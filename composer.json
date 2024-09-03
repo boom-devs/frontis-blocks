@@ -1,0 +1,11 @@
+{
+    "name": "wpmessiah/frontis-blocks",
+    "type": "wordpress-plugin",
+    "autoload": {
+        "psr-4": {
+            "FrontisBlocks\\": "includes/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
