@@ -67,6 +67,8 @@
 }
 
 .frontis-tab-button svg {
+  height: 20px;
+  width: auto;
   margin-right: 8px;
 }
 
