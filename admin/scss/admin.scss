@@ -1,0 +1,46 @@
+.frontis-blocks-admin {
+    display: flex;
+    
+    .frontis-blocks-menu-list {
+      width: 200px;
+      background-color: #f1f1f1;
+      padding: 20px;
+      
+      .frontis-blocks-logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        
+        h1 {
+          margin-left: 10px;
+          font-size: 18px;
+        }
+      }
+      
+      .frontis-blocks-menu-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        
+        &.active {
+          background-color: #fff;
+          font-weight: bold;
+        }
+        
+        svg {
+          margin-right: 10px;
+        }
+      }
+    }
+    
+    .frontis-blocks-tab-panel {
+      flex-grow: 1;
+      padding: 20px;
+    }
+  }
