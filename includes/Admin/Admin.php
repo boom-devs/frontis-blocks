@@ -34,7 +34,11 @@ class Admin {
         if('toplevel_page_frontis-blocks' != $hook){
             return;
         }
-        wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index.js', array('wp-element', 'wp-components', 'wp-i18n'), '1.0.0', true);
+        $script_path = FB_PLUGIN_PATH . 'assets/admin/index.js';
+        $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
+        $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
+        
+        wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index.js', $script_asset['dependencies'], '1.0.0', true);
     }
 
     public function enqueue_scripts($hook){
