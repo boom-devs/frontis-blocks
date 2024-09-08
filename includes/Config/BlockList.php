@@ -15,14 +15,14 @@ class BlockList {
 
     private function init_blocks() {
         $this->blocks = [
-            // 'advanced-heading' => [
-            //     'slug'      => 'advanced-heading',
-            //     'title'     => 'Advanced Heading',
-            //     'package'   => 'free',
-            //     'category'  => 'general',
-            //     'badge'     => 'freemium',
-            //     'status'    => 'active',
-            // ],
+            'advanced-heading' => [
+                'slug'      => 'advanced-heading',
+                'title'     => 'Advanced Heading',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'freemium',
+                'status'    => 'active',
+            ],
             // 'row' => [
             //     'slug'      => 'row',
             //     'title'     => 'Row',
