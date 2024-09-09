@@ -117,7 +117,7 @@ const attributes = {
     },
     HeadingActiveBorderDevice: {
         type: "string",
-        default: "desktop"
+        default: "Desktop"
     },
     HeadingBorderLink : {
         type : "boolean",
@@ -156,7 +156,7 @@ const attributes = {
     },
     HeadingActiveBorderRadiusDevice: {
         type: "string",
-        default: "desktop"
+        default: "Desktop"
     },
     HeadingBorderRadiusLink : {
         type : "boolean",
@@ -195,7 +195,7 @@ const attributes = {
     },
     HeadingActivePaddingDevice: {
         type: "string",
-        default: "desktop"
+        default: "Desktop"
     },
     HeadingPaddingLink : {
         type : "boolean",

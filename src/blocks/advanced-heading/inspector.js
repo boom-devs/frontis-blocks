@@ -114,7 +114,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all padding values */
     const updateAllPadding = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopPadding: {
                         top: value,
@@ -124,7 +124,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabPadding: {
                         top: value,
@@ -134,7 +134,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobilePadding: {
                         top: value,
@@ -153,13 +153,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handlePaddingInputChange = (e, direction) => {
         const value = e.target.value;
         switch(HeadingActivePaddingDevice) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({ HeadingDesktopPadding: { ...HeadingDesktopPadding, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabPadding: { ...HeadingTabPadding, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobilePadding: { ...HeadingMobilePadding, [direction]: value } });
                 break;
             default:
@@ -189,6 +189,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handlePaddingDeviceClick = (device) => {
         setAttributes({ HeadingActivePaddingDevice: device });
     };
+
+
+    /**
+     * This effect is responsible for setting the preview device type in the WordPress block editor.
+     * It listens for changes in the `HeadingActivePaddingDevice` and updates the preview mode accordingly.
+     * The preview device type can be set to values like mobile, tablet, or desktop.
+     */
+    useEffect(() => {
+        try {
+            if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+                wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActivePaddingDevice);
+            }
+        } catch (error) {
+            console.error('Error setting preview device type:', error);
+        }
+    }, [HeadingActivePaddingDevice]);
 
     /** Default padding for desktop (using desktop_padding) */
     const padding = `${HeadingDesktopPadding.top}${HeadingPaddingUnits} ${HeadingDesktopPadding.right}${HeadingPaddingUnits} ${HeadingDesktopPadding.bottom}${HeadingPaddingUnits} ${HeadingDesktopPadding.left}${HeadingPaddingUnits}`;
@@ -299,7 +315,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all Border Width values */
     const updateAllBorderWidth = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopBorderWidth: {
                         top: value,
@@ -309,7 +325,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabBorderWidth: {
                         top: value,
@@ -319,7 +335,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobileBorderWidth: {
                         top: value,
@@ -338,13 +354,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handleBorderWidthInputChange = (e, direction) => {
         const value = e.target.value;
         switch(HeadingActiveBorderDevice) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({ HeadingDesktopBorderWidth: { ...HeadingDesktopBorderWidth, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabBorderWidth: { ...HeadingTabBorderWidth, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobileBorderWidth: { ...HeadingMobileBorderWidth, [direction]: value } });
                 break;
             default:
@@ -375,6 +391,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({ HeadingActiveBorderDevice: device });
     };
 
+    /**
+     * This effect is responsible for setting the preview device type in the WordPress block editor.
+     * It listens for changes in the `HeadingActiveBorderDevice` and updates the preview mode accordingly.
+     * The preview device type can be set to values like mobile, tablet, or desktop.
+     */
+    useEffect(() => {
+        try {
+            if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+                wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActiveBorderDevice);
+            }
+        } catch (error) {
+            console.error('Error setting preview device type:', error);
+        }
+    }, [HeadingActiveBorderDevice]);
+
     /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
     const borderWidth = `${HeadingDesktopBorderWidth.top}${HeadingBorderUnits} ${HeadingDesktopBorderWidth.right}${HeadingBorderUnits} ${HeadingDesktopBorderWidth.bottom}${HeadingBorderUnits} ${HeadingDesktopBorderWidth.left}${HeadingBorderUnits}`;
     /** End Border Width */
@@ -384,7 +415,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all Border Width values */
     const updateAllBorderRadiusWidth = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopBorderRadiusWidth: {
                         top: value,
@@ -394,7 +425,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabBorderRadiusWidth: {
                         top: value,
@@ -404,7 +435,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobileBorderRadiusWidth: {
                         top: value,
@@ -423,13 +454,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handleBorderRadiusWidthInputChange = (e, direction) => {
         const value = e.target.value;
         switch(HeadingActiveBorderRadiusDevice) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({ HeadingDesktopBorderRadiusWidth: { ...HeadingDesktopBorderRadiusWidth, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabBorderRadiusWidth: { ...HeadingTabBorderRadiusWidth, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobileBorderRadiusWidth: { ...HeadingMobileBorderRadiusWidth, [direction]: value } });
                 break;
             default:
@@ -459,6 +490,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handleBorderRadiusWidthDeviceClick = (device) => {
         setAttributes({ HeadingActiveBorderRadiusDevice: device });
     };
+
+    /**
+     * This effect is responsible for setting the preview device type in the WordPress block editor.
+     * It listens for changes in the `HeadingActiveBorderRadiusDevice` and updates the preview mode accordingly.
+     * The preview device type can be set to values like mobile, tablet, or desktop.
+     */
+    useEffect(() => {
+        try {
+            if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+                wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActiveBorderRadiusDevice);
+            }
+        } catch (error) {
+            console.error('Error setting preview device type:', error);
+        }
+    }, [HeadingActiveBorderRadiusDevice]);
 
     /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
     const borderRadiusWidth = `${HeadingDesktopBorderRadiusWidth.top}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.right}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.bottom}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.left}${HeadingBorderRadiusUnits}`;
@@ -1143,9 +1189,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 </BaseControl>
                                             )}
 
-
-
-
                                             <div className="sh_heading_spacing_container">
                                                 <div className="sh_heading_spacing_inner_container">
                                                     {/* Border Width */}
@@ -1153,13 +1196,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         <div className="sh_heading_label">
                                                             <p className="sh_heading_label_text">{__("Border Width", "frontis-blocks")}</p>
                                                             <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActiveBorderDevice === 'desktop' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('desktop')}>
+                                                                <button className={`sh_heading_desktop_device ${HeadingActiveBorderDevice === 'Desktop' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('Desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActiveBorderDevice === 'tab' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('tab')}>
+                                                                <button className={`sh_heading_tab_device ${HeadingActiveBorderDevice === 'Tablet' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('Tablet')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActiveBorderDevice === 'mobile' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('mobile')}>
+                                                                <button className={`sh_heading_mobile_device ${HeadingActiveBorderDevice === 'Mobile' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('Mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
                                                                 </button>
                                                             </div>
@@ -1185,7 +1228,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.top : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top}
+                                                                value={HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.top : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1194,7 +1237,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.right : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right}
+                                                                value={HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.right : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1203,7 +1246,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.bottom : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom}
+                                                                value={HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.bottom : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1212,7 +1255,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.left : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left}
+                                                                value={HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.left : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
@@ -1227,16 +1270,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     </div>                          
                                                 </div>
                                             </div>
-
-
-
-
-
-
-
-
-
-
                                             <div className="sh_heading_spacing_container">
                                                 <div className="sh_heading_spacing_inner_container">
                                                     {/* Border radius Width */}
@@ -1244,13 +1277,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         <div className="sh_heading_label">
                                                             <p className="sh_heading_label_text">{__("Border Radius Width", "frontis-blocks")}</p>
                                                             <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActiveBorderRadiusDevice === 'desktop' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('desktop')}>
+                                                                <button className={`sh_heading_desktop_device ${HeadingActiveBorderRadiusDevice === 'Desktop' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('Desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActiveBorderRadiusDevice === 'tab' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('tab')}>
+                                                                <button className={`sh_heading_tab_device ${HeadingActiveBorderRadiusDevice === 'Tablet' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('Tablet')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActiveBorderRadiusDevice === 'mobile' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('mobile')}>
+                                                                <button className={`sh_heading_mobile_device ${HeadingActiveBorderRadiusDevice === 'Mobile' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('Mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
                                                                 </button>
                                                             </div>
@@ -1275,7 +1308,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.top : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top}
+                                                                value={HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.top : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1284,7 +1317,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.right : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right}
+                                                                value={HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.right : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1293,7 +1326,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.bottom : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom}
+                                                                value={HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.bottom : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1302,7 +1335,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.left : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left}
+                                                                value={HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.left : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
@@ -1326,13 +1359,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         <div className="sh_heading_label">
                                                             <p className="sh_heading_label_text">{__("Padding", "frontis-blocks")}</p>
                                                             <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActivePaddingDevice === 'desktop' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('desktop')}>
+                                                                <button className={`sh_heading_desktop_device ${HeadingActivePaddingDevice === 'Desktop' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('Desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActivePaddingDevice === 'tab' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('tab')}>
+                                                                <button className={`sh_heading_tab_device ${HeadingActivePaddingDevice === 'Tablet' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('Tablet')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActivePaddingDevice === 'mobile' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('mobile')}>
+                                                                <button className={`sh_heading_mobile_device ${HeadingActivePaddingDevice === 'Mobile' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('Mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
                                                                 </button>
                                                             </div>
@@ -1357,7 +1390,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.top : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.top : HeadingMobilePadding.top}
+                                                                value={HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.top : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.top : HeadingMobilePadding.top}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1366,7 +1399,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.right : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.right : HeadingMobilePadding.right}
+                                                                value={HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.right : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.right : HeadingMobilePadding.right}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1375,7 +1408,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.bottom : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.bottom : HeadingMobilePadding.bottom}
+                                                                value={HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.bottom : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.bottom : HeadingMobilePadding.bottom}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1384,7 +1417,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.left : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.left : HeadingMobilePadding.left}
+                                                                value={HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.left : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.left : HeadingMobilePadding.left}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'left')}
                                                             />
                                                         </div>
