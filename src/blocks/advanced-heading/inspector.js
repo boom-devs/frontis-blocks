@@ -718,7 +718,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     renderContent={() => (
                                                         <div className="fb-setting-typography-popup">
                                                             <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-advanced-fontfamily-wrapper">
+                                                                <div className="fb-setting-fontfamily-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Family", "frontis-blocks")}
                                                                         options={FONT_FAMILYS}
@@ -756,7 +756,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                                <div className="fb-advanced-fontweight-wrapper">
+                                                                <div className="fb-setting-fontweight-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Weight", "frontis-blocks")}
                                                                         options={[
@@ -775,7 +775,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingFontWeight: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-fontstyle-wrapper">
+                                                                <div className="fb-setting-fontstyle-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Style", "frontis-blocks")}
                                                                         options={[
@@ -788,7 +788,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingFontStyle: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-texttransform-wrapper">
+                                                                <div className="fb-setting-texttransform-wrapper">
                                                                     <SelectControl
                                                                         label={__("Text Transform", "frontis-blocks")}
                                                                         options={[
@@ -802,7 +802,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingTextTransform: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-textdecoration-wrapper">
+                                                                <div className="fb-setting-textdecoration-wrapper">
                                                                     <SelectControl
                                                                         label={__("Text Decoration", "frontis-blocks")}
                                                                         options={[
@@ -919,7 +919,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         renderContent={() => (
                                                             <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-normal-color">
+                                                                    <div className="fb-setting-normal-color">
                                                                         <ColorPicker
                                                                             color={HeadingColor}
                                                                             onChange={(value) => setAttributes({ HeadingColor: value })}
@@ -969,13 +969,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         renderContent={() => (
                                                             <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-hover-color">
+                                                                    <div className="fb-setting-hover-color">
                                                                         <ColorPicker
                                                                             color={HeadingHoverColor}
                                                                             onChange={(value) => setAttributes({ HeadingHoverColor: value })}
                                                                             enableAlpha={true}
                                                                         />
-                                                                        <div className="fb-advanced-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 { color: '#F72585' },
@@ -999,7 +999,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         <PanelBody
                                             title={__("Border", "frontis-blocks")}
                                             initialOpen={false}
-                                            className="fb-advanced-border-setting-wrapper"
+                                            className="fb-setting-border-setting-wrapper"
                                             >
                                                 <SelectControl
                                                     label={__("Border Style", "frontis-blocks")}
@@ -1048,7 +1048,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         renderContent={() => (
                                                             <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-normal-color">
+                                                                    <div className="fb-setting-normal-color">
                                                                         <ColorPicker
                                                                             color={HeadingBorderColor}
                                                                             onChange={(value) => setAttributes({ HeadingBorderColor: value })}
@@ -1098,13 +1098,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         renderContent={() => (
                                                             <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-hover-color">
+                                                                    <div className="fb-setting-hover-color">
                                                                         <ColorPicker
                                                                             color={HeadingBorderHoverColor}
                                                                             onChange={(value) => setAttributes({ HeadingBorderHoverColor: value })}
                                                                             enableAlpha={true}
                                                                         />
-                                                                        <div className="fb-advanced-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 { color: '#F72585' },
@@ -1401,22 +1401,24 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                 )}
                             {tab.name === "advanced" && (
                                     <>
-                                        <div className="fb-advanced-z-index-wrapper">
-                                            <PanelBody
-                                                title={__("Z Index", "frontis-blocks")}
-                                                initialOpen={true}
-                                                className='fb-advanced-z-index-header'
-                                            >
-                                                <RangeControl
-                                                    value={HeadingZIndex}
-                                                    onChange={(value) => setAttributes({ HeadingZIndex: value === 0 ? undefined : value })}
-                                                    min={1}
-                                                    max={100}
-                                                    step={1}
-                                                    allowReset
-                                                    resetFallbackValue={undefined}
-                                                />
-                                            </PanelBody>
+                                        <div className="fb-setting-advanced-tab-wrapper">
+                                            <div className="fb-setting-z-index-wrapper">
+                                                <PanelBody
+                                                    title={__("Z Index", "frontis-blocks")}
+                                                    initialOpen={true}
+                                                    className='fb-setting-z-index-header'
+                                                >
+                                                    <RangeControl
+                                                        value={HeadingZIndex}
+                                                        onChange={(value) => setAttributes({ HeadingZIndex: value === 0 ? undefined : value })}
+                                                        min={1}
+                                                        max={100}
+                                                        step={1}
+                                                        allowReset
+                                                        resetFallbackValue={undefined}
+                                                    />
+                                                </PanelBody>
+                                            </div>
                                         </div>
                                     </>
                                 )}

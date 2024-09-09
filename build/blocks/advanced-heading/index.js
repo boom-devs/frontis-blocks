@@ -4377,7 +4377,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-typography-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-fontfamily-wrapper"
+          className: "fb-setting-fontfamily-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
           options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
@@ -4421,7 +4421,7 @@ function Inspector(_ref) {
           allowReset: true,
           resetFallbackValue: undefined
         }))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-fontweight-wrapper"
+          className: "fb-setting-fontweight-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
           options: [{
@@ -4462,7 +4462,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-fontstyle-wrapper"
+          className: "fb-setting-fontstyle-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
           options: [{
@@ -4485,7 +4485,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-texttransform-wrapper"
+          className: "fb-setting-texttransform-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-blocks"),
           options: [{
@@ -4511,7 +4511,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-textdecoration-wrapper"
+          className: "fb-setting-textdecoration-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-blocks"),
           options: [{
@@ -4646,7 +4646,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-color-setting-icon-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-normal-color"
+          className: "fb-setting-normal-color"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
           color: HeadingColor,
           onChange: function onChange(value) {
@@ -4707,7 +4707,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-color-setting-icon-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-hover-color"
+          className: "fb-setting-hover-color"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
           color: HeadingHoverColor,
           onChange: function onChange(value) {
@@ -4717,7 +4717,7 @@ function Inspector(_ref) {
           },
           enableAlpha: true
         }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-hover-color-label"
+          className: "fb-setting-hover-color-label"
         }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
           colors: [{
             color: '#F72585'
@@ -4742,7 +4742,7 @@ function Inspector(_ref) {
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border", "frontis-blocks"),
       initialOpen: false,
-      className: "fb-advanced-border-setting-wrapper"
+      className: "fb-setting-border-setting-wrapper"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-blocks"),
       value: HeadingBorder,
@@ -4796,7 +4796,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-color-setting-icon-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-normal-color"
+          className: "fb-setting-normal-color"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
           color: HeadingBorderColor,
           onChange: function onChange(value) {
@@ -4857,7 +4857,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-color-setting-icon-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-hover-color"
+          className: "fb-setting-hover-color"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
           color: HeadingBorderHoverColor,
           onChange: function onChange(value) {
@@ -4867,7 +4867,7 @@ function Inspector(_ref) {
           },
           enableAlpha: true
         }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-hover-color-label"
+          className: "fb-setting-hover-color-label"
         }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
           colors: [{
             color: '#F72585'
@@ -5201,11 +5201,13 @@ function Inspector(_ref) {
       className: "dashicons ".concat(HeadingMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(HeadingMarginLink ? 'is-checked' : ''),
       onClick: handleMarginLinkToggle
     }))))))), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: "fb-advanced-z-index-wrapper"
+      className: "fb-setting-advanced-tab-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-z-index-wrapper"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Z Index", "frontis-blocks"),
       initialOpen: true,
-      className: "fb-advanced-z-index-header"
+      className: "fb-setting-z-index-header"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       value: HeadingZIndex,
       onChange: function onChange(value) {
@@ -5218,7 +5220,7 @@ function Inspector(_ref) {
       step: 1,
       allowReset: true,
       resetFallbackValue: undefined
-    })))));
+    }))))));
   }))));
 }
 
