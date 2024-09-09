@@ -248,7 +248,7 @@ var attributes = {
   },
   HeadingActiveMarginDevice: {
     type: "string",
-    "default": "desktop"
+    "default": "Desktop"
   },
   HeadingMarginLink: {
     type: "boolean",
@@ -3884,7 +3884,7 @@ function Inspector(_ref) {
   /** Function to update all margin values */
   var updateAllMargin = function updateAllMargin(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopMargin: {
             top: value,
@@ -3894,7 +3894,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabMargin: {
             top: value,
@@ -3904,7 +3904,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobileMargin: {
             top: value,
@@ -3923,17 +3923,17 @@ function Inspector(_ref) {
   var handleMarginInputChange = function handleMarginInputChange(e, direction) {
     var value = e.target.value;
     switch (HeadingActiveMarginDevice) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopMargin: _objectSpread(_objectSpread({}, HeadingDesktopMargin), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabMargin: _objectSpread(_objectSpread({}, HeadingTabMargin), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobileMargin: _objectSpread(_objectSpread({}, HeadingMobileMargin), {}, _defineProperty({}, direction, value))
         });
@@ -3971,6 +3971,21 @@ function Inspector(_ref) {
       HeadingActiveMarginDevice: device
     });
   };
+
+  /**
+   * This effect is responsible for setting the preview device type in the WordPress block editor.
+   * It listens for changes in the `HeadingActiveMarginDevice` and updates the preview mode accordingly.
+   * The preview device type can be set to values like mobile, tablet, or desktop.
+   */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    try {
+      if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+        wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActiveMarginDevice);
+      }
+    } catch (error) {
+      console.error('Error setting preview device type:', error);
+    }
+  }, [HeadingActiveMarginDevice]);
 
   /** Default margin for desktop (using desktop_margin) */
   var margin = "".concat(HeadingDesktopMargin.top).concat(HeadingPaddingUnits, " ").concat(HeadingDesktopMargin.right).concat(HeadingPaddingUnits, " ").concat(HeadingDesktopMargin.bottom).concat(HeadingPaddingUnits, " ").concat(HeadingDesktopMargin.left).concat(HeadingPaddingUnits);
@@ -5237,9 +5252,9 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margin", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_responsive_devices"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(HeadingActiveMarginDevice === 'desktop' ? 'active' : ''),
+      className: "sh_heading_desktop_device ".concat(HeadingActiveMarginDevice === 'Desktop' ? 'active' : ''),
       onClick: function onClick() {
-        return handleMarginDeviceClick('desktop');
+        return handleMarginDeviceClick('Desktop');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "8",
@@ -5248,9 +5263,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(HeadingActiveMarginDevice === 'tab' ? 'active' : ''),
+      className: "sh_heading_tab_device ".concat(HeadingActiveMarginDevice === 'Tablet' ? 'active' : ''),
       onClick: function onClick() {
-        return handleMarginDeviceClick('tab');
+        return handleMarginDeviceClick('Tablet');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "6",
@@ -5259,9 +5274,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(HeadingActiveMarginDevice === 'mobile' ? 'active' : ''),
+      className: "sh_heading_mobile_device ".concat(HeadingActiveMarginDevice === 'Mobile' ? 'active' : ''),
       onClick: function onClick() {
-        return handleMarginDeviceClick('mobile');
+        return handleMarginDeviceClick('Mobile');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "4",
@@ -5292,7 +5307,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.top : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.top : HeadingMobileMargin.top,
+      value: HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.top : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.top : HeadingMobileMargin.top,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'top');
       }
@@ -5303,7 +5318,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.right : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.right : HeadingMobileMargin.right,
+      value: HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.right : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.right : HeadingMobileMargin.right,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'right');
       }
@@ -5314,7 +5329,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.bottom : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.bottom : HeadingMobileMargin.bottom,
+      value: HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.bottom : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.bottom : HeadingMobileMargin.bottom,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'bottom');
       }
@@ -5325,7 +5340,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.left : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.left : HeadingMobileMargin.left,
+      value: HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.left : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.left : HeadingMobileMargin.left,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'left');
       }
