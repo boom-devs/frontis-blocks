@@ -23,6 +23,14 @@ class BlockList {
                 'badge'     => 'freemium',
                 'status'    => 'active',
             ],
+            'icon-picker' => [
+                'slug'      => 'icon-picker',
+                'title'     => 'Icon Picker',
+                'package'   => 'free',
+                'category'  => 'general',
+                'badge'     => 'freemium',
+                'status'    => 'active',
+            ],
             // 'row' => [
             //     'slug'      => 'row',
             //     'title'     => 'Row',

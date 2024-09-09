@@ -1,17 +1,17 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "{block_name}/{slug}",
+  "name": "frontis-blocks/icon-picker",
   "version": "0.1.0",
-  "title": "{title}",
-  "category": "{block_name}",
+  "title": "Icon Picker",
+  "category": "frontis-blocks",
   "icon": "smiley",
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
   "supports": {
     "html": false
   },
-  "textdomain": "{block_name}",
+  "textdomain": "frontis-blocks",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
