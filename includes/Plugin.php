@@ -142,5 +142,7 @@ final class Plugin {
         // Additional plugin initialization if needed
 
         Blocks::get_instance();
+
+        Admin::get_instance();
     }
 }

@@ -57,7 +57,7 @@ class Blocks
                 }
 
                 $rb = register_block_type($blocks_dir);
-                error_log(print_r($rb, true));
+                // error_log(print_r($rb, true));
 
                 wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
 
