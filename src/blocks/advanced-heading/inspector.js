@@ -99,7 +99,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
     } = attributes;
-
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -199,7 +199,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all margin values */
     const updateAllMargin = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopMargin: {
                         top: value,
@@ -209,7 +209,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabMargin: {
                         top: value,
@@ -219,7 +219,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobileMargin: {
                         top: value,
@@ -238,13 +238,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handleMarginInputChange = (e, direction) => {
         const value = e.target.value;
         switch(HeadingActiveMarginDevice) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({ HeadingDesktopMargin: { ...HeadingDesktopMargin, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabMargin: { ...HeadingTabMargin, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobileMargin: { ...HeadingMobileMargin, [direction]: value } });
                 break;
             default:
@@ -274,6 +274,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handleMarginDeviceClick = (device) => {
         setAttributes({ HeadingActiveMarginDevice: device });
     };
+
+    /**
+     * This effect is responsible for setting the preview device type in the WordPress block editor.
+     * It listens for changes in the `HeadingActiveMarginDevice` and updates the preview mode accordingly.
+     * The preview device type can be set to values like mobile, tablet, or desktop.
+     */
+    useEffect(() => {
+        try {
+            if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+                wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActiveMarginDevice);
+            }
+        } catch (error) {
+            console.error('Error setting preview device type:', error);
+        }
+    }, [HeadingActiveMarginDevice]);
 
     /** Default margin for desktop (using desktop_margin) */
     const margin = `${HeadingDesktopMargin.top}${HeadingPaddingUnits} ${HeadingDesktopMargin.right}${HeadingPaddingUnits} ${HeadingDesktopMargin.bottom}${HeadingPaddingUnits} ${HeadingDesktopMargin.left}${HeadingPaddingUnits}`;
@@ -1391,13 +1406,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         <div className="sh_heading_label">
                                                             <p className="sh_heading_label_text">{__("Margin", "frontis-blocks")}</p>
                                                             <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActiveMarginDevice === 'desktop' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('desktop')}>
+                                                                <button className={`sh_heading_desktop_device ${HeadingActiveMarginDevice === 'Desktop' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('Desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActiveMarginDevice === 'tab' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('tab')}>
+                                                                <button className={`sh_heading_tab_device ${HeadingActiveMarginDevice === 'Tablet' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('Tablet')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
                                                                 </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActiveMarginDevice === 'mobile' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('mobile')}>
+                                                                <button className={`sh_heading_mobile_device ${HeadingActiveMarginDevice === 'Mobile' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('Mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
                                                                 </button>
                                                             </div>
@@ -1422,7 +1437,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.top : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.top : HeadingMobileMargin.top}
+                                                                value={HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.top : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.top : HeadingMobileMargin.top}
                                                                 onChange={(e) => handleMarginInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1431,7 +1446,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.right : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.right : HeadingMobileMargin.right}
+                                                                value={HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.right : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.right : HeadingMobileMargin.right}
                                                                 onChange={(e) => handleMarginInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1440,7 +1455,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.bottom : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.bottom : HeadingMobileMargin.bottom}
+                                                                value={HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.bottom : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.bottom : HeadingMobileMargin.bottom}
                                                                 onChange={(e) => handleMarginInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1449,7 +1464,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.left : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.left : HeadingMobileMargin.left}
+                                                                value={HeadingActiveMarginDevice === 'Desktop' ? HeadingDesktopMargin.left : HeadingActiveMarginDevice === 'Tablet' ? HeadingTabMargin.left : HeadingMobileMargin.left}
                                                                 onChange={(e) => handleMarginInputChange(e, 'left')}
                                                             />
                                                         </div>

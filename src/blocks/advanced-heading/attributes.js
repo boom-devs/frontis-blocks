@@ -234,7 +234,7 @@ const attributes = {
     },
     HeadingActiveMarginDevice: {
         type: "string",
-        default: "desktop"
+        default: "Desktop"
     },
     HeadingMarginLink : {
         type : "boolean",
