@@ -1,0 +1,30 @@
+.fb-count-down-wrapper {
+	display: flex;
+	justify-content: center;
+	gap: 50px;
+
+	.fb-count-down-item {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		width: 120px;
+		height: 144px;
+		background-color: #6B4EFF;
+		border-radius: 8px;
+
+			.fb-count-down-time {
+				font-size: 60px;
+				font-weight: 500;
+				line-height: 68px;
+				color: #fff;
+			}
+			.fb-count-down-label {
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 28px;
+				color: #fff;
+			}
+	}
+}
