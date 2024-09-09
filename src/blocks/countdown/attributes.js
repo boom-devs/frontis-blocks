@@ -39,6 +39,37 @@ const attributes = {
 		type: "string",
 		default: "Seconds"
 	},
+	countDownBgColor: {
+		type: "string"
+	},
+	countDownLabelBgColorDay: {
+		type: 'string',
+		default: '#6B4EFF',
+	},
+	countDownLabelBgColorHour: {
+		type: 'string',
+		default: '#6B4EFF',
+	},
+	countDownLabelBgColorMinute: {
+		type: 'string',
+		default: '#6B4EFF',
+	},
+	countDownLabelBgColorSecond: {
+		type: 'string',
+		default: '#6B4EFF',
+	},
+	countDownTitleColor: {
+		type: "string"
+	},
+	countDownTextColor: {
+		type: "string"
+	},
+	countDownTitleFontSize: {
+		type: "number"
+	},
+	countDown_Text_Font_Size: {
+		type: "number"
+	},
 	targetDate: {
 		type: "string",
 	}
