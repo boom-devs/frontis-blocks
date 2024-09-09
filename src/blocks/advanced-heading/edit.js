@@ -69,6 +69,7 @@ export default function Edit({ attributes, setAttributes}) {
                             placeholder={__('Sub heading...', 'frontis-blocks')}
                         />
                     )}
+                    
                     <RichText
                         tagName={HeadingTag}
                         value={HeadingText}

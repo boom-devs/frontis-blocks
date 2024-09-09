@@ -3,9 +3,9 @@
   "apiVersion": 3,
   "name": "frontis-blocks/countdown",
   "version": "1.0.0",
-  "title": "Count Down",
+  "title": "Countdown",
   "category": "frontis-blocks",
-  "icon": "heading",
+  "icon": "clock",
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
   "supports": {
