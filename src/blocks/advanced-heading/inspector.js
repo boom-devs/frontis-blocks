@@ -36,12 +36,13 @@ import {
 } from "./constants/constants";
 
 import { useState, useEffect } from "@wordpress/element";
-
+import ResponsiveControl from '../../components/responsivecontrol';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const { 
         blockID,
+        DeviceType,
         HeadingText, 
         HeadingTag,
         HeadingBackgroundColor,
@@ -75,31 +76,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         HeadingDesktopBorderWidth,
         HeadingTabBorderWidth,
         HeadingMobileBorderWidth,
-        HeadingActiveBorderDevice,
         HeadingBorderLink,
         HeadingBorderRadiusUnits,
         HeadingDesktopBorderRadiusWidth,
         HeadingTabBorderRadiusWidth,
         HeadingMobileBorderRadiusWidth,
-        HeadingActiveBorderRadiusDevice,
         HeadingBorderRadiusLink,
         HeadingPaddingUnits,
         HeadingDesktopPadding,
         HeadingTabPadding,
         HeadingMobilePadding,
-        HeadingActivePaddingDevice,
         HeadingPaddingLink,
         HeadingMarginUnits,
         HeadingDesktopMargin,
         HeadingTabMargin,
         HeadingMobileMargin,
-        HeadingActiveMarginDevice,
         HeadingMarginLink,
         HeadingZIndex
 
 
     } = attributes;
-
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -114,7 +111,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all padding values */
     const updateAllPadding = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopPadding: {
                         top: value,
@@ -124,7 +121,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabPadding: {
                         top: value,
@@ -134,7 +131,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobilePadding: {
                         top: value,
@@ -152,14 +149,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to handle input change */
     const handlePaddingInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(HeadingActivePaddingDevice) {
-            case 'desktop':
+        switch(DeviceType) {
+            case 'Desktop':
                 setAttributes({ HeadingDesktopPadding: { ...HeadingDesktopPadding, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabPadding: { ...HeadingTabPadding, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobilePadding: { ...HeadingMobilePadding, [direction]: value } });
                 break;
             default:
@@ -167,7 +164,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
         /** Update all padding values if HeadingPaddingLink is true */
         if (HeadingPaddingLink) {
-            updateAllPadding(value, HeadingActivePaddingDevice);
+            updateAllPadding(value, DeviceType);
         }
     };
 
@@ -187,7 +184,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     /** Function to handle device click for padding */
     const handlePaddingDeviceClick = (device) => {
-        setAttributes({ HeadingActivePaddingDevice: device });
+        setAttributes({ DeviceType: device });
     };
 
     /** Default padding for desktop (using desktop_padding) */
@@ -199,7 +196,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all margin values */
     const updateAllMargin = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopMargin: {
                         top: value,
@@ -209,7 +206,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabMargin: {
                         top: value,
@@ -219,7 +216,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobileMargin: {
                         top: value,
@@ -237,14 +234,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to handle input change */
     const handleMarginInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(HeadingActiveMarginDevice) {
-            case 'desktop':
+        switch(DeviceType) {
+            case 'Desktop':
                 setAttributes({ HeadingDesktopMargin: { ...HeadingDesktopMargin, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabMargin: { ...HeadingTabMargin, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobileMargin: { ...HeadingMobileMargin, [direction]: value } });
                 break;
             default:
@@ -252,7 +249,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
         /** Update all margin values if marginLink is true */
         if (HeadingMarginLink) {
-            updateAllMargin(value, HeadingActiveMarginDevice);
+            updateAllMargin(value, DeviceType);
         }
     };
 
@@ -272,7 +269,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     /** Function to handle device click for margin */
     const handleMarginDeviceClick = (device) => {
-        setAttributes({ HeadingActiveMarginDevice: device });
+        setAttributes({ DeviceType: device });
     };
 
     /** Default margin for desktop (using desktop_margin) */
@@ -284,7 +281,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all Border Width values */
     const updateAllBorderWidth = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopBorderWidth: {
                         top: value,
@@ -294,7 +291,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabBorderWidth: {
                         top: value,
@@ -304,7 +301,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobileBorderWidth: {
                         top: value,
@@ -322,14 +319,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to handle input change */
     const handleBorderWidthInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(HeadingActiveBorderDevice) {
-            case 'desktop':
+        switch(DeviceType) {
+            case 'Desktop':
                 setAttributes({ HeadingDesktopBorderWidth: { ...HeadingDesktopBorderWidth, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabBorderWidth: { ...HeadingTabBorderWidth, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobileBorderWidth: { ...HeadingMobileBorderWidth, [direction]: value } });
                 break;
             default:
@@ -337,7 +334,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
         /** Update all padding values if HeadingBorderLink is true */
         if (HeadingBorderLink) {
-            updateAllBorderWidth(value, HeadingActiveBorderDevice);
+            updateAllBorderWidth(value, DeviceType);
         }
     };
 
@@ -357,7 +354,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     /** Function to handle device click for Border Width */
     const handleBorderWidthDeviceClick = (device) => {
-        setAttributes({ HeadingActiveBorderDevice: device });
+        setAttributes({ DeviceType: device });
     };
 
     /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
@@ -369,7 +366,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to update all Border Width values */
     const updateAllBorderRadiusWidth = (value, device) => {
         switch(device) {
-            case 'desktop':
+            case 'Desktop':
                 setAttributes({
                     HeadingDesktopBorderRadiusWidth: {
                         top: value,
@@ -379,7 +376,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({
                     HeadingTabBorderRadiusWidth: {
                         top: value,
@@ -389,7 +386,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({
                     HeadingMobileBorderRadiusWidth: {
                         top: value,
@@ -407,14 +404,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /** Function to handle input change */
     const handleBorderRadiusWidthInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(HeadingActiveBorderRadiusDevice) {
-            case 'desktop':
+        switch(DeviceType) {
+            case 'Desktop':
                 setAttributes({ HeadingDesktopBorderRadiusWidth: { ...HeadingDesktopBorderRadiusWidth, [direction]: value } });
                 break;
-            case 'tab':
+            case 'Tablet':
                 setAttributes({ HeadingTabBorderRadiusWidth: { ...HeadingTabBorderRadiusWidth, [direction]: value } });
                 break;
-            case 'mobile':
+            case 'Mobile':
                 setAttributes({ HeadingMobileBorderRadiusWidth: { ...HeadingMobileBorderRadiusWidth, [direction]: value } });
                 break;
             default:
@@ -422,7 +419,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
         /** Update all padding values if HeadingBorderRadiusLink is true */
         if (HeadingBorderRadiusLink) {
-            updateAllBorderRadiusWidth(value, HeadingActiveBorderRadiusDevice);
+            updateAllBorderRadiusWidth(value, DeviceType);
         }
     };
 
@@ -442,7 +439,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     /** Function to handle device click for Border Width */
     const handleBorderRadiusWidthDeviceClick = (device) => {
-        setAttributes({ HeadingActiveBorderRadiusDevice: device });
+        setAttributes({ DeviceType: device });
     };
 
     /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
@@ -581,16 +578,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                                 <BaseControl
                                                     label={__("Heading Tag", "frontis-blocks")}
-                                                    className="fb-advanced-tag-wrapper"
+                                                    className="fb-setting-tag-wrapper"
                                                 >
                                                     <ButtonGroup
-                                                     className="fb-advanced-tag-inner-wrapper"
+                                                     className="fb-setting-tag-inner-wrapper"
                                                      >
                                                         {HEADING.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({ HeadingTag: item.value })}
-                                                                className={`fb-advanced-tag-single-btn ${ HeadingTag === item.value ? 'active' : ''}`}
+                                                                className={`fb-setting-tag-single-btn ${ HeadingTag === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -701,11 +698,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         >
                                             <BaseControl 
                                                 label={__("Typography", "frontis-blocks")}
-                                                className="fb-advanced-typography"
+                                                className="fb-setting-typography"
                                             >
                                                 <Dropdown
-                                                    className="fb-advanced-typography-icon-dropdown"
-                                                    contentClassName="fb-advanced-typography-dropdown-content"
+                                                    className="fb-setting-typography-icon-dropdown"
+                                                    contentClassName="fb-setting-typography-dropdown-content"
                                                     popoverProps={{ placement: 'bottom-start' }}
                                                     renderToggle={({ isOpen, onToggle }) => (
                                                         <Button
@@ -713,15 +710,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             onClick={onToggle}
                                                             aria-expanded={isOpen}
                                                             aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-advanced-typography-icon-btn"
+                                                            className="fb-setting-typography-icon-btn"
                                                         >
-                                                            <Dashicon icon="edit" className="fb-advanced-typography-icon" />
+                                                            <Dashicon icon="edit" className="fb-setting-typography-icon" />
                                                         </Button>
                                                     )}
                                                     renderContent={() => (
-                                                        <div className="fb-advanced-typography-popup">
-                                                            <BaseControl className="fb-advanced-typography-popup-inner" >
-                                                                <div className="fb-advanced-fontfamily-wrapper">
+                                                        <div className="fb-setting-typography-popup">
+                                                            <BaseControl className="fb-setting-typography-popup-inner" >
+                                                                <div className="fb-setting-fontfamily-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Family", "frontis-blocks")}
                                                                         options={FONT_FAMILYS}
@@ -729,18 +726,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingFontFamily: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-fontsize-wrapper">
-                                                                    <div className="fb-advanced-fontsize-header">
-                                                                        <div className="fb-advanced-fontsize-label">
+                                                                <div className="fb-setting-fontsize-wrapper">
+                                                                    <div className="fb-setting-fontsize-header">
+                                                                        <div className="fb-setting-fontsize-label">
                                                                             <span>{__("Font Size", "frontis-blocks")}</span>
                                                                         </div>
-                                                                        <div className="fb-advanced-fontsize-units">
-                                                                            <ButtonGroup className="fb-advanced-fontsize-units-wrap">
+                                                                        <div className="fb-setting-fontsize-units">
+                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
                                                                                 {UNIT_TYPES.map((item, key) => (
                                                                                     <Button
                                                                                         key={key}
                                                                                         onClick={() => setAttributes({ HeadingFontSizeUnits: item.value })}
-                                                                                        className={`fb-advanced-fontsize-units-switcher ${ HeadingFontSizeUnits === item.value ? 'active' : ''}`}
+                                                                                        className={`fb-setting-fontsize-units-switcher ${ HeadingFontSizeUnits === item.value ? 'active' : ''}`}
                                                                                     >
                                                                                         {item.label}
                                                                                     </Button>
@@ -748,7 +745,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                             </ButtonGroup>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="fb-advanced-fontsize-rangecontrol">
+                                                                    <div className="fb-setting-fontsize-rangecontrol">
                                                                         <RangeControl
                                                                             value={HeadingFontSize}
                                                                             onChange={(value) => setAttributes({ HeadingFontSize: value })}
@@ -759,7 +756,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                                <div className="fb-advanced-fontweight-wrapper">
+                                                                <div className="fb-setting-fontweight-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Weight", "frontis-blocks")}
                                                                         options={[
@@ -778,7 +775,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingFontWeight: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-fontstyle-wrapper">
+                                                                <div className="fb-setting-fontstyle-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Style", "frontis-blocks")}
                                                                         options={[
@@ -791,7 +788,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingFontStyle: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-texttransform-wrapper">
+                                                                <div className="fb-setting-texttransform-wrapper">
                                                                     <SelectControl
                                                                         label={__("Text Transform", "frontis-blocks")}
                                                                         options={[
@@ -805,7 +802,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingTextTransform: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-textdecoration-wrapper">
+                                                                <div className="fb-setting-textdecoration-wrapper">
                                                                     <SelectControl
                                                                         label={__("Text Decoration", "frontis-blocks")}
                                                                         options={[
@@ -819,18 +816,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onChange={(value) => setAttributes({ HeadingTextDecoration: value })}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-letterspacing-wrapper">
-                                                                    <div className="fb-advanced-letterspacing-header">
-                                                                        <div className="fb-advanced-letterspacing-label">
+                                                                <div className="fb-setting-letterspacing-wrapper">
+                                                                    <div className="fb-setting-letterspacing-header">
+                                                                        <div className="fb-setting-letterspacing-label">
                                                                             <span>{__("Letter Spacing", "frontis-blocks")}</span>
                                                                         </div>
-                                                                        <div className="fb-advanced-letterspacing-units">
-                                                                            <ButtonGroup className="fb-advanced-letterspacing-units-wrap">
+                                                                        <div className="fb-setting-letterspacing-units">
+                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
                                                                                 {UNIT_TYPES.map((item, key) => (
                                                                                     <Button
                                                                                         key={key}
                                                                                         onClick={() => setAttributes({ HeadingLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-advanced-letterspacing-units-switcher ${ HeadingLetterSpacingUnits === item.value ? 'active' : ''}`}
+                                                                                        className={`fb-setting-letterspacing-units-switcher ${ HeadingLetterSpacingUnits === item.value ? 'active' : ''}`}
                                                                                     >
                                                                                         {item.label}
                                                                                     </Button>
@@ -848,18 +845,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         resetFallbackValue={undefined}
                                                                     />
                                                                 </div>
-                                                                <div className="fb-advanced-lineheight-wrapper">
-                                                                    <div className="fb-advanced-lineheight-header">
-                                                                        <div className="fb-advanced-lineheight-label">
+                                                                <div className="fb-setting-lineheight-wrapper">
+                                                                    <div className="fb-setting-lineheight-header">
+                                                                        <div className="fb-setting-lineheight-label">
                                                                             <span>{__("Line Height", "frontis-blocks")}</span>
                                                                         </div>
-                                                                        <div className="fb-advanced-lineheight-units">
-                                                                            <ButtonGroup className="fb-advanced-lineheight-units-wrap">
+                                                                        <div className="fb-setting-lineheight-units">
+                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
                                                                                 {UNIT_TYPES.map((item, key) => (
                                                                                     <Button
                                                                                         key={key}
                                                                                         onClick={() => setAttributes({ HeadingLineHeightUnits: item.value })}
-                                                                                        className={`fb-advanced-lineheight-units-switcher ${ HeadingLineHeightUnits === item.value ? 'active' : ''}`}
+                                                                                        className={`fb-setting-lineheight-units-switcher ${ HeadingLineHeightUnits === item.value ? 'active' : ''}`}
                                                                                     >
                                                                                         {item.label}
                                                                                     </Button>
@@ -884,14 +881,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             </BaseControl>
                                             <BaseControl
                                                 label={__("Text Color", "frontis-blocks")}
-                                                className="fb-advanced-color-panel-wrapper"
+                                                className="fb-setting-color-panel-wrapper"
                                             >
-                                                <ButtonGroup className="fb-advanced-color-panel-btn">
+                                                <ButtonGroup className="fb-setting-color-panel-btn">
                                                     {NORMAL_HOVER.map((item, key) => (
                                                         <Button
                                                             key={key}
                                                             onClick={() => setAttributes({ HeadingColorSwitcher: item.value })}
-                                                            className={`fb-advanced-color-panel-btn-switchr ${HeadingColorSwitcher === item.value ? 'active' : ''}`}
+                                                            className={`fb-setting-color-panel-btn-switchr ${HeadingColorSwitcher === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
@@ -902,11 +899,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             {HeadingColorSwitcher === 'normal' && (
                                                 <BaseControl 
                                                     label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-advanced-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-advanced-color-setting-icon-dropdown"
-                                                        contentClassName="fb-advanced-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{ placement: 'bottom-start' }}
                                                         renderToggle={({ isOpen, onToggle }) => (
                                                             <Button
@@ -914,21 +911,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-advanced-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
-                                                                <Dashicon icon="color-picker" className="fb-advanced-color-setting-icon" />
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-advanced-color-setting-icon-popup">
-                                                                <BaseControl className="fb-advanced-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-normal-color">
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
                                                                         <ColorPicker
                                                                             color={HeadingColor}
                                                                             onChange={(value) => setAttributes({ HeadingColor: value })}
                                                                             enableAlpha={true}
                                                                         />
-                                                                        <div className="fb-advanced-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 { color: '#F72585' },
@@ -952,11 +949,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             {HeadingColorSwitcher === 'hover' && (
                                                 <BaseControl 
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-advanced-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-advanced-color-setting-icon-dropdown"
-                                                        contentClassName="fb-advanced-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{ placement: 'bottom-start' }}
                                                         renderToggle={({ isOpen, onToggle }) => (
                                                             <Button
@@ -964,21 +961,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-advanced-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
-                                                                <Dashicon icon="color-picker" className="fb-advanced-color-setting-icon" />
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-advanced-color-setting-icon-popup">
-                                                                <BaseControl className="fb-advanced-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-hover-color">
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-hover-color">
                                                                         <ColorPicker
                                                                             color={HeadingHoverColor}
                                                                             onChange={(value) => setAttributes({ HeadingHoverColor: value })}
                                                                             enableAlpha={true}
                                                                         />
-                                                                        <div className="fb-advanced-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 { color: '#F72585' },
@@ -1002,7 +999,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         <PanelBody
                                             title={__("Border", "frontis-blocks")}
                                             initialOpen={false}
-                                            className="fb-advanced-border-setting-wrapper"
+                                            className="fb-setting-border-setting-wrapper"
                                             >
                                                 <SelectControl
                                                     label={__("Border Style", "frontis-blocks")}
@@ -1013,14 +1010,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                             <BaseControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                className="fb-advanced-color-panel-wrapper"
+                                                className="fb-setting-color-panel-wrapper"
                                             >
-                                                <ButtonGroup className="fb-advanced-color-panel-btn">
+                                                <ButtonGroup className="fb-setting-color-panel-btn">
                                                     {NORMAL_HOVER.map((item, key) => (
                                                         <Button
                                                             key={key}
                                                             onClick={() => setAttributes({ HeadingBorderColorSwitcher: item.value })}
-                                                            className={`fb-advanced-color-panel-btn-switchr ${HeadingBorderColorSwitcher === item.value ? 'active' : ''}`}
+                                                            className={`fb-setting-color-panel-btn-switchr ${HeadingBorderColorSwitcher === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
@@ -1031,11 +1028,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             {HeadingBorderColorSwitcher === 'normal' && (
                                                 <BaseControl 
                                                     label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-advanced-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-advanced-color-setting-icon-dropdown"
-                                                        contentClassName="fb-advanced-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{ placement: 'bottom-start' }}
                                                         renderToggle={({ isOpen, onToggle }) => (
                                                             <Button
@@ -1043,21 +1040,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-advanced-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
-                                                                <Dashicon icon="color-picker" className="fb-advanced-color-setting-icon" />
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-advanced-color-setting-icon-popup">
-                                                                <BaseControl className="fb-advanced-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-normal-color">
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
                                                                         <ColorPicker
                                                                             color={HeadingBorderColor}
                                                                             onChange={(value) => setAttributes({ HeadingBorderColor: value })}
                                                                             enableAlpha={true}
                                                                         />
-                                                                        <div className="fb-advanced-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 { color: '#F72585' },
@@ -1081,11 +1078,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             {HeadingBorderColorSwitcher === 'hover' && (
                                                 <BaseControl 
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-advanced-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-advanced-color-setting-icon-dropdown"
-                                                        contentClassName="fb-advanced-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{ placement: 'bottom-start' }}
                                                         renderToggle={({ isOpen, onToggle }) => (
                                                             <Button
@@ -1093,21 +1090,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-advanced-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
-                                                                <Dashicon icon="color-picker" className="fb-advanced-color-setting-icon" />
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-advanced-color-setting-icon-popup">
-                                                                <BaseControl className="fb-advanced-color-setting-icon-popup-inner">
-                                                                    <div className="fb-advanced-hover-color">
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-hover-color">
                                                                         <ColorPicker
                                                                             color={HeadingBorderHoverColor}
                                                                             onChange={(value) => setAttributes({ HeadingBorderHoverColor: value })}
                                                                             enableAlpha={true}
                                                                         />
-                                                                        <div className="fb-advanced-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 { color: '#F72585' },
@@ -1128,34 +1125,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 </BaseControl>
                                             )}
 
-
-
-
                                             <div className="sh_heading_spacing_container">
                                                 <div className="sh_heading_spacing_inner_container">
                                                     {/* Border Width */}
                                                     <div className="sh_heading_label_container">
-                                                        <div className="sh_heading_label">
-                                                            <p className="sh_heading_label_text">{__("Border Width", "frontis-blocks")}</p>
-                                                            <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActiveBorderDevice === 'desktop' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('desktop')}>
-                                                                    <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActiveBorderDevice === 'tab' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('tab')}>
-                                                                    <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActiveBorderDevice === 'mobile' ? 'active' : ''}`} onClick={() => handleBorderWidthDeviceClick('mobile')}>
-                                                                    <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="fb-advanced-units-type">
-                                                            <ButtonGroup className="fb-advanced-units-type-wrap">
+                                                        <ResponsiveControl labelText={__('Border', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderWidthDeviceClick}/>
+                                                        <div className="fb-setting-units-type">
+                                                            <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
                                                                     <Button
                                                                         key={key}
                                                                         onClick={() => setAttributes({ HeadingBorderUnits: item.value })}
-                                                                        className={`fb-advanced-units-type-switcher ${ HeadingBorderUnits === item.value ? 'active' : ''}`}
+                                                                        className={`fb-setting-units-type-switcher ${ HeadingBorderUnits === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>
@@ -1170,7 +1151,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.top : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1179,7 +1160,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.right : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1188,7 +1169,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.bottom : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1197,7 +1178,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.left : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left}
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
@@ -1212,41 +1193,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     </div>                          
                                                 </div>
                                             </div>
-
-
-
-
-
-
-
-
-
-
                                             <div className="sh_heading_spacing_container">
                                                 <div className="sh_heading_spacing_inner_container">
                                                     {/* Border radius Width */}
                                                     <div className="sh_heading_label_container">
-                                                        <div className="sh_heading_label">
-                                                            <p className="sh_heading_label_text">{__("Border Radius Width", "frontis-blocks")}</p>
-                                                            <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActiveBorderRadiusDevice === 'desktop' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('desktop')}>
-                                                                    <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActiveBorderRadiusDevice === 'tab' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('tab')}>
-                                                                    <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActiveBorderRadiusDevice === 'mobile' ? 'active' : ''}`} onClick={() => handleBorderRadiusWidthDeviceClick('mobile')}>
-                                                                    <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="fb-advanced-units-type">
-                                                            <ButtonGroup className="fb-advanced-units-type-wrap">
+                                                        <ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
+                                                        <div className="fb-setting-units-type">
+                                                            <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
                                                                     <Button
                                                                         key={key}
                                                                         onClick={() => setAttributes({ HeadingBorderRadiusUnits: item.value })}
-                                                                        className={`fb-advanced-units-type-switcher ${ HeadingBorderRadiusUnits === item.value ? 'active' : ''}`}
+                                                                        className={`fb-setting-units-type-switcher ${ HeadingBorderRadiusUnits === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>
@@ -1260,7 +1218,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.top : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1269,7 +1227,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.right : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1278,7 +1236,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.bottom : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1287,7 +1245,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.left : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left}
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
@@ -1308,27 +1266,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <div className="sh_heading_spacing_inner_container">
                                                     {/* Padding */}
                                                     <div className="sh_heading_label_container">
-                                                        <div className="sh_heading_label">
-                                                            <p className="sh_heading_label_text">{__("Padding", "frontis-blocks")}</p>
-                                                            <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActivePaddingDevice === 'desktop' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('desktop')}>
-                                                                    <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActivePaddingDevice === 'tab' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('tab')}>
-                                                                    <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActivePaddingDevice === 'mobile' ? 'active' : ''}`} onClick={() => handlePaddingDeviceClick('mobile')}>
-                                                                    <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="fb-advanced-units-type">
-                                                            <ButtonGroup className="fb-advanced-units-type-wrap">
+                                                        <ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handlePaddingDeviceClick}/>
+                                                        <div className="fb-setting-units-type">
+                                                            <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
                                                                     <Button
                                                                         key={key}
                                                                         onClick={() => setAttributes({ HeadingPaddingUnits: item.value })}
-                                                                        className={`fb-advanced-units-type-switcher ${ HeadingPaddingUnits === item.value ? 'active' : ''}`}
+                                                                        className={`fb-setting-units-type-switcher ${ HeadingPaddingUnits === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>
@@ -1342,7 +1287,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.top : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.top : HeadingMobilePadding.top}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopPadding.top : DeviceType === 'Tablet' ? HeadingTabPadding.top : HeadingMobilePadding.top}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1351,7 +1296,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.right : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.right : HeadingMobilePadding.right}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopPadding.right : DeviceType === 'Tablet' ? HeadingTabPadding.right : HeadingMobilePadding.right}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1360,7 +1305,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.bottom : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.bottom : HeadingMobilePadding.bottom}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopPadding.bottom : DeviceType === 'Tablet' ? HeadingTabPadding.bottom : HeadingMobilePadding.bottom}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1369,7 +1314,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.left : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.left : HeadingMobilePadding.left}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopPadding.left : DeviceType === 'Tablet' ? HeadingTabPadding.left : HeadingMobilePadding.left}
                                                                 onChange={(e) => handlePaddingInputChange(e, 'left')}
                                                             />
                                                         </div>
@@ -1388,27 +1333,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <div className="sh_heading_spacing_inner_container">
                                                     {/* Margin */}
                                                     <div className="sh_heading_label_container">
-                                                        <div className="sh_heading_label">
-                                                            <p className="sh_heading_label_text">{__("Margin", "frontis-blocks")}</p>
-                                                            <div className="sh_heading_responsive_devices">
-                                                                <button className={`sh_heading_desktop_device ${HeadingActiveMarginDevice === 'desktop' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('desktop')}>
-                                                                    <svg width="8" height="7" viewBox="0 0 8 7"><path d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_tab_device ${HeadingActiveMarginDevice === 'tab' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('tab')}>
-                                                                    <svg width="6" height="7" viewBox="0 0 6 7"><path d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path></svg>
-                                                                </button>
-                                                                <button className={`sh_heading_mobile_device ${HeadingActiveMarginDevice === 'mobile' ? 'active' : ''}`} onClick={() => handleMarginDeviceClick('mobile')}>
-                                                                    <svg width="4" height="7" viewBox="0 0 4 7"><path d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path></svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="fb-advanced-units-type">
-                                                            <ButtonGroup className="fb-advanced-units-type-wrap">
+                                                        <ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleMarginDeviceClick}/>
+                                                        <div className="fb-setting-units-type">
+                                                            <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
                                                                     <Button
                                                                         key={key}
                                                                         onClick={() => setAttributes({ HeadingMarginUnits: item.value })}
-                                                                        className={`fb-advanced-units-type-switcher ${ HeadingMarginUnits === item.value ? 'active' : ''}`}
+                                                                        className={`fb-setting-units-type-switcher ${ HeadingMarginUnits === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>
@@ -1422,7 +1354,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.top : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.top : HeadingMobileMargin.top}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopMargin.top : DeviceType === 'Tablet' ? HeadingTabMargin.top : HeadingMobileMargin.top}
                                                                 onChange={(e) => handleMarginInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -1431,7 +1363,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.right : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.right : HeadingMobileMargin.right}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopMargin.right : DeviceType === 'Tablet' ? HeadingTabMargin.right : HeadingMobileMargin.right}
                                                                 onChange={(e) => handleMarginInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1440,7 +1372,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.bottom : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.bottom : HeadingMobileMargin.bottom}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopMargin.bottom : DeviceType === 'Tablet' ? HeadingTabMargin.bottom : HeadingMobileMargin.bottom}
                                                                 onChange={(e) => handleMarginInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1449,7 +1381,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={HeadingActiveMarginDevice === 'desktop' ? HeadingDesktopMargin.left : HeadingActiveMarginDevice === 'tab' ? HeadingTabMargin.left : HeadingMobileMargin.left}
+                                                                value={DeviceType === 'Desktop' ? HeadingDesktopMargin.left : DeviceType === 'Tablet' ? HeadingTabMargin.left : HeadingMobileMargin.left}
                                                                 onChange={(e) => handleMarginInputChange(e, 'left')}
                                                             />
                                                         </div>
@@ -1469,22 +1401,24 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                 )}
                             {tab.name === "advanced" && (
                                     <>
-                                        <div className="fb-advanced-z-index-wrapper">
-                                            <PanelBody
-                                                title={__("Z Index", "frontis-blocks")}
-                                                initialOpen={true}
-                                                className='fb-advanced-z-index-header'
-                                            >
-                                                <RangeControl
-                                                    value={HeadingZIndex}
-                                                    onChange={(value) => setAttributes({ HeadingZIndex: value === 0 ? undefined : value })}
-                                                    min={1}
-                                                    max={100}
-                                                    step={1}
-                                                    allowReset
-                                                    resetFallbackValue={undefined}
-                                                />
-                                            </PanelBody>
+                                        <div className="fb-setting-advanced-tab-wrapper">
+                                            <div className="fb-setting-z-index-wrapper">
+                                                <PanelBody
+                                                    title={__("Z Index", "frontis-blocks")}
+                                                    initialOpen={true}
+                                                    className='fb-setting-z-index-header'
+                                                >
+                                                    <RangeControl
+                                                        value={HeadingZIndex}
+                                                        onChange={(value) => setAttributes({ HeadingZIndex: value === 0 ? undefined : value })}
+                                                        min={1}
+                                                        max={100}
+                                                        step={1}
+                                                        allowReset
+                                                        resetFallbackValue={undefined}
+                                                    />
+                                                </PanelBody>
+                                            </div>
                                         </div>
                                     </>
                                 )}

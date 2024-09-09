@@ -3,6 +3,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+    DeviceType: {
+        type: "string",
+        default: "Desktop"
+    },
     HeadingAlignment: {
         type: "string",
         default: "left",
@@ -117,7 +121,7 @@ const attributes = {
     },
     HeadingActiveBorderDevice: {
         type: "string",
-        default: "desktop"
+        default: "Desktop"
     },
     HeadingBorderLink : {
         type : "boolean",
@@ -156,7 +160,7 @@ const attributes = {
     },
     HeadingActiveBorderRadiusDevice: {
         type: "string",
-        default: "desktop"
+        default: "Desktop"
     },
     HeadingBorderRadiusLink : {
         type : "boolean",
@@ -166,6 +170,18 @@ const attributes = {
         type: "string",
         default: "px"
     },
+
+    desktopHeadingPadding: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+
+
     HeadingDesktopPadding: {
         type: "object", 
         default: {
@@ -192,10 +208,6 @@ const attributes = {
             left: 0,
             right: 0,
         },
-    },
-    HeadingActivePaddingDevice: {
-        type: "string",
-        default: "desktop"
     },
     HeadingPaddingLink : {
         type : "boolean",
@@ -231,10 +243,6 @@ const attributes = {
             left: 0,
             right: 0,
         },
-    },
-    HeadingActiveMarginDevice: {
-        type: "string",
-        default: "desktop"
     },
     HeadingMarginLink : {
         type : "boolean",
