@@ -29,10 +29,55 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
+import {
+	InspectorControls
+} from '@wordpress/block-editor';
+
+import {
+	SelectControl,
+	PanelBody,
+	TextControl,
+	TabPanel,
+	BaseControl,
+	Button,
+	ButtonGroup,
+	ToggleControl,
+	TextareaControl,
+	Dropdown,
+	Dashicon,
+	RangeControl,
+	ColorPicker,
+	ColorPalette,
+	GradientPicker,
+	CircularOptionPicker
+} from '@wordpress/components';
 export default function Edit() {
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Post Grid – hello from the editor!', 'post-grid' ) }
-		</p>
+		<>
+			<InspectorControls key="controls">
+				<TabPanel
+					tabs={[
+						{
+							name: "general",
+							title: "General",
+							className: "sh-tab general",
+						},
+						{
+							name: "styles",
+							title: "Style",
+							className: "sh-tab styles",
+						},
+						{
+							name: "advance",
+							title: "Advanced",
+							className: "sh-tab advance",
+						},
+					]}
+				>
+
+			<p>hello world</p>
+				</TabPanel>
+			</InspectorControls>
+		</>
 	);
 }
