@@ -131,7 +131,7 @@ var attributes = {
   },
   HeadingActiveBorderDevice: {
     type: "string",
-    "default": "desktop"
+    "default": "Desktop"
   },
   HeadingBorderLink: {
     type: "boolean",
@@ -170,7 +170,7 @@ var attributes = {
   },
   HeadingActiveBorderRadiusDevice: {
     type: "string",
-    "default": "desktop"
+    "default": "Desktop"
   },
   HeadingBorderRadiusLink: {
     type: "boolean",
@@ -209,7 +209,7 @@ var attributes = {
   },
   HeadingActivePaddingDevice: {
     type: "string",
-    "default": "desktop"
+    "default": "Desktop"
   },
   HeadingPaddingLink: {
     type: "boolean",
@@ -3784,7 +3784,7 @@ function Inspector(_ref) {
   /** Function to update all padding values */
   var updateAllPadding = function updateAllPadding(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopPadding: {
             top: value,
@@ -3794,7 +3794,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabPadding: {
             top: value,
@@ -3804,7 +3804,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobilePadding: {
             top: value,
@@ -3823,17 +3823,17 @@ function Inspector(_ref) {
   var handlePaddingInputChange = function handlePaddingInputChange(e, direction) {
     var value = e.target.value;
     switch (HeadingActivePaddingDevice) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopPadding: _objectSpread(_objectSpread({}, HeadingDesktopPadding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabPadding: _objectSpread(_objectSpread({}, HeadingTabPadding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobilePadding: _objectSpread(_objectSpread({}, HeadingMobilePadding), {}, _defineProperty({}, direction, value))
         });
@@ -3871,6 +3871,21 @@ function Inspector(_ref) {
       HeadingActivePaddingDevice: device
     });
   };
+
+  /**
+   * This effect is responsible for setting the preview device type in the WordPress block editor.
+   * It listens for changes in the `HeadingActivePaddingDevice` and updates the preview mode accordingly.
+   * The preview device type can be set to values like mobile, tablet, or desktop.
+   */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    try {
+      if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+        wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActivePaddingDevice);
+      }
+    } catch (error) {
+      console.error('Error setting preview device type:', error);
+    }
+  }, [HeadingActivePaddingDevice]);
 
   /** Default padding for desktop (using desktop_padding) */
   var padding = "".concat(HeadingDesktopPadding.top).concat(HeadingPaddingUnits, " ").concat(HeadingDesktopPadding.right).concat(HeadingPaddingUnits, " ").concat(HeadingDesktopPadding.bottom).concat(HeadingPaddingUnits, " ").concat(HeadingDesktopPadding.left).concat(HeadingPaddingUnits);
@@ -3999,7 +4014,7 @@ function Inspector(_ref) {
   /** Function to update all Border Width values */
   var updateAllBorderWidth = function updateAllBorderWidth(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopBorderWidth: {
             top: value,
@@ -4009,7 +4024,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabBorderWidth: {
             top: value,
@@ -4019,7 +4034,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobileBorderWidth: {
             top: value,
@@ -4038,17 +4053,17 @@ function Inspector(_ref) {
   var handleBorderWidthInputChange = function handleBorderWidthInputChange(e, direction) {
     var value = e.target.value;
     switch (HeadingActiveBorderDevice) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopBorderWidth: _objectSpread(_objectSpread({}, HeadingDesktopBorderWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabBorderWidth: _objectSpread(_objectSpread({}, HeadingTabBorderWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobileBorderWidth: _objectSpread(_objectSpread({}, HeadingMobileBorderWidth), {}, _defineProperty({}, direction, value))
         });
@@ -4087,6 +4102,21 @@ function Inspector(_ref) {
     });
   };
 
+  /**
+   * This effect is responsible for setting the preview device type in the WordPress block editor.
+   * It listens for changes in the `HeadingActiveBorderDevice` and updates the preview mode accordingly.
+   * The preview device type can be set to values like mobile, tablet, or desktop.
+   */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    try {
+      if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+        wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActiveBorderDevice);
+      }
+    } catch (error) {
+      console.error('Error setting preview device type:', error);
+    }
+  }, [HeadingActiveBorderDevice]);
+
   /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
   var borderWidth = "".concat(HeadingDesktopBorderWidth.top).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.right).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.bottom).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.left).concat(HeadingBorderUnits);
   /** End Border Width */
@@ -4099,7 +4129,7 @@ function Inspector(_ref) {
   /** Function to update all Border Width values */
   var updateAllBorderRadiusWidth = function updateAllBorderRadiusWidth(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopBorderRadiusWidth: {
             top: value,
@@ -4109,7 +4139,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabBorderRadiusWidth: {
             top: value,
@@ -4119,7 +4149,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobileBorderRadiusWidth: {
             top: value,
@@ -4138,17 +4168,17 @@ function Inspector(_ref) {
   var handleBorderRadiusWidthInputChange = function handleBorderRadiusWidthInputChange(e, direction) {
     var value = e.target.value;
     switch (HeadingActiveBorderRadiusDevice) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           HeadingDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           HeadingTabBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingTabBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           HeadingMobileBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingMobileBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
@@ -4186,6 +4216,21 @@ function Inspector(_ref) {
       HeadingActiveBorderRadiusDevice: device
     });
   };
+
+  /**
+   * This effect is responsible for setting the preview device type in the WordPress block editor.
+   * It listens for changes in the `HeadingActiveBorderRadiusDevice` and updates the preview mode accordingly.
+   * The preview device type can be set to values like mobile, tablet, or desktop.
+   */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    try {
+      if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+        wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(HeadingActiveBorderRadiusDevice);
+      }
+    } catch (error) {
+      console.error('Error setting preview device type:', error);
+    }
+  }, [HeadingActiveBorderRadiusDevice]);
 
   /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
   var borderRadiusWidth = "".concat(HeadingDesktopBorderRadiusWidth.top).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.right).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.bottom).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.left).concat(HeadingBorderRadiusUnits);
@@ -4913,9 +4958,9 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_responsive_devices"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(HeadingActiveBorderDevice === 'desktop' ? 'active' : ''),
+      className: "sh_heading_desktop_device ".concat(HeadingActiveBorderDevice === 'Desktop' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderWidthDeviceClick('desktop');
+        return handleBorderWidthDeviceClick('Desktop');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "8",
@@ -4924,9 +4969,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(HeadingActiveBorderDevice === 'tab' ? 'active' : ''),
+      className: "sh_heading_tab_device ".concat(HeadingActiveBorderDevice === 'Tablet' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderWidthDeviceClick('tab');
+        return handleBorderWidthDeviceClick('Tablet');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "6",
@@ -4935,9 +4980,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(HeadingActiveBorderDevice === 'mobile' ? 'active' : ''),
+      className: "sh_heading_mobile_device ".concat(HeadingActiveBorderDevice === 'Mobile' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderWidthDeviceClick('mobile');
+        return handleBorderWidthDeviceClick('Mobile');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "4",
@@ -4968,7 +5013,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.top : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top,
+      value: HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.top : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'top');
       }
@@ -4979,7 +5024,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.right : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right,
+      value: HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.right : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'right');
       }
@@ -4990,7 +5035,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.bottom : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom,
+      value: HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.bottom : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'bottom');
       }
@@ -5001,7 +5046,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: HeadingActiveBorderDevice === 'desktop' ? HeadingDesktopBorderWidth.left : HeadingActiveBorderDevice === 'tab' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left,
+      value: HeadingActiveBorderDevice === 'Desktop' ? HeadingDesktopBorderWidth.left : HeadingActiveBorderDevice === 'Tablet' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'left');
       }
@@ -5025,9 +5070,9 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius Width", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_responsive_devices"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(HeadingActiveBorderRadiusDevice === 'desktop' ? 'active' : ''),
+      className: "sh_heading_desktop_device ".concat(HeadingActiveBorderRadiusDevice === 'Desktop' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderRadiusWidthDeviceClick('desktop');
+        return handleBorderRadiusWidthDeviceClick('Desktop');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "8",
@@ -5036,9 +5081,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(HeadingActiveBorderRadiusDevice === 'tab' ? 'active' : ''),
+      className: "sh_heading_tab_device ".concat(HeadingActiveBorderRadiusDevice === 'Tablet' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderRadiusWidthDeviceClick('tab');
+        return handleBorderRadiusWidthDeviceClick('Tablet');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "6",
@@ -5047,9 +5092,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(HeadingActiveBorderRadiusDevice === 'mobile' ? 'active' : ''),
+      className: "sh_heading_mobile_device ".concat(HeadingActiveBorderRadiusDevice === 'Mobile' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderRadiusWidthDeviceClick('mobile');
+        return handleBorderRadiusWidthDeviceClick('Mobile');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "4",
@@ -5080,7 +5125,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.top : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top,
+      value: HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.top : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'top');
       }
@@ -5091,7 +5136,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.right : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right,
+      value: HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.right : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'right');
       }
@@ -5102,7 +5147,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.bottom : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom,
+      value: HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.bottom : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'bottom');
       }
@@ -5113,7 +5158,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: HeadingActiveBorderRadiusDevice === 'desktop' ? HeadingDesktopBorderRadiusWidth.left : HeadingActiveBorderRadiusDevice === 'tab' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left,
+      value: HeadingActiveBorderRadiusDevice === 'Desktop' ? HeadingDesktopBorderRadiusWidth.left : HeadingActiveBorderRadiusDevice === 'Tablet' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'left');
       }
@@ -5140,9 +5185,9 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_responsive_devices"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(HeadingActivePaddingDevice === 'desktop' ? 'active' : ''),
+      className: "sh_heading_desktop_device ".concat(HeadingActivePaddingDevice === 'Desktop' ? 'active' : ''),
       onClick: function onClick() {
-        return handlePaddingDeviceClick('desktop');
+        return handlePaddingDeviceClick('Desktop');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "8",
@@ -5151,9 +5196,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(HeadingActivePaddingDevice === 'tab' ? 'active' : ''),
+      className: "sh_heading_tab_device ".concat(HeadingActivePaddingDevice === 'Tablet' ? 'active' : ''),
       onClick: function onClick() {
-        return handlePaddingDeviceClick('tab');
+        return handlePaddingDeviceClick('Tablet');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "6",
@@ -5162,9 +5207,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(HeadingActivePaddingDevice === 'mobile' ? 'active' : ''),
+      className: "sh_heading_mobile_device ".concat(HeadingActivePaddingDevice === 'Mobile' ? 'active' : ''),
       onClick: function onClick() {
-        return handlePaddingDeviceClick('mobile');
+        return handlePaddingDeviceClick('Mobile');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "4",
@@ -5195,7 +5240,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.top : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.top : HeadingMobilePadding.top,
+      value: HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.top : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.top : HeadingMobilePadding.top,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'top');
       }
@@ -5206,7 +5251,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.right : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.right : HeadingMobilePadding.right,
+      value: HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.right : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.right : HeadingMobilePadding.right,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'right');
       }
@@ -5217,7 +5262,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.bottom : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.bottom : HeadingMobilePadding.bottom,
+      value: HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.bottom : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.bottom : HeadingMobilePadding.bottom,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'bottom');
       }
@@ -5228,7 +5273,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: HeadingActivePaddingDevice === 'desktop' ? HeadingDesktopPadding.left : HeadingActivePaddingDevice === 'tab' ? HeadingTabPadding.left : HeadingMobilePadding.left,
+      value: HeadingActivePaddingDevice === 'Desktop' ? HeadingDesktopPadding.left : HeadingActivePaddingDevice === 'Tablet' ? HeadingTabPadding.left : HeadingMobilePadding.left,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'left');
       }
