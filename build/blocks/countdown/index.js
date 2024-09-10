@@ -3446,7 +3446,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/countdown/editor.scss");
 /* harmony import */ var _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../advanced-heading/constants/constants */ "./src/blocks/advanced-heading/constants/constants.js");
 /* harmony import */ var _components_responsivecontrol__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/responsivecontrol */ "./src/components/responsivecontrol.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -3477,7 +3483,22 @@ function Edit(_ref) {
     showDays = attributes.showDays,
     showHours = attributes.showHours,
     showMinutes = attributes.showMinutes,
-    showSeconds = attributes.showSeconds;
+    showSeconds = attributes.showSeconds,
+    DeviceType = attributes.DeviceType,
+    HeadingBorder = attributes.HeadingBorder,
+    HeadingBorderColor = attributes.HeadingBorderColor,
+    HeadingBorderHoverColor = attributes.HeadingBorderHoverColor,
+    HeadingBorderColorSwitcher = attributes.HeadingBorderColorSwitcher,
+    HeadingBorderUnits = attributes.HeadingBorderUnits,
+    HeadingDesktopBorderWidth = attributes.HeadingDesktopBorderWidth,
+    HeadingTabBorderWidth = attributes.HeadingTabBorderWidth,
+    HeadingMobileBorderWidth = attributes.HeadingMobileBorderWidth,
+    HeadingBorderLink = attributes.HeadingBorderLink,
+    HeadingBorderRadiusUnits = attributes.HeadingBorderRadiusUnits,
+    HeadingDesktopBorderRadiusWidth = attributes.HeadingDesktopBorderRadiusWidth,
+    HeadingTabBorderRadiusWidth = attributes.HeadingTabBorderRadiusWidth,
+    HeadingMobileBorderRadiusWidth = attributes.HeadingMobileBorderRadiusWidth,
+    HeadingBorderRadiusLink = attributes.HeadingBorderRadiusLink;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     timeRemaining = _useState2[0],
@@ -3552,6 +3573,208 @@ function Edit(_ref) {
     };
   }, [targetDate]);
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  {/* Inspector Controls */}
+
+  /** Start Border Width */
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(HeadingDesktopBorderWidth),
+    _useState6 = _slicedToArray(_useState5, 2),
+    previousBorderWidth = _useState6[0],
+    setPreviousBorderWidth = _useState6[1];
+  /** Function to update all Border Width values */
+  var updateAllBorderWidth = function updateAllBorderWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          HeadingDesktopBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          HeadingTabBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          HeadingMobileBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleBorderWidthInputChange = function handleBorderWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          HeadingDesktopBorderWidth: _objectSpread(_objectSpread({}, HeadingDesktopBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          HeadingTabBorderWidth: _objectSpread(_objectSpread({}, HeadingTabBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          HeadingMobileBorderWidth: _objectSpread(_objectSpread({}, HeadingMobileBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if HeadingBorderLink is true */
+    if (HeadingBorderLink) {
+      updateAllBorderWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle HeadingBorderLink toggle */
+  var handleBorderWidthLinkToggle = function handleBorderWidthLinkToggle() {
+    if (!HeadingBorderLink) {
+      setAttributes({
+        HeadingDesktopBorderWidth: previousBorderWidth
+      });
+    }
+    /** setHeadingBorderLinkLink(!HeadingBorderLink) */
+    setAttributes({
+      HeadingBorderLink: !HeadingBorderLink
+    });
+  };
+
+  /** Update previousborderWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    setPreviousBorderWidth(HeadingDesktopBorderWidth);
+  }, [HeadingDesktopBorderWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleBorderWidthDeviceClick = function handleBorderWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
+  var borderWidth = "".concat(HeadingDesktopBorderWidth.top).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.right).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.bottom).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.left).concat(HeadingBorderUnits);
+  /** End Border Width */
+
+  /** Start Border Radius Width */
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(HeadingDesktopBorderRadiusWidth),
+    _useState8 = _slicedToArray(_useState7, 2),
+    previousBorderRadiusWidth = _useState8[0],
+    setPreviousBorderRadiusWidth = _useState8[1];
+  /** Function to update all Border Width values */
+  var updateAllBorderRadiusWidth = function updateAllBorderRadiusWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          HeadingDesktopBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          HeadingTabBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          HeadingMobileBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleBorderRadiusWidthInputChange = function handleBorderRadiusWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          HeadingDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          HeadingTabBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingTabBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          HeadingMobileBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingMobileBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if HeadingBorderRadiusLink is true */
+    if (HeadingBorderRadiusLink) {
+      updateAllBorderRadiusWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle HeadingBorderRadiusLink toggle */
+  var handleBorderRadiusWidthLinkToggle = function handleBorderRadiusWidthLinkToggle() {
+    if (!HeadingBorderRadiusLink) {
+      setAttributes({
+        HeadingDesktopBorderRadiusWidth: previousBorderRadiusWidth
+      });
+    }
+    /** setHeadingBorderRadiusLinkLink(!HeadingBorderRadiusLink) */
+    setAttributes({
+      HeadingBorderRadiusLink: !HeadingBorderRadiusLink
+    });
+  };
+
+  /** Update previousBorderRadiusWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    setPreviousBorderRadiusWidth(HeadingDesktopBorderRadiusWidth);
+  }, [HeadingDesktopBorderRadiusWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleBorderRadiusWidthDeviceClick = function handleBorderRadiusWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
+  var borderRadiusWidth = "".concat(HeadingDesktopBorderRadiusWidth.top).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.right).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.bottom).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.left).concat(HeadingBorderRadiusUnits);
+  /** End Border Radius Width */
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3975,7 +4198,235 @@ function Edit(_ref) {
           }
         }))));
       }
-    })))));
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border", "frontis-blocks"),
+      initialOpen: false,
+      className: "fb-setting-border-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-blocks"),
+      value: HeadingBorder,
+      options: _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.BORDER_STYLES,
+      onChange: function onChange(value) {
+        return setAttributes({
+          HeadingBorder: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref7) {
+        var isOpen = _ref7.isOpen,
+          onToggle = _ref7.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: HeadingBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              HeadingBorderColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: HeadingBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              HeadingBorderColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_inner_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_label_container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            HeadingBorderUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(HeadingBorderUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(HeadingBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(HeadingBorderLink ? 'is-checked' : ''),
+      onClick: handleBorderWidthLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_inner_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_label_container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderRadiusWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            HeadingBorderRadiusUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(HeadingBorderRadiusUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(HeadingBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(HeadingBorderRadiusLink ? 'is-checked' : ''),
+      onClick: handleBorderRadiusWidthLinkToggle
+    }))))))));
   }))), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
     id: blockID
   }), /*#__PURE__*/React.createElement("div", {

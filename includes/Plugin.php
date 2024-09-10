@@ -81,12 +81,12 @@ final class Plugin {
         $this->init_classes();
         $this->init_hooks();
 
-//		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
     }
 
-//	public function enqueue_scripts(){
-//		wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js',  array('jquery'), '1.0.0', true);
-//	}
+	public function enqueue_scripts(){
+		wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js',  array('jquery'), '1.0.0', true);
+	}
 
 
     /**
