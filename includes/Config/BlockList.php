@@ -55,14 +55,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'info-box' => [
-            //     'slug'      => 'info-box',
-            //     'title'     => 'Info Box',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+             'info-box' => [
+                 'slug'      => 'info-box',
+                 'title'     => 'Info Box',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
             // 'icon-box' => [
             //     'slug'      => 'icon-box',
             //     'title'     => 'Icon Box',
