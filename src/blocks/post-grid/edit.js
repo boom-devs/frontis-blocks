@@ -54,30 +54,7 @@ import {
 export default function Edit() {
 	return (
 		<>
-			<InspectorControls key="controls">
-				<TabPanel
-					tabs={[
-						{
-							name: "general",
-							title: "General",
-							className: "sh-tab general",
-						},
-						{
-							name: "styles",
-							title: "Style",
-							className: "sh-tab styles",
-						},
-						{
-							name: "advance",
-							title: "Advanced",
-							className: "sh-tab advance",
-						},
-					]}
-				>
 
-			<p>hello world</p>
-				</TabPanel>
-			</InspectorControls>
 		</>
 	);
 }

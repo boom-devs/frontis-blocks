@@ -1,0 +1,27 @@
+.notic-color-setting-wrapper {
+	width: 100%;
+	display: block;
+	.components-base-control__field {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
+
+.woomni-notice-wrapper {
+	padding: 65px;
+}
+
+.woomni-notice-wrapper {
+	position: relative;
+
+	.woomni-notice-close {
+		position: absolute;
+		top: -1px;
+		right: 5px;
+		background: transparent;
+		border: none;
+		font-size: 20px;
+		cursor: pointer;
+	}
+}
