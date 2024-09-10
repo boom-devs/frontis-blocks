@@ -10,7 +10,7 @@
 	"example": {},
     "supports": {
         "anchor": false,
-        "align": false,
+		"align": ["wide", "full"],
         "customClassName": false
     },
 	"textdomain": "frontis-blocks",

@@ -27,6 +27,7 @@ export default function Edit({ attributes, setAttributes}) {
         SubHeadingPosition,
 
     } = attributes;
+    
 
     const blockProps = useBlockProps();
 
