@@ -71,25 +71,25 @@ const attributes = {
 		default: "Desktop"
 	},
 	// Border Attributes
-	HeadingBorder: {
+	BoxBorder: {
 		type: 'string',
 		default: "none",
 	},
-	HeadingBorderColor: {
+	BoxBorderColor: {
 		type: 'string',
 	},
-	HeadingBorderHoverColor: {
+	BoxBorderHoverColor: {
 		type: 'string',
 	},
-	HeadingBorderColorSwitcher : {
+	BoxBorderColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	HeadingBorderUnits : {
+	BoxBorderUnits : {
 		type: "string",
 		default: "px"
 	},
-	HeadingDesktopBorderWidth: {
+	BoxDesktopBorderWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -98,7 +98,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	HeadingTabBorderWidth: {
+	BoxTabBorderWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -107,7 +107,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	HeadingMobileBorderWidth: {
+	BoxMobileBorderWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -120,15 +120,15 @@ const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
-	HeadingBorderLink : {
+	BoxBorderLink : {
 		type : "boolean",
 		default: true
 	},
-	HeadingBorderRadiusUnits : {
+	BoxBorderRadiusUnits : {
 		type: "string",
 		default: "px"
 	},
-	HeadingDesktopBorderRadiusWidth: {
+	BoxDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -137,7 +137,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	HeadingTabBorderRadiusWidth: {
+	BoxTabBorderRadiusWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -146,7 +146,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	HeadingMobileBorderRadiusWidth: {
+	BoxMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -159,7 +159,7 @@ const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
-	HeadingBorderRadiusLink : {
+	BoxBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},

@@ -43,22 +43,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showSeconds,
 
 		DeviceType,
-		HeadingBorder,
-		HeadingBorderColor,
-		HeadingBorderHoverColor,
-		HeadingBorderColorSwitcher,
-		HeadingBorderUnits,
-		HeadingDesktopBorderWidth,
-		HeadingTabBorderWidth,
-		HeadingMobileBorderWidth,
-		HeadingBorderLink,
-		HeadingBorderRadiusUnits,
-		HeadingDesktopBorderRadiusWidth,
-		HeadingTabBorderRadiusWidth,
-		HeadingMobileBorderRadiusWidth,
-		HeadingBorderRadiusLink,
-
-
+		BoxBorder,
+		BoxBorderColor,
+		BoxBorderUnits,
+		BoxDesktopBorderWidth,
+		BoxTabBorderWidth,
+		BoxMobileBorderWidth,
+		BoxBorderLink,
+		BoxBorderRadiusUnits,
+		BoxDesktopBorderRadiusWidth,
+		BoxTabBorderRadiusWidth,
+		BoxMobileBorderRadiusWidth,
+		BoxBorderRadiusLink,
 	} = attributes;
 
 	const [timeRemaining, setTimeRemaining] = useState({});
@@ -123,13 +119,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	{/* Inspector Controls */}
 
 	/** Start Border Width */
-	const [previousBorderWidth, setPreviousBorderWidth] = useState(HeadingDesktopBorderWidth);
+	const [previousBorderWidth, setPreviousBorderWidth] = useState(BoxDesktopBorderWidth);
 	/** Function to update all Border Width values */
 	const updateAllBorderWidth = (value, device) => {
 		switch(device) {
 			case 'Desktop':
 				setAttributes({
-					HeadingDesktopBorderWidth: {
+					BoxDesktopBorderWidth: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -139,7 +135,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				break;
 			case 'Tablet':
 				setAttributes({
-					HeadingTabBorderWidth: {
+					BoxTabBorderWidth: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -149,7 +145,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				break;
 			case 'Mobile':
 				setAttributes({
-					HeadingMobileBorderWidth: {
+					BoxMobileBorderWidth: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -167,54 +163,54 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const value = e.target.value;
 		switch(DeviceType) {
 			case 'Desktop':
-				setAttributes({ HeadingDesktopBorderWidth: { ...HeadingDesktopBorderWidth, [direction]: value } });
+				setAttributes({ BoxDesktopBorderWidth: { ...BoxDesktopBorderWidth, [direction]: value } });
 				break;
 			case 'Tablet':
-				setAttributes({ HeadingTabBorderWidth: { ...HeadingTabBorderWidth, [direction]: value } });
+				setAttributes({ BoxTabBorderWidth: { ...BoxTabBorderWidth, [direction]: value } });
 				break;
 			case 'Mobile':
-				setAttributes({ HeadingMobileBorderWidth: { ...HeadingMobileBorderWidth, [direction]: value } });
+				setAttributes({ BoxMobileBorderWidth: { ...BoxMobileBorderWidth, [direction]: value } });
 				break;
 			default:
 				break;
 		}
-		/** Update all padding values if HeadingBorderLink is true */
-		if (HeadingBorderLink) {
+		/** Update all padding values if BoxBorderLink is true */
+		if (BoxBorderLink) {
 			updateAllBorderWidth(value, DeviceType);
 		}
 	};
 
-	/** Function to handle HeadingBorderLink toggle */
+	/** Function to handle BoxBorderLink toggle */
 	const handleBorderWidthLinkToggle = () => {
-		if (!HeadingBorderLink) {
-			setAttributes({ HeadingDesktopBorderWidth: previousBorderWidth });
+		if (!BoxBorderLink) {
+			setAttributes({ BoxDesktopBorderWidth: previousBorderWidth });
 		}
-		/** setHeadingBorderLinkLink(!HeadingBorderLink) */
-		setAttributes({HeadingBorderLink: !HeadingBorderLink})
+		/** setBoxBorderLinkLink(!BoxBorderLink) */
+		setAttributes({BoxBorderLink: !BoxBorderLink})
 	};
 
 	/** Update previousborderWidth state when Border Width changes */
 	useEffect(() => {
-		setPreviousBorderWidth(HeadingDesktopBorderWidth);
-	}, [HeadingDesktopBorderWidth]);
+		setPreviousBorderWidth(BoxDesktopBorderWidth);
+	}, [BoxDesktopBorderWidth]);
 
 	/** Function to handle device click for Border Width */
 	const handleBorderWidthDeviceClick = (device) => {
 		setAttributes({ DeviceType: device });
 	};
 
-	/** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
-	const borderWidth = `${HeadingDesktopBorderWidth.top}${HeadingBorderUnits} ${HeadingDesktopBorderWidth.right}${HeadingBorderUnits} ${HeadingDesktopBorderWidth.bottom}${HeadingBorderUnits} ${HeadingDesktopBorderWidth.left}${HeadingBorderUnits}`;
+	/** Default Border Width for desktop (using BoxDesktopBorderWidth) */
+	const borderWidth = `${BoxDesktopBorderWidth.top}${BoxBorderUnits} ${BoxDesktopBorderWidth.right}${BoxBorderUnits} ${BoxDesktopBorderWidth.bottom}${BoxBorderUnits} ${BoxDesktopBorderWidth.left}${BoxBorderUnits}`;
 	/** End Border Width */
 
 	/** Start Border Radius Width */
-	const [previousBorderRadiusWidth, setPreviousBorderRadiusWidth] = useState(HeadingDesktopBorderRadiusWidth);
+	const [previousBorderRadiusWidth, setPreviousBorderRadiusWidth] = useState(BoxDesktopBorderRadiusWidth);
 	/** Function to update all Border Width values */
 	const updateAllBorderRadiusWidth = (value, device) => {
 		switch(device) {
 			case 'Desktop':
 				setAttributes({
-					HeadingDesktopBorderRadiusWidth: {
+					BoxDesktopBorderRadiusWidth: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -224,7 +220,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				break;
 			case 'Tablet':
 				setAttributes({
-					HeadingTabBorderRadiusWidth: {
+					BoxTabBorderRadiusWidth: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -234,7 +230,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				break;
 			case 'Mobile':
 				setAttributes({
-					HeadingMobileBorderRadiusWidth: {
+					BoxMobileBorderRadiusWidth: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -252,44 +248,44 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const value = e.target.value;
 		switch(DeviceType) {
 			case 'Desktop':
-				setAttributes({ HeadingDesktopBorderRadiusWidth: { ...HeadingDesktopBorderRadiusWidth, [direction]: value } });
+				setAttributes({ BoxDesktopBorderRadiusWidth: { ...BoxDesktopBorderRadiusWidth, [direction]: value } });
 				break;
 			case 'Tablet':
-				setAttributes({ HeadingTabBorderRadiusWidth: { ...HeadingTabBorderRadiusWidth, [direction]: value } });
+				setAttributes({ BoxTabBorderRadiusWidth: { ...BoxTabBorderRadiusWidth, [direction]: value } });
 				break;
 			case 'Mobile':
-				setAttributes({ HeadingMobileBorderRadiusWidth: { ...HeadingMobileBorderRadiusWidth, [direction]: value } });
+				setAttributes({ BoxMobileBorderRadiusWidth: { ...BoxMobileBorderRadiusWidth, [direction]: value } });
 				break;
 			default:
 				break;
 		}
-		/** Update all padding values if HeadingBorderRadiusLink is true */
-		if (HeadingBorderRadiusLink) {
+		/** Update all padding values if BoxBorderRadiusLink is true */
+		if (BoxBorderRadiusLink) {
 			updateAllBorderRadiusWidth(value, DeviceType);
 		}
 	};
 
-	/** Function to handle HeadingBorderRadiusLink toggle */
+	/** Function to handle BoxBorderRadiusLink toggle */
 	const handleBorderRadiusWidthLinkToggle = () => {
-		if (!HeadingBorderRadiusLink) {
-			setAttributes({ HeadingDesktopBorderRadiusWidth: previousBorderRadiusWidth });
+		if (!BoxBorderRadiusLink) {
+			setAttributes({ BoxDesktopBorderRadiusWidth: previousBorderRadiusWidth });
 		}
-		/** setHeadingBorderRadiusLinkLink(!HeadingBorderRadiusLink) */
-		setAttributes({HeadingBorderRadiusLink: !HeadingBorderRadiusLink})
+		/** setBoxBorderRadiusLinkLink(!BoxBorderRadiusLink) */
+		setAttributes({BoxBorderRadiusLink: !BoxBorderRadiusLink})
 	};
 
 	/** Update previousBorderRadiusWidth state when Border Width changes */
 	useEffect(() => {
-		setPreviousBorderRadiusWidth(HeadingDesktopBorderRadiusWidth);
-	}, [HeadingDesktopBorderRadiusWidth]);
+		setPreviousBorderRadiusWidth(BoxDesktopBorderRadiusWidth);
+	}, [BoxDesktopBorderRadiusWidth]);
 
 	/** Function to handle device click for Border Width */
 	const handleBorderRadiusWidthDeviceClick = (device) => {
 		setAttributes({ DeviceType: device });
 	};
 
-	/** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
-	const borderRadiusWidth = `${HeadingDesktopBorderRadiusWidth.top}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.right}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.bottom}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.left}${HeadingBorderRadiusUnits}`;
+	/** Default Border Width for desktop (using BoxDesktopBorderWidth) */
+	const borderRadiusWidth = `${BoxDesktopBorderRadiusWidth.top}${BoxBorderRadiusUnits} ${BoxDesktopBorderRadiusWidth.right}${BoxBorderRadiusUnits} ${BoxDesktopBorderRadiusWidth.bottom}${BoxBorderRadiusUnits} ${BoxDesktopBorderRadiusWidth.left}${BoxBorderRadiusUnits}`;
 	/** End Border Radius Width */
 
 
@@ -771,9 +767,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										>
 											<SelectControl
 												label={__("Border Style", "frontis-blocks")}
-												value={HeadingBorder}
+												value={BoxBorder}
 												options={BORDER_STYLES}
-												onChange={(value) => setAttributes({ HeadingBorder: value })}
+												onChange={(value) => setAttributes({ BoxBorder: value })}
 											/>
 
 
@@ -801,8 +797,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<BaseControl className="fb-setting-color-setting-icon-popup-inner">
 																<div className="fb-setting-normal-color">
 																	<ColorPicker
-																		color={HeadingBorderColor}
-																		onChange={(value) => setAttributes({ HeadingBorderColor: value })}
+																		color={BoxBorderColor}
+																		onChange={(value) => setAttributes({ BoxBorderColor: value })}
 																		enableAlpha={true}
 																	/>
 																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -815,8 +811,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																			{ color: '#4CC9F0' },
 																		]}
 																		disableCustomColors={true}
-																		value={HeadingBorderColor}
-																		onChange={(value) => setAttributes({ HeadingBorderColor: value })}
+																		value={BoxBorderColor}
+																		onChange={(value) => setAttributes({ BoxBorderColor: value })}
 																	/>
 																</div>
 															</BaseControl>
@@ -835,8 +831,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																{UNIT_TYPES.map((item, key) => (
 																	<Button
 																		key={key}
-																		onClick={() => setAttributes({ HeadingBorderUnits: item.value })}
-																		className={`fb-setting-units-type-switcher ${HeadingBorderUnits === item.value ? 'active' : ''}`}
+																		onClick={() => setAttributes({ BoxBorderUnits: item.value })}
+																		className={`fb-setting-units-type-switcher ${BoxBorderUnits === item.value ? 'active' : ''}`}
 																	>
 																		{item.label}
 																	</Button>
@@ -851,7 +847,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="top"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderWidth.top : DeviceType === 'Tablet' ? BoxTabBorderWidth.top : BoxMobileBorderWidth.top}
 																onChange={(e) => handleBorderWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -860,7 +856,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="right"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderWidth.right : DeviceType === 'Tablet' ? BoxTabBorderWidth.right : BoxMobileBorderWidth.right}
 																onChange={(e) => handleBorderWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -869,7 +865,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="bottom"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? BoxTabBorderWidth.bottom : BoxMobileBorderWidth.bottom}
 																onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -878,17 +874,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="left"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderWidth.left : DeviceType === 'Tablet' ? BoxTabBorderWidth.left : BoxMobileBorderWidth.left}
 																onChange={(e) => handleBorderWidthInputChange(e, 'left')}
 															/>
 														</div>
 														<div className="sh_heading_input_wrapper">
 															<label className="sh_heading_spacing_input_label"></label>
 															<span
-																className={`dashicons ${HeadingBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${HeadingBorderLink ? 'is-checked' : ''}`}
+																className={`dashicons ${BoxBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${BoxBorderLink ? 'is-checked' : ''}`}
 																onClick={handleBorderWidthLinkToggle}
 															>
-</span>
+															</span>
 														</div>
 													</div>
 												</div>
@@ -903,8 +899,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																{UNIT_TYPES.map((item, key) => (
 																	<Button
 																		key={key}
-																		onClick={() => setAttributes({ HeadingBorderRadiusUnits: item.value })}
-																		className={`fb-setting-units-type-switcher ${HeadingBorderRadiusUnits === item.value ? 'active' : ''}`}
+																		onClick={() => setAttributes({ BoxBorderRadiusUnits: item.value })}
+																		className={`fb-setting-units-type-switcher ${BoxBorderRadiusUnits === item.value ? 'active' : ''}`}
 																	>
 																		{item.label}
 																	</Button>
@@ -918,7 +914,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="top"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.top : BoxMobileBorderRadiusWidth.top}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -927,7 +923,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="right"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.right : BoxMobileBorderRadiusWidth.right}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -936,7 +932,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="bottom"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.bottom : BoxMobileBorderRadiusWidth.bottom}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -945,14 +941,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<input
 																type="number"
 																name="left"
-																value={DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left}
+																value={DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.left : BoxMobileBorderRadiusWidth.left}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
 															/>
 														</div>
 														<div className="sh_heading_input_wrapper">
 															<label className="sh_heading_spacing_input_label"></label>
 															<span
-																className={`dashicons ${HeadingBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${HeadingBorderRadiusLink ? 'is-checked' : ''}`}
+																className={`dashicons ${BoxBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${BoxBorderRadiusLink ? 'is-checked' : ''}`}
 																onClick={handleBorderRadiusWidthLinkToggle}
 															>
 															</span>
@@ -961,7 +957,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												</div>
 											</div>
 										</PanelBody>
-
 
 									</>
 								)}
