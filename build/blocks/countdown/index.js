@@ -3285,7 +3285,7 @@ var attributes = {
     type: 'boolean',
     "default": true
   },
-  // Label Name Atrributes
+  // Label Name Attributes
   countDownLabelDay: {
     type: "string",
     "default": "Days"
@@ -3302,7 +3302,7 @@ var attributes = {
     type: "string",
     "default": "Seconds"
   },
-  // Label Background Atrributes
+  // Label Background Attributes
   countDownLabelBgColorDay: {
     type: 'string',
     "default": '#6B4EFF'
@@ -3321,6 +3321,19 @@ var attributes = {
   },
   targetDate: {
     type: "string"
+  },
+  // Box Width & Height
+  boxWidth: {
+    type: 'number',
+    "default": '100'
+  },
+  boxHeight: {
+    type: 'number',
+    "default": '100'
+  },
+  boxSpaceBetween: {
+    type: 'number',
+    "default": '10'
   },
   // Device Type
   DeviceType: {
@@ -3425,6 +3438,120 @@ var attributes = {
 
 /***/ }),
 
+/***/ "./src/blocks/countdown/attributes/digit.js":
+/*!**************************************************!*\
+  !*** ./src/blocks/countdown/attributes/digit.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var digitAttributes = {
+  digitFontFamily: {
+    type: "string",
+    "default": "inherit"
+  },
+  digitFontSize: {
+    type: "number"
+  },
+  digitFontSizeUnits: {
+    type: "string",
+    "default": "px"
+  },
+  digitFontWeight: {
+    type: "string",
+    "default": "700"
+  },
+  digitFontStyle: {
+    type: "string",
+    "default": "normal"
+  },
+  digitTextTransform: {
+    type: "string",
+    "default": "none"
+  },
+  digitTextDecoration: {
+    type: "string",
+    "default": "none"
+  },
+  digitLetterSpacing: {
+    type: "number"
+  },
+  digitLetterSpacingUnits: {
+    type: "string",
+    "default": "px"
+  },
+  digitLineHeight: {
+    type: "number"
+  },
+  digitLineHeightUnits: {
+    type: "string",
+    "default": "px"
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (digitAttributes);
+
+/***/ }),
+
+/***/ "./src/blocks/countdown/attributes/label.js":
+/*!**************************************************!*\
+  !*** ./src/blocks/countdown/attributes/label.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var labelAttributes = {
+  labelFontFamily: {
+    type: "string",
+    "default": "inherit"
+  },
+  labelFontSize: {
+    type: "number"
+  },
+  labelFontSizeUnits: {
+    type: "string",
+    "default": "px"
+  },
+  labelFontWeight: {
+    type: "string",
+    "default": "700"
+  },
+  labelFontStyle: {
+    type: "string",
+    "default": "normal"
+  },
+  labelTextTransform: {
+    type: "string",
+    "default": "none"
+  },
+  labelTextDecoration: {
+    type: "string",
+    "default": "none"
+  },
+  labelLetterSpacing: {
+    type: "number"
+  },
+  labelLetterSpacingUnits: {
+    type: "string",
+    "default": "px"
+  },
+  labelLineHeight: {
+    type: "number"
+  },
+  labelLineHeightUnits: {
+    type: "string",
+    "default": "px"
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (labelAttributes);
+
+/***/ }),
+
 /***/ "./src/blocks/countdown/edit.js":
 /*!**************************************!*\
   !*** ./src/blocks/countdown/edit.js ***!
@@ -3484,6 +3611,9 @@ function Edit(_ref) {
     showHours = attributes.showHours,
     showMinutes = attributes.showMinutes,
     showSeconds = attributes.showSeconds,
+    boxWidth = attributes.boxWidth,
+    boxHeight = attributes.boxHeight,
+    boxSpaceBetween = attributes.boxSpaceBetween,
     DeviceType = attributes.DeviceType,
     BoxBorder = attributes.BoxBorder,
     BoxBorderColor = attributes.BoxBorderColor,
@@ -3496,7 +3626,29 @@ function Edit(_ref) {
     BoxDesktopBorderRadiusWidth = attributes.BoxDesktopBorderRadiusWidth,
     BoxTabBorderRadiusWidth = attributes.BoxTabBorderRadiusWidth,
     BoxMobileBorderRadiusWidth = attributes.BoxMobileBorderRadiusWidth,
-    BoxBorderRadiusLink = attributes.BoxBorderRadiusLink;
+    BoxBorderRadiusLink = attributes.BoxBorderRadiusLink,
+    digitFontFamily = attributes.digitFontFamily,
+    digitFontSize = attributes.digitFontSize,
+    digitFontSizeUnits = attributes.digitFontSizeUnits,
+    digitFontWeight = attributes.digitFontWeight,
+    digitFontStyle = attributes.digitFontStyle,
+    digitTextTransform = attributes.digitTextTransform,
+    digitTextDecoration = attributes.digitTextDecoration,
+    digitLetterSpacing = attributes.digitLetterSpacing,
+    digitLetterSpacingUnits = attributes.digitLetterSpacingUnits,
+    digitLineHeight = attributes.digitLineHeight,
+    digitLineHeightUnits = attributes.digitLineHeightUnits,
+    labelFontFamily = attributes.labelFontFamily,
+    labelFontSize = attributes.labelFontSize,
+    labelFontSizeUnits = attributes.labelFontSizeUnits,
+    labelFontWeight = attributes.labelFontWeight,
+    labelFontStyle = attributes.labelFontStyle,
+    labelTextTransform = attributes.labelTextTransform,
+    labelTextDecoration = attributes.labelTextDecoration,
+    labelLetterSpacing = attributes.labelLetterSpacing,
+    labelLetterSpacingUnits = attributes.labelLetterSpacingUnits,
+    labelLineHeight = attributes.labelLineHeight,
+    labelLineHeightUnits = attributes.labelLineHeightUnits;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     timeRemaining = _useState2[0],
@@ -3773,7 +3925,26 @@ function Edit(_ref) {
   var borderRadiusWidth = "".concat(BoxDesktopBorderRadiusWidth.top).concat(BoxBorderRadiusUnits, " ").concat(BoxDesktopBorderRadiusWidth.right).concat(BoxBorderRadiusUnits, " ").concat(BoxDesktopBorderRadiusWidth.bottom).concat(BoxBorderRadiusUnits, " ").concat(BoxDesktopBorderRadiusWidth.left).concat(BoxBorderRadiusUnits);
   /** End Border Radius Width */
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  /* set default values for the style attributes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    if (digitFontFamily) {
+      var fontUrl = "https://fonts.googleapis.com/css?family=".concat(digitFontFamily.replace(' ', '+'));
+      var linkElement = document.createElement('link');
+      linkElement.rel = 'stylesheet';
+      linkElement.href = fontUrl;
+      document.head.appendChild(linkElement);
+    }
+  }, [digitFontFamily]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    if (labelFontFamily) {
+      var fontUrl = "https://fonts.googleapis.com/css?family=".concat(labelFontFamily.replace(' ', '+'));
+      var linkElement = document.createElement('link');
+      linkElement.rel = 'stylesheet';
+      linkElement.href = fontUrl;
+      document.head.appendChild(linkElement);
+    }
+  }, [labelFontFamily]);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-count-down-wrapper.".concat(blockID, "{\n           \t\t\tgap: ").concat(boxSpaceBetween, "px;\n                }\n                .fb-count-down-wrapper.").concat(blockID, " .fb-count-down-item {\n                    border: ").concat(BoxBorder, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    width: ").concat(boxWidth, "px;\n                    height: ").concat(boxHeight, "px;\n                    ").concat(BoxBorderColor !== undefined ? "border-color: ".concat(BoxBorderColor, ";") : '', "\n                }\n                .fb-count-down-wrapper.").concat(blockID, " .fb-count-down-item .fb-count-down-time{\n               \t\tfont-family: ").concat(digitFontFamily !== 'default' ? digitFontFamily : digitFontFamily, ";\n                    font-size: ").concat(digitFontSize !== undefined ? "".concat(digitFontSize).concat(digitFontSize) : '', "px;\n                    font-weight: ").concat(digitFontWeight, ";\n                    font-style: ").concat(digitFontStyle, ";\n                    text-transform: ").concat(digitTextTransform, ";\n                    text-decoration: ").concat(digitTextDecoration, ";\n                    ").concat(digitLetterSpacing !== undefined ? "letter-spacing: ".concat(digitLetterSpacing).concat(digitLetterSpacing, ";") : '', "\n                    ").concat(digitLineHeight !== undefined ? "line-height: ".concat(digitLineHeight).concat(digitLineHeight, ";") : '', "\n                }\n                .fb-count-down-wrapper.").concat(blockID, " .fb-count-down-item .fb-count-down-label{\n               \t\tfont-family: ").concat(labelFontFamily !== 'default' ? labelFontFamily : labelFontFamily, ";\n                    font-size: ").concat(labelFontSize !== undefined ? "".concat(labelFontSize).concat(labelFontSize) : '', "px;\n                    font-weight: ").concat(labelFontWeight, ";\n                    font-style: ").concat(labelFontStyle, ";\n                    text-transform: ").concat(labelTextTransform, ";\n                    text-decoration: ").concat(labelTextDecoration, ";\n                    ").concat(labelLetterSpacing !== undefined ? "letter-spacing: ".concat(labelLetterSpacing).concat(labelLetterSpacing, ";") : '', "\n                    ").concat(labelLineHeight !== undefined ? "line-height: ".concat(labelLineHeight).concat(labelLineHeight, ";") : '', "\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"
@@ -3881,8 +4052,47 @@ function Edit(_ref) {
     }))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box", "frontis-blocks"),
       initialOpen: true
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks"),
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box Width", "frontis-blocks"),
+      value: boxWidth,
+      onChange: function onChange(value) {
+        return setAttributes({
+          boxWidth: value === 0 ? undefined : value
+        });
+      },
+      min: 1,
+      max: 1000,
+      step: 1,
+      allowReset: true,
+      resetFallbackValue: undefined
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box Height", "frontis-blocks"),
+      value: boxHeight,
+      onChange: function onChange(value) {
+        return setAttributes({
+          boxHeight: value === 0 ? undefined : value
+        });
+      },
+      min: 1,
+      max: 1000,
+      step: 1,
+      allowReset: true,
+      resetFallbackValue: undefined
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box Space Between", "frontis-blocks"),
+      value: boxSpaceBetween,
+      onChange: function onChange(value) {
+        return setAttributes({
+          boxSpaceBetween: value === 0 ? undefined : value
+        });
+      },
+      min: 1,
+      max: 1000,
+      step: 1,
+      allowReset: true,
+      resetFallbackValue: undefined
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Digit Typography", "frontis-blocks"),
       className: "fb-setting-typography"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
       className: "fb-setting-typography-icon-dropdown",
@@ -3912,10 +4122,15 @@ function Edit(_ref) {
         }, /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-fontfamily-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks")
-          // options={FONT_FAMILYS}
-          // value={HeadingFontFamily}
-          // onChange={(value) => setAttributes({ HeadingFontFamily: value })}
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
+          options: _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.FONT_FAMILYS // Ensure you have FONT_FAMILYS defined.
+          ,
+          value: attributes.digitFontFamily,
+          onChange: function onChange(value) {
+            return setAttributes({
+              digitFontFamily: value
+            });
+          }
         })), /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-fontsize-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
@@ -3924,33 +4139,189 @@ function Edit(_ref) {
           className: "fb-setting-fontsize-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-fontsize-units"
-        })), /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-fontsize-units-wrap"
+        }, _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                digitFontSizeUnits: item.value
+              });
+            },
+            className: "fb-setting-fontsize-units-switcher ".concat(attributes.digitFontSizeUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-fontsize-rangecontrol"
-        })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-fontweight-wrapper"
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-fontstyle-wrapper"
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-texttransform-wrapper"
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-textdecoration-wrapper"
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-letterspacing-wrapper"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-letterspacing-header"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-letterspacing-label"
-        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-letterspacing-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: attributes.digitFontSize,
+          onChange: function onChange(value) {
+            return setAttributes({
+              digitFontSize: value
+            });
+          },
+          min: 1,
+          max: 200,
+          allowReset: true,
+          resetFallbackValue: undefined
         }))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-lineheight-wrapper"
+          className: "fb-setting-fontweight-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("100", "frontis-blocks"),
+            value: "100"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("200", "frontis-blocks"),
+            value: "200"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("300", "frontis-blocks"),
+            value: "300"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("400", "frontis-blocks"),
+            value: "400"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("500", "frontis-blocks"),
+            value: "500"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("600", "frontis-blocks"),
+            value: "600"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("700", "frontis-blocks"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("800", "frontis-blocks"),
+            value: "800"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("900", "frontis-blocks"),
+            value: "900"
+          }],
+          value: attributes.digitFontWeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              digitFontWeight: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label Typography", "frontis-blocks"),
+      className: "fb-setting-typography"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-typography-icon-dropdown",
+      contentClassName: "fb-setting-typography-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref3) {
+        var isOpen = _ref3.isOpen,
+          onToggle = _ref3.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-typography-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "edit",
+          className: "fb-setting-typography-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-typography-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-typography-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-lineheight-header"
+          className: "fb-setting-fontfamily-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
+          options: _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.FONT_FAMILYS // Ensure you have FONT_FAMILYS defined.
+          ,
+          value: attributes.labelFontFamily,
+          onChange: function onChange(value) {
+            return setAttributes({
+              labelFontFamily: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-lineheight-label"
-        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-lineheight-units"
-        })))));
+          className: "fb-setting-fontsize-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-fontsize-units-wrap"
+        }, _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                labelFontSizeUnits: item.value
+              });
+            },
+            className: "fb-setting-fontsize-units-switcher ".concat(attributes.labelFontSizeUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-rangecontrol"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: attributes.labelFontSize,
+          onChange: function onChange(value) {
+            return setAttributes({
+              labelFontSize: value
+            });
+          },
+          min: 1,
+          max: 200,
+          allowReset: true,
+          resetFallbackValue: undefined
+        }))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontweight-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("100", "frontis-blocks"),
+            value: "100"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("200", "frontis-blocks"),
+            value: "200"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("300", "frontis-blocks"),
+            value: "300"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("400", "frontis-blocks"),
+            value: "400"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("500", "frontis-blocks"),
+            value: "500"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("600", "frontis-blocks"),
+            value: "600"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("700", "frontis-blocks"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("800", "frontis-blocks"),
+            value: "800"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("900", "frontis-blocks"),
+            value: "900"
+          }],
+          value: attributes.labelFontWeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              labelFontWeight: value
+            });
+          }
+        }))));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Day Box Background", "frontis-blocks"),
@@ -3961,9 +4332,9 @@ function Edit(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref3) {
-        var isOpen = _ref3.isOpen,
-          onToggle = _ref3.onToggle;
+      renderToggle: function renderToggle(_ref4) {
+        var isOpen = _ref4.isOpen,
+          onToggle = _ref4.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -4022,9 +4393,9 @@ function Edit(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref4) {
-        var isOpen = _ref4.isOpen,
-          onToggle = _ref4.onToggle;
+      renderToggle: function renderToggle(_ref5) {
+        var isOpen = _ref5.isOpen,
+          onToggle = _ref5.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -4083,9 +4454,9 @@ function Edit(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref5) {
-        var isOpen = _ref5.isOpen,
-          onToggle = _ref5.onToggle;
+      renderToggle: function renderToggle(_ref6) {
+        var isOpen = _ref6.isOpen,
+          onToggle = _ref6.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -4144,9 +4515,9 @@ function Edit(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref6) {
-        var isOpen = _ref6.isOpen,
-          onToggle = _ref6.onToggle;
+      renderToggle: function renderToggle(_ref7) {
+        var isOpen = _ref7.isOpen,
+          onToggle = _ref7.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -4210,7 +4581,7 @@ function Edit(_ref) {
         });
       }
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Color", "frontis-blocks"),
       className: "fb-setting-color-setting-wrapper"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
       className: "fb-setting-color-setting-icon-dropdown",
@@ -4218,9 +4589,9 @@ function Edit(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref7) {
-        var isOpen = _ref7.isOpen,
-          onToggle = _ref7.onToggle;
+      renderToggle: function renderToggle(_ref8) {
+        var isOpen = _ref8.isOpen,
+          onToggle = _ref8.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -4428,7 +4799,7 @@ function Edit(_ref) {
   }))), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
     id: blockID
   }), /*#__PURE__*/React.createElement("div", {
-    className: "fb-count-down-wrapper"
+    className: "fb-count-down-wrapper ".concat(blockID)
   }, showDays && /*#__PURE__*/React.createElement("div", {
     className: "fb-count-down-item",
     style: {
@@ -4484,6 +4855,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/blocks/countdown/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/countdown/block.json");
 /* harmony import */ var _attributes_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./attributes.js */ "./src/blocks/countdown/attributes.js");
+/* harmony import */ var _attributes_digit_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./attributes/digit.js */ "./src/blocks/countdown/attributes/digit.js");
+/* harmony import */ var _attributes_label_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./attributes/label.js */ "./src/blocks/countdown/attributes/label.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
 
@@ -4494,8 +4873,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+// Merge attributes and digitAttributes
+var combinedAttributes = _objectSpread(_objectSpread(_objectSpread({}, _attributes_js__WEBPACK_IMPORTED_MODULE_5__["default"]), _attributes_digit_js__WEBPACK_IMPORTED_MODULE_6__["default"]), _attributes_label_js__WEBPACK_IMPORTED_MODULE_7__["default"]);
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
-  attributes: _attributes_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+  attributes: combinedAttributes,
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
@@ -4547,7 +4931,7 @@ function save(_ref) {
     className: "fb-count-down-time days"
   }, "0"), /*#__PURE__*/React.createElement("span", {
     className: "fb-count-down-label"
-  }, countDownLabelDay || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Days', 'woomni-blocks'))), /*#__PURE__*/React.createElement("div", {
+  }, countDownLabelDay || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Days', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-count-down-item",
     style: {
       backgroundColor: countDownLabelBgColorHour
@@ -4556,7 +4940,7 @@ function save(_ref) {
     className: "fb-count-down-time hours"
   }, "0"), /*#__PURE__*/React.createElement("span", {
     className: "fb-count-down-label"
-  }, countDownLabelHour || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hours', 'woomni-blocks'))), /*#__PURE__*/React.createElement("div", {
+  }, countDownLabelHour || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hours', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-count-down-item",
     style: {
       backgroundColor: countDownLabelBgColorMinute
@@ -4565,7 +4949,7 @@ function save(_ref) {
     className: "fb-count-down-time minutes"
   }, "0"), /*#__PURE__*/React.createElement("span", {
     className: "fb-count-down-label"
-  }, countDownLabelMinute || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Minutes', 'woomni-blocks'))), /*#__PURE__*/React.createElement("div", {
+  }, countDownLabelMinute || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Minutes', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-count-down-item",
     style: {
       backgroundColor: countDownLabelBgColorSecond
@@ -4574,7 +4958,7 @@ function save(_ref) {
     className: "fb-count-down-time seconds"
   }, "0"), /*#__PURE__*/React.createElement("span", {
     className: "fb-count-down-label"
-  }, countDownLabelSecond || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Seconds', 'woomni-blocks'))))));
+  }, countDownLabelSecond || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Seconds', 'frontis-blocks'))))));
 }
 
 /***/ }),

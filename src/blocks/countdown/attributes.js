@@ -26,7 +26,7 @@ const attributes = {
 		default: true
 	},
 
-	// Label Name Atrributes
+	// Label Name Attributes
 	countDownLabelDay: {
 		type: "string",
 		default: "Days"
@@ -44,7 +44,7 @@ const attributes = {
 		default: "Seconds"
 	},
 
-	// Label Background Atrributes
+	// Label Background Attributes
 	countDownLabelBgColorDay: {
 		type: 'string',
 		default: '#6B4EFF',
@@ -64,7 +64,19 @@ const attributes = {
 	targetDate: {
 		type: "string",
 	},
-
+	// Box Width & Height
+	boxWidth: {
+		type: 'number',
+		default: '100',
+	},
+	boxHeight: {
+		type: 'number',
+		default: '100',
+	},
+	boxSpaceBetween: {
+		type: 'number',
+		default: '10',
+	},
 	// Device Type
 	DeviceType: {
 		type: "string",
@@ -163,6 +175,7 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+
 };
 
 export default attributes;
