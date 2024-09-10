@@ -15,6 +15,16 @@ const attributes = {
         type: "string",
         default: "Add Text",
     },
+    ButtonUrl: {
+        type: "string",
+        default: "",
+    },
+    ButtonTargetUrl: {
+        type: "boolean",
+    },
+    ButtonWidth: {
+        type: "number",
+    },
     ButtonZIndex : {
         type: "number",
     },

@@ -12,6 +12,7 @@ import {
     Button,
     ButtonGroup,
     ToggleControl,
+    TextControl,
     TextareaControl,
     Dropdown,
     Dashicon,
@@ -45,6 +46,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         DeviceType,
         ButtonAlignment,
         ButtonText,
+        ButtonUrl,
+        ButtonTargetUrl,
+        ButtonWidth,
         ButtonZIndex
 
     } = attributes;
@@ -59,6 +63,32 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     
     return (
         <>
+            <style>
+            {`
+                .fb-advanced-button-wrapper .fb-advanced-button {
+                    align-items: center;
+                    display: inline-flex;
+                    justify-content: center;
+                    outline: none;
+                    text-align: center;
+                    text-decoration: none;
+                    padding: 12px 30px;
+                    background-color: #3f8efc;
+                    border-radius: 0px;
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    position: relative;
+                    transition: .2s ease-in;
+                    white-space: nowrap;
+                    width: ${ButtonWidth !== undefined ? `${ButtonWidth}%` : ''};
+                }
+
+                .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
+                    color: #ffffff;
+                }
+            `}
+            </style>
+
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -92,7 +122,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 initialOpen={true}
                                             >
                                                 <BaseControl
-                                                    label={__("Button Alignment", "frontis-blocks")}
+                                                    label={__("Alignment", "frontis-blocks")}
                                                     id="fb-advanced-button-alignment"
                                                     className="fb-advanced-button-alignment"
                                                 >
@@ -111,12 +141,53 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     </ButtonGroup>
                                                 </BaseControl>
 
-                                                <TextareaControl
-                                                    label={__("Button Text", "frontis-blocks")}
+                                                <TextControl
+                                                    label={__("Text", "frontis-blocks")}
                                                     value={ButtonText}
                                                     onChange={(value) => setAttributes({ ButtonText: value })}
                                                     className="fb-advanced-button-text"
                                                 />
+                                                <div className="fb-link-control-wrapper">
+                                                    <BaseControl 
+                                                        label={__("URL", "frontis-blocks")}
+                                                    >
+                                                        <div className="fb-link-control-inner-wrapper">
+                                                            <TextControl
+                                                                value={ButtonUrl}
+                                                                onChange={(value) => setAttributes({ ButtonUrl: value })}
+                                                                className="fb-advanced-button-url"
+                                                                placeholder={__('https://', 'frontis-blocks')}
+                                                            />
+                                                            <Dropdown
+                                                                className="fb-advanced-button-icon-dropdown"
+                                                                contentClassName="fb-advanced-button-icon-dropdown-content"
+                                                                popoverProps={{ placement: 'bottom-start' }}
+                                                                renderToggle={({ isOpen, onToggle }) => (
+                                                                    <Button
+                                                                        variant="primary"
+                                                                        onClick={onToggle}
+                                                                        aria-expanded={isOpen}
+                                                                        aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+                                                                        className="fb-advanced-button-icon-btn"
+                                                                    >
+                                                                        <Dashicon icon="color-picker" className="fb-advanced-button-icon" />
+                                                                    </Button>
+                                                                )}
+                                                                renderContent={() => (
+                                                                    <div className="fb-advanced-button-icon-popup">
+                                                                        <BaseControl className="fb-advanced-button-icon-popup-inner">
+                                                                            <ToggleControl
+                                                                                label={__("Open in new tab", "frontis-blocks")}
+                                                                                checked={ButtonTargetUrl}
+                                                                                onChange={(value) => setAttributes({ ButtonTargetUrl: value })}
+                                                                            />
+                                                                        </BaseControl>
+                                                                    </div>
+                                                                )}
+                                                            />
+                                                        </div>
+                                                    </BaseControl>
+                                                </div>
                                             </PanelBody>
                                         </div>
                                     </>
@@ -128,6 +199,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             title={__("Styles", "frontis-blocks")}
                                             initialOpen={true}
                                         >
+                                            <BaseControl 
+                                                label={__("Width", "frontis-blocks")}
+                                                className="fb-advanced-button-width"
+                                            >
+                                                <RangeControl
+                                                    value={ButtonWidth}
+                                                    onChange={(value) => setAttributes({ ButtonWidth: value === 0 ? undefined : value })}
+                                                    min={1}
+                                                    max={100}
+                                                    step={1}
+                                                    allowReset
+                                                    resetFallbackValue={undefined}
+                                                />
+                                            </BaseControl>
                                             <BaseControl 
                                                 label={__("Typography", "frontis-blocks")}
                                                 className="fb-setting-typography"

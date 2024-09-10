@@ -4211,7 +4211,7 @@ function Inspector(_ref) {
     }, {
       name: "advanced",
       title: "Advanced",
-      className: "fb-tab advance"
+      className: "fb-tab advanced"
     }]
   }, function (tab) {
     return /*#__PURE__*/React.createElement("div", {
