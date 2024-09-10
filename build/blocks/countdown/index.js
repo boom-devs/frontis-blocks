@@ -3328,25 +3328,25 @@ var attributes = {
     "default": "Desktop"
   },
   // Border Attributes
-  HeadingBorder: {
+  BoxBorder: {
     type: 'string',
     "default": "none"
   },
-  HeadingBorderColor: {
+  BoxBorderColor: {
     type: 'string'
   },
-  HeadingBorderHoverColor: {
+  BoxBorderHoverColor: {
     type: 'string'
   },
-  HeadingBorderColorSwitcher: {
+  BoxBorderColorSwitcher: {
     type: "string",
     "default": "normal"
   },
-  HeadingBorderUnits: {
+  BoxBorderUnits: {
     type: "string",
     "default": "px"
   },
-  HeadingDesktopBorderWidth: {
+  BoxDesktopBorderWidth: {
     type: "object",
     "default": {
       top: 0,
@@ -3355,7 +3355,7 @@ var attributes = {
       right: 0
     }
   },
-  HeadingTabBorderWidth: {
+  BoxTabBorderWidth: {
     type: "object",
     "default": {
       top: 0,
@@ -3364,7 +3364,7 @@ var attributes = {
       right: 0
     }
   },
-  HeadingMobileBorderWidth: {
+  BoxMobileBorderWidth: {
     type: "object",
     "default": {
       top: 0,
@@ -3377,15 +3377,15 @@ var attributes = {
     type: "string",
     "default": "Desktop"
   },
-  HeadingBorderLink: {
+  BoxBorderLink: {
     type: "boolean",
     "default": true
   },
-  HeadingBorderRadiusUnits: {
+  BoxBorderRadiusUnits: {
     type: "string",
     "default": "px"
   },
-  HeadingDesktopBorderRadiusWidth: {
+  BoxDesktopBorderRadiusWidth: {
     type: "object",
     "default": {
       top: 0,
@@ -3394,7 +3394,7 @@ var attributes = {
       right: 0
     }
   },
-  HeadingTabBorderRadiusWidth: {
+  BoxTabBorderRadiusWidth: {
     type: "object",
     "default": {
       top: 0,
@@ -3403,7 +3403,7 @@ var attributes = {
       right: 0
     }
   },
-  HeadingMobileBorderRadiusWidth: {
+  BoxMobileBorderRadiusWidth: {
     type: "object",
     "default": {
       top: 0,
@@ -3416,7 +3416,7 @@ var attributes = {
     type: "string",
     "default": "Desktop"
   },
-  HeadingBorderRadiusLink: {
+  BoxBorderRadiusLink: {
     type: "boolean",
     "default": true
   }
@@ -3485,20 +3485,18 @@ function Edit(_ref) {
     showMinutes = attributes.showMinutes,
     showSeconds = attributes.showSeconds,
     DeviceType = attributes.DeviceType,
-    HeadingBorder = attributes.HeadingBorder,
-    HeadingBorderColor = attributes.HeadingBorderColor,
-    HeadingBorderHoverColor = attributes.HeadingBorderHoverColor,
-    HeadingBorderColorSwitcher = attributes.HeadingBorderColorSwitcher,
-    HeadingBorderUnits = attributes.HeadingBorderUnits,
-    HeadingDesktopBorderWidth = attributes.HeadingDesktopBorderWidth,
-    HeadingTabBorderWidth = attributes.HeadingTabBorderWidth,
-    HeadingMobileBorderWidth = attributes.HeadingMobileBorderWidth,
-    HeadingBorderLink = attributes.HeadingBorderLink,
-    HeadingBorderRadiusUnits = attributes.HeadingBorderRadiusUnits,
-    HeadingDesktopBorderRadiusWidth = attributes.HeadingDesktopBorderRadiusWidth,
-    HeadingTabBorderRadiusWidth = attributes.HeadingTabBorderRadiusWidth,
-    HeadingMobileBorderRadiusWidth = attributes.HeadingMobileBorderRadiusWidth,
-    HeadingBorderRadiusLink = attributes.HeadingBorderRadiusLink;
+    BoxBorder = attributes.BoxBorder,
+    BoxBorderColor = attributes.BoxBorderColor,
+    BoxBorderUnits = attributes.BoxBorderUnits,
+    BoxDesktopBorderWidth = attributes.BoxDesktopBorderWidth,
+    BoxTabBorderWidth = attributes.BoxTabBorderWidth,
+    BoxMobileBorderWidth = attributes.BoxMobileBorderWidth,
+    BoxBorderLink = attributes.BoxBorderLink,
+    BoxBorderRadiusUnits = attributes.BoxBorderRadiusUnits,
+    BoxDesktopBorderRadiusWidth = attributes.BoxDesktopBorderRadiusWidth,
+    BoxTabBorderRadiusWidth = attributes.BoxTabBorderRadiusWidth,
+    BoxMobileBorderRadiusWidth = attributes.BoxMobileBorderRadiusWidth,
+    BoxBorderRadiusLink = attributes.BoxBorderRadiusLink;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     timeRemaining = _useState2[0],
@@ -3576,7 +3574,7 @@ function Edit(_ref) {
   {/* Inspector Controls */}
 
   /** Start Border Width */
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(HeadingDesktopBorderWidth),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(BoxDesktopBorderWidth),
     _useState6 = _slicedToArray(_useState5, 2),
     previousBorderWidth = _useState6[0],
     setPreviousBorderWidth = _useState6[1];
@@ -3585,7 +3583,7 @@ function Edit(_ref) {
     switch (device) {
       case 'Desktop':
         setAttributes({
-          HeadingDesktopBorderWidth: {
+          BoxDesktopBorderWidth: {
             top: value,
             right: value,
             bottom: value,
@@ -3595,7 +3593,7 @@ function Edit(_ref) {
         break;
       case 'Tablet':
         setAttributes({
-          HeadingTabBorderWidth: {
+          BoxTabBorderWidth: {
             top: value,
             right: value,
             bottom: value,
@@ -3605,7 +3603,7 @@ function Edit(_ref) {
         break;
       case 'Mobile':
         setAttributes({
-          HeadingMobileBorderWidth: {
+          BoxMobileBorderWidth: {
             top: value,
             right: value,
             bottom: value,
@@ -3624,45 +3622,45 @@ function Edit(_ref) {
     switch (DeviceType) {
       case 'Desktop':
         setAttributes({
-          HeadingDesktopBorderWidth: _objectSpread(_objectSpread({}, HeadingDesktopBorderWidth), {}, _defineProperty({}, direction, value))
+          BoxDesktopBorderWidth: _objectSpread(_objectSpread({}, BoxDesktopBorderWidth), {}, _defineProperty({}, direction, value))
         });
         break;
       case 'Tablet':
         setAttributes({
-          HeadingTabBorderWidth: _objectSpread(_objectSpread({}, HeadingTabBorderWidth), {}, _defineProperty({}, direction, value))
+          BoxTabBorderWidth: _objectSpread(_objectSpread({}, BoxTabBorderWidth), {}, _defineProperty({}, direction, value))
         });
         break;
       case 'Mobile':
         setAttributes({
-          HeadingMobileBorderWidth: _objectSpread(_objectSpread({}, HeadingMobileBorderWidth), {}, _defineProperty({}, direction, value))
+          BoxMobileBorderWidth: _objectSpread(_objectSpread({}, BoxMobileBorderWidth), {}, _defineProperty({}, direction, value))
         });
         break;
       default:
         break;
     }
-    /** Update all padding values if HeadingBorderLink is true */
-    if (HeadingBorderLink) {
+    /** Update all padding values if BoxBorderLink is true */
+    if (BoxBorderLink) {
       updateAllBorderWidth(value, DeviceType);
     }
   };
 
-  /** Function to handle HeadingBorderLink toggle */
+  /** Function to handle BoxBorderLink toggle */
   var handleBorderWidthLinkToggle = function handleBorderWidthLinkToggle() {
-    if (!HeadingBorderLink) {
+    if (!BoxBorderLink) {
       setAttributes({
-        HeadingDesktopBorderWidth: previousBorderWidth
+        BoxDesktopBorderWidth: previousBorderWidth
       });
     }
-    /** setHeadingBorderLinkLink(!HeadingBorderLink) */
+    /** setBoxBorderLinkLink(!BoxBorderLink) */
     setAttributes({
-      HeadingBorderLink: !HeadingBorderLink
+      BoxBorderLink: !BoxBorderLink
     });
   };
 
   /** Update previousborderWidth state when Border Width changes */
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    setPreviousBorderWidth(HeadingDesktopBorderWidth);
-  }, [HeadingDesktopBorderWidth]);
+    setPreviousBorderWidth(BoxDesktopBorderWidth);
+  }, [BoxDesktopBorderWidth]);
 
   /** Function to handle device click for Border Width */
   var handleBorderWidthDeviceClick = function handleBorderWidthDeviceClick(device) {
@@ -3671,12 +3669,12 @@ function Edit(_ref) {
     });
   };
 
-  /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
-  var borderWidth = "".concat(HeadingDesktopBorderWidth.top).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.right).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.bottom).concat(HeadingBorderUnits, " ").concat(HeadingDesktopBorderWidth.left).concat(HeadingBorderUnits);
+  /** Default Border Width for desktop (using BoxDesktopBorderWidth) */
+  var borderWidth = "".concat(BoxDesktopBorderWidth.top).concat(BoxBorderUnits, " ").concat(BoxDesktopBorderWidth.right).concat(BoxBorderUnits, " ").concat(BoxDesktopBorderWidth.bottom).concat(BoxBorderUnits, " ").concat(BoxDesktopBorderWidth.left).concat(BoxBorderUnits);
   /** End Border Width */
 
   /** Start Border Radius Width */
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(HeadingDesktopBorderRadiusWidth),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(BoxDesktopBorderRadiusWidth),
     _useState8 = _slicedToArray(_useState7, 2),
     previousBorderRadiusWidth = _useState8[0],
     setPreviousBorderRadiusWidth = _useState8[1];
@@ -3685,7 +3683,7 @@ function Edit(_ref) {
     switch (device) {
       case 'Desktop':
         setAttributes({
-          HeadingDesktopBorderRadiusWidth: {
+          BoxDesktopBorderRadiusWidth: {
             top: value,
             right: value,
             bottom: value,
@@ -3695,7 +3693,7 @@ function Edit(_ref) {
         break;
       case 'Tablet':
         setAttributes({
-          HeadingTabBorderRadiusWidth: {
+          BoxTabBorderRadiusWidth: {
             top: value,
             right: value,
             bottom: value,
@@ -3705,7 +3703,7 @@ function Edit(_ref) {
         break;
       case 'Mobile':
         setAttributes({
-          HeadingMobileBorderRadiusWidth: {
+          BoxMobileBorderRadiusWidth: {
             top: value,
             right: value,
             bottom: value,
@@ -3724,45 +3722,45 @@ function Edit(_ref) {
     switch (DeviceType) {
       case 'Desktop':
         setAttributes({
-          HeadingDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+          BoxDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, BoxDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
         break;
       case 'Tablet':
         setAttributes({
-          HeadingTabBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingTabBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+          BoxTabBorderRadiusWidth: _objectSpread(_objectSpread({}, BoxTabBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
         break;
       case 'Mobile':
         setAttributes({
-          HeadingMobileBorderRadiusWidth: _objectSpread(_objectSpread({}, HeadingMobileBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+          BoxMobileBorderRadiusWidth: _objectSpread(_objectSpread({}, BoxMobileBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
         break;
       default:
         break;
     }
-    /** Update all padding values if HeadingBorderRadiusLink is true */
-    if (HeadingBorderRadiusLink) {
+    /** Update all padding values if BoxBorderRadiusLink is true */
+    if (BoxBorderRadiusLink) {
       updateAllBorderRadiusWidth(value, DeviceType);
     }
   };
 
-  /** Function to handle HeadingBorderRadiusLink toggle */
+  /** Function to handle BoxBorderRadiusLink toggle */
   var handleBorderRadiusWidthLinkToggle = function handleBorderRadiusWidthLinkToggle() {
-    if (!HeadingBorderRadiusLink) {
+    if (!BoxBorderRadiusLink) {
       setAttributes({
-        HeadingDesktopBorderRadiusWidth: previousBorderRadiusWidth
+        BoxDesktopBorderRadiusWidth: previousBorderRadiusWidth
       });
     }
-    /** setHeadingBorderRadiusLinkLink(!HeadingBorderRadiusLink) */
+    /** setBoxBorderRadiusLinkLink(!BoxBorderRadiusLink) */
     setAttributes({
-      HeadingBorderRadiusLink: !HeadingBorderRadiusLink
+      BoxBorderRadiusLink: !BoxBorderRadiusLink
     });
   };
 
   /** Update previousBorderRadiusWidth state when Border Width changes */
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    setPreviousBorderRadiusWidth(HeadingDesktopBorderRadiusWidth);
-  }, [HeadingDesktopBorderRadiusWidth]);
+    setPreviousBorderRadiusWidth(BoxDesktopBorderRadiusWidth);
+  }, [BoxDesktopBorderRadiusWidth]);
 
   /** Function to handle device click for Border Width */
   var handleBorderRadiusWidthDeviceClick = function handleBorderRadiusWidthDeviceClick(device) {
@@ -3771,8 +3769,8 @@ function Edit(_ref) {
     });
   };
 
-  /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
-  var borderRadiusWidth = "".concat(HeadingDesktopBorderRadiusWidth.top).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.right).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.bottom).concat(HeadingBorderRadiusUnits, " ").concat(HeadingDesktopBorderRadiusWidth.left).concat(HeadingBorderRadiusUnits);
+  /** Default Border Width for desktop (using BoxDesktopBorderWidth) */
+  var borderRadiusWidth = "".concat(BoxDesktopBorderRadiusWidth.top).concat(BoxBorderRadiusUnits, " ").concat(BoxDesktopBorderRadiusWidth.right).concat(BoxBorderRadiusUnits, " ").concat(BoxDesktopBorderRadiusWidth.bottom).concat(BoxBorderRadiusUnits, " ").concat(BoxDesktopBorderRadiusWidth.left).concat(BoxBorderRadiusUnits);
   /** End Border Radius Width */
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
@@ -4204,11 +4202,11 @@ function Edit(_ref) {
       className: "fb-setting-border-setting-wrapper"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-blocks"),
-      value: HeadingBorder,
+      value: BoxBorder,
       options: _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__.BORDER_STYLES,
       onChange: function onChange(value) {
         return setAttributes({
-          HeadingBorder: value
+          BoxBorder: value
         });
       }
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
@@ -4242,10 +4240,10 @@ function Edit(_ref) {
         }, /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-normal-color"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-          color: HeadingBorderColor,
+          color: BoxBorderColor,
           onChange: function onChange(value) {
             return setAttributes({
-              HeadingBorderColor: value
+              BoxBorderColor: value
             });
           },
           enableAlpha: true
@@ -4264,10 +4262,10 @@ function Edit(_ref) {
             color: '#4CC9F0'
           }],
           disableCustomColors: true,
-          value: HeadingBorderColor,
+          value: BoxBorderColor,
           onChange: function onChange(value) {
             return setAttributes({
-              HeadingBorderColor: value
+              BoxBorderColor: value
             });
           }
         }))));
@@ -4291,10 +4289,10 @@ function Edit(_ref) {
         key: key,
         onClick: function onClick() {
           return setAttributes({
-            HeadingBorderUnits: item.value
+            BoxBorderUnits: item.value
           });
         },
-        className: "fb-setting-units-type-switcher ".concat(HeadingBorderUnits === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(BoxBorderUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_input_container"
@@ -4305,7 +4303,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderWidth.top : HeadingMobileBorderWidth.top,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderWidth.top : DeviceType === 'Tablet' ? BoxTabBorderWidth.top : BoxMobileBorderWidth.top,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'top');
       }
@@ -4316,7 +4314,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderWidth.right : HeadingMobileBorderWidth.right,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderWidth.right : DeviceType === 'Tablet' ? BoxTabBorderWidth.right : BoxMobileBorderWidth.right,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'right');
       }
@@ -4327,7 +4325,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderWidth.bottom : HeadingMobileBorderWidth.bottom,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? BoxTabBorderWidth.bottom : BoxMobileBorderWidth.bottom,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'bottom');
       }
@@ -4338,7 +4336,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderWidth.left : HeadingMobileBorderWidth.left,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderWidth.left : DeviceType === 'Tablet' ? BoxTabBorderWidth.left : BoxMobileBorderWidth.left,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'left');
       }
@@ -4347,7 +4345,7 @@ function Edit(_ref) {
     }, /*#__PURE__*/React.createElement("label", {
       className: "sh_heading_spacing_input_label"
     }), /*#__PURE__*/React.createElement("span", {
-      className: "dashicons ".concat(HeadingBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(HeadingBorderLink ? 'is-checked' : ''),
+      className: "dashicons ".concat(BoxBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(BoxBorderLink ? 'is-checked' : ''),
       onClick: handleBorderWidthLinkToggle
     }))))), /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_spacing_container"
@@ -4368,10 +4366,10 @@ function Edit(_ref) {
         key: key,
         onClick: function onClick() {
           return setAttributes({
-            HeadingBorderRadiusUnits: item.value
+            BoxBorderRadiusUnits: item.value
           });
         },
-        className: "fb-setting-units-type-switcher ".concat(HeadingBorderRadiusUnits === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(BoxBorderRadiusUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_input_container"
@@ -4382,7 +4380,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.top : HeadingMobileBorderRadiusWidth.top,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.top : BoxMobileBorderRadiusWidth.top,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'top');
       }
@@ -4393,7 +4391,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.right : HeadingMobileBorderRadiusWidth.right,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.right : BoxMobileBorderRadiusWidth.right,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'right');
       }
@@ -4404,7 +4402,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.bottom : HeadingMobileBorderRadiusWidth.bottom,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.bottom : BoxMobileBorderRadiusWidth.bottom,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'bottom');
       }
@@ -4415,7 +4413,7 @@ function Edit(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: DeviceType === 'Desktop' ? HeadingDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? HeadingTabBorderRadiusWidth.left : HeadingMobileBorderRadiusWidth.left,
+      value: DeviceType === 'Desktop' ? BoxDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? BoxTabBorderRadiusWidth.left : BoxMobileBorderRadiusWidth.left,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'left');
       }
@@ -4424,7 +4422,7 @@ function Edit(_ref) {
     }, /*#__PURE__*/React.createElement("label", {
       className: "sh_heading_spacing_input_label"
     }), /*#__PURE__*/React.createElement("span", {
-      className: "dashicons ".concat(HeadingBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(HeadingBorderRadiusLink ? 'is-checked' : ''),
+      className: "dashicons ".concat(BoxBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(BoxBorderRadiusLink ? 'is-checked' : ''),
       onClick: handleBorderRadiusWidthLinkToggle
     }))))))));
   }))), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
