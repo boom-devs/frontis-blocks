@@ -4,6 +4,7 @@ import {
 	useBlockProps,
 	InspectorControls,
 } from '@wordpress/block-editor';
+
 import {
 	PanelBody,
 	DateTimePicker,
@@ -13,12 +14,15 @@ import {
 	RangeControl,
 	ToggleControl,
 	TabPanel,
-	ColorPalette
+	ColorPalette, Dropdown, Button, Dashicon, SelectControl, ButtonGroup
 } from '@wordpress/components';
 
 import { useEffect, useState } from '@wordpress/element';
 
 import './editor.scss';
+import {BORDER_STYLES, FONT_FAMILYS, NORMAL_HOVER, UNIT_TYPES} from "../advanced-heading/constants/constants";
+import ResponsiveControl from "../../components/responsivecontrol";
+
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -28,16 +32,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownLabelHour,
 		countDownLabelMinute,
 		countDownLabelSecond,
-		countDownBgColor,
-		countDownTitleColor,
-		countDownTextColor,
-		countDownTitleFontSize,
-		countDown_Text_Font_Size,
+		countDownLabelBgColorDay,
+		countDownLabelBgColorHour,
+		countDownLabelBgColorMinute,
+		countDownLabelBgColorSecond,
 		targetDate,
 		showDays,
 		showHours,
 		showMinutes,
 		showSeconds,
+
+
 
 	} = attributes;
 
@@ -100,15 +105,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const blockProps = useBlockProps();
 
 
+
+
+
+
 	return (
 		<>
-			<style>
-				{`
-				#${blockID} .fb-count-down-wrapper {
-					background-color: ${countDownBgColor};
-				}
-			`}
-			</style>
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel
@@ -193,108 +195,391 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 								{tab.name === "styles" && (
 									<>
-										<PanelBody title={__("Days", "frontis-blocks")} initialOpen={true}>
 
-											<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-												<div className="fb-setting-normal-color">
-													<ColorPicker
-														color={countDownBgColor}
-														onChange={(value) => setAttributes({ countDownBgColor: value })}
-														enableAlpha={true}
-													/>
-													<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-													<ColorPalette
-														colors={[
-															{ color: '#F72585' },
-															{ color: '#7209B7' },
-															{ color: '#3A0CA3' },
-															{ color: '#4361EE' },
-															{ color: '#4CC9F0' },
-														]}
-														disableCustomColors={true}
-														value={countDownBgColor}
-														onChange={(value) => setAttributes({ countDownBgColor: value })}
-													/>
-												</div>
-											</BaseControl>
-
-											<BaseControl label={__("Title Color", "frontis-blocks")} className="notic-color-setting-wrapper">
-												<ColorPicker
-													color={countDownTitleColor}
-													onChange={(value) => setAttributes({ countDownTitleColor: value })}
-													enableAlpha
+										<PanelBody
+											title={__("Box", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<BaseControl
+												label={__("Typography", "frontis-blocks")}
+												className="fb-setting-typography"
+											>
+												<Dropdown
+													className="fb-setting-typography-icon-dropdown"
+													contentClassName="fb-setting-typography-dropdown-content"
+													popoverProps={{ placement: 'bottom-start' }}
+													renderToggle={({ isOpen, onToggle }) => (
+														<Button
+															variant="primary"
+															onClick={onToggle}
+															aria-expanded={isOpen}
+															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															className="fb-setting-typography-icon-btn"
+														>
+															<Dashicon icon="edit" className="fb-setting-typography-icon" />
+														</Button>
+													)}
+													renderContent={() => (
+														<div className="fb-setting-typography-popup">
+															<BaseControl className="fb-setting-typography-popup-inner" >
+																<div className="fb-setting-fontfamily-wrapper">
+																	<SelectControl
+																		label={__("Font Family", "frontis-blocks")}
+																		// options={FONT_FAMILYS}
+																		// value={HeadingFontFamily}
+																		// onChange={(value) => setAttributes({ HeadingFontFamily: value })}
+																	/>
+																</div>
+																<div className="fb-setting-fontsize-wrapper">
+																	<div className="fb-setting-fontsize-header">
+																		<div className="fb-setting-fontsize-label">
+																			<span>{__("Font Size", "frontis-blocks")}</span>
+																		</div>
+																		<div className="fb-setting-fontsize-units">
+																			{/*<ButtonGroup className="fb-setting-fontsize-units-wrap">*/}
+																			{/*	{UNIT_TYPES.map((item, key) => (*/}
+																			{/*		<Button*/}
+																			{/*			key={key}*/}
+																			{/*			onClick={() => setAttributes({ HeadingFontSizeUnits: item.value })}*/}
+																			{/*			className={`fb-setting-fontsize-units-switcher ${ HeadingFontSizeUnits === item.value ? 'active' : ''}`}*/}
+																			{/*		>*/}
+																			{/*			{item.label}*/}
+																			{/*		</Button>*/}
+																			{/*	))}*/}
+																			{/*</ButtonGroup>*/}
+																		</div>
+																	</div>
+																	<div className="fb-setting-fontsize-rangecontrol">
+																		{/*<RangeControl*/}
+																		{/*	value={HeadingFontSize}*/}
+																		{/*	onChange={(value) => setAttributes({ HeadingFontSize: value })}*/}
+																		{/*	min={1}*/}
+																		{/*	max={200}*/}
+																		{/*	allowReset*/}
+																		{/*	resetFallbackValue={undefined}*/}
+																		{/*/>*/}
+																	</div>
+																</div>
+																<div className="fb-setting-fontweight-wrapper">
+																	{/*<SelectControl*/}
+																	{/*	label={__("Font Weight", "frontis-blocks")}*/}
+																	{/*	options={[*/}
+																	{/*		{ label: __("Default", "frontis-blocks"), value: "700" },*/}
+																	{/*		{ label: __("100", "frontis-blocks"), value: "100" },*/}
+																	{/*		{ label: __("200", "frontis-blocks"), value: "200" },*/}
+																	{/*		{ label: __("300", "frontis-blocks"), value: "300" },*/}
+																	{/*		{ label: __("400", "frontis-blocks"), value: "400" },*/}
+																	{/*		{ label: __("500", "frontis-blocks"), value: "500" },*/}
+																	{/*		{ label: __("600", "frontis-blocks"), value: "600" },*/}
+																	{/*		{ label: __("700", "frontis-blocks"), value: "700" },*/}
+																	{/*		{ label: __("800", "frontis-blocks"), value: "800" },*/}
+																	{/*		{ label: __("900", "frontis-blocks"), value: "900" },*/}
+																	{/*	]}*/}
+																	{/*	value={HeadingFontWeight}*/}
+																	{/*	onChange={(value) => setAttributes({ HeadingFontWeight: value })}*/}
+																	{/*/>*/}
+																</div>
+																<div className="fb-setting-fontstyle-wrapper">
+																	{/*<SelectControl*/}
+																	{/*	label={__("Font Style", "frontis-blocks")}*/}
+																	{/*	options={[*/}
+																	{/*		{ label: __("Default", "frontis-blocks"), value: "normal" },*/}
+																	{/*		{ label: __("Normal", "frontis-blocks"), value: "normal" },*/}
+																	{/*		{ label: __("Italic", "frontis-blocks"), value: "italic" },*/}
+																	{/*		{ label: __("Oblique", "frontis-blocks"), value: "oblique" },*/}
+																	{/*	]}*/}
+																	{/*	value={HeadingFontStyle}*/}
+																	{/*	onChange={(value) => setAttributes({ HeadingFontStyle: value })}*/}
+																	{/*/>*/}
+																</div>
+																<div className="fb-setting-texttransform-wrapper">
+																	{/*<SelectControl*/}
+																	{/*	label={__("Text Transform", "frontis-blocks")}*/}
+																	{/*	options={[*/}
+																	{/*		{ label: __("Default", "frontis-blocks"), value: "none" },*/}
+																	{/*		{ label: __("None", "frontis-blocks"), value: "none" },*/}
+																	{/*		{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },*/}
+																	{/*		{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },*/}
+																	{/*		{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },*/}
+																	{/*	]}*/}
+																	{/*	value={HeadingTextTransform}*/}
+																	{/*	onChange={(value) => setAttributes({ HeadingTextTransform: value })}*/}
+																	{/*/>*/}
+																</div>
+																<div className="fb-setting-textdecoration-wrapper">
+																	{/*<SelectControl*/}
+																	{/*	label={__("Text Decoration", "frontis-blocks")}*/}
+																	{/*	options={[*/}
+																	{/*		{ label: __("Default", "frontis-blocks"), value: "none" },*/}
+																	{/*		{ label: __("None", "frontis-blocks"), value: "none" },*/}
+																	{/*		{ label: __("Underline", "frontis-blocks"), value: "underline" },*/}
+																	{/*		{ label: __("Overline", "frontis-blocks"), value: "overline" },*/}
+																	{/*		{ label: __("Line Through", "frontis-blocks"), value: "line-through" },*/}
+																	{/*	]}*/}
+																	{/*	value={HeadingTextDecoration}*/}
+																	{/*	onChange={(value) => setAttributes({ HeadingTextDecoration: value })}*/}
+																	{/*/>*/}
+																</div>
+																<div className="fb-setting-letterspacing-wrapper">
+																	<div className="fb-setting-letterspacing-header">
+																		<div className="fb-setting-letterspacing-label">
+																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																		</div>
+																		<div className="fb-setting-letterspacing-units">
+																			{/*<ButtonGroup className="fb-setting-letterspacing-units-wrap">*/}
+																			{/*	{UNIT_TYPES.map((item, key) => (*/}
+																			{/*		<Button*/}
+																			{/*			key={key}*/}
+																			{/*			onClick={() => setAttributes({ HeadingLetterSpacingUnits: item.value })}*/}
+																			{/*			className={`fb-setting-letterspacing-units-switcher ${ HeadingLetterSpacingUnits === item.value ? 'active' : ''}`}*/}
+																			{/*		>*/}
+																			{/*			{item.label}*/}
+																			{/*		</Button>*/}
+																			{/*	))}*/}
+																			{/*</ButtonGroup>*/}
+																		</div>
+																	</div>
+																	{/*<RangeControl*/}
+																	{/*	value={HeadingLetterSpacing}*/}
+																	{/*	onChange={(value) => setAttributes({ HeadingLetterSpacing: value === 0 ? undefined : value })}*/}
+																	{/*	min={1}*/}
+																	{/*	max={100}*/}
+																	{/*	step={1}*/}
+																	{/*	allowReset*/}
+																	{/*	resetFallbackValue={undefined}*/}
+																	{/*/>*/}
+																</div>
+																<div className="fb-setting-lineheight-wrapper">
+																	<div className="fb-setting-lineheight-header">
+																		<div className="fb-setting-lineheight-label">
+																			<span>{__("Line Height", "frontis-blocks")}</span>
+																		</div>
+																		<div className="fb-setting-lineheight-units">
+																			{/*<ButtonGroup className="fb-setting-lineheight-units-wrap">*/}
+																			{/*	{UNIT_TYPES.map((item, key) => (*/}
+																			{/*		<Button*/}
+																			{/*			key={key}*/}
+																			{/*			onClick={() => setAttributes({ HeadingLineHeightUnits: item.value })}*/}
+																			{/*			className={`fb-setting-lineheight-units-switcher ${ HeadingLineHeightUnits === item.value ? 'active' : ''}`}*/}
+																			{/*		>*/}
+																			{/*			{item.label}*/}
+																			{/*		</Button>*/}
+																			{/*	))}*/}
+																			{/*</ButtonGroup>*/}
+																		</div>
+																	</div>
+																	{/*<RangeControl*/}
+																	{/*	value={HeadingLineHeight}*/}
+																	{/*	onChange={(value) => setAttributes({ HeadingLineHeight: value === 1 ? undefined : value })}*/}
+																	{/*	min={1}*/}
+																	{/*	max={100}*/}
+																	{/*	step={1}*/}
+																	{/*	allowReset*/}
+																	{/*	resetFallbackValue={undefined}*/}
+																	{/*/>*/}
+																</div>
+															</BaseControl>
+														</div>
+													)}
 												/>
 											</BaseControl>
 
-											<BaseControl label={__("Text Color", "frontis-blocks")} className="notic-color-setting-wrapper">
-												<ColorPicker
-													color={countDownTextColor}
-													onChange={(value) => setAttributes({ countDownTextColor: value })}
-													enableAlpha
+											{/* Label Background Color Start */}
+											<BaseControl
+												label={__("Day Box Background", "frontis-blocks")}
+												className="fb-setting-color-setting-wrapper"
+											>
+												<Dropdown
+													className="fb-setting-color-setting-icon-dropdown"
+													contentClassName="fb-setting-color-setting-icon-dropdown-content"
+													popoverProps={{ placement: 'bottom-start' }}
+													renderToggle={({ isOpen, onToggle }) => (
+														<Button
+															variant="primary"
+															onClick={onToggle}
+															aria-expanded={isOpen}
+															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															className="fb-setting-color-setting-icon-btn"
+														>
+															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+														</Button>
+													)}
+													renderContent={() => (
+														<div className="fb-setting-color-setting-icon-popup">
+															<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																<div className="fb-setting-normal-color">
+																	<ColorPicker
+																		color={countDownLabelBgColorDay}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorDay: value })}
+																		enableAlpha={true}
+																	/>
+																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<ColorPalette
+																		colors={[
+																			{ color: '#F72585' },
+																			{ color: '#7209B7' },
+																			{ color: '#3A0CA3' },
+																			{ color: '#4361EE' },
+																			{ color: '#4CC9F0' },
+																		]}
+																		disableCustomColors={true}
+																		value={countDownLabelBgColorDay}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorDay: value })}
+																	/>
+																</div>
+															</BaseControl>
+														</div>
+													)}
 												/>
 											</BaseControl>
 
-											<RangeControl
-												label={__("Title Font Size", "frontis-blocks")}
-												value={countDownTitleFontSize}
-												onChange={(value) => setAttributes({ countDownTitleFontSize: value })}
-												min={1}
-												max={200}
-											/>
-											<RangeControl
-												label={__("Text Font Size", "frontis-blocks")}
-												value={countDown_Text_Font_Size}
-												onChange={(value) => setAttributes({ countDown_Text_Font_Size: value })}
-												min={1}
-												max={200}
-											/>
-
-											<BaseControl label={__("Days Label Background Color", "frontis-blocks")} className="notic-color-setting-wrapper">
-												<ColorPicker
-													color={attributes.countDownLabelBgColorDay}
-													onChange={(value) => setAttributes({ countDownLabelBgColorDay: value })}
-													enableAlpha
+											<BaseControl
+												label={__("Hour Box Background", "frontis-blocks")}
+												className="fb-setting-color-setting-wrapper"
+											>
+												<Dropdown
+													className="fb-setting-color-setting-icon-dropdown"
+													contentClassName="fb-setting-color-setting-icon-dropdown-content"
+													popoverProps={{ placement: 'bottom-start' }}
+													renderToggle={({ isOpen, onToggle }) => (
+														<Button
+															variant="primary"
+															onClick={onToggle}
+															aria-expanded={isOpen}
+															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															className="fb-setting-color-setting-icon-btn"
+														>
+															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+														</Button>
+													)}
+													renderContent={() => (
+														<div className="fb-setting-color-setting-icon-popup">
+															<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																<div className="fb-setting-normal-color">
+																	<ColorPicker
+																		color={countDownLabelBgColorHour}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorHour: value })}
+																		enableAlpha={true}
+																	/>
+																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<ColorPalette
+																		colors={[
+																			{ color: '#F72585' },
+																			{ color: '#7209B7' },
+																			{ color: '#3A0CA3' },
+																			{ color: '#4361EE' },
+																			{ color: '#4CC9F0' },
+																		]}
+																		disableCustomColors={true}
+																		value={countDownLabelBgColorHour}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorHour: value })}
+																	/>
+																</div>
+															</BaseControl>
+														</div>
+													)}
 												/>
 											</BaseControl>
 
-											<BaseControl label={__("Hours Label Background Color", "frontis-blocks")} className="notic-color-setting-wrapper">
-												<ColorPicker
-													color={attributes.countDownLabelBgColorHour}
-													onChange={(value) => setAttributes({ countDownLabelBgColorHour: value })}
-													enableAlpha
+											<BaseControl
+												label={__("Minute Box Background", "frontis-blocks")}
+												className="fb-setting-color-setting-wrapper"
+											>
+												<Dropdown
+													className="fb-setting-color-setting-icon-dropdown"
+													contentClassName="fb-setting-color-setting-icon-dropdown-content"
+													popoverProps={{ placement: 'bottom-start' }}
+													renderToggle={({ isOpen, onToggle }) => (
+														<Button
+															variant="primary"
+															onClick={onToggle}
+															aria-expanded={isOpen}
+															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															className="fb-setting-color-setting-icon-btn"
+														>
+															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+														</Button>
+													)}
+													renderContent={() => (
+														<div className="fb-setting-color-setting-icon-popup">
+															<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																<div className="fb-setting-normal-color">
+																	<ColorPicker
+																		color={countDownLabelBgColorMinute}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorMinute: value })}
+																		enableAlpha={true}
+																	/>
+																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<ColorPalette
+																		colors={[
+																			{ color: '#F72585' },
+																			{ color: '#7209B7' },
+																			{ color: '#3A0CA3' },
+																			{ color: '#4361EE' },
+																			{ color: '#4CC9F0' },
+																		]}
+																		disableCustomColors={true}
+																		value={countDownLabelBgColorMinute}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorMinute: value })}
+																	/>
+																</div>
+															</BaseControl>
+														</div>
+													)}
 												/>
 											</BaseControl>
 
-											<BaseControl label={__("Minutes Label Background Color", "frontis-blocks")} className="notic-color-setting-wrapper">
-												<ColorPicker
-													color={attributes.countDownLabelBgColorMinute}
-													onChange={(value) => setAttributes({ countDownLabelBgColorMinute: value })}
-													enableAlpha
+											<BaseControl
+												label={__("Second Box Background", "frontis-blocks")}
+												className="fb-setting-color-setting-wrapper"
+											>
+												<Dropdown
+													className="fb-setting-color-setting-icon-dropdown"
+													contentClassName="fb-setting-color-setting-icon-dropdown-content"
+													popoverProps={{ placement: 'bottom-start' }}
+													renderToggle={({ isOpen, onToggle }) => (
+														<Button
+															variant="primary"
+															onClick={onToggle}
+															aria-expanded={isOpen}
+															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															className="fb-setting-color-setting-icon-btn"
+														>
+															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+														</Button>
+													)}
+													renderContent={() => (
+														<div className="fb-setting-color-setting-icon-popup">
+															<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																<div className="fb-setting-normal-color">
+																	<ColorPicker
+																		color={countDownLabelBgColorSecond}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorSecond: value })}
+																		enableAlpha={true}
+																	/>
+																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<ColorPalette
+																		colors={[
+																			{ color: '#F72585' },
+																			{ color: '#7209B7' },
+																			{ color: '#3A0CA3' },
+																			{ color: '#4361EE' },
+																			{ color: '#4CC9F0' },
+																		]}
+																		disableCustomColors={true}
+																		value={countDownLabelBgColorSecond}
+																		onChange={(value) => setAttributes({ countDownLabelBgColorSecond: value })}
+																	/>
+																</div>
+															</BaseControl>
+														</div>
+													)}
 												/>
 											</BaseControl>
+											{/* Label Background Color End */}
 
-											<BaseControl label={__("Seconds Label Background Color", "frontis-blocks")} className="notic-color-setting-wrapper">
-												<ColorPicker
-													color={attributes.countDownLabelBgColorSecond}
-													onChange={(value) => setAttributes({ countDownLabelBgColorSecond: value })}
-													enableAlpha
-												/>
-											</BaseControl>
 										</PanelBody>
-									</>
-								)}
-								{tab.name === "advanced" && (
-									<>
-										<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-z-index-wrapper">
-												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
-													initialOpen={true}
-													className='fb-setting-z-index-header'
-												>
-												</PanelBody>
-											</div>
-										</div>
+
 									</>
 								)}
 							</div>
