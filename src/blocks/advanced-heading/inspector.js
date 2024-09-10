@@ -543,7 +543,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             {
                                 name: "advanced",
                                 title: "Advanced",
-                                className: "fb-tab advance",
+                                className: "fb-tab advanced",
                             },
                         ]}
                     >
