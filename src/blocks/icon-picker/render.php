@@ -2,7 +2,16 @@
 /**
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
+
+// function testfn() {
+// 	echo "Hello world";
+// }
+
+// testfn();
 ?>
-<p <?php echo get_block_wrapper_attributes(); ?>>
-	<?php esc_html_e( '{block_name} – hello from a dynamic block!', '{slug}' ); ?>
-</p>
+
+<div data-attributes='<?php echo json_encode($attributes); ?>'>
+	<span id="icon_<?php echo $attributes['blockId']; ?>">
+		<h1>Hello</h1>
+	</span>
+</div>
