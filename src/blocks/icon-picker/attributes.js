@@ -1,7 +1,15 @@
 const attributes = {
+	blockID: {
+		type: 'string',
+		default: ''
+	},
 	icon: {
 		type: 'string',
 		default: 'circle-check',
+	},
+	selectedIconSvg: {
+		type: 'string',
+		default: ''
 	},
 	// Size
 	iconSize: {

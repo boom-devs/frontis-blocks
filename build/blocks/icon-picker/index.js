@@ -13,9 +13,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var attributes = {
+  blockID: {
+    type: 'string',
+    "default": ''
+  },
   icon: {
     type: 'string',
     "default": 'circle-check'
+  },
+  selectedIconSvg: {
+    type: 'string',
+    "default": ''
   },
   // Size
   iconSize: {
@@ -594,21 +602,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/icon-picker/components/icon-picker/controls/renderIcon */ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js");
+
 
 
 
 
 
 function Edit(props) {
-  var iconHandler = function iconHandler() {
+  var attributes = props.attributes,
+    setAttributes = props.setAttributes,
+    clientId = props.clientId;
+  var iconHandler = function iconHandler(iconName) {
+    setAttributes({
+      icon: iconName
+    });
+    console.log(attributes);
     console.log("Hello world");
+    setAttributes({
+      blockID: "fb-icon-picker-" + clientId.slice(0, 8)
+    });
+  };
+  var selectedIconHandler = function selectedIconHandler(svg) {
+    console.log(svg);
+    setAttributes({
+      selectedIconSvg: svg
+    });
   };
   return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: "Settings",
     initialOpen: false
   }, /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_2__["default"], {
     value: '',
-    setIconHandler: iconHandler
+    setIconHandler: iconHandler,
+    selectedIcon: selectedIconHandler
   }))), /*#__PURE__*/React.createElement("h1", null, "Test component"));
 }
 
@@ -862,7 +889,8 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 function FBIconPicker(props) {
   var value = props.value,
-    setIconHandler = props.setIconHandler;
+    setIconHandler = props.setIconHandler,
+    selectedIcon = props.selectedIcon;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     showIconPicker = _useState2[0],
@@ -889,6 +917,7 @@ function FBIconPicker(props) {
   // Insert icon
   var fbInsertIcon = function fbInsertIcon() {
     setIconHandler(insertIcon);
+    selectedIcon((0,_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_4__["default"])(insertIcon));
     setIconPickerModal(false);
   };
   var categories = [{
