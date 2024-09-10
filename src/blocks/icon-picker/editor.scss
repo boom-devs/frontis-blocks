@@ -102,12 +102,20 @@
 	display: flex;
 	align-items: center;
 	position: relative;
+	height: 36px;
 	width: 100%;
 }
 
 .fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search svg {
-	width: 15px;
 	z-index: 9999;
+	width: 14px;
+	height: 14px;
+	position: absolute;
+	top: calc(18px - 7px);
+	color: #555d66;
+	fill: #555d66;
+	transform: rotateZ(90deg);
+	left: 12px;
 }
 
 .fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search input[type="text"] {
@@ -125,15 +133,15 @@
 	top: 0;
 }
 
-.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search span {
-	position: relative;
-	z-index: 99;
-	margin-left: 10px;
-}
+//.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search span {
+//	position: relative;
+//	z-index: 99;
+//	margin-left: 10px;
+//}
 
 .fb_icon_picker_wrapper_body {
 	display: flex;
-	/* align-items: center; */
+	margin-top: 30px;
 }
 
 .fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories {
@@ -142,12 +150,64 @@
 	flex-shrink: 0;
 }
 
+.fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories .fb_icon_picker_wrapper_category {
+	padding: 9px 10px;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #1d2327;
+	display: flex;
+	justify-content: space-between;
+	font-size: 13px;
+	cursor: pointer;
+
+	&.selected {
+		background-color: #dcf2ff;
+		color: #0063a1;
+	}
+}
 
 .fb_icon_picker_icons_list .fb_icon svg {
 	width: 20px;
 	height: 20px;
 }
 
+.fb_icon_picker_icons_list .fb_icon {
+	width: 80px;
+	height: 80px;
+	background-color: #ffffff;
+	border: 1px solid #e6e7e9;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: 0.2s transform ease;
+	flex-direction: column;
+	grid-gap: 6px;
+	max-width: 90%;
+	max-height: 90%;
+
+	&.default {
+		border-color: #007cba;
+		box-shadow: 0 0 0 2px #007cba;
+		pointer-events: none;
+	}
+
+	&.selected {
+		border-color: #007cba;
+		box-shadow: 0 0 0 2px #dcf2ff;
+		pointer-events: none;
+	}
+}
+
 .fb_icon_picker_icons_list {
-	padding-top: 30px;
+	flex: 1;
+	padding: 14px;
+	padding-right: 0;
+	border: 1px solid #e6e7e9;
+	border-radius: 2px;
+}
+
+.fb_icon_picker_wrapper_footer {
+	text-align: right;
 }

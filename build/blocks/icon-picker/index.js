@@ -575,10 +575,101 @@ var attributes = {
 
 /***/ }),
 
-/***/ "./src/blocks/icon-picker/components/defaultSvgIcon.js":
-/*!*************************************************************!*\
-  !*** ./src/blocks/icon-picker/components/defaultSvgIcon.js ***!
-  \*************************************************************/
+/***/ "./src/blocks/icon-picker/edit.js":
+/*!****************************************!*\
+  !*** ./src/blocks/icon-picker/edit.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/icon-picker/editor.scss");
+/* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+function Edit(props) {
+  var iconHandler = function iconHandler() {
+    console.log("Hello world");
+  };
+  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: "Settings",
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    value: '',
+    setIconHandler: iconHandler
+  }))), /*#__PURE__*/React.createElement("h1", null, "Test component"));
+}
+
+/***/ }),
+
+/***/ "./src/blocks/icon-picker/index.js":
+/*!*****************************************!*\
+  !*** ./src/blocks/icon-picker/index.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./attributes */ "./src/blocks/icon-picker/attributes.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/icon-picker/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/blocks/icon-picker/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/icon-picker/block.json");
+/**
+ * Registers a new block provided a unique name and an object defining its behavior.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+
+
+
+/**
+ * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
+ * All files containing `style` keyword are bundled together. The code used
+ * gets applied both to the front of your site and to the editor.
+ *
+ * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * Every block starts by registering a new block type definition.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  /**
+   * @see ./edit.js
+   */
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_1__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ }),
+
+/***/ "./src/components/icon-picker/components/defaultSvgIcon.js":
+/*!*****************************************************************!*\
+  !*** ./src/components/icon-picker/components/defaultSvgIcon.js ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -591,10 +682,10 @@ var defaultIcons = [["0", "1", "2", "3", "4", "5", "6", "7"], ["8", "9", "42-gro
 
 /***/ }),
 
-/***/ "./src/blocks/icon-picker/components/icon-picker/controls/parseIcon.js":
-/*!*****************************************************************************!*\
-  !*** ./src/blocks/icon-picker/components/icon-picker/controls/parseIcon.js ***!
-  \*****************************************************************************/
+/***/ "./src/components/icon-picker/components/icon-picker/controls/parseIcon.js":
+/*!*********************************************************************************!*\
+  !*** ./src/components/icon-picker/components/icon-picker/controls/parseIcon.js ***!
+  \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -614,10 +705,10 @@ function parseSVG(svg) {
 
 /***/ }),
 
-/***/ "./src/blocks/icon-picker/components/icon-picker/controls/renderIcon.js":
-/*!******************************************************************************!*\
-  !*** ./src/blocks/icon-picker/components/icon-picker/controls/renderIcon.js ***!
-  \******************************************************************************/
+/***/ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js":
+/*!**********************************************************************************!*\
+  !*** ./src/components/icon-picker/components/icon-picker/controls/renderIcon.js ***!
+  \**********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -625,8 +716,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _parseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parseIcon */ "./src/blocks/icon-picker/components/icon-picker/controls/parseIcon.js");
-/* harmony import */ var _svgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../svgIcon */ "./src/blocks/icon-picker/components/svgIcon.js");
+/* harmony import */ var _parseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parseIcon */ "./src/components/icon-picker/components/icon-picker/controls/parseIcon.js");
+/* harmony import */ var _svgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../svgIcon */ "./src/components/icon-picker/components/svgIcon.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 /**
  * Set inline CSS class.
@@ -712,10 +803,10 @@ function renderSVG(svg) {
 
 /***/ }),
 
-/***/ "./src/blocks/icon-picker/components/svgIcon.js":
-/*!******************************************************!*\
-  !*** ./src/blocks/icon-picker/components/svgIcon.js ***!
-  \******************************************************/
+/***/ "./src/components/icon-picker/components/svgIcon.js":
+/*!**********************************************************!*\
+  !*** ./src/components/icon-picker/components/svgIcon.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -727,16 +818,16 @@ var FB_SVG_Icon={"0":{"svg":{"solid":{"width":320,"height":512,"path":"M160 32.0
 
 /***/ }),
 
-/***/ "./src/blocks/icon-picker/edit.js":
-/*!****************************************!*\
-  !*** ./src/blocks/icon-picker/edit.js ***!
-  \****************************************/
+/***/ "./src/components/icon-picker/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/icon-picker/index.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */   "default": () => (/* binding */ FBIconPicker)
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
@@ -745,14 +836,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_virtualized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-virtualized */ "./node_modules/react-virtualized/dist/es/index.js");
-/* harmony import */ var _components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/icon-picker/controls/renderIcon */ "./src/blocks/icon-picker/components/icon-picker/controls/renderIcon.js");
-/* harmony import */ var _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/defaultSvgIcon */ "./src/blocks/icon-picker/components/defaultSvgIcon.js");
+/* harmony import */ var _components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/icon-picker/controls/renderIcon */ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js");
+/* harmony import */ var _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/defaultSvgIcon */ "./src/components/icon-picker/components/defaultSvgIcon.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/svgIcon */ "./src/blocks/icon-picker/components/svgIcon.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/icon-picker/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/components/icon-picker/editor.scss");
+/* harmony import */ var _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/svgIcon */ "./src/components/icon-picker/components/svgIcon.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -769,10 +860,9 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-
-function Edit(props) {
-  var attributes = props.attributes,
-    setAttributes = props.setAttributes;
+function FBIconPicker(props) {
+  var value = props.value,
+    setIconHandler = props.setIconHandler;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     showIconPicker = _useState2[0],
@@ -784,34 +874,22 @@ function Edit(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     insertIcon = _useState4[0],
     setInsertIcon = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"]),
     _useState6 = _slicedToArray(_useState5, 2),
-    rowIndexForFirstTime = _useState6[0],
-    setRowIndexForFirstTime = _useState6[1];
-  var icon = attributes.icon,
-    iconSize = attributes.iconSize,
-    iconSizeTablet = attributes.iconSizeTablet,
-    iconSizeMobile = attributes.iconSizeMobile,
-    iconSizeUnit = attributes.iconSizeUnit,
-    align = attributes.align,
-    alignTablet = attributes.alignTablet,
-    alignMobile = attributes.alignMobile,
-    rotation = attributes.rotation,
-    rotationUnit = attributes.rotationUnit,
-    link = attributes.link,
-    target = attributes.target,
-    disableLink = attributes.disableLink,
-    iconAccessabilityMode = attributes.iconAccessabilityMode,
-    iconAccessabilityDesc = attributes.iconAccessabilityDesc;
-  console.log(fb_blocks_info);
-  console.log(_components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"]);
+    defaultIcons = _useState6[0],
+    setDefaultIcons = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+    _useState8 = _slicedToArray(_useState7, 2),
+    filteredDefaultIcons = _useState8[0],
+    setFilteredDefaultIcons = _useState8[1];
   var iconPickerModal = function iconPickerModal() {
     setIconPickerModal(true);
   };
 
   // Insert icon
   var fbInsertIcon = function fbInsertIcon() {
-    console.log("Insert icon");
+    setIconHandler(insertIcon);
+    setIconPickerModal(false);
   };
   var categories = [{
     slug: 'all-icons',
@@ -851,6 +929,11 @@ function Edit(props) {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Others', 'ultimate-addons-for-gutenberg')
   }];
 
+  // Filter icon list
+  var filterIconList = function filterIconList(cat) {
+    console.log(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  };
+
   // Render icon list.
   var renderIconList = function renderIconList() {
     if (!_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length) {
@@ -866,6 +949,9 @@ function Edit(props) {
       }
       return actualTitle.length < 11 ? actualTitle : actualTitle.slice(0, 10) + '..';
     };
+    var fbIconClasses = function fbIconClasses(classes) {
+      return classes.filter(Boolean).join(' ');
+    };
     // renderer.
     function cellRenderer(renderer) {
       var _svgIcon$currentIcon;
@@ -877,21 +963,14 @@ function Edit(props) {
       if (!currentIcon) {
         return null;
       }
-
-      // console.log(svgIcon[0].currentIcon);
-
-      // const iconClass = uagbClassNames( [
-      // 	'uagb-icon-item',
-      // 	value === currentIcon && 'default',
-      // 	currentIcon === insertIcon && 'selected',
-      // ] );
-
-      var actualTitle = (_svgIcon$currentIcon = _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"][currentIcon]) !== null && _svgIcon$currentIcon !== void 0 && _svgIcon$currentIcon.label ? _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"][currentIcon].label : '';
+      var iconClass = fbIconClasses([value === currentIcon && 'default', currentIcon === insertIcon && 'selected']);
+      var actualTitle = (_svgIcon$currentIcon = _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][currentIcon]) !== null && _svgIcon$currentIcon !== void 0 && _svgIcon$currentIcon.label ? _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][currentIcon].label : '';
       return /*#__PURE__*/React.createElement("div", {
         key: key,
-        style: style
+        style: style,
+        className: 'fb_icon_box'
       }, /*#__PURE__*/React.createElement("div", {
-        className: 'fb_icon',
+        className: "fb_icon ".concat(iconClass),
         onClick: function onClick() {
           if (value !== currentIcon) {
             setInsertIcon(currentIcon);
@@ -901,24 +980,21 @@ function Edit(props) {
         text: actualTitle
       }, /*#__PURE__*/React.createElement("span", null, iconTitle(actualTitle)))));
     }
-    var heightAndWidth = 600 / 8;
+    var heightAndWidth = 400 / 8;
     return /*#__PURE__*/React.createElement("div", {
       className: "fb_icon_picker_icons_list"
     }, /*#__PURE__*/React.createElement(react_virtualized__WEBPACK_IMPORTED_MODULE_3__.Grid, {
       cellRenderer: cellRenderer,
       columnCount: _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length,
       columnWidth: 8 === _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length ? heightAndWidth - 2 : 100,
-      height: 500,
+      height: 400,
       rowCount: _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length,
       rowHeight: 8 === _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length ? heightAndWidth : 100,
-      width: 500,
+      width: 400,
       autoContainerWidth: true
     }));
   };
-  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
-    title: "Settings",
-    initialOpen: false
-  }, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb_icon_picker_wrapper",
     onClick: function onClick() {
       return iconPickerModal();
@@ -927,7 +1003,10 @@ function Edit(props) {
     className: 'fb_icon_picker'
   }, /*#__PURE__*/React.createElement("div", {
     className: 'Change icon'
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Change icon', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Change icon', 'frontis-blocks')), insertIcon !== '' && /*#__PURE__*/React.createElement("div", {
+    onClick: function onClick() {
+      return setInsertIcon('');
+    },
     className: 'remove'
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "https://www.w3.org/2000/svg",
@@ -936,12 +1015,12 @@ function Edit(props) {
     d: "M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
   }))), /*#__PURE__*/React.createElement("div", {
     className: 'icon_placeholder'
-  }, /*#__PURE__*/React.createElement("svg", {
+  }, insertIcon !== '' ? (0,_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_4__["default"])(insertIcon) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("svg", {
     xmlns: "https://www.w3.org/2000/svg",
-    viewBox: "0 0 640 512"
+    viewBox: "0 0 448 512"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M495.1 96c-53.13 0-102 29.25-127 76.13c-25 46.88-22.25 103.8 7.25 147.9H263.7c36.63-54.88 31.25-127.8-13-176.8c-44.38-48.87-116.4-61.37-174.6-30.25s-87.88 97.88-71.75 162c16 64 73.63 108.1 139.6 108.1h352C575.5 384 640 319.5 640 240S575.5 96 495.1 96zM63.99 240c0-44.12 35.88-80 80-80s80 35.88 80 80s-35.88 79.1-80 79.1S63.99 284.1 63.99 240zM495.1 320c-44.13 0-80-35.88-80-79.1s35.88-80 80-80s80 35.88 80 80S540.1 320 495.1 320z"
-  }))))))), /*#__PURE__*/React.createElement("div", null, showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Modal, {
+    d: "M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"
+  })))))), /*#__PURE__*/React.createElement("div", null, showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Modal, {
     onRequestClose: closeModal,
     className: 'fb_icon_picker_wrapper_modal'
   }, /*#__PURE__*/React.createElement("div", {
@@ -966,6 +1045,10 @@ function Edit(props) {
     className: 'fb_icon_picker_wrapper_categories'
   }, categories.map(function (category, index) {
     return /*#__PURE__*/React.createElement("div", {
+      onClick: function onClick() {
+        return filterIconList(category);
+      },
+      className: 'fb_icon_picker_wrapper_category',
       key: index
     }, category.title);
   })), /*#__PURE__*/React.createElement("div", {
@@ -977,58 +1060,6 @@ function Edit(props) {
     onClick: fbInsertIcon
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
 }
-
-/***/ }),
-
-/***/ "./src/blocks/icon-picker/index.js":
-/*!*****************************************!*\
-  !*** ./src/blocks/icon-picker/index.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./attributes */ "./src/blocks/icon-picker/attributes.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/icon-picker/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/blocks/icon-picker/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/icon-picker/block.json");
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-
-
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * Internal dependencies
- */
-
-
-
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
-  /**
-   * @see ./edit.js
-   */
-  attributes: _attributes__WEBPACK_IMPORTED_MODULE_1__["default"],
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"]
-});
 
 /***/ }),
 
@@ -1098,6 +1129,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************!*\
   !*** ./src/blocks/icon-picker/style.scss ***!
   \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/icon-picker/editor.scss":
+/*!************************************************!*\
+  !*** ./src/components/icon-picker/editor.scss ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
