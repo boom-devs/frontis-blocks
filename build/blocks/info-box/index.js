@@ -3948,7 +3948,8 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 function Edit(_ref) {
   var attributes = _ref.attributes,
-    setAttributes = _ref.setAttributes;
+    setAttributes = _ref.setAttributes,
+    clientId = _ref.clientId;
   var blockID = attributes.blockID,
     Heading_Text = attributes.Heading_Text,
     Heading_Tag = attributes.Heading_Tag,
@@ -3970,7 +3971,8 @@ function Edit(_ref) {
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
-    setAttributes: setAttributes
+    setAttributes: setAttributes,
+    clientId: clientId
   }), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
     id: blockID
   }), /*#__PURE__*/React.createElement("div", {
@@ -4238,11 +4240,12 @@ function Inspector(_ref) {
     infoButtonPaddingUnits = attributes.infoButtonPaddingUnits,
     infoButtonDesktopPadding = attributes.infoButtonDesktopPadding,
     infoButtonTabPadding = attributes.infoButtonTabPadding,
-    infoButtonMobilePadding = attributes.infoButtonMobilePadding;
+    infoButtonMobilePadding = attributes.infoButtonMobilePadding,
+    icon = attributes.icon;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
       setAttributes({
-        blockID: "fb-advanced-headings-" + clientId.slice(0, 8)
+        blockID: "fb-info-box-content-wrapper-" + clientId.slice(0, 8)
       });
     }
   }, [clientId]);
@@ -5273,7 +5276,7 @@ function Inspector(_ref) {
 
   // Define the CSS as a string
   var css = "\n        #".concat(blockID, " {\n            padding: 20px;\n            border: 1px solid #ccc;\n            background-color: #f9f9f9;\n        }\n    ");
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t.fb-info-box-content-wrapper {\n                    padding: ".concat(boxPadding, ";\n                    border: ").concat(infoBoxBorder, ";\n                    border-width: ").concat(boxBorderWidth, ";\n                    border-radius: ").concat(boxBorderRadiusWidth, ";\n                    ").concat(infoBoxBorderColor !== undefined ? "border-color: ".concat(infoBoxBorderColor, ";") : '', "\n                }\n                .fb-info-box-content-wrapper .fb-heading {\n                    ").concat(Heading_Color !== undefined ? "color: ".concat(Heading_Color, ";") : '', "\n                    ").concat(Heading_Background_Color !== undefined ? "background-color: ".concat(Heading_Background_Color, ";") : '', "\n                    font-family: ").concat(Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family, ";\n                    font-size: ").concat(Heading_Font_Size !== undefined ? "".concat(Heading_Font_Size).concat(Heading_Font_size_units) : '', ";\n                    font-weight: ").concat(Heading_Font_Weight, ";\n                    font-style: ").concat(Heading_Font_Style, ";\n                    text-transform: ").concat(Heading_Text_Transform, ";\n                    text-decoration: ").concat(Heading_Text_Decoration, ";\n                    ").concat(Heading_Letter_Spacing !== undefined ? "letter-spacing: ".concat(Heading_Letter_Spacing).concat(Heading_Letter_Spacing_units, ";") : '', "\n                    ").concat(Heading_Line_Height !== undefined ? "line-height: ".concat(Heading_Line_Height).concat(Heading_Line_Height_units, ";") : '', "\n                    transition: all .3s ease-in-out;\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(Heading_Border, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    ").concat(Heading_Border_Color !== undefined ? "border-color: ".concat(Heading_Border_Color, ";") : '', "\n                }\n                .fb-info-box-content-wrapper .fb-heading:hover {\n                    ").concat(Heading_Hover_Color !== undefined ? "color: ".concat(Heading_Hover_Color, ";") : '', "\n                    ").concat(Heading_Border_Hover_Color !== undefined ? "border-color: ".concat(Heading_Border_Hover_Color, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper .fb-heading {\n                        padding: ").concat(Heading_Tab_padding.top).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.right).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Tab_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Tab_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Tab_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper .fb-heading {\n                        padding: ").concat(Heading_Mobile_padding.top).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.right).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Mobile_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Mobile_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Mobile_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper .fb-description {\n                \t").concat(SubHeadingColor !== undefined ? "color: ".concat(SubHeadingColor, ";") : '', "\n                \tfont-family: ").concat(SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily, ";\n                    font-size: ").concat(SubHeadingFontSize !== undefined ? "".concat(SubHeadingFontSize).concat(SubHeadingFontSizeUnits) : '', ";\n                    font-weight: ").concat(SubHeadingFontWeight, ";\n                    font-style: ").concat(SubHeadingFontStyle, ";\n                    text-transform: ").concat(SubHeadingTextTransform, ";\n                    text-decoration: ").concat(SubHeadingTextDecoration, ";\n                    padding: ").concat(descPadding, ";\n\n                }\n                .fb-info-box-content-wrapper .fb-description:hover {\n                    ").concat(SubHeadingHoverColor !== undefined ? "color: ".concat(SubHeadingHoverColor, ";") : '', "\n                }\n\n                .fb-info-box-content-wrapper .fb-info-btn-wrapper .fb-info-button {\n                \t").concat(buttonTextColor !== undefined ? "color: ".concat(buttonTextColor, ";") : '', "\n                \t").concat(buttonBgColor !== undefined ? "background-color: ".concat(buttonBgColor, ";") : '', "\n                \tfont-family: ").concat(buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily, ";\n                    font-size: ").concat(buttonFontSize !== undefined ? "".concat(buttonFontSize).concat(buttonFontSizeUnits) : '', ";\n                    font-weight: ").concat(buttonFontWeight, ";\n                    font-style: ").concat(buttonFontStyle, ";\n                    text-transform: ").concat(buttonTextTransform, ";\n                    text-decoration: ").concat(buttonTextDecoration, ";\n                    padding: ").concat(buttonPadding, ";\n                    margin: ").concat(buttonMargin, ";\n\n                }\n\n                .fb-info-box-content-wrapper .fb-info-btn-wrapper .fb-info-button:hover {\n                \t").concat(buttonTextHoverColor !== undefined ? "color: ".concat(buttonTextHoverColor, ";") : '', "\n                \t").concat(buttonBgHoverColor !== undefined ? "background-color: ".concat(buttonBgHoverColor, ";") : '', "\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t.fb-info-box-content-wrapper.".concat(blockID, " {\n                    padding: ").concat(boxPadding, ";\n                    border: ").concat(infoBoxBorder, ";\n                    border-width: ").concat(boxBorderWidth, ";\n                    border-radius: ").concat(boxBorderRadiusWidth, ";\n                    ").concat(infoBoxBorderColor !== undefined ? "border-color: ".concat(infoBoxBorderColor, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                    ").concat(Heading_Color !== undefined ? "color: ".concat(Heading_Color, ";") : '', "\n                    ").concat(Heading_Background_Color !== undefined ? "background-color: ".concat(Heading_Background_Color, ";") : '', "\n                    font-family: ").concat(Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family, ";\n                    font-size: ").concat(Heading_Font_Size !== undefined ? "".concat(Heading_Font_Size).concat(Heading_Font_size_units) : '', ";\n                    font-weight: ").concat(Heading_Font_Weight, ";\n                    font-style: ").concat(Heading_Font_Style, ";\n                    text-transform: ").concat(Heading_Text_Transform, ";\n                    text-decoration: ").concat(Heading_Text_Decoration, ";\n                    ").concat(Heading_Letter_Spacing !== undefined ? "letter-spacing: ".concat(Heading_Letter_Spacing).concat(Heading_Letter_Spacing_units, ";") : '', "\n                    ").concat(Heading_Line_Height !== undefined ? "line-height: ".concat(Heading_Line_Height).concat(Heading_Line_Height_units, ";") : '', "\n                    transition: all .3s ease-in-out;\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(Heading_Border, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    ").concat(Heading_Border_Color !== undefined ? "border-color: ".concat(Heading_Border_Color, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading:hover {\n                    ").concat(Heading_Hover_Color !== undefined ? "color: ".concat(Heading_Hover_Color, ";") : '', "\n                    ").concat(Heading_Border_Hover_Color !== undefined ? "border-color: ".concat(Heading_Border_Hover_Color, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Tab_padding.top).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.right).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Tab_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Tab_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Tab_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Mobile_padding.top).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.right).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Mobile_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Mobile_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Mobile_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                \t").concat(SubHeadingColor !== undefined ? "color: ".concat(SubHeadingColor, ";") : '', "\n                \tfont-family: ").concat(SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily, ";\n                    font-size: ").concat(SubHeadingFontSize !== undefined ? "".concat(SubHeadingFontSize).concat(SubHeadingFontSizeUnits) : '', ";\n                    font-weight: ").concat(SubHeadingFontWeight, ";\n                    font-style: ").concat(SubHeadingFontStyle, ";\n                    text-transform: ").concat(SubHeadingTextTransform, ";\n                    text-decoration: ").concat(SubHeadingTextDecoration, ";\n                    padding: ").concat(descPadding, ";\n\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description:hover {\n                    ").concat(SubHeadingHoverColor !== undefined ? "color: ".concat(SubHeadingHoverColor, ";") : '', "\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                \t").concat(buttonTextColor !== undefined ? "color: ".concat(buttonTextColor, ";") : '', "\n                \t").concat(buttonBgColor !== undefined ? "background-color: ".concat(buttonBgColor, ";") : '', "\n                \tfont-family: ").concat(buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily, ";\n                    font-size: ").concat(buttonFontSize !== undefined ? "".concat(buttonFontSize).concat(buttonFontSizeUnits) : '', ";\n                    font-weight: ").concat(buttonFontWeight, ";\n                    font-style: ").concat(buttonFontStyle, ";\n                    text-transform: ").concat(buttonTextTransform, ";\n                    text-decoration: ").concat(buttonTextDecoration, ";\n                    padding: ").concat(buttonPadding, ";\n                    margin: ").concat(buttonMargin, ";\n\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button:hover {\n                \t").concat(buttonTextHoverColor !== undefined ? "color: ".concat(buttonTextHoverColor, ";") : '', "\n                \t").concat(buttonBgHoverColor !== undefined ? "background-color: ".concat(buttonBgHoverColor, ";") : '', "\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"
@@ -5369,7 +5372,7 @@ function Inspector(_ref) {
         }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace', 'frontis-block'));
       }
     })))), /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      value: '',
+      value: icon,
       setIconHandler: iconHandler
     }))), /*#__PURE__*/React.createElement("div", {
       className: "fb-advanced-wrapper"
@@ -8781,10 +8784,14 @@ function FBIconPicker(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     defaultIcons = _useState6[0],
     setDefaultIcons = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"]),
     _useState8 = _slicedToArray(_useState7, 2),
     filteredDefaultIcons = _useState8[0],
     setFilteredDefaultIcons = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('all-icons'),
+    _useState10 = _slicedToArray(_useState9, 2),
+    selectedCat = _useState10[0],
+    setSelectedCat = _useState10[1];
   var iconPickerModal = function iconPickerModal() {
     setIconPickerModal(true);
   };
@@ -8834,12 +8841,74 @@ function FBIconPicker(props) {
 
   // Filter icon list
   var filterIconList = function filterIconList(cat) {
-    console.log(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"]);
+    var filteredIcons = [];
+    var currentGroup = [];
+    setSelectedCat(cat.slug);
+    if ('all-icons' === cat.slug) {
+      setFilteredDefaultIcons(defaultIcons);
+    } else if ('others' === cat.slug) {
+      for (var defaultIcon in _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"]) {
+        if (0 === _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][defaultIcon].custom_categories.length) {
+          // Add matching icon to the current group
+          currentGroup.push(defaultIcon);
+
+          // If the current group is full (like 8 icons), push it to filteredIcons
+          if (currentGroup.length === 8) {
+            filteredIcons.push(currentGroup);
+            currentGroup = []; // Start a new group
+          }
+        }
+      }
+      if (currentGroup.length > 0) {
+        filteredIcons.push(currentGroup);
+      }
+      setFilteredDefaultIcons(filteredIcons);
+    } else {
+      for (var _defaultIcon in _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"]) {
+        // Loop through each icon group in svgIcon
+        if (_components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][_defaultIcon].custom_categories.includes(cat.slug)) {
+          // Add matching icon to the current group
+          currentGroup.push(_defaultIcon);
+        }
+
+        // If the current group is full (like 8 icons), push it to filteredIcons
+        if (currentGroup.length === 8) {
+          filteredIcons.push(currentGroup);
+          currentGroup = []; // Start a new group
+        }
+      }
+      if (currentGroup.length > 0) {
+        filteredIcons.push(currentGroup);
+      }
+      setFilteredDefaultIcons(filteredIcons);
+    }
+  };
+
+  // Filter using search
+  var searchFilter = function searchFilter(searchKey) {
+    setSelectedCat('all-icons');
+    if (searchKey.target.value !== '') {
+      var data = filteredDefaultIcons;
+      var searchKeyword = searchKey.target.value; // Replace with your search keyword
+
+      var filteredData = data.map(function (subArray) {
+        return subArray.filter(function (item) {
+          return item.toLowerCase().split(/[-\s]/).some(function (word) {
+            return word.includes(searchKeyword.toLowerCase());
+          });
+        });
+      }).filter(function (subArray) {
+        return subArray.length > 0;
+      });
+      setFilteredDefaultIcons(filteredData);
+    } else {
+      setFilteredDefaultIcons(defaultIcons);
+    }
   };
 
   // Render icon list.
   var renderIconList = function renderIconList() {
-    if (!_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length) {
+    if (!filteredDefaultIcons.length) {
       return /*#__PURE__*/React.createElement("div", {
         className: "uagb-ip-icons icon-not-found"
       }, /*#__PURE__*/React.createElement("div", {
@@ -8855,14 +8924,13 @@ function FBIconPicker(props) {
     var fbIconClasses = function fbIconClasses(classes) {
       return classes.filter(Boolean).join(' ');
     };
-    // renderer.
     function cellRenderer(renderer) {
       var _svgIcon$currentIcon;
       var columnIndex = renderer.columnIndex,
         key = renderer.key,
         rowIndex = renderer.rowIndex,
         style = renderer.style;
-      var currentIcon = _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"][rowIndex][columnIndex];
+      var currentIcon = filteredDefaultIcons[rowIndex][columnIndex];
       if (!currentIcon) {
         return null;
       }
@@ -8888,11 +8956,11 @@ function FBIconPicker(props) {
       className: "fb_icon_picker_icons_list"
     }, /*#__PURE__*/React.createElement(react_virtualized__WEBPACK_IMPORTED_MODULE_3__.Grid, {
       cellRenderer: cellRenderer,
-      columnCount: _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length,
-      columnWidth: 8 === _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length ? heightAndWidth - 2 : 100,
+      columnCount: filteredDefaultIcons.length,
+      columnWidth: 8 === filteredDefaultIcons.length ? heightAndWidth - 2 : 100,
       height: 400,
-      rowCount: _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length,
-      rowHeight: 8 === _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"].length ? heightAndWidth : 100,
+      rowCount: filteredDefaultIcons.length,
+      rowHeight: 8 === filteredDefaultIcons.length ? heightAndWidth : 100,
       width: 400,
       autoContainerWidth: true
     }));
@@ -8940,6 +9008,9 @@ function FBIconPicker(props) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"
   }))), /*#__PURE__*/React.createElement("input", {
+    onChange: function onChange(e) {
+      return searchFilter(e);
+    },
     type: 'text',
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search', 'frontis-blocks')
   }))), /*#__PURE__*/React.createElement("div", {
@@ -8951,7 +9022,7 @@ function FBIconPicker(props) {
       onClick: function onClick() {
         return filterIconList(category);
       },
-      className: 'fb_icon_picker_wrapper_category',
+      className: "fb_icon_picker_wrapper_category ".concat(selectedCat === category.slug ? 'selected' : ''),
       key: index
     }, category.title);
   })), /*#__PURE__*/React.createElement("div", {

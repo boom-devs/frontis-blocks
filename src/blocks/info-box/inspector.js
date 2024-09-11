@@ -190,7 +190,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		infoButtonPaddingUnits,
 		infoButtonDesktopPadding,
 		infoButtonTabPadding,
-		infoButtonMobilePadding
+		infoButtonMobilePadding,
+		icon
 
 	} = attributes;
 
@@ -198,7 +199,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
 			setAttributes({
-				blockID: "fb-advanced-headings-" + clientId.slice(0, 8),
+				blockID: "fb-info-box-content-wrapper-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId]);
@@ -1123,14 +1124,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 			<style>
 				{`
-				.fb-info-box-content-wrapper {
+				.fb-info-box-content-wrapper.${blockID} {
                     padding: ${boxPadding};
                     border: ${infoBoxBorder};
                     border-width: ${boxBorderWidth};
                     border-radius: ${boxBorderRadiusWidth};
                     ${infoBoxBorderColor !== undefined ? `border-color: ${infoBoxBorderColor};` : ''}
                 }
-                .fb-info-box-content-wrapper .fb-heading {
+                .fb-info-box-content-wrapper.${blockID} .fb-heading {
                     ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ''}
                     ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : ''}
                     font-family: ${Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family};
@@ -1149,13 +1150,13 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     border-radius: ${borderRadiusWidth};
                     ${Heading_Border_Color !== undefined ? `border-color: ${Heading_Border_Color};` : ''}
                 }
-                .fb-info-box-content-wrapper .fb-heading:hover {
+                .fb-info-box-content-wrapper.${blockID} .fb-heading:hover {
                     ${Heading_Hover_Color !== undefined ? `color: ${Heading_Hover_Color};` : ''}
                     ${Heading_Border_Hover_Color !== undefined ? `border-color: ${Heading_Border_Hover_Color};` : ''}
                 }
 
                 @media only screen and (max-width: 1024px) {
-                    .fb-info-box-content-wrapper .fb-heading {
+                    .fb-info-box-content-wrapper.${blockID} .fb-heading {
                         padding: ${Heading_Tab_padding.top}${Heading_padding_units} ${Heading_Tab_padding.right}${Heading_padding_units} ${Heading_Tab_padding.bottom}${Heading_padding_units} ${Heading_Tab_padding.left}${Heading_padding_units} !important;
                         margin: ${Heading_Tab_Margin.top}${Heading_Margin_Units} ${Heading_Tab_Margin.right}${Heading_Margin_Units} ${Heading_Tab_Margin.bottom}${Heading_Margin_Units} ${Heading_Tab_Margin.left}${Heading_Margin_Units} !important;
                         border-width: ${Heading_Tab_Border_Width.top}${Heading_Border_units} ${Heading_Tab_Border_Width.right}${Heading_Border_units} ${Heading_Tab_Border_Width.bottom}${Heading_Border_units} ${Heading_Tab_Border_Width.left}${Heading_Border_units} !important;
@@ -1164,7 +1165,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                 }
 
                 @media only screen and (max-width: 767px) {
-                    .fb-info-box-content-wrapper .fb-heading {
+                    .fb-info-box-content-wrapper.${blockID} .fb-heading {
                         padding: ${Heading_Mobile_padding.top}${Heading_padding_units} ${Heading_Mobile_padding.right}${Heading_padding_units} ${Heading_Mobile_padding.bottom}${Heading_padding_units} ${Heading_Mobile_padding.left}${Heading_padding_units} !important;
                         margin: ${Heading_Mobile_Margin.top}${Heading_Margin_Units} ${Heading_Mobile_Margin.right}${Heading_Margin_Units} ${Heading_Mobile_Margin.bottom}${Heading_Margin_Units} ${Heading_Mobile_Margin.left}${Heading_Margin_Units} !important;
                         border-width: ${Heading_Mobile_Border_Width.top}${Heading_Border_units} ${Heading_Mobile_Border_Width.right}${Heading_Border_units} ${Heading_Mobile_Border_Width.bottom}${Heading_Border_units} ${Heading_Mobile_Border_Width.left}${Heading_Border_units} !important;
@@ -1172,7 +1173,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     }
                 }
 
-                .fb-info-box-content-wrapper .fb-description {
+                .fb-info-box-content-wrapper.${blockID} .fb-description {
                 	${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ''}
                 	font-family: ${SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily};
                     font-size: ${SubHeadingFontSize !== undefined ? `${SubHeadingFontSize}${SubHeadingFontSizeUnits}` : ''};
@@ -1183,11 +1184,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     padding: ${descPadding};
 
                 }
-                .fb-info-box-content-wrapper .fb-description:hover {
+                .fb-info-box-content-wrapper.${blockID} .fb-description:hover {
                     ${SubHeadingHoverColor !== undefined ? `color: ${SubHeadingHoverColor};` : ''}
                 }
 
-                .fb-info-box-content-wrapper .fb-info-btn-wrapper .fb-info-button {
+                .fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper .fb-info-button {
                 	${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ''}
                 	${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : ''}
                 	font-family: ${buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily};
@@ -1201,7 +1202,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
                 }
 
-                .fb-info-box-content-wrapper .fb-info-btn-wrapper .fb-info-button:hover {
+                .fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper .fb-info-button:hover {
                 	${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : ''}
                 	${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
                 }
@@ -1320,7 +1321,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 													}
 
 												</div>
-												<FBIconPicker value={''} setIconHandler={iconHandler}/>
+												<FBIconPicker value={icon} setIconHandler={iconHandler}/>
 											</PanelBody>
 										</div>
 										<div className="fb-advanced-wrapper">

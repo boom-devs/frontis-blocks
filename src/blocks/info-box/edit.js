@@ -12,7 +12,7 @@ import {
  */
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes}) {
+export default function Edit({ attributes, setAttributes, clientId}) {
     const {
         blockID,
         Heading_Text,
@@ -43,6 +43,7 @@ export default function Edit({ attributes, setAttributes}) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId={clientId}
             />
 
             <div {...blockProps} id={blockID}>
