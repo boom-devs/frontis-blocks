@@ -61,6 +61,7 @@ const attributes = {
         type: "string",
         default: "px"
     },
+
     HeadingColorSwitcher : {
         type: "string",
         default: "normal"
@@ -170,7 +171,6 @@ const attributes = {
         type: "string",
         default: "px"
     },
-
     desktopHeadingPadding: {
         type: "object", 
         default: {
@@ -180,8 +180,6 @@ const attributes = {
             right: 0,
         },
     },
-
-
     HeadingDesktopPadding: {
         type: "object", 
         default: {
