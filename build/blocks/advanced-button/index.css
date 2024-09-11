@@ -1,0 +1,47 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/advanced-button/editor.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+/** Start Admin Panel scss **/
+/** End Admin Panel scss **/
+/** Start General scss for Advanced Button **/
+.fb-advanced-button-icon-popup {
+  padding: 0.2rem;
+  min-width: 220px;
+}
+.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner {
+  position: relative;
+  z-index: 99999;
+}
+.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner .components-base-control__field {
+  margin-bottom: 0;
+}
+.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner .components-base-control__field label {
+  display: block;
+  color: #5f5f5f !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 16px !important;
+  margin: 10px 0 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+}
+.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner .components-base-control__field .components-toggle-control {
+  margin-bottom: 0 !important;
+}
+
+.fb-link-control-wrapper .fb-link-control-inner-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fb-link-control-wrapper .fb-link-control-inner-wrapper .fb-advanced-button-url {
+  flex: 1;
+  margin-bottom: 0;
+}
+.fb-link-control-wrapper .fb-link-control-inner-wrapper .fb-advanced-button-url .components-base-control__field {
+  margin-bottom: 0;
+}
+
+/** End General scss for Advanced Button **/
+
+/*# sourceMappingURL=index.css.map*/

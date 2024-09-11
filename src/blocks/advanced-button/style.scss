@@ -1,0 +1,22 @@
+.fb-advanced-button-wrapper {
+    .fb-advanced-button {
+        align-items: center;
+        display: inline-flex;
+        justify-content: center;
+        outline: none;
+        text-align: center;
+        text-decoration: none;
+        padding: 12px 30px;
+        background-color: #3f8efc;
+        border-radius: 0px;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        transition: all .3s ease-in-out;
+        white-space: nowrap;
+        .fb-advanced-button-text {
+            color: #ffffff;
+            transition: all .3s ease-in-out;
+        }
+    }
+}
