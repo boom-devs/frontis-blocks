@@ -3,6 +3,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+	infoBoxBg: {
+		type: 'string',
+		default: ''
+	},
     infoMediaUrl: {
         type: 'string',
         default: ''
@@ -32,6 +36,14 @@ const attributes = {
         default: 'Icon Box title',
     },
     wrapperAlignment: {
+        type: "string",
+        default: "left",
+    },
+	descAlignment: {
+        type: "string",
+        default: "left",
+    },
+	buttonAlignment: {
         type: "string",
         default: "left",
     },
@@ -387,7 +399,181 @@ const attributes = {
     info_Button_Link: {
         type: "string",
         default: ""
-    }
-
+    },
+	//Info box padding
+	infoBoxPaddingUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoBoxDesktopPadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxTabPadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxMobilePadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	// Info Box Border
+	infoBoxBorder: {
+		type: 'string',
+		default: "none",
+	},
+	infoBoxBorderColor: {
+		type: 'string',
+	},
+	infoBoxBorderHoverColor: {
+		type: 'string',
+	},
+	infoBoxBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	infoBoxBorderUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoBoxDesktopBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxTabBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxMobileBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	// 	Info Box Border Radius
+	infoBoxBorderRadiusUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoBoxDesktopBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxTabBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxMobileBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	// Button
+	buttonFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	buttonFontSize: {
+		type: "number",
+		default: 35
+	},
+	buttonFontSizeUnits: {
+		type: "string",
+		default: "px"
+	},
+	buttonFontWeight : {
+		type: "string",
+		default: "700"
+	},
+	buttonFontStyle : {
+		type: "string",
+		default: "normal"
+	},
+	buttonTextTransform : {
+		type: "string",
+		default: "none"
+	},
+	buttonTextDecoration : {
+		type: "string",
+		default: "none"
+	},
+	buttonLetterSpacing : {
+		type: "number",
+	},
+	buttonLetterSpacingUnits : {
+		type: "string",
+		default: "px"
+	},
+	buttonLineHeight : {
+		type: "number",
+	},
+	buttonLineHeightUnits : {
+		type: "string",
+		default: "px"
+	},
+	// Button Color
+	buttonColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	buttonTextColor : {
+		type: "string"
+	},
+	buttonTextHoverColor : {
+		type: "string"
+	},
+	buttonBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	buttonBgColor : {
+		type: "string"
+	},
+	buttonBgHoverColor : {
+		type: "string"
+	},
 }
+//
 export default attributes;

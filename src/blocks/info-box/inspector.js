@@ -125,6 +125,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
         info_Button_Text,
         info_Button_Link,
         wrapperAlignment,
+		descAlignment,
+		buttonAlignment,
+		infoBoxBg,
 
         SubHeadingPaddingUnits,
         SubHeadingDesktopPadding,
@@ -139,15 +142,50 @@ export default function Inspector({attributes, setAttributes, clientId}) {
         SubHeadingFontFamily,
         SubHeadingColor,
         SubHeadingColorSwitcher,
-        SubHeadingHoverColor
+        SubHeadingHoverColor,
 
+		infoBoxPaddingUnits,
+		infoBoxDesktopPadding,
+		infoBoxTabPadding,
+		infoBoxMobilePadding,
+		infoBoxBorder,
+		infoBoxBorderColor,
+		infoBoxBorderHoverColor,
+		infoBoxBorderColorSwitcher,
+		infoBoxBorderUnits,
+		infoBoxDesktopBorderWidth,
+		infoBoxTabBorderWidth,
+		infoBoxMobileBorderWidth,
+
+		infoBoxBorderRadiusUnits,
+		infoBoxDesktopBorderRadiusWidth,
+		infoBoxTabBorderRadiusWidth,
+		infoBoxMobileBorderRadiusWidth,
+
+		buttonFontFamily,
+		buttonFontSize,
+		buttonFontSizeUnits,
+		buttonFontWeight,
+		buttonFontStyle,
+		buttonTextTransform,
+		buttonTextDecoration,
+		buttonLetterSpacing,
+		buttonLetterSpacingUnits,
+		buttonLineHeight,
+		buttonLineHeightUnits,
+		buttonColorSwitcher,
+		buttonTextColor,
+		buttonTextHoverColor,
+		buttonBgColorSwitcher,
+		buttonBgColor,
+		buttonBgHoverColor
     } = attributes;
 
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
-                blockID: "fb_headings-" + clientId.slice(0, 8),
+                blockID: "sh_headings-" + clientId.slice(0, 8),
             });
         }
     }, [clientId]);
@@ -248,6 +286,91 @@ export default function Inspector({attributes, setAttributes, clientId}) {
     /** End Padding */
 
 
+	/** Start Padding */
+	const [boxPreviousPadding, setBoxPreviousPadding] = useState(infoBoxDesktopPadding);
+	/** Function to update all padding values */
+	const updateAllBoxPadding = (value, device) => {
+		switch (device) {
+			case 'desktop':
+				setAttributes({
+					infoBoxDesktopPadding: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			case 'tab':
+				setAttributes({
+					infoBoxTabPadding: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			case 'mobile':
+				setAttributes({
+					infoBoxMobilePadding: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			default:
+				break;
+		}
+	};
+
+	/** Function to handle input change */
+	const handleBoxPaddingInputChange = (e, direction) => {
+		const value = e.target.value;
+		switch (activePaddingDevice) {
+			case 'desktop':
+				setAttributes({infoBoxDesktopPadding: {...infoBoxDesktopPadding, [direction]: value}});
+				break;
+			case 'tab':
+				setAttributes({infoBoxTabPadding: {...infoBoxTabPadding, [direction]: value}});
+				break;
+			case 'mobile':
+				setAttributes({infoBoxMobilePadding: {...infoBoxMobilePadding, [direction]: value}});
+				break;
+			default:
+				break;
+		}
+		/** Update all padding values if paddingLink is true */
+		if (paddingLink) {
+			updateAllBoxPadding(value, activePaddingDevice);
+		}
+	};
+
+	/** Function to handle paddingLink toggle */
+	const handleBoxPaddingLinkToggle = () => {
+		if (!paddingLink) {
+			setAttributes({infoBoxDesktopPadding: boxPreviousPadding});
+		}
+		/** setPaddingLink(!paddingLink) */
+		setAttributes({paddingLink: !paddingLink})
+	};
+
+	/** Update previousPadding state when padding changes */
+	useEffect(() => {
+		setBoxPreviousPadding(infoBoxDesktopPadding);
+	}, [infoBoxDesktopPadding]);
+
+	/** Function to handle device click for padding */
+	const handleBoxPaddingDeviceClick = (device) => {
+		setAttributes({activePaddingDevice: device});
+	};
+
+	/** Default padding for desktop (using desktop_padding) */
+	const boxPadding = `${infoBoxDesktopPadding.top}${infoBoxPaddingUnits} ${infoBoxDesktopPadding.right}${infoBoxPaddingUnits} ${infoBoxDesktopPadding.bottom}${infoBoxPaddingUnits} ${infoBoxDesktopPadding.left}${infoBoxPaddingUnits}`;
+	/** End Padding */
+
     /** Start Padding For Description*/
     const [previousPaddingDescription, setPreviousPaddingDescription] = useState(SubHeadingDesktopPadding);
     /** Function to update all padding values */
@@ -306,7 +429,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
         }
         /** Update all padding values if paddingLink is true */
         if (paddingLink) {
-            updateAllPadding(value, activePaddingDevice);
+			updateAllDescPadding(value, activePaddingDevice);
         }
     };
 
@@ -605,6 +728,190 @@ export default function Inspector({attributes, setAttributes, clientId}) {
     /** End Border Radius Width */
 
 
+	/** Start Box Border Width */
+	const [boxPreviousBorderWidth, setBoxPreviousBorderWidth] = useState(infoBoxDesktopBorderWidth);
+	/** Function to update all Border Width values */
+	const updateBoxBorderWidth = (value, device) => {
+		switch (device) {
+			case 'desktop':
+				setAttributes({
+					infoBoxDesktopBorderWidth: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			case 'tab':
+				setAttributes({
+					infoBoxTabBorderWidth: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			case 'mobile':
+				setAttributes({
+					infoBoxMobileBorderWidth: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			default:
+				break;
+		}
+	};
+
+	/** Function to handle input change */
+	const handleBoxBorderWidthInputChange = (e, direction) => {
+		const value = e.target.value;
+		switch (activeBorderDevice) {
+			case 'desktop':
+				setAttributes({infoBoxDesktopBorderWidth: {...infoBoxDesktopBorderWidth, [direction]: value}});
+				break;
+			case 'tab':
+				setAttributes({infoBoxTabBorderWidth: {...infoBoxTabBorderWidth, [direction]: value}});
+				break;
+			case 'mobile':
+				setAttributes({infoBoxMobileBorderWidth: {...infoBoxMobileBorderWidth, [direction]: value}});
+				break;
+			default:
+				break;
+		}
+		/** Update all padding values if borderLink is true */
+		if (borderLink) {
+			updateBoxBorderWidth(value, activeBorderDevice);
+		}
+	};
+
+	/** Function to handle borderLink toggle */
+	const handleBoxBorderWidthLinkToggle = () => {
+		if (!borderLink) {
+			setAttributes({infoBoxDesktopBorderWidth: boxPreviousBorderWidth});
+		}
+		/** setborderLinkLink(!borderLink) */
+		setAttributes({borderLink: !borderLink})
+	};
+
+	/** Update previousborderWidth state when Border Width changes */
+	useEffect(() => {
+		setBoxPreviousBorderWidth(infoBoxDesktopBorderWidth);
+	}, [infoBoxDesktopBorderWidth]);
+
+	/** Function to handle device click for Border Width */
+	const handleBoxBorderWidthDeviceClick = (device) => {
+		setAttributes({activeBorderDevice: device});
+	};
+
+	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
+	const boxBorderWidth = `${infoBoxDesktopBorderWidth.top}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.right}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.bottom}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.left}${infoBoxBorderUnits}`;
+	/** End Border Width */
+
+	/** Start Border Radius Width */
+	const [boxPreviousBorderRadiusWidth, setBoxPreviousBorderRadiusWidth] = useState(infoBoxDesktopBorderRadiusWidth);
+	/** Function to update all Border Width values */
+	const updateBoxBorderRadiusWidth = (value, device) => {
+		switch (device) {
+			case 'desktop':
+				setAttributes({
+					infoBoxDesktopBorderRadiusWidth: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			case 'tab':
+				setAttributes({
+					infoBoxTabBorderRadiusWidth: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			case 'mobile':
+				setAttributes({
+					infoBoxMobileBorderRadiusWidth: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value
+					}
+				});
+				break;
+			default:
+				break;
+		}
+	};
+
+	/** Function to handle input change */
+	const handleBoxBorderRadiusWidthInputChange = (e, direction) => {
+		const value = e.target.value;
+		switch (activeBorderRadiusDevice) {
+			case 'desktop':
+				setAttributes({
+					infoBoxDesktopBorderRadiusWidth: {
+						...infoBoxDesktopBorderRadiusWidth,
+						[direction]: value
+					}
+				});
+				break;
+			case 'tab':
+				setAttributes({
+					infoBoxTabBorderRadiusWidth: {
+						...infoBoxTabBorderRadiusWidth,
+						[direction]: value
+					}
+				});
+				break;
+			case 'mobile':
+				setAttributes({
+					infoBoxMobileBorderRadiusWidth: {
+						...infoBoxMobileBorderRadiusWidth,
+						[direction]: value
+					}
+				});
+				break;
+			default:
+				break;
+		}
+		/** Update all padding values if borderRadiusLink is true */
+		if (borderRadiusLink) {
+			updateBoxBorderRadiusWidth(value, activeBorderRadiusDevice);
+		}
+	};
+
+	/** Function to handle borderRadiusLink toggle */
+	const handleBoxBorderRadiusWidthLinkToggle = () => {
+		if (!borderRadiusLink) {
+			setAttributes({infoBoxDesktopBorderRadiusWidth: boxPreviousBorderRadiusWidth});
+		}
+		/** setborderRadiusLinkLink(!borderRadiusLink) */
+		setAttributes({borderRadiusLink: !borderRadiusLink})
+	};
+
+	/** Update previousBorderRadiusWidth state when Border Width changes */
+	useEffect(() => {
+		setBoxPreviousBorderRadiusWidth(infoBoxDesktopBorderRadiusWidth);
+	}, [infoBoxDesktopBorderRadiusWidth]);
+
+	/** Function to handle device click for Border Width */
+	const handleBoxBorderRadiusWidthDeviceClick = (device) => {
+		setAttributes({activeBorderRadiusDevice: device});
+	};
+
+	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
+	const boxBorderRadiusWidth = `${infoBoxDesktopBorderRadiusWidth.top}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.right}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.bottom}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.left}${infoBoxBorderRadiusUnits}`;
+	/** End Border Radius Width */
     /* set default values for the style attributes */
     useEffect(() => {
         if (Heading_Font_Family) {
@@ -630,7 +937,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
             <style>
                 {`
-                .fb-info-box-content-wrapper.${blockID} .fb-heading {
+				.fb-info-box-content-wrapper {
+                    padding: ${boxPadding};
+                    border: ${infoBoxBorder};
+                    border-width: ${boxBorderWidth};
+                    border-radius: ${boxBorderRadiusWidth};
+                    ${infoBoxBorderColor !== undefined ? `border-color: ${infoBoxBorderColor};` : ''}
+                }
+                .fb-info-box-content-wrapper .fb-heading {
                     ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ''}
                     ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : ''}
                     font-family: ${Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family};
@@ -649,13 +963,13 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     border-radius: ${borderRadiusWidth};
                     ${Heading_Border_Color !== undefined ? `border-color: ${Heading_Border_Color};` : ''}
                 }
-                .fb-info-box-content-wrapper.${blockID} .fb-heading:hover {
+                .fb-info-box-content-wrapper .fb-heading:hover {
                     ${Heading_Hover_Color !== undefined ? `color: ${Heading_Hover_Color};` : ''}
                     ${Heading_Border_Hover_Color !== undefined ? `border-color: ${Heading_Border_Hover_Color};` : ''}
                 }
 
                 @media only screen and (max-width: 1024px) {
-                    .fb-info-box-content-wrapper.${blockID} .fb-heading {
+                    .fb-info-box-content-wrapper .fb-heading {
                         padding: ${Heading_Tab_padding.top}${Heading_padding_units} ${Heading_Tab_padding.right}${Heading_padding_units} ${Heading_Tab_padding.bottom}${Heading_padding_units} ${Heading_Tab_padding.left}${Heading_padding_units} !important;
                         margin: ${Heading_Tab_Margin.top}${Heading_Margin_Units} ${Heading_Tab_Margin.right}${Heading_Margin_Units} ${Heading_Tab_Margin.bottom}${Heading_Margin_Units} ${Heading_Tab_Margin.left}${Heading_Margin_Units} !important;
                         border-width: ${Heading_Tab_Border_Width.top}${Heading_Border_units} ${Heading_Tab_Border_Width.right}${Heading_Border_units} ${Heading_Tab_Border_Width.bottom}${Heading_Border_units} ${Heading_Tab_Border_Width.left}${Heading_Border_units} !important;
@@ -664,7 +978,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                 }
 
                 @media only screen and (max-width: 767px) {
-                    .fb-info-box-content-wrapper.${blockID} .fb-heading {
+                    .fb-info-box-content-wrapper .fb-heading {
                         padding: ${Heading_Mobile_padding.top}${Heading_padding_units} ${Heading_Mobile_padding.right}${Heading_padding_units} ${Heading_Mobile_padding.bottom}${Heading_padding_units} ${Heading_Mobile_padding.left}${Heading_padding_units} !important;
                         margin: ${Heading_Mobile_Margin.top}${Heading_Margin_Units} ${Heading_Mobile_Margin.right}${Heading_Margin_Units} ${Heading_Mobile_Margin.bottom}${Heading_Margin_Units} ${Heading_Mobile_Margin.left}${Heading_Margin_Units} !important;
                         border-width: ${Heading_Mobile_Border_Width.top}${Heading_Border_units} ${Heading_Mobile_Border_Width.right}${Heading_Border_units} ${Heading_Mobile_Border_Width.bottom}${Heading_Border_units} ${Heading_Mobile_Border_Width.left}${Heading_Border_units} !important;
@@ -672,9 +986,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     }
                 }
 
-                .fb-info-box-content-wrapper.${blockID} .fb-description {
-                ${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ''}
-                font-family: ${SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily};
+                .fb-info-box-content-wrapper .fb-description {
+                	${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ''}
+                	font-family: ${SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily};
                     font-size: ${SubHeadingFontSize !== undefined ? `${SubHeadingFontSize}${SubHeadingFontSizeUnits}` : ''};
                     font-weight: ${SubHeadingFontWeight};
                     font-style: ${SubHeadingFontStyle};
@@ -683,15 +997,31 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     padding: ${descPadding};
 
                 }
-
-                .fb-info-box-content-wrapper.${blockID} .fb-description:hover {
+                .fb-info-box-content-wrapper .fb-description:hover {
                     ${SubHeadingHoverColor !== undefined ? `color: ${SubHeadingHoverColor};` : ''}
+                }
+
+                .fb-info-box-content-wrapper .fb-info-btn-wrapper .fb-info-button {
+                	${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ''}
+                	${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : ''}
+                	font-family: ${buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily};
+                    font-size: ${buttonFontSize !== undefined ? `${buttonFontSize}${buttonFontSizeUnits}` : ''};
+                    font-weight: ${buttonFontWeight};
+                    font-style: ${buttonFontStyle};
+                    text-transform: ${buttonTextTransform};
+                    text-decoration: ${buttonTextDecoration};
+                    padding: ${padding};
+                }
+
+                .fb-info-box-content-wrapper .fb-info-btn-wrapper .fb-info-button:hover {
+                	${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : ''}
+                	${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
                 }
             `}
             </style>
 
             <InspectorControls key="controls">
-                <div className="fb-panel-control">
+                <div className="fb-inspector-control">
                     <TabPanel
                         className="fb-parent-tab-panel"
                         activeClass="active-tab"
@@ -717,7 +1047,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                             <div className={"fb-tab-controls" + tab.name}>
                                 {tab.name === 'general' && (
                                     <>
-                                        <div className="fb-info-image-wrapper">
+                                        <div className="fb-advanced-wrapper">
                                             <PanelBody
                                                 title={__("Icon/Image", "frontis-block")}
                                                 initialOpen={true}
@@ -725,16 +1055,16 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                 <BaseControl
                                                     label={__("Media Alignment", "frontis-block")}
                                                     id="fb-media-alignment"
-                                                    className="fb-media-alignment"
+                                                    className="fb-advanced-alignment"
                                                 >
                                                     <ButtonGroup
-                                                        className="fb-media-alignment-group-btn"
+                                                        className="fb-advanced-alignment-group-btn"
                                                     >
                                                         {TEXT_ALIGN.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({wrapperAlignment: item.value})}
-                                                                className={`fb-media-alignment-single-btn ${Alignment === item.value ? 'active' : ''}`}
+                                                                className={`fb-advanced-alignment-single-btn ${Alignment === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -803,24 +1133,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                 </div>
                                             </PanelBody>
                                         </div>
-                                        <div className="fb-heading-wrapper">
+                                        <div className="fb-advanced-wrapper">
                                             <PanelBody
                                                 title={__("Title", "frontis-block")}
                                                 initialOpen={false}
                                             >
                                                 <BaseControl
                                                     label={__("Heading Alignment", "frontis-block")}
-                                                    id="fb-heading-alignment"
-                                                    className="fb-heading-alignment"
+                                                    id="fb-setting-alignment"
+                                                    className="fb-advanced-alignment"
                                                 >
                                                     <ButtonGroup
-                                                        className="fb-heading-alignment-group-btn"
+                                                        className="fb-advanced-alignment-group-btn"
                                                     >
                                                         {TEXT_ALIGN.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({Alignment: item.value})}
-                                                                className={`fb-heading-alignment-single-btn ${Alignment === item.value ? 'active' : ''}`}
+                                                                className={`fb-advanced-alignment-single-btn ${Alignment === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -830,16 +1160,16 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
                                                 <BaseControl
                                                     label={__("Heading Tag", "frontis-block")}
-                                                    className="fb-heading-tag-wrapper"
+                                                    className="fb-setting-tag-wrapper"
                                                 >
                                                     <ButtonGroup
-                                                        className="fb-heading-tag-inner-wrapper"
+                                                        className="fb-setting-tag-inner-wrapper"
                                                     >
                                                         {HEADING.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({Heading_Tag: item.value})}
-                                                                className={`fb-heading-tag-single-btn ${Heading_Tag === item.value ? 'active' : ''}`}
+                                                                className={`fb-setting-tag-single-btn ${Heading_Tag === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -851,11 +1181,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                     label={__("Heading Text", "frontis-block")}
                                                     value={Heading_Text}
                                                     onChange={(value) => setAttributes({Heading_Text: value})}
-                                                    className="fb-heading-text"
+                                                    className="fb-setting-text"
                                                 />
                                             </PanelBody>
                                         </div>
-                                        <div className="fb-sub-heading-wrapper">
+                                        <div className="fb-advanced-wrapper">
                                             <PanelBody
                                                 title={__("Description", "frontis-block")}
                                                 initialOpen={false}
@@ -868,6 +1198,25 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
                                                 {Sub_Heading_Switcher && (
                                                     <>
+														<BaseControl
+															label={__("Alignment", "frontis-block")}
+															id="fb-media-alignment"
+															className="fb-advanced-alignment"
+														>
+															<ButtonGroup
+																className="fb-advanced-alignment-group-btn"
+															>
+																{TEXT_ALIGN.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({descAlignment: item.value})}
+																		className={`fb-advanced-alignment-single-btn ${descAlignment === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</BaseControl>
                                                         <BaseControl className="fb-sub-heading-position">
                                                             <SelectControl
                                                                 label={__("Description Position", "frontis-block")}
@@ -902,6 +1251,25 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
                                                 {info_Button_Switcher && (
                                                     <>
+														<BaseControl
+															label={__("Alignment", "frontis-block")}
+															id="fb-media-alignment"
+															className="fb-advanced-alignment"
+														>
+															<ButtonGroup
+																className="fb-advanced-alignment-group-btn"
+															>
+																{TEXT_ALIGN.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({buttonAlignment: item.value})}
+																		className={`fb-advanced-alignment-single-btn ${buttonAlignment === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</BaseControl>
                                                         <TextareaControl
                                                             label={__("Button Text", "frontis-block")}
                                                             value={info_Button_Text}
@@ -937,7 +1305,549 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             title={__("Box", "frontis-block")}
                                             initialOpen={false}
                                         >
+											{/*Background*/}
+											<ColorPicker
+												color={infoBoxBg}
+												onChange={(value) => setAttributes({ infoBoxBg: value })}
+											/>
+											{/*Spacing*/}
+											<Heading>
+												Spacing
+											</Heading>
+											{/*Padding control*/}
+											<div className="sh_heading_spacing_container">
+												<div className="sh_heading_spacing_inner_container">
+													{/* Padding */}
+													<div className="sh_heading_label_container">
+														<div className="fb-setting-label-wrapper">
+															<p className="fb-setting-label-text">{__("Padding", "frontis-block")}</p>
+															<div className="fb-responsive-device-wrapper">
+																<button
+																	className={`fb-responsive-desktop-device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
+																	onClick={() => handleBoxPaddingDeviceClick('desktop')}>
+																	<svg width="8" height="7" viewBox="0 0 8 7">
+																		<path
+																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-tablet-device  ${activePaddingDevice === 'tab' ? 'active' : ''}`}
+																	onClick={() => handleBoxPaddingDeviceClick('tab')}>
+																	<svg width="6" height="7" viewBox="0 0 6 7">
+																		<path
+																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-mobile-device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
+																	onClick={() => handleBoxPaddingDeviceClick('mobile')}>
+																	<svg width="4" height="7" viewBox="0 0 4 7">
+																		<path
+																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
+																	</svg>
+																</button>
+															</div>
+														</div>
+														<div className="fb-setting-units-type">
+															<ButtonGroup className="fb-setting-units-type-wrap">
+																{separator_UNIT_TYPES.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({infoBoxPaddingUnits: item.value})}
+																		className={`fb-setting-units-type-switcher ${infoBoxPaddingUnits === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</div>
+													</div>
+													<div className="sh_heading_input_container">
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+															<input
+																type="number"
+																name="top"
+																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.top : activePaddingDevice === 'tab' ? infoBoxTabPadding.top : infoBoxMobilePadding.top}
+																onChange={(e) => handleBoxPaddingInputChange(e, 'top')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+															<input
+																type="number"
+																name="right"
+																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.right : activePaddingDevice === 'tab' ? infoBoxTabPadding.right : infoBoxMobilePadding.right}
+																onChange={(e) => handleBoxPaddingInputChange(e, 'right')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+															<input
+																type="number"
+																name="bottom"
+																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.bottom : activePaddingDevice === 'tab' ? infoBoxTabPadding.bottom : infoBoxMobilePadding.bottom}
+																onChange={(e) => handleBoxPaddingInputChange(e, 'bottom')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+															<input
+																type="number"
+																name="left"
+																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.left : activePaddingDevice === 'tab' ? infoBoxTabPadding.left : infoBoxMobilePadding.left}
+																onChange={(e) => handleBoxPaddingInputChange(e, 'left')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label className="sh_heading_spacing_input_label"></label>
+															<span
+																className={`dashicons ${paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${paddingLink ? 'is-checked' : ''}`}
+																onClick={handleBoxPaddingLinkToggle}
+															>
+                                                            </span>
+														</div>
+													</div>
+												</div>
+											</div>
+											{/*Margin control*/}
+											<div className="sh_heading_spacing_container">
+												<div className="sh_heading_spacing_inner_container">
+													{/* Margin */}
+													<div className="sh_heading_label_container">
+														<div className="fb-setting-label-wrapper">
+															<p className="fb-setting-label-text">{__("Margin", "frontis-block")}</p>
+															<div className="fb-responsive-device-wrapper">
+																<button
+																	className={`fb-responsive-desktop-device ${Heading_Active_Margin_Device === 'desktop' ? 'active' : ''}`}
+																	onClick={() => handleMarginDeviceClick('desktop')}>
+																	<svg width="8" height="7" viewBox="0 0 8 7">
+																		<path
+																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-tablet-device ${Heading_Active_Margin_Device === 'tab' ? 'active' : ''}`}
+																	onClick={() => handleMarginDeviceClick('tab')}>
+																	<svg width="6" height="7" viewBox="0 0 6 7">
+																		<path
+																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-mobile-device ${Heading_Active_Margin_Device === 'mobile' ? 'active' : ''}`}
+																	onClick={() => handleMarginDeviceClick('mobile')}>
+																	<svg width="4" height="7" viewBox="0 0 4 7">
+																		<path
+																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
+																	</svg>
+																</button>
+															</div>
+														</div>
+														<div className="fb-setting-units-type">
+															<ButtonGroup className="fb-setting-units-type-wrap">
+																{separator_UNIT_TYPES.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({Heading_Margin_Units: item.value})}
+																		className={`fb-setting-units-type-switcher ${Heading_Margin_Units === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</div>
+													</div>
+													<div className="sh_heading_input_container">
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+															<input
+																type="number"
+																name="top"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.top : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top}
+																onChange={(e) => handleMarginInputChange(e, 'top')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+															<input
+																type="number"
+																name="right"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.right : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right}
+																onChange={(e) => handleMarginInputChange(e, 'right')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+															<input
+																type="number"
+																name="bottom"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.bottom : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom}
+																onChange={(e) => handleMarginInputChange(e, 'bottom')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+															<input
+																type="number"
+																name="left"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.left : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left}
+																onChange={(e) => handleMarginInputChange(e, 'left')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label className="sh_heading_spacing_input_label"></label>
+															<span
+																className={`dashicons ${Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${Heading_Margin_Link ? 'is-checked' : ''}`}
+																onClick={handleMarginLinkToggle}
+															>
+                                                            </span>
+														</div>
+													</div>
+												</div>
+											</div>
+											{/*Border*/}
+											<Heading>
+												Border
+											</Heading>
+											<SelectControl
+												label={__("Border Style", "frontis-block")}
+												value={Heading_Border}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({infoBoxBorder: value})}
+											/>
 
+											<BaseControl
+												label={__("Border Color", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{NORMAL_HOVER.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({infoBoxBorderColorSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${infoBoxBorderColorSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+
+											{infoBoxBorderColorSwitcher === 'normal' && (
+												<BaseControl
+													label={__("Nomal Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-normal-color">
+																		<ColorPicker
+																			color={Heading_Border_Color}
+																			onChange={(value) => setAttributes({infoBoxBorderColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={Heading_Border_Color}
+																			onChange={(value) => setAttributes({infoBoxBorderColor: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{infoBoxBorderColorSwitcher === 'hover' && (
+												<BaseControl
+													label={__("Hover Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-hover-color">
+																		<ColorPicker
+																			color={infoBoxBorderHoverColor}
+																			onChange={(value) => setAttributes({infoBoxBorderHoverColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-hover-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={Heading_Border_Hover_Color}
+																			onChange={(value) => setAttributes({Heading_Border_Hover_Color: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											<div className="sh_heading_spacing_container">
+												<div className="sh_heading_spacing_inner_container">
+													{/* Border Width */}
+													<div className="sh_heading_label_container">
+														<div className="sh_heading_label">
+															<p className="sh_heading_label_text">{__("Border Width", "frontis-block")}</p>
+															<div className="sh_heading_responsive_devices">
+																<button
+																	className={`sh_heading_desktop_device ${activeBorderDevice === 'desktop' ? 'active' : ''}`}
+																	onClick={() => handleBorderWidthDeviceClick('desktop')}>
+																	<svg width="8" height="7" viewBox="0 0 8 7">
+																		<path
+																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`sh_heading_tab_device ${activeBorderDevice === 'tab' ? 'active' : ''}`}
+																	onClick={() => handleBorderWidthDeviceClick('tab')}>
+																	<svg width="6" height="7" viewBox="0 0 6 7">
+																		<path
+																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`sh_heading_mobile_device ${activeBorderDevice === 'mobile' ? 'active' : ''}`}
+																	onClick={() => handleBorderWidthDeviceClick('mobile')}>
+																	<svg width="4" height="7" viewBox="0 0 4 7">
+																		<path
+																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
+																	</svg>
+																</button>
+															</div>
+														</div>
+														<div className="fb-units-type">
+															<ButtonGroup className="fb-units-type-wrap">
+																{separator_UNIT_TYPES.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({Heading_Border_units: item.value})}
+																		className={`fb-units-type-switcher ${Heading_Border_units === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</div>
+
+													</div>
+													<div className="sh_heading_input_container">
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+															<input
+																type="number"
+																name="top"
+																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.top : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.top : infoBoxMobileBorderWidth.top}
+																onChange={(e) => handleBoxBorderWidthInputChange(e, 'top')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+															<input
+																type="number"
+																name="right"
+																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.right : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.right : infoBoxMobileBorderWidth.right}
+																onChange={(e) => handleBoxBorderWidthInputChange(e, 'right')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+															<input
+																type="number"
+																name="bottom"
+																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.bottom : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.bottom : infoBoxMobileBorderWidth.bottom}
+																onChange={(e) => handleBoxBorderWidthInputChange(e, 'bottom')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+															<input
+																type="number"
+																name="left"
+																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.left : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.left : infoBoxMobileBorderWidth.left}
+																onChange={(e) => handleBoxBorderWidthInputChange(e, 'left')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label className="sh_heading_spacing_input_label"></label>
+															<span
+																className={`dashicons ${borderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${borderLink ? 'is-checked' : ''}`}
+																onClick={handleBoxBorderWidthLinkToggle}
+															>
+                                                            </span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div className="sh_heading_spacing_container">
+												<div className="sh_heading_spacing_inner_container">
+													{/* Border radius Width */}
+													<div className="sh_heading_label_container">
+														<div className="sh_heading_label">
+															<p className="sh_heading_label_text">{__("Border Radius Width", "frontis-block")}</p>
+															<div className="sh_heading_responsive_devices">
+																<button
+																	className={`sh_heading_desktop_device ${activeBorderRadiusDevice === 'desktop' ? 'active' : ''}`}
+																	onClick={() => handleBoxBorderRadiusWidthDeviceClick('desktop')}>
+																	<svg width="8" height="7" viewBox="0 0 8 7">
+																		<path
+																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`sh_heading_tab_device ${activeBorderRadiusDevice === 'tab' ? 'active' : ''}`}
+																	onClick={() => handleBoxBorderRadiusWidthDeviceClick('tab')}>
+																	<svg width="6" height="7" viewBox="0 0 6 7">
+																		<path
+																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`sh_heading_mobile_device ${activeBorderRadiusDevice === 'mobile' ? 'active' : ''}`}
+																	onClick={() => handleBoxBorderRadiusWidthDeviceClick('mobile')}>
+																	<svg width="4" height="7" viewBox="0 0 4 7">
+																		<path
+																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
+																	</svg>
+																</button>
+															</div>
+														</div>
+														<div className="fb-units-type">
+															<ButtonGroup className="fb-units-type-wrap">
+																{separator_UNIT_TYPES.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({infoBoxBorderRadiusUnits: item.value})}
+																		className={`fb-units-type-switcher ${infoBoxBorderRadiusUnits === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</div>
+													</div>
+													<div className="sh_heading_input_container">
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+															<input
+																type="number"
+																name="top"
+																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.top : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.top : infoBoxMobileBorderRadiusWidth.top}
+																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'top')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+															<input
+																type="number"
+																name="right"
+																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.right : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.right : infoBoxMobileBorderRadiusWidth.right}
+																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'right')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+															<input
+																type="number"
+																name="bottom"
+																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.bottom : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.bottom : infoBoxMobileBorderRadiusWidth.bottom}
+																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'bottom')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+															<input
+																type="number"
+																name="left"
+																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.left : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.left : infoBoxMobileBorderRadiusWidth.left}
+																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'left')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label className="sh_heading_spacing_input_label"></label>
+															<span
+																className={`dashicons ${borderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${borderRadiusLink ? 'is-checked' : ''}`}
+																onClick={handleBoxBorderRadiusWidthLinkToggle}
+															>
+                                                            </span>
+														</div>
+													</div>
+												</div>
+											</div>
                                         </PanelBody>
                                         {/*Image Style*/}
                                         <PanelBody
@@ -968,11 +1878,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                         >
                                             <BaseControl
                                                 label={__("Typography", "frontis-block")}
-                                                className="fb-heading-typography"
+                                                className="fb-setting-typography"
                                             >
                                                 <Dropdown
-                                                    className="fb-heading-typography-icon-dropdown"
-                                                    contentClassName="fb-heading-typography-dropdown-content"
+                                                    className="fb-setting-typography-icon-dropdown"
+                                                    contentClassName="fb-setting-typography-dropdown-content"
                                                     popoverProps={{placement: 'bottom-start'}}
                                                     renderToggle={({isOpen, onToggle}) => (
                                                         <Button
@@ -980,15 +1890,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                             onClick={onToggle}
                                                             aria-expanded={isOpen}
                                                             aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                            className="fb-heading-typography-icon-btn"
+                                                            className="fb-setting-typography-icon-btn"
                                                         >
                                                             <Dashicon icon="edit"
-                                                                      className="fb-heading-typography-icon"/>
+                                                                      className="fb-setting-typography-icon"/>
                                                         </Button>
                                                     )}
                                                     renderContent={() => (
-                                                        <div className="fb-heading-typography-popup">
-                                                            <BaseControl className="fb-heading-typography-popup-inner">
+                                                        <div className="fb-setting-typography-popup">
+                                                            <BaseControl className="fb-setting-typography-popup-inner">
                                                                 <div className="fb-fontfamily-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Family", "frontis-block")}
@@ -1227,14 +2137,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             </BaseControl>
                                             <BaseControl
                                                 label={__("Text Color", "frontis-block")}
-                                                className="fb-heading-color-panel-wrapper"
+                                                className="fb-setting-color-panel-wrapper"
                                             >
-                                                <ButtonGroup className="fb-heading-color-panel-btn">
+                                                <ButtonGroup className="fb-setting-color-panel-btn">
                                                     {NORMAL_HOVER.map((item, key) => (
                                                         <Button
                                                             key={key}
                                                             onClick={() => setAttributes({Heading_Color_Switcher: item.value})}
-                                                            className={`fb-heading-color-panel-btn-switchr ${Heading_Color_Switcher === item.value ? 'active' : ''}`}
+                                                            className={`fb-setting-color-panel-btn-switchr ${Heading_Color_Switcher === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
@@ -1245,11 +2155,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {Heading_Color_Switcher === 'normal' && (
                                                 <BaseControl
                                                     label={__("Nomal Color", "frontis-block")}
-                                                    className="fb-heading-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-heading-color-setting-icon-dropdown"
-                                                        contentClassName="fb-heading-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{placement: 'bottom-start'}}
                                                         renderToggle={({isOpen, onToggle}) => (
                                                             <Button
@@ -1257,24 +2167,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                                className="fb-heading-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
                                                                 <Dashicon icon="color-picker"
-                                                                          className="fb-heading-color-setting-icon"/>
+                                                                          className="fb-setting-color-setting-icon"/>
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-heading-color-setting-icon-popup">
+                                                            <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl
-                                                                    className="fb-heading-color-setting-icon-popup-inner">
-                                                                    <div className="fb-heading-normal-color">
+                                                                    className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
                                                                         <ColorPicker
                                                                             color={Heading_Color}
                                                                             onChange={(value) => setAttributes({Heading_Color: value})}
                                                                             enableAlpha={true}
                                                                         />
                                                                         <div
-                                                                            className="fb-heading-color-label">{__("Default Colors", "frontis-block")}</div>
+                                                                            className="fb-setting-color-label">{__("Default Colors", "frontis-block")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 {color: '#F72585'},
@@ -1298,11 +2208,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {Heading_Color_Switcher === 'hover' && (
                                                 <BaseControl
                                                     label={__("Hover Color", "frontis-block")}
-                                                    className="fb-heading-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-heading-color-setting-icon-dropdown"
-                                                        contentClassName="fb-heading-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{placement: 'bottom-start'}}
                                                         renderToggle={({isOpen, onToggle}) => (
                                                             <Button
@@ -1310,24 +2220,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                                className="fb-heading-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
                                                                 <Dashicon icon="color-picker"
-                                                                          className="fb-heading-color-setting-icon"/>
+                                                                          className="fb-setting-color-setting-icon"/>
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-heading-color-setting-icon-popup">
+                                                            <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl
-                                                                    className="fb-heading-color-setting-icon-popup-inner">
-                                                                    <div className="fb-heading-hover-color">
+                                                                    className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-hover-color">
                                                                         <ColorPicker
                                                                             color={Heading_Hover_Color}
                                                                             onChange={(value) => setAttributes({Heading_Hover_Color: value})}
                                                                             enableAlpha={true}
                                                                         />
                                                                         <div
-                                                                            className="fb-heading-hover-color-label">{__("Default Colors", "frontis-block")}</div>
+                                                                            className="fb-setting-hover-color-label">{__("Default Colors", "frontis-block")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 {color: '#F72585'},
@@ -1352,15 +2262,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             <Heading>
                                                 Spacing
                                             </Heading>
-                                            <div className="fb_heading_spacing_container">
-                                                <div className="fb_heading_spacing_inner_container">
+                                            <div className="sh_heading_spacing_container">
+                                                <div className="sh_heading_spacing_inner_container">
                                                     {/* Padding */}
-                                                    <div className="fb_heading_label_container">
-                                                        <div className="fb_heading_label">
-                                                            <p className="fb_heading_label_text">{__("Padding", "frontis-block")}</p>
-                                                            <div className="fb_heading_responsive_devices">
+                                                    <div className="sh_heading_label_container">
+                                                        <div className="fb-setting-label-wrapper">
+                                                            <p className="fb-setting-label-text">{__("Padding", "frontis-block")}</p>
+                                                            <div className="fb-responsive-device-wrapper">
                                                                 <button
-                                                                    className={`fb_heading_desktop_device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
+                                                                    className={`fb-responsive-desktop-device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
                                                                     onClick={() => handlePaddingDeviceClick('desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7">
                                                                         <path
@@ -1368,7 +2278,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_tab_device ${activePaddingDevice === 'tab' ? 'active' : ''}`}
+                                                                    className={`fb-responsive-tablet-device  ${activePaddingDevice === 'tab' ? 'active' : ''}`}
                                                                     onClick={() => handlePaddingDeviceClick('tab')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7">
                                                                         <path
@@ -1376,7 +2286,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_mobile_device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
+                                                                    className={`fb-responsive-mobile-device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
                                                                     onClick={() => handlePaddingDeviceClick('mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7">
                                                                         <path
@@ -1385,13 +2295,13 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <div className="fb-units-type">
-                                                            <ButtonGroup className="fb-units-type-wrap">
+                                                        <div className="fb-setting-units-type">
+                                                            <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {separator_UNIT_TYPES.map((item, key) => (
                                                                     <Button
                                                                         key={key}
                                                                         onClick={() => setAttributes({Heading_padding_units: item.value})}
-                                                                        className={`fb-units-type-switcher ${Heading_padding_units === item.value ? 'active' : ''}`}
+                                                                        className={`fb-setting-units-type-switcher ${Heading_padding_units === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>
@@ -1399,10 +2309,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="fb_heading_input_container">
-                                                        <div className="fb_heading_input_wrapper">
+                                                    <div className="sh_heading_input_container">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1410,9 +2320,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1420,9 +2330,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1430,9 +2340,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1440,8 +2350,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
-                                                            <label className="fb_heading_spacing_input_label"></label>
+                                                        <div className="sh_heading_input_wrapper">
+                                                            <label className="sh_heading_spacing_input_label"></label>
                                                             <span
                                                                 className={`dashicons ${paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${paddingLink ? 'is-checked' : ''}`}
                                                                 onClick={handlePaddingLinkToggle}
@@ -1451,15 +2361,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="fb_heading_spacing_container">
-                                                <div className="fb_heading_spacing_inner_container">
+                                            <div className="sh_heading_spacing_container">
+                                                <div className="sh_heading_spacing_inner_container">
                                                     {/* Margin */}
-                                                    <div className="fb_heading_label_container">
-                                                        <div className="fb_heading_label">
-                                                            <p className="fb_heading_label_text">{__("Margin", "frontis-block")}</p>
-                                                            <div className="fb_heading_responsive_devices">
+                                                    <div className="sh_heading_label_container">
+                                                        <div className="fb-setting-label-wrapper">
+                                                            <p className="fb-setting-label-text">{__("Margin", "frontis-block")}</p>
+                                                            <div className="fb-responsive-device-wrapper">
                                                                 <button
-                                                                    className={`fb_heading_desktop_device ${Heading_Active_Margin_Device === 'desktop' ? 'active' : ''}`}
+                                                                    className={`fb-responsive-desktop-device ${Heading_Active_Margin_Device === 'desktop' ? 'active' : ''}`}
                                                                     onClick={() => handleMarginDeviceClick('desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7">
                                                                         <path
@@ -1467,7 +2377,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_tab_device ${Heading_Active_Margin_Device === 'tab' ? 'active' : ''}`}
+                                                                    className={`fb-responsive-tablet-device ${Heading_Active_Margin_Device === 'tab' ? 'active' : ''}`}
                                                                     onClick={() => handleMarginDeviceClick('tab')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7">
                                                                         <path
@@ -1475,7 +2385,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_mobile_device ${Heading_Active_Margin_Device === 'mobile' ? 'active' : ''}`}
+                                                                    className={`fb-responsive-mobile-device ${Heading_Active_Margin_Device === 'mobile' ? 'active' : ''}`}
                                                                     onClick={() => handleMarginDeviceClick('mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7">
                                                                         <path
@@ -1484,13 +2394,13 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <div className="fb-units-type">
-                                                            <ButtonGroup className="fb-units-type-wrap">
+                                                        <div className="fb-setting-units-type">
+                                                            <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {separator_UNIT_TYPES.map((item, key) => (
                                                                     <Button
                                                                         key={key}
                                                                         onClick={() => setAttributes({Heading_Margin_Units: item.value})}
-                                                                        className={`fb-units-type-switcher ${Heading_Margin_Units === item.value ? 'active' : ''}`}
+                                                                        className={`fb-setting-units-type-switcher ${Heading_Margin_Units === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>
@@ -1498,10 +2408,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="fb_heading_input_container">
-                                                        <div className="fb_heading_input_wrapper">
+                                                    <div className="sh_heading_input_container">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1509,9 +2419,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1519,9 +2429,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1529,9 +2439,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1539,8 +2449,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
-                                                            <label className="fb_heading_spacing_input_label"></label>
+                                                        <div className="sh_heading_input_wrapper">
+                                                            <label className="sh_heading_spacing_input_label"></label>
                                                             <span
                                                                 className={`dashicons ${Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${Heading_Margin_Link ? 'is-checked' : ''}`}
                                                                 onClick={handleMarginLinkToggle}
@@ -1563,14 +2473,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
                                             <BaseControl
                                                 label={__("Border Color", "frontis-block")}
-                                                className="fb-heading-color-panel-wrapper"
+                                                className="fb-setting-color-panel-wrapper"
                                             >
-                                                <ButtonGroup className="fb-heading-color-panel-btn">
+                                                <ButtonGroup className="fb-setting-color-panel-btn">
                                                     {NORMAL_HOVER.map((item, key) => (
                                                         <Button
                                                             key={key}
                                                             onClick={() => setAttributes({Heading_Border_Color_Switcher: item.value})}
-                                                            className={`fb-heading-color-panel-btn-switchr ${Heading_Border_Color_Switcher === item.value ? 'active' : ''}`}
+                                                            className={`fb-setting-color-panel-btn-switchr ${Heading_Border_Color_Switcher === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
@@ -1581,11 +2491,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {Heading_Border_Color_Switcher === 'normal' && (
                                                 <BaseControl
                                                     label={__("Nomal Color", "frontis-block")}
-                                                    className="fb-heading-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-heading-color-setting-icon-dropdown"
-                                                        contentClassName="fb-heading-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{placement: 'bottom-start'}}
                                                         renderToggle={({isOpen, onToggle}) => (
                                                             <Button
@@ -1593,24 +2503,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                                className="fb-heading-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
                                                                 <Dashicon icon="color-picker"
-                                                                          className="fb-heading-color-setting-icon"/>
+                                                                          className="fb-setting-color-setting-icon"/>
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-heading-color-setting-icon-popup">
+                                                            <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl
-                                                                    className="fb-heading-color-setting-icon-popup-inner">
-                                                                    <div className="fb-heading-normal-color">
+                                                                    className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
                                                                         <ColorPicker
                                                                             color={Heading_Border_Color}
                                                                             onChange={(value) => setAttributes({Heading_Border_Color: value})}
                                                                             enableAlpha={true}
                                                                         />
                                                                         <div
-                                                                            className="fb-heading-color-label">{__("Default Colors", "frontis-block")}</div>
+                                                                            className="fb-setting-color-label">{__("Default Colors", "frontis-block")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 {color: '#F72585'},
@@ -1634,11 +2544,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {Heading_Border_Color_Switcher === 'hover' && (
                                                 <BaseControl
                                                     label={__("Hover Color", "frontis-block")}
-                                                    className="fb-heading-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-heading-color-setting-icon-dropdown"
-                                                        contentClassName="fb-heading-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{placement: 'bottom-start'}}
                                                         renderToggle={({isOpen, onToggle}) => (
                                                             <Button
@@ -1646,24 +2556,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                                className="fb-heading-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
                                                                 <Dashicon icon="color-picker"
-                                                                          className="fb-heading-color-setting-icon"/>
+                                                                          className="fb-setting-color-setting-icon"/>
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-heading-color-setting-icon-popup">
+                                                            <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl
-                                                                    className="fb-heading-color-setting-icon-popup-inner">
-                                                                    <div className="fb-heading-hover-color">
+                                                                    className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-hover-color">
                                                                         <ColorPicker
                                                                             color={Heading_Border_Hover_Color}
                                                                             onChange={(value) => setAttributes({Heading_Border_Hover_Color: value})}
                                                                             enableAlpha={true}
                                                                         />
                                                                         <div
-                                                                            className="fb-heading-hover-color-label">{__("Default Colors", "frontis-block")}</div>
+                                                                            className="fb-setting-hover-color-label">{__("Default Colors", "frontis-block")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 {color: '#F72585'},
@@ -1684,15 +2594,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                 </BaseControl>
                                             )}
 
-                                            <div className="fb_heading_spacing_container">
-                                                <div className="fb_heading_spacing_inner_container">
+                                            <div className="sh_heading_spacing_container">
+                                                <div className="sh_heading_spacing_inner_container">
                                                     {/* Border Width */}
-                                                    <div className="fb_heading_label_container">
-                                                        <div className="fb_heading_label">
-                                                            <p className="fb_heading_label_text">{__("Border Width", "frontis-block")}</p>
-                                                            <div className="fb_heading_responsive_devices">
+                                                    <div className="sh_heading_label_container">
+                                                        <div className="sh_heading_label">
+                                                            <p className="sh_heading_label_text">{__("Border Width", "frontis-block")}</p>
+                                                            <div className="sh_heading_responsive_devices">
                                                                 <button
-                                                                    className={`fb_heading_desktop_device ${activeBorderDevice === 'desktop' ? 'active' : ''}`}
+                                                                    className={`sh_heading_desktop_device ${activeBorderDevice === 'desktop' ? 'active' : ''}`}
                                                                     onClick={() => handleBorderWidthDeviceClick('desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7">
                                                                         <path
@@ -1700,7 +2610,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_tab_device ${activeBorderDevice === 'tab' ? 'active' : ''}`}
+                                                                    className={`sh_heading_tab_device ${activeBorderDevice === 'tab' ? 'active' : ''}`}
                                                                     onClick={() => handleBorderWidthDeviceClick('tab')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7">
                                                                         <path
@@ -1708,7 +2618,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_mobile_device ${activeBorderDevice === 'mobile' ? 'active' : ''}`}
+                                                                    className={`sh_heading_mobile_device ${activeBorderDevice === 'mobile' ? 'active' : ''}`}
                                                                     onClick={() => handleBorderWidthDeviceClick('mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7">
                                                                         <path
@@ -1732,10 +2642,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                         </div>
 
                                                     </div>
-                                                    <div className="fb_heading_input_container">
-                                                        <div className="fb_heading_input_wrapper">
+                                                    <div className="sh_heading_input_container">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1743,9 +2653,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1753,9 +2663,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1763,9 +2673,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1773,8 +2683,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
-                                                            <label className="fb_heading_spacing_input_label"></label>
+                                                        <div className="sh_heading_input_wrapper">
+                                                            <label className="sh_heading_spacing_input_label"></label>
                                                             <span
                                                                 className={`dashicons ${borderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${borderLink ? 'is-checked' : ''}`}
                                                                 onClick={handleBorderWidthLinkToggle}
@@ -1785,15 +2695,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                 </div>
                                             </div>
 
-                                            <div className="fb_heading_spacing_container">
-                                                <div className="fb_heading_spacing_inner_container">
+                                            <div className="sh_heading_spacing_container">
+                                                <div className="sh_heading_spacing_inner_container">
                                                     {/* Border radius Width */}
-                                                    <div className="fb_heading_label_container">
-                                                        <div className="fb_heading_label">
-                                                            <p className="fb_heading_label_text">{__("Border Radius Width", "frontis-block")}</p>
-                                                            <div className="fb_heading_responsive_devices">
+                                                    <div className="sh_heading_label_container">
+                                                        <div className="sh_heading_label">
+                                                            <p className="sh_heading_label_text">{__("Border Radius Width", "frontis-block")}</p>
+                                                            <div className="sh_heading_responsive_devices">
                                                                 <button
-                                                                    className={`fb_heading_desktop_device ${activeBorderRadiusDevice === 'desktop' ? 'active' : ''}`}
+                                                                    className={`sh_heading_desktop_device ${activeBorderRadiusDevice === 'desktop' ? 'active' : ''}`}
                                                                     onClick={() => handleBorderRadiusWidthDeviceClick('desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7">
                                                                         <path
@@ -1801,7 +2711,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_tab_device ${activeBorderRadiusDevice === 'tab' ? 'active' : ''}`}
+                                                                    className={`sh_heading_tab_device ${activeBorderRadiusDevice === 'tab' ? 'active' : ''}`}
                                                                     onClick={() => handleBorderRadiusWidthDeviceClick('tab')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7">
                                                                         <path
@@ -1809,7 +2719,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_mobile_device ${activeBorderRadiusDevice === 'mobile' ? 'active' : ''}`}
+                                                                    className={`sh_heading_mobile_device ${activeBorderRadiusDevice === 'mobile' ? 'active' : ''}`}
                                                                     onClick={() => handleBorderRadiusWidthDeviceClick('mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7">
                                                                         <path
@@ -1832,10 +2742,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="fb_heading_input_container">
-                                                        <div className="fb_heading_input_wrapper">
+                                                    <div className="sh_heading_input_container">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1843,9 +2753,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1853,9 +2763,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1863,9 +2773,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1873,8 +2783,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
-                                                            <label className="fb_heading_spacing_input_label"></label>
+                                                        <div className="sh_heading_input_wrapper">
+                                                            <label className="sh_heading_spacing_input_label"></label>
                                                             <span
                                                                 className={`dashicons ${borderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${borderRadiusLink ? 'is-checked' : ''}`}
                                                                 onClick={handleBorderRadiusWidthLinkToggle}
@@ -1894,11 +2804,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {/*Typography*/}
                                             <BaseControl
                                                 label={__("Typography", "frontis-block")}
-                                                className="fb-heading-typography"
+                                                className="fb-setting-typography"
                                             >
                                                 <Dropdown
-                                                    className="fb-heading-typography-icon-dropdown"
-                                                    contentClassName="fb-heading-typography-dropdown-content"
+                                                    className="fb-setting-typography-icon-dropdown"
+                                                    contentClassName="fb-setting-typography-dropdown-content"
                                                     popoverProps={{placement: 'bottom-start'}}
                                                     renderToggle={({isOpen, onToggle}) => (
                                                         <Button
@@ -1906,15 +2816,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                             onClick={onToggle}
                                                             aria-expanded={isOpen}
                                                             aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                            className="fb-heading-typography-icon-btn"
+                                                            className="fb-setting-typography-icon-btn"
                                                         >
                                                             <Dashicon icon="edit"
-                                                                      className="fb-heading-typography-icon"/>
+                                                                      className="fb-setting-typography-icon"/>
                                                         </Button>
                                                     )}
                                                     renderContent={() => (
-                                                        <div className="fb-heading-typography-popup">
-                                                            <BaseControl className="fb-heading-typography-popup-inner">
+                                                        <div className="fb-setting-typography-popup">
+                                                            <BaseControl className="fb-setting-typography-popup-inner">
                                                                 <div className="fb-fontfamily-wrapper">
                                                                     <SelectControl
                                                                         label={__("Font Family", "frontis-block")}
@@ -2154,14 +3064,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {/*Color*/}
                                             <BaseControl
                                                 label={__("Text Color", "frontis-block")}
-                                                className="fb-heading-color-panel-wrapper"
+                                                className="fb-setting-color-panel-wrapper"
                                             >
-                                                <ButtonGroup className="fb-heading-color-panel-btn">
+                                                <ButtonGroup className="fb-setting-color-panel-btn">
                                                     {NORMAL_HOVER.map((item, key) => (
                                                         <Button
                                                             key={key}
                                                             onClick={() => setAttributes({SubHeadingColorSwitcher: item.value})}
-                                                            className={`fb-heading-color-panel-btn-switchr ${SubHeadingColorSwitcher === item.value ? 'active' : ''}`}
+                                                            className={`fb-setting-color-panel-btn-switchr ${SubHeadingColorSwitcher === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
@@ -2172,11 +3082,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {SubHeadingColorSwitcher === 'normal' && (
                                                 <BaseControl
                                                     label={__("Nomal Color", "frontis-block")}
-                                                    className="fb-heading-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-heading-color-setting-icon-dropdown"
-                                                        contentClassName="fb-heading-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{placement: 'bottom-start'}}
                                                         renderToggle={({isOpen, onToggle}) => (
                                                             <Button
@@ -2184,24 +3094,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                                className="fb-heading-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
                                                                 <Dashicon icon="color-picker"
-                                                                          className="fb-heading-color-setting-icon"/>
+                                                                          className="fb-setting-color-setting-icon"/>
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-heading-color-setting-icon-popup">
+                                                            <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl
-                                                                    className="fb-heading-color-setting-icon-popup-inner">
-                                                                    <div className="fb-heading-normal-color">
+                                                                    className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
                                                                         <ColorPicker
                                                                             color={SubHeadingColor}
                                                                             onChange={(value) => setAttributes({SubHeadingColor: value})}
                                                                             enableAlpha={true}
                                                                         />
                                                                         <div
-                                                                            className="fb-heading-color-label">{__("Default Colors", "frontis-block")}</div>
+                                                                            className="fb-setting-color-label">{__("Default Colors", "frontis-block")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 {color: '#F72585'},
@@ -2225,11 +3135,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             {SubHeadingColorSwitcher === 'hover' && (
                                                 <BaseControl
                                                     label={__("Hover Color", "frontis-block")}
-                                                    className="fb-heading-color-setting-wrapper"
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
                                                     <Dropdown
-                                                        className="fb-heading-color-setting-icon-dropdown"
-                                                        contentClassName="fb-heading-color-setting-icon-dropdown-content"
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
                                                         popoverProps={{placement: 'bottom-start'}}
                                                         renderToggle={({isOpen, onToggle}) => (
                                                             <Button
@@ -2237,24 +3147,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onClick={onToggle}
                                                                 aria-expanded={isOpen}
                                                                 aria-label={__("Toggle Typography Settings", "frontis-block")}
-                                                                className="fb-heading-color-setting-icon-btn"
+                                                                className="fb-setting-color-setting-icon-btn"
                                                             >
                                                                 <Dashicon icon="color-picker"
-                                                                          className="fb-heading-color-setting-icon"/>
+                                                                          className="fb-setting-color-setting-icon"/>
                                                             </Button>
                                                         )}
                                                         renderContent={() => (
-                                                            <div className="fb-heading-color-setting-icon-popup">
+                                                            <div className="fb-setting-color-setting-icon-popup">
                                                                 <BaseControl
-                                                                    className="fb-heading-color-setting-icon-popup-inner">
-                                                                    <div className="fb-heading-hover-color">
+                                                                    className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-hover-color">
                                                                         <ColorPicker
                                                                             color={SubHeadingHoverColor}
                                                                             onChange={(value) => setAttributes({SubHeadingHoverColor: value})}
                                                                             enableAlpha={true}
                                                                         />
                                                                         <div
-                                                                            className="fb-heading-hover-color-label">{__("Default Colors", "frontis-block")}</div>
+                                                                            className="fb-setting-hover-color-label">{__("Default Colors", "frontis-block")}</div>
                                                                         <ColorPalette
                                                                             colors={[
                                                                                 {color: '#F72585'},
@@ -2278,15 +3188,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                             <Heading>
                                                 Spacing
                                             </Heading>
-                                            <div className="fb_heading_spacing_container">
-                                                <div className="fb_heading_spacing_inner_container">
+                                            <div className="sh_heading_spacing_container">
+                                                <div className="sh_heading_spacing_inner_container">
                                                     {/* Padding */}
-                                                    <div className="fb_heading_label_container">
-                                                        <div className="fb_heading_label">
-                                                            <p className="fb_heading_label_text">{__("Padding", "frontis-block")}</p>
-                                                            <div className="fb_heading_responsive_devices">
+                                                    <div className="sh_heading_label_container">
+                                                        <div className="sh_heading_label">
+                                                            <p className="sh_heading_label_text">{__("Padding", "frontis-block")}</p>
+                                                            <div className="sh_heading_responsive_devices">
                                                                 <button
-                                                                    className={`fb_heading_desktop_device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
+                                                                    className={`sh_heading_desktop_device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
                                                                     onClick={() => handleDescPaddingDeviceClick('desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7">
                                                                         <path
@@ -2294,7 +3204,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_tab_device ${activePaddingDevice === 'tab' ? 'active' : ''}`}
+                                                                    className={`sh_heading_tab_device ${activePaddingDevice === 'tab' ? 'active' : ''}`}
                                                                     onClick={() => handleDescPaddingDeviceClick('tab')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7">
                                                                         <path
@@ -2302,7 +3212,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_mobile_device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
+                                                                    className={`sh_heading_mobile_device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
                                                                     onClick={() => handleDescPaddingDeviceClick('mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7">
                                                                         <path
@@ -2325,10 +3235,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="fb_heading_input_container">
-                                                        <div className="fb_heading_input_wrapper">
+                                                    <div className="sh_heading_input_container">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -2336,9 +3246,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleDescPaddingInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -2346,9 +3256,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleDescPaddingInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -2356,9 +3266,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleDescPaddingInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -2366,8 +3276,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleDescPaddingInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
-                                                            <label className="fb_heading_spacing_input_label"></label>
+                                                        <div className="sh_heading_input_wrapper">
+                                                            <label className="sh_heading_spacing_input_label"></label>
                                                             <span
                                                                 className={`dashicons ${paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${paddingLink ? 'is-checked' : ''}`}
                                                                 onClick={handleDescPaddingLinkToggle}
@@ -2377,15 +3287,15 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="fb_heading_spacing_container">
-                                                <div className="fb_heading_spacing_inner_container">
+                                            <div className="sh_heading_spacing_container">
+                                                <div className="sh_heading_spacing_inner_container">
                                                     {/* Margin */}
-                                                    <div className="fb_heading_label_container">
-                                                        <div className="fb_heading_label">
-                                                            <p className="fb_heading_label_text">{__("Margin", "frontis-block")}</p>
-                                                            <div className="fb_heading_responsive_devices">
+                                                    <div className="sh_heading_label_container">
+                                                        <div className="sh_heading_label">
+                                                            <p className="sh_heading_label_text">{__("Margin", "frontis-block")}</p>
+                                                            <div className="sh_heading_responsive_devices">
                                                                 <button
-                                                                    className={`fb_heading_desktop_device ${Heading_Active_Margin_Device === 'desktop' ? 'active' : ''}`}
+                                                                    className={`sh_heading_desktop_device ${Heading_Active_Margin_Device === 'desktop' ? 'active' : ''}`}
                                                                     onClick={() => handleMarginDeviceClick('desktop')}>
                                                                     <svg width="8" height="7" viewBox="0 0 8 7">
                                                                         <path
@@ -2393,7 +3303,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_tab_device ${Heading_Active_Margin_Device === 'tab' ? 'active' : ''}`}
+                                                                    className={`sh_heading_tab_device ${Heading_Active_Margin_Device === 'tab' ? 'active' : ''}`}
                                                                     onClick={() => handleMarginDeviceClick('tab')}>
                                                                     <svg width="6" height="7" viewBox="0 0 6 7">
                                                                         <path
@@ -2401,7 +3311,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                     </svg>
                                                                 </button>
                                                                 <button
-                                                                    className={`fb_heading_mobile_device ${Heading_Active_Margin_Device === 'mobile' ? 'active' : ''}`}
+                                                                    className={`sh_heading_mobile_device ${Heading_Active_Margin_Device === 'mobile' ? 'active' : ''}`}
                                                                     onClick={() => handleMarginDeviceClick('mobile')}>
                                                                     <svg width="4" height="7" viewBox="0 0 4 7">
                                                                         <path
@@ -2424,10 +3334,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="fb_heading_input_container">
-                                                        <div className="fb_heading_input_wrapper">
+                                                    <div className="sh_heading_input_container">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -2435,9 +3345,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -2445,9 +3355,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -2455,9 +3365,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
+                                                        <div className="sh_heading_input_wrapper">
                                                             <label
-                                                                className="fb_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+                                                                className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -2465,8 +3375,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="fb_heading_input_wrapper">
-                                                            <label className="fb_heading_spacing_input_label"></label>
+                                                        <div className="sh_heading_input_wrapper">
+                                                            <label className="sh_heading_spacing_input_label"></label>
                                                             <span
                                                                 className={`dashicons ${Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${Heading_Margin_Link ? 'is-checked' : ''}`}
                                                                 onClick={handleMarginLinkToggle}
@@ -2477,8 +3387,719 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                                                 </div>
                                             </div>
                                         </PanelBody>
-                                        <PanelBody title="Button" initialOpen={false}>
+										{/*Button Style*/}
+                                        <PanelBody
+											title={__("Button", "frontis-block")}
+											className="fb-info-box-button-setting-wrapper"
+											initialOpen={false}>
+											<BaseControl
+												label={__("Typography", "frontis-block")}
+												className="fb-setting-typography"
+											>
+												<Dropdown
+													className="fb-setting-typography-icon-dropdown"
+													contentClassName="fb-setting-typography-dropdown-content"
+													popoverProps={{placement: 'bottom-start'}}
+													renderToggle={({isOpen, onToggle}) => (
+														<Button
+															variant="primary"
+															onClick={onToggle}
+															aria-expanded={isOpen}
+															aria-label={__("Toggle Typography Settings", "frontis-block")}
+															className="fb-setting-typography-icon-btn"
+														>
+															<Dashicon icon="edit"
+																	  className="fb-setting-typography-icon"/>
+														</Button>
+													)}
+													renderContent={() => (
+														<div className="fb-setting-typography-popup">
+															<BaseControl className="fb-setting-typography-popup-inner">
+																<div className="fb-fontfamily-wrapper">
+																	<SelectControl
+																		label={__("Font Family", "frontis-block")}
+																		options={FONT_FAMILYS}
+																		value={Heading_Font_Family}
+																		onChange={(value) => setAttributes({buttonFontFamily: value})}
+																	/>
+																</div>
+																<div className="fb-fontsize-wrapper">
+																	<div className="fb-fontsize-header">
+																		<div className="fb-fontsize-label">
+																			<span>{__("Font Size", "frontis-block")}</span>
+																		</div>
+																		<div className="fb-fontsize-units">
+																			<ButtonGroup
+																				className="fb-fontsize-units-wrap">
+																				{separator_UNIT_TYPES.map((item, key) => (
+																					<Button
+																						key={key}
+																						onClick={() => setAttributes({buttonFontSizeUnits: item.value})}
+																						className={`fb-fontsize-units-switcher ${buttonFontSizeUnits === item.value ? 'active' : ''}`}
+																					>
+																						{item.label}
+																					</Button>
+																				))}
+																			</ButtonGroup>
+																		</div>
+																	</div>
+																	<div className="fb-fontsize-rangecontrol">
+																		<RangeControl
+																			value={Heading_Font_Size}
+																			onChange={(value) => setAttributes({buttonFontSize: value})}
+																			min={1}
+																			max={200}
+																			allowReset
+																			resetFallbackValue={undefined}
+																		/>
+																	</div>
+																</div>
+																<div className="fb-fontweight-wrapper">
+																	<SelectControl
+																		label={__("Font Weight", "frontis-block")}
+																		options={[
+																			{
+																				label: __("Default", "frontis-block"),
+																				value: "700"
+																			},
+																			{
+																				label: __("100", "frontis-block"),
+																				value: "100"
+																			},
+																			{
+																				label: __("200", "frontis-block"),
+																				value: "200"
+																			},
+																			{
+																				label: __("300", "frontis-block"),
+																				value: "300"
+																			},
+																			{
+																				label: __("400", "frontis-block"),
+																				value: "400"
+																			},
+																			{
+																				label: __("500", "frontis-block"),
+																				value: "500"
+																			},
+																			{
+																				label: __("600", "frontis-block"),
+																				value: "600"
+																			},
+																			{
+																				label: __("700", "frontis-block"),
+																				value: "700"
+																			},
+																			{
+																				label: __("800", "frontis-block"),
+																				value: "800"
+																			},
+																			{
+																				label: __("900", "frontis-block"),
+																				value: "900"
+																			},
+																		]}
+																		value={buttonFontWeight}
+																		onChange={(value) => setAttributes({buttonFontWeight: value})}
+																	/>
+																</div>
+																<div className="fb-fontstyle-wrapper">
+																	<SelectControl
+																		label={__("Font Style", "frontis-block")}
+																		options={[
+																			{
+																				label: __("Default", "frontis-block"),
+																				value: "normal"
+																			},
+																			{
+																				label: __("Normal", "frontis-block"),
+																				value: "normal"
+																			},
+																			{
+																				label: __("Italic", "frontis-block"),
+																				value: "italic"
+																			},
+																			{
+																				label: __("Oblique", "frontis-block"),
+																				value: "oblique"
+																			},
+																		]}
+																		value={buttonFontStyle}
+																		onChange={(value) => setAttributes({buttonFontStyle: value})}
+																	/>
+																</div>
+																<div className="fb-texttransform-wrapper">
+																	<SelectControl
+																		label={__("Text Transform", "frontis-block")}
+																		options={[
+																			{
+																				label: __("Default", "frontis-block"),
+																				value: "none"
+																			},
+																			{
+																				label: __("None", "frontis-block"),
+																				value: "none"
+																			},
+																			{
+																				label: __("Capitalize", "frontis-block"),
+																				value: "capitalize"
+																			},
+																			{
+																				label: __("Uppercase", "frontis-block"),
+																				value: "uppercase"
+																			},
+																			{
+																				label: __("Lowercase", "frontis-block"),
+																				value: "lowercase"
+																			},
+																		]}
+																		value={buttonTextTransform}
+																		onChange={(value) => setAttributes({buttonTextTransform: value})}
+																	/>
+																</div>
+																<div className="fb-textdecoration-wrapper">
+																	<SelectControl
+																		label={__("Text Decoration", "frontis-block")}
+																		options={[
+																			{
+																				label: __("Default", "frontis-block"),
+																				value: "none"
+																			},
+																			{
+																				label: __("None", "frontis-block"),
+																				value: "none"
+																			},
+																			{
+																				label: __("Underline", "frontis-block"),
+																				value: "underline"
+																			},
+																			{
+																				label: __("Overline", "frontis-block"),
+																				value: "overline"
+																			},
+																			{
+																				label: __("Line Through", "frontis-block"),
+																				value: "line-through"
+																			},
+																		]}
+																		value={buttonTextDecoration}
+																		onChange={(value) => setAttributes({buttonTextDecoration: value})}
+																	/>
+																</div>
+																<div className="fb-letterspacing-wrapper">
+																	<div className="fb-letterspacing-header">
+																		<div className="fb-letterspacing-label">
+																			<span>{__("Letter Spacing", "frontis-block")}</span>
+																		</div>
+																		<div className="fb-letterspacing-units">
+																			<ButtonGroup
+																				className="fb-letterspacing-units-wrap">
+																				{separator_UNIT_TYPES.map((item, key) => (
+																					<Button
+																						key={key}
+																						onClick={() => setAttributes({buttonLetterSpacingUnits: item.value})}
+																						className={`fb-letterspacing-units-switcher ${buttonLetterSpacingUnits === item.value ? 'active' : ''}`}
+																					>
+																						{item.label}
+																					</Button>
+																				))}
+																			</ButtonGroup>
+																		</div>
+																	</div>
+																	<RangeControl
+																		value={buttonLetterSpacing}
+																		onChange={(value) => setAttributes({buttonLetterSpacing: value === 0 ? undefined : value})}
+																		min={1}
+																		max={100}
+																		step={1}
+																		allowReset
+																		resetFallbackValue={undefined}
+																	/>
+																</div>
+																<div className="fb-lineheight-wrapper">
+																	<div className="fb-lineheight-header">
+																		<div className="fb-lineheight-label">
+																			<span>{__("Line Height", "frontis-block")}</span>
+																		</div>
+																		<div className="fb-lineheight-units">
+																			<ButtonGroup
+																				className="fb-lineheight-units-wrap">
+																				{separator_UNIT_TYPES.map((item, key) => (
+																					<Button
+																						key={key}
+																						onClick={() => setAttributes({buttonLineHeightUnits: item.value})}
+																						className={`fb-lineheight-units-switcher ${buttonLineHeightUnits === item.value ? 'active' : ''}`}
+																					>
+																						{item.label}
+																					</Button>
+																				))}
+																			</ButtonGroup>
+																		</div>
+																	</div>
+																	<RangeControl
+																		value={buttonLineHeight}
+																		onChange={(value) => setAttributes({buttonLineHeight: value === 1 ? undefined : value})}
+																		min={1}
+																		max={100}
+																		step={1}
+																		allowReset
+																		resetFallbackValue={undefined}
+																	/>
+																</div>
+															</BaseControl>
+														</div>
+													)}
+												/>
+											</BaseControl>
+											{/* Start Text Color*/}
+											<BaseControl
+												label={__("Text Color", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{NORMAL_HOVER.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({buttonColorSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${buttonColorSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
 
+											{buttonColorSwitcher === 'normal' && (
+												<BaseControl
+													label={__("Nomal Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-normal-color">
+																		<ColorPicker
+																			color={buttonTextColor}
+																			onChange={(value) => setAttributes({buttonTextColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={buttonTextColor}
+																			onChange={(value) => setAttributes({buttonTextColor: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{buttonColorSwitcher === 'hover' && (
+												<BaseControl
+													label={__("Hover Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-hover-color">
+																		<ColorPicker
+																			color={buttonTextHoverColor}
+																			onChange={(value) => setAttributes({buttonTextHoverColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-hover-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={buttonTextHoverColor}
+																			onChange={(value) => setAttributes({buttonTextHoverColor: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+												)}
+											{/* Start Button Bg Color*/}
+											<BaseControl
+												label={__("Background Color", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{NORMAL_HOVER.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({buttonBgColorSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${buttonBgColorSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+
+											{buttonColorSwitcher === 'normal' && (
+												<BaseControl
+													label={__("Nomal Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-normal-color">
+																		<ColorPicker
+																			color={buttonBgColor}
+																			onChange={(value) => setAttributes({buttonBgColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={buttonBgColor}
+																			onChange={(value) => setAttributes({buttonBgColor: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{buttonColorSwitcher === 'hover' && (
+												<BaseControl
+													label={__("Hover Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-hover-color">
+																		<ColorPicker
+																			color={buttonBgHoverColor}
+																			onChange={(value) => setAttributes({buttonBgHoverColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-hover-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={buttonBgHoverColor}
+																			onChange={(value) => setAttributes({buttonBgHoverColor: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{/*Spacing*/}
+											<Heading>
+												Spacing
+											</Heading>
+											<div className="sh_heading_spacing_container">
+												<div className="sh_heading_spacing_inner_container">
+													{/* Padding */}
+													<div className="sh_heading_label_container">
+														<div className="fb-setting-label-wrapper">
+															<p className="fb-setting-label-text">{__("Padding", "frontis-block")}</p>
+															<div className="fb-responsive-device-wrapper">
+																<button
+																	className={`fb-responsive-desktop-device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
+																	onClick={() => handlePaddingDeviceClick('desktop')}>
+																	<svg width="8" height="7" viewBox="0 0 8 7">
+																		<path
+																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-tablet-device  ${activePaddingDevice === 'tab' ? 'active' : ''}`}
+																	onClick={() => handlePaddingDeviceClick('tab')}>
+																	<svg width="6" height="7" viewBox="0 0 6 7">
+																		<path
+																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-mobile-device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
+																	onClick={() => handlePaddingDeviceClick('mobile')}>
+																	<svg width="4" height="7" viewBox="0 0 4 7">
+																		<path
+																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
+																	</svg>
+																</button>
+															</div>
+														</div>
+														<div className="fb-setting-units-type">
+															<ButtonGroup className="fb-setting-units-type-wrap">
+																{separator_UNIT_TYPES.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({Heading_padding_units: item.value})}
+																		className={`fb-setting-units-type-switcher ${Heading_padding_units === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</div>
+													</div>
+													<div className="sh_heading_input_container">
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+															<input
+																type="number"
+																name="top"
+																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.top : activePaddingDevice === 'tab' ? Heading_Tab_padding.top : Heading_Mobile_padding.top}
+																onChange={(e) => handlePaddingInputChange(e, 'top')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+															<input
+																type="number"
+																name="right"
+																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.right : activePaddingDevice === 'tab' ? Heading_Tab_padding.right : Heading_Mobile_padding.right}
+																onChange={(e) => handlePaddingInputChange(e, 'right')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+															<input
+																type="number"
+																name="bottom"
+																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.bottom : activePaddingDevice === 'tab' ? Heading_Tab_padding.bottom : Heading_Mobile_padding.bottom}
+																onChange={(e) => handlePaddingInputChange(e, 'bottom')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+															<input
+																type="number"
+																name="left"
+																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.left : activePaddingDevice === 'tab' ? Heading_Tab_padding.left : Heading_Mobile_padding.left}
+																onChange={(e) => handlePaddingInputChange(e, 'left')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label className="sh_heading_spacing_input_label"></label>
+															<span
+																className={`dashicons ${paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${paddingLink ? 'is-checked' : ''}`}
+																onClick={handlePaddingLinkToggle}
+															>
+                                                            </span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div className="sh_heading_spacing_container">
+												<div className="sh_heading_spacing_inner_container">
+													{/* Margin */}
+													<div className="sh_heading_label_container">
+														<div className="fb-setting-label-wrapper">
+															<p className="fb-setting-label-text">{__("Margin", "frontis-block")}</p>
+															<div className="fb-responsive-device-wrapper">
+																<button
+																	className={`fb-responsive-desktop-device ${Heading_Active_Margin_Device === 'desktop' ? 'active' : ''}`}
+																	onClick={() => handleMarginDeviceClick('desktop')}>
+																	<svg width="8" height="7" viewBox="0 0 8 7">
+																		<path
+																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-tablet-device ${Heading_Active_Margin_Device === 'tab' ? 'active' : ''}`}
+																	onClick={() => handleMarginDeviceClick('tab')}>
+																	<svg width="6" height="7" viewBox="0 0 6 7">
+																		<path
+																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
+																	</svg>
+																</button>
+																<button
+																	className={`fb-responsive-mobile-device ${Heading_Active_Margin_Device === 'mobile' ? 'active' : ''}`}
+																	onClick={() => handleMarginDeviceClick('mobile')}>
+																	<svg width="4" height="7" viewBox="0 0 4 7">
+																		<path
+																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
+																	</svg>
+																</button>
+															</div>
+														</div>
+														<div className="fb-setting-units-type">
+															<ButtonGroup className="fb-setting-units-type-wrap">
+																{separator_UNIT_TYPES.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({Heading_Margin_Units: item.value})}
+																		className={`fb-setting-units-type-switcher ${Heading_Margin_Units === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+														</div>
+													</div>
+													<div className="sh_heading_input_container">
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Top", "frontis-block")}</label>
+															<input
+																type="number"
+																name="top"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.top : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top}
+																onChange={(e) => handleMarginInputChange(e, 'top')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Right", "frontis-block")}</label>
+															<input
+																type="number"
+																name="right"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.right : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right}
+																onChange={(e) => handleMarginInputChange(e, 'right')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Bottom", "frontis-block")}</label>
+															<input
+																type="number"
+																name="bottom"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.bottom : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom}
+																onChange={(e) => handleMarginInputChange(e, 'bottom')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label
+																className="sh_heading_spacing_input_label">{__("Left", "frontis-block")}</label>
+															<input
+																type="number"
+																name="left"
+																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.left : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left}
+																onChange={(e) => handleMarginInputChange(e, 'left')}
+															/>
+														</div>
+														<div className="sh_heading_input_wrapper">
+															<label className="sh_heading_spacing_input_label"></label>
+															<span
+																className={`dashicons ${Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${Heading_Margin_Link ? 'is-checked' : ''}`}
+																onClick={handleMarginLinkToggle}
+															>
+                                                            </span>
+														</div>
+													</div>
+												</div>
+											</div>
                                         </PanelBody>
                                     </>
                                 )}

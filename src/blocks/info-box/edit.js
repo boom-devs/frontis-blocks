@@ -28,20 +28,14 @@ export default function Edit({ attributes, setAttributes}) {
         info_Button_Switcher,
         info_Button_Text,
         info_Button_Link,
-        wrapperAlignment
+        wrapperAlignment,
+		infoBoxBg,
+		descAlignment,
+		buttonAlignment,
 
     } = attributes;
 
     const blockProps = useBlockProps();
-
-    // Define a variable to hold the separator styles based on separator
-    const separatorStyles = Show_Separator_Switcher ? {
-        display: 'inline-block',
-        margin: '0 0 10px 0',
-        width: '12%',
-        borderTop: `2px ${separator} #0170b9`,
-        marginBottom: '15px'
-    } : {};
 
     return (
         <>
@@ -51,11 +45,9 @@ export default function Edit({ attributes, setAttributes}) {
                 setAttributes={setAttributes}
             />
 
-
-
             <div {...blockProps} id={blockID}>
-                <div className={`sh-info-box-content-wrapper ${blockID}`} >
-                    <div className="sh-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
+                <div className={`fb-info-box-content-wrapper ${blockID}`} style={{ backgroundColor: infoBoxBg }}>
+                    <div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
                     <img src={attributes.infoMediaUrl}
                          style={{width: `${attributes.width}px`, height: `${attributes.height}px`}}
                     />
@@ -66,7 +58,7 @@ export default function Edit({ attributes, setAttributes}) {
                         value={Heading_Text}
                         onChange={(value) => setAttributes({text: value})}
                         placeholder={__('Info Heading', 'frontis-block')}
-                        className="sh-heading"
+                        className="fb-heading"
                         style={{textAlign: Alignment}}
                     />
 
@@ -76,7 +68,8 @@ export default function Edit({ attributes, setAttributes}) {
                             value={Sub_Heading_Text}
                             onChange={(value) => setAttributes({Sub_Heading_Text: value})}
                             placeholder={__('Info description', 'frontis-block')}
-                            className="sh-description"
+                            className="fb-description"
+							style={{textAlign: descAlignment}}
                         />
                     )}
 
@@ -86,23 +79,28 @@ export default function Edit({ attributes, setAttributes}) {
                             value={Sub_Heading_Text}
                             onChange={(value) => setAttributes({Sub_Heading_Text: value})}
                             placeholder={__('Info description', 'frontis-block')}
-                            className="sh-description"
+                            className="fb-description"
+							style={{textAlign: descAlignment}}
                         />
                     )}
                     {info_Button_Switcher && (
-                        <a
-                            href={info_Button_Link}
-                            className="sh-info-button"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {info_Button_Text}
-                        </a>
-                    )}
+						<div className="fb-info-btn-wrapper" style={{textAlign: buttonAlignment}}>
+							<a
+								href={info_Button_Link}
+								className="fb-info-button"
+								target="_blank"
+								rel="noopener noreferrer"
+
+							>
+								{info_Button_Text}
+							</a>
+						</div>
+
+					)}
 
 
-                </div>
-            </div>
-        </>
-    );
+				</div>
+			</div>
+		</>
+	);
 }
