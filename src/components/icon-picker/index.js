@@ -16,7 +16,7 @@ export default function FBIconPicker(props) {
 	const { value, setIconHandler } = props;
 	const [showIconPicker, setIconPickerModal] = useState(false);
 	const closeModal = () => setIconPickerModal( false );
-	const [ insertIcon, setInsertIcon ] = useState( '' );
+	const [ insertIcon, setInsertIcon ] = useState( value );
 	const [defaultIcons, setDefaultIcons] = useState(defaultSvgIcon);
 	const [filteredDefaultIcons, setFilteredDefaultIcons] = useState(defaultSvgIcon);
 	const [selectedCat, setSelectedCat] = useState('all-icons');
