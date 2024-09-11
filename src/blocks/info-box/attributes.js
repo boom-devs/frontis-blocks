@@ -19,6 +19,10 @@ const attributes = {
         type: 'number',
         default: 50
     },
+	icon: {
+		type: 'string',
+		default: 'circle-check',
+	},
     boxBgColor: {
         type: 'string',
         default: '#fff'
@@ -400,6 +404,77 @@ const attributes = {
         type: "string",
         default: ""
     },
+	infoButtonPaddingUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoButtonDesktopPadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonTabPadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonMobilePadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	//Button Margin
+	infoButtonMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoButtonDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonActiveMarginDevice: {
+		type: "string",
+		default: "desktop"
+	},
+	infoButtonMarginLink : {
+		type : "boolean",
+		default: true
+	},
 	//Info box padding
 	infoBoxPaddingUnits : {
 		type: "string",
