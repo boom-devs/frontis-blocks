@@ -26,7 +26,7 @@ export default function Edit(props) {
 		<Fragment>
 			<InspectorControls>
 				<PanelBody title="Settings" initialOpen={false}>
-					<FBIconPicker value={''} setIconHandler={iconHandler} selectedIcon={selectedIconHandler} />
+					<FBIconPicker value={''} setIconHandler={iconHandler}/>
 				</PanelBody>
 			</InspectorControls>
 

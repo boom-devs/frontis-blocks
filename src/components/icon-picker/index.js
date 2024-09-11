@@ -13,7 +13,7 @@ import './editor.scss';
 import svgIcon from "./components/svgIcon";
 
 export default function FBIconPicker(props) {
-	const { value, setIconHandler, selectedIcon } = props;
+	const { value, setIconHandler } = props;
 	const [showIconPicker, setIconPickerModal] = useState(false);
 	const closeModal = () => setIconPickerModal( false );
 	const [ insertIcon, setInsertIcon ] = useState( '' );
@@ -27,7 +27,6 @@ export default function FBIconPicker(props) {
 	// Insert icon
 	const fbInsertIcon = () => {
 		setIconHandler(insertIcon);
-		selectedIcon(renderSVG(insertIcon));
 		setIconPickerModal(false);
 	}
 
