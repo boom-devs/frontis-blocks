@@ -39,6 +39,239 @@ var attributes = {
   ButtonWidth: {
     type: "number"
   },
+  ButtonFontFamily: {
+    type: "string",
+    "default": "inherit"
+  },
+  ButtonFontSize: {
+    type: "number",
+    "default": 16
+  },
+  ButtonFontSizeUnits: {
+    type: "string",
+    "default": "px"
+  },
+  ButtonFontWeight: {
+    type: "string",
+    "default": "400"
+  },
+  ButtonFontStyle: {
+    type: "string",
+    "default": "normal"
+  },
+  ButtonTextTransform: {
+    type: "string",
+    "default": "none"
+  },
+  ButtonTextDecoration: {
+    type: "string",
+    "default": "none"
+  },
+  ButtonLetterSpacing: {
+    type: "number"
+  },
+  ButtonLetterSpacingUnits: {
+    type: "string",
+    "default": "px"
+  },
+  ButtonLineHeight: {
+    type: "number"
+  },
+  ButtonLineHeightUnits: {
+    type: "string",
+    "default": "px"
+  },
+  ButtonColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  ButtonColor: {
+    type: "string"
+  },
+  ButtonHoverColor: {
+    type: 'string'
+  },
+  ButtonBgColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  ButtonBgColor: {
+    type: "string"
+  },
+  ButtonBgHoverColor: {
+    type: 'string'
+  },
+  ButtonBorder: {
+    type: 'string',
+    "default": "none"
+  },
+  ButtonBorderColor: {
+    type: 'string'
+  },
+  ButtonBorderHoverColor: {
+    type: 'string'
+  },
+  ButtonBorderColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  ButtonBorderUnits: {
+    type: "string",
+    "default": "px"
+  },
+  ButtonDesktopBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonTabBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonMobileBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonActiveBorderDevice: {
+    type: "string",
+    "default": "Desktop"
+  },
+  ButtonBorderLink: {
+    type: "boolean",
+    "default": true
+  },
+  ButtonBorderRadiusUnits: {
+    type: "string",
+    "default": "px"
+  },
+  ButtonDesktopBorderRadiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonTabBorderRadiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonMobileBorderRadiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonActiveBorderRadiusDevice: {
+    type: "string",
+    "default": "Desktop"
+  },
+  ButtonBorderRadiusLink: {
+    type: "boolean",
+    "default": true
+  },
+  ButtonPaddingUnits: {
+    type: "string",
+    "default": "px"
+  },
+  desktopButtonPadding: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonDesktopPadding: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonTabPadding: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonMobilePadding: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonPaddingLink: {
+    type: "boolean",
+    "default": true
+  },
+  ButtonMarginUnits: {
+    type: "string",
+    "default": "px"
+  },
+  ButtonDesktopMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonTabMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonMobileMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  ButtonMarginLink: {
+    type: "boolean",
+    "default": true
+  },
   ButtonZIndex: {
     type: "number"
   }
@@ -3430,6 +3663,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/responsivecontrol */ "./src/components/responsivecontrol.js");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/advanced-button/editor.scss");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
@@ -3452,6 +3697,47 @@ function Inspector(_ref) {
     ButtonUrl = attributes.ButtonUrl,
     ButtonTargetUrl = attributes.ButtonTargetUrl,
     ButtonWidth = attributes.ButtonWidth,
+    ButtonFontFamily = attributes.ButtonFontFamily,
+    ButtonFontSize = attributes.ButtonFontSize,
+    ButtonFontSizeUnits = attributes.ButtonFontSizeUnits,
+    ButtonFontWeight = attributes.ButtonFontWeight,
+    ButtonFontStyle = attributes.ButtonFontStyle,
+    ButtonTextTransform = attributes.ButtonTextTransform,
+    ButtonTextDecoration = attributes.ButtonTextDecoration,
+    ButtonLetterSpacing = attributes.ButtonLetterSpacing,
+    ButtonLetterSpacingUnits = attributes.ButtonLetterSpacingUnits,
+    ButtonLineHeight = attributes.ButtonLineHeight,
+    ButtonLineHeightUnits = attributes.ButtonLineHeightUnits,
+    ButtonColorSwitcher = attributes.ButtonColorSwitcher,
+    ButtonColor = attributes.ButtonColor,
+    ButtonHoverColor = attributes.ButtonHoverColor,
+    ButtonBgColorSwitcher = attributes.ButtonBgColorSwitcher,
+    ButtonBgColor = attributes.ButtonBgColor,
+    ButtonBgHoverColor = attributes.ButtonBgHoverColor,
+    ButtonBorder = attributes.ButtonBorder,
+    ButtonBorderColor = attributes.ButtonBorderColor,
+    ButtonBorderHoverColor = attributes.ButtonBorderHoverColor,
+    ButtonBorderColorSwitcher = attributes.ButtonBorderColorSwitcher,
+    ButtonBorderUnits = attributes.ButtonBorderUnits,
+    ButtonDesktopBorderWidth = attributes.ButtonDesktopBorderWidth,
+    ButtonTabBorderWidth = attributes.ButtonTabBorderWidth,
+    ButtonMobileBorderWidth = attributes.ButtonMobileBorderWidth,
+    ButtonBorderLink = attributes.ButtonBorderLink,
+    ButtonBorderRadiusUnits = attributes.ButtonBorderRadiusUnits,
+    ButtonDesktopBorderRadiusWidth = attributes.ButtonDesktopBorderRadiusWidth,
+    ButtonTabBorderRadiusWidth = attributes.ButtonTabBorderRadiusWidth,
+    ButtonMobileBorderRadiusWidth = attributes.ButtonMobileBorderRadiusWidth,
+    ButtonBorderRadiusLink = attributes.ButtonBorderRadiusLink,
+    ButtonPaddingUnits = attributes.ButtonPaddingUnits,
+    ButtonDesktopPadding = attributes.ButtonDesktopPadding,
+    ButtonTabPadding = attributes.ButtonTabPadding,
+    ButtonMobilePadding = attributes.ButtonMobilePadding,
+    ButtonPaddingLink = attributes.ButtonPaddingLink,
+    ButtonMarginUnits = attributes.ButtonMarginUnits,
+    ButtonDesktopMargin = attributes.ButtonDesktopMargin,
+    ButtonTabMargin = attributes.ButtonTabMargin,
+    ButtonMobileMargin = attributes.ButtonMobileMargin,
+    ButtonMarginLink = attributes.ButtonMarginLink,
     ButtonZIndex = attributes.ButtonZIndex;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
@@ -3460,6 +3746,417 @@ function Inspector(_ref) {
       });
     }
   }, [clientId]);
+
+  /** Start Padding */
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(ButtonDesktopPadding),
+    _useState2 = _slicedToArray(_useState, 2),
+    previousPadding = _useState2[0],
+    setPreviousPadding = _useState2[1];
+  /** Function to update all padding values */
+  var updateAllPadding = function updateAllPadding(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopPadding: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabPadding: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobilePadding: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handlePaddingInputChange = function handlePaddingInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopPadding: _objectSpread(_objectSpread({}, ButtonDesktopPadding), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabPadding: _objectSpread(_objectSpread({}, ButtonTabPadding), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobilePadding: _objectSpread(_objectSpread({}, ButtonMobilePadding), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if ButtonPaddingLink is true */
+    if (ButtonPaddingLink) {
+      updateAllPadding(value, DeviceType);
+    }
+  };
+
+  /** Function to handle ButtonPaddingLink toggle */
+  var handleButtonPaddingLinkToggle = function handleButtonPaddingLinkToggle() {
+    if (!ButtonPaddingLink) {
+      setAttributes({
+        ButtonDesktopPadding: previousPadding
+      });
+    }
+    /** setButtonPaddingLink(!ButtonPaddingLink) */
+    setAttributes({
+      ButtonPaddingLink: !ButtonPaddingLink
+    });
+  };
+
+  /** Update previousPadding state when padding changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setPreviousPadding(ButtonDesktopPadding);
+  }, [ButtonDesktopPadding]);
+
+  /** Function to handle device click for padding */
+  var handlePaddingDeviceClick = function handlePaddingDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default padding for desktop (using desktop_padding) */
+  var padding = "".concat(ButtonDesktopPadding.top).concat(ButtonPaddingUnits, " ").concat(ButtonDesktopPadding.right).concat(ButtonPaddingUnits, " ").concat(ButtonDesktopPadding.bottom).concat(ButtonPaddingUnits, " ").concat(ButtonDesktopPadding.left).concat(ButtonPaddingUnits);
+  /** End Padding */
+
+  /** Start Margin */
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(ButtonDesktopMargin),
+    _useState4 = _slicedToArray(_useState3, 2),
+    previousMargin = _useState4[0],
+    setPreviousMargin = _useState4[1];
+  /** Function to update all margin values */
+  var updateAllMargin = function updateAllMargin(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobileMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleMarginInputChange = function handleMarginInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopMargin: _objectSpread(_objectSpread({}, ButtonDesktopMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabMargin: _objectSpread(_objectSpread({}, ButtonTabMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobileMargin: _objectSpread(_objectSpread({}, ButtonMobileMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all margin values if marginLink is true */
+    if (ButtonMarginLink) {
+      updateAllMargin(value, DeviceType);
+    }
+  };
+
+  /** Function to handle marginLink toggle */
+  var handleMarginLinkToggle = function handleMarginLinkToggle() {
+    if (!ButtonMarginLink) {
+      setAttributes({
+        ButtonDesktopMargin: previousMargin
+      });
+    }
+    /** setmarginLink(!marginLink) */
+    setAttributes({
+      ButtonMarginLink: !ButtonMarginLink
+    });
+  };
+
+  /** Update previousMargin state when margin changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setPreviousMargin(ButtonDesktopMargin);
+  }, [ButtonDesktopMargin]);
+
+  /** Function to handle device click for margin */
+  var handleMarginDeviceClick = function handleMarginDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default margin for desktop (using desktop_margin) */
+  var margin = "".concat(ButtonDesktopMargin.top).concat(ButtonPaddingUnits, " ").concat(ButtonDesktopMargin.right).concat(ButtonPaddingUnits, " ").concat(ButtonDesktopMargin.bottom).concat(ButtonPaddingUnits, " ").concat(ButtonDesktopMargin.left).concat(ButtonPaddingUnits);
+  /** End Margin */
+
+  /** Start Border Width */
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(ButtonDesktopBorderWidth),
+    _useState6 = _slicedToArray(_useState5, 2),
+    previousBorderWidth = _useState6[0],
+    setPreviousBorderWidth = _useState6[1];
+  /** Function to update all Border Width values */
+  var updateAllBorderWidth = function updateAllBorderWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobileBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleBorderWidthInputChange = function handleBorderWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopBorderWidth: _objectSpread(_objectSpread({}, ButtonDesktopBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabBorderWidth: _objectSpread(_objectSpread({}, ButtonTabBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobileBorderWidth: _objectSpread(_objectSpread({}, ButtonMobileBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if ButtonBorderLink is true */
+    if (ButtonBorderLink) {
+      updateAllBorderWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle ButtonBorderLink toggle */
+  var handleBorderWidthLinkToggle = function handleBorderWidthLinkToggle() {
+    if (!ButtonBorderLink) {
+      setAttributes({
+        ButtonDesktopBorderWidth: previousBorderWidth
+      });
+    }
+    /** setButtonBorderLinkLink(!ButtonBorderLink) */
+    setAttributes({
+      ButtonBorderLink: !ButtonBorderLink
+    });
+  };
+
+  /** Update previousborderWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setPreviousBorderWidth(ButtonDesktopBorderWidth);
+  }, [ButtonDesktopBorderWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleBorderWidthDeviceClick = function handleBorderWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using ButtonDesktopBorderWidth) */
+  var borderWidth = "".concat(ButtonDesktopBorderWidth.top).concat(ButtonBorderUnits, " ").concat(ButtonDesktopBorderWidth.right).concat(ButtonBorderUnits, " ").concat(ButtonDesktopBorderWidth.bottom).concat(ButtonBorderUnits, " ").concat(ButtonDesktopBorderWidth.left).concat(ButtonBorderUnits);
+  /** End Border Width */
+
+  /** Start Border Radius Width */
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(ButtonDesktopBorderRadiusWidth),
+    _useState8 = _slicedToArray(_useState7, 2),
+    previousBorderRadiusWidth = _useState8[0],
+    setPreviousBorderRadiusWidth = _useState8[1];
+  /** Function to update all Border Width values */
+  var updateAllBorderRadiusWidth = function updateAllBorderRadiusWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobileBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleBorderRadiusWidthInputChange = function handleBorderRadiusWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          ButtonDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, ButtonDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          ButtonTabBorderRadiusWidth: _objectSpread(_objectSpread({}, ButtonTabBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          ButtonMobileBorderRadiusWidth: _objectSpread(_objectSpread({}, ButtonMobileBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if ButtonBorderRadiusLink is true */
+    if (ButtonBorderRadiusLink) {
+      updateAllBorderRadiusWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle ButtonBorderRadiusLink toggle */
+  var handleBorderRadiusWidthLinkToggle = function handleBorderRadiusWidthLinkToggle() {
+    if (!ButtonBorderRadiusLink) {
+      setAttributes({
+        ButtonDesktopBorderRadiusWidth: previousBorderRadiusWidth
+      });
+    }
+    /** setButtonBorderRadiusLinkLink(!ButtonBorderRadiusLink) */
+    setAttributes({
+      ButtonBorderRadiusLink: !ButtonBorderRadiusLink
+    });
+  };
+
+  /** Update previousBorderRadiusWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setPreviousBorderRadiusWidth(ButtonDesktopBorderRadiusWidth);
+  }, [ButtonDesktopBorderRadiusWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleBorderRadiusWidthDeviceClick = function handleBorderRadiusWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using ButtonDesktopBorderWidth) */
+  var borderRadiusWidth = "".concat(ButtonDesktopBorderRadiusWidth.top).concat(ButtonBorderRadiusUnits, " ").concat(ButtonDesktopBorderRadiusWidth.right).concat(ButtonBorderRadiusUnits, " ").concat(ButtonDesktopBorderRadiusWidth.bottom).concat(ButtonBorderRadiusUnits, " ").concat(ButtonDesktopBorderRadiusWidth.left).concat(ButtonBorderRadiusUnits);
+  /** End Border Radius Width */
+
+  /* set default values for the style attributes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    if (ButtonFontFamily) {
+      var fontUrl = "https://fonts.googleapis.com/css?family=".concat(ButtonFontFamily.replace(' ', '+'));
+      var linkElement = document.createElement('link');
+      linkElement.rel = 'stylesheet';
+      linkElement.href = fontUrl;
+      document.head.appendChild(linkElement);
+    }
+  }, [ButtonFontFamily]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-advanced-button-wrapper.".concat(blockID, " .fb-advanced-button {\n                    align-items: center;\n                    display: inline-flex;\n                    justify-content: center;\n                    outline: none;\n                    text-align: center;\n                    text-decoration: none;\n                    padding: 12px 30px;\n                    background-color: #3f8efc;\n                    border-radius: 0px;\n                    box-sizing: border-box;\n                    cursor: pointer;\n                    position: relative;\n                    transition: .2s ease-in;\n                    white-space: nowrap;\n                    width: ").concat(ButtonWidth !== undefined ? "".concat(ButtonWidth, "%") : '', ";\n                }\n\n                .fb-advanced-button-wrapper.").concat(blockID, " .fb-advanced-button .fb-advanced-button-text {\n                    color: #ffffff;\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3584,7 +4281,993 @@ function Inspector(_ref) {
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks"),
       className: "fb-setting-typography"
-    }))), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-typography-icon-dropdown",
+      contentClassName: "fb-setting-typography-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref3) {
+        var isOpen = _ref3.isOpen,
+          onToggle = _ref3.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-typography-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "edit",
+          className: "fb-setting-typography-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-typography-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-typography-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontfamily-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
+          options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
+          value: ButtonFontFamily,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonFontFamily: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-fontsize-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                ButtonFontSizeUnits: item.value
+              });
+            },
+            className: "fb-setting-fontsize-units-switcher ".concat(ButtonFontSizeUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-rangecontrol"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: ButtonFontSize,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonFontSize: value
+            });
+          },
+          min: 1,
+          max: 200,
+          allowReset: true,
+          resetFallbackValue: undefined
+        }))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontweight-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("100", "frontis-blocks"),
+            value: "100"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("200", "frontis-blocks"),
+            value: "200"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("300", "frontis-blocks"),
+            value: "300"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("400", "frontis-blocks"),
+            value: "400"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("500", "frontis-blocks"),
+            value: "500"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("600", "frontis-blocks"),
+            value: "600"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("700", "frontis-blocks"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("800", "frontis-blocks"),
+            value: "800"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("900", "frontis-blocks"),
+            value: "900"
+          }],
+          value: ButtonFontWeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonFontWeight: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontstyle-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
+            value: "normal"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "frontis-blocks"),
+            value: "normal"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Italic", "frontis-blocks"),
+            value: "italic"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oblique", "frontis-blocks"),
+            value: "oblique"
+          }],
+          value: ButtonFontStyle,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonFontStyle: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-texttransform-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-blocks"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-blocks"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Capitalize", "frontis-blocks"),
+            value: "capitalize"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Uppercase", "frontis-blocks"),
+            value: "uppercase"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lowercase", "frontis-blocks"),
+            value: "lowercase"
+          }],
+          value: ButtonTextTransform,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonTextTransform: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-textdecoration-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-blocks"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-blocks"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Underline", "frontis-blocks"),
+            value: "underline"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overline", "frontis-blocks"),
+            value: "overline"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Through", "frontis-blocks"),
+            value: "line-through"
+          }],
+          value: ButtonTextDecoration,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonTextDecoration: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-letterspacing-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                ButtonLetterSpacingUnits: item.value
+              });
+            },
+            className: "fb-setting-letterspacing-units-switcher ".concat(ButtonLetterSpacingUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: ButtonLetterSpacing,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonLetterSpacing: value === 0 ? undefined : value
+            });
+          },
+          min: 1,
+          max: 100,
+          step: 1,
+          allowReset: true,
+          resetFallbackValue: undefined
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-lineheight-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                ButtonLineHeightUnits: item.value
+              });
+            },
+            className: "fb-setting-lineheight-units-switcher ".concat(ButtonLineHeightUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: ButtonLineHeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonLineHeight: value === 1 ? undefined : value
+            });
+          },
+          min: 1,
+          max: 100,
+          step: 1,
+          allowReset: true,
+          resetFallbackValue: undefined
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            ButtonColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(ButtonColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), ButtonColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref4) {
+        var isOpen = _ref4.isOpen,
+          onToggle = _ref4.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: ButtonColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: ButtonColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonColor: value
+            });
+          }
+        }))));
+      }
+    })), ButtonColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref5) {
+        var isOpen = _ref5.isOpen,
+          onToggle = _ref5.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: ButtonHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: ButtonHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            ButtonBgColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(ButtonBgColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), ButtonBgColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref6) {
+        var isOpen = _ref6.isOpen,
+          onToggle = _ref6.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: ButtonBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBgColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: ButtonBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBgColor: value
+            });
+          }
+        }))));
+      }
+    })), ButtonBgColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref7) {
+        var isOpen = _ref7.isOpen,
+          onToggle = _ref7.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: ButtonBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBgHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: ButtonBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBgHoverColor: value
+            });
+          }
+        }))));
+      }
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border", "frontis-blocks"),
+      initialOpen: false,
+      className: "fb-setting-border-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-blocks"),
+      value: ButtonBorder,
+      options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.BORDER_STYLES,
+      onChange: function onChange(value) {
+        return setAttributes({
+          ButtonBorder: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Color", "frontis-blocks"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            ButtonBorderColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(ButtonBorderColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), ButtonBorderColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref8) {
+        var isOpen = _ref8.isOpen,
+          onToggle = _ref8.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: ButtonBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBorderColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: ButtonBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBorderColor: value
+            });
+          }
+        }))));
+      }
+    })), ButtonBorderColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref9) {
+        var isOpen = _ref9.isOpen,
+          onToggle = _ref9.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: ButtonBorderHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBorderHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: ButtonBorderHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              ButtonBorderHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_inner_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_label_container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            ButtonBorderUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(ButtonBorderUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderWidth.top : DeviceType === 'Tablet' ? ButtonTabBorderWidth.top : ButtonMobileBorderWidth.top,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderWidth.right : DeviceType === 'Tablet' ? ButtonTabBorderWidth.right : ButtonMobileBorderWidth.right,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? ButtonTabBorderWidth.bottom : ButtonMobileBorderWidth.bottom,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderWidth.left : DeviceType === 'Tablet' ? ButtonTabBorderWidth.left : ButtonMobileBorderWidth.left,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(ButtonBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(ButtonBorderLink ? 'is-checked' : ''),
+      onClick: handleBorderWidthLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_inner_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_label_container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderRadiusWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            ButtonBorderRadiusUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(ButtonBorderRadiusUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? ButtonTabBorderRadiusWidth.top : ButtonMobileBorderRadiusWidth.top,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? ButtonTabBorderRadiusWidth.right : ButtonMobileBorderRadiusWidth.right,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? ButtonTabBorderRadiusWidth.bottom : ButtonMobileBorderRadiusWidth.bottom,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? ButtonDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? ButtonTabBorderRadiusWidth.left : ButtonMobileBorderRadiusWidth.left,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(ButtonBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(ButtonBorderRadiusLink ? 'is-checked' : ''),
+      onClick: handleBorderRadiusWidthLinkToggle
+    })))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "Spacing",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_inner_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_label_container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handlePaddingDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            ButtonPaddingUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(ButtonPaddingUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? ButtonDesktopPadding.top : DeviceType === 'Tablet' ? ButtonTabPadding.top : ButtonMobilePadding.top,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? ButtonDesktopPadding.right : DeviceType === 'Tablet' ? ButtonTabPadding.right : ButtonMobilePadding.right,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? ButtonDesktopPadding.bottom : DeviceType === 'Tablet' ? ButtonTabPadding.bottom : ButtonMobilePadding.bottom,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? ButtonDesktopPadding.left : DeviceType === 'Tablet' ? ButtonTabPadding.left : ButtonMobilePadding.left,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(ButtonPaddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(ButtonPaddingLink ? 'is-checked' : ''),
+      onClick: handleButtonPaddingLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_spacing_inner_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_label_container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleMarginDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            ButtonMarginUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(ButtonMarginUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? ButtonDesktopMargin.top : DeviceType === 'Tablet' ? ButtonTabMargin.top : ButtonMobileMargin.top,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? ButtonDesktopMargin.right : DeviceType === 'Tablet' ? ButtonTabMargin.right : ButtonMobileMargin.right,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? ButtonDesktopMargin.bottom : DeviceType === 'Tablet' ? ButtonTabMargin.bottom : ButtonMobileMargin.bottom,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? ButtonDesktopMargin.left : DeviceType === 'Tablet' ? ButtonTabMargin.left : ButtonMobileMargin.left,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "sh_heading_input_wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "sh_heading_spacing_input_label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(ButtonMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(ButtonMarginLink ? 'is-checked' : ''),
+      onClick: handleMarginLinkToggle
+    }))))))), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-advanced-tab-wrapper"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-z-index-wrapper"
