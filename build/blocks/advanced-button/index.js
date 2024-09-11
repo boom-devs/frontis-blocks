@@ -3321,7 +3321,8 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 function Edit(_ref) {
   var attributes = _ref.attributes,
-    setAttributes = _ref.setAttributes;
+    setAttributes = _ref.setAttributes,
+    clientId = _ref.clientId;
   var blockID = attributes.blockID,
     DeviceType = attributes.DeviceType,
     ButtonAlignment = attributes.ButtonAlignment,
@@ -3338,7 +3339,8 @@ function Edit(_ref) {
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
-    setAttributes: setAttributes
+    setAttributes: setAttributes,
+    clientId: clientId
   }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.AlignmentToolbar, {
     value: ButtonAlignment,
     onChange: function onChange(value) {
@@ -3458,7 +3460,7 @@ function Inspector(_ref) {
       });
     }
   }, [clientId]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-advanced-button-wrapper .fb-advanced-button {\n                    align-items: center;\n                    display: inline-flex;\n                    justify-content: center;\n                    outline: none;\n                    text-align: center;\n                    text-decoration: none;\n                    padding: 12px 30px;\n                    background-color: #3f8efc;\n                    border-radius: 0px;\n                    box-sizing: border-box;\n                    cursor: pointer;\n                    position: relative;\n                    transition: .2s ease-in;\n                    white-space: nowrap;\n                    width: ".concat(ButtonWidth !== undefined ? "".concat(ButtonWidth, "%") : '', ";\n                }\n\n                .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {\n                    color: #ffffff;\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-advanced-button-wrapper.".concat(blockID, " .fb-advanced-button {\n                    align-items: center;\n                    display: inline-flex;\n                    justify-content: center;\n                    outline: none;\n                    text-align: center;\n                    text-decoration: none;\n                    padding: 12px 30px;\n                    background-color: #3f8efc;\n                    border-radius: 0px;\n                    box-sizing: border-box;\n                    cursor: pointer;\n                    position: relative;\n                    transition: .2s ease-in;\n                    white-space: nowrap;\n                    width: ").concat(ButtonWidth !== undefined ? "".concat(ButtonWidth, "%") : '', ";\n                }\n\n                .fb-advanced-button-wrapper.").concat(blockID, " .fb-advanced-button .fb-advanced-button-text {\n                    color: #ffffff;\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"

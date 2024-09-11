@@ -12,7 +12,7 @@ import {
 import Inspector from "./inspector";
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes}) {
+export default function Edit({ attributes, setAttributes, clientId}) {
     const { 
         blockID,
         HeadingText, 
@@ -45,6 +45,7 @@ export default function Edit({ attributes, setAttributes}) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId ={clientId}
             />
 
             <BlockControls>

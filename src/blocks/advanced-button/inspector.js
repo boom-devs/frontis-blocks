@@ -61,11 +61,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, [clientId]);
     
+    
     return (
         <>
             <style>
             {`
-                .fb-advanced-button-wrapper .fb-advanced-button {
+                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
                     align-items: center;
                     display: inline-flex;
                     justify-content: center;
@@ -83,7 +84,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     width: ${ButtonWidth !== undefined ? `${ButtonWidth}%` : ''};
                 }
 
-                .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
+                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button .fb-advanced-button-text {
                     color: #ffffff;
                 }
             `}
