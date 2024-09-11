@@ -3569,7 +3569,8 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 function Edit(_ref) {
   var attributes = _ref.attributes,
-    setAttributes = _ref.setAttributes;
+    setAttributes = _ref.setAttributes,
+    clientId = _ref.clientId;
   var blockID = attributes.blockID,
     HeadingText = attributes.HeadingText,
     HeadingTag = attributes.HeadingTag,
@@ -3587,7 +3588,8 @@ function Edit(_ref) {
   var css = "\n        #".concat(blockID, " {\n            padding: 20px;\n            border: 1px solid #ccc;\n            background-color: #f9f9f9;\n        }\n    ");
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
-    setAttributes: setAttributes
+    setAttributes: setAttributes,
+    clientId: clientId
   }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.AlignmentToolbar, {
     value: HeadingAlignment,
     onChange: function onChange(value) {
