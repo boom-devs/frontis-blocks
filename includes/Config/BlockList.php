@@ -72,14 +72,14 @@ class BlockList {
                  'badge'     => 'free',
                  'status'    => 'active',
              ],
-            // 'icon-box' => [
-            //     'slug'      => 'icon-box',
-            //     'title'     => 'Icon Box',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+             'icon-box' => [
+                 'slug'      => 'icon-box',
+                 'title'     => 'Icon Box',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
             'advanced-button' => [
                 'slug'      => 'advanced-button',
                 'title'     => 'Advanced Button',
