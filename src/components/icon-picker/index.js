@@ -18,7 +18,8 @@ export default function FBIconPicker(props) {
 	const closeModal = () => setIconPickerModal( false );
 	const [ insertIcon, setInsertIcon ] = useState( '' );
 	const [defaultIcons, setDefaultIcons] = useState(defaultSvgIcon);
-	const [filteredDefaultIcons, setFilteredDefaultIcons] = useState();
+	const [filteredDefaultIcons, setFilteredDefaultIcons] = useState(defaultSvgIcon);
+	const [selectedCat, setSelectedCat] = useState('all-icons');
 
 	const iconPickerModal = () => {
 		setIconPickerModal(true);
@@ -83,12 +84,77 @@ export default function FBIconPicker(props) {
 
 	// Filter icon list
 	const filterIconList = (cat) => {
-		console.log(defaultSvgIcon)
+		let filteredIcons = [];
+		let currentGroup = [];
+		setSelectedCat(cat.slug);
+
+		if ( 'all-icons' === cat.slug ) {
+			setFilteredDefaultIcons(defaultIcons);
+		} else if ( 'others' === cat.slug ) {
+			for ( const defaultIcon in svgIcon ) {
+				if ( 0 === svgIcon[ defaultIcon ].custom_categories.length ) {
+					// Add matching icon to the current group
+					currentGroup.push(defaultIcon);
+
+					// If the current group is full (like 8 icons), push it to filteredIcons
+					if (currentGroup.length === 8) {
+						filteredIcons.push(currentGroup);
+						currentGroup = []; // Start a new group
+					}
+				}
+			}
+
+			if (currentGroup.length > 0) {
+				filteredIcons.push(currentGroup);
+			}
+
+			setFilteredDefaultIcons(filteredIcons)
+		} else {
+			for ( const defaultIcon in svgIcon ) {
+				// Loop through each icon group in svgIcon
+				if (svgIcon[defaultIcon].custom_categories.includes(cat.slug)) {
+					// Add matching icon to the current group
+					currentGroup.push(defaultIcon);
+				}
+
+				// If the current group is full (like 8 icons), push it to filteredIcons
+				if (currentGroup.length === 8) {
+					filteredIcons.push(currentGroup);
+					currentGroup = []; // Start a new group
+				}
+			}
+
+			if (currentGroup.length > 0) {
+				filteredIcons.push(currentGroup);
+			}
+
+			setFilteredDefaultIcons(filteredIcons)
+		}
+	}
+
+	// Filter using search
+	const searchFilter = (searchKey) => {
+		setSelectedCat('all-icons');
+		if(searchKey.target.value !== '') {
+			const data = filteredDefaultIcons;
+
+			const searchKeyword = searchKey.target.value;  // Replace with your search keyword
+
+			const filteredData = data.map(subArray =>
+				subArray.filter(item =>
+					item.toLowerCase().split(/[-\s]/).some(word => word.includes(searchKeyword.toLowerCase()))
+				)
+			).filter(subArray => subArray.length > 0);
+
+			setFilteredDefaultIcons(filteredData);
+		} else {
+			setFilteredDefaultIcons(defaultIcons);
+		}
 	}
 
 	// Render icon list.
 	const renderIconList = () => {
-		if ( ! defaultSvgIcon.length ) {
+		if ( ! filteredDefaultIcons.length ) {
 			return (
 				<div className="uagb-ip-icons icon-not-found">
 					<div className="uagb-icon-not-available">
@@ -97,6 +163,7 @@ export default function FBIconPicker(props) {
 				</div>
 			);
 		}
+
 		const iconTitle = ( actualTitle ) => {
 			if ( ! actualTitle ) {
 				return '';
@@ -105,11 +172,11 @@ export default function FBIconPicker(props) {
 		};
 
 		const fbIconClasses = ( classes ) => ( classes.filter( Boolean ).join( ' ' ) );
-		// renderer.
+
 		function cellRenderer( renderer ) {
 			const { columnIndex, key, rowIndex, style } = renderer;
 
-			const currentIcon = defaultSvgIcon[ rowIndex ][ columnIndex ];
+			const currentIcon = filteredDefaultIcons[ rowIndex ][ columnIndex ];
 
 			if ( ! currentIcon ) {
 				return null;
@@ -147,11 +214,11 @@ export default function FBIconPicker(props) {
 			<div className="fb_icon_picker_icons_list">
 				<Grid
 					cellRenderer={ cellRenderer }
-					columnCount={ defaultSvgIcon.length }
-					columnWidth={ 8 === defaultSvgIcon.length ? heightAndWidth - 2 : 100 }
+					columnCount={ filteredDefaultIcons.length }
+					columnWidth={ 8 === filteredDefaultIcons.length ? heightAndWidth - 2 : 100 }
 					height={ 400 }
-					rowCount={ defaultSvgIcon.length }
-					rowHeight={ 8 === defaultSvgIcon.length ? heightAndWidth : 100 }
+					rowCount={ filteredDefaultIcons.length }
+					rowHeight={ 8 === filteredDefaultIcons.length ? heightAndWidth : 100 }
 					width={ 400 }
 					autoContainerWidth={ true }
 				/>
@@ -199,14 +266,14 @@ export default function FBIconPicker(props) {
 											<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
 												d="M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"></path></svg>
 										</span>
-										<input type={'text'} placeholder={__('Search', 'frontis-blocks')}/>
+										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'frontis-blocks')}/>
 									</div>
 								</div>
 								<div className={'fb_icon_picker_wrapper_body'}>
 									<div className={'fb_icon_picker_wrapper_categories'}>
 										{categories.map((category, index) => (
 											<div onClick={() => filterIconList(category)}
-												 className={'fb_icon_picker_wrapper_category'}
+												 className={`fb_icon_picker_wrapper_category ${selectedCat === category.slug ? 'selected' : ''}`}
 												 key={index}>{category.title}</div>
 										))}
 									</div>
