@@ -1156,10 +1156,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 </BaseControl>
                                             )}
 
-                                            <div className="sh_heading_spacing_container">
-                                                <div className="sh_heading_spacing_inner_container">
+                                            <div className="fb-setting-spacing-container">
+                                                <div className="fb-setting-spacing-inner-container">
                                                     {/* Border Width */}
-                                                    <div className="sh_heading_label_container">
+                                                    <div className="fb-setting-spacing-label-container">
                                                         <ResponsiveControl labelText={__('Border', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderWidthDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
@@ -1176,9 +1176,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         </div>
 
                                                     </div>
-                                                    <div className="sh_heading_input_container">
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Top", "frontis-blocks")}</label>
+                                                    <div className="fb-setting-spacing-input-container">
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1186,8 +1186,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Right", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1195,8 +1195,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Bottom", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1204,8 +1204,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Left", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1213,8 +1213,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label"></label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label"></label>
                                                             <span
                                                                 className={`dashicons ${ButtonBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${ButtonBorderLink ? 'is-checked' : ''}`}
                                                                 onClick={handleBorderWidthLinkToggle}
@@ -1224,10 +1224,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     </div>                          
                                                 </div>
                                             </div>
-                                            <div className="sh_heading_spacing_container">
-                                                <div className="sh_heading_spacing_inner_container">
+                                            <div className="fb-setting-spacing-container">
+                                                <div className="fb-setting-spacing-inner-container">
                                                     {/* Border radius Width */}
-                                                    <div className="sh_heading_label_container">
+                                                    <div className="fb-setting-spacing-label-container">
                                                         <ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
@@ -1243,9 +1243,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="sh_heading_input_container">
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Top", "frontis-blocks")}</label>
+                                                    <div className="fb-setting-spacing-input-container">
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1253,8 +1253,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Right", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1262,8 +1262,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Bottom", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1271,8 +1271,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Left", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1280,8 +1280,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label"></label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label"></label>
                                                             <span
                                                                 className={`dashicons ${ButtonBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${ButtonBorderRadiusLink ? 'is-checked' : ''}`}
                                                                 onClick={handleBorderRadiusWidthLinkToggle}
@@ -1293,10 +1293,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             </div>
                                         </PanelBody>
                                         <PanelBody title="Spacing" initialOpen={false}>
-                                            <div className="sh_heading_spacing_container">
-                                                <div className="sh_heading_spacing_inner_container">
+                                            <div className="fb-setting-spacing-container">
+                                                <div className="fb-setting-spacing-inner-container">
                                                     {/* Padding */}
-                                                    <div className="sh_heading_label_container">
+                                                    <div className="fb-setting-spacing-label-container">
                                                         <ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handlePaddingDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
@@ -1312,9 +1312,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="sh_heading_input_container">
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Top", "frontis-blocks")}</label>
+                                                    <div className="fb-setting-spacing-input-container">
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1322,8 +1322,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Right", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1331,8 +1331,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Bottom", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1340,8 +1340,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Left", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1349,8 +1349,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handlePaddingInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label"></label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label"></label>
                                                             <span
                                                                 className={`dashicons ${ButtonPaddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${ButtonPaddingLink ? 'is-checked' : ''}`}
                                                                 onClick={handleButtonPaddingLinkToggle}
@@ -1360,10 +1360,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     </div>                          
                                                 </div>
                                             </div>
-                                            <div className="sh_heading_spacing_container">
-                                                <div className="sh_heading_spacing_inner_container">
+                                            <div className="fb-setting-spacing-container">
+                                                <div className="fb-setting-spacing-inner-container">
                                                     {/* Margin */}
-                                                    <div className="sh_heading_label_container">
+                                                    <div className="fb-setting-spacing-label-container">
                                                         <ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleMarginDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
@@ -1379,9 +1379,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             </ButtonGroup>
                                                         </div>
                                                     </div>
-                                                    <div className="sh_heading_input_container">
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Top", "frontis-blocks")}</label>
+                                                    <div className="fb-setting-spacing-input-container">
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="top"
@@ -1389,8 +1389,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'top')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Right", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="right"
@@ -1398,8 +1398,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'right')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Bottom", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
@@ -1407,8 +1407,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'bottom')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label">{__("Left", "frontis-blocks")}</label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
                                                             <input
                                                                 type="number"
                                                                 name="left"
@@ -1416,8 +1416,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 onChange={(e) => handleMarginInputChange(e, 'left')}
                                                             />
                                                         </div>
-                                                        <div className="sh_heading_input_wrapper">
-                                                            <label className="sh_heading_spacing_input_label"></label>
+                                                        <div className="fb-setting-spacing-input-wrapper">
+                                                            <label className="fb-setting-spacing-input-label"></label>
                                                             <span
                                                                 className={`dashicons ${ButtonMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${ButtonMarginLink ? 'is-checked' : ''}`}
                                                                 onClick={handleMarginLinkToggle}

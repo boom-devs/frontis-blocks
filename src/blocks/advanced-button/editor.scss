@@ -160,26 +160,26 @@ $white_color: #ffffff;
 }
 
 
-.sh_heading_spacing_container {
+.fb-setting-spacing-container {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    .sh_heading_spacing_inner_container {
+    .fb-setting-spacing-inner-container {
       margin-bottom: 20px;
       &:last-child {
         margin-bottom: 0;
       }
-      .sh_heading_input_container {
+      .fb-setting-spacing-input-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     
-        .sh_heading_input_wrapper {
+        .fb-setting-spacing-input-wrapper {
           display: flex;
           flex-direction: column;
           width: 20%;
     
-          .sh_heading_spacing_input_label {
+          .fb-setting-spacing-input-label {
             text-align: center;
             font-size: 12px;
             margin-bottom: 5px;
@@ -239,7 +239,7 @@ $white_color: #ffffff;
           }
         }
       }
-      .sh_heading_label_container {
+      .fb-setting-spacing-label-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
