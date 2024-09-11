@@ -50,7 +50,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         ButtonFontSizeUnits,
         ButtonFontWeight,
         ButtonFontStyle,
-
         ButtonTextTransform,
         ButtonTextDecoration,
         ButtonLetterSpacing,
@@ -63,8 +62,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         ButtonBgColorSwitcher,
         ButtonBgColor,
         ButtonBgHoverColor,
-
-
         ButtonBorder,
         ButtonBorderColor,
         ButtonBorderHoverColor,
@@ -93,6 +90,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         ButtonZIndex
 
     } = attributes;
+    
+    
     
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -461,25 +460,50 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             <style>
             {`
                 .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
-                    align-items: center;
-                    display: inline-flex;
-                    justify-content: center;
-                    outline: none;
-                    text-align: center;
-                    text-decoration: none;
-                    padding: 12px 30px;
-                    background-color: #3f8efc;
-                    border-radius: 0px;
-                    box-sizing: border-box;
-                    cursor: pointer;
-                    position: relative;
-                    transition: .2s ease-in;
-                    white-space: nowrap;
+                    ${ButtonBgColor !== undefined ? `background-color: ${ButtonBgColor};` : ''}
+                    font-family: ${ButtonFontFamily !== 'default' ? ButtonFontFamily : ButtonFontFamily};
+                    font-size: ${ButtonFontSize !== undefined ? `${ButtonFontSize}${ButtonFontSizeUnits}` : ''};
+                    font-weight: ${ButtonFontWeight};
+                    font-style: ${ButtonFontStyle};
+                    text-transform: ${ButtonTextTransform};
+                    text-decoration: ${ButtonTextDecoration};
+                    ${ButtonLetterSpacing !== undefined ? `letter-spacing: ${ButtonLetterSpacing}${ButtonLetterSpacingUnits};` : ''}
+                    ${ButtonLineHeight !== undefined ? `line-height: ${ButtonLineHeight}${ButtonLineHeightUnits};` : ''}
+                    padding: ${padding};
+                    margin: ${margin};
+                    border: ${ButtonBorder};
+                    border-width: ${borderWidth};
+                    border-radius: ${borderRadiusWidth};
+                    ${ButtonBorderColor !== undefined ? `border-color: ${ButtonBorderColor};` : ''}
+                    z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ''};
                     width: ${ButtonWidth !== undefined ? `${ButtonWidth}%` : ''};
                 }
-
                 .fb-advanced-button-wrapper.${blockID} .fb-advanced-button .fb-advanced-button-text {
-                    color: #ffffff;
+                    ${ButtonColor !== undefined ? `color: ${ButtonColor};` : ''}
+                }
+                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button:hover .fb-advanced-button-text {
+                    ${ButtonHoverColor !== undefined ? `color: ${ButtonHoverColor};` : ''}
+                }
+
+                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button:hover {
+                    ${ButtonBgHoverColor !== undefined ? `background-color: ${ButtonBgHoverColor};` : ''}
+                }
+                @media only screen and (max-width: 1024px) {
+                    .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
+                        padding: ${ButtonTabPadding.top}${ButtonPaddingUnits} ${ButtonTabPadding.right}${ButtonPaddingUnits} ${ButtonTabPadding.bottom}${ButtonPaddingUnits} ${ButtonTabPadding.left}${ButtonPaddingUnits} !important;
+                        margin: ${ButtonTabMargin.top}${ButtonMarginUnits} ${ButtonTabMargin.right}${ButtonMarginUnits} ${ButtonTabMargin.bottom}${ButtonMarginUnits} ${ButtonTabMargin.left}${ButtonMarginUnits} !important;
+                        border-width: ${ButtonTabBorderWidth.top}${ButtonBorderUnits} ${ButtonTabBorderWidth.right}${ButtonBorderUnits} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits} ${ButtonTabBorderWidth.left}${ButtonBorderUnits} !important;
+                        border-radius: ${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits} !important;
+                    }
+                }
+
+                @media only screen and (max-width: 767px) {
+                    .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
+                        padding: ${ButtonMobilePadding.top}${ButtonPaddingUnits} ${ButtonMobilePadding.right}${ButtonPaddingUnits} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits} ${ButtonMobilePadding.left}${ButtonPaddingUnits} !important;
+                        margin: ${ButtonMobileMargin.top}${ButtonMarginUnits} ${ButtonMobileMargin.right}${ButtonMarginUnits} ${ButtonMobileMargin.bottom}${ButtonMarginUnits} ${ButtonMobileMargin.left}${ButtonMarginUnits} !important;
+                        border-width: ${ButtonMobileBorderWidth.top}${ButtonBorderUnits} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits} !important;
+                        border-radius: ${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits} !important;
+                    }
                 }
             `}
             </style>

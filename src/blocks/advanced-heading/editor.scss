@@ -3,6 +3,7 @@ $secondary_color: #5f5f5f;
 $background_color: #dcdcde;
 $white_color: #ffffff;
 
+/** Start Admin Panel scss **/
 .fb-inspector-control {
     .fb-tab {
         background-color: $background_color;
@@ -48,82 +49,6 @@ $white_color: #ffffff;
     }
 }
 
-.fb-advanced-alignment,
-.fb-advanced-sub-heading-tag {
-    .fb-advanced-alignment-group-btn,
-    .fb-advanced-sub-heading-tag-btn-group {
-        display: flex;
-
-        .fb-advanced-alignment-single-btn,
-        .fb-advanced-sub-heading-single-btn {
-            align-items: center;
-            display: flex;
-            flex: 1;
-            justify-content: center;
-            padding: 6px;
-            height: unset;
-            line-height: 16px;
-            box-shadow: inset 0 0 0 1px $background_color;
-            color: $secondary_color;
-
-            &.active {
-                background-color: $background_color !important;
-                color: $secondary_color !important;
-            }
-
-            &:focus {
-                outline: none;
-                box-shadow: none;
-            }
-
-            &:hover {
-                background-color: $background_color;
-                color: $secondary_color;
-            }
-        }
-    }
-}
-
-.fb-setting-tag-wrapper {
-    .fb-setting-tag-inner-wrapper {
-        display: flex;
-
-        .fb-setting-tag-single-btn {
-            align-items: center;
-            display: flex;
-            flex: 1;
-            justify-content: center;
-            padding: 6px;
-            height: unset;
-            line-height: 16px;
-            box-shadow: inset 0 0 0 1px $background_color;
-            color: $secondary_color;
-
-            &.active {
-                background-color: $background_color !important;
-                color: $secondary_color !important;
-            }
-
-            &:focus {
-                outline: none;
-                box-shadow: none;
-            }
-
-            &:hover {
-                background-color: $background_color;
-                color: $secondary_color;
-            }
-        }
-    }
-}
-
-.fb-advanced-sub-heading-wrapper,
-.fb-advanced-separator-wrapper {
-    .components-base-control {
-        margin-bottom: 8px;
-    }
-}
-
 .fb-setting-typography {
     .components-base-control__field {
         position: relative;
@@ -154,6 +79,7 @@ $white_color: #ffffff;
         }
     }
 }
+
 .fb-setting-typography-popup {
     padding: 0.2rem;
     min-width: 220px;
@@ -281,7 +207,7 @@ $white_color: #ffffff;
     }
 }
 
-.fb-setting-fontsize-wrapper,.fb-setting-letterspacing-wrapper, .fb-setting-lineheight-wrapper {
+.fb-setting-fontsize-wrapper, .fb-setting-letterspacing-wrapper, .fb-setting-lineheight-wrapper {
     .components-range-control__reset {
         position: absolute;
         top: -33px;
@@ -352,26 +278,26 @@ $white_color: #ffffff;
 }
 
 
-.sh_heading_spacing_container {
+.fb-setting-spacing-container {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    .sh_heading_spacing_inner_container {
+    .fb-setting-spacing-inner-container {
       margin-bottom: 20px;
       &:last-child {
         margin-bottom: 0;
       }
-      .sh_heading_input_container {
+      .fb-setting-spacing-input-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     
-        .sh_heading_input_wrapper {
+        .fb-setting-spacing-input-wrapper {
           display: flex;
           flex-direction: column;
           width: 20%;
     
-          .sh_heading_spacing_input_label {
+          .fb-setting-spacing-input-label {
             text-align: center;
             font-size: 12px;
             margin-bottom: 5px;
@@ -431,7 +357,7 @@ $white_color: #ffffff;
           }
         }
       }
-      .sh_heading_label_container {
+      .fb-setting-spacing-label-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -499,6 +425,86 @@ $white_color: #ffffff;
             padding-right: 5px;
             &.active {
                 color: $primary_color;
+            }
+        }
+    }
+}
+/** End Admin Panel scss **/
+
+
+
+/** Start General scss for Advanced Heading **/
+.fb-setting-tag-wrapper {
+    .fb-setting-tag-inner-wrapper {
+        display: flex;
+
+        .fb-setting-tag-single-btn {
+            align-items: center;
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            padding: 6px;
+            height: unset;
+            line-height: 16px;
+            box-shadow: inset 0 0 0 1px $background_color;
+            color: $secondary_color;
+
+            &.active {
+                background-color: $background_color !important;
+                color: $secondary_color !important;
+            }
+
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+
+            &:hover {
+                background-color: $background_color;
+                color: $secondary_color;
+            }
+        }
+    }
+}
+
+.fb-advanced-sub-heading-wrapper,
+.fb-advanced-separator-wrapper {
+    .components-base-control {
+        margin-bottom: 8px;
+    }
+}
+
+.fb-advanced-alignment,
+.fb-advanced-sub-heading-tag {
+    .fb-advanced-alignment-group-btn,
+    .fb-advanced-sub-heading-tag-btn-group {
+        display: flex;
+
+        .fb-advanced-alignment-single-btn,
+        .fb-advanced-sub-heading-single-btn {
+            align-items: center;
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            padding: 6px;
+            height: unset;
+            line-height: 16px;
+            box-shadow: inset 0 0 0 1px $background_color;
+            color: $secondary_color;
+
+            &.active {
+                background-color: $background_color !important;
+                color: $secondary_color !important;
+            }
+
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+
+            &:hover {
+                background-color: $background_color;
+                color: $secondary_color;
             }
         }
     }

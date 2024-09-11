@@ -14,11 +14,12 @@
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
-  transition: 0.2s ease-in;
+  transition: all 0.3s ease-in-out;
   white-space: nowrap;
 }
 .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
   color: #ffffff;
+  transition: all 0.3s ease-in-out;
 }
 
 /*# sourceMappingURL=style-index.css.map*/
