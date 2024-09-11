@@ -4245,7 +4245,7 @@ function Inspector(_ref) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
       setAttributes({
-        blockID: "fb-info-box-content-wrapper-" + clientId.slice(0, 8)
+        blockID: "fb-icon-picker-" + clientId.slice(0, 8)
       });
     }
   }, [clientId]);
@@ -5372,7 +5372,7 @@ function Inspector(_ref) {
         }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace', 'frontis-block'));
       }
     })))), /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      value: icon,
+      value: 'youtube',
       setIconHandler: iconHandler
     }))), /*#__PURE__*/React.createElement("div", {
       className: "fb-advanced-wrapper"
@@ -5527,11 +5527,11 @@ function Inspector(_ref) {
         });
       }
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Spacing"), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
@@ -5586,11 +5586,11 @@ function Inspector(_ref) {
         className: "fb-setting-units-type-switcher ".concat(infoBoxPaddingUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -5599,9 +5599,9 @@ function Inspector(_ref) {
         return handleBoxPaddingInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -5610,9 +5610,9 @@ function Inspector(_ref) {
         return handleBoxPaddingInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -5621,9 +5621,9 @@ function Inspector(_ref) {
         return handleBoxPaddingInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -5632,18 +5632,18 @@ function Inspector(_ref) {
         return handleBoxPaddingInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(paddingLink ? 'is-checked' : ''),
       onClick: handleBoxPaddingLinkToggle
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
@@ -5698,11 +5698,11 @@ function Inspector(_ref) {
         className: "fb-setting-units-type-switcher ".concat(Heading_Margin_Units === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -5711,9 +5711,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -5722,9 +5722,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -5733,9 +5733,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -5744,9 +5744,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(Heading_Margin_Link ? 'is-checked' : ''),
       onClick: handleMarginLinkToggle
@@ -5897,19 +5897,19 @@ function Inspector(_ref) {
         }))));
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label"
+      className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
-      className: "sh_heading_label_text"
+      className: "fb-setting-label-text"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_responsive_devices"
+      className: "fb-responsive-device-wrapper"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(activeBorderDevice === 'desktop' ? 'active' : ''),
+      className: "fb-responsive-desktop-device ".concat(activeBorderDevice === 'desktop' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderWidthDeviceClick('desktop');
       }
@@ -5920,7 +5920,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(activeBorderDevice === 'tab' ? 'active' : ''),
+      className: "fb-responsive-tablet-device  ".concat(activeBorderDevice === 'tab' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderWidthDeviceClick('tab');
       }
@@ -5931,7 +5931,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(activeBorderDevice === 'mobile' ? 'active' : ''),
+      className: "fb-responsive-mobile-device ".concat(activeBorderDevice === 'mobile' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderWidthDeviceClick('mobile');
       }
@@ -5942,9 +5942,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-units-type"
+      className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-units-type-wrap"
+      className: "fb-setting-units-type-wrap"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -5953,14 +5953,14 @@ function Inspector(_ref) {
             Heading_Border_units: item.value
           });
         },
-        className: "fb-units-type-switcher ".concat(Heading_Border_units === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(Heading_Border_units === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -5969,9 +5969,9 @@ function Inspector(_ref) {
         return handleBoxBorderWidthInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -5980,9 +5980,9 @@ function Inspector(_ref) {
         return handleBoxBorderWidthInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -5991,9 +5991,9 @@ function Inspector(_ref) {
         return handleBoxBorderWidthInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -6002,26 +6002,26 @@ function Inspector(_ref) {
         return handleBoxBorderWidthInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(borderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderLink ? 'is-checked' : ''),
       onClick: handleBoxBorderWidthLinkToggle
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label"
+      className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
-      className: "sh_heading_label_text"
+      className: "fb-setting-label-text"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_responsive_devices"
+      className: "fb-responsive-device-wrapper"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(activeBorderRadiusDevice === 'desktop' ? 'active' : ''),
+      className: "fb-responsive-desktop-device ".concat(activeBorderRadiusDevice === 'desktop' ? 'active' : ''),
       onClick: function onClick() {
         return handleBoxBorderRadiusWidthDeviceClick('desktop');
       }
@@ -6032,7 +6032,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(activeBorderRadiusDevice === 'tab' ? 'active' : ''),
+      className: "fb-responsive-tablet-device  ".concat(activeBorderRadiusDevice === 'tab' ? 'active' : ''),
       onClick: function onClick() {
         return handleBoxBorderRadiusWidthDeviceClick('tab');
       }
@@ -6043,7 +6043,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(activeBorderRadiusDevice === 'mobile' ? 'active' : ''),
+      className: "fb-responsive-mobile-device ".concat(activeBorderRadiusDevice === 'mobile' ? 'active' : ''),
       onClick: function onClick() {
         return handleBoxBorderRadiusWidthDeviceClick('mobile');
       }
@@ -6054,9 +6054,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-units-type"
+      className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-units-type-wrap"
+      className: "fb-setting-units-type-wrap"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -6065,14 +6065,14 @@ function Inspector(_ref) {
             infoBoxBorderRadiusUnits: item.value
           });
         },
-        className: "fb-units-type-switcher ".concat(infoBoxBorderRadiusUnits === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(infoBoxBorderRadiusUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -6081,9 +6081,9 @@ function Inspector(_ref) {
         return handleBoxBorderRadiusWidthInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -6092,9 +6092,9 @@ function Inspector(_ref) {
         return handleBoxBorderRadiusWidthInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -6103,9 +6103,9 @@ function Inspector(_ref) {
         return handleBoxBorderRadiusWidthInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -6114,9 +6114,9 @@ function Inspector(_ref) {
         return handleBoxBorderRadiusWidthInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(borderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderRadiusLink ? 'is-checked' : ''),
       onClick: handleBoxBorderRadiusWidthLinkToggle
@@ -6177,7 +6177,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-typography-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontfamily-wrapper"
+          className: "fb-setting-fontfamily-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-block"),
           options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
@@ -6188,15 +6188,15 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-wrapper"
+          className: "fb-setting-fontsize-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-header"
+          className: "fb-setting-fontsize-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-label"
+          className: "fb-setting-fontsize-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-units"
+          className: "fb-setting-fontsize-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-fontsize-units-wrap"
+          className: "fb-setting-fontsize-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -6205,10 +6205,10 @@ function Inspector(_ref) {
                 Heading_Font_size_units: item.value
               });
             },
-            className: "fb-fontsize-units-switcher ".concat(Heading_Font_size_units === item.value ? 'active' : '')
+            className: "fb-setting-fontsize-units-switcher ".concat(Heading_Font_size_units === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-rangecontrol"
+          className: "fb-setting-fontsize-rangecontrol"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: Heading_Font_Size,
           onChange: function onChange(value) {
@@ -6221,7 +6221,7 @@ function Inspector(_ref) {
           allowReset: true,
           resetFallbackValue: undefined
         }))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontweight-wrapper"
+          className: "fb-setting-fontweight-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-block"),
           options: [{
@@ -6262,7 +6262,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontstyle-wrapper"
+          className: "fb-setting-fontstyle-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-block"),
           options: [{
@@ -6285,7 +6285,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-texttransform-wrapper"
+          className: "fb-setting-texttransform-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-block"),
           options: [{
@@ -6311,7 +6311,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-textdecoration-wrapper"
+          className: "fb-setting-textdecoration-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-block"),
           options: [{
@@ -6337,15 +6337,15 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-wrapper"
+          className: "fb-setting-letterspacing-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-header"
+          className: "fb-setting-letterspacing-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-label"
+          className: "fb-setting-letterspacing-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-units"
+          className: "fb-setting-letterspacing-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-letterspacing-units-wrap"
+          className: "fb-setting-letterspacing-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -6354,7 +6354,7 @@ function Inspector(_ref) {
                 Heading_Letter_Spacing_units: item.value
               });
             },
-            className: "fb-letterspacing-units-switcher ".concat(Heading_Letter_Spacing_units === item.value ? 'active' : '')
+            className: "fb-setting-letterspacing-units-switcher ".concat(Heading_Letter_Spacing_units === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: Heading_Letter_Spacing,
@@ -6369,15 +6369,15 @@ function Inspector(_ref) {
           allowReset: true,
           resetFallbackValue: undefined
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-wrapper"
+          className: "fb-setting-lineheight-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-header"
+          className: "fb-setting-lineheight-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-label"
+          className: "fb-setting-lineheight-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-units"
+          className: "fb-setting-lineheight-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-lineheight-units-wrap"
+          className: "fb-setting-lineheight-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -6386,7 +6386,7 @@ function Inspector(_ref) {
                 Heading_Line_Height_units: item.value
               });
             },
-            className: "fb-lineheight-units-switcher ".concat(Heading_Line_Height_units === item.value ? 'active' : '')
+            className: "fb-setting-lineheight-units-switcher ".concat(Heading_Line_Height_units === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: Heading_Line_Height,
@@ -6540,11 +6540,11 @@ function Inspector(_ref) {
         }))));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Spacing"), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
@@ -6599,11 +6599,11 @@ function Inspector(_ref) {
         className: "fb-setting-units-type-switcher ".concat(Heading_padding_units === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -6612,9 +6612,9 @@ function Inspector(_ref) {
         return handlePaddingInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -6623,9 +6623,9 @@ function Inspector(_ref) {
         return handlePaddingInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -6634,9 +6634,9 @@ function Inspector(_ref) {
         return handlePaddingInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -6645,18 +6645,18 @@ function Inspector(_ref) {
         return handlePaddingInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(paddingLink ? 'is-checked' : ''),
       onClick: handlePaddingLinkToggle
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
@@ -6711,11 +6711,11 @@ function Inspector(_ref) {
         className: "fb-setting-units-type-switcher ".concat(Heading_Margin_Units === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -6724,9 +6724,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -6735,9 +6735,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -6746,9 +6746,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -6757,9 +6757,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(Heading_Margin_Link ? 'is-checked' : ''),
       onClick: handleMarginLinkToggle
@@ -6910,19 +6910,19 @@ function Inspector(_ref) {
         }))));
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label"
+      className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
-      className: "sh_heading_label_text"
+      className: "fb-setting-label-text"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_responsive_devices"
+      className: "fb-responsive-device-wrapper"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(activeBorderDevice === 'desktop' ? 'active' : ''),
+      className: "fb-responsive-desktop-device ".concat(activeBorderDevice === 'desktop' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderWidthDeviceClick('desktop');
       }
@@ -6933,7 +6933,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(activeBorderDevice === 'tab' ? 'active' : ''),
+      className: "fb-responsive-tablet-device  ".concat(activeBorderDevice === 'tab' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderWidthDeviceClick('tab');
       }
@@ -6944,7 +6944,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(activeBorderDevice === 'mobile' ? 'active' : ''),
+      className: "fb-responsive-mobile-device ".concat(activeBorderDevice === 'mobile' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderWidthDeviceClick('mobile');
       }
@@ -6955,9 +6955,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-units-type"
+      className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-units-type-wrap"
+      className: "fb-setting-units-type-wrap"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -6966,14 +6966,14 @@ function Inspector(_ref) {
             Heading_Border_units: item.value
           });
         },
-        className: "fb-units-type-switcher ".concat(Heading_Border_units === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(Heading_Border_units === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -6982,9 +6982,9 @@ function Inspector(_ref) {
         return handleBorderWidthInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -6993,9 +6993,9 @@ function Inspector(_ref) {
         return handleBorderWidthInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -7004,9 +7004,9 @@ function Inspector(_ref) {
         return handleBorderWidthInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -7015,26 +7015,26 @@ function Inspector(_ref) {
         return handleBorderWidthInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(borderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderLink ? 'is-checked' : ''),
       onClick: handleBorderWidthLinkToggle
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label"
+      className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
-      className: "sh_heading_label_text"
+      className: "fb-setting-label-text"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_responsive_devices"
+      className: "fb-responsive-device-wrapper"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(activeBorderRadiusDevice === 'desktop' ? 'active' : ''),
+      className: "fb-responsive-desktop-device ".concat(activeBorderRadiusDevice === 'desktop' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderRadiusWidthDeviceClick('desktop');
       }
@@ -7045,7 +7045,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(activeBorderRadiusDevice === 'tab' ? 'active' : ''),
+      className: "fb-responsive-tablet-device  ".concat(activeBorderRadiusDevice === 'tab' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderRadiusWidthDeviceClick('tab');
       }
@@ -7056,7 +7056,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(activeBorderRadiusDevice === 'mobile' ? 'active' : ''),
+      className: "fb-responsive-mobile-device ".concat(activeBorderRadiusDevice === 'mobile' ? 'active' : ''),
       onClick: function onClick() {
         return handleBorderRadiusWidthDeviceClick('mobile');
       }
@@ -7067,9 +7067,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-units-type"
+      className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-units-type-wrap"
+      className: "fb-setting-units-type-wrap"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -7078,14 +7078,14 @@ function Inspector(_ref) {
             Heading_Border_radius_units: item.value
           });
         },
-        className: "fb-units-type-switcher ".concat(Heading_Border_radius_units === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(Heading_Border_radius_units === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -7094,9 +7094,9 @@ function Inspector(_ref) {
         return handleBorderRadiusWidthInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -7105,9 +7105,9 @@ function Inspector(_ref) {
         return handleBorderRadiusWidthInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -7116,9 +7116,9 @@ function Inspector(_ref) {
         return handleBorderRadiusWidthInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -7127,9 +7127,9 @@ function Inspector(_ref) {
         return handleBorderRadiusWidthInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(borderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderRadiusLink ? 'is-checked' : ''),
       onClick: handleBorderRadiusWidthLinkToggle
@@ -7166,7 +7166,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-typography-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontfamily-wrapper"
+          className: "fb-setting-fontfamily-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-block"),
           options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
@@ -7177,15 +7177,15 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-wrapper"
+          className: "fb-setting-fontsize-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-header"
+          className: "fb-setting-fontsize-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-label"
+          className: "fb-setting-fontsize-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-units"
+          className: "fb-setting-fontsize-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-fontsize-units-wrap"
+          className: "fb-setting-fontsize-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -7194,10 +7194,10 @@ function Inspector(_ref) {
                 SubHeadingFontSizeUnits: item.value
               });
             },
-            className: "fb-fontsize-units-switcher ".concat(SubHeadingFontSizeUnits === item.value ? 'active' : '')
+            className: "fb-setting-fontsize-units-switcher ".concat(SubHeadingFontSizeUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-rangecontrol"
+          className: "fb-setting-fontsize-rangecontrol"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: SubHeadingFontSize,
           onChange: function onChange(value) {
@@ -7210,7 +7210,7 @@ function Inspector(_ref) {
           allowReset: true,
           resetFallbackValue: undefined
         }))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontweight-wrapper"
+          className: "fb-setting-fontweight-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-block"),
           options: [{
@@ -7251,7 +7251,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontstyle-wrapper"
+          className: "fb-setting-fontstyle-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-block"),
           options: [{
@@ -7274,7 +7274,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-texttransform-wrapper"
+          className: "fb-setting-texttransform-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-block"),
           options: [{
@@ -7300,7 +7300,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-textdecoration-wrapper"
+          className: "fb-setting-textdecoration-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-block"),
           options: [{
@@ -7326,15 +7326,15 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-wrapper"
+          className: "fb-setting-letterspacing-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-header"
+          className: "fb-setting-letterspacing-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-label"
+          className: "fb-setting-letterspacing-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-units"
+          className: "fb-setting-letterspacing-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-letterspacing-units-wrap"
+          className: "fb-setting-letterspacing-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -7343,7 +7343,7 @@ function Inspector(_ref) {
                 Heading_Letter_Spacing_units: item.value
               });
             },
-            className: "fb-letterspacing-units-switcher ".concat(Heading_Letter_Spacing_units === item.value ? 'active' : '')
+            className: "fb-setting-letterspacing-units-switcher ".concat(Heading_Letter_Spacing_units === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: Heading_Letter_Spacing,
@@ -7358,15 +7358,15 @@ function Inspector(_ref) {
           allowReset: true,
           resetFallbackValue: undefined
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-wrapper"
+          className: "fb-setting-lineheight-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-header"
+          className: "fb-setting-lineheight-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-label"
+          className: "fb-setting-lineheight-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-units"
+          className: "fb-setting-lineheight-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-lineheight-units-wrap"
+          className: "fb-setting-lineheight-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -7375,7 +7375,7 @@ function Inspector(_ref) {
                 Heading_Line_Height_units: item.value
               });
             },
-            className: "fb-lineheight-units-switcher ".concat(Heading_Line_Height_units === item.value ? 'active' : '')
+            className: "fb-setting-lineheight-units-switcher ".concat(Heading_Line_Height_units === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: Heading_Line_Height,
@@ -7529,19 +7529,19 @@ function Inspector(_ref) {
         }))));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Spacing"), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label"
+      className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
-      className: "sh_heading_label_text"
+      className: "fb-setting-label-text"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_responsive_devices"
+      className: "fb-responsive-device-wrapper"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(activePaddingDevice === 'desktop' ? 'active' : ''),
+      className: "fb-responsive-desktop-device ".concat(activePaddingDevice === 'desktop' ? 'active' : ''),
       onClick: function onClick() {
         return handleDescPaddingDeviceClick('desktop');
       }
@@ -7552,7 +7552,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(activePaddingDevice === 'tab' ? 'active' : ''),
+      className: "fb-responsive-tablet-device  ".concat(activePaddingDevice === 'tab' ? 'active' : ''),
       onClick: function onClick() {
         return handleDescPaddingDeviceClick('tab');
       }
@@ -7563,7 +7563,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(activePaddingDevice === 'mobile' ? 'active' : ''),
+      className: "fb-responsive-mobile-device ".concat(activePaddingDevice === 'mobile' ? 'active' : ''),
       onClick: function onClick() {
         return handleDescPaddingDeviceClick('mobile');
       }
@@ -7574,9 +7574,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-units-type"
+      className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-units-type-wrap"
+      className: "fb-setting-units-type-wrap"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -7585,14 +7585,14 @@ function Inspector(_ref) {
             SubHeadingPaddingUnits: item.value
           });
         },
-        className: "fb-units-type-switcher ".concat(SubHeadingPaddingUnits === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(SubHeadingPaddingUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -7601,9 +7601,9 @@ function Inspector(_ref) {
         return handleDescPaddingInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -7612,9 +7612,9 @@ function Inspector(_ref) {
         return handleDescPaddingInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -7623,9 +7623,9 @@ function Inspector(_ref) {
         return handleDescPaddingInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -7634,26 +7634,26 @@ function Inspector(_ref) {
         return handleDescPaddingInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(paddingLink ? 'is-checked' : ''),
       onClick: handleDescPaddingLinkToggle
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label"
+      className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
-      className: "sh_heading_label_text"
+      className: "fb-setting-label-text"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margin", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_responsive_devices"
+      className: "fb-responsive-device-wrapper"
     }, /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_desktop_device ".concat(Heading_Active_Margin_Device === 'desktop' ? 'active' : ''),
+      className: "fb-responsive-desktop-device ".concat(Heading_Active_Margin_Device === 'desktop' ? 'active' : ''),
       onClick: function onClick() {
         return handleMarginDeviceClick('desktop');
       }
@@ -7664,7 +7664,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_tab_device ".concat(Heading_Active_Margin_Device === 'tab' ? 'active' : ''),
+      className: "fb-responsive-tablet-device  ".concat(Heading_Active_Margin_Device === 'tab' ? 'active' : ''),
       onClick: function onClick() {
         return handleMarginDeviceClick('tab');
       }
@@ -7675,7 +7675,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
     }))), /*#__PURE__*/React.createElement("button", {
-      className: "sh_heading_mobile_device ".concat(Heading_Active_Margin_Device === 'mobile' ? 'active' : ''),
+      className: "fb-responsive-mobile-device ".concat(Heading_Active_Margin_Device === 'mobile' ? 'active' : ''),
       onClick: function onClick() {
         return handleMarginDeviceClick('mobile');
       }
@@ -7686,9 +7686,9 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-units-type"
+      className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-units-type-wrap"
+      className: "fb-setting-units-type-wrap"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -7697,14 +7697,14 @@ function Inspector(_ref) {
             Heading_Margin_Units: item.value
           });
         },
-        className: "fb-units-type-switcher ".concat(Heading_Margin_Units === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(Heading_Margin_Units === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -7713,9 +7713,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -7724,9 +7724,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -7735,9 +7735,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -7746,9 +7746,9 @@ function Inspector(_ref) {
         return handleMarginInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(Heading_Margin_Link ? 'is-checked' : ''),
       onClick: handleMarginLinkToggle
@@ -7785,7 +7785,7 @@ function Inspector(_ref) {
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
           className: "fb-setting-typography-popup-inner"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontfamily-wrapper"
+          className: "fb-setting-fontfamily-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-block"),
           options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
@@ -7796,15 +7796,15 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-wrapper"
+          className: "fb-setting-fontsize-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-header"
+          className: "fb-setting-fontsize-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-label"
+          className: "fb-setting-fontsize-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-units"
+          className: "fb-setting-fontsize-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-fontsize-units-wrap"
+          className: "fb-setting-fontsize-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -7813,10 +7813,10 @@ function Inspector(_ref) {
                 buttonFontSizeUnits: item.value
               });
             },
-            className: "fb-fontsize-units-switcher ".concat(buttonFontSizeUnits === item.value ? 'active' : '')
+            className: "fb-setting-fontsize-units-switcher ".concat(buttonFontSizeUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontsize-rangecontrol"
+          className: "fb-setting-fontsize-rangecontrol"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: Heading_Font_Size,
           onChange: function onChange(value) {
@@ -7829,7 +7829,7 @@ function Inspector(_ref) {
           allowReset: true,
           resetFallbackValue: undefined
         }))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontweight-wrapper"
+          className: "fb-setting-fontweight-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-block"),
           options: [{
@@ -7870,7 +7870,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-fontstyle-wrapper"
+          className: "fb-setting-fontstyle-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-block"),
           options: [{
@@ -7893,7 +7893,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-texttransform-wrapper"
+          className: "fb-setting-texttransform-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-block"),
           options: [{
@@ -7919,7 +7919,7 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-textdecoration-wrapper"
+          className: "fb-setting-textdecoration-wrapper"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-block"),
           options: [{
@@ -7945,15 +7945,15 @@ function Inspector(_ref) {
             });
           }
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-wrapper"
+          className: "fb-setting-letterspacing-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-header"
+          className: "fb-setting-letterspacing-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-label"
+          className: "fb-setting-letterspacing-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-letterspacing-units"
+          className: "fb-setting-letterspacing-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-letterspacing-units-wrap"
+          className: "fb-setting-letterspacing-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -7962,7 +7962,7 @@ function Inspector(_ref) {
                 buttonLetterSpacingUnits: item.value
               });
             },
-            className: "fb-letterspacing-units-switcher ".concat(buttonLetterSpacingUnits === item.value ? 'active' : '')
+            className: "fb-setting-letterspacing-units-switcher ".concat(buttonLetterSpacingUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: buttonLetterSpacing,
@@ -7977,15 +7977,15 @@ function Inspector(_ref) {
           allowReset: true,
           resetFallbackValue: undefined
         })), /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-wrapper"
+          className: "fb-setting-lineheight-wrapper"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-header"
+          className: "fb-setting-lineheight-header"
         }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-label"
+          className: "fb-setting-lineheight-label"
         }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
-          className: "fb-lineheight-units"
+          className: "fb-setting-lineheight-units"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-          className: "fb-lineheight-units-wrap"
+          className: "fb-setting-lineheight-units-wrap"
         }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
           return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             key: key,
@@ -7994,7 +7994,7 @@ function Inspector(_ref) {
                 buttonLineHeightUnits: item.value
               });
             },
-            className: "fb-lineheight-units-switcher ".concat(buttonLineHeightUnits === item.value ? 'active' : '')
+            className: "fb-setting-lineheight-units-switcher ".concat(buttonLineHeightUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           value: buttonLineHeight,
@@ -8285,11 +8285,11 @@ function Inspector(_ref) {
         }))));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Spacing"), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
@@ -8344,11 +8344,11 @@ function Inspector(_ref) {
         className: "fb-setting-units-type-switcher ".concat(infoButtonPaddingUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -8357,9 +8357,9 @@ function Inspector(_ref) {
         return handleButtonPaddingInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -8368,9 +8368,9 @@ function Inspector(_ref) {
         return handleButtonPaddingInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -8379,9 +8379,9 @@ function Inspector(_ref) {
         return handleButtonPaddingInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -8390,18 +8390,18 @@ function Inspector(_ref) {
         return handleButtonPaddingInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(paddingLink ? 'is-checked' : ''),
       onClick: handlePaddingLinkToggle
     }))))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_container"
+      className: "fb-setting-spacing-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_spacing_inner_container"
+      className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_label_container"
+      className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-label-wrapper"
     }, /*#__PURE__*/React.createElement("p", {
@@ -8456,11 +8456,11 @@ function Inspector(_ref) {
         className: "fb-setting-units-type-switcher ".concat(infoButtonMarginUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_container"
+      className: "fb-setting-spacing-input-container"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
@@ -8469,9 +8469,9 @@ function Inspector(_ref) {
         return handleButtonMarginInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
@@ -8480,9 +8480,9 @@ function Inspector(_ref) {
         return handleButtonMarginInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
@@ -8491,9 +8491,9 @@ function Inspector(_ref) {
         return handleButtonMarginInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
@@ -8502,9 +8502,9 @@ function Inspector(_ref) {
         return handleButtonMarginInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "sh_heading_input_wrapper"
+      className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
-      className: "sh_heading_spacing_input_label"
+      className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(infoButtonMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(infoButtonMarginLink ? 'is-checked' : ''),
       onClick: handleButtonMarginLinkToggle
@@ -22075,7 +22075,7 @@ function _unsupportedIterableToArray(r, a) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"title":"Info Box","name":"frontis-blocks/info-box","version":"1.0.0","category":"frontis-blocks","icon":"info","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true}},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"title":"Info Box","name":"frontis-blocks/info-box","version":"1.0.0","category":"frontis-blocks","icon":"info","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
