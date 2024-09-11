@@ -7978,7 +7978,7 @@ function FBIconPicker(props) {
   var closeModal = function closeModal() {
     return setIconPickerModal(false);
   };
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(value),
     _useState4 = _slicedToArray(_useState3, 2),
     insertIcon = _useState4[0],
     setInsertIcon = _useState4[1];

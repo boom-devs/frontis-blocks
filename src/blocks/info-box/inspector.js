@@ -1322,7 +1322,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 													}
 
 												</div>
-												<FBIconPicker value={'youtube'} setIconHandler={iconHandler}/>
+												<FBIconPicker value={icon} setIconHandler={iconHandler}/>
 											</PanelBody>
 										</div>
 										<div className="fb-advanced-wrapper">
