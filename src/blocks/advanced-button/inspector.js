@@ -28,12 +28,14 @@ import {
     NORMAL_HOVER,
     UNIT_TYPES,
     TEXT_ALIGN,
+    ICON_ALIGN,
     FONT_FAMILYS,
     BORDER_STYLES,
 } from "./constants/constants";
 
 import { useState, useEffect } from "@wordpress/element";
 import ResponsiveControl from '../../components/responsivecontrol';
+import FBIconPicker from "../../components/icon-picker";
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
@@ -86,11 +88,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         ButtonTabMargin,
         ButtonMobileMargin,
         ButtonMarginLink,
+        ButtonIconAlign,
+        ButtonIcon,
 
         ButtonZIndex
 
     } = attributes;
-    
     
     
     useEffect(() => {
@@ -453,6 +456,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             document.head.appendChild(linkElement);
         }
     }, [ButtonFontFamily]);
+
+    const iconHandler = (IconName) => {
+		setAttributes({ButtonIcon: IconName})
+
+	}
+    
     
     
     return (
@@ -605,6 +614,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 )}
                                                             />
                                                         </div>
+                                                    </BaseControl>
+                                                </div>
+                                                <div className='fb-advanced-btn-icon-wrapper'>
+                                                    <BaseControl
+                                                        label={__("Icon", "frontis-blocks")}
+                                                        className="fb-advanced-btn-icon"
+                                                    >
+                                                        <ButtonGroup
+                                                            className="fb-advanced-btn-icon-group-btn"
+                                                        >
+                                                            {ICON_ALIGN.map((item, key) => (
+                                                                <Button
+                                                                    key={key}
+                                                                    onClick={() => setAttributes({ ButtonIconAlign: item.value })}
+                                                                    className={`fb-advanced-btn-icon-single-btn ${ButtonIconAlign === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                        {ButtonIconAlign === 'icon' && (
+                                                            <FBIconPicker value={ButtonIcon} setIconHandler={iconHandler} /> 
+                                                        )}
                                                     </BaseControl>
                                                 </div>
                                             </PanelBody>

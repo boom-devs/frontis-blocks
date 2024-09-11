@@ -249,6 +249,14 @@ const attributes = {
         type : "boolean",
         default: true
     },
+    ButtonIconAlign: {
+        type: "string",
+        default: "no-icon",
+    },
+    ButtonIcon: {
+		type: 'string',
+		default: 'circle-check',
+	},
     ButtonZIndex : {
         type: "number",
     },
