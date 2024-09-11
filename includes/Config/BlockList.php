@@ -19,7 +19,19 @@ class BlockList {
                 'slug'      => 'advanced-heading',
                 'title'     => 'Advanced Heading',
                 'package'   => 'free',
+<<<<<<< HEAD
                 'category'  => 'post',
+=======
+                'category'  => 'general',
+                'badge'     => 'freemium',
+                'status'    => 'active',
+            ],
+            'icon-picker' => [
+                'slug'      => 'icon-picker',
+                'title'     => 'Icon Picker',
+                'package'   => 'free',
+                'category'  => 'general',
+>>>>>>> 37ef4b5971d25a7edcd2f0eb53e4e7c3e5d42700
                 'badge'     => 'freemium',
                 'status'    => 'active',
             ],

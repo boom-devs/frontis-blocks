@@ -4,5 +4,8 @@
  */
 ?>
 <p <?php echo get_block_wrapper_attributes(); ?>>
-	<?php esc_html_e( 'Post Grid – hello from a dynamic block!', 'post-grid' ); ?>
+	<?php
+
+	 	var_dump($attributes);
+	 esc_html_e( 'Post Grid – hello from a dynamic block!', 'post-grid' ); ?>
 </p>
