@@ -12,10 +12,11 @@
         box-sizing: border-box;
         cursor: pointer;
         position: relative;
-        transition: .2s ease-in;
+        transition: all .3s ease-in-out;
         white-space: nowrap;
         .fb-advanced-button-text {
             color: #ffffff;
+            transition: all .3s ease-in-out;
         }
     }
 }

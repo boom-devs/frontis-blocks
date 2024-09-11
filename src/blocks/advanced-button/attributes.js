@@ -183,22 +183,13 @@ const attributes = {
         type: "string",
         default: "px"
     },
-    desktopButtonPadding: {
-        type: "object", 
-        default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
-    },
     ButtonDesktopPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 12,
+            bottom: 12,
+            left: 30,
+            right: 30,
         },
     },
     ButtonTabPadding: {
