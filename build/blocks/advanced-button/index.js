@@ -3583,8 +3583,8 @@ function Edit(_ref) {
   }, /*#__PURE__*/React.createElement("a", {
     className: "fb-advanced-button",
     href: ButtonUrl,
-    target: ButtonTargetUrl ? '_blank' : '',
-    rel: ButtonTargetUrl ? 'noopener noreferrer' : '',
+    target: ButtonTargetUrl ? '_blank' : undefined,
+    rel: ButtonTargetUrl ? 'noopener noreferrer' : undefined,
     onClick: handleButtonClick
   }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
     tagName: "span",
@@ -5318,8 +5318,8 @@ function save(_ref) {
   }, /*#__PURE__*/React.createElement("a", {
     className: "fb-advanced-button",
     href: ButtonUrl,
-    target: ButtonTargetUrl ? '_blank' : '',
-    rel: ButtonTargetUrl ? 'noopener noreferrer' : '',
+    target: ButtonTargetUrl ? '_blank' : undefined,
+    rel: ButtonTargetUrl ? 'noopener noreferrer' : undefined,
     style: {
       zIndex: ButtonZIndex,
       width: ButtonWidth ? "".concat(ButtonWidth, "%") : 'auto'

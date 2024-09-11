@@ -22,8 +22,8 @@ export default function save({ attributes }) {
                 <a
                     className="fb-advanced-button"
                     href={ButtonUrl}
-                    target={ButtonTargetUrl ? '_blank' : ''}
-                    rel={ButtonTargetUrl ? 'noopener noreferrer' : ''}
+                    target={ButtonTargetUrl ? '_blank' : undefined}
+                    rel={ButtonTargetUrl ? 'noopener noreferrer' : undefined}
                     style={{
                         zIndex: ButtonZIndex,
                         width: ButtonWidth ? `${ButtonWidth}%` : 'auto',
