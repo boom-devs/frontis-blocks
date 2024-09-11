@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Frontis Blocks
  * Plugin URI: https://frontisblocks.com
- * Description: The ultimate blocks library for Gutenberg editor.
+ * Description: The ultimate blocks library for Gutenberg editor. 
  * Author: WPmessiah
  * Author URI: https://WPmessiah.com
  * Version: 1.0.0
@@ -22,7 +22,7 @@ define( 'FB_PLUGIN_FILE', __FILE__ );
 
 /**
  * Require Autoloader.
- *
+ * 
  * @since 1.0.0
  * @package Frontis_Blocks
  */
@@ -36,6 +36,8 @@ function wm_frontis_blocks(){
 
 //Kick of the plugin.
 wm_frontis_blocks();
+
+
 
 function frontis_enqueue_block_assets() {
     // Register the script

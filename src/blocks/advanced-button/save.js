@@ -1,4 +1,5 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
     const {
@@ -8,6 +9,7 @@ export default function save({ attributes }) {
         ButtonUrl,
         ButtonTargetUrl,
         ButtonWidth,
+        ButtonIcon,
         ButtonZIndex,
     } = attributes;
 
@@ -34,6 +36,7 @@ export default function save({ attributes }) {
                         value={ButtonText}
                         className="fb-advanced-button-text"
                     />
+                    <div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
                 </a>
             </div>
         </div>

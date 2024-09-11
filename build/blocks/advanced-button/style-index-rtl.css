@@ -21,3 +21,17 @@
   color: #ffffff;
   transition: all 0.3s ease-in-out;
 }
+
+.fb-advanced-button-icon {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+.fb-advanced-button-icon svg {
+  display: block;
+  height: 16px;
+  width: 16px;
+  fill: #fff;
+  box-sizing: content-box;
+  margin-right: 10px;
+}
