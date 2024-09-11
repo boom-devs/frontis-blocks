@@ -5372,7 +5372,7 @@ function Inspector(_ref) {
         }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace', 'frontis-block'));
       }
     })))), /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      value: 'youtube',
+      value: icon,
       setIconHandler: iconHandler
     }))), /*#__PURE__*/React.createElement("div", {
       className: "fb-advanced-wrapper"
@@ -8776,7 +8776,7 @@ function FBIconPicker(props) {
   var closeModal = function closeModal() {
     return setIconPickerModal(false);
   };
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(value),
     _useState4 = _slicedToArray(_useState3, 2),
     insertIcon = _useState4[0],
     setInsertIcon = _useState4[1];
