@@ -25,7 +25,7 @@ const attributes = {
     },
 	icon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'face-smile',
 	},
     boxBgColor: {
         type: 'string',
@@ -306,7 +306,7 @@ const attributes = {
     },
     SubHeadingFontSize: {
         type: "number",
-        default: 35
+        default: 16
     },
     SubHeadingFontSizeUnits: {
         type: "string",
@@ -314,7 +314,7 @@ const attributes = {
     },
     SubHeadingFontWeight : {
         type: "string",
-        default: "700"
+        default: "400"
     },
     SubHeadingFontStyle : {
         type: "string",
@@ -354,7 +354,8 @@ const attributes = {
     },
     Sub_Heading_Text: {
         type: "string",
-        default: "Info Description"
+        default: "Contrary to popular belief, Lorem Ipsum is not simply random text." +
+			" It has roots in a piece of classical Latin"
     },
     Sub_Heading_Tag: {
         type : "string",
@@ -362,7 +363,7 @@ const attributes = {
     },
     Sub_Heading_Switcher: {
         type: "boolean",
-        default: false,
+        default: true,
     },
     Sub_Heading_Position: {
         type: "string",
@@ -406,7 +407,7 @@ const attributes = {
     },
     info_Button_Switcher: {
         type: "boolean",
-        default: false,
+        default: true,
     },
     info_Button_Link: {
         type: "string",
@@ -419,10 +420,10 @@ const attributes = {
 	infoButtonDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
 		},
 	},
 	infoButtonTabPadding: {
@@ -491,10 +492,10 @@ const attributes = {
 	infoBoxDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 40,
+			bottom: 40,
+			left: 40,
+			right: 40,
 		},
 	},
 	infoBoxTabPadding: {
@@ -600,7 +601,7 @@ const attributes = {
 	},
 	buttonFontSize: {
 		type: "number",
-		default: 35
+		default: 14
 	},
 	buttonFontSizeUnits: {
 		type: "string",
@@ -608,7 +609,7 @@ const attributes = {
 	},
 	buttonFontWeight : {
 		type: "string",
-		default: "700"
+		default: "400"
 	},
 	buttonFontStyle : {
 		type: "string",
@@ -642,7 +643,8 @@ const attributes = {
 		default: "normal"
 	},
 	buttonTextColor : {
-		type: "string"
+		type: "string",
+		default: '#ffffff'
 	},
 	buttonTextHoverColor : {
 		type: "string"
@@ -652,7 +654,8 @@ const attributes = {
 		default: "normal"
 	},
 	buttonBgColor : {
-		type: "string"
+		type: "string",
+		default: '#4361EE'
 	},
 	buttonBgHoverColor : {
 		type: "string"

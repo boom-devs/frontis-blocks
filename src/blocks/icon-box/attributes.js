@@ -45,15 +45,15 @@ const attributes = {
     },
     wrapperAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
 	contentAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
 	descAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
 	buttonAlignment: {
         type: "string",
@@ -61,7 +61,7 @@ const attributes = {
     },
     Alignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
     Heading_Text: {
         type : "string",
@@ -306,7 +306,7 @@ const attributes = {
     },
     SubHeadingFontSize: {
         type: "number",
-        default: 35
+        default: 16
     },
     SubHeadingFontSizeUnits: {
         type: "string",
@@ -314,7 +314,7 @@ const attributes = {
     },
     SubHeadingFontWeight : {
         type: "string",
-        default: "700"
+        default: "400"
     },
     SubHeadingFontStyle : {
         type: "string",
@@ -362,7 +362,7 @@ const attributes = {
     },
     Sub_Heading_Switcher: {
         type: "boolean",
-        default: false,
+        default: true,
     },
     Sub_Heading_Position: {
         type: "string",

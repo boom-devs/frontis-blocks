@@ -6,12 +6,12 @@ import {
     BlockControls,
     AlignmentToolbar,
 } from '@wordpress/block-editor';
-
 /**
  * Internal depencencies
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import {Card} from "@wordpress/components";
 export default function Edit({ attributes, setAttributes, clientId}) {
     const {
         blockID,
@@ -58,7 +58,10 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 			</BlockControls>
 
             <div {...blockProps} id={blockID}>
-                <div className={`fb-info-box-content-wrapper ${blockID}`} >
+				<Card
+					className={`fb-info-box-content-wrapper ${blockID}`}
+				>
+                <div className={`fb-info-box-content-wrapper-inner ${blockID}`} >
 					<div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
 						{mediaSwitcher === 'image' && (
 						<img src={attributes.infoMediaUrl}
@@ -101,21 +104,20 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                         />
                     )}
                     {info_Button_Switcher && (
-						<div className="fb-info-btn-wrapper" style={{textAlign: buttonAlignment}}>
-							<a
-								href={info_Button_Link}
+						<div className="fb-info-btn-wrapper">
+							<RichText
+								value={info_Button_Text}
+								onChange={(value) => setAttributes({info_Button_Text: value})}
+								placeholder={__('Info Button', 'frontis-block')}
 								className="fb-info-button"
-								target="_blank"
-								rel="noopener noreferrer"
-
-							>
-								{info_Button_Text}
-							</a>
+								style={{textAlign: buttonAlignment}}
+							/>
 						</div>
 
 					)}
 
 				</div>
+				</Card>
 			</div>
 		</>
 	);

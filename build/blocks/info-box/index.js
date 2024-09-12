@@ -39,7 +39,7 @@ var attributes = {
   },
   icon: {
     type: 'string',
-    "default": 'circle-check'
+    "default": 'face-smile'
   },
   boxBgColor: {
     type: 'string',
@@ -317,7 +317,7 @@ var attributes = {
   },
   SubHeadingFontSize: {
     type: "number",
-    "default": 35
+    "default": 16
   },
   SubHeadingFontSizeUnits: {
     type: "string",
@@ -325,7 +325,7 @@ var attributes = {
   },
   SubHeadingFontWeight: {
     type: "string",
-    "default": "700"
+    "default": "400"
   },
   SubHeadingFontStyle: {
     type: "string",
@@ -365,7 +365,7 @@ var attributes = {
   },
   Sub_Heading_Text: {
     type: "string",
-    "default": "Info Description"
+    "default": "Contrary to popular belief, Lorem Ipsum is not simply random text." + " It has roots in a piece of classical Latin"
   },
   Sub_Heading_Tag: {
     type: "string",
@@ -373,7 +373,7 @@ var attributes = {
   },
   Sub_Heading_Switcher: {
     type: "boolean",
-    "default": false
+    "default": true
   },
   Sub_Heading_Position: {
     type: "string",
@@ -417,7 +417,7 @@ var attributes = {
   },
   info_Button_Switcher: {
     type: "boolean",
-    "default": false
+    "default": true
   },
   info_Button_Link: {
     type: "string",
@@ -430,10 +430,10 @@ var attributes = {
   infoButtonDesktopPadding: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: 20,
+      bottom: 20,
+      left: 20,
+      right: 20
     }
   },
   infoButtonTabPadding: {
@@ -502,10 +502,10 @@ var attributes = {
   infoBoxDesktopPadding: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: 40,
+      bottom: 40,
+      left: 40,
+      right: 40
     }
   },
   infoBoxTabPadding: {
@@ -611,7 +611,7 @@ var attributes = {
   },
   buttonFontSize: {
     type: "number",
-    "default": 35
+    "default": 14
   },
   buttonFontSizeUnits: {
     type: "string",
@@ -619,7 +619,7 @@ var attributes = {
   },
   buttonFontWeight: {
     type: "string",
-    "default": "700"
+    "default": "400"
   },
   buttonFontStyle: {
     type: "string",
@@ -653,7 +653,8 @@ var attributes = {
     "default": "normal"
   },
   buttonTextColor: {
-    type: "string"
+    type: "string",
+    "default": '#ffffff'
   },
   buttonTextHoverColor: {
     type: "string"
@@ -663,7 +664,8 @@ var attributes = {
     "default": "normal"
   },
   buttonBgColor: {
-    type: "string"
+    type: "string",
+    "default": '#4361EE'
   },
   buttonBgHoverColor: {
     type: "string"
@@ -3955,13 +3957,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inspector */ "./src/blocks/info-box/inspector.js");
 /* harmony import */ var _components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/icon-picker/components/icon-picker/controls/renderIcon */ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-
 
 
 /**
  * Internal depencencies
  */
+
 
 
 function Edit(_ref) {
@@ -4004,8 +4008,10 @@ function Edit(_ref) {
     controls: ['left', 'center', 'right', 'justify']
   })), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
     id: blockID
-  }), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Card, {
     className: "fb-info-box-content-wrapper ".concat(blockID)
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-info-box-content-wrapper-inner ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-info-media-wrapper",
     style: {
@@ -4059,16 +4065,20 @@ function Edit(_ref) {
       textAlign: descAlignment
     }
   }), info_Button_Switcher && /*#__PURE__*/React.createElement("div", {
-    className: "fb-info-btn-wrapper",
+    className: "fb-info-btn-wrapper"
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+    value: info_Button_Text,
+    onChange: function onChange(value) {
+      return setAttributes({
+        info_Button_Text: value
+      });
+    },
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Info Button', 'frontis-block'),
+    className: "fb-info-button",
     style: {
       textAlign: buttonAlignment
     }
-  }, /*#__PURE__*/React.createElement("a", {
-    href: info_Button_Link,
-    className: "fb-info-button",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, info_Button_Text)))));
+  }))))));
 }
 
 /***/ }),
@@ -5548,8 +5558,9 @@ function Inspector(_ref) {
         });
       },
       className: "fb-info-button-text"
-    }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
       value: info_Button_Link,
+      className: "info-btn-url-input",
       onChange: function onChange(value, post) {
         // Check if the URL has a protocol (http or https), otherwise prepend it
         var formattedLink = value.startsWith('http://') || value.startsWith('https://') ? value : "https://".concat(value);
@@ -5558,7 +5569,7 @@ function Inspector(_ref) {
           info_Button_Text: post && post.title || info_Button_Text
         });
       }
-    }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    })))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box", "frontis-block"),
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
@@ -9074,7 +9085,7 @@ function FBIconPicker(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "secondary",
     onClick: fbInsertIcon
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks'))))))));
 }
 
 /***/ }),
