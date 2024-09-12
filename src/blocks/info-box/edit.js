@@ -32,7 +32,9 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 		infoBoxBg,
 		descAlignment,
 		buttonAlignment,
-		icon
+		icon,
+		mediaSwitcher,
+		contentAlignment
 
     } = attributes;
 
@@ -47,13 +49,25 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                 clientId={clientId}
             />
 
+			<BlockControls>
+				<AlignmentToolbar
+					value={contentAlignment}
+					onChange={(value) => setAttributes({ contentAlignment: value })}
+					controls={['left', 'center', 'right', 'justify']}
+				/>
+			</BlockControls>
+
             <div {...blockProps} id={blockID}>
-                <div className={`fb-info-box-content-wrapper ${blockID}`} style={{ backgroundColor: infoBoxBg }}>
+                <div className={`fb-info-box-content-wrapper ${blockID}`} >
 					<div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
+						{mediaSwitcher === 'image' && (
 						<img src={attributes.infoMediaUrl}
 							 style={{width: `${attributes.width}px`, height: `${attributes.height}px`}}
 						/>
+							)}
+						{mediaSwitcher === 'icon' && (
 						<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+						)}
 					</div>
 
 					<RichText
@@ -100,7 +114,6 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 						</div>
 
 					)}
-
 
 				</div>
 			</div>

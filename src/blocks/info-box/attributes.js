@@ -7,6 +7,10 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	mediaSwitcher : {
+		type: "string",
+		default: "icon"
+	},
     infoMediaUrl: {
         type: 'string',
         default: ''
@@ -40,6 +44,10 @@ const attributes = {
         default: 'Icon Box title',
     },
     wrapperAlignment: {
+        type: "string",
+        default: "left",
+    },
+	contentAlignment: {
         type: "string",
         default: "left",
     },
