@@ -257,9 +257,7 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
-
+	//Margin
     Heading_Margin_Units : {
         type: "string",
         default: "px"
@@ -400,6 +398,46 @@ const attributes = {
             right: 0,
         },
     },
+	//Margin
+	descMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	descDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	descTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	descMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	descActiveMarginDevice: {
+		type: "string",
+		default: "desktop"
+	},
+	descMarginLink : {
+		type : "boolean",
+		default: true
+	},
     //Info Button
     info_Button_Text: {
         type: "string",
@@ -484,6 +522,84 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+	//Info Button Border
+	infoButtonBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	infoButtonBorder: {
+		type: 'string',
+		default: "none",
+	},
+	infoButtonBorderColor: {
+		type: 'string',
+	},
+	infoButtonHoverBorderColor: {
+		type: 'string',
+	},
+	infoButtonBorderUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoButtonDesktopBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonTabBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonMobileBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	//Button Border Radius
+	infoBtnBorderradiusUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoBtnDesktopBorderradiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBtnTabBorderradiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBtnMobileBorderradiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
 	//Info box padding
 	infoBoxPaddingUnits : {
 		type: "string",
@@ -515,6 +631,46 @@ const attributes = {
 			left: 0,
 			right: 0,
 		},
+	},
+	// Info box margin
+	infoBoxMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoBoxDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxActiveMarginDevice: {
+		type: "string",
+		default: "desktop"
+	},
+	infoBoxMarginLink : {
+		type : "boolean",
+		default: true
 	},
 	// Info Box Border
 	infoBoxBorder: {
