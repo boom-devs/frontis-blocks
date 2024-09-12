@@ -384,7 +384,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								className: "fb-tab general",
 							},
 							{
-								name: "styles",
+								name:
+									"styles",
 								title: "Style",
 								className: "fb-tab styles",
 							},
