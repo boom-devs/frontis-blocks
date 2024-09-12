@@ -4980,7 +4980,7 @@ function ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
     device = _ref.device,
     deviceHandler = _ref.deviceHandler;
-  var hadleDevice = function hadleDevice(deviceName) {
+  var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
     if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
       wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(deviceName);
@@ -4995,7 +4995,7 @@ function ResponsiveControl(_ref) {
   }, /*#__PURE__*/React.createElement("button", {
     className: "fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
     onClick: function onClick() {
-      return hadleDevice('Desktop');
+      return handleDevice('Desktop');
     }
   }, /*#__PURE__*/React.createElement("svg", {
     width: "8",
@@ -5006,7 +5006,7 @@ function ResponsiveControl(_ref) {
   }))), /*#__PURE__*/React.createElement("button", {
     className: "fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
     onClick: function onClick() {
-      return hadleDevice('Tablet');
+      return handleDevice('Tablet');
     }
   }, /*#__PURE__*/React.createElement("svg", {
     width: "6",
@@ -5017,7 +5017,7 @@ function ResponsiveControl(_ref) {
   }))), /*#__PURE__*/React.createElement("button", {
     className: "fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
     onClick: function onClick() {
-      return hadleDevice('Mobile');
+      return handleDevice('Mobile');
     }
   }, /*#__PURE__*/React.createElement("svg", {
     width: "4",
