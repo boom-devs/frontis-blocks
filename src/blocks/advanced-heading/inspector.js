@@ -1,10 +1,10 @@
 import { __ } from '@wordpress/i18n';
 
-import { 
-    InspectorControls, 
+import {
+    InspectorControls,
 } from '@wordpress/block-editor';
 
-import { 
+import {
     SelectControl,
     PanelBody,
     TabPanel,
@@ -40,10 +40,10 @@ import ResponsiveControl from '../../components/responsivecontrol';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
-    const { 
+    const {
         blockID,
         DeviceType,
-        HeadingText, 
+        HeadingText,
         HeadingTag,
         HeadingBackgroundColor,
         HeadingAlignment,
@@ -96,7 +96,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
     } = attributes;
-    
+
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -444,7 +444,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
     const borderRadiusWidth = `${HeadingDesktopBorderRadiusWidth.top}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.right}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.bottom}${HeadingBorderRadiusUnits} ${HeadingDesktopBorderRadiusWidth.left}${HeadingBorderRadiusUnits}`;
-    /** End Border Radius Width */ 
+    /** End Border Radius Width */
 
     /* set default values for the style attributes */
     useEffect(() => {
@@ -456,7 +456,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             document.head.appendChild(linkElement);
         }
     }, [HeadingFontFamily]);
-    
+
         // Define the CSS as a string
         const css = `
         #${blockID} {
@@ -465,10 +465,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             background-color: #f9f9f9;
         }
     `;
-    
+
     return (
         <>
-        
+
             <style>
             {`
                 .fb-advanced-wrapper.${blockID} .fb-advanced {
@@ -639,7 +639,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                     </Button>
                                                                 ))}
                                                             </ButtonGroup>
-                                                            
+
                                                         </BaseControl>
 
                                                         <TextareaControl
@@ -696,7 +696,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             title={__("Styles", "frontis-blocks")}
                                             initialOpen={true}
                                         >
-                                            <BaseControl 
+                                            <BaseControl
                                                 label={__("Typography", "frontis-blocks")}
                                                 className="fb-setting-typography"
                                             >
@@ -897,7 +897,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             </BaseControl>
 
                                             {HeadingColorSwitcher === 'normal' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Nomal Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -947,7 +947,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             )}
 
                                             {HeadingColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1026,7 +1026,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             </BaseControl>
 
                                             {HeadingBorderColorSwitcher === 'normal' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Nomal Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1076,7 +1076,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             )}
 
                                             {HeadingBorderColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1190,7 +1190,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             >
                                                             </span>
                                                         </div>
-                                                    </div>                          
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="fb-setting-spacing-container">
@@ -1257,7 +1257,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             >
                                                             </span>
                                                         </div>
-                                                    </div>                          
+                                                    </div>
                                                 </div>
                                             </div>
                                         </PanelBody>
@@ -1326,7 +1326,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             >
                                                             </span>
                                                         </div>
-                                                    </div>                          
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="fb-setting-spacing-container">
@@ -1393,9 +1393,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             >
                                                             </span>
                                                         </div>
-                                                    </div>                          
+                                                    </div>
                                                 </div>
-                                            </div>                                       
+                                            </div>
                                         </PanelBody>
                                     </>
                                 )}
