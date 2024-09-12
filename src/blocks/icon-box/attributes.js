@@ -57,7 +57,7 @@ const attributes = {
     },
     Heading_Text: {
         type : "string",
-        default: "Info Title"
+        default: "Icon Title"
     },
     Heading_Tag: {
         type : "string",
@@ -346,7 +346,7 @@ const attributes = {
     },
     Sub_Heading_Text: {
         type: "string",
-        default: "Info Description"
+        default: "Icon Description"
     },
     Sub_Heading_Tag: {
         type : "string",

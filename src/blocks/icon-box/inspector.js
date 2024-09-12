@@ -191,7 +191,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		infoButtonDesktopPadding,
 		infoButtonTabPadding,
 		infoButtonMobilePadding,
-		icon
+		icon,
+		width
 
 	} = attributes;
 
@@ -1210,6 +1211,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                 .fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper .fb-info-button:hover {
                 	${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : ''}
                 	${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
+                }
+                .fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg {
+                	width: ${attributes.width}px;
                 }
             `}
 			</style>

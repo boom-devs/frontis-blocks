@@ -11,6 +11,7 @@ import {
  * Internal depencencies
  */
 import Inspector from "./inspector";
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Edit({ attributes, setAttributes, clientId}) {
     const {
@@ -32,7 +33,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 		infoBoxBg,
 		descAlignment,
 		buttonAlignment,
-
+		icon
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -48,14 +49,15 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 
             <div {...blockProps} id={blockID}>
                 <div className={`fb-info-box-content-wrapper ${blockID}`} style={{ backgroundColor: infoBoxBg }}>
-                    <div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
-                    <img src={attributes.infoMediaUrl}
-                         style={{width: `${attributes.width}px`, height: `${attributes.height}px`}}
-                    />
-                    </div>
+					<div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
+						<img src={attributes.infoMediaUrl}
+							 style={{width: `${attributes.width}px`, height: `${attributes.height}px`}}
+						/>
+						<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+					</div>
 
-                    <RichText
-                        tagName={Heading_Tag}
+					<RichText
+						tagName={Heading_Tag}
                         value={Heading_Text}
                         onChange={(value) => setAttributes({text: value})}
                         placeholder={__('Info Heading', 'frontis-block')}
