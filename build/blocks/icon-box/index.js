@@ -21,6 +21,10 @@ var attributes = {
     type: 'string',
     "default": ''
   },
+  mediaSwitcher: {
+    type: "string",
+    "default": "icon"
+  },
   infoMediaUrl: {
     type: 'string',
     "default": ''
@@ -57,6 +61,10 @@ var attributes = {
     type: "string",
     "default": "left"
   },
+  contentAlignment: {
+    type: "string",
+    "default": "left"
+  },
   descAlignment: {
     type: "string",
     "default": "left"
@@ -71,7 +79,7 @@ var attributes = {
   },
   Heading_Text: {
     type: "string",
-    "default": "Icon Title"
+    "default": "Icon Box Title"
   },
   Heading_Tag: {
     type: "string",
@@ -357,7 +365,7 @@ var attributes = {
   },
   Sub_Heading_Text: {
     type: "string",
-    "default": "Icon Description"
+    "default": "lorem ipsum dolor somit inta anta kun faya kun."
   },
   Sub_Heading_Tag: {
     type: "string",
@@ -689,6 +697,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   WRAPPER_BORDER_SHADOW: () => (/* binding */ WRAPPER_BORDER_SHADOW),
 /* harmony export */   WRAPPER_MARGIN: () => (/* binding */ WRAPPER_MARGIN),
 /* harmony export */   WRAPPER_PADDING: () => (/* binding */ WRAPPER_PADDING),
+/* harmony export */   mediaType: () => (/* binding */ mediaType),
 /* harmony export */   separator_ICON_SIZE: () => (/* binding */ separator_ICON_SIZE),
 /* harmony export */   separator_LINE_SIZE: () => (/* binding */ separator_LINE_SIZE),
 /* harmony export */   separator_MARGIN: () => (/* binding */ separator_MARGIN),
@@ -741,37 +750,44 @@ var NORMAL_HOVER = [{
   value: "hover"
 }];
 var separator_TYPE = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line", "frontis-block"),
   value: "line"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon", "frontis-block"),
   value: "icon"
 }];
 var separator_POSITION = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block"),
   value: "top"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block"),
   value: "bottom"
 }];
 var subheading_POSITION = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block"),
   value: "top"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block"),
   value: "bottom"
 }];
+var mediaType = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon", "frontis-block"),
+  value: "icon"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image", "frontis-block"),
+  value: "image"
+}];
 var PRESETS = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
   value: "preset-0"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preset 1", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preset 1", "frontis-block"),
   value: "preset-1"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preset 2", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preset 2", "frontis-block"),
   value: "preset-2"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preset 3", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preset 3", "frontis-block"),
   value: "preset-3"
 }];
 var TEXT_ALIGN = [{
@@ -796,2368 +812,2368 @@ var TEXT_ALIGN = [{
   value: "justify"
 }];
 var HEADING = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H1", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H1", "frontis-block"),
   value: "h1"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H2", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H2", "frontis-block"),
   value: "h2"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H3", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H3", "frontis-block"),
   value: "h3"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H4", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H4", "frontis-block"),
   value: "h4"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H5", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H5", "frontis-block"),
   value: "h5"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H6", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("H6", "frontis-block"),
   value: "h6"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("P", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("P", "frontis-block"),
   value: "p"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Div", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Div", "frontis-block"),
   value: "span"
 }];
 var SEPERATOR_STYLES = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "frontis-block"),
   value: "solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "frontis-block"),
   value: "dashed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "frontis-block"),
   value: "dotted"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "frontis-block"),
   value: "double"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Groove", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Groove", "frontis-block"),
   value: "groove"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Outset", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Outset", "frontis-block"),
   value: "outset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ridge", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ridge", "frontis-block"),
   value: "ridge"
 }];
 var BORDER_STYLES = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-block"),
   value: "none"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "frontis-block"),
   value: "solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "frontis-block"),
   value: "dashed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "frontis-block"),
   value: "dotted"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "frontis-block"),
   value: "double"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Groove", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Groove", "frontis-block"),
   value: "groove"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Outset", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Outset", "frontis-block"),
   value: "outset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ridge", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ridge", "frontis-block"),
   value: "ridge"
 }];
 var FONT_FAMILYS = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
   value: "Default"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ABeeZee", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ABeeZee", "frontis-block"),
   value: "ABeeZee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abel", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abel", "frontis-block"),
   value: "Abel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abhaya Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abhaya Libre", "frontis-block"),
   value: "Abhaya Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abril Fatface", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abril Fatface", "frontis-block"),
   value: "Abril Fatface"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abyssinica SIL", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Abyssinica SIL", "frontis-block"),
   value: "Abyssinica SIL"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aclonica", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aclonica", "frontis-block"),
   value: "Aclonica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Acme", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Acme", "frontis-block"),
   value: "Acme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Actor", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Actor", "frontis-block"),
   value: "Actor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Adamina", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Adamina", "frontis-block"),
   value: "Adamina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Adobe Blank", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Adobe Blank", "frontis-block"),
   value: "Adobe Blank"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Advent Pro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Advent Pro", "frontis-block"),
   value: "Advent Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aguafina Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aguafina Script", "frontis-block"),
   value: "Aguafina Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Akronim", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Akronim", "frontis-block"),
   value: "Akronim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("aksarabaligalang", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("aksarabaligalang", "frontis-block"),
   value: "aksarabaligalang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aladin", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aladin", "frontis-block"),
   value: "Aladin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aldrich", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aldrich", "frontis-block"),
   value: "Aldrich"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alef", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alef", "frontis-block"),
   value: "Alef"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("alefhebrew", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("alefhebrew", "frontis-block"),
   value: "alefhebrew"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya", "frontis-block"),
   value: "Alegreya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya Sans", "frontis-block"),
   value: "Alegreya Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya Sans SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya Sans SC", "frontis-block"),
   value: "Alegreya Sans SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alegreya SC", "frontis-block"),
   value: "Alegreya SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aleo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aleo", "frontis-block"),
   value: "Aleo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alex Brush", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alex Brush", "frontis-block"),
   value: "Alex Brush"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alfa Slab One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alfa Slab One", "frontis-block"),
   value: "Alfa Slab One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alice", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alice", "frontis-block"),
   value: "Alice"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alike", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alike", "frontis-block"),
   value: "Alike"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alike Angular", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alike Angular", "frontis-block"),
   value: "Alike Angular"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allan", "frontis-block"),
   value: "Allan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allerta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allerta", "frontis-block"),
   value: "Allerta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allerta Stencil", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allerta Stencil", "frontis-block"),
   value: "Allerta Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allura", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allura", "frontis-block"),
   value: "Allura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Almendra", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Almendra", "frontis-block"),
   value: "Almendra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Almendra Display", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Almendra Display", "frontis-block"),
   value: "Almendra Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Almendra SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Almendra SC", "frontis-block"),
   value: "Almendra SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amarante", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amarante", "frontis-block"),
   value: "Amarante"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amaranth", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amaranth", "frontis-block"),
   value: "Amaranth"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amatic SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amatic SC", "frontis-block"),
   value: "Amatic SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amethysta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amethysta", "frontis-block"),
   value: "Amethysta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amiko", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amiko", "frontis-block"),
   value: "Amiko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amiri", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amiri", "frontis-block"),
   value: "Amiri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amita", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amita", "frontis-block"),
   value: "Amita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("amstelvaralpha", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("amstelvaralpha", "frontis-block"),
   value: "amstelvaralpha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Anaheim", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Anaheim", "frontis-block"),
   value: "Anaheim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Andada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Andada", "frontis-block"),
   value: "Andada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Andada SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Andada SC", "frontis-block"),
   value: "Andada SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Andika", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Andika", "frontis-block"),
   value: "Andika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Angkor", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Angkor", "frontis-block"),
   value: "Angkor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Annie Use Your Telescope", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Annie Use Your Telescope", "frontis-block"),
   value: "Annie Use Your Telescope"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Anonymous Pro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Anonymous Pro", "frontis-block"),
   value: "Anonymous Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antic", "frontis-block"),
   value: "Antic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antic Didone", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antic Didone", "frontis-block"),
   value: "Antic Didone"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antic Slab", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antic Slab", "frontis-block"),
   value: "Antic Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Anton", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Anton", "frontis-block"),
   value: "Anton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antonio", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Antonio", "frontis-block"),
   value: "Antonio"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arapey", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arapey", "frontis-block"),
   value: "Arapey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arbutus", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arbutus", "frontis-block"),
   value: "Arbutus"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arbutus Slab", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arbutus Slab", "frontis-block"),
   value: "Arbutus Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Architects Daughter", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Architects Daughter", "frontis-block"),
   value: "Architects Daughter"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Archivo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Archivo", "frontis-block"),
   value: "Archivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Archivo Black", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Archivo Black", "frontis-block"),
   value: "Archivo Black"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Archivo Narrow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Archivo Narrow", "frontis-block"),
   value: "Archivo Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("archivovfbeta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("archivovfbeta", "frontis-block"),
   value: "archivovfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aref Ruqaa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aref Ruqaa", "frontis-block"),
   value: "Aref Ruqaa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arima Madurai", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arima Madurai", "frontis-block"),
   value: "Arima Madurai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arimo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arimo", "frontis-block"),
   value: "Arimo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arizonia", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arizonia", "frontis-block"),
   value: "Arizonia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Armata", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Armata", "frontis-block"),
   value: "Armata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arsenal", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arsenal", "frontis-block"),
   value: "Arsenal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Artifika", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Artifika", "frontis-block"),
   value: "Artifika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arvo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arvo", "frontis-block"),
   value: "Arvo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arya", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Arya", "frontis-block"),
   value: "Arya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asap", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asap", "frontis-block"),
   value: "Asap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asap Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asap Condensed", "frontis-block"),
   value: "Asap Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("asapvfbeta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("asapvfbeta", "frontis-block"),
   value: "asapvfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asar", "frontis-block"),
   value: "Asar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asset", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asset", "frontis-block"),
   value: "Asset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Assistant", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Assistant", "frontis-block"),
   value: "Assistant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Astloch", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Astloch", "frontis-block"),
   value: "Astloch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asul", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Asul", "frontis-block"),
   value: "Asul"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Athiti", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Athiti", "frontis-block"),
   value: "Athiti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Atomic Age", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Atomic Age", "frontis-block"),
   value: "Atomic Age"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aubrey", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aubrey", "frontis-block"),
   value: "Aubrey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Audiowide", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Audiowide", "frontis-block"),
   value: "Audiowide"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Autour One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Autour One", "frontis-block"),
   value: "Autour One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Average", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Average", "frontis-block"),
   value: "Average"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Average Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Average Sans", "frontis-block"),
   value: "Average Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Gruesa Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Gruesa Libre", "frontis-block"),
   value: "Averia Gruesa Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Libre", "frontis-block"),
   value: "Averia Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Sans Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Sans Libre", "frontis-block"),
   value: "Averia Sans Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Serif Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Averia Serif Libre", "frontis-block"),
   value: "Averia Serif Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("B612", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("B612", "frontis-block"),
   value: "B612"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("B612 Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("B612 Mono", "frontis-block"),
   value: "B612 Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bad Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bad Script", "frontis-block"),
   value: "Bad Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bahiana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bahiana", "frontis-block"),
   value: "Bahiana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bahianita", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bahianita", "frontis-block"),
   value: "Bahianita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bai Jamjuree", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bai Jamjuree", "frontis-block"),
   value: "Bai Jamjuree"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo", "frontis-block"),
   value: "Baloo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Bhai", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Bhai", "frontis-block"),
   value: "Baloo Bhai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Bhaijaan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Bhaijaan", "frontis-block"),
   value: "Baloo Bhaijaan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Bhaina", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Bhaina", "frontis-block"),
   value: "Baloo Bhaina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Chettan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Chettan", "frontis-block"),
   value: "Baloo Chettan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Da", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Da", "frontis-block"),
   value: "Baloo Da"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Paaji", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Paaji", "frontis-block"),
   value: "Baloo Paaji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Tamma", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Tamma", "frontis-block"),
   value: "Baloo Tamma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Tammudu", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Tammudu", "frontis-block"),
   value: "Baloo Tammudu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Thambi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baloo Thambi", "frontis-block"),
   value: "Baloo Thambi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Balthazar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Balthazar", "frontis-block"),
   value: "Balthazar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bangers", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bangers", "frontis-block"),
   value: "Bangers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barlow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barlow", "frontis-block"),
   value: "Barlow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barlow Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barlow Condensed", "frontis-block"),
   value: "Barlow Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barlow Semi Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barlow Semi Condensed", "frontis-block"),
   value: "Barlow Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barriecito", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barriecito", "frontis-block"),
   value: "Barriecito"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barrio", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Barrio", "frontis-block"),
   value: "Barrio"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Basic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Basic", "frontis-block"),
   value: "Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Battambang", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Battambang", "frontis-block"),
   value: "Battambang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baumans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Baumans", "frontis-block"),
   value: "Baumans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bayon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bayon", "frontis-block"),
   value: "Bayon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Belgrano", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Belgrano", "frontis-block"),
   value: "Belgrano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bellefair", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bellefair", "frontis-block"),
   value: "Bellefair"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Belleza", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Belleza", "frontis-block"),
   value: "Belleza"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("BenchNine", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("BenchNine", "frontis-block"),
   value: "BenchNine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bentham", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bentham", "frontis-block"),
   value: "Bentham"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Berkshire Swash", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Berkshire Swash", "frontis-block"),
   value: "Berkshire Swash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Beth Ellen", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Beth Ellen", "frontis-block"),
   value: "Beth Ellen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bevan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bevan", "frontis-block"),
   value: "Bevan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bhavuka", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bhavuka", "frontis-block"),
   value: "Bhavuka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bigelow Rules", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bigelow Rules", "frontis-block"),
   value: "Bigelow Rules"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bigshot One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bigshot One", "frontis-block"),
   value: "Bigshot One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bilbo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bilbo", "frontis-block"),
   value: "Bilbo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bilbo Swash Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bilbo Swash Caps", "frontis-block"),
   value: "Bilbo Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bio Rhyme", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bio Rhyme", "frontis-block"),
   value: "Bio Rhyme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bio Rhyme Expanded", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bio Rhyme Expanded", "frontis-block"),
   value: "Bio Rhyme Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Biryani", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Biryani", "frontis-block"),
   value: "Biryani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bitter", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bitter", "frontis-block"),
   value: "Bitter"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black And White Picture", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black And White Picture", "frontis-block"),
   value: "Black And White Picture"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Han Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Han Sans", "frontis-block"),
   value: "Black Han Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Ops One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Ops One", "frontis-block"),
   value: "Black Ops One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bokor", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bokor", "frontis-block"),
   value: "Bokor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bonbon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bonbon", "frontis-block"),
   value: "Bonbon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Boogaloo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Boogaloo", "frontis-block"),
   value: "Boogaloo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bowlby One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bowlby One", "frontis-block"),
   value: "Bowlby One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bowlby One SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bowlby One SC", "frontis-block"),
   value: "Bowlby One SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brawler", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brawler", "frontis-block"),
   value: "Brawler"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bree Serif", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bree Serif", "frontis-block"),
   value: "Bree Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bruno Ace", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bruno Ace", "frontis-block"),
   value: "Bruno Ace"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bruno Ace SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bruno Ace SC", "frontis-block"),
   value: "Bruno Ace SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bubblegum Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bubblegum Sans", "frontis-block"),
   value: "Bubblegum Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bubbler One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bubbler One", "frontis-block"),
   value: "Bubbler One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Buda", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Buda", "frontis-block"),
   value: "Buda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Buenard", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Buenard", "frontis-block"),
   value: "Buenard"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee", "frontis-block"),
   value: "Bungee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Hairline", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Hairline", "frontis-block"),
   value: "Bungee Hairline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Inline", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Inline", "frontis-block"),
   value: "Bungee Inline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Outline", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Outline", "frontis-block"),
   value: "Bungee Outline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Shade", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bungee Shade", "frontis-block"),
   value: "Bungee Shade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Butcherman", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Butcherman", "frontis-block"),
   value: "Butcherman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Butcherman Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Butcherman Caps", "frontis-block"),
   value: "Butcherman Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Butterfly Kids", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Butterfly Kids", "frontis-block"),
   value: "Butterfly Kids"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cabin", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cabin", "frontis-block"),
   value: "Cabin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cabin Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cabin Condensed", "frontis-block"),
   value: "Cabin Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cabin Sketch", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cabin Sketch", "frontis-block"),
   value: "Cabin Sketch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("cabinvfbeta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("cabinvfbeta", "frontis-block"),
   value: "cabinvfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caesar Dressing", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caesar Dressing", "frontis-block"),
   value: "Caesar Dressing"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cagliostro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cagliostro", "frontis-block"),
   value: "Cagliostro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cairo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cairo", "frontis-block"),
   value: "Cairo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Calligraffitti", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Calligraffitti", "frontis-block"),
   value: "Calligraffitti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cambay", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cambay", "frontis-block"),
   value: "Cambay"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cambo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cambo", "frontis-block"),
   value: "Cambo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Candal", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Candal", "frontis-block"),
   value: "Candal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cantarell", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cantarell", "frontis-block"),
   value: "Cantarell"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cantata One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cantata One", "frontis-block"),
   value: "Cantata One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cantora One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cantora One", "frontis-block"),
   value: "Cantora One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Capriola", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Capriola", "frontis-block"),
   value: "Capriola"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cardo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cardo", "frontis-block"),
   value: "Cardo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carme", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carme", "frontis-block"),
   value: "Carme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carrois Gothic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carrois Gothic", "frontis-block"),
   value: "Carrois Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carrois Gothic SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carrois Gothic SC", "frontis-block"),
   value: "Carrois Gothic SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carter One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Carter One", "frontis-block"),
   value: "Carter One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Catamaran", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Catamaran", "frontis-block"),
   value: "Catamaran"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caudex", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caudex", "frontis-block"),
   value: "Caudex"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caveat", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caveat", "frontis-block"),
   value: "Caveat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caveat Brush", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Caveat Brush", "frontis-block"),
   value: "Caveat Brush"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cedarville Cursive", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cedarville Cursive", "frontis-block"),
   value: "Cedarville Cursive"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ceviche One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ceviche One", "frontis-block"),
   value: "Ceviche One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chakra Petch", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chakra Petch", "frontis-block"),
   value: "Chakra Petch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Changa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Changa", "frontis-block"),
   value: "Changa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Changa One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Changa One", "frontis-block"),
   value: "Changa One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chango", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chango", "frontis-block"),
   value: "Chango"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Charm", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Charm", "frontis-block"),
   value: "Charm"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Charmonman", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Charmonman", "frontis-block"),
   value: "Charmonman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chau Philomene One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chau Philomene One", "frontis-block"),
   value: "Chau Philomene One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chela One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chela One", "frontis-block"),
   value: "Chela One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chelsea Market", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chelsea Market", "frontis-block"),
   value: "Chelsea Market"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chenla", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chenla", "frontis-block"),
   value: "Chenla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cherry Cream Soda", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cherry Cream Soda", "frontis-block"),
   value: "Cherry Cream Soda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cherry Swash", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cherry Swash", "frontis-block"),
   value: "Cherry Swash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chewy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chewy", "frontis-block"),
   value: "Chewy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chicle", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chicle", "frontis-block"),
   value: "Chicle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chilanka", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chilanka", "frontis-block"),
   value: "Chilanka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chivo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chivo", "frontis-block"),
   value: "Chivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chonburi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chonburi", "frontis-block"),
   value: "Chonburi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cinzel", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cinzel", "frontis-block"),
   value: "Cinzel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cinzel Decorative", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cinzel Decorative", "frontis-block"),
   value: "Cinzel Decorative"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Clicker Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Clicker Script", "frontis-block"),
   value: "Clicker Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coda", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coda", "frontis-block"),
   value: "Coda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coda Caption", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coda Caption", "frontis-block"),
   value: "Coda Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Codystar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Codystar", "frontis-block"),
   value: "Codystar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coiny", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coiny", "frontis-block"),
   value: "Coiny"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Combo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Combo", "frontis-block"),
   value: "Combo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comfortaa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comfortaa", "frontis-block"),
   value: "Comfortaa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coming Soon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coming Soon", "frontis-block"),
   value: "Coming Soon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Concert One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Concert One", "frontis-block"),
   value: "Concert One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Condiment", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Condiment", "frontis-block"),
   value: "Condiment"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Content", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Content", "frontis-block"),
   value: "Content"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contrail One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contrail One", "frontis-block"),
   value: "Contrail One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Convergence", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Convergence", "frontis-block"),
   value: "Convergence"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cookie", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cookie", "frontis-block"),
   value: "Cookie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copse", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copse", "frontis-block"),
   value: "Copse"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Corben", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Corben", "frontis-block"),
   value: "Corben"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant", "frontis-block"),
   value: "Cormorant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Garamond", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Garamond", "frontis-block"),
   value: "Cormorant Garamond"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Infant", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Infant", "frontis-block"),
   value: "Cormorant Infant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant SC", "frontis-block"),
   value: "Cormorant SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Unicase", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Unicase", "frontis-block"),
   value: "Cormorant Unicase"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Upright", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cormorant Upright", "frontis-block"),
   value: "Cormorant Upright"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Courgette", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Courgette", "frontis-block"),
   value: "Courgette"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cousine", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cousine", "frontis-block"),
   value: "Cousine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coustard", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Coustard", "frontis-block"),
   value: "Coustard"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Covered By Your Grace", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Covered By Your Grace", "frontis-block"),
   value: "Covered By Your Grace"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crafty Girls", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crafty Girls", "frontis-block"),
   value: "Crafty Girls"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Creepster", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Creepster", "frontis-block"),
   value: "Creepster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Creepster Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Creepster Caps", "frontis-block"),
   value: "Creepster Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crete Round", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crete Round", "frontis-block"),
   value: "Crete Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crimson Pro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crimson Pro", "frontis-block"),
   value: "Crimson Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crimson Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crimson Text", "frontis-block"),
   value: "Crimson Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Croissant One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Croissant One", "frontis-block"),
   value: "Croissant One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crushed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Crushed", "frontis-block"),
   value: "Crushed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cuprum", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cuprum", "frontis-block"),
   value: "Cuprum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cute Font", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cute Font", "frontis-block"),
   value: "Cute Font"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cutive", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cutive", "frontis-block"),
   value: "Cutive"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cutive Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cutive Mono", "frontis-block"),
   value: "Cutive Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Damion", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Damion", "frontis-block"),
   value: "Damion"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dancing Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dancing Script", "frontis-block"),
   value: "Dancing Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dangrek", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dangrek", "frontis-block"),
   value: "Dangrek"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Darker Grotesque", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Darker Grotesque", "frontis-block"),
   value: "Darker Grotesque"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dawning of a New Day", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dawning of a New Day", "frontis-block"),
   value: "Dawning of a New Day"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Days One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Days One", "frontis-block"),
   value: "Days One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("decovaralpha", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("decovaralpha", "frontis-block"),
   value: "decovaralpha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dekko", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dekko", "frontis-block"),
   value: "Dekko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delius", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delius", "frontis-block"),
   value: "Delius"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delius Swash Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delius Swash Caps", "frontis-block"),
   value: "Delius Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delius Unicase", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delius Unicase", "frontis-block"),
   value: "Delius Unicase"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Della Respira", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Della Respira", "frontis-block"),
   value: "Della Respira"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Denk One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Denk One", "frontis-block"),
   value: "Denk One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Devonshire", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Devonshire", "frontis-block"),
   value: "Devonshire"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dhurjati", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dhurjati", "frontis-block"),
   value: "Dhurjati"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dhyana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dhyana", "frontis-block"),
   value: "Dhyana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Didact Gothic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Didact Gothic", "frontis-block"),
   value: "Didact Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Digital Numbers", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Digital Numbers", "frontis-block"),
   value: "Digital Numbers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Diplomata", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Diplomata", "frontis-block"),
   value: "Diplomata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Diplomata SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Diplomata SC", "frontis-block"),
   value: "Diplomata SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("DM Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("DM Sans", "frontis-block"),
   value: "DM Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("DM Serif Display", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("DM Serif Display", "frontis-block"),
   value: "DM Serif Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("DM Serif Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("DM Serif Text", "frontis-block"),
   value: "DM Serif Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Do Hyeon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Do Hyeon", "frontis-block"),
   value: "Do Hyeon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dokdo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dokdo", "frontis-block"),
   value: "Dokdo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Domine", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Domine", "frontis-block"),
   value: "Domine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Donegal One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Donegal One", "frontis-block"),
   value: "Donegal One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Doppio One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Doppio One", "frontis-block"),
   value: "Doppio One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dorsa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dorsa", "frontis-block"),
   value: "Dorsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dosis", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dosis", "frontis-block"),
   value: "Dosis"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dr Sugiyama", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dr Sugiyama", "frontis-block"),
   value: "Dr Sugiyama"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Duru Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Duru Sans", "frontis-block"),
   value: "Duru Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dynalight", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dynalight", "frontis-block"),
   value: "Dynalight"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eagle Lake", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eagle Lake", "frontis-block"),
   value: "Eagle Lake"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("East Sea Dokdo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("East Sea Dokdo", "frontis-block"),
   value: "East Sea Dokdo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eater", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eater", "frontis-block"),
   value: "Eater"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eater Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eater Caps", "frontis-block"),
   value: "Eater Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("EB Garamond", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("EB Garamond", "frontis-block"),
   value: "EB Garamond"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Economica", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Economica", "frontis-block"),
   value: "Economica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eczar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eczar", "frontis-block"),
   value: "Eczar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ek Mukta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ek Mukta", "frontis-block"),
   value: "Ek Mukta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("El Messiri", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("El Messiri", "frontis-block"),
   value: "El Messiri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Electrolize", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Electrolize", "frontis-block"),
   value: "Electrolize"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Elsie", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Elsie", "frontis-block"),
   value: "Elsie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Elsie Swash Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Elsie Swash Caps", "frontis-block"),
   value: "Elsie Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Emblema One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Emblema One", "frontis-block"),
   value: "Emblema One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Emilys Candy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Emilys Candy", "frontis-block"),
   value: "Emilys Candy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans", "frontis-block"),
   value: "Encode Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Condensed", "frontis-block"),
   value: "Encode Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Expanded", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Expanded", "frontis-block"),
   value: "Encode Sans Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Semi Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Semi Condensed", "frontis-block"),
   value: "Encode Sans Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Semi Expanded", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Encode Sans Semi Expanded", "frontis-block"),
   value: "Encode Sans Semi Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Engagement", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Engagement", "frontis-block"),
   value: "Engagement"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Englebert", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Englebert", "frontis-block"),
   value: "Englebert"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enriqueta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enriqueta", "frontis-block"),
   value: "Enriqueta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Erica One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Erica One", "frontis-block"),
   value: "Erica One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Esteban", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Esteban", "frontis-block"),
   value: "Esteban"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Euphoria Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Euphoria Script", "frontis-block"),
   value: "Euphoria Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ewert", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ewert", "frontis-block"),
   value: "Ewert"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exo", "frontis-block"),
   value: "Exo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exo 2", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exo 2", "frontis-block"),
   value: "Exo 2"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Expletus Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Expletus Sans", "frontis-block"),
   value: "Expletus Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fahkwang", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fahkwang", "frontis-block"),
   value: "Fahkwang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fanwood Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fanwood Text", "frontis-block"),
   value: "Fanwood Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Farro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Farro", "frontis-block"),
   value: "Farro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Farsan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Farsan", "frontis-block"),
   value: "Farsan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fascinate", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fascinate", "frontis-block"),
   value: "Fascinate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fascinate Inline", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fascinate Inline", "frontis-block"),
   value: "Fascinate Inline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Faster One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Faster One", "frontis-block"),
   value: "Faster One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fasthand", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fasthand", "frontis-block"),
   value: "Fasthand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fauna One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fauna One", "frontis-block"),
   value: "Fauna One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Faustina", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Faustina", "frontis-block"),
   value: "Faustina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("faustinavfbeta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("faustinavfbeta", "frontis-block"),
   value: "faustinavfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Federant", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Federant", "frontis-block"),
   value: "Federant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Federo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Federo", "frontis-block"),
   value: "Federo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Felipa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Felipa", "frontis-block"),
   value: "Felipa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fenix", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fenix", "frontis-block"),
   value: "Fenix"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Finger Paint", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Finger Paint", "frontis-block"),
   value: "Finger Paint"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Code", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Code", "frontis-block"),
   value: "Fira Code"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Mono", "frontis-block"),
   value: "Fira Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Sans", "frontis-block"),
   value: "Fira Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Sans Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Sans Condensed", "frontis-block"),
   value: "Fira Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Sans Extra Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fira Sans Extra Condensed", "frontis-block"),
   value: "Fira Sans Extra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fjalla One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fjalla One", "frontis-block"),
   value: "Fjalla One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fjord One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fjord One", "frontis-block"),
   value: "Fjord One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Flamenco", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Flamenco", "frontis-block"),
   value: "Flamenco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Flavors", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Flavors", "frontis-block"),
   value: "Flavors"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fondamento", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fondamento", "frontis-block"),
   value: "Fondamento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fontdiner Swanky", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fontdiner Swanky", "frontis-block"),
   value: "Fontdiner Swanky"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forum", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forum", "frontis-block"),
   value: "Forum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Francois One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Francois One", "frontis-block"),
   value: "Francois One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frank Ruhl Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frank Ruhl Libre", "frontis-block"),
   value: "Frank Ruhl Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Freckle Face", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Freckle Face", "frontis-block"),
   value: "Freckle Face"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fredericka the Great", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fredericka the Great", "frontis-block"),
   value: "Fredericka the Great"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fredoka One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fredoka One", "frontis-block"),
   value: "Fredoka One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Freehand", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Freehand", "frontis-block"),
   value: "Freehand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fresca", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fresca", "frontis-block"),
   value: "Fresca"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frijole", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frijole", "frontis-block"),
   value: "Frijole"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fruktur", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fruktur", "frontis-block"),
   value: "Fruktur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fugaz One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fugaz One", "frontis-block"),
   value: "Fugaz One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gabriela", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gabriela", "frontis-block"),
   value: "Gabriela"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gaegu", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gaegu", "frontis-block"),
   value: "Gaegu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gafata", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gafata", "frontis-block"),
   value: "Gafata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Galada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Galada", "frontis-block"),
   value: "Galada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Galdeano", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Galdeano", "frontis-block"),
   value: "Galdeano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Galindo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Galindo", "frontis-block"),
   value: "Galindo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gamja Flower", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gamja Flower", "frontis-block"),
   value: "Gamja Flower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gayathri", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gayathri", "frontis-block"),
   value: "Gayathri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gemunu Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gemunu Libre", "frontis-block"),
   value: "Gemunu Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gentium Basic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gentium Basic", "frontis-block"),
   value: "Gentium Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gentium Book Basic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gentium Book Basic", "frontis-block"),
   value: "Gentium Book Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Geo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Geo", "frontis-block"),
   value: "Geo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Geostar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Geostar", "frontis-block"),
   value: "Geostar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Geostar Fill", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Geostar Fill", "frontis-block"),
   value: "Geostar Fill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Germania One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Germania One", "frontis-block"),
   value: "Germania One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("GFS Didot", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("GFS Didot", "frontis-block"),
   value: "GFS Didot"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("GFS Neohellenic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("GFS Neohellenic", "frontis-block"),
   value: "GFS Neohellenic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gidugu", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gidugu", "frontis-block"),
   value: "Gidugu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gilda Display", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gilda Display", "frontis-block"),
   value: "Gilda Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Give You Glory", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Give You Glory", "frontis-block"),
   value: "Give You Glory"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Glass Antiqua", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Glass Antiqua", "frontis-block"),
   value: "Glass Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Glegoo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Glegoo", "frontis-block"),
   value: "Glegoo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gloria Hallelujah", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gloria Hallelujah", "frontis-block"),
   value: "Gloria Hallelujah"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Goblin One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Goblin One", "frontis-block"),
   value: "Goblin One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gochi Hand", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gochi Hand", "frontis-block"),
   value: "Gochi Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gorditas", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gorditas", "frontis-block"),
   value: "Gorditas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gothic A1", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gothic A1", "frontis-block"),
   value: "Gothic A1"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Goudy Bookletter 1911", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Goudy Bookletter 1911", "frontis-block"),
   value: "Goudy Bookletter 1911"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Graduate", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Graduate", "frontis-block"),
   value: "Graduate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Grand Hotel", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Grand Hotel", "frontis-block"),
   value: "Grand Hotel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gravitas One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gravitas One", "frontis-block"),
   value: "Gravitas One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Great Vibes", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Great Vibes", "frontis-block"),
   value: "Great Vibes"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Grenze", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Grenze", "frontis-block"),
   value: "Grenze"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Griffy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Griffy", "frontis-block"),
   value: "Griffy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gruppo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gruppo", "frontis-block"),
   value: "Gruppo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gudea", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gudea", "frontis-block"),
   value: "Gudea"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gugi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gugi", "frontis-block"),
   value: "Gugi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gurajada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gurajada", "frontis-block"),
   value: "Gurajada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Habibi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Habibi", "frontis-block"),
   value: "Habibi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Halant", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Halant", "frontis-block"),
   value: "Halant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hammersmith One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hammersmith One", "frontis-block"),
   value: "Hammersmith One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hanalei", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hanalei", "frontis-block"),
   value: "Hanalei"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hanalei Fill", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hanalei Fill", "frontis-block"),
   value: "Hanalei Fill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Handlee", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Handlee", "frontis-block"),
   value: "Handlee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("hanna", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("hanna", "frontis-block"),
   value: "hanna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("hannari", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("hannari", "frontis-block"),
   value: "hannari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hanuman", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hanuman", "frontis-block"),
   value: "Hanuman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Happy Monkey", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Happy Monkey", "frontis-block"),
   value: "Happy Monkey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Harmattan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Harmattan", "frontis-block"),
   value: "Harmattan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Headland One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Headland One", "frontis-block"),
   value: "Headland One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heebo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heebo", "frontis-block"),
   value: "Heebo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Henny Penny", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Henny Penny", "frontis-block"),
   value: "Henny Penny"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hermeneus One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hermeneus One", "frontis-block"),
   value: "Hermeneus One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Herr Von Muellerhoff", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Herr Von Muellerhoff", "frontis-block"),
   value: "Herr Von Muellerhoff"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hi Melody", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hi Melody", "frontis-block"),
   value: "Hi Melody"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind", "frontis-block"),
   value: "Hind"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Colombo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Colombo", "frontis-block"),
   value: "Hind Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Guntur", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Guntur", "frontis-block"),
   value: "Hind Guntur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Jalandhar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Jalandhar", "frontis-block"),
   value: "Hind Jalandhar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Kochi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Kochi", "frontis-block"),
   value: "Hind Kochi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Madurai", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Madurai", "frontis-block"),
   value: "Hind Madurai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Mysuru", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Mysuru", "frontis-block"),
   value: "Hind Mysuru"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Siliguri", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Siliguri", "frontis-block"),
   value: "Hind Siliguri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Vadodara", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hind Vadodara", "frontis-block"),
   value: "Hind Vadodara"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Holtwood One SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Holtwood One SC", "frontis-block"),
   value: "Holtwood One SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Homemade Apple", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Homemade Apple", "frontis-block"),
   value: "Homemade Apple"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Homenaje", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Homenaje", "frontis-block"),
   value: "Homenaje"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Mono", "frontis-block"),
   value: "IBM Plex Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Sans", "frontis-block"),
   value: "IBM Plex Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Sans Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Sans Condensed", "frontis-block"),
   value: "IBM Plex Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Serif", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IBM Plex Serif", "frontis-block"),
   value: "IBM Plex Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Iceberg", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Iceberg", "frontis-block"),
   value: "Iceberg"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Iceland", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Iceland", "frontis-block"),
   value: "Iceland"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Double Pica", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Double Pica", "frontis-block"),
   value: "IM Fell Double Pica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Double Pica SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Double Pica SC", "frontis-block"),
   value: "IM Fell Double Pica SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell DW Pica", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell DW Pica", "frontis-block"),
   value: "IM Fell DW Pica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell DW Pica SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell DW Pica SC", "frontis-block"),
   value: "IM Fell DW Pica SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell English", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell English", "frontis-block"),
   value: "IM Fell English"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell English SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell English SC", "frontis-block"),
   value: "IM Fell English SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell French Canon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell French Canon", "frontis-block"),
   value: "IM Fell French Canon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell French Canon SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell French Canon SC", "frontis-block"),
   value: "IM Fell French Canon SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Great Primer", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Great Primer", "frontis-block"),
   value: "IM Fell Great Primer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Great Primer SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("IM Fell Great Primer SC", "frontis-block"),
   value: "IM Fell Great Primer SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Imprima", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Imprima", "frontis-block"),
   value: "Imprima"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inconsolata", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inconsolata", "frontis-block"),
   value: "Inconsolata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inder", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inder", "frontis-block"),
   value: "Inder"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Indie Flower", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Indie Flower", "frontis-block"),
   value: "Indie Flower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inika", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inika", "frontis-block"),
   value: "Inika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inknut Antiqua", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inknut Antiqua", "frontis-block"),
   value: "Inknut Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Irish Grover", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Irish Grover", "frontis-block"),
   value: "Irish Grover"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Istok Web", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Istok Web", "frontis-block"),
   value: "Istok Web"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Italiana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Italiana", "frontis-block"),
   value: "Italiana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Italianno", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Italianno", "frontis-block"),
   value: "Italianno"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Itim", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Itim", "frontis-block"),
   value: "Itim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jacques Francois", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jacques Francois", "frontis-block"),
   value: "Jacques Francois"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jacques Francois Shadow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jacques Francois Shadow", "frontis-block"),
   value: "Jacques Francois Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jaldi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jaldi", "frontis-block"),
   value: "Jaldi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jejugothic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jejugothic", "frontis-block"),
   value: "jejugothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jejuhallasan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jejuhallasan", "frontis-block"),
   value: "jejuhallasan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jejumyeongjo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jejumyeongjo", "frontis-block"),
   value: "jejumyeongjo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jim Nightshade", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jim Nightshade", "frontis-block"),
   value: "Jim Nightshade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jockey One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jockey One", "frontis-block"),
   value: "Jockey One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jolly Lodger", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jolly Lodger", "frontis-block"),
   value: "Jolly Lodger"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jomhuria", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jomhuria", "frontis-block"),
   value: "Jomhuria"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jomolhari", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("jomolhari", "frontis-block"),
   value: "jomolhari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Josefin Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Josefin Sans", "frontis-block"),
   value: "Josefin Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Josefin Sans Std Light", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Josefin Sans Std Light", "frontis-block"),
   value: "Josefin Sans Std Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Josefin Slab", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Josefin Slab", "frontis-block"),
   value: "Josefin Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Joti One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Joti One", "frontis-block"),
   value: "Joti One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jua", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jua", "frontis-block"),
   value: "Jua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Judson", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Judson", "frontis-block"),
   value: "Judson"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Julee", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Julee", "frontis-block"),
   value: "Julee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Julius Sans One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Julius Sans One", "frontis-block"),
   value: "Julius Sans One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Junge", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Junge", "frontis-block"),
   value: "Junge"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jura", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Jura", "frontis-block"),
   value: "Jura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Just Another Hand", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Just Another Hand", "frontis-block"),
   value: "Just Another Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Just Me Again Down Here", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Just Me Again Down Here", "frontis-block"),
   value: "Just Me Again Down Here"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("K2D", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("K2D", "frontis-block"),
   value: "K2D"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kadwa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kadwa", "frontis-block"),
   value: "Kadwa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kalam", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kalam", "frontis-block"),
   value: "Kalam"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kameron", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kameron", "frontis-block"),
   value: "Kameron"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kanit", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kanit", "frontis-block"),
   value: "Kanit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kantumruy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kantumruy", "frontis-block"),
   value: "Kantumruy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karla", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karla", "frontis-block"),
   value: "Karla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karla Tamil Inclined", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karla Tamil Inclined", "frontis-block"),
   value: "Karla Tamil Inclined"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karla Tamil Upright", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karla Tamil Upright", "frontis-block"),
   value: "Karla Tamil Upright"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karma", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Karma", "frontis-block"),
   value: "Karma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Katibeh", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Katibeh", "frontis-block"),
   value: "Katibeh"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kaushan Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kaushan Script", "frontis-block"),
   value: "Kaushan Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kavivanar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kavivanar", "frontis-block"),
   value: "Kavivanar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kavoon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kavoon", "frontis-block"),
   value: "Kavoon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kdam Thmor", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kdam Thmor", "frontis-block"),
   value: "Kdam Thmor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Keania One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Keania One", "frontis-block"),
   value: "Keania One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kelly Slab", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kelly Slab", "frontis-block"),
   value: "Kelly Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kenia", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kenia", "frontis-block"),
   value: "Kenia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Khand", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Khand", "frontis-block"),
   value: "Khand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Khmer", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Khmer", "frontis-block"),
   value: "Khmer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Khula", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Khula", "frontis-block"),
   value: "Khula"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("khyay", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("khyay", "frontis-block"),
   value: "khyay"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kirang Haerang", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kirang Haerang", "frontis-block"),
   value: "Kirang Haerang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kite One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kite One", "frontis-block"),
   value: "Kite One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Knewave", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Knewave", "frontis-block"),
   value: "Knewave"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kodchasan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kodchasan", "frontis-block"),
   value: "Kodchasan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("KoHo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("KoHo", "frontis-block"),
   value: "KoHo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("kokoro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("kokoro", "frontis-block"),
   value: "kokoro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("kopubbatang", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("kopubbatang", "frontis-block"),
   value: "kopubbatang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kotta One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kotta One", "frontis-block"),
   value: "Kotta One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Koulen", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Koulen", "frontis-block"),
   value: "Koulen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kranky", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kranky", "frontis-block"),
   value: "Kranky"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kreon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kreon", "frontis-block"),
   value: "Kreon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kristi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kristi", "frontis-block"),
   value: "Kristi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Krona One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Krona One", "frontis-block"),
   value: "Krona One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Krub", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Krub", "frontis-block"),
   value: "Krub"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kumar One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kumar One", "frontis-block"),
   value: "Kumar One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kurale", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kurale", "frontis-block"),
   value: "Kurale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("La Belle Aurore", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("La Belle Aurore", "frontis-block"),
   value: "La Belle Aurore"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lacquer", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lacquer", "frontis-block"),
   value: "Lacquer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Laila", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Laila", "frontis-block"),
   value: "Laila"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lakki Reddy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lakki Reddy", "frontis-block"),
   value: "Lakki Reddy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lalezar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lalezar", "frontis-block"),
   value: "Lalezar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lancelot", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lancelot", "frontis-block"),
   value: "Lancelot"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("laomuangdon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("laomuangdon", "frontis-block"),
   value: "laomuangdon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("laomuangkhong", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("laomuangkhong", "frontis-block"),
   value: "laomuangkhong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("laosanspro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("laosanspro", "frontis-block"),
   value: "laosanspro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lateef", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lateef", "frontis-block"),
   value: "Lateef"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lato", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lato", "frontis-block"),
   value: "Lato"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("League Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("League Script", "frontis-block"),
   value: "League Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Leckerli One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Leckerli One", "frontis-block"),
   value: "Leckerli One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ledger", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ledger", "frontis-block"),
   value: "Ledger"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lekton", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lekton", "frontis-block"),
   value: "Lekton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lemon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lemon", "frontis-block"),
   value: "Lemon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lemonada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lemonada", "frontis-block"),
   value: "Lemonada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 128", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 128", "frontis-block"),
   value: "Libre Barcode 128"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 128 Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 128 Text", "frontis-block"),
   value: "Libre Barcode 128 Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39", "frontis-block"),
   value: "Libre Barcode 39"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39 Extended", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39 Extended", "frontis-block"),
   value: "Libre Barcode 39 Extended"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39 Extended Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39 Extended Text", "frontis-block"),
   value: "Libre Barcode 39 Extended Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39 Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Barcode 39 Text", "frontis-block"),
   value: "Libre Barcode 39 Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Baskerville", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Baskerville", "frontis-block"),
   value: "Libre Baskerville"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Caslon Display", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Caslon Display", "frontis-block"),
   value: "Libre Caslon Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Caslon Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Caslon Text", "frontis-block"),
   value: "Libre Caslon Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Franklin", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Libre Franklin", "frontis-block"),
   value: "Libre Franklin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Life Savers", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Life Savers", "frontis-block"),
   value: "Life Savers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lilita One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lilita One", "frontis-block"),
   value: "Lilita One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lily Script One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lily Script One", "frontis-block"),
   value: "Lily Script One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Limelight", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Limelight", "frontis-block"),
   value: "Limelight"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Linden Hill", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Linden Hill", "frontis-block"),
   value: "Linden Hill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Literata", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Literata", "frontis-block"),
   value: "Literata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Liu Jian Mao Cao", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Liu Jian Mao Cao", "frontis-block"),
   value: "Liu Jian Mao Cao"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Livvic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Livvic", "frontis-block"),
   value: "Livvic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lobster", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lobster", "frontis-block"),
   value: "Lobster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lobster Two", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lobster Two", "frontis-block"),
   value: "Lobster Two"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lohit Bengali", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lohit Bengali", "frontis-block"),
   value: "Lohit Bengali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lohit Tamil", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lohit Tamil", "frontis-block"),
   value: "Lohit Tamil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("lohitdevanagari", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("lohitdevanagari", "frontis-block"),
   value: "lohitdevanagari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Outline", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Outline", "frontis-block"),
   value: "Londrina Outline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Shadow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Shadow", "frontis-block"),
   value: "Londrina Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Sketch", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Sketch", "frontis-block"),
   value: "Londrina Sketch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Solid", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Londrina Solid", "frontis-block"),
   value: "Londrina Solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Long Cang", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Long Cang", "frontis-block"),
   value: "Long Cang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lora", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lora", "frontis-block"),
   value: "Lora"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Love Ya Like A Sister", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Love Ya Like A Sister", "frontis-block"),
   value: "Love Ya Like A Sister"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Loved by the King", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Loved by the King", "frontis-block"),
   value: "Loved by the King"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lovers Quarrel", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lovers Quarrel", "frontis-block"),
   value: "Lovers Quarrel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Luckiest Guy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Luckiest Guy", "frontis-block"),
   value: "Luckiest Guy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lusitana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lusitana", "frontis-block"),
   value: "Lusitana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lustria", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lustria", "frontis-block"),
   value: "Lustria"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ma Shan Zheng", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ma Shan Zheng", "frontis-block"),
   value: "Ma Shan Zheng"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Macondo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Macondo", "frontis-block"),
   value: "Macondo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Macondo Swash Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Macondo Swash Caps", "frontis-block"),
   value: "Macondo Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mada", "frontis-block"),
   value: "Mada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Magra", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Magra", "frontis-block"),
   value: "Magra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maiden Orange", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maiden Orange", "frontis-block"),
   value: "Maiden Orange"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maitree", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maitree", "frontis-block"),
   value: "Maitree"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Major Mono Display", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Major Mono Display", "frontis-block"),
   value: "Major Mono Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mako", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mako", "frontis-block"),
   value: "Mako"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mali", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mali", "frontis-block"),
   value: "Mali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mallanna", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mallanna", "frontis-block"),
   value: "Mallanna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mandali", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mandali", "frontis-block"),
   value: "Mandali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manjari", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manjari", "frontis-block"),
   value: "Manjari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manuale", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manuale", "frontis-block"),
   value: "Manuale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marcellus", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marcellus", "frontis-block"),
   value: "Marcellus"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marcellus SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marcellus SC", "frontis-block"),
   value: "Marcellus SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marck Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marck Script", "frontis-block"),
   value: "Marck Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margarine", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margarine", "frontis-block"),
   value: "Margarine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marko One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marko One", "frontis-block"),
   value: "Marko One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marmelad", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marmelad", "frontis-block"),
   value: "Marmelad"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Martel", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Martel", "frontis-block"),
   value: "Martel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Martel Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Martel Sans", "frontis-block"),
   value: "Martel Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marvel", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Marvel", "frontis-block"),
   value: "Marvel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mate", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mate", "frontis-block"),
   value: "Mate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mate SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mate SC", "frontis-block"),
   value: "Mate SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maven Pro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maven Pro", "frontis-block"),
   value: "Maven Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("mavenprovfbeta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("mavenprovfbeta", "frontis-block"),
   value: "mavenprovfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("McLaren", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("McLaren", "frontis-block"),
   value: "McLaren"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Meddon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Meddon", "frontis-block"),
   value: "Meddon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("MedievalSharp", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("MedievalSharp", "frontis-block"),
   value: "MedievalSharp"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Medula One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Medula One", "frontis-block"),
   value: "Medula One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Meera Inimai", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Meera Inimai", "frontis-block"),
   value: "Meera Inimai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Megrim", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Megrim", "frontis-block"),
   value: "Megrim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Meie Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Meie Script", "frontis-block"),
   value: "Meie Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merge One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merge One", "frontis-block"),
   value: "Merge One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merienda", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merienda", "frontis-block"),
   value: "Merienda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merienda One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merienda One", "frontis-block"),
   value: "Merienda One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merriweather", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merriweather", "frontis-block"),
   value: "Merriweather"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merriweather Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Merriweather Sans", "frontis-block"),
   value: "Merriweather Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mervale Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mervale Script", "frontis-block"),
   value: "Mervale Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metal", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metal", "frontis-block"),
   value: "Metal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metal Mania", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metal Mania", "frontis-block"),
   value: "Metal Mania"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metamorphous", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metamorphous", "frontis-block"),
   value: "Metamorphous"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metrophobic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Metrophobic", "frontis-block"),
   value: "Metrophobic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miama", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miama", "frontis-block"),
   value: "Miama"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Michroma", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Michroma", "frontis-block"),
   value: "Michroma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Milonga", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Milonga", "frontis-block"),
   value: "Milonga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miltonian", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miltonian", "frontis-block"),
   value: "Miltonian"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miltonian Tattoo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miltonian Tattoo", "frontis-block"),
   value: "Miltonian Tattoo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mina", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mina", "frontis-block"),
   value: "Mina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miniver", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miniver", "frontis-block"),
   value: "Miniver"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miriam Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miriam Libre", "frontis-block"),
   value: "Miriam Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miss Fajardose", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miss Fajardose", "frontis-block"),
   value: "Miss Fajardose"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miss Saint Delafield", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Miss Saint Delafield", "frontis-block"),
   value: "Miss Saint Delafield"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modak", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modak", "frontis-block"),
   value: "Modak"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modern Antiqua", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Modern Antiqua", "frontis-block"),
   value: "Modern Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Molengo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Molengo", "frontis-block"),
   value: "Molengo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Molle", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Molle", "frontis-block"),
   value: "Molle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monda", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monda", "frontis-block"),
   value: "Monda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monofett", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monofett", "frontis-block"),
   value: "Monofett"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monoton", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monoton", "frontis-block"),
   value: "Monoton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monsieur La Doulaise", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Monsieur La Doulaise", "frontis-block"),
   value: "Monsieur La Doulaise"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montaga", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montaga", "frontis-block"),
   value: "Montaga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montez", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montez", "frontis-block"),
   value: "Montez"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montserrat", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montserrat", "frontis-block"),
   value: "Montserrat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montserrat Alternates", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montserrat Alternates", "frontis-block"),
   value: "Montserrat Alternates"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montserrat Subrayada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Montserrat Subrayada", "frontis-block"),
   value: "Montserrat Subrayada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Moul", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Moul", "frontis-block"),
   value: "Moul"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Moulpali", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Moulpali", "frontis-block"),
   value: "Moulpali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mountains of Christmas", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mountains of Christmas", "frontis-block"),
   value: "Mountains of Christmas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mouse Memoirs", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mouse Memoirs", "frontis-block"),
   value: "Mouse Memoirs"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("mplus1p", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("mplus1p", "frontis-block"),
   value: "mplus1p"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr Bedford", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr Bedford", "frontis-block"),
   value: "Mr Bedford"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr Bedfort", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr Bedfort", "frontis-block"),
   value: "Mr Bedfort"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr Dafoe", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr Dafoe", "frontis-block"),
   value: "Mr Dafoe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr De Haviland", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mr De Haviland", "frontis-block"),
   value: "Mr De Haviland"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mrs Saint Delafield", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mrs Saint Delafield", "frontis-block"),
   value: "Mrs Saint Delafield"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mrs Sheppards", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mrs Sheppards", "frontis-block"),
   value: "Mrs Sheppards"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta", "frontis-block"),
   value: "Mukta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta Mahee", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta Mahee", "frontis-block"),
   value: "Mukta Mahee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta Malar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta Malar", "frontis-block"),
   value: "Mukta Malar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta Vaani", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mukta Vaani", "frontis-block"),
   value: "Mukta Vaani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Muli", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Muli", "frontis-block"),
   value: "Muli"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("myanmarsanspro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("myanmarsanspro", "frontis-block"),
   value: "myanmarsanspro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mystery Quest", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mystery Quest", "frontis-block"),
   value: "Mystery Quest"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Brush Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Brush Script", "frontis-block"),
   value: "Nanum Brush Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Gothic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Gothic", "frontis-block"),
   value: "Nanum Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Gothic Coding", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Gothic Coding", "frontis-block"),
   value: "Nanum Gothic Coding"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Myeongjo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Myeongjo", "frontis-block"),
   value: "Nanum Myeongjo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Pen Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nanum Pen Script", "frontis-block"),
   value: "Nanum Pen Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("NATS", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("NATS", "frontis-block"),
   value: "NATS"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Neucha", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Neucha", "frontis-block"),
   value: "Neucha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Neuton", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Neuton", "frontis-block"),
   value: "Neuton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("New Rocker", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("New Rocker", "frontis-block"),
   value: "New Rocker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("News Cycle", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("News Cycle", "frontis-block"),
   value: "News Cycle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("nicomoji", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("nicomoji", "frontis-block"),
   value: "nicomoji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Niconne", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Niconne", "frontis-block"),
   value: "Niconne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("nikukyu", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("nikukyu", "frontis-block"),
   value: "nikukyu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Niramit", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Niramit", "frontis-block"),
   value: "Niramit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nixie One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nixie One", "frontis-block"),
   value: "Nixie One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nobile", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nobile", "frontis-block"),
   value: "Nobile"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nokora", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nokora", "frontis-block"),
   value: "Nokora"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Norican", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Norican", "frontis-block"),
   value: "Norican"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nosifer", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nosifer", "frontis-block"),
   value: "Nosifer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nosifer Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nosifer Caps", "frontis-block"),
   value: "Nosifer Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Notable", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Notable", "frontis-block"),
   value: "Notable"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nothing You Could Do", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nothing You Could Do", "frontis-block"),
   value: "Nothing You Could Do"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noticia Text", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noticia Text", "frontis-block"),
   value: "Noticia Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Sans", "frontis-block"),
   value: "Noto Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Serif", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Serif", "frontis-block"),
   value: "Noto Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("notosanstamil", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("notosanstamil", "frontis-block"),
   value: "notosanstamil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Cut", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Cut", "frontis-block"),
   value: "Nova Cut"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Flat", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Flat", "frontis-block"),
   value: "Nova Flat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Mono", "frontis-block"),
   value: "Nova Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Oval", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Oval", "frontis-block"),
   value: "Nova Oval"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Round", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Round", "frontis-block"),
   value: "Nova Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Script", "frontis-block"),
   value: "Nova Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Slim", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Slim", "frontis-block"),
   value: "Nova Slim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Square", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nova Square", "frontis-block"),
   value: "Nova Square"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("NTR", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("NTR", "frontis-block"),
   value: "NTR"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Numans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Numans", "frontis-block"),
   value: "Numans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nunito", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nunito", "frontis-block"),
   value: "Nunito"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nunito Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nunito Sans", "frontis-block"),
   value: "Nunito Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Odor Mean Chey", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Odor Mean Chey", "frontis-block"),
   value: "Odor Mean Chey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Offside", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Offside", "frontis-block"),
   value: "Offside"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("OFL Sorts Mill Goudy TT", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("OFL Sorts Mill Goudy TT", "frontis-block"),
   value: "OFL Sorts Mill Goudy TT"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Old Standard TT", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Old Standard TT", "frontis-block"),
   value: "Old Standard TT"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oldenburg", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oldenburg", "frontis-block"),
   value: "Oldenburg"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oleo Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oleo Script", "frontis-block"),
   value: "Oleo Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oleo Script Swash Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oleo Script Swash Caps", "frontis-block"),
   value: "Oleo Script Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Open Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Open Sans", "frontis-block"),
   value: "Open Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Open Sans Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Open Sans Condensed", "frontis-block"),
   value: "Open Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("opensanshebrew", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("opensanshebrew", "frontis-block"),
   value: "opensanshebrew"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("opensanshebrewcondensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("opensanshebrewcondensed", "frontis-block"),
   value: "opensanshebrewcondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oranienbaum", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oranienbaum", "frontis-block"),
   value: "Oranienbaum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Orbitron", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Orbitron", "frontis-block"),
   value: "Orbitron"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oregano", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oregano", "frontis-block"),
   value: "Oregano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Orienta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Orienta", "frontis-block"),
   value: "Orienta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Original Surfer", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Original Surfer", "frontis-block"),
   value: "Original Surfer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oswald", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oswald", "frontis-block"),
   value: "Oswald"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Over the Rainbow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Over the Rainbow", "frontis-block"),
   value: "Over the Rainbow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overlock", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overlock", "frontis-block"),
   value: "Overlock"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overlock SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overlock SC", "frontis-block"),
   value: "Overlock SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overpass", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overpass", "frontis-block"),
   value: "Overpass"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overpass Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overpass Mono", "frontis-block"),
   value: "Overpass Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ovo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ovo", "frontis-block"),
   value: "Ovo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oxygen", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oxygen", "frontis-block"),
   value: "Oxygen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oxygen Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oxygen Mono", "frontis-block"),
   value: "Oxygen Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pacifico", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pacifico", "frontis-block"),
   value: "Pacifico"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padauk", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padauk", "frontis-block"),
   value: "Padauk"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Palanquin", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Palanquin", "frontis-block"),
   value: "Palanquin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Palanquin Dark", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Palanquin Dark", "frontis-block"),
   value: "Palanquin Dark"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pangolin", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pangolin", "frontis-block"),
   value: "Pangolin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paprika", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paprika", "frontis-block"),
   value: "Paprika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Parisienne", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Parisienne", "frontis-block"),
   value: "Parisienne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Passero One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Passero One", "frontis-block"),
   value: "Passero One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Passion One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Passion One", "frontis-block"),
   value: "Passion One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pathway Gothic One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pathway Gothic One", "frontis-block"),
   value: "Pathway Gothic One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Patrick Hand", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Patrick Hand", "frontis-block"),
   value: "Patrick Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Patrick Hand SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Patrick Hand SC", "frontis-block"),
   value: "Patrick Hand SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pattaya", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pattaya", "frontis-block"),
   value: "Pattaya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Patua One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Patua One", "frontis-block"),
   value: "Patua One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pavanam", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pavanam", "frontis-block"),
   value: "Pavanam"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paytone One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paytone One", "frontis-block"),
   value: "Paytone One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pecita", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pecita", "frontis-block"),
   value: "Pecita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Peddana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Peddana", "frontis-block"),
   value: "Peddana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Peralta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Peralta", "frontis-block"),
   value: "Peralta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Permanent Marker", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Permanent Marker", "frontis-block"),
   value: "Permanent Marker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Petit Formal Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Petit Formal Script", "frontis-block"),
   value: "Petit Formal Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Petrona", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Petrona", "frontis-block"),
   value: "Petrona"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Phetsarath", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Phetsarath", "frontis-block"),
   value: "Phetsarath"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Philosopher", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Philosopher", "frontis-block"),
   value: "Philosopher"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Piedra", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Piedra", "frontis-block"),
   value: "Piedra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pinyon Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pinyon Script", "frontis-block"),
   value: "Pinyon Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pirata One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pirata One", "frontis-block"),
   value: "Pirata One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Plaster", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Plaster", "frontis-block"),
   value: "Plaster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Play", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Play", "frontis-block"),
   value: "Play"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Playball", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Playball", "frontis-block"),
   value: "Playball"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Playfair Display", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Playfair Display", "frontis-block"),
   value: "Playfair Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Playfair Display SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Playfair Display SC", "frontis-block"),
   value: "Playfair Display SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Podkova", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Podkova", "frontis-block"),
   value: "Podkova"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("podkovavfbeta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("podkovavfbeta", "frontis-block"),
   value: "podkovavfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poetsen One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poetsen One", "frontis-block"),
   value: "Poetsen One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poiret One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poiret One", "frontis-block"),
   value: "Poiret One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poller One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poller One", "frontis-block"),
   value: "Poller One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poly", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poly", "frontis-block"),
   value: "Poly"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pompiere", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pompiere", "frontis-block"),
   value: "Pompiere"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ponnala", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ponnala", "frontis-block"),
   value: "Ponnala"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pontano Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pontano Sans", "frontis-block"),
   value: "Pontano Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poor Story", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poor Story", "frontis-block"),
   value: "Poor Story"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poppins", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Poppins", "frontis-block"),
   value: "Poppins"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Port Lligat Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Port Lligat Sans", "frontis-block"),
   value: "Port Lligat Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Port Lligat Slab", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Port Lligat Slab", "frontis-block"),
   value: "Port Lligat Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Porter Sans Block", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Porter Sans Block", "frontis-block"),
   value: "Porter Sans Block"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Post No Bills Colombo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Post No Bills Colombo", "frontis-block"),
   value: "Post No Bills Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Post No Bills Jaffna", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Post No Bills Jaffna", "frontis-block"),
   value: "Post No Bills Jaffna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pragati Narrow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pragati Narrow", "frontis-block"),
   value: "Pragati Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preahvihear", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preahvihear", "frontis-block"),
   value: "Preahvihear"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Press Start 2P", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Press Start 2P", "frontis-block"),
   value: "Press Start 2P"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pridi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pridi", "frontis-block"),
   value: "Pridi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Princess Sofia", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Princess Sofia", "frontis-block"),
   value: "Princess Sofia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prociono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prociono", "frontis-block"),
   value: "Prociono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prompt", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prompt", "frontis-block"),
   value: "Prompt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prosto One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prosto One", "frontis-block"),
   value: "Prosto One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Proza Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Proza Libre", "frontis-block"),
   value: "Proza Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Mono", "frontis-block"),
   value: "PT Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Sans", "frontis-block"),
   value: "PT Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Sans Caption", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Sans Caption", "frontis-block"),
   value: "PT Sans Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Sans Narrow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Sans Narrow", "frontis-block"),
   value: "PT Sans Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Serif", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Serif", "frontis-block"),
   value: "PT Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Serif Caption", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("PT Serif Caption", "frontis-block"),
   value: "PT Serif Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Puritan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Puritan", "frontis-block"),
   value: "Puritan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Purple Purse", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Purple Purse", "frontis-block"),
   value: "Purple Purse"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pushster", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pushster", "frontis-block"),
   value: "Pushster"
 }, {
   label: "Quando",
@@ -3349,574 +3365,574 @@ var FONT_FAMILYS = [{
   label: "Rye",
   value: "Rye"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sacramento", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sacramento", "frontis-block"),
   value: "Sacramento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sahitya", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sahitya", "frontis-block"),
   value: "Sahitya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sail", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sail", "frontis-block"),
   value: "Sail"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira", "frontis-block"),
   value: "Saira"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Condensed", "frontis-block"),
   value: "Saira Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Extra Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Extra Condensed", "frontis-block"),
   value: "Saira Extra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Semi Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Semi Condensed", "frontis-block"),
   value: "Saira Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Stencil One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Saira Stencil One", "frontis-block"),
   value: "Saira Stencil One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Salsa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Salsa", "frontis-block"),
   value: "Salsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sanchez", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sanchez", "frontis-block"),
   value: "Sanchez"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sancreek", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sancreek", "frontis-block"),
   value: "Sancreek"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sansation", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sansation", "frontis-block"),
   value: "Sansation"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sansita", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sansita", "frontis-block"),
   value: "Sansita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sansita One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sansita One", "frontis-block"),
   value: "Sansita One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarabun", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarabun", "frontis-block"),
   value: "Sarabun"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarala", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarala", "frontis-block"),
   value: "Sarala"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarina", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarina", "frontis-block"),
   value: "Sarina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarpanch", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sarpanch", "frontis-block"),
   value: "Sarpanch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Satisfy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Satisfy", "frontis-block"),
   value: "Satisfy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("sawarabigothic", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("sawarabigothic", "frontis-block"),
   value: "sawarabigothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("sawarabimincho", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("sawarabimincho", "frontis-block"),
   value: "sawarabimincho"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scada", "frontis-block"),
   value: "Scada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scheherazade", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scheherazade", "frontis-block"),
   value: "Scheherazade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Schoolbell", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Schoolbell", "frontis-block"),
   value: "Schoolbell"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scope One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scope One", "frontis-block"),
   value: "Scope One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Seaweed Script", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Seaweed Script", "frontis-block"),
   value: "Seaweed Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secular One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secular One", "frontis-block"),
   value: "Secular One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedan", "frontis-block"),
   value: "Sedan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedan SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedan SC", "frontis-block"),
   value: "Sedan SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedgwick Ave", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedgwick Ave", "frontis-block"),
   value: "Sedgwick Ave"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedgwick Ave Display", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sedgwick Ave Display", "frontis-block"),
   value: "Sedgwick Ave Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulhangang", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulhangang", "frontis-block"),
   value: "seoulhangang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulhangangcondensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulhangangcondensed", "frontis-block"),
   value: "seoulhangangcondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulnamsan", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulnamsan", "frontis-block"),
   value: "seoulnamsan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulnamsancondensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulnamsancondensed", "frontis-block"),
   value: "seoulnamsancondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulnamsanvertical", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("seoulnamsanvertical", "frontis-block"),
   value: "seoulnamsanvertical"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sevillana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sevillana", "frontis-block"),
   value: "Sevillana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Seymour One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Seymour One", "frontis-block"),
   value: "Seymour One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shadows Into Light", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shadows Into Light", "frontis-block"),
   value: "Shadows Into Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shadows Into Light Two", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shadows Into Light Two", "frontis-block"),
   value: "Shadows Into Light Two"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shanti", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shanti", "frontis-block"),
   value: "Shanti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Share", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Share", "frontis-block"),
   value: "Share"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Share Tech", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Share Tech", "frontis-block"),
   value: "Share Tech"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Share Tech Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Share Tech Mono", "frontis-block"),
   value: "Share Tech Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shojumaru", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shojumaru", "frontis-block"),
   value: "Shojumaru"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Short Stack", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Short Stack", "frontis-block"),
   value: "Short Stack"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shrikhand", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shrikhand", "frontis-block"),
   value: "Shrikhand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Siamreap", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Siamreap", "frontis-block"),
   value: "Siamreap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Siemreap", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Siemreap", "frontis-block"),
   value: "Siemreap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sigmar One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sigmar One", "frontis-block"),
   value: "Sigmar One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Signika", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Signika", "frontis-block"),
   value: "Signika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Signika Negative", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Signika Negative", "frontis-block"),
   value: "Signika Negative"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Simonetta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Simonetta", "frontis-block"),
   value: "Simonetta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Day", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Day", "frontis-block"),
   value: "Single Day"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sintony", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sintony", "frontis-block"),
   value: "Sintony"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sirin Stencil", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sirin Stencil", "frontis-block"),
   value: "Sirin Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sitara", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sitara", "frontis-block"),
   value: "Sitara"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Six Caps", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Six Caps", "frontis-block"),
   value: "Six Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Skranji", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Skranji", "frontis-block"),
   value: "Skranji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slabo 13px", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slabo 13px", "frontis-block"),
   value: "Slabo 13px"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slabo 27px", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slabo 27px", "frontis-block"),
   value: "Slabo 27px"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slackey", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slackey", "frontis-block"),
   value: "Slackey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Smokum", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Smokum", "frontis-block"),
   value: "Smokum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Smythe", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Smythe", "frontis-block"),
   value: "Smythe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sniglet", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sniglet", "frontis-block"),
   value: "Sniglet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Snippet", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Snippet", "frontis-block"),
   value: "Snippet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Snowburst One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Snowburst One", "frontis-block"),
   value: "Snowburst One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sofadi One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sofadi One", "frontis-block"),
   value: "Sofadi One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sofia", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sofia", "frontis-block"),
   value: "Sofia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solway", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solway", "frontis-block"),
   value: "Solway"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Song Myung", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Song Myung", "frontis-block"),
   value: "Song Myung"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sonsie One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sonsie One", "frontis-block"),
   value: "Sonsie One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sorts Mill Goudy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sorts Mill Goudy", "frontis-block"),
   value: "Sorts Mill Goudy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("souliyo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("souliyo", "frontis-block"),
   value: "souliyo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Source Code Pro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Source Code Pro", "frontis-block"),
   value: "Source Code Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Source Sans Pro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Source Sans Pro", "frontis-block"),
   value: "Source Sans Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Source Serif Pro", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Source Serif Pro", "frontis-block"),
   value: "Source Serif Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Space Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Space Mono", "frontis-block"),
   value: "Space Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Special Elite", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Special Elite", "frontis-block"),
   value: "Special Elite"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spectral", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spectral", "frontis-block"),
   value: "Spectral"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spicy Rice", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spicy Rice", "frontis-block"),
   value: "Spicy Rice"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spinnaker", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spinnaker", "frontis-block"),
   value: "Spinnaker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spirax", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spirax", "frontis-block"),
   value: "Spirax"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Squada One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Squada One", "frontis-block"),
   value: "Squada One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sree Krushnadevaraya", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sree Krushnadevaraya", "frontis-block"),
   value: "Sree Krushnadevaraya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sriracha", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sriracha", "frontis-block"),
   value: "Sriracha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Srisakdi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Srisakdi", "frontis-block"),
   value: "Srisakdi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Staatliches", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Staatliches", "frontis-block"),
   value: "Staatliches"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stalemate", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stalemate", "frontis-block"),
   value: "Stalemate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stalin One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stalin One", "frontis-block"),
   value: "Stalin One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stalinist One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stalinist One", "frontis-block"),
   value: "Stalinist One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stardos Stencil", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stardos Stencil", "frontis-block"),
   value: "Stardos Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stint Ultra Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stint Ultra Condensed", "frontis-block"),
   value: "Stint Ultra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stint Ultra Expanded", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stint Ultra Expanded", "frontis-block"),
   value: "Stint Ultra Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stoke", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stoke", "frontis-block"),
   value: "Stoke"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Strait", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Strait", "frontis-block"),
   value: "Strait"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Strong", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Strong", "frontis-block"),
   value: "Strong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stylish", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Stylish", "frontis-block"),
   value: "Stylish"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sue Ellen Francisco", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sue Ellen Francisco", "frontis-block"),
   value: "Sue Ellen Francisco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suez One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suez One", "frontis-block"),
   value: "Suez One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sumana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sumana", "frontis-block"),
   value: "Sumana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sunflower", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sunflower", "frontis-block"),
   value: "Sunflower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sunshiney", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sunshiney", "frontis-block"),
   value: "Sunshiney"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Supermercado One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Supermercado One", "frontis-block"),
   value: "Supermercado One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sura", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sura", "frontis-block"),
   value: "Sura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suranna", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suranna", "frontis-block"),
   value: "Suranna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suravaram", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suravaram", "frontis-block"),
   value: "Suravaram"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suwannaphum", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Suwannaphum", "frontis-block"),
   value: "Suwannaphum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Swanky and Moo Moo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Swanky and Moo Moo", "frontis-block"),
   value: "Swanky and Moo Moo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Syncopate", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Syncopate", "frontis-block"),
   value: "Syncopate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tajawal", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tajawal", "frontis-block"),
   value: "Tajawal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tangerine", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tangerine", "frontis-block"),
   value: "Tangerine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Taprom", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Taprom", "frontis-block"),
   value: "Taprom"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tauri", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tauri", "frontis-block"),
   value: "Tauri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Taviraj", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Taviraj", "frontis-block"),
   value: "Taviraj"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Teko", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Teko", "frontis-block"),
   value: "Teko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Telex", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Telex", "frontis-block"),
   value: "Telex"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tenali Ramakrishna", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tenali Ramakrishna", "frontis-block"),
   value: "Tenali Ramakrishna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tenor Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tenor Sans", "frontis-block"),
   value: "Tenor Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terminal Dosis", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terminal Dosis", "frontis-block"),
   value: "Terminal Dosis"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terminal Dosis Light", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terminal Dosis Light", "frontis-block"),
   value: "Terminal Dosis Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Me One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Me One", "frontis-block"),
   value: "Text Me One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Thabit", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Thabit", "frontis-block"),
   value: "Thabit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("tharlon", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("tharlon", "frontis-block"),
   value: "tharlon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Thasadith", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Thasadith", "frontis-block"),
   value: "Thasadith"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The Girl Next Door", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The Girl Next Door", "frontis-block"),
   value: "The Girl Next Door"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tienne", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tienne", "frontis-block"),
   value: "Tienne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tillana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tillana", "frontis-block"),
   value: "Tillana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Timmana", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Timmana", "frontis-block"),
   value: "Timmana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tinos", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tinos", "frontis-block"),
   value: "Tinos"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Titan One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Titan One", "frontis-block"),
   value: "Titan One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Titillium Web", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Titillium Web", "frontis-block"),
   value: "Titillium Web"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trade Winds", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trade Winds", "frontis-block"),
   value: "Trade Winds"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trirong", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trirong", "frontis-block"),
   value: "Trirong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trocchi", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trocchi", "frontis-block"),
   value: "Trocchi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trochut", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trochut", "frontis-block"),
   value: "Trochut"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trykker", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trykker", "frontis-block"),
   value: "Trykker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tuffy", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tuffy", "frontis-block"),
   value: "Tuffy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tulpen One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tulpen One", "frontis-block"),
   value: "Tulpen One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ubuntu", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ubuntu", "frontis-block"),
   value: "Ubuntu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ubuntu Condensed", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ubuntu Condensed", "frontis-block"),
   value: "Ubuntu Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ubuntu Mono", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ubuntu Mono", "frontis-block"),
   value: "Ubuntu Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ultra", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ultra", "frontis-block"),
   value: "Ultra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Uncial Antiqua", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Uncial Antiqua", "frontis-block"),
   value: "Uncial Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Underdog", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Underdog", "frontis-block"),
   value: "Underdog"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unica One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unica One", "frontis-block"),
   value: "Unica One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("UnifrakturCook", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("UnifrakturCook", "frontis-block"),
   value: "UnifrakturCook"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("UnifrakturMaguntia", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("UnifrakturMaguntia", "frontis-block"),
   value: "UnifrakturMaguntia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unkempt", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unkempt", "frontis-block"),
   value: "Unkempt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unlock", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unlock", "frontis-block"),
   value: "Unlock"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unna", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Unna", "frontis-block"),
   value: "Unna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vampiro One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vampiro One", "frontis-block"),
   value: "Vampiro One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Varela", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Varela", "frontis-block"),
   value: "Varela"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Varela Round", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Varela Round", "frontis-block"),
   value: "Varela Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Varta", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Varta", "frontis-block"),
   value: "Varta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vast Shadow", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vast Shadow", "frontis-block"),
   value: "Vast Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vesper Libre", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vesper Libre", "frontis-block"),
   value: "Vesper Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vibur", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vibur", "frontis-block"),
   value: "Vibur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vidaloka", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vidaloka", "frontis-block"),
   value: "Vidaloka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Viga", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Viga", "frontis-block"),
   value: "Viga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Voces", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Voces", "frontis-block"),
   value: "Voces"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Volkhov", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Volkhov", "frontis-block"),
   value: "Volkhov"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vollkorn", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vollkorn", "frontis-block"),
   value: "Vollkorn"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vollkorn SC", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Vollkorn SC", "frontis-block"),
   value: "Vollkorn SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Voltaire", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Voltaire", "frontis-block"),
   value: "Voltaire"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("VT323", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("VT323", "frontis-block"),
   value: "VT323"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Waiting for the Sunrise", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Waiting for the Sunrise", "frontis-block"),
   value: "Waiting for the Sunrise"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wallpoet", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wallpoet", "frontis-block"),
   value: "Wallpoet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Walter Turncoat", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Walter Turncoat", "frontis-block"),
   value: "Walter Turncoat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Warnes", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Warnes", "frontis-block"),
   value: "Warnes"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wellfleet", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wellfleet", "frontis-block"),
   value: "Wellfleet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wendy One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wendy One", "frontis-block"),
   value: "Wendy One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wire One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wire One", "frontis-block"),
   value: "Wire One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Work Sans", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Work Sans", "frontis-block"),
   value: "Work Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yaldevi Colombo", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yaldevi Colombo", "frontis-block"),
   value: "Yaldevi Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yanone Kaffeesatz", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yanone Kaffeesatz", "frontis-block"),
   value: "Yanone Kaffeesatz"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yantramanav", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yantramanav", "frontis-block"),
   value: "Yantramanav"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yatra One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yatra One", "frontis-block"),
   value: "Yatra One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yellowtail", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yellowtail", "frontis-block"),
   value: "Yellowtail"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yeon Sung", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yeon Sung", "frontis-block"),
   value: "Yeon Sung"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yeseva One", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yeseva One", "frontis-block"),
   value: "Yeseva One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yesteryear", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yesteryear", "frontis-block"),
   value: "Yesteryear"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yinmar", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yinmar", "frontis-block"),
   value: "Yinmar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yrsa", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Yrsa", "frontis-block"),
   value: "Yrsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ZCOOL KuaiLe", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ZCOOL KuaiLe", "frontis-block"),
   value: "ZCOOL KuaiLe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ZCOOL QingKe HuangYou", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ZCOOL QingKe HuangYou", "frontis-block"),
   value: "ZCOOL QingKe HuangYou"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ZCOOL XiaoWei", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ZCOOL XiaoWei", "frontis-block"),
   value: "ZCOOL XiaoWei"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zeyada", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zeyada", "frontis-block"),
   value: "Zeyada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zhi Mang Xing", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zhi Mang Xing", "frontis-block"),
   value: "Zhi Mang Xing"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "advanced-heading"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-block"),
   value: "Zilla Slab Highlight"
 }];
 
@@ -3970,31 +3986,38 @@ function Edit(_ref) {
     infoBoxBg = attributes.infoBoxBg,
     descAlignment = attributes.descAlignment,
     buttonAlignment = attributes.buttonAlignment,
-    icon = attributes.icon;
+    icon = attributes.icon,
+    mediaSwitcher = attributes.mediaSwitcher,
+    contentAlignment = attributes.contentAlignment;
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     clientId: clientId
-  }), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
+  }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.AlignmentToolbar, {
+    value: contentAlignment,
+    onChange: function onChange(value) {
+      return setAttributes({
+        contentAlignment: value
+      });
+    },
+    controls: ['left', 'center', 'right', 'justify']
+  })), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
     id: blockID
   }), /*#__PURE__*/React.createElement("div", {
-    className: "fb-info-box-content-wrapper ".concat(blockID),
-    style: {
-      backgroundColor: infoBoxBg
-    }
+    className: "fb-info-box-content-wrapper ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-info-media-wrapper",
     style: {
       textAlign: wrapperAlignment
     }
-  }, /*#__PURE__*/React.createElement("img", {
+  }, mediaSwitcher === 'image' && /*#__PURE__*/React.createElement("img", {
     src: attributes.infoMediaUrl,
     style: {
       width: "".concat(attributes.width, "px"),
       height: "".concat(attributes.height, "px")
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }), mediaSwitcher === 'icon' && /*#__PURE__*/React.createElement("div", {
     className: "fb-icon-wrapper"
   }, (0,_components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_3__["default"])(icon))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
     tagName: Heading_Tag,
@@ -4247,11 +4270,13 @@ function Inspector(_ref) {
     infoButtonTabPadding = attributes.infoButtonTabPadding,
     infoButtonMobilePadding = attributes.infoButtonMobilePadding,
     icon = attributes.icon,
-    width = attributes.width;
+    width = attributes.width,
+    mediaSwitcher = attributes.mediaSwitcher,
+    contentAlignment = attributes.contentAlignment;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
       setAttributes({
-        blockID: "fb-info-box-content-wrapper-" + clientId.slice(0, 8)
+        blockID: "fb-icon-picker-" + clientId.slice(0, 8)
       });
     }
   }, [clientId]);
@@ -4268,13 +4293,7 @@ function Inspector(_ref) {
     setAttributes({
       icon: iconName
     });
-    console.log(icon);
   };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
-    setAttributes({
-      icon: icon
-    });
-  }, [icon]);
 
   /** Start Padding */
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_padding),
@@ -4842,14 +4861,14 @@ function Inspector(_ref) {
         break;
     }
     /** Update all margin values if marginLink is true */
-    if (Heading_Margin_Link) {
+    if (infoButtonMarginLink) {
       updateButtonMargin(value, infoButtonActiveMarginDevice);
     }
   };
 
   /** Function to handle marginLink toggle */
   var handleButtonMarginLinkToggle = function handleButtonMarginLinkToggle() {
-    if (!Heading_Margin_Link) {
+    if (!infoButtonMarginLink) {
       setAttributes({
         infoButtonDesktopMargin: buttonPreviousMargin
       });
@@ -5288,7 +5307,7 @@ function Inspector(_ref) {
 
   // Define the CSS as a string
   var css = "\n        #".concat(blockID, " {\n            padding: 20px;\n            border: 1px solid #ccc;\n            background-color: #f9f9f9;\n        }\n    ");
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t.fb-info-box-content-wrapper.".concat(blockID, " {\n                    padding: ").concat(boxPadding, ";\n                    border: ").concat(infoBoxBorder, ";\n                    border-width: ").concat(boxBorderWidth, ";\n                    border-radius: ").concat(boxBorderRadiusWidth, ";\n                    ").concat(infoBoxBorderColor !== undefined ? "border-color: ".concat(infoBoxBorderColor, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                    ").concat(Heading_Color !== undefined ? "color: ".concat(Heading_Color, ";") : '', "\n                    ").concat(Heading_Background_Color !== undefined ? "background-color: ".concat(Heading_Background_Color, ";") : '', "\n                    font-family: ").concat(Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family, ";\n                    font-size: ").concat(Heading_Font_Size !== undefined ? "".concat(Heading_Font_Size).concat(Heading_Font_size_units) : '', ";\n                    font-weight: ").concat(Heading_Font_Weight, ";\n                    font-style: ").concat(Heading_Font_Style, ";\n                    text-transform: ").concat(Heading_Text_Transform, ";\n                    text-decoration: ").concat(Heading_Text_Decoration, ";\n                    ").concat(Heading_Letter_Spacing !== undefined ? "letter-spacing: ".concat(Heading_Letter_Spacing).concat(Heading_Letter_Spacing_units, ";") : '', "\n                    ").concat(Heading_Line_Height !== undefined ? "line-height: ".concat(Heading_Line_Height).concat(Heading_Line_Height_units, ";") : '', "\n                    transition: all .3s ease-in-out;\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(Heading_Border, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    ").concat(Heading_Border_Color !== undefined ? "border-color: ".concat(Heading_Border_Color, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading:hover {\n                    ").concat(Heading_Hover_Color !== undefined ? "color: ".concat(Heading_Hover_Color, ";") : '', "\n                    ").concat(Heading_Border_Hover_Color !== undefined ? "border-color: ".concat(Heading_Border_Hover_Color, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Tab_padding.top).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.right).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Tab_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Tab_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Tab_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Mobile_padding.top).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.right).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Mobile_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Mobile_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Mobile_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                \t").concat(SubHeadingColor !== undefined ? "color: ".concat(SubHeadingColor, ";") : '', "\n                \tfont-family: ").concat(SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily, ";\n                    font-size: ").concat(SubHeadingFontSize !== undefined ? "".concat(SubHeadingFontSize).concat(SubHeadingFontSizeUnits) : '', ";\n                    font-weight: ").concat(SubHeadingFontWeight, ";\n                    font-style: ").concat(SubHeadingFontStyle, ";\n                    text-transform: ").concat(SubHeadingTextTransform, ";\n                    text-decoration: ").concat(SubHeadingTextDecoration, ";\n                    padding: ").concat(descPadding, ";\n\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description:hover {\n                    ").concat(SubHeadingHoverColor !== undefined ? "color: ".concat(SubHeadingHoverColor, ";") : '', "\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                \t").concat(buttonTextColor !== undefined ? "color: ".concat(buttonTextColor, ";") : '', "\n                \t").concat(buttonBgColor !== undefined ? "background-color: ".concat(buttonBgColor, ";") : '', "\n                \tfont-family: ").concat(buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily, ";\n                    font-size: ").concat(buttonFontSize !== undefined ? "".concat(buttonFontSize).concat(buttonFontSizeUnits) : '', ";\n                    font-weight: ").concat(buttonFontWeight, ";\n                    font-style: ").concat(buttonFontStyle, ";\n                    text-transform: ").concat(buttonTextTransform, ";\n                    text-decoration: ").concat(buttonTextDecoration, ";\n                    padding: ").concat(buttonPadding, ";\n                    margin: ").concat(buttonMargin, ";\n\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button:hover {\n                \t").concat(buttonTextHoverColor !== undefined ? "color: ".concat(buttonTextHoverColor, ";") : '', "\n                \t").concat(buttonBgHoverColor !== undefined ? "background-color: ".concat(buttonBgHoverColor, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-icon-wrapper svg {\n                \twidth: ").concat(attributes.width, "px;\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t.fb-info-box-content-wrapper.".concat(blockID, " {\n                    padding: ").concat(boxPadding, ";\n                    border: ").concat(infoBoxBorder, ";\n                    border-width: ").concat(boxBorderWidth, ";\n                    border-radius: ").concat(boxBorderRadiusWidth, ";\n                    ").concat(infoBoxBorderColor !== undefined ? "border-color: ".concat(infoBoxBorderColor, ";") : '', "\n                    ").concat(infoBoxBg !== undefined ? "background-color: ".concat(infoBoxBg, ";") : '', "\n                    text-align: ").concat(contentAlignment, "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                    ").concat(Heading_Color !== undefined ? "color: ".concat(Heading_Color, ";") : '', "\n                    ").concat(Heading_Background_Color !== undefined ? "background-color: ".concat(Heading_Background_Color, ";") : '', "\n                    font-family: ").concat(Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family, ";\n                    font-size: ").concat(Heading_Font_Size !== undefined ? "".concat(Heading_Font_Size).concat(Heading_Font_size_units) : '', ";\n                    font-weight: ").concat(Heading_Font_Weight, ";\n                    font-style: ").concat(Heading_Font_Style, ";\n                    text-transform: ").concat(Heading_Text_Transform, ";\n                    text-decoration: ").concat(Heading_Text_Decoration, ";\n                    ").concat(Heading_Letter_Spacing !== undefined ? "letter-spacing: ".concat(Heading_Letter_Spacing).concat(Heading_Letter_Spacing_units, ";") : '', "\n                    ").concat(Heading_Line_Height !== undefined ? "line-height: ".concat(Heading_Line_Height).concat(Heading_Line_Height_units, ";") : '', "\n                    transition: all .3s ease-in-out;\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(Heading_Border, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    ").concat(Heading_Border_Color !== undefined ? "border-color: ".concat(Heading_Border_Color, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading:hover {\n                    ").concat(Heading_Hover_Color !== undefined ? "color: ".concat(Heading_Hover_Color, ";") : '', "\n                    ").concat(Heading_Border_Hover_Color !== undefined ? "border-color: ".concat(Heading_Border_Hover_Color, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Tab_padding.top).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.right).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Tab_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Tab_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Tab_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Mobile_padding.top).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.right).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Mobile_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Mobile_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Mobile_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                \t").concat(SubHeadingColor !== undefined ? "color: ".concat(SubHeadingColor, ";") : '', "\n                \tfont-family: ").concat(SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily, ";\n                    font-size: ").concat(SubHeadingFontSize !== undefined ? "".concat(SubHeadingFontSize).concat(SubHeadingFontSizeUnits) : '', ";\n                    font-weight: ").concat(SubHeadingFontWeight, ";\n                    font-style: ").concat(SubHeadingFontStyle, ";\n                    text-transform: ").concat(SubHeadingTextTransform, ";\n                    text-decoration: ").concat(SubHeadingTextDecoration, ";\n                    padding: ").concat(descPadding, ";\n\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description:hover {\n                    ").concat(SubHeadingHoverColor !== undefined ? "color: ".concat(SubHeadingHoverColor, ";") : '', "\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                \t").concat(buttonTextColor !== undefined ? "color: ".concat(buttonTextColor, ";") : '', "\n                \t").concat(buttonBgColor !== undefined ? "background-color: ".concat(buttonBgColor, ";") : '', "\n                \tfont-family: ").concat(buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily, ";\n                    font-size: ").concat(buttonFontSize !== undefined ? "".concat(buttonFontSize).concat(buttonFontSizeUnits) : '', ";\n                    font-weight: ").concat(buttonFontWeight, ";\n                    font-style: ").concat(buttonFontStyle, ";\n                    text-transform: ").concat(buttonTextTransform, ";\n                    text-decoration: ").concat(buttonTextDecoration, ";\n                    padding: ").concat(buttonPadding, ";\n                    margin: ").concat(buttonMargin, ";\n\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button:hover {\n                \t").concat(buttonTextHoverColor !== undefined ? "color: ".concat(buttonTextHoverColor, ";") : '', "\n                \t").concat(buttonBgHoverColor !== undefined ? "background-color: ".concat(buttonBgHoverColor, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-icon-wrapper svg {\n                \twidth: ").concat(attributes.width, "px;\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"
@@ -5330,11 +5349,22 @@ function Inspector(_ref) {
             wrapperAlignment: item.value
           });
         },
-        className: "fb-advanced-alignment-single-btn ".concat(Alignment === item.value ? 'active' : '')
+        className: "fb-advanced-alignment-single-btn ".concat(wrapperAlignment === item.value ? 'active' : '')
       }, item.label);
-    }))), /*#__PURE__*/React.createElement("div", {
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      className: "fb-sub-heading-position"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Media Type", "frontis-block"),
+      value: mediaSwitcher,
+      options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.mediaType,
+      onChange: function onChange(value) {
+        return setAttributes({
+          mediaSwitcher: value
+        });
+      }
+    })), /*#__PURE__*/React.createElement("div", {
       className: "fb-image-upload-field-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+    }, mediaSwitcher === 'image' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: function onSelect(media) {
         setAttributes({
           infoMediaId: media['id'],
@@ -5383,10 +5413,10 @@ function Inspector(_ref) {
           onClick: open
         }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace', 'frontis-block'));
       }
-    })))), /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    })))), mediaSwitcher === 'icon' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, null, /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
       value: icon,
       setIconHandler: iconHandler
-    }))), /*#__PURE__*/React.createElement("div", {
+    }))))), /*#__PURE__*/React.createElement("div", {
       className: "fb-advanced-wrapper"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Title", "frontis-block"),
@@ -5480,6 +5510,54 @@ function Inspector(_ref) {
         });
       },
       className: "fb-sub-heading-text"
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-info-button-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button", "frontis-block"),
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Button", "frontis-block"),
+      checked: info_Button_Switcher,
+      onChange: function onChange(value) {
+        return setAttributes({
+          info_Button_Switcher: value
+        });
+      }
+    }), info_Button_Switcher && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alignment", "frontis-block"),
+      id: "fb-media-alignment",
+      className: "fb-advanced-alignment"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-advanced-alignment-group-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_ALIGN.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            buttonAlignment: item.value
+          });
+        },
+        className: "fb-advanced-alignment-single-btn ".concat(buttonAlignment === item.value ? 'active' : '')
+      }, item.label);
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Text", "frontis-block"),
+      value: info_Button_Text,
+      onChange: function onChange(value) {
+        return setAttributes({
+          info_Button_Text: value
+        });
+      },
+      className: "fb-info-button-text"
+    }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
+      value: info_Button_Link,
+      onChange: function onChange(value, post) {
+        // Check if the URL has a protocol (http or https), otherwise prepend it
+        var formattedLink = value.startsWith('http://') || value.startsWith('https://') ? value : "https://".concat(value);
+        setAttributes({
+          info_Button_Link: formattedLink,
+          info_Button_Text: post && post.title || info_Button_Text
+        });
+      }
     }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box", "frontis-block"),
       initialOpen: false
@@ -5875,7 +5953,7 @@ function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement("button", {
       className: "fb-responsive-desktop-device ".concat(activeBorderDevice === 'desktop' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderWidthDeviceClick('desktop');
+        return handleBoxBorderWidthDeviceClick('desktop');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "8",
@@ -5886,7 +5964,7 @@ function Inspector(_ref) {
     }))), /*#__PURE__*/React.createElement("button", {
       className: "fb-responsive-tablet-device  ".concat(activeBorderDevice === 'tab' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderWidthDeviceClick('tab');
+        return handleBoxBorderWidthDeviceClick('tab');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "6",
@@ -5897,7 +5975,7 @@ function Inspector(_ref) {
     }))), /*#__PURE__*/React.createElement("button", {
       className: "fb-responsive-mobile-device ".concat(activeBorderDevice === 'mobile' ? 'active' : ''),
       onClick: function onClick() {
-        return handleBorderWidthDeviceClick('mobile');
+        return handleBoxBorderWidthDeviceClick('mobile');
       }
     }, /*#__PURE__*/React.createElement("svg", {
       width: "4",
@@ -5914,10 +5992,10 @@ function Inspector(_ref) {
         key: key,
         onClick: function onClick() {
           return setAttributes({
-            Heading_Border_units: item.value
+            infoBoxBorderUnits: item.value
           });
         },
-        className: "fb-setting-units-type-switcher ".concat(Heading_Border_units === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(infoBoxBorderUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-input-container"
@@ -7716,6 +7794,762 @@ function Inspector(_ref) {
     }), /*#__PURE__*/React.createElement("span", {
       className: "dashicons ".concat(Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(Heading_Margin_Link ? 'is-checked' : ''),
       onClick: handleMarginLinkToggle
+    })))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button", "frontis-block"),
+      className: "fb-info-box-button-setting-wrapper",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-block"),
+      className: "fb-setting-typography"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-typography-icon-dropdown",
+      contentClassName: "fb-setting-typography-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref14) {
+        var isOpen = _ref14.isOpen,
+          onToggle = _ref14.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-typography-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "edit",
+          className: "fb-setting-typography-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-typography-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-typography-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontfamily-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-block"),
+          options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
+          value: Heading_Font_Family,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontFamily: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-fontsize-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                buttonFontSizeUnits: item.value
+              });
+            },
+            className: "fb-setting-fontsize-units-switcher ".concat(buttonFontSizeUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-rangecontrol"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: Heading_Font_Size,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontSize: value
+            });
+          },
+          min: 1,
+          max: 200,
+          allowReset: true,
+          resetFallbackValue: undefined
+        }))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontweight-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("100", "frontis-block"),
+            value: "100"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("200", "frontis-block"),
+            value: "200"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("300", "frontis-block"),
+            value: "300"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("400", "frontis-block"),
+            value: "400"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("500", "frontis-block"),
+            value: "500"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("600", "frontis-block"),
+            value: "600"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("700", "frontis-block"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("800", "frontis-block"),
+            value: "800"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("900", "frontis-block"),
+            value: "900"
+          }],
+          value: buttonFontWeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontWeight: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontstyle-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "normal"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "frontis-block"),
+            value: "normal"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Italic", "frontis-block"),
+            value: "italic"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oblique", "frontis-block"),
+            value: "oblique"
+          }],
+          value: buttonFontStyle,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontStyle: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-texttransform-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Capitalize", "frontis-block"),
+            value: "capitalize"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Uppercase", "frontis-block"),
+            value: "uppercase"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lowercase", "frontis-block"),
+            value: "lowercase"
+          }],
+          value: buttonTextTransform,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextTransform: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-textdecoration-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Underline", "frontis-block"),
+            value: "underline"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overline", "frontis-block"),
+            value: "overline"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Through", "frontis-block"),
+            value: "line-through"
+          }],
+          value: buttonTextDecoration,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextDecoration: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-letterspacing-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                buttonLetterSpacingUnits: item.value
+              });
+            },
+            className: "fb-setting-letterspacing-units-switcher ".concat(buttonLetterSpacingUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: buttonLetterSpacing,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonLetterSpacing: value === 0 ? undefined : value
+            });
+          },
+          min: 1,
+          max: 100,
+          step: 1,
+          allowReset: true,
+          resetFallbackValue: undefined
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-lineheight-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                buttonLineHeightUnits: item.value
+              });
+            },
+            className: "fb-setting-lineheight-units-switcher ".concat(buttonLineHeightUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: buttonLineHeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonLineHeight: value === 1 ? undefined : value
+            });
+          },
+          min: 1,
+          max: 100,
+          step: 1,
+          allowReset: true,
+          resetFallbackValue: undefined
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-block"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            buttonColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(buttonColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), buttonColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref15) {
+        var isOpen = _ref15.isOpen,
+          onToggle = _ref15.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonTextColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonTextColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextColor: value
+            });
+          }
+        }))));
+      }
+    })), buttonColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref16) {
+        var isOpen = _ref16.isOpen,
+          onToggle = _ref16.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonTextHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonTextHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-block"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            buttonBgColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(buttonBgColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), buttonColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref17) {
+        var isOpen = _ref17.isOpen,
+          onToggle = _ref17.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgColor: value
+            });
+          }
+        }))));
+      }
+    })), buttonColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref18) {
+        var isOpen = _ref18.isOpen,
+          onToggle = _ref18.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Spacing"), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-label-wrapper"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "fb-setting-label-text"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-block")), /*#__PURE__*/React.createElement("div", {
+      className: "fb-responsive-device-wrapper"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "fb-responsive-desktop-device ".concat(activePaddingDevice === 'desktop' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleButtonPaddingDeviceClick('desktop');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "8",
+      height: "7",
+      viewBox: "0 0 8 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
+    }))), /*#__PURE__*/React.createElement("button", {
+      className: "fb-responsive-tablet-device  ".concat(activePaddingDevice === 'tab' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleButtonPaddingDeviceClick('tab');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "6",
+      height: "7",
+      viewBox: "0 0 6 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
+    }))), /*#__PURE__*/React.createElement("button", {
+      className: "fb-responsive-mobile-device ".concat(activePaddingDevice === 'mobile' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleButtonPaddingDeviceClick('mobile');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "4",
+      height: "7",
+      viewBox: "0 0 4 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            infoButtonPaddingUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(infoButtonPaddingUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.top : activePaddingDevice === 'tab' ? infoButtonTabPadding.top : infoButtonMobilePadding.top,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.right : activePaddingDevice === 'tab' ? infoButtonTabPadding.right : infoButtonMobilePadding.right,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.bottom : activePaddingDevice === 'tab' ? infoButtonTabPadding.bottom : infoButtonMobilePadding.bottom,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.left : activePaddingDevice === 'tab' ? infoButtonTabPadding.left : infoButtonMobilePadding.left,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(paddingLink ? 'is-checked' : ''),
+      onClick: handlePaddingLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-label-wrapper"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "fb-setting-label-text"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margin", "frontis-block")), /*#__PURE__*/React.createElement("div", {
+      className: "fb-responsive-device-wrapper"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "fb-responsive-desktop-device ".concat(infoButtonActiveMarginDevice === 'desktop' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleButtonMarginDeviceClick('desktop');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "8",
+      height: "7",
+      viewBox: "0 0 8 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
+    }))), /*#__PURE__*/React.createElement("button", {
+      className: "fb-responsive-tablet-device ".concat(infoButtonActiveMarginDevice === 'tab' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleButtonMarginDeviceClick('tab');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "6",
+      height: "7",
+      viewBox: "0 0 6 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
+    }))), /*#__PURE__*/React.createElement("button", {
+      className: "fb-responsive-mobile-device ".concat(infoButtonActiveMarginDevice === 'mobile' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleButtonMarginDeviceClick('mobile');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "4",
+      height: "7",
+      viewBox: "0 0 4 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            infoButtonMarginUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(infoButtonMarginUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.top : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.top : infoButtonMobileMargin.top,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.right : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.right : infoButtonMobileMargin.right,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.bottom : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.bottom : infoButtonMobileMargin.bottom,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.left : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.left : infoButtonMobileMargin.left,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(infoButtonMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(infoButtonMarginLink ? 'is-checked' : ''),
+      onClick: handleButtonMarginLinkToggle
     }))))))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Advanced settings")));
   }))));
 }
@@ -21283,7 +22117,7 @@ function _unsupportedIterableToArray(r, a) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"title":"Icon Box","name":"frontis-blocks/icon-box","version":"1.0.0","category":"frontis-blocks","icon":"admin-users","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"title":"Icon Box","name":"frontis-blocks/icon-box","version":"1.0.0","category":"frontis-blocks","icon":"icon","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

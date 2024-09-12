@@ -7,6 +7,10 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	mediaSwitcher : {
+		type: "string",
+		default: "icon"
+	},
     infoMediaUrl: {
         type: 'string',
         default: ''
@@ -43,6 +47,10 @@ const attributes = {
         type: "string",
         default: "left",
     },
+	contentAlignment: {
+        type: "string",
+        default: "left",
+    },
 	descAlignment: {
         type: "string",
         default: "left",
@@ -57,7 +65,7 @@ const attributes = {
     },
     Heading_Text: {
         type : "string",
-        default: "Icon Title"
+        default: "Icon Box Title"
     },
     Heading_Tag: {
         type : "string",
@@ -346,7 +354,7 @@ const attributes = {
     },
     Sub_Heading_Text: {
         type: "string",
-        default: "Icon Description"
+        default: "lorem ipsum dolor somit inta anta kun faya kun."
     },
     Sub_Heading_Tag: {
         type : "string",

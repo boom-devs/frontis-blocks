@@ -58,7 +58,7 @@ import {
 	separator_TYPE,
 	FONT_FAMILYS,
 	CLASSIC_GRADIENT,
-	BORDER_STYLES,
+	BORDER_STYLES, mediaType,
 } from "./constants/constants";
 
 import {useState, createRef, useEffect} from "@wordpress/element";
@@ -192,7 +192,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		infoButtonTabPadding,
 		infoButtonMobilePadding,
 		icon,
-		width
+		width,
+		mediaSwitcher,
+		contentAlignment,
 
 	} = attributes;
 
@@ -200,7 +202,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
 			setAttributes({
-				blockID: "fb-info-box-content-wrapper-" + clientId.slice(0, 8),
+				blockID: "fb-icon-picker-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId]);
@@ -217,12 +219,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	const iconHandler = (iconName) => {
 		setAttributes({icon: iconName})
-		console.log(icon)
 	}
-
-	useEffect(() => {
-		setAttributes({icon})
-	}, [icon]);
 
 	/** Start Padding */
 	const [previousPadding, setPreviousPadding] = useState(Heading_Desktop_padding);
@@ -707,14 +704,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 				break;
 		}
 		/** Update all margin values if marginLink is true */
-		if (Heading_Margin_Link) {
+		if (infoButtonMarginLink) {
 			updateButtonMargin(value, infoButtonActiveMarginDevice);
 		}
 	};
 
 	/** Function to handle marginLink toggle */
 	const handleButtonMarginLinkToggle = () => {
-		if (!Heading_Margin_Link) {
+		if (!infoButtonMarginLink) {
 			setAttributes({infoButtonDesktopMargin: buttonPreviousMargin});
 		}
 		/** setmarginLink(!marginLink) */
@@ -1136,6 +1133,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     border-width: ${boxBorderWidth};
                     border-radius: ${boxBorderRadiusWidth};
                     ${infoBoxBorderColor !== undefined ? `border-color: ${infoBoxBorderColor};` : ''}
+                    ${infoBoxBg !== undefined ? `background-color: ${infoBoxBg};` : ''}
+                    text-align: ${contentAlignment}
                 }
                 .fb-info-box-content-wrapper.${blockID} .fb-heading {
                     ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ''}
@@ -1262,54 +1261,28 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<Button
 																key={key}
 																onClick={() => setAttributes({wrapperAlignment: item.value})}
-																className={`fb-advanced-alignment-single-btn ${Alignment === item.value ? 'active' : ''}`}
+																className={`fb-advanced-alignment-single-btn ${wrapperAlignment === item.value ? 'active' : ''}`}
 															>
 																{item.label}
 															</Button>
 														))}
 													</ButtonGroup>
 												</BaseControl>
+												<BaseControl className="fb-sub-heading-position">
+													<SelectControl
+														label={__("Media Type", "frontis-block")}
+														value={mediaSwitcher}
+														options={mediaType}
+														onChange={(value) => setAttributes({mediaSwitcher: value})}
+													/>
+												</BaseControl>
+
 
 												<div className='fb-image-upload-field-wrapper'>
-													<MediaUploadCheck>
-														<MediaUpload
-															onSelect={(media) => {
-																setAttributes({
-																	infoMediaId: media['id'],
-																	infoMediaUrl: media['url'],
-																	infoMediaWidth: media['width'],
-																	infoMediaHeight: media['height']
-																});
-															}}
-															type="image"
-															value={attributes.infoMediaId}
-															render={({open}) => {
-																return (
-																	<Button
-																		className={attributes.infoMediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-																		onClick={open}
-																	>
-																		{attributes.infoMediaId == 0 && __('Select Icon Image', 'ultimate-addons-for-gutenberg-blocks')}
-																		{attributes.infoMediaId != 0 &&
-																			<ResponsiveWrapper
-																				naturalWidth={attributes.infoMediaWidth}
-																				naturalHeight={attributes.infoMediaHeight}>
-																				<img src={attributes.infoMediaUrl}/>
-																			</ResponsiveWrapper>
-																		}
-																	</Button>
-																);
-															}}
-														/>
-													</MediaUploadCheck>
-													{attributes.infoMediaId != 0 &&
-														<HStack className='editor-post-featured-image__actions'>
-															<Button className='editor-post-featured-image__action'
-																	onClick={() => removeInfoMedia()}>{__('Remove', 'frontis-block')}</Button>
+													{mediaSwitcher === 'image' && (
+														<BaseControl>
 															<MediaUploadCheck>
 																<MediaUpload
-																	title={__('Replace image', 'frontis-block')}
-																	value={attributes.infoMediaId}
 																	onSelect={(media) => {
 																		setAttributes({
 																			infoMediaId: media['id'],
@@ -1319,18 +1292,63 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 																		});
 																	}}
 																	type="image"
-																	render={({open}) => (
-																		<Button
-																			className='editor-post-featured-image__action'
-																			onClick={open}>{__('Replace', 'frontis-block')}</Button>
-																	)}
+																	value={attributes.infoMediaId}
+																	render={({open}) => {
+																		return (
+																			<Button
+																				className={attributes.infoMediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+																				onClick={open}
+																			>
+																				{attributes.infoMediaId == 0 && __('Select Icon Image', 'ultimate-addons-for-gutenberg-blocks')}
+																				{attributes.infoMediaId != 0 &&
+																					<ResponsiveWrapper
+																						naturalWidth={attributes.infoMediaWidth}
+																						naturalHeight={attributes.infoMediaHeight}>
+																						<img
+																							src={attributes.infoMediaUrl}/>
+																					</ResponsiveWrapper>
+																				}
+																			</Button>
+																		);
+																	}}
 																/>
 															</MediaUploadCheck>
-														</HStack>
-													}
+															{attributes.infoMediaId != 0 &&
+																<HStack className='editor-post-featured-image__actions'>
+																	<Button
+																		className='editor-post-featured-image__action'
+																		onClick={() => removeInfoMedia()}>{__('Remove', 'frontis-block')}</Button>
+																	<MediaUploadCheck>
+																		<MediaUpload
+																			title={__('Replace image', 'frontis-block')}
+																			value={attributes.infoMediaId}
+																			onSelect={(media) => {
+																				setAttributes({
+																					infoMediaId: media['id'],
+																					infoMediaUrl: media['url'],
+																					infoMediaWidth: media['width'],
+																					infoMediaHeight: media['height']
+																				});
+																			}}
+																			type="image"
+																			render={({open}) => (
+																				<Button
+																					className='editor-post-featured-image__action'
+																					onClick={open}>{__('Replace', 'frontis-block')}</Button>
+																			)}
+																		/>
+																	</MediaUploadCheck>
+																</HStack>
+															}
+														</BaseControl>
+													)}
 
+													{mediaSwitcher === 'icon' && (
+														<BaseControl>
+															<FBIconPicker value={icon} setIconHandler={iconHandler}/>
+														</BaseControl>
+													)}
 												</div>
-												<FBIconPicker value={icon} setIconHandler={iconHandler}/>
 											</PanelBody>
 										</div>
 										<div className="fb-advanced-wrapper">
@@ -1799,7 +1817,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<div className="fb-responsive-device-wrapper">
 																<button
 																	className={`fb-responsive-desktop-device ${activeBorderDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleBorderWidthDeviceClick('desktop')}>
+																	onClick={() => handleBoxBorderWidthDeviceClick('desktop')}>
 																	<svg width="8" height="7" viewBox="0 0 8 7">
 																		<path
 																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
@@ -1807,7 +1825,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 																</button>
 																<button
 																	className={`fb-responsive-tablet-device  ${activeBorderDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleBorderWidthDeviceClick('tab')}>
+																	onClick={() => handleBoxBorderWidthDeviceClick('tab')}>
 																	<svg width="6" height="7" viewBox="0 0 6 7">
 																		<path
 																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
@@ -1815,7 +1833,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 																</button>
 																<button
 																	className={`fb-responsive-mobile-device ${activeBorderDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleBorderWidthDeviceClick('mobile')}>
+																	onClick={() => handleBoxBorderWidthDeviceClick('mobile')}>
 																	<svg width="4" height="7" viewBox="0 0 4 7">
 																		<path
 																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
@@ -1828,8 +1846,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 																{separator_UNIT_TYPES.map((item, key) => (
 																	<Button
 																		key={key}
-																		onClick={() => setAttributes({Heading_Border_units: item.value})}
-																		className={`fb-setting-units-type-switcher ${Heading_Border_units === item.value ? 'active' : ''}`}
+																		onClick={() => setAttributes({infoBoxBorderUnits: item.value})}
+																		className={`fb-setting-units-type-switcher ${infoBoxBorderUnits === item.value ? 'active' : ''}`}
 																	>
 																		{item.label}
 																	</Button>
