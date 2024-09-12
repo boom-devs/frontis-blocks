@@ -1249,25 +1249,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												title={__("Icon/Image", "frontis-block")}
 												initialOpen={true}
 											>
-												<BaseControl
-													label={__("Media Alignment", "frontis-block")}
-													id="fb-media-alignment"
-													className="fb-advanced-alignment"
-												>
-													<ButtonGroup
-														className="fb-advanced-alignment-group-btn"
-													>
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() => setAttributes({wrapperAlignment: item.value})}
-																className={`fb-advanced-alignment-single-btn ${wrapperAlignment === item.value ? 'active' : ''}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
 														label={__("Media Type", "frontis-block")}
