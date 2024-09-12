@@ -1,0 +1,31 @@
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/countdown/style.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+.fb-count-down-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+.fb-count-down-wrapper .fb-count-down-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 120px;
+  height: 144px;
+  background-color: #6B4EFF;
+  border-radius: 8px;
+}
+.fb-count-down-wrapper .fb-count-down-item .fb-count-down-time {
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 68px;
+  color: #fff;
+}
+.fb-count-down-wrapper .fb-count-down-item .fb-count-down-label {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #fff;
+}
