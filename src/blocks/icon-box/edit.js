@@ -12,7 +12,6 @@ import {
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-
 export default function Edit({ attributes, setAttributes, clientId}) {
     const {
         blockID,
@@ -33,7 +32,10 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 		infoBoxBg,
 		descAlignment,
 		buttonAlignment,
-		icon
+		icon,
+		mediaSwitcher,
+		contentAlignment
+
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -47,17 +49,29 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                 clientId={clientId}
             />
 
+			<BlockControls>
+				<AlignmentToolbar
+					value={contentAlignment}
+					onChange={(value) => setAttributes({ contentAlignment: value })}
+					controls={['left', 'center', 'right', 'justify']}
+				/>
+			</BlockControls>
+
             <div {...blockProps} id={blockID}>
-                <div className={`fb-info-box-content-wrapper ${blockID}`} style={{ backgroundColor: infoBoxBg }}>
+                <div className={`fb-info-box-content-wrapper ${blockID}`} >
 					<div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
+						{mediaSwitcher === 'image' && (
 						<img src={attributes.infoMediaUrl}
 							 style={{width: `${attributes.width}px`, height: `${attributes.height}px`}}
 						/>
+							)}
+						{mediaSwitcher === 'icon' && (
 						<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+						)}
 					</div>
 
 					<RichText
-						tagName={Heading_Tag}
+                        tagName={Heading_Tag}
                         value={Heading_Text}
                         onChange={(value) => setAttributes({text: value})}
                         placeholder={__('Info Heading', 'frontis-block')}
@@ -86,21 +100,6 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 							style={{textAlign: descAlignment}}
                         />
                     )}
-                    {info_Button_Switcher && (
-						<div className="fb-info-btn-wrapper" style={{textAlign: buttonAlignment}}>
-							<a
-								href={info_Button_Link}
-								className="fb-info-button"
-								target="_blank"
-								rel="noopener noreferrer"
-
-							>
-								{info_Button_Text}
-							</a>
-						</div>
-
-					)}
-
 
 				</div>
 			</div>

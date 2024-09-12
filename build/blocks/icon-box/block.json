@@ -5,7 +5,7 @@
   "name": "frontis-blocks/icon-box",
   "version": "1.0.0",
   "category": "frontis-blocks",
-  "icon": "admin-users",
+  "icon": "icon",
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
   "supports": {
