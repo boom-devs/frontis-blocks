@@ -12,6 +12,7 @@ export default function save({ attributes }) {
 		showThousandsSeparator,
 		icon,
 		mediaSwitcher,
+		counterMediaUrl,
 
 		counterNumberFontFamily,
 		counterNumberFontSize,
@@ -51,8 +52,8 @@ export default function save({ attributes }) {
 		<div {...blockProps} id={blockID}>
 			<div className="fb-counter-wrapper">
 				<div className="fb-counter-item">
-					<div className={`fb-counter-number-wrapper`}>
 
+					<div className={`fb-counter-number-wrapper`}>
 						<span
 							className="fb-counter-number"
 							aria-label={counterNumber} // Store the final number in the aria-label for animation
