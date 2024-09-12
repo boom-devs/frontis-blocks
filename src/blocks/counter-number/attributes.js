@@ -3,6 +3,27 @@ const attributes = {
         type: "string",
         default: ""
     },
+	DeviceType: {
+		type: "string",
+		default: "Desktop"
+	},
+
+	mediaSwitcher : {
+		type: "string",
+		default: "icon"
+	},
+	counterMediaUrl: {
+		type: 'string',
+		default: ''
+	},
+	icon: {
+		type: 'string',
+		default: 'circle-check',
+	},
+	counterIconColor : {
+		type: "string",
+		default: "#0D173B"
+	},
     counterNumber: {
         type: "number",
         default: 100
@@ -18,18 +39,6 @@ const attributes = {
     counterTitle: {
         type: "string",
         default: "Happy Clients"
-    },
-    counterColor: {
-        type: "string",
-        default: ""
-    },
-    titleColor: {
-        type: "string",
-        default: ""
-    },
-    counterBgColor: {
-        type: "string",
-        default: ""
     },
     showThousandsSeparator: {
         type: "boolean",

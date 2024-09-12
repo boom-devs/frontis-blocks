@@ -3438,120 +3438,6 @@ var attributes = {
 
 /***/ }),
 
-/***/ "./src/blocks/countdown/attributes/digit.js":
-/*!**************************************************!*\
-  !*** ./src/blocks/countdown/attributes/digit.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var digitAttributes = {
-  digitFontFamily: {
-    type: "string",
-    "default": "inherit"
-  },
-  digitFontSize: {
-    type: "number"
-  },
-  digitFontSizeUnits: {
-    type: "string",
-    "default": "px"
-  },
-  digitFontWeight: {
-    type: "string",
-    "default": "700"
-  },
-  digitFontStyle: {
-    type: "string",
-    "default": "normal"
-  },
-  digitTextTransform: {
-    type: "string",
-    "default": "none"
-  },
-  digitTextDecoration: {
-    type: "string",
-    "default": "none"
-  },
-  digitLetterSpacing: {
-    type: "number"
-  },
-  digitLetterSpacingUnits: {
-    type: "string",
-    "default": "px"
-  },
-  digitLineHeight: {
-    type: "number"
-  },
-  digitLineHeightUnits: {
-    type: "string",
-    "default": "px"
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (digitAttributes);
-
-/***/ }),
-
-/***/ "./src/blocks/countdown/attributes/label.js":
-/*!**************************************************!*\
-  !*** ./src/blocks/countdown/attributes/label.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var labelAttributes = {
-  labelFontFamily: {
-    type: "string",
-    "default": "inherit"
-  },
-  labelFontSize: {
-    type: "number"
-  },
-  labelFontSizeUnits: {
-    type: "string",
-    "default": "px"
-  },
-  labelFontWeight: {
-    type: "string",
-    "default": "700"
-  },
-  labelFontStyle: {
-    type: "string",
-    "default": "normal"
-  },
-  labelTextTransform: {
-    type: "string",
-    "default": "none"
-  },
-  labelTextDecoration: {
-    type: "string",
-    "default": "none"
-  },
-  labelLetterSpacing: {
-    type: "number"
-  },
-  labelLetterSpacingUnits: {
-    type: "string",
-    "default": "px"
-  },
-  labelLineHeight: {
-    type: "number"
-  },
-  labelLineHeightUnits: {
-    type: "string",
-    "default": "px"
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (labelAttributes);
-
-/***/ }),
-
 /***/ "./src/blocks/countdown/edit.js":
 /*!**************************************!*\
   !*** ./src/blocks/countdown/edit.js ***!
@@ -4855,8 +4741,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/blocks/countdown/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/countdown/block.json");
 /* harmony import */ var _attributes_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./attributes.js */ "./src/blocks/countdown/attributes.js");
-/* harmony import */ var _attributes_digit_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./attributes/digit.js */ "./src/blocks/countdown/attributes/digit.js");
-/* harmony import */ var _attributes_label_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./attributes/label.js */ "./src/blocks/countdown/attributes/label.js");
+/* harmony import */ var _style_attributes_digit_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style-attributes/digit.js */ "./src/blocks/countdown/style-attributes/digit.js");
+/* harmony import */ var _style_attributes_label_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style-attributes/label.js */ "./src/blocks/countdown/style-attributes/label.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -4877,7 +4763,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 // Merge attributes and digitAttributes
-var combinedAttributes = _objectSpread(_objectSpread(_objectSpread({}, _attributes_js__WEBPACK_IMPORTED_MODULE_5__["default"]), _attributes_digit_js__WEBPACK_IMPORTED_MODULE_6__["default"]), _attributes_label_js__WEBPACK_IMPORTED_MODULE_7__["default"]);
+var combinedAttributes = _objectSpread(_objectSpread(_objectSpread({}, _attributes_js__WEBPACK_IMPORTED_MODULE_5__["default"]), _style_attributes_digit_js__WEBPACK_IMPORTED_MODULE_6__["default"]), _style_attributes_label_js__WEBPACK_IMPORTED_MODULE_7__["default"]);
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
   attributes: combinedAttributes,
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -4960,6 +4846,120 @@ function save(_ref) {
     className: "fb-count-down-label"
   }, countDownLabelSecond || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Seconds', 'frontis-blocks'))))));
 }
+
+/***/ }),
+
+/***/ "./src/blocks/countdown/style-attributes/digit.js":
+/*!********************************************************!*\
+  !*** ./src/blocks/countdown/style-attributes/digit.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var digitAttributes = {
+  digitFontFamily: {
+    type: "string",
+    "default": "inherit"
+  },
+  digitFontSize: {
+    type: "number"
+  },
+  digitFontSizeUnits: {
+    type: "string",
+    "default": "px"
+  },
+  digitFontWeight: {
+    type: "string",
+    "default": "700"
+  },
+  digitFontStyle: {
+    type: "string",
+    "default": "normal"
+  },
+  digitTextTransform: {
+    type: "string",
+    "default": "none"
+  },
+  digitTextDecoration: {
+    type: "string",
+    "default": "none"
+  },
+  digitLetterSpacing: {
+    type: "number"
+  },
+  digitLetterSpacingUnits: {
+    type: "string",
+    "default": "px"
+  },
+  digitLineHeight: {
+    type: "number"
+  },
+  digitLineHeightUnits: {
+    type: "string",
+    "default": "px"
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (digitAttributes);
+
+/***/ }),
+
+/***/ "./src/blocks/countdown/style-attributes/label.js":
+/*!********************************************************!*\
+  !*** ./src/blocks/countdown/style-attributes/label.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var labelAttributes = {
+  labelFontFamily: {
+    type: "string",
+    "default": "inherit"
+  },
+  labelFontSize: {
+    type: "number"
+  },
+  labelFontSizeUnits: {
+    type: "string",
+    "default": "px"
+  },
+  labelFontWeight: {
+    type: "string",
+    "default": "700"
+  },
+  labelFontStyle: {
+    type: "string",
+    "default": "normal"
+  },
+  labelTextTransform: {
+    type: "string",
+    "default": "none"
+  },
+  labelTextDecoration: {
+    type: "string",
+    "default": "none"
+  },
+  labelLetterSpacing: {
+    type: "number"
+  },
+  labelLetterSpacingUnits: {
+    type: "string",
+    "default": "px"
+  },
+  labelLineHeight: {
+    type: "number"
+  },
+  labelLineHeightUnits: {
+    type: "string",
+    "default": "px"
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (labelAttributes);
 
 /***/ }),
 
