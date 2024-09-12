@@ -58,6 +58,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 			</BlockControls>
 
             <div {...blockProps} id={blockID}>
+
                 <div className={`fb-info-box-content-wrapper ${blockID}`} >
 					<div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
 						{mediaSwitcher === 'image' && (
@@ -100,8 +101,8 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 							style={{textAlign: descAlignment}}
                         />
                     )}
-
 				</div>
+
 			</div>
 		</>
 	);

@@ -1494,8 +1494,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															onChange={(value) => setAttributes({info_Button_Text: value})}
 															className="fb-info-button-text"
 														/>
+														<BaseControl>
 														<URLInput
 															value={info_Button_Link}
+															className='info-btn-url-input'
 															onChange={(value, post) => {
 																// Check if the URL has a protocol (http or https), otherwise prepend it
 																const formattedLink = value.startsWith('http://') || value.startsWith('https://')
@@ -1508,6 +1510,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 																});
 															}}
 														/>
+														</BaseControl>
 													</>
 												)}
 											</PanelBody>
