@@ -1,6 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import {useRef} from "@wordpress/element";
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
 	const {
@@ -52,7 +53,15 @@ export default function save({ attributes }) {
 		<div {...blockProps} id={blockID}>
 			<div className="fb-counter-wrapper">
 				<div className="fb-counter-item">
-
+					<div className={`fb-counter-icon-wrapper`}>
+						{/* Conditionally render image or icon */}
+						{mediaSwitcher === 'image' && counterMediaUrl && (
+							<img src={counterMediaUrl} alt={__('Counter media', 'text-domain')} />
+						)}
+						{mediaSwitcher === 'icon' && icon && (
+							<div className="fb-counter-icon">{renderSVG(icon)}</div>
+						)}
+					</div>
 					<div className={`fb-counter-number-wrapper`}>
 						<span
 							className="fb-counter-number"
