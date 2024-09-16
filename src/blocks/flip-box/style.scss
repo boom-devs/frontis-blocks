@@ -37,13 +37,14 @@
 		position: absolute;
 		left: 0;
 		width: 100%;
-		padding: 40px 30px;
 		perspective: inherit;
 		z-index: 2;
 		transform: translateY(-50%) translateZ(60px) scale(.94);
 		top: 50%;
 	}
-
+	.fb-flip-box-content-inner {
+		padding: 40px 30px;
+	}
 	&:hover {
 		.fb-flip-box-front {
 			transform: rotateY(-180deg);

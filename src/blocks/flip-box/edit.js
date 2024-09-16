@@ -375,8 +375,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												/>
 												<TextareaControl
 													label={__('Description', 'frontis-blocks')}
-													value={flipBoxFrontTitle}
-													onChange={(value) => setAttributes({ flipBoxFrontTitle: value })}
+													value={flipBoxFrontContent}
+													onChange={(value) => setAttributes({ flipBoxFrontContent: value })}
 												/>
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
@@ -1024,30 +1024,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className="fb-flip-box-item">
 						<div className="fb-flip-box-front">
 							<div className="fb-flip-box-content">
-								<div className={`fb-flip-box-icon-wrapper`}>
-									{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
-										<img src={attributes.flipBoxFrontIconMediaUrl}/>
-									)}
-									{mediaSwitcher === 'icon' && (
-										<div className="fb-flip-box-icon">{renderSVG(icon)}</div>
-									)}
+								<div className="fb-flip-box-content-inner">
+									<div className={`fb-flip-box-icon-wrapper`}>
+										{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
+											<img src={attributes.flipBoxFrontIconMediaUrl}/>
+										)}
+										{mediaSwitcher === 'icon' && (
+											<div className="fb-flip-box-icon">{renderSVG(icon)}</div>
+										)}
+									</div>
+									<h3 className="fb-flip-box-title">{flipBoxFrontTitle}</h3>
+									<p>{flipBoxFrontContent}</p>
 								</div>
-								<h3 className="fb-flip-box-title">{flipBoxFrontTitle}</h3>
 							</div>
 						</div>
 						<div className="fb-flip-box-back">
 							<div className="fb-flip-box-content">
-								<div className={`fb-flip-box-icon-wrapper`}>
-									{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
-										<img src={attributes.flipBoxFrontIconMediaUrl}/>
-									)}
-									{mediaSwitcher === 'icon' && (
-										<div className="fb-flip-box-icon">{renderSVG(icon)}</div>
-									)}
+								<div className="fb-flip-box-content-inner">
+									<div className={`fb-flip-box-icon-wrapper`}>
+										{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
+											<img src={attributes.flipBoxFrontIconMediaUrl}/>
+										)}
+										{mediaSwitcher === 'icon' && (
+											<div className="fb-flip-box-icon">{renderSVG(icon)}</div>
+										)}
+									</div>
+									<h3 className="fb-flip-box-title">{flipBoxFrontTitle}</h3>
+									<p>{flipBoxBackContent}</p>
+									<a href={`#`} className="fb-flip-box-button">Read More</a>
 								</div>
-								<h3 className="fb-flip-box-title">{flipBoxFrontTitle}</h3>
-								<p>{flipBoxFrontTitle}</p>
-								<a href={`#`} className="fb-flip-box-button">Read More</a>
 							</div>
 						</div>
 					</div>
