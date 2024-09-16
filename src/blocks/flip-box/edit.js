@@ -3,7 +3,7 @@ import {
 	MediaUpload,
 	MediaUploadCheck,
 	useBlockProps,
-	InspectorControls,
+	InspectorControls, RichText,
 } from '@wordpress/block-editor';
 import {
 	TabPanel,
@@ -28,6 +28,7 @@ import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, SELECT_TYPE, iconTyp
 import FBIconPicker from "../../components/icon-picker";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import ResponsiveControl from "../../components/responsivecontrol";
+import {HEADING} from "../info-box/constants/constants";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -58,6 +59,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		BoxBorderRadiusLink,
 
 		flipBoxFrontTitle,
+		flipBoxFrontTitleHeadingTag,
 		flipBoxFrontTitleFontFamily,
 		flipBoxFrontTitleFontSize,
 		flipBoxFrontTitleFontSizeUnits,
@@ -72,6 +74,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontTitleColor,
 
 		flipBoxBackTitle,
+		flipBoxBackTitleHeadingTag,
 		flipBoxBackTitleFontFamily,
 		flipBoxBackTitleFontSize,
 		flipBoxBackTitleFontSizeUnits,
@@ -384,10 +387,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										{flipBoxTypeSwitcher === 'front' && (
 											<>
 												<TextControl
+													tagName={flipBoxFrontTitleHeadingTag}
 													label={__('Title', 'frontis-blocks')}
 													value={flipBoxFrontTitle}
 													onChange={(value) => setAttributes({ flipBoxFrontTitle: value })}
+													placeholder={__('Flip Box Front Title', 'frontis-block')}
 												/>
+												<BaseControl
+													label={__("Heading Tag", "frontis-block")}
+													className="fb-setting-tag-wrapper"
+												>
+													<ButtonGroup
+														className="fb-setting-tag-inner-wrapper"
+													>
+														{HEADING.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({flipBoxFrontTitleHeadingTag: item.value})}
+																className={`fb-setting-tag-single-btn ${flipBoxFrontTitleHeadingTag === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
 												<TextareaControl
 													label={__('Description', 'frontis-blocks')}
 													value={flipBoxFrontContent}
@@ -478,10 +501,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										{flipBoxTypeSwitcher === 'back' && (
 											<>
 												<TextControl
+													tagName={flipBoxBackTitleHeadingTag}
 													label={__('Title', 'frontis-blocks')}
 													value={flipBoxBackTitle}
 													onChange={(value) => setAttributes({ flipBoxBackTitle: value })}
+													placeholder={__('Flip Box Back Title', 'frontis-block')}
 												/>
+												<BaseControl
+													label={__("Heading Tag", "frontis-block")}
+													className="fb-setting-tag-wrapper"
+												>
+													<ButtonGroup
+														className="fb-setting-tag-inner-wrapper"
+													>
+														{HEADING.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({flipBoxBackTitleHeadingTag: item.value})}
+																className={`fb-setting-tag-single-btn ${flipBoxBackTitleHeadingTag === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
 												<TextareaControl
 													label={__('Description', 'frontis-blocks')}
 													value={flipBoxBackContent}
@@ -1143,7 +1186,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
 										)}
 									</div>
-									<h3 className="fb-flip-box-title">{flipBoxFrontTitle}</h3>
+									<RichText
+										tagName={flipBoxFrontTitleHeadingTag}
+										value={flipBoxFrontTitle}
+										onChange={(value) => setAttributes({flipBoxFrontTitle: value})}
+										placeholder={__('Flib Box Front Title', 'frontis-block')}
+										className="fb-flip-box-title"
+									/>
 									<p>{flipBoxFrontContent}</p>
 								</div>
 							</div>
@@ -1159,7 +1208,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
 										)}
 									</div>
-									<h3 className="fb-flip-box-title">{flipBoxBackTitle}</h3>
+									<RichText
+										tagName={flipBoxBackTitleHeadingTag}
+										value={flipBoxBackTitle}
+										onChange={(value) => setAttributes({flipBoxBackTitle: value})}
+										placeholder={__('Flip Box Back Title', 'frontis-block')}
+										className="fb-flip-box-title"
+									/>
 									<p>{flipBoxBackContent}</p>
 									<a href={`#`} className="fb-flip-box-button">Read More</a>
 								</div>
