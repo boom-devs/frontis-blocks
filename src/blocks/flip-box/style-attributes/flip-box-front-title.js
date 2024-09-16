@@ -3,6 +3,10 @@ const flipBoxFrontTitleAttributes = {
 		type: "string",
 		default: "Front Title Here"
 	},
+	flipBoxFrontTitleHeadingTag: {
+		type : "string",
+		default: "h2"
+	},
 	flipBoxFrontTitleFontFamily: {
 		type: "string",
 		default: "inherit",
