@@ -6,12 +6,17 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const {
 		blockID,
-		flipBoxFrontTitle,
-		icon,
+		flipBoxTypeSwitcher,
+		flipBoxFrontIcon,
 		mediaSwitcher,
 		flipBoxFrontIconMediaUrl,
 
 		DeviceType,
+
+		flipBoxBackMediaSwitcher,
+		flipBoxBackIconMediaUrl,
+		flipBoxBackIcon,
+		flipBoxBackIconColor,
 
 		BoxBorder,
 		BoxBorderColor,
@@ -26,8 +31,7 @@ export default function save({ attributes }) {
 		BoxMobileBorderRadiusWidth,
 		BoxBorderRadiusLink,
 
-
-
+		flipBoxFrontTitle,
 		flipBoxFrontTitleFontFamily,
 		flipBoxFrontTitleFontSize,
 		flipBoxFrontTitleFontSizeUnits,
@@ -41,6 +45,7 @@ export default function save({ attributes }) {
 		flipBoxFrontTitleLineHeightUnits,
 		flipBoxFrontTitleColor,
 
+		flipBoxBackTitle,
 		flipBoxBackTitleFontFamily,
 		flipBoxBackTitleFontSize,
 		flipBoxBackTitleFontSizeUnits,
@@ -53,6 +58,34 @@ export default function save({ attributes }) {
 		flipBoxBackTitleLineHeight,
 		flipBoxBackTitleLineHeightUnits,
 		flipBoxBackTitleColor,
+
+		flipBoxFrontContent,
+		flipBoxFrontContentFontFamily,
+		flipBoxFrontContentFontSize,
+		flipBoxFrontContentFontSizeUnits,
+		flipBoxFrontContentFontWeight,
+		flipBoxFrontContentFontStyle,
+		flipBoxFrontContentTextTransform,
+		flipBoxFrontContentTextDecoration,
+		flipBoxFrontContentLetterSpacing,
+		flipBoxFrontContentLetterSpacingUnits,
+		flipBoxFrontContentLineHeight,
+		flipBoxFrontContentLineHeightUnits,
+		flipBoxFrontContentColor,
+
+		flipBoxBackContent,
+		flipBoxBackContentFontFamily,
+		flipBoxBackContentFontSize,
+		flipBoxBackContentFontSizeUnits,
+		flipBoxBackContentFontWeight,
+		flipBoxBackContentFontStyle,
+		flipBoxBackContentTextTransform,
+		flipBoxBackContentTextDecoration,
+		flipBoxBackContentLetterSpacing,
+		flipBoxBackContentLetterSpacingUnits,
+		flipBoxBackContentLineHeight,
+		flipBoxBackContentLineHeightUnits,
+		flipBoxBackContentColor
 
 	} = attributes;
 
@@ -69,7 +102,7 @@ export default function save({ attributes }) {
 									<img src={attributes.flipBoxFrontIconMediaUrl}/>
 								)}
 								{mediaSwitcher === 'icon' && (
-									<div className="fb-flip-box-icon">{renderSVG(icon)}</div>
+									<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
 								)}
 							</div>
 							<h3 className="fb-flip-box-title">{flipBoxFrontTitle}</h3>
@@ -78,15 +111,15 @@ export default function save({ attributes }) {
 					<div className="fb-flip-box-back">
 						<div className="fb-flip-box-content">
 							<div className={`fb-flip-box-icon-wrapper`}>
-								{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
-									<img src={attributes.flipBoxFrontIconMediaUrl}/>
+								{flipBoxBackMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
+									<img src={attributes.flipBoxBackIconMediaUrl}/>
 								)}
-								{mediaSwitcher === 'icon' && (
-									<div className="fb-flip-box-icon">{renderSVG(icon)}</div>
+								{flipBoxBackMediaSwitcher === 'icon' && (
+									<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
 								)}
 							</div>
-							<h3 className="fb-flip-box-title">{flipBoxFrontTitle}</h3>
-							<p>{flipBoxFrontTitle}</p>
+							<h3 className="fb-flip-box-title">{flipBoxBackTitle}</h3>
+							<p>{flipBoxBackContent}</p>
 							<a href={`#`} className="fb-flip-box-button">Read More</a>
 						</div>
 					</div>
