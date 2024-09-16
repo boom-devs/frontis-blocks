@@ -7,7 +7,7 @@ const flipBoxFrontIconAttributes = {
 		type: 'string',
 		default: ''
 	},
-	icon: {
+	flipBoxFrontIcon: {
 		type: 'string',
 		default: 'circle-check',
 	},

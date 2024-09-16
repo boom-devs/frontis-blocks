@@ -53,6 +53,10 @@ export const mediaType = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },
 ];
+export const iconType = [
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
+];
 export const PRESETS = [
 	{ label: __("Default", "frontis-block"), value: "preset-0" },
 	{ label: __("Preset 1", "frontis-block"), value: "preset-1" },
