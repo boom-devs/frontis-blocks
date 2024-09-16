@@ -77,7 +77,9 @@
 	.fb-flip-box-content-inner {
 		padding: 40px 30px;
 	}
-	&:hover {
+
+	&:hover,
+	&.active {
 		.fb-flip-box-front {
 			transform: rotateY(-180deg);
 			transform-style: preserve-3d;

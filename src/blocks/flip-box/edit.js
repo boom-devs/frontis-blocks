@@ -1174,7 +1174,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps} id={blockID}>
 
 				<div className={`fb-flip-box-wrapper ${blockID}`}>
-					<div className="fb-flip-box-item">
+					<div className={`fb-flip-box-item ${flipBoxTypeSwitcher === 'back' ? 'active' : ''}`}>
 						<div className="fb-flip-box-front">
 							<div className="fb-flip-box-content">
 								<div className="fb-flip-box-content-inner">
