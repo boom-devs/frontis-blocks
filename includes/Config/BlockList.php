@@ -200,14 +200,14 @@ class BlockList {
                 'badge'     => 'free',
                 'status'    => 'active',
             ],
-            // 'team-member' => [
-            //     'slug'      => 'team-member',
-            //     'title'     => 'Team Member',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+             'team-member' => [
+                 'slug'      => 'team-member',
+                 'title'     => 'Team Member',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
             // 'slider' => [
             //     'slug'      => 'slider',
             //     'title'     => 'Slider',
