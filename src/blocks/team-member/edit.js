@@ -1044,7 +1044,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								placeholder={__('Enter Team Member Name', 'frontis-block')}
 								className="fb-team-member-name"
 							/>
-							<p>{teamMemberDesignation}</p>
+							<div className={`fb-team-member-designation`}>{teamMemberDesignation}</div>
 							<div class={`fb-team-member-social-profile`}>
 								<a href={`#`}>
 									<svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
