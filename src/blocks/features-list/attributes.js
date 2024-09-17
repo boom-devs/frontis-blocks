@@ -27,7 +27,15 @@ const attributes = {
                 }
             }
         }
-    }
+    },
+    FeatureIconAlign: {
+        type: "string",
+        default: "no-icon",
+    },
+    FeatureIcon: {
+		type: 'string',
+		default: 'circle-check',
+	},
 };
 
 export default attributes;
