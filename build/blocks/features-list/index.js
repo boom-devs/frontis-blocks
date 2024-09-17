@@ -5249,6 +5249,14 @@ var attributes = {
         }
       }
     }
+  },
+  FeatureIconAlign: {
+    type: "string",
+    "default": "no-icon"
+  },
+  FeatureIcon: {
+    type: 'string',
+    "default": 'circle-check'
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -5390,7 +5398,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
 /* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/features-list/editor.scss");
+/* harmony import */ var _sortableItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sortableItem */ "./src/blocks/features-list/sortableItem.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/features-list/editor.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -5408,7 +5417,8 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
- // Import arrayMove if not already
+
+
 
 function Inspector(_ref) {
   var attributes = _ref.attributes,
@@ -5426,7 +5436,7 @@ function Inspector(_ref) {
   var handleDragEnd = function handleDragEnd(event) {
     var active = event.active,
       over = event.over;
-    if (active.id !== over.id) {
+    if (active && over && active.id !== over.id) {
       var oldIndex = FeatureItems.findIndex(function (item) {
         return item.id === active.id;
       });
@@ -5465,11 +5475,7 @@ function Inspector(_ref) {
       FeatureItems: updatedItems
     });
   };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-    key: "controls"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-inspector-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Feature", "frontis-blocks"),
     initialOpen: true
   }, /*#__PURE__*/React.createElement("div", {
@@ -5477,40 +5483,24 @@ function Inspector(_ref) {
   }, /*#__PURE__*/React.createElement(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__.DndContext, {
     collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__.closestCenter,
     onDragEnd: handleDragEnd
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_5__.SortableContext, {
+    items: FeatureItems.map(function (item) {
+      return item.id;
+    })
+  }, /*#__PURE__*/React.createElement("ul", {
     className: "dnd-items-wrapper"
   }, FeatureItems.map(function (item) {
-    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    return /*#__PURE__*/React.createElement(_sortableItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
       key: item.id,
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(item.title || "Default Title", "frontis-blocks"),
-      initialOpen: false,
-      className: "dnd-items-inner-wrapper"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-item-controls"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.IconButton, {
-      icon: "trash",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delete", "frontis-blocks"),
-      onClick: function onClick() {
-        return handleDeleteItem(item.id);
-      },
-      isDestructive: true
-    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Title", "frontis-blocks"),
-      value: item.title,
-      onChange: function onChange(value) {
-        return handleChangeItem(item.id, 'title', value);
-      }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Description", "frontis-blocks"),
-      value: item.description,
-      onChange: function onChange(value) {
-        return handleChangeItem(item.id, 'description', value);
-      }
-    }));
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      id: item.id,
+      item: item,
+      handleChangeItem: handleChangeItem,
+      handleDeleteItem: handleDeleteItem
+    });
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     isPrimary: true,
     onClick: handleAddItem
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Feature", "frontis-blocks"))))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Feature", "frontis-blocks"))))));
 }
 
 /***/ }),
@@ -5554,6 +5544,106 @@ function save(_ref) {
       value: item.description
     }));
   }))));
+}
+
+/***/ }),
+
+/***/ "./src/blocks/features-list/sortableItem.js":
+/*!**************************************************!*\
+  !*** ./src/blocks/features-list/sortableItem.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SortableItem)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+function SortableItem(_ref) {
+  var id = _ref.id,
+    item = _ref.item,
+    handleChangeItem = _ref.handleChangeItem,
+    handleDeleteItem = _ref.handleDeleteItem;
+  var _useSortable = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_2__.useSortable)({
+      id: id
+    }),
+    attributes = _useSortable.attributes,
+    listeners = _useSortable.listeners,
+    setNodeRef = _useSortable.setNodeRef,
+    transform = _useSortable.transform,
+    transition = _useSortable.transition;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isOpen = _useState2[0],
+    setIsOpen = _useState2[1];
+  var style = {
+    transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__.CSS.Transform.toString(transform),
+    transition: transition
+  };
+  var toggleOpen = function toggleOpen() {
+    return setIsOpen(!isOpen);
+  };
+  return /*#__PURE__*/React.createElement("li", _extends({
+    className: "sortable-item",
+    ref: setNodeRef
+  }, attributes, {
+    style: style
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "sortable-header"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sortable-title",
+    onClick: toggleOpen
+  }, item.title || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default Title", "frontis-blocks")), /*#__PURE__*/React.createElement("span", _extends({
+    className: "sortable-sort"
+  }, listeners, {
+    style: {
+      cursor: 'grab'
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+    icon: "move",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sort", "frontis-blocks")
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "sortable-delete"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+    icon: "trash",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delete", "frontis-blocks"),
+    onClick: function onClick() {
+      return handleDeleteItem(item.id);
+    }
+  }))), isOpen && /*#__PURE__*/React.createElement("div", {
+    className: "sortable-item-content"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Title", "frontis-blocks"),
+    value: item.title,
+    onChange: function onChange(value) {
+      return handleChangeItem(item.id, 'title', value);
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextareaControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Description", "frontis-blocks"),
+    value: item.description,
+    onChange: function onChange(value) {
+      return handleChangeItem(item.id, 'description', value);
+    }
+  })));
 }
 
 /***/ }),

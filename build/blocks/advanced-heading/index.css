@@ -12,7 +12,7 @@
   height: 60px;
   padding: 3px 25px;
 }
-.fb-inspector-control .fb-tab.general.active-tab, .fb-inspector-control .fb-tab.styles.active-tab, .fb-inspector-control .fb-tab.advance.active-tab {
+.fb-inspector-control .fb-tab.active-tab {
   background: #ffffff;
   border-top: 2px solid #007cba !important;
   color: #007cba;
@@ -26,6 +26,12 @@
   margin: 10px 0 !important;
   min-height: auto;
   text-transform: capitalize !important;
+}
+.fb-inspector-control .components-base-control__field .components-text-control__input,
+.fb-inspector-control .components-base-control__field .components-textarea-control__input {
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  box-shadow: none;
 }
 .fb-inspector-control .components-base-control__field label {
   display: block;

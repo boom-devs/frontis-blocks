@@ -2,3 +2,47 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/features-list/editor.scss ***!
   \*************************************************************************************************************************************************************************************************************************************************************/
 /** End General scss for Advanced Button **/
+.fb-Feature-wrapper .dnd-items-wrapper {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title {
+  flex: 12;
+  cursor: pointer;
+  overflow: hidden;
+  padding-right: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort {
+  border-left: 1px solid #b4b4cb;
+  border-right: 1px solid #b4b4cb;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus {
+  box-shadow: none;
+  outline: none;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button {
+  color: #d63638;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus {
+  box-shadow: none;
+  outline: none;
+}
+.fb-Feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-item-content {
+  padding-top: 10px;
+}
