@@ -2,13 +2,17 @@ import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { TextControl, TextareaControl, Button } from '@wordpress/components';
+import { TextControl, TextareaControl, Button, ButtonGroup, BaseControl } from '@wordpress/components';
+import FBIconPicker from "../../components/icon-picker";
 
-
+import {
+    ICON_ALIGN,
+} from "./constants/constants";
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
+    const [FeatureIconAlign, setFeatureIconAlign] = useState( ICON_ALIGN[1].value );
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -17,12 +21,21 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
+    const iconHandler = (IconName) => {
+        handleChangeItem(item.id, 'FeatureIcon', IconName);
+    };
+
+    const handleAlignmentChange = (newAlignment) => {
+        setFeatureIconAlign(newAlignment);
+        handleChangeItem(item.id, 'FeatureIconAlign', newAlignment);
+    };
+    
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 {/* Title toggle */}
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || __("Default Title", "frontis-blocks")}
+                    {item.Title || __("Default Title", "frontis-blocks")}
                 </span>
 
                 {/* Sort button */}
@@ -45,17 +58,38 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
                     <TextControl
                         label={__("Title", "frontis-blocks")}
-                        value={item.title}
-                        onChange={(value) => handleChangeItem(item.id, 'title', value)}
+                        value={item.Title}
+                        onChange={(value) => handleChangeItem(item.id, 'Title', value)}
                     />
 
                     <TextareaControl
                         label={__("Description", "frontis-blocks")}
-                        value={item.description}
-                        onChange={(value) => handleChangeItem(item.id, 'description', value)}
+                        value={item.Description}
+                        onChange={(value) => handleChangeItem(item.id, 'Description', value)}
                     />
+
+                    <div className='fb-feature-icon-wrapper'>
+                        <BaseControl
+                            label={__("Icon", "frontis-blocks")}
+                            className="fb-feature-icon"
+                        >
+                            <ButtonGroup className="fb-feature-icon-group-btn">
+                                {ICON_ALIGN.map((alignItem, key) => (
+                                    <Button
+                                        key={key}
+                                        onClick={() => handleAlignmentChange(alignItem.value)}
+                                        className={`fb-feature-icon-single-btn ${FeatureIconAlign === alignItem.value ? 'active' : ''}`}
+                                    >
+                                        {alignItem.label}
+                                    </Button>
+                                ))}
+                            </ButtonGroup>
+                            { FeatureIconAlign === 'icon' && (
+                                <FBIconPicker value={item.FeatureIcon} setIconHandler={iconHandler} />
+                            )}
+                        </BaseControl>
+                    </div>
                 </div>
-                
             )}
         </li>
     );

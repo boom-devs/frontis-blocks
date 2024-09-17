@@ -11,11 +11,10 @@ import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { blockID, FeatureItems } = attributes;
-
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
-                blockID: "fb-advanced-Feature-" + clientId.slice(0, 8),
+                blockID: "fb-feature-" + clientId.slice(0, 8),
             });
         }
     }, [clientId]);
@@ -31,7 +30,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     const handleAddItem = () => {
-        const newItem = { id: `item-${FeatureItems.length + 1}`, title: 'New Feature', description: 'New description' };
+        const newItem = { id: `item-${FeatureItems.length + 1}`, Title: 'New Feature', Description: 'New Description for feature', FeatureIcon: 'circle-check' };
         setAttributes({ FeatureItems: [...FeatureItems, newItem] });
     };
 
@@ -53,7 +52,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("Feature", "frontis-blocks")}
                 initialOpen={true}
             >
-                <div className="fb-Feature-wrapper">
+                <div className="fb-feature-wrapper">
                     <DndContext
                         collisionDetection={closestCenter}
                         onDragEnd={handleDragEnd}
