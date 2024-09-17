@@ -1,9 +1,9 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './style.scss'; // Ensure you have styles for the front end if needed
 
 export default function Save({ attributes }) {
-    const { blockID, FeatureItems } = attributes;
+    const { blockID, FeatureItems, FeatureTag } = attributes;
 
     const blockProps = useBlockProps.save({
         className: `fb-feature-main-wrapper ${blockID}`,
@@ -23,9 +23,17 @@ export default function Save({ attributes }) {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="fb-feature-list-content-box">
-                                    <h3>{item.Title}</h3>
-                                    <p>{item.Description}</p>
+                                <div className="fb-feature-list-content">
+                                   <RichText.Content
+                                        tagName={FeatureTag}
+                                        className="fb-feature-list-title"
+                                        value={item.Title}
+                                    />
+                                    <RichText.Content
+                                        tagName="p"
+                                        className="fb-feature-list-text"
+                                        value={item.Description}
+                                    />
                                 </div>
                             </li>
                         ))}

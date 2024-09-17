@@ -7,10 +7,9 @@ const attributes = {
         type: "array",
         default: [
             // You can define some default items if needed
-            { id: 'item-1', Title: 'Feature 1', Description: 'Description for feature 1', FeatureIcon: 'circle-check', },
-            { id: 'item-2', Title: 'Feature 2', Description: 'Description for feature 2', FeatureIcon: 'circle-check', },
-            { id: 'item-3', Title: 'Feature 3', Description: 'Description for feature 3', FeatureIcon: 'circle-check', },
-            { id: 'item-4', Title: 'Feature 4', Description: 'Description for feature 4', FeatureIcon: 'circle-check', },
+            { id: 'item-1', Title: 'Feature Item 1', Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', FeatureIcon: 'check', },
+            { id: 'item-2', Title: 'Feature Item 2', Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', FeatureIcon: 'check', },
+            { id: 'item-3', Title: 'Feature Item 3', Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', FeatureIcon: 'check', },
         ],
         items: {
             type: "object",
@@ -29,7 +28,7 @@ const attributes = {
                 },
                 FeatureIcon: {
                     type: 'string',
-                    default: 'circle-check',
+                    default: 'check',
                 },
                 FeatureIconAlign: {
                     type: "string",
@@ -37,7 +36,16 @@ const attributes = {
                 },
             }
         }
-    }
+    },
+    FeatureTag: {
+        type : "string",
+        default: "h3"
+    },
+    FeatureIconShape: {
+        type: "string",
+        default: "circle"
+    },
+    
 };
 
 export default attributes;

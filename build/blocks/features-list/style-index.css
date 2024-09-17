@@ -2,9 +2,11 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/features-list/style.scss ***!
   \************************************************************************************************************************************************************************************************************************************************************/
 .fb-feature-list-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  margin-top: 28px;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-bottom: 28px;
+  padding: 10px;
 }
 .fb-feature-list-wrapper .fb-feature-list-items {
   list-style-type: none !important;
@@ -14,6 +16,9 @@
 }
 .fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item {
   position: relative;
+  display: flex;
+  align-items: center;
+  text-align: left;
 }
 .fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item:not(:last-child) {
   padding-bottom: 10px;
@@ -23,48 +28,51 @@
   z-index: 2;
 }
 .fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner {
-  box-sizing: border-box;
-  display: inline-flex;
-  transition: all 0.5s;
+  background-color: black;
+  border-color: black;
+  transition: ease-in-out 0.5s;
 }
 .fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner .fb-feature-list-icon {
-  border-radius: 50%;
-}
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon {
-  height: 60px;
-  width: 60px;
-  font-size: 21px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: all 0.5s;
   padding: 15px;
 }
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner {
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner .fb-feature-list-icon svg {
+  fill: #fff;
+  height: 30px;
+  width: 30px;
+}
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.circle {
   border-radius: 50%;
 }
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner .fb-feature-list-icon {
-  border-radius: 50%;
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.square {
+  border-radius: 0%;
 }
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon {
-  align-items: center;
-  box-sizing: border-box;
-  display: flex;
-  font-size: 30px;
-  justify-content: center;
-  line-height: 1;
-  padding: 0.5em;
-  text-align: center;
-  transition: all 0.5s;
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.rhombus {
+  margin: 15px 0;
+  transform: rotate(45deg);
 }
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-content-box {
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.rhombus .fb-feature-list-icon {
+  transform: rotate(-45deg);
+}
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.none {
+  background-color: transparent;
+}
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.none .fb-feature-list-icon svg {
+  fill: transparent;
+}
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-content {
   margin: 0 0 0 20px;
 }
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-content-box .fb-feature-list-title {
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-content .fb-feature-list-title {
   font-size: 18px;
+  margin: 0;
+  padding: 0;
 }
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-content-box .fb-feature-list-title a {
-  font-size: 18px;
-}
-.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-content-box .fb-feature-list-content {
+.fb-feature-list-wrapper .fb-feature-list-items .fb-feature-list-item .fb-feature-list-content .fb-feature-list-text {
   font-size: 14px;
-  line-height: 1.5em;
   margin: 0;
   padding: 0;
 }
