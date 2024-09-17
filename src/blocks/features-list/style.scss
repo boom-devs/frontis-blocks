@@ -1,0 +1,99 @@
+.fb-feature-list-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .fb-feature-list-items {
+        list-style-type: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: center;
+
+        .fb-feature-list-item {
+            position: relative;
+
+            &:not(:last-child) {
+                padding-bottom: 10px;
+            }
+
+            .fb-feature-list-icon-box {
+                transition: all .5s;
+                z-index: 2;
+
+                .fb-feature-list-icon-inner {
+                    box-sizing: border-box;
+                    display: inline-flex;
+                    transition: all .5s;
+                    .fb-feature-list-icon {
+                        border-radius: 50%;
+                    }
+                }
+
+                .fb-feature-list-icon {
+                    height: 60px;
+                    width: 60px;
+                    font-size: 21px;
+                    padding: 15px;
+                }
+
+                .fb-feature-list-icon-inner {
+                    border-radius: 50%;
+
+                    .fb-feature-list-icon {
+                        border-radius: 50%;
+                    }
+                }
+
+                .fb-feature-list-icon {
+                    align-items: center;
+                    box-sizing: border-box;
+                    display: flex;
+                    font-size: 30px;
+                    justify-content: center;
+                    line-height: 1;
+                    padding: .5em;
+                    text-align: center;
+                    transition: all .5s;
+                }
+            }
+
+            .fb-feature-list-content-box {
+                margin: 0 0 0 20px;
+
+                .fb-feature-list-title {
+                    font-size: 18px;
+
+                    a {
+                        font-size: 18px;
+                    }
+                }
+
+                .fb-feature-list-content {
+                    font-size: 14px;
+                    line-height: 1.5em;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1025px) {
+    .fb-icon-position-left {
+        .fb-feature-list-item {
+            flex-direction: row;
+            text-align: left;
+
+            &,
+            .fb-icon-position-right .fb-feature-list-item {
+                align-items: flex-start;
+                display: flex;
+            }
+        }
+
+        .fb-feature-list-content-box {
+            margin: 0 !important;
+        }
+    }
+}

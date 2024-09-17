@@ -1,34 +1,38 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import './style.scss'; // Ensure you have styles for the front end if needed
 
-export default function save({ attributes }) {
-    const {
-        blockID,
-        FeatureItems, // Added FeatureItems
-    } = attributes;
+export default function Save({ attributes }) {
+    const { blockID, FeatureItems } = attributes;
 
-    const blockProps = useBlockProps.save();
+    const blockProps = useBlockProps.save({
+        className: `fb-feature-main-wrapper ${blockID}`,
+    });
 
     return (
-        <div {...blockProps} id={blockID}>
-            <div 
-                className={`fb-advanced-Feature-wrapper ${blockID}`} 
-            >
-                <div className="fb-feature-items">
-                    {FeatureItems.map(item => (
-                        <div key={item.id} className="fb-feature-item">
-                            <RichText.Content
-                                tagName="h4"
-                                value={item.title}
-                            />
-                            <RichText.Content
-                                tagName="p"
-                                value={item.description}
-                            />
-                        </div>
-                    ))}
+        <div {...blockProps}>
+            <div className="fb-feature-wrapper">
+                <div className="fb-feature-list-wrapper">
+                    <ul className="fb-feature-list-items">
+                        {FeatureItems.map(item => (
+                            <li key={item.id} className="fb-feature-list-item">
+                                <div className="fb-feature-list-icon-box">
+                                    <div className="fb-feature-list-icon-inner">
+                                        <span className="fb-feature-list-icon">
+                                            {renderSVG(item.FeatureIcon)}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="fb-feature-list-content-box">
+                                    <h3>{item.Title}</h3>
+                                    <p>{item.Description}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>
     );
 }
+
