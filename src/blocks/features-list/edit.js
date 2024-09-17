@@ -6,7 +6,7 @@ import { useEffect } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { blockID, FeatureItems } = attributes;
+    const { blockID, FeatureItems, FeatureTag, FeatureIconShape } = attributes;
 
     const blockProps = useBlockProps({
         className: `fb-feature-main-wrapper ${blockID}`,
@@ -28,15 +28,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                      
                                 <li key={item.id} className="fb-feature-list-item">
                                     <div className="fb-feature-list-icon-box">
-                                        <div className="fb-feature-list-icon-inner">
+                                        <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
                                             <span className="fb-feature-list-icon">
-                                                {renderSVG(item.FeatureIcon)}
+                                                {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="fb-feature-list-content-box">
+                                    <div className="fb-feature-list-content">
                                         <RichText
-                                            tagName="h3"
+                                            tagName={FeatureTag}
+                                            className="fb-feature-list-title"
                                             value={item.Title}
                                             onChange={(value) => {
                                                 const updatedItems = FeatureItems.map(i =>
@@ -48,6 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         />
                                         <RichText
                                             tagName="p"
+                                            className="fb-feature-list-text"
                                             value={item.Description}
                                             onChange={(value) => {
                                                 const updatedItems = FeatureItems.map(i =>

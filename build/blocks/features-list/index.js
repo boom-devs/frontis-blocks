@@ -5229,24 +5229,19 @@ var attributes = {
     // You can define some default items if needed
     {
       id: 'item-1',
-      Title: 'Feature 1',
-      Description: 'Description for feature 1',
-      FeatureIcon: 'circle-check'
+      Title: 'Feature Item 1',
+      Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna',
+      FeatureIcon: 'check'
     }, {
       id: 'item-2',
-      Title: 'Feature 2',
-      Description: 'Description for feature 2',
-      FeatureIcon: 'circle-check'
+      Title: 'Feature Item 2',
+      Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna',
+      FeatureIcon: 'check'
     }, {
       id: 'item-3',
-      Title: 'Feature 3',
-      Description: 'Description for feature 3',
-      FeatureIcon: 'circle-check'
-    }, {
-      id: 'item-4',
-      Title: 'Feature 4',
-      Description: 'Description for feature 4',
-      FeatureIcon: 'circle-check'
+      Title: 'Feature Item 3',
+      Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna',
+      FeatureIcon: 'check'
     }],
     items: {
       type: "object",
@@ -5265,7 +5260,7 @@ var attributes = {
         },
         FeatureIcon: {
           type: 'string',
-          "default": 'circle-check'
+          "default": 'check'
         },
         FeatureIconAlign: {
           type: "string",
@@ -5273,6 +5268,14 @@ var attributes = {
         }
       }
     }
+  },
+  FeatureTag: {
+    type: "string",
+    "default": "h3"
+  },
+  FeatureIconShape: {
+    type: "string",
+    "default": "circle"
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -8534,7 +8537,9 @@ function Edit(_ref) {
     setAttributes = _ref.setAttributes,
     clientId = _ref.clientId;
   var blockID = attributes.blockID,
-    FeatureItems = attributes.FeatureItems;
+    FeatureItems = attributes.FeatureItems,
+    FeatureTag = attributes.FeatureTag,
+    FeatureIconShape = attributes.FeatureIconShape;
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
     className: "fb-feature-main-wrapper ".concat(blockID)
   });
@@ -8555,13 +8560,14 @@ function Edit(_ref) {
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-feature-list-icon-box"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-feature-list-icon-inner"
+      className: "fb-feature-list-icon-inner ".concat(FeatureIconShape)
     }, /*#__PURE__*/React.createElement("span", {
       className: "fb-feature-list-icon"
-    }, (0,_components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_2__["default"])(item.FeatureIcon)))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-feature-list-content-box"
+    }, item.FeatureIcon ? (0,_components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_2__["default"])(item.FeatureIcon) : ''))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-feature-list-content"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
-      tagName: "h3",
+      tagName: FeatureTag,
+      className: "fb-feature-list-title",
       value: item.Title,
       onChange: function onChange(value) {
         var updatedItems = FeatureItems.map(function (i) {
@@ -8576,6 +8582,7 @@ function Edit(_ref) {
       placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Feature Title', 'frontis-blocks')
     }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
       tagName: "p",
+      className: "fb-feature-list-text",
       value: item.Description,
       onChange: function onChange(value) {
         var updatedItems = FeatureItems.map(function (i) {
@@ -8642,14 +8649,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
-/* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
-/* harmony import */ var _sortableItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sortableItem */ "./src/blocks/features-list/sortableItem.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/features-list/editor.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./constants/constants */ "./src/blocks/features-list/constants/constants.js");
+/* harmony import */ var _sortableItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sortableItem */ "./src/blocks/features-list/sortableItem.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/features-list/editor.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -8670,13 +8678,16 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
+
 function Inspector(_ref) {
   var attributes = _ref.attributes,
     setAttributes = _ref.setAttributes,
     clientId = _ref.clientId;
   var blockID = attributes.blockID,
-    FeatureItems = attributes.FeatureItems;
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    FeatureItems = attributes.FeatureItems,
+    FeatureTag = attributes.FeatureTag,
+    FeatureIconShape = attributes.FeatureIconShape;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
       setAttributes({
         blockID: "fb-feature-" + clientId.slice(0, 8)
@@ -8693,7 +8704,7 @@ function Inspector(_ref) {
       var newIndex = FeatureItems.findIndex(function (item) {
         return item.id === over.id;
       });
-      var updatedItems = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_5__.arrayMove)(FeatureItems, oldIndex, newIndex);
+      var updatedItems = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_4__.arrayMove)(FeatureItems, oldIndex, newIndex);
       setAttributes({
         FeatureItems: updatedItems
       });
@@ -8702,9 +8713,9 @@ function Inspector(_ref) {
   var handleAddItem = function handleAddItem() {
     var newItem = {
       id: "item-".concat(FeatureItems.length + 1),
-      Title: 'New Feature',
-      Description: 'New Description for feature',
-      FeatureIcon: 'circle-check'
+      Title: "Feature Item ".concat(FeatureItems.length + 1),
+      Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna',
+      FeatureIcon: 'check'
     };
     setAttributes({
       FeatureItems: [].concat(_toConsumableArray(FeatureItems), [newItem])
@@ -8726,32 +8737,94 @@ function Inspector(_ref) {
       FeatureItems: updatedItems
     });
   };
-  return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Feature", "frontis-blocks"),
-    initialOpen: true
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-feature-main-wrapper ".concat(blockID, " .fb-feature-list-wrapper .fb-feature-list-icon-box .fb-feature-list-icon-inner {\n                    \n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+    key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-feature-wrapper"
-  }, /*#__PURE__*/React.createElement(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__.DndContext, {
-    collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_4__.closestCenter,
-    onDragEnd: handleDragEnd
-  }, /*#__PURE__*/React.createElement(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_5__.SortableContext, {
-    items: FeatureItems.map(function (item) {
-      return item.id;
-    })
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: "dnd-items-wrapper"
-  }, FeatureItems.map(function (item) {
-    return /*#__PURE__*/React.createElement(_sortableItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      key: item.id,
-      id: item.id,
-      item: item,
-      handleChangeItem: handleChangeItem,
-      handleDeleteItem: handleDeleteItem
-    });
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    isPrimary: true,
-    onClick: handleAddItem
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Feature", "frontis-blocks"))))));
+    className: "fb-inspector-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.TabPanel, {
+    className: "fb-parent-tab-panel",
+    activeClass: "active-tab",
+    tabs: [{
+      name: "general",
+      title: "General",
+      className: "fb-tab general"
+    }, {
+      name: "styles",
+      title: "Style",
+      className: "fb-tab styles"
+    }, {
+      name: "advanced",
+      title: "Advanced",
+      className: "fb-tab advanced"
+    }]
+  }, function (tab) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "fb-tab-controls" + tab.name
+    }, tab.name === 'general' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Feature", "frontis-blocks"),
+      initialOpen: true
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-feature-wrapper"
+    }, /*#__PURE__*/React.createElement(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_3__.DndContext, {
+      collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_3__.closestCenter,
+      onDragEnd: handleDragEnd
+    }, /*#__PURE__*/React.createElement(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_4__.SortableContext, {
+      items: FeatureItems.map(function (item) {
+        return item.id;
+      })
+    }, /*#__PURE__*/React.createElement("ul", {
+      className: "dnd-items-wrapper"
+    }, FeatureItems.map(function (item) {
+      return /*#__PURE__*/React.createElement(_sortableItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        key: item.id,
+        id: item.id,
+        item: item,
+        handleChangeItem: handleChangeItem,
+        handleDeleteItem: handleDeleteItem
+      });
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+      isPrimary: true,
+      onClick: handleAddItem
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Feature", "frontis-blocks")))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Title Tag", "frontis-blocks"),
+      className: "fb-setting-tag-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-tag-inner-wrapper"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.HEADING.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureTag: item.value
+          });
+        },
+        className: "fb-setting-tag-single-btn ".concat(FeatureTag === item.value ? 'active' : '')
+      }, item.label);
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Shape", "frontis-blocks"),
+      className: "fb-setting-icon-shape-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
+      value: attributes.FeatureIconShape,
+      options: [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-blocks"),
+        value: "none"
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Circle", "frontis-blocks"),
+        value: "circle"
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Square", "frontis-blocks"),
+        value: "square"
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rhombus", "frontis-blocks"),
+        value: "rhombus"
+      }],
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureIconShape: value
+        });
+      }
+    })))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null));
+  }))));
 }
 
 /***/ }),
@@ -8778,7 +8851,8 @@ __webpack_require__.r(__webpack_exports__);
 function Save(_ref) {
   var attributes = _ref.attributes;
   var blockID = attributes.blockID,
-    FeatureItems = attributes.FeatureItems;
+    FeatureItems = attributes.FeatureItems,
+    FeatureTag = attributes.FeatureTag;
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
     className: "fb-feature-main-wrapper ".concat(blockID)
   });
@@ -8799,8 +8873,16 @@ function Save(_ref) {
     }, /*#__PURE__*/React.createElement("span", {
       className: "fb-feature-list-icon"
     }, (0,_components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(item.FeatureIcon)))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-feature-list-content-box"
-    }, /*#__PURE__*/React.createElement("h3", null, item.Title), /*#__PURE__*/React.createElement("p", null, item.Description)));
+      className: "fb-feature-list-content"
+    }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+      tagName: FeatureTag,
+      className: "fb-feature-list-title",
+      value: item.Title
+    }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+      tagName: "p",
+      className: "fb-feature-list-text",
+      value: item.Description
+    })));
   })))));
 }
 
@@ -9359,7 +9441,7 @@ function FBIconPicker(props) {
     viewBox: "0 0 448 512"
   }, /*#__PURE__*/React.createElement("path", {
     d: "M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"
-  })))))), /*#__PURE__*/React.createElement("div", null, showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Modal, {
+  })))))), showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Modal, {
     onRequestClose: closeModal,
     className: 'fb_icon_picker_wrapper_modal'
   }, /*#__PURE__*/React.createElement("div", {
@@ -9400,7 +9482,7 @@ function FBIconPicker(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "secondary",
     onClick: fbInsertIcon
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))));
 }
 
 /***/ }),
@@ -22443,7 +22525,7 @@ function _unsupportedIterableToArray(r, a) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"frontis-blocks/features-list","version":"1.0.0","title":"Features list","category":"frontis-blocks","icon":"editor-ul","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"anchor":true,"align":["wide","full"],"customClassName":false},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"frontis-blocks/features-list","version":"1.0.0","title":"Features list","category":"frontis-blocks","icon":"editor-ul","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"anchor":false,"align":["wide","full"],"customClassName":false},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

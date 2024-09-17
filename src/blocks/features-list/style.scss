@@ -1,7 +1,9 @@
 .fb-feature-list-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    margin-top: 28px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 28px;
+    padding: 10px;
 
     .fb-feature-list-items {
         list-style-type: none !important;
@@ -11,6 +13,9 @@
 
         .fb-feature-list-item {
             position: relative;
+            display: flex;
+            align-items: center;
+            text-align: left;
 
             &:not(:last-child) {
                 padding-bottom: 10px;
@@ -21,56 +26,59 @@
                 z-index: 2;
 
                 .fb-feature-list-icon-inner {
-                    box-sizing: border-box;
-                    display: inline-flex;
-                    transition: all .5s;
-                    .fb-feature-list-icon {
-                        border-radius: 50%;
-                    }
-                }
-
-                .fb-feature-list-icon {
-                    height: 60px;
-                    width: 60px;
-                    font-size: 21px;
-                    padding: 15px;
-                }
-
-                .fb-feature-list-icon-inner {
-                    border-radius: 50%;
+                    background-color: black;
+                    border-color: black;
+                    transition: ease-in-out .5s;
 
                     .fb-feature-list-icon {
+                        align-items: center;
+                        display: flex;
+                        justify-content: center;
+                        transition: all 0.5s;
+                        padding: 15px;
+    
+                        svg {
+                            fill: #fff;
+                            height: 30px;
+                            width: 30px;
+                        }
+                    }
+
+                    &.circle {
                         border-radius: 50%;
                     }
-                }
-
-                .fb-feature-list-icon {
-                    align-items: center;
-                    box-sizing: border-box;
-                    display: flex;
-                    font-size: 30px;
-                    justify-content: center;
-                    line-height: 1;
-                    padding: .5em;
-                    text-align: center;
-                    transition: all .5s;
+                    &.square {
+                        border-radius: 0%;
+                    }
+                    &.rhombus {
+                        margin: 15px 0;
+                        transform: rotate(45deg);
+                        .fb-feature-list-icon {
+                            transform: rotate(-45deg);
+                        }
+                    }
+                    &.none {
+                        background-color: transparent;
+                        .fb-feature-list-icon {
+                            svg {
+                                fill: transparent;
+                            }
+                        }
+                    }
                 }
             }
 
-            .fb-feature-list-content-box {
+            .fb-feature-list-content {
                 margin: 0 0 0 20px;
 
                 .fb-feature-list-title {
                     font-size: 18px;
-
-                    a {
-                        font-size: 18px;
-                    }
+                    margin: 0;
+                    padding: 0;
                 }
 
-                .fb-feature-list-content {
+                .fb-feature-list-text {
                     font-size: 14px;
-                    line-height: 1.5em;
                     margin: 0;
                     padding: 0;
                 }
