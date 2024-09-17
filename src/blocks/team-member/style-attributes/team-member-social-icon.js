@@ -3,6 +3,7 @@ const teamMemberSocialProfileAttributes = {
 		type: 'string',
 		default: 'circle-check',
 	},
+
 };
 
 export default teamMemberSocialProfileAttributes;

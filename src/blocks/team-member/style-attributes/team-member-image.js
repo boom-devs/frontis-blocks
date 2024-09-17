@@ -1,5 +1,5 @@
 const teamMemberImageAttributes = {
-	MediaUrl: {
+	teamMemberImageMediaUrl: {
 		type: 'string',
 		default: ''
 	},
