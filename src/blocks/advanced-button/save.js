@@ -1,4 +1,5 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
     const {
@@ -8,6 +9,7 @@ export default function save({ attributes }) {
         ButtonUrl,
         ButtonTargetUrl,
         ButtonWidth,
+        ButtonIcon,
         ButtonZIndex,
     } = attributes;
 
@@ -22,8 +24,8 @@ export default function save({ attributes }) {
                 <a
                     className="fb-advanced-button"
                     href={ButtonUrl}
-                    target={ButtonTargetUrl ? '_blank' : ''}
-                    rel={ButtonTargetUrl ? 'noopener noreferrer' : ''}
+                    target={ButtonTargetUrl ? '_blank' : undefined}
+                    rel={ButtonTargetUrl ? 'noopener noreferrer' : undefined}
                     style={{
                         zIndex: ButtonZIndex,
                         width: ButtonWidth ? `${ButtonWidth}%` : 'auto',
@@ -34,6 +36,7 @@ export default function save({ attributes }) {
                         value={ButtonText}
                         className="fb-advanced-button-text"
                     />
+                    <div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
                 </a>
             </div>
         </div>

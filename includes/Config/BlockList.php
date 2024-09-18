@@ -20,7 +20,10 @@ class BlockList {
                 'title'     => 'Advanced Heading',
                 'package'   => 'free',
                 'category'  => 'post',
+<<<<<<< HEAD
                 'category'  => 'general',
+=======
+>>>>>>> 08b0fbc2a51097e27d9f4e2df36fb4f6feefc29d
                 'badge'     => 'freemium',
                 'status'    => 'active',
             ],
@@ -56,6 +59,7 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
+<<<<<<< HEAD
              'info-box' => [
                  'slug'      => 'info-box',
                  'title'     => 'Info Box',
@@ -72,6 +76,24 @@ class BlockList {
                  'badge'     => 'free',
                  'status'    => 'active',
              ],
+=======
+            // 'info-box' => [
+            //     'slug'      => 'info-box',
+            //     'title'     => 'Info Box',
+            //     'package'   => 'free',
+            //     'category'  => 'content',
+            //     'badge'     => 'free',
+            //     'status'    => 'active',
+            // ],
+            // 'icon-box' => [
+            //     'slug'      => 'icon-box',
+            //     'title'     => 'Icon Box',
+            //     'package'   => 'free',
+            //     'category'  => 'content',
+            //     'badge'     => 'free',
+            //     'status'    => 'active',
+            // ],
+>>>>>>> 08b0fbc2a51097e27d9f4e2df36fb4f6feefc29d
             'advanced-button' => [
                 'slug'      => 'advanced-button',
                 'title'     => 'Advanced Button',
@@ -120,14 +142,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'features-list' => [
-            //     'slug'      => 'features-list',
-            //     'title'     => 'Features List',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'features-list' => [
+                'slug'      => 'features-list',
+                'title'     => 'Features List',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'testimonial' => [
             //     'slug'      => 'testimonial',
             //     'title'     => 'Testimonial/Review',

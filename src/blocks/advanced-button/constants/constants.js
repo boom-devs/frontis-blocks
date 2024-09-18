@@ -24,26 +24,10 @@ export const NORMAL_HOVER = [
 	{ label: "Hover", value: "hover" },
 ];
 
-export const separator_TYPE = [
-	{ label: __("Line", "frontis-blocks"), value: "line" },
-	{ label: __("Icon", "frontis-blocks"), value: "icon" },
-];
-
-export const separator_POSITION = [
-	{ label: __("Top", "frontis-blocks"), value: "top" },
-	{ label: __("Bottom", "frontis-blocks"), value: "bottom" },
-];
-
-export const subheading_POSITION = [
-	{ label: __("Top", "frontis-blocks"), value: "top" },
-	{ label: __("Bottom", "frontis-blocks"), value: "bottom" },
-];
-
-export const PRESETS = [
-	{ label: __("Default", "frontis-blocks"), value: "preset-0" },
-	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
-	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
-	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+export const ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "no-icon" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"info"} />), value: "icon-only" },
 ];
 
 export const TEXT_ALIGN = [
