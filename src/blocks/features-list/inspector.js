@@ -43,8 +43,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureTag,
         FeatureAlignment,
         FeatureIconAlignment,
-        FeatureZIndex,
 
+        FeatureListGap,
+        FeatureListGapUnits,
+
+
+        FeatureZIndex,
         FeaturePaddingUnits,
         FeatureDesktopPadding,
         FeatureTabPadding,
@@ -605,6 +609,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "styles" && (
                                     <>
+
+                                        <PanelBody
+                                            title={__("Feature List", "frontis-blocks")}
+                                            initialOpen={false}
+                                            className="fb-setting-feature-list-wrapper"
+                                        >
+                                            <div className="fb-setting-fontsize-wrapper">
+                                                <div className="fb-setting-fontsize-header">
+                                                    <div className="fb-setting-fontsize-label">
+                                                        <span>{__("List Gap", "frontis-blocks")}</span>
+                                                    </div>
+                                                    <div className="fb-setting-fontsize-units">
+                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
+                                                            {UNIT_TYPES.map((item, key) => (
+                                                                <Button
+                                                                    key={key}
+                                                                    onClick={() => setAttributes({ FeatureListGapUnits: item.value })}
+                                                                    className={`fb-setting-fontsize-units-switcher ${ FeatureListGapUnits === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                    </div>
+                                                </div>
+                                                <div className="fb-setting-fontsize-rangecontrol">
+                                                    <RangeControl
+                                                        value={FeatureListGap}
+                                                        onChange={(value) => setAttributes({ FeatureListGap: value })}
+                                                        min={1}
+                                                        max={100}
+                                                        allowReset
+                                                        resetFallbackValue={20}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </PanelBody>
 
                                     </>
                                 )}

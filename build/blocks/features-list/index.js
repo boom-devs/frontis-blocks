@@ -5289,6 +5289,14 @@ var attributes = {
     type: "string",
     "default": "left"
   },
+  FeatureListGap: {
+    type: "number",
+    "default": 20
+  },
+  FeatureListGapUnits: {
+    type: "string",
+    "default": "px"
+  },
   FeatureZIndex: {
     type: "number"
   },
@@ -8883,6 +8891,8 @@ function Inspector(_ref) {
     FeatureTag = attributes.FeatureTag,
     FeatureAlignment = attributes.FeatureAlignment,
     FeatureIconAlignment = attributes.FeatureIconAlignment,
+    FeatureListGap = attributes.FeatureListGap,
+    FeatureListGapUnits = attributes.FeatureListGapUnits,
     FeatureZIndex = attributes.FeatureZIndex,
     FeaturePaddingUnits = attributes.FeaturePaddingUnits,
     FeatureDesktopPadding = attributes.FeatureDesktopPadding,
@@ -9484,7 +9494,44 @@ function Inspector(_ref) {
         },
         className: "fb-setting-text-alignment-single-btn ".concat(FeatureIconAlignment === item.value ? 'active' : '')
       }, item.label);
-    }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Feature List", "frontis-blocks"),
+      initialOpen: false,
+      className: "fb-setting-feature-list-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-header"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-label"
+    }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("List Gap", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-units"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-fontsize-units-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureListGapUnits: item.value
+          });
+        },
+        className: "fb-setting-fontsize-units-switcher ".concat(FeatureListGapUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-rangecontrol"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.RangeControl, {
+      value: FeatureListGap,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureListGap: value
+        });
+      },
+      min: 1,
+      max: 100,
+      allowReset: true,
+      resetFallbackValue: 20
+    }))))), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-advanced-tab-wrapper"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-inner-wrapper"

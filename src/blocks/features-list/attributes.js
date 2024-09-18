@@ -57,6 +57,16 @@ const attributes = {
         type: "string",
         default: "left",
     },
+
+    FeatureListGap: {
+        type: "number",
+        default: 20
+    },
+    FeatureListGapUnits: {
+        type: "string",
+        default: "px"
+    },
+
     FeatureZIndex : {
         type: "number",
     },

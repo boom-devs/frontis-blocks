@@ -71,6 +71,99 @@
   line-height: 20px;
 }
 
+.fb-setting-fontsize-wrapper .fb-setting-fontsize-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-label {
+  display: block;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
+  min-height: auto;
+  text-transform: capitalize;
+}
+.fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap {
+  direction: initial;
+  display: flex;
+  align-items: center;
+}
+.fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher {
+  box-shadow: unset;
+  font-size: 10px;
+  padding: 0;
+  text-transform: uppercase;
+  padding-left: 5px;
+}
+.fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher.active {
+  color: #007cba;
+}
+
+.fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-label {
+  display: block;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
+  min-height: auto;
+  text-transform: capitalize;
+}
+.fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap {
+  direction: initial;
+  display: flex;
+  align-items: center;
+}
+.fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher {
+  box-shadow: unset;
+  font-size: 10px;
+  padding: 0;
+  text-transform: uppercase;
+  padding-left: 5px;
+}
+.fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher.active {
+  color: #007cba;
+}
+
+.fb-setting-lineheight-wrapper .fb-setting-lineheight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-label {
+  display: block;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
+  min-height: auto;
+  text-transform: capitalize;
+}
+.fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap {
+  direction: initial;
+  display: flex;
+  align-items: center;
+}
+.fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher {
+  box-shadow: unset;
+  font-size: 10px;
+  padding: 0;
+  text-transform: uppercase;
+  padding-left: 5px;
+}
+.fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher.active {
+  color: #007cba;
+}
+
 .fb-setting-typography-popup {
   padding: 0.2rem;
   min-width: 220px;
@@ -93,96 +186,6 @@
   margin: 10px 0 !important;
   min-height: auto;
   text-transform: capitalize !important;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-label {
-  display: block;
-  color: #5f5f5f;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 10px 0;
-  min-height: auto;
-  text-transform: capitalize;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap {
-  direction: initial;
-  display: flex;
-  align-items: center;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher {
-  box-shadow: unset;
-  font-size: 10px;
-  padding: 0;
-  text-transform: uppercase;
-  padding-left: 5px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher.active {
-  color: #007cba;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-label {
-  display: block;
-  color: #5f5f5f;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 10px 0;
-  min-height: auto;
-  text-transform: capitalize;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap {
-  direction: initial;
-  display: flex;
-  align-items: center;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher {
-  box-shadow: unset;
-  font-size: 10px;
-  padding: 0;
-  text-transform: uppercase;
-  padding-left: 5px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher.active {
-  color: #007cba;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-label {
-  display: block;
-  color: #5f5f5f;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 10px 0;
-  min-height: auto;
-  text-transform: capitalize;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap {
-  direction: initial;
-  display: flex;
-  align-items: center;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher {
-  box-shadow: unset;
-  font-size: 10px;
-  padding: 0;
-  text-transform: uppercase;
-  padding-left: 5px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher.active {
-  color: #007cba;
 }
 
 .fb-setting-fontsize-wrapper .components-range-control__reset, .fb-setting-letterspacing-wrapper .components-range-control__reset, .fb-setting-lineheight-wrapper .components-range-control__reset {
