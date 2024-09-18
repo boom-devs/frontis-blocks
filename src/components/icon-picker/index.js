@@ -254,6 +254,7 @@ export default function FBIconPicker(props) {
 					</div>
 				</div>
 			</div>
+			<div>
 				{showIconPicker && (
 					<Modal onRequestClose={closeModal} className={'fb_icon_picker_wrapper_modal'}>
 						<div className={'fb_icon_picker_modal_wrapper'}>
@@ -288,10 +289,9 @@ export default function FBIconPicker(props) {
 						</div>
 					</Modal>
 				)}
-<<<<<<< HEAD
+
+				Icon picker
 			</div>
-=======
->>>>>>> 08b0fbc2a51097e27d9f4e2df36fb4f6feefc29d
 		</Fragment>
 	);
 }

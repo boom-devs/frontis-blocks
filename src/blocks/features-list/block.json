@@ -8,7 +8,6 @@
 	"icon": "editor-ul",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
-<<<<<<< HEAD:src/blocks/info-box/block.json
 	"supports": {
 		"html": false,
 		"spacing": {
@@ -17,13 +16,6 @@
 		},
 		"align": ["wide", "full"]
 	},
-=======
-    "supports": {
-        "anchor": false,
-		"align": ["wide", "full"],
-        "customClassName": false
-    },
->>>>>>> 08b0fbc2a51097e27d9f4e2df36fb4f6feefc29d:src/blocks/features-list/block.json
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
