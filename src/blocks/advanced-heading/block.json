@@ -9,8 +9,8 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
     "supports": {
-        "anchor": false,
-        "align": false,
+        "anchor": true,
+		"align": ["wide", "full"],
         "customClassName": false
     },
 	"textdomain": "frontis-blocks",

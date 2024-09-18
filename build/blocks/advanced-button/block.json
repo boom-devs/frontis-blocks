@@ -9,7 +9,7 @@
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
   "supports": {
-    "anchor": false,
+    "anchor": true,
     "align": [
       "wide",
       "full"

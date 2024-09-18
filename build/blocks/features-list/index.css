@@ -1,3 +1,4 @@
+<<<<<<< HEAD:build/blocks/info-box/index.css
 /*!********************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/info-box/editor.scss ***!
   \********************************************************************************************************************************************************************************************************************************************************/
@@ -112,7 +113,7 @@
   font-size: 10px;
   padding: 0;
   text-transform: uppercase;
-  padding-left: 5px;
+  padding-right: 5px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher.active {
   color: #007cba;
@@ -142,7 +143,7 @@
   font-size: 10px;
   padding: 0;
   text-transform: uppercase;
-  padding-left: 5px;
+  padding-right: 5px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher.active {
   color: #007cba;
@@ -172,7 +173,7 @@
   font-size: 10px;
   padding: 0;
   text-transform: uppercase;
-  padding-left: 5px;
+  padding-right: 5px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher.active {
   color: #007cba;
@@ -181,7 +182,7 @@
 .fb-setting-fontsize-wrapper .components-range-control__reset, .fb-setting-letterspacing-wrapper .components-range-control__reset, .fb-setting-lineheight-wrapper .components-range-control__reset {
   position: absolute;
   top: -33px;
-  left: 50px;
+  right: 50px;
   box-shadow: unset;
   font-size: 10px;
 }
@@ -266,8 +267,8 @@
   margin-bottom: 5px;
 }
 .fb-setting-spacing-container .fb-setting-spacing-inner-container .fb-setting-spacing-input-container .fb-setting-spacing-input-wrapper:first-child input {
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
   border-width: 1px;
 }
 .fb-setting-spacing-container .fb-setting-spacing-inner-container .fb-setting-spacing-input-container .fb-setting-spacing-input-wrapper input {
@@ -275,7 +276,7 @@
   color: #1e1e1e;
   height: 30px !important;
   border: 1px solid #8d96a0;
-  border-right-width: 0;
+  border-left-width: 0;
   border-radius: 0;
   height: 24px;
   margin: 0;
@@ -294,7 +295,7 @@
   color: #1e1e1e;
   height: 30px !important;
   border: 1px solid #8d96a0;
-  border-right-width: 0;
+  border-left-width: 0;
   border-radius: 0;
   height: 24px;
   margin: 0;
@@ -303,8 +304,8 @@
   text-align: center;
   width: 100%;
   margin-top: 18px;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -326,7 +327,7 @@
 }
 .fb-setting-label-wrapper p {
   margin-bottom: 0;
-  margin-left: 5px;
+  margin-right: 5px;
 }
 .fb-setting-label-wrapper p.fb-setting-label-text {
   flex: 1;
@@ -367,7 +368,7 @@
   font-size: 10px;
   padding: 0;
   text-transform: uppercase;
-  padding-left: 5px;
+  padding-right: 5px;
 }
 .fb-setting-units-type .fb-setting-units-type-wrap .fb-setting-units-type-switcher.active {
   color: #007cba;
@@ -468,6 +469,8 @@
 .fb-info-button-wrapper .info-btn-url-input input {
   width: 100%;
 }
+=======
+>>>>>>> 08b0fbc2a51097e27d9f4e2df36fb4f6feefc29d:build/blocks/features-list/index.css
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/icon-picker/editor.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
@@ -499,7 +502,7 @@
 
 .fb_icon_picker_wrapper .fb_icon_picker .remove {
   position: absolute;
-  left: 5px;
+  right: 5px;
   top: 5px;
   line-height: 0;
   cursor: pointer;
@@ -584,18 +587,18 @@
   top: 11px;
   color: #555d66;
   fill: #555d66;
-  transform: rotateZ(-90deg);
-  right: 12px;
+  transform: rotateZ(90deg);
+  left: 12px;
 }
 
 .fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search input[type=text] {
   position: absolute;
-  right: 0;
   left: 0;
+  right: 0;
   flex-shrink: 0;
   height: 36px;
   width: 100%;
-  padding: 7px 38px 7px 12px;
+  padding: 7px 12px 7px 38px;
   border: 1px solid #e6e7e9;
   margin: 0;
   border-radius: 2px;
@@ -664,11 +667,86 @@
 .fb_icon_picker_icons_list {
   flex: 1;
   padding: 14px;
-  padding-left: 0;
+  padding-right: 0;
   border: 1px solid #e6e7e9;
   border-radius: 2px;
 }
 
 .fb_icon_picker_wrapper_footer {
-  text-align: left;
+  text-align: right;
 }
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/features-list/editor.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+/** End General scss for Advanced Button **/
+.fb-feature-wrapper .dnd-items-wrapper {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title {
+  flex: 12;
+  cursor: pointer;
+  overflow: hidden;
+  padding-left: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort {
+  border-right: 1px solid #b4b4cb;
+  border-left: 1px solid #b4b4cb;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus {
+  box-shadow: none;
+  outline: none;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button {
+  color: #d63638;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus {
+  box-shadow: none;
+  outline: none;
+}
+.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-item-content {
+  padding-top: 10px;
+}
+
+.fb-feature-icon-group-btn {
+  display: flex;
+}
+
+button.components-button.fb-feature-icon-single-btn {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 6px;
+  height: unset;
+  line-height: 16px;
+  box-shadow: inset 0 0 0 1px #dcdcde;
+  color: #5f5f5f;
+  margin-bottom: 10px;
+}
+button.components-button.fb-feature-icon-single-btn.active {
+  background-color: #dcdcde !important;
+  color: #5f5f5f !important;
+}
+button.components-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/*# sourceMappingURL=index.css.map*/

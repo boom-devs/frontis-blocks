@@ -10,6 +10,7 @@ import {
  * Internal dependencies
  */
 import Inspector from "./inspector";
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -21,6 +22,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         ButtonUrl,
         ButtonTargetUrl,
         ButtonWidth,
+        ButtonIcon,
         ButtonZIndex
     } = attributes;
 
@@ -53,8 +55,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <a 
                         className="fb-advanced-button" 
                         href={ButtonUrl} 
-                        target={ButtonTargetUrl ? '_blank' : ''}
-                        rel={ButtonTargetUrl ? 'noopener noreferrer' : ''}
+                        target={ButtonTargetUrl ? '_blank' : undefined}
+                        rel={ButtonTargetUrl ? 'noopener noreferrer' : undefined}
                         onClick={handleButtonClick}
                     >
                         <RichText
@@ -64,6 +66,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             placeholder={__('Enter button text...', 'frontis-blocks')}
                             className="fb-advanced-button-text"
                         />
+                        <div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
                     </a>
                 </div>
             </div>
