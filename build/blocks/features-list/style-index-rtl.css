@@ -21,6 +21,10 @@
 .fb-feature-list-wrapper.fb-feature-list-right {
   justify-content: flex-end;
 }
+.fb-feature-list-wrapper.fb-icon-position-left .fb-feature-list-item {
+  display: flex;
+  text-align: right;
+}
 .fb-feature-list-wrapper.fb-icon-position-center .fb-feature-list-content {
   margin: 20px 0 0 0 !important;
 }

@@ -120,10 +120,6 @@ const attributes = {
             right: 0,
         },
     },
-    HeadingActiveBorderDevice: {
-        type: "string",
-        default: "Desktop"
-    },
     HeadingBorderLink : {
         type : "boolean",
         default: true
@@ -159,10 +155,6 @@ const attributes = {
             right: 0,
         },
     },
-    HeadingActiveBorderRadiusDevice: {
-        type: "string",
-        default: "Desktop"
-    },
     HeadingBorderRadiusLink : {
         type : "boolean",
         default: true
@@ -170,15 +162,6 @@ const attributes = {
     HeadingPaddingUnits : {
         type: "string",
         default: "px"
-    },
-    desktopHeadingPadding: {
-        type: "object", 
-        default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
     },
     HeadingDesktopPadding: {
         type: "object", 

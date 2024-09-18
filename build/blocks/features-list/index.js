@@ -5223,6 +5223,10 @@ var attributes = {
     type: "string",
     "default": ""
   },
+  DeviceType: {
+    type: "string",
+    "default": "Desktop"
+  },
   FeatureItems: {
     type: "array",
     "default": [
@@ -5284,6 +5288,185 @@ var attributes = {
   FeatureIconAlignment: {
     type: "string",
     "default": "left"
+  },
+  FeatureZIndex: {
+    type: "number"
+  },
+  FeaturePaddingUnits: {
+    type: "string",
+    "default": "px"
+  },
+  FeatureDesktopPadding: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureTabPadding: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureMobilePadding: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeaturePaddingLink: {
+    type: "boolean",
+    "default": true
+  },
+  FeatureMarginUnits: {
+    type: "string",
+    "default": "px"
+  },
+  FeatureDesktopMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureTabMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureMobileMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureMarginLink: {
+    type: "boolean",
+    "default": true
+  },
+  FeatureBgColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  FeatureBgColor: {
+    type: "string"
+  },
+  FeatureBgHoverColor: {
+    type: 'string'
+  },
+  FeatureBorder: {
+    type: 'string',
+    "default": "none"
+  },
+  FeatureBorderColor: {
+    type: 'string'
+  },
+  FeatureBorderHoverColor: {
+    type: 'string'
+  },
+  FeatureBorderColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  FeatureBorderUnits: {
+    type: "string",
+    "default": "px"
+  },
+  FeatureDesktopBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureTabBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureMobileBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureBorderLink: {
+    type: "boolean",
+    "default": true
+  },
+  FeatureBorderRadiusUnits: {
+    type: "string",
+    "default": "px"
+  },
+  FeatureDesktopBorderRadiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureTabBorderRadiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureMobileBorderRadiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  FeatureBorderRadiusLink: {
+    type: "boolean",
+    "default": true
+  },
+  FeatureDesktopSwitcher: {
+    type: "boolean",
+    "default": false
+  },
+  FeatureTabletSwitcher: {
+    type: "boolean",
+    "default": false
+  },
+  FeatureMobileSwitcher: {
+    type: "boolean",
+    "default": false
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -8662,8 +8845,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./constants/constants */ "./src/blocks/features-list/constants/constants.js");
 /* harmony import */ var _sortableItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sortableItem */ "./src/blocks/features-list/sortableItem.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/features-list/editor.scss");
+/* harmony import */ var _components_responsivecontrol__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/responsivecontrol */ "./src/components/responsivecontrol.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/features-list/editor.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -8684,18 +8872,48 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
+
 function Inspector(_ref) {
   var attributes = _ref.attributes,
     setAttributes = _ref.setAttributes,
     clientId = _ref.clientId;
   var blockID = attributes.blockID,
+    DeviceType = attributes.DeviceType,
     FeatureItems = attributes.FeatureItems,
     FeatureTag = attributes.FeatureTag,
-    FeatureIconShape = attributes.FeatureIconShape,
     FeatureAlignment = attributes.FeatureAlignment,
-    FeatureIconAlignment = attributes.FeatureIconAlignment;
-  console.log(FeatureAlignment);
-  console.log(FeatureIconAlignment);
+    FeatureIconAlignment = attributes.FeatureIconAlignment,
+    FeatureZIndex = attributes.FeatureZIndex,
+    FeaturePaddingUnits = attributes.FeaturePaddingUnits,
+    FeatureDesktopPadding = attributes.FeatureDesktopPadding,
+    FeatureTabPadding = attributes.FeatureTabPadding,
+    FeatureMobilePadding = attributes.FeatureMobilePadding,
+    FeaturePaddingLink = attributes.FeaturePaddingLink,
+    FeatureMarginUnits = attributes.FeatureMarginUnits,
+    FeatureDesktopMargin = attributes.FeatureDesktopMargin,
+    FeatureTabMargin = attributes.FeatureTabMargin,
+    FeatureMobileMargin = attributes.FeatureMobileMargin,
+    FeatureMarginLink = attributes.FeatureMarginLink,
+    FeatureBgColorSwitcher = attributes.FeatureBgColorSwitcher,
+    FeatureBgColor = attributes.FeatureBgColor,
+    FeatureBgHoverColor = attributes.FeatureBgHoverColor,
+    FeatureBorder = attributes.FeatureBorder,
+    FeatureBorderColor = attributes.FeatureBorderColor,
+    FeatureBorderHoverColor = attributes.FeatureBorderHoverColor,
+    FeatureBorderColorSwitcher = attributes.FeatureBorderColorSwitcher,
+    FeatureBorderUnits = attributes.FeatureBorderUnits,
+    FeatureDesktopBorderWidth = attributes.FeatureDesktopBorderWidth,
+    FeatureTabBorderWidth = attributes.FeatureTabBorderWidth,
+    FeatureMobileBorderWidth = attributes.FeatureMobileBorderWidth,
+    FeatureBorderLink = attributes.FeatureBorderLink,
+    FeatureBorderRadiusUnits = attributes.FeatureBorderRadiusUnits,
+    FeatureDesktopBorderRadiusWidth = attributes.FeatureDesktopBorderRadiusWidth,
+    FeatureTabBorderRadiusWidth = attributes.FeatureTabBorderRadiusWidth,
+    FeatureMobileBorderRadiusWidth = attributes.FeatureMobileBorderRadiusWidth,
+    FeatureBorderRadiusLink = attributes.FeatureBorderRadiusLink,
+    FeatureDesktopSwitcher = attributes.FeatureDesktopSwitcher,
+    FeatureTabletSwitcher = attributes.FeatureTabletSwitcher,
+    FeatureMobileSwitcher = attributes.FeatureMobileSwitcher;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
       setAttributes({
@@ -8746,6 +8964,407 @@ function Inspector(_ref) {
       FeatureItems: updatedItems
     });
   };
+
+  /** Start Padding */
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(FeatureDesktopPadding),
+    _useState2 = _slicedToArray(_useState, 2),
+    previousPadding = _useState2[0],
+    setPreviousPadding = _useState2[1];
+  /** Function to update all padding values */
+  var updateAllPadding = function updateAllPadding(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopPadding: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabPadding: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobilePadding: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handlePaddingInputChange = function handlePaddingInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopPadding: _objectSpread(_objectSpread({}, FeatureDesktopPadding), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabPadding: _objectSpread(_objectSpread({}, FeatureTabPadding), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobilePadding: _objectSpread(_objectSpread({}, FeatureMobilePadding), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if FeaturePaddingLink is true */
+    if (FeaturePaddingLink) {
+      updateAllPadding(value, DeviceType);
+    }
+  };
+
+  /** Function to handle FeaturePaddingLink toggle */
+  var handleFeaturePaddingLinkToggle = function handleFeaturePaddingLinkToggle() {
+    if (!FeaturePaddingLink) {
+      setAttributes({
+        FeatureDesktopPadding: previousPadding
+      });
+    }
+    /** setFeaturePaddingLink(!FeaturePaddingLink) */
+    setAttributes({
+      FeaturePaddingLink: !FeaturePaddingLink
+    });
+  };
+
+  /** Update previousPadding state when padding changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    setPreviousPadding(FeatureDesktopPadding);
+  }, [FeatureDesktopPadding]);
+
+  /** Function to handle device click for padding */
+  var handlePaddingDeviceClick = function handlePaddingDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default padding for desktop (using desktop_padding) */
+  var padding = "".concat(FeatureDesktopPadding.top).concat(FeaturePaddingUnits, " ").concat(FeatureDesktopPadding.right).concat(FeaturePaddingUnits, " ").concat(FeatureDesktopPadding.bottom).concat(FeaturePaddingUnits, " ").concat(FeatureDesktopPadding.left).concat(FeaturePaddingUnits);
+  /** End Padding */
+
+  /** Start Margin */
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(FeatureDesktopMargin),
+    _useState4 = _slicedToArray(_useState3, 2),
+    previousMargin = _useState4[0],
+    setPreviousMargin = _useState4[1];
+  /** Function to update all margin values */
+  var updateAllMargin = function updateAllMargin(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobileMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleMarginInputChange = function handleMarginInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopMargin: _objectSpread(_objectSpread({}, FeatureDesktopMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabMargin: _objectSpread(_objectSpread({}, FeatureTabMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobileMargin: _objectSpread(_objectSpread({}, FeatureMobileMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all margin values if marginLink is true */
+    if (FeatureMarginLink) {
+      updateAllMargin(value, DeviceType);
+    }
+  };
+
+  /** Function to handle marginLink toggle */
+  var handleMarginLinkToggle = function handleMarginLinkToggle() {
+    if (!FeatureMarginLink) {
+      setAttributes({
+        FeatureDesktopMargin: previousMargin
+      });
+    }
+    /** setmarginLink(!marginLink) */
+    setAttributes({
+      FeatureMarginLink: !FeatureMarginLink
+    });
+  };
+
+  /** Update previousMargin state when margin changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    setPreviousMargin(FeatureDesktopMargin);
+  }, [FeatureDesktopMargin]);
+
+  /** Function to handle device click for margin */
+  var handleMarginDeviceClick = function handleMarginDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default margin for desktop (using desktop_margin) */
+  var margin = "".concat(FeatureDesktopMargin.top).concat(FeaturePaddingUnits, " ").concat(FeatureDesktopMargin.right).concat(FeaturePaddingUnits, " ").concat(FeatureDesktopMargin.bottom).concat(FeaturePaddingUnits, " ").concat(FeatureDesktopMargin.left).concat(FeaturePaddingUnits);
+  /** End Margin */
+
+  /** Start Border Width */
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(FeatureDesktopBorderWidth),
+    _useState6 = _slicedToArray(_useState5, 2),
+    previousBorderWidth = _useState6[0],
+    setPreviousBorderWidth = _useState6[1];
+  /** Function to update all Border Width values */
+  var updateAllBorderWidth = function updateAllBorderWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobileBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleBorderWidthInputChange = function handleBorderWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopBorderWidth: _objectSpread(_objectSpread({}, FeatureDesktopBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabBorderWidth: _objectSpread(_objectSpread({}, FeatureTabBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobileBorderWidth: _objectSpread(_objectSpread({}, FeatureMobileBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if FeatureBorderLink is true */
+    if (FeatureBorderLink) {
+      updateAllBorderWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle FeatureBorderLink toggle */
+  var handleBorderWidthLinkToggle = function handleBorderWidthLinkToggle() {
+    if (!FeatureBorderLink) {
+      setAttributes({
+        FeatureDesktopBorderWidth: previousBorderWidth
+      });
+    }
+    /** setFeatureBorderLinkLink(!FeatureBorderLink) */
+    setAttributes({
+      FeatureBorderLink: !FeatureBorderLink
+    });
+  };
+
+  /** Update previousborderWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    setPreviousBorderWidth(FeatureDesktopBorderWidth);
+  }, [FeatureDesktopBorderWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleBorderWidthDeviceClick = function handleBorderWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using FeatureDesktopBorderWidth) */
+  var borderWidth = "".concat(FeatureDesktopBorderWidth.top).concat(FeatureBorderUnits, " ").concat(FeatureDesktopBorderWidth.right).concat(FeatureBorderUnits, " ").concat(FeatureDesktopBorderWidth.bottom).concat(FeatureBorderUnits, " ").concat(FeatureDesktopBorderWidth.left).concat(FeatureBorderUnits);
+  /** End Border Width */
+
+  /** Start Border Radius Width */
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(FeatureDesktopBorderRadiusWidth),
+    _useState8 = _slicedToArray(_useState7, 2),
+    previousBorderRadiusWidth = _useState8[0],
+    setPreviousBorderRadiusWidth = _useState8[1];
+  /** Function to update all Border Width values */
+  var updateAllBorderRadiusWidth = function updateAllBorderRadiusWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobileBorderRadiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleBorderRadiusWidthInputChange = function handleBorderRadiusWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          FeatureDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, FeatureDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          FeatureTabBorderRadiusWidth: _objectSpread(_objectSpread({}, FeatureTabBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          FeatureMobileBorderRadiusWidth: _objectSpread(_objectSpread({}, FeatureMobileBorderRadiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if FeatureBorderRadiusLink is true */
+    if (FeatureBorderRadiusLink) {
+      updateAllBorderRadiusWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle FeatureBorderRadiusLink toggle */
+  var handleBorderRadiusWidthLinkToggle = function handleBorderRadiusWidthLinkToggle() {
+    if (!FeatureBorderRadiusLink) {
+      setAttributes({
+        FeatureDesktopBorderRadiusWidth: previousBorderRadiusWidth
+      });
+    }
+    /** setFeatureBorderRadiusLinkLink(!FeatureBorderRadiusLink) */
+    setAttributes({
+      FeatureBorderRadiusLink: !FeatureBorderRadiusLink
+    });
+  };
+
+  /** Update previousBorderRadiusWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    setPreviousBorderRadiusWidth(FeatureDesktopBorderRadiusWidth);
+  }, [FeatureDesktopBorderRadiusWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleBorderRadiusWidthDeviceClick = function handleBorderRadiusWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using FeatureDesktopBorderWidth) */
+  var borderRadiusWidth = "".concat(FeatureDesktopBorderRadiusWidth.top).concat(FeatureBorderRadiusUnits, " ").concat(FeatureDesktopBorderRadiusWidth.right).concat(FeatureBorderRadiusUnits, " ").concat(FeatureDesktopBorderRadiusWidth.bottom).concat(FeatureBorderRadiusUnits, " ").concat(FeatureDesktopBorderRadiusWidth.left).concat(FeatureBorderRadiusUnits);
+  /** End Border Radius Width */
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-feature-main-wrapper ".concat(blockID, " .fb-feature-list-wrapper .fb-feature-list-icon-box .fb-feature-list-icon-inner {\n                    \n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
@@ -8865,7 +9484,656 @@ function Inspector(_ref) {
         },
         className: "fb-setting-text-alignment-single-btn ".concat(FeatureIconAlignment === item.value ? 'active' : '')
       }, item.label);
-    }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null));
+    }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null), tab.name === "advanced" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-advanced-tab-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-inner-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Z Index", "frontis-blocks"),
+      initialOpen: true,
+      className: "fb-setting-z-index-header"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.RangeControl, {
+      value: FeatureZIndex,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureZIndex: value === 0 ? undefined : value
+        });
+      },
+      min: 1,
+      max: 100,
+      step: 1,
+      allowReset: true,
+      resetFallbackValue: undefined
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding & Margin", "frontis-blocks"),
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handlePaddingDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeaturePaddingUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(FeaturePaddingUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? FeatureDesktopPadding.top : DeviceType === 'Tablet' ? FeatureTabPadding.top : FeatureMobilePadding.top,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? FeatureDesktopPadding.right : DeviceType === 'Tablet' ? FeatureTabPadding.right : FeatureMobilePadding.right,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? FeatureDesktopPadding.bottom : DeviceType === 'Tablet' ? FeatureTabPadding.bottom : FeatureMobilePadding.bottom,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? FeatureDesktopPadding.left : DeviceType === 'Tablet' ? FeatureTabPadding.left : FeatureMobilePadding.left,
+      onChange: function onChange(e) {
+        return handlePaddingInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(FeaturePaddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(FeaturePaddingLink ? 'is-checked' : ''),
+      onClick: handleFeaturePaddingLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleMarginDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureMarginUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(FeatureMarginUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? FeatureDesktopMargin.top : DeviceType === 'Tablet' ? FeatureTabMargin.top : FeatureMobileMargin.top,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? FeatureDesktopMargin.right : DeviceType === 'Tablet' ? FeatureTabMargin.right : FeatureMobileMargin.right,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? FeatureDesktopMargin.bottom : DeviceType === 'Tablet' ? FeatureTabMargin.bottom : FeatureMobileMargin.bottom,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? FeatureDesktopMargin.left : DeviceType === 'Tablet' ? FeatureTabMargin.left : FeatureMobileMargin.left,
+      onChange: function onChange(e) {
+        return handleMarginInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(FeatureMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(FeatureMarginLink ? 'is-checked' : ''),
+      onClick: handleMarginLinkToggle
+    })))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: "Background Color",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureBgColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(FeatureBgColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), FeatureBgColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref2) {
+        var isOpen = _ref2.isOpen,
+          onToggle = _ref2.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBgColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBgColor: value
+            });
+          }
+        }))));
+      }
+    })), FeatureBgColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref3) {
+        var isOpen = _ref3.isOpen,
+          onToggle = _ref3.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBgHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBgHoverColor: value
+            });
+          }
+        }))));
+      }
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border & Border radius", "frontis-blocks"),
+      initialOpen: false,
+      className: "fb-setting-border-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-blocks"),
+      value: FeatureBorder,
+      options: _constants_constants__WEBPACK_IMPORTED_MODULE_6__.BORDER_STYLES,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureBorder: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Color", "frontis-blocks"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureBorderColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(FeatureBorderColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), FeatureBorderColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref4) {
+        var isOpen = _ref4.isOpen,
+          onToggle = _ref4.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBorderColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBorderColor: value
+            });
+          }
+        }))));
+      }
+    })), FeatureBorderColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref5) {
+        var isOpen = _ref5.isOpen,
+          onToggle = _ref5.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureBorderHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBorderHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureBorderHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureBorderHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureBorderUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(FeatureBorderUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderWidth.top : DeviceType === 'Tablet' ? FeatureTabBorderWidth.top : FeatureMobileBorderWidth.top,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderWidth.right : DeviceType === 'Tablet' ? FeatureTabBorderWidth.right : FeatureMobileBorderWidth.right,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? FeatureTabBorderWidth.bottom : FeatureMobileBorderWidth.bottom,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderWidth.left : DeviceType === 'Tablet' ? FeatureTabBorderWidth.left : FeatureMobileBorderWidth.left,
+      onChange: function onChange(e) {
+        return handleBorderWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(FeatureBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(FeatureBorderLink ? 'is-checked' : ''),
+      onClick: handleBorderWidthLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderRadiusWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureBorderRadiusUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(FeatureBorderRadiusUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? FeatureTabBorderRadiusWidth.top : FeatureMobileBorderRadiusWidth.top,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? FeatureTabBorderRadiusWidth.right : FeatureMobileBorderRadiusWidth.right,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? FeatureTabBorderRadiusWidth.bottom : FeatureMobileBorderRadiusWidth.bottom,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? FeatureDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? FeatureTabBorderRadiusWidth.left : FeatureMobileBorderRadiusWidth.left,
+      onChange: function onChange(e) {
+        return handleBorderRadiusWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(FeatureBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(FeatureBorderRadiusLink ? 'is-checked' : ''),
+      onClick: handleBorderRadiusWidthLinkToggle
+    })))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Responsive Control", "frontis-blocks"),
+      initialOpen: false,
+      className: "fb-setting-responsive-control-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide on Desktop", "frontis-blocks"),
+      className: "fb-setting-responsive-control",
+      checked: FeatureDesktopSwitcher,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureDesktopSwitcher: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide on Tablet", "frontis-blocks"),
+      className: "fb-setting-responsive-control",
+      checked: FeatureTabletSwitcher,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureTabletSwitcher: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide on Mobile", "frontis-blocks"),
+      className: "fb-setting-responsive-control",
+      checked: FeatureMobileSwitcher,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureMobileSwitcher: value
+        });
+      }
+    }))))));
   }))));
 }
 
@@ -9525,6 +10793,74 @@ function FBIconPicker(props) {
     variant: "secondary",
     onClick: fbInsertIcon
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))));
+}
+
+/***/ }),
+
+/***/ "./src/components/responsivecontrol.js":
+/*!*********************************************!*\
+  !*** ./src/components/responsivecontrol.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ResponsiveControl)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+function ResponsiveControl(_ref) {
+  var labelText = _ref.labelText,
+    device = _ref.device,
+    deviceHandler = _ref.deviceHandler;
+  var handleDevice = function handleDevice(deviceName) {
+    deviceHandler(deviceName);
+    if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+      wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(deviceName);
+    }
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-label-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "fb-setting-label-text"
+  }, labelText), /*#__PURE__*/React.createElement("div", {
+    className: "fb-responsive-device-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
+    onClick: function onClick() {
+      return handleDevice('Desktop');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "8",
+    height: "7",
+    viewBox: "0 0 8 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
+    onClick: function onClick() {
+      return handleDevice('Tablet');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "6",
+    height: "7",
+    viewBox: "0 0 6 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
+    onClick: function onClick() {
+      return handleDevice('Mobile');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "4",
+    height: "7",
+    viewBox: "0 0 4 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
+  }))))));
 }
 
 /***/ }),
