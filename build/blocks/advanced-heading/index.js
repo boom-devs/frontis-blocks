@@ -4225,10 +4225,10 @@ function Inspector(_ref) {
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heading Alignment", "frontis-blocks"),
-      id: "fb-advanced-alignment",
-      className: "fb-advanced-alignment"
+      id: "fb-setting-text-alignment",
+      className: "fb-setting-text-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-advanced-alignment-group-btn"
+      className: "fb-setting-text-alignment-group-btn"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_ALIGN.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -4237,13 +4237,14 @@ function Inspector(_ref) {
             HeadingAlignment: item.value
           });
         },
-        className: "fb-advanced-alignment-single-btn ".concat(HeadingAlignment === item.value ? 'active' : '')
+        className: "fb-setting-text-alignment-single-btn ".concat(HeadingAlignment === item.value ? 'active' : '')
       }, item.label);
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heading Tag", "frontis-blocks"),
-      className: "fb-setting-tag-wrapper"
+      id: "fb-setting-text-alignment",
+      className: "fb-setting-text-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-setting-tag-inner-wrapper"
+      className: "fb-setting-text-alignment-group-btn"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.HEADING.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -4252,7 +4253,7 @@ function Inspector(_ref) {
             HeadingTag: item.value
           });
         },
-        className: "fb-setting-tag-single-btn ".concat(HeadingTag === item.value ? 'active' : '')
+        className: "fb-setting-text-alignment-single-btn ".concat(HeadingTag === item.value ? 'active' : '')
       }, item.label);
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heading Text", "frontis-blocks"),
@@ -4289,9 +4290,9 @@ function Inspector(_ref) {
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sub Heading Tag", "frontis-blocks"),
-      className: "fb-advanced-sub-heading-tag"
+      className: "fb-setting-text-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-advanced-sub-heading-tag-btn-group"
+      className: "fb-setting-text-alignment-group-btn"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.HEADING.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -4300,7 +4301,7 @@ function Inspector(_ref) {
             SubHeadingTag: item.value
           });
         },
-        className: "fb-advanced-sub-heading-single-btn ".concat(SubHeadingTag === item.value ? 'active' : '')
+        className: "fb-setting-text-alignment-single-btn ".concat(SubHeadingTag === item.value ? 'active' : '')
       }, item.label);
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sub Heading Text", "frontis-blocks"),
@@ -4354,8 +4355,8 @@ function Inspector(_ref) {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks"),
       className: "fb-setting-typography"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-      className: "fb-setting-typography-icon-dropdown",
-      contentClassName: "fb-setting-typography-dropdown-content",
+      className: "fb-setting-dropdown-icon-wrapper",
+      contentClassName: "fb-setting-dropdown-icon-content",
       popoverProps: {
         placement: 'bottom-start'
       },
@@ -4367,10 +4368,10 @@ function Inspector(_ref) {
           onClick: onToggle,
           "aria-expanded": isOpen,
           "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
-          className: "fb-setting-typography-icon-btn"
+          className: "fb-setting-dropdown-icon-btn"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
           icon: "edit",
-          className: "fb-setting-typography-icon"
+          className: "fb-setting-dropdown-icon"
         }));
       },
       renderContent: function renderContent() {

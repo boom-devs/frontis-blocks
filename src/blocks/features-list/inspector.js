@@ -137,16 +137,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <BaseControl
                                                 label={__("Title Tag", "frontis-blocks")}
-                                                className="fb-setting-tag-wrapper"
+                                                    id="fb-setting-text-alignment"
+                                                    className="fb-setting-text-alignment"
                                             >
                                                 <ButtonGroup
-                                                    className="fb-setting-tag-inner-wrapper"
+                                                        className="fb-setting-text-alignment-group-btn"
                                                     >
                                                     {HEADING.map((item, key) => (
                                                         <Button
                                                             key={key}
                                                             onClick={() => setAttributes({ FeatureTag: item.value })}
-                                                            className={`fb-setting-tag-single-btn ${ FeatureTag === item.value ? 'active' : ''}`}
+                                                            className={`fb-setting-text-alignment-single-btn ${ FeatureTag === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
