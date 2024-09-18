@@ -8557,7 +8557,7 @@ function Edit(_ref) {
     return /*#__PURE__*/React.createElement("li", {
       key: item.id,
       className: "fb-feature-list-item"
-    }, /*#__PURE__*/React.createElement("div", {
+    }, item.FeatureIconAlign !== 'none' && /*#__PURE__*/React.createElement("div", {
       className: "fb-feature-list-icon-box"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-feature-list-icon-inner ".concat(FeatureIconShape)
