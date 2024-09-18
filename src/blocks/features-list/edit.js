@@ -25,15 +25,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <div className="fb-feature-list-wrapper">
                         <ul className="fb-feature-list-items">
                             {FeatureItems.map(item => (
-                                     
+                                  
                                 <li key={item.id} className="fb-feature-list-item">
-                                    <div className="fb-feature-list-icon-box">
-                                        <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
-                                            <span className="fb-feature-list-icon">
-                                                {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                            </span>
+
+                                    { item.FeatureIconAlign !== 'none' && (
+                                        <div className="fb-feature-list-icon-box">
+                                            <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                                <span className="fb-feature-list-icon">
+                                                    {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    ) }
+                                    
                                     <div className="fb-feature-list-content">
                                         <RichText
                                             tagName={FeatureTag}
