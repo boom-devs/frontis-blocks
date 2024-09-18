@@ -6,7 +6,15 @@ import { useEffect } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { blockID, FeatureItems, FeatureTag, FeatureIconShape } = attributes;
+    const { 
+        blockID,
+        FeatureItems,
+        FeatureTag,
+        FeatureIconShape,
+        FeatureAlignment,
+        FeatureIconAlignment,
+
+     } = attributes;
 
     const blockProps = useBlockProps({
         className: `fb-feature-main-wrapper ${blockID}`,
@@ -22,7 +30,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             
             <div {...blockProps}>
                 <div className="fb-feature-wrapper">
-                    <div className="fb-feature-list-wrapper">
+                    <div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>
                         <ul className="fb-feature-list-items">
                             {FeatureItems.map(item => (
                                   
