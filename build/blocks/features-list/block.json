@@ -9,7 +9,6 @@
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
   "supports": {
-<<<<<<< HEAD:build/blocks/info-box/block.json
     "html": false,
     "spacing": {
       "margin": true,
@@ -19,14 +18,6 @@
       "wide",
       "full"
     ]
-=======
-    "anchor": false,
-    "align": [
-      "wide",
-      "full"
-    ],
-    "customClassName": false
->>>>>>> 08b0fbc2a51097e27d9f4e2df36fb4f6feefc29d:build/blocks/features-list/block.json
   },
   "textdomain": "frontis-blocks",
   "editorScript": "file:./index.js",
