@@ -52,14 +52,7 @@ function renderSVG(svg) {
   var extraProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   svg = (0,_parseIcon__WEBPACK_IMPORTED_MODULE_0__["default"])(svg);
   var fontAwesome;
-  // Load Polyfiller Array if needed.
-  if (0 !== fb_blocks_info.font_awesome_5_polyfill.length) {
-    fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][svg];
-    if (!fontAwesome) {
-      var _fb_blocks_info$font_;
-      fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][(_fb_blocks_info$font_ = fb_blocks_info.font_awesome_5_polyfill) === null || _fb_blocks_info$font_ === void 0 ? void 0 : _fb_blocks_info$font_[svg]];
-    }
-  }
+  fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][svg];
   if (!fontAwesome) {
     return null;
   }

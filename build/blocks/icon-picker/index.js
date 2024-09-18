@@ -792,14 +792,7 @@ function renderSVG(svg) {
   var extraProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   svg = (0,_parseIcon__WEBPACK_IMPORTED_MODULE_0__["default"])(svg);
   var fontAwesome;
-  // Load Polyfiller Array if needed.
-  if (0 !== fb_blocks_info.font_awesome_5_polyfill.length) {
-    fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][svg];
-    if (!fontAwesome) {
-      var _fb_blocks_info$font_;
-      fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][(_fb_blocks_info$font_ = fb_blocks_info.font_awesome_5_polyfill) === null || _fb_blocks_info$font_ === void 0 ? void 0 : _fb_blocks_info$font_[svg]];
-    }
-  }
+  fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][svg];
   if (!fontAwesome) {
     return null;
   }
@@ -891,24 +884,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_virtualized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-virtualized */ "./node_modules/react-virtualized/dist/es/index.js");
-/* harmony import */ var _components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/icon-picker/controls/renderIcon */ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js");
-/* harmony import */ var _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/defaultSvgIcon */ "./src/components/icon-picker/components/defaultSvgIcon.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/components/icon-picker/editor.scss");
-/* harmony import */ var _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/svgIcon */ "./src/components/icon-picker/components/svgIcon.js");
+/* harmony import */ var react_virtualized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-virtualized */ "./node_modules/react-virtualized/dist/es/index.js");
+/* harmony import */ var _components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/icon-picker/controls/renderIcon */ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js");
+/* harmony import */ var _components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/defaultSvgIcon */ "./src/components/icon-picker/components/defaultSvgIcon.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor.scss */ "./src/components/icon-picker/editor.scss");
+/* harmony import */ var _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/svgIcon */ "./src/components/icon-picker/components/svgIcon.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
 
 
 
@@ -932,11 +922,11 @@ function FBIconPicker(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     insertIcon = _useState4[0],
     setInsertIcon = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"]),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_4__["default"]),
     _useState6 = _slicedToArray(_useState5, 2),
     defaultIcons = _useState6[0],
     setDefaultIcons = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_5__["default"]),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(_components_defaultSvgIcon__WEBPACK_IMPORTED_MODULE_4__["default"]),
     _useState8 = _slicedToArray(_useState7, 2),
     filteredDefaultIcons = _useState8[0],
     setFilteredDefaultIcons = _useState8[1];
@@ -999,8 +989,8 @@ function FBIconPicker(props) {
     if ('all-icons' === cat.slug) {
       setFilteredDefaultIcons(defaultIcons);
     } else if ('others' === cat.slug) {
-      for (var defaultIcon in _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"]) {
-        if (0 === _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][defaultIcon].custom_categories.length) {
+      for (var defaultIcon in _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"]) {
+        if (0 === _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"][defaultIcon].custom_categories.length) {
           // Add matching icon to the current group
           currentGroup.push(defaultIcon);
 
@@ -1016,9 +1006,9 @@ function FBIconPicker(props) {
       }
       setFilteredDefaultIcons(filteredIcons);
     } else {
-      for (var _defaultIcon in _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"]) {
+      for (var _defaultIcon in _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"]) {
         // Loop through each icon group in svgIcon
-        if (_components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][_defaultIcon].custom_categories.includes(cat.slug)) {
+        if (_components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"][_defaultIcon].custom_categories.includes(cat.slug)) {
           // Add matching icon to the current group
           currentGroup.push(_defaultIcon);
         }
@@ -1087,7 +1077,7 @@ function FBIconPicker(props) {
         return null;
       }
       var iconClass = fbIconClasses([value === currentIcon && 'default', currentIcon === insertIcon && 'selected']);
-      var actualTitle = (_svgIcon$currentIcon = _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][currentIcon]) !== null && _svgIcon$currentIcon !== void 0 && _svgIcon$currentIcon.label ? _components_svgIcon__WEBPACK_IMPORTED_MODULE_9__["default"][currentIcon].label : '';
+      var actualTitle = (_svgIcon$currentIcon = _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"][currentIcon]) !== null && _svgIcon$currentIcon !== void 0 && _svgIcon$currentIcon.label ? _components_svgIcon__WEBPACK_IMPORTED_MODULE_8__["default"][currentIcon].label : '';
       return /*#__PURE__*/React.createElement("div", {
         key: key,
         style: style,
@@ -1099,14 +1089,14 @@ function FBIconPicker(props) {
             setInsertIcon(currentIcon);
           }
         }
-      }, (0,_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_4__["default"])(currentIcon), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Tooltip, {
+      }, (0,_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_3__["default"])(currentIcon), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Tooltip, {
         text: actualTitle
       }, /*#__PURE__*/React.createElement("span", null, iconTitle(actualTitle)))));
     }
     var heightAndWidth = 400 / 8;
     return /*#__PURE__*/React.createElement("div", {
       className: "fb_icon_picker_icons_list"
-    }, /*#__PURE__*/React.createElement(react_virtualized__WEBPACK_IMPORTED_MODULE_3__.Grid, {
+    }, /*#__PURE__*/React.createElement(react_virtualized__WEBPACK_IMPORTED_MODULE_2__.Grid, {
       cellRenderer: cellRenderer,
       columnCount: filteredDefaultIcons.length,
       columnWidth: 8 === filteredDefaultIcons.length ? heightAndWidth - 2 : 100,
@@ -1117,7 +1107,7 @@ function FBIconPicker(props) {
       autoContainerWidth: true
     }));
   };
-  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb_icon_picker_wrapper",
     onClick: function onClick() {
       return iconPickerModal();
@@ -1138,12 +1128,12 @@ function FBIconPicker(props) {
     d: "M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
   }))), /*#__PURE__*/React.createElement("div", {
     className: 'icon_placeholder'
-  }, insertIcon !== '' ? (0,_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_4__["default"])(insertIcon) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("svg", {
+  }, insertIcon !== '' ? (0,_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_3__["default"])(insertIcon) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("svg", {
     xmlns: "https://www.w3.org/2000/svg",
     viewBox: "0 0 448 512"
   }, /*#__PURE__*/React.createElement("path", {
     d: "M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"
-  })))))), /*#__PURE__*/React.createElement("div", null, showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Modal, {
+  })))))), /*#__PURE__*/React.createElement("div", null, showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Modal, {
     onRequestClose: closeModal,
     className: 'fb_icon_picker_wrapper_modal'
   }, /*#__PURE__*/React.createElement("div", {
@@ -1181,10 +1171,10 @@ function FBIconPicker(props) {
     className: 'fb_icon_picker_wrapper_icons_list'
   }, renderIconList())), /*#__PURE__*/React.createElement("div", {
     className: 'fb_icon_picker_wrapper_footer'
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
     variant: "secondary",
     onClick: fbInsertIcon
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks'))))))));
 }
 
 /***/ }),

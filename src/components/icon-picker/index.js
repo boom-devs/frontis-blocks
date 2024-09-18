@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { useState } from 'react';
-import { Fragment } from "@wordpress/element";
 import { Grid } from 'react-virtualized';
 import renderSVG from "./components/icon-picker/controls/renderIcon";
 import defaultSvgIcon from "./components/defaultSvgIcon";
@@ -227,7 +226,7 @@ export default function FBIconPicker(props) {
 	}
 
 	return (
-		<Fragment>
+		<>
 			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>
 				<div className={'fb_icon_picker'}>
 					<div className={'Change icon'}>{__('Change icon', 'frontis-blocks')}</div>
@@ -289,9 +288,7 @@ export default function FBIconPicker(props) {
 						</div>
 					</Modal>
 				)}
-
-				Icon picker
 			</div>
-		</Fragment>
+		</>
 	);
 }

@@ -11,13 +11,7 @@ function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 	svg = parseSVG( svg );
 
 	let fontAwesome;
-	// Load Polyfiller Array if needed.
-	if ( 0 !== fb_blocks_info.font_awesome_5_polyfill.length ) {
-		fontAwesome = svgIcon[ svg ];
-		if ( ! fontAwesome ) {
-			fontAwesome = svgIcon[ fb_blocks_info.font_awesome_5_polyfill?.[ svg ] ];
-		}
-	}
+	fontAwesome = svgIcon[ svg ];
 
 	if ( ! fontAwesome ) {
 		return null;
