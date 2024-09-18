@@ -18,6 +18,12 @@
     &.fb-feature-list-right {
         justify-content: flex-end;
     }
+    &.fb-icon-position-left {
+        .fb-feature-list-item {
+            display: flex;
+            text-align: left;
+        }
+    }
     &.fb-icon-position-center {
         .fb-feature-list-content {
             margin: 20px 0 0 0 !important;
