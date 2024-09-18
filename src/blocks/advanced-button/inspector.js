@@ -551,17 +551,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             >
                                                 <BaseControl
                                                     label={__("Alignment", "frontis-blocks")}
-                                                    id="fb-advanced-button-alignment"
-                                                    className="fb-advanced-button-alignment"
+                                                    id="fb-setting-text-alignment"
+                                                    className="fb-setting-text-alignment"
                                                 >
                                                     <ButtonGroup
-                                                        className="fb-advanced-button-alignment-group-btn"
+                                                        className="fb-setting-text-alignment-group-btn"
                                                     >
                                                         {TEXT_ALIGN.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({ ButtonAlignment: item.value })}
-                                                                className={`fb-advanced-alignment-single-btn ${ButtonAlignment === item.value ? 'active' : ''}`}
+                                                                className={`fb-setting-text-alignment-single-btn ${ButtonAlignment === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -587,8 +587,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 placeholder={__('https://', 'frontis-blocks')}
                                                             />
                                                             <Dropdown
-                                                                className="fb-advanced-button-icon-dropdown"
-                                                                contentClassName="fb-advanced-button-icon-dropdown-content"
+                                                                className="fb-setting-dropdown-icon-wrapper"
+                                                                contentClassName="fb-setting-dropdown-icon-content"
                                                                 popoverProps={{ placement: 'bottom-start' }}
                                                                 renderToggle={({ isOpen, onToggle }) => (
                                                                     <Button
@@ -596,9 +596,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         onClick={onToggle}
                                                                         aria-expanded={isOpen}
                                                                         aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                        className="fb-advanced-button-icon-btn"
+                                                                        className="fb-setting-dropdown-icon-btn"
                                                                     >
-                                                                        <Dashicon icon="color-picker" className="fb-advanced-button-icon" />
+                                                                        <Dashicon icon="color-picker" className="fb-setting-dropdown-icon" />
                                                                     </Button>
                                                                 )}
                                                                 renderContent={() => (
@@ -619,16 +619,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <div className='fb-advanced-btn-icon-wrapper'>
                                                     <BaseControl
                                                         label={__("Icon", "frontis-blocks")}
-                                                        className="fb-advanced-btn-icon"
+                                                            id="fb-setting-text-alignment"
+                                                            className="fb-setting-text-alignment"
                                                     >
                                                         <ButtonGroup
-                                                            className="fb-advanced-btn-icon-group-btn"
+                                                            className="fb-setting-text-alignment-group-btn"
                                                         >
                                                             {ICON_ALIGN.map((item, key) => (
                                                                 <Button
                                                                     key={key}
                                                                     onClick={() => setAttributes({ ButtonIconAlign: item.value })}
-                                                                    className={`fb-advanced-btn-icon-single-btn ${ButtonIconAlign === item.value ? 'active' : ''}`}
+                                                                    className={`fb-setting-text-alignment-single-btn ${ButtonIconAlign === item.value ? 'active' : ''}`}
                                                                 >
                                                                     {item.label}
                                                                 </Button>
@@ -669,8 +670,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 className="fb-setting-typography"
                                             >
                                                 <Dropdown
-                                                    className="fb-setting-typography-icon-dropdown"
-                                                    contentClassName="fb-setting-typography-dropdown-content"
+                                                    className="fb-setting-dropdown-icon-wrapper"
+                                                    contentClassName="fb-setting-dropdown-icon-content"
                                                     popoverProps={{ placement: 'bottom-start' }}
                                                     renderToggle={({ isOpen, onToggle }) => (
                                                         <Button
@@ -678,9 +679,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             onClick={onToggle}
                                                             aria-expanded={isOpen}
                                                             aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-typography-icon-btn"
+                                                            className="fb-setting-dropdown-icon-btn"
                                                         >
-                                                            <Dashicon icon="edit" className="fb-setting-typography-icon" />
+                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
                                                         </Button>
                                                     )}
                                                     renderContent={() => (

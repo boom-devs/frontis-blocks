@@ -8787,9 +8787,10 @@ function Inspector(_ref) {
       onClick: handleAddItem
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Feature", "frontis-blocks")))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Title Tag", "frontis-blocks"),
-      className: "fb-setting-tag-wrapper"
+      id: "fb-setting-text-alignment",
+      className: "fb-setting-text-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
-      className: "fb-setting-tag-inner-wrapper"
+      className: "fb-setting-text-alignment-group-btn"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.HEADING.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
         key: key,
@@ -8798,7 +8799,7 @@ function Inspector(_ref) {
             FeatureTag: item.value
           });
         },
-        className: "fb-setting-tag-single-btn ".concat(FeatureTag === item.value ? 'active' : '')
+        className: "fb-setting-text-alignment-single-btn ".concat(FeatureTag === item.value ? 'active' : '')
       }, item.label);
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Shape", "frontis-blocks"),
