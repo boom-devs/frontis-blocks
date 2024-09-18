@@ -45,6 +45,14 @@ const attributes = {
         type: "string",
         default: "circle"
     },
+    FeatureAlignment: {
+        type: "string",
+        default: "left",
+    },
+    FeatureIconAlignment: {
+        type: "string",
+        default: "left",
+    },
     
 };
 

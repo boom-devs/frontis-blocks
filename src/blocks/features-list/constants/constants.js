@@ -33,7 +33,6 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-	{ label: __(<Dashicon icon={"menu"} />), value: "justify" }
 ];
 
 export const HEADING = [

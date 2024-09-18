@@ -35,7 +35,19 @@ import SortableItem from './sortableItem';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const { blockID, FeatureItems, FeatureTag, FeatureIconShape } = attributes;
+    const { 
+        blockID,
+        FeatureItems,
+        FeatureTag,
+        FeatureIconShape,
+        FeatureAlignment,
+        FeatureIconAlignment,
+    } = attributes;
+
+    console.log(FeatureAlignment);
+    console.log(FeatureIconAlignment);
+    
+
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -168,6 +180,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     ]}
                                                     onChange={(value) => setAttributes({ FeatureIconShape: value })}
                                                 />
+                                            </BaseControl>
+                                            <BaseControl
+                                                label={__("Feature Item Alignment", "frontis-blocks")}
+                                                id="fb-setting-text-alignment"
+                                                className="fb-setting-text-alignment"
+                                            >
+                                                <ButtonGroup
+                                                    className="fb-setting-text-alignment-group-btn"
+                                                >
+                                                    {TEXT_ALIGN.map((item, key) => (
+                                                        <Button
+                                                            key={key}
+                                                            onClick={() => setAttributes({ FeatureAlignment: item.value })}
+                                                            className={`fb-setting-text-alignment-single-btn ${FeatureAlignment === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
+                                            </BaseControl>
+                                            <BaseControl
+                                                label={__("Icon Position", "frontis-blocks")}
+                                                id="fb-setting-text-alignment"
+                                                className="fb-setting-text-alignment"
+                                            >
+                                                <ButtonGroup
+                                                    className="fb-setting-text-alignment-group-btn"
+                                                >
+                                                    {TEXT_ALIGN.map((item, key) => (
+                                                        <Button
+                                                            key={key}
+                                                            onClick={() => setAttributes({ FeatureIconAlignment: item.value })}
+                                                            className={`fb-setting-text-alignment-single-btn ${FeatureIconAlignment === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
                                             </BaseControl>
                                         </PanelBody>
 
