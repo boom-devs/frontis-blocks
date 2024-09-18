@@ -58,6 +58,8 @@ const attributes = {
         default: "left",
     },
 
+
+
     FeatureListGap: {
         type: "number",
         default: 20
@@ -66,6 +68,50 @@ const attributes = {
         type: "string",
         default: "px"
     },
+
+
+    FeatureIconColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    FeatureIconColor : {
+        type: "string"
+    },
+    FeatureIconHoverColor: {
+        type: 'string',
+    },
+
+
+    FeatureIconBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    FeatureIconBgColor : {
+        type: "string"
+    },
+    FeatureIconBgHoverColor: {
+        type: 'string',
+    },
+
+
+    FeatureIconSize: {
+        type: "number",
+        default: 20
+    },
+    FeatureIconSizeUnits: {
+        type: "string",
+        default: "px"
+    },
+    FeatureIconBgSize: {
+        type: "number",
+        default: 20
+    },
+    FeatureIconBgSizeUnits: {
+        type: "string",
+        default: "px"
+    },
+
+
 
     FeatureZIndex : {
         type: "number",
