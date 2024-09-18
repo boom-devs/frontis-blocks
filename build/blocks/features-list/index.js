@@ -5297,6 +5297,42 @@ var attributes = {
     type: "string",
     "default": "px"
   },
+  FeatureIconColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  FeatureIconColor: {
+    type: "string"
+  },
+  FeatureIconHoverColor: {
+    type: 'string'
+  },
+  FeatureIconBgColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  FeatureIconBgColor: {
+    type: "string"
+  },
+  FeatureIconBgHoverColor: {
+    type: 'string'
+  },
+  FeatureIconSize: {
+    type: "number",
+    "default": 20
+  },
+  FeatureIconSizeUnits: {
+    type: "string",
+    "default": "px"
+  },
+  FeatureIconBgSize: {
+    type: "number",
+    "default": 20
+  },
+  FeatureIconBgSizeUnits: {
+    type: "string",
+    "default": "px"
+  },
   FeatureZIndex: {
     type: "number"
   },
@@ -8893,6 +8929,16 @@ function Inspector(_ref) {
     FeatureIconAlignment = attributes.FeatureIconAlignment,
     FeatureListGap = attributes.FeatureListGap,
     FeatureListGapUnits = attributes.FeatureListGapUnits,
+    FeatureIconColorSwitcher = attributes.FeatureIconColorSwitcher,
+    FeatureIconColor = attributes.FeatureIconColor,
+    FeatureIconHoverColor = attributes.FeatureIconHoverColor,
+    FeatureIconBgColorSwitcher = attributes.FeatureIconBgColorSwitcher,
+    FeatureIconBgColor = attributes.FeatureIconBgColor,
+    FeatureIconBgHoverColor = attributes.FeatureIconBgHoverColor,
+    FeatureIconSize = attributes.FeatureIconSize,
+    FeatureIconSizeUnits = attributes.FeatureIconSizeUnits,
+    FeatureIconBgSize = attributes.FeatureIconBgSize,
+    FeatureIconBgSizeUnits = attributes.FeatureIconBgSizeUnits,
     FeatureZIndex = attributes.FeatureZIndex,
     FeaturePaddingUnits = attributes.FeaturePaddingUnits,
     FeatureDesktopPadding = attributes.FeatureDesktopPadding,
@@ -9496,7 +9542,7 @@ function Inspector(_ref) {
       }, item.label);
     }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Feature List", "frontis-blocks"),
-      initialOpen: false,
+      initialOpen: true,
       className: "fb-setting-feature-list-wrapper"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-fontsize-wrapper"
@@ -9525,6 +9571,346 @@ function Inspector(_ref) {
       onChange: function onChange(value) {
         return setAttributes({
           FeatureListGap: value
+        });
+      },
+      min: 1,
+      max: 100,
+      allowReset: true,
+      resetFallbackValue: 20
+    })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon", "frontis-blocks"),
+      initialOpen: false,
+      className: "fb-setting-feature-icon-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Color", "frontis-blocks"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureIconColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(FeatureIconColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), FeatureIconColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref2) {
+        var isOpen = _ref2.isOpen,
+          onToggle = _ref2.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureIconColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureIconColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconColor: value
+            });
+          }
+        }))));
+      }
+    })), FeatureIconColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref3) {
+        var isOpen = _ref3.isOpen,
+          onToggle = _ref3.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureIconHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureIconHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-header"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-label"
+    }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Size", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-units"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-fontsize-units-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureIconSizeUnits: item.value
+          });
+        },
+        className: "fb-setting-fontsize-units-switcher ".concat(FeatureIconSizeUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-rangecontrol"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.RangeControl, {
+      value: FeatureIconSize,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureIconSize: value
+        });
+      },
+      min: 1,
+      max: 100,
+      allowReset: true,
+      resetFallbackValue: 20
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureIconBgColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(FeatureIconBgColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), FeatureIconBgColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref4) {
+        var isOpen = _ref4.isOpen,
+          onToggle = _ref4.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureIconBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconBgColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureIconBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconBgColor: value
+            });
+          }
+        }))));
+      }
+    })), FeatureIconBgColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref5) {
+        var isOpen = _ref5.isOpen,
+          onToggle = _ref5.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
+          color: FeatureIconBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconBgHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: FeatureIconBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              FeatureIconBgHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-header"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-label"
+    }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Size", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-units"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-fontsize-units-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            FeatureIconBgSizeUnits: item.value
+          });
+        },
+        className: "fb-setting-fontsize-units-switcher ".concat(FeatureIconBgSizeUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-fontsize-rangecontrol"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.RangeControl, {
+      value: FeatureIconBgSize,
+      onChange: function onChange(value) {
+        return setAttributes({
+          FeatureIconBgSize: value
         });
       },
       min: 1,
@@ -9734,9 +10120,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref2) {
-        var isOpen = _ref2.isOpen,
-          onToggle = _ref2.onToggle;
+      renderToggle: function renderToggle(_ref6) {
+        var isOpen = _ref6.isOpen,
+          onToggle = _ref6.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -9794,9 +10180,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref3) {
-        var isOpen = _ref3.isOpen,
-          onToggle = _ref3.onToggle;
+      renderToggle: function renderToggle(_ref7) {
+        var isOpen = _ref7.isOpen,
+          onToggle = _ref7.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -9882,9 +10268,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref4) {
-        var isOpen = _ref4.isOpen,
-          onToggle = _ref4.onToggle;
+      renderToggle: function renderToggle(_ref8) {
+        var isOpen = _ref8.isOpen,
+          onToggle = _ref8.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -9943,9 +10329,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref5) {
-        var isOpen = _ref5.isOpen,
-          onToggle = _ref5.onToggle;
+      renderToggle: function renderToggle(_ref9) {
+        var isOpen = _ref9.isOpen,
+          onToggle = _ref9.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
           variant: "primary",
           onClick: onToggle,
