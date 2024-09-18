@@ -86,6 +86,7 @@ final class Plugin {
 
 	public function enqueue_scripts(){
 		wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js',  array('jquery'), '1.0.0', true);
+		wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/public/counter.js',  array('jquery'), '1.0.0', true);
 	}
 
 
