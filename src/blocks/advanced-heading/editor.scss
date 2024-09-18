@@ -15,15 +15,11 @@ $white_color: #ffffff;
         height: 60px;
         padding: 3px 25px;
 
-        &.general,
-        &.styles,
-        &.advance {
-            &.active-tab {
-                background: $white_color;
-                border-top: 2px solid $primary_color !important;
-                color: $primary_color;
-            }
-        }
+		&.active-tab {
+			background: $white_color;
+			border-top: 2px solid $primary_color !important;
+			color: $primary_color;
+		}
     }
     .components-base-control__field {
         .components-base-control__label {
@@ -291,18 +287,18 @@ $white_color: #ffffff;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-    
+
         .fb-setting-spacing-input-wrapper {
           display: flex;
           flex-direction: column;
           width: 20%;
-    
+
           .fb-setting-spacing-input-label {
             text-align: center;
             font-size: 12px;
             margin-bottom: 5px;
           }
-    
+
           &:first-child {
             input {
               border-bottom-left-radius: 5px;
@@ -310,7 +306,7 @@ $white_color: #ffffff;
               border-width: 1px;
             }
           }
-    
+
           input {
             border-color: #ebebeb !important;
             color: #1e1e1e;
@@ -330,7 +326,7 @@ $white_color: #ffffff;
               box-shadow: none !important;
             }
           }
-    
+
           span {
             border-color: #ebebeb !important;
             color: #1e1e1e;
@@ -372,7 +368,7 @@ $white_color: #ffffff;
     p {
         margin-bottom: 0;
         margin-right: 5px;
-        
+
         &.fb-setting-label-text {
           flex: 1;
         }
@@ -380,27 +376,27 @@ $white_color: #ffffff;
     .fb-responsive-device-wrapper {
         display: flex;
         align-items: center;
-        
+
         button {
-          &.fb-responsive-desktop-device, 
-          &.fb-responsive-tablet-device, 
+          &.fb-responsive-desktop-device,
+          &.fb-responsive-tablet-device,
           &.fb-responsive-mobile-device {
             background: none;
             border: none;
             cursor: pointer;
             margin: 0;
             padding: 0;
-            
+
             svg {
               fill: #cebeff;
               height: 10px;
               width: 15px;
             }
-            
+
             &.active {
               color: #551ef7;
               font-weight: 600;
-              
+
               svg {
                 fill: #551ef7;
                 height: 12px;
