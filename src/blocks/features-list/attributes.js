@@ -82,10 +82,12 @@ const attributes = {
         default: "normal"
     },
     FeatureIconColor : {
-        type: "string"
+        type: "string",
+        default: "#fff"
     },
     FeatureIconHoverColor: {
         type: 'string',
+        default: "#fff"
     },
 
 
@@ -94,24 +96,26 @@ const attributes = {
         default: "normal"
     },
     FeatureIconBgColor : {
-        type: "string"
+        type: "string",
+        default: "#000"
     },
     FeatureIconBgHoverColor: {
         type: 'string',
+        default: "#000"
     },
 
 
     FeatureIconSizeDesktop: {
         type: "number",
-        default: 20
+        default: 25
     },
     FeatureIconSizeTablet: {
         type: "number",
-        default: 15
+        default: 25
     },
     FeatureIconSizeMobile: {
         type: "number",
-        default: 10
+        default: 25
     },
     FeatureIconSizeUnits: {
         type: "string",
@@ -120,15 +124,15 @@ const attributes = {
 
     FeatureIconBgSizeDesktop: {
         type: "number",
-        default: 20
+        default: 60
     },
     FeatureIconBgSizeTablet: {
         type: "number",
-        default: 15
+        default: 60
     },
     FeatureIconBgSizeMobile: {
         type: "number",
-        default: 10
+        default: 60
     },
     FeatureIconBgSizeUnits: {
         type: "string",
@@ -143,10 +147,10 @@ const attributes = {
     FeatureIconDesktopPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 15,
+            bottom: 15,
+            left: 15,
+            right: 15,
         },
     },
     FeatureIconTabPadding: {

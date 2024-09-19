@@ -26,7 +26,6 @@
     }
     &.fb-icon-position-center {
         .fb-feature-list-content {
-            margin: 20px 0 0 0 !important;
             h3 {
                 margin-bottom: 5px;
             }
@@ -49,75 +48,67 @@
         margin: 0 !important;
         padding: 0 !important;
         text-align: center;
+    }
+}
 
-        .fb-feature-list-item {
-            position: relative;
-            padding: 10px 0;
-            align-items: center;
+.fb-feature-list-item {
+    position: relative;
+    align-items: center;
 
-            .fb-feature-list-icon-box {
-                transition: ease-in-out .5s;
-                z-index: 2;
+    .fb-feature-list-icon-box {
+        transition: ease-in-out .5s;
+        z-index: 2;
 
-                .fb-feature-list-icon-inner {
-                    display: inline-flex;
-                    background-color: black;
-                    border-color: black;
-                    transition: ease-in-out .5s;
+        .fb-feature-list-icon-inner {
+            display: inline-flex;
+            transition: ease-in-out .5s;
 
-                    .fb-feature-list-icon {
-                        align-items: center;
-                        display: flex;
-                        justify-content: center;
-                        transition: all 0.5s;
-                        padding: 15px;
-    
-                        svg {
-                            fill: #fff;
-                            height: 30px;
-                            width: 30px;
-                        }
-                    }
+            .fb-feature-list-icon {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                transition: all 0.5s;
 
-                    &.circle {
-                        border-radius: 50%;
-                    }
-                    &.square {
-                        border-radius: 0%;
-                    }
-                    &.rhombus {
-                        margin: 15px 0;
-                        transform: rotate(45deg);
-                        .fb-feature-list-icon {
-                            transform: rotate(-45deg);
-                        }
-                    }
-                    &.none {
-                        background-color: transparent;
-                        .fb-feature-list-icon {
-                            svg {
-                                fill: transparent;
-                            }
-                        }
-                    }
+                svg {
+                    transition: all 0.5s;
                 }
             }
 
-            .fb-feature-list-content {
-                margin: 0 0 0 20px;
-
-                .fb-feature-list-title {
-                    font-size: 18px;
-                    margin: 0;
-                    padding: 0;
-                }
-
-                .fb-feature-list-text {
-                    font-size: 14px;
-                    margin: 0;
-                    padding: 0;
+            &.circle {
+                border-radius: 50%;
+            }
+            &.square {
+                border-radius: 0%;
+            }
+            &.rhombus {
+                margin: 15px 0;
+                transform: rotate(45deg);
+                .fb-feature-list-icon {
+                    transform: rotate(-45deg);
                 }
             }
+            &.none {
+                background-color: transparent;
+                .fb-feature-list-icon {
+                    svg {
+                        fill: transparent;
+                    }
+                }
+            }
+        }
+    }
+
+    .fb-feature-list-content {
+        .fb-feature-list-title {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .fb-feature-list-text {
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
         }
     }
 }
