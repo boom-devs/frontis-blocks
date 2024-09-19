@@ -606,14 +606,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Border Radius Width */ 
 
 
+    console.log(FeatureIconColor);
+    
 
     return (
         <>
             <style>
             {`
-                .fb-feature-main-wrapper ${blockID} .fb-feature-list-wrapper .fb-feature-list-icon-box .fb-feature-list-icon-inner {
-                    
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
+                    padding-bottom: calc(${FeatureListGapDesktop}${FeatureListGapUnits} / 2);
                 }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
+                    padding-top: calc(${FeatureListGapDesktop}${FeatureListGapUnits} / 2);
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
+                    fill: ${FeatureIconColor};
+                    height: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
+                    width: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon:hover svg {
+                    fill: ${FeatureIconHoverColor};
+                    height: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
+                    width: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
+                    margin-right: ${FeatureIconSpacingDesktop}${FeatureIconSpacingUnits}!important;
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner {
+                    background-color: ${FeatureIconBgColor};
+                    border-color: ${FeatureIconBgColor};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner:hover {
+                    background-color: ${FeatureIconBgHoverColor};
+                    border-color: ${FeatureIconBgHoverColor};
+                }
+
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon {
+                    width: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
+                    height: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
+                    padding: ${IconPadding};
+                }
+
+
+                @media only screen and (max-width: 1024px) {
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
+                        padding-bottom: calc(${FeatureListGapTablet}${FeatureListGapUnits} / 2);
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
+                        padding-top: calc(${FeatureListGapTablet}${FeatureListGapUnits} / 2);
+                    }
+                }
+
+                @media only screen and (max-width: 767px) {
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
+                        padding-bottom: calc(${FeatureListGapMobile}${FeatureListGapUnits} / 2);
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
+                        padding-top: calc(${FeatureListGapMobile}${FeatureListGapUnits} / 2);
+                    }
+                }
+
             `}
             </style>
             <InspectorControls key="controls">
