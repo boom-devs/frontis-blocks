@@ -59,10 +59,17 @@ const attributes = {
     },
 
 
-
-    FeatureListGap: {
+    FeatureListGapDesktop: {
         type: "number",
         default: 20
+    },
+    FeatureListGapTablet: {
+        type: "number",
+        default: 15
+    },
+    FeatureListGapMobile: {
+        type: "number",
+        default: 10
     },
     FeatureListGapUnits: {
         type: "string",
@@ -94,17 +101,34 @@ const attributes = {
     },
 
 
-    FeatureIconSize: {
+    FeatureIconSizeDesktop: {
         type: "number",
         default: 20
+    },
+    FeatureIconSizeTablet: {
+        type: "number",
+        default: 15
+    },
+    FeatureIconSizeMobile: {
+        type: "number",
+        default: 10
     },
     FeatureIconSizeUnits: {
         type: "string",
         default: "px"
     },
-    FeatureIconBgSize: {
+
+    FeatureIconBgSizeDesktop: {
         type: "number",
         default: 20
+    },
+    FeatureIconBgSizeTablet: {
+        type: "number",
+        default: 15
+    },
+    FeatureIconBgSizeMobile: {
+        type: "number",
+        default: 10
     },
     FeatureIconBgSizeUnits: {
         type: "string",
@@ -112,10 +136,225 @@ const attributes = {
     },
 
 
+    FeatureIconPaddingUnits : {
+        type: "string",
+        default: "px"
+    },
+    FeatureIconDesktopPadding: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    FeatureIconTabPadding: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    FeatureIconMobilePadding: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    FeatureIconPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+    FeatureIconSpacingDesktop: {
+        type: "number",
+        default: 20
+    },
+    FeatureIconSpacingTablet: {
+        type: "number",
+        default: 20
+    },
+    FeatureIconSpacingMobile: {
+        type: "number",
+        default: 20
+    },
+    FeatureIconSpacingUnits: {
+        type: "string",
+        default: "px"
+    },
+
+
+
+
+
+    FeatureTitleFontFamily: {
+        type: "string",
+        default: "inherit",
+    },
+    FeatureTitleFontSizeDesktop: {
+        type: "number",
+        default: 18
+    },
+    FeatureTitleFontSizeTablet: {
+        type: "number",
+        default: 18
+    },
+    FeatureTitleFontSizeMobile: {
+        type: "number",
+        default: 18
+    },
+    FeatureTitleFontSizeUnits: {
+        type: "string",
+        default: "px"
+    },
+    FeatureTitleFontWeight : {
+        type: "string",
+        default: "600"
+    },
+    FeatureTitleFontStyle : {
+        type: "string",
+        default: "normal"
+    },
+    FeatureTitleTextTransform : {
+        type: "string",
+        default: "none"
+    },
+    FeatureTitleTextDecoration : {
+        type: "string",
+        default: "none"
+    },
+    FeatureTitleLetterSpacingDesktop: {
+        type: "number",
+        default: 0
+    },
+    FeatureTitleLetterSpacingTablet: {
+        type: "number",
+        default: 0
+    },
+    FeatureTitleLetterSpacingMobile: {
+        type: "number",
+        default: 0
+    },
+    FeatureTitleLetterSpacingUnits : {
+        type: "string",
+        default: "px"
+    },
+    FeatureTitleLineHeightDesktop: {
+        type: "number",
+        default: 1.2
+    },
+    FeatureTitleLineHeightTablet: {
+        type: "number",
+        default: 1.2
+    },
+    FeatureTitleLineHeightMobile: {
+        type: "number",
+        default: 1.2
+    },
+    FeatureTitleLineHeightUnits : {
+        type: "string",
+        default: "px"
+    },
+
+    FeatureTitleColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    FeatureTitleColor : {
+        type: "string"
+    },
+    FeatureTitleHoverColor: {
+        type: 'string',
+    },
+
+
+    FeatureDescFontFamily: {
+        type: "string",
+        default: "inherit",
+    },
+    FeatureDescFontSizeDesktop: {
+        type: "number",
+        default: 14
+    },
+    FeatureDescFontSizeTablet: {
+        type: "number",
+        default: 14
+    },
+    FeatureDescFontSizeMobile: {
+        type: "number",
+        default: 14
+    },
+    FeatureDescFontSizeUnits: {
+        type: "string",
+        default: "px"
+    },
+    FeatureDescFontWeight : {
+        type: "string",
+        default: "400"
+    },
+    FeatureDescFontStyle : {
+        type: "string",
+        default: "normal"
+    },
+    FeatureDescTextTransform : {
+        type: "string",
+        default: "none"
+    },
+    FeatureDescTextDecoration : {
+        type: "string",
+        default: "none"
+    },
+    FeatureDescLetterSpacingDesktop : {
+        type: "number",
+    },
+    FeatureDescLetterSpacingTablet : {
+        type: "number",
+    },
+    FeatureDescLetterSpacingMobile : {
+        type: "number",
+    },
+    FeatureDescLetterSpacingUnits : {
+        type: "string",
+        default: "px"
+    },
+    FeatureDescLineHeightDesktop : {
+        type: "number",
+    },
+    FeatureDescLineHeightTablet : {
+        type: "number",
+    },
+    FeatureDescLineHeightMobile : {
+        type: "number",
+    },
+    FeatureDescLineHeightUnits : {
+        type: "string",
+        default: "px"
+    },
+
+    FeatureDescColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    FeatureDescColor : {
+        type: "string"
+    },
+    FeatureDescHoverColor: {
+        type: 'string',
+    },
+
+
 
     FeatureZIndex : {
         type: "number",
     },
+
     FeaturePaddingUnits : {
         type: "string",
         default: "px"
