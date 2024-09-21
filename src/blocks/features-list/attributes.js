@@ -140,43 +140,6 @@ const attributes = {
     },
 
 
-    FeatureIconPaddingUnits : {
-        type: "string",
-        default: "px"
-    },
-    FeatureIconDesktopPadding: {
-        type: "object", 
-        default: {
-            top: 15,
-            bottom: 15,
-            left: 15,
-            right: 15,
-        },
-    },
-    FeatureIconTabPadding: {
-        type: "object", 
-        default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
-    },
-    FeatureIconMobilePadding: {
-        type: "object", 
-        default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
-    },
-    FeatureIconPaddingLink : {
-        type : "boolean",
-        default: true
-    },
-
-
     FeatureIconSpacingDesktop: {
         type: "number",
         default: 20
