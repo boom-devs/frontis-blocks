@@ -298,18 +298,18 @@ $border_color: #dddddd;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-    
+
         .fb-setting-spacing-input-wrapper {
           display: flex;
           flex-direction: column;
           width: 20%;
-    
+
           .fb-setting-spacing-input-label {
             text-align: center;
             font-size: 12px;
             margin-bottom: 5px;
           }
-    
+
           &:first-child {
             input {
               border-bottom-left-radius: 5px;
@@ -317,7 +317,7 @@ $border_color: #dddddd;
               border-width: 1px;
             }
           }
-    
+
           input {
             border-color: #ebebeb !important;
             color: #1e1e1e;
@@ -337,7 +337,7 @@ $border_color: #dddddd;
               box-shadow: none !important;
             }
           }
-    
+
           span {
             border-color: #ebebeb !important;
             color: #1e1e1e;
@@ -483,4 +483,5 @@ $border_color: #dddddd;
     .components-base-control {
         margin-bottom: 8px;
     }
+}
 }

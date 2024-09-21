@@ -39,14 +39,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'advanced-image' => [
-            //     'slug'      => 'advanced-image',
-            //     'title'     => 'Advanced Image',
-            //     'package'   => 'free',
-            //     'category'  => 'media',
-            //     'badge'     => 'freemium',
-            //     'status'    => 'active',
-            // ],
+            'advanced-image' => [
+                'slug'      => 'advanced-image',
+                'title'     => 'Advanced Image',
+                'package'   => 'free',
+                'category'  => 'media',
+                'badge'     => 'freemium',
+                'status'    => 'active',
+            ],
             // 'image-gallery' => [
             //     'slug'      => 'image-gallery',
             //     'title'     => 'Image Gallery',

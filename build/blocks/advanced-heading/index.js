@@ -5296,6 +5296,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
 
 function ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
@@ -5307,11 +5310,10 @@ function ResponsiveControl(_ref) {
       wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(deviceName);
     }
   };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-label-wrapper"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "fb-setting-label-text"
-  }, labelText), /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(labelText, "frontis-blocks"),
+    className: "fb-responsive-control"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-responsive-device-wrapper"
   }, /*#__PURE__*/React.createElement("button", {
     className: "fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
