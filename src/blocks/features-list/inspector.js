@@ -67,12 +67,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconBgSizeMobile,
         FeatureIconBgSizeUnits,
 
-        FeatureIconPaddingUnits,
-        FeatureIconDesktopPadding,
-        FeatureIconTabPadding,
-        FeatureIconMobilePadding,
-        FeatureIconPaddingLink,
-
         FeatureIconSpacingDesktop,
         FeatureIconSpacingTablet,
         FeatureIconSpacingMobile,
@@ -198,88 +192,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         const updatedItems = FeatureItems.filter(item => item.id !== id);
         setAttributes({ FeatureItems: updatedItems });
     };
-
-
-
-    /** Start Icon Padding */
-    const [previousIconPadding, setPreviousIconPadding] = useState(FeatureIconDesktopPadding);
-    /** Function to update all icon padding values */
-    const updateAllIconPadding = (value, device) => {
-        switch(device) {
-            case 'Desktop':
-                setAttributes({
-                    FeatureIconDesktopPadding: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    FeatureIconTabPadding: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    FeatureIconMobilePadding: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    };
-
-    /** Function to handle icon input change */
-    const handleIconPaddingInputChange = (e, direction) => {
-        const value = e.target.value;
-        switch(DeviceType) {
-            case 'Desktop':
-                setAttributes({ FeatureIconDesktopPadding: { ...FeatureIconDesktopPadding, [direction]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ FeatureIconTabPadding: { ...FeatureIconTabPadding, [direction]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ FeatureIconMobilePadding: { ...FeatureIconMobilePadding, [direction]: value } });
-                break;
-            default:
-                break;
-        }
-        /** Update all icon padding values if FeatureIconPaddingLink is true */
-        if (FeatureIconPaddingLink) {
-            updateAllIconPadding(value, DeviceType);
-        }
-    };
-
-    /** Function to handle FeatureIconPaddingLink toggle */
-    const handleFeatureIconPaddingLinkToggle = () => {
-        if (!FeatureIconPaddingLink) {
-            setAttributes({ FeatureIconDesktopPadding: previousIconPadding });
-        }
-        /** setFeaturePaddingLink(!FeatureIconPaddingLink) */
-        setAttributes({FeatureIconPaddingLink: !FeatureIconPaddingLink})
-    };
-
-    /** Update previousIconPadding state when padding changes */
-    useEffect(() => {
-        setPreviousIconPadding(FeatureIconDesktopPadding);
-    }, [FeatureIconDesktopPadding]);
-
-    /** Default icon padding for desktop (using desktop_padding) */
-    const IconPadding = `${FeatureIconDesktopPadding.top}${FeatureIconPaddingUnits} ${FeatureIconDesktopPadding.right}${FeatureIconPaddingUnits} ${FeatureIconDesktopPadding.bottom}${FeatureIconPaddingUnits} ${FeatureIconDesktopPadding.left}${FeatureIconPaddingUnits}`;
-    /** End Icon Padding */
     
 
 
@@ -605,8 +517,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const borderRadiusWidth = `${FeatureDesktopBorderRadiusWidth.top}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.right}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.bottom}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.left}${FeatureBorderRadiusUnits}`;
     /** End Border Radius Width */ 
 
-
-    console.log(FeatureIconColor);
     
 
     return (
@@ -644,7 +554,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon {
                     width: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
                     height: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
-                    padding: ${IconPadding};
                 }
 
 
@@ -1163,82 +1072,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             }
                                                         }}
                                                         min={1}
-                                                        max={100}
+                                                        max={200}
                                                         allowReset
-                                                        resetFallbackValue={20}
+                                                        resetFallbackValue={60}
                                                     />
-                                                </div>
-                                            </div>
-
-                                            <div className="fb-setting-spacing-container">
-                                                <div className="fb-setting-spacing-inner-container">
-                                                    {/* Icon Padding */}
-                                                    <div className="fb-setting-spacing-label-container">
-                                                        <ResponsiveControl
-                                                            labelText={__('Padding', 'frontis-block')}
-                                                            device={DeviceType}
-                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                        />
-                                                        <div className="fb-setting-units-type">
-                                                            <ButtonGroup className="fb-setting-units-type-wrap">
-                                                                {UNIT_TYPES.map((item, key) => (
-                                                                    <Button
-                                                                        key={key}
-                                                                        onClick={() => setAttributes({ FeatureIconPaddingUnits: item.value })}
-                                                                        className={`fb-setting-units-type-switcher ${ FeatureIconPaddingUnits === item.value ? 'active' : ''}`}
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                ))}
-                                                            </ButtonGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="fb-setting-spacing-input-container">
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="top"
-                                                                value={DeviceType === 'Desktop' ? FeatureIconDesktopPadding.top : DeviceType === 'Tablet' ? FeatureIconTabPadding.top : FeatureIconMobilePadding.top}
-                                                                onChange={(e) => handleIconPaddingInputChange(e, 'top')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="right"
-                                                                value={DeviceType === 'Desktop' ? FeatureIconDesktopPadding.right : DeviceType === 'Tablet' ? FeatureIconTabPadding.right : FeatureIconMobilePadding.right}
-                                                                onChange={(e) => handleIconPaddingInputChange(e, 'right')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="bottom"
-                                                                value={DeviceType === 'Desktop' ? FeatureIconDesktopPadding.bottom : DeviceType === 'Tablet' ? FeatureIconTabPadding.bottom : FeatureIconMobilePadding.bottom}
-                                                                onChange={(e) => handleIconPaddingInputChange(e, 'bottom')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="left"
-                                                                value={DeviceType === 'Desktop' ? FeatureIconDesktopPadding.left : DeviceType === 'Tablet' ? FeatureIconTabPadding.left : FeatureIconMobilePadding.left}
-                                                                onChange={(e) => handleIconPaddingInputChange(e, 'left')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label"></label>
-                                                            <span
-                                                                className={`dashicons ${FeatureIconPaddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${FeatureIconPaddingLink ? 'is-checked' : ''}`}
-                                                                onClick={handleFeatureIconPaddingLinkToggle}
-                                                            >
-                                                            </span>
-                                                        </div>
-                                                    </div>                          
                                                 </div>
                                             </div>
 
