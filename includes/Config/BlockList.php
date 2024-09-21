@@ -15,14 +15,14 @@ class BlockList {
 
     private function init_blocks() {
         $this->blocks = [
-            // 'advanced-heading' => [
-            //     'slug'      => 'advanced-heading',
-            //     'title'     => 'Advanced Heading',
-            //     'package'   => 'free',
-            //     'category'  => 'general',
-            //     'badge'     => 'freemium',
-            //     'status'    => 'active',
-            // ],
+            'advanced-heading' => [
+                'slug'      => 'advanced-heading',
+                'title'     => 'Advanced Heading',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'freemium',
+                'status'    => 'active',
+            ],
             // 'row' => [
             //     'slug'      => 'row',
             //     'title'     => 'Row',
@@ -71,14 +71,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'button' => [
-            //     'slug'      => 'button',
-            //     'title'     => 'Button',
-            //     'package'   => 'free',
-            //     'category'  => 'general',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'advanced-button' => [
+                'slug'      => 'advanced-button',
+                'title'     => 'Advanced Button',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'dual-button' => [
             //     'slug'      => 'dual-button',
             //     'title'     => 'Dual Button',
@@ -119,14 +119,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'features-list' => [
-            //     'slug'      => 'features-list',
-            //     'title'     => 'Features List',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'features-list' => [
+                'slug'      => 'features-list',
+                'title'     => 'Features List',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'testimonial' => [
             //     'slug'      => 'testimonial',
             //     'title'     => 'Testimonial/Review',

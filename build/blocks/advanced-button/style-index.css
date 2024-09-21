@@ -1,0 +1,39 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/advanced-button/style.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+.fb-advanced-button-wrapper .fb-advanced-button {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 30px;
+  background-color: #3f8efc;
+  border-radius: 0px;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  white-space: nowrap;
+}
+.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+
+.fb-advanced-button-icon {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+.fb-advanced-button-icon svg {
+  display: block;
+  height: 16px;
+  width: 16px;
+  fill: #fff;
+  box-sizing: content-box;
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
