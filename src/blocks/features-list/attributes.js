@@ -215,15 +215,15 @@ const attributes = {
     },
     FeatureTitleLineHeightDesktop: {
         type: "number",
-        default: 1.2
+        default: "inherit",
     },
     FeatureTitleLineHeightTablet: {
         type: "number",
-        default: 1.2
+        default: "inherit",
     },
     FeatureTitleLineHeightMobile: {
         type: "number",
-        default: 1.2
+        default: "inherit",
     },
     FeatureTitleLineHeightUnits : {
         type: "string",
@@ -235,10 +235,12 @@ const attributes = {
         default: "normal"
     },
     FeatureTitleColor : {
-        type: "string"
+        type: "string",
+        default: "#000"
     },
     FeatureTitleHoverColor: {
         type: 'string',
+        default: "#000"
     },
 
 
@@ -293,12 +295,15 @@ const attributes = {
     },
     FeatureDescLineHeightDesktop : {
         type: "number",
+        default: "inherit",
     },
     FeatureDescLineHeightTablet : {
         type: "number",
+        default: "inherit",
     },
     FeatureDescLineHeightMobile : {
         type: "number",
+        default: "inherit",
     },
     FeatureDescLineHeightUnits : {
         type: "string",
@@ -310,10 +315,12 @@ const attributes = {
         default: "normal"
     },
     FeatureDescColor : {
-        type: "string"
+        type: "string",
+        default: "#000"
     },
     FeatureDescHoverColor: {
         type: 'string',
+        default: "#000"
     },
 
 

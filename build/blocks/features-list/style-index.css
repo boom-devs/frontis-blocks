@@ -23,6 +23,7 @@
 }
 .fb-feature-list-wrapper.fb-icon-position-left .fb-feature-list-item {
   display: flex;
+  align-items: center;
   text-align: left;
 }
 .fb-feature-list-wrapper.fb-icon-position-center .fb-feature-list-content h3 {
@@ -30,6 +31,7 @@
 }
 .fb-feature-list-wrapper.fb-icon-position-right .fb-feature-list-item {
   display: flex;
+  align-items: center;
   flex-direction: row-reverse;
   text-align: right;
 }
@@ -84,12 +86,10 @@
   fill: transparent;
 }
 .fb-feature-list-item .fb-feature-list-content .fb-feature-list-title {
-  font-size: 18px;
-  margin: 0;
+  margin: 0 0 5px;
   padding: 0;
 }
 .fb-feature-list-item .fb-feature-list-content .fb-feature-list-text {
-  font-size: 14px;
   margin: 0;
   padding: 0;
 }

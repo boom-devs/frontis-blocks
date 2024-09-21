@@ -523,6 +523,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         <>
             <style>
             {`
+                .fb-feature-main-wrapper.${blockID} {
+                    z-index: ${FeatureZIndex !== undefined ? FeatureZIndex : ''};
+                }
+                .fb-feature-main-wrapper.${blockID} {
+                    ${FeatureBgColor !== undefined ? `background-color: ${FeatureBgColor};` : ''};
+                    padding: ${padding};
+                    margin: ${margin};
+                    border: ${FeatureBorder};
+                    border-width: ${borderWidth};
+                    border-radius: ${borderRadiusWidth} !important;
+                    ${FeatureBorderColor !== undefined ? `border-color: ${FeatureBorderColor};` : ''};
+                    transition: all .3s ease-in-out;
+                }
+                .fb-feature-main-wrapper.${blockID}:hover {
+                    ${FeatureBgHoverColor !== undefined ? `background-color: ${FeatureBgHoverColor};` : ''};
+                    ${FeatureBorderHoverColor !== undefined ? `border-color: ${FeatureBorderHoverColor};` : ''};
+                }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
                     padding-bottom: calc(${FeatureListGapDesktop}${FeatureListGapUnits} / 2);
                 }
@@ -556,6 +573,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     height: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
                 }
 
+                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
+                    font-family: ${FeatureTitleFontFamily};
+                    font-size: ${FeatureTitleFontSizeDesktop}${FeatureTitleFontSizeUnits};
+                    font-weight: ${FeatureTitleFontWeight};
+                    font-style: ${FeatureTitleFontStyle};
+                    text-transform: ${FeatureTitleTextTransform};
+                    text-decoration: ${FeatureTitleTextDecoration};
+                    letter-spacing: ${FeatureTitleLetterSpacingDesktop}${FeatureTitleLetterSpacingUnits};
+                    line-height: ${FeatureTitleLineHeightDesktop}${FeatureTitleLineHeightUnits};
+                    color: ${FeatureTitleColor};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-title:hover {
+                    color: ${FeatureTitleHoverColor};
+                }
+
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
+                    font-family: ${FeatureDescFontFamily};
+                    font-size: ${FeatureDescFontSizeDesktop}${FeatureDescFontSizeUnits};
+                    font-weight: ${FeatureDescFontWeight};
+                    font-style: ${FeatureDescFontStyle};
+                    text-transform: ${FeatureDescTextTransform};
+                    text-decoration: ${FeatureTitleTextDecoration};
+                    letter-spacing: ${FeatureDescLetterSpacingDesktop}${FeatureDescLetterSpacingUnits};
+                    line-height: ${FeatureDescLineHeightDesktop}${FeatureDescLineHeightUnits};
+                    color: ${FeatureDescColor};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text:hover {
+                    color: ${FeatureDescHoverColor};
+                }
 
                 @media only screen and (max-width: 1024px) {
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
