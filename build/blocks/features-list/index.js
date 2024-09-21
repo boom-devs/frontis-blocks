@@ -12406,7 +12406,7 @@ function FBIconPicker(props) {
     viewBox: "0 0 448 512"
   }, /*#__PURE__*/React.createElement("path", {
     d: "M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"
-  })))))), showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Modal, {
+  })))))), /*#__PURE__*/React.createElement("div", null, showIconPicker && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Modal, {
     onRequestClose: closeModal,
     className: 'fb_icon_picker_wrapper_modal'
   }, /*#__PURE__*/React.createElement("div", {
@@ -12447,7 +12447,7 @@ function FBIconPicker(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "secondary",
     onClick: fbInsertIcon
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
 }
 
 /***/ }),
@@ -25558,7 +25558,7 @@ function _unsupportedIterableToArray(r, a) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"frontis-blocks/features-list","version":"1.0.0","title":"Features list","category":"frontis-blocks","icon":"editor-ul","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"anchor":false,"align":["wide","full"],"customClassName":false},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"frontis-blocks/features-list","version":"1.0.0","title":"Features list","category":"frontis-blocks","icon":"editor-ul","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

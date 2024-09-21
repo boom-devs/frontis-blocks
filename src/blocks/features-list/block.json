@@ -8,11 +8,14 @@
 	"icon": "editor-ul",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
-    "supports": {
-        "anchor": false,
-		"align": ["wide", "full"],
-        "customClassName": false
-    },
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"align": ["wide", "full"]
+	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
