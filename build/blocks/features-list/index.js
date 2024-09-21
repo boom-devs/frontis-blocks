@@ -5431,15 +5431,15 @@ var attributes = {
   },
   FeatureTitleLineHeightDesktop: {
     type: "number",
-    "default": 1.2
+    "default": "inherit"
   },
   FeatureTitleLineHeightTablet: {
     type: "number",
-    "default": 1.2
+    "default": "inherit"
   },
   FeatureTitleLineHeightMobile: {
     type: "number",
-    "default": 1.2
+    "default": "inherit"
   },
   FeatureTitleLineHeightUnits: {
     type: "string",
@@ -5450,10 +5450,12 @@ var attributes = {
     "default": "normal"
   },
   FeatureTitleColor: {
-    type: "string"
+    type: "string",
+    "default": "#000"
   },
   FeatureTitleHoverColor: {
-    type: 'string'
+    type: 'string',
+    "default": "#000"
   },
   FeatureDescFontFamily: {
     type: "string",
@@ -5505,13 +5507,16 @@ var attributes = {
     "default": "px"
   },
   FeatureDescLineHeightDesktop: {
-    type: "number"
+    type: "number",
+    "default": "inherit"
   },
   FeatureDescLineHeightTablet: {
-    type: "number"
+    type: "number",
+    "default": "inherit"
   },
   FeatureDescLineHeightMobile: {
-    type: "number"
+    type: "number",
+    "default": "inherit"
   },
   FeatureDescLineHeightUnits: {
     type: "string",
@@ -5522,10 +5527,12 @@ var attributes = {
     "default": "normal"
   },
   FeatureDescColor: {
-    type: "string"
+    type: "string",
+    "default": "#000"
   },
   FeatureDescHoverColor: {
-    type: 'string'
+    type: 'string',
+    "default": "#000"
   },
   FeatureZIndex: {
     type: "number"
@@ -9637,7 +9644,7 @@ function Inspector(_ref) {
   var borderRadiusWidth = "".concat(FeatureDesktopBorderRadiusWidth.top).concat(FeatureBorderRadiusUnits, " ").concat(FeatureDesktopBorderRadiusWidth.right).concat(FeatureBorderRadiusUnits, " ").concat(FeatureDesktopBorderRadiusWidth.bottom).concat(FeatureBorderRadiusUnits, " ").concat(FeatureDesktopBorderRadiusWidth.left).concat(FeatureBorderRadiusUnits);
   /** End Border Radius Width */
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-feature-main-wrapper.".concat(blockID, " .fb-feature-list-item:not(:last-child) {\n                    padding-bottom: calc(").concat(FeatureListGapDesktop).concat(FeatureListGapUnits, " / 2);\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:first-child) {\n                    padding-top: calc(").concat(FeatureListGapDesktop).concat(FeatureListGapUnits, " / 2);\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon svg {\n                    fill: ").concat(FeatureIconColor, ";\n                    height: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                    width: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon:hover svg {\n                    fill: ").concat(FeatureIconHoverColor, ";\n                    height: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                    width: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon-box {\n                    margin-right: ").concat(FeatureIconSpacingDesktop).concat(FeatureIconSpacingUnits, "!important;\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon-inner {\n                    background-color: ").concat(FeatureIconBgColor, ";\n                    border-color: ").concat(FeatureIconBgColor, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon-inner:hover {\n                    background-color: ").concat(FeatureIconBgHoverColor, ";\n                    border-color: ").concat(FeatureIconBgHoverColor, ";\n                }\n\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon {\n                    width: ").concat(FeatureIconBgSizeDesktop).concat(FeatureIconBgSizeUnits, ";\n                    height: ").concat(FeatureIconBgSizeDesktop).concat(FeatureIconBgSizeUnits, ";\n                }\n\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:last-child) {\n                        padding-bottom: calc(").concat(FeatureListGapTablet).concat(FeatureListGapUnits, " / 2);\n                    }\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:first-child) {\n                        padding-top: calc(").concat(FeatureListGapTablet).concat(FeatureListGapUnits, " / 2);\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:last-child) {\n                        padding-bottom: calc(").concat(FeatureListGapMobile).concat(FeatureListGapUnits, " / 2);\n                    }\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:first-child) {\n                        padding-top: calc(").concat(FeatureListGapMobile).concat(FeatureListGapUnits, " / 2);\n                    }\n                }\n\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-feature-main-wrapper.".concat(blockID, " {\n                    z-index: ").concat(FeatureZIndex !== undefined ? FeatureZIndex : '', ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " {\n                    ").concat(FeatureBgColor !== undefined ? "background-color: ".concat(FeatureBgColor, ";") : '', ";\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(FeatureBorder, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, " !important;\n                    ").concat(FeatureBorderColor !== undefined ? "border-color: ".concat(FeatureBorderColor, ";") : '', ";\n                    transition: all .3s ease-in-out;\n                }\n                .fb-feature-main-wrapper.").concat(blockID, ":hover {\n                    ").concat(FeatureBgHoverColor !== undefined ? "background-color: ".concat(FeatureBgHoverColor, ";") : '', ";\n                    ").concat(FeatureBorderHoverColor !== undefined ? "border-color: ".concat(FeatureBorderHoverColor, ";") : '', ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:last-child) {\n                    padding-bottom: calc(").concat(FeatureListGapDesktop).concat(FeatureListGapUnits, " / 2);\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:first-child) {\n                    padding-top: calc(").concat(FeatureListGapDesktop).concat(FeatureListGapUnits, " / 2);\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon svg {\n                    fill: ").concat(FeatureIconColor, ";\n                    height: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                    width: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon:hover svg {\n                    fill: ").concat(FeatureIconHoverColor, ";\n                    height: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                    width: ").concat(FeatureIconSizeDesktop).concat(FeatureIconSizeUnits, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon-box {\n                    margin-right: ").concat(FeatureIconSpacingDesktop).concat(FeatureIconSpacingUnits, "!important;\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon-inner {\n                    background-color: ").concat(FeatureIconBgColor, ";\n                    border-color: ").concat(FeatureIconBgColor, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon-inner:hover {\n                    background-color: ").concat(FeatureIconBgHoverColor, ";\n                    border-color: ").concat(FeatureIconBgHoverColor, ";\n                }\n\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-icon {\n                    width: ").concat(FeatureIconBgSizeDesktop).concat(FeatureIconBgSizeUnits, ";\n                    height: ").concat(FeatureIconBgSizeDesktop).concat(FeatureIconBgSizeUnits, ";\n                }\n\n                 .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-content ").concat(FeatureTag, " {\n                    font-family: ").concat(FeatureTitleFontFamily, ";\n                    font-size: ").concat(FeatureTitleFontSizeDesktop).concat(FeatureTitleFontSizeUnits, ";\n                    font-weight: ").concat(FeatureTitleFontWeight, ";\n                    font-style: ").concat(FeatureTitleFontStyle, ";\n                    text-transform: ").concat(FeatureTitleTextTransform, ";\n                    text-decoration: ").concat(FeatureTitleTextDecoration, ";\n                    letter-spacing: ").concat(FeatureTitleLetterSpacingDesktop).concat(FeatureTitleLetterSpacingUnits, ";\n                    line-height: ").concat(FeatureTitleLineHeightDesktop).concat(FeatureTitleLineHeightUnits, ";\n                    color: ").concat(FeatureTitleColor, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-content .fb-feature-list-title:hover {\n                    color: ").concat(FeatureTitleHoverColor, ";\n                }\n\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-content .fb-feature-list-text {\n                    font-family: ").concat(FeatureDescFontFamily, ";\n                    font-size: ").concat(FeatureDescFontSizeDesktop).concat(FeatureDescFontSizeUnits, ";\n                    font-weight: ").concat(FeatureDescFontWeight, ";\n                    font-style: ").concat(FeatureDescFontStyle, ";\n                    text-transform: ").concat(FeatureDescTextTransform, ";\n                    text-decoration: ").concat(FeatureTitleTextDecoration, ";\n                    letter-spacing: ").concat(FeatureDescLetterSpacingDesktop).concat(FeatureDescLetterSpacingUnits, ";\n                    line-height: ").concat(FeatureDescLineHeightDesktop).concat(FeatureDescLineHeightUnits, ";\n                    color: ").concat(FeatureDescColor, ";\n                }\n                .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-content .fb-feature-list-text:hover {\n                    color: ").concat(FeatureDescHoverColor, ";\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:last-child) {\n                        padding-bottom: calc(").concat(FeatureListGapTablet).concat(FeatureListGapUnits, " / 2);\n                    }\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:first-child) {\n                        padding-top: calc(").concat(FeatureListGapTablet).concat(FeatureListGapUnits, " / 2);\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:last-child) {\n                        padding-bottom: calc(").concat(FeatureListGapMobile).concat(FeatureListGapUnits, " / 2);\n                    }\n                    .fb-feature-main-wrapper.").concat(blockID, " .fb-feature-list-item:not(:first-child) {\n                        padding-top: calc(").concat(FeatureListGapMobile).concat(FeatureListGapUnits, " / 2);\n                    }\n                }\n\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"
