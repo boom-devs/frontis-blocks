@@ -2,18 +2,18 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import UAGSelectControl from '@Components/select-control';
+import FBSelectControl from '@Components/select-control';
 import RangeTypographyControl from './range-typography';
 import googleFonts from '@Controls/fonts';
 import Select from 'react-select';
 
-const { uag_select_font_globally, uag_load_select_font_globally } = uagb_blocks_info;
+const { uag_select_font_globally, uag_load_select_font_globally } = fb_blocks_info;
 
 function FontFamilyControl( props ) {
 	const fonts = [
 		{
 			value: 'Default',
-			label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
+			label: __( 'Default', 'frontis-blocks' ),
 			weight: [ 'Default', '100', '200', '300', '400', '500', '600', '700', '800', '900' ],
 			google: false,
 		},
@@ -45,7 +45,7 @@ function FontFamilyControl( props ) {
 
 	let fontWeight = '';
 
-	const customFonts = uagb_blocks_info.spectra_custom_fonts;
+	const customFonts = fb_blocks_info.frontis_custom_fonts;
 
 	//Push Google Fonts into stytem fonts object
 	// eslint-disable-next-line array-callback-return
@@ -177,25 +177,25 @@ function FontFamilyControl( props ) {
 				sizeLabel={ props.fontSize.label }
 				min={ 0 }
 				sizeMobileText={
-					! props.fontSizeLabel ? __( 'Font Size', 'ultimate-addons-for-gutenberg' ) : props.fontSizeLabel
+					! props.fontSizeLabel ? __( 'Font Size', 'frontis-blocks' ) : props.fontSizeLabel
 				}
 				sizeTabletText={
-					! props.fontSizeLabel ? __( 'Font Size', 'ultimate-addons-for-gutenberg' ) : props.fontSizeLabel
+					! props.fontSizeLabel ? __( 'Font Size', 'frontis-blocks' ) : props.fontSizeLabel
 				}
 				sizeText={
-					! props.fontSizeLabel ? __( 'Font Size', 'ultimate-addons-for-gutenberg' ) : props.fontSizeLabel
+					! props.fontSizeLabel ? __( 'Font Size', 'frontis-blocks' ) : props.fontSizeLabel
 				}
 				units={ [
 					{
-						name: __( 'Pixel', 'ultimate-addons-for-gutenberg' ),
+						name: __( 'Pixel', 'frontis-blocks' ),
 						unitValue: 'px',
 					},
 					{
-						name: __( 'Em', 'ultimate-addons-for-gutenberg' ),
+						name: __( 'Em', 'frontis-blocks' ),
 						unitValue: 'em',
 					},
 					{
-						name: __( 'VW', 'ultimate-addons-for-gutenberg' ),
+						name: __( 'VW', 'frontis-blocks' ),
 						unitValue: 'vw',
 					},
 				] }
@@ -210,27 +210,27 @@ function FontFamilyControl( props ) {
 	return (
 		<>
 			{ /* Font Family */ }
-			<div className="components-base-control uag-font-family-searchable-select__wrapper">
+			<div className="components-base-control fb-font-family-searchable-select__wrapper">
 				<label className="components-input-control__label" htmlFor="font-family">
-					{ __( 'Font Family', 'ultimate-addons-for-gutenberg' ) }
+					{ __( 'Font Family', 'frontis-blocks' ) }
 				</label>
 				<Select
 					styles={ customSelectStyles }
-					placeholder={ __( 'Default', 'ultimate-addons-for-gutenberg' ) }
+					placeholder={ __( 'Default', 'frontis-blocks' ) }
 					onChange={ onFontfamilyChange }
 					options={ gFonts }
 					value={ fontFamilyValue }
 					defaultValue={ fontFamilyValue }
 					isSearchable={ true }
-					className="uag-font-family-searchable-select"
-					classNamePrefix="uag-font-family-select"
+					className="fb-font-family-searchable-select"
+					classNamePrefix="fb-font-family-select"
 				/>
 			</div>
 			{ /* Font Size*/ }
 			{ fontSize }
 			{ /* Font Weitght */ }
-			<UAGSelectControl
-				label={ __( 'Weight', 'ultimate-addons-for-gutenberg' ) }
+			<FBSelectControl
+				label={ __( 'Weight', 'frontis-blocks' ) }
 				data={ {
 					value: props.fontWeight.value,
 					label: props.fontWeight.label,
@@ -240,8 +240,8 @@ function FontFamilyControl( props ) {
 			/>
 			{ /* Font Style */ }
 			{ props.fontStyle && (
-				<UAGSelectControl
-					label={ __( 'Style', 'ultimate-addons-for-gutenberg' ) }
+				<FBSelectControl
+					label={ __( 'Style', 'frontis-blocks' ) }
 					data={ {
 						value: props.fontStyle.value,
 						label: props.fontStyle.label,
@@ -250,15 +250,15 @@ function FontFamilyControl( props ) {
 					options={ [
 						{
 							value: 'normal',
-							label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'Default', 'frontis-blocks' ),
 						},
 						{
 							value: 'italic',
-							label: __( 'Italic', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'Italic', 'frontis-blocks' ),
 						},
 						{
 							value: 'oblique',
-							label: __( 'Oblique', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'Oblique', 'frontis-blocks' ),
 						},
 					] }
 				/>

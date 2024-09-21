@@ -24,7 +24,7 @@ const defaultProps = {
 	onChange: null,
 };
 
-export default function UAGSelectControl( { layout, label, options, data, setAttributes, onChange, help, children } ) {
+export default function FBSelectControl( { layout, label, options, data, setAttributes, onChange, help, children } ) {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
@@ -45,34 +45,34 @@ export default function UAGSelectControl( { layout, label, options, data, setAtt
 
 	// Filter for the control that should appear before this control.
 	const controlBeforeDomElement = applyFilters(
-		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		`frontis.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
 
 	// Filter for the control that should appear after this control.
 	const controlAfterDomElement = applyFilters(
-		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		`frontis.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook
 	);
 
 	// Filter for all the options of this control.
 	const allOptions = applyFilters(
-		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.options`,
+		`frontis.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.options`,
 		options,
 		blockNameForHook
 	);
 
 	// Filter for all the children of this control.
 	const allChildren = applyFilters(
-		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.children`,
+		`frontis.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.children`,
 		children,
 		blockNameForHook
 	);
 
 	return (
-		<div ref={ panelRef } className={ `uagb-select-control uagb-select-control--layout-${ layout }` }>
+		<div ref={ panelRef } className={ `fb-select-control fb-select-control--layout-${ layout }` }>
 			{ controlBeforeDomElement }
 			{ children ? (
 				<SelectControl
@@ -101,5 +101,5 @@ export default function UAGSelectControl( { layout, label, options, data, setAtt
 	);
 }
 
-UAGSelectControl.propTypes = propTypes;
-UAGSelectControl.defaultProps = defaultProps;
+FBSelectControl.propTypes = propTypes;
+FBSelectControl.defaultProps = defaultProps;

@@ -8,7 +8,7 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import UAGSelectControl from '@Components/select-control';
+import FBSelectControl from '@Components/select-control';
 import FontFamilyControl from './font-typography';
 import RangeTypographyControl from './range-typography';
 import TypographyStyles from './inline-styles';
@@ -17,9 +17,9 @@ import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element
 
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import { select } from '@wordpress/data';
-import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
+import getFBEditorStateLocalStorage from '@Controls/getFBEditorStateLocalStorage';
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
-import UAGHelpText from '@Components/help-text';
+import FBHelpText from '@Components/help-text';
 
 // Export for ease of importing in individual blocks.
 export { TypographyStyles };
@@ -29,7 +29,7 @@ const TypographyControl = ( props ) => {
 	const panelRef = useRef( null );
 
 	const [ showAdvancedControls, toggleAdvancedControls ] = useState( false );
-	const allBlocksAttributes = applyFilters( 'uagb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
+	const allBlocksAttributes = applyFilters( 'fb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
 
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -42,10 +42,10 @@ const TypographyControl = ( props ) => {
 	useLayoutEffect( () => {
 		window.addEventListener( 'click', function ( e ) {
 			const popupButton = document.querySelector(
-				`.active.popup-${ props?.attributes?.block_id } .spectra-control-popup__options--action-button`
+				`.active.popup-${ props?.attributes?.block_id } .frontis-control-popup__options--action-button`
 			);
 			const popupWrap = document.querySelector(
-				`.active.popup-${ props?.attributes?.block_id } .spectra-control-popup`
+				`.active.popup-${ props?.attributes?.block_id } .frontis-control-popup`
 			);
 
 			if (
@@ -53,15 +53,15 @@ const TypographyControl = ( props ) => {
 				! popupButton?.contains( e.target ) &&
 				popupWrap &&
 				! popupWrap?.contains( e.target ) &&
-				! e.target?.parentElement?.parentElement?.classList?.contains( 'uag-font-family-select__menu' ) &&
-				! e.target?.classList?.contains( 'uag-responsive-common-button' ) &&
-				! e.target?.closest( '.uag-responsive-common-button' ) &&
-				! e.target?.parentElement?.closest( '.uagb-reset' )
+				! e.target?.parentElement?.parentElement?.classList?.contains( 'fb-font-family-select__menu' ) &&
+				! e.target?.classList?.contains( 'fb-responsive-common-button' ) &&
+				! e.target?.closest( '.fb-responsive-common-button' ) &&
+				! e.target?.parentElement?.closest( '.fb-reset' )
 			) {
 				toggleAdvancedControls( false );
 
 				const blockName = getSelectedBlock()?.name;
-				const uagSettingState = getUAGEditorStateLocalStorage( 'uagSettingState' );
+				const uagSettingState = getFBEditorStateLocalStorage( 'uagSettingState' );
 
 				const data = {
 					...uagSettingState,
@@ -71,7 +71,7 @@ const TypographyControl = ( props ) => {
 					},
 				};
 
-				const uagLocalStorage = getUAGEditorStateLocalStorage();
+				const uagLocalStorage = getFBEditorStateLocalStorage();
 				if ( uagLocalStorage ) {
 					uagLocalStorage.setItem( 'uagSettingState', JSON.stringify( data ) );
 				}
@@ -211,9 +211,9 @@ const TypographyControl = ( props ) => {
 				size={ props.lineHeight }
 				sizeLabel={ props.lineHeight.label }
 				min={ 0 }
-				sizeMobileText={ __( 'Line Height', 'ultimate-addons-for-gutenberg' ) }
-				sizeTabletText={ __( 'Line Height', 'ultimate-addons-for-gutenberg' ) }
-				sizeText={ __( 'Line Height', 'ultimate-addons-for-gutenberg' ) }
+				sizeMobileText={ __( 'Line Height', 'frontis-blocks' ) }
+				sizeTabletText={ __( 'Line Height', 'frontis-blocks' ) }
+				sizeText={ __( 'Line Height', 'frontis-blocks' ) }
 				step={ lineHeightStepsVal }
 				{ ...props }
 			/>
@@ -232,9 +232,9 @@ const TypographyControl = ( props ) => {
 				size={ props.letterSpacing }
 				sizeLabel={ props.letterSpacing.label }
 				min={ -50 }
-				sizeMobileText={ __( 'Letter Spacing', 'ultimate-addons-for-gutenberg' ) }
-				sizeTabletText={ __( 'Letter Spacing', 'ultimate-addons-for-gutenberg' ) }
-				sizeText={ __( 'Letter Spacing', 'ultimate-addons-for-gutenberg' ) }
+				sizeMobileText={ __( 'Letter Spacing', 'frontis-blocks' ) }
+				sizeTabletText={ __( 'Letter Spacing', 'frontis-blocks' ) }
+				sizeText={ __( 'Letter Spacing', 'frontis-blocks' ) }
 				step={ letterSpacingStepsVal }
 				{ ...props }
 			/>
@@ -243,8 +243,8 @@ const TypographyControl = ( props ) => {
 
 	if ( ! disableTransform && props.transform ) {
 		transform = (
-			<UAGSelectControl
-				label={ __( 'Transform', 'ultimate-addons-for-gutenberg' ) }
+			<FBSelectControl
+				label={ __( 'Transform', 'frontis-blocks' ) }
 				data={ {
 					value: props.transform.value,
 					label: props.transform.label,
@@ -253,23 +253,23 @@ const TypographyControl = ( props ) => {
 				options={ [
 					{
 						value: '',
-						label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
+						label: __( 'Default', 'frontis-blocks' ),
 					},
 					{
 						value: 'none',
-						label: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
+						label: __( 'Normal', 'frontis-blocks' ),
 					},
 					{
 						value: 'capitalize',
-						label: __( 'Capitalize', 'ultimate-addons-for-gutenberg' ),
+						label: __( 'Capitalize', 'frontis-blocks' ),
 					},
 					{
 						value: 'uppercase',
-						label: __( 'Uppercase', 'ultimate-addons-for-gutenberg' ),
+						label: __( 'Uppercase', 'frontis-blocks' ),
 					},
 					{
 						value: 'lowercase',
-						label: __( 'Lowercase', 'ultimate-addons-for-gutenberg' ),
+						label: __( 'Lowercase', 'frontis-blocks' ),
 					},
 				] }
 			/>
@@ -277,9 +277,9 @@ const TypographyControl = ( props ) => {
 	}
 	if ( ! disableDecoration && props.decoration ) {
 		decoration = (
-			<div className="uag-typography-decoration">
-				<UAGSelectControl
-					label={ __( 'Decoration', 'ultimate-addons-for-gutenberg' ) }
+			<div className="fb-typography-decoration">
+				<FBSelectControl
+					label={ __( 'Decoration', 'frontis-blocks' ) }
 					data={ {
 						value: props.decoration.value,
 						label: props.decoration.label,
@@ -288,23 +288,23 @@ const TypographyControl = ( props ) => {
 					options={ [
 						{
 							value: '',
-							label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'Default', 'frontis-blocks' ),
 						},
 						{
 							value: 'none',
-							label: __( 'None', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'None', 'frontis-blocks' ),
 						},
 						{
 							value: 'underline',
-							label: __( 'Underline', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'Underline', 'frontis-blocks' ),
 						},
 						{
 							value: 'overline',
-							label: __( 'Overline', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'Overline', 'frontis-blocks' ),
 						},
 						{
 							value: 'line-through',
-							label: __( 'Line Through', 'ultimate-addons-for-gutenberg' ),
+							label: __( 'Line Through', 'frontis-blocks' ),
 						},
 					] }
 				/>
@@ -314,14 +314,14 @@ const TypographyControl = ( props ) => {
 	if ( true !== disableFontFamily && true !== disableFontSize ) {
 		fontAdvancedControls = (
 			<Button
-				className="uag-typography-button spectra-control-popup__options--action-button"
+				className="fb-typography-button frontis-control-popup__options--action-button"
 				aria-pressed={ showAdvancedControls }
 				onClick={ () => {
-					const allPopups = document.querySelectorAll( '.spectra-control-popup__options' );
+					const allPopups = document.querySelectorAll( '.frontis-control-popup__options' );
 					if ( allPopups && 0 < allPopups.length ) {
 						for ( let i = 0; i < allPopups.length; i++ ) {
 							const popupButton = allPopups[ i ]?.querySelector(
-								'.spectra-control-popup__options.active .spectra-control-popup__options--action-button'
+								'.frontis-control-popup__options.active .frontis-control-popup__options--action-button'
 							);
 							popupButton?.click();
 						}
@@ -329,12 +329,12 @@ const TypographyControl = ( props ) => {
 					toggleAdvancedControls( ! showAdvancedControls );
 
 					const blockName = getSelectedBlock()?.name;
-					const uagSettingState = getUAGEditorStateLocalStorage( 'uagSettingState' );
+					const uagSettingState = getFBEditorStateLocalStorage( 'uagSettingState' );
 					let data = {
 						...uagSettingState,
 						[ blockName ]: {
 							...uagSettingState?.[ blockName ],
-							selectedSetting: '.uag-typography-options',
+							selectedSetting: '.fb-typography-options',
 						},
 					};
 
@@ -348,7 +348,7 @@ const TypographyControl = ( props ) => {
 						};
 					}
 
-					const uagLocalStorage = getUAGEditorStateLocalStorage();
+					const uagLocalStorage = getFBEditorStateLocalStorage();
 					if ( uagLocalStorage ) {
 						uagLocalStorage.setItem( 'uagSettingState', JSON.stringify( data ) );
 					}
@@ -371,7 +371,7 @@ const TypographyControl = ( props ) => {
 
 	if ( showAdvancedControls === true ) {
 		showAdvancedFontControls = (
-			<div className="uagb-typography-advanced spectra-control-popup">
+			<div className="fb-typography-advanced frontis-control-popup">
 				{ fontFamily }
 				{ transform }
 				{ decoration }
@@ -383,10 +383,10 @@ const TypographyControl = ( props ) => {
 
 	if ( true !== disableFontFamily && true !== disableFontSize ) {
 		fontTypoAdvancedControls = (
-			<div className="spectra-control-popup__options--action-wrapper">
-				<span className="uag-control-label">
+			<div className="frontis-control-popup__options--action-wrapper">
+				<span className="fb-control-label">
 					{ props.label }
-					{ isTypographyUpdated && <div className="spectra__change-indicator--dot-right" /> }
+					{ isTypographyUpdated && <div className="frontis__change-indicator--dot-right" /> }
 				</span>
 				{ fontAdvancedControls }
 			</div>
@@ -395,12 +395,12 @@ const TypographyControl = ( props ) => {
 
 	const controlName = getIdFromString( props.label );
 	const controlBeforeDomElement = applyFilters(
-		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		`frontis.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
 	const controlAfterDomElement = applyFilters(
-		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		`frontis.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook
 	);
@@ -409,7 +409,7 @@ const TypographyControl = ( props ) => {
 		<div ref={ panelRef } className="components-base-control">
 			{ controlBeforeDomElement }
 			<div
-				className={ ` uag-typography-options spectra-control-popup__options popup-${ props?.attributes?.block_id } ${ activeClass }` }
+				className={ ` fb-typography-options frontis-control-popup__options popup-${ props?.attributes?.block_id } ${ activeClass }` }
 			>
 				{ ! disableAdvancedOptions && (
 					<>
@@ -417,7 +417,7 @@ const TypographyControl = ( props ) => {
 						{ showAdvancedFontControls }
 					</>
 				) }
-				<UAGHelpText text={ help } />
+				<FBHelpText text={ help } />
 			</div>
 			{ controlAfterDomElement }
 		</div>
