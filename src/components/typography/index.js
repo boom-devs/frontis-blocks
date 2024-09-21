@@ -8,16 +8,16 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import UAGSelectControl from '@Controls/select-control';
+import UAGSelectControl from '@Components/select-control';
 import FontFamilyControl from './font-typography';
 import RangeTypographyControl from './range-typography';
 import TypographyStyles from './inline-styles';
-// import styles from './editor.lazy.scss';
+import styles from './editor.lazy.scss';
 import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import { select } from '@wordpress/data';
-import getUAGEditorStateLocalStorage from '@Utils/Helpers';
+import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 import UAGHelpText from '@Components/help-text';
 

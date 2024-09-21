@@ -17,7 +17,7 @@ export function getPanelIdFromRef( ref ) {
 	return null;
 }
 
-const getUAGEditorStateLocalStorage = ( key = false ) => {
+const getFBEditorStateLocalStorage = ( key = false ) => {
 	if ( ! window.localStorage ) {
 		return null;
 	}
@@ -35,7 +35,7 @@ const getUAGEditorStateLocalStorage = ( key = false ) => {
 	return null;
 };
 
-export default getUAGEditorStateLocalStorage;
+export default getFBEditorStateLocalStorage;
 
 
 /**
@@ -53,3 +53,22 @@ export const debounce = ( func, delay ) => {
 		}, delay );
 	};
 };
+
+
+/**
+ * Check if current page is customizer page.
+ * 
+ * @return {boolean} - The result.
+ */
+export const isCustomizerPage = () => {
+    // We need to run this script only on customizer page.
+    if ( ! window.location.href.includes( '/customize.php' ) ) {
+        return false;
+    }
+
+    if ( ! window?.wp?.customize ) {
+        return false;
+    }
+
+    return true;
+}

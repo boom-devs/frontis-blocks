@@ -39,6 +39,7 @@
     "url-loader": "^4.1.1"
   },
   "dependencies": {
-    "@wordpress/editor": "^14.6.0"
+    "@wordpress/editor": "^14.6.0",
+    "react-select": "^5.8.1"
   }
 }

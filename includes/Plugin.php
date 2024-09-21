@@ -98,6 +98,8 @@ final class Plugin {
      * Define constants
      */
     private function define_constants() {
+        $upload_dir = wp_upload_dir( null, false );
+
         define('FB_VERSION', self::VERSION);
         define('FB_SLUG', self::SLUG);
         define('FB_PREFIX', self::PREFIX);
@@ -105,6 +107,9 @@ final class Plugin {
         define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
         define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
         define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
+        define('FB_UPLOAD_DIR_NAME', ' fb-plugin' );
+        define('FB_UPLOAD_DIR', $upload_dir['basedir'] . '/' . FB_UPLOAD_DIR_NAME . '/' );
+        define('FB_UPLOAD_URL', $upload_dir['baseurl'] . '/' . FB_UPLOAD_DIR_NAME . '/' );
     }
 
     /**
