@@ -95,14 +95,14 @@ class BlockList {
                 'badge'     => 'free',
                 'status'    => 'active',
             ],
-            // 'dual-button' => [
-            //     'slug'      => 'dual-button',
-            //     'title'     => 'Dual Button',
-            //     'package'   => 'free',
-            //     'category'  => 'general',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+             'dual-button' => [
+                 'slug'      => 'dual-button',
+                 'title'     => 'Dual Button',
+                 'package'   => 'free',
+                 'category'  => 'general',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
             // 'advanced-navigation' => [
             //     'slug'      => 'advanced-navigation',
             //     'title'     => 'Advanced Navigation',
