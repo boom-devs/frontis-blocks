@@ -1,29 +1,29 @@
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const fs = require('fs');
 
-const wp_rules = defaultConfig.module.rules.map((rule) => {
-    // Handle .jsx? files
-    if (rule.test && rule.test.toString().includes('jsx')) {
-        return rule;
+const blocksDir = path.resolve(__dirname, 'src/blocks');
+const entries = {};
+
+// Read all block directories in src/blocks
+fs.readdirSync(blocksDir).forEach((dir) => {
+    const blockPath = path.join(blocksDir, dir);
+    if (fs.statSync(blockPath).isDirectory()) {
+        // Read all JavaScript files in the block directory
+        const blockFiles = fs.readdirSync(blockPath).filter(file => file.endsWith('.js'));
+        
+        // Create an entry for each block file
+        blockFiles.forEach(file => {
+            const blockName = path.basename(blockPath);
+            entries[`blocks/${blockName}/${file}`] = path.join(blockPath, file);
+        });
     }
-
-    // Modify scss/sass rules to exclude specific directories
-    if (rule.test && rule.test.toString().includes('scss')) {
-        return {
-            ...rule,
-            exclude: [/node_modules/, /editor/],
-        };
-    }
-
-    return rule;
 });
 
 module.exports = {
     ...defaultConfig,
-    entry: {
-        blocks: path.resolve(__dirname, 'src/blocks.js'),
-    },
+    entry: entries, // Use dynamically created entries
     resolve: {
         alias: {
             ...defaultConfig.resolve.alias,
@@ -36,25 +36,26 @@ module.exports = {
     },
     module: {
         rules: [
-          {
-            test: /\.scss$/,
-            use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
-          },
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: ["babel-loader"]
-          }
+            {
+                test: /\.scss$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ["babel-loader"]
+            }
         ],
-      },
+    },
     plugins: [
         ...defaultConfig.plugins,
         new MiniCssExtractPlugin({
-            filename: '[name].css',
+            filename: '[name].css', // Keep original CSS filenames in the same folder
         }),
     ],
     output: {
-        ...defaultConfig.output,
-        path: path.resolve(__dirname, 'build'),
+        filename: '[name]',
+        path: path.resolve(__dirname, 'build'), // Output all block files in the build/blocks directory
+        clean: true, // Clean the output directory before each build
     },
 };
