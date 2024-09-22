@@ -1,7 +1,7 @@
 import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 import { SelectControl } from '@wordpress/components';
 import { select } from '@wordpress/data';
-import styles from './editor.lazy.scss';
+import './editor.lazy.scss';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import PropTypes from 'prop-types';
 import { applyFilters } from '@wordpress/hooks';
@@ -27,13 +27,6 @@ const defaultProps = {
 export default function FBSelectControl( { layout, label, options, data, setAttributes, onChange, help, children } ) {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
-
-	useLayoutEffect( () => {
-		styles.use();
-		return () => {
-			styles.unuse();
-		};
-	}, [] );
 
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return

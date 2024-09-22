@@ -7,7 +7,7 @@ import {
 } from '@wordpress/components';
 import ResponsiveToggle from '../responsive-toggle';
 import { __, sprintf } from '@wordpress/i18n';
-import styles from './editor.lazy.scss';
+import './editor.lazy.scss';
 import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks';
 import { select } from '@wordpress/data';
@@ -23,12 +23,12 @@ const Range = ( props ) => {
 	const panelRef = useRef( null );
 
 	// Add and remove the CSS on the drop and remove of the component.
-	useLayoutEffect( () => {
-		styles.use();
-		return () => {
-			styles.unuse();
-		};
-	}, [] );
+	// useLayoutEffect( () => {
+	// 	styles.use();
+	// 	return () => {
+	// 		styles.unuse();
+	// 	};
+	// }, [] );
 
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return

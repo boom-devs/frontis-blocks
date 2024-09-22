@@ -12,7 +12,7 @@ import FBSelectControl from '@Components/select-control';
 import FontFamilyControl from './font-typography';
 import RangeTypographyControl from './range-typography';
 import TypographyStyles from './inline-styles';
-import styles from './editor.lazy.scss';
+import './editor.lazy.scss';
 import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
@@ -30,14 +30,6 @@ const TypographyControl = ( props ) => {
 
 	const [ showAdvancedControls, toggleAdvancedControls ] = useState( false );
 	// const allBlocksAttributes = applyFilters( 'fb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
-
-	// Add and remove the CSS on the drop and remove of the component.
-	useLayoutEffect( () => {
-		styles.use();
-		return () => {
-			styles.unuse();
-		};
-	}, [] );
 
 	useLayoutEffect( () => {
 		window.addEventListener( 'click', function ( e ) {
