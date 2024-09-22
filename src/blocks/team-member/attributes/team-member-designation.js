@@ -1,7 +1,7 @@
 const teamMemberDesignationAttributes = {
 	teamMemberDesignation: {
 		type: "string",
-		default: "Back Title Here"
+		default: "Creative Director"
 	},
 	teamMemberDesignationHeadingTag: {
 		type : "string",

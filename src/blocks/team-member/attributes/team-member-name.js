@@ -1,7 +1,7 @@
 const teamMemberNameAttributes = {
 	teamMemberName: {
 		type: "string",
-		default: "Back Title Here"
+		default: "Wade Warren"
 	},
 	teamMemberNameHeadingTag: {
 		type : "string",
