@@ -194,7 +194,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
-	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImagePaddingUnits}`;
+	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImageMarginUnits}`;
 	/** End Margin */
 
 

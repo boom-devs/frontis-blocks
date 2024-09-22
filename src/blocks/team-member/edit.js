@@ -30,6 +30,11 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import ResponsiveControl from "../../components/responsivecontrol";
 import {HEADING} from "../info-box/constants/constants";
 
+import TeamMemberContentBorderControl from './style-control/content/team-member-content-border.js';
+import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin.js';
+import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding.js';
+
+
 import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
 import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
@@ -133,21 +138,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationMobileMargin,
 		teamMemberDesignationMarginLink,
 
+		teamMemberContentBackgroundColor,
+		teamMemberContentPaddingUnits,
+		desktopteamMemberContentPadding,
+		teamMemberContentDesktopPadding,
+		teamMemberContentTabPadding,
+		teamMemberContentMobilePadding,
+		teamMemberContentPaddingLink,
 
-		teamMemberContent,
-		teamMemberContentHeadingTag,
-		teamMemberContentFontFamily,
-		teamMemberContentFontSize,
-		teamMemberContentFontSizeUnits,
-		teamMemberContentFontWeight,
-		teamMemberContentFontStyle,
-		teamMemberContentTextTransform,
-		teamMemberContentTextDecoration,
-		teamMemberContentLetterSpacing,
-		teamMemberContentLetterSpacingUnits,
-		teamMemberContentLineHeight,
-		teamMemberContentLineHeightUnits,
-		teamMemberContentColor
+		teamMemberContentMarginUnits,
+		desktopteamMemberContentMargin,
+		teamMemberContentDesktopMargin,
+		teamMemberContentTabMargin,
+		teamMemberContentMobileMargin,
+		teamMemberContentMarginLink,
+
+		teamMemberContentBorder,
+		teamMemberContentBorderColor,
+		teamMemberContentBorderUnits,
+		teamMemberContentDesktopBorderWidth,
+		teamMemberContentTabBorderWidth,
+		teamMemberContentMobileBorderWidth,
+		teamMemberContentActiveBorderDevice,
+		teamMemberContentBorderLink,
+		teamMemberContentBorderRadiusUnits,
+		teamMemberContentDesktopBorderRadiusWidth,
+		teamMemberContentTabBorderRadiusWidth,
+		teamMemberContentMobileBorderRadiusWidth,
+		teamMemberContentActiveBorderRadiusDevice,
+		teamMemberContentBorderRadiusLink
 
 	} = attributes;
 
@@ -162,10 +181,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps();
 
+	{/* Team Member Content Control */}
+	const teamMemberContentBorderRadiusWidth = `${teamMemberContentDesktopBorderRadiusWidth.top}${teamMemberContentBorderRadiusUnits} ${teamMemberContentDesktopBorderRadiusWidth.right}${teamMemberContentBorderRadiusUnits} ${teamMemberContentDesktopBorderRadiusWidth.bottom}${teamMemberContentBorderRadiusUnits} ${teamMemberContentDesktopBorderRadiusWidth.left}${teamMemberContentBorderRadiusUnits}`;
+	const teamMemberContentBorderWidth = `${teamMemberContentDesktopBorderWidth.top}${teamMemberContentBorderUnits} ${teamMemberContentDesktopBorderWidth.right}${teamMemberContentBorderUnits} ${teamMemberContentDesktopBorderWidth.bottom}${teamMemberContentBorderUnits} ${teamMemberContentDesktopBorderWidth.left}${teamMemberContentBorderUnits}`;
 
+	const teamMemberContentMargin = `${teamMemberContentDesktopMargin.top}${teamMemberContentMarginUnits} ${teamMemberContentDesktopMargin.right}${teamMemberContentMarginUnits} ${teamMemberContentDesktopMargin.bottom}${teamMemberContentMarginUnits} ${teamMemberContentDesktopMargin.left}${teamMemberContentMarginUnits}`;
+
+
+	const teamMemberContentPadding = `${teamMemberContentDesktopPadding.top}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.right}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.bottom}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.left}${teamMemberContentPaddingUnits}`;
+
+	{/* Team Member Image Control */}
 	const teamMemberImageBorderWidth = `${teamMemberImageDesktopBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.left}${teamMemberImageBorderUnits}`;
 	const teamMemberImageBorderRadiusWidth = `${teamMemberImageDesktopBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits}`;
 	const teamMembberImagePadding = `${teamMemberImageDesktopPadding.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.left}${teamMemberImagePaddingUnits}`;
+
 	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImageMarginUnits}`;
 
 	{/* Team Member Name Control */}
@@ -207,6 +236,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     border-width: ${teamMemberImageBorderWidth};
                     border-radius: ${teamMemberImageBorderRadiusWidth};
                     margin: ${teamMemberImageMargin};
+                }
+                .fb-team-member-wrapper.${blockID} .fb-team-member-content {
+                    border: ${teamMemberContentBorder};
+                    border-color: ${teamMemberContentBorderColor};
+                    border-width: ${teamMemberContentBorderWidth};
+                    border-radius: ${teamMemberContentBorderRadiusWidth};
+                    margin: ${teamMemberContentMargin};
+                    padding: ${teamMemberContentPadding};
+                    background: ${teamMemberContentBackgroundColor};
                 }
          		.fb-team-member-wrapper.${blockID} .fb-team-member-name {
          		    font-family: ${teamMemberNameFontFamily !== 'default' ? teamMemberNameFontFamily : teamMemberNameFontFamily};
@@ -389,10 +427,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								{tab.name === "styles" && (
 									<>
 										<PanelBody
-											title={__("Container", "frontis-blocks")}
+											title={__("Content", "frontis-blocks")}
 											initialOpen={true}
 										>
-
+											<TeamMemberContentBorderControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<TeamMemberContentMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<TeamMemberContentPaddingControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
 
 										<PanelBody
@@ -448,11 +500,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 
 
-										{/*<PanelBody*/}
-										{/*	title={__("Short Bio", "frontis-blocks")}*/}
-										{/*	initialOpen={false}*/}
-										{/*>*/}
-										{/*</PanelBody>*/}
+										<PanelBody
+											title={__("Content", "frontis-blocks")}
+											initialOpen={false}
+										>
+
+										</PanelBody>
 
 										<PanelBody
 											title={__("Social Profile", "frontis-blocks")}
