@@ -1,4 +1,2 @@
-import './store'
-
-
+import './store';
 import './blocks/post-grid';

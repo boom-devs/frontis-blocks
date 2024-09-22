@@ -1,39 +1,26 @@
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const { spawn } = require('child_process');
 
-
-class FBRunAdditionalProcess {
-    apply(compiler) {
-        compiler.hooks.afterEmit.tapAsync('FBRunAdditionalProcess', (compilation, callback) => {
-            spawn(
-                /^win/.test(process.platform) ? 'npm-run-all.cmd' : 'npm-run-all',
-                ['--sequential', 'build:sass', 'build:placeholder'],
-                { stdio: 'inherit' }
-            );
-            callback();
-        });
-    }
-}
-
-const wp_rules = defaultConfig.module.rules.filter(function (item) {
-    if (String(item.test) === String(/\.jsx?$/)) {
-        return true;
+const wp_rules = defaultConfig.module.rules.map((rule) => {
+    // Handle .jsx? files
+    if (rule.test && rule.test.toString().includes('jsx')) {
+        return rule;
     }
 
-    if (String(item.test) === String(/\.(sc|sa)ss$/)) {
-        item.exclude = [/node_modules/, /editor/];
-        return true;
+    // Modify scss/sass rules to exclude specific directories
+    if (rule.test && rule.test.toString().includes('scss')) {
+        return {
+            ...rule,
+            exclude: [/node_modules/, /editor/],
+        };
     }
-    return false;
+
+    return rule;
 });
 
 module.exports = {
     ...defaultConfig,
-    plugins: [
-        ...defaultConfig.plugins,
-        // new FBRunAdditionalProcess(),
-    ],
     entry: {
         blocks: path.resolve(__dirname, 'src/blocks.js'),
     },
@@ -44,30 +31,28 @@ module.exports = {
             '@Components': path.resolve(__dirname, 'src/components/'),
             '@Utils': path.resolve(__dirname, 'src/utils/'),
             '@Blocks': path.resolve(__dirname, 'src/blocks/'),
-            // '@Attributes': path.resolve(__dirname, 'blocks-config/blocks-attributes/'),
             '@Store': path.resolve(__dirname, 'src/store/'),
         },
     },
     module: {
         rules: [
-            ...wp_rules,
-            {
-                test: /\.(scss|css)$/,
-                exclude: [/node_modules/, /style/],
-                use: [
-                    {
-                        loader: 'style-loader',
-                        options: {
-                            injectType: 'lazySingletonStyleTag',
-                            attributes: { id: 'fb-editor-styles' },
-                        },
-                    },
-                    'css-loader',
-                    'sass-loader',
-                ],
-            },
+          {
+            test: /\.scss$/,
+            use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
+          },
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: ["babel-loader"]
+          }
         ],
-    },
+      },
+    plugins: [
+        ...defaultConfig.plugins,
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+        }),
+    ],
     output: {
         ...defaultConfig.output,
         path: path.resolve(__dirname, 'build'),
