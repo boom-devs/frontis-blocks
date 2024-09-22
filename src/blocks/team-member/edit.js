@@ -377,11 +377,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												value={attributes.teamMemberDesignation}
 												onChange={(value) => setAttributes({ teamMemberDesignation: value })}
 											/>
-											<TextareaControl
-												label={__('Short Bio', 'frontis-blocks')}
-												value={attributes.teamMemberContent}
-												onChange={(value) => setAttributes({ teamMemberContent: value })}
-											/>
+											{/*<TextareaControl*/}
+											{/*	label={__('Short Bio', 'frontis-blocks')}*/}
+											{/*	value={attributes.teamMemberContent}*/}
+											{/*	onChange={(value) => setAttributes({ teamMemberContent: value })}*/}
+											{/*/>*/}
 										</PanelBody>
 									</>
 								)}
@@ -448,12 +448,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 
 
-										<PanelBody
-											title={__("Short Bio", "frontis-blocks")}
-											initialOpen={false}
-										>
-
-										</PanelBody>
+										{/*<PanelBody*/}
+										{/*	title={__("Short Bio", "frontis-blocks")}*/}
+										{/*	initialOpen={false}*/}
+										{/*>*/}
+										{/*</PanelBody>*/}
 
 										<PanelBody
 											title={__("Social Profile", "frontis-blocks")}
