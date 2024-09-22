@@ -120,14 +120,14 @@ class BlockList {
                  'badge'     => 'free',
                  'status'    => 'active',
              ],
-            // 'features-list' => [
-            //     'slug'      => 'features-list',
-            //     'title'     => 'Features List',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+             'features-list' => [
+                 'slug'      => 'features-list',
+                 'title'     => 'Features List',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
             // 'testimonial' => [
             //     'slug'      => 'testimonial',
             //     'title'     => 'Testimonial/Review',
