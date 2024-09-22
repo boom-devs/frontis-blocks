@@ -280,6 +280,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         border-width: ${teamMemberImageTabBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.left}${teamMemberImageBorderUnits} !important;
                         border-radius: ${teamMemberImageTabBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits} !important;
                     }
+					 .fb-team-member-wrapper.${blockID} .fb-team-member-content {
+                        margin: ${teamMemberContentTabMargin.top}${teamMemberContentMarginUnits} ${teamMemberContentTabMargin.right}${teamMemberContentMarginUnits} ${teamMemberContentTabMargin.bottom}${teamMemberContentMarginUnits} ${teamMemberContentTabMargin.left}${teamMemberContentMarginUnits} !important;
+                        padding: ${teamMemberContentTabPadding.top}${teamMemberContentPaddingUnits} ${teamMemberContentTabPadding.right}${teamMemberContentPaddingUnits} ${teamMemberContentTabPadding.bottom}${teamMemberContentPaddingUnits} ${teamMemberContentTabPadding.left}${teamMemberContentPaddingUnits} !important;
+                        border-width: ${teamMemberContentTabBorderWidth.top}${teamMemberContentBorderUnits} ${teamMemberContentTabBorderWidth.right}${teamMemberContentBorderUnits} ${teamMemberContentTabBorderWidth.bottom}${teamMemberContentBorderUnits} ${teamMemberContentTabBorderWidth.left}${teamMemberContentBorderUnits} !important;
+                        border-radius: ${teamMemberContentTabBorderRadiusWidth.top}${teamMemberContentBorderRadiusUnits} ${teamMemberContentTabBorderRadiusWidth.right}${teamMemberContentBorderRadiusUnits} ${teamMemberContentTabBorderRadiusWidth.bottom}${teamMemberContentBorderRadiusUnits} ${teamMemberContentTabBorderRadiusWidth.left}${teamMemberContentBorderRadiusUnits} !important;
+					}
                 }
 
                 @media only screen and (max-width: 767px) {
@@ -288,6 +294,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         border-width: ${teamMemberImageMobileBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.left}${teamMemberImageBorderUnits} !important;
                         border-radius: ${teamMemberImageMobileBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits} !important;
                     }
+
+                   .fb-team-member-wrapper.${blockID} .fb-team-member-content {
+                        margin: ${teamMemberContentMobileMargin.top}${teamMemberContentMarginUnits} ${teamMemberContentMobileMargin.right}${teamMemberContentMarginUnits} ${teamMemberContentMobileMargin.bottom}${teamMemberContentMarginUnits} ${teamMemberContentMobileMargin.left}${teamMemberContentMarginUnits} !important;
+                        padding: ${teamMemberContentMobilePadding.top}${teamMemberContentPaddingUnits} ${teamMemberContentMobilePadding.right}${teamMemberContentPaddingUnits} ${teamMemberContentMobilePadding.bottom}${teamMemberContentPaddingUnits} ${teamMemberContentMobilePadding.left}${teamMemberContentPaddingUnits} !important;
+                        border-width: ${teamMemberContentMobileBorderWidth.top}${teamMemberContentBorderUnits} ${teamMemberContentMobileBorderWidth.right}${teamMemberContentBorderUnits} ${teamMemberContentMobileBorderWidth.bottom}${teamMemberContentBorderUnits} ${teamMemberContentMobileBorderWidth.left}${teamMemberContentBorderUnits} !important;
+                        border-radius: ${teamMemberContentMobileBorderRadiusWidth.top}${teamMemberContentBorderRadiusUnits} ${teamMemberContentMobileBorderRadiusWidth.right}${teamMemberContentBorderRadiusUnits} ${teamMemberContentMobileBorderRadiusWidth.bottom}${teamMemberContentBorderRadiusUnits} ${teamMemberContentMobileBorderRadiusWidth.left}${teamMemberContentBorderRadiusUnits} !important;
+                    }
+
                 }
             `}
 			</style>
@@ -503,19 +517,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 
 
-										<PanelBody
-											title={__("Content", "frontis-blocks")}
-											initialOpen={false}
-										>
+										{/*<PanelBody*/}
+										{/*	title={__("Social Profile", "frontis-blocks")}*/}
+										{/*	initialOpen={false}*/}
+										{/*>*/}
 
-										</PanelBody>
-
-										<PanelBody
-											title={__("Social Profile", "frontis-blocks")}
-											initialOpen={false}
-										>
-
-										</PanelBody>
+										{/*</PanelBody>*/}
 
 									</>
 								)}
