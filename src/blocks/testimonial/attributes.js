@@ -7,6 +7,9 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
+    TestimonialZIndex : {
+        type: "number",
+    },
     TestimonialAlignment: {
         type: "string",
         default: "center",
@@ -21,6 +24,61 @@ const attributes = {
     TestimonialImageID : {
         type: "number",
     },
+
+
+    TestimonialImageWidthDesktop: {
+        type: "number",
+        default: 100
+    },
+    TestimonialImageWidthTablet: {
+        type: "number",
+        default: 100
+    },
+    TestimonialImageWidthMobile: {
+        type: "number",
+        default: 100
+    },
+    TestimonialImageWidthUnits : {
+        type: "string",
+        default: "px"
+    },
+
+    TestimonialBorderRadiusUnits : {
+        type: "string",
+        default: "px"
+    },
+    TestimonialDesktopBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialTabBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialMobileBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
 
     TestimonialDesc: {
         type : "string",

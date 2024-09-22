@@ -38,6 +38,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         DeviceType,
+
+        TestimonialImageWidthDesktop,
+        TestimonialImageWidthTablet,
+        TestimonialImageWidthMobile,
+        TestimonialImageWidthUnits,
+
+        TestimonialBorderRadiusUnits,
+        TestimonialDesktopBorderRadiusWidth,
+        TestimonialTabBorderRadiusWidth,
+        TestimonialMobileBorderRadiusWidth,
+        TestimonialBorderRadiusLink,
+
+        TestimonialZIndex,
         TestimonialAlignment,
         TestimonialDesc,
         TestimonialAuthor,
@@ -66,10 +79,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({TestimonialRatingicon: IconName})
 
 	}
+
     
 
     return (
         <>
+            <style>
+                {`
+                    .fb-testimonial-section.${blockID} {
+                        z-index: ${TestimonialZIndex !== undefined ? TestimonialZIndex : 1};
+                    }
+                    .fb-testimonial-image img {
+                        width: ${TestimonialImageWidthDesktop}${TestimonialImageWidthUnits};
+                        height: ${TestimonialImageWidthDesktop}${TestimonialImageWidthUnits};
+                    }
+
+                    @media only screen and (max-width: 1024px) {
+                        .fb-testimonial-image img {
+                            width: ${TestimonialImageWidthTablet}${TestimonialImageWidthUnits};
+                            height: ${TestimonialImageWidthTablet}${TestimonialImageWidthUnits};
+                        }
+                    }
+
+                    @media only screen and (max-width: 767px) {
+                        .fb-testimonial-image img {
+                            width: ${TestimonialImageWidthMobile}${TestimonialImageWidthUnits};
+                            height: ${TestimonialImageWidthMobile}${TestimonialImageWidthUnits};
+                        }
+                    }
+                `}
+            </style>
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -211,10 +250,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody
-                                            title={__("Testimonial Style", "frontis-blocks")}
+                                            title={__("Image", "frontis-blocks")}
                                             initialOpen={true}
                                             className="fb-setting-testimonial-list-wrapper"
                                         >
+                                            <div className="fb-setting-fontsize-wrapper">
+                                                <div className="fb-setting-fontsize-header">
+                                                    <ResponsiveControl
+                                                        labelText={__("Image Width", "frontis-blocks")}
+                                                        device={DeviceType}
+                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                    />
+                                                    <div className="fb-setting-fontsize-units">
+                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
+                                                            {UNIT_TYPES.map((item, key) => (
+                                                                <Button
+                                                                    key={key}
+                                                                    onClick={() => setAttributes({ TestimonialImageWidthUnits: item.value })}
+                                                                    className={`fb-setting-fontsize-units-switcher ${TestimonialImageWidthUnits === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                    </div>
+                                                </div>
+                                                <div className="fb-setting-fontsize-rangecontrol">
+                                                    <RangeControl
+                                                        value={DeviceType === "Desktop" ? TestimonialImageWidthDesktop : DeviceType === "Tablet" ? TestimonialImageWidthTablet : TestimonialImageWidthMobile}
+                                                        onChange={(value) => {
+                                                            if (DeviceType === "Desktop") {
+                                                                setAttributes({ TestimonialImageWidthDesktop: value });
+                                                            } else if (DeviceType === "Tablet") {
+                                                                setAttributes({ TestimonialImageWidthTablet: value });
+                                                            } else if (DeviceType === "Mobile") {
+                                                                setAttributes({ TestimonialImageWidthMobile: value });
+                                                            }
+                                                        }}
+                                                        min={1}
+                                                        max={500}
+                                                        allowReset
+                                                        resetFallbackValue={100}
+                                                    />
+                                                </div>
+                                            </div>
 
                                         </PanelBody>
 
@@ -229,6 +308,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialOpen={true}
                                                 className='fb-setting-z-index-header'
                                             >
+                                                <RangeControl
+                                                    value={TestimonialZIndex}
+                                                    onChange={(value) => setAttributes({ TestimonialZIndex: value === 0 ? undefined : value })}
+                                                    min={1}
+                                                    max={100}
+                                                    step={1}
+                                                    allowReset
+                                                    resetFallbackValue={undefined}
+                                                />
 
                                             </PanelBody>
                                         </div>
