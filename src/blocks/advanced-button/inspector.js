@@ -583,7 +583,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             <TextControl
                                                                 value={ButtonUrl}
                                                                 onChange={(value) => setAttributes({ ButtonUrl: value })}
-                                                                className="fb-advanced-button-url"
+                                                                className="fb-link-control-url"
                                                                 placeholder={__('https://', 'frontis-blocks')}
                                                             />
                                                             <Dropdown
@@ -602,8 +602,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                     </Button>
                                                                 )}
                                                                 renderContent={() => (
-                                                                    <div className="fb-advanced-button-icon-popup">
-                                                                        <BaseControl className="fb-advanced-button-icon-popup-inner">
+                                                                    <div className="fb-link-control-icon-popup">
+                                                                        <BaseControl className="fb-link-control-icon-popup-inner">
                                                                             <ToggleControl
                                                                                 label={__("Open in new tab", "frontis-blocks")}
                                                                                 checked={ButtonTargetUrl}

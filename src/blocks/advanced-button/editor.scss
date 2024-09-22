@@ -274,10 +274,10 @@ $white_color: #ffffff;
 /** End Admin Panel scss **/
 
 /** Start General scss for Advanced Button **/
-.fb-advanced-button-icon-popup {
+.fb-link-control-icon-popup {
     padding: 0.2rem;
     min-width: 220px;
-    .fb-advanced-button-icon-popup-inner {
+    .fb-link-control-icon-popup-inner {
         position: relative;
         z-index: 99999;
         .components-base-control__field {
@@ -304,7 +304,7 @@ $white_color: #ffffff;
         display: flex;
         align-items: center;
         gap: 10px;
-        .fb-advanced-button-url {
+        .fb-link-control-url {
             flex: 1;
             margin-bottom: 0;
             .components-base-control__field {
