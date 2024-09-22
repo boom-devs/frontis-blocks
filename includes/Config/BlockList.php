@@ -151,14 +151,14 @@ class BlockList {
                 'badge'     => 'free',
                 'status'    => 'active',
             ],
-            // 'testimonial' => [
-            //     'slug'      => 'testimonial',
-            //     'title'     => 'Testimonial/Review',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'testimonial' => [
+                'slug'      => 'testimonial',
+                'title'     => 'Testimonial',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
              'counter-number' => [
                  'slug'      => 'counter-number',
                  'title'     => 'Counter Number',

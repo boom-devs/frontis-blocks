@@ -3,7 +3,11 @@ $secondary_color: #5f5f5f;
 $background_color: #dcdcde;
 $white_color: #ffffff;
 
-
+.fb-setting-responsive-control-wrapper {
+    .fb-setting-responsive-control {
+        margin-bottom: 0;
+    }
+}
 
 /** End General scss for Advanced Button **/
 
