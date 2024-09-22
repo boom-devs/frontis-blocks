@@ -33,6 +33,7 @@ import {HEADING} from "../info-box/constants/constants";
 import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
 import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
+import TeamMemberNameControl from './style-control/name/team-member-name.js';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -142,11 +143,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps();
 
-	{/* Team Member Image Control */}
+
 	const teamMemberImageBorderWidth = `${teamMemberImageDesktopBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.left}${teamMemberImageBorderUnits}`;
 	const teamMemberImageBorderRadiusWidth = `${teamMemberImageDesktopBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits}`;
 	const teamMembberImagePadding = `${teamMemberImageDesktopPadding.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.left}${teamMemberImagePaddingUnits}`;
 	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImagePaddingUnits}`;
+
+	{/* Team Member Name Control */}
+	useEffect(() => {
+		if (teamMemberNameFontFamily) {
+			const fontUrl = `https://fonts.googleapis.com/css?family=${teamMemberNameFontFamily.replace(' ', '+')}`;
+			const linkElement = document.createElement('link');
+			linkElement.rel = 'stylesheet';
+			linkElement.href = fontUrl;
+			document.head.appendChild(linkElement);
+		}
+	}, [teamMemberNameFontFamily]);
 
 	return (
 		<>
@@ -159,7 +171,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     border-radius: ${teamMemberImageBorderRadiusWidth};
                     margin: ${teamMemberImageMargin};
                 }
-
+         		.fb-team-member-wrapper.${blockID} .fb-team-member-name {
+         		    font-family: ${teamMemberNameFontFamily !== 'default' ? teamMemberNameFontFamily : teamMemberNameFontFamily};
+                    font-size: ${teamMemberNameFontSize !== undefined ? `${teamMemberNameFontSize}${teamMemberNameFontSizeUnits}` : ''};
+                    font-weight: ${teamMemberNameFontWeight};
+                    font-style: ${teamMemberNameFontStyle};
+                    text-transform: ${teamMemberNameTextTransform};
+                    text-decoration: ${teamMemberNameTextDecoration};
+                    ${teamMemberNameLetterSpacing !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacing}${teamMemberNameLetterSpacingUnits};` : ''}
+                    ${teamMemberNameLineHeight !== undefined ? `line-height: ${teamMemberNameLineHeight}${teamMemberNameLineHeightUnits};` : ''}
+         			color: ${teamMemberNameColor};
+         		}
              	 @media only screen and (max-width: 1024px) {
                     .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
                         margin: ${teamMemberImageTabMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.left}${teamMemberImageMarginUnits} !important;
@@ -332,12 +354,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
+
 											<TeamMemberImageMarginControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
-
 										</PanelBody>
 
 
@@ -345,7 +367,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Name", "frontis-blocks")}
 											initialOpen={false}
 										>
-
+											<TeamMemberNameControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
 
 										<PanelBody
