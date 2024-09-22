@@ -171,13 +171,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	// Set blockID if it doesn't exist
-	useEffect(() => {
-		if (!blockID) {
-			setAttributes({ blockID: clientId });
-		}
-	}, []);
 
-	const blockIdToUse = blockID || clientId;
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "fb-team-member-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	const blockProps = useBlockProps();
 
@@ -533,7 +534,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</InspectorControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-team-member-wrapper ${blockIdToUse}`}>
+				<div className={`fb-team-member-wrapper ${blockID}`}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image-overlay`}></div>
