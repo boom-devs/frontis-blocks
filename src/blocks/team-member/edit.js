@@ -35,6 +35,8 @@ import TeamMemberImagePaddingControl from './style-control/image/team-member-ima
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
 import TeamMemberNameControl from './style-control/name/team-member-name.js';
 import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
+import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
+import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -124,6 +126,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationLineHeightUnits,
 		teamMemberDesignationColor,
 
+		teamMemberDesignationMarginUnits,
+		desktopteamMemberDesignationMargin,
+		teamMemberDesignationDesktopMargin,
+		teamMemberDesignationTabMargin,
+		teamMemberDesignationMobileMargin,
+		teamMemberDesignationMarginLink,
+
+
 		teamMemberContent,
 		teamMemberContentHeadingTag,
 		teamMemberContentFontFamily,
@@ -171,6 +181,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [teamMemberNameFontFamily]);
 
+
+	{/* Team Member Designation Control */}
+	const teamMemberDesignationMargin = `${teamMemberDesignationDesktopMargin.top}${teamMemberDesignationMarginUnits} ${teamMemberDesignationDesktopMargin.right}${teamMemberDesignationMarginUnits} ${teamMemberDesignationDesktopMargin.bottom}${teamMemberDesignationMarginUnits} ${teamMemberDesignationDesktopMargin.left}${teamMemberDesignationMarginUnits}`;
+
+	useEffect(() => {
+		if (teamMemberDesignationFontFamily) {
+			const fontUrl = `https://fonts.googleapis.com/css?family=${teamMemberDesignationFontFamily.replace(' ', '+')}`;
+			const linkElement = document.createElement('link');
+			linkElement.rel = 'stylesheet';
+			linkElement.href = fontUrl;
+			document.head.appendChild(linkElement);
+		}
+	}, [teamMemberDesignationFontFamily]);
+
+
+
 	return (
 		<>
 			<style>
@@ -194,6 +220,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
          			color: ${teamMemberNameColor};
          			margin: ${teamMemberNameMargin};
          		}
+         		.fb-team-member-wrapper.${blockID} .fb-team-member-designation {
+         		    font-family: ${teamMemberDesignationFontFamily !== 'default' ? teamMemberDesignationFontFamily : teamMemberDesignationFontFamily};
+                    font-size: ${teamMemberDesignationFontSize !== undefined ? `${teamMemberDesignationFontSize}${teamMemberDesignationFontSizeUnits}` : ''};
+                    font-weight: ${teamMemberDesignationFontWeight};
+                    font-style: ${teamMemberDesignationFontStyle};
+                    text-transform: ${teamMemberDesignationTextTransform};
+                    text-decoration: ${teamMemberDesignationTextDecoration};
+                    ${teamMemberDesignationLetterSpacing !== undefined ? `letter-spacing: ${teamMemberDesignationLetterSpacing}${teamMemberDesignationLetterSpacingUnits};` : ''}
+                    ${teamMemberDesignationLineHeight !== undefined ? `line-height: ${teamMemberDesignationLineHeight}${teamMemberDesignationLineHeightUnits};` : ''}
+         			color: ${teamMemberDesignationColor};
+         			margin: ${teamMemberDesignationMargin};
+         		}
+
              	 @media only screen and (max-width: 1024px) {
                     .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
                         margin: ${teamMemberImageTabMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.left}${teamMemberImageMarginUnits} !important;
@@ -389,14 +428,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
+
 										</PanelBody>
 
 										<PanelBody
 											title={__("Designation", "frontis-blocks")}
 											initialOpen={false}
 										>
-
+											<TeamMemberDesignationControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<TeamMemberDesignationMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
+
 
 										<PanelBody
 											title={__("Short Bio", "frontis-blocks")}
