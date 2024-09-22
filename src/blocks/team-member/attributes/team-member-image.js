@@ -3,6 +3,10 @@ const teamMemberImageAttributes = {
 		type: 'string',
 		default: ''
 	},
+	teamMemberImageBackgroundColor : {
+		type: "string",
+		default: ""
+	},
 	// Padding
 	teamMemberImagePaddingUnits : {
 		type: "string",

@@ -75,7 +75,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberImageMobileBorderRadiusWidth,
 		teamMemberImageActiveBorderRadiusDevice,
 		teamMemberImageBorderRadiusLink,
-
+		teamMemberImageBackgroundColor,
 
 		DeviceType,
 
@@ -245,6 +245,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     margin: ${teamMemberContentMargin};
                     padding: ${teamMemberContentPadding};
                     background: ${teamMemberContentBackgroundColor};
+                }
+                .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+                    background: ${teamMemberImageBackgroundColor};
                 }
          		.fb-team-member-wrapper.${blockID} .fb-team-member-name {
          		    font-family: ${teamMemberNameFontFamily !== 'default' ? teamMemberNameFontFamily : teamMemberNameFontFamily};

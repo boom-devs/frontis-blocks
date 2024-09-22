@@ -40,66 +40,8 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 		teamMemberImageMobileBorderRadiusWidth,
 		teamMemberImageActiveBorderRadiusDevice,
 		teamMemberImageBorderRadiusLink,
+		teamMemberImageBackgroundColor,
 		DeviceType,
-
-		BoxBorder,
-		BoxBorderColor,
-		BoxBorderUnits,
-		BoxDesktopBorderWidth,
-		BoxTabBorderWidth,
-		BoxMobileBorderWidth,
-		BoxBorderLink,
-		BoxBorderRadiusUnits,
-		BoxDesktopBorderRadiusWidth,
-		BoxTabBorderRadiusWidth,
-		BoxMobileBorderRadiusWidth,
-		BoxBorderRadiusLink,
-
-
-		teamMemberName,
-		teamMemberNameteamMemberImageTag,
-		teamMemberNameFontFamily,
-		teamMemberNameFontSize,
-		teamMemberNameFontSizeUnits,
-		teamMemberNameFontWeight,
-		teamMemberNameFontStyle,
-		teamMemberNameTextTransform,
-		teamMemberNameTextDecoration,
-		teamMemberNameLetterSpacing,
-		teamMemberNameLetterSpacingUnits,
-		teamMemberNameLineHeight,
-		teamMemberNameLineHeightUnits,
-		teamMemberNameColor,
-
-		teamMemberDesignation,
-		teamMemberDesignationteamMemberImageTag,
-		teamMemberDesignationFontFamily,
-		teamMemberDesignationFontSize,
-		teamMemberDesignationFontSizeUnits,
-		teamMemberDesignationFontWeight,
-		teamMemberDesignationFontStyle,
-		teamMemberDesignationTextTransform,
-		teamMemberDesignationTextDecoration,
-		teamMemberDesignationLetterSpacing,
-		teamMemberDesignationLetterSpacingUnits,
-		teamMemberDesignationLineHeight,
-		teamMemberDesignationLineHeightUnits,
-		teamMemberDesignationColor,
-
-		teamMemberContent,
-		teamMemberContentteamMemberImageTag,
-		teamMemberContentFontFamily,
-		teamMemberContentFontSize,
-		teamMemberContentFontSizeUnits,
-		teamMemberContentFontWeight,
-		teamMemberContentFontStyle,
-		teamMemberContentTextTransform,
-		teamMemberContentTextDecoration,
-		teamMemberContentLetterSpacing,
-		teamMemberContentLetterSpacingUnits,
-		teamMemberContentLineHeight,
-		teamMemberContentLineHeightUnits,
-		teamMemberContentColor
 
 	} = attributes;
 
@@ -336,6 +278,7 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 				)}
 			/>
 		</BaseControl>
+
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
 				{/* Border Width */}
@@ -471,7 +414,53 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 				</div>
 			</div>
 		</div>
-
+		<BaseControl
+			label={__("Overlay Color", "frontis-blocks")}
+			className="fb-setting-color-setting-wrapper"
+		>
+			<Dropdown
+				className="fb-setting-color-setting-icon-dropdown"
+				contentClassName="fb-setting-color-setting-icon-dropdown-content"
+				popoverProps={{ placement: 'bottom-start' }}
+				renderToggle={({ isOpen, onToggle }) => (
+					<Button
+						variant="primary"
+						onClick={onToggle}
+						aria-expanded={isOpen}
+						aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+						className="fb-setting-color-setting-icon-btn"
+					>
+						<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+					</Button>
+				)}
+				renderContent={() => (
+					<div className="fb-setting-color-setting-icon-popup">
+						<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+							<div className="fb-setting-normal-color">
+								<ColorPicker
+									color={teamMemberImageBorderColor}
+									onChange={(value) => setAttributes({ teamMemberImageBackgroundColor: value })}
+									enableAlpha={true}
+								/>
+								<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+								<ColorPalette
+									colors={[
+										{ color: '#F72585' },
+										{ color: '#7209B7' },
+										{ color: '#3A0CA3' },
+										{ color: '#4361EE' },
+										{ color: '#4CC9F0' },
+									]}
+									disableCustomColors={true}
+									value={teamMemberImageBorderColor}
+									onChange={(value) => setAttributes({ teamMemberImageBackgroundColor: value })}
+								/>
+							</div>
+						</BaseControl>
+					</div>
+				)}
+			/>
+		</BaseControl>
 	</>
 	);
 };
