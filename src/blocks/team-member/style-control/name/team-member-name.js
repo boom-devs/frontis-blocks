@@ -278,6 +278,7 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 				)}
 			/>
 		</BaseControl>
+
 	</>
 	);
 };

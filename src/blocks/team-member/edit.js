@@ -34,6 +34,7 @@ import TeamMemberImageBorderControl from './style-control/image/team-member-imag
 import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
 import TeamMemberNameControl from './style-control/name/team-member-name.js';
+import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -100,6 +101,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberNameLineHeightUnits,
 		teamMemberNameColor,
 
+		teamMemberNameMarginUnits,
+		desktopteamMemberNameMargin,
+		teamMemberNameDesktopMargin,
+		teamMemberNameTabMargin,
+		teamMemberNameMobileMargin,
+		teamMemberNameMarginLink,
+
+
 		teamMemberDesignation,
 		teamMemberDesignationHeadingTag,
 		teamMemberDesignationFontFamily,
@@ -147,9 +156,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const teamMemberImageBorderWidth = `${teamMemberImageDesktopBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.left}${teamMemberImageBorderUnits}`;
 	const teamMemberImageBorderRadiusWidth = `${teamMemberImageDesktopBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits}`;
 	const teamMembberImagePadding = `${teamMemberImageDesktopPadding.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.left}${teamMemberImagePaddingUnits}`;
-	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImagePaddingUnits}`;
+	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImageMarginUnits}`;
 
 	{/* Team Member Name Control */}
+	const teamMemberNameMargin = `${teamMemberNameDesktopMargin.top}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.right}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.bottom}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.left}${teamMemberNameMarginUnits}`;
+
 	useEffect(() => {
 		if (teamMemberNameFontFamily) {
 			const fontUrl = `https://fonts.googleapis.com/css?family=${teamMemberNameFontFamily.replace(' ', '+')}`;
@@ -181,6 +192,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     ${teamMemberNameLetterSpacing !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacing}${teamMemberNameLetterSpacingUnits};` : ''}
                     ${teamMemberNameLineHeight !== undefined ? `line-height: ${teamMemberNameLineHeight}${teamMemberNameLineHeightUnits};` : ''}
          			color: ${teamMemberNameColor};
+         			margin: ${teamMemberNameMargin};
          		}
              	 @media only screen and (max-width: 1024px) {
                     .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
@@ -368,6 +380,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 										>
 											<TeamMemberNameControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<TeamMemberNameMarginControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}

@@ -52,6 +52,52 @@ const teamMemberNameAttributes = {
 		type: "string",
 		default: "#0D173B"
 	},
+
+	// margin
+	teamMemberNameMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	desktopteamMemberNameMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberNameDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberNameTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberNameMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberNameMarginLink : {
+		type : "boolean",
+		default: true
+	},
 };
 
 export default teamMemberNameAttributes;
