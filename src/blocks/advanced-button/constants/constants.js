@@ -27,7 +27,6 @@ export const NORMAL_HOVER = [
 export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "no-icon" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
-	{ label: __(<Dashicon icon={"info"} />), value: "icon-only" },
 ];
 
 export const TEXT_ALIGN = [
