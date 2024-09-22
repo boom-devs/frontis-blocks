@@ -121,10 +121,6 @@ const attributes = {
             right: 0,
         },
     },
-    HeadingActiveBorderDevice: {
-        type: "string",
-        default: "Desktop"
-    },
     HeadingBorderLink : {
         type : "boolean",
         default: true
@@ -159,10 +155,6 @@ const attributes = {
             left: 0,
             right: 0,
         },
-    },
-    HeadingActiveBorderRadiusDevice: {
-        type: "string",
-        default: "Desktop"
     },
     HeadingBorderRadiusLink : {
         type : "boolean",

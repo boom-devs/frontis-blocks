@@ -558,17 +558,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             >
                                                 <BaseControl
                                                     label={__("Heading Alignment", "frontis-blocks")}
-                                                    id="fb-advanced-alignment"
-                                                    className="fb-advanced-alignment"
+                                                    id="fb-setting-text-alignment"
+                                                    className="fb-setting-text-alignment"
                                                 >
                                                     <ButtonGroup
-                                                        className="fb-advanced-alignment-group-btn"
+                                                        className="fb-setting-text-alignment-group-btn"
                                                     >
                                                         {TEXT_ALIGN.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({ HeadingAlignment: item.value })}
-                                                                className={`fb-advanced-alignment-single-btn ${HeadingAlignment === item.value ? 'active' : ''}`}
+                                                                className={`fb-setting-text-alignment-single-btn ${HeadingAlignment === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -578,16 +578,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                                 <BaseControl
                                                     label={__("Heading Tag", "frontis-blocks")}
-                                                    className="fb-setting-tag-wrapper"
+                                                        id="fb-setting-text-alignment"
+                                                        className="fb-setting-text-alignment"
                                                 >
                                                     <ButtonGroup
-                                                     className="fb-setting-tag-inner-wrapper"
+                                                        className="fb-setting-text-alignment-group-btn"
                                                      >
                                                         {HEADING.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({ HeadingTag: item.value })}
-                                                                className={`fb-setting-tag-single-btn ${ HeadingTag === item.value ? 'active' : ''}`}
+                                                                className={`fb-setting-text-alignment-single-btn ${ HeadingTag === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -626,14 +627,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         </BaseControl>
                                                         <BaseControl
                                                             label={__("Sub Heading Tag", "frontis-blocks")}
-                                                            className="fb-advanced-sub-heading-tag"
+                                                            className="fb-setting-text-alignment"
                                                         >
-                                                            <ButtonGroup className="fb-advanced-sub-heading-tag-btn-group">
+                                                            <ButtonGroup className="fb-setting-text-alignment-group-btn">
                                                                 {HEADING.map((item, key) => (
                                                                     <Button
                                                                         key={key}
                                                                         onClick={() => setAttributes({ SubHeadingTag: item.value })}
-                                                                        className={`fb-advanced-sub-heading-single-btn ${SubHeadingTag === item.value ? 'active' : ''}`}
+                                                                        className={`fb-setting-text-alignment-single-btn ${SubHeadingTag === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>
@@ -701,8 +702,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 className="fb-setting-typography"
                                             >
                                                 <Dropdown
-                                                    className="fb-setting-typography-icon-dropdown"
-                                                    contentClassName="fb-setting-typography-dropdown-content"
+                                                    className="fb-setting-dropdown-icon-wrapper"
+                                                    contentClassName="fb-setting-dropdown-icon-content"
                                                     popoverProps={{ placement: 'bottom-start' }}
                                                     renderToggle={({ isOpen, onToggle }) => (
                                                         <Button
@@ -710,9 +711,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             onClick={onToggle}
                                                             aria-expanded={isOpen}
                                                             aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-typography-icon-btn"
+                                                            className="fb-setting-dropdown-icon-btn"
                                                         >
-                                                            <Dashicon icon="edit" className="fb-setting-typography-icon" />
+                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
                                                         </Button>
                                                     )}
                                                     renderContent={() => (
