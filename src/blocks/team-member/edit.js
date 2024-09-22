@@ -31,6 +31,8 @@ import ResponsiveControl from "../../components/responsivecontrol";
 import {HEADING} from "../info-box/constants/constants";
 
 import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
+import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
+import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -42,7 +44,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberImageTabPadding,
 		teamMemberImageMobilePadding,
 		teamMemberImagePaddingLink,
-		
+
+		teamMemberImageMarginUnits,
+		desktopteamMemberImageMargin,
+		teamMemberImageDesktopMargin,
+		teamMemberImageTabMargin,
+		teamMemberImageMobileMargin,
+		teamMemberImageMarginLink,
+
 		teamMemberImageBorder,
 		teamMemberImageBorderColor,
 		teamMemberImageBorderUnits,
@@ -136,8 +145,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	{/* Team Member Image Control */}
 	const teamMemberImageBorderWidth = `${teamMemberImageDesktopBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.left}${teamMemberImageBorderUnits}`;
 	const teamMemberImageBorderRadiusWidth = `${teamMemberImageDesktopBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits}`;
-
-
+	const teamMembberImagePadding = `${teamMemberImageDesktopPadding.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.left}${teamMemberImagePaddingUnits}`;
+	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImagePaddingUnits}`;
 
 	return (
 		<>
@@ -148,6 +157,23 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     border-color: ${teamMemberImageBorderColor};
                     border-width: ${teamMemberImageBorderWidth};
                     border-radius: ${teamMemberImageBorderRadiusWidth};
+                    margin: ${teamMemberImageMargin};
+                }
+
+             	 @media only screen and (max-width: 1024px) {
+                    .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
+                        margin: ${teamMemberImageTabMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.left}${teamMemberImageMarginUnits} !important;
+                        border-width: ${teamMemberImageTabBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.left}${teamMemberImageBorderUnits} !important;
+                        border-radius: ${teamMemberImageTabBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits} !important;
+                    }
+                }
+
+                @media only screen and (max-width: 767px) {
+                    .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
+                        margin: ${teamMemberImageMobileMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageMobileMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageMobileMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageMobileMargin.left}${teamMemberImageMarginUnits} !important;
+                        border-width: ${teamMemberImageMobileBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.left}${teamMemberImageBorderUnits} !important;
+                        border-radius: ${teamMemberImageMobileBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits} !important;
+                    }
                 }
             `}
 			</style>
@@ -306,9 +332,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
+											<TeamMemberImageMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 
 										</PanelBody>
-
 
 
 										<PanelBody

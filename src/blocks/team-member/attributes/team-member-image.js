@@ -3,6 +3,7 @@ const teamMemberImageAttributes = {
 		type: 'string',
 		default: ''
 	},
+	// Padding
 	teamMemberImagePaddingUnits : {
 		type: "string",
 		default: "px"
@@ -47,7 +48,51 @@ const teamMemberImageAttributes = {
 		type : "boolean",
 		default: true
 	},
-
+	// margin
+	teamMemberImageMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	desktopteamMemberImageMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberImageDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberImageTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberImageMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberImageMarginLink : {
+		type : "boolean",
+		default: true
+	},
 	// Border
 	teamMemberImageBorder: {
 		type: 'string',
