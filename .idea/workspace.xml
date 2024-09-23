@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a674843-5435-47dc-8224-325a312fece9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/box-shadow/control.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/box-shadow/editor.lazy.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/box-shadow/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/blocks/post-grid/block.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/blocks/post-grid/render.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blocks/post-grid/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/blocks/post-grid/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/box-shadow/control.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/box-shadow/control.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/box-shadow/editor.lazy.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/box-shadow/editor.lazy.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/box-shadow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/box-shadow/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +55,7 @@
       <updated>1726999902362</updated>
       <workItem from="1726999903572" duration="1700000" />
       <workItem from="1727005987432" duration="4852000" />
-      <workItem from="1727073357987" duration="6291000" />
+      <workItem from="1727073357987" duration="9846000" />
     </task>
     <servers />
   </component>

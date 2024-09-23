@@ -4,7 +4,7 @@ import Control from './Control'
 import {BaseControl, Button, Dashicon, Modal} from "@wordpress/components";
 import './editor.lazy.scss';
 
-export default function FB_BoxShadowControl() {
+export default function FB_BoxShadowControl({boxShadowHandler}) {
 	const [boxShadow, setBoxShadow] = useState([23, 23, 0, 10, " ", "#00000045"]);
 
 	const [ isOpen, setOpen ] = useState( false );
@@ -23,6 +23,8 @@ export default function FB_BoxShadowControl() {
 				setBoxShadow(boxShadow.map((c, i) => i === index ? +e.target.value : c));
 				break;
 		}
+
+		boxShadowHandler(boxShadow);
 	}
 
 	const shadowArrayToString = (element) => {
@@ -39,7 +41,7 @@ export default function FB_BoxShadowControl() {
 			</BaseControl>
 
 			{ isOpen && (
-				<Modal title="This is my modal" onRequestClose={closeModal}>
+				<Modal onRequestClose={closeModal}>
 					<div className="controlPane controls">
 						<Control label="Inset" type="checkbox" value={boxShadow[4]}
 								 onChangeHandler={e => onChangeHandler(e, 4)}/>

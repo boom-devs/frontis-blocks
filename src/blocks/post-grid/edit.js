@@ -34,6 +34,22 @@ import './editor.scss';
 export default function Edit (props) {
 	const { attributes, setAttributes } = props;
 	const { headLoadGoogleFonts } = attributes;
+
+	const boxShadowHandler = (boxShadow) => {
+		console.log(boxShadow)
+
+		// How to render boxshadow in div style
+
+		// boxShadow: boxShadow.map(shadowArrayToString).join(" "),
+		// const shadowArrayToString = (element) => {
+		// 	if (typeof element === "number") {
+		// 		return element + "px";
+		// 	}
+		// 	return element;
+		// }
+
+		// setAttributes({boxShadow: boxShadow});
+	}
 	return (
 		<>
 			<InspectorControls>
@@ -46,7 +62,7 @@ export default function Edit (props) {
 					{/*		label: 'headLoadGoogleFonts',*/}
 					{/*	} }*/}
 					{/*></TypographyControl>*/}
-					<FB_BoxShadowControl />
+					<FB_BoxShadowControl boxShadowHandler={boxShadowHandler} />
 
 				</PanelBody>
 			</InspectorControls>
