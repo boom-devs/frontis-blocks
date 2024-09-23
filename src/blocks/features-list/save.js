@@ -7,7 +7,11 @@ export default function Save({ attributes }) {
 
         blockID,
         FeatureItems,
+        FeatureIconShape,
         FeatureTag,
+        FeatureAlignment,
+        FeatureIconAlignment,
+
         FeatureListGapDesktop,
         FeatureListGapTablet,
         FeatureListGapMobile,
@@ -298,19 +302,24 @@ export default function Save({ attributes }) {
 
             <div {...blockProps}>
                 <div className="fb-feature-wrapper">
-                    <div className="fb-feature-list-wrapper">
+                    <div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>
                         <ul className="fb-feature-list-items">
                             {FeatureItems.map(item => (
+                                  
                                 <li key={item.id} className="fb-feature-list-item">
-                                    <div className="fb-feature-list-icon-box">
-                                        <div className="fb-feature-list-icon-inner">
-                                            <span className="fb-feature-list-icon">
-                                                {renderSVG(item.FeatureIcon)}
-                                            </span>
+
+                                    { item.FeatureIconAlign !== 'none' && (
+                                        <div className="fb-feature-list-icon-box">
+                                            <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                                <span className="fb-feature-list-icon">
+                                                    {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    ) }
+                                    
                                     <div className="fb-feature-list-content">
-                                    <RichText.Content
+                                        <RichText.Content
                                             tagName={FeatureTag}
                                             className="fb-feature-list-title"
                                             value={item.Title}
@@ -327,6 +336,7 @@ export default function Save({ attributes }) {
                     </div>
                 </div>
             </div>
+            
         </>
     );
 }
