@@ -19,6 +19,20 @@ class Blocks
         add_action('init', [$this, 'register_blocks']);
         add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
         add_filter('render_block', [$this, 'render_block'], 10, 3);
+        add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ) );
+    }
+
+    public function editor_assets(){
+        $fb_ajax_nonce = wp_create_nonce( 'fb_ajax_nonce' );
+
+        wp_enqueue_script('fb_block_ediotr', FB_PLUGIN_URL . '/assets/js/fb-editor.js', [], time(), true);
+
+        $fb_blocks_info = [
+            'fb_select_font_globally' => [],
+            'fb_load_select_font_globally'=> 'false'
+        ];
+
+        wp_localize_script('fb_block_ediotr', 'fb_blocks_info', $fb_blocks_info);
     }
 
     public function register_blocks()

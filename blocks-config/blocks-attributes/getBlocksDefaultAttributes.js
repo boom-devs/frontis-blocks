@@ -1,5 +1,5 @@
 
-import postGridAttribute from '@Blocks/post/post-grid/attributes';
+import postGridAttribute from '@Blocks/post-grid/attributes';
 
 
 export const blocksAttributes = {

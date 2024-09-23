@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
 import {InspectorControls, RichText, useBlockProps} from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
 import FB_BoxShadowControl from "@Components/box-shadow";
+import TypographyControl from '@Components/typography';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -34,6 +35,7 @@ import './editor.scss';
 export default function Edit (props) {
 	const { attributes, setAttributes } = props;
 	const {
+		headLoadGoogleFonts,
 		headFontFamily,
 		headFontWeight,
 		headFontStyle,
@@ -50,7 +52,9 @@ export default function Edit (props) {
 		headLetterSpacing,
 		headLetterSpacingTablet,
 		headLetterSpacingMobile,
-		headLetterSpacingType } = attributes;
+		headLetterSpacingType,
+		headTransform,
+		headDecoration } = attributes;
 
 	const boxShadowHandler = (boxShadow) => {
 		console.log(boxShadow)
@@ -72,7 +76,7 @@ export default function Edit (props) {
 			<InspectorControls>
 				<PanelBody title={ __('Settings', 'text-domain') }>
 				<TypographyControl
-					label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
+					label={ __( 'Typography', 'text-domain' ) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 					loadGoogleFonts={ {
@@ -161,7 +165,9 @@ export default function Edit (props) {
 				</PanelBody>
 			</InspectorControls>
 
-			<RichText text={ 'Hello world' } />
+			<p>
+				{__('This is post grid', 'text')}
+			</p>
 			
 		</>
 	);

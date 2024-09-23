@@ -28,7 +28,8 @@ const attributes = {
 		type: 'string',
 
 		
-	},
+    },
+    
 	headDecoration: {
 		type: 'string',
 

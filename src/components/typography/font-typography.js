@@ -6,8 +6,10 @@ import FBSelectControl from '@Components/select-control';
 import RangeTypographyControl from './range-typography';
 import googleFonts from '@Controls/fonts';
 import Select from 'react-select';
+const fb_blocks_info = {
 
-const { uag_select_font_globally, uag_load_select_font_globally } = fb_blocks_info;
+};
+const { fb_select_font_globally, fb_load_select_font_globally } = fb_blocks_info;
 
 function FontFamilyControl( props ) {
 	const fonts = [
@@ -45,7 +47,7 @@ function FontFamilyControl( props ) {
 
 	let fontWeight = '';
 
-	const customFonts = fb_blocks_info.frontis_custom_fonts;
+	// const customFonts = fb_blocks_info.frontis_custom_fonts;
 
 	//Push Google Fonts into stytem fonts object
 	// eslint-disable-next-line array-callback-return
@@ -59,12 +61,12 @@ function FontFamilyControl( props ) {
 
 	//Push custom Fonts into stytem fonts object.
 	// eslint-disable-next-line array-callback-return
-	Object.keys( customFonts ).map( ( k ) => {
-		fonts.push( { value: k, label: k, weight: customFonts[ k ].weight } );
-		if ( k === props.fontFamily.value ) {
-			fontWeight = customFonts[ k ].weight;
-		}
-	} );
+	// Object.keys( customFonts ).map( ( k ) => {
+	// 	fonts.push( { value: k, label: k, weight: customFonts[ k ].weight } );
+	// 	if ( k === props.fontFamily.value ) {
+	// 		fontWeight = customFonts[ k ].weight;
+	// 	}
+	// } );
 
 	// check if the font is a system font and then apply the font weight accordingly.
 	if ( fontWeight === '' ) {
@@ -99,8 +101,8 @@ function FontFamilyControl( props ) {
 	};
 
 	const gFonts =
-		uag_load_select_font_globally === 'enabled' && uag_select_font_globally !== 0
-			? uag_select_font_globally
+		fb_load_select_font_globally === 'enabled' && fb_select_font_globally !== 0
+			? fb_select_font_globally
 			: fonts;
 
 	const customSelectStyles = {
