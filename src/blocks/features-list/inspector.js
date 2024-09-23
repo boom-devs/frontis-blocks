@@ -193,9 +193,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ FeatureItems: updatedItems });
     };
     
-
-
-
     /** Start Padding */
     const [previousPadding, setPreviousPadding] = useState(FeatureDesktopPadding);
     /** Function to update all padding values */
@@ -273,7 +270,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [FeatureDesktopPadding]);
 
     /** Default padding for desktop (using desktop_padding) */
-    const padding = `${FeatureDesktopPadding.top}${FeaturePaddingUnits} ${FeatureDesktopPadding.right}${FeaturePaddingUnits} ${FeatureDesktopPadding.bottom}${FeaturePaddingUnits} ${FeatureDesktopPadding.left}${FeaturePaddingUnits}`;
+    const DesktopPadding    = `${FeatureDesktopPadding.top}${FeaturePaddingUnits} ${FeatureDesktopPadding.right}${FeaturePaddingUnits} ${FeatureDesktopPadding.bottom}${FeaturePaddingUnits} ${FeatureDesktopPadding.left}${FeaturePaddingUnits}`;
+    const TabPadding        = `${FeatureTabPadding.top}${FeaturePaddingUnits} ${FeatureTabPadding.right}${FeaturePaddingUnits} ${FeatureTabPadding.bottom}${FeaturePaddingUnits} ${FeatureTabPadding.left}${FeaturePaddingUnits}`;
+    const MobilePadding     = `${FeatureMobilePadding.top}${FeaturePaddingUnits} ${FeatureMobilePadding.right}${FeaturePaddingUnits} ${FeatureMobilePadding.bottom}${FeaturePaddingUnits} ${FeatureMobilePadding.left}${FeaturePaddingUnits}`;
     /** End Padding */
 
     /** Start Margin */
@@ -353,7 +352,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [FeatureDesktopMargin]);
 
     /** Default margin for desktop (using desktop_margin) */
-    const margin = `${FeatureDesktopMargin.top}${FeaturePaddingUnits} ${FeatureDesktopMargin.right}${FeaturePaddingUnits} ${FeatureDesktopMargin.bottom}${FeaturePaddingUnits} ${FeatureDesktopMargin.left}${FeaturePaddingUnits}`;
+    const DesktopMargin     = `${FeatureDesktopMargin.top}${FeatureMarginUnits} ${FeatureDesktopMargin.right}${FeatureMarginUnits} ${FeatureDesktopMargin.bottom}${FeatureMarginUnits} ${FeatureDesktopMargin.left}${FeatureMarginUnits}`;
+    const TabMargin         = `${FeatureTabMargin.top}${FeatureMarginUnits} ${FeatureTabMargin.right}${FeatureMarginUnits} ${FeatureTabMargin.bottom}${FeatureMarginUnits} ${FeatureTabMargin.left}${FeatureMarginUnits}`;
+    const MobileMargin      = `${FeatureMobileMargin.top}${FeatureMarginUnits} ${FeatureMobileMargin.right}${FeatureMarginUnits} ${FeatureMobileMargin.bottom}${FeatureMarginUnits} ${FeatureMobileMargin.left}${FeatureMarginUnits}`;
     /** End Margin */
 
 
@@ -434,7 +435,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [FeatureDesktopBorderWidth]);
 
     /** Default Border Width for desktop (using FeatureDesktopBorderWidth) */
-    const borderWidth = `${FeatureDesktopBorderWidth.top}${FeatureBorderUnits} ${FeatureDesktopBorderWidth.right}${FeatureBorderUnits} ${FeatureDesktopBorderWidth.bottom}${FeatureBorderUnits} ${FeatureDesktopBorderWidth.left}${FeatureBorderUnits}`;
+    const DesktopBorderWidth    = `${FeatureDesktopBorderWidth.top}${FeatureBorderUnits} ${FeatureDesktopBorderWidth.right}${FeatureBorderUnits} ${FeatureDesktopBorderWidth.bottom}${FeatureBorderUnits} ${FeatureDesktopBorderWidth.left}${FeatureBorderUnits}`;
+    const TabBorderWidth        = `${FeatureTabBorderWidth.top}${FeatureBorderUnits} ${FeatureTabBorderWidth.right}${FeatureBorderUnits} ${FeatureTabBorderWidth.bottom}${FeatureBorderUnits} ${FeatureTabBorderWidth.left}${FeatureBorderUnits}`;
+    const MobileBorderWidth     = `${FeatureMobileBorderWidth.top}${FeatureBorderUnits} ${FeatureMobileBorderWidth.right}${FeatureBorderUnits} ${FeatureMobileBorderWidth.bottom}${FeatureBorderUnits} ${FeatureMobileBorderWidth.left}${FeatureBorderUnits}`;
     /** End Border Width */
 
     /** Start Border Radius Width */
@@ -514,7 +517,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [FeatureDesktopBorderRadiusWidth]);
 
     /** Default Border Width for desktop (using FeatureDesktopBorderWidth) */
-    const borderRadiusWidth = `${FeatureDesktopBorderRadiusWidth.top}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.right}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.bottom}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.left}${FeatureBorderRadiusUnits}`;
+    const DesktopBorderRadiusWidth = `${FeatureDesktopBorderRadiusWidth.top}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.right}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.bottom}${FeatureBorderRadiusUnits} ${FeatureDesktopBorderRadiusWidth.left}${FeatureBorderRadiusUnits}`;
+    const TabBorderRadiusWidth = `${FeatureTabBorderRadiusWidth.top}${FeatureBorderRadiusUnits} ${FeatureTabBorderRadiusWidth.right}${FeatureBorderRadiusUnits} ${FeatureTabBorderRadiusWidth.bottom}${FeatureBorderRadiusUnits} ${FeatureTabBorderRadiusWidth.left}${FeatureBorderRadiusUnits}`;
+    const MobileBorderRadiusWidth = `${FeatureMobileBorderRadiusWidth.top}${FeatureBorderRadiusUnits} ${FeatureMobileBorderRadiusWidth.right}${FeatureBorderRadiusUnits} ${FeatureMobileBorderRadiusWidth.bottom}${FeatureBorderRadiusUnits} ${FeatureMobileBorderRadiusWidth.left}${FeatureBorderRadiusUnits}`;
     /** End Border Radius Width */ 
 
     
@@ -528,11 +533,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
                 .fb-feature-main-wrapper.${blockID} {
                     ${FeatureBgColor !== undefined ? `background-color: ${FeatureBgColor};` : ''};
-                    padding: ${padding};
-                    margin: ${margin};
+                    padding: ${DesktopPadding};
+                    margin: ${DesktopMargin};
                     border: ${FeatureBorder};
-                    border-width: ${borderWidth};
-                    border-radius: ${borderRadiusWidth} !important;
+                    border-width: ${DesktopBorderWidth};
+                    border-radius: ${DesktopBorderRadiusWidth} !important;
                     ${FeatureBorderColor !== undefined ? `border-color: ${FeatureBorderColor};` : ''};
                     transition: all .3s ease-in-out;
                 }
@@ -553,8 +558,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon:hover svg {
                     fill: ${FeatureIconHoverColor};
-                    height: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
-                    width: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
                     margin-right: ${FeatureIconSpacingDesktop}${FeatureIconSpacingUnits}!important;
@@ -594,7 +597,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     font-weight: ${FeatureDescFontWeight};
                     font-style: ${FeatureDescFontStyle};
                     text-transform: ${FeatureDescTextTransform};
-                    text-decoration: ${FeatureTitleTextDecoration};
+                    text-decoration: ${FeatureDescTextDecoration};
                     letter-spacing: ${FeatureDescLetterSpacingDesktop}${FeatureDescLetterSpacingUnits};
                     line-height: ${FeatureDescLineHeightDesktop}${FeatureDescLineHeightUnits};
                     color: ${FeatureDescColor};
@@ -604,20 +607,78 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
 
                 @media only screen and (max-width: 1024px) {
+
+                    .fb-feature-main-wrapper.${blockID} {
+                        padding: ${TabPadding};
+                        margin: ${TabMargin};
+                        border-width: ${TabBorderWidth};
+                        border-radius: ${TabBorderRadiusWidth} !important;
+                    }
+
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
                         padding-bottom: calc(${FeatureListGapTablet}${FeatureListGapUnits} / 2);
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
                         padding-top: calc(${FeatureListGapTablet}${FeatureListGapUnits} / 2);
                     }
+
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
+                        height: ${FeatureIconSizeTablet}${FeatureIconSizeUnits};
+                        width: ${FeatureIconSizeTablet}${FeatureIconSizeUnits};
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon {
+                        width: ${FeatureIconBgSizeTablet}${FeatureIconBgSizeUnits};
+                        height: ${FeatureIconBgSizeTablet}${FeatureIconBgSizeUnits};
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
+                        margin-right: ${FeatureIconSpacingTablet}${FeatureIconSpacingUnits}!important;
+                    }
+
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
+                        font-size: ${FeatureTitleFontSizeTablet}${FeatureTitleFontSizeUnits};
+                        letter-spacing: ${FeatureTitleLetterSpacingTablet}${FeatureTitleLetterSpacingUnits};
+                        line-height: ${FeatureTitleLineHeightTablet}${FeatureTitleLineHeightUnits};
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
+                        font-size: ${FeatureDescFontSizeTablet}${FeatureDescFontSizeUnits};
+                        letter-spacing: ${FeatureDescLetterSpacingTablet}${FeatureDescLetterSpacingUnits};
+                        line-height: ${FeatureDescLineHeightTablet}${FeatureDescLineHeightUnits};
+                    }
                 }
 
                 @media only screen and (max-width: 767px) {
+                    .fb-feature-main-wrapper.${blockID} {
+                        padding: ${MobilePadding};
+                        margin: ${MobileMargin};
+                        border-width: ${MobileBorderWidth};
+                        border-radius: ${MobileBorderRadiusWidth} !important;
+                    }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
                         padding-bottom: calc(${FeatureListGapMobile}${FeatureListGapUnits} / 2);
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
                         padding-top: calc(${FeatureListGapMobile}${FeatureListGapUnits} / 2);
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
+                        height: ${FeatureIconSizeMobile}${FeatureIconSizeUnits};
+                        width: ${FeatureIconSizeMobile}${FeatureIconSizeUnits};
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon {
+                        width: ${FeatureIconBgSizeMobile}${FeatureIconBgSizeUnits};
+                        height: ${FeatureIconBgSizeMobile}${FeatureIconBgSizeUnits};
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
+                        margin-right: ${FeatureIconSpacingMobile}${FeatureIconSpacingUnits}!important;
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
+                        font-size: ${FeatureTitleFontSizeMobile}${FeatureTitleFontSizeUnits};
+                        letter-spacing: ${FeatureTitleLetterSpacingMobile}${FeatureTitleLetterSpacingUnits};
+                        line-height: ${FeatureTitleLineHeightMobile}${FeatureTitleLineHeightUnits};
+                    }
+                    .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
+                        font-size: ${FeatureDescFontSizeMobile}${FeatureDescFontSizeUnits};
+                        letter-spacing: ${FeatureDescLetterSpacingMobile}${FeatureDescLetterSpacingUnits};
+                        line-height: ${FeatureDescLineHeightMobile}${FeatureDescLineHeightUnits};
                     }
                 }
 
