@@ -1,0 +1,13 @@
+.controlPane {
+	&.controls {
+		.paneChild {
+			display: flex;
+			/* align-items: center; */
+			flex-direction: row;
+
+			&.color {
+				flex-direction: column;
+			}
+		}
+	}
+}
