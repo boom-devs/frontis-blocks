@@ -34,6 +34,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         TestimonialRatinIconAlign,
         TestimonialQuoteIcon,
         TestimonialQuoteIconAlign,
+
+        TestimonialImageRadiusUnits,
+        TestimonialImageDesktopRadiusWidth,
+        TestimonialImagelTabRadiusWidth,
+        TestimonialImageMobileRadiusWidth,
+        TestimonialImageRadiusLink,
+
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -124,7 +131,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
                                         </div>
                                     )}
-                                    <div className="fb-testimonial-userinfo-container">
+                                    <div className="fb-testimonial-userdesc-container">
                                         <RichText
                                             tagName="p"
                                             value={TestimonialDesc}

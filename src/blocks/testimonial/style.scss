@@ -31,44 +31,25 @@
                             .fb-testimonial-image {
                                 img {
                                     max-width: 100%;
-                                    border-radius: 50%;
                                 }
                             }
                         }
                     }
 
                     .fb-testimonial-description-container {
-                        padding: 20px 0 0;
-                        width: 100%;
                         
                         .fb-testimonial-quote-icon {
                             svg {
-                                width: 100px;
-                                height: 100px;
-                                fill: #FFB400;
+                                transition: ease-in-out 0.5s;
                             }
                         }
 
-                        .fb-testimonial-userinfo-container {
+                        .fb-testimonial-userdesc-container {
                             margin-bottom: 10px;
+                        }
 
-                            .fb-user-desc {
-                                font-size: 18px;
-                                font-style: italic;
-                                color: #333;
-                            }
-
-                            .fb-user {
-                                font-size: 20px;
-                                font-weight: bold;
-                                color: #111;
-                            }
-
-                            .fb-user-designation {
-                                font-size: 16px;
-                                color: #777;
-                            }
-
+                        .fb-testimonial-userinfo-container {
+                            
                             .fb-testimonial-rating {
                                 margin-top: 10px;
 
@@ -76,9 +57,7 @@
                                     display: inline-block;
                                 }
                                 svg {
-                                    width: 20px;
-                                    height: 20px;
-                                    fill: #FFB400;
+                                    transition: ease-in-out 0.5s;
                                 }
                             }
                         }
