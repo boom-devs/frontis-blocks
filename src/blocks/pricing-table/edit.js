@@ -132,9 +132,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pricingTablePriceAmountDesktopMargin,
 		pricingTablePriceAmountTabMargin,
 		pricingTablePriceAmountMobileMargin,
-		pricingTablePriceAmountMarginLink
+		pricingTablePriceAmountMarginLink,
 
-
+		// price period
+		pricingTablePricePeriod,
+		pricingTablePricePeriodFontFamily,
+		pricingTablePricePeriodFontSize,
+		pricingTablePricePeriodFontSizeUnits,
+		pricingTablePricePeriodFontWeight,
+		pricingTablePricePeriodFontStyle,
+		pricingTablePricePeriodTextTransform,
+		pricingTablePricePeriodTextDecoration,
+		pricingTablePricePeriodLetterSpacing,
+		pricingTablePricePeriodLetterSpacingUnits,
+		pricingTablePricePeriodLineHeight,
+		pricingTablePricePeriodLineHeightUnits,
+		pricingTablePricePeriodColor,
+		pricingTablePricePeriodMarginUnits,
+		desktoppricingTablePricePeriodMargin,
+		pricingTablePricePeriodDesktopMargin,
+		pricingTablePricePeriodTabMargin,
+		pricingTablePricePeriodMobileMargin,
+		pricingTablePricePeriodMarginLink,
 
 	} = attributes;
 
@@ -198,9 +217,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													{HEADING.map((item, key) => (
 														<Button
 															key={key}
-															onClick={() => setAttributes({ pricingTableHeaderName: item.value })}
+															onClick={() => setAttributes({ pricingTableHeaderNameHeadingTag: item.value })}
 															className={`fb-setting-tag-single-btn ${
-																attributes.pricingTableHeaderName === item.value ? 'active' : ''
+																attributes.pricingTableHeaderNameHeadingTag === item.value ? 'active' : ''
 															}`}
 														>
 															{item.label}
@@ -230,6 +249,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												value={attributes.pricingTablePriceAmount}
 												onChange={(value) => setAttributes({ pricingTablePriceAmount: value })}
 												placeholder={__('9.99', 'frontis-block')}
+											/>
+											<TextControl
+												label={__('Period', 'frontis-blocks')}
+												value={attributes.pricingTablePricePeriod}
+												onChange={(value) => setAttributes({ pricingTablePricePeriod: value })}
+												placeholder={__('/month', 'frontis-block')}
 											/>
 										</PanelBody>
 
@@ -367,7 +392,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									className="fb-pricing-table-price-amount"
 								/>
 							</div>
-							<span className={`fb-pricing-table-price-period`}>/ month</span>
+							<RichText
+								tagName={'span'}
+								value={pricingTablePricePeriod}
+								onChange={(value) => setAttributes({pricingTablePricePeriod: value})}
+								className="fb-pricing-table-price-period"
+							/>
 						</div>
 						<div className={`fb-pricing-table-feature`}>
 							<div className={`fb-pricing-table-feature-item`}>

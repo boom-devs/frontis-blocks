@@ -10,6 +10,7 @@ export default function save({ attributes }) {
 		pricingTableHeaderContent,
 		pricingTablePricePrefix,
 		pricingTablePriceAmount,
+		pricingTablePricePeriod,
 
 	} = attributes;
 
@@ -31,7 +32,7 @@ export default function save({ attributes }) {
 							{pricingTablePricePrefix}
 							{pricingTablePriceAmount}
 						</div>
-						<span className={`fb-pricing-table-price-period`}>/ month</span>
+						{pricingTablePricePeriod}
 					</div>
 					<div className={`fb-pricing-table-feature`}>
 						<div className={`fb-pricing-table-feature-item`}>
