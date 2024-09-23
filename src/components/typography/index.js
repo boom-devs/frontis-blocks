@@ -18,7 +18,7 @@ import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import { select } from '@wordpress/data';
 import getFBEditorStateLocalStorage from '@Controls/getFBEditorStateLocalStorage';
-// import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
+import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 import FBHelpText from '@Components/help-text';
 
 // Export for ease of importing in individual blocks.
@@ -29,7 +29,7 @@ const TypographyControl = ( props ) => {
 	const panelRef = useRef( null );
 
 	const [ showAdvancedControls, toggleAdvancedControls ] = useState( false );
-	// const allBlocksAttributes = applyFilters( 'fb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
+	const allBlocksAttributes = applyFilters( 'fb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
 
 	useLayoutEffect( () => {
 		window.addEventListener( 'click', function ( e ) {

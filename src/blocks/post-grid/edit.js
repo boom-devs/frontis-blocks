@@ -33,7 +33,24 @@ import './editor.scss';
  */
 export default function Edit (props) {
 	const { attributes, setAttributes } = props;
-	const { headLoadGoogleFonts } = attributes;
+	const {
+		headFontFamily,
+		headFontWeight,
+		headFontStyle,
+		headFontSizeType,
+		headFontSizeTypeMobile,
+		headFontSizeTypeTablet,
+		headFontSize,
+		headFontSizeMobile,
+		headFontSizeTablet,
+		headLineHeightType,
+		headLineHeight,
+		headLineHeightMobile,
+		headLineHeightTablet,
+		headLetterSpacing,
+		headLetterSpacingTablet,
+		headLetterSpacingMobile,
+		headLetterSpacingType } = attributes;
 
 	const boxShadowHandler = (boxShadow) => {
 		console.log(boxShadow)
@@ -54,20 +71,98 @@ export default function Edit (props) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __('Settings', 'text-domain') }>
-					{/*<TypographyControl*/}
-					{/*	attributes={ attributes }*/}
-					{/*	setAttributes={ setAttributes }*/}
-					{/*	loadGoogleFonts={ {*/}
-					{/*		value: headLoadGoogleFonts,*/}
-					{/*		label: 'headLoadGoogleFonts',*/}
-					{/*	} }*/}
-					{/*></TypographyControl>*/}
+				<TypographyControl
+					label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					loadGoogleFonts={ {
+						value: headLoadGoogleFonts,
+						label: 'headLoadGoogleFonts',
+					} }
+					fontFamily={ {
+						value: headFontFamily,
+						label: 'headFontFamily',
+					} }
+					fontWeight={ {
+						value: headFontWeight,
+						label: 'headFontWeight',
+					} }
+					fontStyle={ {
+						value: headFontStyle,
+						label: 'headFontStyle',
+					} }
+					transform={ {
+						value: headTransform,
+						label: 'headTransform',
+					} }
+					decoration={ {
+						value: headDecoration,
+						label: 'headDecoration',
+					} }
+					fontSizeType={ {
+						value: headFontSizeType,
+						label: 'headFontSizeType',
+					} }
+					fontSizeTypeMobile={ {
+						value: headFontSizeTypeMobile,
+						label: 'headFontSizeTypeMobile',
+					} }
+					fontSizeTypeTablet={ {
+						value: headFontSizeTypeTablet,
+						label: 'headFontSizeTypeTablet',
+					} }
+					fontSize={ {
+						value: headFontSize,
+						label: 'headFontSize',
+					} }
+					fontSizeMobile={ {
+						value: headFontSizeMobile,
+						label: 'headFontSizeMobile',
+					} }
+					fontSizeTablet={ {
+						value: headFontSizeTablet,
+						label: 'headFontSizeTablet',
+					} }
+					lineHeightType={ {
+						value: headLineHeightType,
+						label: 'headLineHeightType',
+					} }
+					lineHeight={ {
+						value: headLineHeight,
+						label: 'headLineHeight',
+					} }
+					lineHeightMobile={ {
+						value: headLineHeightMobile,
+						label: 'headLineHeightMobile',
+					} }
+					lineHeightTablet={ {
+						value: headLineHeightTablet,
+						label: 'headLineHeightTablet',
+					} }
+					letterSpacing={ {
+						value: headLetterSpacing,
+						label: 'headLetterSpacing',
+					} }
+					letterSpacingTablet={ {
+						value: headLetterSpacingTablet,
+						label: 'headLetterSpacingTablet',
+					} }
+					letterSpacingMobile={ {
+						value: headLetterSpacingMobile,
+						label: 'headLetterSpacingMobile',
+					} }
+					letterSpacingType={ {
+						value: headLetterSpacingType,
+						label: 'headLetterSpacingType',
+					} }
+				/>
 					<FB_BoxShadowControl boxShadowHandler={boxShadowHandler} />
 
 				</PanelBody>
 			</InspectorControls>
 
-			<RichText text={'Hello world'} />
+			<RichText text={ 'Hello world' } />
+			
 		</>
 	);
 }
