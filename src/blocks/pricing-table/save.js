@@ -12,6 +12,9 @@ export default function save({ attributes }) {
 		pricingTablePriceAmount,
 		pricingTablePricePeriod,
 
+		FeatureItems,
+		FeatureTag
+
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -34,13 +37,32 @@ export default function save({ attributes }) {
 						</div>
 						{pricingTablePricePeriod}
 					</div>
-					<div className={`fb-pricing-table-feature`}>
-						<div className={`fb-pricing-table-feature-item`}>
-								<span className={`fb-pricing-table-feature-icon`}>
-
-								</span>
-							<span className={`fb-pricing-table-feature-title`}>Customization options</span>
-						</div>
+					<div className="fb-feature-list-wrapper">
+						<ul className="fb-feature-list-items">
+							{FeatureItems.map(item => (
+								<li key={item.id} className="fb-feature-list-item">
+									<div className="fb-feature-list-icon-box">
+										<div className="fb-feature-list-icon-inner">
+                                        <span className="fb-feature-list-icon">
+                                            {renderSVG(item.FeatureIcon)}
+                                        </span>
+										</div>
+									</div>
+									<div className="fb-feature-list-content">
+										<RichText.Content
+											tagName={FeatureTag}
+											className="fb-feature-list-title"
+											value={item.Title}
+										/>
+										<RichText.Content
+											tagName="p"
+											className="fb-feature-list-text"
+											value={item.Description}
+										/>
+									</div>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 			</div>

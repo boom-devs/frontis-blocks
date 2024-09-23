@@ -22,13 +22,19 @@ import {
 	ColorPalette,
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
-import {useEffect, useRef, useState} from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import './editor.scss';
-import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, SELECT_TYPE, iconType} from "./constants/constants";
+import {	NORMAL_HOVER,
+	UNIT_TYPES,
+	TEXT_ALIGN,
+	HEADING,
+	FONT_FAMILYS,
+	BORDER_STYLES} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import ResponsiveControl from "../../components/responsivecontrol";
-import {HEADING} from "../info-box/constants/constants";
 
 import TeamMemberContentBorderControl from './style-control/content/team-member-content-border.js';
 import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin.js';
@@ -42,6 +48,10 @@ import TeamMemberNameControl from './style-control/name/team-member-name.js';
 import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
 import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
 import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
+import PricingTableFeaturesControl from './style-control/features/pricing-table-features-control.js';
+
+import SortableItem from './sortableItem.js';
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -155,6 +165,108 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pricingTablePricePeriodMobileMargin,
 		pricingTablePricePeriodMarginLink,
 
+		// Features
+		DeviceType,
+		FeatureItems,
+		FeatureTag,
+		FeatureIconShape,
+		FeatureAlignment,
+		FeatureIconAlignment,
+		FeatureListGapDesktop,
+		FeatureListGapTablet,
+		FeatureListGapMobile,
+		FeatureListGapUnits,
+		FeatureIconColorSwitcher,
+		FeatureIconColor,
+		FeatureIconHoverColor,
+		FeatureIconBgColorSwitcher,
+		FeatureIconBgColor,
+		FeatureIconBgHoverColor,
+		FeatureIconSizeDesktop,
+		FeatureIconSizeTablet,
+		FeatureIconSizeMobile,
+		FeatureIconSizeUnits,
+		FeatureIconBgSizeDesktop,
+		FeatureIconBgSizeTablet,
+		FeatureIconBgSizeMobile,
+		FeatureIconBgSizeUnits,
+		FeatureIconSpacingDesktop,
+		FeatureIconSpacingTablet,
+		FeatureIconSpacingMobile,
+		FeatureIconSpacingUnits,
+		FeatureTitleFontFamily,
+		FeatureTitleFontSizeDesktop,
+		FeatureTitleFontSizeTablet,
+		FeatureTitleFontSizeMobile,
+		FeatureTitleFontSizeUnits,
+		FeatureTitleFontWeight,
+		FeatureTitleFontStyle,
+		FeatureTitleTextTransform,
+		FeatureTitleTextDecoration,
+		FeatureTitleLetterSpacingDesktop,
+		FeatureTitleLetterSpacingTablet,
+		FeatureTitleLetterSpacingMobile,
+		FeatureTitleLetterSpacingUnits,
+		FeatureTitleLineHeightDesktop,
+		FeatureTitleLineHeightTablet,
+		FeatureTitleLineHeightMobile,
+		FeatureTitleLineHeightUnits,
+		FeatureTitleColorSwitcher,
+		FeatureTitleColor,
+		FeatureTitleHoverColor,
+		FeatureDescFontFamily,
+		FeatureDescFontSizeDesktop,
+		FeatureDescFontSizeTablet,
+		FeatureDescFontSizeMobile,
+		FeatureDescFontSizeUnits,
+		FeatureDescFontWeight,
+		FeatureDescFontStyle,
+		FeatureDescTextTransform,
+		FeatureDescTextDecoration,
+		FeatureDescLetterSpacingDesktop,
+		FeatureDescLetterSpacingTablet,
+		FeatureDescLetterSpacingMobile,
+		FeatureDescLetterSpacingUnits,
+		FeatureDescLineHeightDesktop,
+		FeatureDescLineHeightTablet,
+		FeatureDescLineHeightMobile,
+		FeatureDescLineHeightUnits,
+		FeatureDescColorSwitcher,
+		FeatureDescColor,
+		FeatureDescHoverColor,
+		FeatureZIndex,
+		FeaturePaddingUnits,
+		FeatureDesktopPadding,
+		FeatureTabPadding,
+		FeatureMobilePadding,
+		FeaturePaddingLink,
+		FeatureMarginUnits,
+		FeatureDesktopMargin,
+		FeatureTabMargin,
+		FeatureMobileMargin,
+		FeatureMarginLink,
+		FeatureBgColorSwitcher,
+		FeatureBgColor,
+		FeatureBgHoverColor,
+		FeatureBorder,
+		FeatureBorderColor,
+		FeatureBorderHoverColor,
+		FeatureBorderColorSwitcher,
+		FeatureBorderUnits,
+		FeatureDesktopBorderWidth,
+		FeatureTabBorderWidth,
+		FeatureMobileBorderWidth,
+		FeatureBorderLink,
+		FeatureBorderRadiusUnits,
+		FeatureDesktopBorderRadiusWidth,
+		FeatureTabBorderRadiusWidth,
+		FeatureMobileBorderRadiusWidth,
+		FeatureBorderRadiusLink,
+		FeatureDesktopSwitcher,
+		FeatureTabletSwitcher,
+		FeatureMobileSwitcher,
+
+
 	} = attributes;
 
 	// Set blockID if it doesn't exist
@@ -169,7 +281,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps();
 
-	{/* Team Member Content Control */}
+	{/* Pricing Table Drag And Drop Handle Control */}
+
+	const handleDragEnd = (event) => {
+		const { active, over } = event;
+		if (active && over && active.id !== over.id) {
+			const oldIndex = FeatureItems.findIndex(item => item.id === active.id);
+			const newIndex = FeatureItems.findIndex(item => item.id === over.id);
+			const updatedItems = arrayMove(FeatureItems, oldIndex, newIndex);
+			setAttributes({ FeatureItems: updatedItems });
+		}
+	};
+
+	const handleAddItem = () => {
+		const newItem = { id: `item-${FeatureItems.length + 1}`, Title: `Feature Item ${FeatureItems.length + 1}`, Description: 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', FeatureIcon: 'check' };
+		setAttributes({ FeatureItems: [...FeatureItems, newItem] });
+	};
+
+	const handleChangeItem = (id, key, value) => {
+		const updatedItems = FeatureItems.map(item =>
+			item.id === id ? { ...item, [key]: value } : item
+		);
+		setAttributes({ FeatureItems: updatedItems });
+	};
+
+	const handleDeleteItem = (id) => {
+		const updatedItems = FeatureItems.filter(item => item.id !== id);
+		setAttributes({ FeatureItems: updatedItems });
+	};
+
+
 
 
 
@@ -259,6 +400,102 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 
 										<PanelBody title={__("Features", "frontis-blocks")} initialOpen={false}>
+											<div className="fb-feature-wrapper">
+												<DndContext
+													collisionDetection={closestCenter}
+													onDragEnd={handleDragEnd}
+												>
+													<SortableContext items={FeatureItems.map(item => item.id)}>
+														<ul className='dnd-items-wrapper'>
+															{FeatureItems.map((item) => (
+																<SortableItem
+																	key={item.id}
+																	id={item.id}
+																	item={item}
+																	handleChangeItem={handleChangeItem}
+																	handleDeleteItem={handleDeleteItem}
+																/>
+															))}
+														</ul>
+													</SortableContext>
+													<Button isPrimary onClick={handleAddItem}>
+														{__("Add Feature", "frontis-blocks")}
+													</Button>
+												</DndContext>
+											</div>
+
+											<BaseControl
+												label={__("Title Tag", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+												<ButtonGroup
+													className="fb-setting-text-alignment-group-btn"
+												>
+													{HEADING.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({ FeatureTag: item.value })}
+															className={`fb-setting-text-alignment-single-btn ${ FeatureTag === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+											<BaseControl
+												label={__("Icon Shape", "frontis-blocks")}
+												className="fb-setting-icon-shape-wrapper"
+											>
+												<SelectControl
+													value={attributes.FeatureIconShape}
+													options={[
+														{ label: __("None", "frontis-blocks"), value: "none" },
+														{ label: __("Circle", "frontis-blocks"), value: "circle" },
+														{ label: __("Square", "frontis-blocks"), value: "square" },
+														{ label: __("Rhombus", "frontis-blocks"), value: "rhombus" },
+													]}
+													onChange={(value) => setAttributes({ FeatureIconShape: value })}
+												/>
+											</BaseControl>
+											<BaseControl
+												label={__("Feature Item Alignment", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+												<ButtonGroup
+													className="fb-setting-text-alignment-group-btn"
+												>
+													{TEXT_ALIGN.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({ FeatureAlignment: item.value })}
+															className={`fb-setting-text-alignment-single-btn ${FeatureAlignment === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+											<BaseControl
+												label={__("Icon Position", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+												<ButtonGroup
+													className="fb-setting-text-alignment-group-btn"
+												>
+													{TEXT_ALIGN.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({ FeatureIconAlignment: item.value })}
+															className={`fb-setting-text-alignment-single-btn ${FeatureIconAlignment === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
 										</PanelBody>
 
 										<PanelBody title={__("Footer", "frontis-blocks")} initialOpen={false}>
@@ -268,15 +505,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 								{tab.name === "styles" && (
 									<>
+										<PricingTableFeaturesControl
+											attributes={attributes}
+											setAttributes={setAttributes}
+											clientId ={clientId}
+										/>
+
 										<PanelBody
-											title={__("Content", "frontis-blocks")}
+											title={__("Features", "frontis-blocks")}
 											initialOpen={true}
 										>
-											{/*<TeamMemberContentBorderControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
+
 											{/*<TeamMemberContentMarginControl*/}
 											{/*	attributes={attributes}*/}
 											{/*	setAttributes={setAttributes}*/}
@@ -399,13 +638,52 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								className="fb-pricing-table-price-period"
 							/>
 						</div>
-						<div className={`fb-pricing-table-feature`}>
-							<div className={`fb-pricing-table-feature-item`}>
-								<span className={`fb-pricing-table-feature-icon`}>
 
-								</span>
-								<span className={`fb-pricing-table-feature-title`}>Customization options</span>
-							</div>
+						<div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>
+							<ul className="fb-feature-list-items">
+								{FeatureItems.map(item => (
+
+									<li key={item.id} className="fb-feature-list-item">
+
+										{ item.FeatureIconAlign !== 'none' && (
+											<div className="fb-feature-list-icon-box">
+												<div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                                <span className="fb-feature-list-icon">
+                                                    {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                </span>
+												</div>
+											</div>
+										) }
+
+										<div className="fb-feature-list-content">
+											<RichText
+												tagName={FeatureTag}
+												className="fb-feature-list-title"
+												value={item.Title}
+												onChange={(value) => {
+													const updatedItems = FeatureItems.map(i =>
+														i.id === item.id ? { ...i, Title: value } : i
+													);
+													setAttributes({ FeatureItems: updatedItems });
+												}}
+												placeholder={__('Feature Title', 'frontis-blocks')}
+											/>
+											<RichText
+												tagName="p"
+												className="fb-feature-list-text"
+												value={item.Description}
+												onChange={(value) => {
+													const updatedItems = FeatureItems.map(i =>
+														i.id === item.id ? { ...i, Description: value } : i
+													);
+													setAttributes({ FeatureItems: updatedItems });
+												}}
+												placeholder={__('Feature Description', 'frontis-blocks')}
+											/>
+										</div>
+									</li>
+								))}
+							</ul>
 						</div>
 					</div>
 				</div>
