@@ -1,15 +1,10 @@
-
-
 .fb-testimonial-main-wrapper {
-    background-color: #f9f9f9;
-
+    
     .fb-testimonial-section {
-        background-color: #fff;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        padding: 30px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         display: block;
+        transition: ease-in-out 0.5s;
         &.fb-testimonia-section-left {
             text-align: left;
         }
