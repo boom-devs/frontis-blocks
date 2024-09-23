@@ -218,9 +218,7 @@ export default function save({ attributes }) {
 
 	} = attributes;
 
-	const blockProps = useBlockProps.save({
-		className: `fb-pricing-table-wrapper ${blockID}`,
-	});
+	const blockProps = useBlockProps.save({});
 
 	/** Default padding for desktop (using desktop_padding) */
 	const DesktopPadding    = `${FeatureDesktopPadding.top}${FeaturePaddingUnits} ${FeatureDesktopPadding.right}${FeaturePaddingUnits} ${FeatureDesktopPadding.bottom}${FeaturePaddingUnits} ${FeatureDesktopPadding.left}${FeaturePaddingUnits}`;
