@@ -165,7 +165,7 @@ export default function Edit (props) {
 				</PanelBody>
 			</InspectorControls>
 
-			<p>
+			<p {...useBlockProps()}>
 				{__('This is post grid', 'text')}
 			</p>
 			
