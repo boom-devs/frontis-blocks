@@ -21,6 +21,14 @@ export default function save({ attributes }) {
         TestimonialQuoteIcon,
         TestimonialQuoteIconAlign,
         TestimonialZIndex,
+
+
+        TestimonialImageRadiusUnits,
+        TestimonialImageDesktopRadiusWidth,
+        TestimonialImagelTabRadiusWidth,
+        TestimonialImageMobileRadiusWidth,
+        TestimonialImageRadiusLink,
+
     } = attributes;
 
     const blockProps = useBlockProps.save({
