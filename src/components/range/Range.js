@@ -71,7 +71,7 @@ const Range = ( props ) => {
 
 	const resetValues = ( defaultValues ) => {
 		if ( props?.onChange ) {
-			props?.onChange( defaultValues[ props?.data?.label ] );
+			props?.onChange( defaultValues[ props?.label ] );
 		}
 		if ( props.displayUnit ) {
 			onChangeUnits( defaultValues[ props?.unit?.label ] );
@@ -154,15 +154,15 @@ const Range = ( props ) => {
 				<div className="fb-control__header">
 					<ResponsiveToggle label={ props.label } responsive={ props.responsive } />
 					<div className="fb-range-control__actions fb-control__actions">
-						{ props?.allowReset && (
-							<FBReset
-								onReset={ resetValues }
-								attributeNames={ [ props.data.label, props.displayUnit ? props.unit.label : false ] }
-								setAttributes={ props.setAttributes }
-								resetStateEnabled={ props?.resetStateEnabled }
-								isReset={ props?.isReset }
-							/>
-						) }
+						{/*{ props?.allowReset && (*/}
+						{/*	<FBReset*/}
+						{/*		onReset={ resetValues }*/}
+						{/*		attributeNames={ [ props.label, props.displayUnit ? props.unit.label : false ] }*/}
+						{/*		setAttributes={ props.setAttributes }*/}
+						{/*		resetStateEnabled={ props?.resetStateEnabled }*/}
+						{/*		isReset={ props?.isReset }*/}
+						{/*	/>*/}
+						{/*) }*/}
 						{ props.displayUnit && (
 							<ButtonGroup
 								className="fb-control__units"

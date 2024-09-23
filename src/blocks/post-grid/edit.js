@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import {__} from '@wordpress/i18n';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import {InspectorControls, RichText, useBlockProps} from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import {PanelBody} from '@wordpress/components';
 import FB_BoxShadowControl from "@Components/box-shadow";
 
 /**
@@ -22,6 +22,8 @@ import FB_BoxShadowControl from "@Components/box-shadow";
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+import Range from "@Components/range/Range";
+import FB_Spacing from "@Components/spacing";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -31,9 +33,9 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit (props) {
-	const { attributes, setAttributes } = props;
-	const { headLoadGoogleFonts } = attributes;
+export default function Edit(props) {
+	const {attributes, setAttributes} = props;
+	const {DeviceType, headLoadGoogleFonts, FeatureMarginLink, spacingUnits, TestimonialDesktopPadding, TestimonialTabPadding, TestimonialMobilePadding} = attributes;
 
 	const boxShadowHandler = (boxShadow) => {
 		console.log(boxShadow)
@@ -50,10 +52,76 @@ export default function Edit (props) {
 
 		// setAttributes({boxShadow: boxShadow});
 	}
+	let btnLing = false;
+
+	const handleSpacingUnitHandlerFn = (event, position) => {
+		const value = event.target.value;
+		if(FeatureMarginLink) {
+			switch(DeviceType) {
+				case 'Desktop':
+					setAttributes({
+						TestimonialDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						TestimonialTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						TestimonialMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch(DeviceType) {
+				case 'Desktop':
+					setAttributes({ TestimonialDesktopPadding: { ...TestimonialDesktopPadding, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ TestimonialTabPadding: { ...TestimonialTabPadding, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ TestimonialMobilePadding: { ...TestimonialMobilePadding, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const spacingCombineBtnHandlerFn = () => {
+		console.log("From parent fn")
+		// if (!FeatureMarginLink) {
+		// 	setAttributes({ FeatureDesktopMargin: previousMargin });
+		// }
+		/** setmarginLink(!marginLink) */
+		setAttributes({FeatureMarginLink: !FeatureMarginLink})
+		console.log(FeatureMarginLink)
+	}
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __('Settings', 'text-domain') }>
+				<PanelBody title={__('Settings', 'text-domain')}>
 					{/*<TypographyControl*/}
 					{/*	attributes={ attributes }*/}
 					{/*	setAttributes={ setAttributes }*/}
@@ -62,12 +130,18 @@ export default function Edit (props) {
 					{/*		label: 'headLoadGoogleFonts',*/}
 					{/*	} }*/}
 					{/*></TypographyControl>*/}
-					<FB_BoxShadowControl boxShadowHandler={boxShadowHandler} />
+					<FB_BoxShadowControl boxShadowHandler={boxShadowHandler}/>
+					{/*<Range label={'Font size'} displayUnit={'px'} />*/}
+					{/*DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes*/}
+					<FB_Spacing DeviceType={DeviceType} spacingUnits={spacingUnits} spacingDesktop={TestimonialDesktopPadding}
+								spacingTablet={TestimonialTabPadding} spacingMobile={TestimonialMobilePadding}
+								handleSpacingUnitHandler={handleSpacingUnitHandlerFn} spacingCombineBtn={FeatureMarginLink}
+								spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}/>
 
 				</PanelBody>
 			</InspectorControls>
 
-			<RichText text={'Hello world'} />
+			<RichText text={'Hello world'}/>
 		</>
 	);
 }
