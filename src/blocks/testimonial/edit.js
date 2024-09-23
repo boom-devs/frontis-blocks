@@ -21,7 +21,6 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        DeviceType,
         TestimonialImageUrl,
         TestimonialImageAlt,
         TestimonialImageID,
@@ -34,12 +33,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         TestimonialRatinIconAlign,
         TestimonialQuoteIcon,
         TestimonialQuoteIconAlign,
-
-        TestimonialImageRadiusUnits,
-        TestimonialImageDesktopRadiusWidth,
-        TestimonialImagelTabRadiusWidth,
-        TestimonialImageMobileRadiusWidth,
-        TestimonialImageRadiusLink,
 
     } = attributes;
 

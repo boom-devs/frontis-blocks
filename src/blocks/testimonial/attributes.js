@@ -7,9 +7,6 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
-    TestimonialZIndex : {
-        type: "number",
-    },
     TestimonialAlignment: {
         type: "string",
         default: "center",
@@ -420,6 +417,192 @@ const attributes = {
     TestimonialRatingIconHoverColor: {
         type: 'string',
         default: "#FFB400"
+    },
+
+    TestimonialZIndex : {
+        type: "number",
+    },
+    TestimonialPaddingUnits : {
+        type: "string",
+        default: "px"
+    },
+    TestimonialDesktopPadding: {
+        type: "object", 
+        default: {
+            top: 30,
+            bottom: 30,
+            left: 30,
+            right: 30,
+        },
+    },
+    TestimonialTabPadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    TestimonialMobilePadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    TestimonialPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    TestimonialMarginUnits : {
+        type: "string",
+        default: "px"
+    },
+    TestimonialDesktopMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialTabMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialMobileMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialMarginLink : {
+        type : "boolean",
+        default: true
+    },
+
+    TestimonialBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    TestimonialBgColor : {
+        type: "string"
+    },
+    TestimonialBgHoverColor: {
+        type: 'string',
+    },
+
+
+
+    TestimonialBorder: {
+        type: 'string',
+        default: "none",
+    },
+    TestimonialBorderColor: {
+        type: 'string',
+    },
+    TestimonialBorderHoverColor: {
+        type: 'string',
+    },
+    TestimonialBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+
+    TestimonialBorderUnits : {
+        type: "string",
+        default: "px"
+    },
+    TestimonialDesktopBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialTabBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialMobileBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    TestimonialBorderLink : {
+        type : "boolean",
+        default: true
+    },
+
+    TestimonialBorderRadiusUnits : {
+        type: "string",
+        default: "px"
+    },
+    TestimonialDesktopBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+    },
+    TestimonialTabBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+    },
+    TestimonialMobileBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+    },
+    TestimonialBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    TestimonialDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    TestimonialTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    TestimonialMobileSwitcher: {
+        type: "boolean",
+        default: false,
     },
     
 };
