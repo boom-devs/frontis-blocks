@@ -188,7 +188,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const teamMemberContentMargin = `${teamMemberContentDesktopMargin.top}${teamMemberContentMarginUnits} ${teamMemberContentDesktopMargin.right}${teamMemberContentMarginUnits} ${teamMemberContentDesktopMargin.bottom}${teamMemberContentMarginUnits} ${teamMemberContentDesktopMargin.left}${teamMemberContentMarginUnits}`;
 
-
 	const teamMemberContentPadding = `${teamMemberContentDesktopPadding.top}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.right}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.bottom}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.left}${teamMemberContentPaddingUnits}`;
 
 	{/* Team Member Image Control */}
