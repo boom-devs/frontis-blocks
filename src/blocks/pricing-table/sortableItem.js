@@ -29,7 +29,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         setFeatureIconAlign(newAlignment);
         handleChangeItem(item.id, 'FeatureIconAlign', newAlignment);
     };
-    
+
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
@@ -45,10 +45,10 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
                 {/* Delete button */}
                 <span className="sortable-delete">
-                    <Button 
-                        icon="trash" 
-                        label={__("Delete", "frontis-blocks")} 
-                        onClick={() => handleDeleteItem(item.id)} 
+                    <Button
+                        icon="trash"
+                        label={__("Delete", "frontis-blocks")}
+                        onClick={() => handleDeleteItem(item.id)}
                     />
                 </span>
             </div>
@@ -60,12 +60,6 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         label={__("Title", "frontis-blocks")}
                         value={item.Title}
                         onChange={(value) => handleChangeItem(item.id, 'Title', value)}
-                    />
-
-                    <TextareaControl
-                        label={__("Description", "frontis-blocks")}
-                        value={item.Description}
-                        onChange={(value) => handleChangeItem(item.id, 'Description', value)}
                     />
 
                     <div className='fb-feature-icon-wrapper'>
