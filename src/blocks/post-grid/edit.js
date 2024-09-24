@@ -123,7 +123,7 @@ export default function Edit( props ) {
 					<FB_BoxShadowControl boxShadowHandler={boxShadowHandler}/>
 					{/*<Range label={'Font size'} displayUnit={'px'} />*/}
 					{/*DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes*/}
-					<FB_Spacing DeviceType={DeviceType} spacingUnits={spacingUnits}
+					<FB_Spacing label={ 'Padding' } DeviceType={DeviceType} spacingUnits={spacingUnits}
 								spacingDesktop={TestimonialDesktopPadding}
 								spacingTablet={TestimonialTabPadding} spacingMobile={TestimonialMobilePadding}
 								handleSpacingUnitHandler={handleSpacingUnitHandlerFn}

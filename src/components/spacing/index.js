@@ -9,7 +9,7 @@ import {
 import FB_ResponsiveControl from '@Components/responsive-control';
 import './editor.lazy.scss';
 
-export default function FB_Spacing( {DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes} ) {
+export default function FB_Spacing( {label, DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes} ) {
 
 	const handleSpacingUnit = ( event, position ) => {
 		handleSpacingUnitHandler( event, position );
@@ -41,8 +41,9 @@ export default function FB_Spacing( {DeviceType, spacingUnits, spacingDesktop, s
 			<div className="fb-setting-spacing-inner-container">
 				{/* Margin */}
 				<div className="fb-setting-spacing-label-container">
+					{/*eslint-disable-next-line @wordpress/i18n-no-variables*/}
 					<FB_ResponsiveControl
-						labelText={__( 'Margin', 'frontis-blocks' )}
+						labelText={ __( label, 'frontis-blocks' )}
 						device={DeviceType}
 						deviceHandler={( newDevice ) => setAttributes( {DeviceType: newDevice} )}
 					/>
