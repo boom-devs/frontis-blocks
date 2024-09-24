@@ -22,7 +22,10 @@ import {
 	ColorPalette,
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
-import {useEffect, useRef, useState} from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+
 import './editor.scss';
 import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, SELECT_TYPE, iconType} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
@@ -42,6 +45,8 @@ import TeamMemberNameControl from './style-control/name/team-member-name.js';
 import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
 import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
 import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
+
+import SortableItem from './sortableItem.js';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -166,7 +171,107 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberContentTabBorderRadiusWidth,
 		teamMemberContentMobileBorderRadiusWidth,
 		teamMemberContentActiveBorderRadiusDevice,
-		teamMemberContentBorderRadiusLink
+		teamMemberContentBorderRadiusLink,
+
+		// Social Profile
+		teamMemberSocialItems,
+		teamMemberSocialTag,
+		teamMemberSocialIconShape,
+		teamMemberSocialAlignment,
+		teamMemberSocialIconAlignment,
+		teamMemberSocialListGapDesktop,
+		teamMemberSocialListGapTablet,
+		teamMemberSocialListGapMobile,
+		teamMemberSocialListGapUnits,
+		teamMemberSocialIconColorSwitcher,
+		teamMemberSocialIconColor,
+		teamMemberSocialIconHoverColor,
+		teamMemberSocialIconBgColorSwitcher,
+		teamMemberSocialIconBgColor,
+		teamMemberSocialIconBgHoverColor,
+		teamMemberSocialIconSizeDesktop,
+		teamMemberSocialIconSizeTablet,
+		teamMemberSocialIconSizeMobile,
+		teamMemberSocialIconSizeUnits,
+		teamMemberSocialIconBgSizeDesktop,
+		teamMemberSocialIconBgSizeTablet,
+		teamMemberSocialIconBgSizeMobile,
+		teamMemberSocialIconBgSizeUnits,
+		teamMemberSocialIconSpacingDesktop,
+		teamMemberSocialIconSpacingTablet,
+		teamMemberSocialIconSpacingMobile,
+		teamMemberSocialIconSpacingUnits,
+		teamMemberSocialTitleFontFamily,
+		teamMemberSocialTitleFontSizeDesktop,
+		teamMemberSocialTitleFontSizeTablet,
+		teamMemberSocialTitleFontSizeMobile,
+		teamMemberSocialTitleFontSizeUnits,
+		teamMemberSocialTitleFontWeight,
+		teamMemberSocialTitleFontStyle,
+		teamMemberSocialTitleTextTransform,
+		teamMemberSocialTitleTextDecoration,
+		teamMemberSocialTitleLetterSpacingDesktop,
+		teamMemberSocialTitleLetterSpacingTablet,
+		teamMemberSocialTitleLetterSpacingMobile,
+		teamMemberSocialTitleLetterSpacingUnits,
+		teamMemberSocialTitleLineHeightDesktop,
+		teamMemberSocialTitleLineHeightTablet,
+		teamMemberSocialTitleLineHeightMobile,
+		teamMemberSocialTitleLineHeightUnits,
+		teamMemberSocialTitleColorSwitcher,
+		teamMemberSocialTitleColor,
+		teamMemberSocialTitleHoverColor,
+		teamMemberSocialDescFontFamily,
+		teamMemberSocialDescFontSizeDesktop,
+		teamMemberSocialDescFontSizeTablet,
+		teamMemberSocialDescFontSizeMobile,
+		teamMemberSocialDescFontSizeUnits,
+		teamMemberSocialDescFontWeight,
+		teamMemberSocialDescFontStyle,
+		teamMemberSocialDescTextTransform,
+		teamMemberSocialDescTextDecoration,
+		teamMemberSocialDescLetterSpacingDesktop,
+		teamMemberSocialDescLetterSpacingTablet,
+		teamMemberSocialDescLetterSpacingMobile,
+		teamMemberSocialDescLetterSpacingUnits,
+		teamMemberSocialDescLineHeightDesktop,
+		teamMemberSocialDescLineHeightTablet,
+		teamMemberSocialDescLineHeightMobile,
+		teamMemberSocialDescLineHeightUnits,
+		teamMemberSocialDescColorSwitcher,
+		teamMemberSocialDescColor,
+		teamMemberSocialDescHoverColor,
+		teamMemberSocialZIndex,
+		teamMemberSocialPaddingUnits,
+		teamMemberSocialDesktopPadding,
+		teamMemberSocialTabPadding,
+		teamMemberSocialMobilePadding,
+		teamMemberSocialPaddingLink,
+		teamMemberSocialMarginUnits,
+		teamMemberSocialDesktopMargin,
+		teamMemberSocialTabMargin,
+		teamMemberSocialMobileMargin,
+		teamMemberSocialMarginLink,
+		teamMemberSocialBgColorSwitcher,
+		teamMemberSocialBgColor,
+		teamMemberSocialBgHoverColor,
+		teamMemberSocialBorder,
+		teamMemberSocialBorderColor,
+		teamMemberSocialBorderHoverColor,
+		teamMemberSocialBorderColorSwitcher,
+		teamMemberSocialBorderUnits,
+		teamMemberSocialDesktopBorderWidth,
+		teamMemberSocialTabBorderWidth,
+		teamMemberSocialMobileBorderWidth,
+		teamMemberSocialBorderLink,
+		teamMemberSocialBorderRadiusUnits,
+		teamMemberSocialDesktopBorderRadiusWidth,
+		teamMemberSocialTabBorderRadiusWidth,
+		teamMemberSocialMobileBorderRadiusWidth,
+		teamMemberSocialBorderRadiusLink,
+		teamMemberSocialDesktopSwitcher,
+		teamMemberSocialTabletSwitcher,
+		teamMemberSocialMobileSwitcher,
 
 	} = attributes;
 
@@ -224,6 +329,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [teamMemberDesignationFontFamily]);
 
+
+
+	{/* Team Member Social Drag And Drop Handle Control */}
+
+	const handleDragEnd = (event) => {
+		const { active, over } = event;
+		if (active && over && active.id !== over.id) {
+			const oldIndex = teamMemberSocialItems.findIndex(item => item.id === active.id);
+			const newIndex = teamMemberSocialItems.findIndex(item => item.id === over.id);
+			const updatedItems = arrayMove(teamMemberSocialItems, oldIndex, newIndex);
+			setAttributes({ teamMemberSocialItems: updatedItems });
+		}
+	};
+
+	const handleAddItem = () => {
+		const newItem = {
+			id: `item-${teamMemberSocialItems.length + 1}`,
+			Title: `Facebook ${teamMemberSocialItems.length + 1}`,
+			teamMemberSocialIcon: 'facebook'
+		};
+		setAttributes({ teamMemberSocialItems: [...teamMemberSocialItems, newItem] });
+	};
+
+	const handleChangeItem = (id, key, value) => {
+		const updatedItems = teamMemberSocialItems.map(item =>
+			item.id === id ? { ...item, [key]: value } : item
+		);
+		setAttributes({ teamMemberSocialItems: updatedItems });
+	};
+
+	const handleDeleteItem = (id) => {
+		const updatedItems = teamMemberSocialItems.filter(item => item.id !== id);
+		setAttributes({ teamMemberSocialItems: updatedItems });
+	};
 
 
 	return (
@@ -438,6 +577,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{/*	onChange={(value) => setAttributes({ teamMemberContent: value })}*/}
 											{/*/>*/}
 										</PanelBody>
+
+										<PanelBody title={__("Social Profiles", "frontis-blocks")} initialOpen={true}>
+											<div className="fb-feature-wrapper">
+												<DndContext
+													collisionDetection={closestCenter}
+													onDragEnd={handleDragEnd}
+												>
+													<SortableContext items={teamMemberSocialItems.map(item => item.id)}>
+														<ul className='dnd-items-wrapper'>
+															{teamMemberSocialItems.map((item) => (
+																<SortableItem
+																	key={item.id}
+																	id={item.id}
+																	item={item}
+																	handleChangeItem={handleChangeItem}
+																	handleDeleteItem={handleDeleteItem}
+																/>
+															))}
+														</ul>
+													</SortableContext>
+													<Button isPrimary onClick={handleAddItem}>
+														{__("Add Social Profile", "frontis-blocks")}
+													</Button>
+												</DndContext>
+											</div>
+										</PanelBody>
 									</>
 								)}
 
@@ -551,6 +716,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							/>
 							<div className={`fb-team-member-designation`}>{teamMemberDesignation}</div>
 						</div>
+						{teamMemberSocialItems.map(item => (
+
+							<div key={item.id} className="fb-feature-list-item">
+
+								<div className="fb-feature-list-icon-box">
+									<span className="fb-feature-list-icon">
+										{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
+									</span>
+								</div>
+
+							</div>
+						))}
 					</div>
 				</div>
 			</div>

@@ -5,6 +5,9 @@ $white_color: #ffffff;
 
 /** Start Admin Panel scss **/
 .fb-inspector-control {
+	.editor-post-featured-image__actions {
+		z-index: -1;
+	}
 	.fb-tab {
 		background-color: $background_color;
 		border: none;
