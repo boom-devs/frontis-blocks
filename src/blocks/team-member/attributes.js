@@ -1,8 +1,8 @@
 const attributes = {
-    blockID: {
-        type: "string",
-        default: ""
-    },
+	blockID: {
+		type: "string",
+		default: ""
+	},
 	DeviceType: {
 		type: "string",
 		default: "Desktop"

@@ -84,7 +84,7 @@ export default function save({ attributes }) {
 					</div>
 					<div className={`fb-team-member-content`}>
 						{teamMemberName}
-						<p>{teamMemberDesignation}</p>
+						<div className={`fb-team-member-designation`}>{teamMemberDesignation}</div>
 					</div>
 				</div>
 			</div>
