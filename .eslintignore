@@ -1,0 +1,25 @@
+**/*.min.js
+**/node_modules/**
+**/vendor/**
+assets/css/blocks/
+admin-core/assets/src/
+lib/
+dist/
+build
+coverage
+cypress
+node_modules
+vendor
+*.css
+*.scss
+*.min.js
+
+
+blocks-config/fb-controls/fonts.js
+
+**/deprecated/**
+
+# Misc.
+
+# AOS library files.
+assets/js/aos.js
