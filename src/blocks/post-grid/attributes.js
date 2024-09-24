@@ -50,5 +50,8 @@ export const attributes = {
 	FeatureMarginLink: {
 		type: 'boolean',
 		default: true
+	},
+	boxShadow: {
+		type: 'string'
 	}
 }

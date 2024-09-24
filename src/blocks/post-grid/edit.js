@@ -24,17 +24,8 @@ import './editor.scss';
 // eslint-disable-next-line import/no-unresolved
 import FB_Spacing from '@Components/spacing';
 // eslint-disable-next-line import/no-unresolved
-// import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_BoxShadowControl from '@Components/box-shadow';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param  props
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
- */
 export default function Edit( props ) {
 	const {attributes, setAttributes} = props;
 	const {
@@ -43,7 +34,8 @@ export default function Edit( props ) {
 		spacingUnits,
 		TestimonialDesktopPadding,
 		TestimonialTabPadding,
-		TestimonialMobilePadding
+		TestimonialMobilePadding,
+		boxShadow
 	} = attributes;
 
 
@@ -106,6 +98,16 @@ export default function Edit( props ) {
 		setAttributes( {FeatureMarginLink: !FeatureMarginLink} );
 	}
 
+
+	// eslint-disable-next-line no-shadow
+	const boxShadowHandler = ( value ) => {
+		// eslint-disable-next-line import/no-unresolved
+		setAttributes( { boxShadow: value } )
+		/* eslint-disable no-console */
+		console.log( boxShadow );
+		/* eslint-enable no-console */
+	}
+
 	return (
 		<>
 			<InspectorControls>
@@ -118,7 +120,7 @@ export default function Edit( props ) {
 					{/*		label: 'headLoadGoogleFonts',*/}
 					{/*	} }*/}
 					{/*></TypographyControl>*/}
-					{/*<FB_BoxShadowControl boxShadowHandler={boxShadowHandler}/>*/}
+					<FB_BoxShadowControl boxShadowHandler={boxShadowHandler}/>
 					{/*<Range label={'Font size'} displayUnit={'px'} />*/}
 					{/*DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes*/}
 					<FB_Spacing DeviceType={DeviceType} spacingUnits={spacingUnits}
