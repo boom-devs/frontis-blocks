@@ -115,6 +115,20 @@ const attributes = {
 		type: 'boolean',
 		default: false,
 	},
+	headSpace: {
+		type: 'number',
+		default: 15
+	},
+	headSpaceTablet: {
+		type:'number'
+	},
+	headSpaceMobile: {
+		type:'number'
+	},
+	headSpaceType: {
+		type: 'string',
+		default: 'px',
+	}
 };
 
 export default attributes;

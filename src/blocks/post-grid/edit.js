@@ -15,6 +15,7 @@ import {InspectorControls, RichText, useBlockProps} from '@wordpress/block-edito
 import { PanelBody } from '@wordpress/components';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import TypographyControl from '@Components/typography';
+import ResponsiveSlider from '@Components/responsive-slider';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -54,7 +55,11 @@ export default function Edit (props) {
 		headLetterSpacingMobile,
 		headLetterSpacingType,
 		headTransform,
-		headDecoration } = attributes;
+		headDecoration,
+		headSpace,
+		headSpaceTablet,
+		headSpaceMobile,
+		headSpaceType } = attributes;
 
 	const boxShadowHandler = (boxShadow) => {
 		console.log(boxShadow)
@@ -160,7 +165,42 @@ export default function Edit (props) {
 						label: 'headLetterSpacingType',
 					} }
 				/>
-					<FB_BoxShadowControl boxShadowHandler={boxShadowHandler} />
+					<FB_BoxShadowControl boxShadowHandler={ boxShadowHandler } />
+					
+					<ResponsiveSlider
+						label={ __( 'Bottom Spacing', 'text-domain' ) }
+						data={ {
+							desktop: {
+								value: headSpace,
+								label: 'headSpace',
+							},
+							tablet: {
+								value: headSpaceTablet,
+								label: 'headSpaceTablet',
+							},
+							mobile: {
+								value: headSpaceMobile,
+								label: 'headSpaceMobile',
+							},
+						} }
+						min={ 0 }
+						max={ 200 }
+						unit={ {
+							value: headSpaceType,
+							label: 'headSpaceType',
+						} }
+						units={ [
+							{
+								name: __( 'Pixel', 'frontis-blocks' ),
+								unitValue: 'px',
+							},
+							{
+								name: __( 'em', 'frontis-blocks' ),
+								unitValue: 'em',
+							}
+						] }
+						setAttributes={ setAttributes }
+					/>
 
 				</PanelBody>
 			</InspectorControls>
