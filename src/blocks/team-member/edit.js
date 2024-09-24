@@ -715,19 +715,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								className="fb-team-member-name"
 							/>
 							<div className={`fb-team-member-designation`}>{teamMemberDesignation}</div>
-						</div>
-						{teamMemberSocialItems.map(item => (
 
-							<div key={item.id} className="fb-feature-list-item">
-
-								<div className="fb-feature-list-icon-box">
-									<span className="fb-feature-list-icon">
-										{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
-									</span>
+							<div className={`fb-team-member-social-profile-wrapper`}>
+								<div className={`fb-team-member-social-profile`}>
+									{teamMemberSocialItems.map(item => (
+										<span key={item.id} className="fb-team-member-social-icon">
+											{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
+										</span>
+									))}
 								</div>
-
 							</div>
-						))}
+						</div>
 					</div>
 				</div>
 			</div>

@@ -54,8 +54,17 @@
 		}
 		.fb-team-member-social-profile {
 			display: flex;
-			gap: 10px;
+			gap: 0 24px;
 			align-items: center;
 		}
+
+		.fb-team-member-social-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 16px;
+			height: 16px;
+		}
+
 	}
 }
