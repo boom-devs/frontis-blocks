@@ -1,0 +1,134 @@
+import { __ } from '@wordpress/i18n';
+import { InspectorControls } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import {
+    PanelBody,
+    TabPanel,
+    Button,
+} from '@wordpress/components';
+import SortableItem from './sortableItem';
+import './editor.scss';
+
+export default function Inspector({ attributes, setAttributes, clientId }) {
+    const { socialItems } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-Social-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = socialItems.findIndex(item => item.id === active.id);
+            const newIndex = socialItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(socialItems, oldIndex, newIndex);
+            setAttributes({ socialItems: updatedItems });
+        }
+    };
+
+    const handleAddItem = () => {
+        const newItem = { 
+            id: `item-${socialItems.length + 1}`, 
+            Title: `Social Item ${socialItems.length + 1}`, 
+            socialIconUrl: '', 
+            socialIcon: 'behance'
+        };
+        setAttributes({ socialItems: [...socialItems, newItem] });
+    };
+
+    const handleChangeItem = (id, key, value) => {
+        const updatedItems = socialItems.map(item => 
+            item.id === id ? { ...item, [key]: value } : item
+        );
+        setAttributes({ socialItems: updatedItems });
+    };
+
+    const handleDeleteItem = (id) => {
+        const updatedItems = socialItems.filter(item => item.id !== id);
+        setAttributes({ socialItems: updatedItems });
+    };
+
+    return (
+        <>
+            <InspectorControls key="controls">
+                <div className="fb-inspector-control">
+                    <TabPanel
+                        className="fb-parent-tab-panel"
+                        activeClass="active-tab"
+                        tabs={[
+                            {
+                                name: "general",
+                                title: "General",
+                                className: "fb-tab general",
+                            },
+                            {
+                                name: "styles",
+                                title: "Style",
+                                className: "fb-tab styles",
+                            },
+                            {
+                                name: "advanced",
+                                title: "Advanced",
+                                className: "fb-tab advanced",
+                            },
+                        ]}
+                    >
+                        {(tab) => (
+                            <div className={"fb-tab-controls" + tab.name}>
+                                {tab.name === 'general' && (
+                                    <>
+                                        <PanelBody title={__("Social Items", "frontis-blocks")} initialOpen={true}>
+                                            <div className="fb-Social-wrapper">
+                                                <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                                                    <SortableContext items={socialItems.map(item => item.id)}>
+                                                        <ul className='dnd-items-wrapper'>
+                                                            {socialItems.map((item, index) => (
+                                                                <SortableItem
+                                                                    key={item.id}
+                                                                    id={item.id}
+                                                                    item={item}
+                                                                    handleChangeItem={handleChangeItem}
+                                                                    handleDeleteItem={handleDeleteItem}
+                                                                    index={index}
+                                                                />
+                                                            ))}
+                                                        </ul>
+                                                    </SortableContext>
+                                                </DndContext>
+                                                <Button isPrimary onClick={handleAddItem}>
+                                                    {__("Add Social Item", "frontis-blocks")}
+                                                </Button>
+                                            </div>
+                                        </PanelBody>
+                                    </>
+                                )}
+
+                                {tab.name === "styles" && (
+                                    <>
+                                        <PanelBody title={__("Style Settings", "frontis-blocks")} initialOpen={true}>
+                                            {/* Style options can be added here */}
+                                        </PanelBody>
+                                    </>
+                                )}
+
+                                {tab.name === "advanced" && (
+                                    <>
+                                        <PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+                                            {/* Advanced settings can be added here */}
+                                        </PanelBody>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </TabPanel>
+                </div>
+            </InspectorControls>
+        </>
+    );
+}

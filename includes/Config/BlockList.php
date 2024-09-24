@@ -183,14 +183,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'social-icons' => [
-            //     'slug'      => 'social-icons',
-            //     'title'     => 'Social Icons',
-            //     'package'   => 'free',
-            //     'category'  => 'social',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'social-icons' => [
+                'slug'      => 'social-icons',
+                'title'     => 'Social Icons',
+                'package'   => 'free',
+                'category'  => 'social',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             'post-grid' => [
                 'slug'      => 'post-grid',
                 'title'     => 'Post Grid',
