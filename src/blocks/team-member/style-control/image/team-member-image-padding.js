@@ -13,7 +13,6 @@ import {
 } from '@wordpress/components';
 import {useEffect, useState} from "@wordpress/element";
 import {BORDER_STYLES, UNIT_TYPES} from "../../constants/constants";
-import ResponsiveControl from "../../../../components/responsivecontrol";
 
 export default function TeamMemberImagePaddingControl ({ attributes, setAttributes}) {
 

@@ -37,14 +37,14 @@ import TeamMemberContentBorderControl from './style-control/content/team-member-
 import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin.js';
 import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding.js';
 
-
-import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
-import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
+//
+// import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
+// import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
-import TeamMemberNameControl from './style-control/name/team-member-name.js';
-import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
-import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
-import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
+// import TeamMemberNameControl from './style-control/name/team-member-name.js';
+// import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
+// import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
+// import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
 
 import SortableItem from './sortableItem.js';
 
@@ -612,21 +612,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Content", "frontis-blocks")}
 											initialOpen={true}
 										>
-											<TeamMemberContentBorderControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<TeamMemberContentMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<TeamMemberContentPaddingControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<TeamMemberContentBorderControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
+											{/*<TeamMemberContentMarginControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
+											{/*<TeamMemberContentPaddingControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 										</PanelBody>
 
 										<PanelBody
@@ -634,11 +634,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 											className="fb-setting-border-setting-wrapper"
 										>
-											<TeamMemberImageBorderControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<TeamMemberImageBorderControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 
 											<TeamMemberImageMarginControl
 												attributes={attributes}
@@ -652,16 +652,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Name", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<TeamMemberNameControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<TeamMemberNameMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<TeamMemberNameControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
+											{/*<TeamMemberNameMarginControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 
 										</PanelBody>
 
@@ -669,16 +669,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Designation", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<TeamMemberDesignationControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<TeamMemberDesignationMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<TeamMemberDesignationControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
+											{/*<TeamMemberDesignationMarginControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 										</PanelBody>
 
 

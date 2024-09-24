@@ -13,7 +13,7 @@ import {
 } from '@wordpress/components';
 import {useEffect, useState} from "@wordpress/element";
 import {BORDER_STYLES, UNIT_TYPES} from "../../constants/constants";
-import ResponsiveControl from "../../../../components/responsivecontrol";
+import FB_Spacing from '@Components/spacing';
 
 export default function TeamMemberImageMarginControl ({ attributes, setAttributes}) {
 
@@ -107,7 +107,13 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 		teamMemberContentLetterSpacingUnits,
 		teamMemberContentLineHeight,
 		teamMemberContentLineHeightUnits,
-		teamMemberContentColor
+		teamMemberContentColor,
+
+		FeatureMarginLink,
+		spacingUnits,
+		TestimonialDesktopPadding,
+		TestimonialTabPadding,
+		TestimonialMobilePadding,
 
 	} = attributes;
 
@@ -151,6 +157,67 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 				break;
 		}
 	};
+
+
+	const handleSpacingUnitHandlerFn = ( event, position ) => {
+		const value = event.target.value;
+		if ( FeatureMarginLink ) {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						TestimonialDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						TestimonialTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						TestimonialMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {TestimonialDesktopPadding: {...TestimonialDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {TestimonialTabPadding: {...TestimonialTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {TestimonialMobilePadding: {...TestimonialMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const spacingCombineBtnHandlerFn = () => {
+		setAttributes( {FeatureMarginLink: !FeatureMarginLink} );
+	}
+
 
 	/** Function to handle input change */
 	const handleMarginInputChange = (e, direction) => {
@@ -200,73 +267,16 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 
 	return (
 		<>
-			<div className="fb-setting-spacing-container">
-				<div className="fb-setting-spacing-inner-container">
-					{/* Margin */}
-					<div className="fb-setting-spacing-label-container">
-						<ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleMarginDeviceClick}/>
-						<div className="fb-setting-units-type">
-							<ButtonGroup className="fb-setting-units-type-wrap">
-								{UNIT_TYPES.map((item, key) => (
-									<Button
-										key={key}
-										onClick={() => setAttributes({ teamMemberImageMarginUnits: item.value })}
-										className={`fb-setting-units-type-switcher ${ teamMemberImageMarginUnits === item.value ? 'active' : ''}`}
-									>
-										{item.label}
-									</Button>
-								))}
-							</ButtonGroup>
-						</div>
-					</div>
-					<div className="fb-setting-spacing-input-container">
-						<div className="fb-setting-spacing-input-wrapper">
-							<label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
-							<input
-								type="number"
-								name="top"
-								value={DeviceType === 'Desktop' ? teamMemberImageDesktopMargin.top : DeviceType === 'Tablet' ? teamMemberImageTabMargin.top : teamMemberImageMobileMargin.top}
-								onChange={(e) => handleMarginInputChange(e, 'top')}
-							/>
-						</div>
-						<div className="fb-setting-spacing-input-wrapper">
-							<label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
-							<input
-								type="number"
-								name="right"
-								value={DeviceType === 'Desktop' ? teamMemberImageDesktopMargin.right : DeviceType === 'Tablet' ? teamMemberImageTabMargin.right : teamMemberImageMobileMargin.right}
-								onChange={(e) => handleMarginInputChange(e, 'right')}
-							/>
-						</div>
-						<div className="fb-setting-spacing-input-wrapper">
-							<label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
-							<input
-								type="number"
-								name="bottom"
-								value={DeviceType === 'Desktop' ? teamMemberImageDesktopMargin.bottom : DeviceType === 'Tablet' ? teamMemberImageTabMargin.bottom : teamMemberImageMobileMargin.bottom}
-								onChange={(e) => handleMarginInputChange(e, 'bottom')}
-							/>
-						</div>
-						<div className="fb-setting-spacing-input-wrapper">
-							<label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
-							<input
-								type="number"
-								name="left"
-								value={DeviceType === 'Desktop' ? teamMemberImageDesktopMargin.left : DeviceType === 'Tablet' ? teamMemberImageTabMargin.left : teamMemberImageMobileMargin.left}
-								onChange={(e) => handleMarginInputChange(e, 'left')}
-							/>
-						</div>
-						<div className="fb-setting-spacing-input-wrapper">
-							<label className="fb-setting-spacing-input-label"></label>
-							<span
-								className={`dashicons ${teamMemberImageMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${teamMemberImageMarginLink ? 'is-checked' : ''}`}
-								onClick={handleMarginLinkToggle}
-							>
-                                                            </span>
-						</div>
-					</div>
-				</div>
-			</div>
+			{/*DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes*/}
+
+			{/*DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes*/}
+			<FB_Spacing label={ 'Margin' } DeviceType={DeviceType} spacingUnits={spacingUnits}
+						spacingDesktop={TestimonialDesktopPadding}
+						spacingTablet={TestimonialTabPadding} spacingMobile={TestimonialMobilePadding}
+						handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
+						spacingCombineBtn={FeatureMarginLink}
+						spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}/>
+
 		</>
 	);
 };
