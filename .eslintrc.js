@@ -29,6 +29,6 @@ module.exports = {
 	],
 	globals: {
 		fb_blocks_info: true,
-		
+		DeviceType: true
 	},
 };

@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a674843-5435-47dc-8224-325a312fece9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blocks-config/blocks-attributes/getBlocksDefaultAttributes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blocks/post-grid/attributes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/blocks/post-grid/attributes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blocks/post-grid/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/blocks/post-grid/edit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blocks/post-grid/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/blocks/post-grid/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/typography/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/typography/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/box-shadow/control.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/box-shadow/control.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/box-shadow/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/box-shadow/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/spacing/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/spacing/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging kamal/controls",
+    "git-widget-placeholder": "spacing",
     "last_opened_file_path": "C:/laragon/www/gblock-pattern/wp-content/plugins/frontis-blocks",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

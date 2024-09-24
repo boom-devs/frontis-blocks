@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import React from 'react';
 import { ColorPicker } from '@wordpress/components';
 
-function Control({ label, type, onChangeHandler, value }) {
+function Control( { label, type, onChangeHandler, value } ) {
 	return (
 		<div className={`paneChild ${type}`}>
 			<div className='label'>
@@ -14,10 +15,11 @@ function Control({ label, type, onChangeHandler, value }) {
 					</>
 					) : (
 					<>
+						{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 						<label className="switch">
 							<input type={type} name={label} value={value}
-								   min={(label === 'Spread' || label === "Blur") ? 0 : -350}
-								   max={(label === 'Spread' || label === "Blur") ? 100 : 350}
+								   min={( label === 'Spread' || label === 'Blur' ) ? 0 : -350}
+								   max={( label === 'Spread' || label === 'Blur' ) ? 100 : 350}
 								   onChange={onChangeHandler}/>
 							<span className="slider"></span>
 						</label>

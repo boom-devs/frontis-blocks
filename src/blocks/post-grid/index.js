@@ -19,11 +19,8 @@ import './style.scss';
  */
 import Edit from './edit';
 import metadata from './block.json';
-<<<<<<< HEAD
-import {attributes} from "@Blocks/post-grid/attributes";
-=======
-import attributes from './attributes';
->>>>>>> 78b65be20ec645f92cf413d8a1ee32805d8e85b3
+// eslint-disable-next-line import/no-unresolved
+import {attributes} from '@Blocks/post-grid/attributes';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -35,6 +32,5 @@ registerBlockType( metadata.name, {
 	/**
 	 * @see ./edit.js
 	 */
-	edit: Edit,
-	attributes
+	edit: Edit
 } );

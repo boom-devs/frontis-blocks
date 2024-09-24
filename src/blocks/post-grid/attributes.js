@@ -1,7 +1,7 @@
 export const attributes = {
 	DeviceType: {
-		type: "string",
-		default: "Desktop"
+		type: 'string',
+		default: 'Desktop'
 	},
 	spacingUnits: {
 		type: 'object',
@@ -21,7 +21,7 @@ export const attributes = {
 	// 	}
 	// },
 	TestimonialDesktopPadding: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: 30,
 			bottom: 30,
@@ -30,7 +30,7 @@ export const attributes = {
 		},
 	},
 	TestimonialTabPadding: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: 20,
 			bottom: 20,
@@ -39,7 +39,7 @@ export const attributes = {
 		},
 	},
 	TestimonialMobilePadding: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: 20,
 			bottom: 10,
@@ -48,7 +48,7 @@ export const attributes = {
 		},
 	},
 	FeatureMarginLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	}
 }
