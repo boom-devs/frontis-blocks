@@ -15,28 +15,28 @@ import {useEffect, useState} from "@wordpress/element";
 import {BORDER_STYLES, UNIT_TYPES} from "../../constants/constants";
 import ResponsiveControl from "../../../../components/responsivecontrol";
 
-export default function TeamMemberNameMarginControl ({ attributes, setAttributes}) {
+export default function PricingTableHeaderNameMarginControl ({ attributes, setAttributes}) {
 
 	const {
 		DeviceType,
-		teamMemberNameMarginUnits,
-		desktopteamMemberNameMargin,
-		teamMemberNameDesktopMargin,
-		teamMemberNameTabMargin,
-		teamMemberNameMobileMargin,
-		teamMemberNameMarginLink,
+		pricingTableHeaderNameMarginUnits,
+		desktoppricingTableHeaderNameMargin,
+		pricingTableHeaderNameDesktopMargin,
+		pricingTableHeaderNameTabMargin,
+		pricingTableHeaderNameMobileMargin,
+		pricingTableHeaderNameMarginLink,
 
 	} = attributes;
 
 
 	/** Start Margin */
-	const [previousMargin, setPreviousMargin] = useState(teamMemberNameDesktopMargin);
+	const [previousMargin, setPreviousMargin] = useState(pricingTableHeaderNameDesktopMargin);
 	/** Function to update all margin values */
 	const updateAllMargin = (value, device) => {
 		switch(device) {
 			case 'Desktop':
 				setAttributes({
-					teamMemberNameDesktopMargin: {
+					pricingTableHeaderNameDesktopMargin: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -46,7 +46,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 				break;
 			case 'Tablet':
 				setAttributes({
-					teamMemberNameTabMargin: {
+					pricingTableHeaderNameTabMargin: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -56,7 +56,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 				break;
 			case 'Mobile':
 				setAttributes({
-					teamMemberNameMobileMargin: {
+					pricingTableHeaderNameMobileMargin: {
 						top: value,
 						right: value,
 						bottom: value,
@@ -74,36 +74,36 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 		const value = e.target.value;
 		switch(DeviceType) {
 			case 'Desktop':
-				setAttributes({ teamMemberNameDesktopMargin: { ...teamMemberNameDesktopMargin, [direction]: value } });
+				setAttributes({ pricingTableHeaderNameDesktopMargin: { ...pricingTableHeaderNameDesktopMargin, [direction]: value } });
 				break;
 			case 'Tablet':
-				setAttributes({ teamMemberNameTabMargin: { ...teamMemberNameTabMargin, [direction]: value } });
+				setAttributes({ pricingTableHeaderNameTabMargin: { ...pricingTableHeaderNameTabMargin, [direction]: value } });
 				break;
 			case 'Mobile':
-				setAttributes({ teamMemberNameMobileMargin: { ...teamMemberNameMobileMargin, [direction]: value } });
+				setAttributes({ pricingTableHeaderNameMobileMargin: { ...pricingTableHeaderNameMobileMargin, [direction]: value } });
 				break;
 			default:
 				break;
 		}
 		/** Update all margin values if marginLink is true */
-		if (teamMemberNameMarginLink) {
+		if (pricingTableHeaderNameMarginLink) {
 			updateAllMargin(value, DeviceType);
 		}
 	};
 
 	/** Function to handle marginLink toggle */
 	const handleMarginLinkToggle = () => {
-		if (!teamMemberNameMarginLink) {
-			setAttributes({ teamMemberNameDesktopMargin: previousMargin });
+		if (!pricingTableHeaderNameMarginLink) {
+			setAttributes({ pricingTableHeaderNameDesktopMargin: previousMargin });
 		}
 		/** setmarginLink(!marginLink) */
-		setAttributes({teamMemberNameMarginLink: !teamMemberNameMarginLink})
+		setAttributes({pricingTableHeaderNameMarginLink: !pricingTableHeaderNameMarginLink})
 	};
 
 	/** Update previousMargin state when margin changes */
 	useEffect(() => {
-		setPreviousMargin(teamMemberNameDesktopMargin);
-	}, [teamMemberNameDesktopMargin]);
+		setPreviousMargin(pricingTableHeaderNameDesktopMargin);
+	}, [pricingTableHeaderNameDesktopMargin]);
 
 	/** Function to handle device click for margin */
 	const handleMarginDeviceClick = (device) => {
@@ -111,7 +111,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
-	const teamMemberNameMargin = `${teamMemberNameDesktopMargin.top}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.right}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.bottom}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.left}${teamMemberNameMarginUnits}`;
+	const pricingTableHeaderNameMargin = `${pricingTableHeaderNameDesktopMargin.top}${pricingTableHeaderNameMarginUnits} ${pricingTableHeaderNameDesktopMargin.right}${pricingTableHeaderNameMarginUnits} ${pricingTableHeaderNameDesktopMargin.bottom}${pricingTableHeaderNameMarginUnits} ${pricingTableHeaderNameDesktopMargin.left}${pricingTableHeaderNameMarginUnits}`;
 	/** End Margin */
 
 
@@ -127,8 +127,8 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 								{UNIT_TYPES.map((item, key) => (
 									<Button
 										key={key}
-										onClick={() => setAttributes({ teamMemberNameMarginUnits: item.value })}
-										className={`fb-setting-units-type-switcher ${ teamMemberNameMarginUnits === item.value ? 'active' : ''}`}
+										onClick={() => setAttributes({ pricingTableHeaderNameMarginUnits: item.value })}
+										className={`fb-setting-units-type-switcher ${ pricingTableHeaderNameMarginUnits === item.value ? 'active' : ''}`}
 									>
 										{item.label}
 									</Button>
@@ -142,7 +142,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 							<input
 								type="number"
 								name="top"
-								value={DeviceType === 'Desktop' ? teamMemberNameDesktopMargin.top : DeviceType === 'Tablet' ? teamMemberNameTabMargin.top : teamMemberNameMobileMargin.top}
+								value={DeviceType === 'Desktop' ? pricingTableHeaderNameDesktopMargin.top : DeviceType === 'Tablet' ? pricingTableHeaderNameTabMargin.top : pricingTableHeaderNameMobileMargin.top}
 								onChange={(e) => handleMarginInputChange(e, 'top')}
 							/>
 						</div>
@@ -151,7 +151,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 							<input
 								type="number"
 								name="right"
-								value={DeviceType === 'Desktop' ? teamMemberNameDesktopMargin.right : DeviceType === 'Tablet' ? teamMemberNameTabMargin.right : teamMemberNameMobileMargin.right}
+								value={DeviceType === 'Desktop' ? pricingTableHeaderNameDesktopMargin.right : DeviceType === 'Tablet' ? pricingTableHeaderNameTabMargin.right : pricingTableHeaderNameMobileMargin.right}
 								onChange={(e) => handleMarginInputChange(e, 'right')}
 							/>
 						</div>
@@ -160,7 +160,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 							<input
 								type="number"
 								name="bottom"
-								value={DeviceType === 'Desktop' ? teamMemberNameDesktopMargin.bottom : DeviceType === 'Tablet' ? teamMemberNameTabMargin.bottom : teamMemberNameMobileMargin.bottom}
+								value={DeviceType === 'Desktop' ? pricingTableHeaderNameDesktopMargin.bottom : DeviceType === 'Tablet' ? pricingTableHeaderNameTabMargin.bottom : pricingTableHeaderNameMobileMargin.bottom}
 								onChange={(e) => handleMarginInputChange(e, 'bottom')}
 							/>
 						</div>
@@ -169,14 +169,14 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 							<input
 								type="number"
 								name="left"
-								value={DeviceType === 'Desktop' ? teamMemberNameDesktopMargin.left : DeviceType === 'Tablet' ? teamMemberNameTabMargin.left : teamMemberNameMobileMargin.left}
+								value={DeviceType === 'Desktop' ? pricingTableHeaderNameDesktopMargin.left : DeviceType === 'Tablet' ? pricingTableHeaderNameTabMargin.left : pricingTableHeaderNameMobileMargin.left}
 								onChange={(e) => handleMarginInputChange(e, 'left')}
 							/>
 						</div>
 						<div className="fb-setting-spacing-input-wrapper">
 							<label className="fb-setting-spacing-input-label"></label>
 							<span
-								className={`dashicons ${teamMemberNameMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${teamMemberNameMarginLink ? 'is-checked' : ''}`}
+								className={`dashicons ${pricingTableHeaderNameMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${pricingTableHeaderNameMarginLink ? 'is-checked' : ''}`}
 								onClick={handleMarginLinkToggle}
 							>
                                                             </span>

@@ -15,38 +15,40 @@ import {useEffect, useState} from "@wordpress/element";
 import {BORDER_STYLES, UNIT_TYPES, FONT_FAMILYS} from "../../constants/constants";
 import ResponsiveControl from "../../../../components/responsivecontrol";
 
-export default function TeamMemberNameControl ({ attributes, setAttributes}) {
+export default function PricingTableHeaderNameControl ({ attributes, setAttributes}) {
 
 	const {
-		teamMemberNameFontFamily,
-		teamMemberNameFontSize,
-		teamMemberNameFontSizeUnits,
-		teamMemberNameFontWeight,
-		teamMemberNameFontStyle,
-		teamMemberNameTextTransform,
-		teamMemberNameTextDecoration,
-		teamMemberNameLetterSpacing,
-		teamMemberNameLetterSpacingUnits,
-		teamMemberNameLineHeight,
-		teamMemberNameLineHeightUnits,
-		teamMemberNameColor,
+		pricingTableHeaderNameFontFamily,
+		pricingTableHeaderNameFontSize,
+		pricingTableHeaderNameFontSizeUnits,
+		pricingTableHeaderNameFontWeight,
+		pricingTableHeaderNameFontStyle,
+		pricingTableHeaderNameTextTransform,
+		pricingTableHeaderNameTextDecoration,
+		pricingTableHeaderNameLetterSpacing,
+		pricingTableHeaderNameLetterSpacingUnits,
+		pricingTableHeaderNameLineHeight,
+		pricingTableHeaderNameLineHeightUnits,
+		pricingTableHeaderNameColor,
 
 	} = attributes;
 
 
 	/* set default values for the style attributes */
 	useEffect(() => {
-		if (teamMemberNameFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${teamMemberNameFontFamily.replace(' ', '+')}`;
+		if (pricingTableHeaderNameFontFamily) {
+			const fontUrl = `https://fonts.googleapis.com/css?family=${pricingTableHeaderNameFontFamily.replace(' ', '+')}`;
 			const linkElement = document.createElement('link');
 			linkElement.rel = 'stylesheet';
 			linkElement.href = fontUrl;
 			document.head.appendChild(linkElement);
 		}
-	}, [teamMemberNameFontFamily]);
+	}, [pricingTableHeaderNameFontFamily]);
 
 	return (
 	<>
+		<h2>Title</h2>
+
 		<BaseControl
 			label={__("Typography", "frontis-blocks")}
 			className="fb-setting-typography"
@@ -73,8 +75,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 								<SelectControl
 									label={__("Font Family", "frontis-blocks")}
 									options={FONT_FAMILYS}
-									value={teamMemberNameFontFamily}
-									onChange={(value) => setAttributes({ teamMemberNameFontFamily: value })}
+									value={pricingTableHeaderNameFontFamily}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameFontFamily: value })}
 								/>
 							</div>
 							<div className="fb-setting-fontsize-wrapper">
@@ -87,8 +89,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 											{UNIT_TYPES.map((item, key) => (
 												<Button
 													key={key}
-													onClick={() => setAttributes({ teamMemberNameFontSizeUnits: item.value })}
-													className={`fb-setting-fontsize-units-switcher ${ teamMemberNameFontSizeUnits === item.value ? 'active' : ''}`}
+													onClick={() => setAttributes({ pricingTableHeaderNameFontSizeUnits: item.value })}
+													className={`fb-setting-fontsize-units-switcher ${ pricingTableHeaderNameFontSizeUnits === item.value ? 'active' : ''}`}
 												>
 													{item.label}
 												</Button>
@@ -98,8 +100,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 								</div>
 								<div className="fb-setting-fontsize-rangecontrol">
 									<RangeControl
-										value={teamMemberNameFontSize}
-										onChange={(value) => setAttributes({ teamMemberNameFontSize: value })}
+										value={pricingTableHeaderNameFontSize}
+										onChange={(value) => setAttributes({ pricingTableHeaderNameFontSize: value })}
 										min={1}
 										max={200}
 										allowReset
@@ -122,8 +124,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 										{ label: __("800", "frontis-blocks"), value: "800" },
 										{ label: __("900", "frontis-blocks"), value: "900" },
 									]}
-									value={teamMemberNameFontWeight}
-									onChange={(value) => setAttributes({ teamMemberNameFontWeight: value })}
+									value={pricingTableHeaderNameFontWeight}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameFontWeight: value })}
 								/>
 							</div>
 							<div className="fb-setting-fontstyle-wrapper">
@@ -135,8 +137,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 										{ label: __("Italic", "frontis-blocks"), value: "italic" },
 										{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
 									]}
-									value={teamMemberNameFontStyle}
-									onChange={(value) => setAttributes({ teamMemberNameFontStyle: value })}
+									value={pricingTableHeaderNameFontStyle}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameFontStyle: value })}
 								/>
 							</div>
 							<div className="fb-setting-texttransform-wrapper">
@@ -149,8 +151,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 										{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
 										{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
 									]}
-									value={teamMemberNameTextTransform}
-									onChange={(value) => setAttributes({ teamMemberNameTextTransform: value })}
+									value={pricingTableHeaderNameTextTransform}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameTextTransform: value })}
 								/>
 							</div>
 							<div className="fb-setting-textdecoration-wrapper">
@@ -163,8 +165,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 										{ label: __("Overline", "frontis-blocks"), value: "overline" },
 										{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
 									]}
-									value={teamMemberNameTextDecoration}
-									onChange={(value) => setAttributes({ teamMemberNameTextDecoration: value })}
+									value={pricingTableHeaderNameTextDecoration}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameTextDecoration: value })}
 								/>
 							</div>
 							<div className="fb-setting-letterspacing-wrapper">
@@ -177,8 +179,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 											{UNIT_TYPES.map((item, key) => (
 												<Button
 													key={key}
-													onClick={() => setAttributes({ teamMemberNameLetterSpacingUnits: item.value })}
-													className={`fb-setting-letterspacing-units-switcher ${ teamMemberNameLetterSpacingUnits === item.value ? 'active' : ''}`}
+													onClick={() => setAttributes({ pricingTableHeaderNameLetterSpacingUnits: item.value })}
+													className={`fb-setting-letterspacing-units-switcher ${ pricingTableHeaderNameLetterSpacingUnits === item.value ? 'active' : ''}`}
 												>
 													{item.label}
 												</Button>
@@ -187,8 +189,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 									</div>
 								</div>
 								<RangeControl
-									value={teamMemberNameLetterSpacing}
-									onChange={(value) => setAttributes({ teamMemberNameLetterSpacing: value === 0 ? undefined : value })}
+									value={pricingTableHeaderNameLetterSpacing}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameLetterSpacing: value === 0 ? undefined : value })}
 									min={1}
 									max={100}
 									step={1}
@@ -206,8 +208,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 											{UNIT_TYPES.map((item, key) => (
 												<Button
 													key={key}
-													onClick={() => setAttributes({ teamMemberNameLineHeightUnits: item.value })}
-													className={`fb-setting-lineheight-units-switcher ${ teamMemberNameLineHeightUnits === item.value ? 'active' : ''}`}
+													onClick={() => setAttributes({ pricingTableHeaderNameLineHeightUnits: item.value })}
+													className={`fb-setting-lineheight-units-switcher ${ pricingTableHeaderNameLineHeightUnits === item.value ? 'active' : ''}`}
 												>
 													{item.label}
 												</Button>
@@ -216,8 +218,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 									</div>
 								</div>
 								<RangeControl
-									value={teamMemberNameLineHeight}
-									onChange={(value) => setAttributes({ teamMemberNameLineHeight: value === 1 ? undefined : value })}
+									value={pricingTableHeaderNameLineHeight}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameLineHeight: value === 1 ? undefined : value })}
 									min={1}
 									max={100}
 									step={1}
@@ -255,8 +257,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 						<BaseControl className="fb-setting-color-setting-icon-popup-inner">
 							<div className="fb-setting-normal-color">
 								<ColorPicker
-									color={teamMemberNameColor}
-									onChange={(value) => setAttributes({ teamMemberNameColor: value })}
+									color={pricingTableHeaderNameColor}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameColor: value })}
 									enableAlpha={true}
 								/>
 								<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -269,8 +271,8 @@ export default function TeamMemberNameControl ({ attributes, setAttributes}) {
 										{ color: '#4CC9F0' },
 									]}
 									disableCustomColors={true}
-									value={teamMemberNameColor}
-									onChange={(value) => setAttributes({ teamMemberNameColor: value })}
+									value={pricingTableHeaderNameColor}
+									onChange={(value) => setAttributes({ pricingTableHeaderNameColor: value })}
 								/>
 							</div>
 						</BaseControl>

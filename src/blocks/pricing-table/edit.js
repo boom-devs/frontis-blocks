@@ -3,7 +3,7 @@ import {
 	MediaUpload,
 	MediaUploadCheck,
 	useBlockProps,
-	InspectorControls, RichText,
+	InspectorControls, RichText, URLInput,
 } from '@wordpress/block-editor';
 import {
 	TabPanel,
@@ -36,18 +36,8 @@ import FBIconPicker from "../../components/icon-picker";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import ResponsiveControl from "../../components/responsivecontrol";
 
-import TeamMemberContentBorderControl from './style-control/content/team-member-content-border.js';
-import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin.js';
-import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding.js';
-
-
-import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
-import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
-import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
-import TeamMemberNameControl from './style-control/name/team-member-name.js';
-import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
-import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
-import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
+import PricingTableHeaderNameControl from './style-control/name/pricing-table-header-name-control.js';
+import PricingTableHeaderNameMarginControl from './style-control/name/pricing-table-header-name-margin-control.js';
 import PricingTableFeaturesControl from './style-control/features/pricing-table-features-control.js';
 
 import SortableItem from './sortableItem.js';
@@ -266,6 +256,38 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		FeatureTabletSwitcher,
 		FeatureMobileSwitcher,
 
+		// button
+		pricingTableButtonText,
+		pricingTableButtonSwitcher,
+		pricingTableButtonLink,
+		buttonAlignment,
+		pricingTableButtonPaddingUnits,
+		pricingTableButtonDesktopPadding,
+		pricingTableButtonTabPadding,
+		pricingTableButtonMobilePadding,
+		pricingTableButtonMarginUnits,
+		pricingTableButtonDesktopMargin,
+		pricingTableButtonTabMargin,
+		pricingTableButtonMobileMargin,
+		pricingTableButtonActiveMarginDevice,
+		pricingTableButtonMarginLink,
+		buttonFontFamily,
+		buttonFontSize,
+		buttonFontSizeUnits,
+		buttonFontWeight,
+		buttonFontStyle,
+		buttonTextTransform,
+		buttonTextDecoration,
+		buttonLetterSpacing,
+		buttonLetterSpacingUnits,
+		buttonLineHeight,
+		buttonLineHeightUnits,
+		buttonColorSwitcher,
+		buttonTextColor,
+		buttonTextHoverColor,
+		buttonBgColorSwitcher,
+		buttonBgColor,
+		buttonBgHoverColor,
 
 	} = attributes;
 
@@ -360,10 +382,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     ${FeatureBorderColor !== undefined ? `border-color: ${FeatureBorderColor};` : ''};
                     transition: all .3s ease-in-out;
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper:hover {
-                    ${FeatureBgHoverColor !== undefined ? `background-color: ${FeatureBgHoverColor};` : ''};
-                    ${FeatureBorderHoverColor !== undefined ? `border-color: ${FeatureBorderHoverColor};` : ''};
-                }
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-item:not(:last-child) {
                     padding-bottom: calc(${FeatureListGapDesktop}${FeatureListGapUnits} / 2);
                 }
@@ -375,9 +393,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     height: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
                     width: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon:hover svg {
-                    fill: ${FeatureIconHoverColor};
-                }
+
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon-box {
                     margin-right: ${FeatureIconSpacingDesktop}${FeatureIconSpacingUnits}!important;
                 }
@@ -385,10 +401,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     background-color: ${FeatureIconBgColor};
                     border-color: ${FeatureIconBgColor};
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon-inner:hover {
-                    background-color: ${FeatureIconBgHoverColor};
-                    border-color: ${FeatureIconBgHoverColor};
-                }
+
 
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon {
                     width: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
@@ -406,10 +419,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     line-height: ${FeatureTitleLineHeightDesktop}${FeatureTitleLineHeightUnits};
                     color: ${FeatureTitleColor};
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-content .fb-feature-list-title:hover {
-                    color: ${FeatureTitleHoverColor};
-                }
-
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-content .fb-feature-list-text {
                     font-family: ${FeatureDescFontFamily};
                     font-size: ${FeatureDescFontSizeDesktop}${FeatureDescFontSizeUnits};
@@ -421,9 +430,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     line-height: ${FeatureDescLineHeightDesktop}${FeatureDescLineHeightUnits};
                     color: ${FeatureDescColor};
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-content .fb-feature-list-text:hover {
-                    color: ${FeatureDescHoverColor};
-                }
+
 
                 @media only screen and (max-width: 1024px) {
 
@@ -613,21 +620,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</div>
 
 											<BaseControl
-												label={__("Icon Shape", "frontis-blocks")}
-												className="fb-setting-icon-shape-wrapper"
-											>
-												<SelectControl
-													value={attributes.FeatureIconShape}
-													options={[
-														{ label: __("None", "frontis-blocks"), value: "none" },
-														{ label: __("Circle", "frontis-blocks"), value: "circle" },
-														{ label: __("Square", "frontis-blocks"), value: "square" },
-														{ label: __("Rhombus", "frontis-blocks"), value: "rhombus" },
-													]}
-													onChange={(value) => setAttributes({ FeatureIconShape: value })}
-												/>
-											</BaseControl>
-											<BaseControl
 												label={__("Feature Item Alignment", "frontis-blocks")}
 												id="fb-setting-text-alignment"
 												className="fb-setting-text-alignment"
@@ -667,35 +659,92 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</BaseControl>
 										</PanelBody>
 
-										<PanelBody title={__("Footer", "frontis-blocks")} initialOpen={false}>
+										<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
+											{/*Button Element*/}
+											<ToggleControl
+												label={__("Show Button", "frontis-block")}
+												checked={pricingTableButtonSwitcher}
+												onChange={(value) => setAttributes({pricingTableButtonSwitcher: value})}
+											/>
+
+											{pricingTableButtonSwitcher && (
+												<>
+													<BaseControl
+														label={__("Alignment", "frontis-block")}
+														id="fb-media-alignment"
+														className="fb-advanced-alignment"
+													>
+														<ButtonGroup
+															className="fb-advanced-alignment-group-btn"
+														>
+															{TEXT_ALIGN.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() => setAttributes({buttonAlignment: item.value})}
+																	className={`fb-advanced-alignment-single-btn ${buttonAlignment === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+													</BaseControl>
+													<TextareaControl
+														label={__("Button Text", "frontis-block")}
+														value={pricingTableButtonText}
+														onChange={(value) => setAttributes({pricingTableButtonText: value})}
+														className="fb-info-button-text"
+													/>
+													<URLInput
+														value={pricingTableButtonLink}
+														onChange={(value, post) => {
+															// Check if the URL has a protocol (http or https), otherwise prepend it
+															const formattedLink = value.startsWith('http://') || value.startsWith('https://')
+																? value
+																: `https://${value}`;
+
+															setAttributes({
+																pricingTableButtonLink: formattedLink,
+																pricingTableButtonText: (post && post.title) || pricingTableButtonText
+															});
+														}}
+													/>
+												</>
+											)}
 										</PanelBody>
 									</>
 								)}
 
 								{tab.name === "styles" && (
 									<>
+										<PanelBody
+											title={__("Header", "frontis-blocks")}
+											initialOpen={true}
+										>
+
+											<PricingTableHeaderNameControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<PricingTableHeaderNameMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											{/*<TeamMemberContentPaddingControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
+
+										</PanelBody>
+
 										<PricingTableFeaturesControl
 											attributes={attributes}
 											setAttributes={setAttributes}
 											clientId ={clientId}
 										/>
 
-										<PanelBody
-											title={__("Features", "frontis-blocks")}
-											initialOpen={true}
-										>
-
-											{/*<TeamMemberContentMarginControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
-											{/*<TeamMemberContentPaddingControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
-										</PanelBody>
 
 										{/*<PanelBody*/}
 										{/*	title={__("Photo", "frontis-blocks")}*/}
@@ -817,11 +866,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 												{ item.FeatureIconAlign !== 'none' && (
 													<div className="fb-feature-list-icon-box">
-														<div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
-                                                <span className="fb-feature-list-icon">
-                                                    {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                                </span>
-														</div>
+													  	<span className="fb-feature-list-icon">
+															{item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+														</span>
 													</div>
 												) }
 
@@ -845,6 +892,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								</div>
 							</div>
 						</div>
+						{pricingTableButtonSwitcher && (
+							<div className="fb-pricing-table-btn-wrapper" style={{textAlign: buttonAlignment}}>
+								<a
+									href={pricingTableButtonLink}
+									className="fb-pricing-table-btn"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{pricingTableButtonText}
+								</a>
+							</div>
+
+						)}
 					</div>
 				</div>
 			</div>

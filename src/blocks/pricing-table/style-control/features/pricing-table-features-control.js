@@ -495,8 +495,8 @@ export default function PricingTableFeaturesControl ({ attributes, setAttributes
 	return (
 		<>
 			<PanelBody
-				title={__("Feature List", "frontis-blocks")}
-				initialOpen={true}
+				title={__("Features", "frontis-blocks")}
+				initialOpen={false}
 				className="fb-setting-feature-list-wrapper"
 			>
 				<div className="fb-setting-fontsize-wrapper">
@@ -539,129 +539,54 @@ export default function PricingTableFeaturesControl ({ attributes, setAttributes
 						/>
 					</div>
 				</div>
-			</PanelBody>
 
-
-			<PanelBody
-				title={__("Icon", "frontis-blocks")}
-				initialOpen={false}
-				className="fb-setting-feature-icon-wrapper"
-			>
-
+				{/** Feature Icon */}
 				<BaseControl
 					label={__("Icon Color", "frontis-blocks")}
-					className="fb-setting-color-panel-wrapper"
+					className="fb-setting-color-setting-wrapper"
 				>
-					<ButtonGroup className="fb-setting-color-panel-btn">
-						{NORMAL_HOVER.map((item, key) => (
+					<Dropdown
+						className="fb-setting-color-setting-icon-dropdown"
+						contentClassName="fb-setting-color-setting-icon-dropdown-content"
+						popoverProps={{ placement: 'bottom-start' }}
+						renderToggle={({ isOpen, onToggle }) => (
 							<Button
-								key={key}
-								onClick={() => setAttributes({ FeatureIconColorSwitcher: item.value })}
-								className={`fb-setting-color-panel-btn-switchr ${FeatureIconColorSwitcher === item.value ? 'active' : ''}`}
+								variant="primary"
+								onClick={onToggle}
+								aria-expanded={isOpen}
+								className="fb-setting-color-setting-icon-btn"
 							>
-								{item.label}
+								<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
 							</Button>
-						))}
-					</ButtonGroup>
+						)}
+						renderContent={() => (
+							<div className="fb-setting-color-setting-icon-popup">
+								<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+									<div className="fb-setting-normal-color">
+										<ColorPicker
+											color={FeatureIconColor}
+											onChange={(value) => setAttributes({ FeatureIconColor: value })}
+											enableAlpha={true}
+										/>
+										<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+										<ColorPalette
+											colors={[
+												{ color: '#F72585' },
+												{ color: '#7209B7' },
+												{ color: '#3A0CA3' },
+												{ color: '#4361EE' },
+												{ color: '#4CC9F0' },
+											]}
+											disableCustomColors={true}
+											value={FeatureIconColor}
+											onChange={(value) => setAttributes({ FeatureIconColor: value })}
+										/>
+									</div>
+								</BaseControl>
+							</div>
+						)}
+					/>
 				</BaseControl>
-
-				{FeatureIconColorSwitcher === 'normal' && (
-					<BaseControl
-						label={__("Nomal Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-normal-color">
-											<ColorPicker
-												color={FeatureIconColor}
-												onChange={(value) => setAttributes({ FeatureIconColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureIconColor}
-												onChange={(value) => setAttributes({ FeatureIconColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
-
-				{FeatureIconColorSwitcher === 'hover' && (
-					<BaseControl
-						label={__("Hover Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-hover-color">
-											<ColorPicker
-												color={FeatureIconHoverColor}
-												onChange={(value) => setAttributes({ FeatureIconHoverColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureIconHoverColor}
-												onChange={(value) => setAttributes({ FeatureIconHoverColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
 
 				<div className="fb-setting-fontsize-wrapper">
 					<div className="fb-setting-fontsize-header">
@@ -704,127 +629,58 @@ export default function PricingTableFeaturesControl ({ attributes, setAttributes
 					</div>
 				</div>
 
-
-
 				<BaseControl
-					label={__("Background Color", "frontis-blocks")}
-					className="fb-setting-color-panel-wrapper"
+					label={__("Icon Background Color", "frontis-blocks")}
+					className="fb-setting-color-setting-wrapper"
 				>
-					<ButtonGroup className="fb-setting-color-panel-btn">
-						{NORMAL_HOVER.map((item, key) => (
+					<Dropdown
+						className="fb-setting-color-setting-icon-dropdown"
+						contentClassName="fb-setting-color-setting-icon-dropdown-content"
+						popoverProps={{ placement: 'bottom-start' }}
+						renderToggle={({ isOpen, onToggle }) => (
 							<Button
-								key={key}
-								onClick={() => setAttributes({ FeatureIconBgColorSwitcher: item.value })}
-								className={`fb-setting-color-panel-btn-switchr ${FeatureIconBgColorSwitcher === item.value ? 'active' : ''}`}
+								variant="primary"
+								onClick={onToggle}
+								aria-expanded={isOpen}
+								className="fb-setting-color-setting-icon-btn"
 							>
-								{item.label}
+								<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
 							</Button>
-						))}
-					</ButtonGroup>
+						)}
+						renderContent={() => (
+							<div className="fb-setting-color-setting-icon-popup">
+								<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+									<div className="fb-setting-normal-color">
+										<ColorPicker
+											color={FeatureIconBgColor}
+											onChange={(value) => setAttributes({ FeatureIconBgColor: value })}
+											enableAlpha={true}
+										/>
+										<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+										<ColorPalette
+											colors={[
+												{ color: '#F72585' },
+												{ color: '#7209B7' },
+												{ color: '#3A0CA3' },
+												{ color: '#4361EE' },
+												{ color: '#4CC9F0' },
+											]}
+											disableCustomColors={true}
+											value={FeatureIconBgColor}
+											onChange={(value) => setAttributes({ FeatureIconBgColor: value })}
+										/>
+									</div>
+								</BaseControl>
+							</div>
+						)}
+					/>
 				</BaseControl>
 
-				{FeatureIconBgColorSwitcher === 'normal' && (
-					<BaseControl
-						label={__("Nomal Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-normal-color">
-											<ColorPicker
-												color={FeatureIconBgColor}
-												onChange={(value) => setAttributes({ FeatureIconBgColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureIconBgColor}
-												onChange={(value) => setAttributes({ FeatureIconBgColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
-
-				{FeatureIconBgColorSwitcher === 'hover' && (
-					<BaseControl
-						label={__("Hover Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-hover-color">
-											<ColorPicker
-												color={FeatureIconBgHoverColor}
-												onChange={(value) => setAttributes({ FeatureIconBgHoverColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureIconBgHoverColor}
-												onChange={(value) => setAttributes({ FeatureIconBgHoverColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
 
 				<div className="fb-setting-fontsize-wrapper">
 					<div className="fb-setting-fontsize-header">
 						<ResponsiveControl
-							labelText={__("Background Size", "frontis-blocks")}
+							labelText={__("Icon Background Size", "frontis-blocks")}
 							device={DeviceType}
 							deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
 						/>
@@ -865,7 +721,7 @@ export default function PricingTableFeaturesControl ({ attributes, setAttributes
 				<div className="fb-setting-fontsize-wrapper">
 					<div className="fb-setting-fontsize-header">
 						<ResponsiveControl
-							labelText={__("Spacing", "frontis-blocks")}
+							labelText={__("Icon Spacing", "frontis-blocks")}
 							device={DeviceType}
 							deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
 						/>
@@ -903,14 +759,9 @@ export default function PricingTableFeaturesControl ({ attributes, setAttributes
 					</div>
 				</div>
 
-			</PanelBody>
-			<PanelBody
-				title={__("Title", "frontis-blocks")}
-				initialOpen={false}
-				className="fb-setting-feature-title-wrapper"
-			>
+				{/*** Feature Title **/}
 				<BaseControl
-					label={__("Typography", "frontis-blocks")}
+					label={__("Title Typography", "frontis-blocks")}
 					className="fb-setting-typography"
 				>
 					<Dropdown
@@ -1125,136 +976,15 @@ export default function PricingTableFeaturesControl ({ attributes, setAttributes
 						)}
 					/>
 				</BaseControl>
-				<BaseControl
-					label={__("Color", "frontis-blocks")}
-					className="fb-setting-color-panel-wrapper"
-				>
-					<ButtonGroup className="fb-setting-color-panel-btn">
-						{NORMAL_HOVER.map((item, key) => (
-							<Button
-								key={key}
-								onClick={() => setAttributes({ FeatureTitleColorSwitcher: item.value })}
-								className={`fb-setting-color-panel-btn-switchr ${FeatureTitleColorSwitcher === item.value ? 'active' : ''}`}
-							>
-								{item.label}
-							</Button>
-						))}
-					</ButtonGroup>
-				</BaseControl>
 
-				{FeatureTitleColorSwitcher === 'normal' && (
-					<BaseControl
-						label={__("Nomal Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-normal-color">
-											<ColorPicker
-												color={FeatureTitleColor}
-												onChange={(value) => setAttributes({ FeatureTitleColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureTitleColor}
-												onChange={(value) => setAttributes({ FeatureTitleColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
-
-				{FeatureTitleColorSwitcher === 'hover' && (
-					<BaseControl
-						label={__("Hover Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-hover-color">
-											<ColorPicker
-												color={FeatureTitleHoverColor}
-												onChange={(value) => setAttributes({ FeatureTitleHoverColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureTitleHoverColor}
-												onChange={(value) => setAttributes({ FeatureTitleHoverColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
-			</PanelBody>
-			<PanelBody
-				title={__("Description", "frontis-blocks")}
-				initialOpen={false}
-				className="fb-setting-feature-description-wrapper"
-			>
 
 				<BaseControl
-					label={__("Typography", "frontis-blocks")}
-					className="fb-setting-typography"
+					label={__("Title Color", "frontis-blocks")}
+					className="fb-setting-color-setting-wrapper"
 				>
 					<Dropdown
-						className="fb-setting-dropdown-icon-wrapper"
-						contentClassName="fb-setting-dropdown-icon-content"
+						className="fb-setting-color-setting-icon-dropdown"
+						contentClassName="fb-setting-color-setting-icon-dropdown-content"
 						popoverProps={{ placement: 'bottom-start' }}
 						renderToggle={({ isOpen, onToggle }) => (
 							<Button
@@ -1262,324 +992,39 @@ export default function PricingTableFeaturesControl ({ attributes, setAttributes
 								onClick={onToggle}
 								aria-expanded={isOpen}
 								aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-								className="fb-setting-dropdown-icon-btn"
+								className="fb-setting-color-setting-icon-btn"
 							>
-								<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+								<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
 							</Button>
 						)}
 						renderContent={() => (
-							<div className="fb-setting-typography-popup">
-								<BaseControl className="fb-setting-typography-popup-inner" >
-									<div className="fb-setting-fontfamily-wrapper">
-										<SelectControl
-											label={__("Font Family", "frontis-blocks")}
-											options={FONT_FAMILYS}
-											value={FeatureDescFontFamily}
-											onChange={(value) => setAttributes({ FeatureDescFontFamily: value })}
+							<div className="fb-setting-color-setting-icon-popup">
+								<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+									<div className="fb-setting-normal-color">
+										<ColorPicker
+											color={FeatureTitleColor}
+											onChange={(value) => setAttributes({ FeatureTitleColor: value })}
+											enableAlpha={true}
 										/>
-									</div>
-									<div className="fb-setting-fontsize-wrapper">
-										<div className="fb-setting-fontsize-header">
-											<ResponsiveControl
-												labelText={__("Font Size", "frontis-blocks")}
-												device={DeviceType}
-												deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-											/>
-											<div className="fb-setting-fontsize-units">
-												<ButtonGroup className="fb-setting-fontsize-units-wrap">
-													{UNIT_TYPES.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ FeatureDescFontSizeUnits: item.value })}
-															className={`fb-setting-fontsize-units-switcher ${FeatureDescFontSizeUnits === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</div>
-										</div>
-										<div className="fb-setting-fontsize-rangecontrol">
-											<RangeControl
-												value={DeviceType === "Desktop" ? FeatureDescFontSizeDesktop : DeviceType === "Tablet" ? FeatureDescFontSizeTablet : FeatureDescFontSizeMobile}
-												onChange={(value) => {
-													if (DeviceType === "Desktop") {
-														setAttributes({ FeatureDescFontSizeDesktop: value });
-													} else if (DeviceType === "Tablet") {
-														setAttributes({ FeatureDescFontSizeTablet: value });
-													} else if (DeviceType === "Mobile") {
-														setAttributes({ FeatureDescFontSizeMobile: value });
-													}
-												}}
-												min={1}
-												max={200}
-												allowReset
-												resetFallbackValue={undefined}
-											/>
-										</div>
-									</div>
-
-									<div className="fb-setting-fontweight-wrapper">
-										<SelectControl
-											label={__("Font Weight", "frontis-blocks")}
-											options={[
-												{ label: __("Default", "frontis-blocks"), value: "700" },
-												{ label: __("100", "frontis-blocks"), value: "100" },
-												{ label: __("200", "frontis-blocks"), value: "200" },
-												{ label: __("300", "frontis-blocks"), value: "300" },
-												{ label: __("400", "frontis-blocks"), value: "400" },
-												{ label: __("500", "frontis-blocks"), value: "500" },
-												{ label: __("600", "frontis-blocks"), value: "600" },
-												{ label: __("700", "frontis-blocks"), value: "700" },
-												{ label: __("800", "frontis-blocks"), value: "800" },
-												{ label: __("900", "frontis-blocks"), value: "900" },
+										<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+										<ColorPalette
+											colors={[
+												{ color: '#F72585' },
+												{ color: '#7209B7' },
+												{ color: '#3A0CA3' },
+												{ color: '#4361EE' },
+												{ color: '#4CC9F0' },
 											]}
-											value={FeatureDescFontWeight}
-											onChange={(value) => setAttributes({ FeatureDescFontWeight: value })}
+											disableCustomColors={true}
+											value={FeatureTitleColor}
+											onChange={(value) => setAttributes({ FeatureTitleColor: value })}
 										/>
 									</div>
-									<div className="fb-setting-fontstyle-wrapper">
-										<SelectControl
-											label={__("Font Style", "frontis-blocks")}
-											options={[
-												{ label: __("Default", "frontis-blocks"), value: "normal" },
-												{ label: __("Normal", "frontis-blocks"), value: "normal" },
-												{ label: __("Italic", "frontis-blocks"), value: "italic" },
-												{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
-											]}
-											value={FeatureDescFontStyle}
-											onChange={(value) => setAttributes({ FeatureDescFontStyle: value })}
-										/>
-									</div>
-									<div className="fb-setting-texttransform-wrapper">
-										<SelectControl
-											label={__("Text Transform", "frontis-blocks")}
-											options={[
-												{ label: __("Default", "frontis-blocks"), value: "none" },
-												{ label: __("None", "frontis-blocks"), value: "none" },
-												{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-												{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-												{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-											]}
-											value={FeatureDescTextTransform}
-											onChange={(value) => setAttributes({ FeatureDescTextTransform: value })}
-										/>
-									</div>
-									<div className="fb-setting-textdecoration-wrapper">
-										<SelectControl
-											label={__("Text Decoration", "frontis-blocks")}
-											options={[
-												{ label: __("Default", "frontis-blocks"), value: "none" },
-												{ label: __("None", "frontis-blocks"), value: "none" },
-												{ label: __("Underline", "frontis-blocks"), value: "underline" },
-												{ label: __("Overline", "frontis-blocks"), value: "overline" },
-												{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
-											]}
-											value={FeatureDescTextDecoration}
-											onChange={(value) => setAttributes({ FeatureDescTextDecoration: value })}
-										/>
-									</div>
-									<div className="fb-setting-letterspacing-wrapper">
-										<div className="fb-setting-letterspacing-header">
-											<ResponsiveControl
-												labelText={__("Letter Spacing", "frontis-blocks")}
-												device={DeviceType}
-												deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-											/>
-											<div className="fb-setting-letterspacing-units">
-												<ButtonGroup className="fb-setting-letterspacing-units-wrap">
-													{UNIT_TYPES.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ FeatureDescLetterSpacingUnits: item.value })}
-															className={`fb-setting-letterspacing-units-switcher ${FeatureDescLetterSpacingUnits === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</div>
-										</div>
-										<RangeControl
-											value={DeviceType === "Desktop" ? FeatureDescLetterSpacingDesktop : DeviceType === "Tablet" ? FeatureDescLetterSpacingTablet : FeatureDescLetterSpacingMobile}
-											onChange={(value) => {
-												if (DeviceType === "Desktop") {
-													setAttributes({ FeatureDescLetterSpacingDesktop: value });
-												} else if (DeviceType === "Tablet") {
-													setAttributes({ FeatureDescLetterSpacingTablet: value });
-												} else if (DeviceType === "Mobile") {
-													setAttributes({ FeatureDescLetterSpacingMobile: value });
-												}
-											}}
-											min={1}
-											max={100}
-											step={1}
-											allowReset
-											resetFallbackValue={0}
-										/>
-									</div>
-
-									<div className="fb-setting-lineheight-wrapper">
-										<div className="fb-setting-lineheight-header">
-											<ResponsiveControl
-												labelText={__("Line Height", "frontis-blocks")}
-												device={DeviceType}
-												deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-											/>
-											<div className="fb-setting-lineheight-units">
-												<ButtonGroup className="fb-setting-lineheight-units-wrap">
-													{UNIT_TYPES.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ FeatureDescLineHeightUnits: item.value })}
-															className={`fb-setting-lineheight-units-switcher ${FeatureDescLineHeightUnits === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</div>
-										</div>
-										<RangeControl
-											value={DeviceType === "Desktop" ? FeatureDescLineHeightDesktop : DeviceType === "Tablet" ? FeatureDescLineHeightTablet : FeatureDescLineHeightMobile}
-											onChange={(value) => {
-												if (DeviceType === "Desktop") {
-													setAttributes({ FeatureDescLineHeightDesktop: value });
-												} else if (DeviceType === "Tablet") {
-													setAttributes({ FeatureDescLineHeightTablet: value });
-												} else if (DeviceType === "Mobile") {
-													setAttributes({ FeatureDescLineHeightMobile: value });
-												}
-											}}
-											min={1}
-											max={100}
-											step={1}
-											allowReset
-											resetFallbackValue={1}
-										/>
-									</div>
-
 								</BaseControl>
 							</div>
 						)}
 					/>
 				</BaseControl>
-				<BaseControl
-					label={__("Color", "frontis-blocks")}
-					className="fb-setting-color-panel-wrapper"
-				>
-					<ButtonGroup className="fb-setting-color-panel-btn">
-						{NORMAL_HOVER.map((item, key) => (
-							<Button
-								key={key}
-								onClick={() => setAttributes({ FeatureDescColorSwitcher: item.value })}
-								className={`fb-setting-color-panel-btn-switchr ${FeatureDescColorSwitcher === item.value ? 'active' : ''}`}
-							>
-								{item.label}
-							</Button>
-						))}
-					</ButtonGroup>
-				</BaseControl>
-
-				{FeatureDescColorSwitcher === 'normal' && (
-					<BaseControl
-						label={__("Nomal Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-normal-color">
-											<ColorPicker
-												color={FeatureDescColor}
-												onChange={(value) => setAttributes({ FeatureDescColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureDescColor}
-												onChange={(value) => setAttributes({ FeatureDescColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
-
-				{FeatureDescColorSwitcher === 'hover' && (
-					<BaseControl
-						label={__("Hover Color", "frontis-blocks")}
-						className="fb-setting-color-setting-wrapper"
-					>
-						<Dropdown
-							className="fb-setting-color-setting-icon-dropdown"
-							contentClassName="fb-setting-color-setting-icon-dropdown-content"
-							popoverProps={{ placement: 'bottom-start' }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									variant="primary"
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-									className="fb-setting-color-setting-icon-btn"
-								>
-									<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="fb-setting-color-setting-icon-popup">
-									<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-										<div className="fb-setting-hover-color">
-											<ColorPicker
-												color={FeatureDescHoverColor}
-												onChange={(value) => setAttributes({ FeatureDescHoverColor: value })}
-												enableAlpha={true}
-											/>
-											<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-											<ColorPalette
-												colors={[
-													{ color: '#F72585' },
-													{ color: '#7209B7' },
-													{ color: '#3A0CA3' },
-													{ color: '#4361EE' },
-													{ color: '#4CC9F0' },
-												]}
-												disableCustomColors={true}
-												value={FeatureDescHoverColor}
-												onChange={(value) => setAttributes({ FeatureDescHoverColor: value })}
-											/>
-										</div>
-									</BaseControl>
-								</div>
-							)}
-						/>
-					</BaseControl>
-				)}
 			</PanelBody>
 		</>
 	);

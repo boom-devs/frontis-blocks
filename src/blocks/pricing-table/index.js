@@ -14,6 +14,7 @@ import pricingTablePricePrefixAttributes from './attributes/pricing-table-price-
 import pricingTablePriceAmountAttributes from './attributes/pricing-table-price-amount.js';
 import pricingTablePricePeriodAttributes from './attributes/pricing-table-price-period.js';
 import pricingTableFeaturesAttributes from './attributes/pricing-table-features.js';
+import pricingTableButtonAttributes from './attributes/pricing-table-button.js';
 import boxBorderAttributes from './attributes/box-border.js';
 
 // Merge attributes
@@ -25,6 +26,7 @@ const combinedAttributes = {
 	...pricingTablePriceAmountAttributes,
 	...pricingTablePricePeriodAttributes,
 	...pricingTableFeaturesAttributes,
+	...pricingTableButtonAttributes,
 	...boxBorderAttributes,
 };
 registerBlockType( metadata.name, {

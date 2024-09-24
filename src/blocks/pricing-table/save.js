@@ -262,10 +262,7 @@ export default function save({ attributes }) {
                     ${FeatureBorderColor !== undefined ? `border-color: ${FeatureBorderColor};` : ''};
                     transition: all .3s ease-in-out;
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper:hover {
-                    ${FeatureBgHoverColor !== undefined ? `background-color: ${FeatureBgHoverColor};` : ''};
-                    ${FeatureBorderHoverColor !== undefined ? `border-color: ${FeatureBorderHoverColor};` : ''};
-                }
+
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-item:not(:last-child) {
                     padding-bottom: calc(${FeatureListGapDesktop}${FeatureListGapUnits} / 2);
                 }
@@ -277,19 +274,12 @@ export default function save({ attributes }) {
                     height: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
                     width: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon:hover svg {
-                    fill: ${FeatureIconHoverColor};
-                }
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon-box {
                     margin-right: ${FeatureIconSpacingDesktop}${FeatureIconSpacingUnits}!important;
                 }
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon-inner {
                     background-color: ${FeatureIconBgColor};
                     border-color: ${FeatureIconBgColor};
-                }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon-inner:hover {
-                    background-color: ${FeatureIconBgHoverColor};
-                    border-color: ${FeatureIconBgHoverColor};
                 }
 
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-icon {
@@ -308,9 +298,6 @@ export default function save({ attributes }) {
                     line-height: ${FeatureTitleLineHeightDesktop}${FeatureTitleLineHeightUnits};
                     color: ${FeatureTitleColor};
                 }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-content .fb-feature-list-title:hover {
-                    color: ${FeatureTitleHoverColor};
-                }
 
                 .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-content .fb-feature-list-text {
                     font-family: ${FeatureDescFontFamily};
@@ -322,9 +309,6 @@ export default function save({ attributes }) {
                     letter-spacing: ${FeatureDescLetterSpacingDesktop}${FeatureDescLetterSpacingUnits};
                     line-height: ${FeatureDescLineHeightDesktop}${FeatureDescLineHeightUnits};
                     color: ${FeatureDescColor};
-                }
-                .fb-pricing-table-wrapper.${blockID} .fb-feature-main-wrapper .fb-feature-list-content .fb-feature-list-text:hover {
-                    color: ${FeatureDescHoverColor};
                 }
 
                 @media only screen and (max-width: 1024px) {
@@ -430,11 +414,9 @@ export default function save({ attributes }) {
 										{FeatureItems.map(item => (
 											<div key={item.id} className="fb-feature-list-item">
 												<div className="fb-feature-list-icon-box">
-													<div className="fb-feature-list-icon-inner">
-														<span className="fb-feature-list-icon">
-															{renderSVG(item.FeatureIcon)}
-														</span>
-													</div>
+													<span className="fb-feature-list-icon">
+														{renderSVG(item.FeatureIcon)}
+													</span>
 												</div>
 												<div className="fb-feature-list-content">
 													<RichText.Content
