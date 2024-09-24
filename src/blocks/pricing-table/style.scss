@@ -1,0 +1,58 @@
+.fb-pricing-table-wrapper {
+	border-radius: 15px;
+	border: 1px solid rgba(13, 23, 59, 0.10);
+	padding: 40px 30px;
+	background: #FFFFFF;
+
+	.fb-pricing-table-icon {
+
+	}
+	.fb-pricing-table-header {
+
+	}
+	.fb-pricing-table-header-name {
+		margin-top:0;
+		margin-bottom: 8px;
+		color: #0D173B;
+		font-size: 20px;
+		font-weight: 500;
+		line-height: 28px;
+	}
+	.fb-pricing-table-header-content {
+		color: rgba(13, 23, 59, 0.70);
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 26px;
+	}
+	.fb-pricing-table-price-wrapper {
+		display: flex;
+		align-items: flex-end;
+	}
+	.fb-pricing-table-price {
+		color: #0D173B;
+		font-size: 44px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 52px;
+	}
+	.fb-pricing-table-price-period {
+		color: rgba(13, 23, 59, 0.70);
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 26px;
+	}
+	.fb-feature-list-icon {
+		width: 24px;
+		height: 24px;
+	}
+	.fb-feature-list-icon svg path{
+		fill: #0D173B;
+	}
+	.fb-feature-list-title {
+		color: rgba(13, 23, 59, 0.70);
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 28px;
+	}
+}
