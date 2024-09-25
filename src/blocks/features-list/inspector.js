@@ -31,7 +31,8 @@ import {
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
-import ResponsiveControl from '../../components/responsivecontrol';
+// import ResponsiveControl from '../../components/responsivecontrol';
+import FB_ResponsiveControl from '@Components/responsive-control';
 
 import './editor.scss';
 
@@ -825,7 +826,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         >
                                             <div className="fb-setting-fontsize-wrapper">
                                                 <div className="fb-setting-fontsize-header">
-                                                    <ResponsiveControl
+                                                    <FB_ResponsiveControl
                                                         labelText={__("List Gap", "frontis-blocks")}
                                                         device={DeviceType}
                                                         deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -989,7 +990,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <div className="fb-setting-fontsize-wrapper">
                                                 <div className="fb-setting-fontsize-header">
-                                                    <ResponsiveControl
+                                                    <FB_ResponsiveControl
                                                         labelText={__("Icon Size", "frontis-blocks")}
                                                         device={DeviceType}
                                                         deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1147,7 +1148,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <div className="fb-setting-fontsize-wrapper">
                                                 <div className="fb-setting-fontsize-header">
-                                                    <ResponsiveControl
+                                                    <FB_ResponsiveControl
                                                         labelText={__("Background Size", "frontis-blocks")}
                                                         device={DeviceType}
                                                         deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1188,7 +1189,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <div className="fb-setting-fontsize-wrapper">
                                                 <div className="fb-setting-fontsize-header">
-                                                    <ResponsiveControl
+                                                    <FB_ResponsiveControl
                                                         labelText={__("Spacing", "frontis-blocks")}
                                                         device={DeviceType}
                                                         deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1265,7 +1266,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 </div>
                                                                 <div className="fb-setting-fontsize-wrapper">
                                                                     <div className="fb-setting-fontsize-header">
-                                                                        <ResponsiveControl
+                                                                        <FB_ResponsiveControl
                                                                             labelText={__("Font Size", "frontis-blocks")}
                                                                             device={DeviceType}
                                                                             deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1366,7 +1367,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 </div>
                                                                 <div className="fb-setting-letterspacing-wrapper">
                                                                     <div className="fb-setting-letterspacing-header">
-                                                                        <ResponsiveControl
+                                                                        <FB_ResponsiveControl
                                                                             labelText={__("Letter Spacing", "frontis-blocks")}
                                                                             device={DeviceType}
                                                                             deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1406,7 +1407,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                                 <div className="fb-setting-lineheight-wrapper">
                                                                     <div className="fb-setting-lineheight-header">
-                                                                        <ResponsiveControl
+                                                                        <FB_ResponsiveControl
                                                                             labelText={__("Line Height", "frontis-blocks")}
                                                                             device={DeviceType}
                                                                             deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1604,7 +1605,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 </div>
                                                                 <div className="fb-setting-fontsize-wrapper">
                                                                     <div className="fb-setting-fontsize-header">
-                                                                        <ResponsiveControl
+                                                                        <FB_ResponsiveControl
                                                                             labelText={__("Font Size", "frontis-blocks")}
                                                                             device={DeviceType}
                                                                             deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1705,7 +1706,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 </div>
                                                                 <div className="fb-setting-letterspacing-wrapper">
                                                                     <div className="fb-setting-letterspacing-header">
-                                                                        <ResponsiveControl
+                                                                        <FB_ResponsiveControl
                                                                             labelText={__("Letter Spacing", "frontis-blocks")}
                                                                             device={DeviceType}
                                                                             deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1745,7 +1746,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                                 <div className="fb-setting-lineheight-wrapper">
                                                                     <div className="fb-setting-lineheight-header">
-                                                                        <ResponsiveControl
+                                                                        <FB_ResponsiveControl
                                                                             labelText={__("Line Height", "frontis-blocks")}
                                                                             device={DeviceType}
                                                                             deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -1935,7 +1936,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <div className="fb-setting-spacing-inner-container">
                                                         {/* Padding */}
                                                         <div className="fb-setting-spacing-label-container">
-                                                            <ResponsiveControl
+                                                            <FB_ResponsiveControl
                                                                 labelText={__('Padding', 'frontis-block')}
                                                                 device={DeviceType}
                                                                 deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -2006,7 +2007,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <div className="fb-setting-spacing-inner-container">
                                                         {/* Margin */}
                                                         <div className="fb-setting-spacing-label-container">
-                                                            <ResponsiveControl
+                                                            <FB_ResponsiveControl
                                                                 labelText={__('Margin', 'frontis-block')}
                                                                 device={DeviceType}
                                                                 deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -2323,7 +2324,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <div className="fb-setting-spacing-inner-container">
                                                         {/* Border Width */}
                                                         <div className="fb-setting-spacing-label-container">
-                                                            <ResponsiveControl
+                                                            <FB_ResponsiveControl
                                                                 labelText={__('Border', 'frontis-block')}
                                                                 device={DeviceType}
                                                                 deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
@@ -2395,7 +2396,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <div className="fb-setting-spacing-inner-container">
                                                         {/* Border radius Width */}
                                                         <div className="fb-setting-spacing-label-container">
-                                                            <ResponsiveControl
+                                                            <FB_ResponsiveControl
                                                                 labelText={__('Border Radius', 'frontis-block')}
                                                                 device={DeviceType}
                                                                 deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}

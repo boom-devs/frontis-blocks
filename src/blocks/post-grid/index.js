@@ -19,6 +19,8 @@ import './style.scss';
  */
 import Edit from './edit';
 import metadata from './block.json';
+// eslint-disable-next-line import/no-unresolved
+import {attributes} from '@Blocks/post-grid/attributes';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -26,8 +28,9 @@ import metadata from './block.json';
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType( metadata.name, {
+	attributes,
 	/**
 	 * @see ./edit.js
 	 */
-	edit: Edit,
+	edit: Edit
 } );

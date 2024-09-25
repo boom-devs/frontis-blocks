@@ -9,10 +9,26 @@ import {
     Button,
 } from '@wordpress/components';
 import SortableItem from './sortableItem';
+// import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_Spacing from '@Components/spacing';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const { socialItems } = attributes;
+    const {
+        blockID,
+        DeviceType,
+        socialItems,
+        socialIconPaddingUnits,
+        socialIconPaddingDesktop,
+        socialIconPaddingTablet,
+        socialIconPaddingMobile,
+        socialIconPaddingLink,
+
+    } = attributes;
+
+    console.log(socialIconPaddingUnits);
+    
+    
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -53,6 +69,67 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         const updatedItems = socialItems.filter(item => item.id !== id);
         setAttributes({ socialItems: updatedItems });
     };
+
+
+
+	const handleSocialIconPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( socialIconPaddingLink ) {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						socialIconPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						socialIconPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						socialIconPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {socialIconPaddingDesktop: {...socialIconPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {socialIconPaddingTablet: {...socialIconPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {socialIconPaddingMobile: {...socialIconPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleSocialIconPaddingCombineBtn = () => {
+		setAttributes( {socialIconPaddingLink: !socialIconPaddingLink} );
+	}
 
     return (
         <>
@@ -112,7 +189,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Style Settings", "frontis-blocks")} initialOpen={true}>
-                                            {/* Style options can be added here */}
+                                            <FB_Spacing 
+                                                label={__("Padding", "frontis-blocks")}
+                                                DeviceType={DeviceType}
+                                                spacingUnits={socialIconPaddingUnits}
+                                                spacingDesktop={socialIconPaddingDesktop}
+                                                spacingTablet={socialIconPaddingTablet}
+                                                spacingMobile={socialIconPaddingMobile}
+                                                handleSpacingUnitHandler={handleSocialIconPaddingUnitChange}
+                                                spacingCombineBtn={socialIconPaddingLink}
+                                                spacingCombineBtnHandler={handleSocialIconPaddingCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
                                         </PanelBody>
                                     </>
                                 )}
