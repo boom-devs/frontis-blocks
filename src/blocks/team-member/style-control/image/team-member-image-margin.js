@@ -109,63 +109,16 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 		teamMemberContentLineHeightUnits,
 		teamMemberContentColor,
 
-		FeatureMarginLink,
-		spacingUnits,
-		TestimonialDesktopPadding,
-		TestimonialTabPadding,
-		TestimonialMobilePadding,
 
 	} = attributes;
 
-
-	/** Start Margin */
-	const [previousMargin, setPreviousMargin] = useState(teamMemberImageDesktopMargin);
-	/** Function to update all margin values */
-	const updateAllMargin = (value, device) => {
-		switch(device) {
-			case 'Desktop':
-				setAttributes({
-					teamMemberImageDesktopMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			case 'Tablet':
-				setAttributes({
-					teamMemberImageTabMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			case 'Mobile':
-				setAttributes({
-					teamMemberImageMobileMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
-		if ( FeatureMarginLink ) {
+		if ( teamMemberImageMarginLink ) {
 			switch ( DeviceType ) {
 				case 'Desktop':
 					setAttributes( {
-						TestimonialDesktopPadding: {
+						teamMemberImageDesktopMargin: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -175,7 +128,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 					break;
 				case 'Tablet':
 					setAttributes( {
-						TestimonialTabPadding: {
+						teamMemberImageTabMargin: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -185,7 +138,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 					break;
 				case 'Mobile':
 					setAttributes( {
-						TestimonialMobilePadding: {
+						teamMemberImageMobileMargin: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -199,13 +152,13 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 		} else {
 			switch ( DeviceType ) {
 				case 'Desktop':
-					setAttributes( {TestimonialDesktopPadding: {...TestimonialDesktopPadding, [position]: value}} );
+					setAttributes( {teamMemberImageDesktopMargin: {...teamMemberImageDesktopMargin, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {TestimonialTabPadding: {...TestimonialTabPadding, [position]: value}} );
+					setAttributes( {teamMemberImageTabMargin: {...teamMemberImageTabMargin, [position]: value}} );
 					break;
 				case 'Mobile':
-					setAttributes( {TestimonialMobilePadding: {...TestimonialMobilePadding, [position]: value}} );
+					setAttributes( {teamMemberImageMobileMargin: {...teamMemberImageMobileMargin, [position]: value}} );
 					break;
 				default:
 					break;
@@ -215,67 +168,19 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 	}
 
 	const spacingCombineBtnHandlerFn = () => {
-		setAttributes( {FeatureMarginLink: !FeatureMarginLink} );
+		setAttributes( {teamMemberImageMarginLink: !teamMemberImageMarginLink} );
 	}
-
-
-	/** Function to handle input change */
-	const handleMarginInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch(DeviceType) {
-			case 'Desktop':
-				setAttributes({ teamMemberImageDesktopMargin: { ...teamMemberImageDesktopMargin, [direction]: value } });
-				break;
-			case 'Tablet':
-				setAttributes({ teamMemberImageTabMargin: { ...teamMemberImageTabMargin, [direction]: value } });
-				break;
-			case 'Mobile':
-				setAttributes({ teamMemberImageMobileMargin: { ...teamMemberImageMobileMargin, [direction]: value } });
-				break;
-			default:
-				break;
-		}
-		/** Update all margin values if marginLink is true */
-		if (teamMemberImageMarginLink) {
-			updateAllMargin(value, DeviceType);
-		}
-	};
-
-	/** Function to handle marginLink toggle */
-	const handleMarginLinkToggle = () => {
-		if (!teamMemberImageMarginLink) {
-			setAttributes({ teamMemberImageDesktopMargin: previousMargin });
-		}
-		/** setmarginLink(!marginLink) */
-		setAttributes({teamMemberImageMarginLink: !teamMemberImageMarginLink})
-	};
-
-	/** Update previousMargin state when margin changes */
-	useEffect(() => {
-		setPreviousMargin(teamMemberImageDesktopMargin);
-	}, [teamMemberImageDesktopMargin]);
-
-	/** Function to handle device click for margin */
-	const handleMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default margin for desktop (using desktop_margin) */
-	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImageMarginUnits}`;
-	/** End Margin */
-
 
 	return (
 		<>
-			{/*DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes*/}
-
-			{/*DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes*/}
-			<FB_Spacing label={ 'Margin' } DeviceType={DeviceType} spacingUnits={spacingUnits}
-						spacingDesktop={TestimonialDesktopPadding}
-						spacingTablet={TestimonialTabPadding} spacingMobile={TestimonialMobilePadding}
-						handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
-						spacingCombineBtn={FeatureMarginLink}
-						spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}/>
+			<FB_Spacing
+				label={ 'Margin' } DeviceType={DeviceType} spacingUnits={teamMemberImageMarginUnits}
+				spacingDesktop={teamMemberImageDesktopMargin}
+				spacingTablet={teamMemberImageTabMargin} spacingMobile={teamMemberImageMobileMargin}
+				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
+				spacingCombineBtn={teamMemberImageMarginLink}
+				spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
+			/>
 
 		</>
 	);

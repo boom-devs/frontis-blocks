@@ -4,21 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a674843-5435-47dc-8224-325a312fece9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blocks/post-grid/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/blocks/post-grid/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/spacing/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/spacing/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="8a674843-5435-47dc-8224-325a312fece9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\laragon\bin\php\php-8.1.10-Win32-vs16-x64\php.exe">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -33,6 +40,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
     "git-widget-placeholder": "spacing",
     "last_opened_file_path": "C:/laragon/www/gblock-pattern/wp-content/plugins/frontis-blocks",
     "node.js.detected.package.eslint": "true",
@@ -55,6 +63,7 @@
       <workItem from="1726999903572" duration="1700000" />
       <workItem from="1727005987432" duration="4852000" />
       <workItem from="1727073357987" duration="18841000" />
+      <workItem from="1727181626235" duration="69000" />
     </task>
     <servers />
   </component>

@@ -33,9 +33,9 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import ResponsiveControl from "../../components/responsivecontrol";
 import {HEADING} from "../info-box/constants/constants";
 
-import TeamMemberContentBorderControl from './style-control/content/team-member-content-border.js';
-import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin.js';
-import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding.js';
+// import TeamMemberContentBorderControl from './style-control/content/team-member-content-border.js';
+// import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin.js';
+// import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding.js';
 
 //
 // import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
