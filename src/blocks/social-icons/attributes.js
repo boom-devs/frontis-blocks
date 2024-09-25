@@ -82,21 +82,44 @@ const attributes = {
             }
         }
     },
-    socialTag: {
-        type: "string",
-        default: "h3"
+    spacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
-    socialIconShape: {
-        type: "string",
-        default: "circle"
+    socialIconPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
     },
-    socialAlignment: {
-        type: "string",
-        default: "left",
+    socialIconPaddingTablet: {
+        type: "object", 
+        default: {
+            top: 15,
+            bottom: 15,
+            left: 15,
+            right: 15,
+        },
     },
-    socialIconAlignment: {
-        type: "string",
-        default: "left",
+    socialIconPaddingMobile: {
+        type: "object", 
+        default: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+    },
+    socialIconPaddingLink : {
+        type : "boolean",
+        default: true
     },
 };
 

@@ -34,7 +34,8 @@ import {
 } from "./constants/constants";
 
 import { useState, useEffect } from "@wordpress/element";
-import ResponsiveControl from '../../components/responsivecontrol';
+// import ResponsiveControl from '../../components/responsivecontrol';
+import FB_ResponsiveControl from '@Components/responsive-control';
 import FBIconPicker from "../../components/icon-picker";
 import './editor.scss';
 
@@ -1217,7 +1218,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <div className="fb-setting-spacing-inner-container">
                                                     {/* Border Width */}
                                                     <div className="fb-setting-spacing-label-container">
-                                                        <ResponsiveControl labelText={__('Border', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderWidthDeviceClick}/>
+                                                        <FB_ResponsiveControl labelText={__('Border', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderWidthDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
@@ -1285,7 +1286,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <div className="fb-setting-spacing-inner-container">
                                                     {/* Border radius Width */}
                                                     <div className="fb-setting-spacing-label-container">
-                                                        <ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
+                                                        <FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
@@ -1354,7 +1355,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <div className="fb-setting-spacing-inner-container">
                                                     {/* Padding */}
                                                     <div className="fb-setting-spacing-label-container">
-                                                        <ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handlePaddingDeviceClick}/>
+                                                        <FB_ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handlePaddingDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
@@ -1421,7 +1422,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <div className="fb-setting-spacing-inner-container">
                                                     {/* Margin */}
                                                     <div className="fb-setting-spacing-label-container">
-                                                        <ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleMarginDeviceClick}/>
+                                                        <FB_ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleMarginDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
