@@ -40,7 +40,7 @@ import {HEADING} from "../info-box/constants/constants";
 //
 // import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin-control.js';
-// import TeamMemberNameControl from './style-control/name/team-member-name.js';
+import TeamMemberNameTypographyControl from './style-control/name/team-member-name-typography-control.js';
 import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin-control.js';
 // import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
 // import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
@@ -99,18 +99,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		teamMemberName,
 		teamMemberNameHeadingTag,
+		teamMemberNameColor,
+		teamMemberNameLoadGoogleFonts,
 		teamMemberNameFontFamily,
-		teamMemberNameFontSize,
-		teamMemberNameFontSizeUnits,
 		teamMemberNameFontWeight,
 		teamMemberNameFontStyle,
+		teamMemberNameFontSizeType,
+		teamMemberNameFontSizeTypeMobile,
+		teamMemberNameFontSizeTypeTablet,
+		teamMemberNameFontSize,
+		teamMemberNameFontSizeMobile,
+		teamMemberNameFontSizeTablet,
+		teamMemberNameLineHeightType,
+		teamMemberNameLineHeight,
+		teamMemberNameLineHeightMobile,
+		teamMemberNameLineHeightTablet,
+		teamMemberNameLetterSpacing,
+		teamMemberNameLetterSpacingTablet,
+		teamMemberNameLetterSpacingMobile,
+		teamMemberNameLetterSpacingType,
 		teamMemberNameTextTransform,
 		teamMemberNameTextDecoration,
-		teamMemberNameLetterSpacing,
-		teamMemberNameLetterSpacingUnits,
-		teamMemberNameLineHeight,
-		teamMemberNameLineHeightUnits,
-		teamMemberNameColor,
+
 
 		teamMemberNameMarginUnits,
 		desktopteamMemberNameMargin,
@@ -303,16 +313,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	{/* Team Member Name Control */}
 	const teamMemberNameMargin = `${teamMemberNameDesktopMargin.top}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.right}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.bottom}${teamMemberNameMarginUnits} ${teamMemberNameDesktopMargin.left}${teamMemberNameMarginUnits}`;
-
-	useEffect(() => {
-		if (teamMemberNameFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${teamMemberNameFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [teamMemberNameFontFamily]);
 
 
 	{/* Team Member Designation Control */}
@@ -651,11 +651,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Name", "frontis-blocks")}
 											initialOpen={false}
 										>
-											{/*<TeamMemberNameControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
+											<TeamMemberNameTypographyControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 											<TeamMemberNameMarginControl
 												attributes={attributes}
 												setAttributes={setAttributes}

@@ -56,10 +56,12 @@ export default function Edit (props) {
 		headLetterSpacingType,
 		headTransform,
 		headDecoration,
+
 		headSpace,
 		headSpaceTablet,
 		headSpaceMobile,
-		headSpaceType } = attributes;
+		headSpaceType
+	} = attributes;
 
 	const boxShadowHandler = (boxShadow) => {
 		console.log(boxShadow)
@@ -166,7 +168,7 @@ export default function Edit (props) {
 					} }
 				/>
 					<FB_BoxShadowControl boxShadowHandler={ boxShadowHandler } />
-					
+
 					<ResponsiveSlider
 						label={ __( 'Bottom Spacing', 'text-domain' ) }
 						data={ {
@@ -208,7 +210,7 @@ export default function Edit (props) {
 			<p {...useBlockProps()}>
 				{__('This is post grid', 'text')}
 			</p>
-			
+
 		</>
 	);
 }
