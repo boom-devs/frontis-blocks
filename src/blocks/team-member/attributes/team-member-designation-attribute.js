@@ -1,64 +1,64 @@
-const teamMemberNameAttributes = {
-	teamMemberName: {
+const teamMemberDesignationAttribute = {
+	teamMemberDesignation: {
 		type: "string",
-		default: "Wade Warren"
+		default: "Creative Director"
 	},
-	teamMemberNameHeadingTag: {
+	teamMemberDesignationHeadingTag: {
 		type : "string",
 		default: "h2"
 	},
-	teamMemberNameFontFamily: {
+	teamMemberDesignationFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	teamMemberNameFontSize: {
+	teamMemberDesignationFontSize: {
 		type: "number",
 	},
-	teamMemberNameFontSizeUnits: {
+	teamMemberDesignationFontSizeUnits: {
 		type: "string",
 		default: "px"
 	},
-	teamMemberNameFontWeight : {
+	teamMemberDesignationFontWeight : {
 		type: "string",
 		default: "700"
 	},
-	teamMemberNameFontStyle : {
+	teamMemberDesignationFontStyle : {
 		type: "string",
 		default: "normal"
 	},
-	teamMemberNameTextTransform : {
+	teamMemberDesignationTextTransform : {
 		type: "string",
 		default: "none"
 	},
-	teamMemberNameTextDecoration : {
+	teamMemberDesignationTextDecoration : {
 		type: "string",
 		default: "none"
 	},
-	teamMemberNameLetterSpacing : {
+	teamMemberDesignationLetterSpacing : {
 		type: "number",
 	},
-	teamMemberNameLetterSpacingUnits : {
+	teamMemberDesignationLetterSpacingUnits : {
 		type: "string",
 		default: "px"
 	},
-	teamMemberNameLineHeight : {
+	teamMemberDesignationLineHeight : {
 		type: "number",
 	},
-	teamMemberNameLineHeightUnits : {
+	teamMemberDesignationLineHeightUnits : {
 		type: "string",
 		default: "px"
 	},
-	teamMemberNameColor : {
+	teamMemberDesignationColor : {
 		type: "string",
 		default: "#0D173B"
 	},
 
 	// margin
-	teamMemberNameMarginUnits : {
+	teamMemberDesignationMarginUnits : {
 		type: "string",
 		default: "px"
 	},
-	desktopteamMemberNameMargin: {
+	desktopteamMemberDesignationMargin: {
 		type: "object",
 		default: {
 			top: 0,
@@ -67,7 +67,7 @@ const teamMemberNameAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberNameDesktopMargin: {
+	teamMemberDesignationDesktopMargin: {
 		type: "object",
 		default: {
 			top: 0,
@@ -76,7 +76,7 @@ const teamMemberNameAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberNameTabMargin: {
+	teamMemberDesignationTabMargin: {
 		type: "object",
 		default: {
 			top: 0,
@@ -85,7 +85,7 @@ const teamMemberNameAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberNameMobileMargin: {
+	teamMemberDesignationMobileMargin: {
 		type: "object",
 		default: {
 			top: 0,
@@ -94,10 +94,11 @@ const teamMemberNameAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberNameMarginLink : {
+	teamMemberDesignationMarginLink : {
 		type : "boolean",
 		default: true
 	},
+
 };
 
-export default teamMemberNameAttributes;
+export default teamMemberDesignationAttribute;

@@ -39,10 +39,9 @@ import {HEADING} from "../info-box/constants/constants";
 
 //
 // import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
-// import TeamMemberImagePaddingControl from './style-control/image/team-member-image-padding.js';
-import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin.js';
+import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin-control.js';
 // import TeamMemberNameControl from './style-control/name/team-member-name.js';
-// import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin.js';
+import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin-control.js';
 // import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
 // import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
 
@@ -298,7 +297,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	{/* Team Member Image Control */}
 	const teamMemberImageBorderWidth = `${teamMemberImageDesktopBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.left}${teamMemberImageBorderUnits}`;
 	const teamMemberImageBorderRadiusWidth = `${teamMemberImageDesktopBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits}`;
-	const teamMembberImagePadding = `${teamMemberImageDesktopPadding.top}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.right}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.bottom}${teamMemberImagePaddingUnits} ${teamMemberImageDesktopPadding.left}${teamMemberImagePaddingUnits}`;
+
 
 	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImageMarginUnits}`;
 
@@ -657,11 +656,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{/*	setAttributes={setAttributes}*/}
 											{/*	clientId ={clientId}*/}
 											{/*/>*/}
-											{/*<TeamMemberNameMarginControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
+											<TeamMemberNameMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 
 										</PanelBody>
 

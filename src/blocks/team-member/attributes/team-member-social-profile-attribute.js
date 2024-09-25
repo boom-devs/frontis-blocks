@@ -1,4 +1,4 @@
-const teamMemberSocialProfileAttributes = {
+const teamMemberSocialProfileAttribute = {
 	blockID: {
 		type: "string",
 		default: ""
@@ -505,4 +505,4 @@ const teamMemberSocialProfileAttributes = {
 
 };
 
-export default teamMemberSocialProfileAttributes;
+export default teamMemberSocialProfileAttribute;

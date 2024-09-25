@@ -1,19 +1,14 @@
-const teamMemberImageAttributes = {
-	teamMemberImageMediaUrl: {
-		type: 'string',
-		default: ''
-	},
-	teamMemberImageBackgroundColor : {
+const teamMemberContentAttribute = {
+	teamMemberContentBackgroundColor : {
 		type: "string",
 		default: ""
 	},
-
 	// Padding
-	teamMemberImagePaddingUnits : {
+	teamMemberContentPaddingUnits : {
 		type: "string",
 		default: "px"
 	},
-	desktopteamMemberImagePadding: {
+	desktopteamMemberContentPadding: {
 		type: "object",
 		default: {
 			top: 0,
@@ -22,7 +17,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageDesktopPadding: {
+	teamMemberContentDesktopPadding: {
 		type: "object",
 		default: {
 			top: 0,
@@ -31,7 +26,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageTabPadding: {
+	teamMemberContentTabPadding: {
 		type: "object",
 		default: {
 			top: 0,
@@ -40,7 +35,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageMobilePadding: {
+	teamMemberContentMobilePadding: {
 		type: "object",
 		default: {
 			top: 0,
@@ -49,16 +44,16 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImagePaddingLink : {
+	teamMemberContentPaddingLink : {
 		type : "boolean",
 		default: true
 	},
 	// margin
-	teamMemberImageMarginUnits : {
+	teamMemberContentMarginUnits : {
 		type: "string",
 		default: "px"
 	},
-	teamMemberImageDesktopMargin: {
+	desktopteamMemberContentMargin: {
 		type: "object",
 		default: {
 			top: 0,
@@ -67,7 +62,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageTabMargin: {
+	teamMemberContentDesktopMargin: {
 		type: "object",
 		default: {
 			top: 0,
@@ -76,7 +71,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageMobileMargin: {
+	teamMemberContentTabMargin: {
 		type: "object",
 		default: {
 			top: 0,
@@ -85,23 +80,33 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageMarginLink : {
+	teamMemberContentMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	teamMemberContentMarginLink : {
 		type : "boolean",
 		default: true
 	},
+
 	// Border
-	teamMemberImageBorder: {
+	teamMemberContentBorder: {
 		type: 'string',
 		default: "none",
 	},
-	teamMemberImageBorderColor: {
+	teamMemberContentBorderColor: {
 		type: 'string',
 	},
-	teamMemberImageBorderUnits : {
+	teamMemberContentBorderUnits : {
 		type: "string",
 		default: "px"
 	},
-	teamMemberImageDesktopBorderWidth: {
+	teamMemberContentDesktopBorderWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -110,7 +115,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageTabBorderWidth: {
+	teamMemberContentTabBorderWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -119,7 +124,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageMobileBorderWidth: {
+	teamMemberContentMobileBorderWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -128,19 +133,19 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageActiveBorderDevice: {
+	teamMemberContentActiveBorderDevice: {
 		type: "string",
 		default: "Desktop"
 	},
-	teamMemberImageBorderLink : {
+	teamMemberContentBorderLink : {
 		type : "boolean",
 		default: true
 	},
-	teamMemberImageBorderRadiusUnits : {
+	teamMemberContentBorderRadiusUnits : {
 		type: "string",
 		default: "px"
 	},
-	teamMemberImageDesktopBorderRadiusWidth: {
+	teamMemberContentDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -149,7 +154,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageTabBorderRadiusWidth: {
+	teamMemberContentTabBorderRadiusWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -158,7 +163,7 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageMobileBorderRadiusWidth: {
+	teamMemberContentMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
 			top: 0,
@@ -167,15 +172,16 @@ const teamMemberImageAttributes = {
 			right: 0,
 		},
 	},
-	teamMemberImageActiveBorderRadiusDevice: {
+	teamMemberContentActiveBorderRadiusDevice: {
 		type: "string",
 		default: "Desktop"
 	},
-	teamMemberImageBorderRadiusLink : {
+	teamMemberContentBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
+
 
 };
 
-export default teamMemberImageAttributes;
+export default teamMemberContentAttribute;
