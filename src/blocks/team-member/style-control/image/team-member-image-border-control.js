@@ -93,15 +93,6 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 		setAttributes( {teamMemberImageBorderTypeLink: !teamMemberImageBorderTypeLink} );
 	}
 
-	const teamMemberImgBorderTypeUnits = (unit) => {
-		setAttributes(
-			{
-				...teamMemberImageBorderTypeUnits, // Spread the existing spacingUnits object
-				[DeviceType]: unit // Dynamically update the specific DeviceType
-			}
-		)
-	}
-
 	const teamMemberImageBorderTypeUnitsHandler = (unit) => {
 		setAttributes( {
 			teamMemberImageBorderTypeUnits: {

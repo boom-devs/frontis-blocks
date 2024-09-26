@@ -5,9 +5,9 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 	const {
 		DeviceType,
 		teamMemberImageMarginUnits,
-		teamMemberImageDesktopMargin,
-		teamMemberImageTabMargin,
-		teamMemberImageMobileMargin,
+		teamMemberImageMarginDesktop,
+		teamMemberImageMarginTab,
+		teamMemberImageMarginMobile,
 		teamMemberImageMarginLink,
 
 	} = attributes;
@@ -18,7 +18,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 			switch ( DeviceType ) {
 				case 'Desktop':
 					setAttributes( {
-						teamMemberImageDesktopMargin: {
+						teamMemberImageMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -28,7 +28,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 					break;
 				case 'Tablet':
 					setAttributes( {
-						teamMemberImageTabMargin: {
+						teamMemberImageMarginTab: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -38,7 +38,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 					break;
 				case 'Mobile':
 					setAttributes( {
-						teamMemberImageMobileMargin: {
+						teamMemberImageMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -52,13 +52,13 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 		} else {
 			switch ( DeviceType ) {
 				case 'Desktop':
-					setAttributes( {teamMemberImageDesktopMargin: {...teamMemberImageDesktopMargin, [position]: value}} );
+					setAttributes( {teamMemberImageMarginDesktop: {...teamMemberImageMarginDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {teamMemberImageTabMargin: {...teamMemberImageTabMargin, [position]: value}} );
+					setAttributes( {teamMemberImageMarginTab: {...teamMemberImageMarginTab, [position]: value}} );
 					break;
 				case 'Mobile':
-					setAttributes( {teamMemberImageMobileMargin: {...teamMemberImageMobileMargin, [position]: value}} );
+					setAttributes( {teamMemberImageMarginMobile: {...teamMemberImageMarginMobile, [position]: value}} );
 					break;
 				default:
 					break;
@@ -70,17 +70,29 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 		setAttributes( {teamMemberImageMarginLink: !teamMemberImageMarginLink} );
 	}
 
+	const teamMemberImageMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberImageMarginUnits: {
+				...teamMemberImageMarginUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
+
 	return (
 		<>
 			<FB_Spacing
-				label={ 'Margin' } DeviceType={DeviceType} spacingUnits={teamMemberImageMarginUnits}
-				spacingDesktop={teamMemberImageDesktopMargin}
-				spacingTablet={teamMemberImageTabMargin} spacingMobile={teamMemberImageMobileMargin}
+				label={ 'Margin' }
+				DeviceType={DeviceType}
+				spacingUnitsHandler={teamMemberImageMarginUnitsHandler}
+				spacingUnits={teamMemberImageMarginUnits}
+				spacingDesktop={teamMemberImageMarginDesktop}
+				spacingTablet={teamMemberImageMarginTab}
+				spacingMobile={teamMemberImageMarginMobile}
 				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 				spacingCombineBtn={teamMemberImageMarginLink}
 				spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
 			/>
-
 		</>
 	);
 };

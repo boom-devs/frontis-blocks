@@ -17,7 +17,7 @@ const teamMemberImageAttribute = {
 			Mobile: 'px'
 		}
 	},
-	teamMemberImageDesktopMargin: {
+	teamMemberImageMarginDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -26,7 +26,7 @@ const teamMemberImageAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberImageTabMargin: {
+	teamMemberImageMarginTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -35,7 +35,7 @@ const teamMemberImageAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberImageMobileMargin: {
+	teamMemberImageMarginMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -110,28 +110,28 @@ const teamMemberImageAttribute = {
 	teamMemberImageBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 8,
+			bottom: 8,
+			left: 8,
+			right: 8,
 		},
 	},
 	teamMemberImageBorderRadiusTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 8,
+			bottom: 8,
+			left: 8,
+			right: 8,
 		},
 	},
 	teamMemberImageBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 8,
+			bottom: 8,
+			left: 8,
+			right: 8,
 		},
 	},
 	teamMemberImageBorderRadiusLink : {

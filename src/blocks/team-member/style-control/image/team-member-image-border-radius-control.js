@@ -69,14 +69,26 @@ export default function TeamMemberImageBorderRadiusControl ({ attributes, setAtt
 		setAttributes( {teamMemberImageBorderRadiusLink: !teamMemberImageBorderRadiusLink} );
 	}
 
+	const teamMemberImageBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberImageBorderRadiusUnits: {
+				...teamMemberImageBorderRadiusUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
 
 
 	return (
 	<>
 		<FB_Spacing
-			label={ 'Border Radius' } DeviceType={DeviceType} spacingUnits={teamMemberImageBorderRadiusUnits}
+			label={ 'Border Radius' }
+			DeviceType={DeviceType}
+			spacingUnitsHandler={teamMemberImageBorderRadiusUnitsHandler}
+			spacingUnits={teamMemberImageBorderRadiusUnits}
 			spacingDesktop={teamMemberImageBorderRadiusDesktop}
-			spacingTablet={teamMemberImageBorderRadiusTab} spacingMobile={teamMemberImageBorderRadiusMobile}
+			spacingTablet={teamMemberImageBorderRadiusTab}
+			spacingMobile={teamMemberImageBorderRadiusMobile}
 			handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 			spacingCombineBtn={teamMemberImageBorderRadiusLink}
 			spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
