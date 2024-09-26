@@ -86,13 +86,17 @@ const attributes = {
         }
     },
 
+    // socialIconSizeUnits: {
+	// 	type: 'object',
+	// 	default: {
+	// 		Desktop: 'px',
+	// 		Tablet: 'px',
+	// 		Mobile: 'px'
+	// 	}
+    // },
     socialIconSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: "string",
+        default: "px"
     },
     socialIconSizeDesktop: {
         type: "number",
@@ -118,34 +122,230 @@ const attributes = {
     socialIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
         },
     },
     socialIconPaddingTablet: {
         type: "object", 
         default: {
-            top: 15,
-            bottom: 15,
-            left: 15,
-            right: 15,
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
         },
     },
     socialIconPaddingMobile: {
         type: "object", 
         default: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
         },
     },
     socialIconPaddingLink : {
         type : "boolean",
         default: true
     },
+
+
+
+    socialPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialPaddingTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialPaddingMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+    socialMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialMarginDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialMarginTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialMarginMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialMarginLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+    socialBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialBgColor : {
+        type: "string"
+    },
+    socialBgHoverColor: {
+        type: 'string',
+    },
+
+
+    socialBorder: {
+        type: 'string',
+        default: "none",
+    },
+    socialBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialBorderColor: {
+        type: 'string',
+    },
+    socialBorderHoverColor: {
+        type: 'string',
+    },
+
+
+
+    socialBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialBorderDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialBorderTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialBorderMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialBorderLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+    socialBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+
 
 };
 
