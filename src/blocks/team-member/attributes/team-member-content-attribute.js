@@ -16,28 +16,28 @@ const teamMemberContentAttribute = {
 	teamMemberContentPaddingDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 30,
+			bottom: 30,
+			left: 30,
+			right: 30,
 		},
 	},
 	teamMemberContentPaddingTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 30,
+			bottom: 30,
+			left: 30,
+			right: 30,
 		},
 	},
 	teamMemberContentPaddingMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 30,
+			bottom: 30,
+			left: 30,
+			right: 30,
 		},
 	},
 	teamMemberContentPaddingLink : {
