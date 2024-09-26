@@ -33,8 +33,6 @@ export default function TeamMemberContentBorderControl ({ attributes, setAttribu
 
 	} = attributes;
 
-
-	console.log(teamMemberContentBorderTypeUnits);
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberContentBorderTypeLink ) {

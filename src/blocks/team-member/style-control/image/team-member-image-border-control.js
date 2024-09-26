@@ -33,8 +33,6 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 
 	} = attributes;
 
-
-	console.log(teamMemberImageBorderTypeUnits);
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberImageBorderTypeLink ) {
