@@ -9,7 +9,7 @@ const teamMemberNameTypographyAttribute = {
 	},
 	teamMemberNameColor : {
 		type: "string",
-		default: "#0D173B"
+		default: "#FFFFFF"
 	},
 
 	// Typography

@@ -10,8 +10,12 @@ const teamMemberImageAttribute = {
 
 	// margin
 	teamMemberImageMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'em',
+			Mobile: 'px'
+		}
 	},
 	teamMemberImageDesktopMargin: {
 		type: "object",
@@ -52,11 +56,17 @@ const teamMemberImageAttribute = {
 	teamMemberImageBorderColor: {
 		type: 'string',
 	},
-	teamMemberImageBorderUnits : {
-		type: "string",
-		default: "px"
+
+	// Border Type
+	teamMemberImageBorderTypesUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'em',
+			Mobile: 'px'
+		}
 	},
-	teamMemberImageDesktopBorderWidth: {
+	teamMemberImageBorderTypeDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -65,7 +75,7 @@ const teamMemberImageAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberImageTabBorderWidth: {
+	teamMemberImageBorderTypeTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -74,7 +84,7 @@ const teamMemberImageAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberImageMobileBorderWidth: {
+	teamMemberImageBorderTypeMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -83,19 +93,21 @@ const teamMemberImageAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberImageActiveBorderDevice: {
-		type: "string",
-		default: "Desktop"
-	},
-	teamMemberImageBorderLink : {
+	teamMemberImageBorderTypeLink : {
 		type : "boolean",
 		default: true
 	},
+
+	// Border Radius
 	teamMemberImageBorderRadiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'em',
+			Mobile: 'px'
+		}
 	},
-	teamMemberImageDesktopBorderRadiusWidth: {
+	teamMemberImageBorderRadiusDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -104,7 +116,7 @@ const teamMemberImageAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberImageTabBorderRadiusWidth: {
+	teamMemberImageBorderRadiusTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -113,7 +125,7 @@ const teamMemberImageAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberImageMobileBorderRadiusWidth: {
+	teamMemberImageBorderRadiusMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -121,15 +133,12 @@ const teamMemberImageAttribute = {
 			left: 0,
 			right: 0,
 		},
-	},
-	teamMemberImageActiveBorderRadiusDevice: {
-		type: "string",
-		default: "Desktop"
 	},
 	teamMemberImageBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
+
 
 };
 

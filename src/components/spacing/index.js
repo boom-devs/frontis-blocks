@@ -9,7 +9,7 @@ import {
 import FB_ResponsiveControl from '@Components/responsive-control';
 import './editor.lazy.scss';
 
-export default function FB_Spacing( {label, DeviceType, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes} ) {
+export default function FB_Spacing( {label, DeviceType, spacingUnitsHandler, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes} ) {
 
 	const handleSpacingUnit = ( event, position ) => {
 		handleSpacingUnitHandler( event, position );
@@ -36,6 +36,10 @@ export default function FB_Spacing( {label, DeviceType, spacingUnits, spacingDes
 		return spacingMobile[position];
 	};
 
+	const setSpacingUnit = (unit) => {
+		spacingUnitsHandler(unit);
+	}
+
 	return (
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
@@ -52,12 +56,7 @@ export default function FB_Spacing( {label, DeviceType, spacingUnits, spacingDes
 							{UNIT_TYPES.map( ( item, key ) => (
 								<Button
 									key={key}
-									onClick={() => setAttributes( {
-										spacingUnits: {
-											...spacingUnits, // Spread the existing spacingUnits object
-											[DeviceType]: item.value // Dynamically update the specific DeviceType
-										}
-									} )}
+									onClick={() => setSpacingUnit(item.value)}
 									className={`fb-setting-units-type-switcher ${spacingUnits[DeviceType] === item.value ? 'active' : ''}`}
 								>
 									{item.label}

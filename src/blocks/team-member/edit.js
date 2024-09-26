@@ -38,14 +38,16 @@ import {HEADING} from "../info-box/constants/constants";
 // import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding.js';
 
 //
-// import TeamMemberImageBorderControl from './style-control/image/team-member-image-border.js';
+import TeamMemberImageBorderControl from './style-control/image/team-member-image-border-control.js';
+// import TeamMemberImageBorderRadiusControl from './style-control/image/team-member-image-border-radius-control.js';
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin-control.js';
 import TeamMemberNameTypographyControl from './style-control/name/team-member-name-typography-control.js';
 import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin-control.js';
-// import TeamMemberDesignationControl from './style-control/designation/team-member-designation.js';
-// import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin.js';
+import TeamMemberDesignationTypographyControl from './style-control/designation/team-member-designation-typography-control.js';
+import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin-control.js';
 
 import SortableItem from './sortableItem.js';
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -65,21 +67,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberImageMobileMargin,
 		teamMemberImageMarginLink,
 
+		// Team Image Border Type
 		teamMemberImageBorder,
 		teamMemberImageBorderColor,
-		teamMemberImageBorderUnits,
-		teamMemberImageDesktopBorderWidth,
-		teamMemberImageTabBorderWidth,
-		teamMemberImageMobileBorderWidth,
-		teamMemberImageActiveBorderDevice,
-		teamMemberImageBorderLink,
-		teamMemberImageBorderRadiusUnits,
-		teamMemberImageDesktopBorderRadiusWidth,
-		teamMemberImageTabBorderRadiusWidth,
-		teamMemberImageMobileBorderRadiusWidth,
-		teamMemberImageActiveBorderRadiusDevice,
-		teamMemberImageBorderRadiusLink,
 		teamMemberImageBackgroundColor,
+
+		teamMemberImageBorderTypesUnits,
+		teamMemberImageBorderTypeDesktop,
+		teamMemberImageBorderTypeTab,
+		teamMemberImageBorderTypeMobile,
+		teamMemberImageBorderTypeLink,
+
+		// Team Image Border Radius
+		teamMemberImageBorderRadiusUnits,
+		teamMemberImageBorderRadiusDesktop,
+		teamMemberImageBorderRadiusTab,
+		teamMemberImageBorderRadiusMobile,
+		teamMemberImageBorderRadiusLink,
+
+
 
 		DeviceType,
 
@@ -96,7 +102,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		BoxMobileBorderRadiusWidth,
 		BoxBorderRadiusLink,
 
-
+		// Team Name
 		teamMemberName,
 		teamMemberNameHeadingTag,
 		teamMemberNameColor,
@@ -121,36 +127,46 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberNameTextTransform,
 		teamMemberNameTextDecoration,
 
-
+		// Team Name Margin
 		teamMemberNameMarginUnits,
-		desktopteamMemberNameMargin,
 		teamMemberNameDesktopMargin,
 		teamMemberNameTabMargin,
 		teamMemberNameMobileMargin,
 		teamMemberNameMarginLink,
 
-
+		// Team Designation Typography
 		teamMemberDesignation,
 		teamMemberDesignationHeadingTag,
+		teamMemberDesignationColor,
+		teamMemberDesignationLoadGoogleFonts,
 		teamMemberDesignationFontFamily,
-		teamMemberDesignationFontSize,
-		teamMemberDesignationFontSizeUnits,
 		teamMemberDesignationFontWeight,
 		teamMemberDesignationFontStyle,
+		teamMemberDesignationFontSizeType,
+		teamMemberDesignationFontSizeTypeMobile,
+		teamMemberDesignationFontSizeTypeTablet,
+		teamMemberDesignationFontSize,
+		teamMemberDesignationFontSizeMobile,
+		teamMemberDesignationFontSizeTablet,
+		teamMemberDesignationLineHeightType,
+		teamMemberDesignationLineHeight,
+		teamMemberDesignationLineHeightMobile,
+		teamMemberDesignationLineHeightTablet,
+		teamMemberDesignationLetterSpacing,
+		teamMemberDesignationLetterSpacingTablet,
+		teamMemberDesignationLetterSpacingMobile,
+		teamMemberDesignationLetterSpacingType,
 		teamMemberDesignationTextTransform,
 		teamMemberDesignationTextDecoration,
-		teamMemberDesignationLetterSpacing,
-		teamMemberDesignationLetterSpacingUnits,
-		teamMemberDesignationLineHeight,
-		teamMemberDesignationLineHeightUnits,
-		teamMemberDesignationColor,
 
+
+		// Team Designation Margin
 		teamMemberDesignationMarginUnits,
-		desktopteamMemberDesignationMargin,
 		teamMemberDesignationDesktopMargin,
 		teamMemberDesignationTabMargin,
 		teamMemberDesignationMobileMargin,
 		teamMemberDesignationMarginLink,
+
 
 		teamMemberContentBackgroundColor,
 		teamMemberContentPaddingUnits,
@@ -305,8 +321,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const teamMemberContentPadding = `${teamMemberContentDesktopPadding.top}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.right}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.bottom}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.left}${teamMemberContentPaddingUnits}`;
 
 	{/* Team Member Image Control */}
-	const teamMemberImageBorderWidth = `${teamMemberImageDesktopBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageDesktopBorderWidth.left}${teamMemberImageBorderUnits}`;
-	const teamMemberImageBorderRadiusWidth = `${teamMemberImageDesktopBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageDesktopBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits}`;
+	const teamMemberImageBorderType = `${teamMemberImageBorderTypeDesktop.top}${teamMemberImageBorderTypesUnits} ${teamMemberImageBorderTypeDesktop.right}${teamMemberImageBorderTypesUnits} ${teamMemberImageBorderTypeDesktop.bottom}${teamMemberImageBorderTypesUnits} ${teamMemberImageBorderTypeDesktop.left}${teamMemberImageBorderTypesUnits}`;
+
+
+	const teamMemberImageBorderRadius = `${teamMemberImageBorderRadiusDesktop.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusDesktop.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusDesktop.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusDesktop.left}${teamMemberImageBorderRadiusUnits}`;
 
 
 	const teamMemberImageMargin = `${teamMemberImageDesktopMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageDesktopMargin.left}${teamMemberImageMarginUnits}`;
@@ -371,8 +389,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
                     border: ${teamMemberImageBorder};
                     border-color: ${teamMemberImageBorderColor};
-                    border-width: ${teamMemberImageBorderWidth};
-                    border-radius: ${teamMemberImageBorderRadiusWidth};
+
+                    border-radius: ${teamMemberImageBorderRadius};
                     margin: ${teamMemberImageMargin};
                 }
                 .fb-team-member-wrapper.${blockID} .fb-team-member-content {
@@ -415,8 +433,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
              	 @media only screen and (max-width: 1024px) {
                     .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
                         margin: ${teamMemberImageTabMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageTabMargin.left}${teamMemberImageMarginUnits} !important;
-                        border-width: ${teamMemberImageTabBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageTabBorderWidth.left}${teamMemberImageBorderUnits} !important;
-                        border-radius: ${teamMemberImageTabBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageTabBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits} !important;
+
+                        border-radius: ${teamMemberImageBorderRadiusTab.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusTab.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusTab.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusTab.left}${teamMemberImageBorderRadiusUnits} !important;
                     }
 					 .fb-team-member-wrapper.${blockID} .fb-team-member-content {
                         margin: ${teamMemberContentTabMargin.top}${teamMemberContentMarginUnits} ${teamMemberContentTabMargin.right}${teamMemberContentMarginUnits} ${teamMemberContentTabMargin.bottom}${teamMemberContentMarginUnits} ${teamMemberContentTabMargin.left}${teamMemberContentMarginUnits} !important;
@@ -429,8 +447,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 @media only screen and (max-width: 767px) {
                     .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
                         margin: ${teamMemberImageMobileMargin.top}${teamMemberImageMarginUnits} ${teamMemberImageMobileMargin.right}${teamMemberImageMarginUnits} ${teamMemberImageMobileMargin.bottom}${teamMemberImageMarginUnits} ${teamMemberImageMobileMargin.left}${teamMemberImageMarginUnits} !important;
-                        border-width: ${teamMemberImageMobileBorderWidth.top}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.right}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.bottom}${teamMemberImageBorderUnits} ${teamMemberImageMobileBorderWidth.left}${teamMemberImageBorderUnits} !important;
-                        border-radius: ${teamMemberImageMobileBorderRadiusWidth.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageMobileBorderRadiusWidth.left}${teamMemberImageBorderRadiusUnits} !important;
+
+                        border-radius: ${teamMemberImageBorderRadiusMobile.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusMobile.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusMobile.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusMobile.left}${teamMemberImageBorderRadiusUnits} !important;
                     }
 
                    .fb-team-member-wrapper.${blockID} .fb-team-member-content {
@@ -633,7 +651,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 											className="fb-setting-border-setting-wrapper"
 										>
-											{/*<TeamMemberImageBorderControl*/}
+											<TeamMemberImageBorderControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											{/*<TeamMemberImageBorderRadiusControl*/}
 											{/*	attributes={attributes}*/}
 											{/*	setAttributes={setAttributes}*/}
 											{/*	clientId ={clientId}*/}
@@ -668,16 +691,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Designation", "frontis-blocks")}
 											initialOpen={false}
 										>
-											{/*<TeamMemberDesignationControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
-											{/*<TeamMemberDesignationMarginControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
+											<TeamMemberDesignationTypographyControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<TeamMemberDesignationMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
 
 
@@ -713,7 +736,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								placeholder={__('Enter Team Member Name', 'frontis-block')}
 								className="fb-team-member-name"
 							/>
-							<div className={`fb-team-member-designation`}>{teamMemberDesignation}</div>
+
+							<RichText
+								tagName={'div'}
+								value={teamMemberDesignation}
+								onChange={(value) => setAttributes({teamMemberDesignation: value})}
+								className="fb-team-member-designation"
+							/>
 
 							<div className={`fb-team-member-social-profile-wrapper`}>
 								<div className={`fb-team-member-social-profile`}>
