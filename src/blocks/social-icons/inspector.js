@@ -83,7 +83,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
     
-    
+        console.log(socialPaddingDesktop);
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -272,9 +272,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     /** Default padding for desktop (using desktop_padding) */
-    const DesktopPadding    = `${socialPaddingDesktop.top}${socialPaddingUnits} ${socialPaddingDesktop.right}${socialPaddingUnits} ${socialPaddingDesktop.bottom}${socialPaddingUnits} ${socialPaddingDesktop.left}${socialPaddingUnits}`;
-    const TabletPadding     = `${socialPaddingTablet.top}${socialPaddingUnits} ${socialPaddingTablet.right}${socialPaddingUnits} ${socialPaddingTablet.bottom}${socialPaddingUnits} ${socialPaddingTablet.left}${socialPaddingUnits}`;
-    const MobilePadding     = `${socialPaddingMobile.top}${socialPaddingUnits} ${socialPaddingMobile.right}${socialPaddingUnits} ${socialPaddingMobile.bottom}${socialPaddingUnits} ${socialPaddingMobile.left}${socialPaddingUnits}`;
+    const DesktopPadding    = `${socialPaddingDesktop.top}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.right}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.left}${socialPaddingUnits[DeviceType]}`;
+    const TabletPadding = `${socialPaddingTablet.top}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.right}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.left}${socialPaddingUnits[DeviceType]}`;
+    const MobilePadding = `${socialPaddingMobile.top}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.right}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.left}${socialPaddingUnits[DeviceType]}`;
     /** End Padding */
 
     /** Start Global margin */
@@ -347,11 +347,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** end Global margin */
 
-    /** Default margin for desktop */
-    const DesktopMargin    = `${socialMarginDesktop.top}${socialMarginUnits} ${socialMarginDesktop.right}${socialMarginUnits} ${socialMarginDesktop.bottom}${socialMarginUnits} ${socialMarginDesktop.left}${socialMarginUnits}`;
-    const TabletMargin     = `${socialMarginTablet.top}${socialMarginUnits} ${socialMarginTablet.right}${socialMarginUnits} ${socialMarginTablet.bottom}${socialMarginUnits} ${socialMarginTablet.left}${socialMarginUnits}`;
-    const MobileMargin     = `${socialMarginMobile.top}${socialMarginUnits} ${socialMarginMobile.right}${socialMarginUnits} ${socialMarginMobile.bottom}${socialMarginUnits} ${socialMarginMobile.left}${socialMarginUnits}`;
+    const DesktopMargin = `${socialMarginDesktop.top}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.right}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.bottom}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.left}${socialMarginUnits[DeviceType]}`;
+    const TabletMargin = `${socialMarginTablet.top}${socialMarginUnits[DeviceType]} ${socialMarginTablet.right}${socialMarginUnits[DeviceType]} ${socialMarginTablet.bottom}${socialMarginUnits[DeviceType]} ${socialMarginTablet.left}${socialMarginUnits[DeviceType]}`;
+    const MobileMargin = `${socialMarginMobile.top}${socialMarginUnits[DeviceType]} ${socialMarginMobile.right}${socialMarginUnits[DeviceType]} ${socialMarginMobile.bottom}${socialMarginUnits[DeviceType]} ${socialMarginMobile.left}${socialMarginUnits[DeviceType]}`;
     /** End Margin */
+
 
     /** Start Global border */
     const handleSocialBorderUnitChange = ( event, position ) => {
@@ -422,11 +422,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         })
     }
     /** end Global border */
-    /** Default Border for desktop */
-    const BorderDesktopWidth     = `${socialBorderDesktop.top}${socialBorderUnits} ${socialBorderDesktop.right}${socialBorderUnits} ${socialBorderDesktop.bottom}${socialBorderUnits} ${socialBorderDesktop.left}${socialBorderUnits}`;
-    const BorderTabletWidth      = `${socialBorderTablet.top}${socialBorderUnits} ${socialBorderTablet.right}${socialBorderUnits} ${socialBorderTablet.bottom}${socialBorderUnits} ${socialBorderTablet.left}${socialBorderUnits}`;
-    const BorderMobileWidth      = `${socialBorderMobile.top}${socialBorderUnits} ${socialBorderMobile.right}${socialBorderUnits} ${socialBorderMobile.bottom}${socialBorderUnits} ${socialBorderMobile.left}${socialBorderUnits}`;
+    const BorderDesktopWidth = `${socialBorderDesktop.top}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.right}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.bottom}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.left}${socialBorderUnits[DeviceType]}`;
+    const BorderTabletWidth = `${socialBorderTablet.top}${socialBorderUnits[DeviceType]} ${socialBorderTablet.right}${socialBorderUnits[DeviceType]} ${socialBorderTablet.bottom}${socialBorderUnits[DeviceType]} ${socialBorderTablet.left}${socialBorderUnits[DeviceType]}`;
+    const BorderMobileWidth = `${socialBorderMobile.top}${socialBorderUnits[DeviceType]} ${socialBorderMobile.right}${socialBorderUnits[DeviceType]} ${socialBorderMobile.bottom}${socialBorderUnits[DeviceType]} ${socialBorderMobile.left}${socialBorderUnits[DeviceType]}`;
     /** End Border */
+
 
     /** Start Global border radius*/
     const handleSocialBorderRadiusUnitChange = ( event, position ) => {
@@ -498,11 +498,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** end Global border */
 
-    /** Default Border Radius for desktop */
-    const BorderRadiusDesktopWidth    = `${socialBorderRadiusDesktop.top}${socialBorderRadiusUnits} ${socialBorderRadiusDesktop.right}${socialBorderRadiusUnits} ${socialBorderRadiusDesktop.bottom}${socialBorderRadiusUnits} ${socialBorderRadiusDesktop.left}${socialBorderRadiusUnits}`;
-    const BorderRadiusTabletWidth      = `${socialBorderRadiusTablet.top}${socialBorderRadiusUnits} ${socialBorderRadiusTablet.right}${socialBorderRadiusUnits} ${socialBorderRadiusTablet.bottom}${socialBorderRadiusUnits} ${socialBorderRadiusTablet.left}${socialBorderRadiusUnits}`;
-    const BorderRadiusMobileWidth      = `${socialBorderRadiusMobile.top}${socialBorderRadiusUnits} ${socialBorderRadiusMobile.right}${socialBorderRadiusUnits} ${socialBorderRadiusMobile.bottom}${socialBorderRadiusUnits} ${socialBorderRadiusMobile.left}${socialBorderRadiusUnits}`;
+    const BorderRadiusDesktopWidth = `${socialBorderRadiusDesktop.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.left}${socialBorderRadiusUnits[DeviceType]}`;
+    const BorderRadiusTabletWidth = `${socialBorderRadiusTablet.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.left}${socialBorderRadiusUnits[DeviceType]}`;
+    const BorderRadiusMobileWidth = `${socialBorderRadiusMobile.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.left}${socialBorderRadiusUnits[DeviceType]}`;
     /** End Border Radius */
+
+    
 
     return (
         <>
