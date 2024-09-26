@@ -7,6 +7,9 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
+    socialIconZIndex : {
+        type: "number",
+    },
     socialItems: {
         type: "array",
         default: [
@@ -82,7 +85,29 @@ const attributes = {
             }
         }
     },
-    spacingUnits: {
+
+    socialIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialIconSizeDesktop: {
+        type: "number",
+        default: 25
+    },
+    socialIconSizeTablet: {
+        type: "number",
+        default: 25
+    },
+    socialIconSizeMobile: {
+        type: "number",
+        default: 25
+    },
+
+    socialIconPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -121,6 +146,7 @@ const attributes = {
         type : "boolean",
         default: true
     },
+
 };
 
 export default attributes;

@@ -7,9 +7,17 @@ import {
     PanelBody,
     TabPanel,
     Button,
+    ButtonGroup,
 } from '@wordpress/components';
+
+import {
+    NORMAL_HOVER,
+    UNIT_TYPES,
+    ICON_ALIGN,
+    TEXT_ALIGN,
+} from "./constants/constants";
 import SortableItem from './sortableItem';
-// import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
 import './editor.scss';
 
@@ -17,7 +25,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         DeviceType,
+        socialIconZIndex,
         socialItems,
+        socialIconSizeUnits,
+        socialIconSizeDesktop,
+        socialIconSizeTablet,
+        socialIconSizeMobile,
         socialIconPaddingUnits,
         socialIconPaddingDesktop,
         socialIconPaddingTablet,
@@ -131,6 +144,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes( {socialIconPaddingLink: !socialIconPaddingLink} );
 	}
 
+    const socialIconspacingUnitsHandler = (unit) => {
+        setAttributes( {
+            socialIconPaddingUnits: {
+                ...socialIconPaddingUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
     return (
         <>
             <InspectorControls key="controls">
@@ -192,6 +214,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
                                                 DeviceType={DeviceType}
+                                                spacingUnitsHandler={socialIconspacingUnitsHandler}
                                                 spacingUnits={socialIconPaddingUnits}
                                                 spacingDesktop={socialIconPaddingDesktop}
                                                 spacingTablet={socialIconPaddingTablet}
@@ -207,9 +230,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "advanced" && (
                                     <>
-                                        <PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
-                                            {/* Advanced settings can be added here */}
-                                        </PanelBody>
+                                        <div className="fb-setting-advanced-tab-wrapper">
+                                            <div className="fb-setting-inner-wrapper">
+                                                <PanelBody
+                                                    title={__("Z Index", "frontis-blocks")}
+                                                    initialOpen={true}
+                                                    className='fb-setting-z-index-header'
+                                                >
+                                                    <RangeControl
+                                                        value={socialIconZIndex}
+                                                        onChange={(value) => setAttributes({ socialIconZIndex: value === 0 ? undefined : value })}
+                                                        min={1}
+                                                        max={100}
+                                                        step={1}
+                                                        allowReset
+                                                        resetFallbackValue={undefined}
+                                                    />
+                                                </PanelBody>
+                                            </div>
+                                        </div>
                                     </>
                                 )}
                             </div>
