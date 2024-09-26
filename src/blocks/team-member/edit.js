@@ -54,15 +54,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		blockID,
 		DeviceType,
 		teamMemberImageMediaUrl,
-		teamMemberImagePaddingUnits,
-		desktopteamMemberImagePadding,
-		teamMemberImageDesktopPadding,
-		teamMemberImageTabPadding,
-		teamMemberImageMobilePadding,
-		teamMemberImagePaddingLink,
 
+		// Team Image Margin
 		teamMemberImageMarginUnits,
-		desktopteamMemberImageMargin,
 		teamMemberImageMarginDesktop,
 		teamMemberImageMarginTab,
 		teamMemberImageMarginMobile,
@@ -329,6 +323,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	const teamMemberImageMarginGetDesktop = `${teamMemberImageMarginDesktop.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.left}${teamMemberImageMarginUnits[DeviceType]}`;
+
+
 	const teamMemberImageMarginGetTab = `${teamMemberImageMarginTab.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.left}${teamMemberImageMarginUnits[DeviceType]}`;
 	const teamMemberImageMarginGetMobile = `${teamMemberImageMarginMobile.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.left}${teamMemberImageMarginUnits[DeviceType]}`;
 
