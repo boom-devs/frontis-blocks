@@ -20,7 +20,7 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 
 	const {
 		DeviceType,
-		teamMemberImageBorderTypesUnits,
+		teamMemberImageBorderTypeUnits,
 		teamMemberImageBorderTypeDesktop,
 		teamMemberImageBorderTypeTab,
 		teamMemberImageBorderTypeMobile,
@@ -33,6 +33,8 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 
 	} = attributes;
 
+
+	console.log(teamMemberImageBorderTypeUnits);
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberImageBorderTypeLink ) {
@@ -94,11 +96,21 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 	const teamMemberImgBorderTypeUnits = (unit) => {
 		setAttributes(
 			{
-				...teamMemberImageBorderTypesUnits, // Spread the existing spacingUnits object
+				...teamMemberImageBorderTypeUnits, // Spread the existing spacingUnits object
 				[DeviceType]: unit // Dynamically update the specific DeviceType
 			}
 		)
 	}
+
+	const teamMemberImageBorderTypeUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberImageBorderTypeUnits: {
+				...teamMemberImageBorderTypeUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
+
 
 	return (
 	<>
@@ -114,8 +126,8 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 		<FB_Spacing
 			label={ 'Border' }
 			DeviceType={DeviceType}
-			spacingUnitsHandler={teamMemberImgBorderTypeUnits}
-			spacingUnits={teamMemberImageBorderTypesUnits}
+			spacingUnitsHandler={teamMemberImageBorderTypeUnitsHandler}
+			spacingUnits={teamMemberImageBorderTypeUnits}
 			spacingDesktop={teamMemberImageBorderTypeDesktop}
 			spacingTablet={teamMemberImageBorderTypeTab}
 			spacingMobile={teamMemberImageBorderTypeMobile}

@@ -13,7 +13,7 @@ const teamMemberImageAttribute = {
 		type: 'object',
 		default: {
 			Desktop: 'px',
-			Tablet: 'em',
+			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
@@ -58,11 +58,11 @@ const teamMemberImageAttribute = {
 	},
 
 	// Border Type
-	teamMemberImageBorderTypesUnits : {
+	teamMemberImageBorderTypeUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
-			Tablet: 'em',
+			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},

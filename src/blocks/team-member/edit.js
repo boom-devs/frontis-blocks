@@ -52,6 +52,7 @@ import SortableItem from './sortableItem.js';
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		DeviceType,
 		teamMemberImageMediaUrl,
 		teamMemberImagePaddingUnits,
 		desktopteamMemberImagePadding,
@@ -72,7 +73,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberImageBorderColor,
 		teamMemberImageBackgroundColor,
 
-		teamMemberImageBorderTypesUnits,
+		teamMemberImageBorderTypeUnits,
 		teamMemberImageBorderTypeDesktop,
 		teamMemberImageBorderTypeTab,
 		teamMemberImageBorderTypeMobile,
@@ -84,10 +85,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberImageBorderRadiusTab,
 		teamMemberImageBorderRadiusMobile,
 		teamMemberImageBorderRadiusLink,
-
-
-
-		DeviceType,
 
 		BoxBorder,
 		BoxBorderColor,
@@ -321,8 +318,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const teamMemberContentPadding = `${teamMemberContentDesktopPadding.top}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.right}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.bottom}${teamMemberContentPaddingUnits} ${teamMemberContentDesktopPadding.left}${teamMemberContentPaddingUnits}`;
 
 	{/* Team Member Image Control */}
-	const teamMemberImageBorderType = `${teamMemberImageBorderTypeDesktop.top}${teamMemberImageBorderTypesUnits} ${teamMemberImageBorderTypeDesktop.right}${teamMemberImageBorderTypesUnits} ${teamMemberImageBorderTypeDesktop.bottom}${teamMemberImageBorderTypesUnits} ${teamMemberImageBorderTypeDesktop.left}${teamMemberImageBorderTypesUnits}`;
-
+	const teamMemberImageBorderTypeGetDesktop = `${teamMemberImageBorderTypeDesktop.top}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeDesktop.right}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeDesktop.bottom}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeDesktop.left}${teamMemberImageBorderTypeUnits[DeviceType]}`;
 
 	const teamMemberImageBorderRadius = `${teamMemberImageBorderRadiusDesktop.top}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusDesktop.right}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusDesktop.bottom}${teamMemberImageBorderRadiusUnits} ${teamMemberImageBorderRadiusDesktop.left}${teamMemberImageBorderRadiusUnits}`;
 
@@ -389,7 +385,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
                     border: ${teamMemberImageBorder};
                     border-color: ${teamMemberImageBorderColor};
-
+                    border-width: ${teamMemberImageBorderTypeGetDesktop};
                     border-radius: ${teamMemberImageBorderRadius};
                     margin: ${teamMemberImageMargin};
                 }

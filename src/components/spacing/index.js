@@ -56,6 +56,12 @@ export default function FB_Spacing( {label, DeviceType, spacingUnitsHandler, spa
 							{UNIT_TYPES.map( ( item, key ) => (
 								<Button
 									key={key}
+									// onClick={() => setAttributes( {
+									// 	spacingUnits: {
+									// 		...spacingUnits, // Spread the existing spacingUnits object
+									// 		[DeviceType]: item.value // Dynamically update the specific DeviceType
+									// 	}
+									// } )}
 									onClick={() => setSpacingUnit(item.value)}
 									className={`fb-setting-units-type-switcher ${spacingUnits[DeviceType] === item.value ? 'active' : ''}`}
 								>
