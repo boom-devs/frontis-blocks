@@ -1,4 +1,4 @@
-const teamMemberNameTypographyAttribute = {
+const teamMemberNameAttribute = {
 	teamMemberName: {
 		type: "string",
 		default: "Wade Warren"
@@ -84,10 +84,14 @@ const teamMemberNameTypographyAttribute = {
 
 	// margin
 	teamMemberNameMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	teamMemberNameDesktopMargin: {
+	teamMemberNameMarginDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -96,7 +100,7 @@ const teamMemberNameTypographyAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberNameTabMargin: {
+	teamMemberNameMarginTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -105,7 +109,7 @@ const teamMemberNameTypographyAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberNameMobileMargin: {
+	teamMemberNameMarginMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -120,4 +124,4 @@ const teamMemberNameTypographyAttribute = {
 	},
 };
 
-export default teamMemberNameTypographyAttribute;
+export default teamMemberNameAttribute;

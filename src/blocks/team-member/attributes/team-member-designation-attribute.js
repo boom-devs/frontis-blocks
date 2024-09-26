@@ -1,4 +1,4 @@
-const teamMemberDesignationTypographyAttribute = {
+const teamMemberDesignationAttribute = {
 	teamMemberDesignation: {
 		type: "string",
 		default: "Creative Director"
@@ -84,10 +84,14 @@ const teamMemberDesignationTypographyAttribute = {
 
 	// margin
 	teamMemberDesignationMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	teamMemberDesignationDesktopMargin: {
+	teamMemberDesignationMarginDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -96,7 +100,7 @@ const teamMemberDesignationTypographyAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberDesignationTabMargin: {
+	teamMemberDesignationMarginTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -105,7 +109,7 @@ const teamMemberDesignationTypographyAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberDesignationMobileMargin: {
+	teamMemberDesignationMarginMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -121,4 +125,4 @@ const teamMemberDesignationTypographyAttribute = {
 
 };
 
-export default teamMemberDesignationTypographyAttribute;
+export default teamMemberDesignationAttribute;

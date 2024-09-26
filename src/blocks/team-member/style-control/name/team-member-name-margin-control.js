@@ -5,9 +5,9 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 	const {
 		DeviceType,
 		teamMemberNameMarginUnits,
-		teamMemberNameDesktopMargin,
-		teamMemberNameTabMargin,
-		teamMemberNameMobileMargin,
+		teamMemberNameMarginDesktop,
+		teamMemberNameMarginTab,
+		teamMemberNameMarginMobile,
 		teamMemberNameMarginLink,
 
 	} = attributes;
@@ -18,7 +18,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 			switch ( DeviceType ) {
 				case 'Desktop':
 					setAttributes( {
-						teamMemberNameDesktopMargin: {
+						teamMemberNameMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -28,7 +28,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 					break;
 				case 'Tablet':
 					setAttributes( {
-						teamMemberNameTabMargin: {
+						teamMemberNameMarginTab: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -38,7 +38,7 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 					break;
 				case 'Mobile':
 					setAttributes( {
-						teamMemberNameMobileMargin: {
+						teamMemberNameMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -52,13 +52,13 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 		} else {
 			switch ( DeviceType ) {
 				case 'Desktop':
-					setAttributes( {teamMemberNameDesktopMargin: {...teamMemberNameDesktopMargin, [position]: value}} );
+					setAttributes( {teamMemberNameMarginDesktop: {...teamMemberNameMarginDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {teamMemberNameTabMargin: {...teamMemberNameTabMargin, [position]: value}} );
+					setAttributes( {teamMemberNameMarginTab: {...teamMemberNameMarginTab, [position]: value}} );
 					break;
 				case 'Mobile':
-					setAttributes( {teamMemberNameMobileMargin: {...teamMemberNameMobileMargin, [position]: value}} );
+					setAttributes( {teamMemberNameMarginMobile: {...teamMemberNameMarginMobile, [position]: value}} );
 					break;
 				default:
 					break;
@@ -70,17 +70,29 @@ export default function TeamMemberNameMarginControl ({ attributes, setAttributes
 		setAttributes( {teamMemberNameMarginLink: !teamMemberNameMarginLink} );
 	}
 
+	const teamMemberNameMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberNameMarginUnits: {
+				...teamMemberNameMarginUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
+
 	return (
 		<>
 			<FB_Spacing
-				label={ 'Margin' } DeviceType={DeviceType} spacingUnits={teamMemberNameMarginUnits}
-				spacingDesktop={teamMemberNameDesktopMargin}
-				spacingTablet={teamMemberNameTabMargin} spacingMobile={teamMemberNameMobileMargin}
+				label={ 'Margin' }
+				DeviceType={DeviceType}
+				spacingUnitsHandler={teamMemberNameMarginUnitsHandler}
+				spacingUnits={teamMemberNameMarginUnits}
+				spacingDesktop={teamMemberNameMarginDesktop}
+				spacingTablet={teamMemberNameMarginTab}
+				spacingMobile={teamMemberNameMarginMobile}
 				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 				spacingCombineBtn={teamMemberNameMarginLink}
 				spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
 			/>
-
 		</>
 	);
 };

@@ -5,9 +5,9 @@ export default function TeamMemberDesignationMarginControl ({ attributes, setAtt
 	const {
 		DeviceType,
 		teamMemberDesignationMarginUnits,
-		teamMemberDesignationDesktopMargin,
-		teamMemberDesignationTabMargin,
-		teamMemberDesignationMobileMargin,
+		teamMemberDesignationMarginDesktop,
+		teamMemberDesignationMarginTab,
+		teamMemberDesignationMarginMobile,
 		teamMemberDesignationMarginLink,
 
 	} = attributes;
@@ -18,7 +18,7 @@ export default function TeamMemberDesignationMarginControl ({ attributes, setAtt
 			switch ( DeviceType ) {
 				case 'Desktop':
 					setAttributes( {
-						teamMemberDesignationDesktopMargin: {
+						teamMemberDesignationMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -28,7 +28,7 @@ export default function TeamMemberDesignationMarginControl ({ attributes, setAtt
 					break;
 				case 'Tablet':
 					setAttributes( {
-						teamMemberDesignationTabMargin: {
+						teamMemberDesignationMarginTab: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -38,7 +38,7 @@ export default function TeamMemberDesignationMarginControl ({ attributes, setAtt
 					break;
 				case 'Mobile':
 					setAttributes( {
-						teamMemberDesignationMobileMargin: {
+						teamMemberDesignationMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -52,13 +52,13 @@ export default function TeamMemberDesignationMarginControl ({ attributes, setAtt
 		} else {
 			switch ( DeviceType ) {
 				case 'Desktop':
-					setAttributes( {teamMemberDesignationDesktopMargin: {...teamMemberDesignationDesktopMargin, [position]: value}} );
+					setAttributes( {teamMemberDesignationMarginDesktop: {...teamMemberDesignationMarginDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {teamMemberDesignationTabMargin: {...teamMemberDesignationTabMargin, [position]: value}} );
+					setAttributes( {teamMemberDesignationMarginTab: {...teamMemberDesignationMarginTab, [position]: value}} );
 					break;
 				case 'Mobile':
-					setAttributes( {teamMemberDesignationMobileMargin: {...teamMemberDesignationMobileMargin, [position]: value}} );
+					setAttributes( {teamMemberDesignationMarginMobile: {...teamMemberDesignationMarginMobile, [position]: value}} );
 					break;
 				default:
 					break;
@@ -69,13 +69,26 @@ export default function TeamMemberDesignationMarginControl ({ attributes, setAtt
 	const spacingCombineBtnHandlerFn = () => {
 		setAttributes( {teamMemberDesignationMarginLink: !teamMemberDesignationMarginLink} );
 	}
+	const teamMemberDesignationMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberDesignationMarginUnits: {
+				...teamMemberDesignationMarginUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
 
 	return (
 		<>
+
 			<FB_Spacing
-				label={ 'Margin' } DeviceType={DeviceType} spacingUnits={teamMemberDesignationMarginUnits}
-				spacingDesktop={teamMemberDesignationDesktopMargin}
-				spacingTablet={teamMemberDesignationTabMargin} spacingMobile={teamMemberDesignationMobileMargin}
+				label={ 'Margin' }
+				DeviceType={DeviceType}
+				spacingUnitsHandler={teamMemberDesignationMarginUnitsHandler}
+				spacingUnits={teamMemberDesignationMarginUnits}
+				spacingDesktop={teamMemberDesignationMarginDesktop}
+				spacingTablet={teamMemberDesignationMarginTab}
+				spacingMobile={teamMemberDesignationMarginMobile}
 				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 				spacingCombineBtn={teamMemberDesignationMarginLink}
 				spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}

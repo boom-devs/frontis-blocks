@@ -3,12 +3,17 @@ const teamMemberContentAttribute = {
 		type: "string",
 		default: ""
 	},
+
 	// Padding
 	teamMemberContentPaddingUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	desktopteamMemberContentPadding: {
+	teamMemberContentPaddingDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -17,7 +22,7 @@ const teamMemberContentAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberContentDesktopPadding: {
+	teamMemberContentPaddingTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -26,16 +31,7 @@ const teamMemberContentAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberContentTabPadding: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	teamMemberContentMobilePadding: {
+	teamMemberContentPaddingMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -48,12 +44,17 @@ const teamMemberContentAttribute = {
 		type : "boolean",
 		default: true
 	},
+
 	// margin
 	teamMemberContentMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	desktopteamMemberContentMargin: {
+	teamMemberContentMarginDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -62,7 +63,7 @@ const teamMemberContentAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberContentDesktopMargin: {
+	teamMemberContentMarginTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -71,16 +72,7 @@ const teamMemberContentAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberContentTabMargin: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	teamMemberContentMobileMargin: {
+	teamMemberContentMarginMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -102,11 +94,17 @@ const teamMemberContentAttribute = {
 	teamMemberContentBorderColor: {
 		type: 'string',
 	},
-	teamMemberContentBorderUnits : {
-		type: "string",
-		default: "px"
+
+	// Border Type
+	teamMemberContentBorderTypeUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	teamMemberContentDesktopBorderWidth: {
+	teamMemberContentBorderTypeDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -115,7 +113,7 @@ const teamMemberContentAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberContentTabBorderWidth: {
+	teamMemberContentBorderTypeTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -124,7 +122,7 @@ const teamMemberContentAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberContentMobileBorderWidth: {
+	teamMemberContentBorderTypeMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -133,54 +131,51 @@ const teamMemberContentAttribute = {
 			right: 0,
 		},
 	},
-	teamMemberContentActiveBorderDevice: {
-		type: "string",
-		default: "Desktop"
-	},
-	teamMemberContentBorderLink : {
+	teamMemberContentBorderTypeLink : {
 		type : "boolean",
 		default: true
 	},
+
+	// Border Radius
 	teamMemberContentBorderRadiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'em',
+			Mobile: 'px'
+		}
 	},
-	teamMemberContentDesktopBorderRadiusWidth: {
+	teamMemberContentBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 8,
+			bottom: 8,
+			left: 8,
+			right: 8,
 		},
 	},
-	teamMemberContentTabBorderRadiusWidth: {
+	teamMemberContentBorderRadiusTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 8,
+			bottom: 8,
+			left: 8,
+			right: 8,
 		},
 	},
-	teamMemberContentMobileBorderRadiusWidth: {
+	teamMemberContentBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 8,
+			bottom: 8,
+			left: 8,
+			right: 8,
 		},
-	},
-	teamMemberContentActiveBorderRadiusDevice: {
-		type: "string",
-		default: "Desktop"
 	},
 	teamMemberContentBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
-
 
 };
 

@@ -10,8 +10,8 @@ import metadata from './block.json';
 import attributes from './attributes.js';
 import teamMemberContentAttribute from './attributes/team-member-content-attribute.js';
 import teamMemberImageAttribute from './attributes/team-member-image-attribute.js';
-import teamMemberNameTypographyAttribute from './attributes/team-member-name-typography-attribute.js';
-import teamMemberDesignationTypographyAttribute from './attributes/team-member-designation-typography-attribute.js';
+import teamMemberNameAttribute from './attributes/team-member-name-attribute.js';
+import teamMemberDesignationAttribute from './attributes/team-member-designation-attribute.js';
 import teamMemberSocialProfileAttribute from "./attributes/team-member-social-profile-attribute.js";
 import boxBorderAttributes from './attributes/box-border.js';
 
@@ -20,8 +20,8 @@ const combinedAttributes = {
 	...attributes,
 	...teamMemberContentAttribute,
 	...teamMemberImageAttribute,
-	...teamMemberNameTypographyAttribute,
-	...teamMemberDesignationTypographyAttribute,
+	...teamMemberNameAttribute,
+	...teamMemberDesignationAttribute,
 	...teamMemberSocialProfileAttribute,
 	...boxBorderAttributes,
 };
