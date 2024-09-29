@@ -18,19 +18,44 @@ import './style.scss';
  * Internal dependencies
  */
 import Edit from './edit';
+import save from './save';
 import metadata from './block.json';
-// eslint-disable-next-line import/no-unresolved
-import {attributes} from '@Blocks/post-grid/attributes';
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
+
+const attributes = {
+	DeviceType: {
+		type: 'string',
+		default: 'Desktop'
+	},
+	rangeValue: {
+		type: 'object',
+		default: {
+			Desktop: 40,
+			Tablet: 30,
+			Mobile: 20
+		}
+	},
+
+	rangeUnit: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+}
+
 registerBlockType( metadata.name, {
 	attributes,
 	/**
 	 * @see ./edit.js
 	 */
-	edit: Edit
+	edit: Edit,
+	save,
 } );
