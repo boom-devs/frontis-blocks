@@ -16,36 +16,36 @@ const attributes = {
             {
                 id: 'item-1',
                 socialIcon: 'facebook-f',
-                socialIconColorSwitcher: 'normal',
-                socialIconColor: '#3b5998',
-                socialIconHoverColor: '#3b5998',
+                // socialIconColorSwitcher: 'normal',
+                // socialIconColor: '#3b5998',
+                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
             {
                 id: 'item-2',
                 socialIcon: 'x-twitter',
-                socialIconColorSwitcher: 'normal',
-                socialIconColor: '#3b5998',
-                socialIconHoverColor: '#3b5998',
+                // socialIconColorSwitcher: 'normal',
+                // socialIconColor: '#3b5998',
+                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
             {
                 id: 'item-3',
                 socialIcon: 'youtube',
-                socialIconColorSwitcher: 'normal',
-                socialIconColor: '#3b5998',
-                socialIconHoverColor: '#3b5998',
+                // socialIconColorSwitcher: 'normal',
+                // socialIconColor: '#3b5998',
+                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
             {
                 id: 'item-4',
                 socialIcon: 'behance',
-                socialIconColorSwitcher: 'normal',
-                socialIconColor: '#3b5998',
-                socialIconHoverColor: '#3b5998',
+                // socialIconColorSwitcher: 'normal',
+                // socialIconColor: '#3b5998',
+                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
@@ -63,18 +63,18 @@ const attributes = {
                 },
                 socialIcon: {
                     type: 'string',
-                    default: 'check',
+                    default: 'behance',
                 },
-                socialIconColorSwitcher: {
-                    type: "string",
-                    default: "normal"
-                },
-                socialIconColor: {
-                    type: "string"
-                },
-                socialIconHoverColor: {
-                    type: 'string',
-                },
+                // socialIconColorSwitcher: {
+                //     type: "string",
+                //     default: "normal"
+                // },
+                // socialIconColor: {
+                //     type: "string"
+                // },
+                // socialIconHoverColor: {
+                //     type: 'string',
+                // },
                 socialIconUrl: {
                     type: "string",
                     default: "",
@@ -94,6 +94,10 @@ const attributes = {
 	// 		Mobile: 'px'
 	// 	}
     // },
+    socialAlignment: {
+        type: "string",
+        default: "center",
+    },
     socialIconSizeUnits: {
         type: "string",
         default: "px"
@@ -111,6 +115,149 @@ const attributes = {
         default: 25
     },
 
+    socialIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    socialIconColor: {
+        type: "string",
+        default: "#fff"
+    },
+    socialIconHoverColor: {
+        type: 'string',
+        default: "#fff"
+    },
+
+    socialBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialBgColor : {
+        type: "string",
+        default: "#d2691e"
+    },
+    socialBgHoverColor: {
+        type: 'string',
+        default: "#d2691e"
+    },
+
+
+    socialIconBorder: {
+        type: 'string',
+        default: "none",
+    },
+    socialIconBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialIconBorderColor: {
+        type: 'string',
+    },
+    socialIconBorderHoverColor: {
+        type: 'string',
+    },
+
+
+
+    socialIconBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialIconBorderDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialIconBorderTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialIconBorderMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialIconBorderLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+    socialIconBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialIconBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialIconBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialIconBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    socialIconBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+    socialIconGapDesktop: {
+        type: "number",
+        default: 20
+    },
+    socialIconGapTablet: {
+        type: "number",
+        default: 15
+    },
+    socialIconGapMobile: {
+        type: "number",
+        default: 10
+    },
+    socialIconGapUnits: {
+        type: "string",
+        default: "px"
+    },
+
     socialIconPaddingUnits: {
 		type: 'object',
 		default: {
@@ -122,28 +269,28 @@ const attributes = {
     socialIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
         },
     },
     socialIconPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
         },
     },
     socialIconPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
         },
     },
     socialIconPaddingLink : {
@@ -235,14 +382,14 @@ const attributes = {
     },
 
 
-    socialBgColorSwitcher : {
+    socialGlobalBgColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    socialBgColor : {
-        type: "string"
+    socialGlobalBgColor : {
+        type: "string",
     },
-    socialBgHoverColor: {
+    socialGlobalBgHoverColor: {
         type: 'string',
     },
 
