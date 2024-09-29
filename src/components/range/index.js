@@ -18,6 +18,7 @@ const Range = ({min, max, label, rangeValue, onChangeHandler,  rangeUnitHandler,
 		{ label: 'em', value: 'em' },
 	];
 
+	
 	// Get range value
 	const getRangeValue = (  ) => {
 		if ( DeviceType === 'Desktop' ) {
