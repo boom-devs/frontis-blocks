@@ -114,7 +114,8 @@ function Edit(props) {
     rangeUnitHandler: rangeUnitHandler,
     DeviceType: DeviceType,
     units: rangeUnit,
-    setAttributes: setAttributes
+    setAttributes: setAttributes,
+    rangeStep: 0.5
   }))), /*#__PURE__*/React.createElement("p", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This is post grid', 'text')));
 }
 
@@ -229,7 +230,8 @@ var Range = function Range(_ref) {
     rangeUnitHandler = _ref.rangeUnitHandler,
     DeviceType = _ref.DeviceType,
     units = _ref.units,
-    setAttributes = _ref.setAttributes;
+    setAttributes = _ref.setAttributes,
+    rangeStep = _ref.rangeStep;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(rangeValue[DeviceType]),
     _useState2 = _slicedToArray(_useState, 2),
     rangeStateValue = _useState2[0],
@@ -299,7 +301,8 @@ var Range = function Range(_ref) {
       return setRangeValue(value);
     },
     min: min,
-    max: max
+    max: max,
+    step: rangeStep
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Range);

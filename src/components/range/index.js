@@ -8,7 +8,7 @@ import {
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 
-const Range = ({min, max, label, rangeValue, onChangeHandler,  rangeUnitHandler, DeviceType, units, setAttributes }) => {
+const Range = ({min, max, label, rangeValue, onChangeHandler,  rangeUnitHandler, DeviceType, units, setAttributes, rangeStep }) => {
 	const [rangeStateValue, setRangeStateValue] = useState(rangeValue[DeviceType]);
 
 	// Units
@@ -74,6 +74,7 @@ const Range = ({min, max, label, rangeValue, onChangeHandler,  rangeUnitHandler,
 						onChange={ ( value ) => setRangeValue( value ) }
 						min={ min }
 						max={ max }
+						step={rangeStep}
 					/>
 				</div>
 			</div>

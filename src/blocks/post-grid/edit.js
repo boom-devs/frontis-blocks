@@ -92,7 +92,7 @@ export default function Edit (props) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __('Settings', 'text-domain') }>
-					<Range  min='-300' max='300'  label='Width' rangeValue={rangeValue}   onChangeHandler={onChangeHandler} rangeUnitHandler={rangeUnitHandler} DeviceType={DeviceType} units={rangeUnit} setAttributes={setAttributes} />
+					<Range  min='-300' max='300'  label='Width' rangeValue={rangeValue}   onChangeHandler={onChangeHandler} rangeUnitHandler={rangeUnitHandler} DeviceType={DeviceType} units={rangeUnit} setAttributes={setAttributes}  rangeStep={0.5}/>
 
 				</PanelBody>
 			</InspectorControls>
