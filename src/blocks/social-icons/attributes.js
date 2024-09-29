@@ -98,22 +98,24 @@ const attributes = {
         type: "string",
         default: "center",
     },
-    socialIconSizeUnits: {
-        type: "string",
-        default: "px"
-    },
-    socialIconSizeDesktop: {
-        type: "number",
-        default: 25
-    },
-    socialIconSizeTablet: {
-        type: "number",
-        default: 25
-    },
-    socialIconSizeMobile: {
-        type: "number",
-        default: 25
-    },
+
+    socialIconSize: {
+		type: 'object',
+		default: {
+			Desktop: 25,
+			Tablet: 25,
+			Mobile: 25
+		}
+	},
+
+	socialIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
     socialIconColorSwitcher: {
         type: "string",
@@ -240,23 +242,22 @@ const attributes = {
         default: true
     },
 
-
-    socialIconGapDesktop: {
-        type: "number",
-        default: 20
-    },
-    socialIconGapTablet: {
-        type: "number",
-        default: 15
-    },
-    socialIconGapMobile: {
-        type: "number",
-        default: 10
-    },
-    socialIconGapUnits: {
-        type: "string",
-        default: "px"
-    },
+    socialIconGapSize: {
+		type: 'object',
+		default: {
+			Desktop: 20,
+			Tablet: 15,
+			Mobile: 15
+		}
+	},
+	socialIconGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
     socialIconPaddingUnits: {
 		type: 'object',

@@ -11,10 +11,8 @@ export default function save({ attributes }) {
         DeviceType,
         socialAlignment,
         socialIconZIndex,
+        socialIconSize,
         socialIconSizeUnits,
-        socialIconSizeDesktop,
-        socialIconSizeTablet,
-        socialIconSizeMobile,
 
         socialIconColor,
         socialIconHoverColor,
@@ -36,16 +34,13 @@ export default function save({ attributes }) {
         socialIconBorderRadiusTablet,
         socialIconBorderRadiusMobile,
 
-        socialIconGapDesktop,
-        socialIconGapTablet,
-        socialIconGapMobile,
+        socialIconGapSize,
         socialIconGapUnits,
 
         socialIconPaddingUnits,
         socialIconPaddingDesktop,
         socialIconPaddingTablet,
         socialIconPaddingMobile,
-
 
         socialPaddingUnits,
         socialPaddingDesktop,
@@ -145,12 +140,12 @@ export default function save({ attributes }) {
                     ${socialBorderHoverColor !== undefined ? `border-color: ${socialBorderHoverColor};` : ''};
                 }
                 .fb-socials {
-                    column-gap: ${socialIconGapDesktop}${socialIconGapUnits};
+                    column-gap: ${socialIconGapSize.Desktop}${socialIconGapUnits.Desktop};
                     justify-content: ${socialAlignment};
                 }
                 .fb-social-list-item a {
-                    width: ${socialIconSizeDesktop}${socialIconSizeUnits};
-                    height: ${socialIconSizeDesktop}${socialIconSizeUnits};
+                    width: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
+                    height: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
                     padding: ${IconPaddingDesktop};
                     background-color: ${socialBgColor};
                     border: ${socialIconBorder};
@@ -178,11 +173,11 @@ export default function save({ attributes }) {
                         border-radius: ${BorderRadiusTabletWidth} !important;
                     }
                     .fb-socials {
-                        column-gap: ${socialIconGapTablet}${socialIconGapUnits};
+                        column-gap: ${socialIconGapSize.Tablet}${socialIconGapUnits.Tablet};
                     }
                     .fb-social-list-item a {
-                        width: ${socialIconSizeTablet}${socialIconSizeUnits};
-                        height: ${socialIconSizeTablet}${socialIconSizeUnits};
+                        width: ${socialIconSize.Tablet}${socialIconSizeUnits.Tablet};
+                        height: ${socialIconSize.Tablet}${socialIconSizeUnits.Tablet};
                         padding: ${IconPaddingTablet};
                         border-width: ${IconBorderTabletWidth};
                         border-radius: ${IconBorderRadiusTabletWidth} !important;
@@ -197,11 +192,11 @@ export default function save({ attributes }) {
                         border-radius: ${BorderRadiusMobileWidth} !important;
                     }
                     .fb-socials {
-                        column-gap: ${socialIconGapMobile}${socialIconGapUnits};
+                        column-gap: ${socialIconGapSize.Mobile}${socialIconGapUnits.Mobile};
                     }
                     .fb-social-list-item a {
-                        width: ${socialIconSizeMobile}${socialIconSizeUnits};
-                        height: ${socialIconSizeMobile}${socialIconSizeUnits};
+                        width: ${socialIconSize.Mobile}${socialIconSizeUnits.Mobile};
+                        height: ${socialIconSize.Mobile}${socialIconSizeUnits.Mobile};
                         padding: ${IconPaddingMobile};
                         border-width: ${IconBorderMobileWidth};
                         border-radius: ${IconBorderRadiusMobileWidth} !important;
