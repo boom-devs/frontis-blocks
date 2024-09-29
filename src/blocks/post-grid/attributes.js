@@ -1,8 +1,8 @@
 export const attributes = {
-	DeviceType: {
-		type: 'string',
-		default: 'Desktop'
-	},
+	// DeviceType: {
+	// 	type: 'string',
+	// 	default: 'Desktop'
+	// },
 	spacingUnits: {
 		type: 'object',
 		default: {
@@ -11,6 +11,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
+
 	// spacingUnits: {
 	// 	type: 'object',
 	// 	default: {

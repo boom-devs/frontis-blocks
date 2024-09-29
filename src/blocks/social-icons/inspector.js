@@ -27,7 +27,7 @@ import {
 import SortableItem from './sortableItem';
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
-import FB_RangeControl from '@Components/range-control';
+
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
