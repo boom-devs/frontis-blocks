@@ -2754,3 +2754,61 @@ function fb_enqueue_frontend_script() {
     wp_enqueue_script( 'frontis-blocks-icon-picker-view-script' );
 }
 add_action( 'wp_enqueue_scripts', 'fb_enqueue_frontend_script' );
+
+
+
+
+// function fb_enqueue_video_scripts() {
+//     // Enqueue dash.all.min.js script
+//     wp_enqueue_script(
+//         'fb-dash-player',
+//         plugin_dir_url(__FILE__) . 'assets/frontend/js/react-player/dash.all.min.js',
+//         array('wp-element'), // Ensure wp-element (React) is available
+//         null, // Version number (optional)
+//         true // Load in footer
+//     );
+
+//     // Enqueue flv.min.js script
+//     wp_enqueue_script(
+//         'fb-flv-player',
+//         plugin_dir_url(__FILE__) . 'assets/frontend/js/react-player/flv.min.js',
+//         array('wp-element'), // Ensure wp-element (React) is available
+//         null, // Version number (optional)
+//         true // Load in footer
+//     );
+
+//     // Enqueue hls.min.js script
+//     wp_enqueue_script(
+//         'fb-hls-player',
+//         plugin_dir_url(__FILE__) . 'assets/frontend/js/react-player/hls.min.js',
+//         array('wp-element'), // Ensure wp-element (React) is available
+//         null, // Version number (optional)
+//         true // Load in footer
+//     );
+
+//     // Enqueue the main frontend script for the advanced video block
+//     wp_enqueue_script(
+//         'fb-advanced-video-frontend',
+//         plugin_dir_url(__FILE__) . 'src/blocks/advanced-video/react-player-frontend.js', // Adjust path as necessary
+//         array('fb-dash-player', 'fb-flv-player', 'fb-hls-player'), // Ensure other players are loaded first
+//         '1.0', // Version number
+//         true // Load in footer
+//     );
+// }
+// add_action('wp_enqueue_scripts', 'fb_enqueue_video_scripts');
+
+
+function my_block_enqueue_scripts() {
+    if (!is_admin()) { // Ensure this only runs on the front end
+        wp_enqueue_script(
+            'my-react-player-frontend', 
+            plugin_dir_url(__FILE__) . 'src/blocks/advanced-video/frontend.js', 
+            array('wp-element'), 
+            null, 
+            true 
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'my_block_enqueue_scripts');
+
+
