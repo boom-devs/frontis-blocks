@@ -352,11 +352,6 @@ var ICON_ALIGN = [{
     icon: "admin-generic"
   })),
   value: "icon"
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-    icon: "info"
-  })),
-  value: "icon-only"
 }];
 var TEXT_ALIGN = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
@@ -4183,10 +4178,10 @@ function Inspector(_ref) {
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alignment", "frontis-blocks"),
-      id: "fb-advanced-button-alignment",
-      className: "fb-advanced-button-alignment"
+      id: "fb-setting-text-alignment",
+      className: "fb-setting-text-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-advanced-button-alignment-group-btn"
+      className: "fb-setting-text-alignment-group-btn"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_ALIGN.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -4195,7 +4190,7 @@ function Inspector(_ref) {
             ButtonAlignment: item.value
           });
         },
-        className: "fb-advanced-alignment-single-btn ".concat(ButtonAlignment === item.value ? 'active' : '')
+        className: "fb-setting-text-alignment-single-btn ".concat(ButtonAlignment === item.value ? 'active' : '')
       }, item.label);
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text", "frontis-blocks"),
@@ -4219,11 +4214,11 @@ function Inspector(_ref) {
           ButtonUrl: value
         });
       },
-      className: "fb-advanced-button-url",
+      className: "fb-link-control-url",
       placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('https://', 'frontis-blocks')
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-      className: "fb-advanced-button-icon-dropdown",
-      contentClassName: "fb-advanced-button-icon-dropdown-content",
+      className: "fb-setting-dropdown-icon-wrapper",
+      contentClassName: "fb-setting-dropdown-icon-content",
       popoverProps: {
         placement: 'bottom-start'
       },
@@ -4235,17 +4230,17 @@ function Inspector(_ref) {
           onClick: onToggle,
           "aria-expanded": isOpen,
           "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
-          className: "fb-advanced-button-icon-btn"
+          className: "fb-setting-dropdown-icon-btn"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
           icon: "color-picker",
-          className: "fb-advanced-button-icon"
+          className: "fb-setting-dropdown-icon"
         }));
       },
       renderContent: function renderContent() {
         return /*#__PURE__*/React.createElement("div", {
-          className: "fb-advanced-button-icon-popup"
+          className: "fb-link-control-icon-popup"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          className: "fb-advanced-button-icon-popup-inner"
+          className: "fb-link-control-icon-popup-inner"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Open in new tab", "frontis-blocks"),
           checked: ButtonTargetUrl,
@@ -4260,9 +4255,10 @@ function Inspector(_ref) {
       className: "fb-advanced-btn-icon-wrapper"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon", "frontis-blocks"),
-      className: "fb-advanced-btn-icon"
+      id: "fb-setting-text-alignment",
+      className: "fb-setting-text-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-advanced-btn-icon-group-btn"
+      className: "fb-setting-text-alignment-group-btn"
     }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.ICON_ALIGN.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
@@ -4271,7 +4267,7 @@ function Inspector(_ref) {
             ButtonIconAlign: item.value
           });
         },
-        className: "fb-advanced-btn-icon-single-btn ".concat(ButtonIconAlign === item.value ? 'active' : '')
+        className: "fb-setting-text-alignment-single-btn ".concat(ButtonIconAlign === item.value ? 'active' : '')
       }, item.label);
     })), ButtonIconAlign === 'icon' && /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
       value: ButtonIcon,
@@ -4298,8 +4294,8 @@ function Inspector(_ref) {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks"),
       className: "fb-setting-typography"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-      className: "fb-setting-typography-icon-dropdown",
-      contentClassName: "fb-setting-typography-dropdown-content",
+      className: "fb-setting-dropdown-icon-wrapper",
+      contentClassName: "fb-setting-dropdown-icon-content",
       popoverProps: {
         placement: 'bottom-start'
       },
@@ -4311,10 +4307,10 @@ function Inspector(_ref) {
           onClick: onToggle,
           "aria-expanded": isOpen,
           "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
-          className: "fb-setting-typography-icon-btn"
+          className: "fb-setting-dropdown-icon-btn"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
           icon: "edit",
-          className: "fb-setting-typography-icon"
+          className: "fb-setting-dropdown-icon"
         }));
       },
       renderContent: function renderContent() {

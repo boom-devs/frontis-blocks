@@ -183,14 +183,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'call-to-action' => [
-            //     'slug'      => 'call-to-action',
-            //     'title'     => 'Call to Action',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+             'call-to-action' => [
+                 'slug'      => 'call-to-action',
+                 'title'     => 'Call to Action',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
             // 'pricing-table' => [
             //     'slug'      => 'pricing-table',
             //     'title'     => 'Pricing Table',
