@@ -16,36 +16,24 @@ const attributes = {
             {
                 id: 'item-1',
                 socialIcon: 'facebook-f',
-                // socialIconColorSwitcher: 'normal',
-                // socialIconColor: '#3b5998',
-                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
             {
                 id: 'item-2',
                 socialIcon: 'x-twitter',
-                // socialIconColorSwitcher: 'normal',
-                // socialIconColor: '#3b5998',
-                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
             {
                 id: 'item-3',
                 socialIcon: 'youtube',
-                // socialIconColorSwitcher: 'normal',
-                // socialIconColor: '#3b5998',
-                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
             {
                 id: 'item-4',
                 socialIcon: 'behance',
-                // socialIconColorSwitcher: 'normal',
-                // socialIconColor: '#3b5998',
-                // socialIconHoverColor: '#3b5998',
                 socialIconUrl: '#',
                 socialIconTargetUrl: false,
             },
@@ -65,16 +53,6 @@ const attributes = {
                     type: 'string',
                     default: 'behance',
                 },
-                // socialIconColorSwitcher: {
-                //     type: "string",
-                //     default: "normal"
-                // },
-                // socialIconColor: {
-                //     type: "string"
-                // },
-                // socialIconHoverColor: {
-                //     type: 'string',
-                // },
                 socialIconUrl: {
                     type: "string",
                     default: "",
@@ -85,20 +63,10 @@ const attributes = {
             }
         }
     },
-
-    // socialIconSizeUnits: {
-	// 	type: 'object',
-	// 	default: {
-	// 		Desktop: 'px',
-	// 		Tablet: 'px',
-	// 		Mobile: 'px'
-	// 	}
-    // },
     socialAlignment: {
         type: "string",
         default: "center",
     },
-
     socialIconSize: {
 		type: 'object',
 		default: {
@@ -107,7 +75,6 @@ const attributes = {
 			Mobile: 25
 		}
 	},
-
 	socialIconSizeUnits: {
 		type: 'object',
 		default: {
@@ -116,7 +83,6 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-
     socialIconColorSwitcher: {
         type: "string",
         default: "normal"
@@ -142,8 +108,6 @@ const attributes = {
         type: 'string',
         default: "#d2691e"
     },
-
-
     socialIconBorder: {
         type: 'string',
         default: "none",
@@ -158,9 +122,6 @@ const attributes = {
     socialIconBorderHoverColor: {
         type: 'string',
     },
-
-
-
     socialIconBorderUnits: {
 		type: 'object',
 		default: {
@@ -200,8 +161,6 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
     socialIconBorderRadiusUnits: {
 		type: 'object',
 		default: {
@@ -241,7 +200,6 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
     socialIconGapSize: {
 		type: 'object',
 		default: {
@@ -258,7 +216,6 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-
     socialIconPaddingUnits: {
 		type: 'object',
 		default: {
@@ -298,9 +255,6 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
-
     socialPaddingUnits: {
 		type: 'object',
 		default: {
@@ -340,8 +294,6 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
     socialMarginUnits: {
 		type: 'object',
 		default: {
@@ -381,8 +333,6 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
     socialGlobalBgColorSwitcher : {
         type: "string",
         default: "normal"
@@ -393,8 +343,6 @@ const attributes = {
     socialGlobalBgHoverColor: {
         type: 'string',
     },
-
-
     socialBorder: {
         type: 'string',
         default: "none",
@@ -409,9 +357,6 @@ const attributes = {
     socialBorderHoverColor: {
         type: 'string',
     },
-
-
-
     socialBorderUnits: {
 		type: 'object',
 		default: {
@@ -451,8 +396,6 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
     socialBorderRadiusUnits: {
 		type: 'object',
 		default: {
@@ -492,8 +435,6 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
 
 };
 
