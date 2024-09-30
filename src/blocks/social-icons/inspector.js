@@ -1122,7 +1122,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
                                                 <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
 
-
                                                     <SelectControl
                                                             label={__("Border Style", "frontis-blocks")}
                                                             value={socialBorder}
