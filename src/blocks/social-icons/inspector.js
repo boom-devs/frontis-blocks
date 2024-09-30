@@ -187,6 +187,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End Icon Color */
 
+    /** Start Icon BG Color */
+    const handleBgColorSwitcherChange = (value) => {
+        setAttributes({ socialBgColorSwitcher: value });
+    };
+    const handleBgColorChange = (value) => {
+        setAttributes({ socialBgColor: value });
+    };
+    const handleBgHoverColorChange = (value) => {
+        setAttributes({ socialBgHoverColor: value });
+    };
+    /** End Icon BG Color */
+
+    /** Start Icon Border Color */
+    const handleBorderColorSwitcherChange = (value) => {
+        setAttributes({ socialIconBorderColorSwitcher: value });
+    };
+    const handleBorderColorChange = (value) => {
+        setAttributes({ socialIconBorderColor: value });
+    };
+    const handleBorderHoverColorChange = (value) => {
+        setAttributes({ socialIconBorderHoverColor: value });
+    };
+    /** End Icon Border Color */
+
+
+    /** Start Global Bg Color */
+    const handleGlobalBgColorSwitcherChange = (value) => {
+        setAttributes({ socialGlobalBgColorSwitcher: value });
+    };
+    const handleGlobalBgColorChange = (value) => {
+        setAttributes({ socialGlobalBgColor: value });
+    };
+    const handleGlobalBgHoverColorChange = (value) => {
+        setAttributes({ socialGlobalBgHoverColor: value });
+    };
+    /** End Global Bg Color */
+
+
+    /** Start Global Border Color */
+    const handleGlobalBorderColorSwitcherChange = (value) => {
+        setAttributes({ socialBorderColorSwitcher: value });
+    };
+    const handleGlobalBorderColorChange = (value) => {
+        setAttributes({ socialBorderColor: value });
+    };
+    const handleGlobalBorderHoverColorChange = (value) => {
+        setAttributes({ socialBorderHoverColor: value });
+    };
+    /** End Global Border Color */
+
 
     /** Start Icon border */
     const handleSocialIconBorderUnitChange = ( event, position ) => {
@@ -887,7 +937,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Icon", "frontis-blocks")} initialOpen={true}>
-
                                             <FB_Range
                                                 min={1}
                                                 max={300}
@@ -912,246 +961,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 handleGlobalHoverColorChange={handleGlobalHoverColorChange}
                                             />
 
-                                            <BaseControl
-                                                    label={__("Background Color", "frontis-blocks")}
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ socialBgColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${socialBgColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-
-                                                {socialBgColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={socialBgColor}
-                                                                                onChange={(value) => setAttributes({ socialBgColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={socialBgColor}
-                                                                                onChange={(value) => setAttributes({ socialBgColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                                {socialBgColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={socialBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ socialBgHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={socialBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ socialBgHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
+                                            <FB_Color
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalColorSwitcher={socialBgColorSwitcher}
+                                                globalColor={socialBgColor}
+                                                globalHoverColor={socialBgHoverColor}
+                                                handleColorSwitcherChange={handleBgColorSwitcherChange}
+                                                handleGlobalColorChange={handleBgColorChange}
+                                                handleGlobalHoverColorChange={handleBgHoverColorChange}
+                                            />
                                         </PanelBody>
                                         <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
                                             <SelectControl
-                                                    label={__("Border Style", "frontis-blocks")}
-                                                    value={socialIconBorder}
-                                                    options={BORDER_STYLES}
-                                                    onChange={(value) => setAttributes({ socialIconBorder: value })}
-                                                />
+                                                label={__("Border Style", "frontis-blocks")}
+                                                value={socialIconBorder}
+                                                options={BORDER_STYLES}
+                                                onChange={(value) => setAttributes({ socialIconBorder: value })}
+                                            />
 
-                                            <BaseControl
+                                            <FB_Color
                                                 label={__("Border Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ socialIconBorderColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${socialIconBorderColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalColorSwitcher={socialIconBorderColorSwitcher}
+                                                globalColor={socialIconBorderColor}
+                                                globalHoverColor={socialIconBorderHoverColor}
+                                                handleColorSwitcherChange={handleBorderColorSwitcherChange}
+                                                handleGlobalColorChange={handleBorderColorChange}
+                                                handleGlobalHoverColorChange={handleBorderHoverColorChange}
+                                            />
 
-                                            {socialIconBorderColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={socialIconBorderColor}
-                                                                            onChange={(value) => setAttributes({ socialIconBorderColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={socialIconBorderColor}
-                                                                            onChange={(value) => setAttributes({ socialIconBorderColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
-
-                                            {socialIconBorderColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={socialIconBorderHoverColor}
-                                                                            onChange={(value) => setAttributes({ socialIconBorderHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={socialIconBorderHoverColor}
-                                                                            onChange={(value) => setAttributes({ socialIconBorderHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
                                                 DeviceType={DeviceType}
@@ -1228,6 +1065,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         allowReset
                                                         resetFallbackValue={100}
                                                     />
+
+                                                    <FB_Range
+                                                        min={1}
+                                                        max={100}
+                                                        label={__("Icon Gap", "frontis-blocks")}
+                                                        rangeValue={socialIconGapSize}
+                                                        onChangeHandler={socialIconGapSizeHandler}
+                                                        rangeUnitHandler={socialIconGapUnitsHandler}
+                                                        DeviceType={DeviceType}
+                                                        units={socialIconGapUnits}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={20}
+                                                    />
                                                 </PanelBody>
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                     <FB_Spacing 
@@ -1259,119 +1110,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
 
                                                 <PanelBody title="Background Color" initialOpen={false} >
-                                                    <BaseControl
-                                                        className="fb-setting-color-panel-wrapper"
-                                                    >
-                                                        <ButtonGroup className="fb-setting-color-panel-btn">
-                                                            {NORMAL_HOVER.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ socialGlobalBgColorSwitcher: item.value })}
-                                                                    className={`fb-setting-color-panel-btn-switchr ${socialGlobalBgColorSwitcher === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </BaseControl>
-
-                                                    {socialGlobalBgColorSwitcher === 'normal' && (
-                                                        <BaseControl 
-                                                            label={__("Nomal Color", "frontis-blocks")}
-                                                            className="fb-setting-color-setting-wrapper"
-                                                        >
-                                                            <Dropdown
-                                                                className="fb-setting-color-setting-icon-dropdown"
-                                                                contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                                popoverProps={{ placement: 'bottom-start' }}
-                                                                renderToggle={({ isOpen, onToggle }) => (
-                                                                    <Button
-                                                                        variant="primary"
-                                                                        onClick={onToggle}
-                                                                        aria-expanded={isOpen}
-                                                                        className="fb-setting-color-setting-icon-btn"
-                                                                    >
-                                                                        <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                    </Button>
-                                                                )}
-                                                                renderContent={() => (
-                                                                    <div className="fb-setting-color-setting-icon-popup">
-                                                                        <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                            <div className="fb-setting-normal-color">
-                                                                                <ColorPicker
-                                                                                    color={socialGlobalBgColor}
-                                                                                    onChange={(value) => setAttributes({ socialGlobalBgColor: value })}
-                                                                                    enableAlpha={true}
-                                                                                />
-                                                                                <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                                <ColorPalette
-                                                                                    colors={[
-                                                                                        { color: '#F72585' },
-                                                                                        { color: '#7209B7' },
-                                                                                        { color: '#3A0CA3' },
-                                                                                        { color: '#4361EE' },
-                                                                                        { color: '#4CC9F0' },
-                                                                                    ]}
-                                                                                    disableCustomColors={true}
-                                                                                    value={socialGlobalBgColor}
-                                                                                    onChange={(value) => setAttributes({ socialGlobalBgColor: value })}
-                                                                                />
-                                                                            </div>
-                                                                        </BaseControl>
-                                                                    </div>
-                                                                )}
-                                                            />
-                                                        </BaseControl>
-                                                    )}
-
-                                                    {socialGlobalBgColorSwitcher === 'hover' && (
-                                                        <BaseControl 
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            className="fb-setting-color-setting-wrapper"
-                                                        >
-                                                            <Dropdown
-                                                                className="fb-setting-color-setting-icon-dropdown"
-                                                                contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                                popoverProps={{ placement: 'bottom-start' }}
-                                                                renderToggle={({ isOpen, onToggle }) => (
-                                                                    <Button
-                                                                        variant="primary"
-                                                                        onClick={onToggle}
-                                                                        aria-expanded={isOpen}
-                                                                        className="fb-setting-color-setting-icon-btn"
-                                                                    >
-                                                                        <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                    </Button>
-                                                                )}
-                                                                renderContent={() => (
-                                                                    <div className="fb-setting-color-setting-icon-popup">
-                                                                        <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                            <div className="fb-setting-hover-color">
-                                                                                <ColorPicker
-                                                                                    color={socialGlobalBgHoverColor}
-                                                                                    onChange={(value) => setAttributes({ socialGlobalBgHoverColor: value })}
-                                                                                    enableAlpha={true}
-                                                                                />
-                                                                                <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                                <ColorPalette
-                                                                                    colors={[
-                                                                                        { color: '#F72585' },
-                                                                                        { color: '#7209B7' },
-                                                                                        { color: '#3A0CA3' },
-                                                                                        { color: '#4361EE' },
-                                                                                        { color: '#4CC9F0' },
-                                                                                    ]}
-                                                                                    disableCustomColors={true}
-                                                                                    value={socialGlobalBgHoverColor}
-                                                                                    onChange={(value) => setAttributes({ socialGlobalBgHoverColor: value })}
-                                                                                />
-                                                                            </div>
-                                                                        </BaseControl>
-                                                                    </div>
-                                                                )}
-                                                            />
-                                                        </BaseControl>
-                                                    )}
+                                                    <FB_Color
+                                                        label={__("Background Color", "frontis-blocks")}
+                                                        globalColorSwitcher={socialGlobalBgColorSwitcher}
+                                                        globalColor={socialGlobalBgColor}
+                                                        globalHoverColor={socialGlobalBgHoverColor}
+                                                        handleColorSwitcherChange={handleGlobalBgColorSwitcherChange}
+                                                        handleGlobalColorChange={handleGlobalBgColorChange}
+                                                        handleGlobalHoverColorChange={handleGlobalBgHoverColorChange}
+                                                    />
                                                 </PanelBody>
                                                 <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
 
@@ -1383,122 +1130,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onChange={(value) => setAttributes({ socialBorder: value })}
                                                     />
 
-                                                    <BaseControl
+                                                    <FB_Color
                                                         label={__("Border Color", "frontis-blocks")}
-                                                        className="fb-setting-color-panel-wrapper"
-                                                    >
-                                                        <ButtonGroup className="fb-setting-color-panel-btn">
-                                                            {NORMAL_HOVER.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ socialBorderColorSwitcher: item.value })}
-                                                                    className={`fb-setting-color-panel-btn-switchr ${socialBorderColorSwitcher === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </BaseControl>
+                                                        globalColorSwitcher={socialBorderColorSwitcher}
+                                                        globalColor={socialBorderColor}
+                                                        globalHoverColor={socialBorderHoverColor}
+                                                        handleColorSwitcherChange={handleGlobalBorderColorSwitcherChange}
+                                                        handleGlobalColorChange={handleGlobalBorderColorChange}
+                                                        handleGlobalHoverColorChange={handleGlobalBorderHoverColorChange}
+                                                    />
 
-                                                    {socialBorderColorSwitcher === 'normal' && (
-                                                        <BaseControl 
-                                                            label={__("Nomal Color", "frontis-blocks")}
-                                                            className="fb-setting-color-setting-wrapper"
-                                                        >
-                                                            <Dropdown
-                                                                className="fb-setting-color-setting-icon-dropdown"
-                                                                contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                                popoverProps={{ placement: 'bottom-start' }}
-                                                                renderToggle={({ isOpen, onToggle }) => (
-                                                                    <Button
-                                                                        variant="primary"
-                                                                        onClick={onToggle}
-                                                                        aria-expanded={isOpen}
-                                                                        aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                        className="fb-setting-color-setting-icon-btn"
-                                                                    >
-                                                                        <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                    </Button>
-                                                                )}
-                                                                renderContent={() => (
-                                                                    <div className="fb-setting-color-setting-icon-popup">
-                                                                        <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                            <div className="fb-setting-normal-color">
-                                                                                <ColorPicker
-                                                                                    color={socialBorderColor}
-                                                                                    onChange={(value) => setAttributes({ socialBorderColor: value })}
-                                                                                    enableAlpha={true}
-                                                                                />
-                                                                                <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                                <ColorPalette
-                                                                                    colors={[
-                                                                                        { color: '#F72585' },
-                                                                                        { color: '#7209B7' },
-                                                                                        { color: '#3A0CA3' },
-                                                                                        { color: '#4361EE' },
-                                                                                        { color: '#4CC9F0' },
-                                                                                    ]}
-                                                                                    disableCustomColors={true}
-                                                                                    value={socialBorderColor}
-                                                                                    onChange={(value) => setAttributes({ socialBorderColor: value })}
-                                                                                />
-                                                                            </div>
-                                                                        </BaseControl>
-                                                                    </div>
-                                                                )}
-                                                            />
-                                                        </BaseControl>
-                                                    )}
-
-                                                    {socialBorderColorSwitcher === 'hover' && (
-                                                        <BaseControl 
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            className="fb-setting-color-setting-wrapper"
-                                                        >
-                                                            <Dropdown
-                                                                className="fb-setting-color-setting-icon-dropdown"
-                                                                contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                                popoverProps={{ placement: 'bottom-start' }}
-                                                                renderToggle={({ isOpen, onToggle }) => (
-                                                                    <Button
-                                                                        variant="primary"
-                                                                        onClick={onToggle}
-                                                                        aria-expanded={isOpen}
-                                                                        aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                        className="fb-setting-color-setting-icon-btn"
-                                                                    >
-                                                                        <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                    </Button>
-                                                                )}
-                                                                renderContent={() => (
-                                                                    <div className="fb-setting-color-setting-icon-popup">
-                                                                        <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                            <div className="fb-setting-hover-color">
-                                                                                <ColorPicker
-                                                                                    color={socialBorderHoverColor}
-                                                                                    onChange={(value) => setAttributes({ socialBorderHoverColor: value })}
-                                                                                    enableAlpha={true}
-                                                                                />
-                                                                                <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                                <ColorPalette
-                                                                                    colors={[
-                                                                                        { color: '#F72585' },
-                                                                                        { color: '#7209B7' },
-                                                                                        { color: '#3A0CA3' },
-                                                                                        { color: '#4361EE' },
-                                                                                        { color: '#4CC9F0' },
-                                                                                    ]}
-                                                                                    disableCustomColors={true}
-                                                                                    value={socialBorderHoverColor}
-                                                                                    onChange={(value) => setAttributes({ socialBorderHoverColor: value })}
-                                                                                />
-                                                                            </div>
-                                                                        </BaseControl>
-                                                                    </div>
-                                                                )}
-                                                            />
-                                                        </BaseControl>
-                                                    )}
                                                     <FB_Spacing 
                                                         label={__("Border", "frontis-blocks")}
                                                         DeviceType={DeviceType}
@@ -1512,6 +1153,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleSocialBorderCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
+
                                                     <FB_Spacing 
                                                         label={__("Radius Border", "frontis-blocks")}
                                                         DeviceType={DeviceType}
