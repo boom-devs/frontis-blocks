@@ -95,14 +95,14 @@ class BlockList {
             //     'badge'     => 'pro',
             //     'status'    => 'active',
             // ],
-            // 'advanced-video' => [
-            //     'slug'      => 'advanced-video',
-            //     'title'     => 'Advanced Video',
-            //     'package'   => 'free',
-            //     'category'  => 'media',
-            //     'badge'     => 'freemium',
-            //     'status'    => 'active',
-            // ],
+            'advanced-video' => [
+                'slug'      => 'advanced-video',
+                'title'     => 'Advanced Video',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'countdown' => [
             //     'slug'      => 'countdown',
             //     'title'     => 'Countdown',

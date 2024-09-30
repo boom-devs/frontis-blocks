@@ -75,10 +75,7 @@ export default function save({ attributes }) {
     const blockProps = useBlockProps.save({
         className: `fb-social-main-wrapper ${blockID}`,
     });
-
-    console.log(IconBorderDesktopWidth);
     
-
     /** Start Icon border */
     const IconBorderDesktopWidth = `${socialIconBorderDesktop.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.left}${socialIconBorderUnits[DeviceType]}`;
     const IconBorderTabletWidth = `${socialIconBorderTablet.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.left}${socialIconBorderUnits[DeviceType]}`;
