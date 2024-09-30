@@ -1,9 +1,9 @@
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 const Save = ({ attributes }) => {
-  const { layout, columns, rows } = attributes;
+  const { layoutType, columns, rows } = attributes;
   const blockProps = useBlockProps.save({
-    className: `fb-container fb-container-${layout}`,
+    className: `fb-container fb-container-${layoutType}`,
     style: {
       display: 'grid',
       gridTemplateColumns: `repeat(${columns}, 1fr)`,
