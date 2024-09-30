@@ -23,14 +23,14 @@ class BlockList {
                 'badge'     => 'freemium',
                 'status'    => 'active',
             ],
-            // 'row' => [
-            //     'slug'      => 'row',
-            //     'title'     => 'Row',
-            //     'package'   => 'free',
-            //     'category'  => 'layout',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'container' => [
+                'slug'      => 'container',
+                'title'     => 'Container',
+                'package'   => 'free',
+                'category'  => 'layout',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'column' => [
             //     'slug'      => 'column',
             //     'title'     => 'Column',
