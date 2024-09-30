@@ -21,7 +21,6 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        DeviceType,
         TestimonialImageUrl,
         TestimonialImageAlt,
         TestimonialImageID,
@@ -34,6 +33,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         TestimonialRatinIconAlign,
         TestimonialQuoteIcon,
         TestimonialQuoteIconAlign,
+
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -94,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps}>
-                <div className="fb-testimonial-section">
+                <div className={`fb-testimonial-section fb-testimonia-section-${TestimonialAlignment}`}>
                     <div className="fb-testimonial-wrapper">
                         <div className="fb-testimonial-inner-wrapper">
                             <div className='fb-testimonial-container'>
@@ -124,7 +124,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
                                         </div>
                                     )}
-                                    <div className="fb-testimonial-userinfo-container">
+                                    <div className="fb-testimonial-userdesc-container">
                                         <RichText
                                             tagName="p"
                                             value={TestimonialDesc}
