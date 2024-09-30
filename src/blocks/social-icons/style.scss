@@ -1,0 +1,35 @@
+// editor.scss
+
+.fb-social-main-wrapper {
+    .fb-social-wrapper {
+        .fb-social-links-wrapper {
+            ul {
+                margin: 0;
+                padding: 0;
+                &.fb-socials {
+                    list-style: none;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    display: flex;
+    
+                    .fb-social-list-item {
+    
+                        a {
+                            box-sizing: content-box;
+                            text-decoration: none;
+                            cursor: pointer;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: color 0.5s, background-color 0.5s, border 0.5s, border-radius 0.5s, box-shadow 0.5s;
+    
+                            svg {
+                                transition: fill 0.3s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

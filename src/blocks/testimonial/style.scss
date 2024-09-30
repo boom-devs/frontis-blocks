@@ -1,88 +1,58 @@
-
-
 .fb-testimonial-main-wrapper {
-    display: flex;
-    justify-content: center;
-    background-color: #f9f9f9;
-
+    
     .fb-testimonial-section {
-        background-color: #fff;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        padding: 30px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: block;
+        transition: ease-in-out 0.5s;
+        &.fb-testimonia-section-left {
+            text-align: left;
+        }
+        &.fb-testimonia-section-center {
+            text-align: center;
+        }
+        &.fb-testimonia-section-right {
+            text-align: right;
+        }
         
         .fb-testimonial-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-
             .fb-testimonial-inner-wrapper {
                 width: 100%;
 
                 .fb-testimonial-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
 
                     .fb-testimonial-image-wrapper {
                         .fb-testimonial-image-inner-wrapper {
                             .fb-testimonial-image {
                                 img {
                                     max-width: 100%;
-                                    border-radius: 50%;
-                                    height: 100px;
-                                    margin: 0 auto;
-                                    width: 100px;
-                                    display: block;
                                 }
                             }
                         }
                     }
 
                     .fb-testimonial-description-container {
-                        padding: 20px 0;
-                        width: 100%;
                         
                         .fb-testimonial-quote-icon {
-                            margin-bottom: 15px;
                             svg {
-                                width: 100px;
-                                height: 100px;
-                                fill: #FFB400;
+                                transition: ease-in-out 0.5s;
                             }
                         }
 
-                        .fb-testimonial-userinfo-container {
+                        .fb-testimonial-userdesc-container {
                             margin-bottom: 10px;
+                        }
 
-                            .fb-user-desc {
-                                font-size: 18px;
-                                font-style: italic;
-                                color: #333;
-                            }
-
-                            .fb-user {
-                                font-size: 20px;
-                                font-weight: bold;
-                                color: #111;
-                            }
-
-                            .fb-user-designation {
-                                font-size: 16px;
-                                color: #777;
-                            }
-
+                        .fb-testimonial-userinfo-container {
+                            
                             .fb-testimonial-rating {
                                 margin-top: 10px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
+
+                                .fb-testimonial-rating-icon {
+                                    display: inline-block;
+                                }
                                 svg {
-                                    width: 20px;
-                                    height: 20px;
-                                    fill: #FFB400;
+                                    transition: ease-in-out 0.5s;
                                 }
                             }
                         }
