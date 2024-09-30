@@ -3643,7 +3643,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/constants */ "./src/blocks/advanced-button/constants/constants.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/responsivecontrol */ "./src/components/responsivecontrol.js");
+/* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/advanced-button/editor.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -3667,6 +3667,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
  */
 
 
+// import ResponsiveControl from '../../components/responsivecontrol';
 
 
 
@@ -4974,7 +4975,7 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'frontis-block'),
       device: DeviceType,
       deviceHandler: handleBorderWidthDeviceClick
@@ -5051,7 +5052,7 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
       device: DeviceType,
       deviceHandler: handleBorderRadiusWidthDeviceClick
@@ -5131,7 +5132,7 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'frontis-block'),
       device: DeviceType,
       deviceHandler: handlePaddingDeviceClick
@@ -5208,7 +5209,7 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'frontis-block'),
       device: DeviceType,
       deviceHandler: handleMarginDeviceClick
@@ -5825,21 +5826,21 @@ function FBIconPicker(props) {
 
 /***/ }),
 
-/***/ "./src/components/responsivecontrol.js":
-/*!*********************************************!*\
-  !*** ./src/components/responsivecontrol.js ***!
-  \*********************************************/
+/***/ "./src/components/responsive-control/index.js":
+/*!****************************************************!*\
+  !*** ./src/components/responsive-control/index.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ResponsiveControl)
+/* harmony export */   "default": () => (/* binding */ FB_ResponsiveControl)
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 
-function ResponsiveControl(_ref) {
+function FB_ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
     device = _ref.device,
     deviceHandler = _ref.deviceHandler;
