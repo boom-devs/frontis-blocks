@@ -27,7 +27,7 @@ import './editor.scss';
 import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, SELECT_TYPE, iconType} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import ResponsiveControl from "../../components/responsivecontrol";
+import FB_ResponsiveControl from '@Components/responsive-control';
 import {HEADING} from "../info-box/constants/constants";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -540,7 +540,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													<div className="sh_heading_spacing_inner_container">
 														{/* Border Width */}
 														<div className="sh_heading_label_container">
-															<ResponsiveControl labelText={__('Border', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderWidthDeviceClick}/>
+															<FB_ResponsiveControl labelText={__('Border', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderWidthDeviceClick}/>
 															<div className="fb-setting-units-type">
 																<ButtonGroup className="fb-setting-units-type-wrap">
 																	{UNIT_TYPES.map((item, key) => (
@@ -608,7 +608,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													<div className="sh_heading_spacing_inner_container">
 														{/* Border radius Width */}
 														<div className="sh_heading_label_container">
-															<ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
+															<FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
 															<div className="fb-setting-units-type">
 																<ButtonGroup className="fb-setting-units-type-wrap">
 																	{UNIT_TYPES.map((item, key) => (

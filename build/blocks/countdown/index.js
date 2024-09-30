@@ -3458,7 +3458,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/countdown/editor.scss");
 /* harmony import */ var _advanced_heading_constants_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../advanced-heading/constants/constants */ "./src/blocks/advanced-heading/constants/constants.js");
-/* harmony import */ var _components_responsivecontrol__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/responsivecontrol */ "./src/components/responsivecontrol.js");
+/* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -4533,7 +4533,7 @@ function Edit(_ref) {
       className: "sh_heading_spacing_inner_container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_label_container"
-    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'frontis-block'),
       device: DeviceType,
       deviceHandler: handleBorderWidthDeviceClick
@@ -4610,7 +4610,7 @@ function Edit(_ref) {
       className: "sh_heading_spacing_inner_container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "sh_heading_label_container"
-    }, /*#__PURE__*/React.createElement(_components_responsivecontrol__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
       device: DeviceType,
       deviceHandler: handleBorderRadiusWidthDeviceClick
@@ -4963,20 +4963,20 @@ var labelAttributes = {
 
 /***/ }),
 
-/***/ "./src/components/responsivecontrol.js":
-/*!*********************************************!*\
-  !*** ./src/components/responsivecontrol.js ***!
-  \*********************************************/
+/***/ "./src/components/responsive-control/index.js":
+/*!****************************************************!*\
+  !*** ./src/components/responsive-control/index.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ResponsiveControl)
+/* harmony export */   "default": () => (/* binding */ FB_ResponsiveControl)
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 
-function ResponsiveControl(_ref) {
+function FB_ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
     device = _ref.device,
     deviceHandler = _ref.deviceHandler;
