@@ -2797,18 +2797,49 @@ add_action( 'wp_enqueue_scripts', 'fb_enqueue_frontend_script' );
 // }
 // add_action('wp_enqueue_scripts', 'fb_enqueue_video_scripts');
 
+// function my_block_enqueue_scripts() {
+//     if (!is_admin()) { // Ensure this only runs on the front end
 
-function my_block_enqueue_scripts() {
-    if (!is_admin()) { // Ensure this only runs on the front end
-        wp_enqueue_script(
-            'my-react-player-frontend', 
-            plugin_dir_url(__FILE__) . 'src/blocks/advanced-video/frontend.js', 
-            array('wp-element'), 
-            null, 
-            true 
-        );
-    }
+//         // Enqueue your custom frontend script
+//         wp_enqueue_script(
+//             'my-react-player-frontend', 
+//             plugin_dir_url(__FILE__) . 'src/blocks/advanced-video/frontend.js', 
+//             array('wp-element'), // No dependency on 'react-player-cdn' here
+//             null, 
+//             true // This makes sure it loads in the footer
+//         );
+
+//         // Enqueue ReactPlayer from the CDN, placed after your custom script
+//         wp_enqueue_script(
+//             'react-player-cdn', 
+//             'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js', 
+//             array(), // No dependencies
+//             null, 
+//             true // This also makes sure it loads in the footer
+//         );
+//     }
+// }
+// add_action('wp_enqueue_scripts', 'my_block_enqueue_scripts');
+
+
+
+
+function my_enqueue_scripts() {
+    // Enqueue React and React DOM from CDN
+    wp_enqueue_script('react', 'https://unpkg.com/react@17/umd/react.development.js', array(), null, true);
+    wp_enqueue_script('react-dom', 'https://unpkg.com/react-dom@17/umd/react-dom.development.js', array('react'), null, true);
+    
+    // Enqueue ReactPlayer from CDN
+    wp_enqueue_script('react-player', 'https://cdn.jsdelivr.net/npm/react-player@2.16.0/dist/ReactPlayer.standalone.min.js', array('react', 'react-dom'), null, true);
+    
+    // Enqueue your frontend script that initializes ReactPlayer
+    wp_enqueue_script('my-frontend-script', plugin_dir_url(__FILE__) . 'src/blocks/advanced-video/frontend.js', array('react', 'react-dom', 'react-player', 'wp-element'), null, true);
 }
-add_action('wp_enqueue_scripts', 'my_block_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+
+
+
+
 
 
