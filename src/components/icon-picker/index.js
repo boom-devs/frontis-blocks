@@ -1,16 +1,13 @@
 import { __ } from '@wordpress/i18n';
-import { useState } from 'react';
-import { Fragment } from "@wordpress/element";
+import { Fragment, useState, useEffect } from "@wordpress/element";
 import { Grid } from 'react-virtualized';
 import renderSVG from "./components/icon-picker/controls/renderIcon";
 import defaultSvgIcon from "./components/defaultSvgIcon";
+import fetchSvgIcons from "@Components/icon-picker/components/fetchSvgicons";
 import {
-	PanelBody,
 	Button, Modal, Tooltip
 } from "@wordpress/components";
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import './editor.scss';
-import svgIcon from "./components/svgIcon";
 
 export default function FBIconPicker(props) {
 	const { value, setIconHandler } = props;
@@ -20,6 +17,7 @@ export default function FBIconPicker(props) {
 	const [defaultIcons, setDefaultIcons] = useState(defaultSvgIcon);
 	const [filteredDefaultIcons, setFilteredDefaultIcons] = useState(defaultSvgIcon);
 	const [selectedCat, setSelectedCat] = useState('all-icons');
+	const [svgIcon, setSvgIcon] = useState([]);
 
 	const iconPickerModal = () => {
 		setIconPickerModal(true);
@@ -226,6 +224,13 @@ export default function FBIconPicker(props) {
 		);
 	}
 
+	useEffect( () => {
+		fetchSvgIcons().then(icons => {
+			if (icons) {
+				setSvgIcon(icons);
+			}
+		});
+	}, [])
 	return (
 		<Fragment>
 			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>
