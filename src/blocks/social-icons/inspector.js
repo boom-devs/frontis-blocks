@@ -306,10 +306,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    /** end Icon border */
-    const IconBorderDesktopWidth = `${socialIconBorderDesktop.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.left}${socialIconBorderUnits[DeviceType]}`;
-    const IconBorderTabletWidth = `${socialIconBorderTablet.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.left}${socialIconBorderUnits[DeviceType]}`;
-    const IconBorderMobileWidth = `${socialIconBorderMobile.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderMobile.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderMobile.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderMobile.left}${socialIconBorderUnits[DeviceType]}`;
+    /** End Icon border */
+    const IconBorderDesktopWidth = `${socialIconBorderDesktop.top}${socialIconBorderUnits.Desktop} ${socialIconBorderDesktop.right}${socialIconBorderUnits.Desktop} ${socialIconBorderDesktop.bottom}${socialIconBorderUnits.Desktop} ${socialIconBorderDesktop.left}${socialIconBorderUnits.Desktop}`;
+    const IconBorderTabletWidth = `${socialIconBorderTablet.top}${socialIconBorderUnits.Tablet} ${socialIconBorderTablet.right}${socialIconBorderUnits.Tablet} ${socialIconBorderTablet.bottom}${socialIconBorderUnits.Tablet} ${socialIconBorderTablet.left}${socialIconBorderUnits.Tablet}`;
+    const IconBorderMobileWidth = `${socialIconBorderMobile.top}${socialIconBorderUnits.Mobile} ${socialIconBorderMobile.right}${socialIconBorderUnits.Mobile} ${socialIconBorderMobile.bottom}${socialIconBorderUnits.Mobile} ${socialIconBorderMobile.left}${socialIconBorderUnits.Mobile}`;
     /** End Border */
 
 
@@ -383,9 +383,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** end Global border */
 
-    const IconBorderRadiusDesktopWidth = `${socialIconBorderRadiusDesktop.top}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusDesktop.right}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusDesktop.bottom}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusDesktop.left}${socialIconBorderRadiusUnits[DeviceType]}`;
-    const IconBorderRadiusTabletWidth = `${socialIconBorderRadiusTablet.top}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusTablet.right}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusTablet.bottom}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusTablet.left}${socialIconBorderRadiusUnits[DeviceType]}`;
-    const IconBorderRadiusMobileWidth = `${socialIconBorderRadiusMobile.top}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusMobile.right}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusMobile.bottom}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusMobile.left}${socialIconBorderRadiusUnits[DeviceType]}`;
+    /** End Icon Border Radius */
+    const IconBorderRadiusDesktopWidth = `${socialIconBorderRadiusDesktop.top}${socialIconBorderRadiusUnits.Desktop} ${socialIconBorderRadiusDesktop.right}${socialIconBorderRadiusUnits.Desktop} ${socialIconBorderRadiusDesktop.bottom}${socialIconBorderRadiusUnits.Desktop} ${socialIconBorderRadiusDesktop.left}${socialIconBorderRadiusUnits.Desktop}`;
+    const IconBorderRadiusTabletWidth = `${socialIconBorderRadiusTablet.top}${socialIconBorderRadiusUnits.Tablet} ${socialIconBorderRadiusTablet.right}${socialIconBorderRadiusUnits.Tablet} ${socialIconBorderRadiusTablet.bottom}${socialIconBorderRadiusUnits.Tablet} ${socialIconBorderRadiusTablet.left}${socialIconBorderRadiusUnits.Tablet}`;
+    const IconBorderRadiusMobileWidth = `${socialIconBorderRadiusMobile.top}${socialIconBorderRadiusUnits.Mobile} ${socialIconBorderRadiusMobile.right}${socialIconBorderRadiusUnits.Mobile} ${socialIconBorderRadiusMobile.bottom}${socialIconBorderRadiusUnits.Mobile} ${socialIconBorderRadiusMobile.left}${socialIconBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
 
 
@@ -457,10 +458,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    /** Default padding for desktop (using desktop_padding) */
-    const IconPaddingDesktop    = `${socialIconPaddingDesktop.top}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingDesktop.right}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingDesktop.bottom}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingDesktop.left}${socialIconPaddingUnits[DeviceType]}`;
-    const IconPaddingTablet        = `${socialIconPaddingTablet.top}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingTablet.right}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingTablet.bottom}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingTablet.left}${socialIconPaddingUnits[DeviceType]}`;
-    const IconPaddingMobile     = `${socialIconPaddingMobile.top}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingMobile.right}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingMobile.bottom}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingMobile.left}${socialIconPaddingUnits[DeviceType]}`;
+    const IconPaddingDesktop = `${socialIconPaddingDesktop.top}${socialIconPaddingUnits.Desktop} ${socialIconPaddingDesktop.right}${socialIconPaddingUnits.Desktop} ${socialIconPaddingDesktop.bottom}${socialIconPaddingUnits.Desktop} ${socialIconPaddingDesktop.left}${socialIconPaddingUnits.Desktop}`;
+    const IconPaddingTablet = `${socialIconPaddingTablet.top}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.right}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.bottom}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.left}${socialIconPaddingUnits.Tablet}`;
+    const IconPaddingMobile = `${socialIconPaddingMobile.top}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.right}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.bottom}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.left}${socialIconPaddingUnits.Mobile}`;
     /** End Padding */
 
     /** Start Global padding */
@@ -534,10 +534,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** end Global padding */
 
 
-    /** Default padding for desktop (using desktop_padding) */
-    const DesktopPadding    = `${socialPaddingDesktop.top}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.right}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.left}${socialPaddingUnits[DeviceType]}`;
-    const TabletPadding = `${socialPaddingTablet.top}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.right}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.left}${socialPaddingUnits[DeviceType]}`;
-    const MobilePadding = `${socialPaddingMobile.top}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.right}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.left}${socialPaddingUnits[DeviceType]}`;
+    const DesktopPadding = `${socialPaddingDesktop.top}${socialPaddingUnits.Desktop} ${socialPaddingDesktop.right}${socialPaddingUnits.Desktop} ${socialPaddingDesktop.bottom}${socialPaddingUnits.Desktop} ${socialPaddingDesktop.left}${socialPaddingUnits.Desktop}`;
+    const TabletPadding = `${socialPaddingTablet.top}${socialPaddingUnits.Tablet} ${socialPaddingTablet.right}${socialPaddingUnits.Tablet} ${socialPaddingTablet.bottom}${socialPaddingUnits.Tablet} ${socialPaddingTablet.left}${socialPaddingUnits.Tablet}`;
+    const MobilePadding = `${socialPaddingMobile.top}${socialPaddingUnits.Mobile} ${socialPaddingMobile.right}${socialPaddingUnits.Mobile} ${socialPaddingMobile.bottom}${socialPaddingUnits.Mobile} ${socialPaddingMobile.left}${socialPaddingUnits.Mobile}`;
     /** End Padding */
 
     /** Start Global margin */
@@ -581,7 +580,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( DeviceType ) {
                 case 'Desktop':
-                    setAttributes( {socialMarginDesktop: {...socialMargingDesktop, [position]: value}} );
+                    setAttributes( {socialMarginDesktop: {...socialMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
                     setAttributes( {socialMarginTablet: {...socialMarginTablet, [position]: value}} );
@@ -610,9 +609,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** end Global margin */
 
-    const DesktopMargin = `${socialMarginDesktop.top}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.right}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.bottom}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.left}${socialMarginUnits[DeviceType]}`;
-    const TabletMargin = `${socialMarginTablet.top}${socialMarginUnits[DeviceType]} ${socialMarginTablet.right}${socialMarginUnits[DeviceType]} ${socialMarginTablet.bottom}${socialMarginUnits[DeviceType]} ${socialMarginTablet.left}${socialMarginUnits[DeviceType]}`;
-    const MobileMargin = `${socialMarginMobile.top}${socialMarginUnits[DeviceType]} ${socialMarginMobile.right}${socialMarginUnits[DeviceType]} ${socialMarginMobile.bottom}${socialMarginUnits[DeviceType]} ${socialMarginMobile.left}${socialMarginUnits[DeviceType]}`;
+    const DesktopMargin = `${socialMarginDesktop.top}${socialMarginUnits.Desktop} ${socialMarginDesktop.right}${socialMarginUnits.Desktop} ${socialMarginDesktop.bottom}${socialMarginUnits.Desktop} ${socialMarginDesktop.left}${socialMarginUnits.Desktop}`;
+    const TabletMargin = `${socialMarginTablet.top}${socialMarginUnits.Tablet} ${socialMarginTablet.right}${socialMarginUnits.Tablet} ${socialMarginTablet.bottom}${socialMarginUnits.Tablet} ${socialMarginTablet.left}${socialMarginUnits.Tablet}`;
+    const MobileMargin = `${socialMarginMobile.top}${socialMarginUnits.Mobile} ${socialMarginMobile.right}${socialMarginUnits.Mobile} ${socialMarginMobile.bottom}${socialMarginUnits.Mobile} ${socialMarginMobile.left}${socialMarginUnits.Mobile}`;
     /** End Margin */
 
 
@@ -685,9 +684,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         })
     }
     /** end Global border */
-    const BorderDesktopWidth = `${socialBorderDesktop.top}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.right}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.bottom}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.left}${socialBorderUnits[DeviceType]}`;
-    const BorderTabletWidth = `${socialBorderTablet.top}${socialBorderUnits[DeviceType]} ${socialBorderTablet.right}${socialBorderUnits[DeviceType]} ${socialBorderTablet.bottom}${socialBorderUnits[DeviceType]} ${socialBorderTablet.left}${socialBorderUnits[DeviceType]}`;
-    const BorderMobileWidth = `${socialBorderMobile.top}${socialBorderUnits[DeviceType]} ${socialBorderMobile.right}${socialBorderUnits[DeviceType]} ${socialBorderMobile.bottom}${socialBorderUnits[DeviceType]} ${socialBorderMobile.left}${socialBorderUnits[DeviceType]}`;
+    const BorderDesktopWidth = `${socialBorderDesktop.top}${socialBorderUnits.Desktop} ${socialBorderDesktop.right}${socialBorderUnits.Desktop} ${socialBorderDesktop.bottom}${socialBorderUnits.Desktop} ${socialBorderDesktop.left}${socialBorderUnits.Desktop}`;
+    const BorderTabletWidth = `${socialBorderTablet.top}${socialBorderUnits.Tablet} ${socialBorderTablet.right}${socialBorderUnits.Tablet} ${socialBorderTablet.bottom}${socialBorderUnits.Tablet} ${socialBorderTablet.left}${socialBorderUnits.Tablet}`;
+    const BorderMobileWidth = `${socialBorderMobile.top}${socialBorderUnits.Mobile} ${socialBorderMobile.right}${socialBorderUnits.Mobile} ${socialBorderMobile.bottom}${socialBorderUnits.Mobile} ${socialBorderMobile.left}${socialBorderUnits.Mobile}`;
     /** End Border */
 
 
@@ -761,9 +760,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** end Global border */
 
-    const BorderRadiusDesktopWidth = `${socialBorderRadiusDesktop.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.left}${socialBorderRadiusUnits[DeviceType]}`;
-    const BorderRadiusTabletWidth = `${socialBorderRadiusTablet.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.left}${socialBorderRadiusUnits[DeviceType]}`;
-    const BorderRadiusMobileWidth = `${socialBorderRadiusMobile.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.left}${socialBorderRadiusUnits[DeviceType]}`;
+    const BorderRadiusDesktopWidth = `${socialBorderRadiusDesktop.top}${socialBorderRadiusUnits.Desktop} ${socialBorderRadiusDesktop.right}${socialBorderRadiusUnits.Desktop} ${socialBorderRadiusDesktop.bottom}${socialBorderRadiusUnits.Desktop} ${socialBorderRadiusDesktop.left}${socialBorderRadiusUnits.Desktop}`;
+    const BorderRadiusTabletWidth = `${socialBorderRadiusTablet.top}${socialBorderRadiusUnits.Tablet} ${socialBorderRadiusTablet.right}${socialBorderRadiusUnits.Tablet} ${socialBorderRadiusTablet.bottom}${socialBorderRadiusUnits.Tablet} ${socialBorderRadiusTablet.left}${socialBorderRadiusUnits.Tablet}`;
+    const BorderRadiusMobileWidth = `${socialBorderRadiusMobile.top}${socialBorderRadiusUnits.Mobile} ${socialBorderRadiusMobile.right}${socialBorderRadiusUnits.Mobile} ${socialBorderRadiusMobile.bottom}${socialBorderRadiusUnits.Mobile} ${socialBorderRadiusMobile.left}${socialBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
 
     
