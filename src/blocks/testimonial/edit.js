@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { 
+import {
     useBlockProps,
     RichText,
     BlockControls,
@@ -7,7 +7,7 @@ import {
     MediaUploadCheck,
     MediaPlaceholder,
 } from '@wordpress/block-editor';
-import { 
+import {
     Toolbar,
     ToolbarGroup,
     ToolbarButton
@@ -19,7 +19,7 @@ import { useEffect } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockID,
         TestimonialImageUrl,
         TestimonialImageAlt,
@@ -53,6 +53,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return icons;
     };
 
+	console.log(FrontisBlocksData)
+
     return (
         <>
             <Inspector
@@ -73,7 +75,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             icon="trash"
                         />
                         <MediaUploadCheck>
-                            <MediaUpload 
+                            <MediaUpload
                                 onSelect={(media) => setAttributes({
                                     TestimonialImageID: media.id,
                                     TestimonialImageUrl: media.url,
@@ -92,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </ToolbarGroup>
                 )}
             </BlockControls>
-            
+
             <div {...blockProps}>
                 <div className={`fb-testimonial-section fb-testimonia-section-${TestimonialAlignment}`}>
                     <div className="fb-testimonial-wrapper">

@@ -103,6 +103,7 @@ function Edit(props) {
   var rangeUnitHandler = function rangeUnitHandler(unit) {
     setAttributes(rangeUnit[DeviceType] = unit);
   };
+  console.log(FrontisBlocksData);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'text-domain')
   }, /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
