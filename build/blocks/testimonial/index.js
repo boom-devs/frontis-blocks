@@ -3871,6 +3871,7 @@ function Edit(_ref) {
     }
     return icons;
   };
+  console.log(FrontisBlocksData);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,

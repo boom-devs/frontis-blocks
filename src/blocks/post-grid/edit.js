@@ -88,6 +88,9 @@ export default function Edit (props) {
 		setAttributes(rangeUnit[DeviceType] = unit);
 	}
 
+
+	console.log(FrontisBlocksData)
+
 	return (
 		<>
 			<InspectorControls>

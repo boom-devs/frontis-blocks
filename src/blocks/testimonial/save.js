@@ -2,7 +2,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
-    const { 
+    const {
         blockID,
         TestimonialImageWidthDesktop,
         TestimonialImageWidthTablet,
@@ -151,7 +151,7 @@ export default function save({ attributes }) {
     const ImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.left}${TestimonialImageRadiusUnits}`;
     const ImageTabBorderRadiusWidth     = `${TestimonialImagelTabRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.left}${TestimonialImageRadiusUnits}`;
     const ImageMobileBorderRadiusWidth  = `${TestimonialImageMobileRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.left}${TestimonialImageRadiusUnits}`;
-    /** End Border Radius Width */ 
+    /** End Border Radius Width */
 
     /** Default padding for desktop (using desktop_padding) */
     const DesktopPadding = `${TestimonialDesktopPadding.top}${TestimonialPaddingUnits} ${TestimonialDesktopPadding.right}${TestimonialPaddingUnits} ${TestimonialDesktopPadding.bottom}${TestimonialPaddingUnits} ${TestimonialDesktopPadding.left}${TestimonialPaddingUnits}`;
@@ -175,12 +175,12 @@ export default function save({ attributes }) {
     const DesktopBorderRadiusWidth = `${TestimonialDesktopBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
     const TabBorderRadiusWidth = `${TestimonialTabBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
     const MobileBorderRadiusWidth = `${TestimonialMobileBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
-    /** End Border Radius Width */ 
+    /** End Border Radius Width */
 
     return (
-        <>
-            <style>
-                {`
+		<>
+			<style>
+				{`
                     .fb-testimonial-main-wrapper.${blockID} {
                         z-index: ${TestimonialZIndex !== undefined ? TestimonialZIndex : ''} !important;
                     }
@@ -339,57 +339,59 @@ export default function save({ attributes }) {
                         }
                     }
                 `}
-            </style>
-            <div {...blockProps}>
-                <div className={`fb-testimonial-section fb-testimonia-section-${TestimonialAlignment}`}>
-                    <div className="fb-testimonial-wrapper">
-                        <div className="fb-testimonial-inner-wrapper">
-                            <div className='fb-testimonial-container'>
-                                <div className="fb-testimonial-image-wrapper">
-                                    <div className="fb-testimonial-image-inner-wrapper">
-                                        <div className="fb-testimonial-image">
-                                            {TestimonialImageUrl && (
-                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="fb-testimonial-description-container">
-                                    {TestimonialQuoteIconAlign === 'icon' && (
-                                        <div className="fb-testimonial-quote-icon">
-                                            {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
-                                        </div>
-                                    )}
-                                    <div className="fb-testimonial-userinfo-container">
-                                        <RichText.Content
-                                            tagName="p"
-                                            value={TestimonialDesc}
-                                            className="fb-user-desc"
-                                        />
-                                    </div>
-                                    <div className="fb-testimonial-userinfo-container">
-                                        <RichText.Content
-                                            tagName="div"
-                                            value={TestimonialAuthor}
-                                            className="fb-user"
-                                        />
-                                        <RichText.Content
-                                            tagName="span"
-                                            value={TestimonialDesignation}
-                                            className="fb-user-designation"
-                                        />
-                                        {TestimonialRatinIconAlign === 'icon' && (
-                                            <div className="fb-testimonial-rating">
-                                                {renderRatingIcons()}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+			</style>
+			<div {...blockProps}>
+				<div className={`fb-testimonial-section fb-testimonia-section-${TestimonialAlignment}`}>
+					<div className="fb-testimonial-wrapper">
+						<div className="fb-testimonial-inner-wrapper">
+							<div className='fb-testimonial-container'>
+								<div className="fb-testimonial-image-wrapper">
+									<div className="fb-testimonial-image-inner-wrapper">
+										<div className="fb-testimonial-image">
+											{TestimonialImageUrl && (
+												<img src={TestimonialImageUrl} alt={TestimonialImageAlt}/>
+											)}
+										</div>
+									</div>
+								</div>
+								<div className="fb-testimonial-description-container">
+									{TestimonialQuoteIconAlign === 'icon' && (
+										<div className="fb-testimonial-quote-icon">
+											{TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+										</div>
+									)}
+									<div className="fb-testimonial-userinfo-container">
+										<RichText.Content
+											tagName="p"
+											value={TestimonialDesc}
+											className="fb-user-desc"
+										/>
+									</div>
+									<div className="fb-testimonial-userinfo-container">
+										<RichText.Content
+											tagName="div"
+											value={TestimonialAuthor}
+											className="fb-user"
+										/>
+										<RichText.Content
+											tagName="span"
+											value={TestimonialDesignation}
+											className="fb-user-designation"
+										/>
+										{TestimonialRatinIconAlign === 'icon' && (
+											<div className="fb-testimonial-rating">
+												{renderRatingIcons()}
+											</div>
+										)}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</>
+	);
 }
