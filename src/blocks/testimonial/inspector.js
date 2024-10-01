@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useState, useEffect } from '@wordpress/element';
 
-import { 
+import {
     SelectControl,
     PanelBody,
     TabPanel,
@@ -36,7 +36,7 @@ import FBIconPicker from "../../components/icon-picker";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockID,
         DeviceType,
         TestimonialAlignment,
@@ -278,7 +278,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const ImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.left}${TestimonialImageRadiusUnits}`;
     const ImageTabBorderRadiusWidth     = `${TestimonialImagelTabRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.left}${TestimonialImageRadiusUnits}`;
     const ImageMobileBorderRadiusWidth  = `${TestimonialImageMobileRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.left}${TestimonialImageRadiusUnits}`;
-    /** End Border Radius Width */ 
+    /** End Border Radius Width */
 
     /** Start Padding */
     const [previousPadding, setPreviousPadding] = useState(TestimonialDesktopPadding);
@@ -607,7 +607,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const DesktopBorderRadiusWidth = `${TestimonialDesktopBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
     const TabBorderRadiusWidth = `${TestimonialTabBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
     const MobileBorderRadiusWidth = `${TestimonialMobileBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
-    /** End Border Radius Width */     
+    /** End Border Radius Width */
 
     return (
         <>
@@ -862,7 +862,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             ))}
                                                         </ButtonGroup>
                                                         {TestimonialQuoteIconAlign === 'icon' && (
-                                                            <FBIconPicker value={TestimonialQuoteIcon} setIconHandler={quoteIconHandler} /> 
+                                                            <FBIconPicker value={TestimonialQuoteIcon} setIconHandler={quoteIconHandler} />
                                                         )}
                                                     </BaseControl>
                                                 </div>
@@ -887,7 +887,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             ))}
                                                         </ButtonGroup>
                                                         {TestimonialRatinIconAlign === 'icon' && (
-                                                            <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
+                                                            <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} />
                                                         )}
                                                     </BaseControl>
                                                 </div>
@@ -1022,7 +1022,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             >
                                                             </span>
                                                         </div>
-                                                    </div>                          
+                                                    </div>
                                                 </div>
                                             </div>
                                         </PanelBody>
@@ -1091,7 +1091,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
 
                                             {TestimonialQuoteIconColorSwitcher === 'normal' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Nomal Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1140,7 +1140,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             {TestimonialQuoteIconColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1195,7 +1195,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             className="fb-setting-testimonial-description-wrapper"
                                         >
 
-                                            <BaseControl 
+                                            <BaseControl
                                                 label={__("Typography", "frontis-blocks")}
                                                 className="fb-setting-typography"
                                             >
@@ -1429,7 +1429,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
 
                                             {TestimonialDescColorSwitcher === 'normal' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Nomal Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1479,7 +1479,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             {TestimonialDescColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1534,7 +1534,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             className="fb-setting-testimonial-author-wrapper"
                                         >
 
-                                            <BaseControl 
+                                            <BaseControl
                                                 label={__("Typography", "frontis-blocks")}
                                                 className="fb-setting-typography"
                                             >
@@ -1768,7 +1768,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
 
                                             {TestimonialAuthorColorSwitcher === 'normal' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Nomal Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1818,7 +1818,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             {TestimonialAuthorColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -1873,7 +1873,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             className="fb-setting-testimonial-designation-wrapper"
                                         >
 
-                                            <BaseControl 
+                                            <BaseControl
                                                 label={__("Typography", "frontis-blocks")}
                                                 className="fb-setting-typography"
                                             >
@@ -2107,7 +2107,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
 
                                             {TestimonialDesignationColorSwitcher === 'normal' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Nomal Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -2157,7 +2157,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             {TestimonialDesignationColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -2271,7 +2271,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
 
                                             {TestimonialRatingIconColorSwitcher === 'normal' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Nomal Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -2320,7 +2320,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             {TestimonialRatingIconColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <BaseControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     className="fb-setting-color-setting-wrapper"
                                                 >
@@ -2462,7 +2462,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 >
                                                                 </span>
                                                             </div>
-                                                        </div>                          
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="fb-setting-spacing-container">
@@ -2533,9 +2533,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 >
                                                                 </span>
                                                             </div>
-                                                        </div>                          
+                                                        </div>
                                                     </div>
-                                                </div>                                       
+                                                </div>
                                             </PanelBody>
                                             <PanelBody title="Background Color" initialOpen={false} >
                                                 <BaseControl
@@ -2555,7 +2555,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </BaseControl>
 
                                                 {TestimonialBgColorSwitcher === 'normal' && (
-                                                    <BaseControl 
+                                                    <BaseControl
                                                         label={__("Nomal Color", "frontis-blocks")}
                                                         className="fb-setting-color-setting-wrapper"
                                                     >
@@ -2604,7 +2604,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
 
                                                 {TestimonialBgColorSwitcher === 'hover' && (
-                                                    <BaseControl 
+                                                    <BaseControl
                                                         label={__("Hover Color", "frontis-blocks")}
                                                         className="fb-setting-color-setting-wrapper"
                                                     >
@@ -2683,7 +2683,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </BaseControl>
 
                                                 {TestimonialBorderColorSwitcher === 'normal' && (
-                                                    <BaseControl 
+                                                    <BaseControl
                                                         label={__("Nomal Color", "frontis-blocks")}
                                                         className="fb-setting-color-setting-wrapper"
                                                     >
@@ -2733,7 +2733,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
 
                                                 {TestimonialBorderColorSwitcher === 'hover' && (
-                                                    <BaseControl 
+                                                    <BaseControl
                                                         label={__("Hover Color", "frontis-blocks")}
                                                         className="fb-setting-color-setting-wrapper"
                                                     >
@@ -2851,7 +2851,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 >
                                                                 </span>
                                                             </div>
-                                                        </div>                          
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="fb-setting-spacing-container">
@@ -2922,7 +2922,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 >
                                                                 </span>
                                                             </div>
-                                                        </div>                          
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </PanelBody>
@@ -2961,6 +2961,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </TabPanel>
                 </div>
             </InspectorControls>
-        </>   
+        </>
     );
 }
