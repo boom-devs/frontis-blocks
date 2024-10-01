@@ -1,16 +1,20 @@
 import { __ } from '@wordpress/i18n';
 import { useDispatch } from '@wordpress/data';
 import { Button, Placeholder } from '@wordpress/components';
-import { variations } from './variations';
+import { createBlock } from '@wordpress/blocks';
+import variations from './variations';
 
 export const VariationPicker = ({ clientId, setAttributes }) => {
   const { replaceInnerBlocks } = useDispatch('core/block-editor');
 
   const selectVariation = (variation) => {
-    setAttributes(variation.attributes);
-    if (variation.innerBlocks) {
-      replaceInnerBlocks(clientId, variation.innerBlocks);
-    }
+    setAttributes({ layout: variation.attributes.layout });
+    
+    const newInnerBlocks = variation.innerBlocks.map(([name, attributes]) => 
+      createBlock(name, { ...attributes, placeholder: undefined })
+    );
+    
+    replaceInnerBlocks(clientId, newInnerBlocks, false);
   };
 
   return (
@@ -25,8 +29,10 @@ export const VariationPicker = ({ clientId, setAttributes }) => {
             key={variation.name}
             icon={variation.icon}
             onClick={() => selectVariation(variation)}
-            label={variation.title}
-          />
+            variant="secondary"
+          >
+            {variation.title}
+          </Button>
         ))}
       </div>
     </Placeholder>

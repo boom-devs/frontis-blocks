@@ -1,84 +1,44 @@
 .fb-container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+	display: flex;
+	flex-wrap: wrap;
 
-    .fb-inner-blocks-placeholder {
-        min-height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f0f0f0;
-        border: 1px dashed #ccc;
-        
-        .fb-placeholder {
-          text-align: center;
-          color: #888;
-          
-          .components-icon {
-            margin-bottom: 8px;
-          }
-        }
-    }
-    .fb-column-25 {
-        flex-basis: 25%;
-    }
+	&.fb-container-two-columns .fb-column {
+		width: 50%;
+	}
+	&.fb-container-three-columns .fb-column {
+		width: 33.33%;
+	}
+	&.fb-container-four-columns .fb-column {
+		width: 25%;
+	}
+	&.fb-container-two-rows-two-columns .fb-column {
+		width: 50%;
+	}
+	&.fb-container-three-columns-wide-center {
+		.fb-column-25 {
+			width: 25%;
+		}
+		.fb-column-50 {
+			width: 50%;
+		}
+	}
+	&.fb-container-two-thirds-one-third,
+	&.fb-container-one-third-two-thirds {
+		.fb-column-33 {
+			width: 33.33%;
+		}
+		.fb-column-66 {
+			width: 66.67%;
+		}
+	}
+	&.fb-container-two-rows-three-columns .fb-column {
+		width: 33.33%;
+	}
 
-    .fb-column-33 {
-        flex-basis: 33.333%;
-    }
-
-    .fb-column-50 {
-        flex-basis: 50%;
-    }
-
-    .fb-column-66 {
-        flex-basis: 66.666%;
-    }
-
-
-    &.fb-container-full-width {
-      max-width: 100%;
-    }
-    
-    &.fb-container-two-columns,
-    &.fb-container-three-columns,
-    &.fb-container-four-columns,
-    &.fb-container-two-rows-two-columns,
-    &.fb-container-three-columns-wide-center,
-    &.fb-container-two-thirds-one-third,
-    &.fb-container-one-third-two-thirds,
-    &.fb-container-two-rows-three-columns {
-      display: grid;
-      gap: 20px;
-    }
-
-    
-  
-    // Responsive adjustments
-    @media (max-width: 768px) {
-      &.fb-container-two-columns,
-      &.fb-container-three-columns,
-      &.fb-container-four-columns,
-      &.fb-container-two-rows-two-columns,
-      &.fb-container-three-columns-wide-center,
-      &.fb-container-two-thirds-one-third,
-      &.fb-container-one-third-two-thirds,
-      &.fb-container-two-rows-three-columns {
-        grid-template-columns: 1fr !important;
-      }
-    }
-  }
-  
-  // Special layouts
-  .fb-container-three-columns-wide-center {
-    grid-template-columns: 1fr 2fr 1fr !important;
-  }
-  
-  .fb-container-two-thirds-one-third {
-    grid-template-columns: 2fr 1fr !important;
-  }
-  
-  .fb-container-one-third-two-thirds {
-    grid-template-columns: 1fr 2fr !important;
-  }
+	// Responsive adjustments
+	@media (max-width: 768px) {
+		.fb-column {
+			width: 100% !important;
+		}
+	}
+}
