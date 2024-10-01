@@ -1,4 +1,3 @@
-// File: variations.js
 import { __ } from '@wordpress/i18n';
 import icons from './icons';
 
@@ -9,9 +8,10 @@ export const variations = [
     icon: icons.fullWidth,
     attributes: { layout: 'full-width' },
     innerBlocks: [
-      ['frontis-blocks/container', { placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, placeholder: true }]
     ],
     scope: ['block'],
+    isDefault: true,
   },
   {
     name: 'two-columns',
@@ -19,8 +19,8 @@ export const variations = [
     icon: icons.twoColumns,
     attributes: { layout: 'two-columns' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }]
     ],
     scope: ['block'],
   },
@@ -30,9 +30,9 @@ export const variations = [
     icon: icons.threeColumns,
     attributes: { layout: 'three-columns' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }]
     ],
     scope: ['block'],
   },
@@ -42,10 +42,10 @@ export const variations = [
     icon: icons.fourColumns,
     attributes: { layout: 'four-columns' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }]
     ],
     scope: ['block'],
   },
@@ -55,10 +55,10 @@ export const variations = [
     icon: icons.twoRowsTwoColumns,
     attributes: { layout: 'two-rows-two-columns' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }]
     ],
     scope: ['block'],
   },
@@ -68,9 +68,9 @@ export const variations = [
     icon: icons.threeColumnsWideCenter,
     attributes: { layout: 'three-columns-wide-center' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column fb-column-25', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column fb-column-50', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column fb-column-25', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column fb-column-25', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column fb-column-50', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column fb-column-25', placeholder: true }]
     ],
     scope: ['block'],
   },
@@ -80,8 +80,8 @@ export const variations = [
     icon: icons.twoThirdsOneThird,
     attributes: { layout: 'two-thirds-one-third' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column fb-column-66', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column fb-column-33', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column fb-column-66', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column fb-column-33', placeholder: true }]
     ],
     scope: ['block'],
   },
@@ -91,8 +91,8 @@ export const variations = [
     icon: icons.oneThirdTwoThirds,
     attributes: { layout: 'one-third-two-thirds' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column fb-column-33', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column fb-column-66', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column fb-column-33', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column fb-column-66', placeholder: true }]
     ],
     scope: ['block'],
   },
@@ -102,12 +102,12 @@ export const variations = [
     icon: icons.twoRowsThreeColumns,
     attributes: { layout: 'two-rows-three-columns' },
     innerBlocks: [
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }],
-      ['frontis-blocks/container', { className: 'fb-column', placeholder: true }]
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }],
+      ['frontis-blocks/container', { isChildBlock: true, className: 'fb-column', placeholder: true }]
     ],
     scope: ['block'],
   },

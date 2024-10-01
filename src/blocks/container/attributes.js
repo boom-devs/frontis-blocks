@@ -33,7 +33,15 @@ const attributes = {
 	layoutType: {
 		type: "string",
 		default: "flex",
-	},
+    },
+    isChildBlock: {
+        type: 'boolean',
+        default: false,
+      },
+      placeholder: {
+        type: 'boolean',
+        default: false,
+      },
 	// Flex attributes
 	flexDirection: {
 		type: "string",
