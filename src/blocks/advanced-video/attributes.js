@@ -33,6 +33,118 @@ const attributes = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+    videoBorder: {
+        type: 'string',
+        default: "none",
+    },
+    videoBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    videoBorderColor: {
+        type: 'string',
+    },
+    videoBorderHoverColor: {
+        type: 'string',
+    },
+    videoBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    videoBorderDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    videoBorderTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    videoBorderMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    videoBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    videoBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    videoBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+    },
+    videoBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+    },
+    videoBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+        },
+    },
+    videoBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+
+
+
+
+
+
+
+
     videoGlobalPaddingUnits: {
 		type: 'object',
 		default: {
@@ -121,6 +233,8 @@ const attributes = {
     videoGlobalBgHoverColor: {
         type: 'string',
     },
+
+
     videoGlobalBorder: {
         type: 'string',
         default: "none",
