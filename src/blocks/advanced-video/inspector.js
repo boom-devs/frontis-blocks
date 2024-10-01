@@ -45,6 +45,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loopSwitcher,
         showControlsSwitcher,
 
+        videoBorder,
+        videoBorderColorSwitcher,
+        videoBorderColor,
+        videoBorderHoverColor,
+
+        videoBorderUnits,
+        videoBorderDesktop,
+        videoBorderTablet,
+        videoBorderMobile,
+        videoBorderLink,
+
+        videoBorderRadiusUnits,
+        videoBorderRadiusDesktop,
+        videoBorderRadiusTablet,
+        videoBorderRadiusMobile,
+        videoBorderRadiusLink,
+
+
+
+
+
         videoGlobalPaddingUnits,
         videoGlobalPaddingDesktop,
         videoGlobalPaddingTablet,
@@ -90,6 +111,171 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 
+
+
+    /** Start border */
+    const handleIframeBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( videoBorderLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        videoBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        videoBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        videoBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {videoBorderDesktop: {...videoBorderDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {videoBorderTablet: {...videoBorderTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {videoBorderMobile: {...videoBorderMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleIframeBorderCombineBtn = () => {
+        setAttributes( {videoBorderLink: !videoBorderLink} );
+    }
+
+    const handleIframeBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            videoBorderUnits: {
+                ...videoBorderUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+    /** End Global border */
+    const IframeBorderDesktopWidth = `${videoBorderDesktop.top}${videoBorderUnits.Desktop} ${videoBorderDesktop.right}${videoBorderUnits.Desktop} ${videoBorderDesktop.bottom}${videoBorderUnits.Desktop} ${videoBorderDesktop.left}${videoBorderUnits.Desktop}`;
+    const IframeBorderTabletWidth = `${videoBorderTablet.top}${videoBorderUnits.Tablet} ${videoBorderTablet.right}${videoBorderUnits.Tablet} ${videoBorderTablet.bottom}${videoBorderUnits.Tablet} ${videoBorderTablet.left}${videoBorderUnits.Tablet}`;
+    const IframeBorderMobileWidth = `${videoBorderMobile.top}${videoBorderUnits.Mobile} ${videoBorderMobile.right}${videoBorderUnits.Mobile} ${videoBorderMobile.bottom}${videoBorderUnits.Mobile} ${videoBorderMobile.left}${videoBorderUnits.Mobile}`;
+    /** End Border */
+
+
+    /** Start Global border radius*/
+    const handleIframeBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( videoBorderRadiusLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        videoBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        videoBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        videoBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {videoBorderRadiusDesktop: {...videoBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {videoBorderRadiusTablet: {...videoBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {videoBorderRadiusMobile: {...videoBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleIframeBorderRadiusCombineBtn = () => {
+        setAttributes( {videoBorderRadiusLink: !videoBorderRadiusLink} );
+    }
+
+    const handleIframeBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            videoBorderRadiusUnits: {
+                ...videoBorderRadiusUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+    /** end Global border */
+
+    /** End Global Border Radius */
+    const IframeBorderRadiusDesktopWidth = `${videoBorderRadiusDesktop.top}${videoBorderRadiusUnits.Desktop} ${videoBorderRadiusDesktop.right}${videoBorderRadiusUnits.Desktop} ${videoBorderRadiusDesktop.bottom}${videoBorderRadiusUnits.Desktop} ${videoBorderRadiusDesktop.left}${videoBorderRadiusUnits.Desktop}`;
+    const IframeBorderRadiusTabletWidth = `${videoBorderRadiusTablet.top}${videoBorderRadiusUnits.Tablet} ${videoBorderRadiusTablet.right}${videoBorderRadiusUnits.Tablet} ${videoBorderRadiusTablet.bottom}${videoBorderRadiusUnits.Tablet} ${videoBorderRadiusTablet.left}${videoBorderRadiusUnits.Tablet}`;
+    const IframeBorderRadiusMobileWidth = `${videoBorderRadiusMobile.top}${videoBorderRadiusUnits.Mobile} ${videoBorderRadiusMobile.right}${videoBorderRadiusUnits.Mobile} ${videoBorderRadiusMobile.bottom}${videoBorderRadiusUnits.Mobile} ${videoBorderRadiusMobile.left}${videoBorderRadiusUnits.Mobile}`;
+    /** End Border Radius */
+
+
+    /** Start Global Border Color */
+    const handleBorderColorSwitcherChange = (value) => {
+        setAttributes({ videoBorderColorSwitcher: value });
+    };
+    const handleBorderColorChange = (value) => {
+        setAttributes({ videoBorderColor: value });
+    };
+    const handleBorderHoverColorChange = (value) => {
+        setAttributes({ videoBorderHoverColor: value });
+    };
+    /** End Global Border Color */
 
     /** Start Global padding */
     const handleSocialPaddingUnitChange = ( event, position ) => {
@@ -446,6 +632,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
                 }
 
+                .fb-react-player iframe {
+                    border: ${videoBorder};
+                    border-width: ${IframeBorderDesktopWidth};
+                    border-radius: ${IframeBorderRadiusDesktopWidth} !important;
+                    ${videoBorderColor !== undefined ? `border-color: ${videoBorderColor};` : ''};
+                    transition: all .3s ease-in-out;
+                }
+
                 @media only screen and (max-width: 1024px) {
 
                     .fb-advanced-video-wrapper {
@@ -453,6 +647,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         margin: ${TabletMargin};
                         border-width: ${BorderTabletWidth};
                         border-radius: ${BorderRadiusTabletWidth} !important;
+                    }
+
+                    .fb-react-player iframe {
+                        border-width: ${IframeBorderTabletWidth};
+                        border-radius: ${IframeBorderRadiusTabletWidth} !important;
                     }
                 }
 
@@ -462,6 +661,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         margin: ${MobileMargin};
                         border-width: ${BorderMobileWidth};
                         border-radius: ${BorderRadiusMobileWidth} !important;
+                    }
+                        
+                    .fb-react-player iframe {
+                        border-width: ${IframeBorderMobileWidth};
+                        border-radius: ${IframeBorderRadiusMobileWidth} !important;
                     }
                 }
 
@@ -537,6 +741,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
 
                                         </PanelBody>
+                                        <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
+
+                                            <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={videoBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ videoBorder: value })}
+                                            />
+
+                                            <FB_Color
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalColorSwitcher={videoBorderColorSwitcher}
+                                                globalColor={videoBorderColor}
+                                                globalHoverColor={videoBorderHoverColor}
+                                                handleColorSwitcherChange={handleBorderColorSwitcherChange}
+                                                handleGlobalColorChange={handleBorderColorChange}
+                                                handleGlobalHoverColorChange={handleBorderHoverColorChange}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Border", "frontis-blocks")}
+                                                DeviceType={DeviceType}
+                                                spacingUnitsHandler={handleIframeBorderUnitsHandler}
+                                                spacingUnits={videoBorderUnits}
+                                                spacingDesktop={videoBorderDesktop}
+                                                spacingTablet={videoBorderTablet}
+                                                spacingMobile={videoBorderMobile}
+                                                handleSpacingUnitHandler={handleIframeBorderUnitChange}
+                                                spacingCombineBtn={videoBorderLink}
+                                                spacingCombineBtnHandler={handleIframeBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Radius Border", "frontis-blocks")}
+                                                DeviceType={DeviceType}
+                                                spacingUnitsHandler={handleIframeBorderRadiusUnitsHandler}
+                                                spacingUnits={videoBorderRadiusUnits}
+                                                spacingDesktop={videoBorderRadiusDesktop}
+                                                spacingTablet={videoBorderRadiusTablet}
+                                                spacingMobile={videoBorderRadiusMobile}
+                                                handleSpacingUnitHandler={handleIframeBorderRadiusUnitChange}
+                                                spacingCombineBtn={videoBorderRadiusLink}
+                                                spacingCombineBtnHandler={handleIframeBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+                                            </PanelBody>
                                     </>
                                 )}
 
