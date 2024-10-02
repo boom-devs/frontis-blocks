@@ -37,6 +37,8 @@ import TeamMemberContentBorderControl from './style-control/content/team-member-
 import TeamMemberContentBorderRadiusControl from './style-control/content/team-member-content-border-radius-control.js';
 import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin-control.js';
 import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding-control.js';
+import TeamMemberImageSizeControl from './style-control/image/team-member-image-size-control.js';
+
 
 //
 import TeamMemberImageBorderControl from './style-control/image/team-member-image-border-control.js';
@@ -685,6 +687,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											/>
 
 											<TeamMemberImageMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+
+											<TeamMemberImageSizeControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}

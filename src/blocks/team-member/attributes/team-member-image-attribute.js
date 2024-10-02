@@ -8,6 +8,51 @@ const teamMemberImageAttribute = {
 		default: ""
 	},
 
+	// Image Width Size
+	teamMemberImageSizeWidthUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberImageSizeWidthDesktop: {
+		type: "number",
+		default: 416
+	},
+	teamMemberImageSizeWidthTab: {
+		type: "number",
+		default: 416
+	},
+	teamMemberImageSizeWidthMobile: {
+		type: "number",
+		default: 416
+	},
+
+	// Image Height Size
+	teamMemberImageSizeHeightUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberImageSizeHeightDesktop: {
+		type: "number",
+		default: 416
+	},
+	teamMemberImageSizeHeightTab: {
+		type: "number",
+		default: 416
+	},
+	teamMemberImageSizeHeightMobile: {
+		type: "number",
+		default: 416
+	},
+
+
 	// margin
 	teamMemberImageMarginUnits : {
 		type: 'object',
