@@ -66,6 +66,8 @@ import {useState, createRef, useEffect} from "@wordpress/element";
 
 import './editor.scss';
 import FBIconPicker from "../../components/icon-picker";
+import FB_ResponsiveControl from "@Components/responsive-control";
+import FB_Range from "@Components/range";
 export default function Inspector({attributes, setAttributes, clientId}) {
 
 	const {
@@ -111,7 +113,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		Heading_Desktop_padding,
 		Heading_Tab_padding,
 		Heading_Mobile_padding,
-		activePaddingDevice,
+		DeviceType,
 		paddingLink,
 
 		Heading_Margin_Units,
@@ -208,7 +210,6 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		infoBoxDesktopMargin,
 		infoBoxTabMargin,
 		infoBoxMobileMargin,
-		infoBoxActiveMarginDevice,
 		infoBoxMarginLink,
 		infoButtonBorderUnits,
 		infoButtonDesktopBorderWidth,
@@ -221,6 +222,11 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		infoButtonBorderColorSwitcher,
 		infoButtonBorderColor,
 		infoButtonHoverBorderColor,
+		boxBgColor,
+		boxBgColorSwitcher,
+		boxBgHoverColor,
+		mediaSize,
+		mediaSizeUnits
 
 	} = attributes;
 
@@ -247,12 +253,19 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		setAttributes({icon: iconName})
 	}
 
+	const mediaSizeHandler = (value) => {
+		setAttributes({ mediaSize: value });
+	};
+
+	const mediaSizeUnitsHandler = (value) => {
+		setAttributes({ mediaSizeUnits: value });
+	};
 	/** Start Padding */
 	const [previousPadding, setPreviousPadding] = useState(Heading_Desktop_padding);
 	/** Function to update all padding values */
 	const updateAllPadding = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					Heading_Desktop_padding: {
 						top: value,
@@ -262,7 +275,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					Heading_Tab_padding: {
 						top: value,
@@ -272,7 +285,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					Heading_Mobile_padding: {
 						top: value,
@@ -290,14 +303,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handlePaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activePaddingDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({Heading_Desktop_padding: {...Heading_Desktop_padding, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({Heading_Tab_padding: {...Heading_Tab_padding, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({Heading_Mobile_padding: {...Heading_Mobile_padding, [direction]: value}});
 				break;
 			default:
@@ -305,7 +318,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllPadding(value, activePaddingDevice);
+			updateAllPadding(value, DeviceType);
 		}
 	};
 
@@ -325,7 +338,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for padding */
 	const handlePaddingDeviceClick = (device) => {
-		setAttributes({activePaddingDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -376,7 +389,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleButtonPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activePaddingDevice) {
+		switch (DeviceType) {
 			case 'desktop':
 				setAttributes({infoButtonDesktopPadding: {...infoButtonDesktopPadding, [direction]: value}});
 				break;
@@ -391,7 +404,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateButtonPadding(value, activePaddingDevice);
+			updateButtonPadding(value, DeviceType);
 		}
 	};
 
@@ -411,7 +424,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for padding */
 	const handleButtonPaddingDeviceClick = (device) => {
-		setAttributes({activePaddingDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -424,7 +437,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all padding values */
 	const updateAllBoxPadding = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoBoxDesktopPadding: {
 						top: value,
@@ -434,7 +447,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoBoxTabPadding: {
 						top: value,
@@ -444,7 +457,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoBoxMobilePadding: {
 						top: value,
@@ -462,14 +475,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleBoxPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activePaddingDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({infoBoxDesktopPadding: {...infoBoxDesktopPadding, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({infoBoxTabPadding: {...infoBoxTabPadding, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({infoBoxMobilePadding: {...infoBoxMobilePadding, [direction]: value}});
 				break;
 			default:
@@ -477,7 +490,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllBoxPadding(value, activePaddingDevice);
+			updateAllBoxPadding(value, DeviceType);
 		}
 	};
 
@@ -497,7 +510,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for padding */
 	const handleBoxPaddingDeviceClick = (device) => {
-		setAttributes({activePaddingDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -509,7 +522,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all margin values */
 	const updateBoxMargin = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoBoxDesktopMargin: {
 						top: value,
@@ -519,7 +532,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoBoxTabMargin: {
 						top: value,
@@ -529,7 +542,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoBoxMobileMargin: {
 						top: value,
@@ -547,14 +560,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleBoxMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (infoBoxActiveMarginDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({infoBoxDesktopMargin: {...infoBoxDesktopMargin, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({infoBoxTabMargin: {...infoBoxTabMargin, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({infoBoxMobileMargin: {...infoBoxMobileMargin, [direction]: value}});
 				break;
 			default:
@@ -562,7 +575,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (infoBoxMarginLink) {
-			updateBoxMargin(value, infoBoxDesktopMargin);
+			updateBoxMargin(value, DeviceType);
 		}
 	};
 
@@ -582,7 +595,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for margin */
 	const handleBoxMarginDeviceClick = (device) => {
-		setAttributes({infoBoxActiveMarginDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
@@ -594,7 +607,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all padding values */
 	const updateAllDescPadding = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					SubHeadingDesktopPadding: {
 						top: value,
@@ -604,7 +617,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					SubHeadingTabPadding: {
 						top: value,
@@ -614,7 +627,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					SubHeadingMobilePadding: {
 						top: value,
@@ -632,14 +645,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleDescPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activePaddingDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({SubHeadingDesktopPadding: {...SubHeadingDesktopPadding, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({SubHeadingTabPadding: {...SubHeadingTabPadding, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({SubHeadingMobilePadding: {...SubHeadingMobilePadding, [direction]: value}});
 				break;
 			default:
@@ -647,7 +660,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllDescPadding(value, activePaddingDevice);
+			updateAllDescPadding(value, DeviceType);
 		}
 	};
 
@@ -667,7 +680,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for padding */
 	const handleDescPaddingDeviceClick = (device) => {
-		setAttributes({activePaddingDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -679,7 +692,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all margin values */
 	const updateDescMargin = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					descDesktopMargin: {
 						top: value,
@@ -689,7 +702,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					descTabMargin: {
 						top: value,
@@ -699,7 +712,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					descMobileMargin: {
 						top: value,
@@ -717,14 +730,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleDescMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (descActiveMarginDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({descDesktopMargin: {...descDesktopMargin, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({descTabMargin: {...descTabMargin, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({descMobileMargin: {...descMobileMargin, [direction]: value}});
 				break;
 			default:
@@ -732,7 +745,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (descMarginLink) {
-			updateDescMargin(value, descActiveMarginDevice);
+			updateDescMargin(value, DeviceType);
 		}
 	};
 
@@ -752,7 +765,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for margin */
 	const handleDescMarginDeviceClick = (device) => {
-		setAttributes({descActiveMarginDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
@@ -764,7 +777,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all margin values */
 	const updateAllMargin = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					Heading_Desktop_Margin: {
 						top: value,
@@ -774,7 +787,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					Heading_Tab_Margin: {
 						top: value,
@@ -784,7 +797,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					Heading_Mobile_Margin: {
 						top: value,
@@ -802,14 +815,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (Heading_Active_Margin_Device) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({Heading_Desktop_Margin: {...Heading_Desktop_Margin, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({Heading_Tab_Margin: {...Heading_Tab_Margin, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({Heading_Mobile_Margin: {...Heading_Mobile_Margin, [direction]: value}});
 				break;
 			default:
@@ -817,7 +830,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (Heading_Margin_Link) {
-			updateAllMargin(value, Heading_Active_Margin_Device);
+			updateAllMargin(value, DeviceType);
 		}
 	};
 
@@ -837,7 +850,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for margin */
 	const handleMarginDeviceClick = (device) => {
-		setAttributes({Heading_Active_Margin_Device: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
@@ -849,7 +862,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all margin values */
 	const updateButtonMargin = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoButtonDesktopMargin: {
 						top: value,
@@ -859,7 +872,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoButtonTabMargin: {
 						top: value,
@@ -869,7 +882,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoButtonMobileMargin: {
 						top: value,
@@ -887,14 +900,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleButtonMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (infoButtonActiveMarginDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({infoButtonDesktopMargin: {...infoButtonDesktopMargin, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({infoButtonTabMargin: {...infoButtonTabMargin, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({infoButtonMobileMargin: {...infoButtonMobileMargin, [direction]: value}});
 				break;
 			default:
@@ -902,7 +915,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (infoButtonMarginLink) {
-			updateButtonMargin(value, infoButtonActiveMarginDevice);
+			updateButtonMargin(value, DeviceType);
 		}
 	};
 
@@ -934,7 +947,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all Border Width values */
 	const updateButtonBorderWidth = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoButtonDesktopBorderWidth: {
 						top: value,
@@ -944,7 +957,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoButtonTabBorderWidth: {
 						top: value,
@@ -954,7 +967,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoButtonMobileBorderWidth: {
 						top: value,
@@ -972,14 +985,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleButtonBorderWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activeBorderDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({infoButtonDesktopBorderWidth: {...infoButtonDesktopBorderWidth, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({infoButtonTabBorderWidth: {...infoButtonTabBorderWidth, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({infoButtonMobileBorderWidth: {...infoButtonMobileBorderWidth, [direction]: value}});
 				break;
 			default:
@@ -987,7 +1000,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if borderLink is true */
 		if (borderLink) {
-			updateButtonBorderWidth(value, activeBorderDevice);
+			updateButtonBorderWidth(value, DeviceType);
 		}
 	};
 
@@ -1007,7 +1020,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for Border Width */
 	const handleButtonBorderWidthDeviceClick = (device) => {
-		setAttributes({activeBorderDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1019,7 +1032,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all Border Width values */
 	const updateButtonBorderRadiusWidth = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoBtnDesktopBorderradiusWidth: {
 						top: value,
@@ -1029,7 +1042,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoBtnTabBorderradiusWidth: {
 						top: value,
@@ -1039,7 +1052,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoBtnMobileBorderradiusWidth: {
 						top: value,
@@ -1057,8 +1070,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleButtonBorderRadiusWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activeBorderRadiusDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({
 					infoBtnDesktopBorderradiusWidth: {
 						...infoBtnDesktopBorderradiusWidth,
@@ -1066,7 +1079,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoBtnTabBorderradiusWidth: {
 						...infoBtnTabBorderradiusWidth,
@@ -1074,7 +1087,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoBtnMobileBorderradiusWidth: {
 						...infoBtnMobileBorderradiusWidth,
@@ -1087,7 +1100,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if borderRadiusLink is true */
 		if (borderRadiusLink) {
-			updateButtonBorderRadiusWidth(value, activeBorderRadiusDevice);
+			updateButtonBorderRadiusWidth(value, DeviceType);
 		}
 	};
 
@@ -1107,7 +1120,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for Border Width */
 	const handleButtonBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({activeBorderRadiusDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1119,7 +1132,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all Border Width values */
 	const updateAllBorderWidth = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					Heading_Desktop_Border_Width: {
 						top: value,
@@ -1129,7 +1142,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					Heading_Tab_Border_Width: {
 						top: value,
@@ -1139,7 +1152,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					Heading_Mobile_Border_Width: {
 						top: value,
@@ -1157,14 +1170,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleBorderWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activeBorderDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({Heading_Desktop_Border_Width: {...Heading_Desktop_Border_Width, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({Heading_Tab_Border_Width: {...Heading_Tab_Border_Width, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({Heading_Mobile_Border_Width: {...Heading_Mobile_Border_Width, [direction]: value}});
 				break;
 			default:
@@ -1172,7 +1185,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if borderLink is true */
 		if (borderLink) {
-			updateAllBorderWidth(value, activeBorderDevice);
+			updateAllBorderWidth(value, DeviceType);
 		}
 	};
 
@@ -1192,7 +1205,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for Border Width */
 	const handleBorderWidthDeviceClick = (device) => {
-		setAttributes({activeBorderDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1204,7 +1217,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all Border Width values */
 	const updateAllBorderRadiusWidth = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					Heading_Desktop_Border_radius_Width: {
 						top: value,
@@ -1214,7 +1227,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					Heading_Tab_Border_radius_Width: {
 						top: value,
@@ -1224,7 +1237,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					Heading_Mobile_Border_radius_Width: {
 						top: value,
@@ -1242,8 +1255,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleBorderRadiusWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activeBorderRadiusDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({
 					Heading_Desktop_Border_radius_Width: {
 						...Heading_Desktop_Border_radius_Width,
@@ -1251,7 +1264,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					Heading_Tab_Border_radius_Width: {
 						...Heading_Tab_Border_radius_Width,
@@ -1259,7 +1272,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					Heading_Mobile_Border_radius_Width: {
 						...Heading_Mobile_Border_radius_Width,
@@ -1272,7 +1285,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if borderRadiusLink is true */
 		if (borderRadiusLink) {
-			updateAllBorderRadiusWidth(value, activeBorderRadiusDevice);
+			updateAllBorderRadiusWidth(value, DeviceType);
 		}
 	};
 
@@ -1292,7 +1305,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for Border Width */
 	const handleBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({activeBorderRadiusDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1305,7 +1318,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all Border Width values */
 	const updateBoxBorderWidth = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoBoxDesktopBorderWidth: {
 						top: value,
@@ -1315,7 +1328,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoBoxTabBorderWidth: {
 						top: value,
@@ -1325,7 +1338,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoBoxMobileBorderWidth: {
 						top: value,
@@ -1343,14 +1356,14 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to handle input change */
 	const handleBoxBorderWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (activeBorderDevice) {
-			case 'desktop':
+		switch (DeviceType) {
+			case 'Desktop':
 				setAttributes({infoBoxDesktopBorderWidth: {...infoBoxDesktopBorderWidth, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({infoBoxTabBorderWidth: {...infoBoxTabBorderWidth, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({infoBoxMobileBorderWidth: {...infoBoxMobileBorderWidth, [direction]: value}});
 				break;
 			default:
@@ -1358,7 +1371,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if borderLink is true */
 		if (borderLink) {
-			updateBoxBorderWidth(value, activeBorderDevice);
+			updateBoxBorderWidth(value, DeviceType);
 		}
 	};
 
@@ -1378,7 +1391,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for Border Width */
 	const handleBoxBorderWidthDeviceClick = (device) => {
-		setAttributes({activeBorderDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1390,7 +1403,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all Border Width values */
 	const updateBoxBorderRadiusWidth = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoBoxDesktopBorderRadiusWidth: {
 						top: value,
@@ -1399,8 +1412,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 						left: value
 					}
 				});
+
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoBoxTabBorderRadiusWidth: {
 						top: value,
@@ -1410,7 +1424,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoBoxMobileBorderRadiusWidth: {
 						top: value,
@@ -1429,7 +1443,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	const handleBoxBorderRadiusWidthInputChange = (e, direction) => {
 		const value = e.target.value;
 		switch (activeBorderRadiusDevice) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoBoxDesktopBorderRadiusWidth: {
 						...infoBoxDesktopBorderRadiusWidth,
@@ -1437,7 +1451,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoBoxTabBorderRadiusWidth: {
 						...infoBoxTabBorderRadiusWidth,
@@ -1445,7 +1459,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoBoxMobileBorderRadiusWidth: {
 						...infoBoxMobileBorderRadiusWidth,
@@ -1458,7 +1472,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 		}
 		/** Update all padding values if borderRadiusLink is true */
 		if (borderRadiusLink) {
-			updateBoxBorderRadiusWidth(value, activeBorderRadiusDevice);
+			updateBoxBorderRadiusWidth(value, DeviceType);
 		}
 	};
 
@@ -1478,7 +1492,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 
 	/** Function to handle device click for Border Width */
 	const handleBoxBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({activeBorderRadiusDevice: device});
+		setAttributes({DeviceType: device});
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1517,8 +1531,24 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                     border-width: ${boxBorderWidth};
                     border-radius: ${boxBorderRadiusWidth};
                     ${infoBoxBorderColor !== undefined ? `border-color: ${infoBoxBorderColor};` : ''}
-                    ${infoBoxBg !== undefined ? `background-color: ${infoBoxBg};` : ''}
+                    ${boxBgColor !== undefined ? `background-color: ${boxBgColor};` : ''}
                     text-align: ${contentAlignment}
+                }
+                @media only screen and (max-width: 1024px){
+                .fb-info-box-content-wrapper.${blockID}{
+                padding: ${infoBoxTabPadding.top}${infoBoxPaddingUnits} ${infoBoxTabPadding.right}${infoBoxPaddingUnits} ${infoBoxTabPadding.bottom}${infoBoxPaddingUnits} ${infoBoxTabPadding.left}${infoBoxPaddingUnits} !important;
+                margin: ${infoBoxTabMargin.top}${infoBoxMarginUnits} ${infoBoxTabMargin.right}${infoBoxMarginUnits} ${infoBoxTabMargin.bottom}${infoBoxMarginUnits} ${infoBoxTabMargin.left}${infoBoxMarginUnits} !important;
+                border-width: ${infoBoxTabBorderWidth.top}${infoBoxBorderUnits} ${infoBoxTabBorderWidth.right}${infoBoxBorderUnits} ${infoBoxTabBorderWidth.bottom}${infoBoxBorderUnits} ${infoBoxTabBorderWidth.left}${infoBoxBorderUnits} !important;
+                border-radius: ${infoBoxTabBorderRadiusWidth.top}${infoBoxBorderRadiusUnits} ${infoBoxTabBorderRadiusWidth.right}${infoBoxBorderRadiusUnits} ${infoBoxTabBorderRadiusWidth.bottom}${infoBoxBorderRadiusUnits} ${infoBoxTabBorderRadiusWidth.left}${infoBoxBorderRadiusUnits} !important;
+                }
+                }
+                @media only screen and (max-width: 767px){
+                .fb-info-box-content-wrapper.${blockID}{
+                padding: ${infoBoxMobilePadding.top}${infoBoxPaddingUnits} ${infoBoxMobilePadding.right}${infoBoxPaddingUnits} ${infoBoxMobilePadding.bottom}${infoBoxPaddingUnits} ${infoBoxMobilePadding.left}${infoBoxPaddingUnits} !important;
+                margin: ${infoBoxMobileMargin.top}${infoBoxMarginUnits} ${infoBoxMobileMargin.right}${infoBoxMarginUnits} ${infoBoxMobileMargin.bottom}${infoBoxMarginUnits} ${infoBoxMobileMargin.left}${infoBoxMarginUnits} !important;
+                border-width: ${infoBoxMobileBorderWidth.top}${infoBoxBorderUnits} ${infoBoxMobileBorderWidth.right}${infoBoxBorderUnits} ${infoBoxMobileBorderWidth.bottom}${infoBoxBorderUnits} ${infoBoxMobileBorderWidth.left}${infoBoxBorderUnits} !important;
+                border-radius: ${infoBoxMobileBorderRadiusWidth.top}${infoBoxBorderRadiusUnits} ${infoBoxMobileBorderRadiusWidth.right}${infoBoxBorderRadiusUnits} ${infoBoxMobileBorderRadiusWidth.bottom}${infoBoxBorderRadiusUnits} ${infoBoxMobileBorderRadiusWidth.left}${infoBoxBorderRadiusUnits} !important;
+                }
                 }
                 .fb-info-box-content-wrapper.${blockID} .fb-heading {
                     ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ''}
@@ -1576,7 +1606,19 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                 .fb-info-box-content-wrapper.${blockID} .fb-description:hover {
                     ${SubHeadingHoverColor !== undefined ? `color: ${SubHeadingHoverColor};` : ''}
                 }
+				@media only screen and (max-width: 1024px){
+				.fb-info-box-content-wrapper.${blockID} .fb-description {
+                        padding: ${SubHeadingTabPadding.top}${SubHeadingPaddingUnits} ${SubHeadingTabPadding.right}${SubHeadingPaddingUnits} ${SubHeadingTabPadding.bottom}${SubHeadingPaddingUnits} ${SubHeadingTabPadding.left}${SubHeadingPaddingUnits} !important;
+                        margin: ${descTabMargin.top}${descMarginUnits} ${descTabMargin.right}${descMarginUnits} ${descTabMargin.bottom}${descMarginUnits} ${descTabMargin.left}${descMarginUnits} !important;
 
+                    }
+				}
+				@media only screen and (max-width: 757px){
+				.fb-info-box-content-wrapper.${blockID} .fb-description {
+                        padding: ${SubHeadingMobilePadding.top}${SubHeadingPaddingUnits} ${SubHeadingMobilePadding.right}${SubHeadingPaddingUnits} ${SubHeadingMobilePadding.bottom}${SubHeadingPaddingUnits} ${SubHeadingMobilePadding.left}${SubHeadingPaddingUnits} !important;
+                        margin: ${descMobileMargin.top}${descMarginUnits} ${descMobileMargin.right}${descMarginUnits} ${descMobileMargin.bottom}${descMarginUnits} ${descMobileMargin.left}${descMarginUnits} !important;
+                    }
+				}
                 .fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper .fb-info-button {
                 	${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ''}
                 	${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : ''}
@@ -1597,8 +1639,40 @@ export default function Inspector({attributes, setAttributes, clientId}) {
                 	${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : ''}
                 	${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
                 }
-                .fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg {
-                	width: ${attributes.width}px;
+
+                @media only screen and (max-width: 1024px) {
+                    .fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper .fb-info-button {
+                        padding: ${infoButtonTabPadding.top}${infoButtonPaddingUnits} ${infoButtonTabPadding.right}${infoButtonPaddingUnits} ${infoButtonTabPadding.bottom}${infoButtonPaddingUnits} ${infoButtonTabPadding.left}${infoButtonPaddingUnits} !important;
+                        margin: ${infoButtonTabMargin.top}${infoButtonMarginUnits} ${infoButtonTabMargin.right}${infoButtonMarginUnits} ${infoButtonTabMargin.bottom}${infoButtonMarginUnits} ${infoButtonTabMargin.left}${infoButtonMarginUnits} !important;
+                        border-width: ${infoButtonTabBorderWidth.top}${infoButtonBorderUnits} ${infoButtonTabBorderWidth.right}${infoButtonBorderUnits} ${infoButtonTabBorderWidth.bottom}${infoButtonBorderUnits} ${infoButtonTabBorderWidth.left}${infoButtonBorderUnits} !important;
+                        border-radius: ${infoBtnTabBorderradiusWidth.top}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.right}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.bottom}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.left}${infoBtnBorderradiusUnits} !important;
+                    }
+                }
+
+                @media only screen and (max-width: 767px) {
+                    .fb-info-box-content-wrapper.${blockID} .fb-heading {
+                        padding: ${infoButtonMobilePadding.top}${infoButtonPaddingUnits} ${infoButtonMobilePadding.right}${infoButtonPaddingUnits} ${infoButtonMobilePadding.bottom}${infoButtonPaddingUnits} ${infoButtonMobilePadding.left}${infoButtonPaddingUnits} !important;
+                        margin: ${infoButtonMobileMargin.top}${infoButtonMarginUnits} ${infoButtonMobileMargin.right}${infoButtonMarginUnits} ${infoButtonMobileMargin.bottom}${infoButtonMarginUnits} ${infoButtonMobileMargin.left}${infoButtonMarginUnits} !important;
+                        border-width: ${infoButtonMobileBorderWidth.top}${infoButtonBorderUnits} ${infoButtonMobileBorderWidth.right}${infoButtonBorderUnits} ${infoButtonMobileBorderWidth.bottom}${infoButtonBorderUnits} ${infoButtonMobileBorderWidth.left}${infoButtonBorderUnits} !important;
+                        border-radius: ${infoBtnTabBorderradiusWidth.top}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.right}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.bottom}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.left}${infoBtnBorderradiusUnits} !important;
+                    }
+                }
+
+                .fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
+                .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img{
+                	width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
+                }
+                @media only screen and (max-width: 1024px) {
+                .fb-info-box-content-wrapper.${blockID} .fb-iinfoButtonMobileMargincon-wrapper svg,
+                .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img{
+                	width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
+                }
+                }
+                @media only screen and (max-width: 767px) {
+                .fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
+                .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img{
+                	width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
+                }
                 }
             `}
 			</style>
@@ -1635,6 +1709,25 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												title={__("Icon/Image", "frontis-block")}
 												initialOpen={true}
 											>
+												<BaseControl
+													label={__("Alignment", "frontis-block")}
+													id="fb-setting-alignment"
+													className="fb-advanced-alignment"
+												>
+													<ButtonGroup
+														className="fb-advanced-alignment-group-btn"
+													>
+														{TEXT_ALIGN.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({wrapperAlignment: item.value})}
+																className={`fb-advanced-alignment-single-btn ${wrapperAlignment === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
 
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
@@ -1803,14 +1896,6 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 																))}
 															</ButtonGroup>
 														</BaseControl>
-														<BaseControl className="fb-sub-heading-position">
-															<SelectControl
-																label={__("Description Position", "frontis-block")}
-																value={Sub_Heading_Position}
-																options={subheading_POSITION}
-																onChange={(value) => setAttributes({Sub_Heading_Position: value})}
-															/>
-														</BaseControl>
 
 														<TextareaControl
 															label={__("Sub Heading Text", "frontis-block")}
@@ -1895,10 +1980,128 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 											initialOpen={false}
 										>
 											{/*Background*/}
-											<ColorPicker
-												color={infoBoxBg}
-												onChange={(value) => setAttributes({infoBoxBg: value})}
-											/>
+											<BaseControl
+												label={__("Background Color", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{NORMAL_HOVER.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({boxBgColorSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${boxBgColorSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+
+											{boxBgColorSwitcher === 'normal' && (
+												<BaseControl
+													label={__("Nomal Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-normal-color">
+																		<ColorPicker
+																			color={boxBgColor}
+																			onChange={(value) => setAttributes({boxBgColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={boxBgColor}
+																			onChange={(value) => setAttributes({boxBgColor: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{boxBgColorSwitcher === 'hover' && (
+												<BaseControl
+													label={__("Hover Color", "frontis-block")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{placement: 'bottom-start'}}
+														renderToggle={({isOpen, onToggle}) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																aria-label={__("Toggle Typography Settings", "frontis-block")}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker"
+																		  className="fb-setting-color-setting-icon"/>
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl
+																	className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-hover-color">
+																		<ColorPicker
+																			color={boxBgHoverColor}
+																			onChange={(value) => setAttributes({boxBgHoverColor: value})}
+																			enableAlpha={true}
+																		/>
+																		<div
+																			className="fb-setting-hover-color-label">{__("Default Colors", "frontis-block")}</div>
+																		<ColorPalette
+																			colors={[
+																				{color: '#F72585'},
+																				{color: '#7209B7'},
+																				{color: '#3A0CA3'},
+																				{color: '#4361EE'},
+																				{color: '#4CC9F0'},
+																			]}
+																			disableCustomColors={true}
+																			value={boxBgHoverColor}
+																			onChange={(value) => setAttributes({boxBgHoverColor: value})}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
 											{/*Spacing*/}
 											<Heading>
 												Spacing
@@ -1908,35 +2111,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Padding */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Padding", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleBoxPaddingDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activePaddingDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleBoxPaddingDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleBoxPaddingDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handleBoxPaddingDeviceClick}/>
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -1958,7 +2133,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.top : activePaddingDevice === 'tab' ? infoBoxTabPadding.top : infoBoxMobilePadding.top}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopPadding.top : DeviceType === 'Tablet' ? infoBoxTabPadding.top : infoBoxMobilePadding.top}
 																onChange={(e) => handleBoxPaddingInputChange(e, 'top')}
 															/>
 														</div>
@@ -1968,7 +2143,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.right : activePaddingDevice === 'tab' ? infoBoxTabPadding.right : infoBoxMobilePadding.right}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopPadding.right : DeviceType === 'Tablet' ? infoBoxTabPadding.right : infoBoxMobilePadding.right}
 																onChange={(e) => handleBoxPaddingInputChange(e, 'right')}
 															/>
 														</div>
@@ -1978,7 +2153,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.bottom : activePaddingDevice === 'tab' ? infoBoxTabPadding.bottom : infoBoxMobilePadding.bottom}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopPadding.bottom : DeviceType === 'Tablet' ? infoBoxTabPadding.bottom : infoBoxMobilePadding.bottom}
 																onChange={(e) => handleBoxPaddingInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -1988,7 +2163,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.left : activePaddingDevice === 'tab' ? infoBoxTabPadding.left : infoBoxMobilePadding.left}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopPadding.left : DeviceType === 'Tablet' ? infoBoxTabPadding.left : infoBoxMobilePadding.left}
 																onChange={(e) => handleBoxPaddingInputChange(e, 'left')}
 															/>
 														</div>
@@ -2008,35 +2183,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Margin */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Margin", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${infoBoxActiveMarginDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleBoxMarginDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device ${infoBoxActiveMarginDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleBoxMarginDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${infoBoxActiveMarginDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleBoxMarginDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+
+														<FB_ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleBoxMarginDeviceClick}/>
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -2058,7 +2206,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={infoBoxActiveMarginDevice === 'desktop' ? infoBoxDesktopMargin.top : infoBoxActiveMarginDevice === 'tab' ? infoBoxTabMargin.top : infoBoxMobileMargin.top}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopMargin.top : DeviceType === 'Tablet' ? infoBoxTabMargin.top : infoBoxMobileMargin.top}
 																onChange={(e) => handleBoxMarginInputChange(e, 'top')}
 															/>
 														</div>
@@ -2068,7 +2216,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={infoBoxActiveMarginDevice === 'desktop' ? infoBoxDesktopMargin.right : infoBoxActiveMarginDevice === 'tab' ? infoBoxTabMargin.right : infoBoxMobileMargin.right}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopMargin.right : DeviceType === 'Tablet' ? infoBoxTabMargin.right : infoBoxMobileMargin.right}
 																onChange={(e) => handleBoxMarginInputChange(e, 'right')}
 															/>
 														</div>
@@ -2078,7 +2226,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={infoBoxActiveMarginDevice === 'desktop' ? infoBoxDesktopMargin.bottom : infoBoxActiveMarginDevice === 'tab' ? infoBoxTabMargin.bottom : infoBoxMobileMargin.bottom}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopMargin.bottom : DeviceType === 'Tablet' ? infoBoxTabMargin.bottom : infoBoxMobileMargin.bottom}
 																onChange={(e) => handleBoxMarginInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -2088,7 +2236,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={infoBoxActiveMarginDevice === 'desktop' ? infoBoxDesktopMargin.left : infoBoxActiveMarginDevice === 'tab' ? infoBoxTabMargin.left : infoBoxMobileMargin.left}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopMargin.left : DeviceType === 'Tablet' ? infoBoxTabMargin.left : infoBoxMobileMargin.left}
 																onChange={(e) => handleBoxMarginInputChange(e, 'left')}
 															/>
 														</div>
@@ -2241,35 +2389,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Border Width */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Border Width", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activeBorderDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleBoxBorderWidthDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activeBorderDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleBoxBorderWidthDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activeBorderDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleBoxBorderWidthDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Border Width', 'frontis-block')} device={DeviceType} deviceHandler={handleBoxBorderWidthDeviceClick}/>
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -2292,7 +2412,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.top : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.top : infoBoxMobileBorderWidth.top}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderWidth.top : DeviceType === 'Tablet' ? infoBoxTabBorderWidth.top : infoBoxMobileBorderWidth.top}
 																onChange={(e) => handleBoxBorderWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -2302,7 +2422,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.right : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.right : infoBoxMobileBorderWidth.right}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderWidth.right : DeviceType === 'Tablet' ? infoBoxTabBorderWidth.right : infoBoxMobileBorderWidth.right}
 																onChange={(e) => handleBoxBorderWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -2312,7 +2432,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.bottom : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.bottom : infoBoxMobileBorderWidth.bottom}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? infoBoxTabBorderWidth.bottom : infoBoxMobileBorderWidth.bottom}
 																onChange={(e) => handleBoxBorderWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -2322,7 +2442,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.left : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.left : infoBoxMobileBorderWidth.left}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderWidth.left : DeviceType === 'Tablet' ? infoBoxTabBorderWidth.left : infoBoxMobileBorderWidth.left}
 																onChange={(e) => handleBoxBorderWidthInputChange(e, 'left')}
 															/>
 														</div>
@@ -2342,35 +2462,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Border radius Width */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Border Radius Width", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activeBorderRadiusDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleBoxBorderRadiusWidthDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activeBorderRadiusDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleBoxBorderRadiusWidthDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activeBorderRadiusDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleBoxBorderRadiusWidthDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBoxBorderRadiusWidthDeviceClick}/>
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -2392,7 +2484,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.top : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.top : infoBoxMobileBorderRadiusWidth.top}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? infoBoxTabBorderRadiusWidth.top : infoBoxMobileBorderRadiusWidth.top}
 																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -2402,7 +2494,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.right : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.right : infoBoxMobileBorderRadiusWidth.right}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? infoBoxTabBorderRadiusWidth.right : infoBoxMobileBorderRadiusWidth.right}
 																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -2412,7 +2504,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.bottom : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.bottom : infoBoxMobileBorderRadiusWidth.bottom}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? infoBoxTabBorderRadiusWidth.bottom : infoBoxMobileBorderRadiusWidth.bottom}
 																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -2422,7 +2514,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.left : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.left : infoBoxMobileBorderRadiusWidth.left}
+																value={DeviceType === 'Desktop' ? infoBoxDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? infoBoxTabBorderRadiusWidth.left : infoBoxMobileBorderRadiusWidth.left}
 																onChange={(e) => handleBoxBorderRadiusWidthInputChange(e, 'left')}
 															/>
 														</div>
@@ -2443,21 +2535,18 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 											title={__("Image/Icon", "frontis-block")}
 											initialOpen={false}
 										>
-											<RangeControl
-												__nextHasNoMarginBottom
-												label="Width"
-												value={attributes.width}
-												onChange={(value) => setAttributes({width: value})}
-												min={0}
-												max={500}
-											/>
-											<RangeControl
-												__nextHasNoMarginBottom
-												label="Height"
-												value={attributes.height}
-												onChange={(value) => setAttributes({height: value})}
-												min={0}
-												max={500}
+											<FB_Range
+												min={1}
+												max={300}
+												label={__("Width", "frontis-blocks")}
+												rangeValue={mediaSize}
+												onChangeHandler={mediaSizeHandler}
+												rangeUnitHandler={mediaSizeUnitsHandler}
+												DeviceType={DeviceType}
+												units={mediaSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={50}
 											/>
 										</PanelBody>
 										{/*Heading Style*/}
@@ -2855,35 +2944,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Padding */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Padding", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handlePaddingDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activePaddingDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handlePaddingDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handlePaddingDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handlePaddingDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -2905,7 +2967,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.top : activePaddingDevice === 'tab' ? Heading_Tab_padding.top : Heading_Mobile_padding.top}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_padding.top : DeviceType === 'Tablet' ? Heading_Tab_padding.top : Heading_Mobile_padding.top}
 																onChange={(e) => handlePaddingInputChange(e, 'top')}
 															/>
 														</div>
@@ -2915,7 +2977,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.right : activePaddingDevice === 'tab' ? Heading_Tab_padding.right : Heading_Mobile_padding.right}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_padding.right : DeviceType === 'Tablet' ? Heading_Tab_padding.right : Heading_Mobile_padding.right}
 																onChange={(e) => handlePaddingInputChange(e, 'right')}
 															/>
 														</div>
@@ -2925,7 +2987,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.bottom : activePaddingDevice === 'tab' ? Heading_Tab_padding.bottom : Heading_Mobile_padding.bottom}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_padding.bottom : DeviceType === 'Tablet' ? Heading_Tab_padding.bottom : Heading_Mobile_padding.bottom}
 																onChange={(e) => handlePaddingInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -2935,7 +2997,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activePaddingDevice === 'desktop' ? Heading_Desktop_padding.left : activePaddingDevice === 'tab' ? Heading_Tab_padding.left : Heading_Mobile_padding.left}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_padding.left : DeviceType === 'Tablet' ? Heading_Tab_padding.left : Heading_Mobile_padding.left}
 																onChange={(e) => handlePaddingInputChange(e, 'left')}
 															/>
 														</div>
@@ -2954,35 +3016,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Margin */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Margin", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${Heading_Active_Margin_Device === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleMarginDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device ${Heading_Active_Margin_Device === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleMarginDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${Heading_Active_Margin_Device === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleMarginDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleMarginDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -3004,7 +3039,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.top : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Margin.top : DeviceType === 'Tablet' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top}
 																onChange={(e) => handleMarginInputChange(e, 'top')}
 															/>
 														</div>
@@ -3014,7 +3049,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.right : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Margin.right : DeviceType === 'Tablet' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right}
 																onChange={(e) => handleMarginInputChange(e, 'right')}
 															/>
 														</div>
@@ -3024,7 +3059,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.bottom : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Margin.bottom : DeviceType === 'Tablet' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom}
 																onChange={(e) => handleMarginInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -3034,7 +3069,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.left : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Margin.left : DeviceType === 'Tablet' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left}
 																onChange={(e) => handleMarginInputChange(e, 'left')}
 															/>
 														</div>
@@ -3187,35 +3222,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Border Width */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Border Width", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activeBorderDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleBorderWidthDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activeBorderDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleBorderWidthDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activeBorderDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleBorderWidthDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Border Width', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderWidthDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -3238,7 +3246,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.top : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.top : Heading_Mobile_Border_Width.top}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.top : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.top : Heading_Mobile_Border_Width.top}
 																onChange={(e) => handleBorderWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -3248,7 +3256,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.right : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.right : Heading_Mobile_Border_Width.right}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.right : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.right : Heading_Mobile_Border_Width.right}
 																onChange={(e) => handleBorderWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -3258,7 +3266,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.bottom : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.bottom : Heading_Mobile_Border_Width.bottom}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.bottom : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.bottom : Heading_Mobile_Border_Width.bottom}
 																onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -3268,7 +3276,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.left : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.left : Heading_Mobile_Border_Width.left}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.left : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.left : Heading_Mobile_Border_Width.left}
 																onChange={(e) => handleBorderWidthInputChange(e, 'left')}
 															/>
 														</div>
@@ -3288,35 +3296,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Border radius Width */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Border Radius Width", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activeBorderRadiusDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleBorderRadiusWidthDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activeBorderRadiusDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleBorderRadiusWidthDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activeBorderRadiusDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleBorderRadiusWidthDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -3338,7 +3319,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.top : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.top : Heading_Mobile_Border_radius_Width.top}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.top : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.top : Heading_Mobile_Border_radius_Width.top}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -3348,7 +3329,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.right : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.right : Heading_Mobile_Border_radius_Width.right}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.right : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.right : Heading_Mobile_Border_radius_Width.right}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -3358,7 +3339,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.bottom : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.bottom : Heading_Mobile_Border_radius_Width.bottom}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.bottom : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.bottom : Heading_Mobile_Border_radius_Width.bottom}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -3368,7 +3349,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.left : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.left : Heading_Mobile_Border_radius_Width.left}
+																value={DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.left : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.left : Heading_Mobile_Border_radius_Width.left}
 																onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
 															/>
 														</div>
@@ -3781,37 +3762,9 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 											{/* Padding */}
 											<div className="fb-setting-spacing-container">
 												<div className="fb-setting-spacing-inner-container">
-
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Padding", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleDescPaddingDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activePaddingDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleDescPaddingDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleDescPaddingDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handleDescPaddingDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -3833,7 +3786,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.top : activePaddingDevice === 'tab' ? SubHeadingTabPadding.top : SubHeadingMobilePadding.top}
+																value={DeviceType === 'Desktop' ? SubHeadingDesktopPadding.top : DeviceType === 'Tablet' ? SubHeadingTabPadding.top : SubHeadingMobilePadding.top}
 																onChange={(e) => handleDescPaddingInputChange(e, 'top')}
 															/>
 														</div>
@@ -3843,7 +3796,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.right : activePaddingDevice === 'tab' ? SubHeadingTabPadding.right : SubHeadingMobilePadding.right}
+																value={DeviceType === 'Desktop' ? SubHeadingDesktopPadding.right : DeviceType === 'Tablet' ? SubHeadingTabPadding.right : SubHeadingMobilePadding.right}
 																onChange={(e) => handleDescPaddingInputChange(e, 'right')}
 															/>
 														</div>
@@ -3853,7 +3806,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.bottom : activePaddingDevice === 'tab' ? SubHeadingTabPadding.bottom : SubHeadingMobilePadding.bottom}
+																value={DeviceType === 'Desktop' ? SubHeadingDesktopPadding.bottom : DeviceType === 'Tablet' ? SubHeadingTabPadding.bottom : SubHeadingMobilePadding.bottom}
 																onChange={(e) => handleDescPaddingInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -3863,7 +3816,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.left : activePaddingDevice === 'tab' ? SubHeadingTabPadding.left : SubHeadingMobilePadding.left}
+																value={DeviceType === 'Desktop' ? SubHeadingDesktopPadding.left : DeviceType === 'Tablet' ? SubHeadingTabPadding.left : SubHeadingMobilePadding.left}
 																onChange={(e) => handleDescPaddingInputChange(e, 'left')}
 															/>
 														</div>
@@ -3882,35 +3835,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 											<div className="fb-setting-spacing-container">
 												<div className="fb-setting-spacing-inner-container">
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Margin", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${descActiveMarginDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleDescMarginDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${descActiveMarginDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleDescMarginDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${descActiveMarginDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleDescMarginDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleDescMarginDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -3932,7 +3858,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={descActiveMarginDevice === 'desktop' ? descDesktopMargin.top : descActiveMarginDevice === 'tab' ? descTabMargin.top : descMobileMargin.top}
+																value={DeviceType === 'Desktop' ? descDesktopMargin.top : DeviceType === 'Tablet' ? descTabMargin.top : descMobileMargin.top}
 																onChange={(e) => handleDescMarginInputChange(e, 'top')}
 															/>
 														</div>
@@ -3942,7 +3868,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={descActiveMarginDevice === 'desktop' ? descDesktopMargin.right : descActiveMarginDevice === 'tab' ? descTabMargin.right : descMobileMargin.right}
+																value={DeviceType === 'Desktop' ? descDesktopMargin.right : DeviceType === 'Tablet' ? descTabMargin.right : descMobileMargin.right}
 																onChange={(e) => handleDescMarginInputChange(e, 'right')}
 															/>
 														</div>
@@ -3952,7 +3878,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={descActiveMarginDevice === 'desktop' ? descDesktopMargin.bottom : descActiveMarginDevice === 'tab' ? descTabMargin.bottom : descMobileMargin.bottom}
+																value={DeviceType === 'Desktop' ? descDesktopMargin.bottom : DeviceType === 'Tablet' ? descTabMargin.bottom : descMobileMargin.bottom}
 																onChange={(e) => handleDescMarginInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -3962,7 +3888,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={descActiveMarginDevice === 'desktop' ? descDesktopMargin.left : descActiveMarginDevice === 'tab' ? descTabMargin.left : descMobileMargin.left}
+																value={DeviceType === 'Desktop' ? descDesktopMargin.left : DeviceType === 'Tablet' ? descTabMargin.left : descMobileMargin.left}
 																onChange={(e) => handleDescMarginInputChange(e, 'left')}
 															/>
 														</div>
@@ -4497,35 +4423,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Padding */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Padding", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activePaddingDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleButtonPaddingDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activePaddingDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleButtonPaddingDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activePaddingDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleButtonPaddingDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Padding', 'frontis-block')} device={DeviceType} deviceHandler={handleButtonPaddingDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -4547,7 +4446,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.top : activePaddingDevice === 'tab' ? infoButtonTabPadding.top : infoButtonMobilePadding.top}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopPadding.top : DeviceType === 'Tablet' ? infoButtonTabPadding.top : infoButtonMobilePadding.top}
 																onChange={(e) => handleButtonPaddingInputChange(e, 'top')}
 															/>
 														</div>
@@ -4557,7 +4456,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.right : activePaddingDevice === 'tab' ? infoButtonTabPadding.right : infoButtonMobilePadding.right}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopPadding.right : DeviceType === 'Tablet' ? infoButtonTabPadding.right : infoButtonMobilePadding.right}
 																onChange={(e) => handleButtonPaddingInputChange(e, 'right')}
 															/>
 														</div>
@@ -4567,7 +4466,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.bottom : activePaddingDevice === 'tab' ? infoButtonTabPadding.bottom : infoButtonMobilePadding.bottom}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopPadding.bottom : DeviceType === 'Tablet' ? infoButtonTabPadding.bottom : infoButtonMobilePadding.bottom}
 																onChange={(e) => handleButtonPaddingInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -4577,7 +4476,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activePaddingDevice === 'desktop' ? infoButtonDesktopPadding.left : activePaddingDevice === 'tab' ? infoButtonTabPadding.left : infoButtonMobilePadding.left}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopPadding.left : DeviceType === 'Tablet' ? infoButtonTabPadding.left : infoButtonMobilePadding.left}
 																onChange={(e) => handleButtonPaddingInputChange(e, 'left')}
 															/>
 														</div>
@@ -4585,7 +4484,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<label className="fb-setting-spacing-input-label"></label>
 															<span
 																className={`dashicons ${paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${paddingLink ? 'is-checked' : ''}`}
-																onClick={handlePaddingLinkToggle}
+																onClick={handleButtonPaddingLinkToggle}
 															>
                                                             </span>
 														</div>
@@ -4596,35 +4495,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Margin */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Margin", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${infoButtonActiveMarginDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleButtonMarginDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device ${infoButtonActiveMarginDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleButtonMarginDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${infoButtonActiveMarginDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleButtonMarginDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Margin', 'frontis-block')} device={DeviceType} deviceHandler={handleButtonMarginDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -4646,7 +4518,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.top : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.top : infoButtonMobileMargin.top}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopMargin.top : DeviceType === 'Tablet' ? infoButtonTabMargin.top : infoButtonMobileMargin.top}
 																onChange={(e) => handleButtonMarginInputChange(e, 'top')}
 															/>
 														</div>
@@ -4656,7 +4528,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.right : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.right : infoButtonMobileMargin.right}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopMargin.right : DeviceType === 'Tablet' ? infoButtonTabMargin.right : infoButtonMobileMargin.right}
 																onChange={(e) => handleButtonMarginInputChange(e, 'right')}
 															/>
 														</div>
@@ -4666,7 +4538,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.bottom : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.bottom : infoButtonMobileMargin.bottom}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopMargin.bottom : DeviceType === 'Tablet' ? infoButtonTabMargin.bottom : infoButtonMobileMargin.bottom}
 																onChange={(e) => handleButtonMarginInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -4676,7 +4548,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={infoButtonActiveMarginDevice === 'desktop' ? infoButtonDesktopMargin.left : infoButtonActiveMarginDevice === 'tab' ? infoButtonTabMargin.left : infoButtonMobileMargin.left}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopMargin.left : DeviceType === 'Tablet' ? infoButtonTabMargin.left : infoButtonMobileMargin.left}
 																onChange={(e) => handleButtonMarginInputChange(e, 'left')}
 															/>
 														</div>
@@ -4831,35 +4703,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 													{/* Border Width */}
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Border Width", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activeBorderDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleButtonBorderWidthDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activeBorderDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleButtonBorderWidthDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activeBorderDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleButtonBorderWidthDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Border', 'frontis-block')} device={DeviceType} deviceHandler={handleButtonBorderWidthDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -4882,7 +4727,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activeBorderDevice === 'desktop' ? infoButtonDesktopBorderWidth.top : activeBorderDevice === 'tab' ? infoButtonTabBorderWidth.top : infoButtonMobileBorderWidth.top}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.top : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.top : infoButtonMobileBorderWidth.top}
 																onChange={(e) => handleButtonBorderWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -4892,7 +4737,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activeBorderDevice === 'desktop' ? infoButtonDesktopBorderWidth.right : activeBorderDevice === 'tab' ? infoButtonTabBorderWidth.right : infoButtonMobileBorderWidth.right}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.right : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.right : infoButtonMobileBorderWidth.right}
 																onChange={(e) => handleButtonBorderWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -4902,7 +4747,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activeBorderDevice === 'desktop' ? infoButtonDesktopBorderWidth.bottom : activeBorderDevice === 'tab' ? infoButtonTabBorderWidth.bottom : infoButtonMobileBorderWidth.bottom}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.bottom : infoButtonMobileBorderWidth.bottom}
 																onChange={(e) => handleButtonBorderWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -4912,7 +4757,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activeBorderDevice === 'desktop' ? infoButtonDesktopBorderWidth.left : activeBorderDevice === 'tab' ? infoButtonTabBorderWidth.left : infoButtonMobileBorderWidth.left}
+																value={DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.left : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.left : infoButtonMobileBorderWidth.left}
 																onChange={(e) => handleButtonBorderWidthInputChange(e, 'left')}
 															/>
 														</div>
@@ -4932,35 +4777,8 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 												<div className="fb-setting-spacing-inner-container">
 
 													<div className="fb-setting-spacing-label-container">
-														<div className="fb-setting-label-wrapper">
-															<p className="fb-setting-label-text">{__("Border Radius Width", "frontis-block")}</p>
-															<div className="fb-responsive-device-wrapper">
-																<button
-																	className={`fb-responsive-desktop-device ${activeBorderRadiusDevice === 'desktop' ? 'active' : ''}`}
-																	onClick={() => handleButtonBorderRadiusWidthDeviceClick('desktop')}>
-																	<svg width="8" height="7" viewBox="0 0 8 7">
-																		<path
-																			d="M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-tablet-device  ${activeBorderRadiusDevice === 'tab' ? 'active' : ''}`}
-																	onClick={() => handleButtonBorderRadiusWidthDeviceClick('tab')}>
-																	<svg width="6" height="7" viewBox="0 0 6 7">
-																		<path
-																			d="M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"></path>
-																	</svg>
-																</button>
-																<button
-																	className={`fb-responsive-mobile-device ${activeBorderRadiusDevice === 'mobile' ? 'active' : ''}`}
-																	onClick={() => handleButtonBorderRadiusWidthDeviceClick('mobile')}>
-																	<svg width="4" height="7" viewBox="0 0 4 7">
-																		<path
-																			d="M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"></path>
-																	</svg>
-																</button>
-															</div>
-														</div>
+														<FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleButtonBorderRadiusWidthDeviceClick}/>
+
 														<div className="fb-setting-units-type">
 															<ButtonGroup className="fb-setting-units-type-wrap">
 																{separator_UNIT_TYPES.map((item, key) => (
@@ -4982,7 +4800,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="top"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBtnDesktopBorderradiusWidth.top : activeBorderRadiusDevice === 'tab' ? infoBtnTabBorderradiusWidth.top : infoBtnMobileBorderradiusWidth.top}
+																value={DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.top : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.top : infoBtnMobileBorderradiusWidth.top}
 																onChange={(e) => handleButtonBorderRadiusWidthInputChange(e, 'top')}
 															/>
 														</div>
@@ -4992,7 +4810,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="right"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBtnDesktopBorderradiusWidth.right : activeBorderRadiusDevice === 'tab' ? infoBtnTabBorderradiusWidth.right : infoBtnMobileBorderradiusWidth.right}
+																value={DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.right : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.right : infoBtnMobileBorderradiusWidth.right}
 																onChange={(e) => handleButtonBorderRadiusWidthInputChange(e, 'right')}
 															/>
 														</div>
@@ -5002,7 +4820,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="bottom"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBtnDesktopBorderradiusWidth.bottom : activeBorderRadiusDevice === 'tab' ? infoBtnTabBorderradiusWidth.bottom : infoBtnMobileBorderradiusWidth.bottom}
+																value={DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.bottom : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.bottom : infoBtnMobileBorderradiusWidth.bottom}
 																onChange={(e) => handleButtonBorderRadiusWidthInputChange(e, 'bottom')}
 															/>
 														</div>
@@ -5012,7 +4830,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															<input
 																type="number"
 																name="left"
-																value={activeBorderRadiusDevice === 'desktop' ? infoBtnDesktopBorderradiusWidth.left : activeBorderRadiusDevice === 'tab' ? infoBtnTabBorderradiusWidth.left : infoBtnMobileBorderradiusWidth.left}
+																value={DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.left : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.left : infoBtnMobileBorderradiusWidth.left}
 																onChange={(e) => handleButtonBorderRadiusWidthInputChange(e, 'left')}
 															/>
 														</div>
