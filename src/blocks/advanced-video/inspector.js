@@ -612,7 +612,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     return (
         <>
 
-<style>
+            <style>
             {`
                 .fb-advanced-video-main-wrapper.${blockID} {
                     z-index: ${videoGlobalZIndex !== undefined ? videoGlobalZIndex : ''};
