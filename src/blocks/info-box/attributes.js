@@ -3,6 +3,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+	DeviceType: {
+		type: "string",
+		default: "Desktop"
+	},
 	infoBoxBg: {
 		type: 'string',
 		default: ''
@@ -15,6 +19,38 @@ const attributes = {
         type: 'string',
         default: ''
     },
+	mediaSize: {
+		type: 'object',
+		default: {
+			Desktop: 25,
+			Tablet: 25,
+			Mobile: 25
+		}
+	},
+	mediaSizeDesktop: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeSizeTablet: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeSizeMobile: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeUnitsSave: {
+		type: "string",
+		default: "px"
+	},
+	mediaSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
     height: {
         type: 'number',
         default: 50
@@ -31,6 +67,13 @@ const attributes = {
         type: 'string',
         default: '#fff'
     },
+	boxBgHoverColor: {
+		type: 'string',
+	},
+	boxBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
     titleColor: {
         type: 'string',
         default: '#000'
@@ -374,8 +417,8 @@ const attributes = {
     SubHeadingDesktopPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
+            top: 15,
+            bottom: 15,
             left: 0,
             right: 0,
         },
