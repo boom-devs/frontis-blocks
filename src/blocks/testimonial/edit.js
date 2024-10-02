@@ -53,8 +53,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return icons;
     };
 
-	console.log(FrontisBlocksData)
-
     return (
         <>
             <Inspector

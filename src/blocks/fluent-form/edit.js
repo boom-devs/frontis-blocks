@@ -12,34 +12,35 @@ export default function Edit (props) {
 		formId
 	} = attributes;
 
-	console.log(FrontisBlocksData)
-	const formLists = JSON.parse(FrontisBlocksData.fluent_form_lists);
+	// console.log(FrontisBlocksData)
 
-	const modifiedFormLists = formLists.map((obj, i) => {
-		return {
-			label: obj.label,
-			value: obj.value,
-		};
-	});
+	// const formLists = JSON.parse(FrontisBlocksData.fluent_form_lists);
+	//
+	// const modifiedFormLists = formLists.map((obj, i) => {
+	// 	return {
+	// 		label: obj.label,
+	// 		value: obj.value,
+	// 	};
+	// });
 	return (
 		<div {...useBlockProps()}>
-			{!formId && (
-				<SelectControl
-					value={formId}
-					options={modifiedFormLists}
-					onChange={(newFormId) =>
-						setAttributes({ formId: newFormId })
-					}
-				/>
-			)}
+			{/*{!formId && (*/}
+			{/*	<SelectControl*/}
+			{/*		value={formId}*/}
+			{/*		options={modifiedFormLists}*/}
+			{/*		onChange={(newFormId) =>*/}
+			{/*			setAttributes({ formId: newFormId })*/}
+			{/*		}*/}
+			{/*	/>*/}
+			{/*)}*/}
 
-			{formId && (
-				<ServerSideRender
-					className="eb-fluent-form-rendered"
-					block="fluentfom/guten-block"
-					attributes={{ formId: formId }}
-				/>
-			)}
+			{/*{formId && (*/}
+			{/*	<ServerSideRender*/}
+			{/*		className="eb-fluent-form-rendered"*/}
+			{/*		block="fluentfom/guten-block"*/}
+			{/*		attributes={{ formId: formId }}*/}
+			{/*	/>*/}
+			{/*)}*/}
 		</div>
 	);
 }

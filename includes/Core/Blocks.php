@@ -6,6 +6,7 @@ use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Forms\FluentForms;
+use FrontisBlocks\Forms\ContactForms7;
 
 defined('ABSPATH') || exit;
 
@@ -52,52 +53,62 @@ class Blocks
                     continue;
                 }
 
-                // Register the block
-                $rb = register_block_type($blocks_dir);
+// 				if($slug === 'contact-form-7') {
+// 					wp_register_script(
+// 						$editor_script_handle,
+// 						FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true
+// 					);
+//
+// 					register_block_type('frontis-block/contact-form-7-gblock', array(
+// 						'editor_script' => $editor_script_handle,
+// 						'render_callback' => [$this, 'render_contact_form_7_shortcode'], // Use this to render the form dynamically
+// 					));
+// 				} else {
+					$rb = register_block_type($blocks_dir);
+					wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
+					if ($is_editor) {
+						wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
+					}
 
-                // Register translations
-                wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
+					$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
+					wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
+// 				}
 
-                // Enqueue block style in the editor
-                if ($is_editor) {
-                    wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
-                }
-
-                // Enqueue block editor script and pass localized data
-                $editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
-                wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
 				$localize_array = '';
-                $localize_array = [
-// 					'eb_plugins_url'             => ESSENTIAL_BLOCKS_URL,
-// 					'image_url'                  => ESSENTIAL_BLOCKS_URL . 'assets/images',
-// 					'eb_wp_version'              => ESSENTIAL_BLOCKS_WP_VERSION,
-// 					'eb_version'                 => ESSENTIAL_BLOCKS_VERSION,
-// 					'eb_admin_url'               => get_admin_url(),
-// 					'rest_rootURL'               => get_rest_url(),
-// 					'ajax_url'                   => admin_url( 'admin-ajax.php' ),
-// 					'nft_nonce'                  => wp_create_nonce( 'eb-nft-nonce' ),
-// 					'post_grid_pagination_nonce' => wp_create_nonce( 'eb-pagination-nonce' ),
-// 					'placeholder_image'          => ESSENTIAL_BLOCKS_PLACEHOLDER_IMAGE,
-// 					'is_pro_active'              => ESSENTIAL_BLOCKS_IS_PRO_ACTIVE ? "true" : "false",
-// 					'upgrade_pro_url'            => ESSENTIAL_BLOCKS_UPGRADE_PRO_URL,
-// 					'responsiveBreakpoints'      => Helper::get_responsive_breakpoints()
-				 ];
+                $localize_array = [];
+
 				if ( is_admin() ) {
 					$admin_localize_array = [
 						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),
 						'fluent_plugin_active' => FluentForms::check_enable(),
 						'fluent_form_lists'   => json_encode( FluentForms::form_list() ),
-// 						'wpforms_lists'       => json_encode( WPForms::form_list() ),
+						'contact_form_active' => ContactForms7::check_enable(),
+						'contact_form7_lists'  => ContactForms7::form_list(),
+						'contact_form7_html'  => ContactForms7::wf7_form_html()
 					 ];
 
 					$localize_array = array_merge( $localize_array, $admin_localize_array );
 				}
 
-
-
                 wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
             }
         }
+    }
+
+    public function render_contact_form_7_shortcode($attributes) {
+    	// Extract the ID and title from attributes, setting defaults if not provided
+		$id = isset($attributes['id']) ? $attributes['id'] : '123'; // Default ID
+		$title = isset($attributes['title']) ? $attributes['title'] : 'Contact Form'; // Default title
+
+		// Prepare the Contact Form 7 shortcode with dynamic ID and title
+		$shortcode = sprintf(
+			'[contact-form-7 id="%s" title="%s"]',
+			esc_attr($id),
+			esc_attr($title)
+		);
+
+		// Dynamically render the Contact Form 7 form in the front-end
+		return do_shortcode($shortcode);
     }
 
     private function register_block($slug, $data)
