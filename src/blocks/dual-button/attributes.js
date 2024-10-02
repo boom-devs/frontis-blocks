@@ -306,6 +306,7 @@ const attributes = {
 	},
 	connectorLineHeight : {
 		type: "number",
+		default: 35
 	},
 	connectorLineHeightUnits : {
 		type: "string",
@@ -326,10 +327,27 @@ const attributes = {
 		default: "normal"
 	},
 	connectorBgColor : {
-		type: "string"
+		type: "string",
+		default: "#ffffff"
 	},
 	connectorBgHoverColor: {
 		type: 'string',
+	},
+	connectorSize: {
+		type: 'object',
+		default: {
+			Desktop: 35,
+			Tablet: 25,
+			Mobile: 15
+		}
+	},
+	connectorSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	//Button Two
 	ButtonTwoAlignment: {
