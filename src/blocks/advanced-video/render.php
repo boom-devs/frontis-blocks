@@ -219,9 +219,6 @@ $BorderRadiusMobileWidth = $videoGlobalBorderRadiusMobile['top'] . $videoGlobalB
     }
 </style>
 
-<?php
-
-?>
 <script src='https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js'></script>
 
 <div <?php echo get_block_wrapper_attributes(); ?>>
