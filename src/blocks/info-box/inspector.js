@@ -351,7 +351,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	/** Function to update all padding values */
 	const updateButtonPadding = (value, device) => {
 		switch (device) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({
 					infoButtonDesktopPadding: {
 						top: value,
@@ -361,7 +361,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({
 					infoButtonTabPadding: {
 						top: value,
@@ -371,7 +371,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 					}
 				});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({
 					infoButtonMobilePadding: {
 						top: value,
@@ -390,13 +390,13 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	const handleButtonPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
 		switch (DeviceType) {
-			case 'desktop':
+			case 'Desktop':
 				setAttributes({infoButtonDesktopPadding: {...infoButtonDesktopPadding, [direction]: value}});
 				break;
-			case 'tab':
+			case 'Tablet':
 				setAttributes({infoButtonTabPadding: {...infoButtonTabPadding, [direction]: value}});
 				break;
-			case 'mobile':
+			case 'Mobile':
 				setAttributes({infoButtonMobilePadding: {...infoButtonMobilePadding, [direction]: value}});
 				break;
 			default:
