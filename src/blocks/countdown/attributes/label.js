@@ -5,11 +5,11 @@ const labelAttributes = {
 	},
 	labelFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#FFFFFF"
 	},
 	labelFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#FFFFFF"
 	},
 	labelFontFamily: {
 		type: "string",

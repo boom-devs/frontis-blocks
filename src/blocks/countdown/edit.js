@@ -94,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		digitLineHeight,
 		digitLineHeightUnits,
 
-
+		labelFontColor,
 		labelFontFamily,
 		labelFontSize,
 		labelFontSizeUnits,
@@ -211,6 +211,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            			gap: ${countDownItemGap.Desktop}${countDownItemGapUnits.Desktop};
                 }
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item {
+                	background: ${countDownItemBgColor};
 					width: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};
 					height: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};
 					border: ${countDownItemBorder};
@@ -219,6 +220,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     border-radius: ${countDownItemBorderRadiusGetDesktop};
                 }
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
+                	color: ${digitFontColor};
                		font-family: ${digitFontFamily !== 'default' ? digitFontFamily : digitFontFamily};
                     font-size: ${digitFontSize !== undefined ? `${digitFontSize}${digitFontSizeUnits}` : ''};
                     font-weight: ${digitFontWeight};
@@ -229,6 +231,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     ${digitLineHeight !== undefined ? `line-height: ${digitLineHeight}${digitLineHeightUnits};` : ''}
                 }
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
+                	color: ${labelFontColor};
                		font-family: ${labelFontFamily !== 'default' ? labelFontFamily : labelFontFamily};
                     font-size: ${labelFontSize !== undefined ? `${labelFontSize}${labelFontSizeUnits}` : ''};
                     font-weight: ${labelFontWeight};

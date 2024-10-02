@@ -5,11 +5,11 @@ const countDownItemBgColorAttributes = {
 	},
 	countDownItemBgColor: {
 		type: "string",
-		default: "#0D173B"
+		default: "#F97255"
 	},
 	countDownItemBgHoverColor: {
 		type: 'string',
-		default: "#0D173B"
+		default: "#F97255"
 	},
 };
 

@@ -5,11 +5,11 @@ const digitAttributes = {
 	},
 	digitFontColor: {
 		type: "string",
-		default: "#0D173B"
+		default: "#FFFFFF"
 	},
 	digitFontHoverColor: {
 		type: 'string',
-		default: "#0D173B"
+		default: "#FFFFFF"
 	},
 
 	digitFontFamily: {
