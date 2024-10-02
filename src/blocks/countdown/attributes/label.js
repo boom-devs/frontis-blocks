@@ -5,11 +5,11 @@ const labelAttributes = {
 	},
 	labelFontColor: {
 		type: "string",
-		default: "#0D173B"
+		default: "#0d173bb3"
 	},
 	labelFontHoverColor: {
 		type: 'string',
-		default: "#0D173B"
+		default: "#0d173bb3"
 	},
 	labelFontFamily: {
 		type: "string",
@@ -17,6 +17,7 @@ const labelAttributes = {
 	},
 	labelFontSize: {
 		type: "number",
+		default: "18",
 	},
 	labelFontSizeUnits: {
 		type: "string",
@@ -24,7 +25,7 @@ const labelAttributes = {
 	},
 	labelFontWeight : {
 		type: "string",
-		default: "700"
+		default: "400"
 	},
 	labelFontStyle : {
 		type: "string",
@@ -47,6 +48,7 @@ const labelAttributes = {
 	},
 	labelLineHeight : {
 		type: "number",
+		default: "28"
 	},
 	labelLineHeightUnits : {
 		type: "string",

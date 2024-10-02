@@ -61,6 +61,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownItemGap,
 		countDownItemGapUnits,
 
+		countDownItemBgColor,
+
 		// Team Image Border Type
 		countDownItemBorder,
 		countDownItemBorderColor,
@@ -211,26 +213,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item {
 					width: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};
 					height: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};
+					border: ${countDownItemBorder};
+                    border-color: ${countDownItemBorderColor};
+                    border-width: ${countDownItemBorderTypeGetDesktop};
+                    border-radius: ${countDownItemBorderRadiusGetDesktop};
                 }
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
                		font-family: ${digitFontFamily !== 'default' ? digitFontFamily : digitFontFamily};
-                    font-size: ${digitFontSize !== undefined ? `${digitFontSize}${digitFontSize}` : ''}px;
+                    font-size: ${digitFontSize !== undefined ? `${digitFontSize}${digitFontSizeUnits}` : ''};
                     font-weight: ${digitFontWeight};
                     font-style: ${digitFontStyle};
                     text-transform: ${digitTextTransform};
                     text-decoration: ${digitTextDecoration};
                     ${digitLetterSpacing !== undefined ? `letter-spacing: ${digitLetterSpacing}${digitLetterSpacing};` : ''}
-                    ${digitLineHeight !== undefined ? `line-height: ${digitLineHeight}${digitLineHeight};` : ''}
+                    ${digitLineHeight !== undefined ? `line-height: ${digitLineHeight}${digitLineHeightUnits};` : ''}
                 }
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
                		font-family: ${labelFontFamily !== 'default' ? labelFontFamily : labelFontFamily};
-                    font-size: ${labelFontSize !== undefined ? `${labelFontSize}${labelFontSize}` : ''}px;
+                    font-size: ${labelFontSize !== undefined ? `${labelFontSize}${labelFontSizeUnits}` : ''};
                     font-weight: ${labelFontWeight};
                     font-style: ${labelFontStyle};
                     text-transform: ${labelTextTransform};
                     text-decoration: ${labelTextDecoration};
                     ${labelLetterSpacing !== undefined ? `letter-spacing: ${labelLetterSpacing}${labelLetterSpacing};` : ''}
-                    ${labelLineHeight !== undefined ? `line-height: ${labelLineHeight}${labelLineHeight};` : ''}
+                    ${labelLineHeight !== undefined ? `line-height: ${labelLineHeight}${labelLineHeightUnits};` : ''}
                 }
             `}
 			</style>
@@ -386,28 +392,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps} id={blockID}>
 				<div className={`fb-count-down-wrapper ${blockID}`}>
 					{showDays && (
-						<div className={`fb-count-down-item`} style={{ backgroundColor: attributes.countDownLabelBgColorDay }}>
+						<div className={`fb-count-down-item`}>
 							<span className={`fb-count-down-time`}>{timeRemaining.days || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelDay || __('Days', 'frontis-blocks')}</span>
 						</div>
 					)}
 
 					{showHours && (
-						<div className={`fb-count-down-item`} style={{ backgroundColor: attributes.countDownLabelBgColorHour }}>
+						<div className={`fb-count-down-item`}>
 							<span className={`fb-count-down-time`}>{timeRemaining.hours || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelHour || __('Hours', 'frontis-blocks')}</span>
 						</div>
 					)}
 
 					{showMinutes && (
-						<div className={`fb-count-down-item`} style={{ backgroundColor: attributes.countDownLabelBgColorMinute }}>
+						<div className={`fb-count-down-item`}>
 							<span className={`fb-count-down-time`}>{timeRemaining.minutes || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelMinute || __('Minutes', 'frontis-blocks')}</span>
 						</div>
 					)}
 
 					{showSeconds && (
-						<div className={`fb-count-down-item`} style={{ backgroundColor: attributes.countDownLabelBgColorSecond }}>
+						<div className={`fb-count-down-item`}>
 							<span className={`fb-count-down-time`}>{timeRemaining.seconds || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelSecond || __('Seconds', 'frontis-blocks')}</span>
 						</div>

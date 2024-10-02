@@ -21,25 +21,25 @@ export default function save({ attributes }) {
 		<>
 			<div {...blockProps} data-target-date={targetDate}>
 				<div className={`fb-count-down-wrapper ${blockID}`}>
-					<div className={`fb-count-down-item`} style={{ backgroundColor: countDownLabelBgColorDay }}>
+					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time days`}>0</span>
 						<span className={`fb-count-down-label`}>
 						{countDownLabelDay || __('Days', 'frontis-blocks')}
-					</span>
+						</span>
 					</div>
-					<div className={`fb-count-down-item`} style={{ backgroundColor: countDownLabelBgColorHour }}>
+					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time hours`}>0</span>
 						<span className={`fb-count-down-label`}>
 						{countDownLabelHour || __('Hours', 'frontis-blocks')}
-					</span>
+						</span>
 					</div>
-					<div className={`fb-count-down-item`} style={{ backgroundColor: countDownLabelBgColorMinute }}>
+					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time minutes`}>0</span>
 						<span className={`fb-count-down-label`}>
 						{countDownLabelMinute || __('Minutes', 'frontis-blocks')}
 					</span>
 					</div>
-					<div className={`fb-count-down-item`} style={{ backgroundColor: countDownLabelBgColorSecond }}>
+					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time seconds`}>0</span>
 						<span className={`fb-count-down-label`}>
 						{countDownLabelSecond || __('Seconds', 'frontis-blocks')}

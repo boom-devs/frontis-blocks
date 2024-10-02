@@ -15,9 +15,9 @@ const countDownItemSizeAttributes = {
 	countDownItemSize: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: 144,
+			Tablet: 120,
+			Mobile: 100
 		}
 	},
 	countDownItemSizeUnits: {

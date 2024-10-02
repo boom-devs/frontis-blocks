@@ -18,6 +18,7 @@ const digitAttributes = {
 	},
 	digitFontSize: {
 		type: "number",
+		default: "60"
 	},
 	digitFontSizeUnits: {
 		type: "string",
@@ -25,7 +26,7 @@ const digitAttributes = {
 	},
 	digitFontWeight : {
 		type: "string",
-		default: "700"
+		default: "500"
 	},
 	digitFontStyle : {
 		type: "string",
@@ -48,6 +49,7 @@ const digitAttributes = {
 	},
 	digitLineHeight : {
 		type: "number",
+		default: "68"
 	},
 	digitLineHeightUnits : {
 		type: "string",

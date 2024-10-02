@@ -4,35 +4,35 @@ const countDownItemBorderRadiusAttributes = {
 		type: 'object',
 		default: {
 			Desktop: 'px',
-			Tablet: 'em',
+			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
 	countDownItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: 500,
+			bottom: 500,
+			left: 500,
+			right: 500,
 		},
 	},
 	countDownItemBorderRadiusTab: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: 500,
+			bottom: 500,
+			left: 500,
+			right: 500,
 		},
 	},
 	countDownItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: 500,
+			bottom: 500,
+			left: 500,
+			right: 500,
 		},
 	},
 	countDownItemBorderRadiusLink : {
