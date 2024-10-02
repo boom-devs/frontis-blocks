@@ -9,7 +9,7 @@ import { ICON_ALIGN, NORMAL_HOVER } from "./constants/constants"; // Adjust the 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
-    const [activeColorSwitcher, setActiveColorSwitcher] = useState(item.socialIconColorSwitcher);
+    // const [activeColorSwitcher, setActiveColorSwitcher] = useState(item.socialIconColorSwitcher);
     
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -24,10 +24,10 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         handleChangeItem(item.id, 'socialIcon', IconName);
     };
 
-    const updateColorSwitcher = (value) => {
-        handleChangeItem(item.id, 'socialIconColorSwitcher', value);
-        setActiveColorSwitcher(value);
-    };
+    // const updateColorSwitcher = (value) => {
+    //     handleChangeItem(item.id, 'socialIconColorSwitcher', value);
+    //     setActiveColorSwitcher(value);
+    // };
 
     const updateNormalColor = (color) => {
         handleChangeItem(item.id, 'socialIconColor', color.hex);
@@ -64,7 +64,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         <FBIconPicker value={item.socialIcon} setIconHandler={iconHandler} />
                     </BaseControl>
 
-                    <BaseControl label={__("Color Switcher", "frontis-blocks")}>
+                    {/* <BaseControl label={__("Color Switcher", "frontis-blocks")}>
                         <ButtonGroup className="fb-setting-color-panel-btn">
                             {NORMAL_HOVER.map((switcher, key) => (
                                 <Button
@@ -174,7 +174,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                 )}
                             />
                         </BaseControl>
-                    )}
+                    )} */}
 
                     <div className="fb-link-control-wrapper">
                         <BaseControl 

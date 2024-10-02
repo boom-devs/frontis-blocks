@@ -104,14 +104,14 @@ class BlockList {
             //     'badge'     => 'freemium',
             //     'status'    => 'active',
             // ],
-//             'countdown' => [
-//                 'slug'      => 'countdown',
-//                 'title'     => 'Countdown',
-//                 'package'   => 'free',
-//                 'category'  => 'content',
-//                 'badge'     => 'free',
-//                 'status'    => 'active',
-//             ],
+             'countdown' => [
+                 'slug'      => 'countdown',
+                 'title'     => 'Countdown',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
 //             'flip-box' => [
 //                 'slug'      => 'flip-box',
 //                 'title'     => 'Flip Box',

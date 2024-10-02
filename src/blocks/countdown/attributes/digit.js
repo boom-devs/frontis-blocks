@@ -1,4 +1,17 @@
 const digitAttributes = {
+	digitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	digitFontColor: {
+		type: "string",
+		default: "#0D173B"
+	},
+	digitFontHoverColor: {
+		type: 'string',
+		default: "#0D173B"
+	},
+
 	digitFontFamily: {
 		type: "string",
 		default: "inherit",

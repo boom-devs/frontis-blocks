@@ -1,4 +1,16 @@
 const labelAttributes = {
+	labelFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	labelFontColor: {
+		type: "string",
+		default: "#0D173B"
+	},
+	labelFontHoverColor: {
+		type: 'string',
+		default: "#0D173B"
+	},
 	labelFontFamily: {
 		type: "string",
 		default: "inherit",
