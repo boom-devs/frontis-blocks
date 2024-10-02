@@ -25,11 +25,11 @@ import ResponsiveControl from "../../components/responsivecontrol";
 
 import CountdownItemSizeControl from "./style-control/countdown-item-size-control";
 import CountdownItemGapControl from "./style-control/countdown-item-gap-control";
-import ContdownItemBorderTypeControl from "./style-control/contdown-item-border-type-control";
-import ContdownItemBorderRadiusControl from "./style-control/contdown-item-border-radius-control";
-import CountDownTypographyControl from "@Blocks/countdown/style-control/contdown-digit-typograpy-control";
-import CountDownDigitTypographyControl from "@Blocks/countdown/style-control/contdown-digit-typograpy-control";
-import CountDownLabelTypographyControl from "@Blocks/countdown/style-control/contdown-label-typograpy-control";
+import CountDownItemBorderTypeControl from "./style-control/countdown-item-border-type-control";
+import CountDownItemBorderRadiusControl from "./style-control/countdown-item-border-radius-control";
+import CountDownDigitTypographyControl from "./style-control/countdown-digit-typograpy-control";
+import CountDownLabelTypographyControl from "./style-control/countdown-label-typograpy-control";
+import CountDownItemBgColorControl from "./style-control/countdown-item-bg-color-control";
 
 
 
@@ -321,34 +321,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								{tab.name === "styles" && (
 									<>
 
-									<PanelBody
-										title={__("Digit", "frontis-blocks")}
-										initialOpen={true}
-									>
-										<CountDownDigitTypographyControl
-											attributes={attributes}
-											setAttributes={setAttributes}
-											clientId ={clientId}
-										/>
-									</PanelBody>
-
-									<PanelBody
-										title={__("Label", "frontis-blocks")}
-										initialOpen={true}
-									>
-										<CountDownLabelTypographyControl
-											attributes={attributes}
-											setAttributes={setAttributes}
-											clientId ={clientId}
-										/>
-									</PanelBody>
-
-
 										<PanelBody
-											title={__("Box", "frontis-blocks")}
-											initialOpen={false}
+											title={__("Item", "frontis-blocks")}
+											initialOpen={true}
 										>
-
 											<CountdownItemSizeControl
 												attributes={attributes}
 												setAttributes={setAttributes}
@@ -359,25 +335,45 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
-
+											<CountDownItemBgColorControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<CountDownItemBorderTypeControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<CountDownItemBorderRadiusControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
 
 										<PanelBody
-											title={__("Border", "frontis-blocks")}
-											initialOpen={false}
-											className="fb-setting-border-setting-wrapper"
+											title={__("Digit", "frontis-blocks")}
+											initialOpen={true}
 										>
-											<ContdownItemBorderTypeControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<ContdownItemBorderRadiusControl
+											<CountDownDigitTypographyControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
 										</PanelBody>
+
+										<PanelBody
+											title={__("Label", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<CountDownLabelTypographyControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
+
 									</>
 								)}
 							</div>

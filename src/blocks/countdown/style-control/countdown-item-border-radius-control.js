@@ -1,5 +1,5 @@
 import FB_Spacing from "@Components/spacing";
-export default function ContdownItemBorderRadiusControl ({ attributes, setAttributes}) {
+export default function CountDownItemBorderRadiusControl ({ attributes, setAttributes}) {
 
 	const {
 		DeviceType,

@@ -16,7 +16,7 @@ import {BORDER_STYLES} from "../constants/constants";
 import FB_Spacing from "@Components/spacing";
 
 
-export default function ContdownItemBorderTypeControl ({ attributes, setAttributes}) {
+export default function CountDownItemBorderTypeControl ({ attributes, setAttributes}) {
 
 	const {
 		DeviceType,

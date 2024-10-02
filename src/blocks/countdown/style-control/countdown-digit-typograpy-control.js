@@ -24,8 +24,6 @@ export default function CountDownDigitTypographyControl ({ attributes, setAttrib
 		digitLineHeightUnits,
 
 
-
-
 	} = attributes;
 
 
