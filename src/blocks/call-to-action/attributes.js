@@ -3,9 +3,13 @@ const attributes = {
         type: "string",
         default: ""
     },
+	DeviceType: {
+		type: "string",
+		default: "Desktop"
+	},
 	infoBoxBg: {
 		type: 'string',
-		default: ''
+		default: '#0D173B'
 	},
 	mediaSwitcher : {
 		type: "string",
@@ -15,6 +19,38 @@ const attributes = {
         type: 'string',
         default: ''
     },
+	mediaSize: {
+		type: 'object',
+		default: {
+			Desktop: 25,
+			Tablet: 25,
+			Mobile: 25
+		}
+	},
+	mediaSizeDesktop: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeSizeTablet: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeSizeMobile: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeUnitsSave: {
+		type: "string",
+		default: "px"
+	},
+	mediaSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
     height: {
         type: 'number',
         default: 50
@@ -29,11 +65,18 @@ const attributes = {
 	},
     boxBgColor: {
         type: 'string',
-        default: '#fff'
+        default: '#0D173B'
     },
+	boxBgHoverColor: {
+		type: 'string',
+	},
+	boxBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
     titleColor: {
         type: 'string',
-        default: '#000'
+        default: '#ffffff'
     },
     borderRadius: {
         type: 'number',
@@ -41,7 +84,7 @@ const attributes = {
     },
     titleText: {
         type: 'string',
-        default: 'Build your own website',
+        default: 'Icon Box title',
     },
     wrapperAlignment: {
         type: "string",
@@ -63,7 +106,7 @@ const attributes = {
         type: "string",
         default: "left",
     },
-    headingText: {
+    Heading_Text: {
         type : "string",
         default: "Build your own website"
     },
@@ -119,7 +162,7 @@ const attributes = {
     },
     Heading_Color : {
         type: "string",
-		default: "#ffffff"
+		default: '#ffffff'
     },
     Heading_Hover_Color: {
         type: 'string',
@@ -267,7 +310,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 16,
+            bottom: 0,
             left: 0,
             right: 0,
         },
@@ -347,7 +390,7 @@ const attributes = {
     },
     SubHeadingColor : {
         type: "string",
-		default: '#ffffff'
+		default: "#ffffff"
     },
     SubHeadingHoverColor : {
         type: "string"
@@ -375,7 +418,7 @@ const attributes = {
     SubHeadingDesktopPadding: {
         type: "object",
         default: {
-            top: 0,
+            top: 10,
             bottom: 0,
             left: 0,
             right: 0,
@@ -801,7 +844,7 @@ const attributes = {
 	},
 	buttonTextColor : {
 		type: "string",
-		default: '#6B4EFF'
+		default: '#ffffff'
 	},
 	buttonTextHoverColor : {
 		type: "string"
@@ -812,7 +855,7 @@ const attributes = {
 	},
 	buttonBgColor : {
 		type: "string",
-		default: '#ffffff'
+		default: '#F97255'
 	},
 	buttonBgHoverColor : {
 		type: "string"

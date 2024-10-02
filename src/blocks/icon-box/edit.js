@@ -6,12 +6,12 @@ import {
     BlockControls,
     AlignmentToolbar,
 } from '@wordpress/block-editor';
-
 /**
  * Internal depencencies
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import {Card} from "@wordpress/components";
 export default function Edit({ attributes, setAttributes, clientId}) {
     const {
         blockID,
@@ -34,7 +34,8 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 		buttonAlignment,
 		icon,
 		mediaSwitcher,
-		contentAlignment
+		contentAlignment,
+		mediaSize,
 
     } = attributes;
 
@@ -58,12 +59,14 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 			</BlockControls>
 
             <div {...blockProps} id={blockID}>
-
-                <div className={`fb-info-box-content-wrapper ${blockID}`} >
+				<div
+					className={`fb-info-box-content-wrapper ${blockID}`}
+				>
+                <div className={`fb-info-box-content-wrapper-inner ${blockID}`} >
 					<div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
 						{mediaSwitcher === 'image' && (
 						<img src={attributes.infoMediaUrl}
-							 style={{width: `${attributes.width}px`, height: `${attributes.height}px`}}
+
 						/>
 							)}
 						{mediaSwitcher === 'icon' && (
@@ -80,18 +83,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                         style={{textAlign: Alignment}}
                     />
 
-                    {Sub_Heading_Switcher && Sub_Heading_Position === 'top' && (
-                        <RichText
-                            tagName={Sub_Heading_Tag}
-                            value={Sub_Heading_Text}
-                            onChange={(value) => setAttributes({Sub_Heading_Text: value})}
-                            placeholder={__('Info description', 'frontis-block')}
-                            className="fb-description"
-							style={{textAlign: descAlignment}}
-                        />
-                    )}
-
-                    {Sub_Heading_Switcher && Sub_Heading_Position === 'bottom' && (
+                    {Sub_Heading_Switcher && (
                         <RichText
                             tagName={Sub_Heading_Tag}
                             value={Sub_Heading_Text}
@@ -102,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                         />
                     )}
 				</div>
-
+				</div>
 			</div>
 		</>
 	);

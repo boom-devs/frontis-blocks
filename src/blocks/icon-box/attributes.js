@@ -3,6 +3,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+	DeviceType: {
+		type: "string",
+		default: "Desktop"
+	},
 	infoBoxBg: {
 		type: 'string',
 		default: ''
@@ -15,6 +19,38 @@ const attributes = {
         type: 'string',
         default: ''
     },
+	mediaSize: {
+		type: 'object',
+		default: {
+			Desktop: 25,
+			Tablet: 25,
+			Mobile: 25
+		}
+	},
+	mediaSizeDesktop: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeSizeTablet: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeSizeMobile: {
+		type: "number",
+		default: 20
+	},
+	mediaSizeUnitsSave: {
+		type: "string",
+		default: "px"
+	},
+	mediaSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
     height: {
         type: 'number',
         default: 50
@@ -25,12 +61,19 @@ const attributes = {
     },
 	icon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'bolt',
 	},
     boxBgColor: {
         type: 'string',
         default: '#fff'
     },
+	boxBgHoverColor: {
+		type: 'string',
+	},
+	boxBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
     titleColor: {
         type: 'string',
         default: '#000'
@@ -57,7 +100,7 @@ const attributes = {
     },
 	buttonAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
     Alignment: {
         type: "string",
@@ -65,7 +108,7 @@ const attributes = {
     },
     Heading_Text: {
         type : "string",
-        default: "Icon Box Title"
+        default: "Icon Box"
     },
     Heading_Tag: {
         type : "string",
@@ -257,9 +300,7 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-
-
+	//Margin
     Heading_Margin_Units : {
         type: "string",
         default: "px"
@@ -354,7 +395,8 @@ const attributes = {
     },
     Sub_Heading_Text: {
         type: "string",
-        default: "lorem ipsum dolor somit inta anta kun faya kun."
+        default: "Corrupti non maiores atque. Repellendus nulla ratione omnis possimus. sit numquam minima. " +
+			"ut harum eaque eaque laudantium tenetur."
     },
     Sub_Heading_Tag: {
         type : "string",
@@ -375,8 +417,8 @@ const attributes = {
     SubHeadingDesktopPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
+            top: 15,
+            bottom: 15,
             left: 0,
             right: 0,
         },
@@ -399,6 +441,46 @@ const attributes = {
             right: 0,
         },
     },
+	//Margin
+	descMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	descDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	descTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	descMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	descActiveMarginDevice: {
+		type: "string",
+		default: "desktop"
+	},
+	descMarginLink : {
+		type : "boolean",
+		default: true
+	},
     //Info Button
     info_Button_Text: {
         type: "string",
@@ -406,7 +488,7 @@ const attributes = {
     },
     info_Button_Switcher: {
         type: "boolean",
-        default: false,
+        default: true,
     },
     info_Button_Link: {
         type: "string",
@@ -419,10 +501,10 @@ const attributes = {
 	infoButtonDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
 		},
 	},
 	infoButtonTabPadding: {
@@ -483,6 +565,84 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+	//Info Button Border
+	infoButtonBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	infoButtonBorder: {
+		type: 'string',
+		default: "none",
+	},
+	infoButtonBorderColor: {
+		type: 'string',
+	},
+	infoButtonHoverBorderColor: {
+		type: 'string',
+	},
+	infoButtonBorderUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoButtonDesktopBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonTabBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoButtonMobileBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	//Button Border Radius
+	infoBtnBorderradiusUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoBtnDesktopBorderradiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBtnTabBorderradiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBtnMobileBorderradiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
 	//Info box padding
 	infoBoxPaddingUnits : {
 		type: "string",
@@ -491,10 +651,10 @@ const attributes = {
 	infoBoxDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 40,
+			bottom: 40,
+			left: 40,
+			right: 40,
 		},
 	},
 	infoBoxTabPadding: {
@@ -514,6 +674,46 @@ const attributes = {
 			left: 0,
 			right: 0,
 		},
+	},
+	// Info box margin
+	infoBoxMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	infoBoxDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	infoBoxActiveMarginDevice: {
+		type: "string",
+		default: "desktop"
+	},
+	infoBoxMarginLink : {
+		type : "boolean",
+		default: true
 	},
 	// Info Box Border
 	infoBoxBorder: {
@@ -600,7 +800,7 @@ const attributes = {
 	},
 	buttonFontSize: {
 		type: "number",
-		default: 35
+		default: 14
 	},
 	buttonFontSizeUnits: {
 		type: "string",
@@ -608,7 +808,7 @@ const attributes = {
 	},
 	buttonFontWeight : {
 		type: "string",
-		default: "700"
+		default: "400"
 	},
 	buttonFontStyle : {
 		type: "string",
@@ -642,7 +842,8 @@ const attributes = {
 		default: "normal"
 	},
 	buttonTextColor : {
-		type: "string"
+		type: "string",
+		default: '#ffffff'
 	},
 	buttonTextHoverColor : {
 		type: "string"
@@ -652,7 +853,8 @@ const attributes = {
 		default: "normal"
 	},
 	buttonBgColor : {
-		type: "string"
+		type: "string",
+		default: '#4361EE'
 	},
 	buttonBgHoverColor : {
 		type: "string"

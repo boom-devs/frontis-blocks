@@ -141,6 +141,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		ButtonTwoIconAlign,
 		ButtonTwoIcon,
 
+		connectorSwitcher,
+		connectorText
+
     } = attributes;
 
 
@@ -694,6 +697,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													</div>
 												</PanelBody>
 											</div>
+											<div className="fb-dual-button-connenctor-wrapper">
+												<PanelBody
+													title={__("Connector", "frontis-blocks")}
+													initialOpen={true}
+												>
+													<ToggleControl
+														label={__("Show Connector", "frontis-block")}
+														checked={connectorSwitcher}
+														onChange={(value) => setAttributes({connectorSwitcher: value})}
+													/>
+													{connectorSwitcher && (
+													<TextControl
+														label={__("Connector Text", "frontis-blocks")}
+														value={connectorText}
+														onChange={(value) => setAttributes({connectorText: value})}
+														className="fb-advanced-button-text"
+													/>
+												)}
+												</PanelBody>
+											</div>
+
 											<div className="fb-dual-button-two-wrapper">
 												<PanelBody
 													title={__("Button Two", "frontis-blocks")}

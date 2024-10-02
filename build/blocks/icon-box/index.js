@@ -17,6 +17,10 @@ var attributes = {
     type: "string",
     "default": ""
   },
+  DeviceType: {
+    type: "string",
+    "default": "Desktop"
+  },
   infoBoxBg: {
     type: 'string',
     "default": ''
@@ -29,6 +33,38 @@ var attributes = {
     type: 'string',
     "default": ''
   },
+  mediaSize: {
+    type: 'object',
+    "default": {
+      Desktop: 25,
+      Tablet: 25,
+      Mobile: 25
+    }
+  },
+  mediaSizeDesktop: {
+    type: "number",
+    "default": 20
+  },
+  mediaSizeSizeTablet: {
+    type: "number",
+    "default": 20
+  },
+  mediaSizeSizeMobile: {
+    type: "number",
+    "default": 20
+  },
+  mediaSizeUnitsSave: {
+    type: "string",
+    "default": "px"
+  },
+  mediaSizeUnits: {
+    type: 'object',
+    "default": {
+      Desktop: 'px',
+      Tablet: 'px',
+      Mobile: 'px'
+    }
+  },
   height: {
     type: 'number',
     "default": 50
@@ -39,11 +75,18 @@ var attributes = {
   },
   icon: {
     type: 'string',
-    "default": 'circle-check'
+    "default": 'bolt'
   },
   boxBgColor: {
     type: 'string',
     "default": '#fff'
+  },
+  boxBgHoverColor: {
+    type: 'string'
+  },
+  boxBgColorSwitcher: {
+    type: "string",
+    "default": "normal"
   },
   titleColor: {
     type: 'string',
@@ -71,7 +114,7 @@ var attributes = {
   },
   buttonAlignment: {
     type: "string",
-    "default": "left"
+    "default": "center"
   },
   Alignment: {
     type: "string",
@@ -79,7 +122,7 @@ var attributes = {
   },
   Heading_Text: {
     type: "string",
-    "default": "Icon Box Title"
+    "default": "Icon Box"
   },
   Heading_Tag: {
     type: "string",
@@ -271,6 +314,7 @@ var attributes = {
     type: "boolean",
     "default": true
   },
+  //Margin
   Heading_Margin_Units: {
     type: "string",
     "default": "px"
@@ -365,7 +409,7 @@ var attributes = {
   },
   Sub_Heading_Text: {
     type: "string",
-    "default": "lorem ipsum dolor somit inta anta kun faya kun."
+    "default": "Corrupti non maiores atque. Repellendus nulla ratione omnis possimus. sit numquam minima. " + "ut harum eaque eaque laudantium tenetur."
   },
   Sub_Heading_Tag: {
     type: "string",
@@ -386,8 +430,8 @@ var attributes = {
   SubHeadingDesktopPadding: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
+      top: 15,
+      bottom: 15,
       left: 0,
       right: 0
     }
@@ -410,6 +454,46 @@ var attributes = {
       right: 0
     }
   },
+  //Margin
+  descMarginUnits: {
+    type: "string",
+    "default": "px"
+  },
+  descDesktopMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  descTabMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  descMobileMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  descActiveMarginDevice: {
+    type: "string",
+    "default": "desktop"
+  },
+  descMarginLink: {
+    type: "boolean",
+    "default": true
+  },
   //Info Button
   info_Button_Text: {
     type: "string",
@@ -417,7 +501,7 @@ var attributes = {
   },
   info_Button_Switcher: {
     type: "boolean",
-    "default": false
+    "default": true
   },
   info_Button_Link: {
     type: "string",
@@ -430,10 +514,10 @@ var attributes = {
   infoButtonDesktopPadding: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: 20,
+      bottom: 20,
+      left: 20,
+      right: 20
     }
   },
   infoButtonTabPadding: {
@@ -494,6 +578,84 @@ var attributes = {
     type: "boolean",
     "default": true
   },
+  //Info Button Border
+  infoButtonBorderColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  infoButtonBorder: {
+    type: 'string',
+    "default": "none"
+  },
+  infoButtonBorderColor: {
+    type: 'string'
+  },
+  infoButtonHoverBorderColor: {
+    type: 'string'
+  },
+  infoButtonBorderUnits: {
+    type: "string",
+    "default": "px"
+  },
+  infoButtonDesktopBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  infoButtonTabBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  infoButtonMobileBorderWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  //Button Border Radius
+  infoBtnBorderradiusUnits: {
+    type: "string",
+    "default": "px"
+  },
+  infoBtnDesktopBorderradiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  infoBtnTabBorderradiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  infoBtnMobileBorderradiusWidth: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
   //Info box padding
   infoBoxPaddingUnits: {
     type: "string",
@@ -502,10 +664,10 @@ var attributes = {
   infoBoxDesktopPadding: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: 40,
+      bottom: 40,
+      left: 40,
+      right: 40
     }
   },
   infoBoxTabPadding: {
@@ -525,6 +687,46 @@ var attributes = {
       left: 0,
       right: 0
     }
+  },
+  // Info box margin
+  infoBoxMarginUnits: {
+    type: "string",
+    "default": "px"
+  },
+  infoBoxDesktopMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  infoBoxTabMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  infoBoxMobileMargin: {
+    type: "object",
+    "default": {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  },
+  infoBoxActiveMarginDevice: {
+    type: "string",
+    "default": "desktop"
+  },
+  infoBoxMarginLink: {
+    type: "boolean",
+    "default": true
   },
   // Info Box Border
   infoBoxBorder: {
@@ -611,7 +813,7 @@ var attributes = {
   },
   buttonFontSize: {
     type: "number",
-    "default": 35
+    "default": 14
   },
   buttonFontSizeUnits: {
     type: "string",
@@ -619,7 +821,7 @@ var attributes = {
   },
   buttonFontWeight: {
     type: "string",
-    "default": "700"
+    "default": "400"
   },
   buttonFontStyle: {
     type: "string",
@@ -653,7 +855,8 @@ var attributes = {
     "default": "normal"
   },
   buttonTextColor: {
-    type: "string"
+    type: "string",
+    "default": '#ffffff'
   },
   buttonTextHoverColor: {
     type: "string"
@@ -663,7 +866,8 @@ var attributes = {
     "default": "normal"
   },
   buttonBgColor: {
-    type: "string"
+    type: "string",
+    "default": '#4361EE'
   },
   buttonBgHoverColor: {
     type: "string"
@@ -3955,13 +4159,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inspector */ "./src/blocks/icon-box/inspector.js");
 /* harmony import */ var _components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/icon-picker/components/icon-picker/controls/renderIcon */ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-
 
 
 /**
  * Internal depencencies
  */
+
 
 
 function Edit(_ref) {
@@ -3988,7 +4194,8 @@ function Edit(_ref) {
     buttonAlignment = attributes.buttonAlignment,
     icon = attributes.icon,
     mediaSwitcher = attributes.mediaSwitcher,
-    contentAlignment = attributes.contentAlignment;
+    contentAlignment = attributes.contentAlignment,
+    mediaSize = attributes.mediaSize;
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
@@ -4007,16 +4214,14 @@ function Edit(_ref) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-info-box-content-wrapper ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-info-box-content-wrapper-inner ".concat(blockID)
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-info-media-wrapper",
     style: {
       textAlign: wrapperAlignment
     }
   }, mediaSwitcher === 'image' && /*#__PURE__*/React.createElement("img", {
-    src: attributes.infoMediaUrl,
-    style: {
-      width: "".concat(attributes.width, "px"),
-      height: "".concat(attributes.height, "px")
-    }
+    src: attributes.infoMediaUrl
   }), mediaSwitcher === 'icon' && /*#__PURE__*/React.createElement("div", {
     className: "fb-icon-wrapper"
   }, (0,_components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_3__["default"])(icon))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
@@ -4032,7 +4237,7 @@ function Edit(_ref) {
     style: {
       textAlign: Alignment
     }
-  }), Sub_Heading_Switcher && Sub_Heading_Position === 'top' && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+  }), Sub_Heading_Switcher && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
     tagName: Sub_Heading_Tag,
     value: Sub_Heading_Text,
     onChange: function onChange(value) {
@@ -4045,20 +4250,7 @@ function Edit(_ref) {
     style: {
       textAlign: descAlignment
     }
-  }), Sub_Heading_Switcher && Sub_Heading_Position === 'bottom' && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
-    tagName: Sub_Heading_Tag,
-    value: Sub_Heading_Text,
-    onChange: function onChange(value) {
-      return setAttributes({
-        Sub_Heading_Text: value
-      });
-    },
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Info description', 'frontis-block'),
-    className: "fb-description",
-    style: {
-      textAlign: descAlignment
-    }
-  }))));
+  })))));
 }
 
 /***/ }),
@@ -4118,6 +4310,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/icon-box/editor.scss");
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
+/* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
+/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -4137,6 +4331,8 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 /**
  * Internal depencencies
  */
+
+
 
 
 
@@ -4187,7 +4383,7 @@ function Inspector(_ref) {
     Heading_Desktop_padding = attributes.Heading_Desktop_padding,
     Heading_Tab_padding = attributes.Heading_Tab_padding,
     Heading_Mobile_padding = attributes.Heading_Mobile_padding,
-    activePaddingDevice = attributes.activePaddingDevice,
+    DeviceType = attributes.DeviceType,
     paddingLink = attributes.paddingLink,
     Heading_Margin_Units = attributes.Heading_Margin_Units,
     Heading_Desktop_Margin = attributes.Heading_Desktop_Margin,
@@ -4216,6 +4412,12 @@ function Inspector(_ref) {
     SubHeadingColor = attributes.SubHeadingColor,
     SubHeadingColorSwitcher = attributes.SubHeadingColorSwitcher,
     SubHeadingHoverColor = attributes.SubHeadingHoverColor,
+    descMarginUnits = attributes.descMarginUnits,
+    descDesktopMargin = attributes.descDesktopMargin,
+    descTabMargin = attributes.descTabMargin,
+    descMobileMargin = attributes.descMobileMargin,
+    descActiveMarginDevice = attributes.descActiveMarginDevice,
+    descMarginLink = attributes.descMarginLink,
     infoBoxPaddingUnits = attributes.infoBoxPaddingUnits,
     infoBoxDesktopPadding = attributes.infoBoxDesktopPadding,
     infoBoxTabPadding = attributes.infoBoxTabPadding,
@@ -4262,7 +4464,29 @@ function Inspector(_ref) {
     icon = attributes.icon,
     width = attributes.width,
     mediaSwitcher = attributes.mediaSwitcher,
-    contentAlignment = attributes.contentAlignment;
+    contentAlignment = attributes.contentAlignment,
+    infoButtonBorder = attributes.infoButtonBorder,
+    infoBoxMarginUnits = attributes.infoBoxMarginUnits,
+    infoBoxDesktopMargin = attributes.infoBoxDesktopMargin,
+    infoBoxTabMargin = attributes.infoBoxTabMargin,
+    infoBoxMobileMargin = attributes.infoBoxMobileMargin,
+    infoBoxMarginLink = attributes.infoBoxMarginLink,
+    infoButtonBorderUnits = attributes.infoButtonBorderUnits,
+    infoButtonDesktopBorderWidth = attributes.infoButtonDesktopBorderWidth,
+    infoButtonTabBorderWidth = attributes.infoButtonTabBorderWidth,
+    infoButtonMobileBorderWidth = attributes.infoButtonMobileBorderWidth,
+    infoBtnBorderradiusUnits = attributes.infoBtnBorderradiusUnits,
+    infoBtnDesktopBorderradiusWidth = attributes.infoBtnDesktopBorderradiusWidth,
+    infoBtnTabBorderradiusWidth = attributes.infoBtnTabBorderradiusWidth,
+    infoBtnMobileBorderradiusWidth = attributes.infoBtnMobileBorderradiusWidth,
+    infoButtonBorderColorSwitcher = attributes.infoButtonBorderColorSwitcher,
+    infoButtonBorderColor = attributes.infoButtonBorderColor,
+    infoButtonHoverBorderColor = attributes.infoButtonHoverBorderColor,
+    boxBgColor = attributes.boxBgColor,
+    boxBgColorSwitcher = attributes.boxBgColorSwitcher,
+    boxBgHoverColor = attributes.boxBgHoverColor,
+    mediaSize = attributes.mediaSize,
+    mediaSizeUnits = attributes.mediaSizeUnits;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
       setAttributes({
@@ -4284,7 +4508,16 @@ function Inspector(_ref) {
       icon: iconName
     });
   };
-
+  var mediaSizeHandler = function mediaSizeHandler(value) {
+    setAttributes({
+      mediaSize: value
+    });
+  };
+  var mediaSizeUnitsHandler = function mediaSizeUnitsHandler(value) {
+    setAttributes({
+      mediaSizeUnits: value
+    });
+  };
   /** Start Padding */
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_padding),
     _useState2 = _slicedToArray(_useState, 2),
@@ -4293,7 +4526,7 @@ function Inspector(_ref) {
   /** Function to update all padding values */
   var updateAllPadding = function updateAllPadding(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_padding: {
             top: value,
@@ -4303,7 +4536,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_padding: {
             top: value,
@@ -4313,7 +4546,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_padding: {
             top: value,
@@ -4331,18 +4564,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handlePaddingInputChange = function handlePaddingInputChange(e, direction) {
     var value = e.target.value;
-    switch (activePaddingDevice) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_padding: _objectSpread(_objectSpread({}, Heading_Desktop_padding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_padding: _objectSpread(_objectSpread({}, Heading_Tab_padding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_padding: _objectSpread(_objectSpread({}, Heading_Mobile_padding), {}, _defineProperty({}, direction, value))
         });
@@ -4352,7 +4585,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if paddingLink is true */
     if (paddingLink) {
-      updateAllPadding(value, activePaddingDevice);
+      updateAllPadding(value, DeviceType);
     }
   };
 
@@ -4377,7 +4610,7 @@ function Inspector(_ref) {
   /** Function to handle device click for padding */
   var handlePaddingDeviceClick = function handlePaddingDeviceClick(device) {
     setAttributes({
-      activePaddingDevice: device
+      DeviceType: device
     });
   };
 
@@ -4431,7 +4664,7 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleButtonPaddingInputChange = function handleButtonPaddingInputChange(e, direction) {
     var value = e.target.value;
-    switch (activePaddingDevice) {
+    switch (DeviceType) {
       case 'desktop':
         setAttributes({
           infoButtonDesktopPadding: _objectSpread(_objectSpread({}, infoButtonDesktopPadding), {}, _defineProperty({}, direction, value))
@@ -4452,7 +4685,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if paddingLink is true */
     if (paddingLink) {
-      updateButtonPadding(value, activePaddingDevice);
+      updateButtonPadding(value, DeviceType);
     }
   };
 
@@ -4477,7 +4710,7 @@ function Inspector(_ref) {
   /** Function to handle device click for padding */
   var handleButtonPaddingDeviceClick = function handleButtonPaddingDeviceClick(device) {
     setAttributes({
-      activePaddingDevice: device
+      DeviceType: device
     });
   };
 
@@ -4485,6 +4718,7 @@ function Inspector(_ref) {
   var buttonPadding = "".concat(infoButtonDesktopPadding.top).concat(infoButtonPaddingUnits, " ").concat(infoButtonDesktopPadding.right).concat(infoButtonPaddingUnits, " ").concat(infoButtonDesktopPadding.bottom).concat(infoButtonPaddingUnits, " ").concat(infoButtonDesktopPadding.left).concat(infoButtonPaddingUnits);
   /** End Padding */
 
+  /*BOX SPACING*/
   /** Start Padding */
   var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoBoxDesktopPadding),
     _useState6 = _slicedToArray(_useState5, 2),
@@ -4493,7 +4727,7 @@ function Inspector(_ref) {
   /** Function to update all padding values */
   var updateAllBoxPadding = function updateAllBoxPadding(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           infoBoxDesktopPadding: {
             top: value,
@@ -4503,7 +4737,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoBoxTabPadding: {
             top: value,
@@ -4513,7 +4747,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoBoxMobilePadding: {
             top: value,
@@ -4531,18 +4765,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleBoxPaddingInputChange = function handleBoxPaddingInputChange(e, direction) {
     var value = e.target.value;
-    switch (activePaddingDevice) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           infoBoxDesktopPadding: _objectSpread(_objectSpread({}, infoBoxDesktopPadding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoBoxTabPadding: _objectSpread(_objectSpread({}, infoBoxTabPadding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoBoxMobilePadding: _objectSpread(_objectSpread({}, infoBoxMobilePadding), {}, _defineProperty({}, direction, value))
         });
@@ -4552,7 +4786,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if paddingLink is true */
     if (paddingLink) {
-      updateAllBoxPadding(value, activePaddingDevice);
+      updateAllBoxPadding(value, DeviceType);
     }
   };
 
@@ -4577,7 +4811,7 @@ function Inspector(_ref) {
   /** Function to handle device click for padding */
   var handleBoxPaddingDeviceClick = function handleBoxPaddingDeviceClick(device) {
     setAttributes({
-      activePaddingDevice: device
+      DeviceType: device
     });
   };
 
@@ -4585,15 +4819,115 @@ function Inspector(_ref) {
   var boxPadding = "".concat(infoBoxDesktopPadding.top).concat(infoBoxPaddingUnits, " ").concat(infoBoxDesktopPadding.right).concat(infoBoxPaddingUnits, " ").concat(infoBoxDesktopPadding.bottom).concat(infoBoxPaddingUnits, " ").concat(infoBoxDesktopPadding.left).concat(infoBoxPaddingUnits);
   /** End Padding */
 
-  /** Start Padding For Description*/
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(SubHeadingDesktopPadding),
+  /** Start Margin */
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoBoxDesktopMargin),
     _useState8 = _slicedToArray(_useState7, 2),
-    previousPaddingDescription = _useState8[0],
-    setPreviousPaddingDescription = _useState8[1];
+    boxPreviousMargin = _useState8[0],
+    setBoxPreviousMargin = _useState8[1];
+  /** Function to update all margin values */
+  var updateBoxMargin = function updateBoxMargin(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          infoBoxDesktopMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          infoBoxTabMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          infoBoxMobileMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleBoxMarginInputChange = function handleBoxMarginInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          infoBoxDesktopMargin: _objectSpread(_objectSpread({}, infoBoxDesktopMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          infoBoxTabMargin: _objectSpread(_objectSpread({}, infoBoxTabMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          infoBoxMobileMargin: _objectSpread(_objectSpread({}, infoBoxMobileMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all margin values if marginLink is true */
+    if (infoBoxMarginLink) {
+      updateBoxMargin(value, DeviceType);
+    }
+  };
+
+  /** Function to handle marginLink toggle */
+  var handleBoxMarginLinkToggle = function handleBoxMarginLinkToggle() {
+    if (!infoBoxMarginLink) {
+      setAttributes({
+        infoBoxDesktopMargin: boxPreviousMargin
+      });
+    }
+    /** setmarginLink(!marginLink) */
+    setAttributes({
+      infoBoxMarginLink: !infoBoxMarginLink
+    });
+  };
+
+  /** Update previousMargin state when margin changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setBoxPreviousMargin(infoBoxDesktopMargin);
+  }, [infoBoxDesktopMargin]);
+
+  /** Function to handle device click for margin */
+  var handleBoxMarginDeviceClick = function handleBoxMarginDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default margin for desktop (using desktop_margin) */
+  var boxMargin = "".concat(infoBoxDesktopMargin.top).concat(infoBoxMarginUnits, " ").concat(infoBoxDesktopMargin.right).concat(infoBoxMarginUnits, " ").concat(infoBoxDesktopMargin.bottom).concat(infoBoxMarginUnits, " ").concat(infoBoxDesktopMargin.left).concat(infoBoxMarginUnits);
+  /** End Margin */
+
+  /** Start Padding For Description*/
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(SubHeadingDesktopPadding),
+    _useState10 = _slicedToArray(_useState9, 2),
+    previousPaddingDescription = _useState10[0],
+    setPreviousPaddingDescription = _useState10[1];
   /** Function to update all padding values */
   var updateAllDescPadding = function updateAllDescPadding(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           SubHeadingDesktopPadding: {
             top: value,
@@ -4603,7 +4937,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           SubHeadingTabPadding: {
             top: value,
@@ -4613,7 +4947,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           SubHeadingMobilePadding: {
             top: value,
@@ -4631,18 +4965,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleDescPaddingInputChange = function handleDescPaddingInputChange(e, direction) {
     var value = e.target.value;
-    switch (activePaddingDevice) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           SubHeadingDesktopPadding: _objectSpread(_objectSpread({}, SubHeadingDesktopPadding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           SubHeadingTabPadding: _objectSpread(_objectSpread({}, SubHeadingTabPadding), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           SubHeadingMobilePadding: _objectSpread(_objectSpread({}, SubHeadingMobilePadding), {}, _defineProperty({}, direction, value))
         });
@@ -4652,7 +4986,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if paddingLink is true */
     if (paddingLink) {
-      updateAllDescPadding(value, activePaddingDevice);
+      updateAllDescPadding(value, DeviceType);
     }
   };
 
@@ -4677,7 +5011,7 @@ function Inspector(_ref) {
   /** Function to handle device click for padding */
   var handleDescPaddingDeviceClick = function handleDescPaddingDeviceClick(device) {
     setAttributes({
-      activePaddingDevice: device
+      DeviceType: device
     });
   };
 
@@ -4686,14 +5020,114 @@ function Inspector(_ref) {
   /** End Padding */
 
   /** Start Margin */
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_Margin),
-    _useState10 = _slicedToArray(_useState9, 2),
-    previousMargin = _useState10[0],
-    setPreviousMargin = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(descDesktopMargin),
+    _useState12 = _slicedToArray(_useState11, 2),
+    descPreviousMargin = _useState12[0],
+    setDescPreviousMargin = _useState12[1];
+  /** Function to update all margin values */
+  var updateDescMargin = function updateDescMargin(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          descDesktopMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          descTabMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          descMobileMargin: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleDescMarginInputChange = function handleDescMarginInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          descDesktopMargin: _objectSpread(_objectSpread({}, descDesktopMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          descTabMargin: _objectSpread(_objectSpread({}, descTabMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          descMobileMargin: _objectSpread(_objectSpread({}, descMobileMargin), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all margin values if marginLink is true */
+    if (descMarginLink) {
+      updateDescMargin(value, DeviceType);
+    }
+  };
+
+  /** Function to handle marginLink toggle */
+  var handleDescMarginLinkToggle = function handleDescMarginLinkToggle() {
+    if (!descMarginLink) {
+      setAttributes({
+        descDesktopMargin: descPreviousMargin
+      });
+    }
+    /** setmarginLink(!marginLink) */
+    setAttributes({
+      descMarginLink: !descMarginLink
+    });
+  };
+
+  /** Update previousMargin state when margin changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setDescPreviousMargin(descDesktopMargin);
+  }, [descDesktopMargin]);
+
+  /** Function to handle device click for margin */
+  var handleDescMarginDeviceClick = function handleDescMarginDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default margin for desktop (using desktop_margin) */
+  var descMargin = "".concat(descDesktopMargin.top).concat(descMarginUnits, " ").concat(descDesktopMargin.right).concat(descMarginUnits, " ").concat(descDesktopMargin.bottom).concat(descMarginUnits, " ").concat(descDesktopMargin.left).concat(descMarginUnits);
+  /** End Description Margin */
+
+  /** Start Margin */
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_Margin),
+    _useState14 = _slicedToArray(_useState13, 2),
+    previousMargin = _useState14[0],
+    setPreviousMargin = _useState14[1];
   /** Function to update all margin values */
   var updateAllMargin = function updateAllMargin(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_Margin: {
             top: value,
@@ -4703,7 +5137,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_Margin: {
             top: value,
@@ -4713,7 +5147,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_Margin: {
             top: value,
@@ -4731,18 +5165,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleMarginInputChange = function handleMarginInputChange(e, direction) {
     var value = e.target.value;
-    switch (Heading_Active_Margin_Device) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_Margin: _objectSpread(_objectSpread({}, Heading_Desktop_Margin), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_Margin: _objectSpread(_objectSpread({}, Heading_Tab_Margin), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_Margin: _objectSpread(_objectSpread({}, Heading_Mobile_Margin), {}, _defineProperty({}, direction, value))
         });
@@ -4752,7 +5186,7 @@ function Inspector(_ref) {
     }
     /** Update all margin values if marginLink is true */
     if (Heading_Margin_Link) {
-      updateAllMargin(value, Heading_Active_Margin_Device);
+      updateAllMargin(value, DeviceType);
     }
   };
 
@@ -4777,7 +5211,7 @@ function Inspector(_ref) {
   /** Function to handle device click for margin */
   var handleMarginDeviceClick = function handleMarginDeviceClick(device) {
     setAttributes({
-      Heading_Active_Margin_Device: device
+      DeviceType: device
     });
   };
 
@@ -4786,14 +5220,14 @@ function Inspector(_ref) {
   /** End Margin */
 
   /** Start Margin */
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoButtonDesktopMargin),
-    _useState12 = _slicedToArray(_useState11, 2),
-    buttonPreviousMargin = _useState12[0],
-    setButtonPreviousMargin = _useState12[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoButtonDesktopMargin),
+    _useState16 = _slicedToArray(_useState15, 2),
+    buttonPreviousMargin = _useState16[0],
+    setButtonPreviousMargin = _useState16[1];
   /** Function to update all margin values */
   var updateButtonMargin = function updateButtonMargin(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           infoButtonDesktopMargin: {
             top: value,
@@ -4803,7 +5237,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoButtonTabMargin: {
             top: value,
@@ -4813,7 +5247,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoButtonMobileMargin: {
             top: value,
@@ -4831,18 +5265,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleButtonMarginInputChange = function handleButtonMarginInputChange(e, direction) {
     var value = e.target.value;
-    switch (infoButtonActiveMarginDevice) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           infoButtonDesktopMargin: _objectSpread(_objectSpread({}, infoButtonDesktopMargin), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoButtonTabMargin: _objectSpread(_objectSpread({}, infoButtonTabMargin), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoButtonMobileMargin: _objectSpread(_objectSpread({}, infoButtonMobileMargin), {}, _defineProperty({}, direction, value))
         });
@@ -4852,7 +5286,7 @@ function Inspector(_ref) {
     }
     /** Update all margin values if marginLink is true */
     if (infoButtonMarginLink) {
-      updateButtonMargin(value, infoButtonActiveMarginDevice);
+      updateButtonMargin(value, DeviceType);
     }
   };
 
@@ -4885,15 +5319,215 @@ function Inspector(_ref) {
   var buttonMargin = "".concat(infoButtonDesktopMargin.top).concat(infoButtonMarginUnits, " ").concat(infoButtonDesktopMargin.right).concat(infoButtonMarginUnits, " ").concat(infoButtonDesktopMargin.bottom).concat(infoButtonMarginUnits, " ").concat(infoButtonDesktopMargin.left).concat(infoButtonMarginUnits);
   /** End Margin */
 
+  /** Start Button Border Width */
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoButtonDesktopBorderWidth),
+    _useState18 = _slicedToArray(_useState17, 2),
+    buttonPreviousBorderWidth = _useState18[0],
+    setButtonPreviousBorderWidth = _useState18[1];
+  /** Function to update all Border Width values */
+  var updateButtonBorderWidth = function updateButtonBorderWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          infoButtonDesktopBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          infoButtonTabBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          infoButtonMobileBorderWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleButtonBorderWidthInputChange = function handleButtonBorderWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          infoButtonDesktopBorderWidth: _objectSpread(_objectSpread({}, infoButtonDesktopBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          infoButtonTabBorderWidth: _objectSpread(_objectSpread({}, infoButtonTabBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          infoButtonMobileBorderWidth: _objectSpread(_objectSpread({}, infoButtonMobileBorderWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if borderLink is true */
+    if (borderLink) {
+      updateButtonBorderWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle borderLink toggle */
+  var handleButtonBorderWidthLinkToggle = function handleButtonBorderWidthLinkToggle() {
+    if (!borderLink) {
+      setAttributes({
+        infoButtonDesktopBorderWidth: buttonPreviousBorderWidth
+      });
+    }
+    /** setborderLinkLink(!borderLink) */
+    setAttributes({
+      borderLink: !borderLink
+    });
+  };
+
+  /** Update previousborderWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setButtonPreviousBorderWidth(infoButtonDesktopBorderWidth);
+  }, [infoButtonDesktopBorderWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleButtonBorderWidthDeviceClick = function handleButtonBorderWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
+  var buttonBorderWidth = "".concat(infoButtonDesktopBorderWidth.top).concat(infoButtonBorderUnits, " ").concat(infoButtonDesktopBorderWidth.right).concat(infoButtonBorderUnits, " ").concat(infoButtonDesktopBorderWidth.bottom).concat(infoButtonBorderUnits, " ").concat(infoButtonDesktopBorderWidth.left).concat(infoButtonBorderUnits);
+  /** End Border Width */
+
+  /** Start Border Radius Width */
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoBtnDesktopBorderradiusWidth),
+    _useState20 = _slicedToArray(_useState19, 2),
+    buttonPreviousBorderRadiusWidth = _useState20[0],
+    setButtonPreviousBorderRadiusWidth = _useState20[1];
+  /** Function to update all Border Width values */
+  var updateButtonBorderRadiusWidth = function updateButtonBorderRadiusWidth(value, device) {
+    switch (device) {
+      case 'Desktop':
+        setAttributes({
+          infoBtnDesktopBorderradiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          infoBtnTabBorderradiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          infoBtnMobileBorderradiusWidth: {
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  /** Function to handle input change */
+  var handleButtonBorderRadiusWidthInputChange = function handleButtonBorderRadiusWidthInputChange(e, direction) {
+    var value = e.target.value;
+    switch (DeviceType) {
+      case 'Desktop':
+        setAttributes({
+          infoBtnDesktopBorderradiusWidth: _objectSpread(_objectSpread({}, infoBtnDesktopBorderradiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Tablet':
+        setAttributes({
+          infoBtnTabBorderradiusWidth: _objectSpread(_objectSpread({}, infoBtnTabBorderradiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      case 'Mobile':
+        setAttributes({
+          infoBtnMobileBorderradiusWidth: _objectSpread(_objectSpread({}, infoBtnMobileBorderradiusWidth), {}, _defineProperty({}, direction, value))
+        });
+        break;
+      default:
+        break;
+    }
+    /** Update all padding values if borderRadiusLink is true */
+    if (borderRadiusLink) {
+      updateButtonBorderRadiusWidth(value, DeviceType);
+    }
+  };
+
+  /** Function to handle borderRadiusLink toggle */
+  var handleButtonBorderRadiusWidthLinkToggle = function handleButtonBorderRadiusWidthLinkToggle() {
+    if (!borderRadiusLink) {
+      setAttributes({
+        infoBtnDesktopBorderradiusWidth: buttonPreviousBorderRadiusWidth
+      });
+    }
+    /** setborderRadiusLinkLink(!borderRadiusLink) */
+    setAttributes({
+      borderRadiusLink: !borderRadiusLink
+    });
+  };
+
+  /** Update previousBorderRadiusWidth state when Border Width changes */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    setButtonPreviousBorderRadiusWidth(infoBtnDesktopBorderradiusWidth);
+  }, [infoBtnDesktopBorderradiusWidth]);
+
+  /** Function to handle device click for Border Width */
+  var handleButtonBorderRadiusWidthDeviceClick = function handleButtonBorderRadiusWidthDeviceClick(device) {
+    setAttributes({
+      DeviceType: device
+    });
+  };
+
+  /** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
+  var buttonBorderRadiusWidth = "".concat(infoBtnDesktopBorderradiusWidth.top).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnDesktopBorderradiusWidth.right).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnDesktopBorderradiusWidth.bottom).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnDesktopBorderradiusWidth.left).concat(infoBtnBorderradiusUnits);
+  /** End Border Radius Width */
+
   /** Start Border Width */
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_Border_Width),
-    _useState14 = _slicedToArray(_useState13, 2),
-    previousBorderWidth = _useState14[0],
-    setPreviousBorderWidth = _useState14[1];
+  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_Border_Width),
+    _useState22 = _slicedToArray(_useState21, 2),
+    previousBorderWidth = _useState22[0],
+    setPreviousBorderWidth = _useState22[1];
   /** Function to update all Border Width values */
   var updateAllBorderWidth = function updateAllBorderWidth(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_Border_Width: {
             top: value,
@@ -4903,7 +5537,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_Border_Width: {
             top: value,
@@ -4913,7 +5547,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_Border_Width: {
             top: value,
@@ -4931,18 +5565,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleBorderWidthInputChange = function handleBorderWidthInputChange(e, direction) {
     var value = e.target.value;
-    switch (activeBorderDevice) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_Border_Width: _objectSpread(_objectSpread({}, Heading_Desktop_Border_Width), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_Border_Width: _objectSpread(_objectSpread({}, Heading_Tab_Border_Width), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_Border_Width: _objectSpread(_objectSpread({}, Heading_Mobile_Border_Width), {}, _defineProperty({}, direction, value))
         });
@@ -4952,7 +5586,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if borderLink is true */
     if (borderLink) {
-      updateAllBorderWidth(value, activeBorderDevice);
+      updateAllBorderWidth(value, DeviceType);
     }
   };
 
@@ -4977,7 +5611,7 @@ function Inspector(_ref) {
   /** Function to handle device click for Border Width */
   var handleBorderWidthDeviceClick = function handleBorderWidthDeviceClick(device) {
     setAttributes({
-      activeBorderDevice: device
+      DeviceType: device
     });
   };
 
@@ -4986,14 +5620,14 @@ function Inspector(_ref) {
   /** End Border Width */
 
   /** Start Border Radius Width */
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_Border_radius_Width),
-    _useState16 = _slicedToArray(_useState15, 2),
-    previousBorderRadiusWidth = _useState16[0],
-    setPreviousBorderRadiusWidth = _useState16[1];
+  var _useState23 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Heading_Desktop_Border_radius_Width),
+    _useState24 = _slicedToArray(_useState23, 2),
+    previousBorderRadiusWidth = _useState24[0],
+    setPreviousBorderRadiusWidth = _useState24[1];
   /** Function to update all Border Width values */
   var updateAllBorderRadiusWidth = function updateAllBorderRadiusWidth(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_Border_radius_Width: {
             top: value,
@@ -5003,7 +5637,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_Border_radius_Width: {
             top: value,
@@ -5013,7 +5647,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_Border_radius_Width: {
             top: value,
@@ -5031,18 +5665,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleBorderRadiusWidthInputChange = function handleBorderRadiusWidthInputChange(e, direction) {
     var value = e.target.value;
-    switch (activeBorderRadiusDevice) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           Heading_Desktop_Border_radius_Width: _objectSpread(_objectSpread({}, Heading_Desktop_Border_radius_Width), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           Heading_Tab_Border_radius_Width: _objectSpread(_objectSpread({}, Heading_Tab_Border_radius_Width), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           Heading_Mobile_Border_radius_Width: _objectSpread(_objectSpread({}, Heading_Mobile_Border_radius_Width), {}, _defineProperty({}, direction, value))
         });
@@ -5052,7 +5686,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if borderRadiusLink is true */
     if (borderRadiusLink) {
-      updateAllBorderRadiusWidth(value, activeBorderRadiusDevice);
+      updateAllBorderRadiusWidth(value, DeviceType);
     }
   };
 
@@ -5077,7 +5711,7 @@ function Inspector(_ref) {
   /** Function to handle device click for Border Width */
   var handleBorderRadiusWidthDeviceClick = function handleBorderRadiusWidthDeviceClick(device) {
     setAttributes({
-      activeBorderRadiusDevice: device
+      DeviceType: device
     });
   };
 
@@ -5086,14 +5720,14 @@ function Inspector(_ref) {
   /** End Border Radius Width */
 
   /** Start Box Border Width */
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoBoxDesktopBorderWidth),
-    _useState18 = _slicedToArray(_useState17, 2),
-    boxPreviousBorderWidth = _useState18[0],
-    setBoxPreviousBorderWidth = _useState18[1];
+  var _useState25 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoBoxDesktopBorderWidth),
+    _useState26 = _slicedToArray(_useState25, 2),
+    boxPreviousBorderWidth = _useState26[0],
+    setBoxPreviousBorderWidth = _useState26[1];
   /** Function to update all Border Width values */
   var updateBoxBorderWidth = function updateBoxBorderWidth(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           infoBoxDesktopBorderWidth: {
             top: value,
@@ -5103,7 +5737,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoBoxTabBorderWidth: {
             top: value,
@@ -5113,7 +5747,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoBoxMobileBorderWidth: {
             top: value,
@@ -5131,18 +5765,18 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleBoxBorderWidthInputChange = function handleBoxBorderWidthInputChange(e, direction) {
     var value = e.target.value;
-    switch (activeBorderDevice) {
-      case 'desktop':
+    switch (DeviceType) {
+      case 'Desktop':
         setAttributes({
           infoBoxDesktopBorderWidth: _objectSpread(_objectSpread({}, infoBoxDesktopBorderWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoBoxTabBorderWidth: _objectSpread(_objectSpread({}, infoBoxTabBorderWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoBoxMobileBorderWidth: _objectSpread(_objectSpread({}, infoBoxMobileBorderWidth), {}, _defineProperty({}, direction, value))
         });
@@ -5152,7 +5786,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if borderLink is true */
     if (borderLink) {
-      updateBoxBorderWidth(value, activeBorderDevice);
+      updateBoxBorderWidth(value, DeviceType);
     }
   };
 
@@ -5177,7 +5811,7 @@ function Inspector(_ref) {
   /** Function to handle device click for Border Width */
   var handleBoxBorderWidthDeviceClick = function handleBoxBorderWidthDeviceClick(device) {
     setAttributes({
-      activeBorderDevice: device
+      DeviceType: device
     });
   };
 
@@ -5186,14 +5820,14 @@ function Inspector(_ref) {
   /** End Border Width */
 
   /** Start Border Radius Width */
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoBoxDesktopBorderRadiusWidth),
-    _useState20 = _slicedToArray(_useState19, 2),
-    boxPreviousBorderRadiusWidth = _useState20[0],
-    setBoxPreviousBorderRadiusWidth = _useState20[1];
+  var _useState27 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(infoBoxDesktopBorderRadiusWidth),
+    _useState28 = _slicedToArray(_useState27, 2),
+    boxPreviousBorderRadiusWidth = _useState28[0],
+    setBoxPreviousBorderRadiusWidth = _useState28[1];
   /** Function to update all Border Width values */
   var updateBoxBorderRadiusWidth = function updateBoxBorderRadiusWidth(value, device) {
     switch (device) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           infoBoxDesktopBorderRadiusWidth: {
             top: value,
@@ -5203,7 +5837,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoBoxTabBorderRadiusWidth: {
             top: value,
@@ -5213,7 +5847,7 @@ function Inspector(_ref) {
           }
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoBoxMobileBorderRadiusWidth: {
             top: value,
@@ -5232,17 +5866,17 @@ function Inspector(_ref) {
   var handleBoxBorderRadiusWidthInputChange = function handleBoxBorderRadiusWidthInputChange(e, direction) {
     var value = e.target.value;
     switch (activeBorderRadiusDevice) {
-      case 'desktop':
+      case 'Desktop':
         setAttributes({
           infoBoxDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, infoBoxDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'tab':
+      case 'Tablet':
         setAttributes({
           infoBoxTabBorderRadiusWidth: _objectSpread(_objectSpread({}, infoBoxTabBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
         break;
-      case 'mobile':
+      case 'Mobile':
         setAttributes({
           infoBoxMobileBorderRadiusWidth: _objectSpread(_objectSpread({}, infoBoxMobileBorderRadiusWidth), {}, _defineProperty({}, direction, value))
         });
@@ -5252,7 +5886,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if borderRadiusLink is true */
     if (borderRadiusLink) {
-      updateBoxBorderRadiusWidth(value, activeBorderRadiusDevice);
+      updateBoxBorderRadiusWidth(value, DeviceType);
     }
   };
 
@@ -5277,13 +5911,14 @@ function Inspector(_ref) {
   /** Function to handle device click for Border Width */
   var handleBoxBorderRadiusWidthDeviceClick = function handleBoxBorderRadiusWidthDeviceClick(device) {
     setAttributes({
-      activeBorderRadiusDevice: device
+      DeviceType: device
     });
   };
 
   /** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
   var boxBorderRadiusWidth = "".concat(infoBoxDesktopBorderRadiusWidth.top).concat(infoBoxBorderRadiusUnits, " ").concat(infoBoxDesktopBorderRadiusWidth.right).concat(infoBoxBorderRadiusUnits, " ").concat(infoBoxDesktopBorderRadiusWidth.bottom).concat(infoBoxBorderRadiusUnits, " ").concat(infoBoxDesktopBorderRadiusWidth.left).concat(infoBoxBorderRadiusUnits);
   /** End Border Radius Width */
+
   /* set default values for the style attributes */
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (Heading_Font_Family) {
@@ -5297,7 +5932,7 @@ function Inspector(_ref) {
 
   // Define the CSS as a string
   var css = "\n        #".concat(blockID, " {\n            padding: 20px;\n            border: 1px solid #ccc;\n            background-color: #f9f9f9;\n        }\n    ");
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t.fb-info-box-content-wrapper.".concat(blockID, " {\n                    padding: ").concat(boxPadding, ";\n                    border: ").concat(infoBoxBorder, ";\n                    border-width: ").concat(boxBorderWidth, ";\n                    border-radius: ").concat(boxBorderRadiusWidth, ";\n                    ").concat(infoBoxBorderColor !== undefined ? "border-color: ".concat(infoBoxBorderColor, ";") : '', "\n                    ").concat(infoBoxBg !== undefined ? "background-color: ".concat(infoBoxBg, ";") : '', "\n                    text-align: ").concat(contentAlignment, "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                    ").concat(Heading_Color !== undefined ? "color: ".concat(Heading_Color, ";") : '', "\n                    ").concat(Heading_Background_Color !== undefined ? "background-color: ".concat(Heading_Background_Color, ";") : '', "\n                    font-family: ").concat(Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family, ";\n                    font-size: ").concat(Heading_Font_Size !== undefined ? "".concat(Heading_Font_Size).concat(Heading_Font_size_units) : '', ";\n                    font-weight: ").concat(Heading_Font_Weight, ";\n                    font-style: ").concat(Heading_Font_Style, ";\n                    text-transform: ").concat(Heading_Text_Transform, ";\n                    text-decoration: ").concat(Heading_Text_Decoration, ";\n                    ").concat(Heading_Letter_Spacing !== undefined ? "letter-spacing: ".concat(Heading_Letter_Spacing).concat(Heading_Letter_Spacing_units, ";") : '', "\n                    ").concat(Heading_Line_Height !== undefined ? "line-height: ".concat(Heading_Line_Height).concat(Heading_Line_Height_units, ";") : '', "\n                    transition: all .3s ease-in-out;\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(Heading_Border, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    ").concat(Heading_Border_Color !== undefined ? "border-color: ".concat(Heading_Border_Color, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading:hover {\n                    ").concat(Heading_Hover_Color !== undefined ? "color: ".concat(Heading_Hover_Color, ";") : '', "\n                    ").concat(Heading_Border_Hover_Color !== undefined ? "border-color: ".concat(Heading_Border_Hover_Color, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Tab_padding.top).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.right).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Tab_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Tab_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Tab_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Mobile_padding.top).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.right).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Mobile_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Mobile_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Mobile_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                \t").concat(SubHeadingColor !== undefined ? "color: ".concat(SubHeadingColor, ";") : '', "\n                \tfont-family: ").concat(SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily, ";\n                    font-size: ").concat(SubHeadingFontSize !== undefined ? "".concat(SubHeadingFontSize).concat(SubHeadingFontSizeUnits) : '', ";\n                    font-weight: ").concat(SubHeadingFontWeight, ";\n                    font-style: ").concat(SubHeadingFontStyle, ";\n                    text-transform: ").concat(SubHeadingTextTransform, ";\n                    text-decoration: ").concat(SubHeadingTextDecoration, ";\n                    padding: ").concat(descPadding, ";\n\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description:hover {\n                    ").concat(SubHeadingHoverColor !== undefined ? "color: ".concat(SubHeadingHoverColor, ";") : '', "\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                \t").concat(buttonTextColor !== undefined ? "color: ".concat(buttonTextColor, ";") : '', "\n                \t").concat(buttonBgColor !== undefined ? "background-color: ".concat(buttonBgColor, ";") : '', "\n                \tfont-family: ").concat(buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily, ";\n                    font-size: ").concat(buttonFontSize !== undefined ? "".concat(buttonFontSize).concat(buttonFontSizeUnits) : '', ";\n                    font-weight: ").concat(buttonFontWeight, ";\n                    font-style: ").concat(buttonFontStyle, ";\n                    text-transform: ").concat(buttonTextTransform, ";\n                    text-decoration: ").concat(buttonTextDecoration, ";\n                    padding: ").concat(buttonPadding, ";\n                    margin: ").concat(buttonMargin, ";\n\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button:hover {\n                \t").concat(buttonTextHoverColor !== undefined ? "color: ".concat(buttonTextHoverColor, ";") : '', "\n                \t").concat(buttonBgHoverColor !== undefined ? "background-color: ".concat(buttonBgHoverColor, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-icon-wrapper svg {\n                \twidth: ").concat(attributes.width, "px;\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-info-box-content-wrapper.".concat(blockID, " .fb-heading {\n                    ").concat(Heading_Color !== undefined ? "color: ".concat(Heading_Color, ";") : '', "\n                    ").concat(Heading_Background_Color !== undefined ? "background-color: ".concat(Heading_Background_Color, ";") : '', "\n                    font-family: ").concat(Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family, ";\n                    font-size: ").concat(Heading_Font_Size !== undefined ? "".concat(Heading_Font_Size).concat(Heading_Font_size_units) : '', ";\n                    font-weight: ").concat(Heading_Font_Weight, ";\n                    font-style: ").concat(Heading_Font_Style, ";\n                    text-transform: ").concat(Heading_Text_Transform, ";\n                    text-decoration: ").concat(Heading_Text_Decoration, ";\n                    ").concat(Heading_Letter_Spacing !== undefined ? "letter-spacing: ".concat(Heading_Letter_Spacing).concat(Heading_Letter_Spacing_units, ";") : '', "\n                    ").concat(Heading_Line_Height !== undefined ? "line-height: ".concat(Heading_Line_Height).concat(Heading_Line_Height_units, ";") : '', "\n                    transition: all .3s ease-in-out;\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(Heading_Border, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    ").concat(Heading_Border_Color !== undefined ? "border-color: ".concat(Heading_Border_Color, ";") : '', "\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading:hover {\n                    ").concat(Heading_Hover_Color !== undefined ? "color: ".concat(Heading_Hover_Color, ";") : '', "\n                    ").concat(Heading_Border_Hover_Color !== undefined ? "border-color: ".concat(Heading_Border_Hover_Color, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Tab_padding.top).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.right).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Tab_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Tab_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Tab_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Mobile_padding.top).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.right).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Mobile_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Mobile_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Mobile_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                \t").concat(SubHeadingColor !== undefined ? "color: ".concat(SubHeadingColor, ";") : '', "\n                \tfont-family: ").concat(SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily, ";\n                    font-size: ").concat(SubHeadingFontSize !== undefined ? "".concat(SubHeadingFontSize).concat(SubHeadingFontSizeUnits) : '', ";\n                    font-weight: ").concat(SubHeadingFontWeight, ";\n                    font-style: ").concat(SubHeadingFontStyle, ";\n                    text-transform: ").concat(SubHeadingTextTransform, ";\n                    text-decoration: ").concat(SubHeadingTextDecoration, ";\n                    padding: ").concat(descPadding, ";\n                    margin: ").concat(descMargin, ";\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description:hover {\n                    ").concat(SubHeadingHoverColor !== undefined ? "color: ".concat(SubHeadingHoverColor, ";") : '', "\n                }\n\t\t\t\t@media only screen and (max-width: 1024px){\n\t\t\t\t.fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                        padding: ").concat(SubHeadingTabPadding.top).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingTabPadding.right).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingTabPadding.bottom).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingTabPadding.left).concat(SubHeadingPaddingUnits, " !important;\n                        margin: ").concat(descTabMargin.top).concat(descMarginUnits, " ").concat(descTabMargin.right).concat(descMarginUnits, " ").concat(descTabMargin.bottom).concat(descMarginUnits, " ").concat(descTabMargin.left).concat(descMarginUnits, " !important;\n\n                    }\n\t\t\t\t}\n\t\t\t\t@media only screen and (max-width: 757px){\n\t\t\t\t.fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                        padding: ").concat(SubHeadingMobilePadding.top).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingMobilePadding.right).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingMobilePadding.bottom).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingMobilePadding.left).concat(SubHeadingPaddingUnits, " !important;\n                        margin: ").concat(descMobileMargin.top).concat(descMarginUnits, " ").concat(descMobileMargin.right).concat(descMarginUnits, " ").concat(descMobileMargin.bottom).concat(descMarginUnits, " ").concat(descMobileMargin.left).concat(descMarginUnits, " !important;\n                    }\n\t\t\t\t}\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                \t").concat(buttonTextColor !== undefined ? "color: ".concat(buttonTextColor, ";") : '', "\n                \t").concat(buttonBgColor !== undefined ? "background-color: ".concat(buttonBgColor, ";") : '', "\n                \tfont-family: ").concat(buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily, ";\n                    font-size: ").concat(buttonFontSize !== undefined ? "".concat(buttonFontSize).concat(buttonFontSizeUnits) : '', ";\n                    font-weight: ").concat(buttonFontWeight, ";\n                    font-style: ").concat(buttonFontStyle, ";\n                    text-transform: ").concat(buttonTextTransform, ";\n                    text-decoration: ").concat(buttonTextDecoration, ";\n                    padding: ").concat(buttonPadding, ";\n                    margin: ").concat(buttonMargin, ";\n                    border: ").concat(infoButtonBorder, ";\n                    border-width: ").concat(buttonBorderWidth, ";\n                    border-radius: ").concat(buttonBorderRadiusWidth, ";\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button:hover {\n                \t").concat(buttonTextHoverColor !== undefined ? "color: ".concat(buttonTextHoverColor, ";") : '', "\n                \t").concat(buttonBgHoverColor !== undefined ? "background-color: ".concat(buttonBgHoverColor, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                        padding: ").concat(infoButtonTabPadding.top).concat(infoButtonPaddingUnits, " ").concat(infoButtonTabPadding.right).concat(infoButtonPaddingUnits, " ").concat(infoButtonTabPadding.bottom).concat(infoButtonPaddingUnits, " ").concat(infoButtonTabPadding.left).concat(infoButtonPaddingUnits, " !important;\n                        margin: ").concat(infoButtonTabMargin.top).concat(infoButtonMarginUnits, " ").concat(infoButtonTabMargin.right).concat(infoButtonMarginUnits, " ").concat(infoButtonTabMargin.bottom).concat(infoButtonMarginUnits, " ").concat(infoButtonTabMargin.left).concat(infoButtonMarginUnits, " !important;\n                        border-width: ").concat(infoButtonTabBorderWidth.top).concat(infoButtonBorderUnits, " ").concat(infoButtonTabBorderWidth.right).concat(infoButtonBorderUnits, " ").concat(infoButtonTabBorderWidth.bottom).concat(infoButtonBorderUnits, " ").concat(infoButtonTabBorderWidth.left).concat(infoButtonBorderUnits, " !important;\n                        border-radius: ").concat(infoBtnTabBorderradiusWidth.top).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.right).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.bottom).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.left).concat(infoBtnBorderradiusUnits, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(infoButtonMobilePadding.top).concat(infoButtonPaddingUnits, " ").concat(infoButtonMobilePadding.right).concat(infoButtonPaddingUnits, " ").concat(infoButtonMobilePadding.bottom).concat(infoButtonPaddingUnits, " ").concat(infoButtonMobilePadding.left).concat(infoButtonPaddingUnits, " !important;\n                        margin: ").concat(infoButtonMobileMargin.top).concat(infoButtonMarginUnits, " ").concat(infoButtonMobileMargin.right).concat(infoButtonMarginUnits, " ").concat(infoButtonMobileMargin.bottom).concat(infoButtonMarginUnits, " ").concat(infoButtonMobileMargin.left).concat(infoButtonMarginUnits, " !important;\n                        border-width: ").concat(infoButtonMobileBorderWidth.top).concat(infoButtonBorderUnits, " ").concat(infoButtonMobileBorderWidth.right).concat(infoButtonBorderUnits, " ").concat(infoButtonMobileBorderWidth.bottom).concat(infoButtonBorderUnits, " ").concat(infoButtonMobileBorderWidth.left).concat(infoButtonBorderUnits, " !important;\n                        border-radius: ").concat(infoBtnTabBorderradiusWidth.top).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.right).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.bottom).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.left).concat(infoBtnBorderradiusUnits, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-icon-wrapper svg,\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-media-wrapper img{\n                \twidth: ").concat(mediaSize.Desktop).concat(mediaSizeUnits.Desktop, ";\n                }\n                @media only screen and (max-width: 1024px) {\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-iinfoButtonMobileMargincon-wrapper svg,\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-media-wrapper img{\n                \twidth: ").concat(mediaSize.Tablet).concat(mediaSizeUnits.Tablet, ";\n                }\n                }\n                @media only screen and (max-width: 767px) {\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-icon-wrapper svg,\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-media-wrapper img{\n                \twidth: ").concat(mediaSize.Mobile).concat(mediaSizeUnits.Mobile, ";\n                }\n                }\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"
@@ -5326,8 +5961,8 @@ function Inspector(_ref) {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon/Image", "frontis-block"),
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Media Alignment", "frontis-block"),
-      id: "fb-media-alignment",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alignment", "frontis-block"),
+      id: "fb-setting-alignment",
       className: "fb-advanced-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
       className: "fb-advanced-alignment-group-btn"
@@ -5480,18 +6115,7 @@ function Inspector(_ref) {
         },
         className: "fb-advanced-alignment-single-btn ".concat(descAlignment === item.value ? 'active' : '')
       }, item.label);
-    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-      className: "fb-sub-heading-position"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Description Position", "frontis-block"),
-      value: Sub_Heading_Position,
-      options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.subheading_POSITION,
-      onChange: function onChange(value) {
-        return setAttributes({
-          Sub_Heading_Position: value
-        });
-      }
-    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sub Heading Text", "frontis-block"),
       value: Sub_Heading_Text,
       onChange: function onChange(value) {
@@ -5500,635 +6124,70 @@ function Inspector(_ref) {
         });
       },
       className: "fb-sub-heading-text"
-    }))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box", "frontis-block"),
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-info-button-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button", "frontis-block"),
       initialOpen: false
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-      color: infoBoxBg,
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Button", "frontis-block"),
+      checked: info_Button_Switcher,
       onChange: function onChange(value) {
         return setAttributes({
-          infoBoxBg: value
+          info_Button_Switcher: value
         });
       }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Spacing"), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-inner-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(activePaddingDevice === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxPaddingDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(activePaddingDevice === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxPaddingDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(activePaddingDevice === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxPaddingDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-units-type"
+    }), info_Button_Switcher && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alignment", "frontis-block"),
+      id: "fb-media-alignment",
+      className: "fb-advanced-alignment"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-setting-units-type-wrap"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+      className: "fb-advanced-alignment-group-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_ALIGN.map(function (item, key) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         key: key,
         onClick: function onClick() {
           return setAttributes({
-            infoBoxPaddingUnits: item.value
+            buttonAlignment: item.value
           });
         },
-        className: "fb-setting-units-type-switcher ".concat(infoBoxPaddingUnits === item.value ? 'active' : '')
+        className: "fb-advanced-alignment-single-btn ".concat(buttonAlignment === item.value ? 'active' : '')
       }, item.label);
-    })))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "top",
-      value: activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.top : activePaddingDevice === 'tab' ? infoBoxTabPadding.top : infoBoxMobilePadding.top,
-      onChange: function onChange(e) {
-        return handleBoxPaddingInputChange(e, 'top');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "right",
-      value: activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.right : activePaddingDevice === 'tab' ? infoBoxTabPadding.right : infoBoxMobilePadding.right,
-      onChange: function onChange(e) {
-        return handleBoxPaddingInputChange(e, 'right');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "bottom",
-      value: activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.bottom : activePaddingDevice === 'tab' ? infoBoxTabPadding.bottom : infoBoxMobilePadding.bottom,
-      onChange: function onChange(e) {
-        return handleBoxPaddingInputChange(e, 'bottom');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "left",
-      value: activePaddingDevice === 'desktop' ? infoBoxDesktopPadding.left : activePaddingDevice === 'tab' ? infoBoxTabPadding.left : infoBoxMobilePadding.left,
-      onChange: function onChange(e) {
-        return handleBoxPaddingInputChange(e, 'left');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "dashicons ".concat(paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(paddingLink ? 'is-checked' : ''),
-      onClick: handleBoxPaddingLinkToggle
-    }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-inner-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margin", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(Heading_Active_Margin_Device === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device ".concat(Heading_Active_Margin_Device === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(Heading_Active_Margin_Device === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-units-type"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-setting-units-type-wrap"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        key: key,
-        onClick: function onClick() {
-          return setAttributes({
-            Heading_Margin_Units: item.value
-          });
-        },
-        className: "fb-setting-units-type-switcher ".concat(Heading_Margin_Units === item.value ? 'active' : '')
-      }, item.label);
-    })))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "top",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.top : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top,
-      onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'top');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "right",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.right : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right,
-      onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'right');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "bottom",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.bottom : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom,
-      onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'bottom');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "left",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.left : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left,
-      onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'left');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "dashicons ".concat(Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(Heading_Margin_Link ? 'is-checked' : ''),
-      onClick: handleMarginLinkToggle
-    }))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Border"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-block"),
-      value: Heading_Border,
-      options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.BORDER_STYLES,
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Text", "frontis-block"),
+      value: info_Button_Text,
       onChange: function onChange(value) {
         return setAttributes({
-          infoBoxBorder: value
+          info_Button_Text: value
+        });
+      },
+      className: "fb-info-button-text"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
+      value: info_Button_Link,
+      className: "info-btn-url-input",
+      onChange: function onChange(value, post) {
+        // Check if the URL has a protocol (http or https), otherwise prepend it
+        var formattedLink = value.startsWith('http://') || value.startsWith('https://') ? value : "https://".concat(value);
+        setAttributes({
+          info_Button_Link: formattedLink,
+          info_Button_Text: post && post.title || info_Button_Text
         });
       }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Color", "frontis-block"),
-      className: "fb-setting-color-panel-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-setting-color-panel-btn"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        key: key,
-        onClick: function onClick() {
-          return setAttributes({
-            infoBoxBorderColorSwitcher: item.value
-          });
-        },
-        className: "fb-setting-color-panel-btn-switchr ".concat(infoBoxBorderColorSwitcher === item.value ? 'active' : '')
-      }, item.label);
-    }))), infoBoxBorderColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-block"),
-      className: "fb-setting-color-setting-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-      className: "fb-setting-color-setting-icon-dropdown",
-      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-      popoverProps: {
-        placement: 'bottom-start'
-      },
-      renderToggle: function renderToggle(_ref4) {
-        var isOpen = _ref4.isOpen,
-          onToggle = _ref4.onToggle;
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-          variant: "primary",
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
-          className: "fb-setting-color-setting-icon-btn"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-          icon: "color-picker",
-          className: "fb-setting-color-setting-icon"
-        }));
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-setting-icon-popup"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          className: "fb-setting-color-setting-icon-popup-inner"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-normal-color"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-          color: Heading_Border_Color,
-          onChange: function onChange(value) {
-            return setAttributes({
-              infoBoxBorderColor: value
-            });
-          },
-          enableAlpha: true
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-label"
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
-          colors: [{
-            color: '#F72585'
-          }, {
-            color: '#7209B7'
-          }, {
-            color: '#3A0CA3'
-          }, {
-            color: '#4361EE'
-          }, {
-            color: '#4CC9F0'
-          }],
-          disableCustomColors: true,
-          value: Heading_Border_Color,
-          onChange: function onChange(value) {
-            return setAttributes({
-              infoBoxBorderColor: value
-            });
-          }
-        }))));
-      }
-    })), infoBoxBorderColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-block"),
-      className: "fb-setting-color-setting-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-      className: "fb-setting-color-setting-icon-dropdown",
-      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-      popoverProps: {
-        placement: 'bottom-start'
-      },
-      renderToggle: function renderToggle(_ref5) {
-        var isOpen = _ref5.isOpen,
-          onToggle = _ref5.onToggle;
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-          variant: "primary",
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
-          className: "fb-setting-color-setting-icon-btn"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-          icon: "color-picker",
-          className: "fb-setting-color-setting-icon"
-        }));
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-setting-icon-popup"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          className: "fb-setting-color-setting-icon-popup-inner"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-hover-color"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-          color: infoBoxBorderHoverColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              infoBoxBorderHoverColor: value
-            });
-          },
-          enableAlpha: true
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-hover-color-label"
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
-          colors: [{
-            color: '#F72585'
-          }, {
-            color: '#7209B7'
-          }, {
-            color: '#3A0CA3'
-          }, {
-            color: '#4361EE'
-          }, {
-            color: '#4CC9F0'
-          }],
-          disableCustomColors: true,
-          value: Heading_Border_Hover_Color,
-          onChange: function onChange(value) {
-            return setAttributes({
-              Heading_Border_Hover_Color: value
-            });
-          }
-        }))));
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-inner-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(activeBorderDevice === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxBorderWidthDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(activeBorderDevice === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxBorderWidthDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(activeBorderDevice === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxBorderWidthDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-units-type"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-setting-units-type-wrap"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        key: key,
-        onClick: function onClick() {
-          return setAttributes({
-            infoBoxBorderUnits: item.value
-          });
-        },
-        className: "fb-setting-units-type-switcher ".concat(infoBoxBorderUnits === item.value ? 'active' : '')
-      }, item.label);
-    })))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "top",
-      value: activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.top : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.top : infoBoxMobileBorderWidth.top,
-      onChange: function onChange(e) {
-        return handleBoxBorderWidthInputChange(e, 'top');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "right",
-      value: activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.right : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.right : infoBoxMobileBorderWidth.right,
-      onChange: function onChange(e) {
-        return handleBoxBorderWidthInputChange(e, 'right');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "bottom",
-      value: activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.bottom : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.bottom : infoBoxMobileBorderWidth.bottom,
-      onChange: function onChange(e) {
-        return handleBoxBorderWidthInputChange(e, 'bottom');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "left",
-      value: activeBorderDevice === 'desktop' ? infoBoxDesktopBorderWidth.left : activeBorderDevice === 'tab' ? infoBoxTabBorderWidth.left : infoBoxMobileBorderWidth.left,
-      onChange: function onChange(e) {
-        return handleBoxBorderWidthInputChange(e, 'left');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "dashicons ".concat(borderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderLink ? 'is-checked' : ''),
-      onClick: handleBoxBorderWidthLinkToggle
-    }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-inner-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(activeBorderRadiusDevice === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxBorderRadiusWidthDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(activeBorderRadiusDevice === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxBorderRadiusWidthDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(activeBorderRadiusDevice === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBoxBorderRadiusWidthDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-units-type"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
-      className: "fb-setting-units-type-wrap"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        key: key,
-        onClick: function onClick() {
-          return setAttributes({
-            infoBoxBorderRadiusUnits: item.value
-          });
-        },
-        className: "fb-setting-units-type-switcher ".concat(infoBoxBorderRadiusUnits === item.value ? 'active' : '')
-      }, item.label);
-    })))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "top",
-      value: activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.top : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.top : infoBoxMobileBorderRadiusWidth.top,
-      onChange: function onChange(e) {
-        return handleBoxBorderRadiusWidthInputChange(e, 'top');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "right",
-      value: activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.right : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.right : infoBoxMobileBorderRadiusWidth.right,
-      onChange: function onChange(e) {
-        return handleBoxBorderRadiusWidthInputChange(e, 'right');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "bottom",
-      value: activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.bottom : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.bottom : infoBoxMobileBorderRadiusWidth.bottom,
-      onChange: function onChange(e) {
-        return handleBoxBorderRadiusWidthInputChange(e, 'bottom');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
-      type: "number",
-      name: "left",
-      value: activeBorderRadiusDevice === 'desktop' ? infoBoxDesktopBorderRadiusWidth.left : activeBorderRadiusDevice === 'tab' ? infoBoxTabBorderRadiusWidth.left : infoBoxMobileBorderRadiusWidth.left,
-      onChange: function onChange(e) {
-        return handleBoxBorderRadiusWidthInputChange(e, 'left');
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-spacing-input-wrapper"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-setting-spacing-input-label"
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "dashicons ".concat(borderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderRadiusLink ? 'is-checked' : ''),
-      onClick: handleBoxBorderRadiusWidthLinkToggle
-    })))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    })))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image/Icon", "frontis-block"),
       initialOpen: false
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-      __nextHasNoMarginBottom: true,
-      label: "Width",
-      value: attributes.width,
-      onChange: function onChange(value) {
-        return setAttributes({
-          width: value
-        });
-      },
-      min: 0,
-      max: 500
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-      __nextHasNoMarginBottom: true,
-      label: "Height",
-      value: attributes.height,
-      onChange: function onChange(value) {
-        return setAttributes({
-          height: value
-        });
-      },
-      min: 0,
-      max: 500
+    }, /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      min: 1,
+      max: 300,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Width", "frontis-blocks"),
+      rangeValue: mediaSize,
+      onChangeHandler: mediaSizeHandler,
+      rangeUnitHandler: mediaSizeUnitsHandler,
+      DeviceType: DeviceType,
+      units: mediaSizeUnits,
+      setAttributes: setAttributes,
+      rangeStep: 1,
+      resetFallbackValue: 50
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heading", "frontis-block"),
       initialOpen: false
@@ -6141,9 +6200,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref6) {
-        var isOpen = _ref6.isOpen,
-          onToggle = _ref6.onToggle;
+      renderToggle: function renderToggle(_ref4) {
+        var isOpen = _ref4.isOpen,
+          onToggle = _ref4.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -6410,9 +6469,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref7) {
-        var isOpen = _ref7.isOpen,
-          onToggle = _ref7.onToggle;
+      renderToggle: function renderToggle(_ref5) {
+        var isOpen = _ref5.isOpen,
+          onToggle = _ref5.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -6471,9 +6530,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref8) {
-        var isOpen = _ref8.isOpen,
-          onToggle = _ref8.onToggle;
+      renderToggle: function renderToggle(_ref6) {
+        var isOpen = _ref6.isOpen,
+          onToggle = _ref6.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -6529,46 +6588,11 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(activePaddingDevice === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handlePaddingDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(activePaddingDevice === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handlePaddingDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(activePaddingDevice === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handlePaddingDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handlePaddingDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
       className: "fb-setting-units-type-wrap"
@@ -6591,7 +6615,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: activePaddingDevice === 'desktop' ? Heading_Desktop_padding.top : activePaddingDevice === 'tab' ? Heading_Tab_padding.top : Heading_Mobile_padding.top,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_padding.top : DeviceType === 'Tablet' ? Heading_Tab_padding.top : Heading_Mobile_padding.top,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'top');
       }
@@ -6602,7 +6626,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: activePaddingDevice === 'desktop' ? Heading_Desktop_padding.right : activePaddingDevice === 'tab' ? Heading_Tab_padding.right : Heading_Mobile_padding.right,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_padding.right : DeviceType === 'Tablet' ? Heading_Tab_padding.right : Heading_Mobile_padding.right,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'right');
       }
@@ -6613,7 +6637,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: activePaddingDevice === 'desktop' ? Heading_Desktop_padding.bottom : activePaddingDevice === 'tab' ? Heading_Tab_padding.bottom : Heading_Mobile_padding.bottom,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_padding.bottom : DeviceType === 'Tablet' ? Heading_Tab_padding.bottom : Heading_Mobile_padding.bottom,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'bottom');
       }
@@ -6624,7 +6648,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: activePaddingDevice === 'desktop' ? Heading_Desktop_padding.left : activePaddingDevice === 'tab' ? Heading_Tab_padding.left : Heading_Mobile_padding.left,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_padding.left : DeviceType === 'Tablet' ? Heading_Tab_padding.left : Heading_Mobile_padding.left,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'left');
       }
@@ -6641,46 +6665,11 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margin", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(Heading_Active_Margin_Device === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device ".concat(Heading_Active_Margin_Device === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(Heading_Active_Margin_Device === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleMarginDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
       className: "fb-setting-units-type-wrap"
@@ -6703,7 +6692,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.top : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Margin.top : DeviceType === 'Tablet' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'top');
       }
@@ -6714,7 +6703,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.right : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Margin.right : DeviceType === 'Tablet' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'right');
       }
@@ -6725,7 +6714,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.bottom : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Margin.bottom : DeviceType === 'Tablet' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'bottom');
       }
@@ -6736,7 +6725,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.left : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Margin.left : DeviceType === 'Tablet' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'left');
       }
@@ -6780,9 +6769,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref9) {
-        var isOpen = _ref9.isOpen,
-          onToggle = _ref9.onToggle;
+      renderToggle: function renderToggle(_ref7) {
+        var isOpen = _ref7.isOpen,
+          onToggle = _ref7.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -6841,9 +6830,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref10) {
-        var isOpen = _ref10.isOpen,
-          onToggle = _ref10.onToggle;
+      renderToggle: function renderToggle(_ref8) {
+        var isOpen = _ref8.isOpen,
+          onToggle = _ref8.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -6899,46 +6888,11 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(activeBorderDevice === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBorderWidthDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(activeBorderDevice === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBorderWidthDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(activeBorderDevice === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBorderWidthDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Width', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
       className: "fb-setting-units-type-wrap"
@@ -6961,7 +6915,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.top : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.top : Heading_Mobile_Border_Width.top,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.top : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.top : Heading_Mobile_Border_Width.top,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'top');
       }
@@ -6972,7 +6926,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.right : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.right : Heading_Mobile_Border_Width.right,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.right : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.right : Heading_Mobile_Border_Width.right,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'right');
       }
@@ -6983,7 +6937,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.bottom : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.bottom : Heading_Mobile_Border_Width.bottom,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.bottom : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.bottom : Heading_Mobile_Border_Width.bottom,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'bottom');
       }
@@ -6994,7 +6948,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: activeBorderDevice === 'desktop' ? Heading_Desktop_Border_Width.left : activeBorderDevice === 'tab' ? Heading_Tab_Border_Width.left : Heading_Mobile_Border_Width.left,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_Width.left : DeviceType === 'Tablet' ? Heading_Tab_Border_Width.left : Heading_Mobile_Border_Width.left,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'left');
       }
@@ -7011,46 +6965,11 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius Width", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(activeBorderRadiusDevice === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBorderRadiusWidthDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(activeBorderRadiusDevice === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBorderRadiusWidthDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(activeBorderRadiusDevice === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleBorderRadiusWidthDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleBorderRadiusWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
       className: "fb-setting-units-type-wrap"
@@ -7073,7 +6992,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.top : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.top : Heading_Mobile_Border_radius_Width.top,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.top : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.top : Heading_Mobile_Border_radius_Width.top,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'top');
       }
@@ -7084,7 +7003,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.right : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.right : Heading_Mobile_Border_radius_Width.right,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.right : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.right : Heading_Mobile_Border_radius_Width.right,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'right');
       }
@@ -7095,7 +7014,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.bottom : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.bottom : Heading_Mobile_Border_radius_Width.bottom,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.bottom : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.bottom : Heading_Mobile_Border_radius_Width.bottom,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'bottom');
       }
@@ -7106,7 +7025,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: activeBorderRadiusDevice === 'desktop' ? Heading_Desktop_Border_radius_Width.left : activeBorderRadiusDevice === 'tab' ? Heading_Tab_Border_radius_Width.left : Heading_Mobile_Border_radius_Width.left,
+      value: DeviceType === 'Desktop' ? Heading_Desktop_Border_radius_Width.left : DeviceType === 'Tablet' ? Heading_Tab_Border_radius_Width.left : Heading_Mobile_Border_radius_Width.left,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'left');
       }
@@ -7130,9 +7049,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref11) {
-        var isOpen = _ref11.isOpen,
-          onToggle = _ref11.onToggle;
+      renderToggle: function renderToggle(_ref9) {
+        var isOpen = _ref9.isOpen,
+          onToggle = _ref9.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -7399,9 +7318,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref12) {
-        var isOpen = _ref12.isOpen,
-          onToggle = _ref12.onToggle;
+      renderToggle: function renderToggle(_ref10) {
+        var isOpen = _ref10.isOpen,
+          onToggle = _ref10.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -7460,9 +7379,9 @@ function Inspector(_ref) {
       popoverProps: {
         placement: 'bottom-start'
       },
-      renderToggle: function renderToggle(_ref13) {
-        var isOpen = _ref13.isOpen,
-          onToggle = _ref13.onToggle;
+      renderToggle: function renderToggle(_ref11) {
+        var isOpen = _ref11.isOpen,
+          onToggle = _ref11.onToggle;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "primary",
           onClick: onToggle,
@@ -7518,46 +7437,11 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(activePaddingDevice === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleDescPaddingDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(activePaddingDevice === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleDescPaddingDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(activePaddingDevice === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleDescPaddingDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleDescPaddingDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
       className: "fb-setting-units-type-wrap"
@@ -7580,7 +7464,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.top : activePaddingDevice === 'tab' ? SubHeadingTabPadding.top : SubHeadingMobilePadding.top,
+      value: DeviceType === 'Desktop' ? SubHeadingDesktopPadding.top : DeviceType === 'Tablet' ? SubHeadingTabPadding.top : SubHeadingMobilePadding.top,
       onChange: function onChange(e) {
         return handleDescPaddingInputChange(e, 'top');
       }
@@ -7591,7 +7475,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.right : activePaddingDevice === 'tab' ? SubHeadingTabPadding.right : SubHeadingMobilePadding.right,
+      value: DeviceType === 'Desktop' ? SubHeadingDesktopPadding.right : DeviceType === 'Tablet' ? SubHeadingTabPadding.right : SubHeadingMobilePadding.right,
       onChange: function onChange(e) {
         return handleDescPaddingInputChange(e, 'right');
       }
@@ -7602,7 +7486,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.bottom : activePaddingDevice === 'tab' ? SubHeadingTabPadding.bottom : SubHeadingMobilePadding.bottom,
+      value: DeviceType === 'Desktop' ? SubHeadingDesktopPadding.bottom : DeviceType === 'Tablet' ? SubHeadingTabPadding.bottom : SubHeadingMobilePadding.bottom,
       onChange: function onChange(e) {
         return handleDescPaddingInputChange(e, 'bottom');
       }
@@ -7613,7 +7497,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: activePaddingDevice === 'desktop' ? SubHeadingDesktopPadding.left : activePaddingDevice === 'tab' ? SubHeadingTabPadding.left : SubHeadingMobilePadding.left,
+      value: DeviceType === 'Desktop' ? SubHeadingDesktopPadding.left : DeviceType === 'Tablet' ? SubHeadingTabPadding.left : SubHeadingMobilePadding.left,
       onChange: function onChange(e) {
         return handleDescPaddingInputChange(e, 'left');
       }
@@ -7630,46 +7514,11 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-inner-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-label-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-label-wrapper"
-    }, /*#__PURE__*/React.createElement("p", {
-      className: "fb-setting-label-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margin", "frontis-block")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-desktop-device ".concat(Heading_Active_Margin_Device === 'desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "8",
-      height: "7",
-      viewBox: "0 0 8 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-tablet-device  ".concat(Heading_Active_Margin_Device === 'tab' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('tab');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-responsive-mobile-device ".concat(Heading_Active_Margin_Device === 'mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleMarginDeviceClick('mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    }))))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleDescMarginDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-units-type"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
       className: "fb-setting-units-type-wrap"
@@ -7678,10 +7527,10 @@ function Inspector(_ref) {
         key: key,
         onClick: function onClick() {
           return setAttributes({
-            Heading_Margin_Units: item.value
+            descMarginUnits: item.value
           });
         },
-        className: "fb-setting-units-type-switcher ".concat(Heading_Margin_Units === item.value ? 'active' : '')
+        className: "fb-setting-units-type-switcher ".concat(descMarginUnits === item.value ? 'active' : '')
       }, item.label);
     })))), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-input-container"
@@ -7692,9 +7541,9 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.top : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.top : Heading_Mobile_Margin.top,
+      value: DeviceType === 'Desktop' ? descDesktopMargin.top : DeviceType === 'Tablet' ? descTabMargin.top : descMobileMargin.top,
       onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'top');
+        return handleDescMarginInputChange(e, 'top');
       }
     })), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-input-wrapper"
@@ -7703,9 +7552,9 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.right : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.right : Heading_Mobile_Margin.right,
+      value: DeviceType === 'Desktop' ? descDesktopMargin.right : DeviceType === 'Tablet' ? descTabMargin.right : descMobileMargin.right,
       onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'right');
+        return handleDescMarginInputChange(e, 'right');
       }
     })), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-input-wrapper"
@@ -7714,9 +7563,9 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.bottom : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.bottom : Heading_Mobile_Margin.bottom,
+      value: DeviceType === 'Desktop' ? descDesktopMargin.bottom : DeviceType === 'Tablet' ? descTabMargin.bottom : descMobileMargin.bottom,
       onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'bottom');
+        return handleDescMarginInputChange(e, 'bottom');
       }
     })), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-input-wrapper"
@@ -7725,17 +7574,1003 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: Heading_Active_Margin_Device === 'desktop' ? Heading_Desktop_Margin.left : Heading_Active_Margin_Device === 'tab' ? Heading_Tab_Margin.left : Heading_Mobile_Margin.left,
+      value: DeviceType === 'Desktop' ? descDesktopMargin.left : DeviceType === 'Tablet' ? descTabMargin.left : descMobileMargin.left,
       onChange: function onChange(e) {
-        return handleMarginInputChange(e, 'left');
+        return handleDescMarginInputChange(e, 'left');
       }
     })), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-spacing-input-wrapper"
     }, /*#__PURE__*/React.createElement("label", {
       className: "fb-setting-spacing-input-label"
     }), /*#__PURE__*/React.createElement("span", {
-      className: "dashicons ".concat(Heading_Margin_Link ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(Heading_Margin_Link ? 'is-checked' : ''),
-      onClick: handleMarginLinkToggle
+      className: "dashicons ".concat(descMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(descMarginLink ? 'is-checked' : ''),
+      onClick: handleDescMarginLinkToggle
+    })))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button", "frontis-block"),
+      className: "fb-info-box-button-setting-wrapper",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-block"),
+      className: "fb-setting-typography"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-typography-icon-dropdown",
+      contentClassName: "fb-setting-typography-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref12) {
+        var isOpen = _ref12.isOpen,
+          onToggle = _ref12.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-typography-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "edit",
+          className: "fb-setting-typography-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-typography-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-typography-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontfamily-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-block"),
+          options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
+          value: Heading_Font_Family,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontFamily: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-fontsize-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                buttonFontSizeUnits: item.value
+              });
+            },
+            className: "fb-setting-fontsize-units-switcher ".concat(buttonFontSizeUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontsize-rangecontrol"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: Heading_Font_Size,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontSize: value
+            });
+          },
+          min: 1,
+          max: 200,
+          allowReset: true,
+          resetFallbackValue: undefined
+        }))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontweight-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("100", "frontis-block"),
+            value: "100"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("200", "frontis-block"),
+            value: "200"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("300", "frontis-block"),
+            value: "300"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("400", "frontis-block"),
+            value: "400"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("500", "frontis-block"),
+            value: "500"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("600", "frontis-block"),
+            value: "600"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("700", "frontis-block"),
+            value: "700"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("800", "frontis-block"),
+            value: "800"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("900", "frontis-block"),
+            value: "900"
+          }],
+          value: buttonFontWeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontWeight: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-fontstyle-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "normal"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "frontis-block"),
+            value: "normal"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Italic", "frontis-block"),
+            value: "italic"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Oblique", "frontis-block"),
+            value: "oblique"
+          }],
+          value: buttonFontStyle,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonFontStyle: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-texttransform-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Capitalize", "frontis-block"),
+            value: "capitalize"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Uppercase", "frontis-block"),
+            value: "uppercase"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lowercase", "frontis-block"),
+            value: "lowercase"
+          }],
+          value: buttonTextTransform,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextTransform: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-textdecoration-wrapper"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-block"),
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-block"),
+            value: "none"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Underline", "frontis-block"),
+            value: "underline"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Overline", "frontis-block"),
+            value: "overline"
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Through", "frontis-block"),
+            value: "line-through"
+          }],
+          value: buttonTextDecoration,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextDecoration: value
+            });
+          }
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-letterspacing-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-letterspacing-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                buttonLetterSpacingUnits: item.value
+              });
+            },
+            className: "fb-setting-letterspacing-units-switcher ".concat(buttonLetterSpacingUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: buttonLetterSpacing,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonLetterSpacing: value === 0 ? undefined : value
+            });
+          },
+          min: 1,
+          max: 100,
+          step: 1,
+          allowReset: true,
+          resetFallbackValue: undefined
+        })), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-wrapper"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-header"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-label"
+        }, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-block"))), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-lineheight-units"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+          className: "fb-setting-lineheight-units-wrap"
+        }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+          return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            key: key,
+            onClick: function onClick() {
+              return setAttributes({
+                buttonLineHeightUnits: item.value
+              });
+            },
+            className: "fb-setting-lineheight-units-switcher ".concat(buttonLineHeightUnits === item.value ? 'active' : '')
+          }, item.label);
+        })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          value: buttonLineHeight,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonLineHeight: value === 1 ? undefined : value
+            });
+          },
+          min: 1,
+          max: 100,
+          step: 1,
+          allowReset: true,
+          resetFallbackValue: undefined
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-block"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            buttonColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(buttonColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), buttonColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref13) {
+        var isOpen = _ref13.isOpen,
+          onToggle = _ref13.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonTextColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonTextColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextColor: value
+            });
+          }
+        }))));
+      }
+    })), buttonColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref14) {
+        var isOpen = _ref14.isOpen,
+          onToggle = _ref14.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonTextHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonTextHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonTextHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-block"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            buttonBgColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(buttonBgColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), buttonColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref15) {
+        var isOpen = _ref15.isOpen,
+          onToggle = _ref15.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonBgColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgColor: value
+            });
+          }
+        }))));
+      }
+    })), buttonColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref16) {
+        var isOpen = _ref16.isOpen,
+          onToggle = _ref16.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: buttonBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgHoverColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: buttonBgHoverColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              buttonBgHoverColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Spacing"), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleButtonPaddingDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            infoButtonPaddingUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(infoButtonPaddingUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopPadding.top : DeviceType === 'Tablet' ? infoButtonTabPadding.top : infoButtonMobilePadding.top,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopPadding.right : DeviceType === 'Tablet' ? infoButtonTabPadding.right : infoButtonMobilePadding.right,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopPadding.bottom : DeviceType === 'Tablet' ? infoButtonTabPadding.bottom : infoButtonMobilePadding.bottom,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopPadding.left : DeviceType === 'Tablet' ? infoButtonTabPadding.left : infoButtonMobilePadding.left,
+      onChange: function onChange(e) {
+        return handleButtonPaddingInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(paddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(paddingLink ? 'is-checked' : ''),
+      onClick: handleButtonPaddingLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleButtonMarginDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            infoButtonMarginUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(infoButtonMarginUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopMargin.top : DeviceType === 'Tablet' ? infoButtonTabMargin.top : infoButtonMobileMargin.top,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopMargin.right : DeviceType === 'Tablet' ? infoButtonTabMargin.right : infoButtonMobileMargin.right,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopMargin.bottom : DeviceType === 'Tablet' ? infoButtonTabMargin.bottom : infoButtonMobileMargin.bottom,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopMargin.left : DeviceType === 'Tablet' ? infoButtonTabMargin.left : infoButtonMobileMargin.left,
+      onChange: function onChange(e) {
+        return handleButtonMarginInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(infoButtonMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(infoButtonMarginLink ? 'is-checked' : ''),
+      onClick: handleButtonMarginLinkToggle
+    }))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, null, "Border"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-block"),
+      value: infoButtonBorder,
+      options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.BORDER_STYLES,
+      onChange: function onChange(value) {
+        return setAttributes({
+          infoButtonBorder: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Color", "frontis-block"),
+      className: "fb-setting-color-panel-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-color-panel-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.NORMAL_HOVER.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            infoButtonBorderColorSwitcher: item.value
+          });
+        },
+        className: "fb-setting-color-panel-btn-switchr ".concat(infoButtonBorderColorSwitcher === item.value ? 'active' : '')
+      }, item.label);
+    }))), infoButtonBorderColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref17) {
+        var isOpen = _ref17.isOpen,
+          onToggle = _ref17.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-normal-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: infoButtonBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              infoButtonBorderColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: infoButtonBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              infoButtonBorderColor: value
+            });
+          }
+        }))));
+      }
+    })), Heading_Border_Color_Switcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-block"),
+      className: "fb-setting-color-setting-wrapper"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+      className: "fb-setting-color-setting-icon-dropdown",
+      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+      popoverProps: {
+        placement: 'bottom-start'
+      },
+      renderToggle: function renderToggle(_ref18) {
+        var isOpen = _ref18.isOpen,
+          onToggle = _ref18.onToggle;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "primary",
+          onClick: onToggle,
+          "aria-expanded": isOpen,
+          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-block"),
+          className: "fb-setting-color-setting-icon-btn"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+          icon: "color-picker",
+          className: "fb-setting-color-setting-icon"
+        }));
+      },
+      renderContent: function renderContent() {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-color-setting-icon-popup"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          className: "fb-setting-color-setting-icon-popup-inner"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color"
+        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+          color: infoButtonHoverBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              infoButtonHoverBorderColor: value
+            });
+          },
+          enableAlpha: true
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "fb-setting-hover-color-label"
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-block")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          colors: [{
+            color: '#F72585'
+          }, {
+            color: '#7209B7'
+          }, {
+            color: '#3A0CA3'
+          }, {
+            color: '#4361EE'
+          }, {
+            color: '#4CC9F0'
+          }],
+          disableCustomColors: true,
+          value: infoButtonHoverBorderColor,
+          onChange: function onChange(value) {
+            return setAttributes({
+              infoButtonHoverBorderColor: value
+            });
+          }
+        }))));
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleButtonBorderWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            infoButtonBorderUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(infoButtonBorderUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.top : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.top : infoButtonMobileBorderWidth.top,
+      onChange: function onChange(e) {
+        return handleButtonBorderWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.right : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.right : infoButtonMobileBorderWidth.right,
+      onChange: function onChange(e) {
+        return handleButtonBorderWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.bottom : infoButtonMobileBorderWidth.bottom,
+      onChange: function onChange(e) {
+        return handleButtonBorderWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? infoButtonDesktopBorderWidth.left : DeviceType === 'Tablet' ? infoButtonTabBorderWidth.left : infoButtonMobileBorderWidth.left,
+      onChange: function onChange(e) {
+        return handleButtonBorderWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(borderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderLink ? 'is-checked' : ''),
+      onClick: handleButtonBorderWidthLinkToggle
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-inner-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-label-container"
+    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
+      device: DeviceType,
+      deviceHandler: handleButtonBorderRadiusWidthDeviceClick
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-units-type"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+      className: "fb-setting-units-type-wrap"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_3__.separator_UNIT_TYPES.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            infoBtnBorderradiusUnits: item.value
+          });
+        },
+        className: "fb-setting-units-type-switcher ".concat(infoBtnBorderradiusUnits === item.value ? 'active' : '')
+      }, item.label);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "top",
+      value: DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.top : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.top : infoBtnMobileBorderradiusWidth.top,
+      onChange: function onChange(e) {
+        return handleButtonBorderRadiusWidthInputChange(e, 'top');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "right",
+      value: DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.right : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.right : infoBtnMobileBorderradiusWidth.right,
+      onChange: function onChange(e) {
+        return handleButtonBorderRadiusWidthInputChange(e, 'right');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "bottom",
+      value: DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.bottom : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.bottom : infoBtnMobileBorderradiusWidth.bottom,
+      onChange: function onChange(e) {
+        return handleButtonBorderRadiusWidthInputChange(e, 'bottom');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-block")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      name: "left",
+      value: DeviceType === 'Desktop' ? infoBtnDesktopBorderradiusWidth.left : DeviceType === 'Tablet' ? infoBtnTabBorderradiusWidth.left : infoBtnMobileBorderradiusWidth.left,
+      onChange: function onChange(e) {
+        return handleButtonBorderRadiusWidthInputChange(e, 'left');
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-spacing-input-wrapper"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-setting-spacing-input-label"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dashicons ".concat(borderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink', " ").concat(borderRadiusLink ? 'is-checked' : ''),
+      onClick: handleButtonBorderRadiusWidthLinkToggle
     }))))))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Advanced settings")));
   }))));
 }
@@ -7755,47 +8590,231 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Components/icon-picker/components/icon-picker/controls/renderIcon */ "./src/components/icon-picker/components/icon-picker/controls/renderIcon.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
 
 function save(_ref) {
   var attributes = _ref.attributes;
   var blockID = attributes.blockID,
-    boxBgColor = attributes.boxBgColor,
-    borderRadius = attributes.borderRadius,
-    beforeMediaUrl = attributes.beforeMediaUrl,
+    infoMediaUrl = attributes.infoMediaUrl,
+    wrapperAlignment = attributes.wrapperAlignment,
+    Heading_Text = attributes.Heading_Text,
+    Heading_Tag = attributes.Heading_Tag,
+    Heading_Background_Color = attributes.Heading_Background_Color,
+    Alignment = attributes.Alignment,
+    Sub_Heading_Switcher = attributes.Sub_Heading_Switcher,
+    Sub_Heading_Text = attributes.Sub_Heading_Text,
+    Sub_Heading_Position = attributes.Sub_Heading_Position,
+    Heading_Font_Family = attributes.Heading_Font_Family,
+    Heading_Font_Size = attributes.Heading_Font_Size,
+    Heading_Font_size_units = attributes.Heading_Font_size_units,
+    Heading_Font_Weight = attributes.Heading_Font_Weight,
+    Heading_Font_Style = attributes.Heading_Font_Style,
+    Heading_Text_Transform = attributes.Heading_Text_Transform,
+    Heading_Text_Decoration = attributes.Heading_Text_Decoration,
+    Heading_Letter_Spacing = attributes.Heading_Letter_Spacing,
+    Heading_Line_Height = attributes.Heading_Line_Height,
+    Heading_Letter_Spacing_units = attributes.Heading_Letter_Spacing_units,
+    Heading_Line_Height_units = attributes.Heading_Line_Height_units,
+    Heading_Color_Switcher = attributes.Heading_Color_Switcher,
+    Heading_Color = attributes.Heading_Color,
+    Heading_Hover_Color = attributes.Heading_Hover_Color,
+    Heading_Border = attributes.Heading_Border,
+    Heading_Border_Color = attributes.Heading_Border_Color,
+    Heading_Border_Hover_Color = attributes.Heading_Border_Hover_Color,
+    Heading_Border_Color_Switcher = attributes.Heading_Border_Color_Switcher,
+    Heading_Border_units = attributes.Heading_Border_units,
+    Heading_Border_radius_units = attributes.Heading_Border_radius_units,
+    Heading_Desktop_Border_Width = attributes.Heading_Desktop_Border_Width,
+    Heading_Tab_Border_Width = attributes.Heading_Tab_Border_Width,
+    Heading_Mobile_Border_Width = attributes.Heading_Mobile_Border_Width,
+    activeBorderDevice = attributes.activeBorderDevice,
+    Heading_Desktop_Border_radius_Width = attributes.Heading_Desktop_Border_radius_Width,
+    Heading_Tab_Border_radius_Width = attributes.Heading_Tab_Border_radius_Width,
+    Heading_Mobile_Border_radius_Width = attributes.Heading_Mobile_Border_radius_Width,
+    activeBorderRadiusDevice = attributes.activeBorderRadiusDevice,
+    borderRadiusLink = attributes.borderRadiusLink,
+    borderLink = attributes.borderLink,
+    Heading_padding_units = attributes.Heading_padding_units,
+    Heading_Desktop_padding = attributes.Heading_Desktop_padding,
+    Heading_Tab_padding = attributes.Heading_Tab_padding,
+    Heading_Mobile_padding = attributes.Heading_Mobile_padding,
+    DeviceType = attributes.DeviceType,
+    paddingLink = attributes.paddingLink,
+    Heading_Margin_Units = attributes.Heading_Margin_Units,
+    Heading_Desktop_Margin = attributes.Heading_Desktop_Margin,
+    Heading_Tab_Margin = attributes.Heading_Tab_Margin,
+    Heading_Mobile_Margin = attributes.Heading_Mobile_Margin,
+    Heading_Active_Margin_Device = attributes.Heading_Active_Margin_Device,
+    Heading_Margin_Link = attributes.Heading_Margin_Link,
+    info_Button_Switcher = attributes.info_Button_Switcher,
+    info_Button_Text = attributes.info_Button_Text,
+    info_Button_Link = attributes.info_Button_Link,
+    descAlignment = attributes.descAlignment,
+    buttonAlignment = attributes.buttonAlignment,
+    infoBoxBg = attributes.infoBoxBg,
+    SubHeadingPaddingUnits = attributes.SubHeadingPaddingUnits,
+    SubHeadingDesktopPadding = attributes.SubHeadingDesktopPadding,
+    SubHeadingTabPadding = attributes.SubHeadingTabPadding,
+    SubHeadingMobilePadding = attributes.SubHeadingMobilePadding,
+    SubHeadingTextDecoration = attributes.SubHeadingTextDecoration,
+    SubHeadingTextTransform = attributes.SubHeadingTextTransform,
+    SubHeadingFontStyle = attributes.SubHeadingFontStyle,
+    SubHeadingFontWeight = attributes.SubHeadingFontWeight,
+    SubHeadingFontSizeUnits = attributes.SubHeadingFontSizeUnits,
+    SubHeadingFontSize = attributes.SubHeadingFontSize,
+    SubHeadingFontFamily = attributes.SubHeadingFontFamily,
+    SubHeadingColor = attributes.SubHeadingColor,
+    SubHeadingColorSwitcher = attributes.SubHeadingColorSwitcher,
+    SubHeadingHoverColor = attributes.SubHeadingHoverColor,
+    descMarginUnits = attributes.descMarginUnits,
+    descDesktopMargin = attributes.descDesktopMargin,
+    descTabMargin = attributes.descTabMargin,
+    descMobileMargin = attributes.descMobileMargin,
+    descActiveMarginDevice = attributes.descActiveMarginDevice,
+    descMarginLink = attributes.descMarginLink,
+    infoBoxPaddingUnits = attributes.infoBoxPaddingUnits,
+    infoBoxDesktopPadding = attributes.infoBoxDesktopPadding,
+    infoBoxTabPadding = attributes.infoBoxTabPadding,
+    infoBoxMobilePadding = attributes.infoBoxMobilePadding,
+    infoBoxBorder = attributes.infoBoxBorder,
+    infoBoxBorderColor = attributes.infoBoxBorderColor,
+    infoBoxBorderHoverColor = attributes.infoBoxBorderHoverColor,
+    infoBoxBorderColorSwitcher = attributes.infoBoxBorderColorSwitcher,
+    infoBoxBorderUnits = attributes.infoBoxBorderUnits,
+    infoBoxDesktopBorderWidth = attributes.infoBoxDesktopBorderWidth,
+    infoBoxTabBorderWidth = attributes.infoBoxTabBorderWidth,
+    infoBoxMobileBorderWidth = attributes.infoBoxMobileBorderWidth,
+    infoBoxBorderRadiusUnits = attributes.infoBoxBorderRadiusUnits,
+    infoBoxDesktopBorderRadiusWidth = attributes.infoBoxDesktopBorderRadiusWidth,
+    infoBoxTabBorderRadiusWidth = attributes.infoBoxTabBorderRadiusWidth,
+    infoBoxMobileBorderRadiusWidth = attributes.infoBoxMobileBorderRadiusWidth,
+    buttonFontFamily = attributes.buttonFontFamily,
+    buttonFontSize = attributes.buttonFontSize,
+    buttonFontSizeUnits = attributes.buttonFontSizeUnits,
+    buttonFontWeight = attributes.buttonFontWeight,
+    buttonFontStyle = attributes.buttonFontStyle,
+    buttonTextTransform = attributes.buttonTextTransform,
+    buttonTextDecoration = attributes.buttonTextDecoration,
+    buttonLetterSpacing = attributes.buttonLetterSpacing,
+    buttonLetterSpacingUnits = attributes.buttonLetterSpacingUnits,
+    buttonLineHeight = attributes.buttonLineHeight,
+    buttonLineHeightUnits = attributes.buttonLineHeightUnits,
+    buttonColorSwitcher = attributes.buttonColorSwitcher,
+    buttonTextColor = attributes.buttonTextColor,
+    buttonTextHoverColor = attributes.buttonTextHoverColor,
+    buttonBgColorSwitcher = attributes.buttonBgColorSwitcher,
+    buttonBgColor = attributes.buttonBgColor,
+    buttonBgHoverColor = attributes.buttonBgHoverColor,
+    infoButtonMarginLink = attributes.infoButtonMarginLink,
+    infoButtonMarginUnits = attributes.infoButtonMarginUnits,
+    infoButtonDesktopMargin = attributes.infoButtonDesktopMargin,
+    infoButtonTabMargin = attributes.infoButtonTabMargin,
+    infoButtonMobileMargin = attributes.infoButtonMobileMargin,
+    infoButtonActiveMarginDevice = attributes.infoButtonActiveMarginDevice,
+    infoButtonPaddingUnits = attributes.infoButtonPaddingUnits,
+    infoButtonDesktopPadding = attributes.infoButtonDesktopPadding,
+    infoButtonTabPadding = attributes.infoButtonTabPadding,
+    infoButtonMobilePadding = attributes.infoButtonMobilePadding,
+    icon = attributes.icon,
     width = attributes.width,
-    height = attributes.height,
-    titleColor = attributes.titleColor,
-    titleText = attributes.titleText;
+    mediaSwitcher = attributes.mediaSwitcher,
+    contentAlignment = attributes.contentAlignment,
+    infoButtonBorder = attributes.infoButtonBorder,
+    infoBoxMarginUnits = attributes.infoBoxMarginUnits,
+    infoBoxDesktopMargin = attributes.infoBoxDesktopMargin,
+    infoBoxTabMargin = attributes.infoBoxTabMargin,
+    infoBoxMobileMargin = attributes.infoBoxMobileMargin,
+    infoBoxMarginLink = attributes.infoBoxMarginLink,
+    infoButtonBorderUnits = attributes.infoButtonBorderUnits,
+    infoButtonDesktopBorderWidth = attributes.infoButtonDesktopBorderWidth,
+    infoButtonTabBorderWidth = attributes.infoButtonTabBorderWidth,
+    infoButtonMobileBorderWidth = attributes.infoButtonMobileBorderWidth,
+    infoBtnBorderradiusUnits = attributes.infoBtnBorderradiusUnits,
+    infoBtnDesktopBorderradiusWidth = attributes.infoBtnDesktopBorderradiusWidth,
+    infoBtnTabBorderradiusWidth = attributes.infoBtnTabBorderradiusWidth,
+    infoBtnMobileBorderradiusWidth = attributes.infoBtnMobileBorderradiusWidth,
+    infoButtonBorderColorSwitcher = attributes.infoButtonBorderColorSwitcher,
+    infoButtonBorderColor = attributes.infoButtonBorderColor,
+    infoButtonHoverBorderColor = attributes.infoButtonHoverBorderColor,
+    boxBgColor = attributes.boxBgColor,
+    boxBgColorSwitcher = attributes.boxBgColorSwitcher,
+    boxBgHoverColor = attributes.boxBgHoverColor,
+    mediaSize = attributes.mediaSize,
+    mediaSizeUnits = attributes.mediaSizeUnits,
+    mediaSizeUnitsSave = attributes.mediaSizeUnitsSave,
+    mediaSizeDesktop = attributes.mediaSizeDesktop,
+    Sub_Heading_Tag = attributes.Sub_Heading_Tag;
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
     id: blockID
   });
-  return /*#__PURE__*/React.createElement("div", {
-    id: blockID,
-    className: "wp-block-ultimate-addons-icon-box-".concat(blockID)
+  // Box styling variable
+  var boxPadding = "".concat(infoBoxDesktopPadding.top).concat(infoBoxPaddingUnits, " ").concat(infoBoxDesktopPadding.right).concat(infoBoxPaddingUnits, " ").concat(infoBoxDesktopPadding.bottom).concat(infoBoxPaddingUnits, " ").concat(infoBoxDesktopPadding.left).concat(infoBoxPaddingUnits);
+  var boxMargin = "".concat(infoBoxDesktopMargin.top).concat(infoBoxMarginUnits, " ").concat(infoBoxDesktopMargin.right).concat(infoBoxMarginUnits, " ").concat(infoBoxDesktopMargin.bottom).concat(infoBoxMarginUnits, " ").concat(infoBoxDesktopMargin.left).concat(infoBoxMarginUnits);
+  var boxBorderWidth = "".concat(infoBoxDesktopBorderWidth.top).concat(infoBoxBorderUnits, " ").concat(infoBoxDesktopBorderWidth.right).concat(infoBoxBorderUnits, " ").concat(infoBoxDesktopBorderWidth.bottom).concat(infoBoxBorderUnits, " ").concat(infoBoxDesktopBorderWidth.left).concat(infoBoxBorderUnits);
+  var boxBorderRadiusWidth = "".concat(infoBoxDesktopBorderRadiusWidth.top).concat(infoBoxBorderRadiusUnits, " ").concat(infoBoxDesktopBorderRadiusWidth.right).concat(infoBoxBorderRadiusUnits, " ").concat(infoBoxDesktopBorderRadiusWidth.bottom).concat(infoBoxBorderRadiusUnits, " ").concat(infoBoxDesktopBorderRadiusWidth.left).concat(infoBoxBorderRadiusUnits);
+
+  // Title
+  var padding = "".concat(Heading_Desktop_padding.top).concat(Heading_padding_units, " ").concat(Heading_Desktop_padding.right).concat(Heading_padding_units, " ").concat(Heading_Desktop_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Desktop_padding.left).concat(Heading_padding_units);
+  var margin = "".concat(Heading_Desktop_Margin.top).concat(Heading_padding_units, " ").concat(Heading_Desktop_Margin.right).concat(Heading_padding_units, " ").concat(Heading_Desktop_Margin.bottom).concat(Heading_padding_units, " ").concat(Heading_Desktop_Margin.left).concat(Heading_padding_units);
+  var borderWidth = "".concat(Heading_Desktop_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Desktop_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Desktop_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Desktop_Border_Width.left).concat(Heading_Border_units);
+  var borderRadiusWidth = "".concat(Heading_Desktop_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Desktop_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Desktop_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Desktop_Border_radius_Width.left).concat(Heading_Border_radius_units);
+
+  //Description
+  var descPadding = "".concat(SubHeadingDesktopPadding.top).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingDesktopPadding.right).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingDesktopPadding.bottom).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingDesktopPadding.left).concat(SubHeadingPaddingUnits);
+  var descMargin = "".concat(descDesktopMargin.top).concat(descMarginUnits, " ").concat(descDesktopMargin.right).concat(descMarginUnits, " ").concat(descDesktopMargin.bottom).concat(descMarginUnits, " ").concat(descDesktopMargin.left).concat(descMarginUnits);
+
+  //Button
+  var buttonPadding = "".concat(infoButtonDesktopPadding.top).concat(infoButtonPaddingUnits, " ").concat(infoButtonDesktopPadding.right).concat(infoButtonPaddingUnits, " ").concat(infoButtonDesktopPadding.bottom).concat(infoButtonPaddingUnits, " ").concat(infoButtonDesktopPadding.left).concat(infoButtonPaddingUnits);
+  var buttonMargin = "".concat(infoButtonDesktopMargin.top).concat(infoButtonMarginUnits, " ").concat(infoButtonDesktopMargin.right).concat(infoButtonMarginUnits, " ").concat(infoButtonDesktopMargin.bottom).concat(infoButtonMarginUnits, " ").concat(infoButtonDesktopMargin.left).concat(infoButtonMarginUnits);
+  var buttonBorderRadiusWidth = "".concat(infoBtnDesktopBorderradiusWidth.top).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnDesktopBorderradiusWidth.right).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnDesktopBorderradiusWidth.bottom).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnDesktopBorderradiusWidth.left).concat(infoBtnBorderradiusUnits);
+  var buttonBorderWidth = "".concat(infoButtonDesktopBorderWidth.top).concat(infoButtonBorderUnits, " ").concat(infoButtonDesktopBorderWidth.right).concat(infoButtonBorderUnits, " ").concat(infoButtonDesktopBorderWidth.bottom).concat(infoButtonBorderUnits, " ").concat(infoButtonDesktopBorderWidth.left).concat(infoButtonBorderUnits);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-info-box-content-wrapper.".concat(blockID, " .fb-heading {\n                    ").concat(Heading_Color !== undefined ? "color: ".concat(Heading_Color, ";") : '', "\n                    ").concat(Heading_Background_Color !== undefined ? "background-color: ".concat(Heading_Background_Color, ";") : '', "\n                    font-family: ").concat(Heading_Font_Family !== 'default' ? Heading_Font_Family : Heading_Font_Family, ";\n                    font-size: ").concat(Heading_Font_Size !== undefined ? "".concat(Heading_Font_Size).concat(Heading_Font_size_units) : '', ";\n                    font-weight: ").concat(Heading_Font_Weight, ";\n                    font-style: ").concat(Heading_Font_Style, ";\n                    text-transform: ").concat(Heading_Text_Transform, ";\n                    text-decoration: ").concat(Heading_Text_Decoration, ";\n                    ").concat(Heading_Letter_Spacing !== undefined ? "letter-spacing: ".concat(Heading_Letter_Spacing).concat(Heading_Letter_Spacing_units, ";") : '', "\n                    ").concat(Heading_Line_Height !== undefined ? "line-height: ".concat(Heading_Line_Height).concat(Heading_Line_Height_units, ";") : '', "\n                    transition: all .3s ease-in-out;\n                    padding: ").concat(padding, ";\n                    margin: ").concat(margin, ";\n                    border: ").concat(Heading_Border, ";\n                    border-width: ").concat(borderWidth, ";\n                    border-radius: ").concat(borderRadiusWidth, ";\n                    ").concat(Heading_Border_Color !== undefined ? "border-color: ".concat(Heading_Border_Color, ";") : '', "\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading:hover {\n                    ").concat(Heading_Hover_Color !== undefined ? "color: ".concat(Heading_Hover_Color, ";") : '', "\n                    ").concat(Heading_Border_Hover_Color !== undefined ? "border-color: ".concat(Heading_Border_Hover_Color, ";") : '', "\n                }\n\n                @media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Tab_padding.top).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.right).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Tab_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Tab_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Tab_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Tab_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Tab_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Tab_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Tab_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(Heading_Mobile_padding.top).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.right).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.bottom).concat(Heading_padding_units, " ").concat(Heading_Mobile_padding.left).concat(Heading_padding_units, " !important;\n                        margin: ").concat(Heading_Mobile_Margin.top).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.right).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.bottom).concat(Heading_Margin_Units, " ").concat(Heading_Mobile_Margin.left).concat(Heading_Margin_Units, " !important;\n                        border-width: ").concat(Heading_Mobile_Border_Width.top).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.right).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.bottom).concat(Heading_Border_units, " ").concat(Heading_Mobile_Border_Width.left).concat(Heading_Border_units, " !important;\n                        border-radius: ").concat(Heading_Mobile_Border_radius_Width.top).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.right).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.bottom).concat(Heading_Border_radius_units, " ").concat(Heading_Mobile_Border_radius_Width.left).concat(Heading_Border_radius_units, " !important;\n                    }\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                \t").concat(SubHeadingColor !== undefined ? "color: ".concat(SubHeadingColor, ";") : '', "\n                \tfont-family: ").concat(SubHeadingFontFamily !== 'default' ? SubHeadingFontFamily : SubHeadingFontFamily, ";\n                    font-size: ").concat(SubHeadingFontSize !== undefined ? "".concat(SubHeadingFontSize).concat(SubHeadingFontSizeUnits) : '', ";\n                    font-weight: ").concat(SubHeadingFontWeight, ";\n                    font-style: ").concat(SubHeadingFontStyle, ";\n                    text-transform: ").concat(SubHeadingTextTransform, ";\n                    text-decoration: ").concat(SubHeadingTextDecoration, ";\n\t\t\t\t\tpadding: ").concat(descPadding, ";\n                    margin: ").concat(descMargin, ";\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-description:hover {\n                    ").concat(SubHeadingHoverColor !== undefined ? "color: ".concat(SubHeadingHoverColor, ";") : '', "\n                }\n\n\t\t\t\t@media only screen and (max-width: 1024px){\n\t\t\t\t.fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                        padding: ").concat(SubHeadingTabPadding.top).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingTabPadding.right).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingTabPadding.bottom).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingTabPadding.left).concat(SubHeadingPaddingUnits, " !important;\n                        margin: ").concat(descTabMargin.top).concat(descMarginUnits, " ").concat(descTabMargin.right).concat(descMarginUnits, " ").concat(descTabMargin.bottom).concat(descMarginUnits, " ").concat(descTabMargin.left).concat(descMarginUnits, " !important;\n\n                    }\n\t\t\t\t}\n\t\t\t\t@media only screen and (max-width: 757px){\n\t\t\t\t.fb-info-box-content-wrapper.").concat(blockID, " .fb-description {\n                        padding: ").concat(SubHeadingMobilePadding.top).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingMobilePadding.right).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingMobilePadding.bottom).concat(SubHeadingPaddingUnits, " ").concat(SubHeadingMobilePadding.left).concat(SubHeadingPaddingUnits, " !important;\n                        margin: ").concat(descMobileMargin.top).concat(descMarginUnits, " ").concat(descMobileMargin.right).concat(descMarginUnits, " ").concat(descMobileMargin.bottom).concat(descMarginUnits, " ").concat(descMobileMargin.left).concat(descMarginUnits, " !important;\n                    }\n\t\t\t\t}\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                \t").concat(buttonTextColor !== undefined ? "color: ".concat(buttonTextColor, ";") : '', "\n                \t").concat(buttonBgColor !== undefined ? "background-color: ".concat(buttonBgColor, ";") : '', "\n                \tfont-family: ").concat(buttonFontFamily !== 'default' ? buttonFontFamily : buttonFontFamily, ";\n                    font-size: ").concat(buttonFontSize !== undefined ? "".concat(buttonFontSize).concat(buttonFontSizeUnits) : '', ";\n                    font-weight: ").concat(buttonFontWeight, ";\n                    font-style: ").concat(buttonFontStyle, ";\n                    text-transform: ").concat(buttonTextTransform, ";\n                    text-decoration: ").concat(buttonTextDecoration, ";\n\t\t\t\t\tpadding: ").concat(buttonPadding, ";\n                    margin: ").concat(buttonMargin, ";\n                    border: ").concat(infoButtonBorder, ";\n                    border-width: ").concat(buttonBorderWidth, ";\n                    border-radius: ").concat(buttonBorderRadiusWidth, ";\n                }\n\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button:hover {\n                \t").concat(buttonTextHoverColor !== undefined ? "color: ".concat(buttonTextHoverColor, ";") : '', "\n                \t").concat(buttonBgHoverColor !== undefined ? "background-color: ".concat(buttonBgHoverColor, ";") : '', "\n                }\n\n\t\t\t\t@media only screen and (max-width: 1024px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-btn-wrapper .fb-info-button {\n                        padding: ").concat(infoButtonTabPadding.top).concat(infoButtonPaddingUnits, " ").concat(infoButtonTabPadding.right).concat(infoButtonPaddingUnits, " ").concat(infoButtonTabPadding.bottom).concat(infoButtonPaddingUnits, " ").concat(infoButtonTabPadding.left).concat(infoButtonPaddingUnits, " !important;\n                        margin: ").concat(infoButtonTabMargin.top).concat(infoButtonMarginUnits, " ").concat(infoButtonTabMargin.right).concat(infoButtonMarginUnits, " ").concat(infoButtonTabMargin.bottom).concat(infoButtonMarginUnits, " ").concat(infoButtonTabMargin.left).concat(infoButtonMarginUnits, " !important;\n                        border-width: ").concat(infoButtonTabBorderWidth.top).concat(infoButtonBorderUnits, " ").concat(infoButtonTabBorderWidth.right).concat(infoButtonBorderUnits, " ").concat(infoButtonTabBorderWidth.bottom).concat(infoButtonBorderUnits, " ").concat(infoButtonTabBorderWidth.left).concat(infoButtonBorderUnits, " !important;\n                        border-radius: ").concat(infoBtnTabBorderradiusWidth.top).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.right).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.bottom).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.left).concat(infoBtnBorderradiusUnits, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-info-box-content-wrapper.").concat(blockID, " .fb-heading {\n                        padding: ").concat(infoButtonMobilePadding.top).concat(infoButtonPaddingUnits, " ").concat(infoButtonMobilePadding.right).concat(infoButtonPaddingUnits, " ").concat(infoButtonMobilePadding.bottom).concat(infoButtonPaddingUnits, " ").concat(infoButtonMobilePadding.left).concat(infoButtonPaddingUnits, " !important;\n                        margin: ").concat(infoButtonMobileMargin.top).concat(infoButtonMarginUnits, " ").concat(infoButtonMobileMargin.right).concat(infoButtonMarginUnits, " ").concat(infoButtonMobileMargin.bottom).concat(infoButtonMarginUnits, " ").concat(infoButtonMobileMargin.left).concat(infoButtonMarginUnits, " !important;\n                        border-width: ").concat(infoButtonMobileBorderWidth.top).concat(infoButtonBorderUnits, " ").concat(infoButtonMobileBorderWidth.right).concat(infoButtonBorderUnits, " ").concat(infoButtonMobileBorderWidth.bottom).concat(infoButtonBorderUnits, " ").concat(infoButtonMobileBorderWidth.left).concat(infoButtonBorderUnits, " !important;\n                        border-radius: ").concat(infoBtnTabBorderradiusWidth.top).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.right).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.bottom).concat(infoBtnBorderradiusUnits, " ").concat(infoBtnTabBorderradiusWidth.left).concat(infoBtnBorderradiusUnits, " !important;\n                    }\n                }\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-icon-wrapper svg,\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-media-wrapper img{\n                \twidth: ").concat(mediaSize.Desktop).concat(mediaSizeUnits.Desktop, ";\n                }\n                @media only screen and (max-width: 1024px) {\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-iinfoButtonMobileMargincon-wrapper svg,\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-media-wrapper img{\n                \twidth: ").concat(mediaSize.Tablet).concat(mediaSizeUnits.Tablet, ";\n                }\n                }\n                @media only screen and (max-width: 767px) {\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-icon-wrapper svg,\n                .fb-info-box-content-wrapper.").concat(blockID, " .fb-info-media-wrapper img{\n                \twidth: ").concat(mediaSize.Mobile).concat(mediaSizeUnits.Mobile, ";\n                }\n                }\n                ")), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+    className: "fb-info-box-content-wrapper ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "image-compare-block ".concat(blockID)
+    className: "fb-info-box-content-wrapper-inner ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "card",
+    className: "fb-info-media-wrapper",
     style: {
-      backgroundColor: boxBgColor,
-      borderRadius: "".concat(borderRadius, "px")
+      textAlign: wrapperAlignment
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "card-media"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: beforeMediaUrl,
-    style: {
-      width: "".concat(width, "px"),
-      height: "".concat(height, "px")
+  }, mediaSwitcher === 'image' && /*#__PURE__*/React.createElement("img", {
+    src: attributes.infoMediaUrl
+  }), mediaSwitcher === 'icon' && /*#__PURE__*/React.createElement("div", {
+    className: "fb-icon-wrapper"
+  }, (0,_Components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_2__["default"])(icon)))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+    tagName: Heading_Tag,
+    value: Heading_Text,
+    onChange: function onChange(value) {
+      return setAttributes({
+        text: value
+      });
     },
-    alt: "Comparison Image"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "card-body"
-  }, /*#__PURE__*/React.createElement("p", {
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Icon Title', 'frontis-block'),
+    className: "fb-heading",
     style: {
-      color: titleColor
+      textAlign: Alignment
     }
-  }, titleText)))));
+  }), Sub_Heading_Switcher && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+    tagName: Sub_Heading_Tag,
+    value: Sub_Heading_Text,
+    onChange: function onChange(value) {
+      return setAttributes({
+        Sub_Heading_Text: value
+      });
+    },
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Icon description', 'frontis-block'),
+    className: "fb-description",
+    style: {
+      textAlign: descAlignment
+    }
+  }))));
 }
 
 /***/ }),
@@ -8261,6 +9280,258 @@ function FBIconPicker(props) {
     variant: "secondary",
     onClick: fbInsertIcon
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
+}
+
+/***/ }),
+
+/***/ "./src/components/range/index.js":
+/*!***************************************!*\
+  !*** ./src/components/range/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+// import { useState, useEffect } from 'react';
+// import {__} from '@wordpress/i18n';
+// import {
+// 	Button,
+// 	ButtonGroup,
+// 	RangeControl
+// } from '@wordpress/components';
+// // eslint-disable-next-line import/no-unresolved
+// import FB_ResponsiveControl from '@Components/responsive-control';
+
+// const FB_Range = ({min, max, label, rangeValue, onChangeHandler,  rangeUnitHandler, DeviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
+// 	const [rangeStateValue, setRangeStateValue] = useState(rangeValue[DeviceType]);
+
+// 	// Units
+// 	const UNIT_TYPES = [
+// 		{ label: 'px', value: 'px' },
+// 		{ label: '%', value: '%' },
+// 		{ label: 'em', value: 'em' },
+// 	];
+
+// 	const setRangeUnit = (unit) => {
+// 		rangeUnitHandler(unit);
+// 	}
+
+// 	const setRangeValue = (value) => {
+// 		onChangeHandler(value);
+// 		setRangeStateValue(value);
+// 	}
+
+// 	useEffect( () => {
+// 		setRangeStateValue(rangeValue[DeviceType]);
+// 	}, DeviceType)
+//     return(
+// 		<>
+// 			<div className="fb-setting-spacing-container">
+// 				<div className="fb-setting-spacing-inner-container">
+// 					{/* Margin */}
+// 					<div className="fb-setting-spacing-label-container">
+// 						{/*eslint-disable-next-line @wordpress/i18n-no-variables*/}
+// 						<FB_ResponsiveControl
+// 							labelText={ __( label, 'frontis-blocks' )}
+// 							device={DeviceType}
+// 							deviceHandler={( newDevice ) => setAttributes( {DeviceType: newDevice} )}
+// 						/>
+// 						<div className="fb-setting-units-type">
+// 							<ButtonGroup className="fb-setting-units-type-wrap">
+// 								{UNIT_TYPES.map( ( item, key ) => (
+// 									<Button
+// 										key={key}
+// 										onClick={() => setRangeUnit(item.value)}
+// 										className={`fb-setting-units-type-switcher ${units[DeviceType] === item.value ? 'active' : ''}`}
+// 									>
+// 										{item.label}
+// 									</Button>
+// 								) )}
+// 							</ButtonGroup>
+// 						</div>
+// 					</div>
+// 					<RangeControl
+// 						__nextHasNoMarginBottom
+// 						value={ rangeStateValue }
+// 						onChange={ ( value ) => setRangeValue( value ) }
+// 						min={ min }
+// 						max={ max }
+// 						step={rangeStep}
+// 						allowReset
+// 						resetFallbackValue={resetFallbackValue}
+// 					/>
+// 				</div>
+// 			</div>
+// 		</>
+//     );
+// };
+
+// export default FB_Range;
+
+
+
+
+// eslint-disable-next-line import/no-unresolved
+
+var FB_Range = function FB_Range(_ref) {
+  var min = _ref.min,
+    max = _ref.max,
+    label = _ref.label,
+    rangeValue = _ref.rangeValue,
+    onChangeHandler = _ref.onChangeHandler,
+    rangeUnitHandler = _ref.rangeUnitHandler,
+    DeviceType = _ref.DeviceType,
+    units = _ref.units,
+    setAttributes = _ref.setAttributes,
+    rangeStep = _ref.rangeStep,
+    resetFallbackValue = _ref.resetFallbackValue;
+  var UNIT_TYPES = [{
+    label: 'px',
+    value: 'px'
+  }, {
+    label: '%',
+    value: '%'
+  }, {
+    label: 'em',
+    value: 'em'
+  }];
+
+  // Ensure default/fallback value for the current DeviceType
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (rangeValue[DeviceType] === undefined) {
+      var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, DeviceType, resetFallbackValue));
+      onChangeHandler(newRangeValue);
+    }
+  }, [DeviceType, rangeValue, onChangeHandler, resetFallbackValue]);
+  var setRangeValue = function setRangeValue(value) {
+    var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, DeviceType, value || resetFallbackValue));
+    onChangeHandler(newRangeValue);
+  };
+  var setRangeUnit = function setRangeUnit(unit) {
+    var newUnits = _objectSpread(_objectSpread({}, units), {}, _defineProperty({}, DeviceType, unit));
+    rangeUnitHandler(newUnits);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-spacing-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-spacing-inner-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-spacing-label-container"
+  }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
+    device: DeviceType,
+    deviceHandler: function deviceHandler(newDevice) {
+      return setAttributes({
+        DeviceType: newDevice
+      });
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-units-type"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+    className: "fb-setting-units-type-wrap"
+  }, UNIT_TYPES.map(function (item, key) {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      key: key,
+      onClick: function onClick() {
+        return setRangeUnit(item.value);
+      },
+      className: "fb-setting-units-type-switcher ".concat(units[DeviceType] === item.value ? 'active' : '')
+    }, item.label);
+  })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    __nextHasNoMarginBottom: true,
+    value: rangeValue[DeviceType],
+    onChange: setRangeValue,
+    min: min,
+    max: max,
+    step: rangeStep,
+    allowReset: true,
+    resetFallbackValue: resetFallbackValue
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_Range);
+
+/***/ }),
+
+/***/ "./src/components/responsive-control/index.js":
+/*!****************************************************!*\
+  !*** ./src/components/responsive-control/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ FB_ResponsiveControl)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+function FB_ResponsiveControl(_ref) {
+  var labelText = _ref.labelText,
+    device = _ref.device,
+    deviceHandler = _ref.deviceHandler;
+  var handleDevice = function handleDevice(deviceName) {
+    deviceHandler(deviceName);
+    if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+      wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(deviceName);
+    }
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-label-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "fb-setting-label-text"
+  }, labelText), /*#__PURE__*/React.createElement("div", {
+    className: "fb-responsive-device-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
+    onClick: function onClick() {
+      return handleDevice('Desktop');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "8",
+    height: "7",
+    viewBox: "0 0 8 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
+    onClick: function onClick() {
+      return handleDevice('Tablet');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "6",
+    height: "7",
+    viewBox: "0 0 6 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
+    onClick: function onClick() {
+      return handleDevice('Mobile');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "4",
+    height: "7",
+    viewBox: "0 0 4 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
+  }))))));
 }
 
 /***/ }),
@@ -21303,7 +22574,7 @@ function _unsupportedIterableToArray(r, a) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"title":"Icon Box","name":"frontis-blocks/icon-box","version":"1.0.0","category":"frontis-blocks","icon":"admin-users","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"title":"Icon Box","name":"frontis-blocks/icon-box","version":"1.0.0","category":"frontis-blocks","icon":"info","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"textdomain":"frontis-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

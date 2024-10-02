@@ -1,7 +1,7 @@
-.fb-info-box-content-wrapper{
-	.fb-info-btn-wrapper{
-		.fb-info-button{
-			display: inline-block;
-		}
-	}
+.fb-cta-content-wrapper-inner{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 80%;
+	margin: 0 auto;
 }

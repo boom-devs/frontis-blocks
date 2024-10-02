@@ -517,14 +517,10 @@ $white_color: #ffffff;
 		}
 	}
 }
-.fb-cta-content-wrapper{
-	background: linear-gradient(90deg, #6B4EFF, #A64EFF);
-	.fb-cta-content-wrapper-inner{
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
+.fb-cta-content-wrapper-inner{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 80%;
+	margin: 0 auto;
 }
-
