@@ -1,10 +1,9 @@
 .controlPane {
 	&.controls {
+		width: 250px;
+		padding: 10px;
+
 		.paneChild {
-			display: flex;
-			/* align-items: center; */
-			flex-direction: row;
-			gap: 10px;
 
 			&.color {
 				flex-direction: column;
@@ -112,4 +111,8 @@
 	transform: rotate(90deg);
 	font-size: 15px;
 	font-weight: 700;
+}
+
+.fb-box-shadow-wrapper {
+	position: relative;
 }

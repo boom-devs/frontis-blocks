@@ -192,14 +192,14 @@ class BlockList {
                  'badge'     => 'free',
                  'status'    => 'active',
              ],
-            'post-grid' => [
-                'slug'      => 'post-grid',
-                'title'     => 'Post Grid',
-                'package'   => 'free',
-                'category'  => 'post',
-                'badge'     => 'free',
-                'status'    => 'active',
-            ],
+//            'post-grid' => [
+//                'slug'      => 'post-grid',
+//                'title'     => 'Post Grid',
+//                'package'   => 'free',
+//                'category'  => 'post',
+//                'badge'     => 'free',
+//                'status'    => 'active',
+//            ],
              'team-member' => [
                  'slug'      => 'team-member',
                  'title'     => 'Team Member',

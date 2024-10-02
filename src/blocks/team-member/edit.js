@@ -37,16 +37,16 @@ import TeamMemberContentBorderControl from './style-control/content/team-member-
 import TeamMemberContentBorderRadiusControl from './style-control/content/team-member-content-border-radius-control.js';
 import TeamMemberContentMarginControl from './style-control/content/team-member-content-margin-control.js';
 import TeamMemberContentPaddingControl from './style-control/content/team-member-content-padding-control.js';
-import TeamMemberImageSizeControl from './style-control/image/team-member-image-size-control.js';
+// import TeamMemberImageSizeControl from './style-control/image/team-member-image-size-control.js';
 
 
 //
 import TeamMemberImageBorderControl from './style-control/image/team-member-image-border-control.js';
 import TeamMemberImageBorderRadiusControl from './style-control/image/team-member-image-border-radius-control.js';
 import TeamMemberImageMarginControl from './style-control/image/team-member-image-margin-control.js';
-import TeamMemberNameTypographyControl from './style-control/name/team-member-name-typography-control.js';
+// import TeamMemberNameTypographyControl from './style-control/name/team-member-name-typography-control.js';
 import TeamMemberNameMarginControl from './style-control/name/team-member-name-margin-control.js';
-import TeamMemberDesignationTypographyControl from './style-control/designation/team-member-designation-typography-control.js';
+// import TeamMemberDesignationTypographyControl from './style-control/designation/team-member-designation-typography-control.js';
 import TeamMemberDesignationMarginControl from './style-control/designation/team-member-designation-margin-control.js';
 
 import SortableItem from './sortableItem.js';
@@ -692,11 +692,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												clientId ={clientId}
 											/>
 
-											<TeamMemberImageSizeControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<TeamMemberImageSizeControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 										</PanelBody>
 
 
@@ -704,11 +704,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Name", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<TeamMemberNameTypographyControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<TeamMemberNameTypographyControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 											<TeamMemberNameMarginControl
 												attributes={attributes}
 												setAttributes={setAttributes}
@@ -721,11 +721,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Designation", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<TeamMemberDesignationTypographyControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<TeamMemberDesignationTypographyControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 											<TeamMemberDesignationMarginControl
 												attributes={attributes}
 												setAttributes={setAttributes}

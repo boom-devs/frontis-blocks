@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from '@wordpress/element';
 import { getPanelIdFromRef } from '@Utils/Helpers';
-import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
+// import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 import { select } from '@wordpress/data';
 import { Button, Tooltip, Dashicon } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
