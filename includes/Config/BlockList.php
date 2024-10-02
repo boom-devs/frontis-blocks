@@ -143,14 +143,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'fluent-form' => [
-            //     'slug'      => 'fluent-form',
-            //     'title'     => 'Fluent Form',
-            //     'package'   => 'free',
-            //     'category'  => 'form',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'fluent-form' => [
+                'slug'      => 'fluent-form',
+                'title'     => 'Fluent Form',
+                'package'   => 'free',
+                'category'  => 'form',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'contact-form-7' => [
             //     'slug'      => 'contact-form-7',
             //     'title'     => 'Contact Form 7',

@@ -18,7 +18,6 @@ import './style.scss';
  * Internal dependencies
  */
 import Edit from './edit';
-import save from './save';
 import metadata from './block.json';
 
 /**
@@ -40,15 +39,14 @@ const attributes = {
 			Mobile: 20
 		}
 	},
-
 	rangeUnit: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Tablet: 'em',
+			Mobile: '%',
 		}
-	},
+	}
 }
 
 registerBlockType( metadata.name, {
@@ -57,5 +55,4 @@ registerBlockType( metadata.name, {
 	 * @see ./edit.js
 	 */
 	edit: Edit,
-	save,
 } );
