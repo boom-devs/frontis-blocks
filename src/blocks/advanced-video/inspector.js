@@ -278,7 +278,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Global Border Color */
 
     /** Start Global padding */
-    const handleSocialPaddingUnitChange = ( event, position ) => {
+    const handleGlobalPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalPaddingLink ) {
             switch ( DeviceType ) {
@@ -333,11 +333,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     }
 
-    const handleSocialPaddingCombineBtn = () => {
+    const handleGlobalPaddingCombineBtn = () => {
         setAttributes( {videoGlobalPaddingLink: !videoGlobalPaddingLink} );
     }
 
-    const handleSocialPaddingUnitsHandler = (unit) => {
+    const handleGlobalPaddingUnitsHandler = (unit) => {
         setAttributes( {
             videoGlobalPaddingUnits: {
                 ...videoGlobalPaddingUnits,
@@ -356,7 +356,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     
 
     /** Start Global margin */
-    const handleSocialMarginUnitChange = ( event, position ) => {
+    const handleGlobalMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalMarginLink ) {
             switch ( DeviceType ) {
@@ -411,11 +411,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     }
 
-    const handleSocialMarginCombineBtn = () => {
+    const handleGlobalMarginCombineBtn = () => {
         setAttributes( {videoGlobalMarginLink: !videoGlobalMarginLink} );
     }
 
-    const handleSocialMarginUnitsHandler = (unit) => {
+    const handleGlobalMarginUnitsHandler = (unit) => {
         setAttributes( {
             videoGlobalMarginUnits: {
                 ...videoGlobalMarginUnits,
@@ -432,7 +432,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     /** Start Global border */
-    const handleSocialBorderUnitChange = ( event, position ) => {
+    const handleGlobalBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalBorderLink ) {
             switch ( DeviceType ) {
@@ -487,11 +487,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     }
 
-    const handleSocialBorderCombineBtn = () => {
+    const handleGlobalBorderCombineBtn = () => {
         setAttributes( {videoGlobalBorderLink: !videoGlobalBorderLink} );
     }
 
-    const handleSocialBorderUnitsHandler = (unit) => {
+    const handleGlobalBorderUnitsHandler = (unit) => {
         setAttributes( {
             videoGlobalBorderUnits: {
                 ...videoGlobalBorderUnits,
@@ -507,7 +507,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     /** Start Global border radius*/
-    const handleSocialBorderRadiusUnitChange = ( event, position ) => {
+    const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalBorderRadiusLink ) {
             switch ( DeviceType ) {
@@ -562,11 +562,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     }
 
-    const handleSocialBorderRadiusCombineBtn = () => {
+    const handleGlobalBorderRadiusCombineBtn = () => {
         setAttributes( {videoGlobalBorderRadiusLink: !videoGlobalBorderRadiusLink} );
     }
 
-    const handleSocialBorderRadiusUnitsHandler = (unit) => {
+    const handleGlobalBorderRadiusUnitsHandler = (unit) => {
         setAttributes( {
             videoGlobalBorderRadiusUnits: {
                 ...videoGlobalBorderRadiusUnits,
@@ -712,7 +712,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <ToggleControl
                                                     label={__("Autoplay", "frontis-blocks")}
                                                     checked={autoPlaySwitcher}
-                                                    onChange={(value) => setAttributes({ autoPlaySwitcher: value })}
+                                                    onChange={(value) => {
+                                                        setAttributes({ autoPlaySwitcher: value });
+                                                        setAttributes({ muteSwitcher: value ? true : muteSwitcher });
+                                                    }}
                                                 />
                                                 <ToggleControl
                                                     label={__("Mute", "frontis-blocks")}
@@ -738,9 +741,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "styles" && (
                                     <>
-                                        <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
-
-                                        </PanelBody>
                                         <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
 
                                             <SelectControl
@@ -814,27 +814,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <FB_Spacing 
                                                         label={__("Padding", "frontis-blocks")}
                                                         DeviceType={DeviceType}
-                                                        spacingUnitsHandler={handleSocialPaddingUnitsHandler}
+                                                        spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
                                                         spacingUnits={videoGlobalPaddingUnits}
                                                         spacingDesktop={videoGlobalPaddingDesktop}
                                                         spacingTablet={videoGlobalPaddingTablet}
                                                         spacingMobile={videoGlobalPaddingMobile}
-                                                        handleSpacingUnitHandler={handleSocialPaddingUnitChange}
+                                                        handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
                                                         spacingCombineBtn={videoGlobalPaddingLink}
-                                                        spacingCombineBtnHandler={handleSocialPaddingCombineBtn}
+                                                        spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
                                                     <FB_Spacing 
                                                         label={__("Margin", "frontis-blocks")}
                                                         DeviceType={DeviceType}
-                                                        spacingUnitsHandler={handleSocialMarginUnitsHandler}
+                                                        spacingUnitsHandler={handleGlobalMarginUnitsHandler}
                                                         spacingUnits={videoGlobalMarginUnits}
                                                         spacingDesktop={videoGlobalMarginDesktop}
                                                         spacingTablet={videoGlobalMarginTablet}
                                                         spacingMobile={videoGlobalMarginMobile}
-                                                        handleSpacingUnitHandler={handleSocialMarginUnitChange}
+                                                        handleSpacingUnitHandler={handleGlobalMarginUnitChange}
                                                         spacingCombineBtn={videoGlobalMarginLink}
-                                                        spacingCombineBtnHandler={handleSocialMarginCombineBtn}
+                                                        spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
                                                 </PanelBody>
@@ -872,28 +872,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <FB_Spacing 
                                                         label={__("Border", "frontis-blocks")}
                                                         DeviceType={DeviceType}
-                                                        spacingUnitsHandler={handleSocialBorderUnitsHandler}
+                                                        spacingUnitsHandler={handleGlobalBorderUnitsHandler}
                                                         spacingUnits={videoGlobalBorderUnits}
                                                         spacingDesktop={videoGlobalBorderDesktop}
                                                         spacingTablet={videoGlobalBorderTablet}
                                                         spacingMobile={videoGlobalBorderMobile}
-                                                        handleSpacingUnitHandler={handleSocialBorderUnitChange}
+                                                        handleSpacingUnitHandler={handleGlobalBorderUnitChange}
                                                         spacingCombineBtn={videoGlobalBorderLink}
-                                                        spacingCombineBtnHandler={handleSocialBorderCombineBtn}
+                                                        spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
 
                                                     <FB_Spacing 
                                                         label={__("Radius Border", "frontis-blocks")}
                                                         DeviceType={DeviceType}
-                                                        spacingUnitsHandler={handleSocialBorderRadiusUnitsHandler}
+                                                        spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
                                                         spacingUnits={videoGlobalBorderRadiusUnits}
                                                         spacingDesktop={videoGlobalBorderRadiusDesktop}
                                                         spacingTablet={videoGlobalBorderRadiusTablet}
                                                         spacingMobile={videoGlobalBorderRadiusMobile}
-                                                        handleSpacingUnitHandler={handleSocialBorderRadiusUnitChange}
+                                                        handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
                                                         spacingCombineBtn={videoGlobalBorderRadiusLink}
-                                                        spacingCombineBtnHandler={handleSocialBorderRadiusCombineBtn}
+                                                        spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
                                                 </PanelBody>
