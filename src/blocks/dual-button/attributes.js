@@ -260,6 +260,77 @@ const attributes = {
     ButtonZIndex : {
         type: "number",
     },
+	//Connector
+	connectorSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	connectorText: {
+		type: "string",
+		default: "Or",
+	},
+	connectorFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	connectorFontSize: {
+		type: "number",
+		default: 16
+	},
+	connectorFontSizeUnits: {
+		type: "string",
+		default: "px"
+	},
+	connectorFontWeight : {
+		type: "string",
+		default: "400"
+	},
+	connectorFontStyle : {
+		type: "string",
+		default: "normal"
+	},
+	connectorTextTransform : {
+		type: "string",
+		default: "none"
+	},
+	connectorTextDecoration : {
+		type: "string",
+		default: "none"
+	},
+	connectorLetterSpacing : {
+		type: "number",
+	},
+	connectorLetterSpacingUnits : {
+		type: "string",
+		default: "px"
+	},
+	connectorLineHeight : {
+		type: "number",
+	},
+	connectorLineHeightUnits : {
+		type: "string",
+		default: "px"
+	},
+	connectorColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	connectorColor : {
+		type: "string"
+	},
+	connectorHoverColor: {
+		type: 'string',
+	},
+	connectorBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	connectorBgColor : {
+		type: "string"
+	},
+	connectorBgHoverColor: {
+		type: 'string',
+	},
 	//Button Two
 	ButtonTwoAlignment: {
 		type: "string",

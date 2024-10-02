@@ -364,7 +364,9 @@ export default function save({ attributes }) {
 							/>
 						)}
 						{mediaSwitcher === 'icon' && (
-							<div className="fb-icon-wrapper"></div>
+							<div className="fb-icon-wrapper">
+								{renderSVG(icon)}
+							</div>
 						)}
 					</div>
 				</div>
@@ -393,7 +395,6 @@ export default function save({ attributes }) {
 								value={info_Button_Text}
 								onChange={(value) => setAttributes({info_Button_Text: value})}
 								placeholder={__('Info Button', 'frontis-block')}
-
 								style={{textAlign: buttonAlignment}}
 							/>
 						</a>

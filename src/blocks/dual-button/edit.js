@@ -27,7 +27,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		ButtonTwoText,
 		ButtonTwoIcon,
 		ButtonTwoUrl,
-		ButtonTwoTargetUrl
+		ButtonTwoTargetUrl,
+		connectorText,
+		connectorSwitcher
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -75,9 +77,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
 							</a>
 						</div>
+						{connectorSwitcher && (
 						<div className="fb-dual-button-connector">
-
+							<RichText
+								tagName="span"
+								value={connectorText}
+								onChange={(value) => setAttributes({connectorText: value})}
+								placeholder={__('Enter connector text...', 'frontis-blocks')}
+								className="fb-dual-button-connector-text"
+							/>
 						</div>
+						)}
 						<div className="fb-dual-button-one-wrapper">
 							<a
 								className="fb-advanced-button"
