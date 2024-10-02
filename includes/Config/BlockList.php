@@ -151,14 +151,14 @@ class BlockList {
                 'badge'     => 'free',
                 'status'    => 'active',
             ],
-            // 'contact-form-7' => [
-            //     'slug'      => 'contact-form-7',
-            //     'title'     => 'Contact Form 7',
-            //     'package'   => 'free',
-            //     'category'  => 'form',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'contact-form-7' => [
+                'slug'      => 'contact-form-7',
+                'title'     => 'Contact Form 7',
+                'package'   => 'free',
+                'category'  => 'form',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'call-to-action' => [
             //     'slug'      => 'call-to-action',
             //     'title'     => 'Call to Action',

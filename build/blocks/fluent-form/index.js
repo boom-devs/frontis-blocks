@@ -33,29 +33,18 @@ function Edit(props) {
   var attributes = props.attributes,
     setAttributes = props.setAttributes;
   var formId = attributes.formId;
-  console.log(FrontisBlocksData);
-  var formLists = JSON.parse(FrontisBlocksData.fluent_form_lists);
-  var modifiedFormLists = formLists.map(function (obj, i) {
-    return {
-      label: obj.label,
-      value: obj.value
-    };
-  });
-  return /*#__PURE__*/React.createElement("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(), !formId && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    value: formId,
-    options: modifiedFormLists,
-    onChange: function onChange(newFormId) {
-      return setAttributes({
-        formId: newFormId
-      });
-    }
-  }), formId && /*#__PURE__*/React.createElement((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default()), {
-    className: "eb-fluent-form-rendered",
-    block: "fluentfom/guten-block",
-    attributes: {
-      formId: formId
-    }
-  }));
+
+  // console.log(FrontisBlocksData)
+
+  // const formLists = JSON.parse(FrontisBlocksData.fluent_form_lists);
+  //
+  // const modifiedFormLists = formLists.map((obj, i) => {
+  // 	return {
+  // 		label: obj.label,
+  // 		value: obj.value,
+  // 	};
+  // });
+  return /*#__PURE__*/React.createElement("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)());
 }
 
 /***/ }),
