@@ -444,9 +444,13 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
-	ButtonTwoBorderUnits : {
-		type: "string",
-		default: "px"
+	ButtonTwoBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	ButtonTwoDesktopBorderWidth: {
 		type: "object",
@@ -484,8 +488,12 @@ const attributes = {
 		default: true
 	},
 	ButtonTwoBorderRadiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	ButtonTwoDesktopBorderRadiusWidth: {
 		type: "object",
@@ -522,9 +530,15 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
-	ButtonTwoPaddingUnits : {
-		type: "string",
-		default: "px"
+	// Padding
+
+	ButtonTwoPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	ButtonTwoDesktopPadding: {
 		type: "object",
@@ -557,6 +571,7 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+	// Button two margin
 	ButtonTwoMarginUnits : {
 		type: "string",
 		default: "px"
