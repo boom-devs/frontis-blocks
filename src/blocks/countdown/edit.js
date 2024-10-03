@@ -41,10 +41,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownLabelHour,
 		countDownLabelMinute,
 		countDownLabelSecond,
-		countDownLabelBgColorDay,
-		countDownLabelBgColorHour,
-		countDownLabelBgColorMinute,
-		countDownLabelBgColorSecond,
 
 		targetDate,
 		showDays,
