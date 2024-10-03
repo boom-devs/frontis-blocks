@@ -1,4 +1,4 @@
-const counterNumberAttributes = {
+const counterNumberTypographyAttributes = {
 	counterNumberFontColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -57,4 +57,4 @@ const counterNumberAttributes = {
 	},
 };
 
-export default counterNumberAttributes;
+export default counterNumberTypographyAttributes;

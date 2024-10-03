@@ -34,10 +34,13 @@ import CounterItemBorderTypeControl from "@Blocks/counter-number/style-control/c
 import CounterItemBorderRadiusControl from "@Blocks/counter-number/style-control/counter-item-border-radius-control";
 import CounterNumberTypographyControl from "@Blocks/counter-number/style-control/counter-number-typograpy-control";
 import CounterNumberTitleTypographyControl from "@Blocks/counter-number/style-control/counter-number-title-typograpy-control";
+import CounterNumberTitleMarginControl from "@Blocks/counter-number/style-control/counter-number-title-margin-control";
+import CounterNumberMarginControl from "@Blocks/counter-number/style-control/counter-number-margin-control";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		DeviceType,
 		counterNumber,
 		counterPrefix,
 		counterSuffix,
@@ -46,8 +49,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		icon,
 		counterIconColor,
 		mediaSwitcher,
-
-		DeviceType,
 
 		BoxBorder,
 		BoxBorderColor,
@@ -401,12 +402,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
+											<CounterNumberMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
 										<PanelBody
 											title={__("Counter Title", "frontis-blocks")}
 											initialOpen={false}
 										>
 											<CounterNumberTitleTypographyControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<CounterNumberTitleMarginControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}

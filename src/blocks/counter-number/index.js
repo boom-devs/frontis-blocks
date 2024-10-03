@@ -12,8 +12,10 @@ import counterItemSizeAttributes from "./attributes/counter-item-size-attribute.
 import counterItemBorderTypeAttributes from "./attributes/counter-item-border-type-attribute.js";
 import counterItemBorderRadiusAttributes from "./attributes/counter-item-border-radius-attribute.js";
 import counterItemBgColorControl from "./attributes/counter-item-bg-color-attribute.js";
-import counterNumberAttributes from "./attributes/counter-number-attribute.js";
-import counterNumberTitleAttributes from "./attributes/counter-number-title-attribute.js";
+import counterNumberTypographyAttributes from "./attributes/counter-number-typography-attribute.js";
+import counterNumberMarginAttribute from "./attributes/counter-number-margin-attribute.js";
+import counterNumberTitleTypographyAttributes from "./attributes/counter-number-title-typography-attribute.js";
+import counterNumberTitleMarginAttribute from "./attributes/counter-number-title-margin-attribute.js";
 
 // Merge attributes
 const combinedAttributes = {
@@ -22,8 +24,10 @@ const combinedAttributes = {
 	...counterItemBorderTypeAttributes,
 	...counterItemBorderRadiusAttributes,
 	...counterItemBgColorControl,
-	...counterNumberAttributes,
-	...counterNumberTitleAttributes,
+	...counterNumberTypographyAttributes,
+	...counterNumberMarginAttribute,
+	...counterNumberTitleTypographyAttributes,
+	...counterNumberTitleMarginAttribute,
 };
 registerBlockType( metadata.name, {
 	attributes: combinedAttributes,
