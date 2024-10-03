@@ -41,6 +41,8 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@wordpress/editor": "^14.6.0",
-    "react-virtualized": "^9.22.5"
+    "@wordpress/icons": "^10.7.0",
+    "react-virtualized": "^9.22.5",
+    "awesome-icon-picker": "^1.0.25"
   }
 }

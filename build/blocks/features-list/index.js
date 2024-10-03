@@ -8960,7 +8960,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
+<<<<<<< HEAD
 
+=======
+/**
+ * Internal dependencies
+ */
+>>>>>>> 27c59d133d37688901b0b4f70b07538faaff9329
 
 
 function Edit(_ref) {
@@ -12158,7 +12164,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _parseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parseIcon */ "./src/components/icon-picker/components/icon-picker/controls/parseIcon.js");
-/* harmony import */ var _svgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../svgIcon */ "./src/components/icon-picker/components/svgIcon.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 /**
  * Set inline CSS class.
@@ -12168,21 +12173,54 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
  */
 
 
+var url = 'https://svg-icons.boomdevs.com/';
+var token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
+
+// Function to check if data exists in localStorage
+var getDataFromLocalStorage = function getDataFromLocalStorage() {
+  var data = localStorage.getItem('iconData');
+  return data ? JSON.parse(data) : null;
+};
+
+// Fetch SVG icons from the API
+var fetchFromApi = function fetchFromApi() {
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': "Bearer ".concat(token),
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  }).then(function (data) {
+    localStorage.setItem('iconData', JSON.stringify(data)); // Store data in localStorage
+    return data;
+  })["catch"](function (error) {
+    console.error('Error fetching SVG icons:', error);
+    return null;
+  });
+};
+
+// Get data from localStorage or fetch from API
 
 function renderSVG(svg) {
   var _fontAwesome$svg;
   var setAttributes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var extraProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   svg = (0,_parseIcon__WEBPACK_IMPORTED_MODULE_0__["default"])(svg);
-  var fontAwesome;
-  // Load Polyfiller Array if needed.
-  if (0 !== fb_blocks_info.font_awesome_5_polyfill.length) {
-    fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][svg];
-    if (!fontAwesome) {
-      var _fb_blocks_info$font_;
-      fontAwesome = _svgIcon__WEBPACK_IMPORTED_MODULE_1__["default"][(_fb_blocks_info$font_ = fb_blocks_info.font_awesome_5_polyfill) === null || _fb_blocks_info$font_ === void 0 ? void 0 : _fb_blocks_info$font_[svg]];
-    }
+  var data = getDataFromLocalStorage();
+  if (!data) {
+    fetchFromApi().then(function (fetchedData) {
+      data = fetchedData;
+      // console.log(data); // Log or use the fetched data
+    });
   }
+  var svgIcon = data;
+  var fontAwesome;
+  fontAwesome = svgIcon[svg];
   if (!fontAwesome) {
     return null;
   }
@@ -12244,6 +12282,7 @@ function renderSVG(svg) {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./src/components/icon-picker/components/svgIcon.js":
 /*!**********************************************************!*\
   !*** ./src/components/icon-picker/components/svgIcon.js ***!
@@ -12689,6 +12728,8 @@ function scrollbarSize(recalc) {
 
 /***/ }),
 
+=======
+>>>>>>> 27c59d133d37688901b0b4f70b07538faaff9329
 /***/ "./src/blocks/features-list/editor.scss":
 /*!**********************************************!*\
   !*** ./src/blocks/features-list/editor.scss ***!

@@ -1,0 +1,29 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/social-icons/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper .fb-socials {
+  list-style: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  display: flex;
+}
+.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper .fb-socials .fb-social-list-item a {
+  box-sizing: content-box;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 30px;
+  transition: color 0.5s, background-color 0.5s, border 0.5s, border-radius 0.5s, box-shadow 0.5s;
+  background-color: chocolate;
+}
+.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper .fb-socials .fb-social-list-item a svg {
+  fill: #fff;
+  transition: fill 0.3s;
+}

@@ -40,15 +40,25 @@ const attributes = {
 			Mobile: 20
 		}
 	},
+<<<<<<< HEAD
 
+=======
+>>>>>>> 27c59d133d37688901b0b4f70b07538faaff9329
 	rangeUnit: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
+<<<<<<< HEAD
 			Tablet: 'px',
 			Mobile: 'px',
 		}
 	},
+=======
+			Tablet: 'em',
+			Mobile: '%',
+		}
+	}
+>>>>>>> 27c59d133d37688901b0b4f70b07538faaff9329
 }
 
 registerBlockType( metadata.name, {
