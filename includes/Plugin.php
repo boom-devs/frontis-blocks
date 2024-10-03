@@ -4,6 +4,7 @@ namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Core\Blocks;
+use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
@@ -80,8 +81,6 @@ final class Plugin {
         $this->set_locale();
         $this->init_classes();
         $this->init_hooks();
-
-//         add_filter( 'render_block', [$this, 'render_block'], 10, 2 );
     }
 
     /**
@@ -126,11 +125,8 @@ final class Plugin {
 
        	//load blocks
        	self::$blocks = BlockList::get_instance()->get_blocks();
+       	FontLoader::get_instance();
     }
-
-//     public function render_block($block_content, $block) {
-//     	GenerateFrontendCss::get_instance()->generate_css($block_content, $block);
-//     }
 
     /**
      * Initialize hooks
