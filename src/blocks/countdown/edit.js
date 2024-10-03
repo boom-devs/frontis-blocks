@@ -385,7 +385,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 										<PanelBody
 											title={__("Digit", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 											<CountDownDigitTypographyControl
 												attributes={attributes}
@@ -396,7 +396,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 										<PanelBody
 											title={__("Label", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 											<CountDownLabelTypographyControl
 												attributes={attributes}
