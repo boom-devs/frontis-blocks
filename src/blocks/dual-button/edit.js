@@ -90,7 +90,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						)}
 						<div className="fb-dual-button-one-wrapper">
 							<a
-								className="fb-advanced-button"
+								className="fb-advanced-button  fb-dual-button-two"
 								href={ButtonTwoUrl}
 								target={ButtonTwoTargetUrl ? '_blank' : undefined}
 								rel={ButtonTwoTargetUrl ? 'noopener noreferrer' : undefined}
