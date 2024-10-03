@@ -1,0 +1,152 @@
+import { __ } from '@wordpress/i18n';
+
+import FB_Range from "@Components/range";
+import {BaseControl, Button, ButtonGroup, Dashicon, Dropdown, RangeControl, SelectControl} from "@wordpress/components";
+import {FONT_FAMILYS, UNIT_TYPES} from "@Blocks/advanced-heading/constants/constants";
+import FB_Color from "@Components/color";
+export default function CounterNumberTypographyControl ({ attributes, setAttributes}) {
+
+	const {
+		counterNumberFontColorSwitcher,
+		counterNumberFontColor,
+		counterNumberFontHoverColor,
+
+		counterNumberFontFamily,
+		counterNumberFontSize,
+		counterNumberFontSizeUnits,
+		counterNumberFontWeight,
+		counterNumberFontStyle,
+		counterNumberTextTransform,
+		counterNumberTextDecoration,
+		counterNumberLetterSpacing,
+		counterNumberLetterSpacingUnits,
+		counterNumberLineHeight,
+		counterNumberLineHeightUnits,
+
+
+	} = attributes;
+
+
+	const handleColorSwitcherChange = (value) => {
+		setAttributes({ counterNumberFontColorSwitcher: value });
+	};
+	const handleGlobalColorChange = (value) => {
+		setAttributes({ counterNumberFontColor: value });
+	};
+	const handleGlobalHoverColorChange = (value) => {
+		setAttributes({ counterNumberFontHoverColor: value });
+	};
+
+
+
+	return (
+		<>
+
+			<FB_Color
+				label={__(" Color", "frontis-blocks")}
+				globalColorSwitcher={counterNumberFontColorSwitcher}
+				globalColor={counterNumberFontColor}
+				globalHoverColor={counterNumberFontHoverColor}
+				handleColorSwitcherChange={handleColorSwitcherChange}
+				handleGlobalColorChange={handleGlobalColorChange}
+				handleGlobalHoverColorChange={handleGlobalHoverColorChange}
+			/>
+
+
+			{/* Digit Thypography Start */}
+			<BaseControl
+				label={__("Typography", "frontis-blocks")}
+				className="fb-setting-typography"
+			>
+				<Dropdown
+					className="fb-setting-typography-icon-dropdown"
+					contentClassName="fb-setting-typography-dropdown-content"
+					popoverProps={{ placement: 'bottom-start' }}
+					renderToggle={({ isOpen, onToggle }) => (
+						<Button
+							variant="primary"
+							onClick={onToggle}
+							aria-expanded={isOpen}
+							aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+							className="fb-setting-typography-icon-btn"
+						>
+							<Dashicon icon="edit" className="fb-setting-typography-icon" />
+						</Button>
+					)}
+					renderContent={() => (
+						<div className="fb-setting-typography-popup">
+							<BaseControl className="fb-setting-typography-popup-inner">
+								{/* Font Family */}
+								<div className="fb-setting-fontfamily-wrapper">
+									<SelectControl
+										label={__("Font Family", "frontis-blocks")}
+										options={FONT_FAMILYS} // Ensure you have FONT_FAMILYS defined.
+										value={attributes.counterNumberFontFamily}
+										onChange={(value) => setAttributes({ counterNumberFontFamily: value })}
+									/>
+								</div>
+
+								{/* Font Size */}
+								<div className="fb-setting-fontsize-wrapper">
+									<div className="fb-setting-fontsize-header">
+										<div className="fb-setting-fontsize-label">
+											<span>{__("Font Size", "frontis-blocks")}</span>
+										</div>
+										<div className="fb-setting-fontsize-units">
+											<ButtonGroup className="fb-setting-fontsize-units-wrap">
+												{UNIT_TYPES.map((item, key) => (
+													<Button
+														key={key}
+														onClick={() => setAttributes({ counterNumberFontSizeUnits: item.value })}
+														className={`fb-setting-fontsize-units-switcher ${attributes.counterNumberFontSizeUnits === item.value ? 'active' : ''}`}
+													>
+														{item.label}
+													</Button>
+												))}
+											</ButtonGroup>
+										</div>
+									</div>
+									<div className="fb-setting-fontsize-rangecontrol">
+										<RangeControl
+											value={attributes.counterNumberFontSize}
+											onChange={(value) => setAttributes({ counterNumberFontSize: value })}
+											min={1}
+											max={200}
+											allowReset
+											resetFallbackValue={undefined}
+										/>
+									</div>
+								</div>
+
+								{/* Font Weight */}
+								<div className="fb-setting-fontweight-wrapper">
+									<SelectControl
+										label={__("Font Weight", "frontis-blocks")}
+										options={[
+											{ label: __("Default", "frontis-blocks"), value: "700" },
+											{ label: __("100", "frontis-blocks"), value: "100" },
+											{ label: __("200", "frontis-blocks"), value: "200" },
+											{ label: __("300", "frontis-blocks"), value: "300" },
+											{ label: __("400", "frontis-blocks"), value: "400" },
+											{ label: __("500", "frontis-blocks"), value: "500" },
+											{ label: __("600", "frontis-blocks"), value: "600" },
+											{ label: __("700", "frontis-blocks"), value: "700" },
+											{ label: __("800", "frontis-blocks"), value: "800" },
+											{ label: __("900", "frontis-blocks"), value: "900" },
+										]}
+										value={attributes.counterNumberFontWeight}
+										onChange={(value) => setAttributes({ counterNumberFontWeight: value })}
+									/>
+								</div>
+
+								{/* Other typography settings: Font Style, Text Transform, Text Decoration, etc. */}
+								{/* Similar structure for other controls */}
+							</BaseControl>
+						</div>
+					)}
+				/>
+			</BaseControl>
+			{/* Digit Thypography End */}
+		</>
+	);
+};

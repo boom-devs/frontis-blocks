@@ -1,10 +1,24 @@
 const counterNumberAttributes = {
+	counterNumberFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	counterNumberFontColor: {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	counterNumberFontHoverColor: {
+		type: 'string',
+		default: "#FFFFFF"
+	},
+
 	counterNumberFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
 	counterNumberFontSize: {
 		type: "number",
+		default: "60"
 	},
 	counterNumberFontSizeUnits: {
 		type: "string",
@@ -12,7 +26,7 @@ const counterNumberAttributes = {
 	},
 	counterNumberFontWeight : {
 		type: "string",
-		default: "700"
+		default: "500"
 	},
 	counterNumberFontStyle : {
 		type: "string",
@@ -35,16 +49,12 @@ const counterNumberAttributes = {
 	},
 	counterNumberLineHeight : {
 		type: "number",
+		default: "68"
 	},
 	counterNumberLineHeightUnits : {
 		type: "string",
 		default: "px"
 	},
-	counterNumberColor : {
-		type: "string",
-		default: "#0D173B"
-	},
-
 };
 
 export default counterNumberAttributes;

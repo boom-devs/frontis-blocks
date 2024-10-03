@@ -23,8 +23,8 @@ import './editor.scss';
 import {BORDER_STYLES, FONT_FAMILYS, NORMAL_HOVER, UNIT_TYPES} from "../advanced-heading/constants/constants";
 import ResponsiveControl from "../../components/responsivecontrol";
 
-import CountdownItemSizeControl from "./style-control/countdown-item-size-control";
-import CountdownItemGapControl from "./style-control/countdown-item-gap-control";
+import CountDownItemSizeControl from "./style-control/countdown-item-size-control";
+import CountDownItemGapControl from "./style-control/countdown-item-gap-control";
 import CountDownItemBorderTypeControl from "./style-control/countdown-item-border-type-control";
 import CountDownItemBorderRadiusControl from "./style-control/countdown-item-border-radius-control";
 import CountDownDigitTypographyControl from "./style-control/countdown-digit-typograpy-control";
@@ -356,12 +356,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Item", "frontis-blocks")}
 											initialOpen={true}
 										>
-											<CountdownItemSizeControl
+											<CountDownItemSizeControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
-											<CountdownItemGapControl
+											<CountDownItemGapControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}

@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 import FB_Range from "@Components/range";
-export default function CountdownItemGapControl ({ attributes, setAttributes}) {
+export default function CountDownItemGapControl ({ attributes, setAttributes}) {
 
 	const {
 		DeviceType,

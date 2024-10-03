@@ -136,14 +136,14 @@ class BlockList {
                  'badge'     => 'free',
                  'status'    => 'active',
              ],
-//             'counter-number' => [
-//                 'slug'      => 'counter-number',
-//                 'title'     => 'Counter Number',
-//                 'package'   => 'free',
-//                 'category'  => 'content',
-//                 'badge'     => 'free',
-//                 'status'    => 'active',
-//             ],
+             'counter-number' => [
+                 'slug'      => 'counter-number',
+                 'title'     => 'Counter Number',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
             // 'fluent-form' => [
             //     'slug'      => 'fluent-form',
             //     'title'     => 'Fluent Form',
