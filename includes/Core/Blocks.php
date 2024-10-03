@@ -7,6 +7,7 @@ use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Forms\FluentForms;
 use FrontisBlocks\Forms\ContactForms7;
+use FrontisBlocks\Assets\GenerateFrontendCss;
 
 defined('ABSPATH') || exit;
 
@@ -53,26 +54,14 @@ class Blocks
                     continue;
                 }
 
-// 				if($slug === 'contact-form-7') {
-// 					wp_register_script(
-// 						$editor_script_handle,
-// 						FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true
-// 					);
-//
-// 					register_block_type('frontis-block/contact-form-7-gblock', array(
-// 						'editor_script' => $editor_script_handle,
-// 						'render_callback' => [$this, 'render_contact_form_7_shortcode'], // Use this to render the form dynamically
-// 					));
-// 				} else {
-					$rb = register_block_type($blocks_dir);
-					wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
-					if ($is_editor) {
-						wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
-					}
+				$rb = register_block_type($blocks_dir);
+				wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
+				if ($is_editor) {
+					wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
+				}
 
-					$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
-					wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
-// 				}
+				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
+				wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
 
 				$localize_array = '';
                 $localize_array = [];
@@ -157,6 +146,8 @@ class Blocks
             $block_content = $this->add_block_id($block_content, $parsed_block);
             $block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
         }
+
+        GenerateFrontendCss::get_instance()->generate_css($block_content, $parsed_block);
 
         return $block_content;
     }
