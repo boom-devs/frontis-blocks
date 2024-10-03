@@ -4,7 +4,7 @@ namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Core\Blocks;
-use FrontisBlocks\Assets\Asset;
+use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
 
@@ -81,7 +81,11 @@ final class Plugin {
         $this->init_classes();
         $this->init_hooks();
 
+<<<<<<< HEAD
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+=======
+//         add_filter( 'render_block', [$this, 'render_block'], 10, 2 );
+>>>>>>> 27c59d133d37688901b0b4f70b07538faaff9329
     }
 
 	public function enqueue_scripts(){
@@ -128,13 +132,22 @@ final class Plugin {
      * Initialize classes
      */
     private function init_classes() {
-       $this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
+       	$this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
 
+<<<<<<< HEAD
        //load blocks
        self::$blocks = BlockList::get_instance()->get_blocks();
 
 
+=======
+       	//load blocks
+       	self::$blocks = BlockList::get_instance()->get_blocks();
+>>>>>>> 27c59d133d37688901b0b4f70b07538faaff9329
     }
+
+//     public function render_block($block_content, $block) {
+//     	GenerateFrontendCss::get_instance()->generate_css($block_content, $block);
+//     }
 
     /**
      * Initialize hooks

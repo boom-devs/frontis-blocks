@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const path = require('path');

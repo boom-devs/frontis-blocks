@@ -5,6 +5,9 @@ namespace FrontisBlocks\Core;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
+use FrontisBlocks\Forms\FluentForms;
+use FrontisBlocks\Forms\ContactForms7;
+use FrontisBlocks\Assets\GenerateFrontendCss;
 
 defined('ABSPATH') || exit;
 
@@ -24,8 +27,9 @@ class Blocks
     public function register_blocks()
     {
         global $pagenow;
-        
+
         $is_editor = $pagenow === 'post.php' || $pagenow === 'post-new.php' || $pagenow === 'site-editor.php' || $pagenow === 'widgets.php';
+
         $args = [
             'handle' => 'frontis-blocks-editor-global',
             'src'    => FB_PLUGIN_URL . 'build/frontis/global.css',
@@ -45,27 +49,55 @@ class Blocks
                 $blocks_dir = FB_BLOCKS_DIR . $slug;
                 $plugin_slug = 'frontis-blocks';
 
-                // if ($package === 'pro' && defined('FB_PRO_PLUGIN_PATH')) {
-                //     $plugin_dir = FB_PRO_PLUGIN_PATH;
-                //     $blocks_dir = FB_PRO_PLUGIN_PATH . 'build/blocks/' . $slug;
-                //     $plugin_slug = 'frontis-blocks-pro';
-                // }
-
                 if (!file_exists($blocks_dir)) {
                     error_log($blocks_dir);
                     continue;
                 }
 
-                $rb = register_block_type($blocks_dir);
-                // error_log(print_r($rb, true));
+				$rb = register_block_type($blocks_dir);
+				wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
+				if ($is_editor) {
+					wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
+				}
 
-                wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
+				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
+				wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
 
-                if ($is_editor) {
-                    wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
-                }
+				$localize_array = '';
+                $localize_array = [];
+
+				if ( is_admin() ) {
+					$admin_localize_array = [
+						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),
+						'fluent_plugin_active' => FluentForms::check_enable(),
+						'fluent_form_lists'   => json_encode( FluentForms::form_list() ),
+						'contact_form_active' => ContactForms7::check_enable(),
+						'contact_form7_lists'  => ContactForms7::form_list(),
+						'contact_form7_html'  => ContactForms7::wf7_form_html()
+					 ];
+
+					$localize_array = array_merge( $localize_array, $admin_localize_array );
+				}
+
+                wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
             }
         }
+    }
+
+    public function render_contact_form_7_shortcode($attributes) {
+    	// Extract the ID and title from attributes, setting defaults if not provided
+		$id = isset($attributes['id']) ? $attributes['id'] : '123'; // Default ID
+		$title = isset($attributes['title']) ? $attributes['title'] : 'Contact Form'; // Default title
+
+		// Prepare the Contact Form 7 shortcode with dynamic ID and title
+		$shortcode = sprintf(
+			'[contact-form-7 id="%s" title="%s"]',
+			esc_attr($id),
+			esc_attr($title)
+		);
+
+		// Dynamically render the Contact Form 7 form in the front-end
+		return do_shortcode($shortcode);
     }
 
     private function register_block($slug, $data)
@@ -114,6 +146,8 @@ class Blocks
             $block_content = $this->add_block_id($block_content, $parsed_block);
             $block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
         }
+
+        GenerateFrontendCss::get_instance()->generate_css($block_content, $parsed_block);
 
         return $block_content;
     }
