@@ -19,6 +19,22 @@
             transition: all .3s ease-in-out;
         }
     }
+	.fb-dual-button-wrapper {
+		display: flex;
+		align-items: center;
+	}
+	.fb-dual-button-connector{
+		position: relative;
+	}
+	.fb-dual-button-connector-text{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 99;
+		border-radius: 50px;
+		text-align: center;
+	}
 }
 
 .fb-advanced-button-icon {
