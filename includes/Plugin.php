@@ -4,7 +4,7 @@ namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Core\Blocks;
-use FrontisBlocks\Assets\Asset;
+use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
 
@@ -80,6 +80,8 @@ final class Plugin {
         $this->set_locale();
         $this->init_classes();
         $this->init_hooks();
+
+//         add_filter( 'render_block', [$this, 'render_block'], 10, 2 );
     }
 
     /**
@@ -120,13 +122,15 @@ final class Plugin {
      * Initialize classes
      */
     private function init_classes() {
-       $this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
+       	$this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
 
-       //load blocks
-       self::$blocks = BlockList::get_instance()->get_blocks();
-
-      
+       	//load blocks
+       	self::$blocks = BlockList::get_instance()->get_blocks();
     }
+
+//     public function render_block($block_content, $block) {
+//     	GenerateFrontendCss::get_instance()->generate_css($block_content, $block);
+//     }
 
     /**
      * Initialize hooks
