@@ -141,6 +141,15 @@ export default function save({ attributes }) {
 	const buttonBorderTabletWidth = `${ButtonTwoTabBorderWidth.top}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoTabBorderWidth.right}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoTabBorderWidth.bottom}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoTabBorderWidth.left}${ButtonTwoBorderUnits[DeviceType]}`;
 	const buttonBorderMobileWidth = `${ButtonTwoMobileBorderWidth.top}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.right}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.bottom}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.left}${ButtonTwoBorderUnits[DeviceType]}`;
 
+	const buttonDesktopMargin = `${ButtonTwoDesktopMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
+	const buttonTabMargin = `${ButtonTwoTabMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
+	const buttonMobileMargin = `${ButtonTwoMobileMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
+
+	const buttonDesktopPadding = `${ButtonTwoDesktopPadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
+	const buttonTabPadding = `${ButtonTwoTabPadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
+	const buttonMobilePadding = `${ButtonTwoMobilePadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
+
+
 
 	return (
 		<>
@@ -156,8 +165,8 @@ export default function save({ attributes }) {
                     text-decoration: ${ButtonTextDecoration};
                     ${ButtonLetterSpacing !== undefined ? `letter-spacing: ${ButtonLetterSpacing}${ButtonLetterSpacingUnits};` : ''}
                     ${ButtonLineHeight !== undefined ? `line-height: ${ButtonLineHeight}${ButtonLineHeightUnits};` : ''}
-                    padding: ${padding};
-                    margin: ${margin};
+                    padding: ${buttonDesktopPadding};
+                    margin: ${buttonDesktopMargin};
                     border: ${ButtonBorder};
                     border-width: ${borderWidth};
                     border-radius: ${borderRadiusWidth};
@@ -178,8 +187,8 @@ export default function save({ attributes }) {
 
 				@media only screen and (max-width: 1024px) {
                     .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
-                        padding: ${ButtonTabPadding.top}${ButtonPaddingUnits} ${ButtonTabPadding.right}${ButtonPaddingUnits} ${ButtonTabPadding.bottom}${ButtonPaddingUnits} ${ButtonTabPadding.left}${ButtonPaddingUnits} !important;
-                        margin: ${ButtonTabMargin.top}${ButtonMarginUnits} ${ButtonTabMargin.right}${ButtonMarginUnits} ${ButtonTabMargin.bottom}${ButtonMarginUnits} ${ButtonTabMargin.left}${ButtonMarginUnits} !important;
+                        padding: ${buttonTabPadding};
+                        margin: ${buttonTabMargin};
                         border-width: ${ButtonTabBorderWidth.top}${ButtonBorderUnits} ${ButtonTabBorderWidth.right}${ButtonBorderUnits} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits} ${ButtonTabBorderWidth.left}${ButtonBorderUnits} !important;
                         border-radius: ${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits} !important;
                     }
@@ -187,8 +196,8 @@ export default function save({ attributes }) {
 
                 @media only screen and (max-width: 767px) {
                     .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
-                        padding: ${ButtonMobilePadding.top}${ButtonPaddingUnits} ${ButtonMobilePadding.right}${ButtonPaddingUnits} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits} ${ButtonMobilePadding.left}${ButtonPaddingUnits} !important;
-                        margin: ${ButtonMobileMargin.top}${ButtonMarginUnits} ${ButtonMobileMargin.right}${ButtonMarginUnits} ${ButtonMobileMargin.bottom}${ButtonMarginUnits} ${ButtonMobileMargin.left}${ButtonMarginUnits} !important;
+                        padding: ${buttonMobilePadding};
+                        margin: ${buttonMobileMargin};
                         border-width: ${ButtonMobileBorderWidth.top}${ButtonBorderUnits} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits} !important;
                         border-radius: ${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits} !important;
                     }
