@@ -573,8 +573,12 @@ const attributes = {
 	},
 	// Button two margin
 	ButtonTwoMarginUnits : {
-		type: "string",
-		default: "px"
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	ButtonTwoDesktopMargin: {
 		type: "object",

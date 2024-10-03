@@ -256,7 +256,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const buttonBorderMobileWidth = `${ButtonTwoMobileBorderWidth.top}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.right}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.bottom}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.left}${ButtonTwoBorderUnits[DeviceType]}`;
 	const handleButtonBorderRadiusUnitChange = ( event, position ) => {
 		const value = event.target.value;
-		if ( ButtonTwoBorderLink ) {
+		if ( ButtonTwoBorderRadiusLink ) {
 			switch ( DeviceType ) {
 				case 'Desktop':
 					setAttributes( {
@@ -325,175 +325,148 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const buttonBorderRadiusTabletWidth = `${ButtonTwoTabBorderRadiusWidth.top}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoTabBorderRadiusWidth.right}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoTabBorderRadiusWidth.bottom}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoTabBorderRadiusWidth.left}${ButtonTwoBorderRadiusUnits[DeviceType]}`;
 	const buttonBorderRadiusMobileWidth = `${ButtonTwoMobileBorderRadiusWidth.top}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoMobileBorderRadiusWidth.right}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoMobileBorderRadiusWidth.bottom}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoMobileBorderRadiusWidth.left}${ButtonTwoBorderRadiusUnits[DeviceType]}`;
 	/** Start Padding */
-	const [previousPadding, setPreviousPadding] = useState(ButtonDesktopPadding);
-	/** Function to update all padding values */
-	const updateAllPadding = (value, device) => {
-		switch(device) {
-			case 'Desktop':
-				setAttributes({
-					ButtonDesktopPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			case 'Tablet':
-				setAttributes({
-					ButtonTabPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			case 'Mobile':
-				setAttributes({
-					ButtonMobilePadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			default:
-				break;
+	const handleButtonPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( ButtonTwoPaddingLink ) {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						ButtonTwoDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						ButtonTwoTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						ButtonTwoMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {ButtonTwoDesktopPadding: {...ButtonTwoDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {ButtonTwoTabPadding: {...ButtonTwoTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {ButtonTwoMobilePadding: {...ButtonTwoMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
 		}
-	};
 
-	/** Function to handle input change */
-	const handlePaddingInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch(DeviceType) {
-			case 'Desktop':
-				setAttributes({ ButtonDesktopPadding: { ...ButtonDesktopPadding, [direction]: value } });
-				break;
-			case 'Tablet':
-				setAttributes({ ButtonTabPadding: { ...ButtonTabPadding, [direction]: value } });
-				break;
-			case 'Mobile':
-				setAttributes({ ButtonMobilePadding: { ...ButtonMobilePadding, [direction]: value } });
-				break;
-			default:
-				break;
+	}
+	const handleButtonPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			ButtonTwoPaddingUnits: {
+				...ButtonTwoPaddingUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
+
+	const handleButtonPaddingCombineBtn = () => {
+		setAttributes( {ButtonTwoPaddingLink: !ButtonTwoPaddingLink} );
+	}
+
+	const buttonDesktopPadding = `${ButtonTwoDesktopPadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
+	const buttonTabPadding = `${ButtonTwoTabPadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
+	const buttonMobilePadding = `${ButtonTwoMobilePadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
+
+	/** Margin */
+	const handleButtonMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( ButtonTwoMarginLink ) {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						ButtonTwoDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						ButtonTwoTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						ButtonTwoMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {ButtonTwoDesktopMargin: {...ButtonTwoDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {ButtonTwoTabMargin: {...ButtonTwoTabMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {ButtonTwoMobileMargin: {...ButtonTwoMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
 		}
-		/** Update all padding values if ButtonPaddingLink is true */
-		if (ButtonPaddingLink) {
-			updateAllPadding(value, DeviceType);
-		}
-	};
 
-	/** Function to handle ButtonPaddingLink toggle */
-	const handleButtonPaddingLinkToggle = () => {
-		if (!ButtonPaddingLink) {
-			setAttributes({ ButtonDesktopPadding: previousPadding });
-		}
-		/** setButtonPaddingLink(!ButtonPaddingLink) */
-		setAttributes({ButtonPaddingLink: !ButtonPaddingLink})
-	};
+	}
+	const handleButtonMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			ButtonTwoMarginUnits: {
+				...ButtonTwoMarginUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
 
-	/** Update previousPadding state when padding changes */
-	useEffect(() => {
-		setPreviousPadding(ButtonDesktopPadding);
-	}, [ButtonDesktopPadding]);
+	const handleButtonMarginCombineBtn = () => {
+		setAttributes( {ButtonTwoMarginLink: !ButtonTwoMarginLink} );
+	}
 
-	/** Function to handle device click for padding */
-	const handlePaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default padding for desktop (using desktop_padding) */
-	const padding = `${ButtonDesktopPadding.top}${ButtonPaddingUnits} ${ButtonDesktopPadding.right}${ButtonPaddingUnits} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits} ${ButtonDesktopPadding.left}${ButtonPaddingUnits}`;
-	/** End Padding */
-
-	/** Start Margin */
-	const [previousMargin, setPreviousMargin] = useState(ButtonDesktopMargin);
-	/** Function to update all margin values */
-	const updateAllMargin = (value, device) => {
-		switch(device) {
-			case 'Desktop':
-				setAttributes({
-					ButtonDesktopMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			case 'Tablet':
-				setAttributes({
-					ButtonTabMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			case 'Mobile':
-				setAttributes({
-					ButtonMobileMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value
-					}
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleMarginInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch(DeviceType) {
-			case 'Desktop':
-				setAttributes({ ButtonDesktopMargin: { ...ButtonDesktopMargin, [direction]: value } });
-				break;
-			case 'Tablet':
-				setAttributes({ ButtonTabMargin: { ...ButtonTabMargin, [direction]: value } });
-				break;
-			case 'Mobile':
-				setAttributes({ ButtonMobileMargin: { ...ButtonMobileMargin, [direction]: value } });
-				break;
-			default:
-				break;
-		}
-		/** Update all margin values if marginLink is true */
-		if (ButtonMarginLink) {
-			updateAllMargin(value, DeviceType);
-		}
-	};
-
-	/** Function to handle marginLink toggle */
-	const handleMarginLinkToggle = () => {
-		if (!ButtonMarginLink) {
-			setAttributes({ ButtonDesktopMargin: previousMargin });
-		}
-		/** setmarginLink(!marginLink) */
-		setAttributes({ButtonMarginLink: !ButtonMarginLink})
-	};
-
-	/** Update previousMargin state when margin changes */
-	useEffect(() => {
-		setPreviousMargin(ButtonDesktopMargin);
-	}, [ButtonDesktopMargin]);
-
-	/** Function to handle device click for margin */
-	const handleMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default margin for desktop (using desktop_margin) */
-	const margin = `${ButtonDesktopMargin.top}${ButtonPaddingUnits} ${ButtonDesktopMargin.right}${ButtonPaddingUnits} ${ButtonDesktopMargin.bottom}${ButtonPaddingUnits} ${ButtonDesktopMargin.left}${ButtonPaddingUnits}`;
-	/** End Margin */
-
+	const buttonDesktopMargin = `${ButtonTwoDesktopMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
+	const buttonTabMargin = `${ButtonTwoTabMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
+	const buttonMobileMargin = `${ButtonTwoMobileMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
 	/** Start Border Width */
 	const [previousBorderWidth, setPreviousBorderWidth] = useState(ButtonDesktopBorderWidth);
 	/** Function to update all Border Width values */
@@ -698,8 +671,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     text-decoration: ${ButtonTextDecoration};
                     ${ButtonLetterSpacing !== undefined ? `letter-spacing: ${ButtonLetterSpacing}${ButtonLetterSpacingUnits};` : ''}
                     ${ButtonLineHeight !== undefined ? `line-height: ${ButtonLineHeight}${ButtonLineHeightUnits};` : ''}
-                    padding: ${padding};
-                    margin: ${margin};
+                    padding: ${buttonDesktopPadding};
+                    margin: ${buttonDesktopMargin};
                     border: ${ButtonBorder};
                     border-width: ${borderWidth};
                     border-radius: ${borderRadiusWidth};
@@ -719,8 +692,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 }
                 @media only screen and (max-width: 1024px) {
                     .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
-                        padding: ${ButtonTabPadding.top}${ButtonPaddingUnits} ${ButtonTabPadding.right}${ButtonPaddingUnits} ${ButtonTabPadding.bottom}${ButtonPaddingUnits} ${ButtonTabPadding.left}${ButtonPaddingUnits} !important;
-                        margin: ${ButtonTabMargin.top}${ButtonMarginUnits} ${ButtonTabMargin.right}${ButtonMarginUnits} ${ButtonTabMargin.bottom}${ButtonMarginUnits} ${ButtonTabMargin.left}${ButtonMarginUnits} !important;
+                        padding: ${buttonTabPadding};
+                        margin: ${buttonTabMargin};
                         border-width: ${ButtonTabBorderWidth.top}${ButtonBorderUnits} ${ButtonTabBorderWidth.right}${ButtonBorderUnits} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits} ${ButtonTabBorderWidth.left}${ButtonBorderUnits} !important;
                         border-radius: ${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits} !important;
                     }
@@ -728,8 +701,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                 @media only screen and (max-width: 767px) {
                     .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
-                        padding: ${ButtonMobilePadding.top}${ButtonPaddingUnits} ${ButtonMobilePadding.right}${ButtonPaddingUnits} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits} ${ButtonMobilePadding.left}${ButtonPaddingUnits} !important;
-                        margin: ${ButtonMobileMargin.top}${ButtonMarginUnits} ${ButtonMobileMargin.right}${ButtonMarginUnits} ${ButtonMobileMargin.bottom}${ButtonMarginUnits} ${ButtonMobileMargin.left}${ButtonMarginUnits} !important;
+                        padding: ${buttonMobilePadding};
+                        margin: ${buttonMobileMargin};
                         border-width: ${ButtonMobileBorderWidth.top}${ButtonBorderUnits} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits} !important;
                         border-radius: ${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits} !important;
                     }
@@ -1479,7 +1452,34 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													/>
 												</BaseControl>
 											)}
+											{/*	Spacing */}
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												DeviceType={DeviceType}
+												spacingUnitsHandler={handleButtonPaddingUnitsHandler}
+												spacingUnits={ButtonTwoPaddingUnits}
+												spacingDesktop={ButtonTwoDesktopPadding}
+												spacingTablet={ButtonTwoTabPadding}
+												spacingMobile={ButtonTwoMobilePadding}
+												handleSpacingUnitHandler={handleButtonPaddingUnitChange}
+												spacingCombineBtn={ButtonTwoPaddingLink}
+												spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
 
+											<FB_Spacing
+												label={__("Margin", "frontis-blocks")}
+												DeviceType={DeviceType}
+												spacingUnitsHandler={handleButtonMarginUnitsHandler}
+												spacingUnits={ButtonTwoMarginUnits}
+												spacingDesktop={ButtonTwoDesktopMargin}
+												spacingTablet={ButtonTwoTabMargin}
+												spacingMobile={ButtonTwoMobileMargin}
+												handleSpacingUnitHandler={handleButtonMarginUnitChange}
+												spacingCombineBtn={ButtonTwoMarginLink}
+												spacingCombineBtnHandler={handleButtonMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
 
 
 										</PanelBody>
@@ -1904,11 +1904,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 										</PanelBody>
 										{/*	Button Two */}
 
-
-
 										{/*Spacing*/}
 
-									{/*	Connector */}
+										{/*	Connector */}
 										<PanelBody
 											title={__("Connector", "frontis-blocks")}
 											initialOpen={true}
