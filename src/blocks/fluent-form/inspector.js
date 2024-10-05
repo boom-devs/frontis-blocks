@@ -60,12 +60,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormLabelLetterSpacingUnits,
         fluentFormLabelLineHeightUnits,
 
-        fluentFormInputBgColorSwitcher,
         fluentFormInputBgColor,
-        fluentFormInputBgHoverColor,
-        fluentFormInputColorSwitcher,
         fluentFormInputColor,
-        fluentFormInputHoverColor,
+        fluentFormInputFocusColor,
         fluentFormInputFontFamily,
         fluentFormInputFontSize,
         fluentFormInputFontSizeUnits,
@@ -2116,29 +2113,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Label Color */
 
     /** Start Input & Textarea BgColor */
-    const handleInputBgColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormInputBgColorSwitcher: value });
-    };
     const handleInputBgColorChange = (value) => {
         setAttributes({ fluentFormInputBgColor: value });
-    };
-    const handleInputBgHoverColorChange = (value) => {
-        setAttributes({ fluentFormInputBgHoverColor: value });
     };
     /** End Input & Textarea BgColor */
 
     /** Start Input & Textarea Color */
-    const handleInputColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormInputColorSwitcher: value });
-    };
     const handleInputColorChange = (value) => {
         setAttributes({ fluentFormInputColor: value });
     };
-    const handleInputHoverColorChange = (value) => {
-        setAttributes({ fluentFormInputHoverColor: value });
+    /** End Input & Textarea Focus Color */
+    /** Start Input & Textarea Color */
+    const handleInputFocusColorChange = (value) => {
+        setAttributes({ fluentFormInputFocusColor: value });
     };
-    /** End Input & Textarea Color */
-
+    /** End Input & Textarea Focus Color */
 
     /** Start fluentFormTextIndentSize */
     const fluentFormTextIndentSizeHandler = (value) => {
@@ -2269,7 +2258,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End HTML Color */
 
-
     /** Start fluentFormSubmitHeight */
     const fluentFormSubmitHeightHandler = (value) => {
         setAttributes({ fluentFormSubmitHeight: value });
@@ -2324,8 +2312,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End Submit Border Color */
     
-
-
     /** Start fluentFormSuccessColor */
 
     const fluentFormSuccessColorChange = (value) => {
@@ -2381,6 +2367,51 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End Global Border Color */
 
+    // Helper function to load fonts
+    const loadFont = (fontFamily) => {
+        if (fontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    };
+
+    // Apply font family styles using useEffect
+    useEffect(() => {
+        loadFont(fluentFormLabelFontFamily);
+    }, [fluentFormLabelFontFamily]);
+
+    useEffect(() => {
+        loadFont(fluentFormInputFontFamily);
+    }, [fluentFormInputFontFamily]);
+
+    useEffect(() => {
+        loadFont(fluentFormSectionBreakTitleFontFamily);
+    }, [fluentFormSectionBreakTitleFontFamily]);
+
+    useEffect(() => {
+        loadFont(fluentFormSectionBreakDescFontFamily);
+    }, [fluentFormSectionBreakDescFontFamily]);
+
+    useEffect(() => {
+        loadFont(fluentFormHtmlFontFamily);
+    }, [fluentFormHtmlFontFamily]);
+
+    useEffect(() => {
+        loadFont(fluentFormSubmitFontFamily);
+    }, [fluentFormSubmitFontFamily]);
+
+    useEffect(() => {
+        loadFont(fluentFormSuccessFontFamily);
+    }, [fluentFormSuccessFontFamily]);
+
+    useEffect(() => {
+        loadFont(fluentFormErrorFontFamily);
+    }, [fluentFormErrorFontFamily]);
+ 
+
     return (
         <>
             <style>
@@ -2431,6 +2462,82 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea:-moz-placeholder {
                     opacity: 0;
                     visibility: hidden;
+                }
+
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group {
+                    ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Desktop}${fluentFormSpacingUnits.Desktop};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
+                    ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
+                    ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
+                    ${fluentFormLabelFontSize ? `font-size: ${fluentFormLabelFontSize}${fluentFormLabelFontSizeUnits || "px"};` : ""}
+                    ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
+                    ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
+                    ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
+                    ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
+                    ${fluentFormLabelLetterSpacing ? `letter-spacing: ${fluentFormLabelLetterSpacing}${fluentFormLabelLetterSpacingUnits || "px"};` : ""}
+                    ${fluentFormLabelLineHeight ? `line-height: ${fluentFormLabelLineHeight}${fluentFormLabelLineHeightUnits || "px"};` : ""}
+                    transition: all .3s ease-in-out;
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
+                    ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea, 
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
+                    ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
+                    ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
+                    ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
+                    ${fluentFormInputFontSize ? `font-size: ${fluentFormInputFontSize}${fluentFormInputFontSizeUnits};` : ""}
+                    ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
+                    ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
+                    ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
+                    ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
+                    ${fluentFormInputLetterSpacing ? `letter-spacing: ${fluentFormInputLetterSpacing}${fluentFormInputLetterSpacingUnits};` : ""}
+                    ${fluentFormInputLineHeight ? `line-height: ${fluentFormInputLineHeight}${fluentFormInputLineHeightUnits};` : ""}
+                    ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};` : ""}
+                    ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};` : ""}
+                    ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};` : ""}
+
+                    ${fluentFormDesktopPadding ? `padding: ${fluentFormDesktopPadding};` : ""}
+                    ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
+                    ${fluentFormBorderDesktopWidth ? `border-width: ${fluentFormBorderDesktopWidth};` : ""}
+                    ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
+                    ${fluentFormBorderRadiusDesktopWidth ? `border-radius: ${fluentFormBorderRadiusDesktopWidth};` : ""}
+
+
+                    transition: all .3s ease-in-out;
+                }
+                .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
+                    ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
+                    box-shadow: 0 0 0 1px ${fluentFormInputFocusColor ? fluentFormInputFocusColor : ""};
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
+                    ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Desktop}${fluentFormTextareaWidthSizeUnits.Desktop};` : ""}
+                    ${fluentFormTextareaHeightSize ? `height: ${fluentFormTextareaHeightSize.Desktop}${fluentFormTextareaHeightSizeUnits.Desktop};` : ""}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper input::-webkit-input-placeholder,
+                .${blockID}.fb-fluent-form-wrapper textarea::-webkit-input-placeholder {
+                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper input::-moz-placeholder,
+                .${blockID}.fb-fluent-form-wrapper textarea::-moz-placeholder {
+                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper input:-ms-input-placeholder,
+                .${blockID}.fb-fluent-form-wrapper textarea:-ms-input-placeholder {
+                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper input:-moz-placeholder,
+                .${blockID}.fb-fluent-form-wrapper textarea:-moz-placeholder {
+                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
                 }
 
 
@@ -2723,24 +2830,144 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
                                         </PanelBody>
                                         <PanelBody title={__("Input & Textarea", "frontis-blocks")} initialOpen={false}>
-                                            <FB_Color
+                                            <BaseControl 
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormInputBgColorSwitcher}
-                                                globalColor={fluentFormInputBgColor}
-                                                globalHoverColor={fluentFormInputBgHoverColor}
-                                                handleColorSwitcherChange={handleInputBgColorSwitcherChange}
-                                                handleGlobalColorChange={handleInputBgColorChange}
-                                                handleGlobalHoverColorChange={handleInputBgHoverColorChange}
-                                            />
-                                            <FB_Color
+                                                className="fb-setting-color-setting-wrapper"
+                                            >
+                                                <Dropdown
+                                                    className="fb-setting-color-setting-icon-dropdown"
+                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                    popoverProps={{ placement: 'bottom-start' }}
+                                                    renderToggle={({ isOpen, onToggle }) => (
+                                                        <Button
+                                                            variant="primary"
+                                                            onClick={onToggle}
+                                                            aria-expanded={isOpen}
+                                                            className="fb-setting-color-setting-icon-btn"
+                                                        >
+                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                        </Button>
+                                                    )}
+                                                    renderContent={() => (
+                                                        <div className="fb-setting-color-setting-icon-popup">
+                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                <div className="fb-setting-normal-color">
+                                                                    <ColorPicker
+                                                                        color={fluentFormInputBgColor}
+                                                                        onChange={handleInputBgColorChange}
+                                                                        enableAlpha={true}
+                                                                    />
+                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                    <ColorPalette
+                                                                        colors={[
+                                                                            { color: '#F72585' },
+                                                                            { color: '#7209B7' },
+                                                                            { color: '#3A0CA3' },
+                                                                            { color: '#4361EE' },
+                                                                            { color: '#4CC9F0' },
+                                                                        ]}
+                                                                        disableCustomColors={true}
+                                                                        value={fluentFormInputBgColor}
+                                                                        onChange={handleInputBgColorChange}
+                                                                    />
+                                                                </div>
+                                                            </BaseControl>
+                                                        </div>
+                                                    )}
+                                                />
+                                            </BaseControl>
+                                            <BaseControl 
                                                 label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormInputColorSwitcher}
-                                                globalColor={fluentFormInputColor}
-                                                globalHoverColor={fluentFormInputHoverColor}
-                                                handleColorSwitcherChange={handleInputColorSwitcherChange}
-                                                handleGlobalColorChange={handleInputColorChange}
-                                                handleGlobalHoverColorChange={handleInputHoverColorChange}
-                                            />
+                                                className="fb-setting-color-setting-wrapper"
+                                            >
+                                                <Dropdown
+                                                    className="fb-setting-color-setting-icon-dropdown"
+                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                    popoverProps={{ placement: 'bottom-start' }}
+                                                    renderToggle={({ isOpen, onToggle }) => (
+                                                        <Button
+                                                            variant="primary"
+                                                            onClick={onToggle}
+                                                            aria-expanded={isOpen}
+                                                            className="fb-setting-color-setting-icon-btn"
+                                                        >
+                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                        </Button>
+                                                    )}
+                                                    renderContent={() => (
+                                                        <div className="fb-setting-color-setting-icon-popup">
+                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                <div className="fb-setting-normal-color">
+                                                                    <ColorPicker
+                                                                        color={fluentFormInputColor}
+                                                                        onChange={handleInputColorChange}
+                                                                        enableAlpha={true}
+                                                                    />
+                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                    <ColorPalette
+                                                                        colors={[
+                                                                            { color: '#F72585' },
+                                                                            { color: '#7209B7' },
+                                                                            { color: '#3A0CA3' },
+                                                                            { color: '#4361EE' },
+                                                                            { color: '#4CC9F0' },
+                                                                        ]}
+                                                                        disableCustomColors={true}
+                                                                        value={fluentFormInputColor}
+                                                                        onChange={handleInputColorChange}
+                                                                    />
+                                                                </div>
+                                                            </BaseControl>
+                                                        </div>
+                                                    )}
+                                                />
+                                            </BaseControl>
+                                            <BaseControl 
+                                                label={__("Focus Color", "frontis-blocks")}
+                                                className="fb-setting-color-setting-wrapper"
+                                            >
+                                                <Dropdown
+                                                    className="fb-setting-color-setting-icon-dropdown"
+                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                    popoverProps={{ placement: 'bottom-start' }}
+                                                    renderToggle={({ isOpen, onToggle }) => (
+                                                        <Button
+                                                            variant="primary"
+                                                            onClick={onToggle}
+                                                            aria-expanded={isOpen}
+                                                            className="fb-setting-color-setting-icon-btn"
+                                                        >
+                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                        </Button>
+                                                    )}
+                                                    renderContent={() => (
+                                                        <div className="fb-setting-color-setting-icon-popup">
+                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                <div className="fb-setting-normal-color">
+                                                                    <ColorPicker
+                                                                        color={fluentFormInputFocusColor}
+                                                                        onChange={handleInputFocusColorChange}
+                                                                        enableAlpha={true}
+                                                                    />
+                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                    <ColorPalette
+                                                                        colors={[
+                                                                            { color: '#F72585' },
+                                                                            { color: '#7209B7' },
+                                                                            { color: '#3A0CA3' },
+                                                                            { color: '#4361EE' },
+                                                                            { color: '#4CC9F0' },
+                                                                        ]}
+                                                                        disableCustomColors={true}
+                                                                        value={fluentFormInputFocusColor}
+                                                                        onChange={handleInputFocusColorChange}
+                                                                    />
+                                                                </div>
+                                                            </BaseControl>
+                                                        </div>
+                                                    )}
+                                                />
+                                            </BaseControl>
 
                                             <BaseControl 
                                                 label={__("Typography", "frontis-blocks")}
@@ -2936,11 +3163,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormTextIndentSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={""}
                                             />
                                             <FB_Range
                                                 min={1}
-                                                max={100}
+                                                max={2000}
                                                 label={__("Input Width", "frontis-blocks")}
                                                 rangeValue={fluentFormInputWidthSize}
                                                 onChangeHandler={fluentFormInputWidthSizeHandler}
@@ -2949,11 +3176,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormInputWidthSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={""}
                                             />
                                             <FB_Range
                                                 min={1}
-                                                max={100}
+                                                max={2000}
                                                 label={__("Input Height", "frontis-blocks")}
                                                 rangeValue={fluentFormInputHeightSize}
                                                 onChangeHandler={fluentFormInputHeightSizeHandler}
@@ -2962,11 +3189,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormInputHeightSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={""}
                                             />
                                             <FB_Range
                                                 min={1}
-                                                max={100}
+                                                max={2000}
                                                 label={__("Textarea Width", "frontis-blocks")}
                                                 rangeValue={fluentFormTextareaWidthSize}
                                                 onChangeHandler={fluentFormTextareaWidthSizeHandler}
@@ -2975,11 +3202,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormTextareaWidthSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={""}
                                             />
                                             <FB_Range
                                                 min={1}
-                                                max={100}
+                                                max={2000}
                                                 label={__("Textarea Height", "frontis-blocks")}
                                                 rangeValue={fluentFormTextareaHeightSize}
                                                 onChangeHandler={fluentFormTextareaHeightSizeHandler}
@@ -2988,11 +3215,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormTextareaHeightSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={""}
                                             />
                                             <FB_Range
                                                 min={1}
-                                                max={100}
+                                                max={1000}
                                                 label={__("Spacing", "frontis-blocks")}
                                                 rangeValue={fluentFormSpacingSize}
                                                 onChangeHandler={fluentFormSpacingSizeHandler}
@@ -3001,7 +3228,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormSpacingUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={""}
                                             />
 
                                             <FB_Spacing 

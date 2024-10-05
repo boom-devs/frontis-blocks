@@ -79,24 +79,13 @@ const attributes = {
     /** End Label */
 
     /** Start Input & Textarea */
-    fluentFormInputBgColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
     fluentFormInputBgColor: {
         type: 'string',
-    },
-    fluentFormInputBgHoverColor: {
-        type: 'string',
-    },
-    fluentFormInputColorSwitcher : {
-        type: "string",
-        default: "normal"
     },
     fluentFormInputColor: {
         type: 'string',
     },
-    fluentFormInputHoverColor: {
+    fluentFormInputFocusColor: {
         type: 'string',
     },
     fluentFormInputFontFamily: {
@@ -145,9 +134,9 @@ const attributes = {
     fluentFormTextIndentSize: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		}
 	},
 	fluentFormTextIndentSizeUnits: {
@@ -164,9 +153,9 @@ const attributes = {
     fluentFormInputWidthSize: {
         type: 'object',
         default: {
-            Desktop: 25,
-            Tablet: 25,
-            Mobile: 25
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
         }
     },
     fluentFormInputWidthSizeUnits: {
@@ -183,9 +172,9 @@ const attributes = {
     fluentFormInputHeightSize: {
         type: 'object',
         default: {
-            Desktop: 25,
-            Tablet: 25,
-            Mobile: 25
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
         }
     },
     fluentFormInputHeightSizeUnits: {
@@ -202,9 +191,9 @@ const attributes = {
     fluentFormTextareaWidthSize: {
         type: 'object',
         default: {
-            Desktop: 25,
-            Tablet: 25,
-            Mobile: 25
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
         }
     },
     fluentFormTextareaWidthSizeUnits: {
@@ -221,9 +210,9 @@ const attributes = {
     fluentFormTextareaHeightSize: {
         type: 'object',
         default: {
-            Desktop: 25,
-            Tablet: 25,
-            Mobile: 25
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
         }
     },
     fluentFormTextareaHeightSizeUnits: {
@@ -240,9 +229,9 @@ const attributes = {
     fluentFormSpacingSize: {
         type: 'object',
         default: {
-            Desktop: 25,
-            Tablet: 25,
-            Mobile: 25
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
         }
     },
     fluentFormSpacingUnits: {
@@ -267,28 +256,28 @@ const attributes = {
     fluentFormPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormPaddingLink : {
@@ -320,28 +309,28 @@ const attributes = {
     fluentFormBorderDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormBorderTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormBorderMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormBorderLink : {
@@ -359,28 +348,28 @@ const attributes = {
     fluentFormBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormBorderRadiusLink : {
