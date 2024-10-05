@@ -53,7 +53,6 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-	{ label: __(<Dashicon icon={"menu"} />), value: "justify" }
 ];
 
 export const HEADING = [
@@ -86,6 +85,11 @@ export const BORDER_STYLES = [
 	{ label: __("Groove", "frontis-blocks"), value: "groove" },
 	{ label: __("Outset", "frontis-blocks"), value: "outset" },
 	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
+];
+
+export const WIDTH_STYLES = [
+	{ label: __("Custom", "frontis-blocks"), value: "custom" },
+	{ label: __("Full Width", "frontis-blocks"), value: "full-width" },
 ];
 
 export const FONT_FAMILYS = [
