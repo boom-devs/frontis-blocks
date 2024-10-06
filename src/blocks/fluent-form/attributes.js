@@ -87,6 +87,8 @@ const attributes = {
     },
     fluentFormInputFocusColor: {
         type: 'string',
+        default: "#1a7efb",
+
     },
     fluentFormInputFontFamily: {
         type: "string",
@@ -286,7 +288,7 @@ const attributes = {
     },
     fluentFormBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     fluentFormBorderColorSwitcher : {
         type: "string",
@@ -294,6 +296,7 @@ const attributes = {
     },
     fluentFormBorderColor: {
         type: 'string',
+        default: "#dadbdd",
     },
     fluentFormBorderHoverColor: {
         type: 'string',
@@ -309,28 +312,28 @@ const attributes = {
     fluentFormBorderDesktop: {
         type: "object", 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
         },
     },
     fluentFormBorderTablet: {
         type: "object", 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
         },
     },
     fluentFormBorderMobile: {
         type: "object", 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
         },
     },
     fluentFormBorderLink : {
