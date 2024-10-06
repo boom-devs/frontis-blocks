@@ -543,18 +543,15 @@ echo "Desktop Text Indent Size: {$fluentFormTextIndentSize['Desktop']}{$fluentFo
         <?php echo $fluentFormInputLetterSpacing ? "letter-spacing: " . esc_attr($fluentFormInputLetterSpacing) . esc_attr($fluentFormInputLetterSpacingUnits) . ";" : ""; ?>
         <?php echo $fluentFormInputLineHeight ? "line-height: " . esc_attr($fluentFormInputLineHeight) . esc_attr($fluentFormInputLineHeightUnits) . ";" : ""; ?>
 
-
-
-
         <?php echo "text-indent: " . $fluentFormTextIndentSize['Desktop'] . $fluentFormTextIndentSizeUnits['Desktop'] . ";"; ?>
         <?php echo "width: " . esc_attr($fluentFormInputWidthSize['Desktop']) . esc_attr($fluentFormInputWidthSizeUnits['Desktop']) . ";"; ?>
         <?php echo "height: " . esc_attr($fluentFormInputHeightSize['Desktop']) . esc_attr($fluentFormInputHeightSizeUnits['Desktop']) . ";"; ?>
 
         <?php echo $fluentFormDesktopPadding ? "padding: " . esc_attr($fluentFormDesktopPadding) . ";" : ""; ?>
         <?php echo $fluentFormBorder ? "border: " . esc_attr($fluentFormBorder) . ";" : ""; ?>
-        <?php echo $fluentFormBorderDesktopWidth ? "border-width: " . esc_attr($fluentFormBorderDesktopWidth) . ";" : ""; ?>
+        <?php echo $fluentFormBorderDesktopString ? "border-width: " . esc_attr($fluentFormBorderDesktopString) . ";" : ""; ?>
         <?php echo $fluentFormBorderColor ? "border-color: " . esc_attr($fluentFormBorderColor) . ";" : ""; ?>
-        <?php echo $fluentFormBorderRadiusDesktopWidth ? "border-radius: " . esc_attr($fluentFormBorderRadiusDesktopWidth) . ";" : ""; ?>
+        <?php echo $fluentFormBorderRadiusDesktopString ? "border-radius: " . esc_attr($fluentFormBorderRadiusDesktopString) . ";" : ""; ?>
 
         transition: all .3s ease-in-out;
     }
@@ -570,8 +567,373 @@ echo "Desktop Text Indent Size: {$fluentFormTextIndentSize['Desktop']}{$fluentFo
     }
     /** end Input Style */
 
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input::-webkit-input-placeholder,
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea::-webkit-input-placeholder {
+        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input::-moz-placeholder,
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea::-moz-placeholder {
+        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input:-ms-input-placeholder,
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea:-ms-input-placeholder {
+        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input:-moz-placeholder,
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea:-moz-placeholder {
+        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"] {
+        width: <?php echo esc_attr( $fluentFormRadioFontSize['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioFontSizeUnits['Desktop'] ); ?>;
+        height: <?php echo esc_attr( $fluentFormRadioFontSize['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioFontSizeUnits['Desktop'] ); ?>;
+        <?php if ( $fluentFormRadioColor ) : ?>
+            background: <?php echo esc_attr( $fluentFormRadioColor ); ?>;
+        <?php endif; ?>
+        <?php if ( $fluentFormRadioBorderColor ) : ?>
+            border-color: <?php echo esc_attr( $fluentFormRadioBorderColor ); ?>;
+        <?php endif; ?>
+        <?php if ( $fluentFormRadioBorderWidth['Desktop'] ) : ?>
+            border-width: <?php echo esc_attr( $fluentFormRadioBorderWidth['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioBorderWidthUnits['Desktop'] ); ?>;
+        <?php endif; ?>
+        <?php if ( $fluentFormRadioBorderRadiusDesktopString ) : ?>
+            border-radius: <?php echo esc_attr( $fluentFormRadioBorderRadiusDesktopString ); ?>;
+        <?php endif; ?>
+        position: relative;
+        appearance: none;
+        transition: all .3s ease-in-out;
+    }
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
+        width: <?php echo esc_attr( $fluentFormRadioFontSize['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioFontSizeUnits['Desktop'] ); ?>;
+        height: <?php echo esc_attr( $fluentFormRadioFontSize['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioFontSizeUnits['Desktop'] ); ?>;
+        <?php if ( $fluentFormRadioColor ) : ?>
+            background: <?php echo esc_attr( $fluentFormRadioColor ); ?>;
+        <?php endif; ?>
+        <?php if ( $fluentFormRadioBorderColor ) : ?>
+            border-color: <?php echo esc_attr( $fluentFormRadioBorderColor ); ?>;
+        <?php endif; ?>
+        <?php if ( $fluentFormRadioBorderWidth['Desktop'] ) : ?>
+            border-width: <?php echo esc_attr( $fluentFormRadioBorderWidth['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioBorderWidthUnits['Desktop'] ); ?>;
+        <?php endif; ?>
+        <?php if ( $fluentFormCheckBoxBorderRadiusDesktopString ) : ?>
+            border-radius: <?php echo esc_attr( $fluentFormCheckBoxBorderRadiusDesktopString ); ?>;
+        <?php endif; ?>
+        position: relative;
+        appearance: none;
+        transition: all .3s ease-in-out;
+    }
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input[type="radio"]:checked:before {
+        <?php if ( $fluentFormRadioCheckedColor ) : ?>
+            background: <?php echo esc_attr( $fluentFormRadioCheckedColor ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {
+        <?php if ( $fluentFormRadioCheckBoxItemSpacing['Desktop'] ) : ?>
+            margin-bottom: <?php echo esc_attr( $fluentFormRadioCheckBoxItemSpacing['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioCheckBoxItemSpacingUnits['Desktop'] ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-section-break,
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-section-break hr {
+        text-align: <?php echo esc_attr( $fluentFormSectionBreakAlignment ); ?>;
+    }
+
     .fb-fluent-form-wrapper .ff-el-group {
         margin-bottom: <?php echo esc_attr( $fluentFormSpacingSize ) . esc_attr( $fluentFormSpacingUnits ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
+        <?php if ( isset( $fluentFormSectionBreakTitleColor ) ) : ?>
+            color: <?php echo esc_attr( $fluentFormSectionBreakTitleColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleFontFamily ) ) : ?>
+            font-family: <?php echo esc_attr( $fluentFormSectionBreakTitleFontFamily ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleFontSize ) && isset( $fluentFormSectionBreakTitleFontSizeUnits ) ) : ?>
+            font-size: <?php echo esc_attr( $fluentFormSectionBreakTitleFontSize . $fluentFormSectionBreakTitleFontSizeUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleFontWeight ) ) : ?>
+            font-weight: <?php echo esc_attr( $fluentFormSectionBreakTitleFontWeight ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleFontStyle ) ) : ?>
+            font-style: <?php echo esc_attr( $fluentFormSectionBreakTitleFontStyle ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleTextTransform ) ) : ?>
+            text-transform: <?php echo esc_attr( $fluentFormSectionBreakTitleTextTransform ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleTextDecoration ) ) : ?>
+            text-decoration: <?php echo esc_attr( $fluentFormSectionBreakTitleTextDecoration ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleLetterSpacing ) && isset( $fluentFormSectionBreakTitleLetterSpacingUnits ) ) : ?>
+            letter-spacing: <?php echo esc_attr( $fluentFormSectionBreakTitleLetterSpacing . $fluentFormSectionBreakTitleLetterSpacingUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleLineHeight ) && isset( $fluentFormSectionBreakTitleLineHeightUnits ) ) : ?>
+            line-height: <?php echo esc_attr( $fluentFormSectionBreakTitleLineHeight . $fluentFormSectionBreakTitleLineHeightUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitlePaddingDesktopString ) ) : ?>
+            padding: <?php echo esc_attr( $fluentFormSectionBreakTitlePaddingDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakTitleMarginDesktopString ) ) : ?>
+            margin: <?php echo esc_attr( $fluentFormSectionBreakTitleMarginDesktopString ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?> .fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
+        color: <?php echo esc_attr( $fluentFormSectionBreakTitleHoverColor ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
+        <?php if ( isset( $fluentFormSectionBreakDescColor ) ) : ?>
+            color: <?php echo esc_attr( $fluentFormSectionBreakDescColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescFontFamily ) ) : ?>
+            font-family: <?php echo esc_attr( $fluentFormSectionBreakDescFontFamily ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescFontSize ) && isset( $fluentFormSectionBreakDescFontSizeUnits ) ) : ?>
+            font-size: <?php echo esc_attr( $fluentFormSectionBreakDescFontSize . $fluentFormSectionBreakDescFontSizeUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescFontWeight ) ) : ?>
+            font-weight: <?php echo esc_attr( $fluentFormSectionBreakDescFontWeight ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescFontStyle ) ) : ?>
+            font-style: <?php echo esc_attr( $fluentFormSectionBreakDescFontStyle ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescTextTransform ) ) : ?>
+            text-transform: <?php echo esc_attr( $fluentFormSectionBreakDescTextTransform ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescTextDecoration ) ) : ?>
+            text-decoration: <?php echo esc_attr( $fluentFormSectionBreakDescTextDecoration ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescLetterSpacing ) && isset( $fluentFormSectionBreakDescLetterSpacingUnits ) ) : ?>
+            letter-spacing: <?php echo esc_attr( $fluentFormSectionBreakDescLetterSpacing . $fluentFormSectionBreakDescLetterSpacingUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescLineHeight ) && isset( $fluentFormSectionBreakDescLineHeightUnits ) ) : ?>
+            line-height: <?php echo esc_attr( $fluentFormSectionBreakDescLineHeight . $fluentFormSectionBreakDescLineHeightUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescPaddingDesktopString ) ) : ?>
+            padding: <?php echo esc_attr( $fluentFormSectionBreakDescPaddingDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSectionBreakDescMarginDesktopString ) ) : ?>
+            margin: <?php echo esc_attr( $fluentFormSectionBreakDescMarginDesktopString ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
+        color: <?php echo esc_attr( $fluentFormSectionBreakDescHoverColor ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-custom_html > * {
+        <?php if ( isset( $fluentFormHtmlAlignment ) ) : ?>
+            text-align: <?php echo esc_attr( $fluentFormHtmlAlignment ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlColor ) ) : ?>
+            color: <?php echo esc_attr( $fluentFormHtmlColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlFontFamily ) ) : ?>
+            font-family: <?php echo esc_attr( $fluentFormHtmlFontFamily ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlFontSize ) && isset( $fluentFormHtmlFontSizeUnits ) ) : ?>
+            font-size: <?php echo esc_attr( $fluentFormHtmlFontSize . $fluentFormHtmlFontSizeUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlFontWeight ) ) : ?>
+            font-weight: <?php echo esc_attr( $fluentFormHtmlFontWeight ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlFontStyle ) ) : ?>
+            font-style: <?php echo esc_attr( $fluentFormHtmlFontStyle ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlTextTransform ) ) : ?>
+            text-transform: <?php echo esc_attr( $fluentFormHtmlTextTransform ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlTextDecoration ) ) : ?>
+            text-decoration: <?php echo esc_attr( $fluentFormHtmlTextDecoration ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlLetterSpacing ) && isset( $fluentFormHtmlLetterSpacingUnits ) ) : ?>
+            letter-spacing: <?php echo esc_attr( $fluentFormHtmlLetterSpacing . $fluentFormHtmlLetterSpacingUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlLineHeight ) && isset( $fluentFormHtmlLineHeightUnits ) ) : ?>
+            line-height: <?php echo esc_attr( $fluentFormHtmlLineHeight . $fluentFormHtmlLineHeightUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlPaddingDesktopString ) ) : ?>
+            padding: <?php echo esc_attr( $fluentFormHtmlPaddingDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormHtmlMarginDesktopString ) ) : ?>
+            margin: <?php echo esc_attr( $fluentFormHtmlMarginDesktopString ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-custom_html > *:hover {
+        color: <?php echo esc_attr( $fluentFormHtmlHoverColor ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?> .fb-fluent-form-wrapper .ff_submit_btn_wrapper {
+        text-align: <?php echo esc_attr( $fluentFormSubmitAlignment ); ?>;
+    }
+
+    .<?php echo esc_attr( $blockID ); ?> .fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+        <?php if ( isset( $fluentFormSubmitHeight['Desktop'] ) && isset( $fluentFormSubmitHeightUnits['Desktop']) ) : ?>
+            height: <?php echo esc_attr( $fluentFormSubmitHeight['Desktop'] . $fluentFormSubmitHeightUnits['Desktop'] ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitColor ) ) : ?>
+            color: <?php echo esc_attr( $fluentFormSubmitColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitBgColor ) ) : ?>
+            background: <?php echo esc_attr( $fluentFormSubmitBgColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitFontFamily ) ) : ?>
+            font-family: <?php echo esc_attr( $fluentFormSubmitFontFamily ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitFontSize ) && isset( $fluentFormSubmitFontSizeUnits ) ) : ?>
+            font-size: <?php echo esc_attr( $fluentFormSubmitFontSize . $fluentFormSubmitFontSizeUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitFontWeight ) ) : ?>
+            font-weight: <?php echo esc_attr( $fluentFormSubmitFontWeight ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitFontStyle ) ) : ?>
+            font-style: <?php echo esc_attr( $fluentFormSubmitFontStyle ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitTextTransform ) ) : ?>
+            text-transform: <?php echo esc_attr( $fluentFormSubmitTextTransform ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitTextDecoration ) ) : ?>
+            text-decoration: <?php echo esc_attr( $fluentFormSubmitTextDecoration ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitLetterSpacing ) && isset( $fluentFormSubmitLetterSpacingUnits ) ) : ?>
+            letter-spacing: <?php echo esc_attr( $fluentFormSubmitLetterSpacing . $fluentFormSubmitLetterSpacingUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitLineHeight ) && isset( $fluentFormSubmitLineHeightUnits ) ) : ?>
+            line-height: <?php echo esc_attr( $fluentFormSubmitLineHeight . $fluentFormSubmitLineHeightUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitPaddingDesktopString ) ) : ?>
+            padding: <?php echo esc_attr( $fluentFormSubmitPaddingDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitMarginDesktopString ) ) : ?>
+            margin: <?php echo esc_attr( $fluentFormSubmitMarginDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitBorder ) ) : ?>
+            border: <?php echo esc_attr( $fluentFormSubmitBorder ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitBorderDesktopString ) ) : ?>
+            border-width: <?php echo esc_attr( $fluentFormSubmitBorderDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitBorderColor ) ) : ?>
+            border-color: <?php echo esc_attr( $fluentFormSubmitBorderColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitBorderRadiusDesktopString ) ) : ?>
+            border-radius: <?php echo esc_attr( $fluentFormSubmitBorderRadiusDesktopString ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
+        <?php if ( isset( $fluentFormSubmitHoverColor ) ) : ?>
+            color: <?php echo esc_attr( $fluentFormSubmitHoverColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitBgHoverColor ) ) : ?>
+            background: <?php echo esc_attr( $fluentFormSubmitBgHoverColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSubmitBorderHoverColor ) ) : ?>
+            border-color: <?php echo esc_attr( $fluentFormSubmitBorderHoverColor ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+        <?php if ( $fluentFormSubmitWidthSelect === 'full-width' ) : ?>
+            width: 100%;
+        <?php elseif ( $fluentFormSubmitWidthSelect === 'custom' && isset( $fluentFormSubmitWidth['Desktop']) ) : ?>
+            width: <?php echo esc_attr( $fluentFormSubmitWidth['Desktop'] . $fluentFormSubmitWidthUnits['Desktop']); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-message-success {
+        <?php if ( isset( $fluentFormSuccessColor ) ) : ?>
+            color: <?php echo esc_attr( $fluentFormSuccessColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessBgColor ) ) : ?>
+            background: <?php echo esc_attr( $fluentFormSuccessBgColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessFontFamily ) ) : ?>
+            font-family: <?php echo esc_attr( $fluentFormSuccessFontFamily ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessFontSize ) && isset( $fluentFormSuccessFontSizeUnits ) ) : ?>
+            font-size: <?php echo esc_attr( $fluentFormSuccessFontSize . $fluentFormSuccessFontSizeUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessFontWeight ) ) : ?>
+            font-weight: <?php echo esc_attr( $fluentFormSuccessFontWeight ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessFontStyle ) ) : ?>
+            font-style: <?php echo esc_attr( $fluentFormSuccessFontStyle ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessTextTransform ) ) : ?>
+            text-transform: <?php echo esc_attr( $fluentFormSuccessTextTransform ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessTextDecoration ) ) : ?>
+            text-decoration: <?php echo esc_attr( $fluentFormSuccessTextDecoration ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessLetterSpacing ) && isset( $fluentFormSuccessLetterSpacingUnits ) ) : ?>
+            letter-spacing: <?php echo esc_attr( $fluentFormSuccessLetterSpacing . $fluentFormSuccessLetterSpacingUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessLineHeight ) && isset( $fluentFormSuccessLineHeightUnits ) ) : ?>
+            line-height: <?php echo esc_attr( $fluentFormSuccessLineHeight . $fluentFormSuccessLineHeightUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessBorder ) ) : ?>
+            border: <?php echo esc_attr( $fluentFormSuccessBorder ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessBorderDesktopString ) ) : ?>
+            border-width: <?php echo esc_attr( $fluentFormSuccessBorderDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessBorderColor ) ) : ?>
+            border-color: <?php echo esc_attr( $fluentFormSuccessBorderColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormSuccessBorderRadiusDesktopString ) ) : ?>
+            border-radius: <?php echo esc_attr( $fluentFormSuccessBorderRadiusDesktopString ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-message-success:hover {
+        <?php if ( isset( $fluentFormSuccessBorderHoverColor ) ) : ?>
+            border-color: <?php echo esc_attr( $fluentFormSuccessBorderHoverColor ); ?>;
+        <?php endif; ?>
+    }
+
+    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .error.text-danger {
+        <?php if ( isset( $fluentFormErrorColor ) ) : ?>
+            color: <?php echo esc_attr( $fluentFormErrorColor ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorFontFamily ) ) : ?>
+            font-family: <?php echo esc_attr( $fluentFormErrorFontFamily ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorFontSize ) && isset( $fluentFormErrorFontSizeUnits ) ) : ?>
+            font-size: <?php echo esc_attr( $fluentFormErrorFontSize . $fluentFormErrorFontSizeUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorFontWeight ) ) : ?>
+            font-weight: <?php echo esc_attr( $fluentFormErrorFontWeight ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorFontStyle ) ) : ?>
+            font-style: <?php echo esc_attr( $fluentFormErrorFontStyle ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorTextTransform ) ) : ?>
+            text-transform: <?php echo esc_attr( $fluentFormErrorTextTransform ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorTextDecoration ) ) : ?>
+            text-decoration: <?php echo esc_attr( $fluentFormErrorTextDecoration ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorLetterSpacing ) && isset( $fluentFormErrorLetterSpacingUnits ) ) : ?>
+            letter-spacing: <?php echo esc_attr( $fluentFormErrorLetterSpacing . $fluentFormErrorLetterSpacingUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorLineHeight ) && isset( $fluentFormErrorLineHeightUnits ) ) : ?>
+            line-height: <?php echo esc_attr( $fluentFormErrorLineHeight . $fluentFormErrorLineHeightUnits ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorPaddingDesktopString ) ) : ?>
+            padding: <?php echo esc_attr( $fluentFormErrorPaddingDesktopString ); ?>;
+        <?php endif; ?>
+        <?php if ( isset( $fluentFormErrorMarginDesktopString ) ) : ?>
+            margin: <?php echo esc_attr( $fluentFormErrorMarginDesktopString ); ?>;
+        <?php endif; ?>
     }
 
     @media only screen and (max-width: 1024px) {
