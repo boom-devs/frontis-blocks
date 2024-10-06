@@ -337,7 +337,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     } = attributes;
-    
+
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -1408,9 +1408,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border for Submit */
-    const fluentFormSubmitDesktopBorder = `${fluentFormSubmitBorderDesktop.top}${fluentFormSubmitBorderUnits.Desktop} ${fluentFormSubmitBorderDesktop.right}${fluentFormSubmitBorderUnits.Desktop} ${fluentFormSubmitBorderDesktop.bottom}${fluentFormSubmitBorderUnits.Desktop} ${fluentFormSubmitBorderDesktop.left}${fluentFormSubmitBorderUnits.Desktop}`;
-    const fluentFormSubmitTabletBorder = `${fluentFormSubmitBorderTablet.top}${fluentFormSubmitBorderUnits.Tablet} ${fluentFormSubmitBorderTablet.right}${fluentFormSubmitBorderUnits.Tablet} ${fluentFormSubmitBorderTablet.bottom}${fluentFormSubmitBorderUnits.Tablet} ${fluentFormSubmitBorderTablet.left}${fluentFormSubmitBorderUnits.Tablet}`;
-    const fluentFormSubmitMobileBorder = `${fluentFormSubmitBorderMobile.top}${fluentFormSubmitBorderUnits.Mobile} ${fluentFormSubmitBorderMobile.right}${fluentFormSubmitBorderUnits.Mobile} ${fluentFormSubmitBorderMobile.bottom}${fluentFormSubmitBorderUnits.Mobile} ${fluentFormSubmitBorderMobile.left}${fluentFormSubmitBorderUnits.Mobile}`;
+    const fluentFormSubmitDesktopBorderWidth = `${fluentFormSubmitBorderDesktop.top}${fluentFormSubmitBorderUnits.Desktop} ${fluentFormSubmitBorderDesktop.right}${fluentFormSubmitBorderUnits.Desktop} ${fluentFormSubmitBorderDesktop.bottom}${fluentFormSubmitBorderUnits.Desktop} ${fluentFormSubmitBorderDesktop.left}${fluentFormSubmitBorderUnits.Desktop}`;
+    const fluentFormSubmitTabletBorderWidth = `${fluentFormSubmitBorderTablet.top}${fluentFormSubmitBorderUnits.Tablet} ${fluentFormSubmitBorderTablet.right}${fluentFormSubmitBorderUnits.Tablet} ${fluentFormSubmitBorderTablet.bottom}${fluentFormSubmitBorderUnits.Tablet} ${fluentFormSubmitBorderTablet.left}${fluentFormSubmitBorderUnits.Tablet}`;
+    const fluentFormSubmitMobileBorderWidth = `${fluentFormSubmitBorderMobile.top}${fluentFormSubmitBorderUnits.Mobile} ${fluentFormSubmitBorderMobile.right}${fluentFormSubmitBorderUnits.Mobile} ${fluentFormSubmitBorderMobile.bottom}${fluentFormSubmitBorderUnits.Mobile} ${fluentFormSubmitBorderMobile.left}${fluentFormSubmitBorderUnits.Mobile}`;
     /** End Submit Border */
 
     /** Start Submit Border Radius */
@@ -1484,9 +1484,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border radius for Submit */
-    const fluentFormSubmitDesktopBorderRadius = `${fluentFormSubmitBorderRadiusDesktop.top}${fluentFormSubmitBorderRadiusUnits.Desktop} ${fluentFormSubmitBorderRadiusDesktop.right}${fluentFormSubmitBorderRadiusUnits.Desktop} ${fluentFormSubmitBorderRadiusDesktop.bottom}${fluentFormSubmitBorderRadiusUnits.Desktop} ${fluentFormSubmitBorderRadiusDesktop.left}${fluentFormSubmitBorderRadiusUnits.Desktop}`;
-    const fluentFormSubmitTabletBorderRadius = `${fluentFormSubmitBorderRadiusTablet.top}${fluentFormSubmitBorderRadiusUnits.Tablet} ${fluentFormSubmitBorderRadiusTablet.right}${fluentFormSubmitBorderRadiusUnits.Tablet} ${fluentFormSubmitBorderRadiusTablet.bottom}${fluentFormSubmitBorderRadiusUnits.Tablet} ${fluentFormSubmitBorderRadiusTablet.left}${fluentFormSubmitBorderRadiusUnits.Tablet}`;
-    const fluentFormSubmitMobileBorderRadius = `${fluentFormSubmitBorderRadiusMobile.top}${fluentFormSubmitBorderRadiusUnits.Mobile} ${fluentFormSubmitBorderRadiusUnits.Mobile} ${fluentFormSubmitBorderRadiusDesktop.bottom}${fluentFormSubmitBorderRadiusUnits.Mobile} ${fluentFormSubmitBorderRadiusDesktop.left}${fluentFormSubmitBorderRadiusUnits.Mobile}`;
+    const fluentFormSubmitDesktopBorderRadiusWidth = `${fluentFormSubmitBorderRadiusDesktop.top}${fluentFormSubmitBorderRadiusUnits.Desktop} ${fluentFormSubmitBorderRadiusDesktop.right}${fluentFormSubmitBorderRadiusUnits.Desktop} ${fluentFormSubmitBorderRadiusDesktop.bottom}${fluentFormSubmitBorderRadiusUnits.Desktop} ${fluentFormSubmitBorderRadiusDesktop.left}${fluentFormSubmitBorderRadiusUnits.Desktop}`;
+    const fluentFormSubmitTabletBorderRadiusWidth = `${fluentFormSubmitBorderRadiusTablet.top}${fluentFormSubmitBorderRadiusUnits.Tablet} ${fluentFormSubmitBorderRadiusTablet.right}${fluentFormSubmitBorderRadiusUnits.Tablet} ${fluentFormSubmitBorderRadiusTablet.bottom}${fluentFormSubmitBorderRadiusUnits.Tablet} ${fluentFormSubmitBorderRadiusTablet.left}${fluentFormSubmitBorderRadiusUnits.Tablet}`;
+    const fluentFormSubmitMobileBorderRadiusWidth = `${fluentFormSubmitBorderRadiusMobile.top}${fluentFormSubmitBorderRadiusUnits.Mobile} ${fluentFormSubmitBorderRadiusUnits.Mobile} ${fluentFormSubmitBorderRadiusDesktop.bottom}${fluentFormSubmitBorderRadiusUnits.Mobile} ${fluentFormSubmitBorderRadiusDesktop.left}${fluentFormSubmitBorderRadiusUnits.Mobile}`;
 
     /** End Submit Border Radius */
 
@@ -1561,9 +1561,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border for Success */
-    const fluentFormSuccessDesktopBorder = `${fluentFormSuccessBorderDesktop.top}${fluentFormSuccessBorderUnits.Desktop} ${fluentFormSuccessBorderDesktop.right}${fluentFormSuccessBorderUnits.Desktop} ${fluentFormSuccessBorderDesktop.bottom}${fluentFormSuccessBorderUnits.Desktop} ${fluentFormSuccessBorderDesktop.left}${fluentFormSuccessBorderUnits.Desktop}`;
-    const fluentFormSuccessTabletBorder = `${fluentFormSuccessBorderTablet.top}${fluentFormSuccessBorderUnits.Tablet} ${fluentFormSuccessBorderTablet.right}${fluentFormSuccessBorderUnits.Tablet} ${fluentFormSuccessBorderTablet.bottom}${fluentFormSuccessBorderUnits.Tablet} ${fluentFormSuccessBorderTablet.left}${fluentFormSuccessBorderUnits.Tablet}`;
-    const fluentFormSuccessMobileBorder = `${fluentFormSuccessBorderMobile.top}${fluentFormSuccessBorderUnits.Mobile} ${fluentFormSuccessBorderMobile.right}${fluentFormSuccessBorderUnits.Mobile} ${fluentFormSuccessBorderMobile.bottom}${fluentFormSuccessBorderUnits.Mobile} ${fluentFormSuccessBorderMobile.left}${fluentFormSuccessBorderUnits.Mobile}`;
+    const fluentFormSuccessDesktopBorderWidth = `${fluentFormSuccessBorderDesktop.top}${fluentFormSuccessBorderUnits.Desktop} ${fluentFormSuccessBorderDesktop.right}${fluentFormSuccessBorderUnits.Desktop} ${fluentFormSuccessBorderDesktop.bottom}${fluentFormSuccessBorderUnits.Desktop} ${fluentFormSuccessBorderDesktop.left}${fluentFormSuccessBorderUnits.Desktop}`;
+    const fluentFormSuccessTabletBorderWidth = `${fluentFormSuccessBorderTablet.top}${fluentFormSuccessBorderUnits.Tablet} ${fluentFormSuccessBorderTablet.right}${fluentFormSuccessBorderUnits.Tablet} ${fluentFormSuccessBorderTablet.bottom}${fluentFormSuccessBorderUnits.Tablet} ${fluentFormSuccessBorderTablet.left}${fluentFormSuccessBorderUnits.Tablet}`;
+    const fluentFormSuccessMobileBorderWidth = `${fluentFormSuccessBorderMobile.top}${fluentFormSuccessBorderUnits.Mobile} ${fluentFormSuccessBorderMobile.right}${fluentFormSuccessBorderUnits.Mobile} ${fluentFormSuccessBorderMobile.bottom}${fluentFormSuccessBorderUnits.Mobile} ${fluentFormSuccessBorderMobile.left}${fluentFormSuccessBorderUnits.Mobile}`;
     /** End Success Border */
 
     /** Start Success Border Radius */
@@ -1637,9 +1637,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border radius for Success */
-    const fluentFormSuccessDesktopBorderRadius = `${fluentFormSuccessBorderRadiusDesktop.top}${fluentFormSuccessBorderRadiusUnits.Desktop} ${fluentFormSuccessBorderRadiusDesktop.right}${fluentFormSuccessBorderRadiusUnits.Desktop} ${fluentFormSuccessBorderRadiusDesktop.bottom}${fluentFormSuccessBorderRadiusUnits.Desktop} ${fluentFormSuccessBorderRadiusDesktop.left}${fluentFormSuccessBorderRadiusUnits.Desktop}`;
-    const fluentFormSuccessTabletBorderRadius = `${fluentFormSuccessBorderRadiusTablet.top}${fluentFormSuccessBorderRadiusUnits.Tablet} ${fluentFormSuccessBorderRadiusTablet.right}${fluentFormSuccessBorderRadiusUnits.Tablet} ${fluentFormSuccessBorderRadiusTablet.bottom}${fluentFormSuccessBorderRadiusUnits.Tablet} ${fluentFormSuccessBorderRadiusTablet.left}${fluentFormSuccessBorderRadiusUnits.Tablet}`;
-    const fluentFormSuccessMobileBorderRadius = `${fluentFormSuccessBorderRadiusMobile.top}${fluentFormSuccessBorderRadiusUnits.Mobile} ${fluentFormSuccessBorderRadiusUnits.Mobile} ${fluentFormSuccessBorderRadiusDesktop.bottom}${fluentFormSuccessBorderRadiusUnits.Mobile} ${fluentFormSuccessBorderRadiusDesktop.left}${fluentFormSuccessBorderRadiusUnits.Mobile}`;
+    const fluentFormSuccessDesktopBorderRadiusWidth = `${fluentFormSuccessBorderRadiusDesktop.top}${fluentFormSuccessBorderRadiusUnits.Desktop} ${fluentFormSuccessBorderRadiusDesktop.right}${fluentFormSuccessBorderRadiusUnits.Desktop} ${fluentFormSuccessBorderRadiusDesktop.bottom}${fluentFormSuccessBorderRadiusUnits.Desktop} ${fluentFormSuccessBorderRadiusDesktop.left}${fluentFormSuccessBorderRadiusUnits.Desktop}`;
+    const fluentFormSuccessTabletBorderRadiusWidth = `${fluentFormSuccessBorderRadiusTablet.top}${fluentFormSuccessBorderRadiusUnits.Tablet} ${fluentFormSuccessBorderRadiusTablet.right}${fluentFormSuccessBorderRadiusUnits.Tablet} ${fluentFormSuccessBorderRadiusTablet.bottom}${fluentFormSuccessBorderRadiusUnits.Tablet} ${fluentFormSuccessBorderRadiusTablet.left}${fluentFormSuccessBorderRadiusUnits.Tablet}`;
+    const fluentFormSuccessMobileBorderRadiusWidth = `${fluentFormSuccessBorderRadiusMobile.top}${fluentFormSuccessBorderRadiusUnits.Mobile} ${fluentFormSuccessBorderRadiusUnits.Mobile} ${fluentFormSuccessBorderRadiusDesktop.bottom}${fluentFormSuccessBorderRadiusUnits.Mobile} ${fluentFormSuccessBorderRadiusDesktop.left}${fluentFormSuccessBorderRadiusUnits.Mobile}`;
     /** End Success Border Radius */
 
     /** Start Error Padding */
@@ -2540,6 +2540,160 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
                 }
 
+                .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"]{
+                    width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+                    height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+                    ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+                    ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+                    ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
+                    ${fluentFormCheckBoxBorderRadiusDesktopWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
+                    position: relative;
+                    appearance: none;
+                    transition: all .3s ease-in-out;   
+                } 
+                .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
+                    width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+                    height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+                    ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+                    ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+                    ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
+                    ${fluentFormRadioBorderRadiusDesktopWidth ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
+                    position: relative;
+                    appearance: none;
+                    transition: all .3s ease-in-out;   
+                }
+                .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
+                .${blockID}.fb-fluent-form-wrapper input[type="radio"]:checked:before {
+                    ${fluentFormRadioCheckedColor ? `background: ${fluentFormRadioCheckedColor};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {
+                    ${fluentFormRadioCheckBoxItemSpacing ? `margin-bottom: ${fluentFormRadioCheckBoxItemSpacing.Desktop}${fluentFormRadioCheckBoxItemSpacingUnits.Desktop};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break,
+                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break hr {
+                    text-align: ${fluentFormSectionBreakAlignment};
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
+                    ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
+                    ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
+                    ${fluentFormSectionBreakTitleFontSize ? `font-size: ${fluentFormSectionBreakTitleFontSize}${fluentFormSectionBreakTitleFontSizeUnits};` : ""}
+                    ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
+                    ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
+                    ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
+                    ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
+                    ${fluentFormSectionBreakTitleLetterSpacing ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing}${fluentFormSectionBreakTitleLetterSpacingUnits};` : ""}
+                    ${fluentFormSectionBreakTitleLineHeight ? `line-height: ${fluentFormSectionBreakTitleLineHeight}${fluentFormSectionBreakTitleLineHeightUnits};` : ""}
+                    ${fluentFormSectionBreakTitleDesktopPadding ? `padding: ${fluentFormSectionBreakTitleDesktopPadding};` : ""}
+                    ${fluentFormSectionBreakTitleDesktopMargin ? `margin: ${fluentFormSectionBreakTitleDesktopMargin};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
+                    ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
+                    ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
+                    ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
+                    ${fluentFormSectionBreakDescFontSize ? `font-size: ${fluentFormSectionBreakDescFontSize}${fluentFormSectionBreakDescFontSizeUnits};` : ""}
+                    ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
+                    ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
+                    ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
+                    ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
+                    ${fluentFormSectionBreakDescLetterSpacing ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing}${fluentFormSectionBreakDescLetterSpacingUnits};` : ""}
+                    ${fluentFormSectionBreakDescLineHeight ? `line-height: ${fluentFormSectionBreakDescLineHeight}${fluentFormSectionBreakDescLineHeightUnits};` : ""}
+                    ${fluentFormSectionBreakDescDesktopPadding ? `padding: ${fluentFormSectionBreakDescDesktopPadding};` : ""}
+                    ${fluentFormSectionBreakDescDesktopMargin ? `margin: ${fluentFormSectionBreakDescDesktopMargin};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
+                    ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
+                    ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
+                    ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
+                    ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
+                    ${fluentFormHtmlFontSize ? `font-size: ${fluentFormHtmlFontSize}${fluentFormHtmlFontSizeUnits};` : ""}
+                    ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
+                    ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
+                    ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
+                    ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
+                    ${fluentFormHtmlLetterSpacing ? `letter-spacing: ${fluentFormHtmlLetterSpacing}${fluentFormHtmlLetterSpacingUnits};` : ""}
+                    ${fluentFormHtmlLineHeight ? `line-height: ${fluentFormHtmlLineHeight}${fluentFormHtmlLineHeightUnits};` : ""}
+                    ${fluentFormHtmlDesktopPadding ? `padding: ${fluentFormHtmlDesktopPadding};` : ""}
+                    ${fluentFormHtmlDesktopMargin ? `margin: ${fluentFormHtmlDesktopMargin};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
+                    ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
+                }
+                
+                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
+                    ${fluentFormSubmitAlignment ? `text-align: ${fluentFormSubmitAlignment};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+                    ${fluentFormSubmitHeight.Desktop ? `height: ${fluentFormSubmitHeight.Desktop}${fluentFormSubmitHeightUnits.Desktop};` : ""}
+                    ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
+                    ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
+                    ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
+                    ${fluentFormSubmitFontSize ? `font-size: ${fluentFormSubmitFontSize}${fluentFormSubmitFontSizeUnits};` : ""}
+                    ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
+                    ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
+                    ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
+                    ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
+                    ${fluentFormSubmitLetterSpacing ? `letter-spacing: ${fluentFormSubmitLetterSpacing}${fluentFormSubmitLetterSpacingUnits};` : ""}
+                    ${fluentFormSubmitLineHeight ? `line-height: ${fluentFormSubmitLineHeight}${fluentFormSubmitLineHeightUnits};` : ""}
+                    ${fluentFormSubmitDesktopPadding ? `padding: ${fluentFormSubmitDesktopPadding};` : ""}
+                    ${fluentFormSubmitDesktopMargin ? `margin: ${fluentFormSubmitDesktopMargin};` : ""}
+
+                    ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
+                    ${fluentFormSubmitDesktopBorderWidth ? `border-width: ${fluentFormSubmitDesktopBorderWidth};` : ""}
+                    ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
+                    ${fluentFormSubmitDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSubmitDesktopBorderRadiusWidth};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
+                    ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
+                    ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
+                    ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+                    ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
+                    ${fluentFormSubmitWidthSelect === 'custom' && fluentFormSubmitWidth.Desktop 
+                    ? `width: ${fluentFormSubmitWidth.Desktop}${fluentFormSubmitWidthUnits.Desktop};` 
+                    : ''}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper .ff-message-success {
+                    ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
+                    ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
+                    ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
+                    ${fluentFormSuccessFontSize ? `font-size: ${fluentFormSuccessFontSize}${fluentFormSuccessFontSizeUnits};` : ""}
+                    ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
+                    ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
+                    ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
+                    ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
+                    ${fluentFormSuccessLetterSpacing ? `letter-spacing: ${fluentFormSuccessLetterSpacing}${fluentFormSuccessLetterSpacingUnits};` : ""}
+                    ${fluentFormSuccessLineHeight ? `line-height: ${fluentFormSuccessLineHeight}${fluentFormSuccessLineHeightUnits};` : ""}
+                    ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
+                    ${fluentFormSuccessDesktopBorderWidth ? `border-width: ${fluentFormSuccessDesktopBorderWidth};` : ""}
+                    ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
+                    ${fluentFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSuccessDesktopBorderRadiusWidth};` : ""}
+                }
+                .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
+                    ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
+                }
+
+                .${blockID}.fb-fluent-form-wrapper .error.text-danger {
+                    ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
+                    ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
+                    ${fluentFormErrorFontSize ? `font-size: ${fluentFormErrorFontSize}${fluentFormErrorFontSizeUnits};` : ""}
+                    ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
+                    ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
+                    ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
+                    ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
+                    ${fluentFormErrorLetterSpacing ? `letter-spacing: ${fluentFormErrorLetterSpacing}${fluentFormErrorLetterSpacingUnits};` : ""}
+                    ${fluentFormErrorLineHeight ? `line-height: ${fluentFormErrorLineHeight}${fluentFormErrorLineHeightUnits};` : ""} 
+                    ${fluentFormErrorDesktopPadding ? `padding: ${fluentFormErrorDesktopPadding};` : ""}
+                    ${fluentFormErrorDesktopMargin ? `margin: ${fluentFormErrorDesktopMargin};` : ""} 
+                }
+
+                           
 
                 @media only screen and (max-width: 1024px) {
 
@@ -2550,7 +2704,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         border-radius: ${BorderRadiusTabletWidth} !important;
                     }
                 }
-
+                    
                 @media only screen and (max-width: 767px) {
                     .${blockID}.fb-fluent-form-wrapper {
                         padding: ${MobilePadding};
@@ -3351,7 +3505,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormRadioFontSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={''}
                                             />
                                             <BaseControl 
                                                 label={__("Normal Color", "frontis-blocks")}
@@ -3456,7 +3610,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormRadioBorderWidthUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={''}
                                             />
                                             <BaseControl 
                                                 label={__("Border Color", "frontis-blocks")}
@@ -3541,7 +3695,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormRadioCheckBoxItemSpacingUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={''}
                                             />
                                         </PanelBody>
                                         <PanelBody title={__("Section break", "frontis-blocks")} initialOpen={false}>
@@ -4267,7 +4421,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
                                             <FB_Range
                                                 min={1}
-                                                max={100}
+                                                max={2000}
                                                 label={__("Height", "frontis-blocks")}
                                                 rangeValue={fluentFormSubmitHeight}
                                                 onChangeHandler={fluentFormSubmitHeightHandler}
@@ -4276,7 +4430,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={fluentFormSubmitHeightUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={undefined}
+                                                resetFallbackValue={''}
                                             />
                                             
                                             <SelectControl
@@ -4288,7 +4442,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             {fluentFormSubmitWidthSelect === 'custom' && (
                                                 <FB_Range
                                                     min={1}
-                                                    max={100}
+                                                    max={2000}
                                                     label={__("Width", "frontis-blocks")}
                                                     rangeValue={fluentFormSubmitWidth}
                                                     onChangeHandler={fluentFormSubmitWidthHandler}
@@ -4297,7 +4451,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     units={fluentFormSubmitWidthUnits}
                                                     setAttributes={setAttributes}
                                                     rangeStep={1}
-                                                    resetFallbackValue={undefined}
+                                                    resetFallbackValue={''}
                                                 />
                                             )}
                                             <BaseControl 
