@@ -389,9 +389,9 @@ const attributes = {
     fluentFormRadioFontSize: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	fluentFormRadioFontSizeUnits: {
@@ -411,9 +411,9 @@ const attributes = {
     fluentFormRadioBorderWidth: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	fluentFormRadioBorderWidthUnits: {
@@ -438,28 +438,28 @@ const attributes = {
     fluentFormRadioBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormRadioBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormRadioBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormRadioBorderRadiusLink : {
@@ -479,28 +479,28 @@ const attributes = {
     fluentFormCheckBoxBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormCheckBoxBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormCheckBoxBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormCheckBoxBorderRadiusLink : {
@@ -510,9 +510,9 @@ const attributes = {
     fluentFormRadioCheckBoxItemSpacing: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	fluentFormRadioCheckBoxItemSpacingUnits: {
@@ -858,28 +858,28 @@ const attributes = {
     fluentFormHtmlPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormHtmlPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormHtmlPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormHtmlPaddingLink : {
@@ -897,28 +897,28 @@ const attributes = {
     fluentFormHtmlMarginDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormHtmlMarginTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormHtmlMarginMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormHtmlMarginLink : {
@@ -1039,28 +1039,28 @@ const attributes = {
     fluentFormSubmitPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitPaddingLink : {
@@ -1078,28 +1078,28 @@ const attributes = {
     fluentFormSubmitMarginDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitMarginTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitMarginMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitMarginLink : {
@@ -1131,28 +1131,28 @@ const attributes = {
     fluentFormSubmitBorderDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitBorderTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitBorderMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitBorderLink : {
@@ -1170,28 +1170,28 @@ const attributes = {
     fluentFormSubmitBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSubmitBorderRadiusLink : {
@@ -1272,28 +1272,28 @@ const attributes = {
     fluentFormSuccessBorderDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSuccessBorderTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSuccessBorderMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSuccessBorderLink : {
@@ -1311,28 +1311,28 @@ const attributes = {
     fluentFormSuccessBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSuccessBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSuccessBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormSuccessBorderRadiusLink : {
@@ -1396,28 +1396,28 @@ const attributes = {
     fluentFormErrorPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormErrorPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormErrorPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormErrorPaddingLink : {
@@ -1435,28 +1435,28 @@ const attributes = {
     fluentFormErrorMarginDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormErrorMarginTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormErrorMarginMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormErrorMarginLink : {
@@ -1479,28 +1479,28 @@ const attributes = {
     fluentFormGlobalPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalPaddingLink : {
@@ -1582,28 +1582,28 @@ const attributes = {
     fluentFormGlobalBorderDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalBorderTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalBorderMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalBorderLink : {
@@ -1621,28 +1621,28 @@ const attributes = {
     fluentFormGlobalBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     fluentFormGlobalBorderRadiusLink : {
