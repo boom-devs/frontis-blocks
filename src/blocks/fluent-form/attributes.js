@@ -591,28 +591,28 @@ const attributes = {
     fluentFormSectionBreakTitlePaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakTitlePaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakTitlePaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakTitlePaddingLink : {
@@ -630,28 +630,28 @@ const attributes = {
     fluentFormSectionBreakTitleMarginDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakTitleMarginTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakTitleMarginMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakTitleMarginLink : {
@@ -723,28 +723,28 @@ const attributes = {
     fluentFormSectionBreakDescPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakDescPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakDescPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakDescPaddingLink : {
@@ -762,28 +762,28 @@ const attributes = {
     fluentFormSectionBreakDescMarginDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakDescMarginTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakDescMarginMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     fluentFormSectionBreakDescMarginLink : {
