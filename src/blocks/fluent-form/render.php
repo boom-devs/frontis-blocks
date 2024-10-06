@@ -31,7 +31,7 @@ $fluentFormLabelLineHeightUnits = isset($attributes['fluentFormLabelLineHeightUn
 
 $fluentFormInputBgColor = isset($attributes['fluentFormInputBgColor']) ? sanitize_hex_color($attributes['fluentFormInputBgColor']) : '';
 $fluentFormInputColor = isset($attributes['fluentFormInputColor']) ? sanitize_hex_color($attributes['fluentFormInputColor']) : '';
-$fluentFormInputFocusColor = isset($attributes['fluentFormInputFocusColor']) ? sanitize_hex_color($attributes['fluentFormInputFocusColor']) : '';
+$fluentFormInputFocusColor = isset($attributes['fluentFormInputFocusColor']) ? sanitize_hex_color($attributes['fluentFormInputFocusColor']) : '#1a7efb';
 $fluentFormInputFontFamily = isset($attributes['fluentFormInputFontFamily']) ? sanitize_text_field($attributes['fluentFormInputFontFamily']) : 'inherit';
 $fluentFormInputFontSize = isset($attributes['fluentFormInputFontSize']) ? intval($attributes['fluentFormInputFontSize']) : '';
 $fluentFormInputFontSizeUnits = isset($attributes['fluentFormInputFontSizeUnits']) ? sanitize_text_field($attributes['fluentFormInputFontSizeUnits']) : 'px';
@@ -76,14 +76,14 @@ $fluentFormMobilePadding = "{$fluentFormPaddingMobile['top']}{$fluentFormPadding
 /** FluentForm Desktop padding */
 
 
-$fluentFormBorder = isset($attributes['fluentFormBorder']) ? sanitize_text_field($attributes['fluentFormBorder']) : 'none';
-$fluentFormBorderColor = isset($attributes['fluentFormBorderColor']) ? sanitize_hex_color($attributes['fluentFormBorderColor']) : '';
+$fluentFormBorder = isset($attributes['fluentFormBorder']) ? sanitize_text_field($attributes['fluentFormBorder']) : 'solid';
+$fluentFormBorderColor = isset($attributes['fluentFormBorderColor']) ? sanitize_hex_color($attributes['fluentFormBorderColor']) : '#dadbdd';
 $fluentFormBorderHoverColor = isset($attributes['fluentFormBorderHoverColor']) ? sanitize_hex_color($attributes['fluentFormBorderHoverColor']) : '';
 
 $fluentFormBorderUnits = isset($attributes['fluentFormBorderUnits']) ? sanitize_text_field($attributes['fluentFormBorderUnits']) : ['Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px']; 
-$fluentFormBorderDesktop = isset($attributes['fluentFormBorderDesktop']) ? array_map('intval', $attributes['fluentFormBorderDesktop']) : ['top' => '', 'bottom' => '', 'left' => '', 'right' => '']; 
-$fluentFormBorderTablet = isset($attributes['fluentFormBorderTablet']) ? array_map('intval', $attributes['fluentFormBorderTablet']) : ['top' => '', 'bottom' => '', 'left' => '', 'right' => '']; 
-$fluentFormBorderMobile = isset($attributes['fluentFormBorderMobile']) ? array_map('intval', $attributes['fluentFormBorderMobile']) : ['top' => '', 'bottom' => '', 'left' => '', 'right' => ''];
+$fluentFormBorderDesktop = isset($attributes['fluentFormBorderDesktop']) ? array_map('intval', $attributes['fluentFormBorderDesktop']) : ['top' => '1', 'bottom' => '1', 'left' => '1', 'right' => '1']; 
+$fluentFormBorderTablet = isset($attributes['fluentFormBorderTablet']) ? array_map('intval', $attributes['fluentFormBorderTablet']) : ['top' => '1', 'bottom' => '1', 'left' => '1', 'right' => '1']; 
+$fluentFormBorderMobile = isset($attributes['fluentFormBorderMobile']) ? array_map('intval', $attributes['fluentFormBorderMobile']) : ['top' => '1', 'bottom' => '1', 'left' => '1', 'right' => '1'];
 /** fluentFormBorderDesktop */
 $fluentFormBorderDesktopString = "{$fluentFormBorderDesktop['top']}{$fluentFormBorderUnits['Desktop']} {$fluentFormBorderDesktop['right']}{$fluentFormBorderUnits['Desktop']} {$fluentFormBorderDesktop['bottom']}{$fluentFormBorderUnits['Desktop']} {$fluentFormBorderDesktop['left']}{$fluentFormBorderUnits['Desktop']}";
 $fluentFormBorderTabletString = "{$fluentFormBorderTablet['top']}{$fluentFormBorderUnits['Tablet']} {$fluentFormBorderTablet['right']}{$fluentFormBorderUnits['Tablet']} {$fluentFormBorderTablet['bottom']}{$fluentFormBorderUnits['Tablet']} {$fluentFormBorderTablet['left']}{$fluentFormBorderUnits['Tablet']}";
@@ -142,15 +142,15 @@ $fluentFormSectionBreakTitleColorSwitcher = isset($attributes['fluentFormSection
 $fluentFormSectionBreakTitleColor = isset($attributes['fluentFormSectionBreakTitleColor']) ? sanitize_hex_color($attributes['fluentFormSectionBreakTitleColor']) : '';
 $fluentFormSectionBreakTitleHoverColor = isset($attributes['fluentFormSectionBreakTitleHoverColor']) ? sanitize_hex_color($attributes['fluentFormSectionBreakTitleHoverColor']) : '';
 $fluentFormSectionBreakTitleFontFamily = isset($attributes['fluentFormSectionBreakTitleFontFamily']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleFontFamily']) : 'inherit';
-$fluentFormSectionBreakTitleFontSize = isset($attributes['fluentFormSectionBreakTitleFontSize']) ? intval($attributes['fluentFormSectionBreakTitleFontSize']) : 0;
+$fluentFormSectionBreakTitleFontSize = isset($attributes['fluentFormSectionBreakTitleFontSize']) ? intval($attributes['fluentFormSectionBreakTitleFontSize']) : "";
 $fluentFormSectionBreakTitleFontSizeUnits = isset($attributes['fluentFormSectionBreakTitleFontSizeUnits']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleFontSizeUnits']) : 'px';
 $fluentFormSectionBreakTitleFontWeight = isset($attributes['fluentFormSectionBreakTitleFontWeight']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleFontWeight']) : '';
 $fluentFormSectionBreakTitleFontStyle = isset($attributes['fluentFormSectionBreakTitleFontStyle']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleFontStyle']) : 'normal';
 $fluentFormSectionBreakTitleTextTransform = isset($attributes['fluentFormSectionBreakTitleTextTransform']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleTextTransform']) : 'none';
 $fluentFormSectionBreakTitleTextDecoration = isset($attributes['fluentFormSectionBreakTitleTextDecoration']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleTextDecoration']) : 'none';
-$fluentFormSectionBreakTitleLetterSpacing = isset($attributes['fluentFormSectionBreakTitleLetterSpacing']) ? intval($attributes['fluentFormSectionBreakTitleLetterSpacing']) : 0;
+$fluentFormSectionBreakTitleLetterSpacing = isset($attributes['fluentFormSectionBreakTitleLetterSpacing']) ? intval($attributes['fluentFormSectionBreakTitleLetterSpacing']) : "";
 $fluentFormSectionBreakTitleLetterSpacingUnits = isset($attributes['fluentFormSectionBreakTitleLetterSpacingUnits']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleLetterSpacingUnits']) : 'px';
-$fluentFormSectionBreakTitleLineHeight = isset($attributes['fluentFormSectionBreakTitleLineHeight']) ? intval($attributes['fluentFormSectionBreakTitleLineHeight']) : 0;
+$fluentFormSectionBreakTitleLineHeight = isset($attributes['fluentFormSectionBreakTitleLineHeight']) ? intval($attributes['fluentFormSectionBreakTitleLineHeight']) : "";
 $fluentFormSectionBreakTitleLineHeightUnits = isset($attributes['fluentFormSectionBreakTitleLineHeightUnits']) ? sanitize_text_field($attributes['fluentFormSectionBreakTitleLineHeightUnits']) : 'px';
 
 
@@ -470,19 +470,6 @@ $wrapper_attributes = get_block_wrapper_attributes(
 );
 
 
-// Accessing values for different devices
-$textIndentSizeDesktop = $fluentFormTextIndentSize['Desktop'];
-$textIndentSizeTablet = $fluentFormTextIndentSize['Tablet'];
-$textIndentSizeMobile = $fluentFormTextIndentSize['Mobile'];
-
-$textIndentSizeUnitsDesktop = $fluentFormTextIndentSizeUnits['Desktop'];
-$textIndentSizeUnitsTablet = $fluentFormTextIndentSizeUnits['Tablet'];
-$textIndentSizeUnitsMobile = $fluentFormTextIndentSizeUnits['Mobile'];
-
-// Example output (you can replace this with your actual usage)
-echo "Desktop Text Indent Size: {$fluentFormTextIndentSize['Desktop']}{$fluentFormTextIndentSizeUnits['Desktop']}\n";
-
-
 ?>
 
 <style>
@@ -603,9 +590,6 @@ echo "Desktop Text Indent Size: {$fluentFormTextIndentSize['Desktop']}{$fluentFo
         <?php if ( $fluentFormRadioBorderRadiusDesktopString ) : ?>
             border-radius: <?php echo esc_attr( $fluentFormRadioBorderRadiusDesktopString ); ?>;
         <?php endif; ?>
-        position: relative;
-        appearance: none;
-        transition: all .3s ease-in-out;
     }
     .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
         width: <?php echo esc_attr( $fluentFormRadioFontSize['Desktop'] ); ?><?php echo esc_attr( $fluentFormRadioFontSizeUnits['Desktop'] ); ?>;
@@ -622,9 +606,6 @@ echo "Desktop Text Indent Size: {$fluentFormTextIndentSize['Desktop']}{$fluentFo
         <?php if ( $fluentFormCheckBoxBorderRadiusDesktopString ) : ?>
             border-radius: <?php echo esc_attr( $fluentFormCheckBoxBorderRadiusDesktopString ); ?>;
         <?php endif; ?>
-        position: relative;
-        appearance: none;
-        transition: all .3s ease-in-out;
     }
     .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
     .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input[type="radio"]:checked:before {
