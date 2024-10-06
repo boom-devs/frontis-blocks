@@ -2499,14 +2499,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};` : ""}
                     ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};` : ""}
                     ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};` : ""}
-
                     ${fluentFormDesktopPadding ? `padding: ${fluentFormDesktopPadding};` : ""}
                     ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
                     ${fluentFormBorderDesktopWidth ? `border-width: ${fluentFormBorderDesktopWidth};` : ""}
                     ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
                     ${fluentFormBorderRadiusDesktopWidth ? `border-radius: ${fluentFormBorderRadiusDesktopWidth};` : ""}
-
-
                     transition: all .3s ease-in-out;
                 }
                 .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 

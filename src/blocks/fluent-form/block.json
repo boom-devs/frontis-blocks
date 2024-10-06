@@ -17,5 +17,33 @@
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
-	"render": "file:./render.php"
+	"render": "file:./render.php",
+	"attributes": {	
+		"blockID": {
+            "type": "string",
+            "default": ""
+        },
+        "DeviceType": {
+            "type": "string",
+            "default": "Desktop"
+        },
+        "fluentFormGlobalZIndex": {
+            "type": "number"
+        },
+        "formId": {
+            "type": "string"
+        },
+        "showLabels": {
+            "type": "boolean",
+            "default": true
+        },
+        "showPlaceholder": {
+            "type": "boolean",
+            "default": true
+        },
+        "showErrorMessage": {
+            "type": "boolean",
+            "default": true
+        }
+	}
 }
