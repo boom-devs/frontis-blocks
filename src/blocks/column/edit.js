@@ -86,6 +86,13 @@ export default function Edit(props) {
         [clientId]
     );
 
+    const isChildColumn = useSelect((select) => {
+        const { getBlockParents, getBlockName } = select("core/block-editor");
+        const parents = getBlockParents(clientId);
+        return parents.some(parentId => getBlockName(parentId) === 'frontis-blocks/columns');
+    }, [clientId]);
+
+
     useEffect(() => {
         const nextColClientId =
             select("core/block-editor").getAdjacentBlockClientId(clientId) || false;
@@ -369,7 +376,7 @@ export default function Edit(props) {
         dispatch("core/block-editor").replaceInnerBlocks(clientId, newBlocks, false);
     };
 
-    if (!hasInnerBlocks) {
+    if (!hasInnerBlocks && !isChildColumn) {
         return (
             <div {...blockProps}>
                 <Placeholder
