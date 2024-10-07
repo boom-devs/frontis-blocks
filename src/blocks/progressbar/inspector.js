@@ -1,0 +1,423 @@
+import { __ } from '@wordpress/i18n';
+import { InspectorControls } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
+import {
+    PanelBody,
+    BaseControl,
+    TabPanel,
+    Button,
+    ButtonGroup,
+    Dropdown,
+    RangeControl,
+    SelectControl,
+    TextControl,
+    Dashicon,
+    ColorPicker,
+    ColorPalette,
+} from '@wordpress/components';
+
+import {
+    NORMAL_HOVER,
+    UNIT_TYPES,
+    ICON_ALIGN,
+    TEXT_ALIGN,
+    BORDER_STYLES,
+    PROGRESS_TEXT_OPTIONS,
+	Unit_Types,
+	HEADING,
+} from "./constants/constants";
+
+import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_Spacing from '@Components/spacing';
+import FB_Range from '@Components/range';
+import FB_Color from '@Components/color';
+
+import './editor.scss';
+
+export default function Inspector({ attributes, setAttributes, clientId }) {
+	const {
+		blockID,
+		deviceType,
+		progressTextPosition,
+		progressNumber,
+
+        progressColorSwitcher,
+		progressColor,
+        progressHoverColor,
+
+        progressTextColorSwitcher,
+		progressTextColor,
+        progressTextHoverColor,
+
+        progressBgColorSwitcher,
+		progressBgColor,
+        progressBgHoverColor,
+
+		progressTitle,
+		progressHeadingTag,
+		progressBarHeight,
+
+		progressBorderRadiusUnits,
+		progressBorderRadiusDesktop,
+		progressBorderRadiusTablet,
+		progressBorderRadiusMobile,
+		progressBorderRadiusLink,
+
+	} = attributes;
+    
+
+    useEffect(() => {
+        if (!blockID) {
+            setAttributes({
+                blockID: "progressbar-" + clientId.slice(0, 8),
+            });
+        }
+    }, [blockID, clientId, setAttributes]);
+
+    /** Start Progress Border Radius */
+    const progressBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (progressBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        progressBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        progressBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        progressBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ progressBorderRadiusDesktop: { ...progressBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ progressBorderRadiusTablet: { ...progressBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ progressBorderRadiusMobile: { ...progressBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const progressBorderRadiusLinkBtn = () => {
+        setAttributes({
+            progressBorderRadiusLink: !progressBorderRadiusLink
+        });
+    };
+
+    const progressBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            progressBorderRadiusUnits: {
+                ...progressBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Default border radius for Progress */
+    const progressDesktopBorderRadiusWidth = `${progressBorderRadiusDesktop.top}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.right}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.bottom}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.left}${progressBorderRadiusUnits.Desktop}`;
+    const progressTabletBorderRadiusWidth = `${progressBorderRadiusTablet.top}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.right}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.bottom}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.left}${progressBorderRadiusUnits.Tablet}`;
+    const progressMobileBorderRadiusWidth = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
+    /** End Progress Border Radius */
+
+
+    /** Start progressColorSwitcher */
+    const progressColorSwitcherChange = (value) => {
+        setAttributes({ progressColorSwitcher: value });
+    };
+    const progressColorChange = (value) => {
+        setAttributes({ progressColor: value });
+    };
+    const progressHoverColorChange = (value) => {
+        setAttributes({ progressHoverColor: value });
+    };
+    /** End progressColorSwitcher */
+
+    /** Start progressTextColorSwitcher */
+    const progressTextColorSwitcherChange = (value) => {
+        setAttributes({ progressTextColorSwitcher: value });
+    };
+    const progressTextColorChange = (value) => {
+        setAttributes({ progressTextColor: value });
+    };
+    const progressTextHoverColorChange = (value) => {
+        setAttributes({ progressTextHoverColor: value });
+    };
+    /** End progressTextColorSwitcher */
+
+    /** Start progressBgHoverColor */
+    const progressBgColorSwitcherChange = (value) => {
+        setAttributes({ progressBgColorSwitcher: value });
+    };
+    const progressBgColorChange = (value) => {
+        setAttributes({ progressBgColor: value });
+    };
+    const progressBgHoverColorChange = (value) => {
+        setAttributes({ progressBgHoverColor: value });
+    };
+    /** End progressBgHoverColor */
+
+    return (
+        <>
+
+            <style>
+            {`
+			    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+					color: ${progressTextColor} !important;
+                }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
+                    background-color: ${progressBgColor};
+                    border-radius: ${progressDesktopBorderRadiusWidth};
+					position: relative;
+                }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
+					height: ${progressBarHeight ? `${progressBarHeight}px` : '2px'};
+                    background-color: ${progressColor};
+                    border-radius: ${progressDesktopBorderRadiusWidth};
+                    transition: width 0.5s ease-in-out;
+                    width: ${progressNumber}%;
+                }
+				.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number {
+					position: absolute;
+					top: -30px;
+					transform: translateX(-100%);
+					transition: left 0.5s ease-in-out;
+					color: ${progressTextColor};
+				}
+
+				.${blockID} .progress-bar-text-inSide-wrapper {
+                    background-color: ${progressBgColor};
+                    border-radius: ${progressDesktopBorderRadiusWidth};
+					height: ${progressBarHeight ? `${progressBarHeight}px` : '30px'};
+					overflow: hidden;
+                }
+				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
+                    background-color: ${progressColor};
+                    border-radius: ${progressDesktopBorderRadiusWidth};
+					transition: width 0.5s ease-in-out;
+					width: ${progressNumber}%;
+                }
+				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
+                	border-radius: ${progressDesktopBorderRadiusWidth};
+					color: ${progressTextColor};
+					font-size: 14px;
+                }
+
+                @media only screen and (max-width: 1024px) {
+                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
+					.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
+					.${blockID} .progress-bar-text-inSide-wrapper,
+					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
+                        border-radius: ${progressTabletBorderRadiusWidth} !important;
+                    }
+                }
+
+                @media only screen and (max-width: 767px) {
+                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
+					.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
+					.${blockID} .progress-bar-text-inSide-wrapper,
+					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
+                        border-radius: ${progressMobileBorderRadiusWidth} !important;
+                    }
+                }
+				
+            `}
+            </style>
+
+            <InspectorControls key="controls">
+                <div className="fb-inspector-control">
+                    <TabPanel
+                        className="fb-parent-tab-panel"
+                        activeClass="active-tab"
+                        tabs={[
+                            {
+                                name: "general",
+                                title: "General",
+                                className: "fb-tab general",
+                            },
+                            {
+                                name: "styles",
+                                title: "Style",
+                                className: "fb-tab styles",
+                            },
+                            {
+                                name: "advanced",
+                                title: "Advanced",
+                                className: "fb-tab advanced",
+                            },
+                        ]}
+                    >
+                        {(tab) => (
+                            <div className={"fb-tab-controls" + tab.name}>
+                                {tab.name === 'general' && (
+                                    <>
+                                        <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
+                                            <div className='text-position'>
+                                                <SelectControl
+                                                    label={__("Text Position", "frontis-blocks")}
+                                                    value={progressTextPosition}
+                                                    options={PROGRESS_TEXT_OPTIONS}
+                                                    onChange={(value) => setAttributes({ progressTextPosition: value })}
+                                                />
+                                            </div>
+
+                                            <div className="progress-general-wrapper">
+                                                <div className="progress-percentage">
+                                                    <RangeControl
+                                                        label={__("Progress Percentage", "frontis-blocks")}
+                                                        value={progressNumber}
+                                                        onChange={(value) => setAttributes({ progressNumber: value })}
+                                                        min={1}
+                                                        max={100}
+                                                        allowReset
+                                                        resetFallbackValue={50}
+                                                    />
+                                                </div>
+
+                                                <div className="progress-bar-height">
+                                                    <RangeControl
+                                                        label={__("progress Bar Height", "frontis-blocks")}
+                                                        value={progressBarHeight}
+                                                        onChange={(value) => setAttributes({ progressBarHeight: value })}
+                                                        min={1}
+                                                        max={100}
+                                                        allowReset
+                                                        resetFallbackValue={30}
+                                                    />
+                                                </div>
+
+                                                <div className="progress-title">
+                                                    <TextControl
+                                                        label={__("Title", "frontis-blocks")}
+                                                        value={progressTitle}
+                                                        onChange={(value) => setAttributes({ progressTitle: value })}
+                                                    />
+                                                </div>
+
+                                                <div className='progress-heading-tag-wrapper'>
+                                                    <BaseControl
+                                                        label={__("Heading Tag", "frontis-blocks")}
+                                                            id="fb-setting-text-alignment"
+                                                            className="fb-setting-text-alignment"
+                                                    >
+                                                        <ButtonGroup
+                                                            className="fb-setting-text-alignment-group-btn"
+                                                        >
+                                                            {HEADING.map((item, key) => (
+                                                                <Button
+                                                                    key={key}
+                                                                    onClick={() => setAttributes({ progressHeadingTag: item.value })}
+                                                                    className={`fb-setting-text-alignment-single-btn ${ progressHeadingTag === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                    </BaseControl>
+                                                </div>
+                                            </div>
+                                        </PanelBody>
+
+                                    </>
+                                )}
+
+                                {tab.name === "styles" && (
+                                    <>
+                                        <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
+                                            <FB_Color
+                                                label={__("Color", "frontis-blocks")}
+                                                globalColorSwitcher={progressColorSwitcher}
+                                                globalColor={progressColor}
+                                                globalHoverColor={progressHoverColor}
+                                                handleColorSwitcherChange={progressColorSwitcherChange}
+                                                handleGlobalColorChange={progressColorChange}
+                                                handleGlobalHoverColorChange={progressHoverColorChange}
+                                            />
+                                            <FB_Color
+                                                label={__("Label Color", "frontis-blocks")}
+                                                globalColorSwitcher={progressTextColorSwitcher}
+                                                globalColor={progressTextColor}
+                                                globalHoverColor={progressTextHoverColor}
+                                                handleColorSwitcherChange={progressTextColorSwitcherChange}
+                                                handleGlobalColorChange={progressTextColorChange}
+                                                handleGlobalHoverColorChange={progressTextHoverColorChange}
+                                            />
+                                            <FB_Color
+                                                label={__("Base Color", "frontis-blocks")}
+                                                globalColorSwitcher={progressBgColorSwitcher}
+                                                globalColor={progressBgColor}
+                                                globalHoverColor={progressBgHoverColor}
+                                                handleColorSwitcherChange={progressBgColorSwitcherChange}
+                                                handleGlobalColorChange={progressBgColorChange}
+                                                handleGlobalHoverColorChange={progressBgHoverColorChange}
+                                            />
+                                            <FB_Spacing 
+                                                label={__("Radius Border", "frontis-blocks")}
+                                                DeviceType={deviceType}
+                                                spacingUnitsHandler={progressBorderRadiusUnitsHandler}
+                                                spacingUnits={progressBorderRadiusUnits}
+                                                spacingDesktop={progressBorderRadiusDesktop}
+                                                spacingTablet={progressBorderRadiusTablet}
+                                                spacingMobile={progressBorderRadiusMobile}
+                                                handleSpacingUnitHandler={progressBorderRadiusUnitsChange}
+                                                spacingCombineBtn={progressBorderRadiusLink}
+                                                spacingCombineBtnHandler={progressBorderRadiusLinkBtn}
+                                                setAttributes={setAttributes}
+                                            />
+                                        </PanelBody>
+                                    </>
+                                )}
+
+                                {tab.name === "advanced" && (
+                                    <>
+                                        <div className="fb-setting-advanced-tab-wrapper">
+                                            <div className="fb-setting-inner-wrapper">
+                                                <PanelBody
+                                                    title={__("Z Index", "frontis-blocks")}
+                                                    initialOpen={true}
+                                                    className='fb-setting-z-index-header'
+                                                >
+
+                                                </PanelBody>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </TabPanel>
+                </div>
+            </InspectorControls>
+        </>
+    );
+}

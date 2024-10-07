@@ -207,14 +207,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'slider' => [
-            //     'slug'      => 'slider',
-            //     'title'     => 'Slider',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'progressbar' => [
+                'slug'      => 'progressbar',
+                'title'     => 'Progressbar',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
         ];
 
         $this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
