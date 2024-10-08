@@ -104,5 +104,74 @@ const attributes = {
         type : "boolean",
         default: true
     },
+
+    progressFontFamily: {
+        type: "string",
+        default: "",
+    },
+    progressFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	progressFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    progressFontWeight: {
+        type: "string",
+        default: "",
+    },
+    progressFontStyle: {
+        type: "string",
+        default: "",
+    },
+    progressTextTransform: {
+        type: "string",
+        default: "",
+    },
+    progressTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    progressLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	progressLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    progressLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	progressLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 };
 export default attributes;

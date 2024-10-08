@@ -26,6 +26,18 @@ export default function save({ attributes }) {
 		progressBorderRadiusTablet,
 		progressBorderRadiusMobile,
 
+        progressFontFamily,
+        progressFontSize,
+        progressFontSizeUnits,
+        progressFontWeight,
+        progressFontStyle,
+        progressTextTransform,
+        progressTextDecoration,
+        progressLetterSpacing,
+        progressLetterSpacingUnits,
+        progressLineHeight,
+        progressLineHeightUnits,
+
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -47,8 +59,16 @@ export default function save({ attributes }) {
                     position: relative;
                     z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
                 }
-            	.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
-					color: ${progressTextColor}
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+                    ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
+                    ${progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
+                    ${progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
+                    ${progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
+                    ${progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
+                    ${progressTextTransform ? `text-transform: ${progressTextTransform};` : ''}
+                    ${progressTextDecoration ? `text-decoration: ${progressTextDecoration};` : ''}
+                    ${progressLetterSpacing.Desktop && progressLetterSpacingUnits.Desktop ? `letter-spacing: ${progressLetterSpacing.Desktop}${progressLetterSpacingUnits.Desktop};` : ''}
+                    ${progressLineHeight.Desktop && progressLineHeightUnits.Desktop ? `line-height: ${progressLineHeight.Desktop}${progressLineHeightUnits.Desktop};` : ''}
                 }
                 .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
 					color: ${progressTextHoverColor} !important;
@@ -129,7 +149,12 @@ export default function save({ attributes }) {
 					.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
 					.${blockID} .progress-bar-text-inSide-wrapper,
 					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                        border-radius: ${progressTabletBorderRadiusWidth} !important;
+                        border-radius: ${progressTabletBorderRadiusWidth} !important;  
+                    }
+                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+                        ${progressFontSize.Tablet && progressFontSizeUnits.Tablet ? `font-size: ${progressFontSize.Tablet}${progressFontSizeUnits.Tablet};` : ''}
+                        ${progressLetterSpacing.Tablet && progressLetterSpacingUnits.Tablet ? `letter-spacing: ${progressLetterSpacing.Tablet}${progressLetterSpacingUnits.Tablet};` : ''}
+                        ${progressLineHeight.Tablet && progressLineHeightUnits.Tablet ? `line-height: ${progressLineHeight.Tablet}${progressLineHeightUnits.Tablet};` : ''}   
                     }
                 }
 
@@ -139,6 +164,11 @@ export default function save({ attributes }) {
 					.${blockID} .progress-bar-text-inSide-wrapper,
 					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
                         border-radius: ${progressMobileBorderRadiusWidth} !important;
+                    }
+                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
+                        ${progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}
+                        ${progressLetterSpacing.Mobile && progressLetterSpacingUnits.Mobile ? `letter-spacing: ${progressLetterSpacing.Mobile}${progressLetterSpacingUnits.Mobile};` : ''}
+                        ${progressLineHeight.Mobile && progressLineHeightUnits.Mobile ? `line-height: ${progressLineHeight.Mobile}${progressLineHeightUnits.Mobile};` : ''}  
                     }
                 }
                 
