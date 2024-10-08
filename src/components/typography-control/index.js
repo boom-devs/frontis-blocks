@@ -1,4 +1,3 @@
-
 import { __ } from '@wordpress/i18n';
 import { 
 	BaseControl,
@@ -6,7 +5,6 @@ import {
 	SelectControl,
 	Dropdown,
 	Dashicon,
-
 } from '@wordpress/components';
 
 import {
@@ -15,49 +13,37 @@ import {
     FONT_STYLE,
     TEXT_TRANSFORM,
     TEXT_DECORATION,
-
 } from "./constants/constants";
 
 import FB_Range from '@Components/range';
 import './editor.lazy.scss';
 
 const FB_TypographyControl = ({
-
     fontFamily,
 	onChangeFontFamily,
-
 	fontSize,
 	onChangeFontSize,
 	fontSizeUnits,
 	onChangeFontSizeUnit,
-
     fontWeight,
     onChangeFontWeight,
-
     fontStyle,
     onChangeFontStyle,
-
     textTransform,
     onChangeTextTransform,
-
     textDecoration,
     onChangeTextDecoration,
-
     letterSpacing,
 	onChangeLetterSpacing,
 	letterSpacingUnits,
-	onChangeletterSpacingUnit,
-
+	onChangeLetterSpacingUnit,
     lineHeight,
 	onChangeLineHeight,
 	lineHeightUnits,
 	onChangeLineHeightUnit,
-
     DeviceType,
     setAttributes,
 }) => {
-
-
 	const handleFontFamilyChange = (newFontFamily) => {
 		onChangeFontFamily(newFontFamily);
 	};
@@ -65,6 +51,7 @@ const FB_TypographyControl = ({
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
 	};
+
 	const handleFontSizeUnitChange = (newFontSizeUnit) => {
 		onChangeFontSizeUnit(newFontSizeUnit);
 	};
@@ -88,13 +75,15 @@ const FB_TypographyControl = ({
     const handleLetterSpacingChange = (newLetterSpacing) => {
         onChangeLetterSpacing(newLetterSpacing);
     };
+
     const handleLetterSpacingUnitChange = (newLetterSpacingUnit) => {
-        onChangeletterSpacingUnit(newLetterSpacingUnit);
+        onChangeLetterSpacingUnit(newLetterSpacingUnit);
     };
     
     const handleLineHeightChange = (newLineHeight) => {
         onChangeLineHeight(newLineHeight);
     };
+
     const handleLineHeightUnitChange = (newLineHeightUnit) => {
         onChangeLineHeightUnit(newLineHeightUnit);
     };
@@ -122,15 +111,12 @@ const FB_TypographyControl = ({
                 renderContent={() => (
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
-                            {/* Font Family */}
                             <SelectControl
                                 label={__("Font Family", "frontis-blocks")}
                                 options={FONT_FAMILYS}
                                 value={fontFamily}
                                 onChange={handleFontFamilyChange}
                             />
-
-                            {/* Font Size */}
 							<FB_Range
 								min={1}
 								max={100}
@@ -144,40 +130,30 @@ const FB_TypographyControl = ({
 								rangeStep={1}
 								resetFallbackValue={''}
 							/>
-
-                            {/* Font Weight */}
                             <SelectControl
                                 label={__("Font Weight", "frontis-blocks")}
 								options={FONT_WEIGHT}
                                 value={fontWeight}
                                 onChange={handleFontWeightChange}
                             />
-
-                            {/* Font Style */}
                             <SelectControl
                                 label={__("Font Style", "frontis-blocks")}
                                 options={FONT_STYLE}
                                 value={fontStyle}
                                 onChange={handleFontStyleChange}
                             />
-
-                            {/* Text Transform */}
                             <SelectControl
                                 label={__("Text Transform", "frontis-blocks")}
                                 options={TEXT_TRANSFORM}
                                 value={textTransform}
                                 onChange={handleTextTransformChange}
                             />
-
-                            {/* Text Decoration */}
                             <SelectControl
                                 label={__("Text Decoration", "frontis-blocks")}
                                 options={TEXT_DECORATION}
                                 value={textDecoration}
                                 onChange={handleTextDecorationChange}
                             />
-
-                            {/* Letter Spacing */}
                             <FB_Range
                                 min={1}
                                 max={100}
@@ -191,8 +167,6 @@ const FB_TypographyControl = ({
                                 rangeStep={1}
                                 resetFallbackValue={''}
                             />
-
-                            {/* Line Height */}
                             <FB_Range
                                 min={1}
                                 max={100}
