@@ -7,29 +7,17 @@ import {
     TabPanel,
     Button,
     ButtonGroup,
-    Dropdown,
     RangeControl,
     SelectControl,
     TextControl,
-    Dashicon,
-    ColorPicker,
-    ColorPalette,
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_ALIGN,
-    TEXT_ALIGN,
-    BORDER_STYLES,
     PROGRESS_TEXT_OPTIONS,
-	Unit_Types,
 	HEADING,
 } from "./constants/constants";
 
-import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
-import FB_Range from '@Components/range';
 import FB_Color from '@Components/color';
 
 import './editor.scss';
@@ -37,7 +25,8 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		DeviceType,
+        progressGlobalZIndex,
 		progressTextPosition,
 		progressNumber,
 
@@ -78,7 +67,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const progressBorderRadiusUnitsChange = (event, position) => {
         const value = event.target.value;
         if (progressBorderRadiusLink) {
-            switch (deviceType) {
+            switch (DeviceType) {
                 case 'Desktop':
                     setAttributes({
                         progressBorderRadiusDesktop: {
@@ -113,7 +102,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch (deviceType) {
+            switch (DeviceType) {
                 case 'Desktop':
                     setAttributes({ progressBorderRadiusDesktop: { ...progressBorderRadiusDesktop, [position]: value } });
                     break;
@@ -139,7 +128,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             progressBorderRadiusUnits: {
                 ...progressBorderRadiusUnits,
-                [deviceType]: unit
+                [DeviceType]: unit
             }
         });
     };
@@ -149,7 +138,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const progressTabletBorderRadiusWidth = `${progressBorderRadiusTablet.top}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.right}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.bottom}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.left}${progressBorderRadiusUnits.Tablet}`;
     const progressMobileBorderRadiusWidth = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
     /** End Progress Border Radius */
-
 
     /** Start progressColorSwitcher */
     const progressColorSwitcherChange = (value) => {
@@ -186,19 +174,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ progressBgHoverColor: value });
     };
     /** End progressBgHoverColor */
+  
 
     return (
         <>
 
             <style>
-            {`
+            {`  
+                .${blockID} .progress-bar-wrapper {
+                    position: relative;
+                    z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
+                }
 			    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
 					color: ${progressTextColor} !important;
+                }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
+					color: ${progressTextHoverColor} !important;
                 }
                 .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
                     background-color: ${progressBgColor};
                     border-radius: ${progressDesktopBorderRadiusWidth};
 					position: relative;
+                }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line:hover {
+                    background-color: ${progressBgHoverColor};
                 }
                 .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
 					height: ${progressBarHeight ? `${progressBarHeight}px` : '2px'};
@@ -207,12 +206,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     transition: width 0.5s ease-in-out;
                     width: ${progressNumber}%;
                 }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar:hover {
+                    background-color: ${progressHoverColor};
+                    transition: ease-in-out .5s;
+                }
 				.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number {
 					position: absolute;
 					top: -30px;
 					transform: translateX(-100%);
 					transition: left 0.5s ease-in-out;
 					color: ${progressTextColor};
+				}
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number:hover {
+					color: ${progressTextHoverColor};
 				}
 
 				.${blockID} .progress-bar-text-inSide-wrapper {
@@ -221,16 +227,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					height: ${progressBarHeight ? `${progressBarHeight}px` : '30px'};
 					overflow: hidden;
                 }
+                .${blockID} .progress-bar-text-inSide-wrapper:hover {
+                    background-color: ${progressBgHoverColor};
+                }
 				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
                     background-color: ${progressColor};
                     border-radius: ${progressDesktopBorderRadiusWidth};
 					transition: width 0.5s ease-in-out;
 					width: ${progressNumber}%;
                 }
+                .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label:hover {
+                    background-color: ${progressHoverColor};
+                    transition: ease-in-out .5s;
+                }
 				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
                 	border-radius: ${progressDesktopBorderRadiusWidth};
 					color: ${progressTextColor};
 					font-size: 14px;
+                }
+                .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info:hover {
+					color: ${progressTextHoverColor};
                 }
 
                 @media only screen and (max-width: 1024px) {
@@ -383,7 +399,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
-                                                DeviceType={deviceType}
+                                                DeviceType={DeviceType}
                                                 spacingUnitsHandler={progressBorderRadiusUnitsHandler}
                                                 spacingUnits={progressBorderRadiusUnits}
                                                 spacingDesktop={progressBorderRadiusDesktop}
@@ -407,7 +423,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-
+                                                    <RangeControl
+                                                        value={progressGlobalZIndex}
+                                                        onChange={(value) => setAttributes({ progressGlobalZIndex: value === 0 ? undefined : value })}
+                                                        min={1}
+                                                        max={10000000}
+                                                        step={1}
+                                                        allowReset
+                                                        resetFallbackValue={100}
+                                                    />
                                                 </PanelBody>
                                             </div>
                                         </div>

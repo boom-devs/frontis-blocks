@@ -1,35 +1,16 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import Inspector from "./inspector";
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
 		progressTextPosition,
 		progressNumber,
-		progressColor,
-		progressTextColor,
-		progressBgColor,
 		progressTitle,
 		progressHeadingTag,
-		progressBarHeight,
-		progressBorder,
-		progressBorderColorSwitcher,
-		progressBorderColor,
-		progressBorderHoverColor,
-		progressBorderUnits,
-		progressBorderDesktop,
-		progressBorderTablet,
-		progressBorderMobile,
-		progressBorderLink,
-		progressBorderRadiusUnits,
-		progressBorderRadiusDesktop,
-		progressBorderRadiusTablet,
-		progressBorderRadiusMobile,
-		progressBorderRadiusLink,
 	} = attributes;
 
 	const outSideprogressBarRef = useRef(null);
