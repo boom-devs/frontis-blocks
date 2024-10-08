@@ -29,7 +29,6 @@ import {
     BORDER_STYLES,
 } from "./constants/constants";
 
-// import ResponsiveControl from '../../components/responsivecontrol';
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FBIconPicker from "../../components/icon-picker";
 

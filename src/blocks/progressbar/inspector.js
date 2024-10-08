@@ -19,6 +19,7 @@ import {
 
 import FB_Spacing from '@Components/spacing';
 import FB_Color from '@Components/color';
+import FB_TypographyControl from '@Components/typography-control';
 
 import './editor.scss';
 
@@ -52,9 +53,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
 
+        progressFontFamily,
+        progressFontSize,
+        progressFontSizeUnits,
+        progressFontWeight,
+        progressFontStyle,
+        progressTextTransform,
+        progressTextDecoration,
+        progressLetterSpacing,
+        progressLetterSpacingUnits,
+        progressLineHeight,
+        progressLineHeightUnits,
+
 	} = attributes;
     
-
     useEffect(() => {
         if (!blockID) {
             setAttributes({
@@ -62,6 +74,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [blockID, clientId, setAttributes]);
+
+    // Helper function to load fonts
+    const loadFont = (fontFamily) => {
+        if (fontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    };
+
+    // Apply font family styles using useEffect
+    useEffect(() => {
+        loadFont(progressFontFamily);
+    }, [progressFontFamily]);
 
     /** Start Progress Border Radius */
     const progressBorderRadiusUnitsChange = (event, position) => {
@@ -174,7 +202,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ progressBgHoverColor: value });
     };
     /** End progressBgHoverColor */
-  
+
 
     return (
         <>
@@ -185,8 +213,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     position: relative;
                     z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
                 }
-			    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
-					color: ${progressTextColor} !important;
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+                    ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
+                    ${progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
+                    ${progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
+                    ${progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
+                    ${progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
+                    ${progressTextTransform ? `text-transform: ${progressTextTransform};` : ''}
+                    ${progressTextDecoration ? `text-decoration: ${progressTextDecoration};` : ''}
+                    ${progressLetterSpacing.Desktop && progressLetterSpacingUnits.Desktop ? `letter-spacing: ${progressLetterSpacing.Desktop}${progressLetterSpacingUnits.Desktop};` : ''}
+                    ${progressLineHeight.Desktop && progressLineHeightUnits.Desktop ? `line-height: ${progressLineHeight.Desktop}${progressLineHeightUnits.Desktop};` : ''}
                 }
                 .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
 					color: ${progressTextHoverColor} !important;
@@ -254,7 +290,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
 					.${blockID} .progress-bar-text-inSide-wrapper,
 					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                        border-radius: ${progressTabletBorderRadiusWidth} !important;
+                        border-radius: ${progressTabletBorderRadiusWidth} !important;                     
+                    }
+
+                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+                        ${progressFontSize.Tablet && progressFontSizeUnits.Tablet ? `font-size: ${progressFontSize.Tablet}${progressFontSizeUnits.Tablet};` : ''}
+                        ${progressLetterSpacing.Tablet && progressLetterSpacingUnits.Tablet ? `letter-spacing: ${progressLetterSpacing.Tablet}${progressLetterSpacingUnits.Tablet};` : ''}
+                        ${progressLineHeight.Tablet && progressLineHeightUnits.Tablet ? `line-height: ${progressLineHeight.Tablet}${progressLineHeightUnits.Tablet};` : ''}   
                     }
                 }
 
@@ -263,7 +305,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
 					.${blockID} .progress-bar-text-inSide-wrapper,
 					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                        border-radius: ${progressMobileBorderRadiusWidth} !important;
+                        border-radius: ${progressMobileBorderRadiusWidth} !important;                      
+                    }
+                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
+                        ${progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}
+                        ${progressLetterSpacing.Mobile && progressLetterSpacingUnits.Mobile ? `letter-spacing: ${progressLetterSpacing.Mobile}${progressLetterSpacingUnits.Mobile};` : ''}
+                        ${progressLineHeight.Mobile && progressLineHeightUnits.Mobile ? `line-height: ${progressLineHeight.Mobile}${progressLineHeightUnits.Mobile};` : ''}  
                     }
                 }
 				
@@ -370,6 +417,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
+                                            <FB_TypographyControl 
+                                                fontFamily={progressFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ progressFontFamily: value })}
+                                                
+                                                fontSize={progressFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ progressFontSize: value })}
+                                                
+                                                fontSizeUnits={progressFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ progressFontSizeUnits: value })}
+                                                
+                                                fontWeight={progressFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ progressFontWeight: value })}
+                                                
+                                                fontStyle={progressFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ progressFontStyle: value })}
+                                                
+                                                textTransform={progressTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ progressTextTransform: value })}
+                                                
+                                                textDecoration={progressTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ progressTextDecoration: value })}
+                                                
+                                                letterSpacing={progressLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ progressLetterSpacing: value })}
+                                                
+                                                letterSpacingUnits={progressLetterSpacingUnits[DeviceType]}
+                                                onChangeletterSpacingUnit={(value) => setAttributes({ progressFontSize: value })}
+                                                
+                                                lineHeight={progressLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ progressLineHeight: value })}
+                                                
+                                                lineHeightUnits={progressLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ progressLineHeightUnits: value })}
+                                                
+                                                DeviceType={DeviceType}
+                                                setAttributes={setAttributes}
+                                            />
                                             <FB_Color
                                                 label={__("Color", "frontis-blocks")}
                                                 globalColorSwitcher={progressColorSwitcher}
