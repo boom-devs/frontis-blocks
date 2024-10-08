@@ -3,9 +3,12 @@ const attributes = {
         type: "string",
         default: ""
     },
-    deviceType: {
+    DeviceType: {
         type: "string",
         default: "Desktop"
+    },
+    progressGlobalZIndex : {
+        type: "number",
     },
     progressTextPosition: {
         type: "string",

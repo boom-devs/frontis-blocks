@@ -4,19 +4,16 @@ export default function save({ attributes }) {
     
     const {
 		blockID,
-		deviceType,
+		DeviceType,
+        progressGlobalZIndex,
 		progressTextPosition,
 		progressNumber,
-
-        progressColorSwitcher,
 		progressColor,
         progressHoverColor,
 
-        progressTextColorSwitcher,
 		progressTextColor,
         progressTextHoverColor,
 
-        progressBgColorSwitcher,
 		progressBgColor,
         progressBgHoverColor,
 
@@ -28,7 +25,6 @@ export default function save({ attributes }) {
 		progressBorderRadiusDesktop,
 		progressBorderRadiusTablet,
 		progressBorderRadiusMobile,
-		progressBorderRadiusLink,
 
     } = attributes;
 
@@ -47,13 +43,23 @@ export default function save({ attributes }) {
 
             <style>
             {`
+                .${blockID} .progress-bar-wrapper {
+                    position: relative;
+                    z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
+                }
             	.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
 					color: ${progressTextColor}
+                }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
+					color: ${progressTextHoverColor} !important;
                 }
                 .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
                     background-color: ${progressBgColor};
                     border-radius: ${progressDesktopBorderRadiusWidth};
 					position: relative;
+                }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line:hover {
+                    background-color: ${progressBgHoverColor};
                 }
                 .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
 					height: ${progressBarHeight ? `${progressBarHeight}px` : '2px'};
@@ -61,6 +67,10 @@ export default function save({ attributes }) {
                     border-radius: ${progressDesktopBorderRadiusWidth};
                     transition: width 0.5s ease-in-out;
                     width: ${progressNumber}%;
+                }
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar:hover {
+                    background-color: ${progressHoverColor};
+                    transition: ease-in-out .5s;
                 }
 				.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number {
 					position: absolute;
@@ -70,6 +80,9 @@ export default function save({ attributes }) {
 					transition: left 0.5s ease-in-out;
                     color: ${progressTextColor};
 				}
+                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number:hover {
+					color: ${progressTextHoverColor};
+				}
                 
 				.${blockID} .progress-bar-text-inSide-wrapper {
                     display: flex;
@@ -77,6 +90,9 @@ export default function save({ attributes }) {
                     border-radius: ${progressDesktopBorderRadiusWidth};
 					height: ${progressBarHeight ? `${progressBarHeight}px` : '30px'};
 					overflow: hidden;
+                }
+                .${blockID} .progress-bar-text-inSide-wrapper:hover {
+                    background-color: ${progressBgHoverColor};
                 }
 				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
                     display: flex;
@@ -87,6 +103,10 @@ export default function save({ attributes }) {
                     border-radius: ${progressDesktopBorderRadiusWidth};
 					transition: width 0.5s ease-in-out;
 					width: ${progressNumber}%;
+                }
+                .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label:hover {
+                    background-color: ${progressHoverColor};
+                    transition: ease-in-out .5s;
                 }
 
 				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
@@ -99,6 +119,9 @@ export default function save({ attributes }) {
                     border-radius: ${progressDesktopBorderRadiusWidth};
 					color: ${progressTextColor};
 					font-size: 14px;
+                }
+                .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info:hover {
+					color: ${progressTextHoverColor};
                 }
 
                 @media only screen and (max-width: 1024px) {
