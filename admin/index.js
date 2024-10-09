@@ -1,4 +1,4 @@
-import { render } from '@wordpress/element';
+import { createRoot } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import App from './App';
 import './scss/admin.scss';
@@ -12,4 +12,5 @@ const FrontisBlocksAdmin = () => {
   );
 };
 
-render(<FrontisBlocksAdmin />, document.getElementById('frontis-blocks-admin'));
+const root = createRoot(document.getElementById('frontis-blocks-admin'));
+root.render(<FrontisBlocksAdmin />);
