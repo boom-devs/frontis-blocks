@@ -31,22 +31,10 @@ const attributes = {
 		type: 'string',
 		default: 'Desktop'
 	},
-	rangeValue: {
-		type: 'object',
-		default: {
-			Desktop: 40,
-			Tablet: 30,
-			Mobile: 20
-		}
+	boxShadow: {
+		type: 'string',
+		default: '23px 23px 0px 10px #00000045',
 	},
-	rangeUnit: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'em',
-			Mobile: '%',
-		}
-	}
 }
 
 registerBlockType( metadata.name, {

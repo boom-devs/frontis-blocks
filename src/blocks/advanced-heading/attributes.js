@@ -260,6 +260,11 @@ const attributes = {
     HeadingZIndex : {
         type: "number",
     },
+
+    HeadingGlobalBoxShadow: {
+        type: 'string',
+        default: '23px 23px 0px 10px #00000045',
+    },
     
 }
 export default attributes;
