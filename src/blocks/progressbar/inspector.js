@@ -442,8 +442,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 letterSpacing={progressLetterSpacing}
                                                 onChangeLetterSpacing={(value) => setAttributes({ progressLetterSpacing: value })}
                                                 
-                                                letterSpacingUnits={progressLetterSpacingUnits[DeviceType]}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ progressFontSize: value })}
+                                                letterSpacingUnits={progressLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ progressLetterSpacingUnits: value })}
                                                 
                                                 lineHeight={progressLineHeight}
                                                 onChangeLineHeight={(value) => setAttributes({ progressLineHeight: value })}
