@@ -1,0 +1,75 @@
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/scss/admin.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+.frontis-blocks-admin {
+  display: flex;
+}
+.frontis-blocks-admin .frontis-blocks-menu-list {
+  width: 200px;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+.frontis-blocks-admin .frontis-blocks-menu-list .frontis-blocks-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.frontis-blocks-admin .frontis-blocks-menu-list .frontis-blocks-logo h1 {
+  margin-right: 10px;
+  font-size: 18px;
+}
+.frontis-blocks-admin .frontis-blocks-menu-list .frontis-blocks-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: right;
+}
+.frontis-blocks-admin .frontis-blocks-menu-list .frontis-blocks-menu-item.active {
+  background-color: #fff;
+  font-weight: bold;
+}
+.frontis-blocks-admin .frontis-blocks-menu-list .frontis-blocks-menu-item svg {
+  margin-left: 10px;
+}
+.frontis-blocks-admin .frontis-blocks-tab-panel {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.frontis-tab-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.frontis-tab-list {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.frontis-tab-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.frontis-tab-button.active-tab {
+  background-color: #f0f0f0;
+  border-bottom: 2px solid #007cba;
+}
+
+.frontis-tab-button svg {
+  margin-left: 8px;
+}
+
+.frontis-tab-content {
+  padding: 20px;
+}
