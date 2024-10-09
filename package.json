@@ -42,6 +42,8 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@wordpress/editor": "^14.6.0",
     "classnames": "^2.5.1",
+    "rc-switch": "^4.1.0",
+    "react-toastify": "^10.0.5",
     "react-virtualized": "^9.22.5"
   }
 }
