@@ -3,6 +3,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { useState, useEffect } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import FB_BoxShadowControl from '@Components/box-shadow';
 
 
 import { 
@@ -151,6 +152,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureTabBorderRadiusWidth,
         FeatureMobileBorderRadiusWidth,
         FeatureBorderRadiusLink,
+
+        FeatureboxShadowValues,
+        FeatureboxShadowCssValue,
 
         FeatureDesktopSwitcher,
         FeatureTabletSwitcher,
@@ -540,6 +544,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     border-width: ${DesktopBorderWidth};
                     border-radius: ${DesktopBorderRadiusWidth} !important;
                     ${FeatureBorderColor !== undefined ? `border-color: ${FeatureBorderColor};` : ''};
+                    box-shadow: ${FeatureboxShadowCssValue};
                     transition: all .3s ease-in-out;
                 }
                 .fb-feature-main-wrapper.${blockID}:hover {
@@ -2463,6 +2468,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         </div>                          
                                                     </div>
                                                 </div>
+                                                <FB_BoxShadowControl
+                                                    onBoxShadowChange={(value) => setAttributes({ FeatureboxShadowValues: value })}
+                                                    initialShadowValue={FeatureboxShadowValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ FeatureboxShadowCssValue: value })}
+                                                />
                                             </PanelBody>
 
                                             <PanelBody

@@ -511,6 +511,14 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+    FeatureboxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureboxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
     
 };
 
