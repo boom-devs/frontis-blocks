@@ -1,34 +1,38 @@
-
 import { __ } from '@wordpress/i18n';
-
-
-import {InspectorControls, RichText, useBlockProps} from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import './editor.scss';
 
-export default function Edit (props) {
+export default function Edit(props) {
 	const { attributes, setAttributes } = props;
-	const {
-		boxShadow,
-	} = attributes;
+	const { boxShadowValues, boxShadowCSS } = attributes;
 
-	const testboxShadowHandler = (newBoxShadow) => {
-		setAttributes({ boxShadow: newBoxShadow.join(' ') });
-	};
+    return (
+        <>
+            <InspectorControls>
+                <PanelBody title={__('Settings', 'text-domain')}>
+                    <FB_BoxShadowControl
+                        onBoxShadowChange={(value) => setAttributes({ boxShadowValues: value })}
+                        initialShadowValue={boxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ boxShadowCSS: value })}
+                    />
+                </PanelBody>
+            </InspectorControls>
 
-	return (
-		<>
-			<InspectorControls>
-				<PanelBody title={ __('Settings', 'text-domain') }>
-					<FB_BoxShadowControl boxShadowHandler={testboxShadowHandler} />
-				</PanelBody>
-			</InspectorControls>
+            {/* Dynamic style block to apply box-shadow */}
+            <style>
+                {`
+                    .customBoxShadow {
+                        box-shadow: ${boxShadowCSS};
+                    }
+                `}
+            </style>
 
-			<p {...useBlockProps()} style={{ boxShadow: boxShadow }}>
-				{__('This is post grid', 'text')}
-			</p>
-
-		</>
-	);
+            {/* Block content with box-shadow applied */}
+            <p {...useBlockProps()} className="customBoxShadow">
+                {__('This is post grid', 'text-domain')}
+            </p>
+        </>
+    );
 }

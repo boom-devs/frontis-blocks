@@ -104,6 +104,7 @@ export default function Save({ attributes }) {
         FeatureDesktopBorderRadiusWidth,
         FeatureTabBorderRadiusWidth,
         FeatureMobileBorderRadiusWidth,
+        FeatureboxShadowCssValue,
 
         FeatureDesktopSwitcher,
         FeatureTabletSwitcher,
@@ -154,6 +155,7 @@ export default function Save({ attributes }) {
                     border-width: ${DesktopBorderWidth};
                     border-radius: ${DesktopBorderRadiusWidth} !important;
                     ${FeatureBorderColor !== undefined ? `border-color: ${FeatureBorderColor};` : ''};
+                    box-shadow: ${FeatureboxShadowCssValue};
                     transition: all .3s ease-in-out;
                 }
                 .fb-feature-main-wrapper.${blockID}:hover {
