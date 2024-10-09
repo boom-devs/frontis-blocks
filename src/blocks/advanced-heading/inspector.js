@@ -38,6 +38,7 @@ import {
 import { useState, useEffect } from "@wordpress/element";
 // import ResponsiveControl from '../../components/responsivecontrol';
 import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_BoxShadowControl from '@Components/box-shadow';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
