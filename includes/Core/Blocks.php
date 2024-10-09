@@ -5,6 +5,7 @@ namespace FrontisBlocks\Core;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
+use FrontisBlocks\Forms\FluentForms;
 
 defined('ABSPATH') || exit;
 
@@ -24,8 +25,9 @@ class Blocks
     public function register_blocks()
     {
         global $pagenow;
-        
+
         $is_editor = $pagenow === 'post.php' || $pagenow === 'post-new.php' || $pagenow === 'site-editor.php' || $pagenow === 'widgets.php';
+
         $args = [
             'handle' => 'frontis-blocks-editor-global',
             'src'    => FB_PLUGIN_URL . 'build/frontis/global.css',
@@ -45,25 +47,55 @@ class Blocks
                 $blocks_dir = FB_BLOCKS_DIR . $slug;
                 $plugin_slug = 'frontis-blocks';
 
-                // if ($package === 'pro' && defined('FB_PRO_PLUGIN_PATH')) {
-                //     $plugin_dir = FB_PRO_PLUGIN_PATH;
-                //     $blocks_dir = FB_PRO_PLUGIN_PATH . 'build/blocks/' . $slug;
-                //     $plugin_slug = 'frontis-blocks-pro';
-                // }
-
                 if (!file_exists($blocks_dir)) {
                     error_log($blocks_dir);
                     continue;
                 }
 
+                // Register the block
                 $rb = register_block_type($blocks_dir);
-                error_log(print_r($rb, true));
 
+                // Register translations
                 wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
 
+                // Enqueue block style in the editor
                 if ($is_editor) {
                     wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
                 }
+
+                // Enqueue block editor script and pass localized data
+                $editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
+                wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
+				$localize_array = '';
+                $localize_array = [
+// 					'eb_plugins_url'             => ESSENTIAL_BLOCKS_URL,
+// 					'image_url'                  => ESSENTIAL_BLOCKS_URL . 'assets/images',
+// 					'eb_wp_version'              => ESSENTIAL_BLOCKS_WP_VERSION,
+// 					'eb_version'                 => ESSENTIAL_BLOCKS_VERSION,
+// 					'eb_admin_url'               => get_admin_url(),
+// 					'rest_rootURL'               => get_rest_url(),
+// 					'ajax_url'                   => admin_url( 'admin-ajax.php' ),
+// 					'nft_nonce'                  => wp_create_nonce( 'eb-nft-nonce' ),
+// 					'post_grid_pagination_nonce' => wp_create_nonce( 'eb-pagination-nonce' ),
+// 					'placeholder_image'          => ESSENTIAL_BLOCKS_PLACEHOLDER_IMAGE,
+// 					'is_pro_active'              => ESSENTIAL_BLOCKS_IS_PRO_ACTIVE ? "true" : "false",
+// 					'upgrade_pro_url'            => ESSENTIAL_BLOCKS_UPGRADE_PRO_URL,
+// 					'responsiveBreakpoints'      => Helper::get_responsive_breakpoints()
+				 ];
+				if ( is_admin() ) {
+					$admin_localize_array = [
+						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),
+						'fluent_plugin_active' => FluentForms::check_enable(),
+						'fluent_form_lists'   => json_encode( FluentForms::form_list() ),
+// 						'wpforms_lists'       => json_encode( WPForms::form_list() ),
+					 ];
+
+					$localize_array = array_merge( $localize_array, $admin_localize_array );
+				}
+
+
+
+                wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
             }
         }
     }
