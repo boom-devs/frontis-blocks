@@ -5,7 +5,7 @@
 
 // Get block attributes
 $blockID = isset( $attributes['blockID'] ) ? sanitize_text_field( $attributes['blockID'] ) : '';
-$DeviceType = isset( $attributes['DeviceType'] ) ? sanitize_text_field( $attributes['DeviceType'] ) : 'Desktop';
+$deviceType = isset( $attributes['deviceType'] ) ? sanitize_text_field( $attributes['deviceType'] ) : 'Desktop';
 
 $videoGlobalZIndex = isset( $attributes['videoGlobalZIndex'] ) ? intval( $attributes['videoGlobalZIndex'] ) : '';
 $videoURL = isset( $attributes['videoURL'] ) ? esc_url( $attributes['videoURL'] ) : 'https://www.youtube.com/watch?v=WZdCL4Y5EBY';

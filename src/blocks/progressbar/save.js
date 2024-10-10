@@ -4,7 +4,7 @@ export default function save({ attributes }) {
     
     const {
 		blockID,
-		DeviceType,
+		deviceType,
         progressGlobalZIndex,
 		progressTextPosition,
 		progressNumber,

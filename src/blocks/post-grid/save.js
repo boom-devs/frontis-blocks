@@ -2,7 +2,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 export default function save({ attributes }) {
-	const { DeviceType, rangeValue, rangeUnit } = attributes;
+	const { deviceType, rangeValue, rangeUnit } = attributes;
 
 	return (
         <>

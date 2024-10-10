@@ -26,7 +26,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
         progressGlobalZIndex,
 		progressTextPosition,
 		progressNumber,
@@ -95,7 +95,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const progressBorderRadiusUnitsChange = (event, position) => {
         const value = event.target.value;
         if (progressBorderRadiusLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         progressBorderRadiusDesktop: {
@@ -130,7 +130,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({ progressBorderRadiusDesktop: { ...progressBorderRadiusDesktop, [position]: value } });
                     break;
@@ -156,7 +156,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             progressBorderRadiusUnits: {
                 ...progressBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -451,7 +451,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 lineHeightUnits={progressLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ progressLineHeightUnits: value })}
                                                 
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
                                             <FB_Color
@@ -483,7 +483,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={progressBorderRadiusUnitsHandler}
                                                 spacingUnits={progressBorderRadiusUnits}
                                                 spacingDesktop={progressBorderRadiusDesktop}

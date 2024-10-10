@@ -41,7 +41,7 @@ const FB_TypographyControl = ({
 	onChangeLineHeight,
 	lineHeightUnits,
 	onChangeLineHeightUnit,
-    DeviceType,
+    deviceType,
     setAttributes,
 }) => {
 	const handleFontFamilyChange = (newFontFamily) => {
@@ -124,7 +124,7 @@ const FB_TypographyControl = ({
 								rangeValue={fontSize}
 								onChangeHandler={handleFontSizeChange}
 								rangeUnitHandler={handleFontSizeUnitChange}
-								DeviceType={DeviceType}
+								deviceType={deviceType}
 								units={fontSizeUnits}
 								setAttributes={setAttributes}
 								rangeStep={1}
@@ -161,7 +161,7 @@ const FB_TypographyControl = ({
                                 rangeValue={letterSpacing}
                                 onChangeHandler={handleLetterSpacingChange}
                                 rangeUnitHandler={handleLetterSpacingUnitChange}
-                                DeviceType={DeviceType}
+                                deviceType={deviceType}
                                 units={letterSpacingUnits}
                                 setAttributes={setAttributes}
                                 rangeStep={1}
@@ -174,7 +174,7 @@ const FB_TypographyControl = ({
                                 rangeValue={lineHeight}
                                 onChangeHandler={handleLineHeightChange}
                                 rangeUnitHandler={handleLineHeightUnitChange}
-                                DeviceType={DeviceType}
+                                deviceType={deviceType}
                                 units={lineHeightUnits}
                                 setAttributes={setAttributes}
                                 rangeStep={1}
