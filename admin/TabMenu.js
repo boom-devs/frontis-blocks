@@ -14,7 +14,7 @@ import {
     IntegrationsIcon,
 } from './icons'
 
-const TabMenus = applyFilters('frontis_blocks_settings_menu_list', [
+const TabMenus = applyFilters('frontisblocks/admin/tabs', [
     {
         id: 'general',
         icon: <HomeIcon />,

@@ -21,7 +21,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'freemium',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             'container' => [
                 'slug'      => 'container',
@@ -29,7 +29,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'layout',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             'column' => [
                 'slug'      => 'column',
@@ -37,7 +37,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'layout',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             // 'advanced-image' => [
             //     'slug'      => 'advanced-image',
@@ -45,7 +45,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'media',
             //     'badge'     => 'freemium',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'image-gallery' => [
             //     'slug'      => 'image-gallery',
@@ -53,7 +53,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'media',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'info-box' => [
             //     'slug'      => 'info-box',
@@ -61,7 +61,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'icon-box' => [
             //     'slug'      => 'icon-box',
@@ -69,7 +69,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             'advanced-button' => [
                 'slug'      => 'advanced-button',
@@ -77,7 +77,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             // 'dual-button' => [
             //     'slug'      => 'dual-button',
@@ -85,7 +85,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'general',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             'advanced-navigation' => [
                 'slug'      => 'advanced-navigation',
@@ -93,7 +93,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'navigation',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             // 'advanced-video' => [
             //     'slug'      => 'advanced-video',
@@ -101,7 +101,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'media',
             //     'badge'     => 'freemium',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'countdown' => [
             //     'slug'      => 'countdown',
@@ -109,7 +109,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'flip-box' => [
             //     'slug'      => 'flip-box',
@@ -117,7 +117,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             'features-list' => [
                 'slug'      => 'features-list',
@@ -125,7 +125,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             'testimonial' => [
                 'slug'      => 'testimonial',
@@ -133,7 +133,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'content',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             // 'counter-number' => [
             //     'slug'      => 'counter-number',
@@ -141,7 +141,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'fluent-form' => [
             //     'slug'      => 'fluent-form',
@@ -149,7 +149,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'form',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'contact-form-7' => [
             //     'slug'      => 'contact-form-7',
@@ -157,7 +157,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'form',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'call-to-action' => [
             //     'slug'      => 'call-to-action',
@@ -165,7 +165,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'pricing-table' => [
             //     'slug'      => 'pricing-table',
@@ -173,7 +173,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'woo-product-grid' => [
             //     'slug'      => 'woo-product-grid',
@@ -181,7 +181,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'woocommerce',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             'social-icons' => [
                 'slug'      => 'social-icons',
@@ -189,7 +189,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'social',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             'post-grid' => [
                 'slug'      => 'post-grid',
@@ -197,7 +197,7 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
             ],
             // 'team-member' => [
             //     'slug'      => 'team-member',
@@ -205,7 +205,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
             // 'slider' => [
             //     'slug'      => 'slider',
@@ -213,7 +213,7 @@ class BlockList {
             //     'package'   => 'free',
             //     'category'  => 'content',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
             // ],
         ];
 

@@ -3,16 +3,16 @@ import { TabPanel } from './components';
 import TabMenus from './TabMenu';
 
 const App = () => {
-    const getInitialTab = () => {
+    const getTabFromUrl = () => {
         const queryParams = new URLSearchParams(window.location.search);
         return queryParams.get("tab") || "general";
     };
 
-    const [activeTab, setActiveTab] = useState(getInitialTab);
+    const [activeTab, setActiveTab] = useState(getTabFromUrl);
 
     useEffect(() => {
         const handlePopState = () => {
-            setActiveTab(getInitialTab());
+            setActiveTab(getTabFromUrl());
         };
 
         window.addEventListener('popstate', handlePopState);
@@ -31,12 +31,16 @@ const App = () => {
         setActiveTab(tabName);
     };
 
+    // Get the current tab from URL every render
+    const currentTab = getTabFromUrl();
+
     return (
         <div className="frontis-blocks-admin">
             <TabPanel
                 className="frontis-blocks-tab-panel"
                 activeClass="active-tab"
                 onSelect={handleTabChange}
+                initialTabName={currentTab}
                 tabs={TabMenus.map(tab => ({
                     name: tab.id,
                     title: tab.label,
@@ -48,7 +52,7 @@ const App = () => {
                     const activeTabData = TabMenus.find(t => t.id === tab.name);
                     return (
                         <div className="frontis-blocks-tab-content">
-                            {activeTabData.comp}
+                             {TabMenus.find(tab => tab.id === activeTab)?.comp}
                         </div>
                     );
                 }}
