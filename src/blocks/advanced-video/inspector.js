@@ -37,7 +37,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        DeviceType,
+        deviceType,
         videoGlobalZIndex,
         videoURL,
         autoPlaySwitcher,
@@ -117,7 +117,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleIframeBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         videoBorderDesktop: {
@@ -152,7 +152,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {videoBorderDesktop: {...videoBorderDesktop, [position]: value}} );
                     break;
@@ -177,7 +177,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             videoBorderUnits: {
                 ...videoBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -192,7 +192,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleIframeBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         videoBorderRadiusDesktop: {
@@ -227,7 +227,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {videoBorderRadiusDesktop: {...videoBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -252,7 +252,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             videoBorderRadiusUnits: {
                 ...videoBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -281,7 +281,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         videoGlobalPaddingDesktop: {
@@ -316,7 +316,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {videoGlobalPaddingDesktop: {...videoGlobalPaddingDesktop, [position]: value}} );
                     break;
@@ -341,7 +341,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             videoGlobalPaddingUnits: {
                 ...videoGlobalPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -359,7 +359,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         videoGlobalMarginDesktop: {
@@ -394,7 +394,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {videoGlobalMarginDesktop: {...videoGlobalMarginDesktop, [position]: value}} );
                     break;
@@ -419,7 +419,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             videoGlobalMarginUnits: {
                 ...videoGlobalMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -435,7 +435,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         videoGlobalBorderDesktop: {
@@ -470,7 +470,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {videoGlobalBorderDesktop: {...videoGlobalBorderDesktop, [position]: value}} );
                     break;
@@ -495,7 +495,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             videoGlobalBorderUnits: {
                 ...videoGlobalBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -510,7 +510,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( videoGlobalBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         videoGlobalBorderRadiusDesktop: {
@@ -545,7 +545,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {videoGlobalBorderRadiusDesktop: {...videoGlobalBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -570,7 +570,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             videoGlobalBorderRadiusUnits: {
                 ...videoGlobalBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -762,7 +762,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleIframeBorderUnitsHandler}
                                                 spacingUnits={videoBorderUnits}
                                                 spacingDesktop={videoBorderDesktop}
@@ -776,7 +776,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleIframeBorderRadiusUnitsHandler}
                                                 spacingUnits={videoBorderRadiusUnits}
                                                 spacingDesktop={videoBorderRadiusDesktop}
@@ -813,7 +813,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                     <FB_Spacing 
                                                         label={__("Padding", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
                                                         spacingUnits={videoGlobalPaddingUnits}
                                                         spacingDesktop={videoGlobalPaddingDesktop}
@@ -826,7 +826,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                     <FB_Spacing 
                                                         label={__("Margin", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalMarginUnitsHandler}
                                                         spacingUnits={videoGlobalMarginUnits}
                                                         spacingDesktop={videoGlobalMarginDesktop}
@@ -871,7 +871,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     <FB_Spacing 
                                                         label={__("Border", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalBorderUnitsHandler}
                                                         spacingUnits={videoGlobalBorderUnits}
                                                         spacingDesktop={videoGlobalBorderDesktop}
@@ -885,7 +885,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     <FB_Spacing 
                                                         label={__("Radius Border", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
                                                         spacingUnits={videoGlobalBorderRadiusUnits}
                                                         spacingDesktop={videoGlobalBorderRadiusDesktop}

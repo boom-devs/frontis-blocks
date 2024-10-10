@@ -13,6 +13,7 @@ import {
     ButtonGroup,
     ToggleControl,
     TextControl,
+    TextareaControl,
     Dropdown,
     Dashicon,
     RangeControl,
@@ -103,6 +104,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonIcon,
         buttonZIndex,
         buttonZIndexUnits,
+        customCSS,
     } = attributes;    
     
     useEffect(() => {

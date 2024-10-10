@@ -8,7 +8,7 @@ export default function save({ attributes }) {
         socialIconUrl,
         socialIconTargetUrl,
 
-        DeviceType,
+        deviceType,
         socialAlignment,
         socialIconZIndex,
         socialIconSize,
@@ -77,45 +77,45 @@ export default function save({ attributes }) {
     });
     
     /** Start Icon border */
-    const IconBorderDesktopWidth = `${socialIconBorderDesktop.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderDesktop.left}${socialIconBorderUnits[DeviceType]}`;
-    const IconBorderTabletWidth = `${socialIconBorderTablet.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderTablet.left}${socialIconBorderUnits[DeviceType]}`;
-    const IconBorderMobileWidth = `${socialIconBorderMobile.top}${socialIconBorderUnits[DeviceType]} ${socialIconBorderMobile.right}${socialIconBorderUnits[DeviceType]} ${socialIconBorderMobile.bottom}${socialIconBorderUnits[DeviceType]} ${socialIconBorderMobile.left}${socialIconBorderUnits[DeviceType]}`;
+    const IconBorderDesktopWidth = `${socialIconBorderDesktop.top}${socialIconBorderUnits[deviceType]} ${socialIconBorderDesktop.right}${socialIconBorderUnits[deviceType]} ${socialIconBorderDesktop.bottom}${socialIconBorderUnits[deviceType]} ${socialIconBorderDesktop.left}${socialIconBorderUnits[deviceType]}`;
+    const IconBorderTabletWidth = `${socialIconBorderTablet.top}${socialIconBorderUnits[deviceType]} ${socialIconBorderTablet.right}${socialIconBorderUnits[deviceType]} ${socialIconBorderTablet.bottom}${socialIconBorderUnits[deviceType]} ${socialIconBorderTablet.left}${socialIconBorderUnits[deviceType]}`;
+    const IconBorderMobileWidth = `${socialIconBorderMobile.top}${socialIconBorderUnits[deviceType]} ${socialIconBorderMobile.right}${socialIconBorderUnits[deviceType]} ${socialIconBorderMobile.bottom}${socialIconBorderUnits[deviceType]} ${socialIconBorderMobile.left}${socialIconBorderUnits[deviceType]}`;
     /** End Icon Border */
 
     /** Start Border Radius */
-    const IconBorderRadiusDesktopWidth = `${socialIconBorderRadiusDesktop.top}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusDesktop.right}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusDesktop.bottom}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusDesktop.left}${socialIconBorderRadiusUnits[DeviceType]}`;
-    const IconBorderRadiusTabletWidth = `${socialIconBorderRadiusTablet.top}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusTablet.right}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusTablet.bottom}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusTablet.left}${socialIconBorderRadiusUnits[DeviceType]}`;
-    const IconBorderRadiusMobileWidth = `${socialIconBorderRadiusMobile.top}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusMobile.right}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusMobile.bottom}${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusUnits[DeviceType]} ${socialIconBorderRadiusMobile.left}${socialIconBorderRadiusUnits[DeviceType]}`;
+    const IconBorderRadiusDesktopWidth = `${socialIconBorderRadiusDesktop.top}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusDesktop.right}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusDesktop.bottom}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusDesktop.left}${socialIconBorderRadiusUnits[deviceType]}`;
+    const IconBorderRadiusTabletWidth = `${socialIconBorderRadiusTablet.top}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusTablet.right}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusTablet.bottom}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusTablet.left}${socialIconBorderRadiusUnits[deviceType]}`;
+    const IconBorderRadiusMobileWidth = `${socialIconBorderRadiusMobile.top}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusMobile.right}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusMobile.bottom}${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusUnits[deviceType]} ${socialIconBorderRadiusMobile.left}${socialIconBorderRadiusUnits[deviceType]}`;
     /** End Border Radius */
 
     /** Start Icon Padding */
-    const IconPaddingDesktop    = `${socialIconPaddingDesktop.top}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingDesktop.right}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingDesktop.bottom}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingDesktop.left}${socialIconPaddingUnits[DeviceType]}`;
-    const IconPaddingTablet        = `${socialIconPaddingTablet.top}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingTablet.right}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingTablet.bottom}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingTablet.left}${socialIconPaddingUnits[DeviceType]}`;
-    const IconPaddingMobile     = `${socialIconPaddingMobile.top}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingMobile.right}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingMobile.bottom}${socialIconPaddingUnits[DeviceType]} ${socialIconPaddingMobile.left}${socialIconPaddingUnits[DeviceType]}`;
+    const IconPaddingDesktop    = `${socialIconPaddingDesktop.top}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingDesktop.right}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingDesktop.bottom}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingDesktop.left}${socialIconPaddingUnits[deviceType]}`;
+    const IconPaddingTablet        = `${socialIconPaddingTablet.top}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingTablet.right}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingTablet.bottom}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingTablet.left}${socialIconPaddingUnits[deviceType]}`;
+    const IconPaddingMobile     = `${socialIconPaddingMobile.top}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingMobile.right}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingMobile.bottom}${socialIconPaddingUnits[deviceType]} ${socialIconPaddingMobile.left}${socialIconPaddingUnits[deviceType]}`;
     /** End Icon Padding */
 
     /** Start Global Padding */
-    const DesktopPadding    = `${socialPaddingDesktop.top}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.right}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingDesktop.left}${socialPaddingUnits[DeviceType]}`;
-    const TabletPadding = `${socialPaddingTablet.top}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.right}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingTablet.left}${socialPaddingUnits[DeviceType]}`;
-    const MobilePadding = `${socialPaddingMobile.top}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.right}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.bottom}${socialPaddingUnits[DeviceType]} ${socialPaddingMobile.left}${socialPaddingUnits[DeviceType]}`;
+    const DesktopPadding    = `${socialPaddingDesktop.top}${socialPaddingUnits[deviceType]} ${socialPaddingDesktop.right}${socialPaddingUnits[deviceType]} ${socialPaddingDesktop.bottom}${socialPaddingUnits[deviceType]} ${socialPaddingDesktop.left}${socialPaddingUnits[deviceType]}`;
+    const TabletPadding = `${socialPaddingTablet.top}${socialPaddingUnits[deviceType]} ${socialPaddingTablet.right}${socialPaddingUnits[deviceType]} ${socialPaddingTablet.bottom}${socialPaddingUnits[deviceType]} ${socialPaddingTablet.left}${socialPaddingUnits[deviceType]}`;
+    const MobilePadding = `${socialPaddingMobile.top}${socialPaddingUnits[deviceType]} ${socialPaddingMobile.right}${socialPaddingUnits[deviceType]} ${socialPaddingMobile.bottom}${socialPaddingUnits[deviceType]} ${socialPaddingMobile.left}${socialPaddingUnits[deviceType]}`;
     /** End Global Padding */
 
     /** Start Global Margin */
-    const DesktopMargin = `${socialMarginDesktop.top}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.right}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.bottom}${socialMarginUnits[DeviceType]} ${socialMarginDesktop.left}${socialMarginUnits[DeviceType]}`;
-    const TabletMargin = `${socialMarginTablet.top}${socialMarginUnits[DeviceType]} ${socialMarginTablet.right}${socialMarginUnits[DeviceType]} ${socialMarginTablet.bottom}${socialMarginUnits[DeviceType]} ${socialMarginTablet.left}${socialMarginUnits[DeviceType]}`;
-    const MobileMargin = `${socialMarginMobile.top}${socialMarginUnits[DeviceType]} ${socialMarginMobile.right}${socialMarginUnits[DeviceType]} ${socialMarginMobile.bottom}${socialMarginUnits[DeviceType]} ${socialMarginMobile.left}${socialMarginUnits[DeviceType]}`;
+    const DesktopMargin = `${socialMarginDesktop.top}${socialMarginUnits[deviceType]} ${socialMarginDesktop.right}${socialMarginUnits[deviceType]} ${socialMarginDesktop.bottom}${socialMarginUnits[deviceType]} ${socialMarginDesktop.left}${socialMarginUnits[deviceType]}`;
+    const TabletMargin = `${socialMarginTablet.top}${socialMarginUnits[deviceType]} ${socialMarginTablet.right}${socialMarginUnits[deviceType]} ${socialMarginTablet.bottom}${socialMarginUnits[deviceType]} ${socialMarginTablet.left}${socialMarginUnits[deviceType]}`;
+    const MobileMargin = `${socialMarginMobile.top}${socialMarginUnits[deviceType]} ${socialMarginMobile.right}${socialMarginUnits[deviceType]} ${socialMarginMobile.bottom}${socialMarginUnits[deviceType]} ${socialMarginMobile.left}${socialMarginUnits[deviceType]}`;
     /** End Global Margin */
  
      /** Start Global border */
-     const BorderDesktopWidth = `${socialBorderDesktop.top}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.right}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.bottom}${socialBorderUnits[DeviceType]} ${socialBorderDesktop.left}${socialBorderUnits[DeviceType]}`;
-     const BorderTabletWidth = `${socialBorderTablet.top}${socialBorderUnits[DeviceType]} ${socialBorderTablet.right}${socialBorderUnits[DeviceType]} ${socialBorderTablet.bottom}${socialBorderUnits[DeviceType]} ${socialBorderTablet.left}${socialBorderUnits[DeviceType]}`;
-     const BorderMobileWidth = `${socialBorderMobile.top}${socialBorderUnits[DeviceType]} ${socialBorderMobile.right}${socialBorderUnits[DeviceType]} ${socialBorderMobile.bottom}${socialBorderUnits[DeviceType]} ${socialBorderMobile.left}${socialBorderUnits[DeviceType]}`;
+     const BorderDesktopWidth = `${socialBorderDesktop.top}${socialBorderUnits[deviceType]} ${socialBorderDesktop.right}${socialBorderUnits[deviceType]} ${socialBorderDesktop.bottom}${socialBorderUnits[deviceType]} ${socialBorderDesktop.left}${socialBorderUnits[deviceType]}`;
+     const BorderTabletWidth = `${socialBorderTablet.top}${socialBorderUnits[deviceType]} ${socialBorderTablet.right}${socialBorderUnits[deviceType]} ${socialBorderTablet.bottom}${socialBorderUnits[deviceType]} ${socialBorderTablet.left}${socialBorderUnits[deviceType]}`;
+     const BorderMobileWidth = `${socialBorderMobile.top}${socialBorderUnits[deviceType]} ${socialBorderMobile.right}${socialBorderUnits[deviceType]} ${socialBorderMobile.bottom}${socialBorderUnits[deviceType]} ${socialBorderMobile.left}${socialBorderUnits[deviceType]}`;
      /** End Global Border */
 
     /** Start Global Border Radius */
-     const BorderRadiusDesktopWidth = `${socialBorderRadiusDesktop.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusDesktop.left}${socialBorderRadiusUnits[DeviceType]}`;
-     const BorderRadiusTabletWidth = `${socialBorderRadiusTablet.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusTablet.left}${socialBorderRadiusUnits[DeviceType]}`;
-     const BorderRadiusMobileWidth = `${socialBorderRadiusMobile.top}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.right}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.bottom}${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusUnits[DeviceType]} ${socialBorderRadiusMobile.left}${socialBorderRadiusUnits[DeviceType]}`;
+     const BorderRadiusDesktopWidth = `${socialBorderRadiusDesktop.top}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusDesktop.right}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusDesktop.bottom}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusDesktop.left}${socialBorderRadiusUnits[deviceType]}`;
+     const BorderRadiusTabletWidth = `${socialBorderRadiusTablet.top}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusTablet.right}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusTablet.bottom}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusTablet.left}${socialBorderRadiusUnits[deviceType]}`;
+     const BorderRadiusMobileWidth = `${socialBorderRadiusMobile.top}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusMobile.right}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusMobile.bottom}${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusUnits[deviceType]} ${socialBorderRadiusMobile.left}${socialBorderRadiusUnits[deviceType]}`;
      /** End Global Border Radius */
 
     return (

@@ -7,7 +7,7 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        DeviceType,
+        deviceType,
         videoZIndex,
         videoURL,
         autoPlaySwitcher,

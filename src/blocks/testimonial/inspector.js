@@ -37,7 +37,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        DeviceType,
+        deviceType,
         TestimonialAlignment,
         TestimonialDesc,
         TestimonialAuthor,
@@ -235,7 +235,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Function to handle input change */
     const handleImageBorderRadiusWidthInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(DeviceType) {
+        switch(deviceType) {
             case 'Desktop':
                 setAttributes({ TestimonialImageDesktopRadiusWidth: { ...TestimonialImageDesktopRadiusWidth, [direction]: value } });
                 break;
@@ -250,7 +250,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         /** Update all padding values if TestimonialImageRadiusLink is true */
         if (TestimonialImageRadiusLink) {
-            updateAllImageBorderRadiusWidth(value, DeviceType);
+            updateAllImageBorderRadiusWidth(value, deviceType);
         }
     };
 
@@ -270,7 +270,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** Function to handle device click for Border Width */
     const handleBorderRadiusWidthDeviceClick = (device) => {
-        setAttributes({ DeviceType: device });
+        setAttributes({ deviceType: device });
     };
 
     /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
@@ -322,7 +322,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Function to handle input change */
     const handlePaddingInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(DeviceType) {
+        switch(deviceType) {
             case 'Desktop':
                 setAttributes({ TestimonialDesktopPadding: { ...TestimonialDesktopPadding, [direction]: value } });
                 break;
@@ -337,7 +337,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         /** Update all padding values if TestimonialPaddingLink is true */
         if (TestimonialPaddingLink) {
-            updateAllPadding(value, DeviceType);
+            updateAllPadding(value, deviceType);
         }
     };
 
@@ -404,7 +404,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Function to handle input change */
     const handleMarginInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(DeviceType) {
+        switch(deviceType) {
             case 'Desktop':
                 setAttributes({ TestimonialDesktopMargin: { ...TestimonialDesktopMargin, [direction]: value } });
                 break;
@@ -419,7 +419,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         /** Update all margin values if marginLink is true */
         if (TestimonialMarginLink) {
-            updateAllMargin(value, DeviceType);
+            updateAllMargin(value, deviceType);
         }
     };
 
@@ -487,7 +487,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Function to handle input change */
     const handleBorderWidthInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(DeviceType) {
+        switch(deviceType) {
             case 'Desktop':
                 setAttributes({ TestimonialDesktopBorderWidth: { ...TestimonialDesktopBorderWidth, [direction]: value } });
                 break;
@@ -502,7 +502,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         /** Update all padding values if TestimonialBorderLink is true */
         if (TestimonialBorderLink) {
-            updateAllBorderWidth(value, DeviceType);
+            updateAllBorderWidth(value, deviceType);
         }
     };
 
@@ -569,7 +569,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Function to handle input change */
     const handleBorderRadiusWidthInputChange = (e, direction) => {
         const value = e.target.value;
-        switch(DeviceType) {
+        switch(deviceType) {
             case 'Desktop':
                 setAttributes({ TestimonialDesktopBorderRadiusWidth: { ...TestimonialDesktopBorderRadiusWidth, [direction]: value } });
                 break;
@@ -584,7 +584,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         /** Update all padding values if TestimonialBorderRadiusLink is true */
         if (TestimonialBorderRadiusLink) {
-            updateAllBorderRadiusWidth(value, DeviceType);
+            updateAllBorderRadiusWidth(value, deviceType);
         }
     };
 
@@ -920,8 +920,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <div className="fb-setting-fontsize-header">
                                                     <FB_ResponsiveControl
                                                         labelText={__("Image Width", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                        device={deviceType}
+                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                     />
                                                     <div className="fb-setting-fontsize-units">
                                                         <ButtonGroup className="fb-setting-fontsize-units-wrap">
@@ -939,13 +939,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </div>
                                                 <div className="fb-setting-fontsize-rangecontrol">
                                                     <RangeControl
-                                                        value={DeviceType === "Desktop" ? TestimonialImageWidthDesktop : DeviceType === "Tablet" ? TestimonialImageWidthTablet : TestimonialImageWidthMobile}
+                                                        value={deviceType === "Desktop" ? TestimonialImageWidthDesktop : deviceType === "Tablet" ? TestimonialImageWidthTablet : TestimonialImageWidthMobile}
                                                         onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
+                                                            if (deviceType === "Desktop") {
                                                                 setAttributes({ TestimonialImageWidthDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
+                                                            } else if (deviceType === "Tablet") {
                                                                 setAttributes({ TestimonialImageWidthTablet: value });
-                                                            } else if (DeviceType === "Mobile") {
+                                                            } else if (deviceType === "Mobile") {
                                                                 setAttributes({ TestimonialImageWidthMobile: value });
                                                             }
                                                         }}
@@ -961,7 +961,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <div className="fb-setting-spacing-inner-container">
                                                     {/* Border radius Width */}
                                                     <div className="fb-setting-spacing-label-container">
-                                                        <FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={DeviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
+                                                        <FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={deviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
                                                         <div className="fb-setting-units-type">
                                                             <ButtonGroup className="fb-setting-units-type-wrap">
                                                                 {UNIT_TYPES.map((item, key) => (
@@ -982,7 +982,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             <input
                                                                 type="number"
                                                                 name="top"
-                                                                value={DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.top : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.top : TestimonialImageMobileRadiusWidth.top}
+                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.top : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.top : TestimonialImageMobileRadiusWidth.top}
                                                                 onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'top')}
                                                             />
                                                         </div>
@@ -991,7 +991,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             <input
                                                                 type="number"
                                                                 name="right"
-                                                                value={DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.right : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.right : TestimonialImageMobileRadiusWidth.right}
+                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.right : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.right : TestimonialImageMobileRadiusWidth.right}
                                                                 onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'right')}
                                                             />
                                                         </div>
@@ -1000,7 +1000,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             <input
                                                                 type="number"
                                                                 name="bottom"
-                                                                value={DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.bottom : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.bottom : TestimonialImageMobileRadiusWidth.bottom}
+                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.bottom : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.bottom : TestimonialImageMobileRadiusWidth.bottom}
                                                                 onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'bottom')}
                                                             />
                                                         </div>
@@ -1009,7 +1009,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             <input
                                                                 type="number"
                                                                 name="left"
-                                                                value={DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.left : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.left : TestimonialImageMobileRadiusWidth.left}
+                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.left : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.left : TestimonialImageMobileRadiusWidth.left}
                                                                 onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'left')}
                                                             />
                                                         </div>
@@ -1035,8 +1035,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <div className="fb-setting-fontsize-header">
                                                     <FB_ResponsiveControl
                                                         labelText={__("Icon Size", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                        device={deviceType}
+                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                     />
                                                     <div className="fb-setting-fontsize-units">
                                                         <ButtonGroup className="fb-setting-fontsize-units-wrap">
@@ -1054,13 +1054,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </div>
                                                 <div className="fb-setting-fontsize-rangecontrol">
                                                     <RangeControl
-                                                        value={DeviceType === "Desktop" ? TestimonialQuoteIconSizeDesktop : DeviceType === "Tablet" ? TestimonialQuoteIconSizeTablet : TestimonialQuoteIconSizeMobile}
+                                                        value={deviceType === "Desktop" ? TestimonialQuoteIconSizeDesktop : deviceType === "Tablet" ? TestimonialQuoteIconSizeTablet : TestimonialQuoteIconSizeMobile}
                                                         onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
+                                                            if (deviceType === "Desktop") {
                                                                 setAttributes({ TestimonialQuoteIconSizeDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
+                                                            } else if (deviceType === "Tablet") {
                                                                 setAttributes({ TestimonialQuoteIconSizeTablet: value });
-                                                            } else if (DeviceType === "Mobile") {
+                                                            } else if (deviceType === "Mobile") {
                                                                 setAttributes({ TestimonialQuoteIconSizeMobile: value });
                                                             }
                                                         }}
@@ -1228,8 +1228,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-fontsize-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-fontsize-units">
                                                                             <ButtonGroup className="fb-setting-fontsize-units-wrap">
@@ -1247,13 +1247,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     </div>
                                                                     <div className="fb-setting-fontsize-rangecontrol">
                                                                         <RangeControl
-                                                                            value={DeviceType === "Desktop" ? TestimonialDescFontSizeDesktop : DeviceType === "Tablet" ? TestimonialDescFontSizeTablet : TestimonialDescFontSizeMobile}
+                                                                            value={deviceType === "Desktop" ? TestimonialDescFontSizeDesktop : deviceType === "Tablet" ? TestimonialDescFontSizeTablet : TestimonialDescFontSizeMobile}
                                                                             onChange={(value) => {
-                                                                                if (DeviceType === "Desktop") {
+                                                                                if (deviceType === "Desktop") {
                                                                                     setAttributes({ TestimonialDescFontSizeDesktop: value });
-                                                                                } else if (DeviceType === "Tablet") {
+                                                                                } else if (deviceType === "Tablet") {
                                                                                     setAttributes({ TestimonialDescFontSizeTablet: value });
-                                                                                } else if (DeviceType === "Mobile") {
+                                                                                } else if (deviceType === "Mobile") {
                                                                                     setAttributes({ TestimonialDescFontSizeMobile: value });
                                                                                 }
                                                                             }}
@@ -1329,8 +1329,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-letterspacing-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-letterspacing-units">
                                                                             <ButtonGroup className="fb-setting-letterspacing-units-wrap">
@@ -1347,13 +1347,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         </div>
                                                                     </div>
                                                                     <RangeControl
-                                                                        value={DeviceType === "Desktop" ? TestimonialDescLetterSpacingDesktop : DeviceType === "Tablet" ? TestimonialDescLetterSpacingTablet : TestimonialDescLetterSpacingMobile}
+                                                                        value={deviceType === "Desktop" ? TestimonialDescLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialDescLetterSpacingTablet : TestimonialDescLetterSpacingMobile}
                                                                         onChange={(value) => {
-                                                                            if (DeviceType === "Desktop") {
+                                                                            if (deviceType === "Desktop") {
                                                                                 setAttributes({ TestimonialDescLetterSpacingDesktop: value });
-                                                                            } else if (DeviceType === "Tablet") {
+                                                                            } else if (deviceType === "Tablet") {
                                                                                 setAttributes({ TestimonialDescLetterSpacingTablet: value });
-                                                                            } else if (DeviceType === "Mobile") {
+                                                                            } else if (deviceType === "Mobile") {
                                                                                 setAttributes({ TestimonialDescLetterSpacingMobile: value });
                                                                             }
                                                                         }}
@@ -1369,8 +1369,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-lineheight-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-lineheight-units">
                                                                             <ButtonGroup className="fb-setting-lineheight-units-wrap">
@@ -1387,13 +1387,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         </div>
                                                                     </div>
                                                                     <RangeControl
-                                                                        value={DeviceType === "Desktop" ? TestimonialDescLineHeightDesktop : DeviceType === "Tablet" ? TestimonialDescLineHeightTablet : TestimonialDescLineHeightMobile}
+                                                                        value={deviceType === "Desktop" ? TestimonialDescLineHeightDesktop : deviceType === "Tablet" ? TestimonialDescLineHeightTablet : TestimonialDescLineHeightMobile}
                                                                         onChange={(value) => {
-                                                                            if (DeviceType === "Desktop") {
+                                                                            if (deviceType === "Desktop") {
                                                                                 setAttributes({ TestimonialDescLineHeightDesktop: value });
-                                                                            } else if (DeviceType === "Tablet") {
+                                                                            } else if (deviceType === "Tablet") {
                                                                                 setAttributes({ TestimonialDescLineHeightTablet: value });
-                                                                            } else if (DeviceType === "Mobile") {
+                                                                            } else if (deviceType === "Mobile") {
                                                                                 setAttributes({ TestimonialDescLineHeightMobile: value });
                                                                             }
                                                                         }}
@@ -1567,8 +1567,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-fontsize-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-fontsize-units">
                                                                             <ButtonGroup className="fb-setting-fontsize-units-wrap">
@@ -1586,13 +1586,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     </div>
                                                                     <div className="fb-setting-fontsize-rangecontrol">
                                                                         <RangeControl
-                                                                            value={DeviceType === "Desktop" ? TestimonialAuthorFontSizeDesktop : DeviceType === "Tablet" ? TestimonialAuthorFontSizeTablet : TestimonialAuthorFontSizeMobile}
+                                                                            value={deviceType === "Desktop" ? TestimonialAuthorFontSizeDesktop : deviceType === "Tablet" ? TestimonialAuthorFontSizeTablet : TestimonialAuthorFontSizeMobile}
                                                                             onChange={(value) => {
-                                                                                if (DeviceType === "Desktop") {
+                                                                                if (deviceType === "Desktop") {
                                                                                     setAttributes({ TestimonialAuthorFontSizeDesktop: value });
-                                                                                } else if (DeviceType === "Tablet") {
+                                                                                } else if (deviceType === "Tablet") {
                                                                                     setAttributes({ TestimonialAuthorFontSizeTablet: value });
-                                                                                } else if (DeviceType === "Mobile") {
+                                                                                } else if (deviceType === "Mobile") {
                                                                                     setAttributes({ TestimonialAuthorFontSizeMobile: value });
                                                                                 }
                                                                             }}
@@ -1668,8 +1668,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-letterspacing-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-letterspacing-units">
                                                                             <ButtonGroup className="fb-setting-letterspacing-units-wrap">
@@ -1686,13 +1686,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         </div>
                                                                     </div>
                                                                     <RangeControl
-                                                                        value={DeviceType === "Desktop" ? TestimonialAuthorLetterSpacingDesktop : DeviceType === "Tablet" ? TestimonialAuthorLetterSpacingTablet : TestimonialAuthorLetterSpacingMobile}
+                                                                        value={deviceType === "Desktop" ? TestimonialAuthorLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialAuthorLetterSpacingTablet : TestimonialAuthorLetterSpacingMobile}
                                                                         onChange={(value) => {
-                                                                            if (DeviceType === "Desktop") {
+                                                                            if (deviceType === "Desktop") {
                                                                                 setAttributes({ TestimonialAuthorLetterSpacingDesktop: value });
-                                                                            } else if (DeviceType === "Tablet") {
+                                                                            } else if (deviceType === "Tablet") {
                                                                                 setAttributes({ TestimonialAuthorLetterSpacingTablet: value });
-                                                                            } else if (DeviceType === "Mobile") {
+                                                                            } else if (deviceType === "Mobile") {
                                                                                 setAttributes({ TestimonialAuthorLetterSpacingMobile: value });
                                                                             }
                                                                         }}
@@ -1708,8 +1708,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-lineheight-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-lineheight-units">
                                                                             <ButtonGroup className="fb-setting-lineheight-units-wrap">
@@ -1726,13 +1726,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         </div>
                                                                     </div>
                                                                     <RangeControl
-                                                                        value={DeviceType === "Desktop" ? TestimonialAuthorLineHeightDesktop : DeviceType === "Tablet" ? TestimonialAuthorLineHeightTablet : TestimonialAuthorLineHeightMobile}
+                                                                        value={deviceType === "Desktop" ? TestimonialAuthorLineHeightDesktop : deviceType === "Tablet" ? TestimonialAuthorLineHeightTablet : TestimonialAuthorLineHeightMobile}
                                                                         onChange={(value) => {
-                                                                            if (DeviceType === "Desktop") {
+                                                                            if (deviceType === "Desktop") {
                                                                                 setAttributes({ TestimonialAuthorLineHeightDesktop: value });
-                                                                            } else if (DeviceType === "Tablet") {
+                                                                            } else if (deviceType === "Tablet") {
                                                                                 setAttributes({ TestimonialAuthorLineHeightTablet: value });
-                                                                            } else if (DeviceType === "Mobile") {
+                                                                            } else if (deviceType === "Mobile") {
                                                                                 setAttributes({ TestimonialAuthorLineHeightMobile: value });
                                                                             }
                                                                         }}
@@ -1906,8 +1906,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-fontsize-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-fontsize-units">
                                                                             <ButtonGroup className="fb-setting-fontsize-units-wrap">
@@ -1925,13 +1925,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     </div>
                                                                     <div className="fb-setting-fontsize-rangecontrol">
                                                                         <RangeControl
-                                                                            value={DeviceType === "Desktop" ? TestimonialDesignationFontSizeDesktop : DeviceType === "Tablet" ? TestimonialDesignationFontSizeTablet : TestimonialDesignationFontSizeMobile}
+                                                                            value={deviceType === "Desktop" ? TestimonialDesignationFontSizeDesktop : deviceType === "Tablet" ? TestimonialDesignationFontSizeTablet : TestimonialDesignationFontSizeMobile}
                                                                             onChange={(value) => {
-                                                                                if (DeviceType === "Desktop") {
+                                                                                if (deviceType === "Desktop") {
                                                                                     setAttributes({ TestimonialDesignationFontSizeDesktop: value });
-                                                                                } else if (DeviceType === "Tablet") {
+                                                                                } else if (deviceType === "Tablet") {
                                                                                     setAttributes({ TestimonialDesignationFontSizeTablet: value });
-                                                                                } else if (DeviceType === "Mobile") {
+                                                                                } else if (deviceType === "Mobile") {
                                                                                     setAttributes({ TestimonialDesignationFontSizeMobile: value });
                                                                                 }
                                                                             }}
@@ -2007,8 +2007,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-letterspacing-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-letterspacing-units">
                                                                             <ButtonGroup className="fb-setting-letterspacing-units-wrap">
@@ -2025,13 +2025,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         </div>
                                                                     </div>
                                                                     <RangeControl
-                                                                        value={DeviceType === "Desktop" ? TestimonialDesignationLetterSpacingDesktop : DeviceType === "Tablet" ? TestimonialDesignationLetterSpacingTablet : TestimonialDesignationLetterSpacingMobile}
+                                                                        value={deviceType === "Desktop" ? TestimonialDesignationLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialDesignationLetterSpacingTablet : TestimonialDesignationLetterSpacingMobile}
                                                                         onChange={(value) => {
-                                                                            if (DeviceType === "Desktop") {
+                                                                            if (deviceType === "Desktop") {
                                                                                 setAttributes({ TestimonialDesignationLetterSpacingDesktop: value });
-                                                                            } else if (DeviceType === "Tablet") {
+                                                                            } else if (deviceType === "Tablet") {
                                                                                 setAttributes({ TestimonialDesignationLetterSpacingTablet: value });
-                                                                            } else if (DeviceType === "Mobile") {
+                                                                            } else if (deviceType === "Mobile") {
                                                                                 setAttributes({ TestimonialDesignationLetterSpacingMobile: value });
                                                                             }
                                                                         }}
@@ -2047,8 +2047,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     <div className="fb-setting-lineheight-header">
                                                                         <FB_ResponsiveControl
                                                                             labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={DeviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                            device={deviceType}
+                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                                         />
                                                                         <div className="fb-setting-lineheight-units">
                                                                             <ButtonGroup className="fb-setting-lineheight-units-wrap">
@@ -2065,13 +2065,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         </div>
                                                                     </div>
                                                                     <RangeControl
-                                                                        value={DeviceType === "Desktop" ? TestimonialDesignationLineHeightDesktop : DeviceType === "Tablet" ? TestimonialDesignationLineHeightTablet : TestimonialDesignationLineHeightMobile}
+                                                                        value={deviceType === "Desktop" ? TestimonialDesignationLineHeightDesktop : deviceType === "Tablet" ? TestimonialDesignationLineHeightTablet : TestimonialDesignationLineHeightMobile}
                                                                         onChange={(value) => {
-                                                                            if (DeviceType === "Desktop") {
+                                                                            if (deviceType === "Desktop") {
                                                                                 setAttributes({ TestimonialDesignationLineHeightDesktop: value });
-                                                                            } else if (DeviceType === "Tablet") {
+                                                                            } else if (deviceType === "Tablet") {
                                                                                 setAttributes({ TestimonialDesignationLineHeightTablet: value });
-                                                                            } else if (DeviceType === "Mobile") {
+                                                                            } else if (deviceType === "Mobile") {
                                                                                 setAttributes({ TestimonialDesignationLineHeightMobile: value });
                                                                             }
                                                                         }}
@@ -2215,8 +2215,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <div className="fb-setting-fontsize-header">
                                                     <FB_ResponsiveControl
                                                         labelText={__("Icon Size", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                        device={deviceType}
+                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                     />
                                                     <div className="fb-setting-fontsize-units">
                                                         <ButtonGroup className="fb-setting-fontsize-units-wrap">
@@ -2234,13 +2234,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </div>
                                                 <div className="fb-setting-fontsize-rangecontrol">
                                                     <RangeControl
-                                                        value={DeviceType === "Desktop" ? TestimonialRatingIconSizeDesktop : DeviceType === "Tablet" ? TestimonialRatingIconSizeTablet : TestimonialRatingIconSizeMobile}
+                                                        value={deviceType === "Desktop" ? TestimonialRatingIconSizeDesktop : deviceType === "Tablet" ? TestimonialRatingIconSizeTablet : TestimonialRatingIconSizeMobile}
                                                         onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
+                                                            if (deviceType === "Desktop") {
                                                                 setAttributes({ TestimonialRatingIconSizeDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
+                                                            } else if (deviceType === "Tablet") {
                                                                 setAttributes({ TestimonialRatingIconSizeTablet: value });
-                                                            } else if (DeviceType === "Mobile") {
+                                                            } else if (deviceType === "Mobile") {
                                                                 setAttributes({ TestimonialRatingIconSizeMobile: value });
                                                             }
                                                         }}
@@ -2399,8 +2399,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         <div className="fb-setting-spacing-label-container">
                                                             <FB_ResponsiveControl
                                                                 labelText={__('Padding', 'frontis-block')}
-                                                                device={DeviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                device={deviceType}
+                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                             />
                                                             <div className="fb-setting-units-type">
                                                                 <ButtonGroup className="fb-setting-units-type-wrap">
@@ -2422,7 +2422,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="top"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopPadding.top : DeviceType === 'Tablet' ? TestimonialTabPadding.top : TestimonialMobilePadding.top}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.top : deviceType === 'Tablet' ? TestimonialTabPadding.top : TestimonialMobilePadding.top}
                                                                     onChange={(e) => handlePaddingInputChange(e, 'top')}
                                                                 />
                                                             </div>
@@ -2431,7 +2431,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="right"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopPadding.right : DeviceType === 'Tablet' ? TestimonialTabPadding.right : TestimonialMobilePadding.right}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.right : deviceType === 'Tablet' ? TestimonialTabPadding.right : TestimonialMobilePadding.right}
                                                                     onChange={(e) => handlePaddingInputChange(e, 'right')}
                                                                 />
                                                             </div>
@@ -2440,7 +2440,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="bottom"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopPadding.bottom : DeviceType === 'Tablet' ? TestimonialTabPadding.bottom : TestimonialMobilePadding.bottom}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.bottom : deviceType === 'Tablet' ? TestimonialTabPadding.bottom : TestimonialMobilePadding.bottom}
                                                                     onChange={(e) => handlePaddingInputChange(e, 'bottom')}
                                                                 />
                                                             </div>
@@ -2449,7 +2449,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="left"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopPadding.left : DeviceType === 'Tablet' ? TestimonialTabPadding.left : TestimonialMobilePadding.left}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.left : deviceType === 'Tablet' ? TestimonialTabPadding.left : TestimonialMobilePadding.left}
                                                                     onChange={(e) => handlePaddingInputChange(e, 'left')}
                                                                 />
                                                             </div>
@@ -2470,8 +2470,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         <div className="fb-setting-spacing-label-container">
                                                             <FB_ResponsiveControl
                                                                 labelText={__('Margin', 'frontis-block')}
-                                                                device={DeviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                device={deviceType}
+                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                             />
                                                             <div className="fb-setting-units-type">
                                                                 <ButtonGroup className="fb-setting-units-type-wrap">
@@ -2493,7 +2493,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="top"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopMargin.top : DeviceType === 'Tablet' ? TestimonialTabMargin.top : TestimonialMobileMargin.top}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.top : deviceType === 'Tablet' ? TestimonialTabMargin.top : TestimonialMobileMargin.top}
                                                                     onChange={(e) => handleMarginInputChange(e, 'top')}
                                                                 />
                                                             </div>
@@ -2502,7 +2502,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="right"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopMargin.right : DeviceType === 'Tablet' ? TestimonialTabMargin.right : TestimonialMobileMargin.right}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.right : deviceType === 'Tablet' ? TestimonialTabMargin.right : TestimonialMobileMargin.right}
                                                                     onChange={(e) => handleMarginInputChange(e, 'right')}
                                                                 />
                                                             </div>
@@ -2511,7 +2511,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="bottom"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopMargin.bottom : DeviceType === 'Tablet' ? TestimonialTabMargin.bottom : TestimonialMobileMargin.bottom}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.bottom : deviceType === 'Tablet' ? TestimonialTabMargin.bottom : TestimonialMobileMargin.bottom}
                                                                     onChange={(e) => handleMarginInputChange(e, 'bottom')}
                                                                 />
                                                             </div>
@@ -2520,7 +2520,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="left"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopMargin.left : DeviceType === 'Tablet' ? TestimonialTabMargin.left : TestimonialMobileMargin.left}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.left : deviceType === 'Tablet' ? TestimonialTabMargin.left : TestimonialMobileMargin.left}
                                                                     onChange={(e) => handleMarginInputChange(e, 'left')}
                                                                 />
                                                             </div>
@@ -2787,8 +2787,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         <div className="fb-setting-spacing-label-container">
                                                             <FB_ResponsiveControl
                                                                 labelText={__('Border', 'frontis-block')}
-                                                                device={DeviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                device={deviceType}
+                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                             />
                                                             <div className="fb-setting-units-type">
                                                                 <ButtonGroup className="fb-setting-units-type-wrap">
@@ -2811,7 +2811,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="top"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.top : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.top : TestimonialMobileBorderWidth.top}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.top : deviceType === 'Tablet' ? TestimonialTabBorderWidth.top : TestimonialMobileBorderWidth.top}
                                                                     onChange={(e) => handleBorderWidthInputChange(e, 'top')}
                                                                 />
                                                             </div>
@@ -2820,7 +2820,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="right"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.right : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.right : TestimonialMobileBorderWidth.right}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.right : deviceType === 'Tablet' ? TestimonialTabBorderWidth.right : TestimonialMobileBorderWidth.right}
                                                                     onChange={(e) => handleBorderWidthInputChange(e, 'right')}
                                                                 />
                                                             </div>
@@ -2829,7 +2829,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="bottom"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.bottom : TestimonialMobileBorderWidth.bottom}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.bottom : deviceType === 'Tablet' ? TestimonialTabBorderWidth.bottom : TestimonialMobileBorderWidth.bottom}
                                                                     onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
                                                                 />
                                                             </div>
@@ -2838,7 +2838,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="left"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.left : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.left : TestimonialMobileBorderWidth.left}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.left : deviceType === 'Tablet' ? TestimonialTabBorderWidth.left : TestimonialMobileBorderWidth.left}
                                                                     onChange={(e) => handleBorderWidthInputChange(e, 'left')}
                                                                 />
                                                             </div>
@@ -2859,8 +2859,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         <div className="fb-setting-spacing-label-container">
                                                             <FB_ResponsiveControl
                                                                 labelText={__('Border Radius', 'frontis-block')}
-                                                                device={DeviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                                device={deviceType}
+                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                             />
                                                             <div className="fb-setting-units-type">
                                                                 <ButtonGroup className="fb-setting-units-type-wrap">
@@ -2882,7 +2882,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="top"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.top : TestimonialMobileBorderRadiusWidth.top}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.top : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.top : TestimonialMobileBorderRadiusWidth.top}
                                                                     onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
                                                                 />
                                                             </div>
@@ -2891,7 +2891,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="right"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.right : TestimonialMobileBorderRadiusWidth.right}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.right : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.right : TestimonialMobileBorderRadiusWidth.right}
                                                                     onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
                                                                 />
                                                             </div>
@@ -2900,7 +2900,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="bottom"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.bottom : TestimonialMobileBorderRadiusWidth.bottom}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.bottom : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.bottom : TestimonialMobileBorderRadiusWidth.bottom}
                                                                     onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
                                                                 />
                                                             </div>
@@ -2909,7 +2909,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <input
                                                                     type="number"
                                                                     name="left"
-                                                                    value={DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.left : TestimonialMobileBorderRadiusWidth.left}
+                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.left : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.left : TestimonialMobileBorderRadiusWidth.left}
                                                                     onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
                                                                 />
                                                             </div>

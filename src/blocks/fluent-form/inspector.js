@@ -38,7 +38,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        DeviceType,
+        deviceType,
         fluentFormGlobalZIndex,
         formId,
         showLabels,
@@ -351,7 +351,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handlePaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormPaddingDesktop: {
@@ -386,7 +386,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormPaddingDesktop: {...fluentFormPaddingDesktop, [position]: value}} );
                     break;
@@ -411,7 +411,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormPaddingUnits: {
                 ...fluentFormPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -429,7 +429,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormBorderDesktop: {
@@ -464,7 +464,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormBorderDesktop: {...fluentFormBorderDesktop, [position]: value}} );
                     break;
@@ -489,7 +489,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormBorderUnits: {
                 ...fluentFormBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -504,7 +504,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormBorderRadiusDesktop: {
@@ -539,7 +539,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormBorderRadiusDesktop: {...fluentFormBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -564,7 +564,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormBorderRadiusUnits: {
                 ...fluentFormBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -580,7 +580,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormRadioBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormRadioBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormRadioBorderRadiusDesktop: {
@@ -615,7 +615,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormRadioBorderRadiusDesktop: {...fluentFormRadioBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -640,7 +640,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormRadioBorderRadiusUnits: {
                 ...fluentFormRadioBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -658,7 +658,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormCheckBoxBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormCheckBoxBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormCheckBoxBorderRadiusDesktop: {
@@ -693,7 +693,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormCheckBoxBorderRadiusDesktop: {...fluentFormCheckBoxBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -718,7 +718,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormCheckBoxBorderRadiusUnits: {
                 ...fluentFormCheckBoxBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -734,7 +734,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSectionBreakTitlePaddingUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSectionBreakTitlePaddingLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSectionBreakTitlePaddingDesktop: {
@@ -769,7 +769,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSectionBreakTitlePaddingDesktop: {...fluentFormSectionBreakTitlePaddingDesktop, [position]: value}} );
                     break;
@@ -795,7 +795,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSectionBreakTitlePaddingUnits: {
                 ...fluentFormSectionBreakTitlePaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -810,7 +810,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSectionBreakTitleMarginUnitsChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormSectionBreakTitleMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormSectionBreakTitleMarginDesktop: {
@@ -845,7 +845,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSectionBreakTitleMarginDesktop: {...fluentFormSectionBreakTitleMarginDesktop, [position]: value}} );
                     break;
@@ -871,7 +871,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormSectionBreakTitleMarginUnits: {
                 ...fluentFormSectionBreakTitleMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         } );
     };
@@ -885,7 +885,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSectionBreakDescPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSectionBreakDescPaddingLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSectionBreakDescPaddingDesktop: {
@@ -920,7 +920,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSectionBreakDescPaddingDesktop: {...fluentFormSectionBreakDescPaddingDesktop, [position]: value}} );
                     break;
@@ -946,7 +946,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSectionBreakDescPaddingUnits: {
                 ...fluentFormSectionBreakDescPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -961,7 +961,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSectionBreakDescMarginUnitsChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormSectionBreakDescMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormSectionBreakDescMarginDesktop: {
@@ -996,7 +996,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSectionBreakDescMarginDesktop: {...fluentFormSectionBreakDescMarginDesktop, [position]: value}} );
                     break;
@@ -1022,7 +1022,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormSectionBreakDescMarginUnits: {
                 ...fluentFormSectionBreakDescMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         } );
     };
@@ -1037,7 +1037,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormHtmlPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormHtmlPaddingLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormHtmlPaddingDesktop: {
@@ -1072,7 +1072,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormHtmlPaddingDesktop: {...fluentFormHtmlPaddingDesktop, [position]: value}} );
                     break;
@@ -1098,7 +1098,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormHtmlPaddingUnits: {
                 ...fluentFormHtmlPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1113,7 +1113,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormHtmlMarginUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormHtmlMarginLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormHtmlMarginDesktop: {
@@ -1148,7 +1148,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormHtmlMarginDesktop: {...fluentFormHtmlMarginDesktop, [position]: value}} );
                     break;
@@ -1174,7 +1174,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormHtmlMarginUnits: {
                 ...fluentFormHtmlMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1190,7 +1190,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSubmitPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSubmitPaddingLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSubmitPaddingDesktop: {
@@ -1225,7 +1225,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSubmitPaddingDesktop: {...fluentFormSubmitPaddingDesktop, [position]: value}} );
                     break;
@@ -1251,7 +1251,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSubmitPaddingUnits: {
                 ...fluentFormSubmitPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1266,7 +1266,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSubmitMarginUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSubmitMarginLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSubmitMarginDesktop: {
@@ -1301,7 +1301,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSubmitMarginDesktop: {...fluentFormSubmitMarginDesktop, [position]: value}} );
                     break;
@@ -1327,7 +1327,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSubmitMarginUnits: {
                 ...fluentFormSubmitMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1341,7 +1341,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSubmitBorderUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSubmitBorderLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSubmitBorderDesktop: {
@@ -1376,7 +1376,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSubmitBorderDesktop: {...fluentFormSubmitBorderDesktop, [position]: value}} );
                     break;
@@ -1402,7 +1402,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSubmitBorderUnits: {
                 ...fluentFormSubmitBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1417,7 +1417,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSubmitBorderRadiusUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSubmitBorderRadiusLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSubmitBorderRadiusDesktop: {
@@ -1452,7 +1452,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({ fluentFormSubmitBorderRadiusDesktop: { ...fluentFormSubmitBorderRadiusDesktop, [position]: value } });
                     break;
@@ -1478,7 +1478,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSubmitBorderRadiusUnits: {
                 ...fluentFormSubmitBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1494,7 +1494,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSuccessBorderUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSuccessBorderLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSuccessBorderDesktop: {
@@ -1529,7 +1529,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormSuccessBorderDesktop: {...fluentFormSuccessBorderDesktop, [position]: value}} );
                     break;
@@ -1555,7 +1555,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSuccessBorderUnits: {
                 ...fluentFormSuccessBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1570,7 +1570,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormSuccessBorderRadiusUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormSuccessBorderRadiusLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormSuccessBorderRadiusDesktop: {
@@ -1605,7 +1605,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({ fluentFormSuccessBorderRadiusDesktop: { ...fluentFormSuccessBorderRadiusDesktop, [position]: value } });
                     break;
@@ -1631,7 +1631,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormSuccessBorderRadiusUnits: {
                 ...fluentFormSuccessBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1646,7 +1646,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormErrorPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormErrorPaddingLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormErrorPaddingDesktop: {
@@ -1681,7 +1681,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({ fluentFormErrorPaddingDesktop: { ...fluentFormErrorPaddingDesktop, [position]: value } });
                     break;
@@ -1707,7 +1707,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormErrorPaddingUnits: {
                 ...fluentFormErrorPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1722,7 +1722,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormErrorMarginUnitsChange = (event, position) => {
         const value = event.target.value;
         if (fluentFormErrorMarginLink) {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
                         fluentFormErrorMarginDesktop: {
@@ -1757,7 +1757,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch (DeviceType) {
+            switch (deviceType) {
                 case 'Desktop':
                     setAttributes({ fluentFormErrorMarginDesktop: { ...fluentFormErrorMarginDesktop, [position]: value } });
                     break;
@@ -1783,7 +1783,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             fluentFormErrorMarginUnits: {
                 ...fluentFormErrorMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         });
     };
@@ -1799,7 +1799,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormGlobalPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormGlobalPaddingDesktop: {
@@ -1834,7 +1834,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormGlobalPaddingDesktop: {...fluentFormGlobalPaddingDesktop, [position]: value}} );
                     break;
@@ -1859,7 +1859,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormGlobalPaddingUnits: {
                 ...fluentFormGlobalPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -1877,7 +1877,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormGlobalMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormGlobalMarginDesktop: {
@@ -1912,7 +1912,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormGlobalMarginDesktop: {...fluentFormGlobalMarginDesktop, [position]: value}} );
                     break;
@@ -1937,7 +1937,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormGlobalMarginUnits: {
                 ...fluentFormGlobalMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -1953,7 +1953,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormGlobalBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormGlobalBorderDesktop: {
@@ -1988,7 +1988,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormGlobalBorderDesktop: {...fluentFormGlobalBorderDesktop, [position]: value}} );
                     break;
@@ -2013,7 +2013,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormGlobalBorderUnits: {
                 ...fluentFormGlobalBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -2028,7 +2028,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( fluentFormGlobalBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         fluentFormGlobalBorderRadiusDesktop: {
@@ -2063,7 +2063,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {fluentFormGlobalBorderRadiusDesktop: {...fluentFormGlobalBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -2088,7 +2088,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             fluentFormGlobalBorderRadiusUnits: {
                 ...fluentFormGlobalBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -3310,7 +3310,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormTextIndentSize}
                                                 onChangeHandler={fluentFormTextIndentSizeHandler}
                                                 rangeUnitHandler={fluentFormTextIndentSizeUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormTextIndentSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3323,7 +3323,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormInputWidthSize}
                                                 onChangeHandler={fluentFormInputWidthSizeHandler}
                                                 rangeUnitHandler={fluentFormInputWidthSizeUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormInputWidthSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3336,7 +3336,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormInputHeightSize}
                                                 onChangeHandler={fluentFormInputHeightSizeHandler}
                                                 rangeUnitHandler={fluentFormInputHeightSizeUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormInputHeightSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3349,7 +3349,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormTextareaWidthSize}
                                                 onChangeHandler={fluentFormTextareaWidthSizeHandler}
                                                 rangeUnitHandler={fluentFormTextareaWidthSizeUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormTextareaWidthSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3362,7 +3362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormTextareaHeightSize}
                                                 onChangeHandler={fluentFormTextareaHeightSizeHandler}
                                                 rangeUnitHandler={fluentFormTextareaHeightSizeUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormTextareaHeightSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3375,7 +3375,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormSpacingSize}
                                                 onChangeHandler={fluentFormSpacingSizeHandler}
                                                 rangeUnitHandler={fluentFormSpacingUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormSpacingUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3384,7 +3384,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handlePaddingUnitsHandler}
                                                 spacingUnits={fluentFormPaddingUnits}
                                                 spacingDesktop={fluentFormPaddingDesktop}
@@ -3415,7 +3415,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleBorderUnitsHandler}
                                                 spacingUnits={fluentFormBorderUnits}
                                                 spacingDesktop={fluentFormBorderDesktop}
@@ -3429,7 +3429,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleBorderRadiusUnitsHandler}
                                                 spacingUnits={fluentFormBorderRadiusUnits}
                                                 spacingDesktop={fluentFormBorderRadiusDesktop}
@@ -3498,7 +3498,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormRadioFontSize}
                                                 onChangeHandler={fluentFormRadioFontSizeHandler}
                                                 rangeUnitHandler={fluentFormRadioFontSizeUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormRadioFontSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3603,7 +3603,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormRadioBorderWidth}
                                                 onChangeHandler={(value) => setAttributes({ fluentFormRadioBorderWidth: value })}
                                                 rangeUnitHandler={(value) => setAttributes({ fluentFormRadioBorderWidthUnits: value })}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormRadioBorderWidthUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3657,7 +3657,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
                                             <FB_Spacing 
                                                 label={__("Radio Radius", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormRadioBorderRadiusUnitsHandler}
                                                 spacingUnits={fluentFormRadioBorderRadiusUnits}
                                                 spacingDesktop={fluentFormRadioBorderRadiusDesktop}
@@ -3670,7 +3670,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Checkbox Radius", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormCheckBoxBorderRadiusUnitsHandler}
                                                 spacingUnits={fluentFormCheckBoxBorderRadiusUnits}
                                                 spacingDesktop={fluentFormCheckBoxBorderRadiusDesktop}
@@ -3688,7 +3688,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormRadioCheckBoxItemSpacing}
                                                 onChangeHandler={fluentFormRadioCheckBoxItemSpacingHandler}
                                                 rangeUnitHandler={fluentFormRadioCheckBoxItemSpacingUnitssHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormRadioCheckBoxItemSpacingUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -3909,7 +3909,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </BaseControl>
                                                 <FB_Spacing 
                                                     label={__("Padding", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={fluentFormSectionBreakTitlePaddingUnitsHandler}
                                                     spacingUnits={fluentFormSectionBreakTitlePaddingUnits}
                                                     spacingDesktop={fluentFormSectionBreakTitlePaddingDesktop}
@@ -3922,7 +3922,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                                 <FB_Spacing
                                                     label={__("Margin", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={fluentFormSectionBreakTitleMarginUnitsHandler}
                                                     spacingUnits={fluentFormSectionBreakTitleMarginUnits}
                                                     spacingDesktop={fluentFormSectionBreakTitleMarginDesktop}
@@ -4127,7 +4127,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </BaseControl>
                                                 <FB_Spacing 
                                                     label={__("Padding", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={fluentFormSectionBreakDescPaddingUnitsHandler}
                                                     spacingUnits={fluentFormSectionBreakDescPaddingUnits}
                                                     spacingDesktop={fluentFormSectionBreakDescPaddingDesktop}
@@ -4141,7 +4141,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing
                                                     label={__("Margin", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={fluentFormSectionBreakDescMarginUnitsHandler}
                                                     spacingUnits={fluentFormSectionBreakDescMarginUnits}
                                                     spacingDesktop={fluentFormSectionBreakDescMarginDesktop}
@@ -4369,7 +4369,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormHtmlPaddingUnitsHandler}
                                                 spacingUnits={fluentFormHtmlPaddingUnits}
                                                 spacingDesktop={fluentFormHtmlPaddingDesktop}
@@ -4383,7 +4383,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing
                                                 label={__("Margin", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormHtmlMarginUnitsHandler}
                                                 spacingUnits={fluentFormHtmlMarginUnits}
                                                 spacingDesktop={fluentFormHtmlMarginDesktop}
@@ -4423,7 +4423,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={fluentFormSubmitHeight}
                                                 onChangeHandler={fluentFormSubmitHeightHandler}
                                                 rangeUnitHandler={fluentFormSubmitHeightUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={fluentFormSubmitHeightUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -4444,7 +4444,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     rangeValue={fluentFormSubmitWidth}
                                                     onChangeHandler={fluentFormSubmitWidthHandler}
                                                     rangeUnitHandler={fluentFormSubmitWidthUnitsHandler}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     units={fluentFormSubmitWidthUnits}
                                                     setAttributes={setAttributes}
                                                     rangeStep={1}
@@ -4654,7 +4654,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormSubmitPaddingUnitsHandler}
                                                 spacingUnits={fluentFormSubmitPaddingUnits}
                                                 spacingDesktop={fluentFormSubmitPaddingDesktop}
@@ -4667,7 +4667,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Margin", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormSubmitMarginUnitsHandler}
                                                 spacingUnits={fluentFormSubmitMarginUnits}
                                                 spacingDesktop={fluentFormSubmitMarginDesktop}
@@ -4695,7 +4695,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormSubmitBorderUnitsHandler}
                                                 spacingUnits={fluentFormSubmitBorderUnits}
                                                 spacingDesktop={fluentFormSubmitBorderDesktop}
@@ -4708,7 +4708,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Border Radius", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormSubmitBorderRadiusUnitsHandler}
                                                 spacingUnits={fluentFormSubmitBorderRadiusUnits}
                                                 spacingDesktop={fluentFormSubmitBorderRadiusDesktop}
@@ -5015,7 +5015,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormSuccessBorderUnitsHandler}
                                                 spacingUnits={fluentFormSuccessBorderUnits}
                                                 spacingDesktop={fluentFormSuccessBorderDesktop}
@@ -5028,7 +5028,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Border Radius", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormSuccessBorderRadiusUnitsHandler}
                                                 spacingUnits={fluentFormSuccessBorderRadiusUnits}
                                                 spacingDesktop={fluentFormSuccessBorderRadiusDesktop}
@@ -5272,7 +5272,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </BaseControl>
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormErrorPaddingUnitsHandler}
                                                 spacingUnits={fluentFormErrorPaddingUnits}
                                                 spacingDesktop={fluentFormErrorPaddingDesktop}
@@ -5285,7 +5285,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Margin", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={fluentFormErrorMarginUnitsHandler}
                                                 spacingUnits={fluentFormErrorMarginUnits}
                                                 spacingDesktop={fluentFormErrorMarginDesktop}
@@ -5323,7 +5323,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                     <FB_Spacing 
                                                         label={__("Padding", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
                                                         spacingUnits={fluentFormGlobalPaddingUnits}
                                                         spacingDesktop={fluentFormGlobalPaddingDesktop}
@@ -5336,7 +5336,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                     <FB_Spacing 
                                                         label={__("Margin", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalMarginUnitsHandler}
                                                         spacingUnits={fluentFormGlobalMarginUnits}
                                                         spacingDesktop={fluentFormGlobalMarginDesktop}
@@ -5381,7 +5381,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     <FB_Spacing 
                                                         label={__("Border", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalBorderUnitsHandler}
                                                         spacingUnits={fluentFormGlobalBorderUnits}
                                                         spacingDesktop={fluentFormGlobalBorderDesktop}
@@ -5395,7 +5395,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     <FB_Spacing 
                                                         label={__("Border Radius", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
                                                         spacingUnits={fluentFormGlobalBorderRadiusUnits}
                                                         spacingDesktop={fluentFormGlobalBorderRadiusDesktop}
