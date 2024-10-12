@@ -2,7 +2,7 @@
  * Internal & External dependencies.
  */
 import { ButtonGroup, Button, Tooltip } from '@wordpress/components';
-import { useDeviceType, setDeviceType } from '@Controls/getPreviewType';
+import { usedeviceType, setdeviceType } from '@Controls/getPreviewType';
 import { __, sprintf } from '@wordpress/i18n';
 import { useEffect, useState, useRef } from '@wordpress/element';
 import { select } from '@wordpress/data';
@@ -13,7 +13,7 @@ import { applyFilters } from '@wordpress/hooks';
 
 const ResponsiveToggle = ( props ) => {
 	const { label, responsive, help = false } = props;
-	const deviceType = useDeviceType();
+	const deviceType = usedeviceType();
 	const [ displayResponsive, toggleResponsive ] = useState( false );
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
@@ -171,7 +171,7 @@ const ResponsiveToggle = ( props ) => {
 								}` }
 								aria-pressed={ deviceType === staticName }
 								onClick={ () => {
-									setDeviceType( staticName );
+									setdeviceType( staticName );
 									toggleResponsive( displayResponsive );
 								} }
 							>

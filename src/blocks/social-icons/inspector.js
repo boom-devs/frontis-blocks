@@ -35,7 +35,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        DeviceType,
+        deviceType,
         socialAlignment,
         socialIconZIndex,
         socialItems,
@@ -242,7 +242,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleSocialIconBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( socialIconBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         socialIconBorderDesktop: {
@@ -277,7 +277,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {socialIconBorderDesktop: {...socialIconBorderDesktop, [position]: value}} );
                     break;
@@ -302,7 +302,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             socialIconBorderUnits: {
                 ...socialIconBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -317,7 +317,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleSocialIconBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( socialIconBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         socialIconBorderRadiusDesktop: {
@@ -352,7 +352,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {socialIconBorderRadiusDesktop: {...socialIconBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -377,7 +377,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             socialIconBorderRadiusUnits: {
                 ...socialIconBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -394,7 +394,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const handleSocialIconPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( socialIconPaddingLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						socialIconPaddingDesktop: {
@@ -429,7 +429,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {socialIconPaddingDesktop: {...socialIconPaddingDesktop, [position]: value}} );
 					break;
@@ -454,7 +454,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             socialIconPaddingUnits: {
                 ...socialIconPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -467,7 +467,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleSocialPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( socialPaddingLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						socialPaddingDesktop: {
@@ -502,7 +502,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {socialPaddingDesktop: {...socialPaddingDesktop, [position]: value}} );
 					break;
@@ -527,7 +527,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             socialPaddingUnits: {
                 ...socialPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -543,7 +543,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleSocialMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( socialMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         socialMarginDesktop: {
@@ -578,7 +578,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {socialMarginDesktop: {...socialMarginDesktop, [position]: value}} );
                     break;
@@ -603,7 +603,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             socialMarginUnits: {
                 ...socialMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -619,7 +619,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleSocialBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( socialBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         socialBorderDesktop: {
@@ -654,7 +654,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {socialBorderDesktop: {...socialBorderDesktop, [position]: value}} );
                     break;
@@ -679,7 +679,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             socialBorderUnits: {
                 ...socialBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -694,7 +694,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleSocialBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( socialBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         socialBorderRadiusDesktop: {
@@ -729,7 +729,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {socialBorderRadiusDesktop: {...socialBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -754,7 +754,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             socialBorderRadiusUnits: {
                 ...socialBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -943,7 +943,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={socialIconSize}
                                                 onChangeHandler={socialIconSizeHandler}
                                                 rangeUnitHandler={socialIconSizeUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={socialIconSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -990,7 +990,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleSocialIconBorderUnitsHandler}
                                                 spacingUnits={socialIconBorderUnits}
                                                 spacingDesktop={socialIconBorderDesktop}
@@ -1003,7 +1003,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleSocialIconBorderRadiusUnitsHandler}
                                                 spacingUnits={socialIconBorderRadiusUnits}
                                                 spacingDesktop={socialIconBorderRadiusDesktop}
@@ -1023,7 +1023,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={socialIconGapSize}
                                                 onChangeHandler={socialIconGapSizeHandler}
                                                 rangeUnitHandler={socialIconGapUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={socialIconGapUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -1031,7 +1031,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={socialIconspacingUnitsHandler}
                                                 spacingUnits={socialIconPaddingUnits}
                                                 spacingDesktop={socialIconPaddingDesktop}
@@ -1072,7 +1072,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeValue={socialIconGapSize}
                                                         onChangeHandler={socialIconGapSizeHandler}
                                                         rangeUnitHandler={socialIconGapUnitsHandler}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         units={socialIconGapUnits}
                                                         setAttributes={setAttributes}
                                                         rangeStep={1}
@@ -1082,7 +1082,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                     <FB_Spacing 
                                                         label={__("Padding", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleSocialPaddingUnitsHandler}
                                                         spacingUnits={socialPaddingUnits}
                                                         spacingDesktop={socialPaddingDesktop}
@@ -1095,7 +1095,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                     <FB_Spacing 
                                                         label={__("Margin", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleSocialMarginUnitsHandler}
                                                         spacingUnits={socialMarginUnits}
                                                         spacingDesktop={socialMarginDesktop}
@@ -1140,7 +1140,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     <FB_Spacing 
                                                         label={__("Border", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleSocialBorderUnitsHandler}
                                                         spacingUnits={socialBorderUnits}
                                                         spacingDesktop={socialBorderDesktop}
@@ -1154,7 +1154,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     <FB_Spacing 
                                                         label={__("Radius Border", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleSocialBorderRadiusUnitsHandler}
                                                         spacingUnits={socialBorderRadiusUnits}
                                                         spacingDesktop={socialBorderRadiusDesktop}

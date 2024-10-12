@@ -4,7 +4,7 @@ import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 
-const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, DeviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
+const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, deviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
 
 	const UNIT_TYPES = [
 		{ label: 'px', value: 'px' },
@@ -12,21 +12,21 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 		{ label: 'em', value: 'em' },
 	];
 
-	// Ensure default/fallback value for the current DeviceType
+	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {
-		if (rangeValue[DeviceType] === undefined) {
-			const newRangeValue = { ...rangeValue, [DeviceType]: resetFallbackValue };
+		if (rangeValue[deviceType] === undefined) {
+			const newRangeValue = { ...rangeValue, [deviceType]: resetFallbackValue };
 			onChangeHandler(newRangeValue);
 		}
-	}, [DeviceType, rangeValue, onChangeHandler, resetFallbackValue]);
+	}, [deviceType, rangeValue, onChangeHandler, resetFallbackValue]);
 
 	const setRangeValue = (value) => {
-		const newRangeValue = { ...rangeValue, [DeviceType]: value || resetFallbackValue };
+		const newRangeValue = { ...rangeValue, [deviceType]: value || resetFallbackValue };
 		onChangeHandler(newRangeValue);
 	};
 
 	const setRangeUnit = (unit) => {
-		const newUnits = { ...units, [DeviceType]: unit };
+		const newUnits = { ...units, [deviceType]: unit };
 		rangeUnitHandler(newUnits);
 	};
 
@@ -36,8 +36,8 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 				<div className="fb-setting-spacing-label-container">
 					<FB_ResponsiveControl
 						labelText={ __( label, 'frontis-blocks' )}
-						device={ DeviceType }
-						deviceHandler={( newDevice ) => setAttributes({ DeviceType: newDevice })}
+						device={ deviceType }
+						deviceHandler={( newDevice ) => setAttributes({ deviceType: newDevice })}
 					/>
 					<div className="fb-setting-units-type">
 						<ButtonGroup className="fb-setting-units-type-wrap">
@@ -45,7 +45,7 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 								<Button
 									key={key}
 									onClick={() => setRangeUnit(item.value)}
-									className={`fb-setting-units-type-switcher ${units[DeviceType] === item.value ? 'active' : ''}`}
+									className={`fb-setting-units-type-switcher ${units[deviceType] === item.value ? 'active' : ''}`}
 								>
 									{item.label}
 								</Button>
@@ -55,7 +55,7 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 				</div>
 				<RangeControl
 					__nextHasNoMarginBottom
-					value={ rangeValue[DeviceType] }
+					value={ rangeValue[deviceType] }
 					onChange={ setRangeValue }
 					min={ min }
 					max={ max }

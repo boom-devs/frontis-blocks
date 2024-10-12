@@ -3,7 +3,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-    DeviceType: {
+    deviceType: {
         type: "string",
         default: "Desktop"
     },
