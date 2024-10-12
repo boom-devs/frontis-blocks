@@ -167,14 +167,14 @@ class BlockList {
             //     'badge'     => 'free',
             //     'status'    => 'active',
             // ],
-            // 'pricing-table' => [
-            //     'slug'      => 'pricing-table',
-            //     'title'     => 'Pricing Table',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'pricing-table' => [
+                'slug'      => 'pricing-table',
+                'title'     => 'Pricing Table',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'active',
+            ],
             // 'woo-product-grid' => [
             //     'slug'      => 'woo-product-grid',
             //     'title'     => 'Woo Product Grid',
