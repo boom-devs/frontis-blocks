@@ -52,8 +52,8 @@
   outline: none;
 }
 .rc-switch-checked {
-  border: 1px solid #36d66b;
-  background-color: rgba(54,214,107, .8);
+  border: 1px solid #399CFF;
+  background-color: rgba(57, 156, 255, 0.8);
 }
 .rc-switch-checked .rc-switch-inner {
   left: 12px;

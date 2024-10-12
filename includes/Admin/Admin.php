@@ -61,6 +61,7 @@ class Admin {
             'version' => FB_VERSION,
             'pro_url' => FB_UPGRADE_PRO_URL,
             'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
+            'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
         ));
     }
 

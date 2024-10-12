@@ -6,7 +6,6 @@ import './scss/admin.scss';
 const FrontisBlocksAdmin = () => {
   return (
     <div className="wrap">
-      <h1>{__('Frontis Blocks', 'frontis-blocks')}</h1>
       <App />
     </div>
   );

@@ -1,0 +1,272 @@
+.fb-blocks {
+  &-container {
+    // Styles for the main container
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    &-left, &-right {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-title {
+    font-size: 24px;
+    margin-right: 20px;
+  }
+
+  &-search {
+    position: relative;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    
+    &::before { 
+      content: '\f179'; // WordPress dashicons search icon
+      font-family: dashicons;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #757575;
+      font-size: 20px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    &-input[type="text"] {
+      width: 100%;
+      padding: 8px 12px 8px 35px;
+      padding-right: 30px; // Add space for the clear button
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      background: transparent;
+
+      &::placeholder {
+        color: #999;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #007cba;
+        box-shadow: 0 0 0 1px #007cba;
+      }
+    }
+
+    &-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #757575;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  &-button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    &.fb-blocks-enable-all {
+      background-color: #4CAF50;
+      color: white;
+
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+
+    &.fb-blocks-disable-all {
+      background-color: #f44336;
+      color: white;
+
+      &:hover {
+        background-color: #da190b;
+      }
+    }
+  }
+
+  &-category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &-category-button {
+    padding: 6px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    &--active {
+      background-color: #007cba;
+      color: white;
+      border-color: #007cba;
+
+      &:hover {
+        background-color: #006ba1;
+      }
+    }
+  }
+
+  &-category-group {
+    margin-bottom: 30px;
+  }
+
+  &-category-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #f04;
+  }
+
+  &-category-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  &-no-results {
+    font-style: italic;
+    color: #666;
+  }
+}
+
+.frontis-blocks-search {
+  position: relative;
+  width: 300px;
+
+  &::before {
+    content: '\f179'; // WordPress dashicons search icon
+    font-family: dashicons;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #757575;
+    font-size: 20px;
+    z-index: 1;
+    pointer-events: none; // This ensures the icon doesn't interfere with input interactions
+  }
+
+  .frontis-blocks-search-input {
+    width: 100%;
+    padding: 8px 12px 8px 35px; // Increased left padding to accommodate the icon
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #007cba;
+      box-shadow: 0 0 0 1px #007cba;
+    }
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+}
+
+.fb-block-card {
+  display: flex;
+  align-items: center;
+  padding: 20px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background-color: #F0F1F4;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  &-icon {
+    flex: 0 0 50px;
+    margin-right: 15px;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &-content {
+    flex: 1;
+  }
+
+  &-title {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &-links {
+    display: flex;
+    gap: 10px;
+  }
+
+  &-link {
+    font-size: 12px;
+    color: #333;
+    text-decoration: none;
+
+    svg {
+      height: 16px;
+      width: 16px;
+      margin-right: 4px;
+    }
+
+    &:hover {
+      color: #007cba;
+      text-decoration: none;
+    }
+  }
+
+  &-switch {
+    flex: 0 0 auto;
+    margin-left: 15px;
+
+    &-label {
+      display: flex;
+      align-items: center;
+    }
+
+    &-input {
+      margin-left: 10px;
+    }
+  }
+}
