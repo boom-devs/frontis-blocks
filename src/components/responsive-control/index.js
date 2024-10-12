@@ -5,7 +5,7 @@ export default function FB_ResponsiveControl({labelText, device, deviceHandler})
 	const handleDevice = (deviceName) => {
 		deviceHandler(deviceName);
 		if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
-			wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(deviceName);
+			wp.data.dispatch('core/edit-post').__experimentalSetPreviewdeviceType(deviceName);
 		}
 	}
 	return (

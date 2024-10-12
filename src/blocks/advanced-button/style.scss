@@ -6,7 +6,6 @@
         outline: none;
         text-align: center;
         text-decoration: none;
-        padding: 12px 30px;
         background-color: #3f8efc;
         border-radius: 0px;
         box-sizing: border-box;
@@ -14,6 +13,10 @@
         position: relative;
         transition: all .3s ease-in-out;
         white-space: nowrap;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
         .fb-advanced-button-text {
             color: #ffffff;
             transition: all .3s ease-in-out;

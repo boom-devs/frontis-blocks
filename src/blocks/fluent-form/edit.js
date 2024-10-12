@@ -10,7 +10,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
 		formId,
 		showLabels,
         showPlaceholder,

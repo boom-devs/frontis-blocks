@@ -3,7 +3,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-    DeviceType: {
+    deviceType: {
         type: "string",
         default: "Desktop"
     },
@@ -510,6 +510,14 @@ const attributes = {
     FeatureMobileSwitcher: {
         type: "boolean",
         default: false,
+    },
+    FeatureboxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureboxShadowCssValue: {
+        type: 'string',
+        default: '',
     },
     
 };

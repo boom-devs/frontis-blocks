@@ -5,7 +5,7 @@
 
 // Get block attributes
 $blockID        = isset( $attributes['blockID'] ) ? sanitize_text_field( $attributes['blockID'] ) : '';
-$DeviceType     = isset( $attributes['DeviceType'] ) ? sanitize_text_field( $attributes['DeviceType'] ) : 'Desktop';
+$deviceType     = isset( $attributes['deviceType'] ) ? sanitize_text_field( $attributes['deviceType'] ) : 'Desktop';
 $formId         = isset( $attributes['formId'] ) ? sanitize_text_field( $attributes['formId'] ) : '';
 
 $showLabels = isset( $attributes['showLabels'] ) ? (bool) $attributes['showLabels'] : true;
