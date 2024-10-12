@@ -22,6 +22,9 @@ class BlockList {
                 'category'  => 'post',
                 'badge'     => 'freemium',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-heading',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-heading',
             ],
             'container' => [
                 'slug'      => 'container',
@@ -30,6 +33,9 @@ class BlockList {
                 'category'  => 'layout',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/container',
+                'demo'      => 'https://wpmessiah.com/demo/container',
             ],
             'column' => [
                 'slug'      => 'column',
@@ -38,6 +44,9 @@ class BlockList {
                 'category'  => 'layout',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/column',
+                'demo'      => 'https://wpmessiah.com/demo/column',
             ],
             // 'advanced-image' => [
             //     'slug'      => 'advanced-image',
@@ -46,6 +55,9 @@ class BlockList {
             //     'category'  => 'media',
             //     'badge'     => 'freemium',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/advanced-image',
+            //     'demo'      => 'https://wpmessiah.com/demo/advanced-image',
             // ],
             // 'image-gallery' => [
             //     'slug'      => 'image-gallery',
@@ -54,6 +66,9 @@ class BlockList {
             //     'category'  => 'media',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/image-gallery',
+            //     'demo'      => 'https://wpmessiah.com/demo/image-gallery',
             // ],
             // 'info-box' => [
             //     'slug'      => 'info-box',
@@ -62,6 +77,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/info-box',
+            //     'demo'      => 'https://wpmessiah.com/demo/info-box',
             // ],
             // 'icon-box' => [
             //     'slug'      => 'icon-box',
@@ -70,6 +88,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/icon-box',
+            //     'demo'      => 'https://wpmessiah.com/demo/icon-box',
             // ],
             'advanced-button' => [
                 'slug'      => 'advanced-button',
@@ -78,6 +99,9 @@ class BlockList {
                 'category'  => 'post',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-button',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-button',
             ],
             // 'dual-button' => [
             //     'slug'      => 'dual-button',
@@ -86,6 +110,9 @@ class BlockList {
             //     'category'  => 'general',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/dual-button',
+            //     'demo'      => 'https://wpmessiah.com/demo/dual-button',
             // ],
             'advanced-navigation' => [
                 'slug'      => 'advanced-navigation',
@@ -94,6 +121,9 @@ class BlockList {
                 'category'  => 'navigation',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-navigation',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-navigation',
             ],
             // 'advanced-video' => [
             //     'slug'      => 'advanced-video',
@@ -102,6 +132,9 @@ class BlockList {
             //     'category'  => 'media',
             //     'badge'     => 'freemium',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/advanced-video',
+            //     'demo'      => 'https://wpmessiah.com/demo/advanced-video',
             // ],
             // 'countdown' => [
             //     'slug'      => 'countdown',
@@ -110,6 +143,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/countdown',
+            //     'demo'      => 'https://wpmessiah.com/demo/countdown',
             // ],
             // 'flip-box' => [
             //     'slug'      => 'flip-box',
@@ -118,6 +154,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/flip-box',
+            //     'demo'      => 'https://wpmessiah.com/demo/flip-box',
             // ],
             'features-list' => [
                 'slug'      => 'features-list',
@@ -126,6 +165,9 @@ class BlockList {
                 'category'  => 'post',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/features-list',
+                'demo'      => 'https://wpmessiah.com/demo/features-list',
             ],
             'testimonial' => [
                 'slug'      => 'testimonial',
@@ -134,6 +176,9 @@ class BlockList {
                 'category'  => 'content',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/testimonial',
+                'demo'      => 'https://wpmessiah.com/demo/testimonial',
             ],
             // 'counter-number' => [
             //     'slug'      => 'counter-number',
@@ -142,6 +187,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/counter-number',
+            //     'demo'      => 'https://wpmessiah.com/demo/counter-number',
             // ],
             // 'fluent-form' => [
             //     'slug'      => 'fluent-form',
@@ -150,6 +198,9 @@ class BlockList {
             //     'category'  => 'form',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/fluent-form',
+            //     'demo'      => 'https://wpmessiah.com/demo/fluent-form',
             // ],
             // 'contact-form-7' => [
             //     'slug'      => 'contact-form-7',
@@ -158,6 +209,9 @@ class BlockList {
             //     'category'  => 'form',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/contact-form-7',
+            //     'demo'      => 'https://wpmessiah.com/demo/contact-form-7',
             // ],
             // 'call-to-action' => [
             //     'slug'      => 'call-to-action',
@@ -166,6 +220,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/call-to-action',
+            //     'demo'      => 'https://wpmessiah.com/demo/call-to-action',
             // ],
             // 'pricing-table' => [
             //     'slug'      => 'pricing-table',
@@ -174,6 +231,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/pricing-table',
+            //     'demo'      => 'https://wpmessiah.com/demo/pricing-table',
             // ],
             // 'woo-product-grid' => [
             //     'slug'      => 'woo-product-grid',
@@ -182,6 +242,9 @@ class BlockList {
             //     'category'  => 'woocommerce',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/woo-product-grid',
+            //     'demo'      => 'https://wpmessiah.com/demo/woo-product-grid',
             // ],
             'social-icons' => [
                 'slug'      => 'social-icons',
@@ -190,6 +253,9 @@ class BlockList {
                 'category'  => 'social',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/social-icons',
+                'demo'      => 'https://wpmessiah.com/demo/social-icons',
             ],
             'post-grid' => [
                 'slug'      => 'post-grid',
@@ -198,6 +264,9 @@ class BlockList {
                 'category'  => 'post',
                 'badge'     => 'free',
                 'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/post-grid',
+                'demo'      => 'https://wpmessiah.com/demo/post-grid',
             ],
             // 'team-member' => [
             //     'slug'      => 'team-member',
@@ -206,6 +275,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/team-member',
+            //     'demo'      => 'https://wpmessiah.com/demo/team-member',
             // ],
             // 'slider' => [
             //     'slug'      => 'slider',
@@ -214,6 +286,9 @@ class BlockList {
             //     'category'  => 'content',
             //     'badge'     => 'free',
             //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/slider',
+            //     'demo'      => 'https://wpmessiah.com/demo/slider',
             // ],
         ];
 
