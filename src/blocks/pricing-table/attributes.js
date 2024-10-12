@@ -1,59 +1,174 @@
-export const attributes = {
-	DeviceType: {
+const attributes = {
+	blockId: {
+		type: "string",
+		default: ""
+	},
+	/** Start Header */
+	pricingTitle: {
+		type: "string",
+		default: "Startup"
+	},
+	pricingSubTitleSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	pricingSubTitle: {
+		type: "string",
+		default: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+	},
+	pricingIconAlign: {
+        type: "string",
+        default: "icon",
+    },
+    pricingIcon: {
 		type: 'string',
-		default: 'Desktop'
+		default: 'circle-check',
 	},
-	spacingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'em',
-			Mobile: 'px'
-		}
+	/** End Header */
+
+	/** Start Pricing */
+	normalPrice :{
+		type: "string",
+		default: "99"
 	},
-	// spacingUnits: {
-	// 	type: 'object',
-	// 	default: {
-	// 		top: 50,
-	// 		right: 30,
-	// 		bottom: 20,
-	// 		left: 10
-	// 	}
-	// },
-	TestimonialDesktopPadding: {
-		type: 'object',
-		default: {
-			top: 30,
-			bottom: 30,
-			left: 30,
-			right: 30,
-		},
+	salePriceSwitcher :{
+		type: "boolean",
+		default: false
 	},
-	TestimonialTabPadding: {
-		type: 'object',
-		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
-		},
+	salePrice :{
+		type: "string",
+		default: "90"
 	},
-	TestimonialMobilePadding: {
-		type: 'object',
-		default: {
-			top: 20,
-			bottom: 10,
-			left: 20,
-			right: 20,
-		},
+	priceCurrency :{
+		type: "string",
+		default: "$"
 	},
-	FeatureMarginLink: {
-		type: 'boolean',
+	priceCurrencyPosition :{
+		type: "string",
+		default: "left"
+	},
+	pricePeriod :{
+		type: "string",
+		default: "month"
+	},
+	pricePeriodSeparator :{
+		type: "string",
+		default: "/"
+	},
+	/** End Pricing */
+
+	/** Start Price list Features */
+	priceHideFeaturesSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	priceFeatureShowLineSwitcher: {
+		type: "boolean",
 		default: true
 	},
-	boxShadow: {
-		type: 'string'
-	}
+	priceFeatureIconSwitcher: {
+		type: "boolean",
+		default: true
+	},
+	priceFeatureItems: {
+		type: "array",
+		default: [
+			{
+				id: 'item-1',
+				priceFeatureListItem: 'Feature Item 1',
+				priceFeatureListIcon: 'check',
+				priceFeatureListIconAlign: 'icon',
+			},
+			{
+				id: 'item-2',
+				priceFeatureListItem: 'Feature Item 2',
+				priceFeatureListIcon: 'check',
+				priceFeatureListIconAlign: 'icon',
+			},
+			{
+				id: 'item-3',
+				priceFeatureListItem: 'Feature Item 3',
+				priceFeatureListIcon: 'check',
+				priceFeatureListIconAlign: 'icon',
+			},
+			{
+				id: 'item-4',
+				priceFeatureListItem: 'Feature Item 4',
+				priceFeatureListIcon: 'check',
+				priceFeatureListIconAlign: 'icon',
+			}
+		],
+        items: {
+            type: "object",
+            properties: {
+                id: {
+                    type: "string",
+                    default: ""
+                },
+                priceFeatureListItem: {
+                    type: "string",
+                    default: ""
+                },
+				priceFeatureListIcon: {
+                    type: 'string',
+                    default: 'check',
+                },
+				priceFeatureListIconAlign: {
+                    type: "string",
+                    default: "icon",
+                },
+            }
+        }
+	},
+	/** End Price list Features */
+
+	/** Start Button */
+	priceButtonSwitcher: {
+		type: "boolean",
+		default: true
+	},
+    priceButtonText: {
+        type: "string",
+        default: "Choose Plan",
+    },
+    priceButtonUrl: {
+        type: "string",
+        default: "",
+    },
+    priceButtonTargetUrl: {
+        type: "boolean",
+    },
+	priceButtonIconAlign: {
+        type: "string",
+        default: "no-icon",
+    },
+    priceButtonIcon: {
+		type: 'string',
+		default: 'circle-check',
+	},
+	priceButtonIconPosition :{
+		type: "string",
+		default: "left"
+	},
+	priceButtonIconSpacing: {
+		type: "number",
+		default: 10
+	},
+	/** End Button */
+	/** Start Ribbon */	
+	priceRibbonSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	priceRibbonText: {
+		type: "string",
+		default: "Featured"
+	},
+	priceRibbonPosition: {
+		type: "string",
+		default: "right"
+	},
+	/** End Ribbon */
 }
 
 export default attributes;
