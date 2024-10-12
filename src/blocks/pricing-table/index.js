@@ -8,29 +8,9 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
-import pricingTableHeaderNameAttributes from './attributes/pricing-table-header-name.js';
-import pricingTableHeaderContentAttributes from './attributes/pricing-table-header-content.js';
-import pricingTablePricePrefixAttributes from './attributes/pricing-table-price-prefix.js';
-import pricingTablePriceAmountAttributes from './attributes/pricing-table-price-amount.js';
-import pricingTablePricePeriodAttributes from './attributes/pricing-table-price-period.js';
-import pricingTableFeaturesAttributes from './attributes/pricing-table-features.js';
-import pricingTableButtonAttributes from './attributes/pricing-table-button.js';
-import boxBorderAttributes from './attributes/box-border.js';
 
-// Merge attributes
-const combinedAttributes = {
-	...attributes,
-	...pricingTableHeaderNameAttributes,
-	...pricingTableHeaderContentAttributes,
-	...pricingTablePricePrefixAttributes,
-	...pricingTablePriceAmountAttributes,
-	...pricingTablePricePeriodAttributes,
-	...pricingTableFeaturesAttributes,
-	...pricingTableButtonAttributes,
-	...boxBorderAttributes,
-};
 registerBlockType( metadata.name, {
-	attributes: combinedAttributes,
+	attributes,
 	edit: Edit,
 	save,
 } );
