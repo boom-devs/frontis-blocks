@@ -121,7 +121,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const priceIconHandler = (IconName) => {
-		setAttributes({priceButtonIcon: IconName})
+		setAttributes({pricingIcon: IconName})
 	}
 	const priceButtonIconHandler = (IconName) => {
 		setAttributes({priceButtonIcon: IconName})
