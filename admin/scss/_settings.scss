@@ -1,56 +1,58 @@
 .fb-blocks-settings {
+  font-family: $body-font-family;
+  color: $text-color;
 
   h2 {
     font-size: 23px;
     font-weight: 400;
     margin: 0;
-    padding: 9px 0 4px 0;
+    padding: $spacing-unit 0 ($spacing-unit / 2) 0;
     line-height: 1.3;
   }
 
   .fb-blocks-settings-container {
     display: flex;
-    margin-top: 20px;
+    margin-top: $spacing-unit * 2.5;
   }
 
   .fb-blocks-settings-tabs {
     display: flex;
     flex-direction: column;
-    width: 200px;
-    border-right: 1px solid #ccc;
+    width: $sidebar-width;
+    border-right: 1px solid $border-color;
   }
 
   .fb-blocks-settings-tab {
-    padding: 10px 15px;
+    padding: $spacing-unit ($spacing-unit * 2);
     text-align: left;
     background: none;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 14px;
-    color: #50575e;
+    transition: background-color $transition-duration;
+    font-size: $base-font-size;
+    color: $dark-gray;
 
     &:hover {
-      background-color: #f6f7f7;
+      background-color: $light-gray;
     }
 
     &.active {
       font-weight: 600;
-      background-color: #fff;
-      color: #1e1e1e;
-      box-shadow: inset 3px 0 0 #2271b1;
+      background-color: $tab-active-background;
+      color: $text-color;
+      box-shadow: inset 3px 0 0 $primary-color;
     }
   }
 
   .fb-blocks-settings-content {
     flex-grow: 1;
-    padding: 0 20px;
+    padding: 0 $spacing-unit * 2.5;
   }
 
   .fb-blocks-settings-editor-options {
     h3 {
       font-size: 1.3em;
-      margin: 1em 0;
+      margin: $spacing-unit * 1.5 0;
     }
   }
 }

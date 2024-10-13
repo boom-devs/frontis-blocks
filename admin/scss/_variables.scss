@@ -1,0 +1,67 @@
+// Colors
+$primary-color: #007cba;
+$secondary-color: #0a4b78;
+$success-color: #46b450;
+$warning-color: #ffb900;
+$error-color: #dc3232;
+$text-color: #1e1e1e;
+$light-gray: #f0f0f1;
+$medium-gray: #ddd;
+$dark-gray: #50575e;
+
+// Typography
+$base-font-size: 14px;
+$base-line-height: 1.5;
+$heading-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+// Spacing
+$spacing-unit: 8px;
+$gutter: $spacing-unit * 3;
+
+// Layout
+$sidebar-width: 280px;
+$content-width: 800px;
+
+// Borders
+$border-radius: 4px;
+$border-color: $medium-gray;
+
+// Transitions
+$transition-duration: 0.3s;
+
+// Z-index
+$z-index-modal: 1000;
+$z-index-tooltip: 1100;
+
+// Card
+$card-padding: $spacing-unit * 2;
+$card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+// Tabs
+$tab-background: $light-gray;
+$tab-active-background: #fff;
+$tab-border-color: $border-color;
+
+// Buttons
+$button-padding: $spacing-unit $spacing-unit * 2;
+$button-border-radius: $border-radius;
+
+// Inputs
+$input-height: 36px;
+$input-padding: $spacing-unit;
+$input-border-color: $border-color;
+
+// Block Card
+$block-card-width: 250px;
+$block-card-height: 200px;
+
+// Version Control
+$version-control-bg: $light-gray;
+
+// Assets Generation
+$assets-generation-bg: #fff;
+
+// Editor Options
+$editor-options-bg: #fff;
+
