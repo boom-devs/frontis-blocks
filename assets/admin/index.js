@@ -171,15 +171,18 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var BlockCard = function BlockCard(_ref) {
-  var block = _ref.block;
+  var block = _ref.block,
+    onChange = _ref.onChange;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(block.status === 'true'),
     _useState2 = _slicedToArray(_useState, 2),
     isChecked = _useState2[0],
     setIsChecked = _useState2[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    setIsChecked(block.status === 'true');
+  }, [block.status]);
   var handleChange = function handleChange(checked) {
+    onChange(block.slug, checked);
     setIsChecked(checked);
-    // Here you would typically update the block status in your backend
-    // For example: updateBlockStatus(block.slug, checked);
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-block-card"
@@ -212,15 +215,6 @@ var BlockCard = function BlockCard(_ref) {
   }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
     checked: isChecked,
     onChange: handleChange,
-    onColor: "#86d3ff",
-    onHandleColor: "#2693e6",
-    handleDiameter: 24,
-    uncheckedIcon: false,
-    checkedIcon: false,
-    boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.6)",
-    activeBoxShadow: "0px 0px 1px 10px rgba(0, 0, 0, 0.2)",
-    height: 20,
-    width: 48,
     className: "fb-block-card-switch-input",
     id: "switch-".concat(block.slug)
   }))));
@@ -279,10 +273,13 @@ var Blocks = function Blocks() {
     _useState8 = _slicedToArray(_useState7, 2),
     searchTerm = _useState8[0],
     setSearchTerm = _useState8[1];
+  var _window$frontisBlocks = window.frontisBlocksAdmin,
+    ajaxurl = _window$frontisBlocks.ajaxurl,
+    nonce = _window$frontisBlocks.nonce;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var loadBlocks = function loadBlocks() {
-      var _window$frontisBlocks;
-      var blocksData = (_window$frontisBlocks = window.frontisBlocksAdmin) === null || _window$frontisBlocks === void 0 ? void 0 : _window$frontisBlocks.blocks;
+      var _window$frontisBlocks2;
+      var blocksData = (_window$frontisBlocks2 = window.frontisBlocksAdmin) === null || _window$frontisBlocks2 === void 0 ? void 0 : _window$frontisBlocks2.blocks;
       if (blocksData && _typeof(blocksData) === 'object') {
         var blocksArray = Object.values(blocksData);
         setBlocks(blocksArray);
@@ -323,6 +320,36 @@ var Blocks = function Blocks() {
   var clearSearch = function clearSearch() {
     setSearchTerm('');
   };
+  var handleEnableAll = function handleEnableAll() {
+    setBlocks(function (prevBlocks) {
+      return prevBlocks.map(function (block) {
+        return _objectSpread(_objectSpread({}, block), {}, {
+          status: 'true'
+        });
+      });
+    });
+  };
+  var handleDisableAll = function handleDisableAll() {
+    setBlocks(function (prevBlocks) {
+      return prevBlocks.map(function (block) {
+        return _objectSpread(_objectSpread({}, block), {}, {
+          status: 'false'
+        });
+      });
+    });
+  };
+  var handleBlockChange = function handleBlockChange(slug, enabled) {
+    setBlocks(function (prevBlocks) {
+      return prevBlocks.map(function (block) {
+        return block.slug === slug ? _objectSpread(_objectSpread({}, block), {}, {
+          status: enabled ? 'true' : 'false'
+        }) : block;
+      });
+    });
+
+    // Here you might want to add an AJAX call to update the server
+    // updateBlockStatus(slug, enabled);
+  };
   if (isLoading) {
     return /*#__PURE__*/React.createElement("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading blocks...', 'frontis-blocks'));
   }
@@ -350,9 +377,11 @@ var Blocks = function Blocks() {
   }, "\xD7"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-header-right"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-blocks-button fb-blocks-enable-all"
+    className: "fb-blocks-button fb-blocks-enable-all",
+    onClick: handleEnableAll
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable All', 'frontis-blocks')), /*#__PURE__*/React.createElement("button", {
-    className: "fb-blocks-button fb-blocks-disable-all"
+    className: "fb-blocks-button fb-blocks-disable-all",
+    onClick: handleDisableAll
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-category-filter"
   }, Object.entries(categoryInfo).map(function (_ref3) {
@@ -380,7 +409,8 @@ var Blocks = function Blocks() {
     }, categoryBlocks.map(function (block) {
       return /*#__PURE__*/React.createElement(_BlockCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
         key: block.slug,
-        block: block
+        block: block,
+        onChange: handleBlockChange
       });
     })));
   }) : /*#__PURE__*/React.createElement("p", {
@@ -436,7 +466,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Integration = function Integration() {
   return /*#__PURE__*/React.createElement("div", {
-    className: "frontis-blocks-integration"
+    className: "fb-blocks-integration"
   }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Integration', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shortcode', 'frontis-blocks'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Use this shortcode to display Frontis Blocks in your posts or pages:', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     value: "[frontis_blocks]",
     readOnly: true
@@ -461,25 +491,117 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _settingsTabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./settingsTabs */ "./admin/components/settingsTabs.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
 var Settings = function Settings() {
-  //   const settings = useSelect((select) => select('frontis-blocks').getSettings());
-  //   const { updateSettings } = useDispatch('frontis-blocks');
-
-  var handleSave = function handleSave() {
-    // Implement save functionality
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(_settingsTabs__WEBPACK_IMPORTED_MODULE_2__["default"][0].id),
+    _useState2 = _slicedToArray(_useState, 2),
+    activeTab = _useState2[0],
+    setActiveTab = _useState2[1];
+  var handleTabClick = function handleTabClick(tabId) {
+    setActiveTab(tabId);
   };
+  var ActiveComponent = _settingsTabs__WEBPACK_IMPORTED_MODULE_2__["default"].find(function (tab) {
+    return tab.id === activeTab;
+  }).component;
   return /*#__PURE__*/React.createElement("div", {
-    className: "frontis-blocks-settings"
-  }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Global Settings', 'frontis-blocks'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null)));
+    className: "fb-blocks-settings"
+  }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-settings-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-settings-tabs"
+  }, _settingsTabs__WEBPACK_IMPORTED_MODULE_2__["default"].map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.id,
+      className: "fb-blocks-settings-tab ".concat(activeTab === tab.id ? 'active' : ''),
+      onClick: function onClick() {
+        return handleTabClick(tab.id);
+      }
+    }, tab.label);
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-settings-content"
+  }, /*#__PURE__*/React.createElement(ActiveComponent, null))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Settings);
+
+/***/ }),
+
+/***/ "./admin/components/Settings/AssetsGeneration.js":
+/*!*******************************************************!*\
+  !*** ./admin/components/Settings/AssetsGeneration.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+var AssetsGeneration = function AssetsGeneration() {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-settings-assets-generation"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Assets Generation', 'frontis-blocks')));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AssetsGeneration);
+
+/***/ }),
+
+/***/ "./admin/components/Settings/EditorOptions.js":
+/*!****************************************************!*\
+  !*** ./admin/components/Settings/EditorOptions.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+var EditorOptions = function EditorOptions() {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-settings-editor-options"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Editor Options', 'frontis-blocks')));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditorOptions);
+
+/***/ }),
+
+/***/ "./admin/components/Settings/VersionControl.js":
+/*!*****************************************************!*\
+  !*** ./admin/components/Settings/VersionControl.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+var VersionControl = function VersionControl() {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-settings-version-control"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Version Control', 'frontis-blocks')));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VersionControl);
 
 /***/ }),
 
@@ -568,6 +690,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./admin/components/settingsTabs.js":
+/*!******************************************!*\
+  !*** ./admin/components/settingsTabs.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Settings_EditorOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Settings/EditorOptions */ "./admin/components/Settings/EditorOptions.js");
+/* harmony import */ var _Settings_AssetsGeneration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Settings/AssetsGeneration */ "./admin/components/Settings/AssetsGeneration.js");
+/* harmony import */ var _Settings_VersionControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Settings/VersionControl */ "./admin/components/Settings/VersionControl.js");
+
+
+
+
+var settingsTabs = [{
+  id: 'editor',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Editor Options', 'frontis-blocks'),
+  component: _Settings_EditorOptions__WEBPACK_IMPORTED_MODULE_1__["default"]
+}, {
+  id: 'assets',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Assets Generation', 'frontis-blocks'),
+  component: _Settings_AssetsGeneration__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  id: 'version',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Version Control', 'frontis-blocks'),
+  component: _Settings_VersionControl__WEBPACK_IMPORTED_MODULE_3__["default"]
+}];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (settingsTabs);
+
+/***/ }),
+
 /***/ "./admin/icons/index.js":
 /*!******************************!*\
   !*** ./admin/icons/index.js ***!
@@ -581,6 +740,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Crown: () => (/* binding */ Crown),
 /* harmony export */   Doc: () => (/* binding */ Doc),
 /* harmony export */   FrontisIcon: () => (/* binding */ FrontisIcon),
+/* harmony export */   Grid: () => (/* binding */ Grid),
 /* harmony export */   HomeIcon: () => (/* binding */ HomeIcon),
 /* harmony export */   IntegrationsIcon: () => (/* binding */ IntegrationsIcon),
 /* harmony export */   Link: () => (/* binding */ Link),
@@ -734,6 +894,16 @@ var Link = function Link() {
     strokeLinecap: "round",
     strokeLinejoin: "round",
     d: "M8.794 6.292a3 3 0 0 1 .828 4.829l-3 3A3 3 0 1 1 2.378 9.88L3.55 8.707m8.9-.414 1.171-1.172A3 3 0 1 0 9.38 2.88l-3 3a3 3 0 0 0 .827 4.829"
+  }));
+};
+var Grid = function Grid() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    d: "M2.084 5.417c0-1.571 0-2.357.488-2.845s1.274-.488 2.845-.488c1.572 0 2.357 0 2.845.488.489.488.489 1.274.489 2.845 0 1.572 0 2.357-.489 2.845-.488.489-1.273.489-2.845.489-1.571 0-2.357 0-2.845-.489-.488-.488-.488-1.273-.488-2.845ZM11.25 14.583c0-1.571 0-2.357.488-2.845s1.274-.488 2.845-.488c1.572 0 2.357 0 2.845.488.489.488.489 1.274.489 2.845 0 1.572 0 2.357-.489 2.845-.488.489-1.273.489-2.845.489-1.571 0-2.357 0-2.845-.489-.488-.488-.488-1.273-.488-2.845ZM2.084 14.583c0-1.571 0-2.357.488-2.845s1.274-.488 2.845-.488c1.572 0 2.357 0 2.845.488.489.488.489 1.274.489 2.845 0 1.572 0 2.357-.489 2.845-.488.489-1.273.489-2.845.489-1.571 0-2.357 0-2.845-.489-.488-.488-.488-1.273-.488-2.845ZM11.25 5.417c0-1.571 0-2.357.488-2.845s1.274-.488 2.845-.488c1.572 0 2.357 0 2.845.488.489.488.489 1.274.489 2.845 0 1.572 0 2.357-.489 2.845-.488.489-1.273.489-2.845.489-1.571 0-2.357 0-2.845-.489-.488-.488-.488-1.273-.488-2.845Z"
   }));
 };
 
@@ -1651,17 +1821,6 @@ module.exports = window["React"];
 
 "use strict";
 module.exports = window["wp"]["components"];
-
-/***/ }),
-
-/***/ "@wordpress/data":
-/*!******************************!*\
-  !*** external ["wp","data"] ***!
-  \******************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = window["wp"]["data"];
 
 /***/ }),
 

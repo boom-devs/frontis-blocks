@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, TextControl, Button } from '@wordpress/comp
 
 const Integration = () => {
   return (
-    <div className="frontis-blocks-integration">
+    <div className="fb-blocks-integration">
       <h2>{__('Integration', 'frontis-blocks')}</h2>
       <Card>
         <CardHeader>

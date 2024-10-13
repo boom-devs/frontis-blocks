@@ -19,6 +19,9 @@ class Admin {
 
         add_action( 'wp_ajax_fb_save_settings', array( $this, 'save_settings' ) );
 
+        add_action( 'wp_ajax_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
+        add_action( 'wp_ajax_nopriv_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
+
     }
 
     public function add_menu_page(){
