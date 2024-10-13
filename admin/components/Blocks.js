@@ -8,7 +8,8 @@ const Blocks = () => {
   const [blocks, setBlocks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [ searchTerm, setSearchTerm ] = useState('');
+  const { ajaxurl, nonce } = window.frontisBlocksAdmin;
 
   useEffect(() => {
     const loadBlocks = () => {
@@ -51,6 +52,23 @@ const Blocks = () => {
     setSearchTerm('');
   };
 
+  const handleEnableAll = () => {
+    setBlocks(prevBlocks => prevBlocks.map(block => ({ ...block, status: 'true' })));
+  };
+
+  const handleDisableAll = () => {
+    setBlocks(prevBlocks => prevBlocks.map(block => ({ ...block, status: 'false' })));
+  };
+
+  const handleBlockChange = (slug, enabled) => {
+    setBlocks(prevBlocks => prevBlocks.map(block => 
+      block.slug === slug ? { ...block, status: enabled ? 'true' : 'false' } : block
+    ));
+
+    // Here you might want to add an AJAX call to update the server
+    // updateBlockStatus(slug, enabled);
+  };
+
   if (isLoading) {
     return <div>{__('Loading blocks...', 'frontis-blocks')}</div>;
   }
@@ -76,10 +94,10 @@ const Blocks = () => {
           </div>
         </div>
         <div className="fb-blocks-header-right">
-          <button className="fb-blocks-button fb-blocks-enable-all">
+          <button className="fb-blocks-button fb-blocks-enable-all" onClick={handleEnableAll}>
             {__('Enable All', 'frontis-blocks')}
           </button>
-          <button className="fb-blocks-button fb-blocks-disable-all">
+          <button className="fb-blocks-button fb-blocks-disable-all" onClick={handleDisableAll}>
             {__('Disable All', 'frontis-blocks')}
           </button>
         </div>
@@ -101,7 +119,11 @@ const Blocks = () => {
             <h3 className="fb-blocks-category-title">{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
             <div className="fb-blocks-category-content">
               {categoryBlocks.map((block) => (
-                <BlockCard key={block.slug} block={block} />
+                <BlockCard 
+                  key={block.slug} 
+                  block={block} 
+                  onChange={handleBlockChange}
+                />
               ))}
             </div>
           </div>

@@ -1,14 +1,18 @@
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import Switch from 'rc-switch';
 import { Doc, Link } from '../icons';
-const BlockCard = ({ block }) => {
+
+const BlockCard = ({ block, onChange }) => {
     const [isChecked, setIsChecked] = useState(block.status === 'true');
 
+    useEffect(() => {
+        setIsChecked(block.status === 'true');
+    }, [block.status]);
+
     const handleChange = (checked) => {
+        onChange(block.slug, checked);
         setIsChecked(checked);
-        // Here you would typically update the block status in your backend
-        // For example: updateBlockStatus(block.slug, checked);
     };
 
     return (
@@ -34,15 +38,6 @@ const BlockCard = ({ block }) => {
                     <Switch
                         checked={isChecked}
                         onChange={handleChange}
-                        onColor="#86d3ff"
-                        onHandleColor="#2693e6"
-                        handleDiameter={24}
-                        uncheckedIcon={false}
-                        checkedIcon={false}
-                        boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                        activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                        height={20}
-                        width={48}
                         className="fb-block-card-switch-input"
                         id={`switch-${block.slug}`}
                     />
