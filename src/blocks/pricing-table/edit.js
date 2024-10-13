@@ -60,7 +60,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		priceHideFeaturesSwitcher,
 		priceFeatureShowLineSwitcher,
 		priceFeatureIconSwitcher,
-        priceFeatureItems,
+		priceFeatureItems,
 		/** End Feature */
 
 		/** Start Button */
@@ -150,26 +150,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						<div className="fb-pricing-features-wrapper">
 							{ !priceHideFeaturesSwitcher && (
 								<ul className="fb-pricing-features-list">
-									{priceFeatureItems.map((item, key) => (
-										<li className="fb-pricing-feature-item" key={key}>
-											{item.priceFeatureListIconAlign !== 'none' && (
+									{priceFeatureItems.map(item => (
+										<li className="fb-pricing-feature-item" key={item.id}>
+											{priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
 												<div className="fb-pricing-feature-icon">
 													<span className="fb-pricing-feature-icon-inner">
-														{item.priceFeatureListIcon ? renderSVG(item.priceFeatureListIcon) : ''}
+														{item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
 													</span>
 												</div>
 											)}
 											<RichText
 												tagName="span"
 												className="fb-pricing-feature-text"
-												value={item.priceFeatureListItem}
+												value={item.Title}
 												onChange={(value) => {
 													const updatedItems = priceFeatureItems.map(i =>
-														i.id === item.id ? { ...i, priceFeatureListItem: value } : i
+														i.id === item.id ? { ...i, Title: value } : i
 													);
 													setAttributes({ priceFeatureItems: updatedItems });
 												}}
-												placeholder={__('Enter feature item', 'frontis-blocks')}
+												placeholder={__('Feature Title', 'frontis-blocks')}
 											/>
 										</li>
 									))}

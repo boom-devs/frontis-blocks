@@ -19,6 +19,7 @@ export default function save({ attributes }) {
         priceHideFeaturesSwitcher,
         priceFeatureShowLineSwitcher,
         priceFeatureIconSwitcher,
+        pricepriceFeatureItems,
         priceFeatureItems,
         priceButtonSwitcher,
         priceButtonText,
@@ -92,17 +93,17 @@ export default function save({ attributes }) {
                             <ul className="fb-pricing-features-list">
                                 {priceFeatureItems.map((item, key) => (
                                     <li className="fb-pricing-feature-item" key={key}>
-                                        {item.priceFeatureListIconAlign !== 'none' && (
+                                        {priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
                                             <div className="fb-pricing-feature-icon">
                                                 <span className="fb-pricing-feature-icon-inner">
-                                                    {item.priceFeatureListIcon ? renderSVG(item.priceFeatureListIcon) : ''}
+                                                    {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
                                                 </span>
                                             </div>
                                         )}
                                         <RichText.Content
                                             tagName="span"
                                             className="fb-pricing-feature-text"
-                                            value={item.priceFeatureListItem}
+                                            value={item.Title}
                                         />
                                     </li>
                                 ))}

@@ -57,7 +57,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceHideFeaturesSwitcher,
 		priceFeatureShowLineSwitcher,
 		priceFeatureIconSwitcher,
-        priceFeatureItems,
+		priceFeatureItems,
+		
 		/** End Feature */
 
 		/** Start Button */
@@ -89,36 +90,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
-	const handleDragEnd = (event) => {
-		const { active, over } = event;
-		if (active && over && active.id !== over.id) {
-			const oldIndex = priceFeatureItems.findIndex(item => item.id === active.id);
-			const newIndex = priceFeatureItems.findIndex(item => item.id === over.id);
-			const updatedItems = arrayMove(priceFeatureItems, oldIndex, newIndex);
-			setAttributes({ priceFeatureItems: updatedItems });
-		}
-	};
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = priceFeatureItems.findIndex(item => item.id === active.id);
+            const newIndex = priceFeatureItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(priceFeatureItems, oldIndex, newIndex);
+            setAttributes({ priceFeatureItems: updatedItems });
+        }
+    };
 
-	const handleAddItem = () => {
-		const newItem = {
-			id: `item-${priceFeatureItems.length + 1}`,
-			Title: `Feature Item ${priceFeatureItems.length + 1}`,
-			FeatureIcon: 'check'
-		};
-		setAttributes({ priceFeatureItems: [...priceFeatureItems, newItem] });
-	};
+    const handleAddItem = () => {
+        const newItem = { id: `item-${priceFeatureItems.length + 1}`, Title: `Feature Item ${priceFeatureItems.length + 1}`, FeatureIcon: 'check' };
+        setAttributes({ priceFeatureItems: [...priceFeatureItems, newItem] });
+    };
 
-	const handleChangeItem = (id, key, value) => {
-		const updatedItems = priceFeatureItems.map(item =>
-			item.id === id ? { ...item, [key]: value } : item
-		);
-		setAttributes({ priceFeatureItems: updatedItems });
-	};
+    const handleChangeItem = (id, key, value) => {
+        const updatedItems = priceFeatureItems.map(item => 
+            item.id === id ? { ...item, [key]: value } : item
+        );
+        setAttributes({ priceFeatureItems: updatedItems });
+    };
 
-	const handleDeleteItem = (id) => {
-		const updatedItems = priceFeatureItems.filter(item => item.id !== id);
-		setAttributes({ priceFeatureItems: updatedItems });
-	};
+    const handleDeleteItem = (id) => {
+        const updatedItems = priceFeatureItems.filter(item => item.id !== id);
+        setAttributes({ priceFeatureItems: updatedItems });
+    };
 
 	const priceIconHandler = (IconName) => {
 		setAttributes({pricingIcon: IconName})
@@ -269,7 +266,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     collisionDetection={closestCenter}
                                                     onDragEnd={handleDragEnd}
                                                 >
-                                                    <SortableContext items={priceFeatureItems.map(item => item.id)}>
+													<SortableContext items={priceFeatureItems.map(item => item.id)}>
                                                         <ul className='dnd-items-wrapper'>
                                                             {priceFeatureItems.map((item) => (
                                                                 <SortableItem
