@@ -3,6 +3,11 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+    deviceType: {
+        type: "string",
+        default: "Desktop"
+    },
+	/** Start General Settings */
 	/** Start Header */
 	pricingTitle: {
 		type: "string",
@@ -149,6 +154,219 @@ const attributes = {
 		default: "right"
 	},
 	/** End Ribbon */
+	/** End General Settings */
+
+
+	/** Start Global Setting */
+	priceGlobalZIndex : {
+        type: "number",
+    },
+	/** Start Padding */
+	priceGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceGlobalPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Margin */
+	priceGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceGlobalMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
+
+	/** Start Background */
+	priceGlobalBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	priceGlobalBgColor : {
+		type: "string",
+	},
+	priceGlobalBgHoverColor: {
+		type: 'string',
+	},
+	/** End Background */
+
+	/** Start Border */
+	priceGlobalBorder: {
+		type: 'string',
+		default: "none",
+	},
+	priceGlobalBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	priceGlobalBorderColor: {
+		type: 'string',
+	},
+	priceGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	priceGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceGlobalBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceGlobalBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	priceGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceGlobalBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceGlobalBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceGlobalBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceGlobalBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	priceGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    priceGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+	/** End Box Shadow */
+	/** End Global Setting */
 }
 
 export default attributes;
