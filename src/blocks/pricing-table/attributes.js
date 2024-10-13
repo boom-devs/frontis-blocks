@@ -71,33 +71,13 @@ const attributes = {
 		default: true
 	},
 	priceFeatureItems: {
-		type: "array",
-		default: [
-			{
-				id: 'item-1',
-				priceFeatureListItem: 'Feature Item 1',
-				priceFeatureListIcon: 'check',
-				priceFeatureListIconAlign: 'icon',
-			},
-			{
-				id: 'item-2',
-				priceFeatureListItem: 'Feature Item 2',
-				priceFeatureListIcon: 'check',
-				priceFeatureListIconAlign: 'icon',
-			},
-			{
-				id: 'item-3',
-				priceFeatureListItem: 'Feature Item 3',
-				priceFeatureListIcon: 'check',
-				priceFeatureListIconAlign: 'icon',
-			},
-			{
-				id: 'item-4',
-				priceFeatureListItem: 'Feature Item 4',
-				priceFeatureListIcon: 'check',
-				priceFeatureListIconAlign: 'icon',
-			}
-		],
+        type: "array",
+        default: [
+            // You can define some default items if needed
+            { id: 'item-1', Title: 'Feature Item 1', FeatureIcon: 'check', },
+            { id: 'item-2', Title: 'Feature Item 2', FeatureIcon: 'check', },
+            { id: 'item-3', Title: 'Feature Item 3', FeatureIcon: 'check', },
+        ],
         items: {
             type: "object",
             properties: {
@@ -105,21 +85,21 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
-                priceFeatureListItem: {
+                Title: {
                     type: "string",
                     default: ""
                 },
-				priceFeatureListIcon: {
+                FeatureIcon: {
                     type: 'string',
                     default: 'check',
                 },
-				priceFeatureListIconAlign: {
+                FeatureIconAlign: {
                     type: "string",
                     default: "icon",
                 },
             }
         }
-	},
+    },
 	/** End Price list Features */
 
 	/** Start Button */
