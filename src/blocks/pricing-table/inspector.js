@@ -35,6 +35,7 @@ import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
 import FB_Color from '@Components/color';
+import FB_TypographyControl from '@Components/typography-control';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -84,8 +85,225 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceRibbonPosition,
 		/** End Ribbon */
 
+		/** Start Icon Style */
+		pricingIconAlignment,
+		priceIconColorSwitcher,
+		priceIconColor,
+		priceIconHoverColor,
+		priceIconBgColorSwitcher,
+		priceIconBgColor,
+		priceIconBgHoverColor,
+		priceIconSize,
+		priceIconSizeUnits,
+		priceIconBgSize,
+		priceIconBgSizeUnits,
 
-		/** Start Padding */
+		/** Start Icon Border */
+		priceIconBorder,
+		priceIconBorderColorSwitcher,
+		priceIconBorderColor,
+		priceIconBorderHoverColor,
+		priceIconBorderUnits,
+		priceIconBorderDesktop,
+		priceIconBorderTablet,
+		priceIconBorderMobile,
+		priceIconBorderLink,
+		/** End Icon Border */
+
+		/** Start Icon Border Radius */
+		priceIconBorderRadiusUnits,
+		priceIconBorderRadiusDesktop,
+		priceIconBorderRadiusTablet,
+		priceIconBorderRadiusMobile,
+		priceIconBorderRadiusLink,
+		/** End Icon Border Radius */
+		/** End Icon Style */
+
+
+		/** Start Pricing Style */
+		pricingAlignment,
+		normalPricingFontFamily,
+		normalPricingFontSize,
+		normalPricingFontSizeUnits,
+		normalPricingFontWeight,
+		normalPricingFontStyle,
+		normalPricingTextTransform,
+		normalPricingTextDecoration,
+		normalPricingLetterSpacing,
+		normalPricingLetterSpacingUnits,
+		normalPricingLineHeight,
+		normalPricingLineHeightUnits,
+		normalPricingColorSwitcher,
+		normalPricingColor,
+		normalPricingHoverColor,
+
+		salePricingFontFamily,
+		salePricingFontSize,
+		salePricingFontSizeUnits,
+		salePricingFontWeight,
+		salePricingFontStyle,
+		salePricingTextTransform,
+		salePricingTextDecoration,
+		salePricingLetterSpacing,
+		salePricingLetterSpacingUnits,
+		salePricingLineHeight,
+		salePricingLineHeightUnits,
+		salePricingColorSwitcher,
+		salePricingColor,
+		salePricingHoverColor,
+
+		priceCurrencyFontFamily,
+		priceCurrencyFontSize,
+		priceCurrencyFontSizeUnits,
+		priceCurrencyFontWeight,
+		priceCurrencyFontStyle,
+		priceCurrencyTextTransform,
+		priceCurrencyTextDecoration,
+		priceCurrencyLetterSpacing,
+		priceCurrencyLetterSpacingUnits,
+		priceCurrencyLineHeight,
+		priceCurrencyLineHeightUnits,
+		priceCurrencyColorSwitcher,
+		priceCurrencyColor,
+		priceCurrencyHoverColor,
+
+		pricePeriodFontFamily,
+		pricePeriodFontSize,
+		pricePeriodFontSizeUnits,
+		pricePeriodFontWeight,
+		pricePeriodFontStyle,
+		pricePeriodTextTransform,
+		pricePeriodTextDecoration,
+		pricePeriodLetterSpacing,
+		pricePeriodLetterSpacingUnits,
+		pricePeriodLineHeight,
+		pricePeriodLineHeightUnits,
+		pricePeriodColorSwitcher,
+		pricePeriodColor,
+		pricePeriodHoverColor,
+		/** End Pricing Style */
+
+		/**Start Title and Subtitle Style */
+		pricingTitleAlignment,
+		pricingTitleColorSwitcher,
+		pricingTitleColor,
+		pricingTitleHoverColor,
+		pricingTitleFontFamily,
+		pricingTitleFontSize,
+		pricingTitleFontSizeUnits,
+		pricingTitleFontWeight,
+		pricingTitleFontStyle,
+		pricingTitleTextTransform,
+		pricingTitleTextDecoration,
+		pricingTitleLetterSpacing,
+		pricingTitleLetterSpacingUnits,
+		pricingTitleLineHeight,
+		pricingTitleLineHeightUnits,
+
+		pricingSubtitleColorSwitcher,
+		pricingSubtitleColor,
+		pricingSubtitleHoverColor,
+		pricingSubtitleFontFamily,
+		pricingSubtitleFontSize,
+		pricingSubtitleFontSizeUnits,
+		pricingSubtitleFontWeight,
+		pricingSubtitleFontStyle,
+		pricingSubtitleTextTransform,
+		pricingSubtitleTextDecoration,
+		pricingSubtitleLetterSpacing,
+		pricingSubtitleLetterSpacingUnits,
+		pricingSubtitleLineHeight,
+		pricingSubtitleLineHeightUnits,
+		/**end Title and Subtitle Style */
+
+		/** Start Feature Icon */
+		priceFeatureAlignment,
+		priceFeatureIconColorSwitcher,
+		priceFeatureIconColor,
+		priceFeatureIconHoverColor,
+		priceFeatureIconSize,
+		priceFeatureIconSizeUnits,
+		/** End Feature Icon */
+
+		/** Start Feature Title */
+		pricingfeatureTitleColorSwitcher,
+		pricingfeatureTitleColor,
+		pricingfeatureTitleHoverColor,
+		pricingfeatureTitleFontFamily,
+		pricingfeatureTitleFontSize,
+		pricingfeatureTitleFontSizeUnits,
+		pricingfeatureTitleFontWeight,
+		pricingfeatureTitleFontStyle,
+		pricingfeatureTitleTextTransform,
+		pricingfeatureTitleTextDecoration,
+		pricingfeatureTitleLetterSpacing,
+		pricingfeatureTitleLetterSpacingUnits,
+		pricingfeatureTitleLineHeight,
+		pricingfeatureTitleLineHeightUnits,
+		/** End Feature Title */
+
+
+		/** Start price Button */
+		priceButtonAlignment,
+		priceButtonWidth,
+		priceButtonWidthUnits,
+
+		priceButtonFontFamily,
+		priceButtonFontSize,
+		priceButtonFontSizeUnits,
+		priceButtonFontWeight,
+		priceButtonFontStyle,
+		priceButtonTextTransform,
+		priceButtonTextDecoration,
+		priceButtonLetterSpacing,
+		priceButtonLetterSpacingUnits,
+		priceButtonLineHeight,
+		priceButtonLineHeightUnits,
+
+		priceButtonColorSwitcher,
+		priceButtonColor,
+		priceButtonHoverColor,
+		priceButtonBgColorSwitcher,
+		priceButtonBgColor,
+		priceButtonBgHoverColor,
+
+		priceButtonPaddingUnits,
+		priceButtonDesktopPadding,
+		priceButtonTabPadding,
+		priceButtonMobilePadding,
+		priceButtonPaddingLink,
+
+		priceButtonMarginUnits,
+		priceButtonDesktopMargin,
+		priceButtonTabMargin,
+		priceButtonMobileMargin,
+		priceButtonMarginLink,
+
+		priceButtonBorder,
+		priceButtonBorderColorSwitcher,
+		priceButtonBorderColor,
+		priceButtonBorderHoverColor,
+
+		priceButtonBorderUnits,
+		priceButtonDesktopBorderWidth,
+		priceButtonTabBorderWidth,
+		priceButtonMobileBorderWidth,
+		priceButtonBorderLink,
+
+		priceButtonBorderRadiusUnits,
+		priceButtonDesktopBorderRadiusWidth,
+		priceButtonTabBorderRadiusWidth,
+		priceButtonMobileBorderRadiusWidth,
+		priceButtonBorderRadiusLink,
+
+		priceButtonIconColorSwitcher,
+		priceButtonIconColor,
+		priceButtonIconHoverColor,
+		priceButtonIconSize,
+		priceButtonIconSizeUnits,
+		/** End price Button */
+
+		/** Start Global Settings */
 		priceGlobalZIndex,
 		priceGlobalPaddingUnits,
         priceGlobalPaddingDesktop,
@@ -116,6 +334,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         priceGlobalBorderRadiusLink,
 		priceGlobalBoxShadowValues,
 		priceGlobalBoxShadowCssValue,
+		/** End Global Settings */
 
     } = attributes;
 
@@ -162,6 +381,444 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({priceButtonIcon: IconName})
 	}
 
+
+	/** Start Icon Border */
+	const handlePriceIconBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceIconBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceIconBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceIconBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceIconBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceIconBorderDesktop: {...priceIconBorderDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceIconBorderTablet: {...priceIconBorderTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceIconBorderMobile: {...priceIconBorderMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handlePriceIconBorderCombineBtn = () => {
+		setAttributes( {priceIconBorderLink: !priceIconBorderLink} );
+	}
+
+	const handlePriceIconBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			priceIconBorderUnits: {
+				...priceIconBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceIconDesktopBorderWidthValue = `${priceIconBorderDesktop.top}${priceIconBorderUnits.Desktop} ${priceIconBorderDesktop.right}${priceIconBorderUnits.Desktop} ${priceIconBorderDesktop.bottom}${priceIconBorderUnits.Desktop} ${priceIconBorderDesktop.left}${priceIconBorderUnits.Desktop}`;
+	const priceIconTabletBorderWidthValue = `${priceIconBorderTablet.top}${priceIconBorderUnits.Tablet} ${priceIconBorderTablet.right}${priceIconBorderUnits.Tablet} ${priceIconBorderTablet.bottom}${priceIconBorderUnits.Tablet} ${priceIconBorderTablet.left}${priceIconBorderUnits.Tablet}`;
+	const priceIconMobileBorderWidthValue = `${priceIconBorderMobile.top}${priceIconBorderUnits.Mobile} ${priceIconBorderMobile.right}${priceIconBorderUnits.Mobile} ${priceIconBorderMobile.bottom}${priceIconBorderUnits.Mobile} ${priceIconBorderMobile.left}${priceIconBorderUnits.Mobile}`;
+	/** End Icon Border */
+
+	/** Start Icon Border Radius */
+	const handlePriceIconBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceIconBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceIconBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceIconBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceIconBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceIconBorderRadiusDesktop: {...priceIconBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceIconBorderRadiusTablet: {...priceIconBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceIconBorderRadiusMobile: {...priceIconBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handlePriceIconBorderRadiusCombineBtn = () => {
+		setAttributes( {priceIconBorderRadiusLink: !priceIconBorderRadiusLink} );
+	}
+
+	const handlePriceIconBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			priceIconBorderRadiusUnits: {
+				...priceIconBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceIconDesktopBorderRadiusWidthValue = `${priceIconBorderRadiusDesktop.top}${priceIconBorderRadiusUnits.Desktop} ${priceIconBorderRadiusDesktop.right}${priceIconBorderRadiusUnits.Desktop} ${priceIconBorderRadiusDesktop.bottom}${priceIconBorderRadiusUnits.Desktop} ${priceIconBorderRadiusDesktop.left}${priceIconBorderRadiusUnits.Desktop}`;
+	const priceIconTabletBorderRadiusWidthValue = `${priceIconBorderRadiusTablet.top}${priceIconBorderRadiusUnits.Tablet} ${priceIconBorderRadiusTablet.right}${priceIconBorderRadiusUnits.Tablet} ${priceIconBorderRadiusTablet.bottom}${priceIconBorderRadiusUnits.Tablet} ${priceIconBorderRadiusTablet.left}${priceIconBorderRadiusUnits.Tablet}`;
+	const priceIconMobileBorderRadiusWidthValue = `${priceIconBorderRadiusMobile.top}${priceIconBorderRadiusUnits.Mobile} ${priceIconBorderRadiusMobile.right}${priceIconBorderRadiusUnits.Mobile} ${priceIconBorderRadiusMobile.bottom}${priceIconBorderRadiusUnits.Mobile} ${priceIconBorderRadiusMobile.left}${priceIconBorderRadiusUnits.Mobile}`;
+	/** End Icon Border Radius */
+
+
+	/** Start Pricing Button padding */
+	const handlePriceButtonPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceButtonPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceButtonDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceButtonTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceButtonMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceButtonDesktopPadding: {...priceButtonDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceButtonTabPadding: {...priceButtonTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceButtonMobilePadding: {...priceButtonMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handlePriceButtonPaddingCombineBtn = () => {
+		setAttributes( {priceButtonPaddingLink: !priceButtonPaddingLink} );
+	}
+
+	const handlePriceButtonPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			priceButtonPaddingUnits: {
+				...priceButtonPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceButtonDesktopPaddingValue = `${priceButtonDesktopPadding.top}${priceButtonPaddingUnits.Desktop} ${priceButtonDesktopPadding.right}${priceButtonPaddingUnits.Desktop} ${priceButtonDesktopPadding.bottom}${priceButtonPaddingUnits.Desktop} ${priceButtonDesktopPadding.left}${priceButtonPaddingUnits.Desktop}`;
+	const priceButtonTabletPaddingValue = `${priceButtonTabPadding.top}${priceButtonPaddingUnits.Tablet} ${priceButtonTabPadding.right}${priceButtonPaddingUnits.Tablet} ${priceButtonTabPadding.bottom}${priceButtonPaddingUnits.Tablet} ${priceButtonTabPadding.left}${priceButtonPaddingUnits.Tablet}`;
+	const priceButtonMobilePaddingValue = `${priceButtonMobilePadding.top}${priceButtonPaddingUnits.Mobile} ${priceButtonMobilePadding.right}${priceButtonPaddingUnits.Mobile} ${priceButtonMobilePadding.bottom}${priceButtonPaddingUnits.Mobile} ${priceButtonMobilePadding.left}${priceButtonPaddingUnits.Mobile}`;
+	/** End Pricing Button Padding */
+	
+	/** Start Pricing Button Margin */
+	const handlePriceButtonMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceButtonMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceButtonDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceButtonTabMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceButtonMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceButtonDesktopMargin: {...priceButtonDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceButtonTabMargin: {...priceButtonTabMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceButtonMobileMargin: {...priceButtonMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handlePriceButtonMarginCombineBtn = () => {
+		setAttributes( {priceButtonMarginLink: !priceButtonMarginLink} );
+	}
+
+	const handlePriceButtonMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			priceButtonMarginUnits: {
+				...priceButtonMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const priceButtonDesktopMarginValue = `${priceButtonDesktopMargin.top}${priceButtonMarginUnits.Desktop} ${priceButtonDesktopMargin.right}${priceButtonMarginUnits.Desktop} ${priceButtonDesktopMargin.bottom}${priceButtonMarginUnits.Desktop} ${priceButtonDesktopMargin.left}${priceButtonMarginUnits.Desktop}`;
+	const priceButtonTabletMarginValue = `${priceButtonTabMargin.top}${priceButtonMarginUnits.Tablet} ${priceButtonTabMargin.right}${priceButtonMarginUnits.Tablet} ${priceButtonTabMargin.bottom}${priceButtonMarginUnits.Tablet} ${priceButtonTabMargin.left}${priceButtonMarginUnits.Tablet}`;
+	const priceButtonMobileMarginValue = `${priceButtonMobileMargin.top}${priceButtonMarginUnits.Mobile} ${priceButtonMobileMargin.right}${priceButtonMarginUnits.Mobile} ${priceButtonMobileMargin.bottom}${priceButtonMarginUnits.Mobile} ${priceButtonMobileMargin.left}${priceButtonMarginUnits.Mobile}`;
+	/** End Pricing Button Margin */
+
+	/** Start Pricing Button border */
+	const handlePriceButtonBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceButtonBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceButtonDesktopBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceButtonTabBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceButtonMobileBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceButtonDesktopBorderWidth: {...priceButtonDesktopBorderWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceButtonTabBorderWidth: {...priceButtonTabBorderWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceButtonMobileBorderWidth: {...priceButtonMobileBorderWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handlePriceButtonBorderCombineBtn = () => {
+		setAttributes( {priceButtonBorderLink: !priceButtonBorderLink} );
+	}
+
+	const handlePriceButtonBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			priceButtonBorderUnits: {
+				...priceButtonBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceButtonDesktopBorderWidthValue = `${priceButtonDesktopBorderWidth.top}${priceButtonBorderUnits.Desktop} ${priceButtonDesktopBorderWidth.right}${priceButtonBorderUnits.Desktop} ${priceButtonDesktopBorderWidth.bottom}${priceButtonBorderUnits.Desktop} ${priceButtonDesktopBorderWidth.left}${priceButtonBorderUnits.Desktop}`;
+	const priceButtonTabletBorderWidthValue = `${priceButtonTabBorderWidth.top}${priceButtonBorderUnits.Tablet} ${priceButtonTabBorderWidth.right}${priceButtonBorderUnits.Tablet} ${priceButtonTabBorderWidth.bottom}${priceButtonBorderUnits.Tablet} ${priceButtonTabBorderWidth.left}${priceButtonBorderUnits.Tablet}`;
+	const priceButtonMobileBorderWidthValue = `${priceButtonMobileBorderWidth.top}${priceButtonBorderUnits.Mobile} ${priceButtonMobileBorderWidth.right}${priceButtonBorderUnits.Mobile} ${priceButtonMobileBorderWidth.bottom}${priceButtonBorderUnits.Mobile} ${priceButtonMobileBorderWidth.left}${priceButtonBorderUnits.Mobile}`;
+	/** End Pricing Button Border */
+
+
+	/** Start Pricing Button border radius*/
+	const handlePriceButtonBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceButtonBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceButtonDesktopBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceButtonTabBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceButtonMobileBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceButtonDesktopBorderRadiusWidth: {...priceButtonDesktopBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceButtonTabBorderRadiusWidth: {...priceButtonTabBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceButtonMobileBorderRadiusWidth: {...priceButtonMobileBorderRadiusWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handlePriceButtonBorderRadiusCombineBtn = () => {
+		setAttributes( {priceButtonBorderRadiusLink: !priceButtonBorderRadiusLink} );
+	}
+
+	const handlePriceButtonBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			priceButtonBorderRadiusUnits: {
+				...priceButtonBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Pricing Button border */
+
+	/** End Pricing Button Border Radius */
+	const priceButtonDesktopBorderRadiusWidthValue = `${priceButtonDesktopBorderRadiusWidth.top}${priceButtonBorderRadiusUnits.Desktop} ${priceButtonDesktopBorderRadiusWidth.right}${priceButtonBorderRadiusUnits.Desktop} ${priceButtonDesktopBorderRadiusWidth.bottom}${priceButtonBorderRadiusUnits.Desktop} ${priceButtonDesktopBorderRadiusWidth.left}${priceButtonBorderRadiusUnits.Desktop}`;
+	const priceButtonTabletBorderRadiusWidthValue = `${priceButtonTabBorderRadiusWidth.top}${priceButtonBorderRadiusUnits.Tablet} ${priceButtonTabBorderRadiusWidth.right}${priceButtonBorderRadiusUnits.Tablet} ${priceButtonTabBorderRadiusWidth.bottom}${priceButtonBorderRadiusUnits.Tablet} ${priceButtonTabBorderRadiusWidth.left}${priceButtonBorderRadiusUnits.Tablet}`;
+	const priceButtonMobileBorderRadiusWidthValue = `${priceButtonMobileBorderRadiusWidth.top}${priceButtonBorderRadiusUnits.Mobile} ${priceButtonMobileBorderRadiusWidth.right}${priceButtonBorderRadiusUnits.Mobile} ${priceButtonMobileBorderRadiusWidth.bottom}${priceButtonBorderRadiusUnits.Mobile} ${priceButtonMobileBorderRadiusWidth.left}${priceButtonBorderRadiusUnits.Mobile}`;
+	/** End Pricing Button Border Radius */
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -481,6 +1138,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
 				${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
 			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-header {
+
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-icon-wrapper {
+				justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
+				width: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
+				height: auto;
+				background-color: ${priceIconBgColor};
+				${priceIconBorder ? `border-style: ${priceIconBorder};` : ''}
+				${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
+				${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
+				${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
+				transition: background-color 0.3s ease;
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover {
+				background-color: ${priceIconBgHoverColor};
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
+				width: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+				height: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+				fill: ${priceIconColor};
+				transition: fill 0.3s ease;
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg:hover {
+				fill: ${priceIconHoverColor};
+			}
 
 			@media only screen and (max-width: 1024px) {
 				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
@@ -526,7 +1211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === 'general' && (
 									<>
 										{/** Start Header */}
-										<PanelBody title={__("Header", "frontis-blocks")} initialOpen={true}>
+										<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
 											<TextControl
 												label={__("Title", "frontis-blocks")}
 												value={pricingTitle}
@@ -753,10 +1438,746 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === "styles" && (
 									<>
 										<PanelBody
-											title={__("Header", "frontis-blocks")}
+											title={__("Icon", "frontis-blocks")}
 											initialOpen={true}
 										>
 
+											<BaseControl
+												label={__("Alignment", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+													<ButtonGroup
+														className="fb-setting-text-alignment-group-btn"
+													>
+														{TEXT_ALIGN.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({ pricingIconAlignment: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${pricingIconAlignment === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+											</BaseControl>
+
+											<FB_Range
+												min={1}
+                                                max={200}
+												label={__("Icon Size", "frontis-blocks")}
+                                                rangeValue={priceIconSize}
+                                                onChangeHandler={(value) => setAttributes({ priceIconSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ priceIconSizeUnits: value })}
+                                                deviceType={deviceType}
+                                                units={priceIconSizeUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={"100"}
+											/>
+
+											<FB_Range
+												min={0}
+												max={200}
+												label={__("Background Size", "frontis-blocks")}
+												rangeValue={priceIconBgSize}
+												onChangeHandler={(value) => setAttributes({ priceIconBgSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceIconBgSizeUnits: value })}
+												deviceType={deviceType}
+												units={priceIconBgSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<FB_Color
+												label={__("Color", "frontis-blocks")}
+												globalColorSwitcher={priceIconColorSwitcher}
+												globalColor={priceIconColor}
+												globalHoverColor={priceIconHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceIconColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceIconColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconHoverColor: value })}
+											/>
+
+											<FB_Color
+												label={__("Background Color", "frontis-blocks")}
+												globalColorSwitcher={priceIconBgColorSwitcher}
+												globalColor={priceIconBgColor}
+												globalHoverColor={priceIconBgHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceIconBgColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceIconBgColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBgHoverColor: value })}
+											/>
+
+											<SelectControl
+													label={__("Border Style", "frontis-blocks")}
+													value={priceIconBorder}
+													options={BORDER_STYLES}
+													onChange={(value) => setAttributes({ priceIconBorder: value })}
+											/>
+
+											<FB_Color
+												label={__("Border Color", "frontis-blocks")}
+												globalColorSwitcher={priceIconBorderColorSwitcher}
+												globalColor={priceIconBorderColor}
+												globalHoverColor={priceIconBorderHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceIconBorderColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+											/>
+
+											<FB_Spacing 
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlePriceIconBorderUnitsHandler}
+												spacingUnits={priceIconBorderUnits}
+												spacingDesktop={priceIconBorderDesktop}
+												spacingTablet={priceIconBorderTablet}
+												spacingMobile={priceIconBorderMobile}
+												handleSpacingUnitHandler={handlePriceIconBorderUnitChange}
+												spacingCombineBtn={priceIconBorderLink}
+												spacingCombineBtnHandler={handlePriceIconBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing 
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlePriceIconBorderRadiusUnitsHandler}
+												spacingUnits={priceIconBorderRadiusUnits}
+												spacingDesktop={priceIconBorderRadiusDesktop}
+												spacingTablet={priceIconBorderRadiusTablet}
+												spacingMobile={priceIconBorderRadiusMobile}
+												handleSpacingUnitHandler={handlePriceIconBorderRadiusUnitChange}
+												spacingCombineBtn={priceIconBorderRadiusLink}
+												spacingCombineBtnHandler={handlePriceIconBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+										</PanelBody>
+										<PanelBody
+											title={__("Price", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<BaseControl
+												label={__("Alignment", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+													<ButtonGroup
+														className="fb-setting-text-alignment-group-btn"
+													>
+														{TEXT_ALIGN.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({ pricingAlignment: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${pricingAlignment === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+											</BaseControl>
+
+											<FB_Color
+												label={__("Price Color", "frontis-blocks")}
+												globalColorSwitcher={normalPricingColorSwitcher}
+												globalColor={normalPricingColor}
+												globalHoverColor={normalPricingHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ normalPricingColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ normalPricingColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ normalPricingHoverColor: value })}
+											/>
+											<FB_TypographyControl
+												fontFamily={normalPricingFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ normalPricingFontFamily: value })}
+
+												fontSize={normalPricingFontSize}
+												onChangeFontSize={(value) => setAttributes({ normalPricingFontSize: value })}
+
+												fontSizeUnits={normalPricingFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ normalPricingFontSizeUnits: value })}
+
+												fontWeight={normalPricingFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ normalPricingFontWeight: value })}
+
+												fontStyle={normalPricingFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ normalPricingFontStyle: value })}
+
+												textTransform={normalPricingTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ normalPricingTextTransform: value })}
+
+												textDecoration={normalPricingTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ normalPricingTextDecoration: value })}
+
+												letterSpacing={normalPricingLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ normalPricingLetterSpacing: value })}
+
+												letterSpacingUnits={normalPricingLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ normalPricingLetterSpacingUnits: value })}
+
+												lineHeight={normalPricingLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ normalPricingLineHeight: value })}
+
+												lineHeightUnits={normalPricingLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ normalPricingLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Color
+												label={__("Sale Price Color", "frontis-blocks")}
+												globalColorSwitcher={salePricingColorSwitcher}
+												globalColor={salePricingColor}
+												globalHoverColor={salePricingHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ salePricingColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ salePricingColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ salePricingHoverColor: value })}
+											/>
+
+											<FB_TypographyControl
+												fontFamily={salePricingFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ salePricingFontFamily: value })}
+
+												fontSize={salePricingFontSize}
+												onChangeFontSize={(value) => setAttributes({ salePricingFontSize: value })}
+
+												fontSizeUnits={salePricingFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ salePricingFontSizeUnits: value })}
+
+												fontWeight={salePricingFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ salePricingFontWeight: value })}
+
+												fontStyle={salePricingFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ salePricingFontStyle: value })}
+
+												textTransform={salePricingTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ salePricingTextTransform: value })}
+
+												textDecoration={salePricingTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ salePricingTextDecoration: value })}
+
+												letterSpacing={salePricingLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ salePricingLetterSpacing: value })}
+
+												letterSpacingUnits={salePricingLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ salePricingLetterSpacingUnits: value })}
+
+												lineHeight={salePricingLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ salePricingLineHeight: value })}
+
+												lineHeightUnits={salePricingLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ salePricingLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Color
+												label={__("Currency Color", "frontis-blocks")}
+												globalColorSwitcher={priceCurrencyColorSwitcher}
+												globalColor={priceCurrencyColor}
+												globalHoverColor={priceCurrencyHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceCurrencyColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceCurrencyColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceCurrencyHoverColor: value })}
+											/>
+
+											<FB_TypographyControl
+												fontFamily={priceCurrencyFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ priceCurrencyFontFamily: value })}
+
+												fontSize={priceCurrencyFontSize}
+												onChangeFontSize={(value) => setAttributes({ priceCurrencyFontSize: value })}
+
+												fontSizeUnits={priceCurrencyFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ priceCurrencyFontSizeUnits: value })}
+
+												fontWeight={priceCurrencyFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ priceCurrencyFontWeight: value })}
+
+												fontStyle={priceCurrencyFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ priceCurrencyFontStyle: value })}
+
+												textTransform={priceCurrencyTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ priceCurrencyTextTransform: value })}
+
+												textDecoration={priceCurrencyTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ priceCurrencyTextDecoration: value })}
+
+												letterSpacing={priceCurrencyLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ priceCurrencyLetterSpacing: value })}
+
+												letterSpacingUnits={priceCurrencyLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ priceCurrencyLetterSpacingUnits: value })}
+
+												lineHeight={priceCurrencyLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ priceCurrencyLineHeight: value })}
+
+												lineHeightUnits={priceCurrencyLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ priceCurrencyLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Color
+												label={__("Period Color", "frontis-blocks")}
+												globalColorSwitcher={pricePeriodColorSwitcher}
+												globalColor={pricePeriodColor}
+												globalHoverColor={pricePeriodHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricePeriodColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricePeriodColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricePeriodHoverColor: value })}
+											/>
+
+											<FB_TypographyControl
+												fontFamily={pricePeriodFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ pricePeriodFontFamily: value })}
+
+												fontSize={pricePeriodFontSize}
+												onChangeFontSize={(value) => setAttributes({ pricePeriodFontSize: value })}
+
+												fontSizeUnits={pricePeriodFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ pricePeriodFontSizeUnits: value })}
+
+												fontWeight={pricePeriodFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ pricePeriodFontWeight: value })}
+
+												fontStyle={pricePeriodFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ pricePeriodFontStyle: value })}
+
+												textTransform={pricePeriodTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ pricePeriodTextTransform: value })}
+
+												textDecoration={pricePeriodTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricePeriodTextDecoration: value })}
+
+												letterSpacing={pricePeriodLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ pricePeriodLetterSpacing: value })}
+
+												letterSpacingUnits={pricePeriodLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ pricePeriodLetterSpacingUnits: value })}
+
+												lineHeight={pricePeriodLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ pricePeriodLineHeight: value })}
+
+												lineHeightUnits={pricePeriodLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ pricePeriodLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+										<PanelBody
+											title={__("Title and Subtitle", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<BaseControl
+												label={__("Alignment", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+													<ButtonGroup
+														className="fb-setting-text-alignment-group-btn"
+													>
+														{TEXT_ALIGN.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({ pricingTitleAlignment: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${pricingTitleAlignment === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+											</BaseControl>
+
+											<FB_Color
+												label={__("Title Color", "frontis-blocks")}
+												globalColorSwitcher={pricingTitleColorSwitcher}
+												globalColor={pricingTitleColor}
+												globalHoverColor={pricingTitleHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricingTitleColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricingTitleColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricingTitleHoverColor: value })}
+											/>
+
+											<FB_TypographyControl
+												fontFamily={pricingTitleFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ pricingTitleFontFamily: value })}
+
+												fontSize={pricingTitleFontSize}
+												onChangeFontSize={(value) => setAttributes({ pricingTitleFontSize: value })}
+
+												fontSizeUnits={pricingTitleFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ pricingTitleFontSizeUnits: value })}
+
+												fontWeight={pricingTitleFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ pricingTitleFontWeight: value })}
+
+												fontStyle={pricingTitleFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ pricingTitleFontStyle: value })}
+
+												textTransform={pricingTitleTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ pricingTitleTextTransform: value })}
+
+												textDecoration={pricingTitleTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricingTitleTextDecoration: value })}
+
+												letterSpacing={pricingTitleLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ pricingTitleLetterSpacing: value })}
+
+												letterSpacingUnits={pricingTitleLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ pricingTitleLetterSpacingUnits: value })}
+
+												lineHeight={pricingTitleLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ pricingTitleLineHeight: value })}
+
+												lineHeightUnits={pricingTitleLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ pricingTitleLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Color
+												label={__("Subtitle Color", "frontis-blocks")}
+												globalColorSwitcher={pricingSubtitleColorSwitcher}
+												globalColor={pricingSubtitleColor}
+												globalHoverColor={pricingSubtitleHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricingSubtitleColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricingSubtitleColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricingSubtitleHoverColor: value })}
+											/>
+
+											<FB_TypographyControl
+												fontFamily={pricingSubtitleFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ pricingSubtitleFontFamily: value })}
+
+												fontSize={pricingSubtitleFontSize}
+												onChangeFontSize={(value) => setAttributes({ pricingSubtitleFontSize: value })}
+
+												fontSizeUnits={pricingSubtitleFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ pricingSubtitleFontSizeUnits: value })}
+
+												fontWeight={pricingSubtitleFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ pricingSubtitleFontWeight: value })}
+
+												fontStyle={pricingSubtitleFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ pricingSubtitleFontStyle: value })}
+
+												textTransform={pricingSubtitleTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ pricingSubtitleTextTransform: value })}
+
+												textDecoration={pricingSubtitleTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricingSubtitleTextDecoration: value })}
+
+												letterSpacing={pricingSubtitleLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ pricingSubtitleLetterSpacing: value })}
+
+												letterSpacingUnits={pricingSubtitleLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ pricingSubtitleLetterSpacingUnits: value })}
+
+												lineHeight={pricingSubtitleLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ pricingSubtitleLineHeight: value })}
+
+												lineHeightUnits={pricingSubtitleLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ pricingSubtitleLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+										<PanelBody
+											title={__("Feature", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<BaseControl
+												label={__("Alignment", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+													<ButtonGroup
+														className="fb-setting-text-alignment-group-btn"
+													>
+														{TEXT_ALIGN.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({ priceFeatureAlignment: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${priceFeatureAlignment === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+											</BaseControl>
+
+											<FB_Color
+												label={__("Feature Icon Color", "frontis-blocks")}
+												globalColorSwitcher={priceFeatureIconColorSwitcher}
+												globalColor={priceFeatureIconColor}
+												globalHoverColor={priceFeatureIconHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceFeatureIconColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceFeatureIconColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceFeatureIconHoverColor: value })}
+											/>
+
+											<FB_Range
+												min={0}
+												max={200}
+												label={__("Feature Icon Size", "frontis-blocks")}
+												rangeValue={priceFeatureIconSize}
+												onChangeHandler={(value) => setAttributes({ priceFeatureIconSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceFeatureIconSizeUnits: value })}
+												deviceType={deviceType}
+												units={priceFeatureIconSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<FB_Color
+												label={__("Feature Title Color", "frontis-blocks")}
+												globalColorSwitcher={pricingfeatureTitleColorSwitcher}
+												globalColor={pricingfeatureTitleColor}
+												globalHoverColor={pricingfeatureTitleHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricingfeatureTitleColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricingfeatureTitleColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricingfeatureTitleHoverColor: value })}
+											/>
+
+											<FB_TypographyControl
+												fontFamily={pricingfeatureTitleFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ pricingfeatureTitleFontFamily: value })}
+
+												fontSize={pricingfeatureTitleFontSize}
+												onChangeFontSize={(value) => setAttributes({ pricingfeatureTitleFontSize: value })}
+
+												fontSizeUnits={pricingfeatureTitleFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ pricingfeatureTitleFontSizeUnits: value })}
+
+												fontWeight={pricingfeatureTitleFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ pricingfeatureTitleFontWeight: value })}
+
+												fontStyle={pricingfeatureTitleFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ pricingfeatureTitleFontStyle: value })}
+
+												textTransform={pricingfeatureTitleTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ pricingfeatureTitleTextTransform: value })}
+
+												textDecoration={pricingfeatureTitleTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricingfeatureTitleTextDecoration: value })}
+
+												letterSpacing={pricingfeatureTitleLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ pricingfeatureTitleLetterSpacing: value })}
+
+												letterSpacingUnits={pricingfeatureTitleLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ pricingfeatureTitleLetterSpacingUnits: value })}
+
+												lineHeight={pricingfeatureTitleLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ pricingfeatureTitleLineHeight: value })}
+
+												lineHeightUnits={pricingfeatureTitleLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ pricingfeatureTitleLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+
+										<PanelBody
+											title={__("Button", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<BaseControl
+												label={__("Alignment", "frontis-blocks")}
+												id="fb-setting-text-alignment"
+												className="fb-setting-text-alignment"
+											>
+													<ButtonGroup
+														className="fb-setting-text-alignment-group-btn"
+													>
+														{TEXT_ALIGN.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({ priceButtonAlignment: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${priceButtonAlignment === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+											</BaseControl>
+
+											<FB_Range
+												min={0}
+												max={100}
+												label={__("Button Width", "frontis-blocks")}
+												rangeValue={priceButtonWidth}
+												onChangeHandler={(value) => setAttributes({ priceButtonWidth: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceButtonWidthUnits: value })}
+												deviceType={deviceType}
+												units={priceButtonWidthUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<FB_TypographyControl
+												fontFamily={priceButtonFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ priceButtonFontFamily: value })}
+
+												fontSize={priceButtonFontSize}
+												onChangeFontSize={(value) => setAttributes({ priceButtonFontSize: value })}
+
+												fontSizeUnits={priceButtonFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ priceButtonFontSizeUnits: value })}
+
+												fontWeight={priceButtonFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ priceButtonFontWeight: value })}
+
+												fontStyle={priceButtonFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ priceButtonFontStyle: value })}
+
+												textTransform={priceButtonTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ priceButtonTextTransform: value })}
+
+												textDecoration={priceButtonTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ priceButtonTextDecoration: value })}
+
+												letterSpacing={priceButtonLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ priceButtonLetterSpacing: value })}
+
+												letterSpacingUnits={priceButtonLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ priceButtonLetterSpacingUnits: value })}
+
+												lineHeight={priceButtonLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ priceButtonLineHeight: value })}
+
+												lineHeightUnits={priceButtonLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ priceButtonLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Color
+												label={__("Text Color", "frontis-blocks")}
+												colorSwitcher={priceButtonColorSwitcher}
+												globalColor={priceButtonColor}
+												globalHoverColor={priceButtonHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceButtonColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceButtonColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonHoverColor: value })}
+											/>
+
+											<FB_Color
+												label={__("Background Color", "frontis-blocks")}
+												colorSwitcher={priceButtonBgColorSwitcher}
+												globalColor={priceButtonBgColor}
+												globalHoverColor={priceButtonBgHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceButtonBgColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceButtonBgColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonBgHoverColor: value })}
+											/>
+
+											<FB_Spacing 
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlePriceButtonPaddingUnitsHandler}
+												spacingUnits={priceButtonPaddingUnits}
+												spacingDesktop={priceButtonDesktopPadding}
+												spacingTablet={priceButtonTabPadding}
+												spacingMobile={priceButtonMobilePadding}
+												handleSpacingUnitHandler={handlePriceButtonPaddingUnitChange}
+												spacingCombineBtn={priceButtonPaddingLink}
+												spacingCombineBtnHandler={handlePriceButtonPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<FB_Spacing 
+												label={__("Margin", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlePriceButtonMarginUnitsHandler}
+												spacingUnits={priceButtonMarginUnits}
+												spacingDesktop={priceButtonDesktopMargin}
+												spacingTablet={priceButtonTabMargin}
+												spacingMobile={priceButtonMobileMargin}
+												handleSpacingUnitHandler={handlePriceButtonMarginUnitChange}
+												spacingCombineBtn={priceButtonMarginLink}
+												spacingCombineBtnHandler={handlePriceButtonMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<SelectControl
+													label={__("Border Style", "frontis-blocks")}
+													value={priceButtonBorder}
+													options={BORDER_STYLES}
+													onChange={(value) => setAttributes({ priceButtonBorder: value })}
+											/>
+
+											<FB_Color
+												label={__("Border Color", "frontis-blocks")}
+												colorSwitcher={priceButtonBorderColorSwitcher}
+												globalColor={priceButtonBorderColor}
+												globalHoverColor={priceButtonBorderHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceButtonBorderColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceButtonBorderColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
+											/>
+
+											<FB_Spacing 
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlePriceButtonBorderUnitsHandler}
+												spacingUnits={priceButtonBorderUnits}
+												spacingDesktop={priceButtonDesktopBorderWidth}
+												spacingTablet={priceButtonTabBorderWidth}
+												spacingMobile={priceButtonMobileBorderWidth}
+												handleSpacingUnitHandler={handlePriceButtonBorderUnitChange}
+												spacingCombineBtn={priceButtonBorderLink}
+												spacingCombineBtnHandler={handlePriceButtonBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing 
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlePriceButtonBorderRadiusUnitsHandler}
+												spacingUnits={priceButtonBorderRadiusUnits}
+												spacingDesktop={priceButtonDesktopBorderRadiusWidth}
+												spacingTablet={priceButtonTabBorderRadiusWidth}
+												spacingMobile={priceButtonMobileBorderRadiusWidth}
+												handleSpacingUnitHandler={handlePriceButtonBorderRadiusUnitChange}
+												spacingCombineBtn={priceButtonBorderRadiusLink}
+												spacingCombineBtnHandler={handlePriceButtonBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<FB_Color
+												label={__("Icon Color", "frontis-blocks")}
+												colorSwitcher={priceButtonIconColorSwitcher}
+												globalColor={priceButtonIconColor}
+												globalHoverColor={priceButtonIconHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceButtonIconColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceButtonIconColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonIconHoverColor: value })}
+											/>
+
+											<FB_Range
+												min={0}
+												max={100}
+												label={__("Icon Size", "frontis-blocks")}
+												rangeValue={priceButtonIconSize}
+												onChangeHandler={(value) => setAttributes({ priceButtonIconSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceButtonIconSizeUnits: value })}
+												deviceType={deviceType}
+												units={priceButtonIconSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
 										</PanelBody>
 									</>
 								)}
