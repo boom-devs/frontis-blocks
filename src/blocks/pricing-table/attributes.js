@@ -157,6 +157,1098 @@ const attributes = {
 	/** End General Settings */
 
 
+	/** Start Style Settings */
+
+
+	/** Start Icon */
+	pricingIconAlignment: {
+		type: "string",
+		default: "center",
+	},
+	priceIconColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	priceIconColor : { 
+		type: "string",
+		default: ""
+	},
+	priceIconHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	priceIconBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	priceIconBgColor : {
+		type: "string",
+		default: ""
+	},
+	priceIconBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	priceIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '70',
+			Tablet: '70',
+			Mobile: '70'
+		}
+	},
+	priceIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceIconBgSize: {
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100',
+		}
+	},
+	priceIconBgSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	/** Start Border */
+	priceIconBorder: {
+		type: 'string',
+		default: "none",
+	},
+	priceIconBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	priceIconBorderColor: {
+		type: 'string',
+	},
+	priceIconBorderHoverColor: {
+		type: 'string',
+	},
+	priceIconBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceIconBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceIconBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceIconBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceIconBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	priceIconBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceIconBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceIconBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceIconBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceIconBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Icon */
+	/** End Style Settings */
+
+
+	/** Start Pricing Style */
+	pricingAlignment: {
+		type: "string",
+		default: "center"
+	},
+	normalPricingFontFamily: {
+        type: "string",
+        default: "inherit",
+    },
+	normalPricingFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	normalPricingFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	normalPricingFontWeight: {
+        type: "string",
+        default: ""
+    },
+	normalPricingFontStyle: {
+        type: "string",
+        default: ""
+    },
+	normalPricingTextTransform: {
+        type: "string",
+        default: ""
+    },
+	normalPricingTextDecoration: {
+        type: "string",
+        default: ""
+    },
+	normalPricingLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	normalPricingLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    normalPricingLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	normalPricingLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	normalPricingColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	normalPricingColor: {
+		type: 'string',
+		default: ''
+	},
+	normalPricingHoverColor: {
+		type: 'string',
+		default: ''
+	},
+
+	salePricingFontFamily: {
+        type: "string",
+        default: "",
+    },
+	salePricingFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	salePricingFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	salePricingFontWeight: {
+        type: "string",
+        default: "",
+    },
+	salePricingFontStyle: {
+        type: "string",
+        default: "",
+    },
+	salePricingTextTransform: {
+        type: "string",
+        default: "",
+    },
+	salePricingTextDecoration: {
+        type: "string",
+        default: "",
+    },
+	salePricingLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	salePricingLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	salePricingLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	salePricingLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	salePricingColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	salePricingColor: {
+		type: 'string',
+		default: ''
+	},
+	salePricingHoverColor: {
+		type: 'string',
+		default: ''
+	},
+
+	priceCurrencyFontFamily: {
+		type: 'string',
+		default: 'inherit'
+	},
+	priceCurrencyFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceCurrencyFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceCurrencyFontWeight: {
+		type: 'string',
+		default: ''
+	},
+	priceCurrencyFontStyle: {
+		type: 'string',
+		default: ''
+	},
+	priceCurrencyTextTransform: {
+		type: 'string',
+		default: ''
+	},
+	priceCurrencyTextDecoration: {
+		type: 'string',
+		default: ''
+	},
+	priceCurrencyLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceCurrencyLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceCurrencyLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceCurrencyLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceCurrencyColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	priceCurrencyColor: {
+		type: 'string',
+		default: ''
+	},
+	priceCurrencyHoverColor: {
+		type: 'string',
+		default: ''
+	},
+
+	pricePeriodFontFamily: {
+		type: "string",
+		default: "inherit"
+	},
+	pricePeriodFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricePeriodFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricePeriodFontWeight: {
+		type: "string",
+		default: ""
+	},
+	pricePeriodFontStyle: {
+		type: "string",
+		default: ""
+	},
+	pricePeriodTextTransform: {
+		type: "string",
+		default: ""
+	},
+	pricePeriodTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	pricePeriodLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricePeriodLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricePeriodLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricePeriodLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricePeriodColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	pricePeriodColor: {
+		type: 'string',
+		default: ''
+	},
+	pricePeriodHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	/** End Pricing Style */
+
+	/**Start Title and Subtitle Style */
+	pricingTitleAlignment: {
+		type: "string",
+		default: "center"
+	},
+	pricingTitleColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	pricingTitleColor: {
+		type: 'string',
+		default: ''
+	},
+	pricingTitleHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	pricingTitleFontFamily: {
+		type: "string",
+		default: "",
+	},
+	pricingTitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricingTitleFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	pricingTitleFontWeight: {
+		type: "string",
+		default: ""
+	},
+	pricingTitleFontStyle: {
+		type: "string",
+		default: ""
+	},
+	pricingTitleTextTransform: {
+		type: "string",
+		default: ""
+	},
+	pricingTitleTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	pricingTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricingTitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	pricingTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricingTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	pricingSubtitleColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	pricingSubtitleColor: {
+		type: 'string',
+		default: ''
+	},
+	pricingSubtitleHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	pricingSubtitleFontFamily: {
+		type: "string",
+		default: "",
+	},
+	pricingSubtitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricingSubtitleFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	pricingSubtitleFontWeight: {
+		type: "string",
+		default: ""
+	},
+	pricingSubtitleFontStyle: {
+		type: "string",
+		default: ""
+	},
+	pricingSubtitleTextTransform: {
+		type: "string",
+		default: ""
+	},
+	pricingSubtitleTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	pricingSubtitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricingSubtitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	pricingSubtitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	pricingSubtitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/**end Title and Subtitle Style */
+
+	/** Start Feature Icon */
+	priceFeatureAlignment: {
+		type: "string",
+		default: "center"
+	},
+	priceFeatureIconColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceFeatureIconColor: {
+		type: "string",
+		default: ""
+	},
+	priceFeatureIconHoverColor: {
+		type: "string",
+		default: ""
+	},
+	priceFeatureIconSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	priceFeatureIconSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
+	/** End Feature Icon */
+
+	/** Start Feature Title */
+	pricingfeatureTitleColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	pricingfeatureTitleColor: {
+		type: "string",
+		default: ""
+	},
+	pricingfeatureTitleHoverColor: {
+		type: "string",
+		default: ""
+	},
+	pricingfeatureTitleFontFamily: {
+		type: "string",
+		default: ""
+	},
+	pricingfeatureTitleFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	pricingfeatureTitleFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
+	pricingfeatureTitleFontWeight: {
+		type: "string",
+		default: ""
+	},
+	pricingfeatureTitleFontStyle: {
+		type: "string",
+		default: ""
+	},
+	pricingfeatureTitleTextTransform: {
+		type: "string",
+		default: ""
+	},
+	pricingfeatureTitleTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	pricingfeatureTitleLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	pricingfeatureTitleLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
+	pricingfeatureTitleLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	pricingfeatureTitleLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
+	/** End feature Title */
+
+	/** Start price Button */
+	priceButtonAlignment: {
+		type: "string",
+		default: "left",
+	},
+	priceButtonWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceButtonWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	priceButtonFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	priceButtonFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceButtonFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceButtonFontWeight: {
+		type: "string",
+		default: ""
+	},
+	priceButtonFontStyle: {
+		type: "string",
+		default: ""
+	},
+	priceButtonTextTransform: {
+		type: "string",
+		default: ""
+	},
+	priceButtonTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	priceButtonLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceButtonLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceButtonLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceButtonLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceButtonColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceButtonColor: {
+		type: "string"
+	},
+	priceButtonHoverColor: {
+		type: 'string',
+	},
+	priceButtonBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceButtonBgColor: {
+		type: "string"
+	},
+	priceButtonBgHoverColor: {
+		type: 'string',
+	},
+	priceButtonPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceButtonDesktopPadding: {
+		type: "object", 
+		default: {
+			top: 12,
+			bottom: 12,
+			left: 24,
+			right: 24,
+		},
+	},
+	priceButtonTabPadding: {
+		type: "object", 
+		default: {
+			top: 12,
+			bottom: 12,
+			left: 24,
+			right: 24,
+		},
+	},
+	priceButtonMobilePadding: {
+		type: "object", 
+		default: {
+			top: 12,
+			bottom: 12,
+			left: 24,
+			right: 24,
+		},
+	},
+	priceButtonPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	priceButtonMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceButtonDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	priceButtonTabMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	priceButtonMobileMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	priceButtonMarginLink: {
+		type: "boolean",
+		default: true
+	},
+	priceButtonBorder: {
+		type: 'string',
+		default: "none",
+	},
+	priceButtonBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceButtonBorderColor: {
+		type: 'string',
+	},
+	priceButtonBorderHoverColor: {
+		type: 'string',
+	},
+	priceButtonBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceButtonDesktopBorderWidth: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	priceButtonTabBorderWidth: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	priceButtonMobileBorderWidth: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	priceButtonBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	priceButtonBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceButtonDesktopBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: "4",
+			bottom: "4",
+			left: "4",
+			right: "4",
+		},
+	},
+	priceButtonTabBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	priceButtonMobileBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: "4",
+			bottom: "4",
+			left: "4",
+			right: "4",
+		},
+	},
+	priceButtonBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	priceButtonIconColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceButtonIconColor: {
+		type: "string",
+		default: ""
+	},
+	priceButtonIconHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	priceButtonIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '14',
+			Mobile: '12'
+		}
+	},
+	priceButtonIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End price Button Icon */
+
+
 	/** Start Global Setting */
 	priceGlobalZIndex : {
         type: "number",
