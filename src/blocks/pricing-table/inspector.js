@@ -85,6 +85,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceRibbonPosition,
 		/** End Ribbon */
 
+		/** Start Style Settings */
+		pricingHeaderBgColorSwitcher,
+		pricingHeaderBgColor,
+		pricingHeaderBgHoverColor,
+		/** Start Padding */
+		pricingHeaderPaddingUnits,
+		pricingHeaderDesktopPadding,
+		pricingHeaderTabletPadding,
+		pricingHeaderMobilePadding,
+		pricingHeaderPaddingLink,
+		/** End Padding */
+		/** Start Border */
+		pricingHeaderBorder,
+		pricingHeaderBorderColorSwitcher,
+		pricingHeaderBorderColor,
+		pricingHeaderBorderHoverColor,
+		pricingHeaderBorderUnits,
+		pricingHeaderBorderDesktop,
+		pricingHeaderBorderTablet,
+		pricingHeaderBorderMobile,
+		pricingHeaderBorderLink,
+		/** End Border */
+
+		/** Start Border Radius */
+		pricingHeaderBorderRadiusUnits,
+		pricingHeaderBorderRadiusDesktop,
+		pricingHeaderBorderRadiusTablet,
+		pricingHeaderBorderRadiusMobile,
+		pricingHeaderBorderRadiusLink,
+		/**End Header */
+
 		/** Start Icon Style */
 		pricingIconAlignment,
 		priceIconColorSwitcher,
@@ -381,6 +412,225 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({priceButtonIcon: IconName})
 	}
 
+
+	/** Start Header padding */
+	const handleHeaderPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingHeaderPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingHeaderDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingHeaderTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingHeaderMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingHeaderDesktopPadding: {...pricingHeaderDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingHeaderTabletPadding: {...pricingHeaderTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingHeaderMobilePadding: {...pricingHeaderMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleHeaderPaddingCombineBtn = () => {
+		setAttributes( {pricingHeaderPaddingLink: !pricingHeaderPaddingLink} );
+	}
+
+	const handleHeaderPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingHeaderPaddingUnits: {
+				...pricingHeaderPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const headerDesktopPadding = `${pricingHeaderDesktopPadding.top}${pricingHeaderPaddingUnits.Desktop} ${pricingHeaderDesktopPadding.right}${pricingHeaderPaddingUnits.Desktop} ${pricingHeaderDesktopPadding.bottom}${pricingHeaderPaddingUnits.Desktop} ${pricingHeaderDesktopPadding.left}${pricingHeaderPaddingUnits.Desktop}`;
+	const headerTabletPadding = `${pricingHeaderTabletPadding.top}${pricingHeaderPaddingUnits.Tablet} ${pricingHeaderTabletPadding.right}${pricingHeaderPaddingUnits.Tablet} ${pricingHeaderTabletPadding.bottom}${pricingHeaderPaddingUnits.Tablet} ${pricingHeaderTabletPadding.left}${pricingHeaderPaddingUnits.Tablet}`;
+	const headerMobilePadding = `${pricingHeaderMobilePadding.top}${pricingHeaderPaddingUnits.Mobile} ${pricingHeaderMobilePadding.right}${pricingHeaderPaddingUnits.Mobile} ${pricingHeaderMobilePadding.bottom}${pricingHeaderPaddingUnits.Mobile} ${pricingHeaderMobilePadding.left}${pricingHeaderPaddingUnits.Mobile}`;
+	/** End Header Padding */
+
+	/** Start Header border */
+	const handleHeaderBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingHeaderBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingHeaderBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingHeaderBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingHeaderBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingHeaderBorderDesktop: {...pricingHeaderBorderDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingHeaderBorderTablet: {...pricingHeaderBorderTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingHeaderBorderMobile: {...pricingHeaderBorderMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleHeaderBorderCombineBtn = () => {
+		setAttributes( {pricingHeaderBorderLink: !pricingHeaderBorderLink} );
+	}
+
+	const handleHeaderBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingHeaderBorderUnits: {
+				...pricingHeaderBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const headerDesktopBorderWidth = `${pricingHeaderBorderDesktop.top}${pricingHeaderBorderUnits.Desktop} ${pricingHeaderBorderDesktop.right}${pricingHeaderBorderUnits.Desktop} ${pricingHeaderBorderDesktop.bottom}${pricingHeaderBorderUnits.Desktop} ${pricingHeaderBorderDesktop.left}${pricingHeaderBorderUnits.Desktop}`;
+	const headerTabletBorderWidth = `${pricingHeaderBorderTablet.top}${pricingHeaderBorderUnits.Tablet} ${pricingHeaderBorderTablet.right}${pricingHeaderBorderUnits.Tablet} ${pricingHeaderBorderTablet.bottom}${pricingHeaderBorderUnits.Tablet} ${pricingHeaderBorderTablet.left}${pricingHeaderBorderUnits.Tablet}`;
+	const headerMobileBorderWidth = `${pricingHeaderBorderMobile.top}${pricingHeaderBorderUnits.Mobile} ${pricingHeaderBorderMobile.right}${pricingHeaderBorderUnits.Mobile} ${pricingHeaderBorderMobile.bottom}${pricingHeaderBorderUnits.Mobile} ${pricingHeaderBorderMobile.left}${pricingHeaderBorderUnits.Mobile}`;
+	/** End Header Border */
+
+	/** Start Header border radius*/
+	const handleHeaderBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingHeaderBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingHeaderBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingHeaderBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingHeaderBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingHeaderBorderRadiusDesktop: {...pricingHeaderBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingHeaderBorderRadiusTablet: {...pricingHeaderBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingHeaderBorderRadiusMobile: {...pricingHeaderBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleHeaderBorderRadiusCombineBtn = () => {
+		setAttributes( {pricingHeaderBorderRadiusLink: !pricingHeaderBorderRadiusLink} );
+	}
+
+	const handleHeaderBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingHeaderBorderRadiusUnits: {
+				...pricingHeaderBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Header border */
+
+	/** End Header Border Radius */
+	const headerDesktopBorderRadiusWidth = `${pricingHeaderBorderRadiusDesktop.top}${pricingHeaderBorderRadiusUnits.Desktop} ${pricingHeaderBorderRadiusDesktop.right}${pricingHeaderBorderRadiusUnits.Desktop} ${pricingHeaderBorderRadiusDesktop.bottom}${pricingHeaderBorderRadiusUnits.Desktop} ${pricingHeaderBorderRadiusDesktop.left}${pricingHeaderBorderRadiusUnits.Desktop}`;
+	const headerTabletBorderRadiusWidth = `${pricingHeaderBorderRadiusTablet.top}${pricingHeaderBorderRadiusUnits.Tablet} ${pricingHeaderBorderRadiusTablet.right}${pricingHeaderBorderRadiusUnits.Tablet} ${pricingHeaderBorderRadiusTablet.bottom}${pricingHeaderBorderRadiusUnits.Tablet} ${pricingHeaderBorderRadiusTablet.left}${pricingHeaderBorderRadiusUnits.Tablet}`;
+	const headerMobileBorderRadiusWidth = `${pricingHeaderBorderRadiusMobile.top}${pricingHeaderBorderRadiusUnits.Mobile} ${pricingHeaderBorderRadiusMobile.right}${pricingHeaderBorderRadiusUnits.Mobile} ${pricingHeaderBorderRadiusMobile.bottom}${pricingHeaderBorderRadiusUnits.Mobile} ${pricingHeaderBorderRadiusMobile.left}${pricingHeaderBorderRadiusUnits.Mobile}`;
+	/** End Header Border Radius */
 
 	/** Start Icon Border */
 	const handlePriceIconBorderUnitChange = ( event, position ) => {
@@ -1132,6 +1382,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 				${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+				transition: background-color 0.3s ease, border-color 0.3s ease;
 			}
 			.fb-pricing-wrapper.${blockId}:hover {
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
@@ -1139,7 +1390,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
 			}
 			.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-
+				${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
+				${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
+				${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
+				${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
+				${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
+				${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
+				transition: background-color 0.3s ease, border-color 0.3s ease;
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-header:hover {
+				${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
+				${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
 			}
 			.fb-pricing-wrapper.${blockId} .fb-pricing-icon-wrapper {
 				justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
@@ -1438,8 +1699,80 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === "styles" && (
 									<>
 										<PanelBody
-											title={__("Icon", "frontis-blocks")}
+											title={__("Header", "frontis-blocks")}
 											initialOpen={true}
+										>
+											<FB_Color
+												label={__("Background Color", "frontis-blocks")}
+												globalColorSwitcher={pricingHeaderBgColorSwitcher}
+												globalColor={pricingHeaderBgColor}
+												globalHoverColor={pricingHeaderBgHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricingHeaderBgColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricingHeaderBgColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricingHeaderBgHoverColor: value })}
+											/>
+											<FB_Spacing 
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleHeaderPaddingUnitsHandler}
+												spacingUnits={pricingHeaderPaddingUnits}
+												spacingDesktop={pricingHeaderDesktopPadding}
+												spacingTablet={pricingHeaderTabletPadding}
+												spacingMobile={pricingHeaderMobilePadding}
+												handleSpacingUnitHandler={handleHeaderPaddingUnitChange}
+												spacingCombineBtn={pricingHeaderPaddingLink}
+												spacingCombineBtnHandler={handleHeaderPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={pricingHeaderBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ pricingHeaderBorder: value })}
+											/>
+
+											<FB_Color
+												label={__("Border Color", "frontis-blocks")}
+												globalColorSwitcher={pricingHeaderBorderColorSwitcher}
+												globalColor={pricingHeaderBorderColor}
+												globalHoverColor={pricingHeaderBorderHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricingHeaderBorderColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricingHeaderBorderColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricingHeaderBorderHoverColor: value })}
+											/>
+
+											<FB_Spacing 
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleHeaderBorderUnitsHandler}
+												spacingUnits={pricingHeaderBorderUnits}
+												spacingDesktop={pricingHeaderBorderDesktop}
+												spacingTablet={pricingHeaderBorderTablet}
+												spacingMobile={pricingHeaderBorderMobile}
+												handleSpacingUnitHandler={handleHeaderBorderUnitChange}
+												spacingCombineBtn={pricingHeaderBorderLink}
+												spacingCombineBtnHandler={handleHeaderBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing 
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleHeaderBorderRadiusUnitsHandler}
+												spacingUnits={pricingHeaderBorderRadiusUnits}
+												spacingDesktop={pricingHeaderBorderRadiusDesktop}
+												spacingTablet={pricingHeaderBorderRadiusTablet}
+												spacingMobile={pricingHeaderBorderRadiusMobile}
+												handleSpacingUnitHandler={handleHeaderBorderRadiusUnitChange}
+												spacingCombineBtn={pricingHeaderBorderRadiusLink}
+												spacingCombineBtnHandler={handleHeaderBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+
+										<PanelBody
+											title={__("Icon", "frontis-blocks")}
+											initialOpen={false}
 										>
 
 											<BaseControl
