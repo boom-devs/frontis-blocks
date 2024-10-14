@@ -11,6 +11,10 @@ import {
     SelectControl,
     TextareaControl,
     TextControl,
+	Dropdown,
+	Dashicon,
+	ColorPicker,
+	ColorPalette,
     ToggleControl,
 } from '@wordpress/components';
 
@@ -23,6 +27,7 @@ import {
 	ICON_POSITION,
 	RIBBON_POSITION,
 	BORDER_STYLES,
+	NORMAL_HOVER,
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
@@ -62,7 +67,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		/** Start Feature */
 		priceHideFeaturesSwitcher,
-		priceFeatureShowLineSwitcher,
 		priceFeatureIconSwitcher,
 		priceFeatureItems,
 		
@@ -336,6 +340,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonIconSize,
 		priceButtonIconSizeUnits,
 		/** End price Button */
+
+
+		/** Start Ribbon Color Settings */
+		priceRibbonColorSwitcher,
+		priceRibbonColor,
+		priceRibbonHoverColor,
+		priceRibbonBgColorSwitcher,
+		priceRibbonBgColor,
+		priceRibbonBgHoverColor,
+
+		priceRibbonTop,
+		priceRibbonTopUnits,
+		priceRibbonLeft,
+		priceRibbonLeftUnits,
+		priceRibbonRight,
+		priceRibbonRightUnits,
+		priceRibbonWidth,
+		priceRibbonWidthUnits,
+		priceRibbonFontSize,
+		priceRibbonFontSizeUnits,
+		priceRibbonpadding,
+		priceRibbonpaddingUnits,
+		/** End Ribbon Color Settings */
 
 		/** Start Global Settings */
 		priceGlobalZIndex,
@@ -1527,12 +1554,137 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
 			}
 
+			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-item {
+				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+			}
+
+			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner svg {
+				width: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+				height: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+				fill: ${priceFeatureIconColor};
+				transition: fill 0.3s ease;
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner:hover svg {
+				fill: ${priceFeatureIconHoverColor};
+			}
+
+			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text {
+				${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
+				${pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
+				${pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
+				${pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
+				${pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
+				${pricingfeatureTitleTextTransform ? `text-transform: ${pricingfeatureTitleTextTransform};` : ''}
+				${pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
+				${pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
+				${pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text:hover {
+				${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
+			}
+
+
+			.fb-pricing-wrapper.${blockId} .fb-pricing-footer-wrapper {
+				justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
+			}
+
+			.fb-pricing-wrapper.${blockId} .fb-pricing-button {
+				width: ${priceButtonWidth.Desktop ? `${priceButtonWidth.Desktop}${priceButtonWidthUnits.Desktop}` : 'auto'};
+				${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
+				${priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
+				${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
+				${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
+				${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
+				${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
+				${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
+				${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
+				${priceButtonColor ? `color: ${priceButtonColor};` : ''}
+				${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
+				${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
+				${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
+				${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
+				${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
+				${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
+				${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
+				transition: color 0.3s ease, background-color 0.3s ease;
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-button:hover {
+				${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
+				${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
+				${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
+				width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+				height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+				fill: ${priceButtonIconColor};
+				transition: fill 0.3s ease;
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon:hover svg {
+				fill: ${priceButtonIconHoverColor};
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
+				${priceRibbonBgColor ? `background-color: ${priceRibbonBgColor};` : ''}
+				${priceRibbonColor ? `color: ${priceRibbonColor};` : ''}
+				font-size: ${priceRibbonFontSize.Desktop ? `${priceRibbonFontSize.Desktop}${priceRibbonFontSizeUnits.Desktop}` : ''};
+				top: ${priceRibbonTop.Desktop ? `${priceRibbonTop.Desktop}${priceRibbonTopUnits.Desktop}` : ''};
+				width: ${priceRibbonWidth.Desktop ? `${priceRibbonWidth.Desktop}${priceRibbonWidthUnits.Desktop}` : ''};
+				padding: ${priceRibbonpadding.Desktop ? `${priceRibbonpadding.Desktop}${priceRibbonpaddingUnits.Desktop}` : ''};
+				transition: background-color 0.3s ease, color 0.3s ease;
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon:hover {
+				${priceRibbonBgHoverColor ? `background-color: ${priceRibbonBgHoverColor};` : ''}
+				${priceRibbonHoverColor ? `color: ${priceRibbonHoverColor};` : ''}
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
+				left: ${priceRibbonLeft.Desktop ? `${priceRibbonLeft.Desktop}${priceRibbonLeftUnits.Desktop}` : ''};
+			}
+			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
+				right: ${priceRibbonRight.Desktop ? `${priceRibbonRight.Desktop}${priceRibbonRightUnits.Desktop}` : ''};
+			}
+
 			@media only screen and (max-width: 1024px) {
 				.fb-pricing-wrapper.${blockId} {
 					${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
 					${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
 					${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-header {
+					${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
+					${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
+					${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
+					width: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+					height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+					${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
+					${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
+					width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+					height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-button {
+					${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
+					${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
+					${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
+					${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
+					width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+					height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
+					font-size: ${priceRibbonFontSize.Tablet ? `${priceRibbonFontSize.Tablet}${priceRibbonFontSizeUnits.Tablet}` : ''};
+					top: ${priceRibbonTop.Tablet ? `${priceRibbonTop.Tablet}${priceRibbonTopUnits.Tablet}` : ''};
+					width: ${priceRibbonWidth.Tablet ? `${priceRibbonWidth.Tablet}${priceRibbonWidthUnits.Tablet}` : ''};
+					padding: ${priceRibbonpadding.Tablet ? `${priceRibbonpadding.Tablet}${priceRibbonpaddingUnits.Tablet}` : ''};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
+					left: ${priceRibbonLeft.Tablet ? `${priceRibbonLeft.Tablet}${priceRibbonLeftUnits.Tablet}` : ''};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
+					right: ${priceRibbonRight.Tablet ? `${priceRibbonRight.Tablet}${priceRibbonRightUnits.Tablet}` : ''};
 				}
 			}
 
@@ -1542,6 +1694,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
 					${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
 					${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-header {
+					${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
+					${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
+					${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
+					width: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+					height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+					${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
+					${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
+					width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+					height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-button {
+					${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
+					${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
+					${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
+					${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
+					width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+					height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
+					font-size: ${priceRibbonFontSize.Mobile ? `${priceRibbonFontSize.Mobile}${priceRibbonFontSizeUnits.Mobile}` : ''};
+					top: ${priceRibbonTop.Mobile ? `${priceRibbonTop.Mobile}${priceRibbonTopUnits.Mobile}` : ''};
+					width: ${priceRibbonWidth.Mobile ? `${priceRibbonWidth.Mobile}${priceRibbonWidthUnits.Mobile}` : ''};
+					padding: ${priceRibbonpadding.Mobile ? `${priceRibbonpadding.Mobile}${priceRibbonpaddingUnits.Mobile}` : ''};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
+					left: ${priceRibbonLeft.Mobile ? `${priceRibbonLeft.Mobile}${priceRibbonLeftUnits.Mobile}` : ''};
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
+					right: ${priceRibbonRight.Mobile ? `${priceRibbonRight.Mobile}${priceRibbonRightUnits.Mobile}` : ''};
 				}
 			}
 		`}
@@ -1669,11 +1858,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Hide Features", "frontis-blocks")}
 												checked={priceHideFeaturesSwitcher}
 												onChange={(value) => setAttributes({priceHideFeaturesSwitcher: value})}
-											/>
-											<ToggleControl
-												label={__("Show Line", "frontis-blocks")}
-												checked={priceFeatureShowLineSwitcher}
-												onChange={(value) => setAttributes({priceFeatureShowLineSwitcher: value})}
 											/>
 											<ToggleControl
 												label={__("Show Icon", "frontis-blocks")}
@@ -2436,6 +2620,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												deviceType={deviceType}
 												setAttributes={setAttributes}
 											/>
+
 										</PanelBody>
 
 										<PanelBody
@@ -2514,25 +2699,236 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 
-											<FB_Color
-												label={__("Text Color", "frontis-blocks")}
-												colorSwitcher={priceButtonColorSwitcher}
-												globalColor={priceButtonColor}
-												globalHoverColor={priceButtonHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceButtonColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceButtonColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonHoverColor: value })}
-											/>
+											
+											<BaseControl
+                                                label={__("Text Color", "frontis-blocks")}
+                                                className="fb-setting-color-panel-wrapper"
+                                            >
+                                                <ButtonGroup className="fb-setting-color-panel-btn">
+                                                    {NORMAL_HOVER.map((item, key) => (
+                                                        <Button
+                                                            key={key}
+                                                            onClick={() => setAttributes({ priceButtonColorSwitcher: item.value })}
+                                                            className={`fb-setting-color-panel-btn-switchr ${priceButtonColorSwitcher === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
+                                            </BaseControl>
 
-											<FB_Color
+                                            {priceButtonColorSwitcher === 'normal' && (
+                                                <BaseControl 
+                                                    label={__("Nomal Color", "frontis-blocks")}
+                                                    className="fb-setting-color-setting-wrapper"
+                                                >
+                                                    <Dropdown
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                        popoverProps={{ placement: 'bottom-start' }}
+                                                        renderToggle={({ isOpen, onToggle }) => (
+                                                            <Button
+                                                                variant="primary"
+                                                                onClick={onToggle}
+                                                                aria-expanded={isOpen}
+                                                                className="fb-setting-color-setting-icon-btn"
+                                                            >
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                            </Button>
+                                                        )}
+                                                        renderContent={() => (
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
+                                                                        <ColorPicker
+                                                                            color={priceButtonColor}
+                                                                            onChange={(value) => setAttributes({ priceButtonColor: value })}
+                                                                            enableAlpha={true}
+                                                                        />
+                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <ColorPalette
+                                                                            colors={[
+                                                                                { color: '#F72585' },
+                                                                                { color: '#7209B7' },
+                                                                                { color: '#3A0CA3' },
+                                                                                { color: '#4361EE' },
+                                                                                { color: '#4CC9F0' },
+                                                                            ]}
+                                                                            disableCustomColors={true}
+                                                                            value={priceButtonColor}
+                                                                            onChange={(value) => setAttributes({ priceButtonColor: value })}
+                                                                        />
+                                                                    </div>
+                                                                </BaseControl>
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </BaseControl>
+                                            )}
+
+                                            {priceButtonColorSwitcher === 'hover' && (
+                                                <BaseControl 
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    className="fb-setting-color-setting-wrapper"
+                                                >
+                                                    <Dropdown
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                        popoverProps={{ placement: 'bottom-start' }}
+                                                        renderToggle={({ isOpen, onToggle }) => (
+                                                            <Button
+                                                                variant="primary"
+                                                                onClick={onToggle}
+                                                                aria-expanded={isOpen}
+                                                                className="fb-setting-color-setting-icon-btn"
+                                                            >
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                            </Button>
+                                                        )}
+                                                        renderContent={() => (
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-hover-color">
+                                                                        <ColorPicker
+                                                                            color={priceButtonHoverColor}
+                                                                            onChange={(value) => setAttributes({ priceButtonHoverColor: value })}
+                                                                            enableAlpha={true}
+                                                                        />
+                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <ColorPalette
+                                                                            colors={[
+                                                                                { color: '#F72585' },
+                                                                                { color: '#7209B7' },
+                                                                                { color: '#3A0CA3' },
+                                                                                { color: '#4361EE' },
+                                                                                { color: '#4CC9F0' },
+                                                                            ]}
+                                                                            disableCustomColors={true}
+                                                                            value={priceButtonHoverColor}
+                                                                            onChange={(value) => setAttributes({ priceButtonHoverColor: value })}
+                                                                        />
+                                                                    </div>
+                                                                </BaseControl>
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </BaseControl>
+												)}
+											
+											<BaseControl
 												label={__("Background Color", "frontis-blocks")}
-												colorSwitcher={priceButtonBgColorSwitcher}
-												globalColor={priceButtonBgColor}
-												globalHoverColor={priceButtonBgHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceButtonBgColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceButtonBgColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonBgHoverColor: value })}
-											/>
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{NORMAL_HOVER.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({ priceButtonBgColorSwitcher: item.value })}
+															className={`fb-setting-color-panel-btn-switchr ${priceButtonBgColorSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+
+											{priceButtonBgColorSwitcher === 'normal' && (
+												<BaseControl 
+													label={__("Nomal Color", "frontis-blocks")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{ placement: 'bottom-start' }}
+														renderToggle={({ isOpen, onToggle }) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-normal-color">
+																		<ColorPicker
+																			color={priceButtonBgColor}
+																			onChange={(value) => setAttributes({ priceButtonBgColor: value })}
+																			enableAlpha={true}
+																		/>
+																		<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																		<ColorPalette
+																			colors={[
+																				{ color: '#F72585' },
+																				{ color: '#7209B7' },
+																				{ color: '#3A0CA3' },
+																				{ color: '#4361EE' },
+																				{ color: '#4CC9F0' },
+																			]}
+																			disableCustomColors={true}
+																			value={priceButtonBgColor}
+																			onChange={(value) => setAttributes({ priceButtonBgColor: value })}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{priceButtonBgColorSwitcher === 'hover' && (
+												<BaseControl 
+													label={__("Hover Color", "frontis-blocks")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{ placement: 'bottom-start' }}
+														renderToggle={({ isOpen, onToggle }) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-hover-color">
+																		<ColorPicker
+																			color={priceButtonBgHoverColor}
+																			onChange={(value) => setAttributes({ priceButtonBgHoverColor: value })}
+																			enableAlpha={true}
+																		/>
+																		<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																		<ColorPalette
+																			colors={[
+																				{ color: '#F72585' },
+																				{ color: '#7209B7' },
+																				{ color: '#3A0CA3' },
+																				{ color: '#4361EE' },
+																				{ color: '#4CC9F0' },
+																			]}
+																			disableCustomColors={true}
+																			value={priceButtonBgHoverColor}
+																			onChange={(value) => setAttributes({ priceButtonBgHoverColor: value })}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
 
 											<FB_Spacing 
 												label={__("Padding", "frontis-blocks")}
@@ -2567,16 +2963,120 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													options={BORDER_STYLES}
 													onChange={(value) => setAttributes({ priceButtonBorder: value })}
 											/>
-
-											<FB_Color
+											<BaseControl
 												label={__("Border Color", "frontis-blocks")}
-												colorSwitcher={priceButtonBorderColorSwitcher}
-												globalColor={priceButtonBorderColor}
-												globalHoverColor={priceButtonBorderHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceButtonBorderColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceButtonBorderColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
-											/>
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{NORMAL_HOVER.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({ priceButtonBorderColorSwitcher: item.value })}
+															className={`fb-setting-color-panel-btn-switchr ${priceButtonBorderColorSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+
+											{priceButtonBorderColorSwitcher === 'normal' && (
+												<BaseControl 
+													label={__("Nomal Color", "frontis-blocks")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{ placement: 'bottom-start' }}
+														renderToggle={({ isOpen, onToggle }) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-normal-color">
+																		<ColorPicker
+																			color={priceButtonBorderColor}
+																			onChange={(value) => setAttributes({ priceButtonBorderColor: value })}
+																			enableAlpha={true}
+																		/>
+																		<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																		<ColorPalette
+																			colors={[
+																				{ color: '#F72585' },
+																				{ color: '#7209B7' },
+																				{ color: '#3A0CA3' },
+																				{ color: '#4361EE' },
+																				{ color: '#4CC9F0' },
+																			]}
+																			disableCustomColors={true}
+																			value={priceButtonBorderColor}
+																			onChange={(value) => setAttributes({ priceButtonBorderColor: value })}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{priceButtonBorderColorSwitcher === 'hover' && (
+												<BaseControl 
+													label={__("Hover Color", "frontis-blocks")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{ placement: 'bottom-start' }}
+														renderToggle={({ isOpen, onToggle }) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-hover-color">
+																		<ColorPicker
+																			color={priceButtonBorderHoverColor}
+																			onChange={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
+																			enableAlpha={true}
+																		/>
+																		<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																		<ColorPalette
+																			colors={[
+																				{ color: '#F72585' },
+																				{ color: '#7209B7' },
+																				{ color: '#3A0CA3' },
+																				{ color: '#4361EE' },
+																				{ color: '#4CC9F0' },
+																			]}
+																			disableCustomColors={true}
+																			value={priceButtonBorderHoverColor}
+																			onChange={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
 
 											<FB_Spacing 
 												label={__("Border", "frontis-blocks")}
@@ -2605,15 +3105,120 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingCombineBtnHandler={handlePriceButtonBorderRadiusCombineBtn}
 												setAttributes={setAttributes}
 											/>
-											<FB_Color
+											<BaseControl
 												label={__("Icon Color", "frontis-blocks")}
-												colorSwitcher={priceButtonIconColorSwitcher}
-												globalColor={priceButtonIconColor}
-												globalHoverColor={priceButtonIconHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceButtonIconColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceButtonIconColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceButtonIconHoverColor: value })}
-											/>
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{NORMAL_HOVER.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({ priceButtonIconColorSwitcher: item.value })}
+															className={`fb-setting-color-panel-btn-switchr ${priceButtonIconColorSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+
+											{priceButtonIconColorSwitcher === 'normal' && (
+												<BaseControl 
+													label={__("Nomal Color", "frontis-blocks")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{ placement: 'bottom-start' }}
+														renderToggle={({ isOpen, onToggle }) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-normal-color">
+																		<ColorPicker
+																			color={priceButtonIconColor}
+																			onChange={(value) => setAttributes({ priceButtonIconColor: value })}
+																			enableAlpha={true}
+																		/>
+																		<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																		<ColorPalette
+																			colors={[
+																				{ color: '#F72585' },
+																				{ color: '#7209B7' },
+																				{ color: '#3A0CA3' },
+																				{ color: '#4361EE' },
+																				{ color: '#4CC9F0' },
+																			]}
+																			disableCustomColors={true}
+																			value={priceButtonIconColor}
+																			onChange={(value) => setAttributes({ priceButtonIconColor: value })}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
+
+											{priceButtonIconColorSwitcher === 'hover' && (
+												<BaseControl 
+													label={__("Hover Color", "frontis-blocks")}
+													className="fb-setting-color-setting-wrapper"
+												>
+													<Dropdown
+														className="fb-setting-color-setting-icon-dropdown"
+														contentClassName="fb-setting-color-setting-icon-dropdown-content"
+														popoverProps={{ placement: 'bottom-start' }}
+														renderToggle={({ isOpen, onToggle }) => (
+															<Button
+																variant="primary"
+																onClick={onToggle}
+																aria-expanded={isOpen}
+																className="fb-setting-color-setting-icon-btn"
+															>
+																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															</Button>
+														)}
+														renderContent={() => (
+															<div className="fb-setting-color-setting-icon-popup">
+																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																	<div className="fb-setting-hover-color">
+																		<ColorPicker
+																			color={priceButtonIconHoverColor}
+																			onChange={(value) => setAttributes({ priceButtonIconHoverColor: value })}
+																			enableAlpha={true}
+																		/>
+																		<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																		<ColorPalette
+																			colors={[
+																				{ color: '#F72585' },
+																				{ color: '#7209B7' },
+																				{ color: '#3A0CA3' },
+																				{ color: '#4361EE' },
+																				{ color: '#4CC9F0' },
+																			]}
+																			disableCustomColors={true}
+																			value={priceButtonIconHoverColor}
+																			onChange={(value) => setAttributes({ priceButtonIconHoverColor: value })}
+																		/>
+																	</div>
+																</BaseControl>
+															</div>
+														)}
+													/>
+												</BaseControl>
+											)}
 
 											<FB_Range
 												min={0}
@@ -2624,6 +3229,107 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeUnitHandler={(value) => setAttributes({ priceButtonIconSizeUnits: value })}
 												deviceType={deviceType}
 												units={priceButtonIconSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+										</PanelBody>
+										<PanelBody
+											title={__("Ribbon", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<FB_Color
+												label={__("Color", "frontis-blocks")}
+												globalColorSwitcher={priceRibbonColorSwitcher}
+												globalColor={priceRibbonColor}
+												globalHoverColor={priceRibbonHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceRibbonColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceRibbonColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceRibbonHoverColor: value })}
+											/>
+											<FB_Color
+												label={__("Background Color", "frontis-blocks")}
+												globalColorSwitcher={priceRibbonBgColorSwitcher}
+												globalColor={priceRibbonBgColor}
+												globalHoverColor={priceRibbonBgHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ priceRibbonBgColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ priceRibbonBgColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ priceRibbonBgHoverColor: value })}
+											/>
+											<FB_Range
+												min={1}
+												max={200}
+												label={__("Top", "frontis-blocks")}
+												rangeValue={priceRibbonTop}
+												onChangeHandler={(value) => setAttributes({ priceRibbonTop: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceRibbonTopUnits: value })}
+												deviceType={deviceType}
+												units={priceRibbonTopUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+											<FB_Range
+												min={-200}
+												max={200}
+												label={__("Left", "frontis-blocks")}
+												rangeValue={priceRibbonLeft}
+												onChangeHandler={(value) => setAttributes({ priceRibbonLeft: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceRibbonLeftUnits: value })}
+												deviceType={deviceType}
+												units={priceRibbonLeftUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+											<FB_Range
+												min={-200}
+												max={200}
+												label={__("Right", "frontis-blocks")}
+												rangeValue={priceRibbonRight}
+												onChangeHandler={(value) => setAttributes({ priceRibbonRight: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceRibbonRightUnits: value })}
+												deviceType={deviceType}
+												units={priceRibbonRightUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+											<FB_Range
+												min={1}
+												max={500}
+												label={__("Width", "frontis-blocks")}
+												rangeValue={priceRibbonWidth}
+												onChangeHandler={(value) => setAttributes({ priceRibbonWidth: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceRibbonWidthUnits: value })}
+												deviceType={deviceType}
+												units={priceRibbonWidthUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+											<FB_Range
+												min={1}
+												max={100}
+												label={__("Font Size", "frontis-blocks")}
+												rangeValue={priceRibbonFontSize}
+												onChangeHandler={(value) => setAttributes({ priceRibbonFontSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceRibbonFontSizeUnits: value })}
+												deviceType={deviceType}
+												units={priceRibbonFontSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+											<FB_Range
+												min={1}
+												max={100}
+												label={__("Padding", "frontis-blocks")}
+												rangeValue={priceRibbonpadding}
+												onChangeHandler={(value) => setAttributes({ priceRibbonpadding: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceRibbonpaddingUnits: value })}
+												deviceType={deviceType}
+												units={priceRibbonpaddingUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
 												resetFallbackValue={""}

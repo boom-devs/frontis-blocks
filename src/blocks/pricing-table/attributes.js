@@ -67,10 +67,6 @@ const attributes = {
 		type: "boolean",
 		default: false
 	},
-	priceFeatureShowLineSwitcher: {
-		type: "boolean",
-		default: true
-	},
 	priceFeatureIconSwitcher: {
 		type: "boolean",
 		default: true
@@ -125,7 +121,7 @@ const attributes = {
     },
 	priceButtonIconAlign: {
         type: "string",
-        default: "no-icon",
+        default: "none",
     },
     priceButtonIcon: {
 		type: 'string',
@@ -1004,9 +1000,9 @@ const attributes = {
 	priceFeatureIconSize: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: "20",
+			Tablet: "20",
+			Mobile: "20"
 		}
 	},
 	priceFeatureIconSizeUnits: {
@@ -1026,7 +1022,7 @@ const attributes = {
 	},
 	pricingfeatureTitleColor: {
 		type: "string",
-		default: ""
+		default: "#333"
 	},
 	pricingfeatureTitleHoverColor: {
 		type: "string",
@@ -1039,9 +1035,9 @@ const attributes = {
 	pricingfeatureTitleFontSize: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16"
 		}
 	},
 	pricingfeatureTitleFontSizeUnits: {
@@ -1100,12 +1096,13 @@ const attributes = {
 			Mobile: "px"
 		}
 	},
+
 	/** End feature Title */
 
 	/** Start price Button */
 	priceButtonAlignment: {
 		type: "string",
-		default: "left",
+		default: "center",
 	},
 	priceButtonWidth: {
 		type: 'object',
@@ -1196,7 +1193,8 @@ const attributes = {
 		default: "normal"
 	},
 	priceButtonColor: {
-		type: "string"
+		type: "string",
+		default: "#fff",
 	},
 	priceButtonHoverColor: {
 		type: 'string',
@@ -1206,10 +1204,12 @@ const attributes = {
 		default: "normal"
 	},
 	priceButtonBgColor: {
-		type: "string"
+		type: "string",
+		default: "#0073e6",
 	},
 	priceButtonBgHoverColor: {
 		type: 'string',
+		default: "#005bb5",
 	},
 	priceButtonPaddingUnits: {
 		type: 'object',
@@ -1261,28 +1261,28 @@ const attributes = {
 	priceButtonDesktopMargin: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "20",
+			bottom: "20",
+			left: "0",
+			right: "0",
 		},
 	},
 	priceButtonTabMargin: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "20",
+			bottom: "20",
+			left: "0",
+			right: "0",
 		},
 	},
 	priceButtonMobileMargin: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "20",
+			bottom: "20",
+			left: "0",
+			right: "0",
 		},
 	},
 	priceButtonMarginLink: {
@@ -1397,9 +1397,9 @@ const attributes = {
 	priceButtonIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '16',
-			Tablet: '14',
-			Mobile: '12'
+			Desktop: '20',
+			Tablet: '20',
+			Mobile: '20'
 		}
 	},
 	priceButtonIconSizeUnits: {
@@ -1411,6 +1411,131 @@ const attributes = {
 		}
 	},
 	/** End price Button Icon */
+
+
+	/** Start Ribbon Color Settings */
+	priceRibbonColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceRibbonColor: {
+		type: "string",
+		default: "#fff"
+	},
+	priceRibbonHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	priceRibbonBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceRibbonBgColor: {
+		type: "string",
+		default: "#f00"
+	},
+	priceRibbonBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	priceRibbonTop: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceRibbonTopUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceRibbonLeft: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceRibbonLeftUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceRibbonRight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceRibbonRightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceRibbonWidth: {
+		type: 'object',
+		default: {
+			Desktop: '180',
+			Tablet: '180',
+			Mobile: '180'
+		}
+	},
+	priceRibbonWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceRibbonFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '14',
+			Tablet: '14',
+			Mobile: '14'
+		}
+	},
+	priceRibbonFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceRibbonpadding: {
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
+		}
+	},
+	priceRibbonpaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Ribbon Color Settings */
 
 
 	/** Start Global Setting */
