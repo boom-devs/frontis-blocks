@@ -1400,341 +1400,341 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     return (
         <>
 
-		<style>
-		{`
-			.fb-pricing-wrapper.${blockId} {
-				${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
-				${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-				${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
-				${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
-				${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-				${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-				${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId}:hover {
-				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
-				${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
-				${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-				${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
-				${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
-				${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
-				${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
-				${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
-				${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-header:hover {
-				${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
-				${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-icon-wrapper {
-				justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-				width: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
-				height: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
-				${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
-				${priceIconBorder ? `border: ${priceIconBorder};` : ''}
-				${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
-				${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
-				${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover {
-				background-color: ${priceIconBgHoverColor};
-				${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-				width: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
-				height: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
-				fill: ${priceIconColor};
-				transition: fill 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover svg {
-				fill: ${priceIconHoverColor};
-			}
-
-			.fb-pricing-wrapper.${blockId}	.fb-pricing-price-wrapper {
-				justify-content: ${pricingAlignment === 'left' ? 'flex-start' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'flex-end' : 'center'};
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper {
-				margin: ${priceingPriceGap.Desktop ? `${priceingPriceGap.Desktop}${priceingPriceGapUnits.Desktop}` : '0'} 0;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price {
-				${normalPricingColor ? `color: ${normalPricingColor};` : ''}
-				${normalPricingFontFamily ? `font-family: ${normalPricingFontFamily};` : ""}
-				${normalPricingFontSize.Desktop ? `font-size: ${normalPricingFontSize.Desktop}${normalPricingFontSizeUnits.Desktop};` : ""}
-				${normalPricingFontWeight ? `font-weight: ${normalPricingFontWeight};` : ""}
-				${normalPricingFontStyle ? `font-style: ${normalPricingFontStyle};` : ""}
-				${normalPricingTextTransform ? `text-transform: ${normalPricingTextTransform};` : ""}
-				${normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
-				${normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
-				${normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
-				${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price {
-				${salePricingColor ? `color: ${salePricingColor};` : ''}
-				${salePricingFontFamily ? `font-family: ${salePricingFontFamily};` : ""}
-				${salePricingFontSize.Desktop ? `font-size: ${salePricingFontSize.Desktop}${salePricingFontSizeUnits.Desktop};` : ""}
-				${salePricingFontWeight ? `font-weight: ${salePricingFontWeight};` : ""}
-				${salePricingFontStyle ? `font-style: ${salePricingFontStyle};` : ""}
-				${salePricingTextTransform ? `text-transform: ${salePricingTextTransform};` : ""}
-				${salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
-				${salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
-				${salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
-				${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency {
-				${priceCurrencyColor ? `color: ${priceCurrencyColor};` : ''}
-				${priceCurrencyFontFamily ? `font-family: ${priceCurrencyFontFamily};` : ""}
-				${priceCurrencyFontSize.Desktop ? `font-size: ${priceCurrencyFontSize.Desktop}${priceCurrencyFontSizeUnits.Desktop};` : ""}
-				${priceCurrencyFontWeight ? `font-weight: ${priceCurrencyFontWeight};` : ""}
-				${priceCurrencyFontStyle ? `font-style: ${priceCurrencyFontStyle};` : ""}
-				${priceCurrencyTextTransform ? `text-transform: ${priceCurrencyTextTransform};` : ""}
-				${priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
-				${priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
-				${priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
-				${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period {
-				${pricePeriodColor ? `color: ${pricePeriodColor};` : ''}
-				${pricePeriodFontFamily ? `font-family: ${pricePeriodFontFamily};` : ""}
-				${pricePeriodFontSize.Desktop ? `font-size: ${pricePeriodFontSize.Desktop}${pricePeriodFontSizeUnits.Desktop};` : ""}
-				${pricePeriodFontWeight ? `font-weight: ${pricePeriodFontWeight};` : ""}
-				${pricePeriodFontStyle ? `font-style: ${pricePeriodFontStyle};` : ""}
-				${pricePeriodTextTransform ? `text-transform: ${pricePeriodTextTransform};` : ""}
-				${pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
-				${pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
-				${pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period:hover {
-				${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-title {
-				${pricingTitleColor ? `color: ${pricingTitleColor};` : ''}
-				${pricingTitleFontFamily ? `font-family: ${pricingTitleFontFamily};` : ''}
-				${pricingTitleFontSize.Desktop ? `font-size: ${pricingTitleFontSize.Desktop}${pricingTitleFontSizeUnits.Desktop};` : ''}
-				${pricingTitleFontWeight ? `font-weight: ${pricingTitleFontWeight};` : ''}
-				${pricingTitleFontStyle ? `font-style: ${pricingTitleFontStyle};` : ''}
-				${pricingTitleTextTransform ? `text-transform: ${pricingTitleTextTransform};` : ''}
-				${pricingTitleTextDecoration ? `text-decoration: ${pricingTitleTextDecoration};` : ''}
-				${pricingTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingTitleLetterSpacing.Desktop}${pricingTitleLetterSpacingUnits.Desktop};` : ''}
-				${pricingTitleLineHeight.Desktop ? `line-height: ${pricingTitleLineHeight.Desktop}${pricingTitleLineHeightUnits.Desktop};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-title:hover {
-				${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle {
-				${pricingSubtitleColor ? `color: ${pricingSubtitleColor};` : ''}
-				${pricingSubtitleFontFamily ? `font-family: ${pricingSubtitleFontFamily};` : ''}
-				${pricingSubtitleFontSize.Desktop ? `font-size: ${pricingSubtitleFontSize.Desktop}${pricingSubtitleFontSizeUnits.Desktop};` : ''}
-				${pricingSubtitleFontWeight ? `font-weight: ${pricingSubtitleFontWeight};` : ''}
-				${pricingSubtitleFontStyle ? `font-style: ${pricingSubtitleFontStyle};` : ''}
-				${pricingSubtitleTextTransform ? `text-transform: ${pricingSubtitleTextTransform};` : ''}
-				${pricingSubtitleTextDecoration ? `text-decoration: ${pricingSubtitleTextDecoration};` : ''}
-				${pricingSubtitleLetterSpacing.Desktop ? `letter-spacing: ${pricingSubtitleLetterSpacing.Desktop}${pricingSubtitleLetterSpacingUnits.Desktop};` : ''}
-				${pricingSubtitleLineHeight.Desktop ? `line-height: ${pricingSubtitleLineHeight.Desktop}${pricingSubtitleLineHeightUnits.Desktop};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle:hover {
-				${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-item {
-				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner svg {
-				width: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
-				height: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
-				fill: ${priceFeatureIconColor};
-				transition: fill 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner:hover svg {
-				fill: ${priceFeatureIconHoverColor};
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text {
-				${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
-				${pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
-				${pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
-				${pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
-				${pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
-				${pricingfeatureTitleTextTransform ? `text-transform: ${pricingfeatureTitleTextTransform};` : ''}
-				${pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
-				${pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
-				${pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text:hover {
-				${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
-			}
-
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-footer-wrapper {
-				justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
-			}
-
-			.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-				width: ${priceButtonWidth.Desktop ? `${priceButtonWidth.Desktop}${priceButtonWidthUnits.Desktop}` : 'auto'};
-				${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
-				${priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
-				${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
-				${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
-				${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
-				${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
-				${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
-				${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
-				${priceButtonColor ? `color: ${priceButtonColor};` : ''}
-				${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
-				${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
-				${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
-				${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
-				${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
-				${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
-				${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
-				transition: color 0.3s ease, background-color 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-button:hover {
-				${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
-				${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
-				${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-				width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
-				height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
-				fill: ${priceButtonIconColor};
-				transition: fill 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon:hover svg {
-				fill: ${priceButtonIconHoverColor};
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-				${priceRibbonBgColor ? `background-color: ${priceRibbonBgColor};` : ''}
-				${priceRibbonColor ? `color: ${priceRibbonColor};` : ''}
-				font-size: ${priceRibbonFontSize.Desktop ? `${priceRibbonFontSize.Desktop}${priceRibbonFontSizeUnits.Desktop}` : ''};
-				top: ${priceRibbonTop.Desktop ? `${priceRibbonTop.Desktop}${priceRibbonTopUnits.Desktop}` : ''};
-				width: ${priceRibbonWidth.Desktop ? `${priceRibbonWidth.Desktop}${priceRibbonWidthUnits.Desktop}` : ''};
-				padding: ${priceRibbonpadding.Desktop ? `${priceRibbonpadding.Desktop}${priceRibbonpaddingUnits.Desktop}` : ''};
-				transition: background-color 0.3s ease, color 0.3s ease;
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon:hover {
-				${priceRibbonBgHoverColor ? `background-color: ${priceRibbonBgHoverColor};` : ''}
-				${priceRibbonHoverColor ? `color: ${priceRibbonHoverColor};` : ''}
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-				left: ${priceRibbonLeft.Desktop ? `${priceRibbonLeft.Desktop}${priceRibbonLeftUnits.Desktop}` : ''};
-			}
-			.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-				right: ${priceRibbonRight.Desktop ? `${priceRibbonRight.Desktop}${priceRibbonRightUnits.Desktop}` : ''};
-			}
-
-			@media only screen and (max-width: 1024px) {
+			<style>
+			{`
 				.fb-pricing-wrapper.${blockId} {
-					${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-					${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
-					${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-					${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+					${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
+					${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+					${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
+					${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
+					${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+					${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+					${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
+					${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+					transition: background-color 0.3s ease, border-color 0.3s ease;
+				}
+				.fb-pricing-wrapper.${blockId}:hover {
+					${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
+					${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
+					${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
 				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-					${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
-					${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
-					${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
+					${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
+					${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
+					${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
+					${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
+					${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
+					${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
+					transition: background-color 0.3s ease, border-color 0.3s ease;
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-header:hover {
+					${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
+					${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-icon-wrapper {
+					justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
 				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-					width: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
-					height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
-					${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
-					${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''}
+					width: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
+					height: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
+					${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
+					${priceIconBorder ? `border: ${priceIconBorder};` : ''}
+					${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
+					${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
+					${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
+					transition: background-color 0.3s ease, border-color 0.3s ease;
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover {
+					background-color: ${priceIconBgHoverColor};
+					${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
 				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-					width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
-					height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+					width: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+					height: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+					fill: ${priceIconColor};
+					transition: fill 0.3s ease;
 				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-					${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
-					${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
-					${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
-					${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover svg {
+					fill: ${priceIconHoverColor};
 				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-					width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
-					height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-					font-size: ${priceRibbonFontSize.Tablet ? `${priceRibbonFontSize.Tablet}${priceRibbonFontSizeUnits.Tablet}` : ''};
-					top: ${priceRibbonTop.Tablet ? `${priceRibbonTop.Tablet}${priceRibbonTopUnits.Tablet}` : ''};
-					width: ${priceRibbonWidth.Tablet ? `${priceRibbonWidth.Tablet}${priceRibbonWidthUnits.Tablet}` : ''};
-					padding: ${priceRibbonpadding.Tablet ? `${priceRibbonpadding.Tablet}${priceRibbonpaddingUnits.Tablet}` : ''};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-					left: ${priceRibbonLeft.Tablet ? `${priceRibbonLeft.Tablet}${priceRibbonLeftUnits.Tablet}` : ''};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-					right: ${priceRibbonRight.Tablet ? `${priceRibbonRight.Tablet}${priceRibbonRightUnits.Tablet}` : ''};
-				}
-			}
 
-			@media only screen and (max-width: 767px) {
-				.fb-pricing-wrapper.${blockId} {
-					${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-					${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
-					${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-					${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+				.fb-pricing-wrapper.${blockId}	.fb-pricing-price-wrapper {
+					justify-content: ${pricingAlignment === 'left' ? 'flex-start' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'flex-end' : 'center'};
 				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-					${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
-					${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
-					${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper {
+					margin: ${priceingPriceGap.Desktop ? `${priceingPriceGap.Desktop}${priceingPriceGapUnits.Desktop}` : '0'} 0;
 				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-					width: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
-					height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
-					${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
-					${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price {
+					${normalPricingColor ? `color: ${normalPricingColor};` : ''}
+					${normalPricingFontFamily ? `font-family: ${normalPricingFontFamily};` : ""}
+					${normalPricingFontSize.Desktop ? `font-size: ${normalPricingFontSize.Desktop}${normalPricingFontSizeUnits.Desktop};` : ""}
+					${normalPricingFontWeight ? `font-weight: ${normalPricingFontWeight};` : ""}
+					${normalPricingFontStyle ? `font-style: ${normalPricingFontStyle};` : ""}
+					${normalPricingTextTransform ? `text-transform: ${normalPricingTextTransform};` : ""}
+					${normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
+					${normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
+					${normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
 				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-					width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
-					height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
+					${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
 				}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price {
+					${salePricingColor ? `color: ${salePricingColor};` : ''}
+					${salePricingFontFamily ? `font-family: ${salePricingFontFamily};` : ""}
+					${salePricingFontSize.Desktop ? `font-size: ${salePricingFontSize.Desktop}${salePricingFontSizeUnits.Desktop};` : ""}
+					${salePricingFontWeight ? `font-weight: ${salePricingFontWeight};` : ""}
+					${salePricingFontStyle ? `font-style: ${salePricingFontStyle};` : ""}
+					${salePricingTextTransform ? `text-transform: ${salePricingTextTransform};` : ""}
+					${salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
+					${salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
+					${salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
+					${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
+				}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency {
+					${priceCurrencyColor ? `color: ${priceCurrencyColor};` : ''}
+					${priceCurrencyFontFamily ? `font-family: ${priceCurrencyFontFamily};` : ""}
+					${priceCurrencyFontSize.Desktop ? `font-size: ${priceCurrencyFontSize.Desktop}${priceCurrencyFontSizeUnits.Desktop};` : ""}
+					${priceCurrencyFontWeight ? `font-weight: ${priceCurrencyFontWeight};` : ""}
+					${priceCurrencyFontStyle ? `font-style: ${priceCurrencyFontStyle};` : ""}
+					${priceCurrencyTextTransform ? `text-transform: ${priceCurrencyTextTransform};` : ""}
+					${priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
+					${priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
+					${priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
+					${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
+				}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period {
+					${pricePeriodColor ? `color: ${pricePeriodColor};` : ''}
+					${pricePeriodFontFamily ? `font-family: ${pricePeriodFontFamily};` : ""}
+					${pricePeriodFontSize.Desktop ? `font-size: ${pricePeriodFontSize.Desktop}${pricePeriodFontSizeUnits.Desktop};` : ""}
+					${pricePeriodFontWeight ? `font-weight: ${pricePeriodFontWeight};` : ""}
+					${pricePeriodFontStyle ? `font-style: ${pricePeriodFontStyle};` : ""}
+					${pricePeriodTextTransform ? `text-transform: ${pricePeriodTextTransform};` : ""}
+					${pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
+					${pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
+					${pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period:hover {
+					${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
+				}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-title {
+					${pricingTitleColor ? `color: ${pricingTitleColor};` : ''}
+					${pricingTitleFontFamily ? `font-family: ${pricingTitleFontFamily};` : ''}
+					${pricingTitleFontSize.Desktop ? `font-size: ${pricingTitleFontSize.Desktop}${pricingTitleFontSizeUnits.Desktop};` : ''}
+					${pricingTitleFontWeight ? `font-weight: ${pricingTitleFontWeight};` : ''}
+					${pricingTitleFontStyle ? `font-style: ${pricingTitleFontStyle};` : ''}
+					${pricingTitleTextTransform ? `text-transform: ${pricingTitleTextTransform};` : ''}
+					${pricingTitleTextDecoration ? `text-decoration: ${pricingTitleTextDecoration};` : ''}
+					${pricingTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingTitleLetterSpacing.Desktop}${pricingTitleLetterSpacingUnits.Desktop};` : ''}
+					${pricingTitleLineHeight.Desktop ? `line-height: ${pricingTitleLineHeight.Desktop}${pricingTitleLineHeightUnits.Desktop};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-title:hover {
+					${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle {
+					${pricingSubtitleColor ? `color: ${pricingSubtitleColor};` : ''}
+					${pricingSubtitleFontFamily ? `font-family: ${pricingSubtitleFontFamily};` : ''}
+					${pricingSubtitleFontSize.Desktop ? `font-size: ${pricingSubtitleFontSize.Desktop}${pricingSubtitleFontSizeUnits.Desktop};` : ''}
+					${pricingSubtitleFontWeight ? `font-weight: ${pricingSubtitleFontWeight};` : ''}
+					${pricingSubtitleFontStyle ? `font-style: ${pricingSubtitleFontStyle};` : ''}
+					${pricingSubtitleTextTransform ? `text-transform: ${pricingSubtitleTextTransform};` : ''}
+					${pricingSubtitleTextDecoration ? `text-decoration: ${pricingSubtitleTextDecoration};` : ''}
+					${pricingSubtitleLetterSpacing.Desktop ? `letter-spacing: ${pricingSubtitleLetterSpacing.Desktop}${pricingSubtitleLetterSpacingUnits.Desktop};` : ''}
+					${pricingSubtitleLineHeight.Desktop ? `line-height: ${pricingSubtitleLineHeight.Desktop}${pricingSubtitleLineHeightUnits.Desktop};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle:hover {
+					${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
+				}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-item {
+					justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+				}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner svg {
+					width: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+					height: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+					fill: ${priceFeatureIconColor};
+					transition: fill 0.3s ease;
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner:hover svg {
+					fill: ${priceFeatureIconHoverColor};
+				}
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text {
+					${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
+					${pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
+					${pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
+					${pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
+					${pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
+					${pricingfeatureTitleTextTransform ? `text-transform: ${pricingfeatureTitleTextTransform};` : ''}
+					${pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
+					${pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
+					${pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text:hover {
+					${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
+				}
+
+
+				.fb-pricing-wrapper.${blockId} .fb-pricing-footer-wrapper {
+					justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
+				}
+
 				.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-					${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
-					${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
-					${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
-					${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
+					width: ${priceButtonWidth.Desktop ? `${priceButtonWidth.Desktop}${priceButtonWidthUnits.Desktop}` : 'auto'};
+					${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
+					${priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
+					${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
+					${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
+					${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
+					${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
+					${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
+					${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
+					${priceButtonColor ? `color: ${priceButtonColor};` : ''}
+					${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
+					${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
+					${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
+					${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
+					${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
+					${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
+					${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
+					transition: color 0.3s ease, background-color 0.3s ease;
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-button:hover {
+					${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
+					${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
+					${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
 				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-					width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
-					height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+					width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+					height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+					fill: ${priceButtonIconColor};
+					transition: fill 0.3s ease;
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon:hover svg {
+					fill: ${priceButtonIconHoverColor};
 				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-					font-size: ${priceRibbonFontSize.Mobile ? `${priceRibbonFontSize.Mobile}${priceRibbonFontSizeUnits.Mobile}` : ''};
-					top: ${priceRibbonTop.Mobile ? `${priceRibbonTop.Mobile}${priceRibbonTopUnits.Mobile}` : ''};
-					width: ${priceRibbonWidth.Mobile ? `${priceRibbonWidth.Mobile}${priceRibbonWidthUnits.Mobile}` : ''};
-					padding: ${priceRibbonpadding.Mobile ? `${priceRibbonpadding.Mobile}${priceRibbonpaddingUnits.Mobile}` : ''};
+					${priceRibbonBgColor ? `background-color: ${priceRibbonBgColor};` : ''}
+					${priceRibbonColor ? `color: ${priceRibbonColor};` : ''}
+					font-size: ${priceRibbonFontSize.Desktop ? `${priceRibbonFontSize.Desktop}${priceRibbonFontSizeUnits.Desktop}` : ''};
+					top: ${priceRibbonTop.Desktop ? `${priceRibbonTop.Desktop}${priceRibbonTopUnits.Desktop}` : ''};
+					width: ${priceRibbonWidth.Desktop ? `${priceRibbonWidth.Desktop}${priceRibbonWidthUnits.Desktop}` : ''};
+					padding: ${priceRibbonpadding.Desktop ? `${priceRibbonpadding.Desktop}${priceRibbonpaddingUnits.Desktop}` : ''};
+					transition: background-color 0.3s ease, color 0.3s ease;
+				}
+				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon:hover {
+					${priceRibbonBgHoverColor ? `background-color: ${priceRibbonBgHoverColor};` : ''}
+					${priceRibbonHoverColor ? `color: ${priceRibbonHoverColor};` : ''}
 				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-					left: ${priceRibbonLeft.Mobile ? `${priceRibbonLeft.Mobile}${priceRibbonLeftUnits.Mobile}` : ''};
+					left: ${priceRibbonLeft.Desktop ? `${priceRibbonLeft.Desktop}${priceRibbonLeftUnits.Desktop}` : ''};
 				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-					right: ${priceRibbonRight.Mobile ? `${priceRibbonRight.Mobile}${priceRibbonRightUnits.Mobile}` : ''};
+					right: ${priceRibbonRight.Desktop ? `${priceRibbonRight.Desktop}${priceRibbonRightUnits.Desktop}` : ''};
 				}
-			}
-		`}
-		</style>
+
+				@media only screen and (max-width: 1024px) {
+					.fb-pricing-wrapper.${blockId} {
+						${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+						${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+						${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+						${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
+						${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
+						${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
+						${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
+						width: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+						height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+						${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
+						${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
+						width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+						height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-button {
+						${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
+						${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
+						${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
+						${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
+						width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+						height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
+						font-size: ${priceRibbonFontSize.Tablet ? `${priceRibbonFontSize.Tablet}${priceRibbonFontSizeUnits.Tablet}` : ''};
+						top: ${priceRibbonTop.Tablet ? `${priceRibbonTop.Tablet}${priceRibbonTopUnits.Tablet}` : ''};
+						width: ${priceRibbonWidth.Tablet ? `${priceRibbonWidth.Tablet}${priceRibbonWidthUnits.Tablet}` : ''};
+						padding: ${priceRibbonpadding.Tablet ? `${priceRibbonpadding.Tablet}${priceRibbonpaddingUnits.Tablet}` : ''};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
+						left: ${priceRibbonLeft.Tablet ? `${priceRibbonLeft.Tablet}${priceRibbonLeftUnits.Tablet}` : ''};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
+						right: ${priceRibbonRight.Tablet ? `${priceRibbonRight.Tablet}${priceRibbonRightUnits.Tablet}` : ''};
+					}
+				}
+
+				@media only screen and (max-width: 767px) {
+					.fb-pricing-wrapper.${blockId} {
+						${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+						${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+						${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+						${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
+						${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
+						${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
+						${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
+						width: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+						height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+						${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
+						${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
+						width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+						height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-button {
+						${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
+						${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
+						${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
+						${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
+						width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+						height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
+						font-size: ${priceRibbonFontSize.Mobile ? `${priceRibbonFontSize.Mobile}${priceRibbonFontSizeUnits.Mobile}` : ''};
+						top: ${priceRibbonTop.Mobile ? `${priceRibbonTop.Mobile}${priceRibbonTopUnits.Mobile}` : ''};
+						width: ${priceRibbonWidth.Mobile ? `${priceRibbonWidth.Mobile}${priceRibbonWidthUnits.Mobile}` : ''};
+						padding: ${priceRibbonpadding.Mobile ? `${priceRibbonpadding.Mobile}${priceRibbonpaddingUnits.Mobile}` : ''};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
+						left: ${priceRibbonLeft.Mobile ? `${priceRibbonLeft.Mobile}${priceRibbonLeftUnits.Mobile}` : ''};
+					}
+					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
+						right: ${priceRibbonRight.Mobile ? `${priceRibbonRight.Mobile}${priceRibbonRightUnits.Mobile}` : ''};
+					}
+				}
+			`}
+			</style>
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel
