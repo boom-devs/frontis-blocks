@@ -33,9 +33,11 @@ import CounterItemBgColorControl from "@Blocks/counter-number/style-control/coun
 import CounterItemBorderTypeControl from "@Blocks/counter-number/style-control/counter-item-border-type-control";
 import CounterItemBorderRadiusControl from "@Blocks/counter-number/style-control/counter-item-border-radius-control";
 import CounterNumberTypographyControl from "@Blocks/counter-number/style-control/counter-number-typograpy-control";
-import CounterNumberTitleTypographyControl from "@Blocks/counter-number/style-control/counter-number-title-typograpy-control";
-import CounterNumberTitleMarginControl from "@Blocks/counter-number/style-control/counter-number-title-margin-control";
 import CounterNumberMarginControl from "@Blocks/counter-number/style-control/counter-number-margin-control";
+
+// import CounterNumberTitleTypographyControl from "@Blocks/counter-number/style-control/counter-number-title-typograpy-control";
+// import CounterNumberTitleMarginControl from "@Blocks/counter-number/style-control/counter-number-title-margin-control";
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -47,22 +49,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		counterTitle,
 		showThousandsSeparator,
 		icon,
-		counterIconColor,
 		mediaSwitcher,
+		counterMediaUrl,
 
-		BoxBorder,
-		BoxBorderColor,
-		BoxBorderUnits,
-		BoxDesktopBorderWidth,
-		BoxTabBorderWidth,
-		BoxMobileBorderWidth,
-		BoxBorderLink,
-		BoxBorderRadiusUnits,
-		BoxDesktopBorderRadiusWidth,
-		BoxTabBorderRadiusWidth,
-		BoxMobileBorderRadiusWidth,
-		BoxBorderRadiusLink,
 
+		counterNumberFontColorSwitcher,
+		counterNumberFontColor,
+		counterNumberFontHoverColor,
 
 		counterNumberFontFamily,
 		counterNumberFontSize,
@@ -75,20 +68,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		counterNumberLetterSpacingUnits,
 		counterNumberLineHeight,
 		counterNumberLineHeightUnits,
-		counterNumberColor,
 
-		counterTitleFontFamily,
-		counterTitleFontSize,
-		counterTitleFontSizeUnits,
-		counterTitleFontWeight,
-		counterTitleFontStyle,
-		counterTitleTextTransform,
-		counterTitleTextDecoration,
-		counterTitleLetterSpacing,
-		counterTitleLetterSpacingUnits,
-		counterTitleLineHeight,
-		counterTitleLineHeightUnits,
-		counterTitleColor,
+		counterNumberMarginUnits,
+		counterNumberMarginDesktop,
+		counterNumberMarginTab,
+		counterNumberMarginMobile,
+		counterNumberMarginLink,
+
+
+		counterNumberTitleFontColorSwitcher,
+		counterNumberTitleFontColor,
+		counterNumberTitleFontHoverColor,
+
+		counterNumberTitleFontFamily,
+		counterNumberTitleFontSize,
+		counterNumberTitleFontSizeUnits,
+		counterNumberTitleFontWeight,
+		counterNumberTitleFontStyle,
+		counterNumberTitleTextTransform,
+		counterNumberTitleTextDecoration,
+		counterNumberTitleLetterSpacing,
+		counterNumberTitleLetterSpacingUnits,
+		counterNumberTitleLineHeight,
+		counterNumberTitleLineHeightUnits,
+
+		counterNumberTitleMarginUnits,
+		counterNumberTitleMarginDesktop,
+		counterNumberTitleMarginTab,
+		counterNumberTitleMarginMobile,
+		counterNumberTitleMarginLink,
+
 
 	} = attributes;
 
@@ -156,13 +165,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		});
 	}
 	const iconHandler = (iconName) => {
-		setAttributes({icon: iconName})
+		setAttributes({icon: iconName || 'star' })
 	}
 
 	const blockProps = useBlockProps();
 
 
 	{/* Inspector Controls */}
+
+	/* Counter Number */
+	const counterNumberMarginGetDesktop = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits[DeviceType]}`;
+	const counterNumberMarginGetTab = `${counterNumberMarginTab.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.left}${counterNumberMarginUnits[DeviceType]}`;
+	const counterNumberMarginGetMobile = `${counterNumberMarginMobile.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.left}${counterNumberMarginUnits[DeviceType]}`;
+
 
 
 	/* set default values for the style attributes */
@@ -177,15 +192,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [counterNumberFontFamily]);
 
 	useEffect(() => {
-		if (counterTitleFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${counterTitleFontFamily.replace(' ', '+')}`;
+		if (counterNumberTitleFontFamily) {
+			const fontUrl = `https://fonts.googleapis.com/css?family=${counterNumberTitleFontFamily.replace(' ', '+')}`;
 			const linkElement = document.createElement('link');
 			linkElement.rel = 'stylesheet';
 			linkElement.href = fontUrl;
 			document.head.appendChild(linkElement);
 		}
-	}, [counterTitleFontFamily]);
+	}, [counterNumberTitleFontFamily]);
 
+	
 	return (
 		<>
 			<style>
@@ -194,23 +210,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
                 .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix{
                		font-family: ${counterNumberFontFamily !== 'default' ? counterNumberFontFamily : counterNumberFontFamily};
-                    font-size: ${counterNumberFontSize !== undefined ? `${counterNumberFontSize}${counterNumberFontSizeUnits}` : ''}px;
+                    font-size: ${counterNumberFontSize !== undefined ? `${counterNumberFontSize}${counterNumberFontSizeUnits}` : ''};
                     font-weight: ${counterNumberFontWeight};
                     font-style: ${counterNumberFontStyle};
                     text-transform: ${counterNumberTextTransform};
                     text-decoration: ${counterNumberTextDecoration};
                     ${counterNumberLetterSpacing !== undefined ? `letter-spacing: ${counterNumberLetterSpacing}${counterNumberLetterSpacingUnits};` : ''}
                     ${counterNumberLineHeight !== undefined ? `line-height: ${counterNumberLineHeight}${counterNumberLineHeightUnits};` : ''}
+                    margin: ${counterNumberMarginGetDesktop};
                 }
                 .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title{
-               		font-family: ${counterTitleFontFamily !== 'default' ? counterTitleFontFamily : counterTitleFontFamily};
-                    font-size: ${counterTitleFontSize !== undefined ? `${counterTitleFontSize}${counterTitleFontSizeUnits}` : ''}px;
-                    font-weight: ${counterTitleFontWeight};
-                    font-style: ${counterTitleFontStyle};
-                    text-transform: ${counterTitleTextTransform};
-                    text-decoration: ${counterTitleTextDecoration};
-                    ${counterTitleLetterSpacing !== undefined ? `letter-spacing: ${counterTitleLetterSpacing}${counterTitleLetterSpacingUnits};` : ''}
-                    ${counterTitleLineHeight !== undefined ? `line-height: ${counterTitleLineHeight}${counterTitleLineHeightUnitst};` : ''}
+               		font-family: ${counterNumberTitleFontFamily !== 'default' ? counterNumberTitleFontFamily : counterNumberTitleFontFamily};
+                    font-size: ${counterNumberTitleFontSize !== undefined ? `${counterNumberTitleFontSize}${counterNumberTitleFontSizeUnits}` : ''};
+                    font-weight: ${counterNumberTitleFontWeight};
+                    font-style: ${counterNumberTitleFontStyle};
+                    text-transform: ${counterNumberTitleTextTransform};
+                    text-decoration: ${counterNumberTitleTextDecoration};
+                    ${counterNumberTitleLetterSpacing !== undefined ? `letter-spacing: ${counterNumberTitleLetterSpacing}${counterNumberTitleLetterSpacingUnits};` : ''}
+                    ${counterNumberTitleLineHeight !== undefined ? `line-height: ${counterNumberTitleLineHeight}${counterNumberTitleLineHeightUnits};` : ''}
                 }
             `}
 			</style>
@@ -412,16 +429,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Counter Title", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<CounterNumberTitleTypographyControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<CounterNumberTitleMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											{/*<CounterNumberTitleTypographyControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
+											{/*<CounterNumberTitleMarginControl*/}
+											{/*	attributes={attributes}*/}
+											{/*	setAttributes={setAttributes}*/}
+											{/*	clientId ={clientId}*/}
+											{/*/>*/}
 										</PanelBody>
 									</>
 								)}

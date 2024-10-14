@@ -7,7 +7,6 @@ const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
-
 	mediaSwitcher : {
 		type: "string",
 		default: "icon"
@@ -18,7 +17,7 @@ const attributes = {
 	},
 	icon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'star',
 	},
 	counterIconColor : {
 		type: "string",

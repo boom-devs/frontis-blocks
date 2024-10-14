@@ -6,6 +6,7 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const {
 		blockID,
+		DeviceType,
 		counterNumber,
 		counterPrefix,
 		counterSuffix,
@@ -14,6 +15,11 @@ export default function save({ attributes }) {
 		icon,
 		mediaSwitcher,
 		counterMediaUrl,
+
+
+		counterNumberFontColorSwitcher,
+		counterNumberFontColor,
+		counterNumberFontHoverColor,
 
 		counterNumberFontFamily,
 		counterNumberFontSize,
@@ -27,18 +33,34 @@ export default function save({ attributes }) {
 		counterNumberLineHeight,
 		counterNumberLineHeightUnits,
 
-		counterTitleFontFamily,
-		counterTitleFontSize,
-		counterTitleFontSizeUnits,
-		counterTitleFontWeight,
-		counterTitleFontStyle,
-		counterTitleTextTransform,
-		counterTitleTextDecoration,
-		counterTitleLetterSpacing,
-		counterTitleLetterSpacingUnits,
-		counterTitleLineHeight,
-		counterTitleLineHeightUnits,
+		counterNumberMarginUnits,
+		counterNumberMarginDesktop,
+		counterNumberMarginTab,
+		counterNumberMarginMobile,
+		counterNumberMarginLink,
 
+
+		counterNumberTitleFontColorSwitcher,
+		counterNumberTitleFontColor,
+		counterNumberTitleFontHoverColor,
+
+		counterNumberTitleFontFamily,
+		counterNumberTitleFontSize,
+		counterNumberTitleFontSizeUnits,
+		counterNumberTitleFontWeight,
+		counterNumberTitleFontStyle,
+		counterNumberTitleTextTransform,
+		counterNumberTitleTextDecoration,
+		counterNumberTitleLetterSpacing,
+		counterNumberTitleLetterSpacingUnits,
+		counterNumberTitleLineHeight,
+		counterNumberTitleLineHeightUnits,
+
+		counterNumberTitleMarginUnits,
+		counterNumberTitleMarginDesktop,
+		counterNumberTitleMarginTab,
+		counterNumberTitleMarginMobile,
+		counterNumberTitleMarginLink,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();

@@ -29,6 +29,11 @@ export const NORMAL_HOVER = [
 	{ label: "Hover", value: "hover" },
 ];
 
+export const SELECT_TYPE = [
+	{ label: "Front", value: "front" },
+	{ label: "Back", value: "back" },
+];
+
 export const separator_TYPE = [
 	{ label: __("Line", "frontis-block"), value: "line" },
 	{ label: __("Icon", "frontis-block"), value: "icon" },
@@ -45,6 +50,10 @@ export const subheading_POSITION = [
 ];
 
 export const mediaType = [
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
+];
+export const iconType = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },
 ];
