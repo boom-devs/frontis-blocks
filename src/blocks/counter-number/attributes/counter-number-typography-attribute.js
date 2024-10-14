@@ -14,11 +14,11 @@ const counterNumberTypographyAttributes = {
 
 	counterNumberFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Plus Jakarta Sans",
 	},
 	counterNumberFontSize: {
 		type: "number",
-		default: "60"
+		default: "62"
 	},
 	counterNumberFontSizeUnits: {
 		type: "string",
@@ -26,7 +26,7 @@ const counterNumberTypographyAttributes = {
 	},
 	counterNumberFontWeight : {
 		type: "string",
-		default: "500"
+		default: "700"
 	},
 	counterNumberFontStyle : {
 		type: "string",
@@ -49,7 +49,7 @@ const counterNumberTypographyAttributes = {
 	},
 	counterNumberLineHeight : {
 		type: "number",
-		default: "68"
+		default: "80"
 	},
 	counterNumberLineHeightUnits : {
 		type: "string",

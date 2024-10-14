@@ -1,6 +1,6 @@
 const counterNumberTitleMarginAttribute = {
 	// margin
-	counterNumberTitleMarginMarginUnits : {
+	counterNumberTitleMarginUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -8,7 +8,7 @@ const counterNumberTitleMarginAttribute = {
 			Mobile: 'px'
 		}
 	},
-	counterNumberTitleMarginMarginDesktop: {
+	counterNumberTitleMarginDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -17,7 +17,7 @@ const counterNumberTitleMarginAttribute = {
 			right: 0,
 		},
 	},
-	counterNumberTitleMarginMarginTab: {
+	counterNumberTitleMarginTab: {
 		type: "object",
 		default: {
 			top: 0,
@@ -26,7 +26,7 @@ const counterNumberTitleMarginAttribute = {
 			right: 0,
 		},
 	},
-	counterNumberTitleMarginMarginMobile: {
+	counterNumberTitleMarginMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -35,7 +35,7 @@ const counterNumberTitleMarginAttribute = {
 			right: 0,
 		},
 	},
-	counterNumberTitleMarginMarginLink : {
+	counterNumberTitleMarginLink : {
 		type : "boolean",
 		default: true
 	},

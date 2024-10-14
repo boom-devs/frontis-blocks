@@ -14,11 +14,11 @@ const counterNumberTitleTypographyAttributes = {
 
 	counterNumberTitleFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Inter Tight",
 	},
 	counterNumberTitleFontSize: {
 		type: "number",
-		default: "60"
+		default: "18"
 	},
 	counterNumberTitleFontSizeUnits: {
 		type: "string",
@@ -26,7 +26,7 @@ const counterNumberTitleTypographyAttributes = {
 	},
 	counterNumberTitleFontWeight : {
 		type: "string",
-		default: "500"
+		default: "400"
 	},
 	counterNumberTitleFontStyle : {
 		type: "string",
@@ -49,7 +49,7 @@ const counterNumberTitleTypographyAttributes = {
 	},
 	counterNumberTitleLineHeight : {
 		type: "number",
-		default: "68"
+		default: "28"
 	},
 	counterNumberTitleLineHeightUnits : {
 		type: "string",

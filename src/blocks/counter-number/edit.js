@@ -35,8 +35,8 @@ import CounterItemBorderRadiusControl from "@Blocks/counter-number/style-control
 import CounterNumberTypographyControl from "@Blocks/counter-number/style-control/counter-number-typograpy-control";
 import CounterNumberMarginControl from "@Blocks/counter-number/style-control/counter-number-margin-control";
 
-// import CounterNumberTitleTypographyControl from "@Blocks/counter-number/style-control/counter-number-title-typograpy-control";
-// import CounterNumberTitleMarginControl from "@Blocks/counter-number/style-control/counter-number-title-margin-control";
+import CounterNumberTitleTypographyControl from "@Blocks/counter-number/style-control/counter-number-title-typograpy-control";
+import CounterNumberTitleMarginControl from "@Blocks/counter-number/style-control/counter-number-title-margin-control";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -178,6 +178,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const counterNumberMarginGetTab = `${counterNumberMarginTab.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.left}${counterNumberMarginUnits[DeviceType]}`;
 	const counterNumberMarginGetMobile = `${counterNumberMarginMobile.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.left}${counterNumberMarginUnits[DeviceType]}`;
 
+	/* Counter Number */
+	const counterNumberTitleMarginGetDesktop = `${counterNumberTitleMarginDesktop.top}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginDesktop.right}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginDesktop.bottom}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginDesktop.left}${counterNumberTitleMarginUnits[DeviceType]}`;
+	const counterNumberTitleMarginGetTab = `${counterNumberTitleMarginTab.top}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginTab.right}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginTab.bottom}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginTab.left}${counterNumberTitleMarginUnits[DeviceType]}`;
+	const counterNumberTitleMarginGetMobile = `${counterNumberTitleMarginMobile.top}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginMobile.right}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginMobile.bottom}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginMobile.left}${counterNumberTitleMarginUnits[DeviceType]}`;
+
+
+
 
 
 	/* set default values for the style attributes */
@@ -201,11 +208,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [counterNumberTitleFontFamily]);
 
-	
+
 	return (
 		<>
 			<style>
 				{`
+				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
+ 					margin: ${counterNumberMarginGetDesktop};
+				}
                 .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
                 .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
                 .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix{
@@ -217,7 +227,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     text-decoration: ${counterNumberTextDecoration};
                     ${counterNumberLetterSpacing !== undefined ? `letter-spacing: ${counterNumberLetterSpacing}${counterNumberLetterSpacingUnits};` : ''}
                     ${counterNumberLineHeight !== undefined ? `line-height: ${counterNumberLineHeight}${counterNumberLineHeightUnits};` : ''}
-                    margin: ${counterNumberMarginGetDesktop};
+                    color: ${counterNumberFontColor};
                 }
                 .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title{
                		font-family: ${counterNumberTitleFontFamily !== 'default' ? counterNumberTitleFontFamily : counterNumberTitleFontFamily};
@@ -228,6 +238,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     text-decoration: ${counterNumberTitleTextDecoration};
                     ${counterNumberTitleLetterSpacing !== undefined ? `letter-spacing: ${counterNumberTitleLetterSpacing}${counterNumberTitleLetterSpacingUnits};` : ''}
                     ${counterNumberTitleLineHeight !== undefined ? `line-height: ${counterNumberTitleLineHeight}${counterNumberTitleLineHeightUnits};` : ''}
+                    margin: ${counterNumberTitleMarginGetDesktop};
+                    color: ${counterNumberTitleFontColor};
+                }
+
+               	@media only screen and (max-width: 1024px) {
+					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
+						margin: ${counterNumberMarginGetTab};
+					}
+					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
+						margin: ${counterNumberTitleMarginGetTab};
+					}
+                }
+
+                @media only screen and (max-width: 767px) {
+					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
+						margin: ${counterNumberMarginGetMobile};
+					}
+					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
+						margin: ${counterNumberTitleMarginGetMobile};
+					}
                 }
             `}
 			</style>
@@ -429,16 +459,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Counter Title", "frontis-blocks")}
 											initialOpen={false}
 										>
-											{/*<CounterNumberTitleTypographyControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
-											{/*<CounterNumberTitleMarginControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
+											<CounterNumberTitleTypographyControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+											<CounterNumberTitleMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
 									</>
 								)}
