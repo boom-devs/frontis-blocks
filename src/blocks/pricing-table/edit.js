@@ -80,6 +80,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		priceRibbonPosition,
 
 		/** End Ribbon */
+
+		pricingTitleAlignment,
 	} = attributes;
 
     const blockProps = useBlockProps({
@@ -105,7 +107,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className="fb-pricing-header">
 						<div className="fb-pricing-icon-wrapper">
 							{pricingIconAlign === 'icon' && (
-								<div className="fb-pricing-icon">{renderSVG(pricingIcon)}</div>
+								<span className="fb-pricing-icon">{renderSVG(pricingIcon)}</span>
 							)}
 						</div>
 						<div className="fb-pricing-price-wrapper">
@@ -127,7 +129,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								</span>
 							)}
 						</div>
-						<div className="fb-pricing-title-wrapper">
+						<div className={`fb-pricing-title-wrapper fb-pricing-title-${pricingTitleAlignment}`}>
 							<RichText
 								tagName="h2"
 								className="fb-pricing-title"

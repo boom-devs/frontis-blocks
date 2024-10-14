@@ -319,7 +319,7 @@ const attributes = {
 	},
 	priceIconColor : { 
 		type: "string",
-		default: ""
+		default: "#fff"
 	},
 	priceIconHoverColor: {
 		type: 'string',
@@ -331,7 +331,7 @@ const attributes = {
 	},
 	priceIconBgColor : {
 		type: "string",
-		default: ""
+		default: "#F72585"
 	},
 	priceIconBgHoverColor: {
 		type: 'string',
@@ -340,9 +340,9 @@ const attributes = {
 	priceIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '70',
-			Tablet: '70',
-			Mobile: '70'
+			Desktop: '50',
+			Tablet: '50',
+			Mobile: '50'
 		}
 	},
 	priceIconSizeUnits: {
@@ -356,9 +356,9 @@ const attributes = {
 	priceIconBgSize: {
 		type: 'object',
 		default: {
-			Desktop: '100',
-			Tablet: '100',
-			Mobile: '100',
+			Desktop: '80',
+			Tablet: '80',
+			Mobile: '80',
 		}
 	},
 	priceIconBgSizeUnits: {
@@ -438,28 +438,28 @@ const attributes = {
 	priceIconBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	priceIconBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	priceIconBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	priceIconBorderRadiusLink : {
@@ -482,9 +482,9 @@ const attributes = {
 	normalPricingFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '40',
+			Tablet: '40',
+			Mobile: '20'
 		}
 	},
 	normalPricingFontSizeUnits: {
@@ -497,7 +497,7 @@ const attributes = {
 	},
 	normalPricingFontWeight: {
         type: "string",
-        default: ""
+        default: "700"
     },
 	normalPricingFontStyle: {
         type: "string",
@@ -549,7 +549,7 @@ const attributes = {
 	},
 	normalPricingColor: {
 		type: 'string',
-		default: ''
+		default: '#fff'
 	},
 	normalPricingHoverColor: {
 		type: 'string',
@@ -563,9 +563,9 @@ const attributes = {
 	salePricingFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '40',
+			Tablet: '40',
+			Mobile: '20'
 		}
 	},
 	salePricingFontSizeUnits: {
@@ -578,7 +578,7 @@ const attributes = {
 	},
 	salePricingFontWeight: {
         type: "string",
-        default: "",
+        default: "700",
     },
 	salePricingFontStyle: {
         type: "string",
@@ -630,7 +630,7 @@ const attributes = {
 	},
 	salePricingColor: {
 		type: 'string',
-		default: ''
+		default: '#000'
 	},
 	salePricingHoverColor: {
 		type: 'string',
@@ -725,9 +725,9 @@ const attributes = {
 	pricePeriodFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
 		}
 	},
 	pricePeriodFontSizeUnits: {
@@ -740,7 +740,7 @@ const attributes = {
 	},
 	pricePeriodFontWeight: {
 		type: "string",
-		default: ""
+		default: "400"
 	},
 	pricePeriodFontStyle: {
 		type: "string",
@@ -792,11 +792,27 @@ const attributes = {
 	},
 	pricePeriodColor: {
 		type: 'string',
-		default: ''
+		default: '#fff'
 	},
 	pricePeriodHoverColor: {
 		type: 'string',
 		default: ''
+	},
+	priceingPriceGap: {
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
+		}
+	},
+	priceingPriceGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	/** End Pricing Style */
 
@@ -811,7 +827,7 @@ const attributes = {
 	},
 	pricingTitleColor: {
 		type: 'string',
-		default: ''
+		default: '#fff'
 	},
 	pricingTitleHoverColor: {
 		type: 'string',
@@ -824,9 +840,9 @@ const attributes = {
 	pricingTitleFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '20'
 		}
 	},
 	pricingTitleFontSizeUnits: {
@@ -839,7 +855,7 @@ const attributes = {
 	},
 	pricingTitleFontWeight: {
 		type: "string",
-		default: ""
+		default: "700"
 	},
 	pricingTitleFontStyle: {
 		type: "string",
@@ -892,7 +908,7 @@ const attributes = {
 	},
 	pricingSubtitleColor: {
 		type: 'string',
-		default: ''
+		default: '#fff'
 	},
 	pricingSubtitleHoverColor: {
 		type: 'string',
@@ -905,9 +921,9 @@ const attributes = {
 	pricingSubtitleFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
 		}
 	},
 	pricingSubtitleFontSizeUnits: {
@@ -920,7 +936,7 @@ const attributes = {
 	},
 	pricingSubtitleFontWeight: {
 		type: "string",
-		default: ""
+		default: "400"
 	},
 	pricingSubtitleFontStyle: {
 		type: "string",

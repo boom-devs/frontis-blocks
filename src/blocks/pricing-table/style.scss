@@ -45,50 +45,40 @@
 	.fb-pricing-icon-wrapper {
 		display: flex;
 		align-items: center;
-		// .fb-pricing-icon {
-		// 	width: 100px;
-		// 	height: 100px;
-		// }
+		justify-content: center;
+
+		.fb-pricing-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
 	}
 	.fb-pricing-price-wrapper {
-		margin-top: 20px;
+		display: flex;
+		align-items: center;
 		.fb-pricing-normal-price {
-			font-size: 40px;
-			font-weight: 700;
-			color: #FFFFFF;
 			&.line-through {
 				text-decoration: line-through;
 				padding-right: 8px;
 			}
-			.price-period{
-				font-size: 16px;
-				font-weight: 400;
-				color: #FFFFFF;
-			}
-		}
-		.fb-pricing-sale-price {
-			font-size: 40px;
-			font-weight: 700;
-			color: #000000;
-			.price-period{
-				font-size: 16px;
-				font-weight: 400;
-				color: #000000;
-			}
 		}
 	}
 	.fb-pricing-title-wrapper {
-		margin-top: 20px;
+		display: block;
+		&.fb-pricing-title-left {
+			text-align: left;
+		}
+		&.fb-pricing-title-center {
+			text-align: center;
+		}
+		&.fb-pricing-title-right {
+			text-align: right;
+		}
 		.fb-pricing-title {
-			font-size: 30px;
-			font-weight: 700;
-			color: #FFFFFF;
 			margin: 0;
 		}
 		.fb-pricing-subtitle {
-			font-size: 16px;
-			font-weight: 400;
-			color: #FFFFFF;
 			margin: 0;
 		}
 	}
