@@ -158,7 +158,155 @@ const attributes = {
 
 
 	/** Start Style Settings */
+	pricingHeaderBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	pricingHeaderBgColor: {
+		type: "string",
+		default: "#399CFF"
+	},
+	pricingHeaderBgHoverColor: {
+		type: 'string',
+	},
+	/** Start Padding */
+	pricingHeaderPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingHeaderDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
+		},
+	},
+	pricingHeaderTabletPadding: {
+		type: "object", 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
+		},
+	},
+	pricingHeaderMobilePadding: {
+		type: "object", 
+		default: {
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
+		},
+	},
+	pricingHeaderPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Padding */
+	/** Start Border */
+	pricingHeaderBorder: {
+		type: 'string',
+		default: "none",
+	},
+	pricingHeaderBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	pricingHeaderBorderColor: {
+		type: 'string',
+	},
+	pricingHeaderBorderHoverColor: {
+		type: 'string',
+	},
+	pricingHeaderBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingHeaderBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingHeaderBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingHeaderBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingHeaderBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
 
+	/** Start Border Radius */
+	pricingHeaderBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingHeaderBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingHeaderBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingHeaderBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingHeaderBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/**End Header */
 
 	/** Start Icon */
 	pricingIconAlignment: {
@@ -1353,7 +1501,7 @@ const attributes = {
 	/** Start Border */
 	priceGlobalBorder: {
 		type: 'string',
-		default: "none",
+		default: "solid",
 	},
 	priceGlobalBorderColorSwitcher : {
 		type: "string",
@@ -1361,6 +1509,7 @@ const attributes = {
 	},
 	priceGlobalBorderColor: {
 		type: 'string',
+		default: "#ddd"
 	},
 	priceGlobalBorderHoverColor: {
 		type: 'string',
@@ -1376,28 +1525,28 @@ const attributes = {
 	priceGlobalBorderDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
 		},
 	},
 	priceGlobalBorderTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
 		},
 	},
 	priceGlobalBorderMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
 		},
 	},
 	priceGlobalBorderLink : {
