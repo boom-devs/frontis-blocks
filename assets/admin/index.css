@@ -158,8 +158,8 @@
 }
 .fb-blocks-search-input[type=text]:focus {
   outline: none;
-  border-color: #007cba;
-  box-shadow: 0 0 0 1px #007cba;
+  border-color: #4B9DEF;
+  box-shadow: 0 0 0 1px #4B9DEF;
 }
 .fb-blocks-search-clear {
   position: absolute;
@@ -190,18 +190,18 @@
   background-color: rgb(226.8103448276, 226.8103448276, 228.6896551724);
 }
 .fb-blocks-button.fb-blocks-enable-all {
-  background-color: #46b450;
+  background-color: #4CAF50;
   color: #fff;
 }
 .fb-blocks-button.fb-blocks-enable-all:hover {
-  background-color: rgb(62.86, 161.64, 71.84);
+  background-color: rgb(68.2788844622, 157.2211155378, 71.8725099602);
 }
 .fb-blocks-button.fb-blocks-disable-all {
-  background-color: #dc3232;
+  background-color: #E43242;
   color: #fff;
 }
 .fb-blocks-button.fb-blocks-disable-all:hover {
-  background-color: rgb(208.84375, 35.65625, 35.65625);
+  background-color: rgb(223.1142241379, 29.3857758621, 46.7995689655);
 }
 .fb-blocks-category-filter {
   display: flex;
@@ -221,12 +221,12 @@
   background-color: rgb(226.8103448276, 226.8103448276, 228.6896551724);
 }
 .fb-blocks-category-button--active {
-  background-color: #007cba;
+  background-color: #4B9DEF;
   color: #fff;
-  border-color: #007cba;
+  border-color: #4B9DEF;
 }
 .fb-blocks-category-button--active:hover {
-  background-color: rgb(0, 107, 160.5);
+  background-color: rgb(51.5816326531, 144.25, 236.9183673469);
 }
 .fb-blocks-category-group {
   margin-bottom: 30px;
@@ -325,7 +325,7 @@
   margin-right: 4px;
 }
 .fb-block-card-link:hover {
-  color: #007cba;
+  color: #4B9DEF;
   text-decoration: none;
 }
 .fb-block-card-switch {
@@ -378,7 +378,7 @@
   font-weight: 600;
   background-color: #fff;
   color: #1e1e1e;
-  box-shadow: inset 3px 0 0 #007cba;
+  box-shadow: inset 3px 0 0 #4B9DEF;
 }
 .fb-blocks-settings .fb-blocks-settings-content {
   flex-grow: 1;
@@ -421,7 +421,7 @@
   line-height: 1.5;
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input {
-  flex: 0 0 100px;
+  flex: 0 0 200px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -482,6 +482,65 @@
     flex: 0 0 auto;
     width: 100%;
   }
+}
+
+.fb-button-primary {
+  background-color: #4B9DEF;
+  color: #f0f0f1;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border: none;
+  padding: 16px 20px;
+  cursor: pointer;
+}
+.fb-button-primary:hover {
+  background-color: rgb(28.1632653061, 131.5, 234.8367346939);
+}
+
+.fb-button-error {
+  background-color: #E43242;
+  color: #f0f0f1;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border: none;
+  padding: 16px 20px;
+  cursor: pointer;
+}
+.fb-button-error:hover {
+  background-color: rgb(200.5818965517, 26.4181034483, 42.0732758621);
+}
+
+.fb-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.fb-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.fb-confirmation-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.fb-confirmation-modal-actions button {
+  margin-left: 10px;
 }
 
 .frontis-blocks-admin {
@@ -547,7 +606,7 @@
 
 .frontis-tab-button.active-tab {
   background-color: #f0f0f1;
-  border-bottom: 2px solid #007cba;
+  border-bottom: 2px solid #4B9DEF;
 }
 
 .frontis-tab-button svg {

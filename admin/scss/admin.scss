@@ -2,6 +2,7 @@
 @import "variables";
 @import "blocks";
 @import "settings";
+@import "common";
 
 
 .frontis-blocks-admin {
@@ -71,6 +72,7 @@
   cursor: pointer;
   transition: background-color $transition-duration;
 }
+
 
 .frontis-tab-button.active-tab {
   background-color: $tab-background;

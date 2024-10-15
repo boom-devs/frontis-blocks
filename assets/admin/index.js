@@ -554,6 +554,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rc_switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-switch */ "./node_modules/rc-switch/es/index.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/ConfirmationModal */ "./admin/components/common/ConfirmationModal.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -570,6 +571,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var AssetsGeneration = function AssetsGeneration() {
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({
       fileGeneration: false
@@ -577,15 +579,28 @@ var AssetsGeneration = function AssetsGeneration() {
     _useState2 = _slicedToArray(_useState, 2),
     options = _useState2[0],
     setOptions = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isModalOpen = _useState4[0],
+    setIsModalOpen = _useState4[1];
   var handleSwitchChange = function handleSwitchChange(option) {
     setOptions(function (prevOptions) {
       return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, !prevOptions[option]));
     });
   };
-  var handleAssetGeneration = function handleAssetGeneration() {
-    // Add asset generation logic here
-    console.log('Asset generation triggered');
-  };
+  var handleAssetGeneration = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useCallback)(function () {
+    console.log('handleAssetGeneration called');
+    setIsModalOpen(true);
+    console.log('isModalOpen set to:', true);
+  }, []);
+  var confirmAssetGeneration = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useCallback)(function () {
+    console.log('Asset generation confirmed and triggered');
+    setIsModalOpen(false);
+  }, []);
+  var closeModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useCallback)(function () {
+    setIsModalOpen(false);
+  }, []);
+  console.log('AssetsGeneration rendered, isModalOpen:', isModalOpen);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-options"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Assets Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
@@ -606,9 +621,15 @@ var AssetsGeneration = function AssetsGeneration() {
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Asset Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate assets for your blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isPrimary: true,
+    className: "fb-button-primary",
     onClick: handleAssetGeneration
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate Assets', 'frontis-blocks')))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate Assets', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    isOpen: isModalOpen,
+    onClose: closeModal,
+    onConfirm: confirmAssetGeneration,
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Confirm Asset Generation', 'frontis-blocks'),
+    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Are you sure you want to generate assets? This process may take a few moments.', 'frontis-blocks')
+  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AssetsGeneration);
 
@@ -943,6 +964,53 @@ var TabPanel = function TabPanel(_ref) {
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TabPanel);
+
+/***/ }),
+
+/***/ "./admin/components/common/ConfirmationModal.js":
+/*!******************************************************!*\
+  !*** ./admin/components/common/ConfirmationModal.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var ConfirmationModal = function ConfirmationModal(_ref) {
+  var isOpen = _ref.isOpen,
+    onClose = _ref.onClose,
+    onConfirm = _ref.onConfirm,
+    title = _ref.title,
+    message = _ref.message;
+  //   console.log('ConfirmationModal rendered, isOpen:', isOpen);
+
+  if (!isOpen) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal-overlay"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal-content"
+  }, /*#__PURE__*/React.createElement("h2", null, title), /*#__PURE__*/React.createElement("p", null, message), /*#__PURE__*/React.createElement("div", {
+    className: "fb-confirmation-modal-actions"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    className: "fb-button-error",
+    onClick: onClose
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Cancel', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    className: "fb-button-primary",
+    onClick: function onClick() {
+      onConfirm();
+      onClose();
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Confirm', 'frontis-blocks')))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ConfirmationModal);
 
 /***/ }),
 
