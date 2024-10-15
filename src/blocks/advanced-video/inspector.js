@@ -614,10 +614,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             <style>
             {`
-                .fb-advanced-video-main-wrapper.${blockID} {
+                .${blockID}.fb-advanced-video-main-wrapper {
                     z-index: ${videoGlobalZIndex !== undefined ? videoGlobalZIndex : ''};
                 }
-                .fb-advanced-video-wrapper {
+                .${blockID}.fb-advanced-video-wrapper {
                     ${videoGlobalBgColor !== undefined ? `background-color: ${videoGlobalBgColor};` : ''};
                     padding: ${DesktopPadding};
                     margin: ${DesktopMargin};
@@ -627,12 +627,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${videoGlobalBorderColor !== undefined ? `border-color: ${videoGlobalBorderColor};` : ''};
                     transition: all .3s ease-in-out;
                 }
-                .fb-advanced-video-wrapper:hover {
+                .${blockID}.fb-advanced-video-wrapper:hover {
                     ${videoGlobalBgHoverColor !== undefined ? `background-color: ${videoGlobalBgHoverColor};` : ''};
                     ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
                 }
 
-                .fb-react-player iframe {
+                .${blockID} .fb-react-player iframe {
                     border: ${videoBorder};
                     border-width: ${IframeBorderDesktopWidth};
                     border-radius: ${IframeBorderRadiusDesktopWidth} !important;
@@ -642,28 +642,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 @media only screen and (max-width: 1024px) {
 
-                    .fb-advanced-video-wrapper {
+                    .${blockID}.fb-advanced-video-wrapper {
                         padding: ${TabletPadding};
                         margin: ${TabletMargin};
                         border-width: ${BorderTabletWidth};
                         border-radius: ${BorderRadiusTabletWidth} !important;
                     }
 
-                    .fb-react-player iframe {
+                    .${blockID} .fb-react-player iframe {
                         border-width: ${IframeBorderTabletWidth};
                         border-radius: ${IframeBorderRadiusTabletWidth} !important;
                     }
                 }
 
                 @media only screen and (max-width: 767px) {
-                    .fb-advanced-video-wrapper {
+                    .${blockID}.fb-advanced-video-wrapper {
                         padding: ${MobilePadding};
                         margin: ${MobileMargin};
                         border-width: ${BorderMobileWidth};
                         border-radius: ${BorderRadiusMobileWidth} !important;
                     }
                         
-                    .fb-react-player iframe {
+                    .${blockID} .fb-react-player iframe {
                         border-width: ${IframeBorderMobileWidth};
                         border-radius: ${IframeBorderRadiusMobileWidth} !important;
                     }

@@ -408,6 +408,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
+
+    /* set default values for the style attributes */
+    useEffect(() => {
+        if (normalPricingFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${normalPricingFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [normalPricingFontFamily]);
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
