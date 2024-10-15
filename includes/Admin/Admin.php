@@ -2,7 +2,8 @@
 
 namespace FrontisBlocks\Admin;
 
-use FrontisBlocks\Core\Settings;
+
+use FrontisBlocks\Admin\Settings;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Traits\Singleton;
 
@@ -22,6 +23,8 @@ class Admin {
         add_action( 'wp_ajax_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
         add_action( 'wp_ajax_nopriv_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
 
+        // Add the new REST API endpoint
+        add_action('rest_api_init', [$this, 'register_rest_routes']);
     }
 
     public function add_menu_page(){
@@ -41,6 +44,16 @@ class Admin {
     }
 
     public function enqueue_styles($hook){
+        if('toplevel_page_frontis-blocks' != $hook){
+            return;
+        }
+
+        wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index.css', array(), '1.0.0');
+
+        
+    }
+
+    public function enqueue_scripts($hook){
         if('toplevel_page_frontis-blocks' != $hook){
             return;
         }
@@ -66,14 +79,6 @@ class Admin {
             'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
             'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
         ));
-    }
-
-    public function enqueue_scripts($hook){
-        if('toplevel_page_frontis-blocks' != $hook){
-            return;
-        }
-
-        wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index.css', array(), '1.0.0');
     }
 
         /**
@@ -167,6 +172,74 @@ class Admin {
         }
     }
 
+    /**
+     * Register REST API routes
+     */
+    public function register_rest_routes() {
+        register_rest_route('frontis-blocks/v1', '/save-option', [
+            'methods' => 'POST',
+            'callback' => [$this, 'save_option_endpoint'],
+            'permission_callback' => function () {
+                return current_user_can('manage_options');
+            },
+        ]);
 
+        register_rest_route('frontis-blocks/v1', '/get-options', [
+            'methods' => 'POST',
+            'callback' => [$this, 'get_options_endpoint'],
+            'permission_callback' => function () {
+                return current_user_can('manage_options');
+            },
+        ]);
+    }
+
+    /**
+     * Handle the save option REST API endpoint
+     *
+     * @param WP_REST_Request $request Full details about the request.
+     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function save_option_endpoint($request) {
+        $nonce = $request->get_param('nonce');
+        if (!wp_verify_nonce($nonce, 'fb_save_settings')) {
+            return new \WP_Error('invalid_nonce', 'Invalid nonce', ['status' => 403]);
+        }
+
+        error_log(print_r($request->get_params(), true));
+
+        $key = $request->get_param('key');
+        $value = $request->get_param('value');
+
+        if (empty($key)) {
+            return new \WP_Error('missing_key', 'Key is required', ['status' => 400]);
+        }
+
+        $result = Settings::save($key, $value);
+
+        if ($result) {
+            return new \WP_REST_Response(['success' => true, 'message' => 'Option saved successfully'], 200);
+        } else {
+            return new \WP_Error('save_failed', 'Failed to save option', ['status' => 500]);
+        }
+    }
+
+    public function get_options_endpoint($request) {
+        $nonce = $request->get_param('nonce');
+        if (!wp_verify_nonce($nonce, 'fb_save_settings')) {
+            return new \WP_Error('invalid_nonce', 'Invalid nonce', ['status' => 403]);
+        }
+
+        $keys = $request->get_param('keys');
+        if (!is_array($keys)) {
+            return new \WP_Error('invalid_keys', 'Keys must be an array', ['status' => 400]);
+        }
+
+        $options = [];
+        foreach ($keys as $key) {
+            $options[$key] = Settings::get($key, '');
+        }
+
+        return new \WP_REST_Response(['success' => true, 'data' => $options], 200);
+    }
 
 }
