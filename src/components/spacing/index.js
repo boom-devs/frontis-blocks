@@ -9,7 +9,7 @@ import {
 import FB_ResponsiveControl from '@Components/responsive-control';
 import './editor.lazy.scss';
 
-export default function FB_Spacing( {label, DeviceType, spacingUnitsHandler, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes} ) {
+export default function FB_Spacing( {label, deviceType, spacingUnitsHandler, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes} ) {
 
 	const handleSpacingUnit = ( event, position ) => {
 		handleSpacingUnitHandler( event, position );
@@ -27,9 +27,9 @@ export default function FB_Spacing( {label, DeviceType, spacingUnitsHandler, spa
 
 	// Get spacing value
 	const getSpacingValue = ( position ) => {
-		if ( DeviceType === 'Desktop' ) {
+		if ( deviceType === 'Desktop' ) {
 			return spacingDesktop[position];
-		} else if ( DeviceType === 'Tablet' ) {
+		} else if ( deviceType === 'Tablet' ) {
 			return spacingTablet[position];
 		}
 
@@ -48,8 +48,8 @@ export default function FB_Spacing( {label, DeviceType, spacingUnitsHandler, spa
 					{/*eslint-disable-next-line @wordpress/i18n-no-variables*/}
 					<FB_ResponsiveControl
 						labelText={ __( label, 'frontis-blocks' )}
-						device={DeviceType}
-						deviceHandler={( newDevice ) => setAttributes( {DeviceType: newDevice} )}
+						device={deviceType}
+						deviceHandler={( newDevice ) => setAttributes( {deviceType: newDevice} )}
 					/>
 					<div className="fb-setting-units-type">
 						<ButtonGroup className="fb-setting-units-type-wrap">
@@ -57,7 +57,7 @@ export default function FB_Spacing( {label, DeviceType, spacingUnitsHandler, spa
 								<Button
 									key={key}
 									onClick={() => setSpacingUnit(item.value)}
-									className={`fb-setting-units-type-switcher ${spacingUnits[DeviceType] === item.value ? 'active' : ''}`}
+									className={`fb-setting-units-type-switcher ${spacingUnits[deviceType] === item.value ? 'active' : ''}`}
 								>
 									{item.label}
 								</Button>

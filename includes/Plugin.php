@@ -7,6 +7,7 @@ use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Assets\Asset;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
+use FrontisBlocks\Core\FontLoader;
 
 final class Plugin {
     /**
@@ -137,7 +138,7 @@ final class Plugin {
 
        //load blocks
        self::$blocks = BlockList::get_instance()->get_blocks();
-
+		FontLoader::get_instance();
 
     }
 

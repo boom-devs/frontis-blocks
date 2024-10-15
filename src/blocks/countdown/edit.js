@@ -217,14 +217,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 }
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
                 	color: ${digitFontColor};
-               		font-family: ${digitFontFamily !== 'default' ? digitFontFamily : digitFontFamily};
-                    font-size: ${digitFontSize !== undefined ? `${digitFontSize}${digitFontSizeUnits}` : ''};
-                    font-weight: ${digitFontWeight};
-                    font-style: ${digitFontStyle};
-                    text-transform: ${digitTextTransform};
-                    text-decoration: ${digitTextDecoration};
-                    ${digitLetterSpacing !== undefined ? `letter-spacing: ${digitLetterSpacing}${digitLetterSpacing};` : ''}
-                    ${digitLineHeight !== undefined ? `line-height: ${digitLineHeight}${digitLineHeightUnits};` : ''}
+                    ${digitFontFamily ? `font-family: ${digitFontFamily};` : ""}
+					${digitFontSize.Desktop ? `font-size: ${digitFontSize.Desktop}${digitFontSizeUnits.Desktop};` : ""}
+					${digitFontWeight ? `font-weight: ${digitFontWeight};` : ""}
+					${digitFontStyle ? `font-style: ${digitFontStyle};` : ""}
+					${digitTextTransform ? `text-transform: ${digitTextTransform};` : ""}
+					${digitTextDecoration ? `text-decoration: ${digitTextDecoration};` : ""}
+					${digitLetterSpacing.Desktop ? `letter-spacing: ${digitLetterSpacing.Desktop}${digitLetterSpacingUnits.Desktop};` : ""}
+					${digitLineHeight.Desktop ? `line-height: ${digitLineHeight.Desktop}${digitLineHeightUnits.Desktop};` : ""}
                 }
                 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
                 	color: ${labelFontColor};
@@ -249,6 +249,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							border-width: ${countDownItemBorderTypeGetTab};
 							border-radius: ${countDownItemBorderRadiusGetTab};
 						}
+
+
                 }
 
                 @media only screen and (max-width: 767px) {

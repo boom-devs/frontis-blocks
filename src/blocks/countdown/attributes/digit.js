@@ -11,49 +11,73 @@ const digitAttributes = {
 		type: 'string',
 		default: "#FFFFFF"
 	},
-
 	digitFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit'
 	},
 	digitFontSize: {
-		type: "number",
-		default: "60"
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	digitFontSizeUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	digitFontWeight : {
-		type: "string",
-		default: "500"
+	digitFontWeight: {
+		type: 'string',
+		default: ''
 	},
-	digitFontStyle : {
-		type: "string",
-		default: "normal"
+	digitFontStyle: {
+		type: 'string',
+		default: ''
 	},
-	digitTextTransform : {
-		type: "string",
-		default: "none"
+	digitTextTransform: {
+		type: 'string',
+		default: ''
 	},
-	digitTextDecoration : {
-		type: "string",
-		default: "none"
+	digitTextDecoration: {
+		type: 'string',
+		default: ''
 	},
-	digitLetterSpacing : {
-		type: "number",
+	digitLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	digitLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	digitLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	digitLineHeight : {
-		type: "number",
-		default: "68"
+	digitLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	digitLineHeightUnits : {
-		type: "string",
-		default: "px"
+	digitLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 };
 
