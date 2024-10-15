@@ -76,7 +76,7 @@ const attributes = {
         default: "px"
     },
 
-
+    /** Start Icon */
     FeatureIconColorSwitcher : {
         type: "string",
         default: "normal"
@@ -156,7 +156,7 @@ const attributes = {
         type: "string",
         default: "px"
     },
-
+    /** End Icon */
 
 
 
