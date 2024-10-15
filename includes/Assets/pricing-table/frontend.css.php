@@ -443,7 +443,7 @@ $css_content = "
 		" . ($priceIconHoverColor ? "fill: $priceIconHoverColor;" : "") . "
 	}
 
-	.$blockId.fb-pricing-wrapper {
+	.$blockId.fb-pricing-wrapper .fb-pricing-price-wrapper {
 		" . ($pricingAlignment ? "justify-content: " . ($pricingAlignment === 'left' ? 'flex-start' : ($pricingAlignment === 'center' ? 'center' : ($pricingAlignment === 'right' ? 'flex-end' : 'center'))) . ";" : "") . "
 	}
 
