@@ -32,7 +32,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             
             <div {...blockProps}>
                 <div className="fb-parent-wrapper">
-                    <div className="fb-advanced-video-wrapper">
+                    <div className={`fb-advanced-video-wrapper ${blockID}`}>
                         <div className="fb-player-wrapper">
                             <div className="fb-player-option">
                                 <ReactPlayer
