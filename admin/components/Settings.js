@@ -1,22 +1,22 @@
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import settingsTabs from './settingsTabs';
+import SettingsTabs from './SettingsTabs';
 
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState(settingsTabs[0].id);
+  const [activeTab, setActiveTab] = useState(SettingsTabs[0].id);
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
 
-  const ActiveComponent = settingsTabs.find(tab => tab.id === activeTab).component;
+  const ActiveComponent = SettingsTabs.find(tab => tab.id === activeTab).component;
 
   return (
     <div className="fb-blocks-settings">
       <h2>{__('Settings', 'frontis-blocks')}</h2>
       <div className="fb-blocks-settings-container">
         <div className="fb-blocks-settings-tabs">
-          {settingsTabs.map((tab) => (
+          {SettingsTabs.map((tab) => (
             <button
               key={tab.id}
               className={`fb-blocks-settings-tab ${activeTab === tab.id ? 'active' : ''}`}
