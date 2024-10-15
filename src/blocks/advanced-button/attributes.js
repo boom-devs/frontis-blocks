@@ -328,9 +328,5 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    customCSS: {
-        type: 'string',
-        default: '',
-    },
 }
 export default attributes;
