@@ -1,4 +1,8 @@
 import { __ } from '@wordpress/i18n';
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 import { 
     useBlockProps, 
     RichText, 
@@ -13,6 +17,7 @@ import Inspector from "./inspector";
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId}) {
+    const container = useRef();
     const { 
         blockID,
         HeadingText, 
@@ -39,6 +44,27 @@ export default function Edit({ attributes, setAttributes, clientId}) {
             background-color: #f9f9f9;
         }
     `;
+
+
+    const tl = useRef();
+  
+    const toggleTimeline = () => {
+      tl.current.reversed(!tl.current.reversed());
+    };
+  
+    useGSAP(
+      () => {
+        const boxes = gsap.utils.toArray('.box');
+        tl.current = gsap
+          .timeline()
+          .to(boxes[0], { x: 120, rotation: 360 })
+          .to(boxes[1], { x: -120, rotation: -360 }, '<')
+          .to(boxes[2], { y: -166 })
+          .reverse();
+      },
+      { scope: container }
+    );
+  
     
     return (
         <>
@@ -57,7 +83,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
             </BlockControls>
             
             <div {...blockProps} id={blockID}>
-                <div className={`fb-advanced-wrapper ${blockID}`} style={{textAlign: HeadingAlignment}}>
+                {/* <div className={`fb-advanced-wrapper ${blockID}`} style={{textAlign: HeadingAlignment}}>
 
                     {ShowSeparatorSwitcher && SeperatorPosition === "top" && (
                         <div className='fb-advanced-title-separator'></div>
@@ -93,7 +119,18 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                         <div className='fb-advanced-title-separator'></div>
                     )}
 
-                </div>
+                </div> */}
+                <main>
+                    <section className="boxes-container" ref={container} id={blockID}>
+                        <h2>Use the button to toggle a Timeline</h2>
+                        <div>
+                            <button onClick={toggleTimeline}>Toggle Timeline</button>
+                        </div>
+                        <div className="box gradient-blue">Box 1</div>
+                        <div className="box gradient-blue">Box 2</div>
+                        <div className="box gradient-blue">Box 3</div>
+                    </section>
+                </main>
             </div>
         </>
     );

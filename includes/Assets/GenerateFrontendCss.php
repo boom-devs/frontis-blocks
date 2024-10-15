@@ -13,8 +13,9 @@ class GenerateFrontendCss {
 
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $single_block) {
-			 	if ('frontis-blocks/'.$single_block['slug']  === $block['blockName']) {
-					include plugin_dir_path(__DIR__) . 'Assets/' . $single_block['slug'] . '/frontend.css.php';
+				$css_file_path = plugin_dir_path(__DIR__) . 'Assets/' . $single_block['slug'] . '/frontend.css.php';
+			 	if ('frontis-blocks/'.$single_block['slug']  === $block['blockName'] && file_exists($css_file_path)) {
+					include $css_file_path;
 				}
 			}
 		}
