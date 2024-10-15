@@ -6,6 +6,7 @@ use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Forms\FluentForms;
+use FrontisBlocks\Assets\GenerateFrontendCss;
 
 defined('ABSPATH') || exit;
 
@@ -146,6 +147,8 @@ class Blocks
             $block_content = $this->add_block_id($block_content, $parsed_block);
             $block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
         }
+
+        GenerateFrontendCss::get_instance()->generate_css($block_content, $parsed_block);
 
         return $block_content;
     }

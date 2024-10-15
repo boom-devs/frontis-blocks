@@ -48,7 +48,6 @@ export default function save({ attributes }) {
 		/** End Ribbon */
 
 		/** Start Style Settings */
-		pricingHeaderBgColorSwitcher,
 		pricingHeaderBgColor,
 		pricingHeaderBgHoverColor,
 		/** Start Padding */
@@ -56,18 +55,15 @@ export default function save({ attributes }) {
 		pricingHeaderDesktopPadding,
 		pricingHeaderTabletPadding,
 		pricingHeaderMobilePadding,
-		pricingHeaderPaddingLink,
 		/** End Padding */
 		/** Start Border */
 		pricingHeaderBorder,
-		pricingHeaderBorderColorSwitcher,
 		pricingHeaderBorderColor,
 		pricingHeaderBorderHoverColor,
 		pricingHeaderBorderUnits,
 		pricingHeaderBorderDesktop,
 		pricingHeaderBorderTablet,
 		pricingHeaderBorderMobile,
-		pricingHeaderBorderLink,
 		/** End Border */
 
 		/** Start Border Radius */
@@ -75,7 +71,6 @@ export default function save({ attributes }) {
 		pricingHeaderBorderRadiusDesktop,
 		pricingHeaderBorderRadiusTablet,
 		pricingHeaderBorderRadiusMobile,
-		pricingHeaderBorderRadiusLink,
 		/**End Header */
 
 		/** Start Icon Style */
@@ -328,30 +323,23 @@ export default function save({ attributes }) {
         priceGlobalPaddingDesktop,
         priceGlobalPaddingTablet,
         priceGlobalPaddingMobile,
-        priceGlobalPaddingLink,
         priceGlobalMarginUnits,
         priceGlobalMarginDesktop,
         priceGlobalMarginTablet,
         priceGlobalMarginMobile,
-        priceGlobalMarginLink,
-        priceGlobalBgColorSwitcher,
         priceGlobalBgColor,
         priceGlobalBgHoverColor,
         priceGlobalBorder,
-        priceGlobalBorderColorSwitcher,
         priceGlobalBorderColor,
         priceGlobalBorderHoverColor,
         priceGlobalBorderUnits,
         priceGlobalBorderDesktop,
         priceGlobalBorderTablet,
         priceGlobalBorderMobile,
-        priceGlobalBorderLink,
         priceGlobalBorderRadiusUnits,
         priceGlobalBorderRadiusDesktop,
         priceGlobalBorderRadiusTablet,
         priceGlobalBorderRadiusMobile,
-        priceGlobalBorderRadiusLink,
-		priceGlobalBoxShadowValues,
 		priceGlobalBoxShadowCssValue,
 		/** End Global Settings */
 
@@ -406,50 +394,13 @@ export default function save({ attributes }) {
 	const priceButtonMobileBorderRadiusWidthValue = `${priceButtonMobileBorderRadiusWidth.top}${priceButtonBorderRadiusUnits.Mobile} ${priceButtonMobileBorderRadiusWidth.right}${priceButtonBorderRadiusUnits.Mobile} ${priceButtonMobileBorderRadiusWidth.bottom}${priceButtonBorderRadiusUnits.Mobile} ${priceButtonMobileBorderRadiusWidth.left}${priceButtonBorderRadiusUnits.Mobile}`;
 	/** End Pricing Button Border Radius */
 
-    const globalDesktopPadding    = `${priceGlobalPaddingDesktop.top}${priceGlobalPaddingUnits.Desktop} ${priceGlobalPaddingDesktop.right}${priceGlobalPaddingUnits.Desktop} ${priceGlobalPaddingDesktop.bottom}${priceGlobalPaddingUnits.Desktop} ${priceGlobalPaddingDesktop.left}${priceGlobalPaddingUnits.Desktop}`;
-	const globalTabletPadding     = `${priceGlobalPaddingTablet.top}${priceGlobalPaddingUnits.Tablet} ${priceGlobalPaddingTablet.right}${priceGlobalPaddingUnits.Tablet} ${priceGlobalPaddingTablet.bottom}${priceGlobalPaddingUnits.Tablet} ${priceGlobalPaddingTablet.left}${priceGlobalPaddingUnits.Tablet}`;
-	const globalMobilePadding     = `${priceGlobalPaddingMobile.top}${priceGlobalPaddingUnits.Mobile} ${priceGlobalPaddingMobile.right}${priceGlobalPaddingUnits.Mobile} ${priceGlobalPaddingMobile.bottom}${priceGlobalPaddingUnits.Mobile} ${priceGlobalPaddingMobile.left}${priceGlobalPaddingUnits.Mobile}`;
-	/** End Global Padding */
-
-	const globalDesktopMargin = `${priceGlobalMarginDesktop.top}${priceGlobalMarginUnits.Desktop} ${priceGlobalMarginDesktop.right}${priceGlobalMarginUnits.Desktop} ${priceGlobalMarginDesktop.bottom}${priceGlobalMarginUnits.Desktop} ${priceGlobalMarginDesktop.left}${priceGlobalMarginUnits.Desktop}`;
-	const globalTabletMargin = `${priceGlobalMarginTablet.top}${priceGlobalMarginUnits.Tablet} ${priceGlobalMarginTablet.right}${priceGlobalMarginUnits.Tablet} ${priceGlobalMarginTablet.bottom}${priceGlobalMarginUnits.Tablet} ${priceGlobalMarginTablet.left}${priceGlobalMarginUnits.Tablet}`;
-	const globalMobileMargin = `${priceGlobalMarginMobile.top}${priceGlobalMarginUnits.Mobile} ${priceGlobalMarginMobile.right}${priceGlobalMarginUnits.Mobile} ${priceGlobalMarginMobile.bottom}${priceGlobalMarginUnits.Mobile} ${priceGlobalMarginMobile.left}${priceGlobalMarginUnits.Mobile}`;
-	/** End Global Margin */
-
-	const globalDesktopBorderWidth = `${priceGlobalBorderDesktop.top}${priceGlobalBorderUnits.Desktop} ${priceGlobalBorderDesktop.right}${priceGlobalBorderUnits.Desktop} ${priceGlobalBorderDesktop.bottom}${priceGlobalBorderUnits.Desktop} ${priceGlobalBorderDesktop.left}${priceGlobalBorderUnits.Desktop}`;
-	const globalTabletBorderWidth = `${priceGlobalBorderTablet.top}${priceGlobalBorderUnits.Tablet} ${priceGlobalBorderTablet.right}${priceGlobalBorderUnits.Tablet} ${priceGlobalBorderTablet.bottom}${priceGlobalBorderUnits.Tablet} ${priceGlobalBorderTablet.left}${priceGlobalBorderUnits.Tablet}`;
-	const globalMobileBorderWidth = `${priceGlobalBorderMobile.top}${priceGlobalBorderUnits.Mobile} ${priceGlobalBorderMobile.right}${priceGlobalBorderUnits.Mobile} ${priceGlobalBorderMobile.bottom}${priceGlobalBorderUnits.Mobile} ${priceGlobalBorderMobile.left}${priceGlobalBorderUnits.Mobile}`;
-	/** End Border */
-    
-	const globalDesktopBorderRadiusWidth = `${priceGlobalBorderRadiusDesktop.top}${priceGlobalBorderRadiusUnits.Desktop} ${priceGlobalBorderRadiusDesktop.right}${priceGlobalBorderRadiusUnits.Desktop} ${priceGlobalBorderRadiusDesktop.bottom}${priceGlobalBorderRadiusUnits.Desktop} ${priceGlobalBorderRadiusDesktop.left}${priceGlobalBorderRadiusUnits.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${priceGlobalBorderRadiusTablet.top}${priceGlobalBorderRadiusUnits.Tablet} ${priceGlobalBorderRadiusTablet.right}${priceGlobalBorderRadiusUnits.Tablet} ${priceGlobalBorderRadiusTablet.bottom}${priceGlobalBorderRadiusUnits.Tablet} ${priceGlobalBorderRadiusTablet.left}${priceGlobalBorderRadiusUnits.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${priceGlobalBorderRadiusMobile.top}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.right}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.bottom}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.left}${priceGlobalBorderRadiusUnits.Mobile}`;
-	/** End Border Radius */
-
 
     return (
         <>
 
             <style>
 			{`
-				.fb-pricing-wrapper.${blockId} {
-					${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
-					${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-					${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
-					${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
-					${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-					${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-					${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-					${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
-					transition: background-color 0.3s ease, border-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId}:hover {
-					${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
-					${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
-					${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
-				}
 				.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-					${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
 					${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
 					${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
 					${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
@@ -673,12 +624,6 @@ export default function save({ attributes }) {
 				}
 
 				@media only screen and (max-width: 1024px) {
-					.fb-pricing-wrapper.${blockId} {
-						${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-						${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
-						${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-						${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-					}
 					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
 						${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
 						${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
@@ -719,12 +664,6 @@ export default function save({ attributes }) {
 				}
 
 				@media only screen and (max-width: 767px) {
-					.fb-pricing-wrapper.${blockId} {
-						${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-						${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
-						${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-						${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-					}
 					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
 						${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
 						${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
