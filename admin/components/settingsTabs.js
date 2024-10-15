@@ -1,11 +1,13 @@
 import { __ } from "@wordpress/i18n";
-import EditorOptions from "./settings/EditorOptions";
-import AssetsGeneration from "./Settings/AssetsGeneration";
-import VersionControl from "./Settings/VersionControl";
-import EditorEnhancements from "./Settings/EditorEnhancements";
-import Performance from "./Settings/Performance";
+import {
+    EditorOptions,
+    AssetsGeneration,
+    VersionControl,
+    EditorEnhancements,
+    Performance,
+} from "./SettingsComponents";
 
-const settingsTabs = [
+const SettingsTabs = [
 	{
 		id: "editor",
 		label: __("Editor Options", "frontis-blocks"),
@@ -33,4 +35,4 @@ const settingsTabs = [
 	},
 ];
 
-export default settingsTabs;
+export default SettingsTabs;

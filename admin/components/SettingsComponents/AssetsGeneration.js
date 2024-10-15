@@ -29,8 +29,6 @@ const AssetsGeneration = () => {
     setIsModalOpen(false);
   }, []);
 
-  console.log('AssetsGeneration rendered, isModalOpen:', isModalOpen);
-
   return (
     <div className="fb-blocks-settings-options">
       <h3>{__('Assets Generation', 'frontis-blocks')}</h3>
