@@ -463,6 +463,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		setAttributes({buttonIcon: IconName})
 
 	}
+
+    console.log(buttonboxShadowCssValue);
+    
     
     return (
         <>
@@ -488,6 +491,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${buttonZIndex.Desktop && buttonZIndexUnits.Desktop ? `z-index: ${buttonZIndex.Desktop}${buttonZIndexUnits.Desktop};` : ''}
                     ${buttonWidth.Desktop && buttonWidthUnits.Desktop ? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};` : ''}
                     display: ${buttonAlignment === 'justify' ? 'flex' : 'inline-flex'};
+                    transition: all 0.3s ease;
+                }
+
+                .fb-advanced-button-wrapper.${blockId} .fb-advanced-button:hover {
+                    ${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
                 }
 
                 .fb-advanced-button-wrapper.${blockId} .fb-advanced-button .fb-advanced-button-text {
