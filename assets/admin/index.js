@@ -992,6 +992,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rc_switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-switch */ "./node_modules/rc-switch/es/index.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -1008,31 +1010,78 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var EditorOptions = function EditorOptions() {
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({
-      defaultContentWidth: '',
-      buttonInheritFromTheme: false,
-      containerPadding: '',
-      containerElementsGap: '',
-      customCSS: false,
-      copyPasteStyle: false
+      fb_default_content_width: '',
+      fb_button_inherit_from_theme: false,
+      fb_container_padding: '',
+      fb_container_elements_gap: '',
+      fb_custom_css: false,
+      fb_copy_paste_style: false
     }),
     _useState2 = _slicedToArray(_useState, 2),
     options = _useState2[0],
     setOptions = _useState2[1];
+  var nonce = window.frontisBlocksAdmin.nonce;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    fetchOptions();
+  }, []);
+  var fetchOptions = function fetchOptions() {
+    var keys = Object.keys(options);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+      path: '/frontis-blocks/v1/get-options',
+      method: 'POST',
+      data: {
+        nonce: nonce,
+        keys: keys
+      }
+    }).then(function (response) {
+      if (response.success) {
+        setOptions(function (prevOptions) {
+          return _objectSpread(_objectSpread({}, prevOptions), response.data);
+        });
+      } else {
+        console.error('Failed to fetch options');
+      }
+    });
+  };
+  var saveOption = function saveOption(key, value) {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+      path: '/frontis-blocks/v1/save-option',
+      method: 'POST',
+      data: {
+        nonce: nonce,
+        key: key,
+        value: value
+      }
+    }).then(function (response) {
+      if (response.success) {
+        console.log("Option ".concat(key, " saved successfully"));
+      } else {
+        console.error("Failed to save option ".concat(key));
+      }
+    });
+  };
   var handleNumberChange = function handleNumberChange(option, value) {
     setOptions(function (prevOptions) {
       return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, value));
     });
   };
+  var handleNumberBlur = function handleNumberBlur(option, value) {
+    saveOption(option, value);
+  };
   var handleSwitchChange = function handleSwitchChange(option) {
+    var newValue = !options[option];
     setOptions(function (prevOptions) {
-      return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, !prevOptions[option]));
+      return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, newValue));
     });
+    saveOption(option, newValue);
   };
   var NumberInputWithPx = function NumberInputWithPx(_ref) {
     var value = _ref.value,
       onChange = _ref.onChange,
+      onBlur = _ref.onBlur,
       min = _ref.min,
       max = _ref.max;
     return /*#__PURE__*/React.createElement("div", {
@@ -1042,7 +1091,8 @@ var EditorOptions = function EditorOptions() {
       min: min,
       max: max,
       value: value,
-      onChange: onChange
+      onChange: onChange,
+      onBlur: onBlur
     }), /*#__PURE__*/React.createElement("span", {
       className: "fb-option-input-px"
     }, "px"));
@@ -1054,9 +1104,12 @@ var EditorOptions = function EditorOptions() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default Content Width', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default width for content in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.defaultContentWidth,
+    value: options.fb_default_content_width,
     onChange: function onChange(value) {
-      return handleNumberChange('defaultContentWidth', value);
+      return handleNumberChange('fb_default_content_width', value);
+    },
+    onBlur: function onBlur() {
+      return handleNumberBlur('fb_default_content_width', options.fb_default_content_width);
     },
     min: 0,
     max: 2000
@@ -1067,18 +1120,21 @@ var EditorOptions = function EditorOptions() {
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Button - Inherit From Theme', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Use button styles from the current theme', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.buttonInheritFromTheme,
+    checked: options.fb_button_inherit_from_theme,
     onChange: function onChange() {
-      return handleSwitchChange('buttonInheritFromTheme');
+      return handleSwitchChange('fb_button_inherit_from_theme');
     }
   }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Padding', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default padding for containers in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.containerPadding,
+    value: options.fb_container_padding,
     onChange: function onChange(value) {
-      return handleNumberChange('containerPadding', value);
+      return handleNumberChange('fb_container_padding', value);
+    },
+    onBlur: function onBlur() {
+      return handleNumberBlur('fb_container_padding', options.fb_container_padding);
     },
     min: 0,
     max: 2000
@@ -1087,9 +1143,12 @@ var EditorOptions = function EditorOptions() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Elements Gap', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default gap between container elements in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.containerElementsGap,
+    value: options.fb_container_elements_gap,
     onChange: function onChange(value) {
-      return handleNumberChange('containerElementsGap', value);
+      return handleNumberChange('fb_container_elements_gap', value);
+    },
+    onBlur: function onBlur() {
+      return handleNumberBlur('fb_container_elements_gap', options.fb_container_elements_gap);
     },
     min: 0,
     max: 2000
@@ -1100,9 +1159,9 @@ var EditorOptions = function EditorOptions() {
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom CSS', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable custom CSS for blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.customCSS,
+    checked: options.fb_custom_css,
     onChange: function onChange() {
-      return handleSwitchChange('customCSS');
+      return handleSwitchChange('fb_custom_css');
     }
   }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
@@ -1111,9 +1170,9 @@ var EditorOptions = function EditorOptions() {
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Copy Paste Style', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable copy and paste style functionality', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.copyPasteStyle,
+    checked: options.fb_copy_paste_style,
     onChange: function onChange() {
-      return handleSwitchChange('copyPasteStyle');
+      return handleSwitchChange('fb_copy_paste_style');
     }
   }))));
 };
@@ -2253,6 +2312,17 @@ function useSafeState(defaultValue) {
 
 "use strict";
 module.exports = window["React"];
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 

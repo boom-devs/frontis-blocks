@@ -1,6 +1,6 @@
 <?php
 
-namespace FrontisBlocks\Core;
+namespace FrontisBlocks\Admin;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +21,7 @@ class Settings {
 
     public static function save( $key, $value = '' )
     {
-        update_option( $key, $value );
+        return update_option( $key, $value );
     }
 
     public static function get( $key, $default = '' )
