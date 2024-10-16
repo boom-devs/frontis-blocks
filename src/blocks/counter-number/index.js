@@ -8,6 +8,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
+import counterIconAttributes from "./attributes/counter-icon-attribute.js";
 import counterItemSizeAttributes from "./attributes/counter-item-size-attribute.js";
 import counterItemBorderTypeAttributes from "./attributes/counter-item-border-type-attribute.js";
 import counterItemBorderRadiusAttributes from "./attributes/counter-item-border-radius-attribute.js";
@@ -20,6 +21,7 @@ import counterNumberTitleMarginAttribute from "./attributes/counter-number-title
 // Merge attributes
 const combinedAttributes = {
 	...attributes,
+	...counterIconAttributes,
 	...counterItemSizeAttributes,
 	...counterItemBorderTypeAttributes,
 	...counterItemBorderRadiusAttributes,

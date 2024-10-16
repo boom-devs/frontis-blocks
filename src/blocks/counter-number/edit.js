@@ -28,13 +28,13 @@ import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES} from "./constants/co
 import FBIconPicker from "../../components/icon-picker";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import ResponsiveControl from "../../components/responsivecontrol";
+import CounterIconControl from "@Blocks/counter-number/style-control/counter-icon-control";
 import CounterItemSizeControl from "@Blocks/counter-number/style-control/counter-item-size-control";
 import CounterItemBgColorControl from "@Blocks/counter-number/style-control/counter-item-bg-color-control";
 import CounterItemBorderTypeControl from "@Blocks/counter-number/style-control/counter-item-border-type-control";
 import CounterItemBorderRadiusControl from "@Blocks/counter-number/style-control/counter-item-border-radius-control";
 import CounterNumberTypographyControl from "@Blocks/counter-number/style-control/counter-number-typograpy-control";
 import CounterNumberMarginControl from "@Blocks/counter-number/style-control/counter-number-margin-control";
-
 import CounterNumberTitleTypographyControl from "@Blocks/counter-number/style-control/counter-number-title-typograpy-control";
 import CounterNumberTitleMarginControl from "@Blocks/counter-number/style-control/counter-number-title-margin-control";
 
@@ -75,6 +75,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		counterItemBgColorSwitcher,
 		counterItemBgColor,
 		counterItemBgHoverColor,
+
+		counterIconColorSwitcher,
+		counterIconColor,
+		counterIconHoverColor,
+		counterIconSize,
+		counterIconSizeUnits,
+
+		counterIconMarginUnits,
+		counterIconMarginDesktop,
+		counterIconMarginTab,
+		counterIconMarginMobile,
+		counterIconMarginLink,
 
 
 		counterNumberFontColorSwitcher,
@@ -196,7 +208,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	{/* Inspector Controls */}
-	{/* Countdown Item Control */}
+	{/* Counter Item Control */}
 	const counterItemBorderTypeGetDesktop = `${counterItemBorderTypeDesktop.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.left}${counterItemBorderTypeUnits[deviceType]}`;
 	const counterItemBorderTypeGetTab = `${counterItemBorderTypeTab.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTab.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTab.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTab.left}${counterItemBorderTypeUnits[deviceType]}`;
 	const counterItemBorderTypeGetMobile = `${counterItemBorderTypeMobile.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.left}${counterItemBorderTypeUnits[deviceType]}`;
@@ -207,12 +219,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const counterItemBorderRadiusGetMobile = `${counterItemBorderRadiusMobile.top}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.right}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.bottom}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.left}${counterItemBorderRadiusUnits[deviceType]}`;
 
 
+	/* Counter Icon */
+	const counterIconMarginGetDesktop = `${counterIconMarginDesktop.top}${counterIconMarginUnits[deviceType]} ${counterIconMarginDesktop.right}${counterIconMarginUnits[deviceType]} ${counterIconMarginDesktop.bottom}${counterIconMarginUnits[deviceType]} ${counterIconMarginDesktop.left}${counterIconMarginUnits[deviceType]}`;
+	const counterIconMarginGetTab = `${counterIconMarginTab.top}${counterIconMarginUnits[deviceType]} ${counterIconMarginTab.right}${counterIconMarginUnits[deviceType]} ${counterIconMarginTab.bottom}${counterIconMarginUnits[deviceType]} ${counterIconMarginTab.left}${counterIconMarginUnits[deviceType]}`;
+	const counterIconMarginGetMobile = `${counterIconMarginMobile.top}${counterIconMarginUnits[deviceType]} ${counterIconMarginMobile.right}${counterIconMarginUnits[deviceType]} ${counterIconMarginMobile.bottom}${counterIconMarginUnits[deviceType]} ${counterIconMarginMobile.left}${counterIconMarginUnits[deviceType]}`;
+
 	/* Counter Number */
 	const counterNumberMarginGetDesktop = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits[deviceType]}`;
 	const counterNumberMarginGetTab = `${counterNumberMarginTab.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTab.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTab.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTab.left}${counterNumberMarginUnits[deviceType]}`;
 	const counterNumberMarginGetMobile = `${counterNumberMarginMobile.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.left}${counterNumberMarginUnits[deviceType]}`;
 
-	/* Counter Number */
+	/* Counter Title */
 	const counterNumberTitleMarginGetDesktop = `${counterNumberTitleMarginDesktop.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.left}${counterNumberTitleMarginUnits[deviceType]}`;
 	const counterNumberTitleMarginGetTab = `${counterNumberTitleMarginTab.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTab.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTab.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTab.left}${counterNumberTitleMarginUnits[deviceType]}`;
 	const counterNumberTitleMarginGetMobile = `${counterNumberTitleMarginMobile.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.left}${counterNumberTitleMarginUnits[deviceType]}`;
@@ -230,6 +247,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${counterItemBorderTypeGetDesktop ? `border-width: ${counterItemBorderTypeGetDesktop};` : ''}
 					${counterItemBorderRadiusGetDesktop ? `border-radius: ${counterItemBorderRadiusGetDesktop};` : ''}
 					${counterItemBorderColor ? `border-color: ${counterItemBorderColor};` : ''}
+				}
+				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg{
+				  	${counterIconSize.Desktop ? `width: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
+				  	${counterIconColor ? `fill: ${counterIconColor};` : ''}
+				  	 ${counterIconMarginGetDesktop ? `margin: ${counterIconMarginGetDesktop};` : ''}
 				}
 				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
 				  ${counterNumberMarginGetDesktop ? `margin: ${counterNumberMarginGetDesktop};` : ''}
@@ -496,7 +518,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Icon", "frontis-blocks")}
 											initialOpen={false}
 										>
-
+											<CounterIconControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
 										</PanelBody>
 										<PanelBody
 											title={__("Counter Number", "frontis-blocks")}

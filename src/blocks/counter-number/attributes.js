@@ -19,10 +19,6 @@ const attributes = {
 		type: 'string',
 		default: 'star',
 	},
-	counterIconColor : {
-		type: "string",
-		default: "#0D173B"
-	},
     counterNumber: {
         type: "number",
         default: 100
