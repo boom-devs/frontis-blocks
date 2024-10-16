@@ -52,6 +52,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		mediaSwitcher,
 		counterMediaUrl,
 
+		counterItemSize,
+		counterItemSizeUnits,
+		// Border Type
+		counterItemBorder,
+		counterItemBorderColor,
+		counterItemBackgroundColor,
+
+		counterItemBorderTypeUnits,
+		counterItemBorderTypeDesktop,
+		counterItemBorderTypeTab,
+		counterItemBorderTypeMobile,
+		counterItemBorderTypeLink,
+
+		// Border Radius
+		counterItemBorderRadiusUnits,
+		counterItemBorderRadiusDesktop,
+		counterItemBorderRadiusTab,
+		counterItemBorderRadiusMobile,
+		counterItemBorderRadiusLink,
+
+		counterItemBgColorSwitcher,
+		counterItemBgColor,
+		counterItemBgHoverColor,
+
 
 		counterNumberFontColorSwitcher,
 		counterNumberFontColor,
@@ -172,6 +196,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	{/* Inspector Controls */}
+	{/* Countdown Item Control */}
+	const counterItemBorderTypeGetDesktop = `${counterItemBorderTypeDesktop.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.left}${counterItemBorderTypeUnits[deviceType]}`;
+	const counterItemBorderTypeGetTab = `${counterItemBorderTypeTab.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTab.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTab.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTab.left}${counterItemBorderTypeUnits[deviceType]}`;
+	const counterItemBorderTypeGetMobile = `${counterItemBorderTypeMobile.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.left}${counterItemBorderTypeUnits[deviceType]}`;
+
+
+	const counterItemBorderRadiusGetDesktop = `${counterItemBorderRadiusDesktop.top}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusDesktop.right}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusDesktop.bottom}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusDesktop.left}${counterItemBorderRadiusUnits[deviceType]}`;
+	const counterItemBorderRadiusGetTab = `${counterItemBorderRadiusTab.top}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusTab.right}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusTab.bottom}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusTab.left}${counterItemBorderRadiusUnits[deviceType]}`;
+	const counterItemBorderRadiusGetMobile = `${counterItemBorderRadiusMobile.top}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.right}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.bottom}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.left}${counterItemBorderRadiusUnits[deviceType]}`;
+
 
 	/* Counter Number */
 	const counterNumberMarginGetDesktop = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits[deviceType]}`;
@@ -184,35 +218,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const counterNumberTitleMarginGetMobile = `${counterNumberTitleMarginMobile.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.left}${counterNumberTitleMarginUnits[deviceType]}`;
 
 
-
-
-
-	/* set default values for the style attributes */
-	// useEffect(() => {
-	// 	if (counterNumberFontFamily) {
-	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${counterNumberFontFamily.replace(' ', '+')}`;
-	// 		const linkElement = document.createElement('link');
-	// 		linkElement.rel = 'stylesheet';
-	// 		linkElement.href = fontUrl;
-	// 		document.head.appendChild(linkElement);
-	// 	}
-	// }, [counterNumberFontFamily]);
-	//
-	// useEffect(() => {
-	// 	if (counterNumberTitleFontFamily) {
-	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${counterNumberTitleFontFamily.replace(' ', '+')}`;
-	// 		const linkElement = document.createElement('link');
-	// 		linkElement.rel = 'stylesheet';
-	// 		linkElement.href = fontUrl;
-	// 		document.head.appendChild(linkElement);
-	// 	}
-	// }, [counterNumberTitleFontFamily]);
-
-
 	return (
 		<>
 			<style>
 				{`
+				.fb-counter-wrapper.${blockID} .fb-counter-item {
+				  	${counterItemBgColor ? `background: ${counterItemBgColor};` : ''}
+					${counterItemSize.Desktop ? `width: ${counterItemSize.Desktop}${counterItemSizeUnits.Desktop};` : ''}
+					${counterItemSize.Desktop ? `height: ${counterItemSize.Desktop}${counterItemSizeUnits.Desktop};` : ''}
+					${counterItemBorder ? `border: ${counterItemBorder};` : ''}
+					${counterItemBorderTypeGetDesktop ? `border-width: ${counterItemBorderTypeGetDesktop};` : ''}
+					${counterItemBorderRadiusGetDesktop ? `border-radius: ${counterItemBorderRadiusGetDesktop};` : ''}
+					${counterItemBorderColor ? `border-color: ${counterItemBorderColor};` : ''}
+				}
 				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
 				  ${counterNumberMarginGetDesktop ? `margin: ${counterNumberMarginGetDesktop};` : ''}
 				}
@@ -245,6 +263,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				}
 
 				@media only screen and (max-width: 1024px) {
+					.fb-counter-wrapper.${blockID} .fb-counter-item {
+						${counterItemSize.Tablet ? `width: ${counterItemSize.Tablet}${counterItemSizeUnits.Tablet};` : ''}
+						${counterItemSize.Tablet ? `height: ${counterItemSize.Tablet}${counterItemSizeUnits.Tablet};` : ''}
+						${counterItemBorderTypeGetTab ? `border-width: ${counterItemBorderTypeGetTab};` : ''}
+						${counterItemBorderRadiusGetTab ? `border-radius: ${counterItemBorderRadiusGetTab};` : ''}
+					}
+
 				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
 					${counterNumberMarginGetTab ? `margin: ${counterNumberMarginGetTab};` : ''}
 				  }
@@ -259,10 +284,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
 					${counterNumberTitleMarginGetTab ? `margin: ${counterNumberTitleMarginGetTab};` : ''}
+					${counterNumberTitleFontSize.Tablet ? `font-size: ${counterNumberTitleFontSize.Tablet}${counterNumberTitleFontSizeUnits.Tablet};` : ''}
+					${counterNumberTitleLetterSpacing.Tablet ? `letter-spacing: ${counterNumberTitleLetterSpacing.Tablet}${counterNumberTitleLetterSpacingUnits.Tablet};` : ''}
+					${counterNumberTitleLineHeight.Tablet ? `line-height: ${counterNumberTitleLineHeight.Tablet}${counterNumberTitleLineHeightUnits.Tablet};` : ''}
 				  }
 				}
 
 				@media only screen and (max-width: 767px) {
+					.fb-counter-wrapper.${blockID} .fb-counter-item {
+						${counterItemSize.Mobile ? `width: ${counterItemSize.Mobile}${counterItemSizeUnits.Mobile};` : ''}
+						${counterItemSize.Mobile ? `height: ${counterItemSize.Mobile}${counterItemSizeUnits.Mobile};` : ''}
+						${counterItemBorderTypeGetTab ? `border-width: ${counterItemBorderTypeGetTab};` : ''}
+						${counterItemBorderRadiusGetTab ? `border-radius: ${counterItemBorderRadiusGetTab};` : ''}
+					}
+
 				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
 					${counterNumberMarginGetMobile ? `margin: ${counterNumberMarginGetMobile};` : ''}
 				  }
@@ -277,6 +312,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
 					${counterNumberTitleMarginGetMobile ? `margin: ${counterNumberTitleMarginGetMobile};` : ''}
+					${counterNumberTitleFontSize.Mobile ? `font-size: ${counterNumberTitleFontSize.Mobile}${counterNumberTitleFontSizeUnits.Mobile};` : ''}
+					${counterNumberTitleLetterSpacing.Mobile ? `letter-spacing: ${counterNumberTitleLetterSpacing.Mobile}${counterNumberTitleLetterSpacingUnits.Mobile};` : ''}
+					${counterNumberTitleLineHeight.Mobile ? `line-height: ${counterNumberTitleLineHeight.Mobile}${counterNumberTitleLineHeightUnits.Mobile};` : ''}
 				  }
 				}
             `}

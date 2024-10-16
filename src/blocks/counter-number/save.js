@@ -16,6 +16,9 @@ export default function save({ attributes }) {
 		mediaSwitcher,
 		counterMediaUrl,
 
+		counterItemBgColorSwitcher,
+		counterItemBgColor,
+		counterItemBgHoverColor,
 
 		counterNumberFontColorSwitcher,
 		counterNumberFontColor,

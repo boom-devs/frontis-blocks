@@ -59,7 +59,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		countDownItemBgColor,
 
-		// Team Image Border Type
+		// Border Type
 		countDownItemBorder,
 		countDownItemBorderColor,
 		countDownItemBackgroundColor,
@@ -70,7 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownItemBorderTypeMobile,
 		countDownItemBorderTypeLink,
 
-		// Team Image Border Radius
+		// Border Radius
 		countDownItemBorderRadiusUnits,
 		countDownItemBorderRadiusDesktop,
 		countDownItemBorderRadiusTab,

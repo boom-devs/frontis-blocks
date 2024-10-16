@@ -5,11 +5,11 @@ const counterItemBgColorAttributes = {
 	},
 	counterItemBgColor: {
 		type: "string",
-		default: "#F97255"
+		default: ""
 	},
 	counterItemBgHoverColor: {
 		type: 'string',
-		default: "#F97255"
+		default: ""
 	},
 };
 
