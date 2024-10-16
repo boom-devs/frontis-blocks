@@ -5,7 +5,7 @@ $block_attributes = $block['attrs'];
 $block_ID = isset( $block_attributes['blockID'] ) ? sanitize_text_field( $block_attributes['blockID'] ) : '';
 
 
-$countDownItemBgColor = isset($block_attributes['countDownItemBgColor']) ? sanitize_hex_color($block_attributes['countDownItemBgColor']) : '';
+$countDownItemBgColor = isset($block_attributes['countDownItemBgColor']) ? sanitize_hex_color($block_attributes['countDownItemBgColor']) : '#F97255';
 
 /** Start Border */
 $countDownItemBorder = isset($block_attributes['countDownItemBorder']) ? sanitize_text_field($block_attributes['countDownItemBorder']) : '';
@@ -21,13 +21,20 @@ $countDownItemBorderTypeGetMobile = $countDownItemBorderTypeMobile['top'] . $cou
 
 /** Start Border Radius */
 $countDownItemBorderRadiusUnits = isset($block_attributes['priceGlobalBorderRadiusUnits']) ? $block_attributes['priceGlobalBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$countDownItemBorderRadiusDesktop = isset($block_attributes['priceGlobalBorderRadiusDesktop']) ? $block_attributes['priceGlobalBorderRadiusDesktop'] : array('top' => '10', 'bottom' => '10', 'left' => '10', 'right' => '10');
-$countDownItemBorderRadiusTablet = isset($block_attributes['priceGlobalBorderRadiusTablet']) ? $block_attributes['priceGlobalBorderRadiusTablet'] : array('top' => '10', 'bottom' => '10', 'left' => '10', 'right' => '10');
-$countDownItemBorderRadiusMobile = isset($block_attributes['priceGlobalBorderRadiusMobile']) ? $block_attributes['priceGlobalBorderRadiusMobile'] : array('top' => '10', 'bottom' => '10', 'left' => '10', 'right' => '10');
+$countDownItemBorderRadiusDesktop = isset($block_attributes['priceGlobalBorderRadiusDesktop']) ? $block_attributes['priceGlobalBorderRadiusDesktop'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
+$countDownItemBorderRadiusTablet = isset($block_attributes['priceGlobalBorderRadiusTablet']) ? $block_attributes['priceGlobalBorderRadiusTablet'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
+$countDownItemBorderRadiusMobile = isset($block_attributes['priceGlobalBorderRadiusMobile']) ? $block_attributes['priceGlobalBorderRadiusMobile'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
 $countDownItemBorderRadiusGetDesktop = $countDownItemBorderRadiusDesktop['top'] . $countDownItemBorderRadiusUnits['Desktop'] . ' ' . $countDownItemBorderRadiusDesktop['right'] . $countDownItemBorderRadiusUnits['Desktop'] . ' ' . $countDownItemBorderRadiusDesktop['bottom'] . $countDownItemBorderRadiusUnits['Desktop'] . ' ' . $countDownItemBorderRadiusDesktop['left'] . $countDownItemBorderRadiusUnits['Desktop'];
 $countDownItemBorderRadiusGetTablet = $countDownItemBorderRadiusTablet['top'] . $countDownItemBorderRadiusUnits['Tablet'] . ' ' . $countDownItemBorderRadiusTablet['right'] . $countDownItemBorderRadiusUnits['Tablet'] . ' ' . $countDownItemBorderRadiusTablet['bottom'] . $countDownItemBorderRadiusUnits['Tablet'] . ' ' . $countDownItemBorderRadiusTablet['left'] . $countDownItemBorderRadiusUnits['Tablet'];
 $countDownItemBorderRadiusGetMobile = $countDownItemBorderRadiusMobile['top'] . $countDownItemBorderRadiusUnits['Mobile'] . ' ' . $countDownItemBorderRadiusMobile['right'] . $countDownItemBorderRadiusUnits['Mobile'] . ' ' . $countDownItemBorderRadiusMobile['bottom'] . $countDownItemBorderRadiusUnits['Mobile'] . ' ' . $countDownItemBorderRadiusMobile['left'] . $countDownItemBorderRadiusUnits['Mobile'];
 /** End Border Radius */
+
+$countDownItemGap = isset($block_attributes['countDownItemGap']) ? $block_attributes['countDownItemGap'] : array('Desktop' => '20', 'Tablet' => '20', 'Mobile' => '20');
+$countDownItemGapUnits = isset($block_attributes['countDownItemGapUnits']) ? $block_attributes['countDownItemGapUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+
+$countDownItemSize = isset($block_attributes['countDownItemSize']) ? $block_attributes['countDownItemSize'] : array('Desktop' => '144', 'Tablet' => '140', 'Mobile' => '140');
+$countDownItemSizeUnits = isset($block_attributes['countDownItemSizeUnits']) ? $block_attributes['countDownItemSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+
 
 /** Digit Typography */
 $digitFontFamily = isset($block_attributes['digitFontFamily']) ? sanitize_text_field($block_attributes['digitFontFamily']) : 'inherit';
@@ -64,11 +71,16 @@ $labelFontHoverColor = isset($block_attributes['labelFontHoverColor']) ? sanitiz
 
 // Generate CSS content
 $css_content = "
+	.fb-count-down-wrapper.$block_ID{
+		" . ($countDownItemGap['Desktop'] && $countDownItemGapUnits['Desktop'] ? "gap: {$countDownItemGap['Desktop']}{$countDownItemGapUnits['Desktop']};" : "") . "
+	}
 	.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 		" . ($countDownItemBorderTypeGetDesktop ? "border-width: $countDownItemBorderTypeGetDesktop;" : "") . "
 		" . ($countDownItemBorderRadiusGetDesktop ? "border-radius: $countDownItemBorderRadiusGetDesktop;" : "") . "
 		" . ($countDownItemBorderColor ? "border-color: $countDownItemBorderColor;" : "") . "
 		" . ($countDownItemBgColor ? "background: $countDownItemBgColor;" : "") . "
+		" . ($countDownItemSize['Desktop'] && $countDownItemSizeUnits['Desktop'] ? "width: {$countDownItemSize['Desktop']}{$countDownItemSizeUnits['Desktop']};" : "") . "
+		" . ($countDownItemSize['Desktop'] && $countDownItemSizeUnits['Desktop'] ? "height: {$countDownItemSize['Desktop']}{$countDownItemSizeUnits['Desktop']};" : "") . "
 	}
 	.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-time{
 		" . ($digitFontColor ? "color: $digitFontColor;" : "") . "
@@ -94,9 +106,14 @@ $css_content = "
 	}
 
 	@media only screen and (max-width: 1024px) {
+		.fb-count-down-wrapper.$block_ID{
+			" . ($countDownItemGap['Tablet'] && $countDownItemGapUnits['Tablet'] ? "gap: {$countDownItemGap['Tablet']}{$countDownItemGapUnits['Tablet']};" : "") . "
+		}
 		.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 			" . ($countDownItemBorderTypeGetTablet ? "border-width: $countDownItemBorderTypeGetTablet;" : "") . "
 			" . ($countDownItemBorderRadiusGetTablet ? "border-radius: $countDownItemBorderRadiusGetTablet;" : "") . "
+			" . ($countDownItemSize['Tablet'] && $countDownItemSizeUnits['Tablet'] ? "width: {$countDownItemSize['Tablet']}{$countDownItemSizeUnits['Tablet']};" : "") . "
+			" . ($countDownItemSize['Tablet'] && $countDownItemSizeUnits['Tablet'] ? "height: {$countDownItemSize['Tablet']}{$countDownItemSizeUnits['Tablet']};" : "") . "
 		}
 		.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-time{
 			" . ($digitFontSize['Tablet'] && $digitFontSizeUnits['Tablet'] ? "font-size: {$digitFontSize['Tablet']}{$digitFontSizeUnits['Tablet']};" : "") . "
@@ -111,9 +128,14 @@ $css_content = "
 	}
 
 	@media only screen and (max-width: 767px) {
+		.fb-count-down-wrapper.$block_ID{
+			" . ($countDownItemGap['Mobile'] && $countDownItemGapUnits['Mobile'] ? "gap: {$countDownItemGap['Mobile']}{$countDownItemGapUnits['Mobile']};" : "") . "
+		}
 		.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 			" . ($countDownItemBorderTypeGetMobile ? "border-width: $countDownItemBorderTypeGetMobile;" : "") . "
 			" . ($countDownItemBorderRadiusGetMobile ? "border-radius: $countDownItemBorderRadiusGetMobile;" : "") . "
+			" . ($countDownItemSize['Mobile'] && $countDownItemSizeUnits['Mobile'] ? "width: {$countDownItemSize['Mobile']}{$countDownItemSizeUnits['Mobile']};" : "") . "
+			" . ($countDownItemSize['Mobile'] && $countDownItemSizeUnits['Mobile'] ? "height: {$countDownItemSize['Mobile']}{$countDownItemSizeUnits['Mobile']};" : "") . "
 		}
 		.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-time{
 			" . ($digitFontSize['Mobile'] && $digitFontSizeUnits['Mobile'] ? "font-size: {$digitFontSize['Mobile']}{$digitFontSizeUnits['Mobile']};" : "") . "

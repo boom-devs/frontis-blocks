@@ -249,7 +249,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							border-width: ${countDownItemBorderTypeGetTab};
 							border-radius: ${countDownItemBorderRadiusGetTab};
 						}
-
+						 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
+							${digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ""}
+							${digitLetterSpacing.Tablet ? `letter-spacing: ${digitLetterSpacing.Tablet}${digitLetterSpacingUnits.Tablet};` : ""}
+							${digitLineHeight.Tablet ? `line-height: ${digitLineHeight.Tablet}${digitLineHeightUnits.Tablet};` : ""}
+						}
+						.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
+							${labelFontSize.Tablet ? `font-size: ${labelFontSize.Tablet}${labelFontSizeUnits.Tablet};` : ""}
+							${labelLetterSpacing.Tablet ? `letter-spacing: ${labelLetterSpacing.Tablet}${labelLetterSpacingUnits.Tablet};` : ""}
+							${labelLineHeight.Tablet ? `line-height: ${labelLineHeight.Tablet}${labelLineHeightUnits.Tablet};` : ""}
+						}
 
                 }
 
@@ -262,6 +271,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							height: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};
 							border-width: ${countDownItemBorderTypeGetMobile};
 							border-radius: ${countDownItemBorderRadiusGetMobile};
+						}
+						.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
+							${digitFontSize.Mobile ? `font-size: ${digitFontSize.Mobile}${digitFontSizeUnits.Mobile};` : ""}
+							${digitLetterSpacing.Mobile ? `letter-spacing: ${digitLetterSpacing.Mobile}${digitLetterSpacingUnits.Mobile};` : ""}
+							${digitLineHeight.Mobile ? `line-height: ${digitLineHeight.Mobile}${digitLineHeightUnits.Mobile};` : ""}
+						}
+						.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
+							${labelFontSize.Mobile ? `font-size: ${labelFontSize.Mobile}${labelFontSizeUnits.Mobile};` : ""}
+							${labelLetterSpacing.Mobile ? `letter-spacing: ${labelLetterSpacing.Mobile}${labelLetterSpacingUnits.Mobile};` : ""}
+							${labelLineHeight.Mobile ? `line-height: ${labelLineHeight.Mobile}${labelLineHeightUnits.Mobile};` : ""}
 						}
                 }
 

@@ -29,7 +29,7 @@ export default function CountDownItemSizeControl ({ attributes, setAttributes}) 
 			rangeValue={countDownItemSize}
 			onChangeHandler={countDownItemSizeHandler}
 			rangeUnitHandler={countDownItemSizeUnitsHandler}
-			DeviceType={DeviceType}
+			deviceType={DeviceType}
 			units={countDownItemSizeUnits}
 			setAttributes={setAttributes}
 			rangeStep={1}
