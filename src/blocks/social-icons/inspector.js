@@ -772,10 +772,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             <style>
             {`
-                .fb-social-main-wrapper.${blockID} {
+                .${blockID}.fb-social-main-wrapper {
                     z-index: ${socialIconZIndex !== undefined ? socialIconZIndex : ''};
                 }
-                .fb-social-wrapper {
+                .${blockID}.fb-social-wrapper {
                     ${socialGlobalBgColor !== undefined ? `background-color: ${socialGlobalBgColor};` : ''};
                     padding: ${DesktopPadding};
                     margin: ${DesktopMargin};
@@ -785,15 +785,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${socialBorderColor !== undefined ? `border-color: ${socialBorderColor};` : ''};
                     transition: all .3s ease-in-out;
                 }
-                .fb-social-wrapper:hover {
+                .${blockID}.fb-social-wrapper:hover {
                     ${socialGlobalBgHoverColor !== undefined ? `background-color: ${socialGlobalBgHoverColor};` : ''};
                     ${socialBorderHoverColor !== undefined ? `border-color: ${socialBorderHoverColor};` : ''};
                 }
-                .fb-socials {
+                .${blockID} .fb-socials {
                     column-gap: ${socialIconGapSize.Desktop}${socialIconGapUnits.Desktop};
                     justify-content: ${socialAlignment};
                 }
-                .fb-social-list-item a {
+                .${blockID} .fb-social-list-item a {
                     width: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
                     height: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
                     padding: ${IconPaddingDesktop};
@@ -803,29 +803,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     border-radius: ${IconBorderRadiusDesktopWidth} !important;
                     ${socialIconBorderColor !== undefined ? `border-color: ${socialIconBorderColor};` : ''};
                 }
-                .fb-social-list-item a:hover {
+                .${blockID} .fb-social-list-item a:hover {
                     background-color: ${socialBgHoverColor};
                     ${socialIconBorderHoverColor !== undefined ? `border-color: ${socialIconBorderHoverColor};` : ''};
                 }
-                .fb-social-list-item a svg{
+                .${blockID} .fb-social-list-item a svg{
                     fill: ${socialIconColor};
                 }
-                .fb-social-list-item a:hover svg{
+                .${blockID} .fb-social-list-item a:hover svg{
                     fill: ${socialIconHoverColor};
                 }
 
                 @media only screen and (max-width: 1024px) {
 
-                    .fb-social-wrapper {
+                    .${blockID}.fb-social-wrapper {
                         padding: ${TabletPadding};
                         margin: ${TabletMargin};
                         border-width: ${BorderTabletWidth};
                         border-radius: ${BorderRadiusTabletWidth} !important;
                     }
-                    .fb-socials {
+                    .${blockID} .fb-socials {
                         column-gap: ${socialIconGapSize.Tablet}${socialIconGapUnits.Tablet};
                     }
-                    .fb-social-list-item a {
+                    .${blockID} .fb-social-list-item a {
                         width: ${socialIconSize.Tablet}${socialIconSizeUnits.Tablet};
                         height: ${socialIconSize.Tablet}${socialIconSizeUnits.Tablet};
                         padding: ${IconPaddingTablet};
@@ -835,16 +835,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
 
                 @media only screen and (max-width: 767px) {
-                    .fb-social-wrapper {
+                    .${blockID}.fb-social-wrapper {
                         padding: ${MobilePadding};
                         margin: ${MobileMargin};
                         border-width: ${BorderMobileWidth};
                         border-radius: ${BorderRadiusMobileWidth} !important;
                     }
-                    .fb-socials {
+                    .${blockID} .fb-socials {
                         column-gap: ${socialIconGapSize.Mobile}${socialIconGapUnits.Mobile};
                     }
-                    .fb-social-list-item a {
+                    .${blockID} .fb-social-list-item a {
                         width: ${socialIconSize.Mobile}${socialIconSizeUnits.Mobile};
                         height: ${socialIconSize.Mobile}${socialIconSizeUnits.Mobile};
                         padding: ${IconPaddingMobile};
