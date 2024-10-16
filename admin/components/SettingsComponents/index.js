@@ -3,3 +3,4 @@ export { default as AssetsGeneration } from "./AssetsGeneration";
 export { default as VersionControl } from "./VersionControl";
 export { default as EditorEnhancements } from "./EditorEnhancements";
 export { default as Performance } from "./Performance";
+export { default as SiteVisibility } from "./SiteVisibility";

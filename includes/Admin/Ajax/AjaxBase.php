@@ -11,13 +11,6 @@ abstract class AjaxBase {
     protected $prefix = 'fb';
 
     /**
-     * Ajax events to be registered.
-     *
-     * @var array
-     */
-    protected $ajax_events = [];
-
-    /**
      * Error messages.
      *
      * @var array
@@ -32,7 +25,7 @@ abstract class AjaxBase {
      * Constructor.
      */
     public function __construct() {
-        
+
     }
 
     /**
@@ -40,9 +33,9 @@ abstract class AjaxBase {
      *
      * @return void
      */
-    public function init_ajax_events() {
-        if (!empty($this->ajax_events)) {
-            foreach ($this->ajax_events as $ajax_event) {
+    public function init_ajax_events($ajax_events) {
+        if (!empty($ajax_events)) {
+            foreach ($ajax_events as $ajax_event) {
                 add_action('wp_ajax_' . $this->prefix . '_' . $ajax_event, array($this, $ajax_event));
             }
         }

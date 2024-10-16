@@ -5,6 +5,7 @@ import {
     VersionControl,
     EditorEnhancements,
     Performance,
+    SiteVisibility
 } from "./SettingsComponents";
 
 const SettingsTabs = [
@@ -32,7 +33,12 @@ const SettingsTabs = [
 		id: "performance",
 		label: __("Performance", "frontis-blocks"),
 		component: Performance,
-	},
+    },
+    {
+        id: "site-visibility",
+        label: __("Site Visibility", "frontis-blocks"),
+        component: SiteVisibility,
+    }
 ];
 
 export default SettingsTabs;
