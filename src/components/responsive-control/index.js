@@ -1,13 +1,15 @@
 import { __ } from '@wordpress/i18n';
+import { useDispatch } from '@wordpress/data';
+import { store as editorStore } from '@wordpress/editor';
 
 export default function FB_ResponsiveControl({labelText, device, deviceHandler}) {
+	const { setDeviceType } = useDispatch(editorStore);
 
 	const handleDevice = (deviceName) => {
 		deviceHandler(deviceName);
-		if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
-			wp.data.dispatch('core/edit-post').__experimentalSetPreviewdeviceType(deviceName);
-		}
+		setDeviceType(deviceName);
 	}
+
 	return (
 		<>
 			<div className="fb-setting-label-wrapper">
@@ -27,7 +29,6 @@ export default function FB_ResponsiveControl({labelText, device, deviceHandler})
 		</>
 	);
 }
-
 
 
 

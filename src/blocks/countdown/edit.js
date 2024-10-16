@@ -178,25 +178,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	/* set default values for the style attributes */
-	useEffect(() => {
-		if (digitFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${digitFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [digitFontFamily]);
-
-	useEffect(() => {
-		if (labelFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${labelFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [labelFontFamily]);
+	// useEffect(() => {
+	// 	if (digitFontFamily) {
+	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${digitFontFamily.replace(' ', '+')}`;
+	// 		const linkElement = document.createElement('link');
+	// 		linkElement.rel = 'stylesheet';
+	// 		linkElement.href = fontUrl;
+	// 		document.head.appendChild(linkElement);
+	// 	}
+	// }, [digitFontFamily]);
+	//
+	// useEffect(() => {
+	// 	if (labelFontFamily) {
+	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${labelFontFamily.replace(' ', '+')}`;
+	// 		const linkElement = document.createElement('link');
+	// 		linkElement.rel = 'stylesheet';
+	// 		linkElement.href = fontUrl;
+	// 		document.head.appendChild(linkElement);
+	// 	}
+	// }, [labelFontFamily]);
 
 	return (
 		<>

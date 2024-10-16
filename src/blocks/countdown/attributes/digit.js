@@ -18,9 +18,9 @@ const digitAttributes = {
 	digitFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '48',
+			Tablet: '42',
+			Mobile: '38'
 		}
 	},
 	digitFontSizeUnits: {

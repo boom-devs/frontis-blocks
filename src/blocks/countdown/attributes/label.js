@@ -12,47 +12,72 @@ const labelAttributes = {
 		default: "#FFFFFF"
 	},
 	labelFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit'
 	},
 	labelFontSize: {
-		type: "number",
-		default: "18",
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '18'
+		}
 	},
 	labelFontSizeUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	labelFontWeight : {
-		type: "string",
-		default: "400"
+	labelFontWeight: {
+		type: 'string',
+		default: ''
 	},
-	labelFontStyle : {
-		type: "string",
-		default: "normal"
+	labelFontStyle: {
+		type: 'string',
+		default: ''
 	},
-	labelTextTransform : {
-		type: "string",
-		default: "none"
+	labelTextTransform: {
+		type: 'string',
+		default: ''
 	},
-	labelTextDecoration : {
-		type: "string",
-		default: "none"
+	labelTextDecoration: {
+		type: 'string',
+		default: ''
 	},
-	labelLetterSpacing : {
-		type: "number",
+	labelLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	labelLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	labelLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	labelLineHeight : {
-		type: "number",
-		default: "28"
+	labelLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	labelLineHeightUnits : {
-		type: "string",
-		default: "px"
+	labelLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 };
 

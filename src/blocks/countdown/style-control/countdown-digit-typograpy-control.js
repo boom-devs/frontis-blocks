@@ -54,43 +54,43 @@ export default function CountDownDigitTypographyControl ({ attributes, setAttrib
 				handleGlobalHoverColorChange={handleGlobalHoverColorChange}
 			/>
 
-			{/*<FB_TypographyControl*/}
-			{/*	fontFamily={digitFontFamily}*/}
-			{/*	onChangeFontFamily={(value) => setAttributes({ digitFontFamily: value })}*/}
+			<FB_TypographyControl
+				fontFamily={digitFontFamily}
+				onChangeFontFamily={(value) => setAttributes({ digitFontFamily: value })}
 
-			{/*	fontSize={digitFontSize}*/}
-			{/*	onChangeFontSize={(value) => setAttributes({ digitFontSize: value })}*/}
+				fontSize={digitFontSize}
+				onChangeFontSize={(value) => setAttributes({ digitFontSize: value })}
 
-			{/*	fontSizeUnits={digitFontSizeUnits}*/}
-			{/*	onChangeFontSizeUnit={(value) => setAttributes({ digitFontSizeUnits: value })}*/}
+				fontSizeUnits={digitFontSizeUnits}
+				onChangeFontSizeUnit={(value) => setAttributes({ digitFontSizeUnits: value })}
 
-			{/*	fontWeight={digitFontWeight}*/}
-			{/*	onChangeFontWeight={(value) => setAttributes({ digitFontWeight: value })}*/}
+				fontWeight={digitFontWeight}
+				onChangeFontWeight={(value) => setAttributes({ digitFontWeight: value })}
 
-			{/*	fontStyle={digitFontStyle}*/}
-			{/*	onChangeFontStyle={(value) => setAttributes({ digitFontStyle: value })}*/}
+				fontStyle={digitFontStyle}
+				onChangeFontStyle={(value) => setAttributes({ digitFontStyle: value })}
 
-			{/*	textTransform={digitTextTransform}*/}
-			{/*	onChangeTextTransform={(value) => setAttributes({ digitTextTransform: value })}*/}
+				textTransform={digitTextTransform}
+				onChangeTextTransform={(value) => setAttributes({ digitTextTransform: value })}
 
-			{/*	textDecoration={digitTextDecoration}*/}
-			{/*	onChangeTextDecoration={(value) => setAttributes({ digitTextDecoration: value })}*/}
+				textDecoration={digitTextDecoration}
+				onChangeTextDecoration={(value) => setAttributes({ digitTextDecoration: value })}
 
-			{/*	letterSpacing={digitLetterSpacing}*/}
-			{/*	onChangeLetterSpacing={(value) => setAttributes({ digitLetterSpacing: value })}*/}
+				letterSpacing={digitLetterSpacing}
+				onChangeLetterSpacing={(value) => setAttributes({ digitLetterSpacing: value })}
 
-			{/*	letterSpacingUnits={digitLetterSpacingUnits}*/}
-			{/*	onChangeLetterSpacingUnit={(value) => setAttributes({ digitLetterSpacingUnits: value })}*/}
+				letterSpacingUnits={digitLetterSpacingUnits}
+				onChangeLetterSpacingUnit={(value) => setAttributes({ digitLetterSpacingUnits: value })}
 
-			{/*	lineHeight={digitLineHeight}*/}
-			{/*	onChangeLineHeight={(value) => setAttributes({ digitLineHeight: value })}*/}
+				lineHeight={digitLineHeight}
+				onChangeLineHeight={(value) => setAttributes({ digitLineHeight: value })}
 
-			{/*	lineHeightUnits={digitLineHeightUnits}*/}
-			{/*	onChangeLineHeightUnit={(value) => setAttributes({ digitLineHeightUnits: value })}*/}
+				lineHeightUnits={digitLineHeightUnits}
+				onChangeLineHeightUnit={(value) => setAttributes({ digitLineHeightUnits: value })}
 
-			{/*	deviceType={DeviceType}*/}
-			{/*	setAttributes={setAttributes}*/}
-			{/*/>*/}
+				deviceType={DeviceType}
+				setAttributes={setAttributes}
+			/>
 		</>
 	);
 };

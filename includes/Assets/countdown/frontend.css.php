@@ -30,18 +30,36 @@ $countDownItemBorderRadiusGetMobile = $countDownItemBorderRadiusMobile['top'] . 
 /** End Border Radius */
 
 /** Digit Typography */
-$digitFontColor = isset($block_attributes['digitFontColor']) ? $block_attributes['digitFontColor'] : '';
-$digitFontFamily = isset($block_attributes['digitFontFamily']) ? $block_attributes['digitFontFamily'] : '';
-$digitFontSize = isset($block_attributes['digitFontSize']) ? $block_attributes['digitFontSize'] : '48';
-$digitFontSizeUnits = isset($block_attributes['digitFontSizeUnits']) ? $block_attributes['digitFontSizeUnits'] : 'px';
-$digitFontWeight = isset($block_attributes['digitFontWeight']) ? $block_attributes['digitFontWeight'] : '700';
-$digitFontStyle = isset($block_attributes['digitFontStyle']) ? $block_attributes['digitFontStyle'] : '';
-$digitTextTransform = isset($block_attributes['digitTextTransform']) ? $block_attributes['digitTextTransform'] : '';
-$digitTextDecoration = isset($block_attributes['digitTextDecoration']) ? $block_attributes['digitTextDecoration'] : '';
-$digitLetterSpacing = isset($block_attributes['digitLetterSpacing']) ? $block_attributes['digitLetterSpacing'] : '';
-$digitLetterSpacingUnits = isset($block_attributes['digitLetterSpacingUnits']) ? $block_attributes['digitLetterSpacingUnits'] : 'px';
-$digitLineHeight = isset($block_attributes['digitLineHeight']) ? $block_attributes['digitLineHeight'] : '62';
-$digitLineHeightUnits = isset($block_attributes['digitLineHeightUnits']) ? $block_attributes['digitLineHeightUnits'] : 'px';
+$digitFontFamily = isset($block_attributes['digitFontFamily']) ? sanitize_text_field($block_attributes['digitFontFamily']) : 'inherit';
+$digitFontSize = isset($block_attributes['digitFontSize']) ? $block_attributes['digitFontSize'] : array('Desktop' => '48', 'Tablet' => '40', 'Mobile' => '38');
+$digitFontSizeUnits = isset($block_attributes['digitFontSizeUnits']) ? $block_attributes['digitFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$digitFontWeight = isset($block_attributes['digitFontWeight']) ? sanitize_text_field($block_attributes['digitFontWeight']) : '700';
+$digitFontStyle = isset($block_attributes['digitFontStyle']) ? sanitize_text_field($block_attributes['digitFontStyle']) : '';
+$digitTextTransform = isset($block_attributes['digitTextTransform']) ? sanitize_text_field($block_attributes['digitTextTransform']) : '';
+$digitTextDecoration = isset($block_attributes['digitTextDecoration']) ? sanitize_text_field($block_attributes['digitTextDecoration']) : '';
+$digitLetterSpacing = isset($block_attributes['digitLetterSpacing']) ? $block_attributes['digitLetterSpacing'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$digitLetterSpacingUnits = isset($block_attributes['digitLetterSpacingUnits']) ? $block_attributes['digitLetterSpacingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$digitLineHeight = isset($block_attributes['digitLineHeight']) ? $block_attributes['digitLineHeight'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$digitLineHeightUnits = isset($block_attributes['digitLineHeightUnits']) ? $block_attributes['digitLineHeightUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$digitFontColor = isset($block_attributes['digitFontColor']) ? sanitize_hex_color($block_attributes['digitFontColor']) : '#fff';
+$digitFontHoverColor = isset($block_attributes['digitFontHoverColor']) ? sanitize_hex_color($block_attributes['digitFontHoverColor']) : '';
+
+
+/** Label Typography */
+$labelFontFamily = isset($block_attributes['labelFontFamily']) ? sanitize_text_field($block_attributes['labelFontFamily']) : 'inherit';
+$labelFontSize = isset($block_attributes['labelFontSize']) ? $block_attributes['labelFontSize'] : array('Desktop' => '24', 'Tablet' => '20', 'Mobile' => '18');
+$labelFontSizeUnits = isset($block_attributes['labelFontSizeUnits']) ? $block_attributes['labelFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$labelFontWeight = isset($block_attributes['labelFontWeight']) ? sanitize_text_field($block_attributes['labelFontWeight']) : '400';
+$labelFontStyle = isset($block_attributes['labelFontStyle']) ? sanitize_text_field($block_attributes['labelFontStyle']) : '';
+$labelTextTransform = isset($block_attributes['labelTextTransform']) ? sanitize_text_field($block_attributes['labelTextTransform']) : '';
+$labelTextDecoration = isset($block_attributes['labelTextDecoration']) ? sanitize_text_field($block_attributes['labelTextDecoration']) : '';
+$labelLetterSpacing = isset($block_attributes['labelLetterSpacing']) ? $block_attributes['labelLetterSpacing'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$labelLetterSpacingUnits = isset($block_attributes['labelLetterSpacingUnits']) ? $block_attributes['labelLetterSpacingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$labelLineHeight = isset($block_attributes['labelLineHeight']) ? $block_attributes['labelLineHeight'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$labelLineHeightUnits = isset($block_attributes['labelLineHeightUnits']) ? $block_attributes['labelLineHeightUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$labelFontColor = isset($block_attributes['labelFontColor']) ? sanitize_hex_color($block_attributes['labelFontColor']) : '#fff';
+$labelFontHoverColor = isset($block_attributes['labelFontHoverColor']) ? sanitize_hex_color($block_attributes['labelFontHoverColor']) : '';
+
 
 
 // Generate CSS content
@@ -53,15 +71,26 @@ $css_content = "
 		" . ($countDownItemBgColor ? "background: $countDownItemBgColor;" : "") . "
 	}
 	.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-time{
-			" . ($digitFontColor ? "color: $digitFontColor;" : "") . "
-            " . ($digitFontFamily ? "font-family: $digitFontFamily;" : "") . "
-            " . ($digitFontSize ? "font-size: {$digitFontSize}{$digitFontSizeUnits};" : "") . "
-            " . ($digitFontWeight ? "font-weight: $digitFontWeight;" : "") . "
-            " . ($digitFontStyle ? "font-style: $digitFontStyle;" : "") . "
-            " . ($digitTextTransform ? "text-transform: $digitTextTransform;" : "") . "
-            " . ($digitTextDecoration ? "text-decoration: $digitTextDecoration;" : "") . "
-            " . ($digitLetterSpacing ? "letter-spacing: {$digitLetterSpacing}{$digitLetterSpacingUnits};" : "") . "
-            " . ($digitLineHeight ? "line-height: {$digitLineHeight}{$digitLineHeightUnits};" : "") . "
+		" . ($digitFontColor ? "color: $digitFontColor;" : "") . "
+		" . ($digitFontFamily ? "font-family: $digitFontFamily;" : "") . "
+		" . ($digitFontSize['Desktop'] && $digitFontSizeUnits['Desktop'] ? "font-size: {$digitFontSize['Desktop']}{$digitFontSizeUnits['Desktop']};" : "") . "
+		" . ($digitFontWeight ? "font-weight: $digitFontWeight;" : "") . "
+		" . ($digitFontStyle ? "font-style: $digitFontStyle;" : "") . "
+		" . ($digitTextTransform ? "text-transform: $digitTextTransform;" : "") . "
+		" . ($digitTextDecoration ? "text-decoration: $digitTextDecoration;" : "") . "
+		" . ($digitLetterSpacing['Desktop'] && $digitLetterSpacingUnits['Desktop'] ? "letter-spacing: {$digitLetterSpacing['Desktop']}{$digitLetterSpacingUnits['Desktop']};" : "") . "
+		" . ($digitLineHeight['Desktop'] && $digitLineHeightUnits['Desktop'] ? "line-height: {$digitLineHeight['Desktop']}{$digitLineHeightUnits['Desktop']};" : "") . "
+	}
+	.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-label{
+		" . ($labelFontColor ? "color: $labelFontColor;" : "") . "
+		" . ($labelFontFamily ? "font-family: $labelFontFamily;" : "") . "
+		" . ($labelFontSize['Desktop'] && $labelFontSizeUnits['Desktop'] ? "font-size: {$labelFontSize['Desktop']}{$labelFontSizeUnits['Desktop']};" : "") . "
+		" . ($labelFontWeight ? "font-weight: $labelFontWeight;" : "") . "
+		" . ($labelFontStyle ? "font-style: $labelFontStyle;" : "") . "
+		" . ($labelTextTransform ? "text-transform: $labelTextTransform;" : "") . "
+		" . ($labelTextDecoration ? "text-decoration: $labelTextDecoration;" : "") . "
+		" . ($labelLetterSpacing['Desktop'] && $labelLetterSpacingUnits['Desktop'] ? "letter-spacing: {$labelLetterSpacing['Desktop']}{$labelLetterSpacingUnits['Desktop']};" : "") . "
+		" . ($labelLineHeight['Desktop'] && $labelLineHeightUnits['Desktop'] ? "line-height: {$labelLineHeight['Desktop']}{$labelLineHeightUnits['Desktop']};" : "") . "
 	}
 
 	@media only screen and (max-width: 1024px) {
@@ -69,12 +98,32 @@ $css_content = "
 			" . ($countDownItemBorderTypeGetTablet ? "border-width: $countDownItemBorderTypeGetTablet;" : "") . "
 			" . ($countDownItemBorderRadiusGetTablet ? "border-radius: $countDownItemBorderRadiusGetTablet;" : "") . "
 		}
+		.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-time{
+			" . ($digitFontSize['Tablet'] && $digitFontSizeUnits['Tablet'] ? "font-size: {$digitFontSize['Tablet']}{$digitFontSizeUnits['Tablet']};" : "") . "
+			" . ($digitLetterSpacing['Tablet'] && $digitLetterSpacingUnits['Tablet'] ? "letter-spacing: {$digitLetterSpacing['Tablet']}{$digitLetterSpacingUnits['Tablet']};" : "") . "
+			" . ($digitLineHeight['Tablet'] && $digitLineHeightUnits['Tablet'] ? "line-height: {$digitLineHeight['Tablet']}{$digitLineHeightUnits['Tablet']};" : "") . "
+		}
+		.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-label{
+			" . ($labelFontSize['Tablet'] && $labelFontSizeUnits['Tablet'] ? "font-size: {$labelFontSize['Tablet']}{$labelFontSizeUnits['Tablet']};" : "") . "
+			" . ($labelLetterSpacing['Tablet'] && $labelLetterSpacingUnits['Tablet'] ? "letter-spacing: {$labelLetterSpacing['Tablet']}{$labelLetterSpacingUnits['Tablet']};" : "") . "
+			" . ($labelLineHeight['Tablet'] && $labelLineHeightUnits['Tablet'] ? "line-height: {$labelLineHeight['Tablet']}{$labelLineHeightUnits['Tablet']};" : "") . "
+		}
 	}
 
 	@media only screen and (max-width: 767px) {
 		.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 			" . ($countDownItemBorderTypeGetMobile ? "border-width: $countDownItemBorderTypeGetMobile;" : "") . "
 			" . ($countDownItemBorderRadiusGetMobile ? "border-radius: $countDownItemBorderRadiusGetMobile;" : "") . "
+		}
+		.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-time{
+			" . ($digitFontSize['Mobile'] && $digitFontSizeUnits['Mobile'] ? "font-size: {$digitFontSize['Mobile']}{$digitFontSizeUnits['Mobile']};" : "") . "
+			" . ($digitLetterSpacing['Mobile'] && $digitLetterSpacingUnits['Mobile'] ? "letter-spacing: {$digitLetterSpacing['Mobile']}{$digitLetterSpacingUnits['Mobile']};" : "") . "
+			" . ($digitLineHeight['Mobile'] && $digitLineHeightUnits['Mobile'] ? "line-height: {$digitLineHeight['Mobile']}{$digitLineHeightUnits['Mobile']};" : "") . "
+		}
+		.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-label{
+			" . ($labelFontSize['Mobile'] && $labelFontSizeUnits['Mobile'] ? "font-size: {$labelFontSize['Mobile']}{$labelFontSizeUnits['Mobile']};" : "") . "
+			" . ($labelLetterSpacing['Mobile'] && $labelLetterSpacingUnits['Mobile'] ? "letter-spacing: {$labelLetterSpacing['Mobile']}{$labelLetterSpacingUnits['Mobile']};" : "") . "
+			" . ($labelLineHeight['Mobile'] && $labelLineHeightUnits['Mobile'] ? "line-height: {$labelLineHeight['Mobile']}{$labelLineHeightUnits['Mobile']};" : "") . "
 		}
 	}
 ";
