@@ -20,9 +20,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
  */
 
-/* eslint-disable no-console */
-console.log("Hello World! (from frontis-blocks-post-grid block)");
-/* eslint-enable no-console */
+
 
 const url = 'https://www.youtube.com/watch?v=d46Azg3Pm4c'
 const container = document.getElementById('container')

@@ -45,7 +45,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureTag,
         FeatureAlignment,
         FeatureIconAlignment,
-
+        FeatureIconShape,
         FeatureListGapDesktop,
         FeatureListGapTablet,
         FeatureListGapMobile,
@@ -527,6 +527,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const MobileBorderRadiusWidth = `${FeatureMobileBorderRadiusWidth.top}${FeatureBorderRadiusUnits} ${FeatureMobileBorderRadiusWidth.right}${FeatureBorderRadiusUnits} ${FeatureMobileBorderRadiusWidth.bottom}${FeatureBorderRadiusUnits} ${FeatureMobileBorderRadiusWidth.left}${FeatureBorderRadiusUnits}`;
     /** End Border Radius Width */ 
 
+    console.log(FeatureIconShape);
     
 
     return (
@@ -535,6 +536,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             {`
                 .fb-feature-main-wrapper.${blockID} {
                     z-index: ${FeatureZIndex !== undefined ? FeatureZIndex : ''};
+                    position: relative;
                 }
                 .fb-feature-main-wrapper.${blockID} {
                     ${FeatureBgColor !== undefined ? `background-color: ${FeatureBgColor};` : ''};
@@ -1927,7 +1929,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     value={FeatureZIndex}
                                                     onChange={(value) => setAttributes({ FeatureZIndex: value === 0 ? undefined : value })}
                                                     min={1}
-                                                    max={100}
+                                                    max={10000000}
                                                     step={1}
                                                     allowReset
                                                     resetFallbackValue={undefined}

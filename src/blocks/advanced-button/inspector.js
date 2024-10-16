@@ -463,8 +463,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		setAttributes({buttonIcon: IconName})
 
 	}
-
-    console.log(buttonboxShadowCssValue);
     
     
     return (
