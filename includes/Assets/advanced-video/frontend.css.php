@@ -97,7 +97,7 @@ $BorderRadiusMobileWidth = $videoGlobalBorderRadiusMobile['top'] . $videoGlobalB
 
 // Generate CSS content
 $css_content = "
-	    .$blockId.fb-advanced-video-main-wrapper {
+	.$blockId.fb-advanced-video-main-wrapper {
         z-index: " . (isset($videoGlobalZIndex) ? intval($videoGlobalZIndex) : 'auto') . ";
     }
     .$blockId.fb-advanced-video-wrapper {

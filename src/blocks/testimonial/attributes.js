@@ -132,11 +132,11 @@ const attributes = {
     },
     TestimonialQuoteIconColor : {
         type: "string",
-        default: "#FFB400"
+        default: "#399CFF"
     },
     TestimonialQuoteIconHoverColor: {
         type: 'string',
-        default: "#FFB400"
+        default: "#399CFF"
     },
 
 
@@ -178,15 +178,15 @@ const attributes = {
     },
     TestimonialDescLetterSpacingDesktop: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialDescLetterSpacingTablet: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialDescLetterSpacingMobile: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialDescLetterSpacingUnits : {
         type: "string",
@@ -261,15 +261,15 @@ const attributes = {
     },
     TestimonialAuthorLetterSpacingDesktop: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialAuthorLetterSpacingTablet: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialAuthorLetterSpacingMobile: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialAuthorLetterSpacingUnits : {
         type: "string",
@@ -344,15 +344,15 @@ const attributes = {
     },
     TestimonialDesignationLetterSpacingDesktop: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialDesignationLetterSpacingTablet: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialDesignationLetterSpacingMobile: {
         type: "number",
-        default: 0
+        default: ''
     },
     TestimonialDesignationLetterSpacingUnits : {
         type: "string",
@@ -464,28 +464,28 @@ const attributes = {
     TestimonialDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialMarginLink : {
@@ -528,28 +528,28 @@ const attributes = {
     TestimonialDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialBorderLink : {

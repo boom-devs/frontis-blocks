@@ -24,11 +24,11 @@ const attributes = {
     },
     progressColor: {
         type: "string",
-        default: "#6830c8"
+        default: "#399CFF"
     },
     progressHoverColor: {
         type: 'string',
-        default: "#6830c8"
+        default: "#399CFF"
     },
     progressTextColorSwitcher: {
         type: "string",

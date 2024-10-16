@@ -65,7 +65,7 @@ const attributes = {
     },
     socialAlignment: {
         type: "string",
-        default: "center",
+        default: "left",
     },
     socialIconSize: {
 		type: 'object',
@@ -102,11 +102,11 @@ const attributes = {
     },
     socialBgColor : {
         type: "string",
-        default: "#d2691e"
+        default: "#399CFF"
     },
     socialBgHoverColor: {
         type: 'string',
-        default: "#d2691e"
+        default: "#399CFF"
     },
     socialIconBorder: {
         type: 'string',
@@ -133,28 +133,28 @@ const attributes = {
     socialIconBorderDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderLink : {
@@ -172,28 +172,28 @@ const attributes = {
     socialIconBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusLink : {
@@ -266,28 +266,28 @@ const attributes = {
     socialPaddingDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialPaddingTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialPaddingMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialPaddingLink : {
@@ -305,28 +305,28 @@ const attributes = {
     socialMarginDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialMarginTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialMarginMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialMarginLink : {
@@ -368,28 +368,28 @@ const attributes = {
     socialBorderDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderLink : {
@@ -407,28 +407,28 @@ const attributes = {
     socialBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderRadiusLink : {
