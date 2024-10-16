@@ -629,12 +629,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialBgHoverColor !== undefined ? `background-color: ${TestimonialBgHoverColor};` : ''};
                         ${TestimonialBorderHoverColor !== undefined ? `border-color: ${TestimonialBorderHoverColor};` : ''};
                     }
-                    .fb-testimonial-image img {
+                    .${blockID} .fb-testimonial-image img {
                         width: ${TestimonialImageWidthDesktop}${TestimonialImageWidthUnits};
                         height: ${TestimonialImageWidthDesktop}${TestimonialImageWidthUnits};
                         border-radius: ${ImageDesktopBorderRadiusWidth};
                     }
-                    .fb-testimonial-quote-icon svg {
+                    .${blockID} .fb-testimonial-quote-icon svg {
                         width: ${TestimonialQuoteIconSizeDesktop}${TestimonialQuoteIconSizeUnits};
                         height: ${TestimonialQuoteIconSizeDesktop}${TestimonialQuoteIconSizeUnits};
                         fill: ${TestimonialQuoteIconColor};
@@ -642,7 +642,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     .fb-testimonial-quote-icon:hover svg {
                         fill: ${TestimonialQuoteIconHoverColor};
                     }
-                    .fb-testimonial-userdesc-container .fb-user-desc {
+                    .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                         font-family: ${TestimonialDescFontFamily};
                         font-size: ${TestimonialDescFontSizeDesktop}${TestimonialDescFontSizeUnits};
                         font-weight: ${TestimonialDescFontWeight};
@@ -653,11 +653,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         line-height: ${TestimonialDescLineHeightDesktop}${TestimonialDescLineHeightUnits};
                         color: ${TestimonialDescColor};
                     }
-                    .fb-testimonial-userdesc-container .fb-user-desc:hover {
+                    .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
                         color: ${TestimonialDescHoverColor};
                     }
 
-                    .fb-testimonial-userinfo-container .fb-user {
+                    .${blockID} .fb-testimonial-userinfo-container .fb-user {
                         font-family: ${TestimonialAuthorFontFamily};
                         font-size: ${TestimonialAuthorFontSizeDesktop}${TestimonialAuthorFontSizeUnits};
                         font-weight: ${TestimonialAuthorFontWeight};
@@ -668,11 +668,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         line-height: ${TestimonialAuthorLineHeightDesktop}${TestimonialAuthorLineHeightUnits};
                         color: ${TestimonialAuthorColor};
                     }
-                    .fb-testimonial-userinfo-container .fb-user:hover {
+                    .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
                         color: ${TestimonialAuthorHoverColor};
                     }
 
-                    .fb-testimonial-userinfo-container .fb-user-designation {
+                    .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                         font-family: ${TestimonialDesignationFontFamily};
                         font-size: ${TestimonialDesignationFontSizeDesktop}${TestimonialDesignationFontSizeUnits};
                         font-weight: ${TestimonialDesignationFontWeight};
@@ -683,16 +683,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         line-height: ${TestimonialDesignationLineHeightDesktop}${TestimonialDesignationLineHeightUnits};
                         color: ${TestimonialDesignationColor};
                     }
-                    .fb-testimonial-userinfo-container .fb-user-designation:hover {
+                    .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
                         color: ${TestimonialDesignationHoverColor};
                     }
 
-                    .fb-testimonial-rating-icon svg {
+                    .${blockID} .fb-testimonial-rating-icon svg {
                         width: ${TestimonialRatingIconSizeDesktop}${TestimonialRatingIconSizeUnits};
                         height: ${TestimonialRatingIconSizeDesktop}${TestimonialRatingIconSizeUnits};
                         fill: ${TestimonialRatingIconColor};
                     }
-                    .fb-testimonial-rating-icon:hover svg {
+                    .${blockID} .fb-testimonial-rating-icon:hover svg {
                         fill: ${TestimonialRatingIconHoverColor};
                     }
 
@@ -703,68 +703,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             border-width: ${TabBorderWidth};
                             border-radius: ${TabBorderRadiusWidth} !important;
                         }
-                        .fb-testimonial-image img {
+                        .${blockID} .fb-testimonial-image img {
                             width: ${TestimonialImageWidthTablet}${TestimonialImageWidthUnits};
                             height: ${TestimonialImageWidthTablet}${TestimonialImageWidthUnits};
                             border-radius: ${ImageTabBorderRadiusWidth};
                         }
-                        .fb-testimonial-quote-icon svg {
+                        .${blockID} .fb-testimonial-quote-icon svg {
                             width: ${TestimonialQuoteIconSizeTablet}${TestimonialQuoteIconSizeUnits};
                             height: ${TestimonialQuoteIconSizeTablet}${TestimonialQuoteIconSizeUnits};
                         }
-                        .fb-testimonial-userdesc-container .fb-user-desc {
+                        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                             font-size: ${TestimonialDescFontSizeTablet}${TestimonialDescFontSizeUnits};
                             letter-spacing: ${TestimonialDescLetterSpacingTablet}${TestimonialDescLetterSpacingUnits};
                             line-height: ${TestimonialDescLineHeightTablet}${TestimonialDescLineHeightUnits};
                         }
-                        .fb-testimonial-userinfo-container .fb-user {
+                        .${blockID} .fb-testimonial-userinfo-container .fb-user {
                             font-size: ${TestimonialAuthorFontSizeTablet}${TestimonialDescFontSizeUnits};
                             letter-spacing: ${TestimonialAuthorLetterSpacingTablet}${TestimonialDescLetterSpacingUnits};
                             line-height: ${TestimonialAuthorLineHeightTablet}${TestimonialDescLineHeightUnits};
                         }
-                        .fb-testimonial-userinfo-container .fb-user-designation {
+                        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                             font-size: ${TestimonialDesignationFontSizeTablet}${TestimonialDescFontSizeUnits};
                             letter-spacing: ${TestimonialDesignationLetterSpacingTablet}${TestimonialDescLetterSpacingUnits};
                             line-height: ${TestimonialDesignationLineHeightTablet}${TestimonialDescLineHeightUnits};
                         }
-                        .fb-testimonial-rating-icon svg {
+                        .${blockID} .fb-testimonial-rating-icon svg {
                             width: ${TestimonialRatingIconSizeTablet}${TestimonialRatingIconSizeUnits};
                             height: ${TestimonialRatingIconSizeTablet}${TestimonialRatingIconSizeUnits};
                         }
                     }
 
                     @media only screen and (max-width: 767px) {
-                        .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
+                        .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
                             padding: ${MobilePadding};
                             margin: ${MobileMargin};
                             border-width: ${MobileBorderWidth};
                             border-radius: ${MobileBorderRadiusWidth} !important;
                         }
-                        .fb-testimonial-image img {
+                        .${blockID} .fb-testimonial-image img {
                             width: ${TestimonialImageWidthMobile}${TestimonialImageWidthUnits};
                             height: ${TestimonialImageWidthMobile}${TestimonialImageWidthUnits};
                             border-radius: ${ImageMobileBorderRadiusWidth};
                         }
-                        .fb-testimonial-quote-icon svg {
+                        .${blockID} .fb-testimonial-quote-icon svg {
                             width: ${TestimonialQuoteIconSizeMobile}${TestimonialQuoteIconSizeUnits};
                             height: ${TestimonialQuoteIconSizeMobile}${TestimonialQuoteIconSizeUnits};
                         }
-                        .fb-testimonial-userdesc-container .fb-user-desc {
+                        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                             font-size: ${TestimonialDescFontSizeMobile}${TestimonialDescFontSizeUnits};
                             letter-spacing: ${TestimonialDescLetterSpacingMobile}${TestimonialDescLetterSpacingUnits};
                             line-height: ${TestimonialDescLineHeightMobile}${TestimonialDescLineHeightUnits};
                         }
-                        .fb-testimonial-userinfo-container .fb-user {
+                        .${blockID} .fb-testimonial-userinfo-container .fb-user {
                             font-size: ${TestimonialAuthorFontSizeMobile}${TestimonialDescFontSizeUnits};
                             letter-spacing: ${TestimonialAuthorLetterSpacingMobile}${TestimonialDescLetterSpacingUnits};
                             line-height: ${TestimonialAuthorLineHeightMobile}${TestimonialDescLineHeightUnits};
                         }
-                        .fb-testimonial-userinfo-container .fb-user-designation {
+                        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                             font-size: ${TestimonialDesignationFontSizeMobile}${TestimonialDescFontSizeUnits};
                             letter-spacing: ${TestimonialDesignationLetterSpacingMobile}${TestimonialDescLetterSpacingUnits};
                             line-height: ${TestimonialDesignationLineHeightMobile}${TestimonialDescLineHeightUnits};
                         }
-                        .fb-testimonial-rating-icon svg {
+                        .${blockID} .fb-testimonial-rating-icon svg {
                             width: ${TestimonialRatingIconSizeMobile}${TestimonialRatingIconSizeUnits};
                             height: ${TestimonialRatingIconSizeMobile}${TestimonialRatingIconSizeUnits};
                         }
