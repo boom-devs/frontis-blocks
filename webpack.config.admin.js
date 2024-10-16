@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 const webpack = require('webpack');
 
-console.log('Using custom webpack config for admin');
 
 module.exports = {
   ...defaultConfig,
