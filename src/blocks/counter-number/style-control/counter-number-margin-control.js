@@ -3,7 +3,7 @@ import FB_Spacing from '@Components/spacing';
 export default function CounterNumberMarginControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		counterNumberMarginUnits,
 		counterNumberMarginDesktop,
 		counterNumberMarginTab,
@@ -15,7 +15,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( counterNumberMarginLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						counterNumberMarginDesktop: {
@@ -50,7 +50,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {counterNumberMarginDesktop: {...counterNumberMarginDesktop, [position]: value}} );
 					break;
@@ -74,7 +74,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 		setAttributes( {
 			counterNumberMarginUnits: {
 				...counterNumberMarginUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -83,7 +83,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 		<>
 			<FB_Spacing
 				label={ 'Margin' }
-				DeviceType={DeviceType}
+				deviceType={deviceType}
 				spacingUnitsHandler={counterNumberMarginUnitsHandler}
 				spacingUnits={counterNumberMarginUnits}
 				spacingDesktop={counterNumberMarginDesktop}

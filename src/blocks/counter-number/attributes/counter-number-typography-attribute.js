@@ -5,55 +5,79 @@ const counterNumberTypographyAttributes = {
 	},
 	counterNumberFontColor: {
 		type: "string",
-		default: "#FFFFFF"
+		default: "#0D173B"
 	},
 	counterNumberFontHoverColor: {
 		type: 'string',
-		default: "#FFFFFF"
+		default: "#0D173B"
 	},
-
 	counterNumberFontFamily: {
-		type: "string",
-		default: "Plus Jakarta Sans",
+		type: 'string',
+		default: 'inherit'
 	},
 	counterNumberFontSize: {
-		type: "number",
-		default: "62"
+		type: 'object',
+		default: {
+			Desktop: '62',
+			Tablet: '58',
+			Mobile: '52'
+		}
 	},
 	counterNumberFontSizeUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	counterNumberFontWeight : {
-		type: "string",
-		default: "700"
+	counterNumberFontWeight: {
+		type: 'string',
+		default: '700'
 	},
-	counterNumberFontStyle : {
-		type: "string",
-		default: "normal"
+	counterNumberFontStyle: {
+		type: 'string',
+		default: ''
 	},
-	counterNumberTextTransform : {
-		type: "string",
-		default: "none"
+	counterNumberTextTransform: {
+		type: 'string',
+		default: ''
 	},
-	counterNumberTextDecoration : {
-		type: "string",
-		default: "none"
+	counterNumberTextDecoration: {
+		type: 'string',
+		default: ''
 	},
-	counterNumberLetterSpacing : {
-		type: "number",
+	counterNumberLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	counterNumberLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	counterNumberLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	counterNumberLineHeight : {
-		type: "number",
-		default: "80"
+	counterNumberLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	counterNumberLineHeightUnits : {
-		type: "string",
-		default: "px"
+	counterNumberLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 };
 

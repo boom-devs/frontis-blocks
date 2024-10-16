@@ -5,55 +5,79 @@ const counterNumberTitleTypographyAttributes = {
 	},
 	counterNumberTitleFontColor: {
 		type: "string",
-		default: "#FFFFFF"
+		default: "#0d173bb3"
 	},
 	counterNumberTitleFontHoverColor: {
 		type: 'string',
-		default: "#FFFFFF"
+		default: "#0d173bb3"
 	},
-
 	counterNumberTitleFontFamily: {
-		type: "string",
-		default: "Inter Tight",
+		type: 'string',
+		default: 'inherit'
 	},
 	counterNumberTitleFontSize: {
-		type: "number",
-		default: "18"
+		type: 'object',
+		default: {
+			Desktop: '18',
+			Tablet: '16',
+			Mobile: '16'
+		}
 	},
 	counterNumberTitleFontSizeUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	counterNumberTitleFontWeight : {
-		type: "string",
-		default: "400"
+	counterNumberTitleFontWeight: {
+		type: 'string',
+		default: '400'
 	},
-	counterNumberTitleFontStyle : {
-		type: "string",
-		default: "normal"
+	counterNumberTitleFontStyle: {
+		type: 'string',
+		default: ''
 	},
-	counterNumberTitleTextTransform : {
-		type: "string",
-		default: "none"
+	counterNumberTitleTextTransform: {
+		type: 'string',
+		default: ''
 	},
-	counterNumberTitleTextDecoration : {
-		type: "string",
-		default: "none"
+	counterNumberTitleTextDecoration: {
+		type: 'string',
+		default: ''
 	},
-	counterNumberTitleLetterSpacing : {
-		type: "number",
+	counterNumberTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	counterNumberTitleLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	counterNumberTitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	counterNumberTitleLineHeight : {
-		type: "number",
-		default: "28"
+	counterNumberTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	counterNumberTitleLineHeightUnits : {
-		type: "string",
-		default: "px"
+	counterNumberTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 };
 

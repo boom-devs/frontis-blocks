@@ -2,7 +2,7 @@ import FB_Spacing from "@Components/spacing";
 export default function CounterItemBorderRadiusControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		counterItemBorderRadiusUnits,
 		counterItemBorderRadiusDesktop,
 		counterItemBorderRadiusTab,
@@ -14,7 +14,7 @@ export default function CounterItemBorderRadiusControl ({ attributes, setAttribu
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( counterItemBorderRadiusLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						counterItemBorderRadiusDesktop: {
@@ -49,7 +49,7 @@ export default function CounterItemBorderRadiusControl ({ attributes, setAttribu
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {counterItemBorderRadiusDesktop: {...counterItemBorderRadiusDesktop, [position]: value}} );
 					break;
@@ -73,7 +73,7 @@ export default function CounterItemBorderRadiusControl ({ attributes, setAttribu
 		setAttributes( {
 			counterItemBorderRadiusUnits: {
 				...counterItemBorderRadiusUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -83,7 +83,7 @@ export default function CounterItemBorderRadiusControl ({ attributes, setAttribu
 	<>
 		<FB_Spacing
 			label={ 'Border Radius' }
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			spacingUnitsHandler={counterItemBorderRadiusUnitsHandler}
 			spacingUnits={counterItemBorderRadiusUnits}
 			spacingDesktop={counterItemBorderRadiusDesktop}

@@ -6,7 +6,7 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
 		counterNumber,
 		counterPrefix,
 		counterSuffix,

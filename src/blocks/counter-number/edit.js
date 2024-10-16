@@ -42,7 +42,7 @@ import CounterNumberTitleMarginControl from "@Blocks/counter-number/style-contro
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
 		counterNumber,
 		counterPrefix,
 		counterSuffix,
@@ -174,39 +174,39 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	{/* Inspector Controls */}
 
 	/* Counter Number */
-	const counterNumberMarginGetDesktop = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits[DeviceType]}`;
-	const counterNumberMarginGetTab = `${counterNumberMarginTab.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginTab.left}${counterNumberMarginUnits[DeviceType]}`;
-	const counterNumberMarginGetMobile = `${counterNumberMarginMobile.top}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.right}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits[DeviceType]} ${counterNumberMarginMobile.left}${counterNumberMarginUnits[DeviceType]}`;
+	const counterNumberMarginGetDesktop = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits[deviceType]}`;
+	const counterNumberMarginGetTab = `${counterNumberMarginTab.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTab.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTab.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTab.left}${counterNumberMarginUnits[deviceType]}`;
+	const counterNumberMarginGetMobile = `${counterNumberMarginMobile.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.left}${counterNumberMarginUnits[deviceType]}`;
 
 	/* Counter Number */
-	const counterNumberTitleMarginGetDesktop = `${counterNumberTitleMarginDesktop.top}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginDesktop.right}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginDesktop.bottom}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginDesktop.left}${counterNumberTitleMarginUnits[DeviceType]}`;
-	const counterNumberTitleMarginGetTab = `${counterNumberTitleMarginTab.top}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginTab.right}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginTab.bottom}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginTab.left}${counterNumberTitleMarginUnits[DeviceType]}`;
-	const counterNumberTitleMarginGetMobile = `${counterNumberTitleMarginMobile.top}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginMobile.right}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginMobile.bottom}${counterNumberTitleMarginUnits[DeviceType]} ${counterNumberTitleMarginMobile.left}${counterNumberTitleMarginUnits[DeviceType]}`;
+	const counterNumberTitleMarginGetDesktop = `${counterNumberTitleMarginDesktop.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.left}${counterNumberTitleMarginUnits[deviceType]}`;
+	const counterNumberTitleMarginGetTab = `${counterNumberTitleMarginTab.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTab.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTab.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTab.left}${counterNumberTitleMarginUnits[deviceType]}`;
+	const counterNumberTitleMarginGetMobile = `${counterNumberTitleMarginMobile.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.left}${counterNumberTitleMarginUnits[deviceType]}`;
 
 
 
 
 
 	/* set default values for the style attributes */
-	useEffect(() => {
-		if (counterNumberFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${counterNumberFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [counterNumberFontFamily]);
-
-	useEffect(() => {
-		if (counterNumberTitleFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${counterNumberTitleFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [counterNumberTitleFontFamily]);
+	// useEffect(() => {
+	// 	if (counterNumberFontFamily) {
+	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${counterNumberFontFamily.replace(' ', '+')}`;
+	// 		const linkElement = document.createElement('link');
+	// 		linkElement.rel = 'stylesheet';
+	// 		linkElement.href = fontUrl;
+	// 		document.head.appendChild(linkElement);
+	// 	}
+	// }, [counterNumberFontFamily]);
+	//
+	// useEffect(() => {
+	// 	if (counterNumberTitleFontFamily) {
+	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${counterNumberTitleFontFamily.replace(' ', '+')}`;
+	// 		const linkElement = document.createElement('link');
+	// 		linkElement.rel = 'stylesheet';
+	// 		linkElement.href = fontUrl;
+	// 		document.head.appendChild(linkElement);
+	// 	}
+	// }, [counterNumberTitleFontFamily]);
 
 
 	return (
@@ -214,51 +214,71 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<style>
 				{`
 				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
- 					margin: ${counterNumberMarginGetDesktop};
+				  ${counterNumberMarginGetDesktop ? `margin: ${counterNumberMarginGetDesktop};` : ''}
 				}
-                .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
-                .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
-                .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix{
-               		font-family: ${counterNumberFontFamily !== 'default' ? counterNumberFontFamily : counterNumberFontFamily};
-                    font-size: ${counterNumberFontSize !== undefined ? `${counterNumberFontSize}${counterNumberFontSizeUnits}` : ''};
-                    font-weight: ${counterNumberFontWeight};
-                    font-style: ${counterNumberFontStyle};
-                    text-transform: ${counterNumberTextTransform};
-                    text-decoration: ${counterNumberTextDecoration};
-                    ${counterNumberLetterSpacing !== undefined ? `letter-spacing: ${counterNumberLetterSpacing}${counterNumberLetterSpacingUnits};` : ''}
-                    ${counterNumberLineHeight !== undefined ? `line-height: ${counterNumberLineHeight}${counterNumberLineHeightUnits};` : ''}
-                    color: ${counterNumberFontColor};
-                }
-                .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title{
-               		font-family: ${counterNumberTitleFontFamily !== 'default' ? counterNumberTitleFontFamily : counterNumberTitleFontFamily};
-                    font-size: ${counterNumberTitleFontSize !== undefined ? `${counterNumberTitleFontSize}${counterNumberTitleFontSizeUnits}` : ''};
-                    font-weight: ${counterNumberTitleFontWeight};
-                    font-style: ${counterNumberTitleFontStyle};
-                    text-transform: ${counterNumberTitleTextTransform};
-                    text-decoration: ${counterNumberTitleTextDecoration};
-                    ${counterNumberTitleLetterSpacing !== undefined ? `letter-spacing: ${counterNumberTitleLetterSpacing}${counterNumberTitleLetterSpacingUnits};` : ''}
-                    ${counterNumberTitleLineHeight !== undefined ? `line-height: ${counterNumberTitleLineHeight}${counterNumberTitleLineHeightUnits};` : ''}
-                    margin: ${counterNumberTitleMarginGetDesktop};
-                    color: ${counterNumberTitleFontColor};
-                }
 
-               	@media only screen and (max-width: 1024px) {
-					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
-						margin: ${counterNumberMarginGetTab};
-					}
-					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
-						margin: ${counterNumberTitleMarginGetTab};
-					}
-                }
+				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
+				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
+				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix {
+				  ${counterNumberFontColor ? `color: ${counterNumberFontColor};` : ''}
+				  ${counterNumberFontFamily ? `font-family: ${counterNumberFontFamily};` : ''}
+				  ${counterNumberFontSize.Desktop ? `font-size: ${counterNumberFontSize.Desktop}${counterNumberFontSizeUnits.Desktop};` : ''}
+				  ${counterNumberFontWeight ? `font-weight: ${counterNumberFontWeight};` : ''}
+				  ${counterNumberFontStyle ? `font-style: ${counterNumberFontStyle};` : ''}
+				  ${counterNumberTextTransform ? `text-transform: ${counterNumberTextTransform};` : ''}
+				  ${counterNumberTextDecoration ? `text-decoration: ${counterNumberTextDecoration};` : ''}
+				  ${counterNumberLetterSpacing.Desktop ? `letter-spacing: ${counterNumberLetterSpacing.Desktop}${counterNumberLetterSpacingUnits.Desktop};` : ''}
+				  ${counterNumberLineHeight.Desktop ? `line-height: ${counterNumberLineHeight.Desktop}${counterNumberLineHeightUnits.Desktop};` : ''}
+				}
 
-                @media only screen and (max-width: 767px) {
-					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
-						margin: ${counterNumberMarginGetMobile};
-					}
-					.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
-						margin: ${counterNumberTitleMarginGetMobile};
-					}
-                }
+				.fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
+				  ${counterNumberTitleFontColor ? `color: ${counterNumberTitleFontColor};` : ''}
+				  ${counterNumberTitleFontFamily ? `font-family: ${counterNumberTitleFontFamily};` : ''}
+				  ${counterNumberTitleFontSize.Desktop ? `font-size: ${counterNumberTitleFontSize.Desktop}${counterNumberTitleFontSizeUnits.Desktop};` : ''}
+				  ${counterNumberTitleFontWeight ? `font-weight: ${counterNumberTitleFontWeight};` : ''}
+				  ${counterNumberTitleFontStyle ? `font-style: ${counterNumberTitleFontStyle};` : ''}
+				  ${counterNumberTitleTextTransform ? `text-transform: ${counterNumberTitleTextTransform};` : ''}
+				  ${counterNumberTitleTextDecoration ? `text-decoration: ${counterNumberTitleTextDecoration};` : ''}
+				  ${counterNumberTitleLetterSpacing.Desktop ? `letter-spacing: ${counterNumberTitleLetterSpacing.Desktop}${counterNumberTitleLetterSpacingUnits.Desktop};` : ''}
+				  ${counterNumberTitleLineHeight.Desktop ? `line-height: ${counterNumberTitleLineHeight.Desktop}${counterNumberTitleLineHeightUnits.Desktop};` : ''}
+				  ${counterNumberTitleMarginGetDesktop ? `margin: ${counterNumberTitleMarginGetDesktop};` : ''}
+				}
+
+				@media only screen and (max-width: 1024px) {
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
+					${counterNumberMarginGetTab ? `margin: ${counterNumberMarginGetTab};` : ''}
+				  }
+
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix {
+					${counterNumberFontSize.Tablet ? `font-size: ${counterNumberFontSize.Tablet}${counterNumberFontSizeUnits.Tablet};` : ''}
+					${counterNumberLetterSpacing.Tablet ? `letter-spacing: ${counterNumberLetterSpacing.Tablet}${counterNumberLetterSpacingUnits.Tablet};` : ''}
+					${counterNumberLineHeight.Tablet ? `line-height: ${counterNumberLineHeight.Tablet}${counterNumberLineHeightUnits.Tablet};` : ''}
+				  }
+
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
+					${counterNumberTitleMarginGetTab ? `margin: ${counterNumberTitleMarginGetTab};` : ''}
+				  }
+				}
+
+				@media only screen and (max-width: 767px) {
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
+					${counterNumberMarginGetMobile ? `margin: ${counterNumberMarginGetMobile};` : ''}
+				  }
+
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix {
+					${counterNumberFontSize.Mobile ? `font-size: ${counterNumberFontSize.Mobile}${counterNumberFontSizeUnits.Mobile};` : ''}
+					${counterNumberLetterSpacing.Mobile ? `letter-spacing: ${counterNumberLetterSpacing.Mobile}${counterNumberLetterSpacingUnits.Mobile};` : ''}
+					${counterNumberLineHeight.Mobile ? `line-height: ${counterNumberLineHeight.Mobile}${counterNumberLineHeightUnits.Mobile};` : ''}
+				  }
+
+				  .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
+					${counterNumberTitleMarginGetMobile ? `margin: ${counterNumberTitleMarginGetMobile};` : ''}
+				  }
+				}
             `}
 			</style>
 

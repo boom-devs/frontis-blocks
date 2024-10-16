@@ -4,7 +4,7 @@ import FB_Range from "@Components/range";
 export default function CounterItemSizeControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		counterItemSize,
 		counterItemSizeUnits,
 
@@ -29,7 +29,7 @@ export default function CounterItemSizeControl ({ attributes, setAttributes}) {
 			rangeValue={counterItemSize}
 			onChangeHandler={counterItemSizeHandler}
 			rangeUnitHandler={counterItemSizeUnitsHandler}
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			units={counterItemSizeUnits}
 			setAttributes={setAttributes}
 			rangeStep={1}

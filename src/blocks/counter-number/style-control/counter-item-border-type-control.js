@@ -19,7 +19,7 @@ import FB_Spacing from "@Components/spacing";
 export default function CounterItemBorderTypeControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		counterItemBorderTypeUnits,
 		counterItemBorderTypeDesktop,
 		counterItemBorderTypeTab,
@@ -33,7 +33,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( counterItemBorderTypeLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						counterItemBorderTypeDesktop: {
@@ -68,7 +68,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {counterItemBorderTypeDesktop: {...counterItemBorderTypeDesktop, [position]: value}} );
 					break;
@@ -92,7 +92,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 		setAttributes( {
 			counterItemBorderTypeUnits: {
 				...counterItemBorderTypeUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -111,7 +111,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 
 		<FB_Spacing
 			label={ 'Border' }
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			spacingUnitsHandler={counterItemBorderTypeUnitsHandler}
 			spacingUnits={counterItemBorderTypeUnits}
 			spacingDesktop={counterItemBorderTypeDesktop}
