@@ -18,9 +18,9 @@ const labelAttributes = {
 	labelFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
-			Tablet: '20',
-			Mobile: '18'
+			Desktop: '14',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	labelFontSizeUnits: {
