@@ -2,59 +2,76 @@ import { __ } from '@wordpress/i18n';
 import { TextControl } from '@wordpress/components';
 import Switch from 'rc-switch';
 import { useState, useEffect } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
 
 const EditorOptions = () => {
   const [options, setOptions] = useState({
-    fb_default_content_width: '',
-    fb_button_inherit_from_theme: false,
-    fb_container_padding: '',
-    fb_container_elements_gap: '',
-    fb_custom_css: false,
-    fb_copy_paste_style: false,
+    default_content_width: '',
+    button_inherit_from_theme: false,
+    container_padding: '',
+    container_elements_gap: '',
+    custom_css: '',
+    copy_paste_style: false,
   });
 
-    const { nonce } = window.frontisBlocksAdmin;
-    
+  const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
-  useEffect(() => {
-    fetchOptions();
-  }, []);
+  // useEffect(() => {
+  //   fetchOptions();
+  // }, []);
 
-  const fetchOptions = () => {
-    const keys = Object.keys(options);
-    apiFetch({
-      path: '/frontis-blocks/v1/get-options',
-      method: 'POST',
-      data: {
-        nonce: nonce,
-        keys: keys,
-      },
-    }).then((response) => {
-      if (response.success) {
-        setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
-      } else {
-        console.error('Failed to fetch options');
-      }
-    });
-  };
-
-  
+  // const fetchOptions = () => {
+  //   const keys = Object.keys(options);
+  //   jQuery.ajax({
+  //     url: ajaxUrl,
+  //     type: 'POST',
+  //     data: {
+  //       action: 'fb_get_options',
+  //       nonce: nonce,
+  //       keys: keys,
+  //     },
+  //     success: function(response) {
+  //       if (response.success) {
+  //         setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
+  //       } else {
+  //         console.error('Failed to fetch options');
+  //       }
+  //     },
+  //     error: function(xhr, status, error) {
+  //       console.error('AJAX error:', status, error);
+  //     }
+  //   });
+  // };
 
   const saveOption = (key, value) => {
-    apiFetch({
-      path: '/frontis-blocks/v1/save-option',
-      method: 'POST',
+    console.log('Sending AJAX request:', {
+      url: ajaxUrl,
+      action: `fb_${key}`,
+      security: nonce,
+      value: value
+    });
+
+    window.jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
       data: {
-        nonce: nonce,
-        key: key,
+        action: `fb_${key}`,
+        security: nonce,
         value: value,
       },
-    }).then((response) => {
-      if (response.success) {
-        console.log(`Option ${key} saved successfully`);
-      } else {
-        console.error(`Failed to save option ${key}`);
+      success: function(response) {
+        console.log('AJAX success response:', response);
+        if (response.success) {
+          console.log(`Option ${key} saved successfully`);
+          setOptions(prevOptions => ({ ...prevOptions, [key]: value }));
+        } else {
+          console.error(`Failed to save option ${key}:`, response.data?.message);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('AJAX error:', status, error);
+        console.log('Full error response:', xhr.responseText);
+        console.log('Status code:', xhr.status);
+        console.log('Status text:', xhr.statusText);
       }
     });
   };
@@ -89,7 +106,6 @@ const EditorOptions = () => {
 
   return (
     <div className="fb-blocks-settings-options">
-      <h3>{__('Editor Options', 'frontis-blocks')}</h3>
       
       <div className="fb-option">
         <div className="fb-option-label">
@@ -97,9 +113,9 @@ const EditorOptions = () => {
           <p>{__('Set the default width for content in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
-          value={options.fb_default_content_width}
-          onChange={(value) => handleNumberChange('fb_default_content_width', value)}
-          onBlur={() => handleNumberBlur('fb_default_content_width', options.fb_default_content_width)}
+          value={options.default_content_width}
+          onChange={(value) => handleNumberChange('default_content_width', value)}
+          onBlur={() => handleNumberBlur('default_content_width', options.default_content_width)}
           min={0}
           max={2000}
         />
@@ -112,8 +128,8 @@ const EditorOptions = () => {
         </div>
         <div className="fb-option-input">
           <Switch
-            checked={options.fb_button_inherit_from_theme}
-            onChange={() => handleSwitchChange('fb_button_inherit_from_theme')}
+            checked={options.button_inherit_from_theme}
+            onChange={() => handleSwitchChange('button_inherit_from_theme')}
           />
         </div>
       </div>
@@ -124,9 +140,9 @@ const EditorOptions = () => {
           <p>{__('Set the default padding for containers in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
-          value={options.fb_container_padding}
-          onChange={(value) => handleNumberChange('fb_container_padding', value)}
-          onBlur={() => handleNumberBlur('fb_container_padding', options.fb_container_padding)}
+          value={options.container_padding}
+          onChange={(value) => handleNumberChange('container_padding', value)}
+          onBlur={() => handleNumberBlur('container_padding', options.container_padding)}
           min={0}
           max={2000}
         />
@@ -138,9 +154,9 @@ const EditorOptions = () => {
           <p>{__('Set the default gap between container elements in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
-          value={options.fb_container_elements_gap}
-          onChange={(value) => handleNumberChange('fb_container_elements_gap', value)}
-          onBlur={() => handleNumberBlur('fb_container_elements_gap', options.fb_container_elements_gap)}
+          value={options.container_elements_gap}
+          onChange={(value) => handleNumberChange('container_elements_gap', value)}
+          onBlur={() => handleNumberBlur('container_elements_gap', options.container_elements_gap)}
           min={0}
           max={2000}
         />
@@ -153,8 +169,8 @@ const EditorOptions = () => {
         </div>
         <div className="fb-option-input">
           <Switch
-            checked={options.fb_custom_css}
-            onChange={() => handleSwitchChange('fb_custom_css')}
+            checked={options.custom_css}
+            onChange={() => handleSwitchChange('custom_css')}
           />
         </div>
       </div>
@@ -166,8 +182,8 @@ const EditorOptions = () => {
         </div>
         <div className="fb-option-input">
           <Switch
-            checked={options.fb_copy_paste_style}
-            onChange={() => handleSwitchChange('fb_copy_paste_style')}
+            checked={options.copy_paste_style}
+            onChange={() => handleSwitchChange('copy_paste_style')}
           />
         </div>
       </div>

@@ -18,10 +18,10 @@ class Admin {
 
         add_action( 'plugin_action_links', [ $this, 'fb_menu_action_links' ], 10, 2 );
 
-        add_action( 'wp_ajax_fb_save_settings', array( $this, 'save_settings' ) );
+        // add_action( 'wp_ajax_fb_save_settings', array( $this, 'save_settings' ) );
 
-        add_action( 'wp_ajax_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
-        add_action( 'wp_ajax_nopriv_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
+        // add_action( 'wp_ajax_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
+        // add_action( 'wp_ajax_nopriv_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
 
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
@@ -57,9 +57,15 @@ class Admin {
         if('toplevel_page_frontis-blocks' != $hook){
             return;
         }
+        wp_enqueue_script('jquery');
         $script_path = FB_PLUGIN_PATH . 'assets/admin/index.js';
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
         $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
+
+        //push jquery in $script_asset['dependencies']
+        $script_asset['dependencies'][] = 'jquery';
+
+        // error_log(print_r($script_asset['dependencies'], true));
         
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index.js', $script_asset['dependencies'], '1.0.0', true);
 
@@ -69,7 +75,7 @@ class Admin {
         // Localize the script with new data
         wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', array(
             'blocks' => $blocks,
-            'nonce' => wp_create_nonce('fb_save_settings'),
+            'nonce' => wp_create_nonce('fb_settings_nonce'),
             'adminUrl' => admin_url(),
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'restUrl' => get_rest_url(),
