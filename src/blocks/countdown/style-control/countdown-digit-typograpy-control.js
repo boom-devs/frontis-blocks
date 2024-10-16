@@ -9,7 +9,7 @@ import FB_TypographyControl from '@Components/typography-control';
 export default function CountDownDigitTypographyControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		digitFontColorSwitcher,
 		digitFontColor,
 		digitFontHoverColor,
@@ -88,7 +88,7 @@ export default function CountDownDigitTypographyControl ({ attributes, setAttrib
 				lineHeightUnits={digitLineHeightUnits}
 				onChangeLineHeightUnit={(value) => setAttributes({ digitLineHeightUnits: value })}
 
-				deviceType={DeviceType}
+				deviceType={deviceType}
 				setAttributes={setAttributes}
 			/>
 		</>

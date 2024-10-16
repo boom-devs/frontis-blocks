@@ -5,7 +5,7 @@ import { useEffect, useState } from '@wordpress/element';
 export default function save({ attributes }) {
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -78,14 +78,14 @@ export default function save({ attributes }) {
 	{/* Inspector Controls */}
 
 	// {/* Countdown Item Control */}
-	// const countDownItemBorderTypeGetDesktop = `${countDownItemBorderTypeDesktop.top}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeDesktop.right}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeDesktop.bottom}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeDesktop.left}${countDownItemBorderTypeUnits[DeviceType]}`;
-	// const countDownItemBorderTypeGetTab = `${countDownItemBorderTypeTab.top}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeTab.right}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeTab.bottom}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeTab.left}${countDownItemBorderTypeUnits[DeviceType]}`;
-	// const countDownItemBorderTypeGetMobile = `${countDownItemBorderTypeMobile.top}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeMobile.right}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeMobile.bottom}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeMobile.left}${countDownItemBorderTypeUnits[DeviceType]}`;
+	// const countDownItemBorderTypeGetDesktop = `${countDownItemBorderTypeDesktop.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.left}${countDownItemBorderTypeUnits[deviceType]}`;
+	// const countDownItemBorderTypeGetTab = `${countDownItemBorderTypeTab.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.left}${countDownItemBorderTypeUnits[deviceType]}`;
+	// const countDownItemBorderTypeGetMobile = `${countDownItemBorderTypeMobile.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.left}${countDownItemBorderTypeUnits[deviceType]}`;
 	//
 	//
-	// const countDownItemBorderRadiusGetDesktop = `${countDownItemBorderRadiusDesktop.top}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusDesktop.right}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusDesktop.bottom}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusDesktop.left}${countDownItemBorderRadiusUnits[DeviceType]}`;
-	// const countDownItemBorderRadiusGetTab = `${countDownItemBorderRadiusTab.top}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusTab.right}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusTab.bottom}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusTab.left}${countDownItemBorderRadiusUnits[DeviceType]}`;
-	// const countDownItemBorderRadiusGetMobile = `${countDownItemBorderRadiusMobile.top}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusMobile.right}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusMobile.bottom}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusMobile.left}${countDownItemBorderRadiusUnits[DeviceType]}`;
+	// const countDownItemBorderRadiusGetDesktop = `${countDownItemBorderRadiusDesktop.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.left}${countDownItemBorderRadiusUnits[deviceType]}`;
+	// const countDownItemBorderRadiusGetTab = `${countDownItemBorderRadiusTab.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.left}${countDownItemBorderRadiusUnits[deviceType]}`;
+	// const countDownItemBorderRadiusGetMobile = `${countDownItemBorderRadiusMobile.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.left}${countDownItemBorderRadiusUnits[deviceType]}`;
 
 	return (
 		<>

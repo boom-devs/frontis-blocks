@@ -1,6 +1,6 @@
 const countDownItemBorderTypeAttributes = {
 	// Border Type
-	countDownItemBorderBorder: {
+	countDownItemBorder: {
 		type: 'string',
 		default: "none",
 	},

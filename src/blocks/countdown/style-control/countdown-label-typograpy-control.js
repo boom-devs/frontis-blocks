@@ -9,7 +9,7 @@ import FB_TypographyControl from "@Components/typography-control";
 export default function CountDownLabelTypographyControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		labelFontColorSwitcher,
 		labelFontColor,
 		labelFontHoverColor,
@@ -88,7 +88,7 @@ export default function CountDownLabelTypographyControl ({ attributes, setAttrib
 				lineHeightUnits={labelLineHeightUnits}
 				onChangeLineHeightUnit={(value) => setAttributes({ labelLineHeightUnits: value })}
 
-				deviceType={DeviceType}
+				deviceType={deviceType}
 				setAttributes={setAttributes}
 			/>
 		</>

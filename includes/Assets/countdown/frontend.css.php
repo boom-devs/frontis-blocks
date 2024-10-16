@@ -54,7 +54,7 @@ $digitFontHoverColor = isset($block_attributes['digitFontHoverColor']) ? sanitiz
 
 /** Label Typography */
 $labelFontFamily = isset($block_attributes['labelFontFamily']) ? sanitize_text_field($block_attributes['labelFontFamily']) : 'inherit';
-$labelFontSize = isset($block_attributes['labelFontSize']) ? $block_attributes['labelFontSize'] : array('Desktop' => '24', 'Tablet' => '20', 'Mobile' => '18');
+$labelFontSize = isset($block_attributes['labelFontSize']) ? $block_attributes['labelFontSize'] : array('Desktop' => '14', 'Tablet' => '', 'Mobile' => '');
 $labelFontSizeUnits = isset($block_attributes['labelFontSizeUnits']) ? $block_attributes['labelFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $labelFontWeight = isset($block_attributes['labelFontWeight']) ? sanitize_text_field($block_attributes['labelFontWeight']) : '400';
 $labelFontStyle = isset($block_attributes['labelFontStyle']) ? sanitize_text_field($block_attributes['labelFontStyle']) : '';
@@ -77,6 +77,7 @@ $css_content = "
 	.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 		" . ($countDownItemBorderTypeGetDesktop ? "border-width: $countDownItemBorderTypeGetDesktop;" : "") . "
 		" . ($countDownItemBorderRadiusGetDesktop ? "border-radius: $countDownItemBorderRadiusGetDesktop;" : "") . "
+		" . ($countDownItemBorder ? "border: $countDownItemBorder;" : "") . "
 		" . ($countDownItemBorderColor ? "border-color: $countDownItemBorderColor;" : "") . "
 		" . ($countDownItemBgColor ? "background: $countDownItemBgColor;" : "") . "
 		" . ($countDownItemSize['Desktop'] && $countDownItemSizeUnits['Desktop'] ? "width: {$countDownItemSize['Desktop']}{$countDownItemSizeUnits['Desktop']};" : "") . "

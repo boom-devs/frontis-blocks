@@ -65,7 +65,7 @@ const attributes = {
 		type: "string",
 	},
 	// Device Type
-	DeviceType: {
+	deviceType: {
 		type: "string",
 		default: "Desktop"
 	},

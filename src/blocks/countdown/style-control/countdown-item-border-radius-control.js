@@ -2,7 +2,7 @@ import FB_Spacing from "@Components/spacing";
 export default function CountDownItemBorderRadiusControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		countDownItemBorderRadiusUnits,
 		countDownItemBorderRadiusDesktop,
 		countDownItemBorderRadiusTab,
@@ -14,7 +14,7 @@ export default function CountDownItemBorderRadiusControl ({ attributes, setAttri
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( countDownItemBorderRadiusLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						countDownItemBorderRadiusDesktop: {
@@ -49,7 +49,7 @@ export default function CountDownItemBorderRadiusControl ({ attributes, setAttri
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {countDownItemBorderRadiusDesktop: {...countDownItemBorderRadiusDesktop, [position]: value}} );
 					break;
@@ -73,7 +73,7 @@ export default function CountDownItemBorderRadiusControl ({ attributes, setAttri
 		setAttributes( {
 			countDownItemBorderRadiusUnits: {
 				...countDownItemBorderRadiusUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -83,7 +83,7 @@ export default function CountDownItemBorderRadiusControl ({ attributes, setAttri
 	<>
 		<FB_Spacing
 			label={ 'Border Radius' }
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			spacingUnitsHandler={countDownItemBorderRadiusUnitsHandler}
 			spacingUnits={countDownItemBorderRadiusUnits}
 			spacingDesktop={countDownItemBorderRadiusDesktop}

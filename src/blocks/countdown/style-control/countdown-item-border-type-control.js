@@ -19,7 +19,7 @@ import FB_Spacing from "@Components/spacing";
 export default function CountDownItemBorderTypeControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		countDownItemBorderTypeUnits,
 		countDownItemBorderTypeDesktop,
 		countDownItemBorderTypeTab,
@@ -33,7 +33,7 @@ export default function CountDownItemBorderTypeControl ({ attributes, setAttribu
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( countDownItemBorderTypeLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						countDownItemBorderTypeDesktop: {
@@ -68,7 +68,7 @@ export default function CountDownItemBorderTypeControl ({ attributes, setAttribu
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {countDownItemBorderTypeDesktop: {...countDownItemBorderTypeDesktop, [position]: value}} );
 					break;
@@ -92,7 +92,7 @@ export default function CountDownItemBorderTypeControl ({ attributes, setAttribu
 		setAttributes( {
 			countDownItemBorderTypeUnits: {
 				...countDownItemBorderTypeUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -111,7 +111,7 @@ export default function CountDownItemBorderTypeControl ({ attributes, setAttribu
 
 		<FB_Spacing
 			label={ 'Border' }
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			spacingUnitsHandler={countDownItemBorderTypeUnitsHandler}
 			spacingUnits={countDownItemBorderTypeUnits}
 			spacingDesktop={countDownItemBorderTypeDesktop}

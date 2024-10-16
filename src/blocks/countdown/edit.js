@@ -36,7 +36,7 @@ import CountDownItemBgColorControl from "./style-control/countdown-item-bg-color
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -167,122 +167,102 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	{/* Inspector Controls */}
 
 	{/* Countdown Item Control */}
-	const countDownItemBorderTypeGetDesktop = `${countDownItemBorderTypeDesktop.top}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeDesktop.right}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeDesktop.bottom}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeDesktop.left}${countDownItemBorderTypeUnits[DeviceType]}`;
-	const countDownItemBorderTypeGetTab = `${countDownItemBorderTypeTab.top}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeTab.right}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeTab.bottom}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeTab.left}${countDownItemBorderTypeUnits[DeviceType]}`;
-	const countDownItemBorderTypeGetMobile = `${countDownItemBorderTypeMobile.top}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeMobile.right}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeMobile.bottom}${countDownItemBorderTypeUnits[DeviceType]} ${countDownItemBorderTypeMobile.left}${countDownItemBorderTypeUnits[DeviceType]}`;
+	const countDownItemBorderTypeGetDesktop = `${countDownItemBorderTypeDesktop.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.left}${countDownItemBorderTypeUnits[deviceType]}`;
+	const countDownItemBorderTypeGetTab = `${countDownItemBorderTypeTab.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.left}${countDownItemBorderTypeUnits[deviceType]}`;
+	const countDownItemBorderTypeGetMobile = `${countDownItemBorderTypeMobile.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.left}${countDownItemBorderTypeUnits[deviceType]}`;
 
 
-	const countDownItemBorderRadiusGetDesktop = `${countDownItemBorderRadiusDesktop.top}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusDesktop.right}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusDesktop.bottom}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusDesktop.left}${countDownItemBorderRadiusUnits[DeviceType]}`;
-	const countDownItemBorderRadiusGetTab = `${countDownItemBorderRadiusTab.top}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusTab.right}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusTab.bottom}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusTab.left}${countDownItemBorderRadiusUnits[DeviceType]}`;
-	const countDownItemBorderRadiusGetMobile = `${countDownItemBorderRadiusMobile.top}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusMobile.right}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusMobile.bottom}${countDownItemBorderRadiusUnits[DeviceType]} ${countDownItemBorderRadiusMobile.left}${countDownItemBorderRadiusUnits[DeviceType]}`;
+	const countDownItemBorderRadiusGetDesktop = `${countDownItemBorderRadiusDesktop.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.left}${countDownItemBorderRadiusUnits[deviceType]}`;
+	const countDownItemBorderRadiusGetTab = `${countDownItemBorderRadiusTab.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.left}${countDownItemBorderRadiusUnits[deviceType]}`;
+	const countDownItemBorderRadiusGetMobile = `${countDownItemBorderRadiusMobile.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.left}${countDownItemBorderRadiusUnits[deviceType]}`;
 
-
-	/* set default values for the style attributes */
-	// useEffect(() => {
-	// 	if (digitFontFamily) {
-	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${digitFontFamily.replace(' ', '+')}`;
-	// 		const linkElement = document.createElement('link');
-	// 		linkElement.rel = 'stylesheet';
-	// 		linkElement.href = fontUrl;
-	// 		document.head.appendChild(linkElement);
-	// 	}
-	// }, [digitFontFamily]);
-	//
-	// useEffect(() => {
-	// 	if (labelFontFamily) {
-	// 		const fontUrl = `https://fonts.googleapis.com/css?family=${labelFontFamily.replace(' ', '+')}`;
-	// 		const linkElement = document.createElement('link');
-	// 		linkElement.rel = 'stylesheet';
-	// 		linkElement.href = fontUrl;
-	// 		document.head.appendChild(linkElement);
-	// 	}
-	// }, [labelFontFamily]);
 
 	return (
 		<>
 
 			<style>
 				{`
-                .fb-count-down-wrapper.${blockID}{
-           			gap: ${countDownItemGap.Desktop}${countDownItemGapUnits.Desktop};
-                }
-                .fb-count-down-wrapper.${blockID} .fb-count-down-item {
-                	background: ${countDownItemBgColor};
-					width: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};
-					height: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};
-					border: ${countDownItemBorder};
-                    border-color: ${countDownItemBorderColor};
-                    border-width: ${countDownItemBorderTypeGetDesktop};
-                    border-radius: ${countDownItemBorderRadiusGetDesktop};
-                }
-                .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
-                	color: ${digitFontColor};
-                    ${digitFontFamily ? `font-family: ${digitFontFamily};` : ""}
-					${digitFontSize.Desktop ? `font-size: ${digitFontSize.Desktop}${digitFontSizeUnits.Desktop};` : ""}
-					${digitFontWeight ? `font-weight: ${digitFontWeight};` : ""}
-					${digitFontStyle ? `font-style: ${digitFontStyle};` : ""}
-					${digitTextTransform ? `text-transform: ${digitTextTransform};` : ""}
-					${digitTextDecoration ? `text-decoration: ${digitTextDecoration};` : ""}
-					${digitLetterSpacing.Desktop ? `letter-spacing: ${digitLetterSpacing.Desktop}${digitLetterSpacingUnits.Desktop};` : ""}
-					${digitLineHeight.Desktop ? `line-height: ${digitLineHeight.Desktop}${digitLineHeightUnits.Desktop};` : ""}
-                }
-                .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
-                	color: ${labelFontColor};
-               		font-family: ${labelFontFamily !== 'default' ? labelFontFamily : labelFontFamily};
-                    font-size: ${labelFontSize !== undefined ? `${labelFontSize}${labelFontSizeUnits}` : ''};
-                    font-weight: ${labelFontWeight};
-                    font-style: ${labelFontStyle};
-                    text-transform: ${labelTextTransform};
-                    text-decoration: ${labelTextDecoration};
-                    ${labelLetterSpacing !== undefined ? `letter-spacing: ${labelLetterSpacing}${labelLetterSpacing};` : ''}
-                    ${labelLineHeight !== undefined ? `line-height: ${labelLineHeight}${labelLineHeightUnits};` : ''}
-                }
+             	.fb-count-down-wrapper.${blockID} {
+					${countDownItemGap.Desktop ? `gap: ${countDownItemGap.Desktop}${countDownItemGapUnits.Desktop};` : ''}
+				}
 
+				.fb-count-down-wrapper.${blockID} .fb-count-down-item {
+					${countDownItemBgColor ? `background: ${countDownItemBgColor};` : ''}
+					${countDownItemSize.Desktop ? `width: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};` : ''}
+					${countDownItemSize.Desktop ? `height: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};` : ''}
+					${countDownItemBorder ? `border: ${countDownItemBorder};` : ''}
+					${countDownItemBorderTypeGetDesktop ? `border-width: ${countDownItemBorderTypeGetDesktop};` : ''}
+					${countDownItemBorderRadiusGetDesktop ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
+					${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
+				}
 
-                @media only screen and (max-width: 1024px) {
-				   .fb-count-down-wrapper.${blockID}{
-						gap: ${countDownItemGap.Tablet}${countDownItemGapUnits.Tablet};
+				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
+					${digitFontColor ? `color: ${digitFontColor};` : ''}
+					${digitFontFamily ? `font-family: ${digitFontFamily};` : ''}
+					${digitFontSize.Desktop ? `font-size: ${digitFontSize.Desktop}${digitFontSizeUnits.Desktop};` : ''}
+					${digitFontWeight ? `font-weight: ${digitFontWeight};` : ''}
+					${digitFontStyle ? `font-style: ${digitFontStyle};` : ''}
+					${digitTextTransform ? `text-transform: ${digitTextTransform};` : ''}
+					${digitTextDecoration ? `text-decoration: ${digitTextDecoration};` : ''}
+					${digitLetterSpacing.Desktop ? `letter-spacing: ${digitLetterSpacing.Desktop}${digitLetterSpacingUnits.Desktop};` : ''}
+					${digitLineHeight.Desktop ? `line-height: ${digitLineHeight.Desktop}${digitLineHeightUnits.Desktop};` : ''}
+				}
+
+				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
+					${labelFontColor ? `color: ${labelFontColor};` : ''}
+					${labelFontFamily ? `font-family: ${labelFontFamily};` : ''}
+					${labelFontSize.Desktop ? `font-size: ${labelFontSize.Desktop}${labelFontSizeUnits.Desktop};` : ''}
+					${labelFontWeight ? `font-weight: ${labelFontWeight};` : ''}
+					${labelFontStyle ? `font-style: ${labelFontStyle};` : ''}
+					${labelTextTransform ? `text-transform: ${labelTextTransform};` : ''}
+					${labelTextDecoration ? `text-decoration: ${labelTextDecoration};` : ''}
+					${labelLetterSpacing.Desktop ? `letter-spacing: ${labelLetterSpacing.Desktop}${labelLetterSpacingUnits.Desktop};` : ''}
+					${labelLineHeight.Desktop ? `line-height: ${labelLineHeight.Desktop}${labelLineHeightUnits.Desktop};` : ''}
+				}
+
+				@media only screen and (max-width: 1024px) {
+					.fb-count-down-wrapper.${blockID} {
+						${countDownItemGap.Tablet ? `gap: ${countDownItemGap.Tablet}${countDownItemGapUnits.Tablet};` : ''}
 					}
-					 .fb-count-down-wrapper.${blockID} .fb-count-down-item {
-							width: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};
-							height: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};
-							border-width: ${countDownItemBorderTypeGetTab};
-							border-radius: ${countDownItemBorderRadiusGetTab};
-						}
-						 .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
-							${digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ""}
-							${digitLetterSpacing.Tablet ? `letter-spacing: ${digitLetterSpacing.Tablet}${digitLetterSpacingUnits.Tablet};` : ""}
-							${digitLineHeight.Tablet ? `line-height: ${digitLineHeight.Tablet}${digitLineHeightUnits.Tablet};` : ""}
-						}
-						.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
-							${labelFontSize.Tablet ? `font-size: ${labelFontSize.Tablet}${labelFontSizeUnits.Tablet};` : ""}
-							${labelLetterSpacing.Tablet ? `letter-spacing: ${labelLetterSpacing.Tablet}${labelLetterSpacingUnits.Tablet};` : ""}
-							${labelLineHeight.Tablet ? `line-height: ${labelLineHeight.Tablet}${labelLineHeightUnits.Tablet};` : ""}
-						}
-
-                }
-
-                @media only screen and (max-width: 767px) {
-                	.fb-count-down-wrapper.${blockID}{
-						gap: ${countDownItemGap.Mobile}${countDownItemGapUnits.Mobile};
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item {
+						${countDownItemSize.Tablet ? `width: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};` : ''}
+						${countDownItemSize.Tablet ? `height: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};` : ''}
+						${countDownItemBorderTypeGetTab ? `border-width: ${countDownItemBorderTypeGetTab};` : ''}
+						${countDownItemBorderRadiusGetTab ? `border-radius: ${countDownItemBorderRadiusGetTab};` : ''}
 					}
-					 .fb-count-down-wrapper.${blockID} .fb-count-down-item {
-							width: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};
-							height: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};
-							border-width: ${countDownItemBorderTypeGetMobile};
-							border-radius: ${countDownItemBorderRadiusGetMobile};
-						}
-						.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time{
-							${digitFontSize.Mobile ? `font-size: ${digitFontSize.Mobile}${digitFontSizeUnits.Mobile};` : ""}
-							${digitLetterSpacing.Mobile ? `letter-spacing: ${digitLetterSpacing.Mobile}${digitLetterSpacingUnits.Mobile};` : ""}
-							${digitLineHeight.Mobile ? `line-height: ${digitLineHeight.Mobile}${digitLineHeightUnits.Mobile};` : ""}
-						}
-						.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label{
-							${labelFontSize.Mobile ? `font-size: ${labelFontSize.Mobile}${labelFontSizeUnits.Mobile};` : ""}
-							${labelLetterSpacing.Mobile ? `letter-spacing: ${labelLetterSpacing.Mobile}${labelLetterSpacingUnits.Mobile};` : ""}
-							${labelLineHeight.Mobile ? `line-height: ${labelLineHeight.Mobile}${labelLineHeightUnits.Mobile};` : ""}
-						}
-                }
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
+						${digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ''}
+						${digitLetterSpacing.Tablet ? `letter-spacing: ${digitLetterSpacing.Tablet}${digitLetterSpacingUnits.Tablet};` : ''}
+						${digitLineHeight.Tablet ? `line-height: ${digitLineHeight.Tablet}${digitLineHeightUnits.Tablet};` : ''}
+					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
+						${labelFontSize.Tablet ? `font-size: ${labelFontSize.Tablet}${labelFontSizeUnits.Tablet};` : ''}
+						${labelLetterSpacing.Tablet ? `letter-spacing: ${labelLetterSpacing.Tablet}${labelLetterSpacingUnits.Tablet};` : ''}
+						${labelLineHeight.Tablet ? `line-height: ${labelLineHeight.Tablet}${labelLineHeightUnits.Tablet};` : ''}
+					}
+				}
+
+				@media only screen and (max-width: 767px) {
+					.fb-count-down-wrapper.${blockID} {
+						${countDownItemGap.Mobile ? `gap: ${countDownItemGap.Mobile}${countDownItemGapUnits.Mobile};` : ''}
+					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item {
+						${countDownItemSize.Mobile ? `width: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};` : ''}
+						${countDownItemSize.Mobile ? `height: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};` : ''}
+						${countDownItemBorderTypeGetMobile ? `border-width: ${countDownItemBorderTypeGetMobile};` : ''}
+						${countDownItemBorderRadiusGetMobile ? `border-radius: ${countDownItemBorderRadiusGetMobile};` : ''}
+					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
+						${digitFontSize.Mobile ? `font-size: ${digitFontSize.Mobile}${digitFontSizeUnits.Mobile};` : ''}
+						${digitLetterSpacing.Mobile ? `letter-spacing: ${digitLetterSpacing.Mobile}${digitLetterSpacingUnits.Mobile};` : ''}
+						${digitLineHeight.Mobile ? `line-height: ${digitLineHeight.Mobile}${digitLineHeightUnits.Mobile};` : ''}
+					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
+						${labelFontSize.Mobile ? `font-size: ${labelFontSize.Mobile}${labelFontSizeUnits.Mobile};` : ''}
+						${labelLetterSpacing.Mobile ? `letter-spacing: ${labelLetterSpacing.Mobile}${labelLetterSpacingUnits.Mobile};` : ''}
+						${labelLineHeight.Mobile ? `line-height: ${labelLineHeight.Mobile}${labelLineHeightUnits.Mobile};` : ''}
+					}
+				}
 
             `}
 			</style>

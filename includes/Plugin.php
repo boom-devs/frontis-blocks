@@ -7,83 +7,82 @@ use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Assets\Asset;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
-use FrontisBlocks\Core\FontLoader;
 
 final class Plugin {
-    /**
-     * Plugin version
-     *
-     * @var string
-     */
-    const VERSION = '1.0.0';
+	/**
+	 * Plugin version
+	 *
+	 * @var string
+	 */
+	const VERSION = '1.0.0';
 
-    /**
-     * Plugin slug
-     *
-     * @var string
-     */
-    const SLUG = 'frontis-blocks';
+	/**
+	 * Plugin slug
+	 *
+	 * @var string
+	 */
+	const SLUG = 'frontis-blocks';
 
-    /**
-     * Plugin prefix
-     *
-     * @var string
-     */
-    const PREFIX = 'fb_';
+	/**
+	 * Plugin prefix
+	 *
+	 * @var string
+	 */
+	const PREFIX = 'fb_';
 
-    /**
-     * Plugin text domain
-     *
-     * @var string
-     */
-    const TEXT_DOMAIN = 'frontis-blocks';
+	/**
+	 * Plugin text domain
+	 *
+	 * @var string
+	 */
+	const TEXT_DOMAIN = 'frontis-blocks';
 
-    /**
-     * Admin instance
-     *
-     * @var Admin
-     */
-    public $admin;
+	/**
+	 * Admin instance
+	 *
+	 * @var Admin
+	 */
+	public $admin;
 
-    /**
-     * Asset instance
-     *
-     * @var Asset
-     */
-    public $asset;
+	/**
+	 * Asset instance
+	 *
+	 * @var Asset
+	 */
+	public $asset;
 
-    /**
-     * Plugin settings
-     *
-     * @var array|null
-     */
-    public static $settings = null;
+	/**
+	 * Plugin settings
+	 *
+	 * @var array|null
+	 */
+	public static $settings = null;
 
-    /**
-     * Loaded blocks
-     *
-     * @var array
-     */
-    public static $blocks = [];
+	/**
+	 * Loaded blocks
+	 *
+	 * @var array
+	 */
+	public static $blocks = [];
 
-    /**
-     * Plugin instance
-     *
-     * @var Plugin|null
-     */
-    private static $instance = null;
+	/**
+	 * Plugin instance
+	 *
+	 * @var Plugin|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Constructor
-     */
-    private function __construct() {
-        $this->define_constants();
-        $this->set_locale();
-        $this->init_classes();
-        $this->init_hooks();
+	/**
+	 * Constructor
+	 */
+	private function __construct() {
+		$this->define_constants();
+		$this->set_locale();
+		$this->init_classes();
+		$this->init_hooks();
 
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
-    }
+	}
 
 	public function enqueue_scripts(){
 		wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js',  array('jquery'), '1.0.0', true);
@@ -91,72 +90,72 @@ final class Plugin {
 	}
 
 
-    /**
-     * Get plugin instance
-     *
-     * @return Plugin
-     */
-    public static function get_instance() {
-        if (null === self::$instance) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Get plugin instance
+	 *
+	 * @return Plugin
+	 */
+	public static function get_instance() {
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Define constants
-     */
-    private function define_constants() {
-        $upload_dir = wp_upload_dir( null, false );
+	/**
+	 * Define constants
+	 */
+	private function define_constants() {
+		$upload_dir = wp_upload_dir( null, false );
 
-        define('FB_VERSION', self::VERSION);
-        define('FB_SLUG', self::SLUG);
-        define('FB_PREFIX', self::PREFIX);
-        define('FB_TEXT_DOMAIN', self::TEXT_DOMAIN);
-        define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
-        define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
-        define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
-        define('FB_UPLOAD_DIR_NAME', ' fb-plugin' );
-        define('FB_UPLOAD_DIR', $upload_dir['basedir'] . '/' . FB_UPLOAD_DIR_NAME . '/' );
-        define('FB_UPLOAD_URL', $upload_dir['baseurl'] . '/' . FB_UPLOAD_DIR_NAME . '/' );
-    }
+		define('FB_VERSION', self::VERSION);
+		define('FB_SLUG', self::SLUG);
+		define('FB_PREFIX', self::PREFIX);
+		define('FB_TEXT_DOMAIN', self::TEXT_DOMAIN);
+		define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
+		define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
+		define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
+		define('FB_UPLOAD_DIR_NAME', ' fb-plugin' );
+		define('FB_UPLOAD_DIR', $upload_dir['basedir'] . '/' . FB_UPLOAD_DIR_NAME . '/' );
+		define('FB_UPLOAD_URL', $upload_dir['baseurl'] . '/' . FB_UPLOAD_DIR_NAME . '/' );
+	}
 
-    /**
-     * Set locale
-     */
-    private function set_locale() {
-        add_action('plugins_loaded', function() {
-            load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(plugin_basename(FB_PLUGIN_FILE)) . '/languages');
-        });
-    }
+	/**
+	 * Set locale
+	 */
+	private function set_locale() {
+		add_action('plugins_loaded', function() {
+			load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(plugin_basename(FB_PLUGIN_FILE)) . '/languages');
+		});
+	}
 
-    /**
-     * Initialize classes
-     */
-    private function init_classes() {
-       $this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
+	/**
+	 * Initialize classes
+	 */
+	private function init_classes() {
+		$this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
 
-       //load blocks
-       self::$blocks = BlockList::get_instance()->get_blocks();
-		FontLoader::get_instance();
+		//load blocks
+		self::$blocks = BlockList::get_instance()->get_blocks();
 
-    }
 
-    /**
-     * Initialize hooks
-     */
-    private function init_hooks() {
-        add_action('plugins_loaded', [$this, 'init_plugin']);
-    }
+	}
 
-    /**
-     * Initialize plugin
-     */
-    public function init_plugin() {
-        // Additional plugin initialization if needed
+	/**
+	 * Initialize hooks
+	 */
+	private function init_hooks() {
+		add_action('plugins_loaded', [$this, 'init_plugin']);
+	}
 
-        Blocks::get_instance();
+	/**
+	 * Initialize plugin
+	 */
+	public function init_plugin() {
+		// Additional plugin initialization if needed
 
-        Admin::get_instance();
-    }
+		Blocks::get_instance();
+
+		Admin::get_instance();
+	}
 }

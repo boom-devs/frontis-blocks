@@ -4,7 +4,7 @@ import FB_Range from "@Components/range";
 export default function CountDownItemGapControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		countDownItemGap,
 		countDownItemGapUnits,
 
@@ -29,7 +29,7 @@ export default function CountDownItemGapControl ({ attributes, setAttributes}) {
 			rangeValue={countDownItemGap}
 			onChangeHandler={countDownItemGapHandler}
 			rangeUnitHandler={countDownItemGapUnitsHandler}
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			units={countDownItemGapUnits}
 			setAttributes={setAttributes}
 			rangeStep={1}

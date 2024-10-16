@@ -4,7 +4,7 @@ import FB_Range from "@Components/range";
 export default function CountDownItemSizeControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		countDownItemSize,
 		countDownItemSizeUnits,
 
@@ -29,7 +29,7 @@ export default function CountDownItemSizeControl ({ attributes, setAttributes}) 
 			rangeValue={countDownItemSize}
 			onChangeHandler={countDownItemSizeHandler}
 			rangeUnitHandler={countDownItemSizeUnitsHandler}
-			deviceType={DeviceType}
+			deviceType={deviceType}
 			units={countDownItemSizeUnits}
 			setAttributes={setAttributes}
 			rangeStep={1}
