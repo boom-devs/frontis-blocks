@@ -42,7 +42,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		mediaSwitcher,
 		flipBoxFrontIconMediaUrl,
 		deviceType,
-
+		flipBoxFrontTitle,
+		flipBoxFrontTitleHeadingTag,
 		/** Start Flip Box Item Front Attribute */
 		flipBoxItemFrontSize,
 		flipBoxItemFrontSizeUnits,
@@ -82,27 +83,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemBackBorderRadiusLink,
 		/** End Flip Box Item Back Attribute */
 
+		/** Start Flip Box Front Title Attribute */
+		flipBoxFrontTitleFontColorSwitcher,
+		flipBoxFrontTitleFontColor,
+		flipBoxFrontTitleFontHoverColor,
 
-		flipBoxBackMediaSwitcher,
-		flipBoxBackIconMediaUrl,
-		flipBoxBackIcon,
-		flipBoxBackIconColor,
+		flipBoxFrontTitleMarginUnits,
+		flipBoxFrontTitleMarginDesktop,
+		flipBoxFrontTitleMarginTablet,
+		flipBoxFrontTitleMarginMobile,
+		flipBoxFrontTitleMarginLink,
 
-		BoxBorder,
-		BoxBorderColor,
-		BoxBorderUnits,
-		BoxDesktopBorderWidth,
-		BoxTabBorderWidth,
-		BoxMobileBorderWidth,
-		BoxBorderLink,
-		BoxBorderRadiusUnits,
-		BoxDesktopBorderRadiusWidth,
-		BoxTabBorderRadiusWidth,
-		BoxMobileBorderRadiusWidth,
-		BoxBorderRadiusLink,
-
-		flipBoxFrontTitle,
-		flipBoxFrontTitleHeadingTag,
 		flipBoxFrontTitleFontFamily,
 		flipBoxFrontTitleFontSize,
 		flipBoxFrontTitleFontSizeUnits,
@@ -114,7 +105,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontTitleLetterSpacingUnits,
 		flipBoxFrontTitleLineHeight,
 		flipBoxFrontTitleLineHeightUnits,
-		flipBoxFrontTitleColor,
+		/** End Flip Box Front Title Attribute */
+
+
+		flipBoxBackMediaSwitcher,
+		flipBoxBackIconMediaUrl,
+		flipBoxBackIcon,
+		flipBoxBackIconColor,
 
 		flipBoxBackTitle,
 		flipBoxBackTitleHeadingTag,
@@ -226,6 +223,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemFrontBorderTypeGetDesktop ? `border-width: ${flipBoxItemFrontBorderTypeGetDesktop};` : ''}
 					${flipBoxItemFrontBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemFrontBorderRadiusGetDesktop};` : ''}
 					${flipBoxItemFrontBorderColor ? `border-color: ${flipBoxItemFrontBorderColor};` : ''}
+				}
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-title {
+				  ${flipBoxFrontTitleFontColor ? `color: ${flipBoxFrontTitleFontColor};` : ''}
+				  ${flipBoxFrontTitleFontFamily ? `font-family: ${flipBoxFrontTitleFontFamily};` : ''}
+				  ${flipBoxFrontTitleFontSize.Desktop ? `font-size: ${flipBoxFrontTitleFontSize.Desktop}${flipBoxFrontTitleFontSizeUnits.Desktop};` : ''}
+				  ${flipBoxFrontTitleFontWeight ? `font-weight: ${flipBoxFrontTitleFontWeight};` : ''}
+				  ${flipBoxFrontTitleFontStyle ? `font-style: ${flipBoxFrontTitleFontStyle};` : ''}
+				  ${flipBoxFrontTitleTextTransform ? `text-transform: ${flipBoxFrontTitleTextTransform};` : ''}
+				  ${flipBoxFrontTitleTextDecoration ? `text-decoration: ${flipBoxFrontTitleTextDecoration};` : ''}
+				  ${flipBoxFrontTitleLetterSpacing.Desktop ? `letter-spacing: ${flipBoxFrontTitleLetterSpacing.Desktop}${flipBoxFrontTitleLetterSpacingUnits.Desktop};` : ''}
+				  ${flipBoxFrontTitleLineHeight.Desktop ? `line-height: ${flipBoxFrontTitleLineHeight.Desktop}${flipBoxFrontTitleLineHeightUnits.Desktop};` : ''}
+
 				}
 
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back {

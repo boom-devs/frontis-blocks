@@ -8,9 +8,9 @@ export default function FlipBoxFrontTitleControl ({ attributes, setAttributes}) 
 
 	const {
 		deviceType,
-		flipBoxFrontTitleColorSwitcher,
-		flipBoxFrontTitleColor,
-		flipBoxFrontTitleHoverColor,
+		flipBoxFrontTitleFontColorSwitcher,
+		flipBoxFrontTitleFontColor,
+		flipBoxFrontTitleFontHoverColor,
 
 		flipBoxFrontTitleMarginUnits,
 		flipBoxFrontTitleMarginDesktop,
@@ -34,13 +34,13 @@ export default function FlipBoxFrontTitleControl ({ attributes, setAttributes}) 
 
 	/** Start Front Title Color */
 	const handleColorSwitcherChange = (value) => {
-		setAttributes({ flipBoxFrontTitleColorSwitcher: value });
+		setAttributes({ flipBoxFrontTitleFontColorSwitcher: value });
 	};
 	const handleGlobalColorChange = (value) => {
-		setAttributes({ flipBoxFrontTitleColor: value });
+		setAttributes({ flipBoxFrontTitleFontColor: value });
 	};
 	const handleGlobalHoverColorChange = (value) => {
-		setAttributes({ flipBoxFrontTitleHoverColor: value });
+		setAttributes({ flipBoxFrontTitleFontHoverColor: value });
 	};
 	/** End Front Title Color */
 
@@ -115,9 +115,9 @@ export default function FlipBoxFrontTitleControl ({ attributes, setAttributes}) 
 		<>
 			<FB_Color
 				label={__(" Color", "frontis-blocks")}
-				globalColorSwitcher={flipBoxFrontTitleColorSwitcher}
-				globalColor={flipBoxFrontTitleColor}
-				globalHoverColor={flipBoxFrontTitleHoverColor}
+				globalColorSwitcher={flipBoxFrontTitleFontColorSwitcher}
+				globalColor={flipBoxFrontTitleFontColor}
+				globalHoverColor={flipBoxFrontTitleFontHoverColor}
 				handleColorSwitcherChange={handleColorSwitcherChange}
 				handleGlobalColorChange={handleGlobalColorChange}
 				handleGlobalHoverColorChange={handleGlobalHoverColorChange}

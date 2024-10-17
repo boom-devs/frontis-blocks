@@ -9,15 +9,15 @@ const flipBoxFrontTitleAttributes = {
 	},
 
 	/** Start Color */
-	flipBoxFrontTitleColorSwitcher: {
+	flipBoxFrontTitleFontColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	flipBoxFrontTitleColor: {
+	flipBoxFrontTitleFontColor: {
 		type: "string",
 		default: "#0d173bb3"
 	},
-	flipBoxFrontTitleHoverColor: {
+	flipBoxFrontTitleFontHoverColor: {
 		type: 'string',
 		default: "#0d173bb3"
 	},
