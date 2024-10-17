@@ -462,6 +462,7 @@ $css_content = "
 	 border-radius: {$fluentFormBorderRadiusDesktopString};
 	 transition: all .3s ease-in-out;
 	}
+
 	.$blockID.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
 	.$blockID.fb-fluent-form-wrapper .ff-el-group textarea:focus,
 	.$blockID.fb-fluent-form-wrapper .ff-el-group select:focus {
@@ -508,6 +509,7 @@ $css_content = "
         border-width: {$fluentFormRadioBorderWidth['Desktop']}{$fluentFormRadioBorderWidthUnits['Desktop']};
         border-radius: {$fluentFormCheckBoxBorderRadiusDesktopString};
     }
+
     .$blockID.fb-fluent-form-wrapper input[type='checkbox']:checked:before,
     .$blockID.fb-fluent-form-wrapper input[type='radio']:checked:before {
         background: {$fluentFormRadioCheckedColor};
@@ -526,6 +528,7 @@ $css_content = "
         margin-bottom: {$fluentFormSpacingSize['Desktop']}{$fluentFormSpacingUnits['Desktop']};
     }
 
+
     .$blockID.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
         color: {$fluentFormSectionBreakTitleColor};
         font-family: {$fluentFormSectionBreakTitleFontFamily};
@@ -539,6 +542,7 @@ $css_content = "
         padding: {$fluentFormSectionBreakTitlePaddingDesktopString};
         margin: {$fluentFormSectionBreakTitleMarginDesktopString};
     }
+
 
     .$blockID.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
         color: {$fluentFormSectionBreakTitleHoverColor};
@@ -558,6 +562,7 @@ $css_content = "
         margin: {$fluentFormSectionBreakDescMarginDesktopString};
     }
 
+
     .$blockID.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
         color: {$fluentFormSectionBreakDescHoverColor};
     }
@@ -576,6 +581,7 @@ $css_content = "
         padding: {$fluentFormHtmlPaddingDesktopString};
         margin: {$fluentFormHtmlMarginDesktopString};
     }
+
 
     .$blockID.fb-fluent-form-wrapper .ff-custom_html > *:hover {
         color: {$fluentFormHtmlHoverColor};
@@ -604,6 +610,7 @@ $css_content = "
         border-color: {$fluentFormSubmitBorderColor};
         border-radius: {$fluentFormSubmitBorderRadiusDesktopString};
     }
+
 
     .{$blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
         color: {$fluentFormSubmitHoverColor};
@@ -634,6 +641,7 @@ $css_content = "
         border-radius: {$fluentFormSuccessBorderRadiusDesktopString};	
     }
 
+
     .$blockID.fb-fluent-form-wrapper .ff-message-success:hover {
         border-color: {$fluentFormSuccessBorderHoverColor}; 
     }
@@ -651,6 +659,7 @@ $css_content = "
 		padding: {$fluentFormErrorPaddingDesktopString};
 		margin: {$fluentFormErrorMarginDesktopString};
     }
+
 
 	.$blockID.fb-fluent-form-wrapper {
         background-color: {$fluentFormGlobalBgColor};
@@ -706,6 +715,66 @@ $css_content = "
             border-width: {$BorderTabletWidth};
             border-radius: {$BorderRadiusTabletWidth} !important;
         }
+		.$blockID.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
+		.$blockID.fb-fluent-form-wrapper .ff-el-group textarea,
+		.$blockID.fb-fluent-form-wrapper .ff-el-group select {
+			padding: {$fluentFormTabletPadding};
+			text-indent: {$fluentFormTabletTextIndentSize['Tablet']}{$fluentFormTabletTextIndentSizeUnits['Tablet']};
+			width: {$fluentFormTabletWidthSize['Tablet']}{$fluentFormTabletWidthSizeUnits['Tablet']};
+			height: {$fluentFormTabletHeightSize['Tablet']}{$fluentFormTabletHeightSizeUnits['Tablet']};
+			border-width: {$fluentFormBorderTabletString};
+			border-radius: {$fluentFormBorderRadiusTabletString};
+			transition: all .3s ease-in-out;
+
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-group textarea {
+			width: {$fluentFormTextareaWidthSize['Tablet']}{$fluentFormTextareaWidthSizeUnits['Tablet']};
+			height: {$fluentFormTextareaHeightSize['Tablet']}{$fluentFormTextareaHeightSizeUnits['Tablet']};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-input--content input[type='checkbox'] {
+			width: {$fluentFormRadioFontSize['Tablet']}{$fluentFormRadioFontSizeUnits['Tablet']};
+			height: {$fluentFormRadioFontSize['Tablet']}{$fluentFormRadioFontSizeUnits['Tablet']};
+			border-width: {$fluentFormRadioBorderWidth['Tablet']}{$fluentFormRadioBorderWidthUnits['Tablet']};
+			border-radius: {$fluentFormRadioBorderRadiusTabletString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-input--content input[type='radio'] {
+			width: {$fluentFormRadioFontSize['Tablet']}{$fluentFormRadioFontSizeUnits['Tablet']};
+			height: {$fluentFormRadioFontSize['Tablet']}{$fluentFormRadioFontSizeUnits['Tablet']};
+			border-width: {$fluentFormRadioBorderWidth['Tablet']}{$fluentFormRadioBorderWidthUnits['Tablet']};
+			border-radius: {$fluentFormCheckBoxBorderRadiusTabletString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {
+			margin-bottom: {$fluentFormRadioCheckBoxItemSpacing['Tablet']}{$fluentFormRadioCheckBoxItemSpacingUnits['Tablet']};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-group {
+			margin-bottom: {$fluentFormSpacingSize['Tablet']}{$fluentFormSpacingUnits['Tablet']};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
+			padding: {$fluentFormSectionBreakTitlePaddingTabletString};
+			margin: {$fluentFormSectionBreakTitleMarginTabletString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
+			padding: {$fluentFormSectionBreakDescPaddingTabletString};
+			margin: {$fluentFormSectionBreakDescMarginTabletString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-custom_html > * {
+			padding: {$fluentFormHtmlPaddingTabletString};
+			margin: {$fluentFormHtmlMarginTabletString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+			padding: {$fluentFormSubmitPaddingTabletString};
+			margin: {$fluentFormSubmitMarginTabletString};
+			border-width: {$fluentFormSubmitBorderTabletString};
+			border-radius: {$fluentFormSubmitBorderRadiusTabletString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-message-success {
+			border-width: {$fluentFormSuccessBorderTabletString};
+			border-radius: {$fluentFormSuccessBorderRadiusTabletString};
+		}
+		.$blockID.fb-fluent-form-wrapper .error.text-danger {
+			padding: {$fluentFormErrorPaddingTabletString};
+			margin: {$fluentFormErrorMarginTabletString};
+		}
     }
 
     @media only screen and (max-width: 767px) {
@@ -715,8 +784,66 @@ $css_content = "
             border-width: {$BorderMobileWidth};
             border-radius: {$BorderRadiusMobileWidth} !important;
         }
-    }
-
+		.$blockID.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
+		.$blockID.fb-fluent-form-wrapper .ff-el-group textarea,
+		.$blockID.fb-fluent-form-wrapper .ff-el-group select {
+			padding: {$fluentFormMobilePadding};
+			text-indent: {$fluentFormMobileTextIndentSize['Mobile']}{$fluentFormMobileTextIndentSizeUnits['Mobile']};
+			width: {$fluentFormMobileWidthSize['Mobile']}{$fluentFormMobileWidthSizeUnits['Mobile']};
+			height: {$fluentFormMobileHeightSize['Mobile']}{$fluentFormMobileHeightSizeUnits['Mobile']};
+			border-width: {$fluentFormBorderMobileString};	
+			border-radius: {$fluentFormBorderRadiusMobileString};
+			transition: all .3s ease-in-out;
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-group textarea {		
+			width: {$fluentFormTextareaWidthSize['Mobile']}{$fluentFormTextareaWidthSizeUnits['Mobile']};
+			height: {$fluentFormTextareaHeightSize['Mobile']}{$fluentFormTextareaHeightSizeUnits['Mobile']};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-input--content input[type='checkbox'] {	
+			width: {$fluentFormRadioFontSize['Mobile']}{$fluentFormRadioFontSizeUnits['Mobile']};
+			height: {$fluentFormRadioFontSize['Mobile']}{$fluentFormRadioFontSizeUnits['Mobile']};
+			border-width: {$fluentFormRadioBorderWidth['Mobile']}{$fluentFormRadioBorderWidthUnits['Mobile']};
+			border-radius: {$fluentFormRadioBorderRadiusMobileString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-input--content input[type='radio'] {	
+			width: {$fluentFormRadioFontSize['Mobile']}{$fluentFormRadioFontSizeUnits['Mobile']};
+			height: {$fluentFormRadioFontSize['Mobile']}{$fluentFormRadioFontSizeUnits['Mobile']};
+			border-width: {$fluentFormRadioBorderWidth['Mobile']}{$fluentFormRadioBorderWidthUnits['Mobile']};
+			border-radius: {$fluentFormCheckBoxBorderRadiusMobileString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {	
+			margin-bottom: {$fluentFormRadioCheckBoxItemSpacing['Mobile']}{$fluentFormRadioCheckBoxItemSpacingUnits['Mobile']};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-group {	
+			margin-bottom: {$fluentFormSpacingSize['Mobile']}{$fluentFormSpacingUnits['Mobile']};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {		
+			padding: {$fluentFormSectionBreakTitlePaddingMobileString};
+			margin: {$fluentFormSectionBreakTitleMarginMobileString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {		
+			padding: {$fluentFormSectionBreakDescPaddingMobileString};
+			margin: {$fluentFormSectionBreakDescMarginMobileString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-custom_html > * {	
+			padding: {$fluentFormHtmlPaddingMobileString};
+			margin: {$fluentFormHtmlMarginMobileString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {	
+			padding: {$fluentFormSubmitPaddingMobileString};
+			margin: {$fluentFormSubmitMarginMobileString};
+			border-width: {$fluentFormSubmitBorderMobileString};
+			border-radius: {$fluentFormSubmitBorderRadiusMobileString};
+		}
+		.$blockID.fb-fluent-form-wrapper .ff-message-success {	
+			border-width: {$fluentFormSuccessBorderMobileString};
+			border-radius: {$fluentFormSuccessBorderRadiusMobileString};
+		}
+		.$blockID.fb-fluent-form-wrapper .error.text-danger {	
+			padding: {$fluentFormErrorPaddingMobileString};
+			margin: {$fluentFormErrorMarginMobileString};
+		}
+	}
 
 
 ";

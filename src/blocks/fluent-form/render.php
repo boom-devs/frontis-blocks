@@ -4,18 +4,18 @@
  */
 
 // Get block attributes
-$blockID        = isset( $attributes['blockID'] ) ? sanitize_text_field( $attributes['blockID'] ) : '';
-$deviceType     = isset( $attributes['deviceType'] ) ? sanitize_text_field( $attributes['deviceType'] ) : 'Desktop';
-$formId         = isset( $attributes['formId'] ) ? sanitize_text_field( $attributes['formId'] ) : '';
+$blockID                        = isset( $attributes['blockID'] ) ? sanitize_text_field( $attributes['blockID'] ) : '';
+$deviceType                     = isset( $attributes['deviceType'] ) ? sanitize_text_field( $attributes['deviceType'] ) : 'Desktop';
+$formId                         = isset( $attributes['formId'] ) ? sanitize_text_field( $attributes['formId'] ) : '';
 
-$showLabels = isset( $attributes['showLabels'] ) ? (bool) $attributes['showLabels'] : true;
-$showPlaceholder = isset( $attributes['showPlaceholder'] ) ? (bool) $attributes['showPlaceholder'] : true;
-$showErrorMessage = isset( $attributes['showErrorMessage'] ) ? (bool) $attributes['showErrorMessage'] : true;
-$fluentFormGlobalZIndex = isset( $attributes['fluentFormGlobalZIndex'] ) ? intval( $attributes['fluentFormGlobalZIndex'] ) : '';
+$showLabels                     = isset( $attributes['showLabels'] ) ? (bool) $attributes['showLabels'] : true;
+$showPlaceholder                = isset( $attributes['showPlaceholder'] ) ? (bool) $attributes['showPlaceholder'] : true;
+$showErrorMessage               = isset( $attributes['showErrorMessage'] ) ? (bool) $attributes['showErrorMessage'] : true;
+$fluentFormGlobalZIndex         = isset( $attributes['fluentFormGlobalZIndex'] ) ? intval( $attributes['fluentFormGlobalZIndex'] ) : '';
 
-$fluentFormSubmitWidthSelect 					= isset($attributes['fluentFormSubmitWidthSelect']) ? sanitize_text_field($attributes['fluentFormSubmitWidthSelect']) : 'custom';
-$fluentFormSubmitWidth 							= isset($attributes['fluentFormSubmitWidth']) ? array_map('intval', $attributes['fluentFormSubmitWidth']) : ['Desktop' => '', 'Tablet' => '', 'Mobile' => ''];
-$fluentFormSubmitWidthUnits 					= isset($attributes['fluentFormSubmitWidthUnits']) ? array_map('sanitize_text_field', $attributes['fluentFormSubmitWidthUnits']) : ['Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px'];
+$fluentFormSubmitWidthSelect 	= isset($attributes['fluentFormSubmitWidthSelect']) ? sanitize_text_field($attributes['fluentFormSubmitWidthSelect']) : 'custom';
+$fluentFormSubmitWidth 			= isset($attributes['fluentFormSubmitWidth']) ? array_map('intval', $attributes['fluentFormSubmitWidth']) : ['Desktop' => '', 'Tablet' => '', 'Mobile' => ''];
+$fluentFormSubmitWidthUnits     = isset($attributes['fluentFormSubmitWidthUnits']) ? array_map('sanitize_text_field', $attributes['fluentFormSubmitWidthUnits']) : ['Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px'];
 
 
 $_wrapper_classes = [
