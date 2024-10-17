@@ -32,6 +32,7 @@ import {HEADING} from "../info-box/constants/constants";
 import FlipBoxItemFrontControl from "@Blocks/flip-box/style-control/flip-box-item-front-control";
 import FlipBoxItemBackControl from "@Blocks/flip-box/style-control/flip-box-item-back-control";
 import FlipBoxFrontTitleControl from "@Blocks/flip-box/style-control/flip-box-front-title-control";
+import FlipBoxBackTitleControl from "@Blocks/flip-box/style-control/flip-box-back-title-control";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -44,6 +45,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		deviceType,
 		flipBoxFrontTitle,
 		flipBoxFrontTitleHeadingTag,
+		flipBoxBackTitle,
+		flipBoxBackTitleHeadingTag,
+
 		/** Start Flip Box Item Front Attribute */
 		flipBoxItemFrontSize,
 		flipBoxItemFrontSizeUnits,
@@ -107,14 +111,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontTitleLineHeightUnits,
 		/** End Flip Box Front Title Attribute */
 
+		/** Start Flip Box Back Title Attribute */
+		flipBoxBackTitleFontColorSwitcher,
+		flipBoxBackTitleFontColor,
+		flipBoxBackTitleFontHoverColor,
 
-		flipBoxBackMediaSwitcher,
-		flipBoxBackIconMediaUrl,
-		flipBoxBackIcon,
-		flipBoxBackIconColor,
+		flipBoxBackTitleMarginUnits,
+		flipBoxBackTitleMarginDesktop,
+		flipBoxBackTitleMarginTablet,
+		flipBoxBackTitleMarginMobile,
+		flipBoxBackTitleMarginLink,
 
-		flipBoxBackTitle,
-		flipBoxBackTitleHeadingTag,
 		flipBoxBackTitleFontFamily,
 		flipBoxBackTitleFontSize,
 		flipBoxBackTitleFontSizeUnits,
@@ -126,7 +133,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxBackTitleLetterSpacingUnits,
 		flipBoxBackTitleLineHeight,
 		flipBoxBackTitleLineHeightUnits,
-		flipBoxBackTitleColor,
+		/** End Flip Box Back Title Attribute */
+
+
+		flipBoxBackMediaSwitcher,
+		flipBoxBackIconMediaUrl,
+		flipBoxBackIcon,
+		flipBoxBackIconColor,
+
 
 		flipBoxFrontContent,
 		flipBoxFrontContentFontFamily,
@@ -234,9 +248,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxFrontTitleTextDecoration ? `text-decoration: ${flipBoxFrontTitleTextDecoration};` : ''}
 				  ${flipBoxFrontTitleLetterSpacing.Desktop ? `letter-spacing: ${flipBoxFrontTitleLetterSpacing.Desktop}${flipBoxFrontTitleLetterSpacingUnits.Desktop};` : ''}
 				  ${flipBoxFrontTitleLineHeight.Desktop ? `line-height: ${flipBoxFrontTitleLineHeight.Desktop}${flipBoxFrontTitleLineHeightUnits.Desktop};` : ''}
-
 				}
 
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-title {
+				  ${flipBoxBackTitleFontColor ? `color: ${flipBoxBackTitleFontColor};` : ''}
+				  ${flipBoxBackTitleFontFamily ? `font-family: ${flipBoxBackTitleFontFamily};` : ''}
+				  ${flipBoxBackTitleFontSize.Desktop ? `font-size: ${flipBoxBackTitleFontSize.Desktop}${flipBoxBackTitleFontSizeUnits.Desktop};` : ''}
+				  ${flipBoxBackTitleFontWeight ? `font-weight: ${flipBoxBackTitleFontWeight};` : ''}
+				  ${flipBoxBackTitleFontStyle ? `font-style: ${flipBoxBackTitleFontStyle};` : ''}
+				  ${flipBoxBackTitleTextTransform ? `text-transform: ${flipBoxBackTitleTextTransform};` : ''}
+				  ${flipBoxBackTitleTextDecoration ? `text-decoration: ${flipBoxBackTitleTextDecoration};` : ''}
+				  ${flipBoxBackTitleLetterSpacing.Desktop ? `letter-spacing: ${flipBoxBackTitleLetterSpacing.Desktop}${flipBoxBackTitleLetterSpacingUnits.Desktop};` : ''}
+				  ${flipBoxBackTitleLineHeight.Desktop ? `line-height: ${flipBoxBackTitleLineHeight.Desktop}${flipBoxBackTitleLineHeightUnits.Desktop};` : ''}
+				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back {
 					${flipBoxItemBackSize.Desktop ? `min-height: ${flipBoxItemBackSize.Desktop}${flipBoxItemBackSizeUnits.Desktop};` : ''}
 					${flipBoxItemBackBorder ? `border: ${flipBoxItemBackBorder};` : ''}
@@ -622,6 +646,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</BaseControl>
 											{flipBoxTypeSwitcher === 'front' && (
 												<>
+
 													<FlipBoxFrontTitleControl
 														attributes={attributes}
 														setAttributes={setAttributes}
@@ -632,7 +657,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 											{flipBoxTypeSwitcher === 'back' && (
 												<>
-													<FlipBoxItemBackControl
+													<FlipBoxBackTitleControl
 														attributes={attributes}
 														setAttributes={setAttributes}
 														clientId ={clientId}
