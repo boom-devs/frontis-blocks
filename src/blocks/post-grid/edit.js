@@ -4,7 +4,8 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
-
+import { PluginSidebar } from '@wordpress/editor';
+import { more } from '@wordpress/icons';
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
@@ -93,6 +94,9 @@ export default function Edit (props) {
 
 	return (
 		<>
+			<PluginSidebar name="my-sidebar" title="My sidebar title">
+				<PanelBody>{ __( 'My sidebar content' ) }</PanelBody>
+			</PluginSidebar>
 			<InspectorControls>
 				<PanelBody title={ __('Settings', 'text-domain') }>
 					<Range  min='-300' max='300'  label='Width' rangeValue={rangeValue}   onChangeHandler={onChangeHandler} rangeUnitHandler={rangeUnitHandler} DeviceType={DeviceType} units={rangeUnit} setAttributes={setAttributes}  rangeStep={0.5}/>

@@ -199,6 +199,14 @@ class BlockList {
                 'badge'     => 'free',
                 'status'    => 'active',
             ],
+            'anime' => [
+				'slug'      => 'anime',
+				'title'     => 'Anime',
+                'package'   => 'free',
+                'category'  => 'anime',
+                'badge'     => 'free',
+                'status'    => 'active',
+			],
             // 'team-member' => [
             //     'slug'      => 'team-member',
             //     'title'     => 'Team Member',

@@ -1,0 +1,62 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.fb-interaction-flex {
+	display: flex;
+}
+.fb-interaction-flex-align-center {
+	align-items: center;
+}
+
+.fb-interaction-flex-space-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+.fb-element-triggered-interaction {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	h3 {
+		margin-bottom: 0;
+	}
+
+	button {
+		padding: 0;
+	}
+}
+
+.fb-pick-interaction-element {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	margin: 0;
+	padding: 0;
+
+	li {
+		margin: 0;
+		padding: 0;
+		margin-bottom: 10px;
+		font-size: 12px;
+		font-weight: 500;
+
+		ul {
+			padding: 0;
+			margin: 0;
+
+			li{
+				margin-bottom: 5px;
+				font-weight: 400;
+				cursor: pointer;
+			}
+		}
+	}
+}
+.fb-help-text {
+	color: #c2bbbb;
+}
