@@ -2417,7 +2417,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             <style>
             {`
                 .${blockID}.fb-fluent-form-wrapper {
-                    z-index: ${fluentFormGlobalZIndex !== undefined ? fluentFormGlobalZIndex : ''};
+                    ${fluentFormGlobalZIndex !== undefined ? `z-index: ${fluentFormGlobalZIndex};` : ''}
+                    position: relative;
                 }
                 .${blockID}.fb-fluent-form-wrapper {
                     ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
@@ -5313,10 +5314,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         value={fluentFormGlobalZIndex}
                                                         onChange={(value) => setAttributes({ fluentFormGlobalZIndex: value === 0 ? undefined : value })}
                                                         min={1}
-                                                        max={10000}
+                                                        max={10000000}
                                                         step={1}
                                                         allowReset
-                                                        resetFallbackValue={100}
+                                                        resetFallbackValue={''}
                                                     />
                                                 </PanelBody>
 
