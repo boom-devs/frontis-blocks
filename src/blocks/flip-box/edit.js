@@ -31,6 +31,7 @@ import ResponsiveControl from "../../components/responsivecontrol";
 import {HEADING} from "../info-box/constants/constants";
 import FlipBoxItemFrontControl from "@Blocks/flip-box/style-control/flip-box-item-front-control";
 import FlipBoxItemBackControl from "@Blocks/flip-box/style-control/flip-box-item-back-control";
+import FlipBoxFrontTitleControl from "@Blocks/flip-box/style-control/flip-box-front-title-control";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -553,8 +554,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Item", "frontis-blocks")}
 											initialOpen={true}
 										>
-
-
 											<BaseControl
 												label={__("Select Type", "frontis-block")}
 												className="fb-setting-color-panel-wrapper"
@@ -591,6 +590,48 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												</>
 											)}
 										</PanelBody>
+
+										<PanelBody
+											title={__("Title", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<BaseControl
+												label={__("Select Type", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{SELECT_TYPE.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({flipBoxTypeSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${flipBoxTypeSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+											{flipBoxTypeSwitcher === 'front' && (
+												<>
+													<FlipBoxFrontTitleControl
+														attributes={attributes}
+														setAttributes={setAttributes}
+														clientId ={clientId}
+													/>
+												</>
+											)}
+
+											{flipBoxTypeSwitcher === 'back' && (
+												<>
+													<FlipBoxItemBackControl
+														attributes={attributes}
+														setAttributes={setAttributes}
+														clientId ={clientId}
+													/>
+												</>
+											)}
+										</PanelBody>
+
 									</>
 								)}
 							</div>

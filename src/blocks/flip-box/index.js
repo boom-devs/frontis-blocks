@@ -12,7 +12,7 @@ import flipBoxItemFrontAttributes from './attributes/flip-box-item-front-attribu
 import flipBoxItemBackAttributes from './attributes/flip-box-item-back-attribute.js';
 import flipBoxFrontIconAttributes from './attributes/flip-box-front-icon.js';
 import flipBoxBackIconAttributes from './attributes/flip-box-back-icon.js';
-import flipBoxFrontTitleAttributes from './attributes/flip-box-front-title.js';
+import flipBoxFrontTitleAttributes from './attributes/flip-box-front-title-attribute.js';
 import flipBoxBackTitleAttributes from './attributes/flip-box-back-title.js';
 import flipBoxFrontContentAttributes from './attributes/flip-box-front-content.js';
 import flipBoxBackContentAttributes from './attributes/flip-box-back-content.js';
