@@ -22,7 +22,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 		deviceType,
 		counterItemBorderTypeUnits,
 		counterItemBorderTypeDesktop,
-		counterItemBorderTypeTab,
+		counterItemBorderTypeTablet,
 		counterItemBorderTypeMobile,
 		counterItemBorderTypeLink,
 
@@ -46,7 +46,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 					break;
 				case 'Tablet':
 					setAttributes( {
-						counterItemBorderTypeTab: {
+						counterItemBorderTypeTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -73,7 +73,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 					setAttributes( {counterItemBorderTypeDesktop: {...counterItemBorderTypeDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {counterItemBorderTypeTab: {...counterItemBorderTypeTab, [position]: value}} );
+					setAttributes( {counterItemBorderTypeTablet: {...counterItemBorderTypeTablet, [position]: value}} );
 					break;
 				case 'Mobile':
 					setAttributes( {counterItemBorderTypeMobile: {...counterItemBorderTypeMobile, [position]: value}} );
@@ -115,7 +115,7 @@ export default function CounterItemBorderTypeControl ({ attributes, setAttribute
 			spacingUnitsHandler={counterItemBorderTypeUnitsHandler}
 			spacingUnits={counterItemBorderTypeUnits}
 			spacingDesktop={counterItemBorderTypeDesktop}
-			spacingTablet={counterItemBorderTypeTab}
+			spacingTablet={counterItemBorderTypeTablet}
 			spacingMobile={counterItemBorderTypeMobile}
 			handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 			spacingCombineBtn={counterItemBorderTypeLink}

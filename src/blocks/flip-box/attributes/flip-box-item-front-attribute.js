@@ -1,6 +1,6 @@
-const flipBoxItemAttributes = {
+const flipBoxItemFrontAttributes = {
 	/** Start Size */
-	flipBoxItemSize: {
+	flipBoxItemFrontSize: {
 		type: 'object',
 		default: {
 			Desktop: '',
@@ -8,7 +8,7 @@ const flipBoxItemAttributes = {
 			Mobile: ''
 		}
 	},
-	flipBoxItemSizeUnits: {
+	flipBoxItemFrontSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -19,7 +19,7 @@ const flipBoxItemAttributes = {
 	/** End Size */
 
 	/** Start Padding */
-	flipBoxItemPaddingUnits: {
+	flipBoxItemFrontPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -27,7 +27,7 @@ const flipBoxItemAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxItemPaddingDesktop: {
+	flipBoxItemFrontPaddingDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -36,7 +36,7 @@ const flipBoxItemAttributes = {
 			right: '',
 		},
 	},
-	flipBoxItemPaddingTablet: {
+	flipBoxItemFrontPaddingTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -45,7 +45,7 @@ const flipBoxItemAttributes = {
 			right: '',
 		},
 	},
-	flipBoxItemPaddingMobile: {
+	flipBoxItemFrontPaddingMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -54,29 +54,29 @@ const flipBoxItemAttributes = {
 			right: '',
 		},
 	},
-	flipBoxItemPaddingLink : {
+	flipBoxItemFrontPaddingLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Padding */
 
 	/** Start Border Type */
-	flipBoxItemBorderColorSwitcher: {
+	flipBoxItemFrontBorderColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	flipBoxItemBorderColor: {
+	flipBoxItemFrontBorderColor: {
 		type: "string",
 		default: ""
 	},
-	flipBoxItemBorderHoverColor: {
+	flipBoxItemFrontBorderHoverColor: {
 		type: 'string',
 	},
-	flipBoxItemBorder: {
+	flipBoxItemFrontBorder: {
 		type: 'string',
 		default: "none",
 	},
-	flipBoxItemBorderTypeUnits : {
+	flipBoxItemFrontBorderTypeUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -84,7 +84,7 @@ const flipBoxItemAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxItemBorderTypeDesktop: {
+	flipBoxItemFrontBorderTypeDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -93,7 +93,7 @@ const flipBoxItemAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxItemBorderTypeTablet: {
+	flipBoxItemFrontBorderTypeTablet: {
 		type: "object",
 		default: {
 			top: 0,
@@ -102,7 +102,7 @@ const flipBoxItemAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxItemBorderTypeMobile: {
+	flipBoxItemFrontBorderTypeMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -111,14 +111,14 @@ const flipBoxItemAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxItemBorderTypeLink : {
+	flipBoxItemFrontBorderTypeLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Border Type */
 
 	/** Start Border Radius */
-	flipBoxItemBorderRadiusUnits : {
+	flipBoxItemFrontBorderRadiusUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -126,34 +126,34 @@ const flipBoxItemAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxItemBorderRadiusDesktop: {
+	flipBoxItemFrontBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
-	flipBoxItemBorderRadiusTablet: {
+	flipBoxItemFrontBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
-	flipBoxItemBorderRadiusMobile: {
+	flipBoxItemFrontBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
-	flipBoxItemBorderRadiusLink : {
+	flipBoxItemFrontBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
@@ -161,4 +161,4 @@ const flipBoxItemAttributes = {
 
 };
 
-export default flipBoxItemAttributes;
+export default flipBoxItemFrontAttributes;

@@ -8,7 +8,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
-import flipBoxItemAttributes from './attributes/flip-box-item-attribute.js';
+import flipBoxItemFrontAttributes from './attributes/flip-box-item-front-attribute.js';
 import flipBoxFrontIconAttributes from './attributes/flip-box-front-icon.js';
 import flipBoxBackIconAttributes from './attributes/flip-box-back-icon.js';
 import flipBoxFrontTitleAttributes from './attributes/flip-box-front-title.js';
@@ -19,7 +19,7 @@ import flipBoxBackContentAttributes from './attributes/flip-box-back-content.js'
 // Merge attributes
 const combinedAttributes = {
 	...attributes,
-	...flipBoxItemAttributes,
+	...flipBoxItemFrontAttributes,
 	...flipBoxFrontIconAttributes,
 	...flipBoxBackIconAttributes,
 	...flipBoxFrontTitleAttributes,

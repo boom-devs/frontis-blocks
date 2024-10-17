@@ -29,7 +29,7 @@ import FBIconPicker from "../../components/icon-picker";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import ResponsiveControl from "../../components/responsivecontrol";
 import {HEADING} from "../info-box/constants/constants";
-import FlipBoxItemControl from "@Blocks/flip-box/style-control/flip-box-item-control";
+import FlipBoxItemFrontControl from "@Blocks/flip-box/style-control/flip-box-item-front-control";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -39,8 +39,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontIcon,
 		mediaSwitcher,
 		flipBoxFrontIconMediaUrl,
+		deviceType,
 
-		DeviceType,
+		/** Start Flip Box Item Front Attribute */
+		flipBoxItemFrontSize,
+		flipBoxItemFrontSizeUnits,
+		flipBoxItemFrontBorderTypeUnits,
+		flipBoxItemFrontBorderTypeDesktop,
+		flipBoxItemFrontBorderTypeTablet,
+		flipBoxItemFrontBorderTypeMobile,
+		flipBoxItemFrontBorderTypeLink,
+		flipBoxItemFrontBorder,
+		flipBoxItemFrontBorderColorSwitcher,
+		flipBoxItemFrontBorderColor,
+		flipBoxItemFrontBorderHoverColor,
+		flipBoxItemFrontBorderRadiusUnits,
+		flipBoxItemFrontBorderRadiusDesktop,
+		flipBoxItemFrontBorderRadiusTablet,
+		flipBoxItemFrontBorderRadiusMobile,
+		flipBoxItemFrontBorderRadiusLink,
+		/** End Flip Box Item Front Attribute */
+
 
 		flipBoxBackMediaSwitcher,
 		flipBoxBackIconMediaUrl,
@@ -141,13 +160,64 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes({flipBoxBackIcon: iconName})
 	}
 
+	useEffect(() => {
+		if (!blockID) {
+			setAttributes({
+				blockID: "flip-box" + clientId.slice(0, 8),
+			});
+		}
+	}, [blockID, clientId, setAttributes]);
+
 	const blockProps = useBlockProps();
 
 
 	{/* Inspector Controls */}
+	/** Start Flip Box Item Front Control */
+	const flipBoxItemFrontBorderTypeGetDesktop = `${flipBoxItemFrontBorderTypeDesktop.top}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeDesktop.right}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeDesktop.bottom}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeDesktop.left}${flipBoxItemFrontBorderTypeUnits[deviceType]}`;
+	const flipBoxItemFrontBorderTypeGetTablet = `${flipBoxItemFrontBorderTypeTablet.top}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeTablet.right}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeTablet.bottom}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeTablet.left}${flipBoxItemFrontBorderTypeUnits[deviceType]}`;
+	const flipBoxItemFrontBorderTypeGetMobile = `${flipBoxItemFrontBorderTypeMobile.top}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeMobile.right}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeMobile.bottom}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeMobile.left}${flipBoxItemFrontBorderTypeUnits[deviceType]}`;
+
+
+	const flipBoxItemFrontBorderRadiusGetDesktop = `${flipBoxItemFrontBorderRadiusDesktop.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
+	const flipBoxItemFrontBorderRadiusGetTablet = `${flipBoxItemFrontBorderRadiusTablet.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
+	const flipBoxItemFrontBorderRadiusGetMobile = `${flipBoxItemFrontBorderRadiusMobile.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
+	/** End Flip Box Item Front Control */
+
 
 	return (
 		<>
+			<style>
+				{`
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front {
+					${flipBoxItemFrontSize.Desktop ? `min-height: ${flipBoxItemFrontSize.Desktop}${flipBoxItemFrontSizeUnits.Desktop};` : ''}
+					${flipBoxItemFrontBorder ? `border: ${flipBoxItemFrontBorder};` : ''}
+					${flipBoxItemFrontBorderTypeGetDesktop ? `border-width: ${flipBoxItemFrontBorderTypeGetDesktop};` : ''}
+					${flipBoxItemFrontBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemFrontBorderRadiusGetDesktop};` : ''}
+					${flipBoxItemFrontBorderColor ? `border-color: ${flipBoxItemFrontBorderColor};` : ''}
+				}
+
+
+				@media only screen and (max-width: 1024px) {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front {
+						${flipBoxItemFrontSize.Tablet ? `min-height: ${flipBoxItemFrontSize.Tablet}${flipBoxItemFrontSizeUnits.Tablet};` : ''}
+						${flipBoxItemFrontBorderTypeGetTablet ? `border-width: ${flipBoxItemFrontBorderTypeGetTablet};` : ''}
+						${flipBoxItemFrontBorderRadiusGetTablet ? `border-radius: ${flipBoxItemFrontBorderRadiusGetTablet};` : ''}
+					}
+
+				}
+
+				@media only screen and (max-width: 767px) {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front{
+						${flipBoxItemFrontSize.Mobile ? `min-height: ${flipBoxItemFrontSize.Mobile}${flipBoxItemFrontSizeUnits.Mobile};` : ''}
+						${flipBoxItemFrontBorderTypeGetMobile ? `border-width: ${flipBoxItemFrontBorderTypeGetMobile};` : ''}
+						${flipBoxItemFrontBorderRadiusGetMobile ? `border-radius: ${flipBoxItemFrontBorderRadiusGetMobile};` : ''}
+					}
+
+				}
+
+            `}
+			</style>
+
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel
@@ -434,11 +504,33 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											title={__("Item", "frontis-blocks")}
 											initialOpen={true}
 										>
-											<FlipBoxItemControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+
+
+											<BaseControl
+												label={__("Select Type", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{SELECT_TYPE.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({flipBoxTypeSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${flipBoxTypeSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+											{flipBoxTypeSwitcher === 'front' && (
+												<>
+													<FlipBoxItemFrontControl
+														attributes={attributes}
+														setAttributes={setAttributes}
+														clientId ={clientId}
+													/>
+												</>
+											)}
 										</PanelBody>
 									</>
 								)}
