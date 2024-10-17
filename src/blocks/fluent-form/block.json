@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Fluent Form",
 	"category": "frontis-blocks",
-	"icon": "tagcloud",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
     "supports": {

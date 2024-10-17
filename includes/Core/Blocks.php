@@ -69,30 +69,18 @@ class Blocks
                 wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
 				$localize_array = '';
                 $localize_array = [
-// 					'eb_plugins_url'             => ESSENTIAL_BLOCKS_URL,
-// 					'image_url'                  => ESSENTIAL_BLOCKS_URL . 'assets/images',
-// 					'eb_wp_version'              => ESSENTIAL_BLOCKS_WP_VERSION,
-// 					'eb_version'                 => ESSENTIAL_BLOCKS_VERSION,
-// 					'eb_admin_url'               => get_admin_url(),
-// 					'rest_rootURL'               => get_rest_url(),
-// 					'ajax_url'                   => admin_url( 'admin-ajax.php' ),
-// 					'nft_nonce'                  => wp_create_nonce( 'eb-nft-nonce' ),
-// 					'post_grid_pagination_nonce' => wp_create_nonce( 'eb-pagination-nonce' ),
-// 					'placeholder_image'          => ESSENTIAL_BLOCKS_PLACEHOLDER_IMAGE,
-// 					'is_pro_active'              => ESSENTIAL_BLOCKS_IS_PRO_ACTIVE ? "true" : "false",
-// 					'upgrade_pro_url'            => ESSENTIAL_BLOCKS_UPGRADE_PRO_URL,
-// 					'responsiveBreakpoints'      => Helper::get_responsive_breakpoints()
 				 ];
 				if ( is_admin() ) {
 					$admin_localize_array = [
 						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),
 						'fluent_plugin_active' => FluentForms::check_enable(),
 						'fluent_form_lists'   => json_encode( FluentForms::form_list() ),
-// 						'wpforms_lists'       => json_encode( WPForms::form_list() ),
 					 ];
 
 					$localize_array = array_merge( $localize_array, $admin_localize_array );
 				}
+
+                $localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
 
 
 
