@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Counter Number",
 	"category": "frontis-blocks",
-	"icon": "smiley",
+	"icon": "clock",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {

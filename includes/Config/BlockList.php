@@ -112,14 +112,14 @@ class BlockList {
                  'badge'     => 'free',
                  'status'    => 'active',
              ],
-//             'flip-box' => [
-//                 'slug'      => 'flip-box',
-//                 'title'     => 'Flip Box',
-//                 'package'   => 'free',
-//                 'category'  => 'content',
-//                 'badge'     => 'free',
-//                 'status'    => 'active',
-//             ],
+             'flip-box' => [
+                 'slug'      => 'flip-box',
+                 'title'     => 'Flip Box',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'active',
+             ],
              'features-list' => [
                  'slug'      => 'features-list',
                  'title'     => 'Features List',

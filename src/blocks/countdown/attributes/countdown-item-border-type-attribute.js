@@ -4,7 +4,7 @@ const countDownItemBorderTypeAttributes = {
 		type: 'string',
 		default: "none",
 	},
-	countDownItemBorderBorderColor: {
+	countDownItemBorderColor: {
 		type: 'string',
 	},
 	countDownItemBorderTypeUnits : {
