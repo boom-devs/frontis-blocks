@@ -183,7 +183,7 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 			<FB_Range
 				min={1}
 				max={300}
-				label={__("Item Size", "frontis-blocks")}
+				label={__("Item Height", "frontis-blocks")}
 				rangeValue={flipBoxItemFrontSize}
 				onChangeHandler={flipBoxItemFrontSizeHandler}
 				rangeUnitHandler={flipBoxItemFrontSizeUnitsHandler}

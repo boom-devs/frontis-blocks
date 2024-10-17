@@ -9,6 +9,7 @@ import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
 import flipBoxItemFrontAttributes from './attributes/flip-box-item-front-attribute.js';
+import flipBoxItemBackAttributes from './attributes/flip-box-item-back-attribute.js';
 import flipBoxFrontIconAttributes from './attributes/flip-box-front-icon.js';
 import flipBoxBackIconAttributes from './attributes/flip-box-back-icon.js';
 import flipBoxFrontTitleAttributes from './attributes/flip-box-front-title.js';
@@ -20,6 +21,7 @@ import flipBoxBackContentAttributes from './attributes/flip-box-back-content.js'
 const combinedAttributes = {
 	...attributes,
 	...flipBoxItemFrontAttributes,
+	...flipBoxItemBackAttributes,
 	...flipBoxFrontIconAttributes,
 	...flipBoxBackIconAttributes,
 	...flipBoxFrontTitleAttributes,
