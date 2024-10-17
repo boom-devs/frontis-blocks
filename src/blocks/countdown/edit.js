@@ -66,14 +66,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		countDownItemBorderTypeUnits,
 		countDownItemBorderTypeDesktop,
-		countDownItemBorderTypeTab,
+		countDownItemBorderTypeTablet,
 		countDownItemBorderTypeMobile,
 		countDownItemBorderTypeLink,
 
 		// Border Radius
 		countDownItemBorderRadiusUnits,
 		countDownItemBorderRadiusDesktop,
-		countDownItemBorderRadiusTab,
+		countDownItemBorderRadiusTablet,
 		countDownItemBorderRadiusMobile,
 		countDownItemBorderRadiusLink,
 
@@ -129,7 +129,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		if (!blockID) {
 			setAttributes({
-				blockID: "count-down-" + clientId.slice(0, 8),
+				blockID: "countdown-" + clientId.slice(0, 8),
 			});
 		}
 	}, [blockID, clientId, setAttributes]);
@@ -168,12 +168,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	{/* Countdown Item Control */}
 	const countDownItemBorderTypeGetDesktop = `${countDownItemBorderTypeDesktop.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.left}${countDownItemBorderTypeUnits[deviceType]}`;
-	const countDownItemBorderTypeGetTab = `${countDownItemBorderTypeTab.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTab.left}${countDownItemBorderTypeUnits[deviceType]}`;
+	const countDownItemBorderTypeGetTablet = `${countDownItemBorderTypeTablet.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTablet.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTablet.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeTablet.left}${countDownItemBorderTypeUnits[deviceType]}`;
 	const countDownItemBorderTypeGetMobile = `${countDownItemBorderTypeMobile.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeMobile.left}${countDownItemBorderTypeUnits[deviceType]}`;
 
 
 	const countDownItemBorderRadiusGetDesktop = `${countDownItemBorderRadiusDesktop.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusDesktop.left}${countDownItemBorderRadiusUnits[deviceType]}`;
-	const countDownItemBorderRadiusGetTab = `${countDownItemBorderRadiusTab.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTab.left}${countDownItemBorderRadiusUnits[deviceType]}`;
+	const countDownItemBorderRadiusGetTablet = `${countDownItemBorderRadiusTablet.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTablet.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTablet.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusTablet.left}${countDownItemBorderRadiusUnits[deviceType]}`;
 	const countDownItemBorderRadiusGetMobile = `${countDownItemBorderRadiusMobile.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.left}${countDownItemBorderRadiusUnits[deviceType]}`;
 
 
@@ -227,8 +227,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item {
 						${countDownItemSize.Tablet ? `width: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};` : ''}
 						${countDownItemSize.Tablet ? `height: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};` : ''}
-						${countDownItemBorderTypeGetTab ? `border-width: ${countDownItemBorderTypeGetTab};` : ''}
-						${countDownItemBorderRadiusGetTab ? `border-radius: ${countDownItemBorderRadiusGetTab};` : ''}
+						${countDownItemBorderTypeGetTablet ? `border-width: ${countDownItemBorderTypeGetTablet};` : ''}
+						${countDownItemBorderRadiusGetTablet ? `border-radius: ${countDownItemBorderRadiusGetTablet};` : ''}
 					}
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 						${digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ''}

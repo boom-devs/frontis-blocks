@@ -24,7 +24,7 @@ const counterItemBorderTypeAttributes = {
 			right: 0,
 		},
 	},
-	counterItemBorderTypeTab: {
+	counterItemBorderTypeTablet: {
 		type: "object",
 		default: {
 			top: 0,

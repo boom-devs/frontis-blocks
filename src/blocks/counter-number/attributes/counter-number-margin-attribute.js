@@ -17,7 +17,7 @@ const counterNumberMarginAttribute = {
 			right: 0,
 		},
 	},
-	counterNumberMarginTab: {
+	counterNumberMarginTablet: {
 		type: "object",
 		default: {
 			top: 0,

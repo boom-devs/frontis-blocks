@@ -6,64 +6,15 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const {
 		blockID,
-		deviceType,
 		counterNumber,
+		counterTitle,
 		counterPrefix,
 		counterSuffix,
-		counterTitle,
 		showThousandsSeparator,
 		icon,
 		mediaSwitcher,
 		counterMediaUrl,
 
-		counterItemBgColorSwitcher,
-		counterItemBgColor,
-		counterItemBgHoverColor,
-
-		counterNumberFontColorSwitcher,
-		counterNumberFontColor,
-		counterNumberFontHoverColor,
-
-		counterNumberFontFamily,
-		counterNumberFontSize,
-		counterNumberFontSizeUnits,
-		counterNumberFontWeight,
-		counterNumberFontStyle,
-		counterNumberTextTransform,
-		counterNumberTextDecoration,
-		counterNumberLetterSpacing,
-		counterNumberLetterSpacingUnits,
-		counterNumberLineHeight,
-		counterNumberLineHeightUnits,
-
-		counterNumberMarginUnits,
-		counterNumberMarginDesktop,
-		counterNumberMarginTab,
-		counterNumberMarginMobile,
-		counterNumberMarginLink,
-
-
-		counterNumberTitleFontColorSwitcher,
-		counterNumberTitleFontColor,
-		counterNumberTitleFontHoverColor,
-
-		counterNumberTitleFontFamily,
-		counterNumberTitleFontSize,
-		counterNumberTitleFontSizeUnits,
-		counterNumberTitleFontWeight,
-		counterNumberTitleFontStyle,
-		counterNumberTitleTextTransform,
-		counterNumberTitleTextDecoration,
-		counterNumberTitleLetterSpacing,
-		counterNumberTitleLetterSpacingUnits,
-		counterNumberTitleLineHeight,
-		counterNumberTitleLineHeightUnits,
-
-		counterNumberTitleMarginUnits,
-		counterNumberTitleMarginDesktop,
-		counterNumberTitleMarginTab,
-		counterNumberTitleMarginMobile,
-		counterNumberTitleMarginLink,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -76,7 +27,7 @@ export default function save({ attributes }) {
 
 	return (
 		<div {...blockProps} id={blockID}>
-			<div className="fb-counter-wrapper">
+			<div className={`fb-counter-wrapper ${blockID}`}>
 				<div className="fb-counter-item">
 					<div className={`fb-counter-icon-wrapper`}>
 						{/* Conditionally render image or icon */}
@@ -88,12 +39,13 @@ export default function save({ attributes }) {
 						)}
 					</div>
 					<div className={`fb-counter-number-wrapper`}>
+						<span className={`fb-counter-number-prefix`}>{counterPrefix}</span>
 						<span
 							className="fb-counter-number"
 							aria-label={counterNumber} // Store the final number in the aria-label for animation
 						>
-                        0 {/* Initial value for animation */}
-                    </span>
+                        0 {/* Initial value for animation */}</span>
+						<span className={`fb-counter-number-suffix`}>{counterSuffix}</span>
 					</div>
 					<span className="fb-counter-title">
                             {counterTitle}

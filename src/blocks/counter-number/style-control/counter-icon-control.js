@@ -15,7 +15,7 @@ export default function CounterIconControl ({ attributes, setAttributes}) {
 
 		counterIconMarginUnits,
 		counterIconMarginDesktop,
-		counterIconMarginTab,
+		counterIconMarginTablet,
 		counterIconMarginMobile,
 		counterIconMarginLink,
 
@@ -58,7 +58,7 @@ export default function CounterIconControl ({ attributes, setAttributes}) {
 					break;
 				case 'Tablet':
 					setAttributes( {
-						counterIconMarginTab: {
+						counterIconMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -85,7 +85,7 @@ export default function CounterIconControl ({ attributes, setAttributes}) {
 					setAttributes( {counterIconMarginDesktop: {...counterIconMarginDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {counterIconMarginTab: {...counterIconMarginTab, [position]: value}} );
+					setAttributes( {counterIconMarginTablet: {...counterIconMarginTablet, [position]: value}} );
 					break;
 				case 'Mobile':
 					setAttributes( {counterIconMarginMobile: {...counterIconMarginMobile, [position]: value}} );
@@ -139,7 +139,7 @@ export default function CounterIconControl ({ attributes, setAttributes}) {
 				spacingUnitsHandler={counterIconMarginUnitsHandler}
 				spacingUnits={counterIconMarginUnits}
 				spacingDesktop={counterIconMarginDesktop}
-				spacingTablet={counterIconMarginTab}
+				spacingTablet={counterIconMarginTablet}
 				spacingMobile={counterIconMarginMobile}
 				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 				spacingCombineBtn={counterIconMarginLink}

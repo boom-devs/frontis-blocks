@@ -6,7 +6,7 @@ export default function CounterNumberTitleMarginControl ({ attributes, setAttrib
 		deviceType,
 		counterNumberTitleMarginUnits,
 		counterNumberTitleMarginDesktop,
-		counterNumberTitleMarginTab,
+		counterNumberTitleMarginTablet,
 		counterNumberTitleMarginMobile,
 		counterNumberTitleMarginLink,
 
@@ -28,7 +28,7 @@ export default function CounterNumberTitleMarginControl ({ attributes, setAttrib
 					break;
 				case 'Tablet':
 					setAttributes( {
-						counterNumberTitleMarginTab: {
+						counterNumberTitleMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -55,7 +55,7 @@ export default function CounterNumberTitleMarginControl ({ attributes, setAttrib
 					setAttributes( {counterNumberTitleMarginDesktop: {...counterNumberTitleMarginDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {counterNumberTitleMarginTab: {...counterNumberTitleMarginTab, [position]: value}} );
+					setAttributes( {counterNumberTitleMarginTablet: {...counterNumberTitleMarginTablet, [position]: value}} );
 					break;
 				case 'Mobile':
 					setAttributes( {counterNumberTitleMarginMobile: {...counterNumberTitleMarginMobile, [position]: value}} );
@@ -87,7 +87,7 @@ export default function CounterNumberTitleMarginControl ({ attributes, setAttrib
 				spacingUnitsHandler={counterNumberTitleMarginUnitsHandler}
 				spacingUnits={counterNumberTitleMarginUnits}
 				spacingDesktop={counterNumberTitleMarginDesktop}
-				spacingTablet={counterNumberTitleMarginTab}
+				spacingTablet={counterNumberTitleMarginTablet}
 				spacingMobile={counterNumberTitleMarginMobile}
 				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 				spacingCombineBtn={counterNumberTitleMarginLink}

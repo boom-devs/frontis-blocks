@@ -17,7 +17,7 @@ const countDownItemBorderRadiusAttributes = {
 			right: 500,
 		},
 	},
-	countDownItemBorderRadiusTab: {
+	countDownItemBorderRadiusTablet: {
 		type: "object",
 		default: {
 			top: 500,

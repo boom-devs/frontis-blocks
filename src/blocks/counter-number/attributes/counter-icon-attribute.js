@@ -50,7 +50,7 @@ const counterIconAttributes = {
 			right: 0,
 		},
 	},
-	counterIconMarginTab: {
+	counterIconMarginTablet: {
 		type: "object",
 		default: {
 			top: 0,

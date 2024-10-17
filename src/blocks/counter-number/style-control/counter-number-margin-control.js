@@ -6,7 +6,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 		deviceType,
 		counterNumberMarginUnits,
 		counterNumberMarginDesktop,
-		counterNumberMarginTab,
+		counterNumberMarginTablet,
 		counterNumberMarginMobile,
 		counterNumberMarginLink,
 
@@ -28,7 +28,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 					break;
 				case 'Tablet':
 					setAttributes( {
-						counterNumberMarginTab: {
+						counterNumberMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -55,7 +55,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 					setAttributes( {counterNumberMarginDesktop: {...counterNumberMarginDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {counterNumberMarginTab: {...counterNumberMarginTab, [position]: value}} );
+					setAttributes( {counterNumberMarginTablet: {...counterNumberMarginTablet, [position]: value}} );
 					break;
 				case 'Mobile':
 					setAttributes( {counterNumberMarginMobile: {...counterNumberMarginMobile, [position]: value}} );
@@ -87,7 +87,7 @@ export default function CounterNumberMarginControl ({ attributes, setAttributes}
 				spacingUnitsHandler={counterNumberMarginUnitsHandler}
 				spacingUnits={counterNumberMarginUnits}
 				spacingDesktop={counterNumberMarginDesktop}
-				spacingTablet={counterNumberMarginTab}
+				spacingTablet={counterNumberMarginTablet}
 				spacingMobile={counterNumberMarginMobile}
 				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
 				spacingCombineBtn={counterNumberMarginLink}

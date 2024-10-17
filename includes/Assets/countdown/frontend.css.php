@@ -4,7 +4,6 @@ use FrontisBlocks\Assets\EnqueueBlocksCss;
 $block_attributes = $block['attrs'];
 $block_ID = isset( $block_attributes['blockID'] ) ? sanitize_text_field( $block_attributes['blockID'] ) : '';
 
-
 $countDownItemBgColor = isset($block_attributes['countDownItemBgColor']) ? sanitize_hex_color($block_attributes['countDownItemBgColor']) : '#F97255';
 
 /** Start Border */
