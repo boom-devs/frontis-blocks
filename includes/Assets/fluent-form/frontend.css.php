@@ -36,6 +36,7 @@ $fluentFormInputLetterSpacing 		= isset($attributes['fluentFormInputLetterSpacin
 $fluentFormInputLetterSpacingUnits 	= isset($attributes['fluentFormInputLetterSpacingUnits']) ? sanitize_text_field($attributes['fluentFormInputLetterSpacingUnits']) : 'px';
 $fluentFormInputLineHeight 			= isset($attributes['fluentFormInputLineHeight']) ? intval($attributes['fluentFormInputLineHeight']) : '';
 $fluentFormInputLineHeightUnits 	= isset($attributes['fluentFormInputLineHeightUnits']) ? sanitize_text_field($attributes['fluentFormInputLineHeightUnits']) : 'px';
+
 $fluentFormTextIndentSize 			= isset($attributes['fluentFormTextIndentSize']) ? $attributes['fluentFormTextIndentSize'] : ['Desktop' => '', 'Tablet' => '', 'Mobile' => ''];
 $fluentFormTextIndentSizeUnits 		= isset($attributes['fluentFormTextIndentSizeUnits']) ? $attributes['fluentFormTextIndentSizeUnits'] : ['Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px'];
 $fluentFormInputWidthSize 			= isset($attributes['fluentFormInputWidthSize']) ? $attributes['fluentFormInputWidthSize'] : ['Desktop' => '', 'Tablet' => '', 'Mobile' => ''];
@@ -719,9 +720,9 @@ $css_content = "
 		.$blockID.fb-fluent-form-wrapper .ff-el-group textarea,
 		.$blockID.fb-fluent-form-wrapper .ff-el-group select {
 			padding: {$fluentFormTabletPadding};
-			text-indent: {$fluentFormTabletTextIndentSize['Tablet']}{$fluentFormTabletTextIndentSizeUnits['Tablet']};
-			width: {$fluentFormTabletWidthSize['Tablet']}{$fluentFormTabletWidthSizeUnits['Tablet']};
-			height: {$fluentFormTabletHeightSize['Tablet']}{$fluentFormTabletHeightSizeUnits['Tablet']};
+			text-indent: {$fluentFormTextIndentSize['Tablet']}{$fluentFormTextIndentSizeUnits['Tablet']};
+			width: {$fluentFormInputWidthSize['Tablet']}{$fluentFormInputWidthSizeUnits['Tablet']};
+			height: {$fluentFormInputHeightSize['Tablet']}{$fluentFormInputHeightSizeUnits['Tablet']};
 			border-width: {$fluentFormBorderTabletString};
 			border-radius: {$fluentFormBorderRadiusTabletString};
 			transition: all .3s ease-in-out;
@@ -788,9 +789,9 @@ $css_content = "
 		.$blockID.fb-fluent-form-wrapper .ff-el-group textarea,
 		.$blockID.fb-fluent-form-wrapper .ff-el-group select {
 			padding: {$fluentFormMobilePadding};
-			text-indent: {$fluentFormMobileTextIndentSize['Mobile']}{$fluentFormMobileTextIndentSizeUnits['Mobile']};
-			width: {$fluentFormMobileWidthSize['Mobile']}{$fluentFormMobileWidthSizeUnits['Mobile']};
-			height: {$fluentFormMobileHeightSize['Mobile']}{$fluentFormMobileHeightSizeUnits['Mobile']};
+			text-indent: {$fluentFormTextIndentSize['Mobile']}{$fluentFormTextIndentSizeUnits['Mobile']};
+			width: {$fluentFormInputWidthSize['Mobile']}{$fluentFormInputWidthSizeUnits['Mobile']};
+			height: {$fluentFormInputHeightSize['Mobile']}{$fluentFormInputHeightSizeUnits['Mobile']};
 			border-width: {$fluentFormBorderMobileString};	
 			border-radius: {$fluentFormBorderRadiusMobileString};
 			transition: all .3s ease-in-out;
