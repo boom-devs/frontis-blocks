@@ -13,20 +13,6 @@ $showPlaceholder = isset( $attributes['showPlaceholder'] ) ? (bool) $attributes[
 $showErrorMessage = isset( $attributes['showErrorMessage'] ) ? (bool) $attributes['showErrorMessage'] : true;
 $fluentFormGlobalZIndex = isset( $attributes['fluentFormGlobalZIndex'] ) ? intval( $attributes['fluentFormGlobalZIndex'] ) : '';
 
-$fluentFormLabelColor = isset($attributes['fluentFormLabelColor']) ? sanitize_hex_color($attributes['fluentFormLabelColor']) : '';
-$fluentFormLabelHoverColor = isset($attributes['fluentFormLabelHoverColor']) ? sanitize_hex_color($attributes['fluentFormLabelHoverColor']) : '';
-$fluentFormLabelFontFamily = isset($attributes['fluentFormLabelFontFamily']) ? sanitize_text_field($attributes['fluentFormLabelFontFamily']) : 'inherit';
-$fluentFormLabelFontSize = isset($attributes['fluentFormLabelFontSize']) ? intval($attributes['fluentFormLabelFontSize']) : '';
-$fluentFormLabelFontSizeUnits = isset($attributes['fluentFormLabelFontSizeUnits']) ? sanitize_text_field($attributes['fluentFormLabelFontSizeUnits']) : 'px';
-$fluentFormLabelFontWeight = isset($attributes['fluentFormLabelFontWeight']) ? sanitize_text_field($attributes['fluentFormLabelFontWeight']) : '';
-$fluentFormLabelFontStyle = isset($attributes['fluentFormLabelFontStyle']) ? sanitize_text_field($attributes['fluentFormLabelFontStyle']) : 'normal';
-$fluentFormLabelTextTransform = isset($attributes['fluentFormLabelTextTransform']) ? sanitize_text_field($attributes['fluentFormLabelTextTransform']) : 'none';
-$fluentFormLabelTextDecoration = isset($attributes['fluentFormLabelTextDecoration']) ? sanitize_text_field($attributes['fluentFormLabelTextDecoration']) : 'none';
-$fluentFormLabelLetterSpacing = isset($attributes['fluentFormLabelLetterSpacing']) ? intval($attributes['fluentFormLabelLetterSpacing']) : '';
-$fluentFormLabelLetterSpacingUnits = isset($attributes['fluentFormLabelLetterSpacingUnits']) ? sanitize_text_field($attributes['fluentFormLabelLetterSpacingUnits']) : 'px';
-$fluentFormLabelLineHeight = isset($attributes['fluentFormLabelLineHeight']) ? intval($attributes['fluentFormLabelLineHeight']) : '';
-$fluentFormLabelLineHeightUnits = isset($attributes['fluentFormLabelLineHeightUnits']) ? sanitize_text_field($attributes['fluentFormLabelLineHeightUnits']) : 'px';
-
 
 
 $fluentFormInputBgColor = isset($attributes['fluentFormInputBgColor']) ? sanitize_hex_color($attributes['fluentFormInputBgColor']) : '';
@@ -475,7 +461,6 @@ $wrapper_attributes = get_block_wrapper_attributes(
 <style>
 
     .fb-fluent-form-wrapper.<?php echo esc_attr( $blockID ); ?> {
-        z-index: <?php echo isset( $fluentFormGlobalZIndex ) ? intval( $fluentFormGlobalZIndex ) : 'auto'; ?>;
         <?php if ( isset( $fluentFormGlobalBgColor ) ): ?>
             background-color: <?php echo esc_attr( $fluentFormGlobalBgColor ); ?>;
         <?php endif; ?>
@@ -496,83 +481,6 @@ $wrapper_attributes = get_block_wrapper_attributes(
         <?php if ( isset( $fluentFormGlobalBorderHoverColor ) ): ?>
             border-color: <?php echo esc_attr( $fluentFormGlobalBorderHoverColor ); ?>;
         <?php endif; ?>
-    }
-    /** Start Label Style */
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-group label {
-        color: <?php echo esc_attr( $fluentFormLabelColor ); ?>;
-        font-family: <?php echo esc_attr( $fluentFormLabelFontFamily ); ?>;
-        font-size: <?php echo esc_attr( $fluentFormLabelFontSize . ($fluentFormLabelFontSizeUnits ? esc_attr($fluentFormLabelFontSizeUnits) : 'px')); ?>;
-        font-weight: <?php echo esc_attr( $fluentFormLabelFontWeight ); ?>;
-        font-style: <?php echo esc_attr( $fluentFormLabelFontStyle ); ?>;
-        text-transform: <?php echo esc_attr( $fluentFormLabelTextTransform ); ?>;
-        text-decoration: <?php echo esc_attr( $fluentFormLabelTextDecoration ); ?>;
-        letter-spacing: <?php echo esc_attr( $fluentFormLabelLetterSpacing . ($fluentFormLabelLetterSpacingUnits ? esc_attr($fluentFormLabelLetterSpacingUnits) : 'px')); ?>;
-        line-height: <?php echo esc_attr( $fluentFormLabelLineHeight . ($fluentFormLabelLineHeightUnits ? esc_attr($fluentFormLabelLineHeightUnits) : 'px')); ?>;
-        transition: all .3s ease-in-out;
-    }
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-group label:hover {
-        color: <?php echo esc_attr( $fluentFormLabelHoverColor ); ?>;
-    }
-    /** End Label Style */
-
-    /** Start Input Style */
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-group textarea, 
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-group select {
-        <?php echo $fluentFormInputBgColor ? "background-color: " . esc_attr($fluentFormInputBgColor) . ";" : ""; ?>
-        <?php echo $fluentFormInputColor ? "color: " . esc_attr($fluentFormInputColor) . ";" : ""; ?>
-        <?php echo $fluentFormInputFontFamily ? "font-family: " . esc_attr($fluentFormInputFontFamily) . ";" : ""; ?>
-        <?php echo $fluentFormInputFontSize ? "font-size: " . esc_attr($fluentFormInputFontSize) . esc_attr($fluentFormInputFontSizeUnits) . ";" : ""; ?>
-        <?php echo $fluentFormInputFontWeight ? "font-weight: " . esc_attr($fluentFormInputFontWeight) . ";" : ""; ?>
-        <?php echo $fluentFormInputFontStyle ? "font-style: " . esc_attr($fluentFormInputFontStyle) . ";" : ""; ?>
-        <?php echo $fluentFormInputTextTransform ? "text-transform: " . esc_attr($fluentFormInputTextTransform) . ";" : ""; ?>
-        <?php echo $fluentFormInputTextDecoration ? "text-decoration: " . esc_attr($fluentFormInputTextDecoration) . ";" : ""; ?>
-        <?php echo $fluentFormInputLetterSpacing ? "letter-spacing: " . esc_attr($fluentFormInputLetterSpacing) . esc_attr($fluentFormInputLetterSpacingUnits) . ";" : ""; ?>
-        <?php echo $fluentFormInputLineHeight ? "line-height: " . esc_attr($fluentFormInputLineHeight) . esc_attr($fluentFormInputLineHeightUnits) . ";" : ""; ?>
-
-        <?php echo "text-indent: " . $fluentFormTextIndentSize['Desktop'] . $fluentFormTextIndentSizeUnits['Desktop'] . ";"; ?>
-        <?php echo "width: " . esc_attr($fluentFormInputWidthSize['Desktop']) . esc_attr($fluentFormInputWidthSizeUnits['Desktop']) . ";"; ?>
-        <?php echo "height: " . esc_attr($fluentFormInputHeightSize['Desktop']) . esc_attr($fluentFormInputHeightSizeUnits['Desktop']) . ";"; ?>
-
-        <?php echo $fluentFormDesktopPadding ? "padding: " . esc_attr($fluentFormDesktopPadding) . ";" : ""; ?>
-        <?php echo $fluentFormBorder ? "border: " . esc_attr($fluentFormBorder) . ";" : ""; ?>
-        <?php echo $fluentFormBorderDesktopString ? "border-width: " . esc_attr($fluentFormBorderDesktopString) . ";" : ""; ?>
-        <?php echo $fluentFormBorderColor ? "border-color: " . esc_attr($fluentFormBorderColor) . ";" : ""; ?>
-        <?php echo $fluentFormBorderRadiusDesktopString ? "border-radius: " . esc_attr($fluentFormBorderRadiusDesktopString) . ";" : ""; ?>
-
-        transition: all .3s ease-in-out;
-    }
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-group select:focus {
-        border-color: <?php echo esc_attr($fluentFormInputFocusColor); ?>;
-        box-shadow: 0 0 0 1px <?php echo esc_attr($fluentFormInputFocusColor); ?>;
-    }
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-group textarea {
-        width: <?php echo esc_attr($fluentFormTextareaWidthSize['Desktop']) . esc_attr($fluentFormTextareaWidthSizeUnits['Desktop']); ?>;
-        height: <?php echo esc_attr($fluentFormTextareaHeightSize['Desktop']) . esc_attr($fluentFormTextareaHeightSizeUnits['Desktop']); ?>;
-    }
-    /** end Input Style */
-
-
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input::-webkit-input-placeholder,
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea::-webkit-input-placeholder {
-        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
-    }
-
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input::-moz-placeholder,
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea::-moz-placeholder {
-        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
-    }
-
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input:-ms-input-placeholder,
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea:-ms-input-placeholder {
-        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
-    }
-
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper input:-moz-placeholder,
-    .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper textarea:-moz-placeholder {
-        color: <?php echo esc_attr( $fluentFormPlaceholderColor ); ?>;
     }
 
     .<?php echo esc_attr( $blockID ); ?>.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"] {
