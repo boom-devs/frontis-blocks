@@ -3,6 +3,7 @@
 namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
+use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Assets\Asset;
 use FrontisBlocks\Utils\Enqueue;
@@ -147,5 +148,7 @@ final class Plugin {
         Blocks::get_instance();
 
         Admin::get_instance();
+
+        Settings::get_instance()->register_ajax_events();
     }
 }

@@ -1,29 +1,169 @@
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import Switch from 'rc-switch';
-import { useState, useCallback } from '@wordpress/element';
+import { useState, useEffect, useCallback } from '@wordpress/element';
 import ConfirmationModal from '../common/ConfirmationModal';
+import { toast } from 'react-toastify';
 
 const AssetsGeneration = () => {
   const [options, setOptions] = useState({
-    fileGeneration: false,
+    file_generation: false,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSwitchChange = (option) => {
-    setOptions(prevOptions => ({ ...prevOptions, [option]: !prevOptions[option] }));
+  const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+
+  useEffect(() => {
+    fetchOptions();
+  }, []);
+
+  const fetchOptions = () => {
+    const keys = Object.keys(options);
+    jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_get_options',
+        security: nonce,
+        keys: keys,
+      },
+      success: function(response) {
+        if (response.success) {
+          setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
+        } else {
+          toast.error(__(`Failed to fetch options: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+      },
+      error: function(xhr, status, error) {
+        toast.error(__(`Failed to fetch options: ${status} - ${error}`, 'frontis-blocks'), {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    });
+  };
+
+  const saveOption = (key, value) => {
+    return new Promise((resolve, reject) => {
+      window.jQuery.ajax({
+        url: ajaxUrl,
+        type: 'POST',
+        data: {
+          action: `fb_${key}`,
+          security: nonce,
+          value: value,
+        },
+        success: function(response) {
+          if (response.success) {
+            setOptions(prevOptions => ({ ...prevOptions, [key]: value }));
+            toast.success(__(response.data.message, 'frontis-blocks'), {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+            resolve(true);
+          } else {
+            const errorMessage = response.data?.message || 'Unknown error';
+            const errorDetails = response.data?.old_value !== undefined ? 
+              ` (Old value: ${JSON.stringify(response.data.old_value)}, New value: ${JSON.stringify(response.data.new_value)}, Option name: ${response.data.option_name})` : '';
+            toast.error(__(`Failed to save option: ${errorMessage}${errorDetails}`, 'frontis-blocks'), {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+            reject(new Error(errorMessage));
+          }
+        },
+        error: function(xhr, status, error) {
+          const errorMessage = `${status} - ${error}`;
+          toast.error(__(`Failed to save option: ${errorMessage}`, 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          reject(new Error(errorMessage));
+        }
+      });
+    });
+  };
+
+  const handleSwitchChange = async (option) => {
+    const newValue = !options[option];
+    try {
+      await saveOption(option, newValue ? '1' : '0');
+      setOptions(prevOptions => ({ ...prevOptions, [option]: newValue }));
+    } catch (error) {
+      // Revert the switch if saving failed
+      setOptions(prevOptions => ({ ...prevOptions, [option]: !newValue }));
+    }
   };
 
   const handleAssetGeneration = useCallback(() => {
-    console.log('handleAssetGeneration called');
     setIsModalOpen(true);
-    console.log('isModalOpen set to:', true);
   }, []);
 
   const confirmAssetGeneration = useCallback(() => {
-    console.log('Asset generation confirmed and triggered');
     setIsModalOpen(false);
-  }, []);
+    window.jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_generate_assets',
+        security: nonce,
+      },
+      success: function(response) {
+        if (response.success) {
+          toast.success(__(response.data.message, 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        } else {
+          toast.error(__(`Failed to generate assets: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+      },
+      error: function(xhr, status, error) {
+        toast.error(__(`Failed to generate assets: ${status} - ${error}`, 'frontis-blocks'), {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    });
+  }, [ajaxUrl, nonce]);
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
@@ -40,8 +180,8 @@ const AssetsGeneration = () => {
         </div>
         <div className="fb-option-input">
           <Switch
-            checked={options.fileGeneration}
-            onChange={() => handleSwitchChange('fileGeneration')}
+            checked={options.file_generation}
+            onChange={() => handleSwitchChange('file_generation')}
           />
         </div>
       </div>
