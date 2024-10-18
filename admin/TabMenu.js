@@ -4,7 +4,8 @@ import {
     Dashboard,
     Blocks,
     Settings,
-    Integration
+    Integration,
+    Pricing
 } from "./components";
 
 import {
@@ -12,6 +13,7 @@ import {
     OptionsIcon,
     BlockIcon,
     IntegrationsIcon,
+    PricingIcon
 } from './icons'
 
 const TabMenus = applyFilters('frontisblocks/admin/tabs', [
@@ -38,6 +40,12 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
         icon: <IntegrationsIcon />,
         label: __("Integrations", "frontis-blocks"),
         comp: <Integration />
+    },
+    {
+        id: 'pricing',
+        icon: <PricingIcon />,
+        label: __("Pricing", "frontis-blocks"),
+        comp: <Pricing />
     },
 ]);
 
