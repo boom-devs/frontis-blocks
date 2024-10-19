@@ -90,13 +90,9 @@
                 }
             }
             &.none {
-                background-color: transparent;
-                .fb-feature-list-icon {
-                    svg {
-                        fill: transparent;
-                    }
-                }
+                display: none !important;
             }
+
         }
     }
 

@@ -7,33 +7,31 @@ import {
 } from '@wordpress/block-editor';
 
 /**
- * Internal depencencies
+ * Internal dependencies
  */
 import Inspector from "./inspector";
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId}) {
     const { 
-        blockID,
-        HeadingText, 
-        HeadingTag,
-        HeadingAlignment,
-        SubHeadingSwitcher,
-        Separator,
-        ShowSeparatorSwitcher,
-        SubHeadingText,
-        SubHeadingTag,
-        SeperatorPosition,
-        SubHeadingPosition,
-
+        blockId,
+        headingText, 
+        headingTag,
+        headingAlignment,
+        subHeadingSwitcher,
+        separator,
+        showSeparatorSwitcher,
+        subHeadingText,
+        subHeadingTag,
+        separatorPosition,
+        subHeadingPosition,
     } = attributes;
     
-
     const blockProps = useBlockProps();
 
     // Define the CSS as a string
     const css = `
-        #${blockID} {
+        #${blockId} {
             padding: 20px;
             border: 1px solid #ccc;
             background-color: #f9f9f9;
@@ -45,51 +43,51 @@ export default function Edit({ attributes, setAttributes, clientId}) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId ={clientId}
+                clientId={clientId}
             />
 
             <BlockControls>
                 <AlignmentToolbar
-                    value={HeadingAlignment}
-                    onChange={(value) => setAttributes({ HeadingAlignment: value })}
+                    value={headingAlignment}
+                    onChange={(value) => setAttributes({ headingAlignment: value })}
                     controls={['left', 'center', 'right', 'justify']}
                 />
             </BlockControls>
             
-            <div {...blockProps} id={blockID}>
-                <div className={`fb-advanced-wrapper ${blockID}`} style={{textAlign: HeadingAlignment}}>
+            <div {...blockProps} id={blockId}>
+                <div className={`fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
 
-                    {ShowSeparatorSwitcher && SeperatorPosition === "top" && (
+                    {showSeparatorSwitcher && separatorPosition === "top" && (
                         <div className='fb-advanced-title-separator'></div>
                     )}
 
-                    {SubHeadingSwitcher && SubHeadingPosition === 'top' && (
+                    {subHeadingSwitcher && subHeadingPosition === 'top' && (
                         <RichText
-                            tagName={SubHeadingTag}
-                            value={SubHeadingText}
-                            onChange={(value) => setAttributes({ SubHeadingText: value })}
+                            tagName={subHeadingTag}
+                            value={subHeadingText}
+                            onChange={(value) => setAttributes({ subHeadingText: value })}
                             placeholder={__('Sub heading...', 'frontis-blocks')}
                         />
                     )}
                     
                     <RichText
-                        tagName={HeadingTag}
-                        value={HeadingText}
-                        onChange={(value) => setAttributes({ HeadingText: value })}
+                        tagName={headingTag}
+                        value={headingText}
+                        onChange={(value) => setAttributes({ headingText: value })}
                         placeholder={__('Advanced Heading', 'frontis-blocks')}
-                        className= "fb-advanced"
+                        className="fb-advanced"
                     />
 
-                    {SubHeadingSwitcher && SubHeadingPosition === 'bottom' && (
+                    {subHeadingSwitcher && subHeadingPosition === 'bottom' && (
                         <RichText
-                            tagName={SubHeadingTag}
-                            value={SubHeadingText}
-                            onChange={(value) => setAttributes({ SubHeadingText: value })}
+                            tagName={subHeadingTag}
+                            value={subHeadingText}
+                            onChange={(value) => setAttributes({ subHeadingText: value })}
                             placeholder={__('Sub heading...', 'frontis-blocks')}
                         />
                     )}
                     
-                    {ShowSeparatorSwitcher && SeperatorPosition === "bottom" && (
+                    {showSeparatorSwitcher && separatorPosition === "bottom" && (
                         <div className='fb-advanced-title-separator'></div>
                     )}
 
@@ -98,4 +96,3 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         </>
     );
 }
-

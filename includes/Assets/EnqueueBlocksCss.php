@@ -4,7 +4,6 @@ namespace FrontisBlocks\Assets;
 
 class EnqueueBlocksCss {
 	public static function enqueue_block_asset($css_content, $block_name, $block_id) {
-
 		// Define the path to save the CSS file in the uploads directory
 		$upload_dir = wp_upload_dir();
 		$css_dir = trailingslashit( $upload_dir['basedir'] ) . 'frontis-blocks/';

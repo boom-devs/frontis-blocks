@@ -23,5 +23,3 @@ blocks/**/index.js.LICENSE.txt
 
 .prettierrc
 
-vendor
-build

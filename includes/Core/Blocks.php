@@ -53,19 +53,24 @@ class Blocks
                     error_log($blocks_dir);
                     continue;
                 }
-
-				$rb = register_block_type($blocks_dir);
-				wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
-				if ($is_editor) {
-					wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
-				}
-
-				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
-				wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
-
-				$localize_array = '';
+                
                 $localize_array = [];
 
+                // Register the block
+                $rb = register_block_type($blocks_dir);
+
+                // Register translations
+                wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
+
+                // Enqueue block style in the editor
+                if ($is_editor) {
+                    wp_enqueue_block_style("{$plugin_slug}/{$slug}", $args);
+                }
+
+                // Enqueue block editor script and pass localized data
+                $editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
+                wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
+                 
 				if ( is_admin() ) {
 					$admin_localize_array = [
 						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),
@@ -79,6 +84,7 @@ class Blocks
 					$localize_array = array_merge( $localize_array, $admin_localize_array );
 				}
 
+                $localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
                 wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
             }
         }
