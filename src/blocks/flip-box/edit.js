@@ -32,7 +32,9 @@ import {HEADING} from "../info-box/constants/constants";
 import FlipBoxItemFrontControl from "@Blocks/flip-box/style-control/flip-box-item-front-control";
 import FlipBoxItemBackControl from "@Blocks/flip-box/style-control/flip-box-item-back-control";
 import FlipBoxFrontTitleControl from "@Blocks/flip-box/style-control/flip-box-front-title-control";
+import FlipBoxFrontContentControl from "@Blocks/flip-box/style-control/flip-box-front-content-control";
 import FlipBoxBackTitleControl from "@Blocks/flip-box/style-control/flip-box-back-title-control";
+import FlipBoxBackContentControl from "@Blocks/flip-box/style-control/flip-box-back-content-control";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -136,13 +138,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		/** End Flip Box Back Title Attribute */
 
 
-		flipBoxBackMediaSwitcher,
-		flipBoxBackIconMediaUrl,
-		flipBoxBackIcon,
-		flipBoxBackIconColor,
-
-
+		/** Start Flip Box Front Content Attribute */
 		flipBoxFrontContent,
+		flipBoxFrontContentFontColorSwitcher,
+		flipBoxFrontContentFontColor,
+		flipBoxFrontContentFontHoverColor,
+
+		flipBoxFrontContentMarginUnits,
+		flipBoxFrontContentMarginDesktop,
+		flipBoxFrontContentMarginTablet,
+		flipBoxFrontContentMarginMobile,
+		flipBoxFrontContentMarginLink,
+
 		flipBoxFrontContentFontFamily,
 		flipBoxFrontContentFontSize,
 		flipBoxFrontContentFontSizeUnits,
@@ -154,9 +161,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontContentLetterSpacingUnits,
 		flipBoxFrontContentLineHeight,
 		flipBoxFrontContentLineHeightUnits,
-		flipBoxFrontContentColor,
+		/** End Flip Box Front Content Attribute */
 
+
+		/** Start Flip Box Back Content Attribute */
 		flipBoxBackContent,
+		flipBoxBackContentFontColorSwitcher,
+		flipBoxBackContentFontColor,
+		flipBoxBackContentFontHoverColor,
+
+		flipBoxBackContentMarginUnits,
+		flipBoxBackContentMarginDesktop,
+		flipBoxBackContentMarginTablet,
+		flipBoxBackContentMarginMobile,
+		flipBoxBackContentMarginLink,
+
 		flipBoxBackContentFontFamily,
 		flipBoxBackContentFontSize,
 		flipBoxBackContentFontSizeUnits,
@@ -168,8 +187,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxBackContentLetterSpacingUnits,
 		flipBoxBackContentLineHeight,
 		flipBoxBackContentLineHeightUnits,
-		flipBoxBackContentColor
+		/** End Flip Box Back Content Attribute */
 
+		flipBoxBackMediaSwitcher,
+		flipBoxBackIconMediaUrl,
+		flipBoxBackIcon,
+		flipBoxBackIconColor,
 
 	} = attributes;
 
@@ -249,7 +272,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxFrontTitleLetterSpacing.Desktop ? `letter-spacing: ${flipBoxFrontTitleLetterSpacing.Desktop}${flipBoxFrontTitleLetterSpacingUnits.Desktop};` : ''}
 				  ${flipBoxFrontTitleLineHeight.Desktop ? `line-height: ${flipBoxFrontTitleLineHeight.Desktop}${flipBoxFrontTitleLineHeightUnits.Desktop};` : ''}
 				}
-
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content {
+				  ${flipBoxFrontContentFontColor ? `color: ${flipBoxFrontContentFontColor};` : ''}
+				  ${flipBoxFrontContentFontFamily ? `font-family: ${flipBoxFrontContentFontFamily};` : ''}
+				  ${flipBoxFrontContentFontSize.Desktop ? `font-size: ${flipBoxFrontContentFontSize.Desktop}${flipBoxFrontContentFontSizeUnits.Desktop};` : ''}
+				  ${flipBoxFrontContentFontWeight ? `font-weight: ${flipBoxFrontContentFontWeight};` : ''}
+				  ${flipBoxFrontContentFontStyle ? `font-style: ${flipBoxFrontContentFontStyle};` : ''}
+				  ${flipBoxFrontContentTextTransform ? `text-transform: ${flipBoxFrontContentTextTransform};` : ''}
+				  ${flipBoxFrontContentTextDecoration ? `text-decoration: ${flipBoxFrontContentTextDecoration};` : ''}
+				  ${flipBoxFrontContentLetterSpacing.Desktop ? `letter-spacing: ${flipBoxFrontContentLetterSpacing.Desktop}${flipBoxFrontContentLetterSpacingUnits.Desktop};` : ''}
+				  ${flipBoxFrontContentLineHeight.Desktop ? `line-height: ${flipBoxFrontContentLineHeight.Desktop}${flipBoxFrontContentLineHeightUnits.Desktop};` : ''}
+				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-title {
 				  ${flipBoxBackTitleFontColor ? `color: ${flipBoxBackTitleFontColor};` : ''}
 				  ${flipBoxBackTitleFontFamily ? `font-family: ${flipBoxBackTitleFontFamily};` : ''}
@@ -260,6 +293,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxBackTitleTextDecoration ? `text-decoration: ${flipBoxBackTitleTextDecoration};` : ''}
 				  ${flipBoxBackTitleLetterSpacing.Desktop ? `letter-spacing: ${flipBoxBackTitleLetterSpacing.Desktop}${flipBoxBackTitleLetterSpacingUnits.Desktop};` : ''}
 				  ${flipBoxBackTitleLineHeight.Desktop ? `line-height: ${flipBoxBackTitleLineHeight.Desktop}${flipBoxBackTitleLineHeightUnits.Desktop};` : ''}
+				}
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-content {
+				  ${flipBoxBackContentFontColor ? `color: ${flipBoxBackContentFontColor};` : ''}
+				  ${flipBoxBackContentFontFamily ? `font-family: ${flipBoxBackContentFontFamily};` : ''}
+				  ${flipBoxBackContentFontSize.Desktop ? `font-size: ${flipBoxBackContentFontSize.Desktop}${flipBoxBackContentFontSizeUnits.Desktop};` : ''}
+				  ${flipBoxBackContentFontWeight ? `font-weight: ${flipBoxBackContentFontWeight};` : ''}
+				  ${flipBoxBackContentFontStyle ? `font-style: ${flipBoxBackContentFontStyle};` : ''}
+				  ${flipBoxBackContentTextTransform ? `text-transform: ${flipBoxBackContentTextTransform};` : ''}
+				  ${flipBoxBackContentTextDecoration ? `text-decoration: ${flipBoxBackContentTextDecoration};` : ''}
+				  ${flipBoxBackContentLetterSpacing.Desktop ? `letter-spacing: ${flipBoxBackContentLetterSpacing.Desktop}${flipBoxBackContentLetterSpacingUnits.Desktop};` : ''}
+				  ${flipBoxBackContentLineHeight.Desktop ? `line-height: ${flipBoxBackContentLineHeight.Desktop}${flipBoxBackContentLineHeightUnits.Desktop};` : ''}
 				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back {
 					${flipBoxItemBackSize.Desktop ? `min-height: ${flipBoxItemBackSize.Desktop}${flipBoxItemBackSizeUnits.Desktop};` : ''}
@@ -666,6 +710,46 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											)}
 										</PanelBody>
 
+										<PanelBody
+											title={__("Content", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<BaseControl
+												label={__("Select Type", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{SELECT_TYPE.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({flipBoxTypeSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${flipBoxTypeSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+											{flipBoxTypeSwitcher === 'front' && (
+												<>
+													<FlipBoxFrontContentControl
+														attributes={attributes}
+														setAttributes={setAttributes}
+														clientId ={clientId}
+													/>
+												</>
+											)}
+
+											{flipBoxTypeSwitcher === 'back' && (
+												<>
+													<FlipBoxBackContentControl
+														attributes={attributes}
+														setAttributes={setAttributes}
+														clientId ={clientId}
+													/>
+												</>
+											)}
+										</PanelBody>
 									</>
 								)}
 							</div>
@@ -695,7 +779,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										placeholder={__('Flip Box Front Title', 'frontis-block')}
 										className="fb-flip-box-title"
 									/>
-									<p>{flipBoxFrontContent}</p>
+									<RichText
+										tagName={'p'}
+										value={flipBoxFrontContent}
+										onChange={(value) => setAttributes({flipBoxFrontContent: value})}
+										className="fb-flip-box-front-content"
+									/>
 								</div>
 							</div>
 						</div>
@@ -717,7 +806,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										placeholder={__('Flip Box Back Title', 'frontis-block')}
 										className="fb-flip-box-title"
 									/>
-									<p>{flipBoxBackContent}</p>
+									<RichText
+										tagName={'p'}
+										value={flipBoxBackContent}
+										onChange={(value) => setAttributes({flipBoxBackContent: value})}
+										className="fb-flip-box-back-content"
+									/>
 									<a href={`#`} className="fb-flip-box-button">Read More</a>
 								</div>
 							</div>
