@@ -15,15 +15,16 @@ import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
-        blockID,
-        DeviceType,
-        ButtonAlignment,
-        ButtonText,
-        ButtonUrl,
-        ButtonTargetUrl,
-        ButtonWidth,
-        ButtonIcon,
-        ButtonZIndex
+        blockId,
+        deviceType,
+        buttonAlignment,
+        buttonText,
+        buttonUrl,
+        buttonTargetUrl,
+        buttonWidth,
+        buttonIcon,
+        buttonZIndex,
+        buttonIconAlign,
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -39,34 +40,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId = {clientId}
+                clientId={clientId}
             />
 
             <BlockControls>
                 <AlignmentToolbar
-                    value={ButtonAlignment}
-                    onChange={(value) => setAttributes({ ButtonAlignment: value })}
+                    value={buttonAlignment}
+                    onChange={(value) => setAttributes({ buttonAlignment: value })}
                     controls={['left', 'center', 'right', 'justify']}
                 />
             </BlockControls>
             
-            <div {...blockProps} id={blockID}>
-                <div className={`fb-advanced-button-wrapper ${blockID}`} style={{ textAlign: ButtonAlignment }}>
+            <div {...blockProps} id={blockId}>
+                <div className={`fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }}>
                     <a 
                         className="fb-advanced-button" 
-                        href={ButtonUrl} 
-                        target={ButtonTargetUrl ? '_blank' : undefined}
-                        rel={ButtonTargetUrl ? 'noopener noreferrer' : undefined}
+                        href={buttonUrl} 
+                        target={buttonTargetUrl ? '_blank' : undefined}
+                        rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                         onClick={handleButtonClick}
                     >
                         <RichText
                             tagName="span"
-                            value={ButtonText}
-                            onChange={(value) => setAttributes({ ButtonText: value })}
+                            value={buttonText}
+                            onChange={(value) => setAttributes({ buttonText: value })}
                             placeholder={__('Enter button text...', 'frontis-blocks')}
                             className="fb-advanced-button-text"
                         />
-                        <div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
+                        {buttonIconAlign === 'icon' && (
+                          <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                        )}
                     </a>
                 </div>
             </div>

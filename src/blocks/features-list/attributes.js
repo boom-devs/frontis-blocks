@@ -3,7 +3,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-    DeviceType: {
+    deviceType: {
         type: "string",
         default: "Desktop"
     },
@@ -76,7 +76,7 @@ const attributes = {
         default: "px"
     },
 
-
+    /** Start Icon */
     FeatureIconColorSwitcher : {
         type: "string",
         default: "normal"
@@ -156,7 +156,7 @@ const attributes = {
         type: "string",
         default: "px"
     },
-
+    /** End Icon */
 
 
 
@@ -336,28 +336,28 @@ const attributes = {
     FeatureDesktopPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureTabPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureMobilePadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeaturePaddingLink : {
@@ -371,28 +371,28 @@ const attributes = {
     FeatureDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureMarginLink : {
@@ -435,28 +435,28 @@ const attributes = {
     FeatureDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureBorderLink : {
@@ -471,28 +471,28 @@ const attributes = {
     FeatureDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureBorderRadiusLink : {
@@ -510,6 +510,14 @@ const attributes = {
     FeatureMobileSwitcher: {
         type: "boolean",
         default: false,
+    },
+    FeatureboxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureboxShadowCssValue: {
+        type: 'string',
+        default: '',
     },
     
 };

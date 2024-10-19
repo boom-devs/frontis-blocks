@@ -1,88 +1,10 @@
-<<<<<<< HEAD
-// import { useState, useEffect } from 'react';
-// import {__} from '@wordpress/i18n';
-// import {
-// 	Button,
-// 	ButtonGroup,
-// 	RangeControl
-// } from '@wordpress/components';
-// // eslint-disable-next-line import/no-unresolved
-// import FB_ResponsiveControl from '@Components/responsive-control';
-
-// const FB_Range = ({min, max, label, rangeValue, onChangeHandler,  rangeUnitHandler, DeviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
-// 	const [rangeStateValue, setRangeStateValue] = useState(rangeValue[DeviceType]);
-
-// 	// Units
-// 	const UNIT_TYPES = [
-// 		{ label: 'px', value: 'px' },
-// 		{ label: '%', value: '%' },
-// 		{ label: 'em', value: 'em' },
-// 	];
-
-// 	const setRangeUnit = (unit) => {
-// 		rangeUnitHandler(unit);
-// 	}
-
-// 	const setRangeValue = (value) => {
-// 		onChangeHandler(value);
-// 		setRangeStateValue(value);
-// 	}
-
-// 	useEffect( () => {
-// 		setRangeStateValue(rangeValue[DeviceType]);
-// 	}, DeviceType)
-//     return(
-// 		<>
-// 			<div className="fb-setting-spacing-container">
-// 				<div className="fb-setting-spacing-inner-container">
-// 					{/* Margin */}
-// 					<div className="fb-setting-spacing-label-container">
-// 						{/*eslint-disable-next-line @wordpress/i18n-no-variables*/}
-// 						<FB_ResponsiveControl
-// 							labelText={ __( label, 'frontis-blocks' )}
-// 							device={DeviceType}
-// 							deviceHandler={( newDevice ) => setAttributes( {DeviceType: newDevice} )}
-// 						/>
-// 						<div className="fb-setting-units-type">
-// 							<ButtonGroup className="fb-setting-units-type-wrap">
-// 								{UNIT_TYPES.map( ( item, key ) => (
-// 									<Button
-// 										key={key}
-// 										onClick={() => setRangeUnit(item.value)}
-// 										className={`fb-setting-units-type-switcher ${units[DeviceType] === item.value ? 'active' : ''}`}
-// 									>
-// 										{item.label}
-// 									</Button>
-// 								) )}
-// 							</ButtonGroup>
-// 						</div>
-// 					</div>
-// 					<RangeControl
-// 						__nextHasNoMarginBottom
-// 						value={ rangeStateValue }
-// 						onChange={ ( value ) => setRangeValue( value ) }
-// 						min={ min }
-// 						max={ max }
-// 						step={rangeStep}
-// 						allowReset
-// 						resetFallbackValue={resetFallbackValue}
-// 					/>
-// 				</div>
-// 			</div>
-// 		</>
-//     );
-// };
-
-// export default FB_Range;
-
-
 import { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 
-const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, DeviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
+const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, deviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
 
 	const UNIT_TYPES = [
 		{ label: 'px', value: 'px' },
@@ -90,21 +12,21 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 		{ label: 'em', value: 'em' },
 	];
 
-	// Ensure default/fallback value for the current DeviceType
+	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {
-		if (rangeValue[DeviceType] === undefined) {
-			const newRangeValue = { ...rangeValue, [DeviceType]: resetFallbackValue };
+		if (rangeValue[deviceType] === undefined) {
+			const newRangeValue = { ...rangeValue, [deviceType]: resetFallbackValue };
 			onChangeHandler(newRangeValue);
 		}
-	}, [DeviceType, rangeValue, onChangeHandler, resetFallbackValue]);
+	}, [deviceType, rangeValue, onChangeHandler, resetFallbackValue]);
 
 	const setRangeValue = (value) => {
-		const newRangeValue = { ...rangeValue, [DeviceType]: value || resetFallbackValue };
+		const newRangeValue = { ...rangeValue, [deviceType]: value || resetFallbackValue };
 		onChangeHandler(newRangeValue);
 	};
 
 	const setRangeUnit = (unit) => {
-		const newUnits = { ...units, [DeviceType]: unit };
+		const newUnits = { ...units, [deviceType]: unit };
 		rangeUnitHandler(newUnits);
 	};
 
@@ -114,8 +36,8 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 				<div className="fb-setting-spacing-label-container">
 					<FB_ResponsiveControl
 						labelText={ __( label, 'frontis-blocks' )}
-						device={ DeviceType }
-						deviceHandler={( newDevice ) => setAttributes({ DeviceType: newDevice })}
+						device={ deviceType }
+						deviceHandler={( newDevice ) => setAttributes({ deviceType: newDevice })}
 					/>
 					<div className="fb-setting-units-type">
 						<ButtonGroup className="fb-setting-units-type-wrap">
@@ -123,7 +45,7 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 								<Button
 									key={key}
 									onClick={() => setRangeUnit(item.value)}
-									className={`fb-setting-units-type-switcher ${units[DeviceType] === item.value ? 'active' : ''}`}
+									className={`fb-setting-units-type-switcher ${units[deviceType] === item.value ? 'active' : ''}`}
 								>
 									{item.label}
 								</Button>
@@ -133,7 +55,7 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 				</div>
 				<RangeControl
 					__nextHasNoMarginBottom
-					value={ rangeValue[DeviceType] }
+					value={ rangeValue[deviceType] }
 					onChange={ setRangeValue }
 					min={ min }
 					max={ max }
@@ -147,90 +69,3 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 };
 
 export default FB_Range;
-=======
-import { useState, useEffect } from 'react';
-import {__} from '@wordpress/i18n';
-import {
-	Button,
-	ButtonGroup,
-	RangeControl
-} from '@wordpress/components';
-// eslint-disable-next-line import/no-unresolved
-import FB_ResponsiveControl from '@Components/responsive-control';
-
-const Range = ({min, max, label, rangeValue, onChangeHandler,  rangeUnitHandler, DeviceType, units, setAttributes, rangeStep }) => {
-	const [rangeStateValue, setRangeStateValue] = useState(rangeValue[DeviceType]);
-
-	// Units
-	const UNIT_TYPES = [
-		{ label: 'px', value: 'px' },
-		{ label: '%', value: '%' },
-		{ label: 'em', value: 'em' },
-	];
-
-	
-	// Get range value
-	const getRangeValue = (  ) => {
-		if ( DeviceType === 'Desktop' ) {
-			return rangeValue[DeviceType];
-		} else if ( DeviceType === 'Tablet' ) {
-			return rangeValue[DeviceType];
-		}
-
-		return rangeValue[DeviceType];
-	};
-
-	const setRangeUnit = (unit) => {
-		rangeUnitHandler(unit);
-	}
-
-	const setRangeValue = (value) => {
-		onChangeHandler(value);
-		setRangeStateValue(value);
-	}
-
-	useEffect( () => {
-		setRangeStateValue(rangeValue[DeviceType]);
-	}, DeviceType)
-    return(
-		<>
-			<div className="fb-setting-spacing-container">
-				<div className="fb-setting-spacing-inner-container">
-					{/* Margin */}
-					<div className="fb-setting-spacing-label-container">
-						{/*eslint-disable-next-line @wordpress/i18n-no-variables*/}
-						<FB_ResponsiveControl
-							labelText={ __( label, 'frontis-blocks' )}
-							device={DeviceType}
-							deviceHandler={( newDevice ) => setAttributes( {DeviceType: newDevice} )}
-						/>
-						<div className="fb-setting-units-type">
-							<ButtonGroup className="fb-setting-units-type-wrap">
-								{UNIT_TYPES.map( ( item, key ) => (
-									<Button
-										key={key}
-										onClick={() => setRangeUnit(item.value)}
-										className={`fb-setting-units-type-switcher ${units[DeviceType] === item.value ? 'active' : ''}`}
-									>
-										{item.label}
-									</Button>
-								) )}
-							</ButtonGroup>
-						</div>
-					</div>
-					<RangeControl
-						__nextHasNoMarginBottom
-						value={ rangeStateValue }
-						onChange={ ( value ) => setRangeValue( value ) }
-						min={ min }
-						max={ max }
-						step={rangeStep}
-					/>
-				</div>
-			</div>
-		</>
-    );
-};
-
-export default Range;
->>>>>>> 27c59d133d37688901b0b4f70b07538faaff9329

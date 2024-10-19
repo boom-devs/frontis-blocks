@@ -294,8 +294,6 @@ export default function FBIconPicker(props) {
 						</div>
 					</Modal>
 				)}
-
-				Icon picker
 			</div>
 		</Fragment>
 	);

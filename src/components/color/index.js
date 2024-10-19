@@ -1,5 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { Button, ButtonGroup, BaseControl, Dropdown, ColorPicker, ColorPalette, Dashicon, } from '@wordpress/components';
+import './editor.lazy.scss';
+
 
 const FB_Color = ({label, globalColorSwitcher, globalColor, globalHoverColor, handleColorSwitcherChange, handleGlobalColorChange, handleGlobalHoverColorChange }) => {
 

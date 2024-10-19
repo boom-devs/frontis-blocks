@@ -32,7 +32,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-social-wrapper">
+                <div className={`fb-social-wrapper ${blockID}`}>
                     <div className="fb-social-links-wrapper">
                         <ul className="fb-socials">
                             {socialItems.map(item => (

@@ -1,275 +1,325 @@
 const attributes = {
-    blockID: {
+    blockId: {
         type: "string",
         default: ""
     },
-    DeviceType: {
+    deviceType: {
         type: "string",
         default: "Desktop"
     },
-    HeadingAlignment: {
+    headingAlignment: {
         type: "string",
         default: "left",
     },
-    HeadingText: {
+    headingText: {
         type : "string",
         default: "Advanced Heading"
     },
-    HeadingTag: {
+    headingTag: {
         type : "string",
-        default: "h2"
+        default: "h2" 
     },
-    HeadingFontFamily: {
+    headingFontFamily: {
         type: "string",
         default: "inherit",
     },
-    HeadingFontSize: {
-        type: "number",
-        default: 35
-    },
-    HeadingFontSizeUnits: {
+    headingFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    headingFontWeight : {
         type: "string",
-        default: "px"
+        default: ""
     },
-    HeadingFontWeight : {
+    headingFontStyle : {
         type: "string",
-        default: "700"
+        default: ""
     },
-    HeadingFontStyle : {
+    headingTextTransform : {
         type: "string",
-        default: "normal"
+        default: ""
     },
-    HeadingTextTransform : {
+    headingTextDecoration : {
         type: "string",
-        default: "none"
+        default: ""
     },
-    HeadingTextDecoration : {
-        type: "string",
-        default: "none"
-    },
-    HeadingLetterSpacing : {
-        type: "number",
-    },
-    HeadingLetterSpacingUnits : {
-        type: "string",
-        default: "px"
-    },
-    HeadingLineHeight : {
-        type: "number",
-    },
-    HeadingLineHeightUnits : {
-        type: "string",
-        default: "px"
-    },
+    headingLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
-    HeadingColorSwitcher : {
+    headingLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    headingColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    HeadingColor : {
+    headingColor : {
         type: "string"
     },
-    HeadingHoverColor: {
+    headingHoverColor: {
         type: 'string',
     },
-    HeadingBackgroundColor: {
+    headingBackgroundColor: {
         type: 'string',
     },
-
-    HeadingBorder: {
+    headingBorder: {
         type: 'string',
         default: "none",
     },
-    HeadingBorderColor: {
-        type: 'string',
-    },
-    HeadingBorderHoverColor: {
-        type: 'string',
-    },
-    HeadingBorderColorSwitcher : {
+    headingBorderColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    HeadingBorderUnits : {
+    headingBorderColor: {
+        type: 'string',
+    },
+    headingBorderHoverColor: {
+        type: 'string',
+    },
+    headingBorderUnits : {
         type: "string",
         default: "px"
     },
-    HeadingDesktopBorderWidth: {
-        type: "object",
+    headingBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    headingDesktopBorder: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingTabBorderWidth: {
-        type: "object",
+    headingTabBorder: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingMobileBorderWidth: {
-        type: "object",
+    headingMobileBorder: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingBorderLink : {
+    headingBorderLink : {
         type : "boolean",
         default: true
     },
-    HeadingBorderRadiusUnits : {
-        type: "string",
-        default: "px"
+    headingBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
-    HeadingDesktopBorderRadiusWidth: {
-        type: "object",
+    headingDesktopBorderRadius: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingTabBorderRadiusWidth: {
-        type: "object",
+    headingTabBorderRadius: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingMobileBorderRadiusWidth: {
-        type: "object",
+    headingMobileBorderRadius: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingBorderRadiusLink : {
+    headingBorderRadiusLink : {
         type : "boolean",
         default: true
     },
-    HeadingPaddingUnits : {
-        type: "string",
-        default: "px"
+    headingPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
-    desktopHeadingPadding: {
-        type: "object",
+    headingDesktopPadding: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingDesktopPadding: {
-        type: "object",
+    headingTabPadding: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingTabPadding: {
-        type: "object",
+    headingMobilePadding: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingMobilePadding: {
-        type: "object",
-        default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
-    },
-    HeadingPaddingLink : {
+    headingPaddingLink : {
         type : "boolean",
         default: true
     },
-    HeadingMarginUnits : {
-        type: "string",
-        default: "px"
+    headingMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
-    HeadingDesktopMargin: {
-        type: "object",
+    headingDesktopMargin: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingTabMargin: {
-        type: "object",
+    headingTabMargin: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingMobileMargin: {
-        type: "object",
+    headingMobileMargin: {
+        type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    HeadingMarginLink : {
+    headingMarginLink : {
         type : "boolean",
         default: true
     },
-    SubHeadingText: {
+    subHeadingText: {
         type: "string",
         default: "Advanced Sub Heading"
     },
-    SubHeadingTag: {
+    subHeadingTag: {
         type : "string",
-        default: "p"
+        default: "p" 
     },
-    SubHeadingSwitcher: {
+    subHeadingSwitcher: {
         type: "boolean",
         default: false,
     },
-    SubHeadingPosition: {
+    subHeadingPosition: {
         type: "string",
         default: "bottom",
     },
-    Separator: {
+    separator: {
         type: "string",
         default: "solid",
     },
-    ShowSeparatorSwitcher: {
+    showSeparatorSwitcher: {
         type: "boolean",
         default: false,
     },
-    SeperatorPosition: {
+    separatorPosition: {
         type: "string",
         default: "bottom",
     },
-    HeadingZIndex : {
-        type: "number",
-    },
 
+    headingZIndex: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingZIndexUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    
 }
 export default attributes;
