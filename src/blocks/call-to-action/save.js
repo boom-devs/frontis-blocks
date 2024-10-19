@@ -195,17 +195,6 @@ export default function save({ attributes }) {
 		<>
 			<style>
 			{`
-                    .fb-cta-content-wrapper.${blockID} {
-                    padding: ${boxPadding};
-                    margin: ${boxMargin};
-                    border: ${infoBoxBorder};
-                    border-width: ${boxBorderWidth};
-                    border-radius: ${boxBorderRadiusWidth};
-                    ${infoBoxBorderColor !== undefined ? `border-color: ${infoBoxBorderColor};` : ''}
-                    ${boxBgColor !== undefined ? `background-color: ${boxBgColor};` : ''}
-                    text-align: ${contentAlignment};
-                }
-
                 @media only screen and (max-width: 1024px){
                 .fb-cta-content-wrapper.${blockID}{
                 padding: ${infoBoxTabPadding.top}${infoBoxPaddingUnits} ${infoBoxTabPadding.right}${infoBoxPaddingUnits} ${infoBoxTabPadding.bottom}${infoBoxPaddingUnits} ${infoBoxTabPadding.left}${infoBoxPaddingUnits} !important;

@@ -1,19 +1,32 @@
 import { __ } from "@wordpress/i18n";
 import { memo, useState, useEffect } from "@wordpress/element";
-import { Placeholder, SelectControl } from "@wordpress/components";
-import {InspectorControls, RichText, useBlockProps} from '@wordpress/block-editor';
+import {SelectControl } from "@wordpress/components";
+import {useBlockProps} from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";
-import { decodeEntities } from '@wordpress/html-entities';
 import './editor.scss';
+import Inspector from "../contact-form-7/inspector";
 
-export default function Edit (props) {
+const Edit = ({ attributes, setAttributes, clientId }) => {
 	const [wpCf7Form, setWpCf7Forms] = useState(FrontisBlocksData.contact_form7_html);
 	const [selectedForm, setSelectedForm] = useState();
-	const { attributes, setAttributes } = props;
 
 	const {
-		formId
+		formId,
+		blockID,
+		showLabels,
+		showPlaceholder,
+		showErrorMessage
 	} = attributes;
+
+	const blockProps = useBlockProps({
+		className: [
+			'fb-contact-form-wrapper',
+			blockID,
+			!showLabels && 'fb-contact-form-hide-label',
+			!showPlaceholder && 'fb-contact-form-hide-placeholder',
+			!showErrorMessage && 'fb-contact-form-hide-error-message'
+		].filter(Boolean).join(' ')
+	});
 
 	const modifiedFormLists = FrontisBlocksData.contact_form7_lists.map((obj, i) => {
 		return {
@@ -29,13 +42,18 @@ export default function Edit (props) {
 
 	useEffect( ( ) => {
 		setSelectedForm(wpCf7Form[formId]);
-
-		console.log(selectedForm)
 	}, [formId] )
+
 
 	return (
 		<>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 			<div
+				{...blockProps}
 				dangerouslySetInnerHTML={{__html: selectedForm}}
 			/>
 			<div {...useBlockProps()}>
@@ -47,20 +65,9 @@ export default function Edit (props) {
 					/>
 				)}
 
-			{/*	{formId && (*/}
-			{/*		<>*/}
-			{/*			<div>*/}
-			{/*				{decodeEntities('[contact-form-7 id="f56d373" title="Contact form 1"]')}*/}
-			{/*			</div>*/}
-			{/*		</>*/}
-			{/*		// <ServerSideRender*/}
-			{/*		// 	className="fb-contact-form-7"*/}
-			{/*		// 	block="frontis-block/contact-form-7-gblock"*/}
-			{/*		// 	attributes={{formId: formId}}*/}
-			{/*		// />*/}
-			{/*	)}*/}
 			</div>
 
 		</>
 	);
 }
+export default memo(Edit);

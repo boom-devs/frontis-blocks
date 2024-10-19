@@ -3,7 +3,11 @@ const attributes = {
         type: "string",
         default: ""
     },
-    DeviceType: {
+    deviceType: {
+        type: "string",
+        default: "Desktop"
+    },
+	DeviceType: {
         type: "string",
         default: "Desktop"
     },
@@ -179,10 +183,14 @@ const attributes = {
         type : "boolean",
         default: true
     },
-    ButtonPaddingUnits : {
-        type: "string",
-        default: "px"
-    },
+	ButtonPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
     ButtonDesktopPadding: {
         type: "object",
         default: {
@@ -214,10 +222,14 @@ const attributes = {
         type : "boolean",
         default: true
     },
-    ButtonMarginUnits : {
-        type: "string",
-        default: "px"
-    },
+	ButtonMarginUnits : {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
     ButtonDesktopMargin: {
         type: "object",
         default: {

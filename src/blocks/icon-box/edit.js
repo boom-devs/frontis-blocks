@@ -18,25 +18,14 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         Heading_Text,
         Heading_Tag,
         Alignment,
-        separator,
         Sub_Heading_Switcher,
-        Show_Separator_Switcher,
         Sub_Heading_Text,
         Sub_Heading_Tag,
-        Seperator_Position,
-        Sub_Heading_Position,
-        info_Button_Switcher,
-        info_Button_Text,
-        info_Button_Link,
         wrapperAlignment,
-		infoBoxBg,
 		descAlignment,
-		buttonAlignment,
 		icon,
 		mediaSwitcher,
 		contentAlignment,
-		mediaSize,
-
     } = attributes;
 
     const blockProps = useBlockProps();
