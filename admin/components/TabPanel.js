@@ -1,7 +1,8 @@
 import { useState } from '@wordpress/element';
 
 const TabPanel = ({ className, activeClass, onSelect, tabs, children }) => {
-  const [activeTab, setActiveTab] = useState(tabs[0]?.name);
+  const [ activeTab, setActiveTab ] = useState(tabs[ 0 ]?.name);
+  const { version } = window.frontisBlocksAdmin;
 
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
@@ -9,22 +10,26 @@ const TabPanel = ({ className, activeClass, onSelect, tabs, children }) => {
   };
 
   return (
-    <div className={`frontis-tab-panel ${className}`}>
-      <div className="frontis-tab-list">
-        {tabs.map((tab) => (
-          <button
-            key={tab.name}
-            className={`frontis-tab-button ${activeTab === tab.name ? activeClass : ''}`}
-            onClick={() => handleTabChange(tab.name)}
-          >
-            {tab.icon}
-            <span>{tab.title}</span>
-          </button>
-        ))}
+    <div className={`fb-blocks-tab-panel ${className}`}>
+      <div className="fb-blocks-tab-panel-header">
+        <div className="fb-blocks-tab-list">
+          {tabs.map((tab) => (
+            <button
+              key={tab.name}
+              className={`fb-blocks-tab-button ${activeTab === tab.name ? `${activeClass} fb-blocks-active-tab` : ''}`}
+              onClick={() => handleTabChange(tab.name)}
+            >
+              {tab.icon}
+              <span>{tab.title}</span>
+            </button>
+          ))}
+        </div>
+        <div className="fb-blocks-version">Free version: {version}</div>
       </div>
-      <div className="frontis-tab-content">
+      <div className="fb-blocks-tab-content">
         {children(tabs.find((tab) => tab.name === activeTab))}
       </div>
+
     </div>
   );
 };
