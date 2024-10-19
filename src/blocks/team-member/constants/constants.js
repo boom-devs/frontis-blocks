@@ -64,6 +64,12 @@ export const PRESETS = [
 	{ label: __("Preset 3", "frontis-block"), value: "preset-3" },
 ];
 
+export const CONTENT_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
+];
+
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
