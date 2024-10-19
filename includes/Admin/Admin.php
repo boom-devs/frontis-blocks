@@ -75,6 +75,7 @@ class Admin {
         // Localize the script with new data
         wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', array(
             'blocks' => $blocks,
+            'defaultBlocks' => BlockList::get_instance()->get_default_blocks(),
             'nonce' => wp_create_nonce('fb_settings_nonce'),
             'adminUrl' => admin_url(),
             'ajaxUrl' => admin_url('admin-ajax.php'),

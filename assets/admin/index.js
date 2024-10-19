@@ -133,7 +133,7 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blocks", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Blocks, null)
 }, {
-  id: 'options',
+  id: 'settings',
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.OptionsIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Settings, null)
@@ -248,19 +248,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _BlockCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BlockCard */ "./admin/components/BlockCard.js");
-/* harmony import */ var _assets_css_switch_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/css/switch.css */ "./assets/css/switch.css");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+/* harmony import */ var _assets_css_switch_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/css/switch.css */ "./assets/css/switch.css");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -286,17 +288,88 @@ var Blocks = function Blocks() {
     ajaxurl = _window$frontisBlocks.ajaxurl,
     nonce = _window$frontisBlocks.nonce;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var loadBlocks = function loadBlocks() {
-      var _window$frontisBlocks2;
-      var blocksData = (_window$frontisBlocks2 = window.frontisBlocksAdmin) === null || _window$frontisBlocks2 === void 0 ? void 0 : _window$frontisBlocks2.blocks;
-      if (blocksData && _typeof(blocksData) === 'object') {
-        var blocksArray = Object.values(blocksData);
-        setBlocks(blocksArray);
-      }
-      setIsLoading(false);
-    };
-    loadBlocks();
+    getBlocks();
   }, []);
+  var getBlocks = function getBlocks() {
+    console.log('Fetching blocks...');
+    jQuery.ajax({
+      url: ajaxurl,
+      type: 'POST',
+      data: {
+        action: 'fb_get_blocks',
+        security: nonce
+      },
+      success: function success(response) {
+        console.log('Raw response:', response);
+        try {
+          if (typeof response === 'string') {
+            response = JSON.parse(response);
+          }
+          console.log('Parsed response:', response);
+          if (response.success) {
+            var mergedBlocks = response.data || {};
+            var blocksArray = Object.entries(mergedBlocks).map(function (_ref) {
+              var _ref2 = _slicedToArray(_ref, 2),
+                slug = _ref2[0],
+                data = _ref2[1];
+              return _objectSpread(_objectSpread({}, data.info), {}, {
+                slug: slug,
+                status: data.status ? '1' : '0'
+              });
+            });
+            console.log('Processed blocks:', blocksArray);
+            setBlocks(blocksArray);
+          } else {
+            var _response$data;
+            console.error('Failed to fetch blocks:', ((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error');
+            react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Failed to fetch blocks', 'frontis-blocks'));
+          }
+        } catch (error) {
+          console.error('Error processing response:', error);
+          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Error processing server response', 'frontis-blocks'));
+        }
+        setIsLoading(false);
+      },
+      error: function error(jqXHR, textStatus, errorThrown) {
+        console.error('Error fetching blocks:', textStatus, errorThrown);
+        console.log('Response text:', jqXHR.responseText);
+        react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Error fetching blocks', 'frontis-blocks'));
+        setIsLoading(false);
+      }
+    });
+  };
+  var saveBlocks = function saveBlocks(updatedBlocks) {
+    console.log('Saving blocks:', updatedBlocks);
+    var blocksToSave = updatedBlocks.reduce(function (acc, block) {
+      acc[block.slug] = block.status === '1';
+      return acc;
+    }, {});
+    console.log('Blocks to save:', blocksToSave);
+    jQuery.ajax({
+      url: ajaxurl,
+      type: 'POST',
+      data: {
+        action: 'fb_save_blocks',
+        security: nonce,
+        blocks: JSON.stringify(blocksToSave)
+      },
+      success: function success(response) {
+        console.log('Save blocks response:', response);
+        if (response.success) {
+          console.log('Blocks saved successfully');
+          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Blocks saved successfully', 'frontis-blocks'));
+        } else {
+          var _response$data2;
+          console.error('Failed to save blocks:', ((_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.message) || 'Unknown error');
+          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Failed to save blocks', 'frontis-blocks'));
+        }
+      },
+      error: function error(jqXHR, textStatus, errorThrown) {
+        console.error('Error saving blocks:', textStatus, errorThrown);
+        react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Error saving blocks', 'frontis-blocks'));
+      }
+    });
+  };
   var categoryInfo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useMemo)(function () {
     var filteredBlocks = blocks.filter(function (block) {
       return block.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -321,43 +394,40 @@ var Blocks = function Blocks() {
       }
     }, info);
   }, [blocks, searchTerm]);
-  var filteredCategories = selectedCategory === 'all' ? Object.entries(categoryInfo).filter(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 1),
-      category = _ref2[0];
+  var filteredCategories = selectedCategory === 'all' ? Object.entries(categoryInfo).filter(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 1),
+      category = _ref4[0];
     return category !== 'all';
   }) : [[selectedCategory, categoryInfo[selectedCategory]]];
   var clearSearch = function clearSearch() {
     setSearchTerm('');
   };
   var handleEnableAll = function handleEnableAll() {
-    setBlocks(function (prevBlocks) {
-      return prevBlocks.map(function (block) {
-        return _objectSpread(_objectSpread({}, block), {}, {
-          status: 'true'
-        });
+    var updatedBlocks = blocks.map(function (block) {
+      return _objectSpread(_objectSpread({}, block), {}, {
+        status: '1'
       });
     });
+    setBlocks(updatedBlocks);
+    saveBlocks(updatedBlocks);
   };
   var handleDisableAll = function handleDisableAll() {
-    setBlocks(function (prevBlocks) {
-      return prevBlocks.map(function (block) {
-        return _objectSpread(_objectSpread({}, block), {}, {
-          status: 'false'
-        });
+    var updatedBlocks = blocks.map(function (block) {
+      return _objectSpread(_objectSpread({}, block), {}, {
+        status: '0'
       });
     });
+    setBlocks(updatedBlocks);
+    saveBlocks(updatedBlocks);
   };
   var handleBlockChange = function handleBlockChange(slug, enabled) {
-    setBlocks(function (prevBlocks) {
-      return prevBlocks.map(function (block) {
-        return block.slug === slug ? _objectSpread(_objectSpread({}, block), {}, {
-          status: enabled ? 'true' : 'false'
-        }) : block;
-      });
+    var updatedBlocks = blocks.map(function (block) {
+      return block.slug === slug ? _objectSpread(_objectSpread({}, block), {}, {
+        status: enabled ? '1' : '0'
+      }) : block;
     });
-
-    // Here you might want to add an AJAX call to update the server
-    // updateBlockStatus(slug, enabled);
+    setBlocks(updatedBlocks);
+    saveBlocks(updatedBlocks);
   };
   if (isLoading) {
     return /*#__PURE__*/React.createElement("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading blocks...', 'frontis-blocks'));
@@ -393,10 +463,10 @@ var Blocks = function Blocks() {
     onClick: handleDisableAll
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-category-filter"
-  }, Object.entries(categoryInfo).map(function (_ref3) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-      category = _ref4[0],
-      count = _ref4[1].count;
+  }, Object.entries(categoryInfo).map(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+      category = _ref6[0],
+      count = _ref6[1].count;
     return /*#__PURE__*/React.createElement("button", {
       key: category,
       onClick: function onClick() {
@@ -404,10 +474,10 @@ var Blocks = function Blocks() {
       },
       className: "fb-blocks-category-button ".concat(selectedCategory === category ? 'fb-blocks-category-button--active' : '')
     }, category === 'all' ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('All', 'frontis-blocks') : category.charAt(0).toUpperCase() + category.slice(1), " (", count, ")");
-  })), filteredCategories.length > 0 ? filteredCategories.map(function (_ref5) {
-    var _ref6 = _slicedToArray(_ref5, 2),
-      category = _ref6[0],
-      categoryBlocks = _ref6[1].blocks;
+  })), filteredCategories.length > 0 ? filteredCategories.map(function (_ref7) {
+    var _ref8 = _slicedToArray(_ref7, 2),
+      category = _ref8[0],
+      categoryBlocks = _ref8[1].blocks;
     return /*#__PURE__*/React.createElement("div", {
       key: category,
       className: "fb-blocks-category-group fb-blocks-category-group--".concat(category)
@@ -473,6 +543,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -488,22 +559,124 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var Integration = function Integration() {
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({
-      recaptchaV2SiteKey: '',
-      recaptchaV2SecretKey: '',
-      recaptchaV3SiteKey: '',
-      recaptchaV3SecretKey: '',
-      googleMapsApiKey: '',
-      instagramAccessToken: ''
+      recaptcha_v2_site_key: '',
+      recaptcha_v2_secret_key: '',
+      recaptcha_v3_site_key: '',
+      recaptcha_v3_secret_key: '',
+      google_maps_api_key: '',
+      instagram_access_token: ''
     }),
     _useState2 = _slicedToArray(_useState, 2),
     integrations = _useState2[0],
     setIntegrations = _useState2[1];
+  var _window$frontisBlocks = window.frontisBlocksAdmin,
+    nonce = _window$frontisBlocks.nonce,
+    ajaxUrl = _window$frontisBlocks.ajaxUrl;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    fetchOptions();
+  }, []);
+  var fetchOptions = function fetchOptions() {
+    var keys = Object.keys(integrations);
+    jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_get_options',
+        security: nonce,
+        keys: keys
+      },
+      success: function success(response) {
+        if (response.success) {
+          setIntegrations(function (prevIntegrations) {
+            return _objectSpread(_objectSpread({}, prevIntegrations), response.data);
+          });
+        } else {
+          var _response$data;
+          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error'), 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+          });
+        }
+      },
+      error: function error(xhr, status, _error) {
+        react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(status, " - ").concat(_error), 'frontis-blocks'), {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
+        });
+      }
+    });
+  };
+  var saveOption = function saveOption(key, value) {
+    return new Promise(function (resolve, reject) {
+      window.jQuery.ajax({
+        url: ajaxUrl,
+        type: 'POST',
+        data: {
+          action: "fb_".concat(key),
+          security: nonce,
+          value: value
+        },
+        success: function success(response) {
+          if (response.success) {
+            setIntegrations(function (prevIntegrations) {
+              return _objectSpread(_objectSpread({}, prevIntegrations), {}, _defineProperty({}, key, value));
+            });
+            react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(response.data.message, 'frontis-blocks'), {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true
+            });
+            resolve(true);
+          } else {
+            var _response$data2;
+            var errorMessage = ((_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.message) || 'Unknown error';
+            react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage), 'frontis-blocks'), {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true
+            });
+            reject(new Error(errorMessage));
+          }
+        },
+        error: function error(xhr, status, _error2) {
+          var errorMessage = "".concat(status, " - ").concat(_error2);
+          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage), 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+          });
+          reject(new Error(errorMessage));
+        }
+      });
+    });
+  };
   var handleChange = function handleChange(value, name) {
     setIntegrations(function (prevState) {
       return _objectSpread(_objectSpread({}, prevState), {}, _defineProperty({}, name, value));
     });
+  };
+  var handleBlur = function handleBlur(name) {
+    saveOption(name, integrations[name]);
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-integration"
@@ -515,22 +688,29 @@ var Integration = function Integration() {
     className: "section-left"
   }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Google reCAPTCHA', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Lorem ipsum dolor sit amet consectetur. Facilisis magna rhoncus aliquam neque semper interdum tempus eleifend justo. Cursus lectus nibh tempus commodo leo eget netus. Id libero eu euismod metus congue. Ornare erat ornare vel scelerisque neque in semper tortor justo.', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Google reCAPTCHA is a free service that protects your website from spam and abuse.', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "section-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "recaptcha-version"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v2', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key v1', 'frontis-blocks'),
-    value: integrations.recaptchaV2SiteKey,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key', 'frontis-blocks'),
+    value: integrations.recaptcha_v2_site_key,
     onChange: function onChange(value) {
-      return handleChange(value, 'recaptchaV2SiteKey');
+      return handleChange(value, 'recaptcha_v2_site_key');
+    },
+    onBlur: function onBlur() {
+      return handleBlur('recaptcha_v2_site_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v2 Site Key', 'frontis-blocks')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key v2', 'frontis-blocks'),
-    value: integrations.recaptchaV2SecretKey,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key', 'frontis-blocks'),
+    type: "password",
+    value: integrations.recaptcha_v2_secret_key,
     onChange: function onChange(value) {
-      return handleChange(value, 'recaptchaV2SecretKey');
+      return handleChange(value, 'recaptcha_v2_secret_key');
+    },
+    onBlur: function onBlur() {
+      return handleBlur('recaptcha_v2_secret_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v2 Secret Key', 'frontis-blocks')
   }), /*#__PURE__*/React.createElement("a", {
@@ -539,17 +719,24 @@ var Integration = function Integration() {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('API Documentation', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "recaptcha-version"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v3', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key v1', 'frontis-blocks'),
-    value: integrations.recaptchaV3SiteKey,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key', 'frontis-blocks'),
+    value: integrations.recaptcha_v3_site_key,
     onChange: function onChange(value) {
-      return handleChange(value, 'recaptchaV3SiteKey');
+      return handleChange(value, 'recaptcha_v3_site_key');
+    },
+    onBlur: function onBlur() {
+      return handleBlur('recaptcha_v3_site_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v3 Site Key', 'frontis-blocks')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key v2', 'frontis-blocks'),
-    value: integrations.recaptchaV3SecretKey,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key', 'frontis-blocks'),
+    type: "password",
+    value: integrations.recaptcha_v3_secret_key,
     onChange: function onChange(value) {
-      return handleChange(value, 'recaptchaV3SecretKey');
+      return handleChange(value, 'recaptcha_v3_secret_key');
+    },
+    onBlur: function onBlur() {
+      return handleBlur('recaptcha_v3_secret_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v3 Secret Key', 'frontis-blocks')
   }), /*#__PURE__*/React.createElement("a", {
@@ -567,9 +754,12 @@ var Integration = function Integration() {
     className: "section-right"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Google Maps API Key', 'frontis-blocks'),
-    value: integrations.googleMapsApiKey,
+    value: integrations.google_maps_api_key,
     onChange: function onChange(value) {
-      return handleChange(value, 'googleMapsApiKey');
+      return handleChange(value, 'google_maps_api_key');
+    },
+    onBlur: function onBlur() {
+      return handleBlur('google_maps_api_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter Google Maps API Key', 'frontis-blocks')
   }), /*#__PURE__*/React.createElement("a", {
@@ -587,9 +777,13 @@ var Integration = function Integration() {
     className: "section-right"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Instagram Access Token', 'frontis-blocks'),
-    value: integrations.instagramAccessToken,
+    type: "password",
+    value: integrations.instagram_access_token,
     onChange: function onChange(value) {
-      return handleChange(value, 'instagramAccessToken');
+      return handleChange(value, 'instagram_access_token');
+    },
+    onBlur: function onBlur() {
+      return handleBlur('instagram_access_token');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter Instagram Access Token', 'frontis-blocks')
   }), /*#__PURE__*/React.createElement("a", {
