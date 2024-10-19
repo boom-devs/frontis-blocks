@@ -104,11 +104,6 @@ var ICON_ALIGN = [{
     icon: "admin-generic"
   })),
   value: "icon"
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-    icon: "info"
-  })),
-  value: "icon-only"
 }];
 var TEXT_ALIGN = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
