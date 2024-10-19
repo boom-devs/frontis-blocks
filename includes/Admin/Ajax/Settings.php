@@ -32,6 +32,10 @@ class Settings extends AjaxBase {
             'recaptcha_v3_secret_key',
             'google_maps_api_key',
             'instagram_access_token',
+            'coming_soon_mode',
+            'maintenance_mode',
+            'coming_soon_page_id',
+            'maintenance_page_id',
         ];
 
         $this->init_ajax_events($ajax_events);
@@ -274,5 +278,22 @@ class Settings extends AjaxBase {
     public function instagram_access_token() {
         $this->handle_option_update('instagram_access_token', 'text');
     }
+
+    public function coming_soon_mode() {
+        $this->handle_option_update('coming_soon_mode', 'boolean');
+    }
+
+    public function maintenance_mode() {
+        $this->handle_option_update('maintenance_mode', 'boolean');
+    }
+
+    public function coming_soon_page_id() {
+        $this->handle_option_update('coming_soon_page_id', 'text');
+    }
+
+    public function maintenance_page_id() {
+        $this->handle_option_update('maintenance_page_id', 'text');
+    }
+
     
 }

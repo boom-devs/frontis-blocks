@@ -198,6 +198,14 @@ class Admin {
                 return current_user_can('manage_options');
             },
         ]);
+
+        register_rest_route('wp/v2/frontis-blocks', '/system-health', [
+            'methods' => 'GET',
+            'callback' => [$this, 'get_system_health'],
+            'permission_callback' => function () {
+                return current_user_can('manage_options');
+            },
+        ]);
     }
 
     /**
@@ -247,6 +255,58 @@ class Admin {
         }
 
         return new \WP_REST_Response(['success' => true, 'data' => $options], 200);
+    }
+
+    public function get_system_health() {
+        $health_info = [
+            [
+                'label' => __('PHP Version', 'frontis-blocks'),
+                'value' => phpversion(),
+                'status' => version_compare(phpversion(), '7.4', '>=') ? 'good' : 'error',
+            ],
+            [
+                'label' => __('WordPress Version', 'frontis-blocks'),
+                'value' => get_bloginfo('version'),
+                'status' => version_compare(get_bloginfo('version'), '5.8', '>=') ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Memory Limit', 'frontis-blocks'),
+                'value' => ini_get('memory_limit'),
+                'status' => (intval(ini_get('memory_limit')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max Execution Time', 'frontis-blocks'),
+                'value' => ini_get('max_execution_time') . 's',
+                'status' => (ini_get('max_execution_time') >= 30) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Frontis Blocks Version', 'frontis-blocks'),
+                'value' => FB_VERSION,
+                'status' => version_compare(FB_VERSION, '1.0.0', '>=') ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Upload max filesize', 'frontis-blocks'),
+                'value' => ini_get('upload_max_filesize'),
+                'status' => (intval(ini_get('upload_max_filesize')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Post max size', 'frontis-blocks'),
+                'value' => ini_get('post_max_size'),
+                'status' => (intval(ini_get('post_max_size')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max input vars', 'frontis-blocks'),
+                'value' => ini_get('max_input_vars'),
+                'status' => (intval(ini_get('max_input_vars')) >= 1000) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max execution time', 'frontis-blocks'),
+                'value' => ini_get('max_execution_time') . 's',
+                'status' => (ini_get('max_execution_time') >= 30) ? 'good' : 'warning',
+            ],
+        ];
+
+        return new \WP_REST_Response($health_info, 200);
     }
 
 }
