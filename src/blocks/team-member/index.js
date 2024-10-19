@@ -8,21 +8,21 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
-import teamMemberImageAttributes from './style-attributes/team-member-image.js';
-import teamMemberNameAttributes from './style-attributes/team-member-name.js';
-import teamMemberDesignationAttributes from './style-attributes/team-member-designation.js';
-import teamMemberContentAttributes from "./style-attributes/team-member-content.js";
-import teamMemberSocialProfileAttributes from "./style-attributes/team-member-social-icon.js";
-import boxBorderAttributes from './style-attributes/box-border.js';
+import teamMemberContentAttribute from './attributes/team-member-content-attribute.js';
+import teamMemberImageAttribute from './attributes/team-member-image-attribute.js';
+import teamMemberNameAttribute from './attributes/team-member-name-attribute.js';
+import teamMemberDesignationAttribute from './attributes/team-member-designation-attribute.js';
+import teamMemberSocialProfileAttribute from "./attributes/team-member-social-profile-attribute.js";
+import boxBorderAttributes from './attributes/box-border.js';
 
 // Merge attributes
 const combinedAttributes = {
 	...attributes,
-	...teamMemberImageAttributes,
-	...teamMemberNameAttributes,
-	...teamMemberDesignationAttributes,
-	...teamMemberContentAttributes,
-	...teamMemberSocialProfileAttributes,
+	...teamMemberContentAttribute,
+	...teamMemberImageAttribute,
+	...teamMemberNameAttribute,
+	...teamMemberDesignationAttribute,
+	...teamMemberSocialProfileAttribute,
 	...boxBorderAttributes,
 };
 registerBlockType( metadata.name, {
@@ -30,3 +30,7 @@ registerBlockType( metadata.name, {
 	edit: Edit,
 	save,
 } );
+
+
+
+	
