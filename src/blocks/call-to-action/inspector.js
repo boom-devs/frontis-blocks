@@ -234,7 +234,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
 			setAttributes({
-				blockID: "fb-icon-picker-" + clientId.slice(0, 8),
+				blockID: "fb-call-to-action-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId]);
@@ -247,10 +247,6 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 			infoMediaId: '',
 			infoMediaUrl: ''
 		});
-	}
-
-	const iconHandler = (iconName) => {
-		setAttributes({icon: iconName})
 	}
 
 	const mediaSizeHandler = (value) => {

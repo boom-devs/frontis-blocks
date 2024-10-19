@@ -4,17 +4,12 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const {
 		blockID,
+		deviceType,
 		ButtonAlignment,
 		ButtonText,
 		ButtonUrl,
+		DeviceType,
 		ButtonTargetUrl,
-		ButtonIcon,
-		ButtonTwoText,
-		ButtonTwoIcon,
-		ButtonTwoUrl,
-		ButtonTwoTargetUrl,
-		connectorText,
-		connectorSwitcher,
 		ButtonWidth,
 		ButtonFontFamily,
 		ButtonFontSize,
@@ -52,33 +47,12 @@ export default function save({ attributes }) {
 		ButtonTabPadding,
 		ButtonMobilePadding,
 		ButtonPaddingLink,
-		ButtonMarginUnits,
-		ButtonDesktopMargin,
-		ButtonTabMargin,
-		ButtonMobileMargin,
-		ButtonMarginLink,
 		ButtonIconAlign,
+		ButtonIcon,
 		ButtonZIndex,
-
-		ButtonTwoAlignment,
-		ButtonTwoWidth,
-		ButtonTwoFontFamily,
-		ButtonTwoFontSize,
-		ButtonTwoFontSizeUnits,
-		ButtonTwoFontWeight,
-		ButtonTwoFontStyle,
-		ButtonTwoTextTransform,
-		ButtonTwoTextDecoration,
-		ButtonTwoLetterSpacing,
-		ButtonTwoLetterSpacingUnits,
-		ButtonTwoLineHeight,
-		ButtonTwoLineHeightUnits,
-		ButtonTwoColorSwitcher,
-		ButtonTwoColor,
-		ButtonTwoHoverColor,
-		ButtonTwoBgColorSwitcher,
-		ButtonTwoBgColor,
-		ButtonTwoBgHoverColor,
+		ButtonTwoText,
+		ButtonTwoUrl,
+		ButtonTwoTargetUrl,
 		ButtonTwoBorder,
 		ButtonTwoBorderColor,
 		ButtonTwoBorderHoverColor,
@@ -93,17 +67,17 @@ export default function save({ attributes }) {
 		ButtonTwoTabBorderRadiusWidth,
 		ButtonTwoMobileBorderRadiusWidth,
 		ButtonTwoBorderRadiusLink,
-		ButtonTwoPaddingUnits,
-		ButtonTwoDesktopPadding,
-		ButtonTwoTabPadding,
-		ButtonTwoMobilePadding,
-		ButtonTwoPaddingLink,
 		ButtonTwoMarginUnits,
-		ButtonTwoDesktopMargin,
-		ButtonTwoTabMargin,
-		ButtonTwoMobileMargin,
-		ButtonTwoMarginLink,
 		ButtonTwoIconAlign,
+		ButtonTwoIcon,
+		ButtonMarginUnits,
+		ButtonDesktopMargin,
+		ButtonTabMargin,
+		ButtonMobileMargin,
+		ButtonMarginLink,
+
+		connectorSwitcher,
+		connectorText,
 		connectorFontFamily,
 		connectorFontSize,
 		connectorFontSizeUnits,
@@ -122,16 +96,13 @@ export default function save({ attributes }) {
 		connectorBgColor,
 		connectorBgHoverColor,
 		connectorSize,
-		connectorSizeUnits,
-		DeviceType
+		connectorSizeUnits
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
 
 	const borderRadiusWidth = `${ButtonDesktopBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonDesktopBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonDesktopBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonDesktopBorderRadiusWidth.left}${ButtonBorderRadiusUnits}`;
 	const borderWidth = `${ButtonDesktopBorderWidth.top}${ButtonBorderUnits} ${ButtonDesktopBorderWidth.right}${ButtonBorderUnits} ${ButtonDesktopBorderWidth.bottom}${ButtonBorderUnits} ${ButtonDesktopBorderWidth.left}${ButtonBorderUnits}`;
-	const margin = `${ButtonDesktopMargin.top}${ButtonPaddingUnits} ${ButtonDesktopMargin.right}${ButtonPaddingUnits} ${ButtonDesktopMargin.bottom}${ButtonPaddingUnits} ${ButtonDesktopMargin.left}${ButtonPaddingUnits}`;
-	const padding = `${ButtonDesktopPadding.top}${ButtonPaddingUnits} ${ButtonDesktopPadding.right}${ButtonPaddingUnits} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits} ${ButtonDesktopPadding.left}${ButtonPaddingUnits}`;
 
 	const buttonBorderRadiusDesktopWidth = `${ButtonTwoDesktopBorderRadiusWidth.top}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoDesktopBorderRadiusWidth.right}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoDesktopBorderRadiusWidth.bottom}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoDesktopBorderRadiusWidth.left}${ButtonTwoBorderRadiusUnits[DeviceType]}`;
 	const buttonBorderRadiusTabletWidth = `${ButtonTwoTabBorderRadiusWidth.top}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoTabBorderRadiusWidth.right}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoTabBorderRadiusWidth.bottom}${ButtonTwoBorderRadiusUnits[DeviceType]} ${ButtonTwoTabBorderRadiusWidth.left}${ButtonTwoBorderRadiusUnits[DeviceType]}`;
@@ -141,13 +112,13 @@ export default function save({ attributes }) {
 	const buttonBorderTabletWidth = `${ButtonTwoTabBorderWidth.top}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoTabBorderWidth.right}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoTabBorderWidth.bottom}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoTabBorderWidth.left}${ButtonTwoBorderUnits[DeviceType]}`;
 	const buttonBorderMobileWidth = `${ButtonTwoMobileBorderWidth.top}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.right}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.bottom}${ButtonTwoBorderUnits[DeviceType]} ${ButtonTwoMobileBorderWidth.left}${ButtonTwoBorderUnits[DeviceType]}`;
 
-	const buttonDesktopMargin = `${ButtonTwoDesktopMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoDesktopMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
-	const buttonTabMargin = `${ButtonTwoTabMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoTabMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
-	const buttonMobileMargin = `${ButtonTwoMobileMargin.top}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.right}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.bottom}${ButtonTwoMarginUnits[DeviceType]} ${ButtonTwoMobileMargin.left}${ButtonTwoMarginUnits[DeviceType]}`;
+	const buttonDesktopMargin = `${ButtonDesktopMargin.top}${ButtonTwoMarginUnits[deviceType]} ${ButtonDesktopMargin.right}${ButtonTwoMarginUnits[deviceType]} ${ButtonDesktopMargin.bottom}${ButtonTwoMarginUnits[deviceType]} ${ButtonDesktopMargin.left}${ButtonTwoMarginUnits[deviceType]}`;
+	const buttonTabMargin = `${ButtonTabMargin.top}${ButtonTwoMarginUnits[deviceType]} ${ButtonTabMargin.right}${ButtonTwoMarginUnits[deviceType]} ${ButtonTabMargin.bottom}${ButtonTwoMarginUnits[deviceType]} ${ButtonTabMargin.left}${ButtonTwoMarginUnits[deviceType]}`;
+	const buttonMobileMargin = `${ButtonMobileMargin.top}${ButtonTwoMarginUnits[deviceType]} ${ButtonMobileMargin.right}${ButtonTwoMarginUnits[deviceType]} ${ButtonMobileMargin.bottom}${ButtonTwoMarginUnits[deviceType]} ${ButtonMobileMargin.left}${ButtonTwoMarginUnits[deviceType]}`;
 
-	const buttonDesktopPadding = `${ButtonTwoDesktopPadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoDesktopPadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
-	const buttonTabPadding = `${ButtonTwoTabPadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoTabPadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
-	const buttonMobilePadding = `${ButtonTwoMobilePadding.top}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.right}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.bottom}${ButtonTwoPaddingUnits[DeviceType]} ${ButtonTwoMobilePadding.left}${ButtonTwoPaddingUnits[DeviceType]}`;
+	const buttonDesktopPadding = `${ButtonDesktopPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.left}${ButtonPaddingUnits[DeviceType]}`;
+	const buttonTabPadding = `${ButtonTabPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.left}${ButtonPaddingUnits[DeviceType]}`;
+	const buttonMobilePadding = `${ButtonMobilePadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.left}${ButtonPaddingUnits[DeviceType]}`;
 
 
 
@@ -155,25 +126,7 @@ export default function save({ attributes }) {
 		<>
 			<style>
 				{`
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
-                    ${ButtonBgColor !== undefined ? `background-color: ${ButtonBgColor};` : ''}
-                    font-family: ${ButtonFontFamily !== 'default' ? ButtonFontFamily : ButtonFontFamily};
-                    font-size: ${ButtonFontSize !== undefined ? `${ButtonFontSize}${ButtonFontSizeUnits}` : ''};
-                    font-weight: ${ButtonFontWeight};
-                    font-style: ${ButtonFontStyle};
-                    text-transform: ${ButtonTextTransform};
-                    text-decoration: ${ButtonTextDecoration};
-                    ${ButtonLetterSpacing !== undefined ? `letter-spacing: ${ButtonLetterSpacing}${ButtonLetterSpacingUnits};` : ''}
-                    ${ButtonLineHeight !== undefined ? `line-height: ${ButtonLineHeight}${ButtonLineHeightUnits};` : ''}
-                    padding: ${buttonDesktopPadding};
-                    margin: ${buttonDesktopMargin};
-                    border: ${ButtonBorder};
-                    border-width: ${borderWidth};
-                    border-radius: ${borderRadiusWidth};
-                    ${ButtonBorderColor !== undefined ? `border-color: ${ButtonBorderColor};` : ''}
-                    z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ''};
 
-                }
                 .fb-advanced-button-wrapper.${blockID} .fb-advanced-button .fb-advanced-button-text {
                     ${ButtonColor !== undefined ? `color: ${ButtonColor};` : ''}
                 }
@@ -250,7 +203,6 @@ export default function save({ attributes }) {
                     border-radius: ${buttonBorderRadiusMobileWidth};
                 }
                 }
-
             `}
 			</style>
 			<div {...blockProps} id={blockID}>
