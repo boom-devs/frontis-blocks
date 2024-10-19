@@ -17,7 +17,7 @@ var attributes = {
     type: "string",
     "default": ""
   },
-  DeviceType: {
+  deviceType: {
     type: "string",
     "default": "Desktop"
   },
@@ -139,11 +139,11 @@ var attributes = {
   },
   TestimonialQuoteIconColor: {
     type: "string",
-    "default": "#FFB400"
+    "default": "#399CFF"
   },
   TestimonialQuoteIconHoverColor: {
     type: 'string',
-    "default": "#FFB400"
+    "default": "#399CFF"
   },
   TestimonialDescFontFamily: {
     type: "string",
@@ -183,15 +183,15 @@ var attributes = {
   },
   TestimonialDescLetterSpacingDesktop: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialDescLetterSpacingTablet: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialDescLetterSpacingMobile: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialDescLetterSpacingUnits: {
     type: "string",
@@ -263,15 +263,15 @@ var attributes = {
   },
   TestimonialAuthorLetterSpacingDesktop: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialAuthorLetterSpacingTablet: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialAuthorLetterSpacingMobile: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialAuthorLetterSpacingUnits: {
     type: "string",
@@ -343,15 +343,15 @@ var attributes = {
   },
   TestimonialDesignationLetterSpacingDesktop: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialDesignationLetterSpacingTablet: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialDesignationLetterSpacingMobile: {
     type: "number",
-    "default": 0
+    "default": ''
   },
   TestimonialDesignationLetterSpacingUnits: {
     type: "string",
@@ -458,28 +458,28 @@ var attributes = {
   TestimonialDesktopMargin: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   TestimonialTabMargin: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   TestimonialMobileMargin: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   TestimonialMarginLink: {
@@ -517,28 +517,28 @@ var attributes = {
   TestimonialDesktopBorderWidth: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   TestimonialTabBorderWidth: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   TestimonialMobileBorderWidth: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   TestimonialBorderLink: {
@@ -612,18 +612,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ICON_ALIGN: () => (/* binding */ ICON_ALIGN),
 /* harmony export */   NORMAL_HOVER: () => (/* binding */ NORMAL_HOVER),
 /* harmony export */   SEPERATOR_STYLES: () => (/* binding */ SEPERATOR_STYLES),
-/* harmony export */   SUBTITLE_MARGIN: () => (/* binding */ SUBTITLE_MARGIN),
 /* harmony export */   TEXT_ALIGN: () => (/* binding */ TEXT_ALIGN),
-/* harmony export */   TITLE_MARGIN: () => (/* binding */ TITLE_MARGIN),
-/* harmony export */   UNIT_TYPES: () => (/* binding */ UNIT_TYPES),
-/* harmony export */   WRAPPER_BG: () => (/* binding */ WRAPPER_BG),
-/* harmony export */   WRAPPER_BORDER_SHADOW: () => (/* binding */ WRAPPER_BORDER_SHADOW),
-/* harmony export */   WRAPPER_MARGIN: () => (/* binding */ WRAPPER_MARGIN),
-/* harmony export */   WRAPPER_PADDING: () => (/* binding */ WRAPPER_PADDING),
-/* harmony export */   separator_ICON_SIZE: () => (/* binding */ separator_ICON_SIZE),
-/* harmony export */   separator_LINE_SIZE: () => (/* binding */ separator_LINE_SIZE),
-/* harmony export */   separator_MARGIN: () => (/* binding */ separator_MARGIN),
-/* harmony export */   separator_WIDTH: () => (/* binding */ separator_WIDTH)
+/* harmony export */   UNIT_TYPES: () => (/* binding */ UNIT_TYPES)
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
@@ -631,18 +621,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-// the consts defined here should be unique from one another
-var WRAPPER_BG = "wrprBg";
-var WRAPPER_MARGIN = "wrpMargin";
-var WRAPPER_PADDING = "wrpPadding";
-var WRAPPER_BORDER_SHADOW = "wrpBorderShadow";
-var TITLE_MARGIN = "titleMargin";
-var SUBTITLE_MARGIN = "subtitleMargin";
-var separator_MARGIN = "separatorMargin";
-var separator_LINE_SIZE = "separatorLineSize";
-var separator_ICON_SIZE = "separatorIconSize";
-var separator_WIDTH = "separatorWidth";
 var UNIT_TYPES = [{
   label: "px",
   value: "px"
@@ -3048,193 +3026,193 @@ var FONT_FAMILYS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pushster", "frontis-blocks"),
   value: "Pushster"
 }, {
-  label: "Quando",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Quando", "frontis-blocks"),
   value: "Quando"
 }, {
-  label: "Quantico",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Quantico", "frontis-blocks"),
   value: "Quantico"
 }, {
-  label: "Quattrocento",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Quattrocento", "frontis-blocks"),
   value: "Quattrocento"
 }, {
-  label: "Quattrocento Sans",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Quattrocento Sans", "frontis-blocks"),
   value: "Quattrocento Sans"
 }, {
-  label: "Questrial",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Questrial", "frontis-blocks"),
   value: "Questrial"
 }, {
-  label: "Quicksand",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Quicksand", "frontis-blocks"),
   value: "Quicksand"
 }, {
-  label: "Quintessential",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Quintessential", "frontis-blocks"),
   value: "Quintessential"
 }, {
-  label: "Qwigley",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Qwigley", "frontis-blocks"),
   value: "Qwigley"
 }, {
-  label: "Racing Sans One",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Racing Sans One", "frontis-blocks"),
   value: "Racing Sans One"
 }, {
-  label: "Radley",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Radley", "frontis-blocks"),
   value: "Radley"
 }, {
-  label: "Rajdhani",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rajdhani", "frontis-blocks"),
   value: "Rajdhani"
 }, {
-  label: "Rakkas",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rakkas", "frontis-blocks"),
   value: "Rakkas"
 }, {
-  label: "Raleway",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Raleway", "frontis-blocks"),
   value: "Raleway"
 }, {
-  label: "Raleway Dots",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Raleway Dots", "frontis-blocks"),
   value: "Raleway Dots"
 }, {
-  label: "Ramabhadra",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ramabhadra", "frontis-blocks"),
   value: "Ramabhadra"
 }, {
-  label: "Ramaraja",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ramaraja", "frontis-blocks"),
   value: "Ramaraja"
 }, {
-  label: "Rambla",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rambla", "frontis-blocks"),
   value: "Rambla"
 }, {
-  label: "Rammetto One",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rammetto One", "frontis-blocks"),
   value: "Rammetto One"
 }, {
-  label: "Ranchers",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ranchers", "frontis-blocks"),
   value: "Ranchers"
 }, {
-  label: "Rancho",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rancho", "frontis-blocks"),
   value: "Rancho"
 }, {
-  label: "Ranga",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ranga", "frontis-blocks"),
   value: "Ranga"
 }, {
-  label: "Rasa",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rasa", "frontis-blocks"),
   value: "Rasa"
 }, {
-  label: "Rationale",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rationale", "frontis-blocks"),
   value: "Rationale"
 }, {
-  label: "Ravi Prakash",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ravi Prakash", "frontis-blocks"),
   value: "Ravi Prakash"
 }, {
-  label: "Red Hat Display",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Red Hat Display", "frontis-blocks"),
   value: "Red Hat Display"
 }, {
-  label: "Red Hat Text",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Red Hat Text", "frontis-blocks"),
   value: "Red Hat Text"
 }, {
-  label: "Redacted",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redacted", "frontis-blocks"),
   value: "Redacted"
 }, {
-  label: "Redacted Script",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redacted Script", "frontis-blocks"),
   value: "Redacted Script"
 }, {
-  label: "Redressed",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redressed", "frontis-blocks"),
   value: "Redressed"
 }, {
-  label: "Reem Kufi",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reem Kufi", "frontis-blocks"),
   value: "Reem Kufi"
 }, {
-  label: "Reenie Beanie",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reenie Beanie", "frontis-blocks"),
   value: "Reenie Beanie"
 }, {
-  label: "Revalia",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Revalia", "frontis-blocks"),
   value: "Revalia"
 }, {
-  label: "Rhodium Libre",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rhodium Libre", "frontis-blocks"),
   value: "Rhodium Libre"
 }, {
-  label: "Ribeye",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ribeye", "frontis-blocks"),
   value: "Ribeye"
 }, {
-  label: "Ribeye Marrow",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ribeye Marrow", "frontis-blocks"),
   value: "Ribeye Marrow"
 }, {
-  label: "Righteous",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Righteous", "frontis-blocks"),
   value: "Righteous"
 }, {
-  label: "Risque",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Risque", "frontis-blocks"),
   value: "Risque"
 }, {
-  label: "Roboto",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Roboto", "frontis-blocks"),
   value: "Roboto"
 }, {
-  label: "Roboto Condensed",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Roboto Condensed", "frontis-blocks"),
   value: "Roboto Condensed"
 }, {
-  label: "Roboto Mono",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Roboto Mono", "frontis-blocks"),
   value: "Roboto Mono"
 }, {
-  label: "Roboto Slab",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Roboto Slab", "frontis-blocks"),
   value: "Roboto Slab"
 }, {
-  label: "Rochester",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rochester", "frontis-blocks"),
   value: "Rochester"
 }, {
-  label: "Rock Salt",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rock Salt", "frontis-blocks"),
   value: "Rock Salt"
 }, {
-  label: "Rokkitt",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rokkitt", "frontis-blocks"),
   value: "Rokkitt"
 }, {
-  label: "Romanesco",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Romanesco", "frontis-blocks"),
   value: "Romanesco"
 }, {
-  label: "Ropa Sans",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ropa Sans", "frontis-blocks"),
   value: "Ropa Sans"
 }, {
-  label: "Rosario",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rosario", "frontis-blocks"),
   value: "Rosario"
 }, {
-  label: "Rosarivo",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rosarivo", "frontis-blocks"),
   value: "Rosarivo"
 }, {
-  label: "Rouge Script",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rouge Script", "frontis-blocks"),
   value: "Rouge Script"
 }, {
-  label: "roundedmplus1c",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("roundedmplus1c", "frontis-blocks"),
   value: "roundedmplus1c"
 }, {
-  label: "Rozha One",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rozha One", "frontis-blocks"),
   value: "Rozha One"
 }, {
-  label: "Rubik",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rubik", "frontis-blocks"),
   value: "Rubik"
 }, {
-  label: "Rubik Mono One",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rubik Mono One", "frontis-blocks"),
   value: "Rubik Mono One"
 }, {
-  label: "Rubik One",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rubik One", "frontis-blocks"),
   value: "Rubik One"
 }, {
-  label: "Ruda",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ruda", "frontis-blocks"),
   value: "Ruda"
 }, {
-  label: "Rufina",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rufina", "frontis-blocks"),
   value: "Rufina"
 }, {
-  label: "Ruge Boogie",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ruge Boogie", "frontis-blocks"),
   value: "Ruge Boogie"
 }, {
-  label: "Ruluko",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ruluko", "frontis-blocks"),
   value: "Ruluko"
 }, {
-  label: "Rum Raisin",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rum Raisin", "frontis-blocks"),
   value: "Rum Raisin"
 }, {
-  label: "Ruslan Display",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ruslan Display", "frontis-blocks"),
   value: "Ruslan Display"
 }, {
-  label: "Russo One",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Russo One", "frontis-blocks"),
   value: "Russo One"
 }, {
-  label: "Ruthie",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ruthie", "frontis-blocks"),
   value: "Ruthie"
 }, {
-  label: "Rye",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rye", "frontis-blocks"),
   value: "Rye"
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sacramento", "frontis-blocks"),
@@ -3904,7 +3882,7 @@ function Edit(_ref) {
   })))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
     className: "fb-testimonial-section fb-testimonia-section-".concat(TestimonialAlignment)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-testimonial-wrapper"
+    className: "fb-testimonial-wrapper ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-testimonial-inner-wrapper"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4050,8 +4028,6 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-// import ResponsiveControl from '../../components/responsivecontrol';
-
 
 
 function Inspector(_ref) {
@@ -4059,7 +4035,7 @@ function Inspector(_ref) {
     setAttributes = _ref.setAttributes,
     clientId = _ref.clientId;
   var blockID = attributes.blockID,
-    DeviceType = attributes.DeviceType,
+    deviceType = attributes.deviceType,
     TestimonialAlignment = attributes.TestimonialAlignment,
     TestimonialDesc = attributes.TestimonialDesc,
     TestimonialAuthor = attributes.TestimonialAuthor,
@@ -4247,7 +4223,7 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleImageBorderRadiusWidthInputChange = function handleImageBorderRadiusWidthInputChange(e, direction) {
     var value = e.target.value;
-    switch (DeviceType) {
+    switch (deviceType) {
       case 'Desktop':
         setAttributes({
           TestimonialImageDesktopRadiusWidth: _objectSpread(_objectSpread({}, TestimonialImageDesktopRadiusWidth), {}, _defineProperty({}, direction, value))
@@ -4268,7 +4244,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if TestimonialImageRadiusLink is true */
     if (TestimonialImageRadiusLink) {
-      updateAllImageBorderRadiusWidth(value, DeviceType);
+      updateAllImageBorderRadiusWidth(value, deviceType);
     }
   };
 
@@ -4293,7 +4269,7 @@ function Inspector(_ref) {
   /** Function to handle device click for Border Width */
   var handleBorderRadiusWidthDeviceClick = function handleBorderRadiusWidthDeviceClick(device) {
     setAttributes({
-      DeviceType: device
+      deviceType: device
     });
   };
 
@@ -4349,7 +4325,7 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handlePaddingInputChange = function handlePaddingInputChange(e, direction) {
     var value = e.target.value;
-    switch (DeviceType) {
+    switch (deviceType) {
       case 'Desktop':
         setAttributes({
           TestimonialDesktopPadding: _objectSpread(_objectSpread({}, TestimonialDesktopPadding), {}, _defineProperty({}, direction, value))
@@ -4370,7 +4346,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if TestimonialPaddingLink is true */
     if (TestimonialPaddingLink) {
-      updateAllPadding(value, DeviceType);
+      updateAllPadding(value, deviceType);
     }
   };
 
@@ -4444,7 +4420,7 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleMarginInputChange = function handleMarginInputChange(e, direction) {
     var value = e.target.value;
-    switch (DeviceType) {
+    switch (deviceType) {
       case 'Desktop':
         setAttributes({
           TestimonialDesktopMargin: _objectSpread(_objectSpread({}, TestimonialDesktopMargin), {}, _defineProperty({}, direction, value))
@@ -4465,7 +4441,7 @@ function Inspector(_ref) {
     }
     /** Update all margin values if marginLink is true */
     if (TestimonialMarginLink) {
-      updateAllMargin(value, DeviceType);
+      updateAllMargin(value, deviceType);
     }
   };
 
@@ -4539,7 +4515,7 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleBorderWidthInputChange = function handleBorderWidthInputChange(e, direction) {
     var value = e.target.value;
-    switch (DeviceType) {
+    switch (deviceType) {
       case 'Desktop':
         setAttributes({
           TestimonialDesktopBorderWidth: _objectSpread(_objectSpread({}, TestimonialDesktopBorderWidth), {}, _defineProperty({}, direction, value))
@@ -4560,7 +4536,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if TestimonialBorderLink is true */
     if (TestimonialBorderLink) {
-      updateAllBorderWidth(value, DeviceType);
+      updateAllBorderWidth(value, deviceType);
     }
   };
 
@@ -4634,7 +4610,7 @@ function Inspector(_ref) {
   /** Function to handle input change */
   var handleBorderRadiusWidthInputChange = function handleBorderRadiusWidthInputChange(e, direction) {
     var value = e.target.value;
-    switch (DeviceType) {
+    switch (deviceType) {
       case 'Desktop':
         setAttributes({
           TestimonialDesktopBorderRadiusWidth: _objectSpread(_objectSpread({}, TestimonialDesktopBorderRadiusWidth), {}, _defineProperty({}, direction, value))
@@ -4655,7 +4631,7 @@ function Inspector(_ref) {
     }
     /** Update all padding values if TestimonialBorderRadiusLink is true */
     if (TestimonialBorderRadiusLink) {
-      updateAllBorderRadiusWidth(value, DeviceType);
+      updateAllBorderRadiusWidth(value, deviceType);
     }
   };
 
@@ -4683,7 +4659,7 @@ function Inspector(_ref) {
   var MobileBorderRadiusWidth = "".concat(TestimonialMobileBorderRadiusWidth.top).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialMobileBorderRadiusWidth.right).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialMobileBorderRadiusWidth.bottom).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialMobileBorderRadiusWidth.left).concat(TestimonialBorderRadiusUnits);
   /** End Border Radius Width */
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                    .fb-testimonial-main-wrapper.".concat(blockID, " {\n                        z-index: ").concat(TestimonialZIndex !== undefined ? TestimonialZIndex : '', " !important;\n                    }\n                    .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                        ").concat(TestimonialBgColor !== undefined ? "background-color: ".concat(TestimonialBgColor, ";") : '', ";\n                        padding: ").concat(DesktopPadding, ";\n                        margin: ").concat(DesktopMargin, ";\n                        border: ").concat(TestimonialBorder, ";\n                        border-width: ").concat(DesktopBorderWidth, ";\n                        border-radius: ").concat(DesktopBorderRadiusWidth, " !important;\n                        ").concat(TestimonialBorderColor !== undefined ? "border-color: ".concat(TestimonialBorderColor, ";") : '', ";\n                        transition: all .3s ease-in-out;\n                    }\n                    .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section:hover {\n                        ").concat(TestimonialBgHoverColor !== undefined ? "background-color: ".concat(TestimonialBgHoverColor, ";") : '', ";\n                        ").concat(TestimonialBorderHoverColor !== undefined ? "border-color: ".concat(TestimonialBorderHoverColor, ";") : '', ";\n                    }\n                    .fb-testimonial-image img {\n                        width: ").concat(TestimonialImageWidthDesktop).concat(TestimonialImageWidthUnits, ";\n                        height: ").concat(TestimonialImageWidthDesktop).concat(TestimonialImageWidthUnits, ";\n                        border-radius: ").concat(ImageDesktopBorderRadiusWidth, ";\n                    }\n                    .fb-testimonial-quote-icon svg {\n                        width: ").concat(TestimonialQuoteIconSizeDesktop).concat(TestimonialQuoteIconSizeUnits, ";\n                        height: ").concat(TestimonialQuoteIconSizeDesktop).concat(TestimonialQuoteIconSizeUnits, ";\n                        fill: ").concat(TestimonialQuoteIconColor, ";\n                    }\n                    .fb-testimonial-quote-icon:hover svg {\n                        fill: ").concat(TestimonialQuoteIconHoverColor, ";\n                    }\n                    .fb-testimonial-userdesc-container .fb-user-desc {\n                        font-family: ").concat(TestimonialDescFontFamily, ";\n                        font-size: ").concat(TestimonialDescFontSizeDesktop).concat(TestimonialDescFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialDescFontWeight, ";\n                        font-style: ").concat(TestimonialDescFontStyle, ";\n                        text-transform: ").concat(TestimonialDescTextTransform, ";\n                        text-decoration: ").concat(TestimonialDescTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialDescLetterSpacingDesktop).concat(TestimonialDescLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialDescLineHeightDesktop).concat(TestimonialDescLineHeightUnits, ";\n                        color: ").concat(TestimonialDescColor, ";\n                    }\n                    .fb-testimonial-userdesc-container .fb-user-desc:hover {\n                        color: ").concat(TestimonialDescHoverColor, ";\n                    }\n\n                    .fb-testimonial-userinfo-container .fb-user {\n                        font-family: ").concat(TestimonialAuthorFontFamily, ";\n                        font-size: ").concat(TestimonialAuthorFontSizeDesktop).concat(TestimonialAuthorFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialAuthorFontWeight, ";\n                        font-style: ").concat(TestimonialAuthorFontStyle, ";\n                        text-transform: ").concat(TestimonialAuthorTextTransform, ";\n                        text-decoration: ").concat(TestimonialAuthorTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialAuthorLetterSpacingDesktop).concat(TestimonialAuthorLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialAuthorLineHeightDesktop).concat(TestimonialAuthorLineHeightUnits, ";\n                        color: ").concat(TestimonialAuthorColor, ";\n                    }\n                    .fb-testimonial-userinfo-container .fb-user:hover {\n                        color: ").concat(TestimonialAuthorHoverColor, ";\n                    }\n\n                    .fb-testimonial-userinfo-container .fb-user-designation {\n                        font-family: ").concat(TestimonialDesignationFontFamily, ";\n                        font-size: ").concat(TestimonialDesignationFontSizeDesktop).concat(TestimonialDesignationFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialDesignationFontWeight, ";\n                        font-style: ").concat(TestimonialDesignationFontStyle, ";\n                        text-transform: ").concat(TestimonialDesignationTextTransform, ";\n                        text-decoration: ").concat(TestimonialDesignationTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialDesignationLetterSpacingDesktop).concat(TestimonialDesignationLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialDesignationLineHeightDesktop).concat(TestimonialDesignationLineHeightUnits, ";\n                        color: ").concat(TestimonialDesignationColor, ";\n                    }\n                    .fb-testimonial-userinfo-container .fb-user-designation:hover {\n                        color: ").concat(TestimonialDesignationHoverColor, ";\n                    }\n\n                    .fb-testimonial-rating-icon svg {\n                        width: ").concat(TestimonialRatingIconSizeDesktop).concat(TestimonialRatingIconSizeUnits, ";\n                        height: ").concat(TestimonialRatingIconSizeDesktop).concat(TestimonialRatingIconSizeUnits, ";\n                        fill: ").concat(TestimonialRatingIconColor, ";\n                    }\n                    .fb-testimonial-rating-icon:hover svg {\n                        fill: ").concat(TestimonialRatingIconHoverColor, ";\n                    }\n\n                    @media only screen and (max-width: 1024px) {\n                        .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                            padding: ").concat(TabPadding, ";\n                            margin: ").concat(TabMargin, ";\n                            border-width: ").concat(TabBorderWidth, ";\n                            border-radius: ").concat(TabBorderRadiusWidth, " !important;\n                        }\n                        .fb-testimonial-image img {\n                            width: ").concat(TestimonialImageWidthTablet).concat(TestimonialImageWidthUnits, ";\n                            height: ").concat(TestimonialImageWidthTablet).concat(TestimonialImageWidthUnits, ";\n                            border-radius: ").concat(ImageTabBorderRadiusWidth, ";\n                        }\n                        .fb-testimonial-quote-icon svg {\n                            width: ").concat(TestimonialQuoteIconSizeTablet).concat(TestimonialQuoteIconSizeUnits, ";\n                            height: ").concat(TestimonialQuoteIconSizeTablet).concat(TestimonialQuoteIconSizeUnits, ";\n                        }\n                        .fb-testimonial-userdesc-container .fb-user-desc {\n                            font-size: ").concat(TestimonialDescFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDescLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDescLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user {\n                            font-size: ").concat(TestimonialAuthorFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialAuthorLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialAuthorLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user-designation {\n                            font-size: ").concat(TestimonialDesignationFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDesignationLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDesignationLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-rating-icon svg {\n                            width: ").concat(TestimonialRatingIconSizeTablet).concat(TestimonialRatingIconSizeUnits, ";\n                            height: ").concat(TestimonialRatingIconSizeTablet).concat(TestimonialRatingIconSizeUnits, ";\n                        }\n                    }\n\n                    @media only screen and (max-width: 767px) {\n                        .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                            padding: ").concat(MobilePadding, ";\n                            margin: ").concat(MobileMargin, ";\n                            border-width: ").concat(MobileBorderWidth, ";\n                            border-radius: ").concat(MobileBorderRadiusWidth, " !important;\n                        }\n                        .fb-testimonial-image img {\n                            width: ").concat(TestimonialImageWidthMobile).concat(TestimonialImageWidthUnits, ";\n                            height: ").concat(TestimonialImageWidthMobile).concat(TestimonialImageWidthUnits, ";\n                            border-radius: ").concat(ImageMobileBorderRadiusWidth, ";\n                        }\n                        .fb-testimonial-quote-icon svg {\n                            width: ").concat(TestimonialQuoteIconSizeMobile).concat(TestimonialQuoteIconSizeUnits, ";\n                            height: ").concat(TestimonialQuoteIconSizeMobile).concat(TestimonialQuoteIconSizeUnits, ";\n                        }\n                        .fb-testimonial-userdesc-container .fb-user-desc {\n                            font-size: ").concat(TestimonialDescFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDescLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDescLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user {\n                            font-size: ").concat(TestimonialAuthorFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialAuthorLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialAuthorLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user-designation {\n                            font-size: ").concat(TestimonialDesignationFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDesignationLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDesignationLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-rating-icon svg {\n                            width: ").concat(TestimonialRatingIconSizeMobile).concat(TestimonialRatingIconSizeUnits, ";\n                            height: ").concat(TestimonialRatingIconSizeMobile).concat(TestimonialRatingIconSizeUnits, ";\n                        }\n                    }\n                ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                    .fb-testimonial-main-wrapper.".concat(blockID, " {\n                        z-index: ").concat(TestimonialZIndex !== undefined ? TestimonialZIndex : '', " !important;\n                    }\n                    .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                        ").concat(TestimonialBgColor !== undefined ? "background-color: ".concat(TestimonialBgColor, ";") : '', ";\n                        padding: ").concat(DesktopPadding, ";\n                        margin: ").concat(DesktopMargin, ";\n                        border: ").concat(TestimonialBorder, ";\n                        border-width: ").concat(DesktopBorderWidth, ";\n                        border-radius: ").concat(DesktopBorderRadiusWidth, " !important;\n                        ").concat(TestimonialBorderColor !== undefined ? "border-color: ".concat(TestimonialBorderColor, ";") : '', ";\n                        transition: all .3s ease-in-out;\n                    }\n                    .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section:hover {\n                        ").concat(TestimonialBgHoverColor !== undefined ? "background-color: ".concat(TestimonialBgHoverColor, ";") : '', ";\n                        ").concat(TestimonialBorderHoverColor !== undefined ? "border-color: ".concat(TestimonialBorderHoverColor, ";") : '', ";\n                    }\n                    .").concat(blockID, " .fb-testimonial-image img {\n                        width: ").concat(TestimonialImageWidthDesktop).concat(TestimonialImageWidthUnits, ";\n                        height: ").concat(TestimonialImageWidthDesktop).concat(TestimonialImageWidthUnits, ";\n                        border-radius: ").concat(ImageDesktopBorderRadiusWidth, ";\n                    }\n                    .").concat(blockID, " .fb-testimonial-quote-icon svg {\n                        width: ").concat(TestimonialQuoteIconSizeDesktop).concat(TestimonialQuoteIconSizeUnits, ";\n                        height: ").concat(TestimonialQuoteIconSizeDesktop).concat(TestimonialQuoteIconSizeUnits, ";\n                        fill: ").concat(TestimonialQuoteIconColor, ";\n                    }\n                    .fb-testimonial-quote-icon:hover svg {\n                        fill: ").concat(TestimonialQuoteIconHoverColor, ";\n                    }\n                    .").concat(blockID, " .fb-testimonial-userdesc-container .fb-user-desc {\n                        font-family: ").concat(TestimonialDescFontFamily, ";\n                        font-size: ").concat(TestimonialDescFontSizeDesktop).concat(TestimonialDescFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialDescFontWeight, ";\n                        font-style: ").concat(TestimonialDescFontStyle, ";\n                        text-transform: ").concat(TestimonialDescTextTransform, ";\n                        text-decoration: ").concat(TestimonialDescTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialDescLetterSpacingDesktop).concat(TestimonialDescLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialDescLineHeightDesktop).concat(TestimonialDescLineHeightUnits, ";\n                        color: ").concat(TestimonialDescColor, ";\n                    }\n                    .").concat(blockID, " .fb-testimonial-userdesc-container .fb-user-desc:hover {\n                        color: ").concat(TestimonialDescHoverColor, ";\n                    }\n\n                    .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user {\n                        font-family: ").concat(TestimonialAuthorFontFamily, ";\n                        font-size: ").concat(TestimonialAuthorFontSizeDesktop).concat(TestimonialAuthorFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialAuthorFontWeight, ";\n                        font-style: ").concat(TestimonialAuthorFontStyle, ";\n                        text-transform: ").concat(TestimonialAuthorTextTransform, ";\n                        text-decoration: ").concat(TestimonialAuthorTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialAuthorLetterSpacingDesktop).concat(TestimonialAuthorLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialAuthorLineHeightDesktop).concat(TestimonialAuthorLineHeightUnits, ";\n                        color: ").concat(TestimonialAuthorColor, ";\n                    }\n                    .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user:hover {\n                        color: ").concat(TestimonialAuthorHoverColor, ";\n                    }\n\n                    .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user-designation {\n                        font-family: ").concat(TestimonialDesignationFontFamily, ";\n                        font-size: ").concat(TestimonialDesignationFontSizeDesktop).concat(TestimonialDesignationFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialDesignationFontWeight, ";\n                        font-style: ").concat(TestimonialDesignationFontStyle, ";\n                        text-transform: ").concat(TestimonialDesignationTextTransform, ";\n                        text-decoration: ").concat(TestimonialDesignationTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialDesignationLetterSpacingDesktop).concat(TestimonialDesignationLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialDesignationLineHeightDesktop).concat(TestimonialDesignationLineHeightUnits, ";\n                        color: ").concat(TestimonialDesignationColor, ";\n                    }\n                    .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user-designation:hover {\n                        color: ").concat(TestimonialDesignationHoverColor, ";\n                    }\n\n                    .").concat(blockID, " .fb-testimonial-rating-icon svg {\n                        width: ").concat(TestimonialRatingIconSizeDesktop).concat(TestimonialRatingIconSizeUnits, ";\n                        height: ").concat(TestimonialRatingIconSizeDesktop).concat(TestimonialRatingIconSizeUnits, ";\n                        fill: ").concat(TestimonialRatingIconColor, ";\n                    }\n                    .").concat(blockID, " .fb-testimonial-rating-icon:hover svg {\n                        fill: ").concat(TestimonialRatingIconHoverColor, ";\n                    }\n\n                    @media only screen and (max-width: 1024px) {\n                        .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                            padding: ").concat(TabPadding, ";\n                            margin: ").concat(TabMargin, ";\n                            border-width: ").concat(TabBorderWidth, ";\n                            border-radius: ").concat(TabBorderRadiusWidth, " !important;\n                        }\n                        .").concat(blockID, " .fb-testimonial-image img {\n                            width: ").concat(TestimonialImageWidthTablet).concat(TestimonialImageWidthUnits, ";\n                            height: ").concat(TestimonialImageWidthTablet).concat(TestimonialImageWidthUnits, ";\n                            border-radius: ").concat(ImageTabBorderRadiusWidth, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-quote-icon svg {\n                            width: ").concat(TestimonialQuoteIconSizeTablet).concat(TestimonialQuoteIconSizeUnits, ";\n                            height: ").concat(TestimonialQuoteIconSizeTablet).concat(TestimonialQuoteIconSizeUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-userdesc-container .fb-user-desc {\n                            font-size: ").concat(TestimonialDescFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDescLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDescLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user {\n                            font-size: ").concat(TestimonialAuthorFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialAuthorLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialAuthorLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user-designation {\n                            font-size: ").concat(TestimonialDesignationFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDesignationLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDesignationLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-rating-icon svg {\n                            width: ").concat(TestimonialRatingIconSizeTablet).concat(TestimonialRatingIconSizeUnits, ";\n                            height: ").concat(TestimonialRatingIconSizeTablet).concat(TestimonialRatingIconSizeUnits, ";\n                        }\n                    }\n\n                    @media only screen and (max-width: 767px) {\n                        .").concat(blockID, ".fb-testimonial-main-wrapper .fb-testimonial-section {\n                            padding: ").concat(MobilePadding, ";\n                            margin: ").concat(MobileMargin, ";\n                            border-width: ").concat(MobileBorderWidth, ";\n                            border-radius: ").concat(MobileBorderRadiusWidth, " !important;\n                        }\n                        .").concat(blockID, " .fb-testimonial-image img {\n                            width: ").concat(TestimonialImageWidthMobile).concat(TestimonialImageWidthUnits, ";\n                            height: ").concat(TestimonialImageWidthMobile).concat(TestimonialImageWidthUnits, ";\n                            border-radius: ").concat(ImageMobileBorderRadiusWidth, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-quote-icon svg {\n                            width: ").concat(TestimonialQuoteIconSizeMobile).concat(TestimonialQuoteIconSizeUnits, ";\n                            height: ").concat(TestimonialQuoteIconSizeMobile).concat(TestimonialQuoteIconSizeUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-userdesc-container .fb-user-desc {\n                            font-size: ").concat(TestimonialDescFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDescLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDescLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user {\n                            font-size: ").concat(TestimonialAuthorFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialAuthorLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialAuthorLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-userinfo-container .fb-user-designation {\n                            font-size: ").concat(TestimonialDesignationFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDesignationLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDesignationLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .").concat(blockID, " .fb-testimonial-rating-icon svg {\n                            width: ").concat(TestimonialRatingIconSizeMobile).concat(TestimonialRatingIconSizeUnits, ";\n                            height: ").concat(TestimonialRatingIconSizeMobile).concat(TestimonialRatingIconSizeUnits, ";\n                        }\n                    }\n                ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"
@@ -4818,10 +4794,10 @@ function Inspector(_ref) {
       className: "fb-setting-fontsize-header"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Width", "frontis-blocks"),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: function deviceHandler(newDevice) {
         return setAttributes({
-          DeviceType: newDevice
+          deviceType: newDevice
         });
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -4841,17 +4817,17 @@ function Inspector(_ref) {
     })))), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-fontsize-rangecontrol"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-      value: DeviceType === "Desktop" ? TestimonialImageWidthDesktop : DeviceType === "Tablet" ? TestimonialImageWidthTablet : TestimonialImageWidthMobile,
+      value: deviceType === "Desktop" ? TestimonialImageWidthDesktop : deviceType === "Tablet" ? TestimonialImageWidthTablet : TestimonialImageWidthMobile,
       onChange: function onChange(value) {
-        if (DeviceType === "Desktop") {
+        if (deviceType === "Desktop") {
           setAttributes({
             TestimonialImageWidthDesktop: value
           });
-        } else if (DeviceType === "Tablet") {
+        } else if (deviceType === "Tablet") {
           setAttributes({
             TestimonialImageWidthTablet: value
           });
-        } else if (DeviceType === "Mobile") {
+        } else if (deviceType === "Mobile") {
           setAttributes({
             TestimonialImageWidthMobile: value
           });
@@ -4869,7 +4845,7 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: handleBorderRadiusWidthDeviceClick
     }), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-units-type"
@@ -4894,7 +4870,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.top : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.top : TestimonialImageMobileRadiusWidth.top,
+      value: deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.top : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.top : TestimonialImageMobileRadiusWidth.top,
       onChange: function onChange(e) {
         return handleImageBorderRadiusWidthInputChange(e, 'top');
       }
@@ -4905,7 +4881,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.right : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.right : TestimonialImageMobileRadiusWidth.right,
+      value: deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.right : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.right : TestimonialImageMobileRadiusWidth.right,
       onChange: function onChange(e) {
         return handleImageBorderRadiusWidthInputChange(e, 'right');
       }
@@ -4916,7 +4892,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.bottom : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.bottom : TestimonialImageMobileRadiusWidth.bottom,
+      value: deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.bottom : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.bottom : TestimonialImageMobileRadiusWidth.bottom,
       onChange: function onChange(e) {
         return handleImageBorderRadiusWidthInputChange(e, 'bottom');
       }
@@ -4927,7 +4903,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: DeviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.left : DeviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.left : TestimonialImageMobileRadiusWidth.left,
+      value: deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.left : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.left : TestimonialImageMobileRadiusWidth.left,
       onChange: function onChange(e) {
         return handleImageBorderRadiusWidthInputChange(e, 'left');
       }
@@ -4948,10 +4924,10 @@ function Inspector(_ref) {
       className: "fb-setting-fontsize-header"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Size", "frontis-blocks"),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: function deviceHandler(newDevice) {
         return setAttributes({
-          DeviceType: newDevice
+          deviceType: newDevice
         });
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -4971,17 +4947,17 @@ function Inspector(_ref) {
     })))), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-fontsize-rangecontrol"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-      value: DeviceType === "Desktop" ? TestimonialQuoteIconSizeDesktop : DeviceType === "Tablet" ? TestimonialQuoteIconSizeTablet : TestimonialQuoteIconSizeMobile,
+      value: deviceType === "Desktop" ? TestimonialQuoteIconSizeDesktop : deviceType === "Tablet" ? TestimonialQuoteIconSizeTablet : TestimonialQuoteIconSizeMobile,
       onChange: function onChange(value) {
-        if (DeviceType === "Desktop") {
+        if (deviceType === "Desktop") {
           setAttributes({
             TestimonialQuoteIconSizeDesktop: value
           });
-        } else if (DeviceType === "Tablet") {
+        } else if (deviceType === "Tablet") {
           setAttributes({
             TestimonialQuoteIconSizeTablet: value
           });
-        } else if (DeviceType === "Mobile") {
+        } else if (deviceType === "Mobile") {
           setAttributes({
             TestimonialQuoteIconSizeMobile: value
           });
@@ -5175,10 +5151,10 @@ function Inspector(_ref) {
           className: "fb-setting-fontsize-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -5198,17 +5174,17 @@ function Inspector(_ref) {
         })))), /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-fontsize-rangecontrol"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialDescFontSizeDesktop : DeviceType === "Tablet" ? TestimonialDescFontSizeTablet : TestimonialDescFontSizeMobile,
+          value: deviceType === "Desktop" ? TestimonialDescFontSizeDesktop : deviceType === "Tablet" ? TestimonialDescFontSizeTablet : TestimonialDescFontSizeMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialDescFontSizeDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialDescFontSizeTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialDescFontSizeMobile: value
               });
@@ -5340,10 +5316,10 @@ function Inspector(_ref) {
           className: "fb-setting-letterspacing-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -5361,17 +5337,17 @@ function Inspector(_ref) {
             className: "fb-setting-letterspacing-units-switcher ".concat(TestimonialDescLetterSpacingUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialDescLetterSpacingDesktop : DeviceType === "Tablet" ? TestimonialDescLetterSpacingTablet : TestimonialDescLetterSpacingMobile,
+          value: deviceType === "Desktop" ? TestimonialDescLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialDescLetterSpacingTablet : TestimonialDescLetterSpacingMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialDescLetterSpacingDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialDescLetterSpacingTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialDescLetterSpacingMobile: value
               });
@@ -5388,10 +5364,10 @@ function Inspector(_ref) {
           className: "fb-setting-lineheight-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -5409,17 +5385,17 @@ function Inspector(_ref) {
             className: "fb-setting-lineheight-units-switcher ".concat(TestimonialDescLineHeightUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialDescLineHeightDesktop : DeviceType === "Tablet" ? TestimonialDescLineHeightTablet : TestimonialDescLineHeightMobile,
+          value: deviceType === "Desktop" ? TestimonialDescLineHeightDesktop : deviceType === "Tablet" ? TestimonialDescLineHeightTablet : TestimonialDescLineHeightMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialDescLineHeightDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialDescLineHeightTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialDescLineHeightMobile: value
               });
@@ -5618,10 +5594,10 @@ function Inspector(_ref) {
           className: "fb-setting-fontsize-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -5641,17 +5617,17 @@ function Inspector(_ref) {
         })))), /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-fontsize-rangecontrol"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialAuthorFontSizeDesktop : DeviceType === "Tablet" ? TestimonialAuthorFontSizeTablet : TestimonialAuthorFontSizeMobile,
+          value: deviceType === "Desktop" ? TestimonialAuthorFontSizeDesktop : deviceType === "Tablet" ? TestimonialAuthorFontSizeTablet : TestimonialAuthorFontSizeMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialAuthorFontSizeDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialAuthorFontSizeTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialAuthorFontSizeMobile: value
               });
@@ -5783,10 +5759,10 @@ function Inspector(_ref) {
           className: "fb-setting-letterspacing-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -5804,17 +5780,17 @@ function Inspector(_ref) {
             className: "fb-setting-letterspacing-units-switcher ".concat(TestimonialAuthorLetterSpacingUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialAuthorLetterSpacingDesktop : DeviceType === "Tablet" ? TestimonialAuthorLetterSpacingTablet : TestimonialAuthorLetterSpacingMobile,
+          value: deviceType === "Desktop" ? TestimonialAuthorLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialAuthorLetterSpacingTablet : TestimonialAuthorLetterSpacingMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialAuthorLetterSpacingDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialAuthorLetterSpacingTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialAuthorLetterSpacingMobile: value
               });
@@ -5831,10 +5807,10 @@ function Inspector(_ref) {
           className: "fb-setting-lineheight-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -5852,17 +5828,17 @@ function Inspector(_ref) {
             className: "fb-setting-lineheight-units-switcher ".concat(TestimonialAuthorLineHeightUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialAuthorLineHeightDesktop : DeviceType === "Tablet" ? TestimonialAuthorLineHeightTablet : TestimonialAuthorLineHeightMobile,
+          value: deviceType === "Desktop" ? TestimonialAuthorLineHeightDesktop : deviceType === "Tablet" ? TestimonialAuthorLineHeightTablet : TestimonialAuthorLineHeightMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialAuthorLineHeightDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialAuthorLineHeightTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialAuthorLineHeightMobile: value
               });
@@ -6061,10 +6037,10 @@ function Inspector(_ref) {
           className: "fb-setting-fontsize-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -6084,17 +6060,17 @@ function Inspector(_ref) {
         })))), /*#__PURE__*/React.createElement("div", {
           className: "fb-setting-fontsize-rangecontrol"
         }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialDesignationFontSizeDesktop : DeviceType === "Tablet" ? TestimonialDesignationFontSizeTablet : TestimonialDesignationFontSizeMobile,
+          value: deviceType === "Desktop" ? TestimonialDesignationFontSizeDesktop : deviceType === "Tablet" ? TestimonialDesignationFontSizeTablet : TestimonialDesignationFontSizeMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialDesignationFontSizeDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialDesignationFontSizeTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialDesignationFontSizeMobile: value
               });
@@ -6226,10 +6202,10 @@ function Inspector(_ref) {
           className: "fb-setting-letterspacing-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -6247,17 +6223,17 @@ function Inspector(_ref) {
             className: "fb-setting-letterspacing-units-switcher ".concat(TestimonialDesignationLetterSpacingUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialDesignationLetterSpacingDesktop : DeviceType === "Tablet" ? TestimonialDesignationLetterSpacingTablet : TestimonialDesignationLetterSpacingMobile,
+          value: deviceType === "Desktop" ? TestimonialDesignationLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialDesignationLetterSpacingTablet : TestimonialDesignationLetterSpacingMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialDesignationLetterSpacingDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialDesignationLetterSpacingTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialDesignationLetterSpacingMobile: value
               });
@@ -6274,10 +6250,10 @@ function Inspector(_ref) {
           className: "fb-setting-lineheight-header"
         }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
           labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
-          device: DeviceType,
+          device: deviceType,
           deviceHandler: function deviceHandler(newDevice) {
             return setAttributes({
-              DeviceType: newDevice
+              deviceType: newDevice
             });
           }
         }), /*#__PURE__*/React.createElement("div", {
@@ -6295,17 +6271,17 @@ function Inspector(_ref) {
             className: "fb-setting-lineheight-units-switcher ".concat(TestimonialDesignationLineHeightUnits === item.value ? 'active' : '')
           }, item.label);
         })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          value: DeviceType === "Desktop" ? TestimonialDesignationLineHeightDesktop : DeviceType === "Tablet" ? TestimonialDesignationLineHeightTablet : TestimonialDesignationLineHeightMobile,
+          value: deviceType === "Desktop" ? TestimonialDesignationLineHeightDesktop : deviceType === "Tablet" ? TestimonialDesignationLineHeightTablet : TestimonialDesignationLineHeightMobile,
           onChange: function onChange(value) {
-            if (DeviceType === "Desktop") {
+            if (deviceType === "Desktop") {
               setAttributes({
                 TestimonialDesignationLineHeightDesktop: value
               });
-            } else if (DeviceType === "Tablet") {
+            } else if (deviceType === "Tablet") {
               setAttributes({
                 TestimonialDesignationLineHeightTablet: value
               });
-            } else if (DeviceType === "Mobile") {
+            } else if (deviceType === "Mobile") {
               setAttributes({
                 TestimonialDesignationLineHeightMobile: value
               });
@@ -6465,10 +6441,10 @@ function Inspector(_ref) {
       className: "fb-setting-fontsize-header"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Size", "frontis-blocks"),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: function deviceHandler(newDevice) {
         return setAttributes({
-          DeviceType: newDevice
+          deviceType: newDevice
         });
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -6488,17 +6464,17 @@ function Inspector(_ref) {
     })))), /*#__PURE__*/React.createElement("div", {
       className: "fb-setting-fontsize-rangecontrol"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-      value: DeviceType === "Desktop" ? TestimonialRatingIconSizeDesktop : DeviceType === "Tablet" ? TestimonialRatingIconSizeTablet : TestimonialRatingIconSizeMobile,
+      value: deviceType === "Desktop" ? TestimonialRatingIconSizeDesktop : deviceType === "Tablet" ? TestimonialRatingIconSizeTablet : TestimonialRatingIconSizeMobile,
       onChange: function onChange(value) {
-        if (DeviceType === "Desktop") {
+        if (deviceType === "Desktop") {
           setAttributes({
             TestimonialRatingIconSizeDesktop: value
           });
-        } else if (DeviceType === "Tablet") {
+        } else if (deviceType === "Tablet") {
           setAttributes({
             TestimonialRatingIconSizeTablet: value
           });
-        } else if (DeviceType === "Mobile") {
+        } else if (deviceType === "Mobile") {
           setAttributes({
             TestimonialRatingIconSizeMobile: value
           });
@@ -6674,10 +6650,10 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'frontis-block'),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: function deviceHandler(newDevice) {
         return setAttributes({
-          DeviceType: newDevice
+          deviceType: newDevice
         });
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -6703,7 +6679,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopPadding.top : DeviceType === 'Tablet' ? TestimonialTabPadding.top : TestimonialMobilePadding.top,
+      value: deviceType === 'Desktop' ? TestimonialDesktopPadding.top : deviceType === 'Tablet' ? TestimonialTabPadding.top : TestimonialMobilePadding.top,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'top');
       }
@@ -6714,7 +6690,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopPadding.right : DeviceType === 'Tablet' ? TestimonialTabPadding.right : TestimonialMobilePadding.right,
+      value: deviceType === 'Desktop' ? TestimonialDesktopPadding.right : deviceType === 'Tablet' ? TestimonialTabPadding.right : TestimonialMobilePadding.right,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'right');
       }
@@ -6725,7 +6701,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopPadding.bottom : DeviceType === 'Tablet' ? TestimonialTabPadding.bottom : TestimonialMobilePadding.bottom,
+      value: deviceType === 'Desktop' ? TestimonialDesktopPadding.bottom : deviceType === 'Tablet' ? TestimonialTabPadding.bottom : TestimonialMobilePadding.bottom,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'bottom');
       }
@@ -6736,7 +6712,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopPadding.left : DeviceType === 'Tablet' ? TestimonialTabPadding.left : TestimonialMobilePadding.left,
+      value: deviceType === 'Desktop' ? TestimonialDesktopPadding.left : deviceType === 'Tablet' ? TestimonialTabPadding.left : TestimonialMobilePadding.left,
       onChange: function onChange(e) {
         return handlePaddingInputChange(e, 'left');
       }
@@ -6755,10 +6731,10 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'frontis-block'),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: function deviceHandler(newDevice) {
         return setAttributes({
-          DeviceType: newDevice
+          deviceType: newDevice
         });
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -6784,7 +6760,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopMargin.top : DeviceType === 'Tablet' ? TestimonialTabMargin.top : TestimonialMobileMargin.top,
+      value: deviceType === 'Desktop' ? TestimonialDesktopMargin.top : deviceType === 'Tablet' ? TestimonialTabMargin.top : TestimonialMobileMargin.top,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'top');
       }
@@ -6795,7 +6771,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopMargin.right : DeviceType === 'Tablet' ? TestimonialTabMargin.right : TestimonialMobileMargin.right,
+      value: deviceType === 'Desktop' ? TestimonialDesktopMargin.right : deviceType === 'Tablet' ? TestimonialTabMargin.right : TestimonialMobileMargin.right,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'right');
       }
@@ -6806,7 +6782,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopMargin.bottom : DeviceType === 'Tablet' ? TestimonialTabMargin.bottom : TestimonialMobileMargin.bottom,
+      value: deviceType === 'Desktop' ? TestimonialDesktopMargin.bottom : deviceType === 'Tablet' ? TestimonialTabMargin.bottom : TestimonialMobileMargin.bottom,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'bottom');
       }
@@ -6817,7 +6793,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopMargin.left : DeviceType === 'Tablet' ? TestimonialTabMargin.left : TestimonialMobileMargin.left,
+      value: deviceType === 'Desktop' ? TestimonialDesktopMargin.left : deviceType === 'Tablet' ? TestimonialTabMargin.left : TestimonialMobileMargin.left,
       onChange: function onChange(e) {
         return handleMarginInputChange(e, 'left');
       }
@@ -7123,10 +7099,10 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'frontis-block'),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: function deviceHandler(newDevice) {
         return setAttributes({
-          DeviceType: newDevice
+          deviceType: newDevice
         });
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -7152,7 +7128,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.top : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.top : TestimonialMobileBorderWidth.top,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.top : deviceType === 'Tablet' ? TestimonialTabBorderWidth.top : TestimonialMobileBorderWidth.top,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'top');
       }
@@ -7163,7 +7139,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.right : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.right : TestimonialMobileBorderWidth.right,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.right : deviceType === 'Tablet' ? TestimonialTabBorderWidth.right : TestimonialMobileBorderWidth.right,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'right');
       }
@@ -7174,7 +7150,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.bottom : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.bottom : TestimonialMobileBorderWidth.bottom,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.bottom : deviceType === 'Tablet' ? TestimonialTabBorderWidth.bottom : TestimonialMobileBorderWidth.bottom,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'bottom');
       }
@@ -7185,7 +7161,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderWidth.left : DeviceType === 'Tablet' ? TestimonialTabBorderWidth.left : TestimonialMobileBorderWidth.left,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.left : deviceType === 'Tablet' ? TestimonialTabBorderWidth.left : TestimonialMobileBorderWidth.left,
       onChange: function onChange(e) {
         return handleBorderWidthInputChange(e, 'left');
       }
@@ -7204,10 +7180,10 @@ function Inspector(_ref) {
       className: "fb-setting-spacing-label-container"
     }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius', 'frontis-block'),
-      device: DeviceType,
+      device: deviceType,
       deviceHandler: function deviceHandler(newDevice) {
         return setAttributes({
-          DeviceType: newDevice
+          deviceType: newDevice
         });
       }
     }), /*#__PURE__*/React.createElement("div", {
@@ -7233,7 +7209,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "top",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.top : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.top : TestimonialMobileBorderRadiusWidth.top,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.top : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.top : TestimonialMobileBorderRadiusWidth.top,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'top');
       }
@@ -7244,7 +7220,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Right", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "right",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.right : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.right : TestimonialMobileBorderRadiusWidth.right,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.right : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.right : TestimonialMobileBorderRadiusWidth.right,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'right');
       }
@@ -7255,7 +7231,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "bottom",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.bottom : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.bottom : TestimonialMobileBorderRadiusWidth.bottom,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.bottom : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.bottom : TestimonialMobileBorderRadiusWidth.bottom,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'bottom');
       }
@@ -7266,7 +7242,7 @@ function Inspector(_ref) {
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Left", "frontis-blocks")), /*#__PURE__*/React.createElement("input", {
       type: "number",
       name: "left",
-      value: DeviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.left : DeviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.left : TestimonialMobileBorderRadiusWidth.left,
+      value: deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.left : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.left : TestimonialMobileBorderRadiusWidth.left,
       onChange: function onChange(e) {
         return handleBorderRadiusWidthInputChange(e, 'left');
       }
@@ -7333,10 +7309,6 @@ __webpack_require__.r(__webpack_exports__);
 function save(_ref) {
   var attributes = _ref.attributes;
   var blockID = attributes.blockID,
-    TestimonialImageWidthDesktop = attributes.TestimonialImageWidthDesktop,
-    TestimonialImageWidthTablet = attributes.TestimonialImageWidthTablet,
-    TestimonialImageWidthMobile = attributes.TestimonialImageWidthMobile,
-    TestimonialImageWidthUnits = attributes.TestimonialImageWidthUnits,
     TestimonialImageUrl = attributes.TestimonialImageUrl,
     TestimonialImageAlt = attributes.TestimonialImageAlt,
     TestimonialAlignment = attributes.TestimonialAlignment,
@@ -7347,105 +7319,7 @@ function save(_ref) {
     TestimonialRatingicon = attributes.TestimonialRatingicon,
     TestimonialRatinIconAlign = attributes.TestimonialRatinIconAlign,
     TestimonialQuoteIcon = attributes.TestimonialQuoteIcon,
-    TestimonialQuoteIconAlign = attributes.TestimonialQuoteIconAlign,
-    TestimonialImageRadiusUnits = attributes.TestimonialImageRadiusUnits,
-    TestimonialImageDesktopRadiusWidth = attributes.TestimonialImageDesktopRadiusWidth,
-    TestimonialImagelTabRadiusWidth = attributes.TestimonialImagelTabRadiusWidth,
-    TestimonialImageMobileRadiusWidth = attributes.TestimonialImageMobileRadiusWidth,
-    TestimonialQuoteIconSizeDesktop = attributes.TestimonialQuoteIconSizeDesktop,
-    TestimonialQuoteIconSizeTablet = attributes.TestimonialQuoteIconSizeTablet,
-    TestimonialQuoteIconSizeMobile = attributes.TestimonialQuoteIconSizeMobile,
-    TestimonialQuoteIconSizeUnits = attributes.TestimonialQuoteIconSizeUnits,
-    TestimonialQuoteIconColor = attributes.TestimonialQuoteIconColor,
-    TestimonialQuoteIconHoverColor = attributes.TestimonialQuoteIconHoverColor,
-    TestimonialDescFontFamily = attributes.TestimonialDescFontFamily,
-    TestimonialDescFontSizeDesktop = attributes.TestimonialDescFontSizeDesktop,
-    TestimonialDescFontSizeTablet = attributes.TestimonialDescFontSizeTablet,
-    TestimonialDescFontSizeMobile = attributes.TestimonialDescFontSizeMobile,
-    TestimonialDescFontSizeUnits = attributes.TestimonialDescFontSizeUnits,
-    TestimonialDescFontWeight = attributes.TestimonialDescFontWeight,
-    TestimonialDescFontStyle = attributes.TestimonialDescFontStyle,
-    TestimonialDescTextTransform = attributes.TestimonialDescTextTransform,
-    TestimonialDescTextDecoration = attributes.TestimonialDescTextDecoration,
-    TestimonialDescLetterSpacingDesktop = attributes.TestimonialDescLetterSpacingDesktop,
-    TestimonialDescLetterSpacingTablet = attributes.TestimonialDescLetterSpacingTablet,
-    TestimonialDescLetterSpacingMobile = attributes.TestimonialDescLetterSpacingMobile,
-    TestimonialDescLetterSpacingUnits = attributes.TestimonialDescLetterSpacingUnits,
-    TestimonialDescLineHeightDesktop = attributes.TestimonialDescLineHeightDesktop,
-    TestimonialDescLineHeightTablet = attributes.TestimonialDescLineHeightTablet,
-    TestimonialDescLineHeightMobile = attributes.TestimonialDescLineHeightMobile,
-    TestimonialDescLineHeightUnits = attributes.TestimonialDescLineHeightUnits,
-    TestimonialDescColor = attributes.TestimonialDescColor,
-    TestimonialDescHoverColor = attributes.TestimonialDescHoverColor,
-    TestimonialAuthorFontFamily = attributes.TestimonialAuthorFontFamily,
-    TestimonialAuthorFontSizeDesktop = attributes.TestimonialAuthorFontSizeDesktop,
-    TestimonialAuthorFontSizeTablet = attributes.TestimonialAuthorFontSizeTablet,
-    TestimonialAuthorFontSizeMobile = attributes.TestimonialAuthorFontSizeMobile,
-    TestimonialAuthorFontSizeUnits = attributes.TestimonialAuthorFontSizeUnits,
-    TestimonialAuthorFontWeight = attributes.TestimonialAuthorFontWeight,
-    TestimonialAuthorFontStyle = attributes.TestimonialAuthorFontStyle,
-    TestimonialAuthorTextTransform = attributes.TestimonialAuthorTextTransform,
-    TestimonialAuthorTextDecoration = attributes.TestimonialAuthorTextDecoration,
-    TestimonialAuthorLetterSpacingDesktop = attributes.TestimonialAuthorLetterSpacingDesktop,
-    TestimonialAuthorLetterSpacingTablet = attributes.TestimonialAuthorLetterSpacingTablet,
-    TestimonialAuthorLetterSpacingMobile = attributes.TestimonialAuthorLetterSpacingMobile,
-    TestimonialAuthorLetterSpacingUnits = attributes.TestimonialAuthorLetterSpacingUnits,
-    TestimonialAuthorLineHeightDesktop = attributes.TestimonialAuthorLineHeightDesktop,
-    TestimonialAuthorLineHeightTablet = attributes.TestimonialAuthorLineHeightTablet,
-    TestimonialAuthorLineHeightMobile = attributes.TestimonialAuthorLineHeightMobile,
-    TestimonialAuthorLineHeightUnits = attributes.TestimonialAuthorLineHeightUnits,
-    TestimonialAuthorColor = attributes.TestimonialAuthorColor,
-    TestimonialAuthorHoverColor = attributes.TestimonialAuthorHoverColor,
-    TestimonialDesignationFontFamily = attributes.TestimonialDesignationFontFamily,
-    TestimonialDesignationFontSizeDesktop = attributes.TestimonialDesignationFontSizeDesktop,
-    TestimonialDesignationFontSizeTablet = attributes.TestimonialDesignationFontSizeTablet,
-    TestimonialDesignationFontSizeMobile = attributes.TestimonialDesignationFontSizeMobile,
-    TestimonialDesignationFontSizeUnits = attributes.TestimonialDesignationFontSizeUnits,
-    TestimonialDesignationFontWeight = attributes.TestimonialDesignationFontWeight,
-    TestimonialDesignationFontStyle = attributes.TestimonialDesignationFontStyle,
-    TestimonialDesignationTextTransform = attributes.TestimonialDesignationTextTransform,
-    TestimonialDesignationTextDecoration = attributes.TestimonialDesignationTextDecoration,
-    TestimonialDesignationLetterSpacingDesktop = attributes.TestimonialDesignationLetterSpacingDesktop,
-    TestimonialDesignationLetterSpacingTablet = attributes.TestimonialDesignationLetterSpacingTablet,
-    TestimonialDesignationLetterSpacingMobile = attributes.TestimonialDesignationLetterSpacingMobile,
-    TestimonialDesignationLetterSpacingUnits = attributes.TestimonialDesignationLetterSpacingUnits,
-    TestimonialDesignationLineHeightDesktop = attributes.TestimonialDesignationLineHeightDesktop,
-    TestimonialDesignationLineHeightTablet = attributes.TestimonialDesignationLineHeightTablet,
-    TestimonialDesignationLineHeightMobile = attributes.TestimonialDesignationLineHeightMobile,
-    TestimonialDesignationLineHeightUnits = attributes.TestimonialDesignationLineHeightUnits,
-    TestimonialDesignationColor = attributes.TestimonialDesignationColor,
-    TestimonialDesignationHoverColor = attributes.TestimonialDesignationHoverColor,
-    TestimonialRatingIconSizeDesktop = attributes.TestimonialRatingIconSizeDesktop,
-    TestimonialRatingIconSizeTablet = attributes.TestimonialRatingIconSizeTablet,
-    TestimonialRatingIconSizeMobile = attributes.TestimonialRatingIconSizeMobile,
-    TestimonialRatingIconSizeUnits = attributes.TestimonialRatingIconSizeUnits,
-    TestimonialRatingIconColor = attributes.TestimonialRatingIconColor,
-    TestimonialRatingIconHoverColor = attributes.TestimonialRatingIconHoverColor,
-    TestimonialZIndex = attributes.TestimonialZIndex,
-    TestimonialPaddingUnits = attributes.TestimonialPaddingUnits,
-    TestimonialDesktopPadding = attributes.TestimonialDesktopPadding,
-    TestimonialTabPadding = attributes.TestimonialTabPadding,
-    TestimonialMobilePadding = attributes.TestimonialMobilePadding,
-    TestimonialMarginUnits = attributes.TestimonialMarginUnits,
-    TestimonialDesktopMargin = attributes.TestimonialDesktopMargin,
-    TestimonialTabMargin = attributes.TestimonialTabMargin,
-    TestimonialMobileMargin = attributes.TestimonialMobileMargin,
-    TestimonialBgColor = attributes.TestimonialBgColor,
-    TestimonialBgHoverColor = attributes.TestimonialBgHoverColor,
-    TestimonialBorder = attributes.TestimonialBorder,
-    TestimonialBorderColor = attributes.TestimonialBorderColor,
-    TestimonialBorderHoverColor = attributes.TestimonialBorderHoverColor,
-    TestimonialBorderUnits = attributes.TestimonialBorderUnits,
-    TestimonialDesktopBorderWidth = attributes.TestimonialDesktopBorderWidth,
-    TestimonialTabBorderWidth = attributes.TestimonialTabBorderWidth,
-    TestimonialMobileBorderWidth = attributes.TestimonialMobileBorderWidth,
-    TestimonialBorderRadiusUnits = attributes.TestimonialBorderRadiusUnits,
-    TestimonialDesktopBorderRadiusWidth = attributes.TestimonialDesktopBorderRadiusWidth,
-    TestimonialTabBorderRadiusWidth = attributes.TestimonialTabBorderRadiusWidth,
-    TestimonialMobileBorderRadiusWidth = attributes.TestimonialMobileBorderRadiusWidth,
-    TestimonialDesktopSwitcher = attributes.TestimonialDesktopSwitcher,
-    TestimonialTabletSwitcher = attributes.TestimonialTabletSwitcher,
-    TestimonialMobileSwitcher = attributes.TestimonialMobileSwitcher;
+    TestimonialQuoteIconAlign = attributes.TestimonialQuoteIconAlign;
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
     className: "fb-testimonial-main-wrapper ".concat(blockID)
   });
@@ -7461,41 +7335,10 @@ function save(_ref) {
     }
     return icons;
   };
-
-  /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
-  var ImageDesktopBorderRadiusWidth = "".concat(TestimonialImageDesktopRadiusWidth.top).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImageDesktopRadiusWidth.right).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImageDesktopRadiusWidth.bottom).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImageDesktopRadiusWidth.left).concat(TestimonialImageRadiusUnits);
-  var ImageTabBorderRadiusWidth = "".concat(TestimonialImagelTabRadiusWidth.top).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImagelTabRadiusWidth.right).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImagelTabRadiusWidth.bottom).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImagelTabRadiusWidth.left).concat(TestimonialImageRadiusUnits);
-  var ImageMobileBorderRadiusWidth = "".concat(TestimonialImageMobileRadiusWidth.top).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImageMobileRadiusWidth.right).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImageMobileRadiusWidth.bottom).concat(TestimonialImageRadiusUnits, " ").concat(TestimonialImageMobileRadiusWidth.left).concat(TestimonialImageRadiusUnits);
-  /** End Border Radius Width */
-
-  /** Default padding for desktop (using desktop_padding) */
-  var DesktopPadding = "".concat(TestimonialDesktopPadding.top).concat(TestimonialPaddingUnits, " ").concat(TestimonialDesktopPadding.right).concat(TestimonialPaddingUnits, " ").concat(TestimonialDesktopPadding.bottom).concat(TestimonialPaddingUnits, " ").concat(TestimonialDesktopPadding.left).concat(TestimonialPaddingUnits);
-  var TabPadding = "".concat(TestimonialTabPadding.top).concat(TestimonialPaddingUnits, " ").concat(TestimonialTabPadding.right).concat(TestimonialPaddingUnits, " ").concat(TestimonialTabPadding.bottom).concat(TestimonialPaddingUnits, " ").concat(TestimonialTabPadding.left).concat(TestimonialPaddingUnits);
-  var MobilePadding = "".concat(TestimonialMobilePadding.top).concat(TestimonialPaddingUnits, " ").concat(TestimonialMobilePadding.right).concat(TestimonialPaddingUnits, " ").concat(TestimonialMobilePadding.bottom).concat(TestimonialPaddingUnits, " ").concat(TestimonialMobilePadding.left).concat(TestimonialPaddingUnits);
-  /** End Padding */
-
-  /** Default margin for desktop (using desktop_margin) */
-  var DesktopMargin = "".concat(TestimonialDesktopMargin.top).concat(TestimonialMarginUnits, " ").concat(TestimonialDesktopMargin.right).concat(TestimonialMarginUnits, " ").concat(TestimonialDesktopMargin.bottom).concat(TestimonialMarginUnits, " ").concat(TestimonialDesktopMargin.left).concat(TestimonialMarginUnits);
-  var TabMargin = "".concat(TestimonialTabMargin.top).concat(TestimonialMarginUnits, " ").concat(TestimonialTabMargin.right).concat(TestimonialMarginUnits, " ").concat(TestimonialTabMargin.bottom).concat(TestimonialMarginUnits, " ").concat(TestimonialTabMargin.left).concat(TestimonialMarginUnits);
-  var MobileMargin = "".concat(TestimonialMobileMargin.top).concat(TestimonialMarginUnits, " ").concat(TestimonialMobileMargin.right).concat(TestimonialMarginUnits, " ").concat(TestimonialMobileMargin.bottom).concat(TestimonialMarginUnits, " ").concat(TestimonialMobileMargin.left).concat(TestimonialMarginUnits);
-  /** End Margin */
-
-  /** Default Border Width for desktop (using TestimonialDesktopBorderWidth) */
-  var DesktopBorderWidth = "".concat(TestimonialDesktopBorderWidth.top).concat(TestimonialBorderUnits, " ").concat(TestimonialDesktopBorderWidth.right).concat(TestimonialBorderUnits, " ").concat(TestimonialDesktopBorderWidth.bottom).concat(TestimonialBorderUnits, " ").concat(TestimonialDesktopBorderWidth.left).concat(TestimonialBorderUnits);
-  var TabBorderWidth = "".concat(TestimonialTabBorderWidth.top).concat(TestimonialBorderUnits, " ").concat(TestimonialTabBorderWidth.right).concat(TestimonialBorderUnits, " ").concat(TestimonialTabBorderWidth.bottom).concat(TestimonialBorderUnits, " ").concat(TestimonialTabBorderWidth.left).concat(TestimonialBorderUnits);
-  var MobileBorderWidth = "".concat(TestimonialMobileBorderWidth.top).concat(TestimonialBorderUnits, " ").concat(TestimonialMobileBorderWidth.right).concat(TestimonialBorderUnits, " ").concat(TestimonialMobileBorderWidth.bottom).concat(TestimonialBorderUnits, " ").concat(TestimonialMobileBorderWidth.left).concat(TestimonialBorderUnits);
-  /** End Border Width */
-
-  /** Default Border Width for desktop (using TestimonialDesktopBorderWidth) */
-  var DesktopBorderRadiusWidth = "".concat(TestimonialDesktopBorderRadiusWidth.top).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialDesktopBorderRadiusWidth.right).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialDesktopBorderRadiusWidth.bottom).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialDesktopBorderRadiusWidth.left).concat(TestimonialBorderRadiusUnits);
-  var TabBorderRadiusWidth = "".concat(TestimonialTabBorderRadiusWidth.top).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialTabBorderRadiusWidth.right).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialTabBorderRadiusWidth.bottom).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialTabBorderRadiusWidth.left).concat(TestimonialBorderRadiusUnits);
-  var MobileBorderRadiusWidth = "".concat(TestimonialMobileBorderRadiusWidth.top).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialMobileBorderRadiusWidth.right).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialMobileBorderRadiusWidth.bottom).concat(TestimonialBorderRadiusUnits, " ").concat(TestimonialMobileBorderRadiusWidth.left).concat(TestimonialBorderRadiusUnits);
-  /** End Border Radius Width */
-
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                    .fb-testimonial-main-wrapper.".concat(blockID, " {\n                        z-index: ").concat(TestimonialZIndex !== undefined ? TestimonialZIndex : '', " !important;\n                    }\n                    .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                        ").concat(TestimonialBgColor !== undefined ? "background-color: ".concat(TestimonialBgColor, ";") : '', ";\n                        padding: ").concat(DesktopPadding, ";\n                        margin: ").concat(DesktopMargin, ";\n                        border: ").concat(TestimonialBorder, ";\n                        border-width: ").concat(DesktopBorderWidth, ";\n                        border-radius: ").concat(DesktopBorderRadiusWidth, " !important;\n                        ").concat(TestimonialBorderColor !== undefined ? "border-color: ".concat(TestimonialBorderColor, ";") : '', ";\n                        transition: all .3s ease-in-out;\n                    }\n                    .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section:hover {\n                        ").concat(TestimonialBgHoverColor !== undefined ? "background-color: ".concat(TestimonialBgHoverColor, ";") : '', ";\n                        ").concat(TestimonialBorderHoverColor !== undefined ? "border-color: ".concat(TestimonialBorderHoverColor, ";") : '', ";\n                    }\n                    .fb-testimonial-image img {\n                        width: ").concat(TestimonialImageWidthDesktop).concat(TestimonialImageWidthUnits, ";\n                        height: ").concat(TestimonialImageWidthDesktop).concat(TestimonialImageWidthUnits, ";\n                        border-radius: ").concat(ImageDesktopBorderRadiusWidth, ";\n                    }\n                    .fb-testimonial-quote-icon svg {\n                        width: ").concat(TestimonialQuoteIconSizeDesktop).concat(TestimonialQuoteIconSizeUnits, ";\n                        height: ").concat(TestimonialQuoteIconSizeDesktop).concat(TestimonialQuoteIconSizeUnits, ";\n                        fill: ").concat(TestimonialQuoteIconColor, ";\n                    }\n                    .fb-testimonial-quote-icon:hover svg {\n                        fill: ").concat(TestimonialQuoteIconHoverColor, ";\n                    }\n                    .fb-testimonial-userdesc-container .fb-user-desc {\n                        font-family: ").concat(TestimonialDescFontFamily, ";\n                        font-size: ").concat(TestimonialDescFontSizeDesktop).concat(TestimonialDescFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialDescFontWeight, ";\n                        font-style: ").concat(TestimonialDescFontStyle, ";\n                        text-transform: ").concat(TestimonialDescTextTransform, ";\n                        text-decoration: ").concat(TestimonialDescTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialDescLetterSpacingDesktop).concat(TestimonialDescLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialDescLineHeightDesktop).concat(TestimonialDescLineHeightUnits, ";\n                        color: ").concat(TestimonialDescColor, ";\n                    }\n                    .fb-testimonial-userdesc-container .fb-user-desc:hover {\n                        color: ").concat(TestimonialDescHoverColor, ";\n                    }\n\n                    .fb-testimonial-userinfo-container .fb-user {\n                        font-family: ").concat(TestimonialAuthorFontFamily, ";\n                        font-size: ").concat(TestimonialAuthorFontSizeDesktop).concat(TestimonialAuthorFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialAuthorFontWeight, ";\n                        font-style: ").concat(TestimonialAuthorFontStyle, ";\n                        text-transform: ").concat(TestimonialAuthorTextTransform, ";\n                        text-decoration: ").concat(TestimonialAuthorTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialAuthorLetterSpacingDesktop).concat(TestimonialAuthorLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialAuthorLineHeightDesktop).concat(TestimonialAuthorLineHeightUnits, ";\n                        color: ").concat(TestimonialAuthorColor, ";\n                    }\n                    .fb-testimonial-userinfo-container .fb-user:hover {\n                        color: ").concat(TestimonialAuthorHoverColor, ";\n                    }\n\n                    .fb-testimonial-userinfo-container .fb-user-designation {\n                        font-family: ").concat(TestimonialDesignationFontFamily, ";\n                        font-size: ").concat(TestimonialDesignationFontSizeDesktop).concat(TestimonialDesignationFontSizeUnits, ";\n                        font-weight: ").concat(TestimonialDesignationFontWeight, ";\n                        font-style: ").concat(TestimonialDesignationFontStyle, ";\n                        text-transform: ").concat(TestimonialDesignationTextTransform, ";\n                        text-decoration: ").concat(TestimonialDesignationTextDecoration, ";\n                        letter-spacing: ").concat(TestimonialDesignationLetterSpacingDesktop).concat(TestimonialDesignationLetterSpacingUnits, ";\n                        line-height: ").concat(TestimonialDesignationLineHeightDesktop).concat(TestimonialDesignationLineHeightUnits, ";\n                        color: ").concat(TestimonialDesignationColor, ";\n                    }\n                    .fb-testimonial-userinfo-container .fb-user-designation:hover {\n                        color: ").concat(TestimonialDesignationHoverColor, ";\n                    }\n\n                    .fb-testimonial-rating-icon svg {\n                        width: ").concat(TestimonialRatingIconSizeDesktop).concat(TestimonialRatingIconSizeUnits, ";\n                        height: ").concat(TestimonialRatingIconSizeDesktop).concat(TestimonialRatingIconSizeUnits, ";\n                        fill: ").concat(TestimonialRatingIconColor, ";\n                    }\n                    .fb-testimonial-rating-icon:hover svg {\n                        fill: ").concat(TestimonialRatingIconHoverColor, ";\n                    }\n\n                    @media only screen and (max-width: 1024px) {\n                        .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                            padding: ").concat(TabPadding, ";\n                            margin: ").concat(TabMargin, ";\n                            border-width: ").concat(TabBorderWidth, ";\n                            border-radius: ").concat(TabBorderRadiusWidth, " !important;\n                        }\n                        .fb-testimonial-image img {\n                            width: ").concat(TestimonialImageWidthTablet).concat(TestimonialImageWidthUnits, ";\n                            height: ").concat(TestimonialImageWidthTablet).concat(TestimonialImageWidthUnits, ";\n                            border-radius: ").concat(ImageTabBorderRadiusWidth, ";\n                        }\n                        .fb-testimonial-quote-icon svg {\n                            width: ").concat(TestimonialQuoteIconSizeTablet).concat(TestimonialQuoteIconSizeUnits, ";\n                            height: ").concat(TestimonialQuoteIconSizeTablet).concat(TestimonialQuoteIconSizeUnits, ";\n                        }\n                        .fb-testimonial-userdesc-container .fb-user-desc {\n                            font-size: ").concat(TestimonialDescFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDescLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDescLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user {\n                            font-size: ").concat(TestimonialAuthorFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialAuthorLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialAuthorLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user-designation {\n                            font-size: ").concat(TestimonialDesignationFontSizeTablet).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDesignationLetterSpacingTablet).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDesignationLineHeightTablet).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-rating-icon svg {\n                            width: ").concat(TestimonialRatingIconSizeTablet).concat(TestimonialRatingIconSizeUnits, ";\n                            height: ").concat(TestimonialRatingIconSizeTablet).concat(TestimonialRatingIconSizeUnits, ";\n                        }\n                    }\n\n                    @media only screen and (max-width: 767px) {\n                        .fb-testimonial-main-wrapper.").concat(blockID, " .fb-testimonial-section {\n                            padding: ").concat(MobilePadding, ";\n                            margin: ").concat(MobileMargin, ";\n                            border-width: ").concat(MobileBorderWidth, ";\n                            border-radius: ").concat(MobileBorderRadiusWidth, " !important;\n                        }\n                        .fb-testimonial-image img {\n                            width: ").concat(TestimonialImageWidthMobile).concat(TestimonialImageWidthUnits, ";\n                            height: ").concat(TestimonialImageWidthMobile).concat(TestimonialImageWidthUnits, ";\n                            border-radius: ").concat(ImageMobileBorderRadiusWidth, ";\n                        }\n                        .fb-testimonial-quote-icon svg {\n                            width: ").concat(TestimonialQuoteIconSizeMobile).concat(TestimonialQuoteIconSizeUnits, ";\n                            height: ").concat(TestimonialQuoteIconSizeMobile).concat(TestimonialQuoteIconSizeUnits, ";\n                        }\n                        .fb-testimonial-userdesc-container .fb-user-desc {\n                            font-size: ").concat(TestimonialDescFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDescLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDescLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user {\n                            font-size: ").concat(TestimonialAuthorFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialAuthorLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialAuthorLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-userinfo-container .fb-user-designation {\n                            font-size: ").concat(TestimonialDesignationFontSizeMobile).concat(TestimonialDescFontSizeUnits, ";\n                            letter-spacing: ").concat(TestimonialDesignationLetterSpacingMobile).concat(TestimonialDescLetterSpacingUnits, ";\n                            line-height: ").concat(TestimonialDesignationLineHeightMobile).concat(TestimonialDescLineHeightUnits, ";\n                        }\n                        .fb-testimonial-rating-icon svg {\n                            width: ").concat(TestimonialRatingIconSizeMobile).concat(TestimonialRatingIconSizeUnits, ";\n                            height: ").concat(TestimonialRatingIconSizeMobile).concat(TestimonialRatingIconSizeUnits, ";\n                        }\n                    }\n                ")), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
     className: "fb-testimonial-section fb-testimonia-section-".concat(TestimonialAlignment)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-testimonial-wrapper"
+    className: "fb-testimonial-wrapper ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-testimonial-inner-wrapper"
   }, /*#__PURE__*/React.createElement("div", {
@@ -8114,7 +7957,7 @@ function FBIconPicker(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "secondary",
     onClick: fbInsertIcon
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks'))))))));
 }
 
 /***/ }),
@@ -8132,16 +7975,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 function FB_ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
     device = _ref.device,
     deviceHandler = _ref.deviceHandler;
+  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
+    setDeviceType = _useDispatch.setDeviceType;
   var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
-    if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
-      wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(deviceName);
-    }
+    setDeviceType(deviceName);
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-label-wrapper"
@@ -20630,6 +20479,28 @@ module.exports = window["wp"]["blocks"];
 
 "use strict";
 module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "@wordpress/editor":
+/*!********************************!*\
+  !*** external ["wp","editor"] ***!
+  \********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["editor"];
 
 /***/ }),
 

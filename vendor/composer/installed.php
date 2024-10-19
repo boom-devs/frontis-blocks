@@ -3,7 +3,7 @@
         'name' => 'wpmessiah/frontis-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4172b25d6acbd7f6b4aa4ed495c425f7e7a58d51',
+        'reference' => 'd1d4b09bd3e702cbbb26bff5040c05240b871e18',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'wpmessiah/frontis-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4172b25d6acbd7f6b4aa4ed495c425f7e7a58d51',
+            'reference' => 'd1d4b09bd3e702cbbb26bff5040c05240b871e18',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -5223,7 +5223,7 @@ var attributes = {
     type: "string",
     "default": ""
   },
-  DeviceType: {
+  deviceType: {
     type: "string",
     "default": "Desktop"
   },
@@ -5235,33 +5235,21 @@ var attributes = {
     "default": [{
       id: 'item-1',
       socialIcon: 'facebook-f',
-      socialIconColorSwitcher: 'normal',
-      socialIconColor: '#3b5998',
-      socialIconHoverColor: '#3b5998',
       socialIconUrl: '#',
       socialIconTargetUrl: false
     }, {
       id: 'item-2',
       socialIcon: 'x-twitter',
-      socialIconColorSwitcher: 'normal',
-      socialIconColor: '#3b5998',
-      socialIconHoverColor: '#3b5998',
       socialIconUrl: '#',
       socialIconTargetUrl: false
     }, {
       id: 'item-3',
       socialIcon: 'youtube',
-      socialIconColorSwitcher: 'normal',
-      socialIconColor: '#3b5998',
-      socialIconHoverColor: '#3b5998',
       socialIconUrl: '#',
       socialIconTargetUrl: false
     }, {
       id: 'item-4',
       socialIcon: 'behance',
-      socialIconColorSwitcher: 'normal',
-      socialIconColor: '#3b5998',
-      socialIconHoverColor: '#3b5998',
       socialIconUrl: '#',
       socialIconTargetUrl: false
     }],
@@ -5278,17 +5266,7 @@ var attributes = {
         },
         socialIcon: {
           type: 'string',
-          "default": 'check'
-        },
-        socialIconColorSwitcher: {
-          type: "string",
-          "default": "normal"
-        },
-        socialIconColor: {
-          type: "string"
-        },
-        socialIconHoverColor: {
-          type: 'string'
+          "default": 'behance'
         },
         socialIconUrl: {
           type: "string",
@@ -5300,29 +5278,157 @@ var attributes = {
       }
     }
   },
-  // socialIconSizeUnits: {
-  // 	type: 'object',
-  // 	default: {
-  // 		Desktop: 'px',
-  // 		Tablet: 'px',
-  // 		Mobile: 'px'
-  // 	}
-  // },
-  socialIconSizeUnits: {
+  socialAlignment: {
     type: "string",
-    "default": "px"
+    "default": "left"
   },
-  socialIconSizeDesktop: {
-    type: "number",
-    "default": 25
+  socialIconSize: {
+    type: 'object',
+    "default": {
+      Desktop: 25,
+      Tablet: 25,
+      Mobile: 25
+    }
   },
-  socialIconSizeTablet: {
-    type: "number",
-    "default": 25
+  socialIconSizeUnits: {
+    type: 'object',
+    "default": {
+      Desktop: 'px',
+      Tablet: 'px',
+      Mobile: 'px'
+    }
   },
-  socialIconSizeMobile: {
-    type: "number",
-    "default": 25
+  socialIconColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  socialIconColor: {
+    type: "string",
+    "default": "#fff"
+  },
+  socialIconHoverColor: {
+    type: 'string',
+    "default": "#fff"
+  },
+  socialBgColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  socialBgColor: {
+    type: "string",
+    "default": "#399CFF"
+  },
+  socialBgHoverColor: {
+    type: 'string',
+    "default": "#399CFF"
+  },
+  socialIconBorder: {
+    type: 'string',
+    "default": "none"
+  },
+  socialIconBorderColorSwitcher: {
+    type: "string",
+    "default": "normal"
+  },
+  socialIconBorderColor: {
+    type: 'string'
+  },
+  socialIconBorderHoverColor: {
+    type: 'string'
+  },
+  socialIconBorderUnits: {
+    type: 'object',
+    "default": {
+      Desktop: 'px',
+      Tablet: 'px',
+      Mobile: 'px'
+    }
+  },
+  socialIconBorderDesktop: {
+    type: "object",
+    "default": {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    }
+  },
+  socialIconBorderTablet: {
+    type: "object",
+    "default": {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    }
+  },
+  socialIconBorderMobile: {
+    type: "object",
+    "default": {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    }
+  },
+  socialIconBorderLink: {
+    type: "boolean",
+    "default": true
+  },
+  socialIconBorderRadiusUnits: {
+    type: 'object',
+    "default": {
+      Desktop: 'px',
+      Tablet: 'px',
+      Mobile: 'px'
+    }
+  },
+  socialIconBorderRadiusDesktop: {
+    type: "object",
+    "default": {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    }
+  },
+  socialIconBorderRadiusTablet: {
+    type: "object",
+    "default": {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    }
+  },
+  socialIconBorderRadiusMobile: {
+    type: "object",
+    "default": {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    }
+  },
+  socialIconBorderRadiusLink: {
+    type: "boolean",
+    "default": true
+  },
+  socialIconGapSize: {
+    type: 'object',
+    "default": {
+      Desktop: 20,
+      Tablet: 15,
+      Mobile: 15
+    }
+  },
+  socialIconGapUnits: {
+    type: 'object',
+    "default": {
+      Desktop: 'px',
+      Tablet: 'px',
+      Mobile: 'px'
+    }
   },
   socialIconPaddingUnits: {
     type: 'object',
@@ -5335,28 +5441,28 @@ var attributes = {
   socialIconPaddingDesktop: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: 20,
+      bottom: 20,
+      left: 20,
+      right: 20
     }
   },
   socialIconPaddingTablet: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: 20,
+      bottom: 20,
+      left: 20,
+      right: 20
     }
   },
   socialIconPaddingMobile: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: 20,
+      bottom: 20,
+      left: 20,
+      right: 20
     }
   },
   socialIconPaddingLink: {
@@ -5374,28 +5480,28 @@ var attributes = {
   socialPaddingDesktop: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialPaddingTablet: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialPaddingMobile: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialPaddingLink: {
@@ -5413,42 +5519,42 @@ var attributes = {
   socialMarginDesktop: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialMarginTablet: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialMarginMobile: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialMarginLink: {
     type: "boolean",
     "default": true
   },
-  socialBgColorSwitcher: {
+  socialGlobalBgColorSwitcher: {
     type: "string",
     "default": "normal"
   },
-  socialBgColor: {
+  socialGlobalBgColor: {
     type: "string"
   },
-  socialBgHoverColor: {
+  socialGlobalBgHoverColor: {
     type: 'string'
   },
   socialBorder: {
@@ -5476,28 +5582,28 @@ var attributes = {
   socialBorderDesktop: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialBorderTablet: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialBorderMobile: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialBorderLink: {
@@ -5515,28 +5621,28 @@ var attributes = {
   socialBorderRadiusDesktop: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialBorderRadiusTablet: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialBorderRadiusMobile: {
     type: "object",
     "default": {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
     }
   },
   socialBorderRadiusLink: {
@@ -5679,7 +5785,7 @@ function Edit(_ref) {
     setAttributes: setAttributes,
     clientId: clientId
   }), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
-    className: "fb-social-wrapper"
+    className: "fb-social-wrapper ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-social-links-wrapper"
   }, /*#__PURE__*/React.createElement("ul", {
@@ -5758,8 +5864,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sortableItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sortableItem */ "./src/blocks/social-icons/sortableItem.js");
 /* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
 /* harmony import */ var _Components_spacing__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @Components/spacing */ "./src/components/spacing/index.js");
-/* harmony import */ var _Components_range_control__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @Components/range-control */ "./src/components/range-control/index.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/social-icons/editor.scss");
+/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
+/* harmony import */ var _Components_color__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @Components/color */ "./src/components/color/index.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/social-icons/editor.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -5784,18 +5891,40 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
+
 function Inspector(_ref) {
   var attributes = _ref.attributes,
     setAttributes = _ref.setAttributes,
     clientId = _ref.clientId;
   var blockID = attributes.blockID,
-    DeviceType = attributes.DeviceType,
+    deviceType = attributes.deviceType,
+    socialAlignment = attributes.socialAlignment,
     socialIconZIndex = attributes.socialIconZIndex,
     socialItems = attributes.socialItems,
+    socialIconSize = attributes.socialIconSize,
     socialIconSizeUnits = attributes.socialIconSizeUnits,
-    socialIconSizeDesktop = attributes.socialIconSizeDesktop,
-    socialIconSizeTablet = attributes.socialIconSizeTablet,
-    socialIconSizeMobile = attributes.socialIconSizeMobile,
+    socialIconColorSwitcher = attributes.socialIconColorSwitcher,
+    socialIconColor = attributes.socialIconColor,
+    socialIconHoverColor = attributes.socialIconHoverColor,
+    socialBgColorSwitcher = attributes.socialBgColorSwitcher,
+    socialBgColor = attributes.socialBgColor,
+    socialBgHoverColor = attributes.socialBgHoverColor,
+    socialIconBorder = attributes.socialIconBorder,
+    socialIconBorderColorSwitcher = attributes.socialIconBorderColorSwitcher,
+    socialIconBorderColor = attributes.socialIconBorderColor,
+    socialIconBorderHoverColor = attributes.socialIconBorderHoverColor,
+    socialIconBorderUnits = attributes.socialIconBorderUnits,
+    socialIconBorderDesktop = attributes.socialIconBorderDesktop,
+    socialIconBorderTablet = attributes.socialIconBorderTablet,
+    socialIconBorderMobile = attributes.socialIconBorderMobile,
+    socialIconBorderLink = attributes.socialIconBorderLink,
+    socialIconBorderRadiusUnits = attributes.socialIconBorderRadiusUnits,
+    socialIconBorderRadiusDesktop = attributes.socialIconBorderRadiusDesktop,
+    socialIconBorderRadiusTablet = attributes.socialIconBorderRadiusTablet,
+    socialIconBorderRadiusMobile = attributes.socialIconBorderRadiusMobile,
+    socialIconBorderRadiusLink = attributes.socialIconBorderRadiusLink,
+    socialIconGapSize = attributes.socialIconGapSize,
+    socialIconGapUnits = attributes.socialIconGapUnits,
     socialIconPaddingUnits = attributes.socialIconPaddingUnits,
     socialIconPaddingDesktop = attributes.socialIconPaddingDesktop,
     socialIconPaddingTablet = attributes.socialIconPaddingTablet,
@@ -5811,9 +5940,9 @@ function Inspector(_ref) {
     socialMarginTablet = attributes.socialMarginTablet,
     socialMarginMobile = attributes.socialMarginMobile,
     socialMarginLink = attributes.socialMarginLink,
-    socialBgColorSwitcher = attributes.socialBgColorSwitcher,
-    socialBgColor = attributes.socialBgColor,
-    socialBgHoverColor = attributes.socialBgHoverColor,
+    socialGlobalBgColorSwitcher = attributes.socialGlobalBgColorSwitcher,
+    socialGlobalBgColor = attributes.socialGlobalBgColor,
+    socialGlobalBgHoverColor = attributes.socialGlobalBgHoverColor,
     socialBorder = attributes.socialBorder,
     socialBorderColorSwitcher = attributes.socialBorderColorSwitcher,
     socialBorderColor = attributes.socialBorderColor,
@@ -5828,7 +5957,6 @@ function Inspector(_ref) {
     socialBorderRadiusTablet = attributes.socialBorderRadiusTablet,
     socialBorderRadiusMobile = attributes.socialBorderRadiusMobile,
     socialBorderRadiusLink = attributes.socialBorderRadiusLink;
-  console.log(socialPaddingDesktop);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (clientId && typeof clientId === 'string') {
       setAttributes({
@@ -5880,11 +6008,281 @@ function Inspector(_ref) {
     });
   };
 
+  /** Start socialIconSize */
+  var socialIconSizeHandler = function socialIconSizeHandler(value) {
+    setAttributes({
+      socialIconSize: value
+    });
+  };
+  var socialIconSizeUnitsHandler = function socialIconSizeUnitsHandler(value) {
+    setAttributes({
+      socialIconSizeUnits: value
+    });
+  };
+  /** End socialIconSize */
+
+  /** Start socialIconGapSize */
+  var socialIconGapSizeHandler = function socialIconGapSizeHandler(value) {
+    setAttributes({
+      socialIconGapSize: value
+    });
+  };
+  var socialIconGapUnitsHandler = function socialIconGapUnitsHandler(value) {
+    setAttributes({
+      socialIconGapUnits: value
+    });
+  };
+  /** End socialIconGapSize */
+
+  /** Start Icon Color */
+  var handleColorSwitcherChange = function handleColorSwitcherChange(value) {
+    setAttributes({
+      socialIconColorSwitcher: value
+    });
+  };
+  var handleGlobalColorChange = function handleGlobalColorChange(value) {
+    setAttributes({
+      socialIconColor: value
+    });
+  };
+  var handleGlobalHoverColorChange = function handleGlobalHoverColorChange(value) {
+    setAttributes({
+      socialIconHoverColor: value
+    });
+  };
+  /** End Icon Color */
+
+  /** Start Icon BG Color */
+  var handleBgColorSwitcherChange = function handleBgColorSwitcherChange(value) {
+    setAttributes({
+      socialBgColorSwitcher: value
+    });
+  };
+  var handleBgColorChange = function handleBgColorChange(value) {
+    setAttributes({
+      socialBgColor: value
+    });
+  };
+  var handleBgHoverColorChange = function handleBgHoverColorChange(value) {
+    setAttributes({
+      socialBgHoverColor: value
+    });
+  };
+  /** End Icon BG Color */
+
+  /** Start Icon Border Color */
+  var handleBorderColorSwitcherChange = function handleBorderColorSwitcherChange(value) {
+    setAttributes({
+      socialIconBorderColorSwitcher: value
+    });
+  };
+  var handleBorderColorChange = function handleBorderColorChange(value) {
+    setAttributes({
+      socialIconBorderColor: value
+    });
+  };
+  var handleBorderHoverColorChange = function handleBorderHoverColorChange(value) {
+    setAttributes({
+      socialIconBorderHoverColor: value
+    });
+  };
+  /** End Icon Border Color */
+
+  /** Start Global Bg Color */
+  var handleGlobalBgColorSwitcherChange = function handleGlobalBgColorSwitcherChange(value) {
+    setAttributes({
+      socialGlobalBgColorSwitcher: value
+    });
+  };
+  var handleGlobalBgColorChange = function handleGlobalBgColorChange(value) {
+    setAttributes({
+      socialGlobalBgColor: value
+    });
+  };
+  var handleGlobalBgHoverColorChange = function handleGlobalBgHoverColorChange(value) {
+    setAttributes({
+      socialGlobalBgHoverColor: value
+    });
+  };
+  /** End Global Bg Color */
+
+  /** Start Global Border Color */
+  var handleGlobalBorderColorSwitcherChange = function handleGlobalBorderColorSwitcherChange(value) {
+    setAttributes({
+      socialBorderColorSwitcher: value
+    });
+  };
+  var handleGlobalBorderColorChange = function handleGlobalBorderColorChange(value) {
+    setAttributes({
+      socialBorderColor: value
+    });
+  };
+  var handleGlobalBorderHoverColorChange = function handleGlobalBorderHoverColorChange(value) {
+    setAttributes({
+      socialBorderHoverColor: value
+    });
+  };
+  /** End Global Border Color */
+
+  /** Start Icon border */
+  var handleSocialIconBorderUnitChange = function handleSocialIconBorderUnitChange(event, position) {
+    var value = event.target.value;
+    if (socialIconBorderLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            socialIconBorderDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            socialIconBorderTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            socialIconBorderMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            socialIconBorderDesktop: _objectSpread(_objectSpread({}, socialIconBorderDesktop), {}, _defineProperty({}, position, value))
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            socialIconBorderTablet: _objectSpread(_objectSpread({}, socialIconBorderTablet), {}, _defineProperty({}, position, value))
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            socialIconBorderMobile: _objectSpread(_objectSpread({}, socialIconBorderMobile), {}, _defineProperty({}, position, value))
+          });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+  var handleSocialIconBorderCombineBtn = function handleSocialIconBorderCombineBtn() {
+    setAttributes({
+      socialIconBorderLink: !socialIconBorderLink
+    });
+  };
+  var handleSocialIconBorderUnitsHandler = function handleSocialIconBorderUnitsHandler(unit) {
+    setAttributes({
+      socialIconBorderUnits: _objectSpread(_objectSpread({}, socialIconBorderUnits), {}, _defineProperty({}, deviceType, unit))
+    });
+  };
+  /** End Icon border */
+  var IconBorderDesktopWidth = "".concat(socialIconBorderDesktop.top).concat(socialIconBorderUnits.Desktop, " ").concat(socialIconBorderDesktop.right).concat(socialIconBorderUnits.Desktop, " ").concat(socialIconBorderDesktop.bottom).concat(socialIconBorderUnits.Desktop, " ").concat(socialIconBorderDesktop.left).concat(socialIconBorderUnits.Desktop);
+  var IconBorderTabletWidth = "".concat(socialIconBorderTablet.top).concat(socialIconBorderUnits.Tablet, " ").concat(socialIconBorderTablet.right).concat(socialIconBorderUnits.Tablet, " ").concat(socialIconBorderTablet.bottom).concat(socialIconBorderUnits.Tablet, " ").concat(socialIconBorderTablet.left).concat(socialIconBorderUnits.Tablet);
+  var IconBorderMobileWidth = "".concat(socialIconBorderMobile.top).concat(socialIconBorderUnits.Mobile, " ").concat(socialIconBorderMobile.right).concat(socialIconBorderUnits.Mobile, " ").concat(socialIconBorderMobile.bottom).concat(socialIconBorderUnits.Mobile, " ").concat(socialIconBorderMobile.left).concat(socialIconBorderUnits.Mobile);
+  /** End Border */
+
+  /** Start Icon border radius*/
+  var handleSocialIconBorderRadiusUnitChange = function handleSocialIconBorderRadiusUnitChange(event, position) {
+    var value = event.target.value;
+    if (socialIconBorderRadiusLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            socialIconBorderRadiusDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            socialIconBorderRadiusTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            socialIconBorderRadiusMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            socialIconBorderRadiusDesktop: _objectSpread(_objectSpread({}, socialIconBorderRadiusDesktop), {}, _defineProperty({}, position, value))
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            socialIconBorderRadiusTablet: _objectSpread(_objectSpread({}, socialIconBorderRadiusTablet), {}, _defineProperty({}, position, value))
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            socialIconBorderRadiusMobile: _objectSpread(_objectSpread({}, socialIconBorderRadiusMobile), {}, _defineProperty({}, position, value))
+          });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+  var handleSocialIconBorderRadiusCombineBtn = function handleSocialIconBorderRadiusCombineBtn() {
+    setAttributes({
+      socialIconBorderRadiusLink: !socialIconBorderRadiusLink
+    });
+  };
+  var handleSocialIconBorderRadiusUnitsHandler = function handleSocialIconBorderRadiusUnitsHandler(unit) {
+    setAttributes({
+      socialIconBorderRadiusUnits: _objectSpread(_objectSpread({}, socialIconBorderRadiusUnits), {}, _defineProperty({}, deviceType, unit))
+    });
+  };
+  /** end Global border */
+
+  /** End Icon Border Radius */
+  var IconBorderRadiusDesktopWidth = "".concat(socialIconBorderRadiusDesktop.top).concat(socialIconBorderRadiusUnits.Desktop, " ").concat(socialIconBorderRadiusDesktop.right).concat(socialIconBorderRadiusUnits.Desktop, " ").concat(socialIconBorderRadiusDesktop.bottom).concat(socialIconBorderRadiusUnits.Desktop, " ").concat(socialIconBorderRadiusDesktop.left).concat(socialIconBorderRadiusUnits.Desktop);
+  var IconBorderRadiusTabletWidth = "".concat(socialIconBorderRadiusTablet.top).concat(socialIconBorderRadiusUnits.Tablet, " ").concat(socialIconBorderRadiusTablet.right).concat(socialIconBorderRadiusUnits.Tablet, " ").concat(socialIconBorderRadiusTablet.bottom).concat(socialIconBorderRadiusUnits.Tablet, " ").concat(socialIconBorderRadiusTablet.left).concat(socialIconBorderRadiusUnits.Tablet);
+  var IconBorderRadiusMobileWidth = "".concat(socialIconBorderRadiusMobile.top).concat(socialIconBorderRadiusUnits.Mobile, " ").concat(socialIconBorderRadiusMobile.right).concat(socialIconBorderRadiusUnits.Mobile, " ").concat(socialIconBorderRadiusMobile.bottom).concat(socialIconBorderRadiusUnits.Mobile, " ").concat(socialIconBorderRadiusMobile.left).concat(socialIconBorderRadiusUnits.Mobile);
+  /** End Border Radius */
+
   /** Start Icon padding */
   var handleSocialIconPaddingUnitChange = function handleSocialIconPaddingUnitChange(event, position) {
     var value = event.target.value;
     if (socialIconPaddingLink) {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialIconPaddingDesktop: {
@@ -5919,7 +6317,7 @@ function Inspector(_ref) {
           break;
       }
     } else {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialIconPaddingDesktop: _objectSpread(_objectSpread({}, socialIconPaddingDesktop), {}, _defineProperty({}, position, value))
@@ -5947,24 +6345,19 @@ function Inspector(_ref) {
   };
   var socialIconspacingUnitsHandler = function socialIconspacingUnitsHandler(unit) {
     setAttributes({
-      socialIconPaddingUnits: _objectSpread(_objectSpread({}, socialIconPaddingUnits), {}, _defineProperty({}, DeviceType, unit))
+      socialIconPaddingUnits: _objectSpread(_objectSpread({}, socialIconPaddingUnits), {}, _defineProperty({}, deviceType, unit))
     });
   };
-  /** Default padding for desktop (using desktop_padding) */
-  var IconPaddingDesktop = "".concat(socialIconPaddingDesktop.top).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingDesktop.right).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingDesktop.bottom).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingDesktop.left).concat(socialIconPaddingUnits[DeviceType]);
-  var IconPaddingTablet = "".concat(socialIconPaddingTablet.top).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingTablet.right).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingTablet.bottom).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingTablet.left).concat(socialIconPaddingUnits[DeviceType]);
-  var IconPaddingMobile = "".concat(socialIconPaddingMobile.top).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingMobile.right).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingMobile.bottom).concat(socialIconPaddingUnits[DeviceType], " ").concat(socialIconPaddingMobile.left).concat(socialIconPaddingUnits[DeviceType]);
+  var IconPaddingDesktop = "".concat(socialIconPaddingDesktop.top).concat(socialIconPaddingUnits.Desktop, " ").concat(socialIconPaddingDesktop.right).concat(socialIconPaddingUnits.Desktop, " ").concat(socialIconPaddingDesktop.bottom).concat(socialIconPaddingUnits.Desktop, " ").concat(socialIconPaddingDesktop.left).concat(socialIconPaddingUnits.Desktop);
+  var IconPaddingTablet = "".concat(socialIconPaddingTablet.top).concat(socialIconPaddingUnits.Tablet, " ").concat(socialIconPaddingTablet.right).concat(socialIconPaddingUnits.Tablet, " ").concat(socialIconPaddingTablet.bottom).concat(socialIconPaddingUnits.Tablet, " ").concat(socialIconPaddingTablet.left).concat(socialIconPaddingUnits.Tablet);
+  var IconPaddingMobile = "".concat(socialIconPaddingMobile.top).concat(socialIconPaddingUnits.Mobile, " ").concat(socialIconPaddingMobile.right).concat(socialIconPaddingUnits.Mobile, " ").concat(socialIconPaddingMobile.bottom).concat(socialIconPaddingUnits.Mobile, " ").concat(socialIconPaddingMobile.left).concat(socialIconPaddingUnits.Mobile);
   /** End Padding */
-
-  console.log(IconPaddingDesktop);
-  console.log(IconPaddingTablet);
-  console.log(IconPaddingMobile);
 
   /** Start Global padding */
   var handleSocialPaddingUnitChange = function handleSocialPaddingUnitChange(event, position) {
     var value = event.target.value;
     if (socialPaddingLink) {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialPaddingDesktop: {
@@ -5999,7 +6392,7 @@ function Inspector(_ref) {
           break;
       }
     } else {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialPaddingDesktop: _objectSpread(_objectSpread({}, socialPaddingDesktop), {}, _defineProperty({}, position, value))
@@ -6027,22 +6420,21 @@ function Inspector(_ref) {
   };
   var handleSocialPaddingUnitsHandler = function handleSocialPaddingUnitsHandler(unit) {
     setAttributes({
-      socialPaddingUnits: _objectSpread(_objectSpread({}, socialPaddingUnits), {}, _defineProperty({}, DeviceType, unit))
+      socialPaddingUnits: _objectSpread(_objectSpread({}, socialPaddingUnits), {}, _defineProperty({}, deviceType, unit))
     });
   };
   /** end Global padding */
 
-  /** Default padding for desktop (using desktop_padding) */
-  var DesktopPadding = "".concat(socialPaddingDesktop.top).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingDesktop.right).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingDesktop.bottom).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingDesktop.left).concat(socialPaddingUnits[DeviceType]);
-  var TabletPadding = "".concat(socialPaddingTablet.top).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingTablet.right).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingTablet.bottom).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingTablet.left).concat(socialPaddingUnits[DeviceType]);
-  var MobilePadding = "".concat(socialPaddingMobile.top).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingMobile.right).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingMobile.bottom).concat(socialPaddingUnits[DeviceType], " ").concat(socialPaddingMobile.left).concat(socialPaddingUnits[DeviceType]);
+  var DesktopPadding = "".concat(socialPaddingDesktop.top).concat(socialPaddingUnits.Desktop, " ").concat(socialPaddingDesktop.right).concat(socialPaddingUnits.Desktop, " ").concat(socialPaddingDesktop.bottom).concat(socialPaddingUnits.Desktop, " ").concat(socialPaddingDesktop.left).concat(socialPaddingUnits.Desktop);
+  var TabletPadding = "".concat(socialPaddingTablet.top).concat(socialPaddingUnits.Tablet, " ").concat(socialPaddingTablet.right).concat(socialPaddingUnits.Tablet, " ").concat(socialPaddingTablet.bottom).concat(socialPaddingUnits.Tablet, " ").concat(socialPaddingTablet.left).concat(socialPaddingUnits.Tablet);
+  var MobilePadding = "".concat(socialPaddingMobile.top).concat(socialPaddingUnits.Mobile, " ").concat(socialPaddingMobile.right).concat(socialPaddingUnits.Mobile, " ").concat(socialPaddingMobile.bottom).concat(socialPaddingUnits.Mobile, " ").concat(socialPaddingMobile.left).concat(socialPaddingUnits.Mobile);
   /** End Padding */
 
   /** Start Global margin */
   var handleSocialMarginUnitChange = function handleSocialMarginUnitChange(event, position) {
     var value = event.target.value;
     if (socialMarginLink) {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialMarginDesktop: {
@@ -6077,10 +6469,10 @@ function Inspector(_ref) {
           break;
       }
     } else {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
-            socialMarginDesktop: _objectSpread(_objectSpread({}, socialMargingDesktop), {}, _defineProperty({}, position, value))
+            socialMarginDesktop: _objectSpread(_objectSpread({}, socialMarginDesktop), {}, _defineProperty({}, position, value))
           });
           break;
         case 'Tablet':
@@ -6105,21 +6497,21 @@ function Inspector(_ref) {
   };
   var handleSocialMarginUnitsHandler = function handleSocialMarginUnitsHandler(unit) {
     setAttributes({
-      socialMarginUnits: _objectSpread(_objectSpread({}, socialMarginUnits), {}, _defineProperty({}, DeviceType, unit))
+      socialMarginUnits: _objectSpread(_objectSpread({}, socialMarginUnits), {}, _defineProperty({}, deviceType, unit))
     });
   };
   /** end Global margin */
 
-  var DesktopMargin = "".concat(socialMarginDesktop.top).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginDesktop.right).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginDesktop.bottom).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginDesktop.left).concat(socialMarginUnits[DeviceType]);
-  var TabletMargin = "".concat(socialMarginTablet.top).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginTablet.right).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginTablet.bottom).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginTablet.left).concat(socialMarginUnits[DeviceType]);
-  var MobileMargin = "".concat(socialMarginMobile.top).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginMobile.right).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginMobile.bottom).concat(socialMarginUnits[DeviceType], " ").concat(socialMarginMobile.left).concat(socialMarginUnits[DeviceType]);
+  var DesktopMargin = "".concat(socialMarginDesktop.top).concat(socialMarginUnits.Desktop, " ").concat(socialMarginDesktop.right).concat(socialMarginUnits.Desktop, " ").concat(socialMarginDesktop.bottom).concat(socialMarginUnits.Desktop, " ").concat(socialMarginDesktop.left).concat(socialMarginUnits.Desktop);
+  var TabletMargin = "".concat(socialMarginTablet.top).concat(socialMarginUnits.Tablet, " ").concat(socialMarginTablet.right).concat(socialMarginUnits.Tablet, " ").concat(socialMarginTablet.bottom).concat(socialMarginUnits.Tablet, " ").concat(socialMarginTablet.left).concat(socialMarginUnits.Tablet);
+  var MobileMargin = "".concat(socialMarginMobile.top).concat(socialMarginUnits.Mobile, " ").concat(socialMarginMobile.right).concat(socialMarginUnits.Mobile, " ").concat(socialMarginMobile.bottom).concat(socialMarginUnits.Mobile, " ").concat(socialMarginMobile.left).concat(socialMarginUnits.Mobile);
   /** End Margin */
 
   /** Start Global border */
   var handleSocialBorderUnitChange = function handleSocialBorderUnitChange(event, position) {
     var value = event.target.value;
     if (socialBorderLink) {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialBorderDesktop: {
@@ -6154,7 +6546,7 @@ function Inspector(_ref) {
           break;
       }
     } else {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialBorderDesktop: _objectSpread(_objectSpread({}, socialBorderDesktop), {}, _defineProperty({}, position, value))
@@ -6182,20 +6574,20 @@ function Inspector(_ref) {
   };
   var handleSocialBorderUnitsHandler = function handleSocialBorderUnitsHandler(unit) {
     setAttributes({
-      socialBorderUnits: _objectSpread(_objectSpread({}, socialBorderUnits), {}, _defineProperty({}, DeviceType, unit))
+      socialBorderUnits: _objectSpread(_objectSpread({}, socialBorderUnits), {}, _defineProperty({}, deviceType, unit))
     });
   };
   /** end Global border */
-  var BorderDesktopWidth = "".concat(socialBorderDesktop.top).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderDesktop.right).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderDesktop.bottom).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderDesktop.left).concat(socialBorderUnits[DeviceType]);
-  var BorderTabletWidth = "".concat(socialBorderTablet.top).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderTablet.right).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderTablet.bottom).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderTablet.left).concat(socialBorderUnits[DeviceType]);
-  var BorderMobileWidth = "".concat(socialBorderMobile.top).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderMobile.right).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderMobile.bottom).concat(socialBorderUnits[DeviceType], " ").concat(socialBorderMobile.left).concat(socialBorderUnits[DeviceType]);
+  var BorderDesktopWidth = "".concat(socialBorderDesktop.top).concat(socialBorderUnits.Desktop, " ").concat(socialBorderDesktop.right).concat(socialBorderUnits.Desktop, " ").concat(socialBorderDesktop.bottom).concat(socialBorderUnits.Desktop, " ").concat(socialBorderDesktop.left).concat(socialBorderUnits.Desktop);
+  var BorderTabletWidth = "".concat(socialBorderTablet.top).concat(socialBorderUnits.Tablet, " ").concat(socialBorderTablet.right).concat(socialBorderUnits.Tablet, " ").concat(socialBorderTablet.bottom).concat(socialBorderUnits.Tablet, " ").concat(socialBorderTablet.left).concat(socialBorderUnits.Tablet);
+  var BorderMobileWidth = "".concat(socialBorderMobile.top).concat(socialBorderUnits.Mobile, " ").concat(socialBorderMobile.right).concat(socialBorderUnits.Mobile, " ").concat(socialBorderMobile.bottom).concat(socialBorderUnits.Mobile, " ").concat(socialBorderMobile.left).concat(socialBorderUnits.Mobile);
   /** End Border */
 
   /** Start Global border radius*/
   var handleSocialBorderRadiusUnitChange = function handleSocialBorderRadiusUnitChange(event, position) {
     var value = event.target.value;
     if (socialBorderRadiusLink) {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialBorderRadiusDesktop: {
@@ -6230,7 +6622,7 @@ function Inspector(_ref) {
           break;
       }
     } else {
-      switch (DeviceType) {
+      switch (deviceType) {
         case 'Desktop':
           setAttributes({
             socialBorderRadiusDesktop: _objectSpread(_objectSpread({}, socialBorderRadiusDesktop), {}, _defineProperty({}, position, value))
@@ -6258,17 +6650,17 @@ function Inspector(_ref) {
   };
   var handleSocialBorderRadiusUnitsHandler = function handleSocialBorderRadiusUnitsHandler(unit) {
     setAttributes({
-      socialBorderRadiusUnits: _objectSpread(_objectSpread({}, socialBorderRadiusUnits), {}, _defineProperty({}, DeviceType, unit))
+      socialBorderRadiusUnits: _objectSpread(_objectSpread({}, socialBorderRadiusUnits), {}, _defineProperty({}, deviceType, unit))
     });
   };
   /** end Global border */
 
-  var BorderRadiusDesktopWidth = "".concat(socialBorderRadiusDesktop.top).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusDesktop.right).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusDesktop.bottom).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusDesktop.left).concat(socialBorderRadiusUnits[DeviceType]);
-  var BorderRadiusTabletWidth = "".concat(socialBorderRadiusTablet.top).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusTablet.right).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusTablet.bottom).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusTablet.left).concat(socialBorderRadiusUnits[DeviceType]);
-  var BorderRadiusMobileWidth = "".concat(socialBorderRadiusMobile.top).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusMobile.right).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusMobile.bottom).concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusUnits[DeviceType], " ").concat(socialBorderRadiusMobile.left).concat(socialBorderRadiusUnits[DeviceType]);
+  var BorderRadiusDesktopWidth = "".concat(socialBorderRadiusDesktop.top).concat(socialBorderRadiusUnits.Desktop, " ").concat(socialBorderRadiusDesktop.right).concat(socialBorderRadiusUnits.Desktop, " ").concat(socialBorderRadiusDesktop.bottom).concat(socialBorderRadiusUnits.Desktop, " ").concat(socialBorderRadiusDesktop.left).concat(socialBorderRadiusUnits.Desktop);
+  var BorderRadiusTabletWidth = "".concat(socialBorderRadiusTablet.top).concat(socialBorderRadiusUnits.Tablet, " ").concat(socialBorderRadiusTablet.right).concat(socialBorderRadiusUnits.Tablet, " ").concat(socialBorderRadiusTablet.bottom).concat(socialBorderRadiusUnits.Tablet, " ").concat(socialBorderRadiusTablet.left).concat(socialBorderRadiusUnits.Tablet);
+  var BorderRadiusMobileWidth = "".concat(socialBorderRadiusMobile.top).concat(socialBorderRadiusUnits.Mobile, " ").concat(socialBorderRadiusMobile.right).concat(socialBorderRadiusUnits.Mobile, " ").concat(socialBorderRadiusMobile.bottom).concat(socialBorderRadiusUnits.Mobile, " ").concat(socialBorderRadiusMobile.left).concat(socialBorderRadiusUnits.Mobile);
   /** End Border Radius */
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .fb-social-main-wrapper.".concat(blockID, " {\n                    z-index: ").concat(socialIconZIndex !== undefined ? socialIconZIndex : '', ";\n                }\n                .fb-social-wrapper {\n                    ").concat(socialBgColor !== undefined ? "background-color: ".concat(socialBgColor, ";") : '', ";\n                    padding: ").concat(DesktopPadding, ";\n                    margin: ").concat(DesktopMargin, ";\n                    border: ").concat(socialBorder, ";\n                    border-width: ").concat(BorderDesktopWidth, ";\n                    border-radius: ").concat(BorderRadiusDesktopWidth, " !important;\n                    ").concat(socialBorderColor !== undefined ? "border-color: ".concat(socialBorderColor, ";") : '', ";\n                    transition: all .3s ease-in-out;\n                }\n                .fb-social-wrapper:hover {\n                    ").concat(socialBgHoverColor !== undefined ? "background-color: ".concat(socialBgHoverColor, ";") : '', ";\n                    ").concat(socialBorderHoverColor !== undefined ? "border-color: ".concat(socialBorderHoverColor, ";") : '', ";\n                }\n\n                @media only screen and (max-width: 1024px) {\n\n                    .fb-social-wrapper {\n                        padding: ").concat(TabletPadding, ";\n                        margin: ").concat(TabletMargin, ";\n                        border-width: ").concat(BorderTabletWidth, ";\n                        border-radius: ").concat(BorderRadiusTabletWidth, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .fb-social-wrapper {\n                        padding: ").concat(MobilePadding, ";\n                        margin: ").concat(MobileMargin, ";\n                        border-width: ").concat(BorderMobileWidth, ";\n                        border-radius: ").concat(BorderRadiusMobileWidth, " !important;\n                    }\n                }\n\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n                .".concat(blockID, ".fb-social-main-wrapper {\n                    z-index: ").concat(socialIconZIndex !== undefined ? socialIconZIndex : '', ";\n                }\n                .").concat(blockID, ".fb-social-wrapper {\n                    ").concat(socialGlobalBgColor !== undefined ? "background-color: ".concat(socialGlobalBgColor, ";") : '', ";\n                    padding: ").concat(DesktopPadding, ";\n                    margin: ").concat(DesktopMargin, ";\n                    border: ").concat(socialBorder, ";\n                    border-width: ").concat(BorderDesktopWidth, ";\n                    border-radius: ").concat(BorderRadiusDesktopWidth, " !important;\n                    ").concat(socialBorderColor !== undefined ? "border-color: ".concat(socialBorderColor, ";") : '', ";\n                    transition: all .3s ease-in-out;\n                }\n                .").concat(blockID, ".fb-social-wrapper:hover {\n                    ").concat(socialGlobalBgHoverColor !== undefined ? "background-color: ".concat(socialGlobalBgHoverColor, ";") : '', ";\n                    ").concat(socialBorderHoverColor !== undefined ? "border-color: ".concat(socialBorderHoverColor, ";") : '', ";\n                }\n                .").concat(blockID, " .fb-socials {\n                    column-gap: ").concat(socialIconGapSize.Desktop).concat(socialIconGapUnits.Desktop, ";\n                    justify-content: ").concat(socialAlignment, ";\n                }\n                .").concat(blockID, " .fb-social-list-item a {\n                    width: ").concat(socialIconSize.Desktop).concat(socialIconSizeUnits.Desktop, ";\n                    height: ").concat(socialIconSize.Desktop).concat(socialIconSizeUnits.Desktop, ";\n                    padding: ").concat(IconPaddingDesktop, ";\n                    background-color: ").concat(socialBgColor, ";\n                    border: ").concat(socialIconBorder, ";\n                    border-width: ").concat(IconBorderDesktopWidth, ";\n                    border-radius: ").concat(IconBorderRadiusDesktopWidth, " !important;\n                    ").concat(socialIconBorderColor !== undefined ? "border-color: ".concat(socialIconBorderColor, ";") : '', ";\n                }\n                .").concat(blockID, " .fb-social-list-item a:hover {\n                    background-color: ").concat(socialBgHoverColor, ";\n                    ").concat(socialIconBorderHoverColor !== undefined ? "border-color: ".concat(socialIconBorderHoverColor, ";") : '', ";\n                }\n                .").concat(blockID, " .fb-social-list-item a svg{\n                    fill: ").concat(socialIconColor, ";\n                }\n                .").concat(blockID, " .fb-social-list-item a:hover svg{\n                    fill: ").concat(socialIconHoverColor, ";\n                }\n\n                @media only screen and (max-width: 1024px) {\n\n                    .").concat(blockID, ".fb-social-wrapper {\n                        padding: ").concat(TabletPadding, ";\n                        margin: ").concat(TabletMargin, ";\n                        border-width: ").concat(BorderTabletWidth, ";\n                        border-radius: ").concat(BorderRadiusTabletWidth, " !important;\n                    }\n                    .").concat(blockID, " .fb-socials {\n                        column-gap: ").concat(socialIconGapSize.Tablet).concat(socialIconGapUnits.Tablet, ";\n                    }\n                    .").concat(blockID, " .fb-social-list-item a {\n                        width: ").concat(socialIconSize.Tablet).concat(socialIconSizeUnits.Tablet, ";\n                        height: ").concat(socialIconSize.Tablet).concat(socialIconSizeUnits.Tablet, ";\n                        padding: ").concat(IconPaddingTablet, ";\n                        border-width: ").concat(IconBorderTabletWidth, ";\n                        border-radius: ").concat(IconBorderRadiusTabletWidth, " !important;\n                    }\n                }\n\n                @media only screen and (max-width: 767px) {\n                    .").concat(blockID, ".fb-social-wrapper {\n                        padding: ").concat(MobilePadding, ";\n                        margin: ").concat(MobileMargin, ";\n                        border-width: ").concat(BorderMobileWidth, ";\n                        border-radius: ").concat(BorderRadiusMobileWidth, " !important;\n                    }\n                    .").concat(blockID, " .fb-socials {\n                        column-gap: ").concat(socialIconGapSize.Mobile).concat(socialIconGapUnits.Mobile, ";\n                    }\n                    .").concat(blockID, " .fb-social-list-item a {\n                        width: ").concat(socialIconSize.Mobile).concat(socialIconSizeUnits.Mobile, ";\n                        height: ").concat(socialIconSize.Mobile).concat(socialIconSizeUnits.Mobile, ";\n                        padding: ").concat(IconPaddingMobile, ";\n                        border-width: ").concat(IconBorderMobileWidth, ";\n                        border-radius: ").concat(IconBorderRadiusMobileWidth, " !important;\n                    }\n                }\n\n            ")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
     key: "controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-inspector-control"
@@ -6292,8 +6684,26 @@ function Inspector(_ref) {
     return /*#__PURE__*/React.createElement("div", {
       className: "fb-tab-controls" + tab.name
     }, tab.name === 'general' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Social Items", "frontis-blocks"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General Info", "frontis-blocks"),
       initialOpen: true
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Alignment", "frontis-blocks"),
+      id: "fb-setting-text-alignment",
+      className: "fb-setting-text-alignment"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
+      className: "fb-setting-text-alignment-group-btn"
+    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.TEXT_ALIGN.map(function (item, key) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+        key: key,
+        onClick: function onClick() {
+          return setAttributes({
+            socialAlignment: item.value
+          });
+        },
+        className: "fb-setting-text-alignment-single-btn ".concat(socialAlignment === item.value ? 'active' : '')
+      }, item.label);
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Social Items", "frontis-blocks")
     }, /*#__PURE__*/React.createElement("div", {
       className: "fb-Social-wrapper"
     }, /*#__PURE__*/React.createElement(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_3__.DndContext, {
@@ -6317,64 +6727,99 @@ function Inspector(_ref) {
     })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
       isPrimary: true,
       onClick: handleAddItem
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Social Item", "frontis-blocks"))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Social Item", "frontis-blocks")))))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon", "frontis-blocks"),
       initialOpen: true
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-fontsize-wrapper"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-fontsize-header"
-    }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Size", "frontis-blocks"),
-      device: DeviceType,
-      deviceHandler: function deviceHandler(newDevice) {
+    }, /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      min: 1,
+      max: 300,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Size", "frontis-blocks"),
+      rangeValue: socialIconSize,
+      onChangeHandler: socialIconSizeHandler,
+      rangeUnitHandler: socialIconSizeUnitsHandler,
+      deviceType: deviceType,
+      units: socialIconSizeUnits,
+      setAttributes: setAttributes,
+      rangeStep: 1,
+      resetFallbackValue: 25
+    }), /*#__PURE__*/React.createElement(_Components_color__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Color", "frontis-blocks"),
+      globalColorSwitcher: socialIconColorSwitcher,
+      globalColor: socialIconColor,
+      globalHoverColor: socialIconHoverColor,
+      handleColorSwitcherChange: handleColorSwitcherChange,
+      handleGlobalColorChange: handleGlobalColorChange,
+      handleGlobalHoverColorChange: handleGlobalHoverColorChange
+    }), /*#__PURE__*/React.createElement(_Components_color__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
+      globalColorSwitcher: socialBgColorSwitcher,
+      globalColor: socialBgColor,
+      globalHoverColor: socialBgHoverColor,
+      handleColorSwitcherChange: handleBgColorSwitcherChange,
+      handleGlobalColorChange: handleBgColorChange,
+      handleGlobalHoverColorChange: handleBgHoverColorChange
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border and Radius", "frontis-blocks"),
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Style", "frontis-blocks"),
+      value: socialIconBorder,
+      options: _constants_constants__WEBPACK_IMPORTED_MODULE_6__.BORDER_STYLES,
+      onChange: function onChange(value) {
         return setAttributes({
-          DeviceType: newDevice
+          socialIconBorder: value
         });
       }
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-fontsize-units"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
-      className: "fb-setting-fontsize-units-wrap"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.UNIT_TYPES.map(function (item, key) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
-        key: key,
-        onClick: function onClick() {
-          return setAttributes({
-            socialIconSizeUnits: item.value
-          });
-        },
-        className: "fb-setting-fontsize-units-switcher ".concat(socialIconSizeUnits === item.value ? 'active' : '')
-      }, item.label);
-    })))), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-fontsize-rangecontrol"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.RangeControl, {
-      value: DeviceType === "Desktop" ? socialIconSizeDesktop : DeviceType === "Tablet" ? socialIconSizeTablet : socialIconSizeMobile,
-      onChange: function onChange(value) {
-        if (DeviceType === "Desktop") {
-          setAttributes({
-            socialIconSizeDesktop: value
-          });
-        } else if (DeviceType === "Tablet") {
-          setAttributes({
-            socialIconSizeTablet: value
-          });
-        } else if (DeviceType === "Mobile") {
-          setAttributes({
-            socialIconSizeMobile: value
-          });
-        }
-      },
+    }), /*#__PURE__*/React.createElement(_Components_color__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Color", "frontis-blocks"),
+      globalColorSwitcher: socialIconBorderColorSwitcher,
+      globalColor: socialIconBorderColor,
+      globalHoverColor: socialIconBorderHoverColor,
+      handleColorSwitcherChange: handleBorderColorSwitcherChange,
+      handleGlobalColorChange: handleBorderColorChange,
+      handleGlobalHoverColorChange: handleBorderHoverColorChange
+    }), /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border", "frontis-blocks"),
+      deviceType: deviceType,
+      spacingUnitsHandler: handleSocialIconBorderUnitsHandler,
+      spacingUnits: socialIconBorderUnits,
+      spacingDesktop: socialIconBorderDesktop,
+      spacingTablet: socialIconBorderTablet,
+      spacingMobile: socialIconBorderMobile,
+      handleSpacingUnitHandler: handleSocialIconBorderUnitChange,
+      spacingCombineBtn: socialIconBorderLink,
+      spacingCombineBtnHandler: handleSocialIconBorderCombineBtn,
+      setAttributes: setAttributes
+    }), /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Radius Border", "frontis-blocks"),
+      deviceType: deviceType,
+      spacingUnitsHandler: handleSocialIconBorderRadiusUnitsHandler,
+      spacingUnits: socialIconBorderRadiusUnits,
+      spacingDesktop: socialIconBorderRadiusDesktop,
+      spacingTablet: socialIconBorderRadiusTablet,
+      spacingMobile: socialIconBorderRadiusMobile,
+      handleSpacingUnitHandler: handleSocialIconBorderRadiusUnitChange,
+      spacingCombineBtn: socialIconBorderRadiusLink,
+      spacingCombineBtnHandler: handleSocialIconBorderRadiusCombineBtn,
+      setAttributes: setAttributes
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spacing", "frontis-blocks"),
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_10__["default"], {
       min: 1,
       max: 100,
-      allowReset: true,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Gap", "frontis-blocks"),
+      rangeValue: socialIconGapSize,
+      onChangeHandler: socialIconGapSizeHandler,
+      rangeUnitHandler: socialIconGapUnitsHandler,
+      deviceType: deviceType,
+      units: socialIconGapUnits,
+      setAttributes: setAttributes,
+      rangeStep: 1,
       resetFallbackValue: 20
-    })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spacing", "frontis-blocks"),
-      initialOpen: true
-    }, /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }), /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-blocks"),
-      DeviceType: DeviceType,
+      deviceType: deviceType,
       spacingUnitsHandler: socialIconspacingUnitsHandler,
       spacingUnits: socialIconPaddingUnits,
       spacingDesktop: socialIconPaddingDesktop,
@@ -6404,12 +6849,24 @@ function Inspector(_ref) {
       step: 1,
       allowReset: true,
       resetFallbackValue: 100
+    }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      min: 1,
+      max: 100,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon Gap", "frontis-blocks"),
+      rangeValue: socialIconGapSize,
+      onChangeHandler: socialIconGapSizeHandler,
+      rangeUnitHandler: socialIconGapUnitsHandler,
+      deviceType: deviceType,
+      units: socialIconGapUnits,
+      setAttributes: setAttributes,
+      rangeStep: 1,
+      resetFallbackValue: 20
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding and Margin", "frontis-blocks"),
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Padding", "frontis-blocks"),
-      DeviceType: DeviceType,
+      deviceType: deviceType,
       spacingUnitsHandler: handleSocialPaddingUnitsHandler,
       spacingUnits: socialPaddingUnits,
       spacingDesktop: socialPaddingDesktop,
@@ -6421,7 +6878,7 @@ function Inspector(_ref) {
       setAttributes: setAttributes
     }), /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Margin", "frontis-blocks"),
-      DeviceType: DeviceType,
+      deviceType: deviceType,
       spacingUnitsHandler: handleSocialMarginUnitsHandler,
       spacingUnits: socialMarginUnits,
       spacingDesktop: socialMarginDesktop,
@@ -6434,141 +6891,15 @@ function Inspector(_ref) {
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Background Color",
       initialOpen: false
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-      className: "fb-setting-color-panel-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
-      className: "fb-setting-color-panel-btn"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.NORMAL_HOVER.map(function (item, key) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
-        key: key,
-        onClick: function onClick() {
-          return setAttributes({
-            socialBgColorSwitcher: item.value
-          });
-        },
-        className: "fb-setting-color-panel-btn-switchr ".concat(socialBgColorSwitcher === item.value ? 'active' : '')
-      }, item.label);
-    }))), socialBgColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
-      className: "fb-setting-color-setting-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
-      className: "fb-setting-color-setting-icon-dropdown",
-      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-      popoverProps: {
-        placement: 'bottom-start'
-      },
-      renderToggle: function renderToggle(_ref2) {
-        var isOpen = _ref2.isOpen,
-          onToggle = _ref2.onToggle;
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
-          variant: "primary",
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          className: "fb-setting-color-setting-icon-btn"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
-          icon: "color-picker",
-          className: "fb-setting-color-setting-icon"
-        }));
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-setting-icon-popup"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-          className: "fb-setting-color-setting-icon-popup-inner"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-normal-color"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
-          color: socialBgColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBgColor: value
-            });
-          },
-          enableAlpha: true
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-label"
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-          colors: [{
-            color: '#F72585'
-          }, {
-            color: '#7209B7'
-          }, {
-            color: '#3A0CA3'
-          }, {
-            color: '#4361EE'
-          }, {
-            color: '#4CC9F0'
-          }],
-          disableCustomColors: true,
-          value: socialBgColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBgColor: value
-            });
-          }
-        }))));
-      }
-    })), socialBgColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
-      className: "fb-setting-color-setting-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
-      className: "fb-setting-color-setting-icon-dropdown",
-      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-      popoverProps: {
-        placement: 'bottom-start'
-      },
-      renderToggle: function renderToggle(_ref3) {
-        var isOpen = _ref3.isOpen,
-          onToggle = _ref3.onToggle;
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
-          variant: "primary",
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          className: "fb-setting-color-setting-icon-btn"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
-          icon: "color-picker",
-          className: "fb-setting-color-setting-icon"
-        }));
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-setting-icon-popup"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-          className: "fb-setting-color-setting-icon-popup-inner"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-hover-color"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
-          color: socialBgHoverColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBgHoverColor: value
-            });
-          },
-          enableAlpha: true
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-hover-color-label"
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-          colors: [{
-            color: '#F72585'
-          }, {
-            color: '#7209B7'
-          }, {
-            color: '#3A0CA3'
-          }, {
-            color: '#4361EE'
-          }, {
-            color: '#4CC9F0'
-          }],
-          disableCustomColors: true,
-          value: socialBgHoverColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBgHoverColor: value
-            });
-          }
-        }))));
-      }
-    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }, /*#__PURE__*/React.createElement(_Components_color__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
+      globalColorSwitcher: socialGlobalBgColorSwitcher,
+      globalColor: socialGlobalBgColor,
+      globalHoverColor: socialGlobalBgHoverColor,
+      handleColorSwitcherChange: handleGlobalBgColorSwitcherChange,
+      handleGlobalColorChange: handleGlobalBgColorChange,
+      handleGlobalHoverColorChange: handleGlobalBgHoverColorChange
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border and Radius", "frontis-blocks"),
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
@@ -6580,146 +6911,17 @@ function Inspector(_ref) {
           socialBorder: value
         });
       }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
+    }), /*#__PURE__*/React.createElement(_Components_color__WEBPACK_IMPORTED_MODULE_11__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Color", "frontis-blocks"),
-      className: "fb-setting-color-panel-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, {
-      className: "fb-setting-color-panel-btn"
-    }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.NORMAL_HOVER.map(function (item, key) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
-        key: key,
-        onClick: function onClick() {
-          return setAttributes({
-            socialBorderColorSwitcher: item.value
-          });
-        },
-        className: "fb-setting-color-panel-btn-switchr ".concat(socialBorderColorSwitcher === item.value ? 'active' : '')
-      }, item.label);
-    }))), socialBorderColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Nomal Color", "frontis-blocks"),
-      className: "fb-setting-color-setting-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
-      className: "fb-setting-color-setting-icon-dropdown",
-      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-      popoverProps: {
-        placement: 'bottom-start'
-      },
-      renderToggle: function renderToggle(_ref4) {
-        var isOpen = _ref4.isOpen,
-          onToggle = _ref4.onToggle;
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
-          variant: "primary",
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
-          className: "fb-setting-color-setting-icon-btn"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
-          icon: "color-picker",
-          className: "fb-setting-color-setting-icon"
-        }));
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-setting-icon-popup"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-          className: "fb-setting-color-setting-icon-popup-inner"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-normal-color"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
-          color: socialBorderColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBorderColor: value
-            });
-          },
-          enableAlpha: true
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-label"
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-          colors: [{
-            color: '#F72585'
-          }, {
-            color: '#7209B7'
-          }, {
-            color: '#3A0CA3'
-          }, {
-            color: '#4361EE'
-          }, {
-            color: '#4CC9F0'
-          }],
-          disableCustomColors: true,
-          value: socialBorderColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBorderColor: value
-            });
-          }
-        }))));
-      }
-    })), socialBorderColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
-      className: "fb-setting-color-setting-wrapper"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
-      className: "fb-setting-color-setting-icon-dropdown",
-      contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-      popoverProps: {
-        placement: 'bottom-start'
-      },
-      renderToggle: function renderToggle(_ref5) {
-        var isOpen = _ref5.isOpen,
-          onToggle = _ref5.onToggle;
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
-          variant: "primary",
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
-          className: "fb-setting-color-setting-icon-btn"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
-          icon: "color-picker",
-          className: "fb-setting-color-setting-icon"
-        }));
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-color-setting-icon-popup"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
-          className: "fb-setting-color-setting-icon-popup-inner"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-hover-color"
-        }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPicker, {
-          color: socialBorderHoverColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBorderHoverColor: value
-            });
-          },
-          enableAlpha: true
-        }), /*#__PURE__*/React.createElement("div", {
-          className: "fb-setting-hover-color-label"
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-          colors: [{
-            color: '#F72585'
-          }, {
-            color: '#7209B7'
-          }, {
-            color: '#3A0CA3'
-          }, {
-            color: '#4361EE'
-          }, {
-            color: '#4CC9F0'
-          }],
-          disableCustomColors: true,
-          value: socialBorderHoverColor,
-          onChange: function onChange(value) {
-            return setAttributes({
-              socialBorderHoverColor: value
-            });
-          }
-        }))));
-      }
-    })), /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      globalColorSwitcher: socialBorderColorSwitcher,
+      globalColor: socialBorderColor,
+      globalHoverColor: socialBorderHoverColor,
+      handleColorSwitcherChange: handleGlobalBorderColorSwitcherChange,
+      handleGlobalColorChange: handleGlobalBorderColorChange,
+      handleGlobalHoverColorChange: handleGlobalBorderHoverColorChange
+    }), /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border", "frontis-blocks"),
-      DeviceType: DeviceType,
+      deviceType: deviceType,
       spacingUnitsHandler: handleSocialBorderUnitsHandler,
       spacingUnits: socialBorderUnits,
       spacingDesktop: socialBorderDesktop,
@@ -6731,7 +6933,7 @@ function Inspector(_ref) {
       setAttributes: setAttributes
     }), /*#__PURE__*/React.createElement(_Components_spacing__WEBPACK_IMPORTED_MODULE_9__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Radius Border", "frontis-blocks"),
-      DeviceType: DeviceType,
+      deviceType: deviceType,
       spacingUnitsHandler: handleSocialBorderRadiusUnitsHandler,
       spacingUnits: socialBorderRadiusUnits,
       spacingDesktop: socialBorderRadiusDesktop,
@@ -6772,8 +6974,8 @@ function save(_ref) {
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
     className: "fb-social-main-wrapper ".concat(blockID)
   });
-  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
-    className: "fb-social-wrapper"
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+    className: "fb-social-wrapper ".concat(blockID)
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-social-links-wrapper"
   }, /*#__PURE__*/React.createElement("ul", {
@@ -6788,7 +6990,7 @@ function save(_ref) {
       target: socialIconTargetUrl ? '_blank' : undefined,
       rel: socialIconTargetUrl ? 'noopener noreferrer' : undefined
     }, item.socialIcon ? (0,_components_icon_picker_components_icon_picker_controls_renderIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(item.socialIcon) : ''));
-  })))));
+  }))))));
 }
 
 /***/ }),
@@ -6847,10 +7049,8 @@ function SortableItem(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     isOpen = _useState2[0],
     setIsOpen = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(item.socialIconColorSwitcher),
-    _useState4 = _slicedToArray(_useState3, 2),
-    activeColorSwitcher = _useState4[0],
-    setActiveColorSwitcher = _useState4[1];
+  // const [activeColorSwitcher, setActiveColorSwitcher] = useState(item.socialIconColorSwitcher);
+
   var style = {
     transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_3__.CSS.Transform.toString(transform),
     transition: transition,
@@ -6864,10 +7064,12 @@ function SortableItem(_ref) {
   var iconHandler = function iconHandler(IconName) {
     handleChangeItem(item.id, 'socialIcon', IconName);
   };
-  var updateColorSwitcher = function updateColorSwitcher(value) {
-    handleChangeItem(item.id, 'socialIconColorSwitcher', value);
-    setActiveColorSwitcher(value);
-  };
+
+  // const updateColorSwitcher = (value) => {
+  //     handleChangeItem(item.id, 'socialIconColorSwitcher', value);
+  //     setActiveColorSwitcher(value);
+  // };
+
   var updateNormalColor = function updateNormalColor(color) {
     handleChangeItem(item.id, 'socialIconColor', color.hex);
   };
@@ -6910,122 +7112,6 @@ function SortableItem(_ref) {
   }, /*#__PURE__*/React.createElement(_components_icon_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     value: item.socialIcon,
     setIconHandler: iconHandler
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color Switcher", "frontis-blocks")
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ButtonGroup, {
-    className: "fb-setting-color-panel-btn"
-  }, _constants_constants__WEBPACK_IMPORTED_MODULE_6__.NORMAL_HOVER.map(function (switcher, key) {
-    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-      key: key,
-      onClick: function onClick() {
-        return updateColorSwitcher(switcher.value);
-      },
-      className: "fb-setting-color-panel-btn-switchr ".concat(activeColorSwitcher === switcher.value ? 'active' : '')
-    }, switcher.label);
-  }))), activeColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "frontis-blocks"),
-    className: "fb-setting-color-setting-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Dropdown, {
-    className: "fb-setting-color-setting-icon-dropdown",
-    contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-    popoverProps: {
-      placement: 'bottom-start'
-    },
-    renderToggle: function renderToggle(_ref2) {
-      var isOpen = _ref2.isOpen,
-        onToggle = _ref2.onToggle;
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-        variant: "primary",
-        onClick: onToggle,
-        "aria-expanded": isOpen,
-        className: "fb-setting-color-setting-icon-btn"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Dashicon, {
-        icon: "color-picker",
-        className: "fb-setting-color-setting-icon"
-      }));
-    },
-    renderContent: function renderContent() {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "fb-setting-color-setting-icon-popup"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
-        className: "fb-setting-color-setting-icon-popup-inner"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "fb-setting-normal-color"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
-        color: item.socialIconColor,
-        onChange: updateNormalColor,
-        enableAlpha: true
-      }), /*#__PURE__*/React.createElement("div", {
-        className: "fb-setting-color-label"
-      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
-        colors: [{
-          color: '#F72585'
-        }, {
-          color: '#7209B7'
-        }, {
-          color: '#3A0CA3'
-        }, {
-          color: '#4361EE'
-        }, {
-          color: '#4CC9F0'
-        }],
-        disableCustomColors: true,
-        value: item.socialIconColor,
-        onChange: updateNormalColor
-      }))));
-    }
-  })), activeColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "frontis-blocks"),
-    className: "fb-setting-color-setting-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Dropdown, {
-    className: "fb-setting-color-setting-icon-dropdown",
-    contentClassName: "fb-setting-color-setting-icon-dropdown-content",
-    popoverProps: {
-      placement: 'bottom-start'
-    },
-    renderToggle: function renderToggle(_ref3) {
-      var isOpen = _ref3.isOpen,
-        onToggle = _ref3.onToggle;
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-        variant: "primary",
-        onClick: onToggle,
-        "aria-expanded": isOpen,
-        className: "fb-setting-color-setting-icon-btn"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Dashicon, {
-        icon: "color-picker",
-        className: "fb-setting-color-setting-icon"
-      }));
-    },
-    renderContent: function renderContent() {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "fb-setting-color-setting-icon-popup"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
-        className: "fb-setting-color-setting-icon-popup-inner"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "fb-setting-hover-color"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
-        color: item.socialIconHoverColor,
-        onChange: updateHoverColor,
-        enableAlpha: true
-      }), /*#__PURE__*/React.createElement("div", {
-        className: "fb-setting-hover-color-label"
-      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
-        colors: [{
-          color: '#F72585'
-        }, {
-          color: '#7209B7'
-        }, {
-          color: '#3A0CA3'
-        }, {
-          color: '#4361EE'
-        }, {
-          color: '#4CC9F0'
-        }],
-        disableCustomColors: true,
-        value: item.socialIconHoverColor,
-        onChange: updateHoverColor
-      }))));
-    }
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-link-control-wrapper"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
@@ -7045,9 +7131,9 @@ function SortableItem(_ref) {
     popoverProps: {
       placement: 'bottom-start'
     },
-    renderToggle: function renderToggle(_ref4) {
-      var isOpen = _ref4.isOpen,
-        onToggle = _ref4.onToggle;
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+        onToggle = _ref2.onToggle;
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
         variant: "primary",
         onClick: onToggle,
@@ -7074,6 +7160,174 @@ function SortableItem(_ref) {
     }
   }))))));
 }
+
+/***/ }),
+
+/***/ "./src/components/color/index.js":
+/*!***************************************!*\
+  !*** ./src/components/color/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/color/editor.lazy.scss");
+
+
+
+var FB_Color = function FB_Color(_ref) {
+  var label = _ref.label,
+    globalColorSwitcher = _ref.globalColorSwitcher,
+    globalColor = _ref.globalColor,
+    globalHoverColor = _ref.globalHoverColor,
+    handleColorSwitcherChange = _ref.handleColorSwitcherChange,
+    handleGlobalColorChange = _ref.handleGlobalColorChange,
+    handleGlobalHoverColorChange = _ref.handleGlobalHoverColorChange;
+  var NORMAL_HOVER = [{
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Normal', 'frontis-blocks'),
+    value: 'normal'
+  }, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover', 'frontis-blocks'),
+    value: 'hover'
+  }];
+  var setHandleColorSwitcherChange = function setHandleColorSwitcherChange(value) {
+    handleColorSwitcherChange(value);
+  };
+  var setHandleGlobalColorChange = function setHandleGlobalColorChange(value) {
+    handleGlobalColorChange(value);
+  };
+  var setHandleGlobalHoverColorChange = function setHandleGlobalHoverColorChange(value) {
+    handleGlobalHoverColorChange(value);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-color-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(label, "frontis-blocks"),
+    className: "fb-setting-color-panel-wrapper"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ButtonGroup, {
+    className: "fb-setting-color-panel-btn"
+  }, NORMAL_HOVER.map(function (item, key) {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      key: key,
+      onClick: function onClick() {
+        return setHandleColorSwitcherChange(item.value);
+      },
+      className: "fb-setting-color-panel-btn-switcher ".concat(globalColorSwitcher === item.value ? 'active' : '')
+    }, item.label);
+  }))), globalColorSwitcher === 'normal' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal Color", "frontis-blocks"),
+    className: "fb-setting-color-setting-wrapper"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+    className: "fb-setting-color-setting-icon-dropdown",
+    contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+    popoverProps: {
+      placement: 'bottom-start'
+    },
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+        onToggle = _ref2.onToggle;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+        variant: "primary",
+        onClick: onToggle,
+        "aria-expanded": isOpen,
+        className: "fb-setting-color-setting-icon-btn"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+        icon: "color-picker",
+        className: "fb-setting-color-setting-icon"
+      }));
+    },
+    renderContent: function renderContent() {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-color-setting-icon-popup"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+        className: "fb-setting-color-setting-icon-popup-inner"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-normal-color"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+        color: globalColor,
+        onChange: setHandleGlobalColorChange,
+        enableAlpha: true
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-color-label"
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+        colors: [{
+          color: '#F72585'
+        }, {
+          color: '#7209B7'
+        }, {
+          color: '#3A0CA3'
+        }, {
+          color: '#4361EE'
+        }, {
+          color: '#4CC9F0'
+        }],
+        disableCustomColors: true,
+        value: globalColor,
+        onChange: setHandleGlobalColorChange
+      }))));
+    }
+  })), globalColorSwitcher === 'hover' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover Color", "frontis-blocks"),
+    className: "fb-setting-color-setting-wrapper"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+    className: "fb-setting-color-setting-icon-dropdown",
+    contentClassName: "fb-setting-color-setting-icon-dropdown-content",
+    popoverProps: {
+      placement: 'bottom-start'
+    },
+    renderToggle: function renderToggle(_ref3) {
+      var isOpen = _ref3.isOpen,
+        onToggle = _ref3.onToggle;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+        variant: "primary",
+        onClick: onToggle,
+        "aria-expanded": isOpen,
+        className: "fb-setting-color-setting-icon-btn"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+        icon: "color-picker",
+        className: "fb-setting-color-setting-icon"
+      }));
+    },
+    renderContent: function renderContent() {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-color-setting-icon-popup"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+        className: "fb-setting-color-setting-icon-popup-inner"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-hover-color"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+        color: globalHoverColor,
+        onChange: setHandleGlobalHoverColorChange,
+        enableAlpha: true
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-hover-color-label"
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default Colors", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+        colors: [{
+          color: '#F72585'
+        }, {
+          color: '#7209B7'
+        }, {
+          color: '#3A0CA3'
+        }, {
+          color: '#4361EE'
+        }, {
+          color: '#4CC9F0'
+        }],
+        disableCustomColors: true,
+        value: globalHoverColor,
+        onChange: setHandleGlobalHoverColorChange
+      }))));
+    }
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_Color);
 
 /***/ }),
 
@@ -7655,21 +7909,21 @@ function FBIconPicker(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "secondary",
     onClick: fbInsertIcon
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks')))))), "Icon picker"));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insert icon', 'frontis-blocks'))))))));
 }
 
 /***/ }),
 
-/***/ "./src/components/range-control/index.js":
-/*!***********************************************!*\
-  !*** ./src/components/range-control/index.js ***!
-  \***********************************************/
+/***/ "./src/components/range/index.js":
+/*!***************************************!*\
+  !*** ./src/components/range/index.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ FB_RangeControl)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -7678,21 +7932,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/range-control/editor.lazy.scss");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
 
+// eslint-disable-next-line import/no-unresolved
 
-
-function FB_RangeControl(_ref) {
-  var label = _ref.label,
-    DeviceType = _ref.DeviceType,
-    rangeUnitsHandler = _ref.rangeUnitsHandler,
-    rangeUnit = _ref.rangeUnit,
-    rangeDesktopValue = _ref.rangeDesktopValue,
-    rangeTabletValue = _ref.rangeTabletValue,
-    rangeMobileValue = _ref.rangeMobileValue,
-    setAttributes = _ref.setAttributes;
+var FB_Range = function FB_Range(_ref) {
+  var min = _ref.min,
+    max = _ref.max,
+    label = _ref.label,
+    rangeValue = _ref.rangeValue,
+    onChangeHandler = _ref.onChangeHandler,
+    rangeUnitHandler = _ref.rangeUnitHandler,
+    deviceType = _ref.deviceType,
+    units = _ref.units,
+    setAttributes = _ref.setAttributes,
+    rangeStep = _ref.rangeStep,
+    resetFallbackValue = _ref.resetFallbackValue;
   var UNIT_TYPES = [{
     label: 'px',
     value: 'px'
@@ -7704,75 +7966,59 @@ function FB_RangeControl(_ref) {
     value: 'em'
   }];
 
-  // Function to handle range unit change
+  // Ensure default/fallback value for the current deviceType
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (rangeValue[deviceType] === undefined) {
+      var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, deviceType, resetFallbackValue));
+      onChangeHandler(newRangeValue);
+    }
+  }, [deviceType, rangeValue, onChangeHandler, resetFallbackValue]);
+  var setRangeValue = function setRangeValue(value) {
+    var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, deviceType, value || resetFallbackValue));
+    onChangeHandler(newRangeValue);
+  };
   var setRangeUnit = function setRangeUnit(unit) {
-    rangeUnitsHandler(unit);
+    var newUnits = _objectSpread(_objectSpread({}, units), {}, _defineProperty({}, deviceType, unit));
+    rangeUnitHandler(newUnits);
   };
-
-  // Function to handle range value change based on DeviceType
-  var handleRangeChange = function handleRangeChange(value) {
-    if (DeviceType === 'Desktop') {
-      setAttributes({
-        rangeDesktopValue: value
-      });
-    } else if (DeviceType === 'Tablet') {
-      setAttributes({
-        rangeTabletValue: value
-      });
-    } else if (DeviceType === 'Mobile') {
-      setAttributes({
-        rangeMobileValue: value
-      });
-    }
-  };
-
-  // Get the current range value based on the DeviceType
-  var getCurrentRangeValue = function getCurrentRangeValue() {
-    if (DeviceType === 'Desktop') {
-      return rangeDesktopValue;
-    } else if (DeviceType === 'Tablet') {
-      return rangeTabletValue;
-    } else if (DeviceType === 'Mobile') {
-      return rangeMobileValue;
-    }
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "fb-setting-fontsize-wrapper"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "fb-setting-fontsize-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-spacing-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-spacing-inner-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-spacing-label-container"
+  }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
     labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
-    device: DeviceType,
+    device: deviceType,
     deviceHandler: function deviceHandler(newDevice) {
       return setAttributes({
-        DeviceType: newDevice
+        deviceType: newDevice
       });
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-units-type"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
     className: "fb-setting-units-type-wrap"
   }, UNIT_TYPES.map(function (item, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
       key: key,
       onClick: function onClick() {
         return setRangeUnit(item.value);
       },
-      className: "fb-setting-units-type-switcher ".concat(rangeUnit[DeviceType] === item.value ? 'active' : '')
+      className: "fb-setting-units-type-switcher ".concat(units[deviceType] === item.value ? 'active' : '')
     }, item.label);
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "fb-setting-fontsize-rangecontrol"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    value: getCurrentRangeValue,
-    onChange: function onChange(e) {
-      return handleRangeChange(e);
-    },
-    min: 1,
-    max: 100,
+  })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    __nextHasNoMarginBottom: true,
+    value: rangeValue[deviceType],
+    onChange: setRangeValue,
+    min: min,
+    max: max,
+    step: rangeStep,
     allowReset: true,
-    resetFallbackValue: 20
+    resetFallbackValue: resetFallbackValue
   })));
-}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_Range);
 
 /***/ }),
 
@@ -7789,16 +8035,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 function FB_ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
     device = _ref.device,
     deviceHandler = _ref.deviceHandler;
+  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
+    setDeviceType = _useDispatch.setDeviceType;
   var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
-    if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
-      wp.data.dispatch('core/edit-post').__experimentalSetPreviewDeviceType(deviceName);
-    }
+    setDeviceType(deviceName);
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-label-wrapper"
@@ -7872,7 +8124,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function FB_Spacing(_ref) {
   var label = _ref.label,
-    DeviceType = _ref.DeviceType,
+    deviceType = _ref.deviceType,
     spacingUnitsHandler = _ref.spacingUnitsHandler,
     spacingUnits = _ref.spacingUnits,
     spacingDesktop = _ref.spacingDesktop,
@@ -7901,9 +8153,9 @@ function FB_Spacing(_ref) {
 
   // Get spacing value
   var getSpacingValue = function getSpacingValue(position) {
-    if (DeviceType === 'Desktop') {
+    if (deviceType === 'Desktop') {
       return spacingDesktop[position];
-    } else if (DeviceType === 'Tablet') {
+    } else if (deviceType === 'Tablet') {
       return spacingTablet[position];
     }
     return spacingMobile[position];
@@ -7919,10 +8171,10 @@ function FB_Spacing(_ref) {
     className: "fb-setting-spacing-label-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
     labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
-    device: DeviceType,
+    device: deviceType,
     deviceHandler: function deviceHandler(newDevice) {
       return setAttributes({
-        DeviceType: newDevice
+        deviceType: newDevice
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -7935,7 +8187,7 @@ function FB_Spacing(_ref) {
       onClick: function onClick() {
         return setSpacingUnit(item.value);
       },
-      className: "fb-setting-units-type-switcher ".concat(spacingUnits[DeviceType] === item.value ? 'active' : '')
+      className: "fb-setting-units-type-switcher ".concat(spacingUnits[deviceType] === item.value ? 'active' : '')
     }, item.label);
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "fb-setting-spacing-input-container"
@@ -8070,10 +8322,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/icon-picker/editor.scss":
-/*!************************************************!*\
-  !*** ./src/components/icon-picker/editor.scss ***!
-  \************************************************/
+/***/ "./src/components/color/editor.lazy.scss":
+/*!***********************************************!*\
+  !*** ./src/components/color/editor.lazy.scss ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -8083,10 +8335,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/range-control/editor.lazy.scss":
-/*!*******************************************************!*\
-  !*** ./src/components/range-control/editor.lazy.scss ***!
-  \*******************************************************/
+/***/ "./src/components/icon-picker/editor.scss":
+/*!************************************************!*\
+  !*** ./src/components/icon-picker/editor.scss ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -20464,6 +20716,28 @@ module.exports = window["wp"]["blocks"];
 
 "use strict";
 module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "@wordpress/editor":
+/*!********************************!*\
+  !*** external ["wp","editor"] ***!
+  \********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["editor"];
 
 /***/ }),
 

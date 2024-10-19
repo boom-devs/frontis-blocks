@@ -12,7 +12,7 @@
   height: 60px;
   padding: 3px 25px;
 }
-.fb-inspector-control .fb-tab.active-tab {
+.fb-inspector-control .fb-tab.general.active-tab, .fb-inspector-control .fb-tab.styles.active-tab, .fb-inspector-control .fb-tab.advance.active-tab {
   background: #ffffff;
   border-top: 2px solid #007cba !important;
   color: #007cba;
@@ -476,10 +476,6 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-frontis-blocks-advanced-heading {
-  border: 1px dotted #f00;
-}
-
 .fb_icon_picker_wrapper {
   position: relative;
   cursor: pointer;
@@ -671,6 +667,10 @@
 
 .fb_icon_picker_wrapper_footer {
   text-align: right;
+}
+
+.fb_icon_picker_wrapper_modal {
+  min-width: 615px !important;
 }
 
 /*# sourceMappingURL=index.css.map*/
