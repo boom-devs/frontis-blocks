@@ -1,6 +1,9 @@
 .fb-blocks-settings {
   font-family: $body-font-family;
   color: $text-color;
+  padding: 24px;
+  background-color: $white-color;
+  border-radius: 14px;
 
   h2 {
     font-size: 23px;

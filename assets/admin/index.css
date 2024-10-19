@@ -1,3 +1,7 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/scss/admin.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap);
 /*!****************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/react-toastify/dist/ReactToastify.css ***!
   \****************************************************************************************************************************************************************************************************************************************/
@@ -800,9 +804,14 @@
   }
 }
 
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/scss/admin.scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/scss/admin.scss (1) ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
+.fb-blocks-container {
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
+}
 .fb-blocks-header {
   display: flex;
   justify-content: space-between;
@@ -1037,8 +1046,11 @@
 }
 
 .fb-blocks-settings {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Work Sans", sans-serif;
   color: #1e1e1e;
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
 }
 .fb-blocks-settings h2 {
   font-size: 23px;
@@ -1239,10 +1251,37 @@
   margin-left: 10px;
 }
 
+.fb-upgrade-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  background-color: #F89B2E;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.fb-upgrade-button svg {
+  height: 24px;
+  width: 24px;
+  margin-left: 8px;
+}
+.fb-upgrade-button:hover {
+  background-color: rgb(235.125, 130.5, 7.875);
+  color: #FFFFFF;
+}
+.fb-upgrade-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(248, 155, 46, 0.5);
+}
+
 .fb-blocks-integration {
   margin: 20px auto;
-  background-color: #fff;
-  border-radius: 4px;
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
 }
 .fb-blocks-integration .integration-section {
   padding: 24px;
@@ -1350,6 +1389,9 @@
 .fb-blocks-pricing {
   max-width: 100%;
   margin: 0 auto;
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
 }
 .fb-blocks-pricing h2 {
   text-align: center;
@@ -1381,12 +1423,12 @@
 .fb-blocks-pricing .fb-pricing-header h2 {
   font-size: 24px;
   font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 .fb-blocks-pricing .fb-pricing-header p {
   font-size: 14px;
   font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 .fb-blocks-pricing .fb-pricing-type {
   display: block;
@@ -1467,9 +1509,62 @@
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+.fb-blocks-dashboard {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+.fb-blocks-dashboard-left {
+  width: 70%;
+}
+.fb-blocks-dashboard-right {
+  width: 30%;
+}
+
+.fb-pro-banner {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 16px;
+}
+.fb-pro-banner .fb-pro-title-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.fb-pro-banner .fb-pro-title-flex span {
+  width: 100px;
+  height: 100px;
+  background-color: #FEF5EA;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fb-pro-banner .fb-pro-title-flex span svg {
+  width: 40px;
+  height: 40px;
+}
+.fb-pro-banner .fb-pro-title-flex h2 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+#frontis-blocks-admin {
+  background-color: #f5f7fa;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI2NTgiIHZpZXdCb3g9IjAgMCAxOTIwIDY1OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgb3BhY2l0eT0iMC4zIiBmaWx0ZXI9InVybCgjZmlsdGVyMF9mXzU1NDNfMzY3MikiPgo8ZWxsaXBzZSBjeD0iOTYwIiByeD0iNjQ1IiByeT0iMjU4IiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfNTU0M18zNjcyKSIvPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2ZfNTU0M18zNjcyIiB4PSItODUiIHk9Ii02NTgiIHdpZHRoPSIyMDkwIiBoZWlnaHQ9IjEzMTYiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjAwIiByZXN1bHQ9ImVmZmVjdDFfZm9yZWdyb3VuZEJsdXJfNTU0M18zNjcyIi8+CjwvZmlsdGVyPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfNTU0M18zNjcyIiB4MT0iMzE1IiB5MT0iMi40MjUyMmUtMDUiIHgyPSIxNjA1IiB5Mj0iLTEuMTI0NjJlLTA1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNDMkUwRkUiLz4KPHN0b3Agb2Zmc2V0PSIwLjI1IiBzdG9wLWNvbG9yPSIjRkZENkE3Ii8+CjxzdG9wIG9mZnNldD0iMC41MjUiIHN0b3AtY29sb3I9IiNEMkZERDMiLz4KPHN0b3Agb2Zmc2V0PSIwLjc1IiBzdG9wLWNvbG9yPSIjRkU5MjlDIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0QwOUFGRiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
+  padding: 20px 0;
+  margin-left: -20px;
+}
+
 .frontis-blocks-admin {
   display: flex;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 .frontis-blocks-admin .frontis-blocks-menu-list {
   width: 280px;
@@ -1552,7 +1647,6 @@
   align-items: center;
   margin-bottom: 20px;
   padding: 8px 20px;
-  margin-top: 30px;
 }
 .fb-header-top-left svg {
   height: 62px;
@@ -1563,30 +1657,6 @@
   font-weight: bold;
   color: #1e1e1e;
   margin: 0;
-}
-.fb-header-top-right .fb-upgrade-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 20px;
-  background-color: #ffb900;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-.fb-header-top-right .fb-upgrade-button svg {
-  height: 24px;
-  width: 24px;
-  margin-left: 8px;
-}
-.fb-header-top-right .fb-upgrade-button:hover {
-  background-color: #cc9400;
-}
-.fb-header-top-right .fb-upgrade-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 185, 0, 0.5);
 }
 
 .fb-blocks-tab-panel {
@@ -1619,28 +1689,24 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #555d66;
-  font-size: 13px;
-  font-weight: 400;
+  color: #555E72;
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
 }
 .fb-blocks-tab-button:hover {
-  color: #0073aa;
+  color: #4B9DEF;
 }
 .fb-blocks-tab-button.fb-blocks-active-tab {
-  color: #fff;
-  background-color: #4B9DEF;
+  color: #4B9DEF;
+  background-color: #EDF5FD;
   border-radius: 8px;
 }
 .fb-blocks-tab-button svg {
   width: 20px;
   height: 20px;
   margin-right: 8px;
-}
-
-.fb-blocks-tab-content {
-  padding: 24px;
-  background-color: #fff;
-  border-radius: 14px;
 }
 
 .fb-blocks-version {

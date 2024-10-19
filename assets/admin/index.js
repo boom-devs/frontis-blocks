@@ -142,12 +142,16 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
-}, {
-  id: 'pricing',
-  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.PricingIcon, null),
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pricing", "frontis-blocks"),
-  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Pricing, null)
 }]);
+// Add pricing tab if not pro
+if (window.frontisBlocksAdmin.isProActive === 'false') {
+  TabMenus.push({
+    id: 'pricing',
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.PricingIcon, null),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pricing", "frontis-blocks"),
+    comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Pricing, null)
+  });
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TabMenus);
 
 /***/ }),
@@ -513,16 +517,127 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _DashboardComponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardComponents */ "./admin/components/DashboardComponents/index.js");
 
 
 var Dashboard = function Dashboard() {
   return /*#__PURE__*/React.createElement("div", {
-    className: "frontis-blocks-dashboard"
-  }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Dashboard', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Welcome to Frontis Blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Here you can manage your Frontis Blocks settings and view usage statistics.', 'frontis-blocks')))));
+    className: "fb-blocks-dashboard"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-dashboard-left"
+  }, window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.ProBanner, null), /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.VideoBanner, null)), /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-dashboard-right"
+  }, /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.SystemRequirements, null)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dashboard);
+
+/***/ }),
+
+/***/ "./admin/components/DashboardComponents/ProBanner.js":
+/*!***********************************************************!*\
+  !*** ./admin/components/DashboardComponents/ProBanner.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons */ "./admin/icons/index.js");
+
+
+function ProBanner() {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-pro-banner"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-pro-title-flex"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "#F89B2E",
+    strokeWidth: 4,
+    d: "m37.296 22.81.413-4.383c.324-3.442.486-5.164-.103-5.875a1.786 1.786 0 0 0-1.215-.662c-.856-.075-1.932 1.15-4.082 3.598-1.113 1.266-1.669 1.899-2.29 1.997a1.662 1.662 0 0 1-1.01-.162c-.573-.288-.955-1.07-1.72-2.636l-4.026-8.25C21.82 3.479 21.099 2 20 2c-1.098 0-1.82 1.479-3.264 4.437l-4.026 8.25c-.764 1.566-1.146 2.348-1.719 2.636-.317.16-.667.216-1.01.162-.621-.098-1.177-.731-2.29-1.997-2.15-2.449-3.226-3.673-4.082-3.598-.463.041-.896.277-1.215.662-.589.711-.427 2.433-.103 5.875l.413 4.384c.68 7.223 1.02 10.834 3.148 13.011C7.981 38 11.172 38 17.552 38h4.896c6.38 0 9.571 0 11.7-2.178 2.128-2.177 2.468-5.789 3.148-13.011Z"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "#F89B2E",
+    strokeLinecap: "round",
+    strokeWidth: 4,
+    d: "M14.604 30.793h10.8"
+  }))), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade to Pro', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Get access to all features and support by upgrading to Pro.', 'frontis-blocks')), window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement("a", {
+    href: window.frontisBlocksAdmin.pro_url,
+    className: "fb-upgrade-button",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, "Upgrade to Pro ", /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_1__.Crown, null)));
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProBanner);
+
+/***/ }),
+
+/***/ "./admin/components/DashboardComponents/SystemRequirements.js":
+/*!********************************************************************!*\
+  !*** ./admin/components/DashboardComponents/SystemRequirements.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+var SystemRequirements = function SystemRequirements() {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('System Requirements', 'frontis-blocks')));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SystemRequirements);
+
+/***/ }),
+
+/***/ "./admin/components/DashboardComponents/VideoBanner.js":
+/*!*************************************************************!*\
+  !*** ./admin/components/DashboardComponents/VideoBanner.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+var VideoBanner = function VideoBanner() {
+  return /*#__PURE__*/React.createElement("div", null, "VideoBanner");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VideoBanner);
+
+/***/ }),
+
+/***/ "./admin/components/DashboardComponents/index.js":
+/*!*******************************************************!*\
+  !*** ./admin/components/DashboardComponents/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ProBanner: () => (/* reexport safe */ _ProBanner__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   SystemRequirements: () => (/* reexport safe */ _SystemRequirements__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   VideoBanner: () => (/* reexport safe */ _VideoBanner__WEBPACK_IMPORTED_MODULE_2__["default"])
+/* harmony export */ });
+/* harmony import */ var _ProBanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProBanner */ "./admin/components/DashboardComponents/ProBanner.js");
+/* harmony import */ var _SystemRequirements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SystemRequirements */ "./admin/components/DashboardComponents/SystemRequirements.js");
+/* harmony import */ var _VideoBanner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VideoBanner */ "./admin/components/DashboardComponents/VideoBanner.js");
+
+
+
 
 /***/ }),
 
@@ -1835,6 +1950,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rc_switch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rc-switch */ "./node_modules/rc-switch/es/index.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -1848,22 +1969,15 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var SiteVisibility = function SiteVisibility() {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({
+      coming_soon_mode: false,
+      maintenance_mode: false,
+      coming_soon_page_id: '',
+      maintenance_page_id: ''
+    }),
     _useState2 = _slicedToArray(_useState, 2),
-    comingSoonMode = _useState2[0],
-    setComingSoonMode = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    maintenanceMode = _useState4[0],
-    setMaintenanceMode = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(''),
-    _useState6 = _slicedToArray(_useState5, 2),
-    comingSoonPage = _useState6[0],
-    setComingSoonPage = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(''),
-    _useState8 = _slicedToArray(_useState7, 2),
-    maintenancePage = _useState8[0],
-    setMaintenancePage = _useState8[1];
+    options = _useState2[0],
+    setOptions = _useState2[1];
   var _useSelect = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(function (select) {
       return {
         pages: select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_2__.store).getEntityRecords('postType', 'page', {
@@ -1882,21 +1996,14 @@ var SiteVisibility = function SiteVisibility() {
       label: page.title.rendered
     };
   }) : [];
-
-  // const handleComingSoonChange = (checked) => {
-  //   setComingSoonMode(checked);
-  //   if (checked) {
-  //     setMaintenanceMode(false);
-  //   }
-  // };
-
-  // const handleMaintenanceChange = (checked) => {
-  //   setMaintenanceMode(checked);
-  //   if (checked) {
-  //     setComingSoonMode(false);
-  //   }
-  // };
-
+  var handleChange = function handleChange(key, value) {
+    setOptions(_objectSpread(_objectSpread({}, options), {}, _defineProperty({}, key, value)));
+    if (key === 'coming_soon_mode' && value === false) {
+      setOptions(_objectSpread(_objectSpread({}, options), {}, {
+        maintenance_mode: false
+      }));
+    }
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-options"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1906,12 +2013,11 @@ var SiteVisibility = function SiteVisibility() {
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Coming Soon Mode', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Activate coming soon page for visitors', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    checked: comingSoonMode,
-    onChange: function onChange() {
-      setComingSoonMode(!comingSoonMode);
-      setMaintenanceMode(false);
+    checked: options.coming_soon_mode,
+    onChange: function onChange(value) {
+      return handleChange('coming_soon_mode', value);
     }
-  }))), comingSoonMode && /*#__PURE__*/React.createElement("div", {
+  }))), options.coming_soon_mode && /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
@@ -1919,9 +2025,9 @@ var SiteVisibility = function SiteVisibility() {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Select, {
     options: pageOptions,
-    value: comingSoonPage,
+    value: options.coming_soon_page_id,
     onChange: function onChange(value) {
-      return setComingSoonPage(value);
+      return handleChange('coming_soon_page_id', value);
     }
   }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
@@ -1930,12 +2036,11 @@ var SiteVisibility = function SiteVisibility() {
   }, /*#__PURE__*/React.createElement("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Maintenance Mode', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Activate maintenance mode for visitors', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    checked: maintenanceMode,
-    onChange: function onChange() {
-      setMaintenanceMode(!maintenanceMode);
-      setComingSoonMode(false);
+    checked: options.maintenance_mode,
+    onChange: function onChange(value) {
+      return handleChange('maintenance_mode', value);
     }
-  }))), maintenanceMode && /*#__PURE__*/React.createElement("div", {
+  }))), options.maintenance_mode && /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
@@ -1943,9 +2048,9 @@ var SiteVisibility = function SiteVisibility() {
     className: "fb-option-input"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Select, {
     options: pageOptions,
-    value: maintenancePage,
+    value: options.maintenance_page_id,
     onChange: function onChange(value) {
-      return setMaintenancePage(value);
+      return handleChange('maintenance_page_id', value);
     }
   }))));
 };

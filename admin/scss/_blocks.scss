@@ -1,6 +1,8 @@
 .fb-blocks {
   &-container {
-    // Styles for the main container
+    padding: 24px;
+    background-color: $white-color;
+    border-radius: 14px;
   }
 
   &-header {
