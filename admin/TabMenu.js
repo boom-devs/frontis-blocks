@@ -30,7 +30,7 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
         comp: <Blocks />
     },
     {
-        id: 'options',
+        id: 'settings',
         icon: <OptionsIcon />,
         label: __("Settings", "frontis-blocks"),
         comp: <Settings />
