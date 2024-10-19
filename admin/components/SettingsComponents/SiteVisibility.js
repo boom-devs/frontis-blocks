@@ -6,10 +6,13 @@ import Switch from 'rc-switch';
 import { useState } from '@wordpress/element';
 
 const SiteVisibility = () => {
-  const [comingSoonMode, setComingSoonMode] = useState(false);
-  const [maintenanceMode, setMaintenanceMode] = useState(false);
-  const [comingSoonPage, setComingSoonPage] = useState('');
-  const [maintenancePage, setMaintenancePage] = useState('');
+  const [ options, setOptions ] = useState({
+    coming_soon_mode: false,
+    maintenance_mode: false,
+    coming_soon_page_id: '',
+    maintenance_page_id: ''
+  });
+
 
   const { pages, hasResolved } = useSelect(
     select => ({
@@ -24,19 +27,18 @@ const SiteVisibility = () => {
     label: page.title.rendered
   })) : [];
 
-  // const handleComingSoonChange = (checked) => {
-  //   setComingSoonMode(checked);
-  //   if (checked) {
-  //     setMaintenanceMode(false);
-  //   }
-  // };
-
-  // const handleMaintenanceChange = (checked) => {
-  //   setMaintenanceMode(checked);
-  //   if (checked) {
-  //     setComingSoonMode(false);
-  //   }
-  // };
+  const handleChange = (key, value) => {
+    setOptions({
+      ...options,
+      [key]: value
+    });
+    if (key === 'coming_soon_mode' && value === false) {
+      setOptions({
+        ...options,
+        maintenance_mode: false
+      });
+    }
+  };
 
   return (
     <div className="fb-blocks-settings-options">
@@ -47,15 +49,12 @@ const SiteVisibility = () => {
         </div>
         <div className="fb-option-input">
           <Switch
-            checked={comingSoonMode}
-          onChange={() => {
-            setComingSoonMode(!comingSoonMode);
-            setMaintenanceMode(false);
-          }}
+            checked={options.coming_soon_mode}
+            onChange={(value) => handleChange('coming_soon_mode', value)}
           />
         </div>
       </div>
-      {comingSoonMode && (
+      {options.coming_soon_mode && (
         <div className="fb-option">
           <div className="fb-option-label">
             <label>{__('Select Coming Soon Page', 'frontis-blocks')}</label>
@@ -63,8 +62,8 @@ const SiteVisibility = () => {
           <div className="fb-option-input">
             <Select
               options={pageOptions}
-              value={comingSoonPage}
-              onChange={(value) => setComingSoonPage(value)}
+              value={options.coming_soon_page_id}
+              onChange={(value) => handleChange('coming_soon_page_id', value)}
             />
           </div>
         </div>
@@ -76,15 +75,12 @@ const SiteVisibility = () => {
         </div>
         <div className="fb-option-input">
           <Switch
-            checked={maintenanceMode}
-            onChange={() => {
-            setMaintenanceMode(!maintenanceMode);
-            setComingSoonMode(false);
-          }}
+            checked={options.maintenance_mode}
+            onChange={(value) => handleChange('maintenance_mode', value)}
           />
         </div>
       </div>
-      {maintenanceMode && (
+      {options.maintenance_mode && (
         <div className="fb-option">
           <div className="fb-option-label">
             <label>{__('Select Maintenance Page', 'frontis-blocks')}</label>
@@ -92,14 +88,15 @@ const SiteVisibility = () => {
           <div className="fb-option-input">
             <Select
               options={pageOptions}
-              value={maintenancePage}
-              onChange={(value) => setMaintenancePage(value)}
+              value={options.maintenance_page_id}
+              onChange={(value) => handleChange('maintenance_page_id', value)}
             />
           </div>
         </div>
       )}
     </div>
   );
+
 };
 
 export default SiteVisibility;

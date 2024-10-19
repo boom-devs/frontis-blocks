@@ -1,0 +1,42 @@
+.fb-blocks-dashboard {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+    &-left {
+        width: 70%;
+    }
+    &-right {
+        width: 30%;
+    }
+}
+
+.fb-pro-banner {
+    background-color: $white-color;
+    padding: 20px;
+    border-radius: 16px;
+    .fb-pro-title-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+        span {
+            width: 100px;
+            height: 100px;
+            background-color: $warning-color-50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+    }
+}
