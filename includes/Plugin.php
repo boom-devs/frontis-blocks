@@ -3,6 +3,7 @@
 namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
+use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Utils\Enqueue;
@@ -82,9 +83,6 @@ final class Plugin {
         $this->init_hooks();
 
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
-
-//         add_filter( 'render_block', [$this, 'render_block'], 10, 2 );
-
     }
 
 	public function enqueue_scripts(){
@@ -116,6 +114,9 @@ final class Plugin {
         define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
         define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
         define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
+        define('FB_PLUGIN_BASENAME', plugin_basename(FB_PLUGIN_FILE));
+        define('FB_UPGRADE_PRO_URL', 'https://frontis.co/frontis-blocks-pro');
+        define('FB_IS_PRO_ACTIVE', class_exists( 'FrontisBlocks\Pro\Plugin' ) ? true : false );
     }
 
     /**
@@ -143,10 +144,6 @@ final class Plugin {
        	self::$blocks = BlockList::get_instance()->get_blocks();
     }
 
-//     public function render_block($block_content, $block) {
-//     	GenerateFrontendCss::get_instance()->generate_css($block_content, $block);
-//     }
-
     /**
      * Initialize hooks
      */
@@ -163,5 +160,7 @@ final class Plugin {
         Blocks::get_instance();
 
         Admin::get_instance();
+
+        Settings::get_instance()->register_ajax_events();
     }
 }

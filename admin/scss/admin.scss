@@ -1,81 +1,209 @@
+// @import url('https://cdnjs.cloudflare.com/ajax/libs/dashicons/0.9.0/css/dashicons.min.css');
+@import "variables";
+@import "blocks";
+@import "settings";
+@import "common";
+@import "integration";
+@import "pricing";
+
 .frontis-blocks-admin {
-    display: flex;
+  display: flex;
+  font-family: $body-font-family;
+  
+  .frontis-blocks-menu-list {
+    width: $sidebar-width;
+    background-color: $light-gray;
+    padding: $spacing-unit * 2.5;
     
-    .frontis-blocks-menu-list {
-      width: 200px;
-      background-color: #f1f1f1;
-      padding: 20px;
+    .frontis-blocks-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: $spacing-unit * 2.5;
       
-      .frontis-blocks-logo {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        
-        h1 {
-          margin-left: 10px;
-          font-size: 18px;
-        }
-      }
-      
-      .frontis-blocks-menu-item {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        margin-bottom: 5px;
-        cursor: pointer;
-        border: none;
-        background: none;
-        width: 100%;
-        text-align: left;
-        
-        &.active {
-          background-color: #fff;
-          font-weight: bold;
-        }
-        
-        svg {
-          margin-right: 10px;
-        }
+      h1 {
+        margin-left: $spacing-unit;
+        font-size: $base-font-size * 1.3;
       }
     }
     
-    .frontis-blocks-tab-panel {
-      flex-grow: 1;
-      padding: 20px;
+    .frontis-blocks-menu-item {
+      display: flex;
+      align-items: center;
+      padding: $spacing-unit;
+      margin-bottom: $spacing-unit / 2;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      
+      &.active {
+        background-color: $tab-active-background;
+        font-weight: bold;
+      }
+      
+      svg {
+        margin-right: $spacing-unit;
+      }
+    }
+  }
+  
+  .frontis-blocks-tab-panel {
+    flex-grow: 1;
+    padding: $spacing-unit * 2.5;
+  }
+}
+
+.frontis-tab-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.frontis-tab-list {
+  display: flex;
+  border-bottom: 1px solid $border-color;
+}
+
+.frontis-tab-button {
+  display: flex;
+  align-items: center;
+  padding: $spacing-unit ($spacing-unit * 2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color $transition-duration;
+}
+
+
+.frontis-tab-button.active-tab {
+  background-color: $tab-background;
+  border-bottom: 2px solid $primary-color;
+}
+
+.frontis-tab-button svg {
+  height: $spacing-unit * 2.5;
+  width: $spacing-unit * 2.5;
+  margin-right: $spacing-unit;
+}
+
+.frontis-tab-content {
+  background: $tab-active-background;
+  padding: $spacing-unit * 2.5;
+  border-radius: $border-radius;
+  margin-top: $spacing-unit * 3.75;
+}
+
+.fb-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-unit * 2.5;
+  padding: $spacing-unit ($spacing-unit * 2.5);
+  margin-top: $spacing-unit * 3.75;
+
+  &-left {
+    svg {
+      height: $spacing-unit * 7.75;
+      width: $spacing-unit * 23;
+    }
+    .fb-title {
+      font-size: $base-font-size * 1.7;
+      font-weight: bold;
+      color: $text-color;
+      margin: 0;
     }
   }
 
-  .frontis-tab-panel {
-    display: flex;
-    flex-direction: column;
+  &-right {
+    .fb-upgrade-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-unit ($spacing-unit * 2.5);
+      background-color: $warning-color;
+      color: $tab-active-background;
+      text-decoration: none;
+      border-radius: $border-radius;
+      font-weight: bold;
+      transition: background-color $transition-duration;
+
+      svg {
+        height: $spacing-unit * 3;
+        width: $spacing-unit * 3;
+        margin-left: $spacing-unit;
+      }
+
+      &:hover {
+        background-color: darken($warning-color, 10%);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba($warning-color, 0.5);
+      }
+    }
   }
-  
-  .frontis-tab-list {
-    display: flex;
-    border-bottom: 1px solid #ccc;
+}
+
+.fb-blocks-tab-panel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.fb-blocks-tab-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e2e4e7;
+  background-color: #fff;
+  margin-bottom: 30px;
+  border-radius: 14px;
+}
+
+.fb-blocks-tab-list {
+  display: flex;
+  padding: 0 16px;
+}
+
+.fb-blocks-tab-button {
+  display: flex;
+  align-items: center;
+  padding: 16px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #555d66;
+  font-size: 13px;
+  font-weight: 400;
+
+  &:hover {
+    color: #0073aa;
   }
-  
-  .frontis-tab-button {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+  &.fb-blocks-active-tab {
+    color: #fff;
+    background-color: $primary-color;
+    border-radius: 8px;
   }
-  
-  .frontis-tab-button.active-tab {
-    background-color: #f0f0f0;
-    border-bottom: 2px solid #007cba;
-  }
-  
-  .frontis-tab-button svg {
+
+  svg {
+    width: 20px;
     height: 20px;
-    width: auto;
     margin-right: 8px;
   }
-  
-  .frontis-tab-content {
-    padding: 20px;
-  }
+}
+
+.fb-blocks-tab-content {
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 14px;
+}
+
+.fb-blocks-version {
+  font-size: 14px;
+  color: $text-muted;
+}

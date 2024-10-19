@@ -24,6 +24,11 @@ const MenuList = ({ activeTab, onTabChange }) => {
       title: __('Integration', 'frontis-blocks'),
       icon: FrontisIcon,
     },
+    {
+      name: 'pricing',
+      title: __('Pricing', 'frontis-blocks'),
+      icon: FrontisIcon,
+    },
   ];
 
   return (
