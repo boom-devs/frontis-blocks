@@ -38,6 +38,7 @@ import FlipBoxBackContentControl from "@Blocks/flip-box/style-control/flip-box-b
 import {ICON_ALIGN, TEXT_ALIGN} from "@Blocks/dual-button/constants/constants";
 import FlipBoxBackButtonControl from "@Blocks/flip-box/style-control/flip-box-back-button-control";
 import FlipBoxFrontIconControl from "@Blocks/flip-box/style-control/flip-box-front-icon-control";
+import FlipBoxBackIconControl from "@Blocks/flip-box/style-control/flip-box-back-icon-control";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -93,6 +94,45 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontIconBorderRadiusMobile,
 		flipBoxFrontIconBorderRadiusLink,
 		/** End Flip Box Front Icon Attribute */
+
+		/** Start Flip Box Back Icon Attribute */
+		flipBoxBackIconSize,
+		flipBoxBackIconSizeUnits,
+		flipBoxBackIconFontColorSwitcher,
+		flipBoxBackIconFontColor,
+		flipBoxBackIconFontHoverColor,
+		flipBoxBackIconBgFontColorSwitcher,
+		flipBoxBackIconBgFontColor,
+		flipBoxBackIconBgFontHoverColor,
+
+		flipBoxBackIconMarginUnits,
+		flipBoxBackIconMarginDesktop,
+		flipBoxBackIconMarginTablet,
+		flipBoxBackIconMarginMobile,
+		flipBoxBackIconMarginLink,
+
+		flipBoxBackIconPaddingUnits,
+		flipBoxBackIconPaddingDesktop,
+		flipBoxBackIconPaddingTablet,
+		flipBoxBackIconPaddingMobile,
+		flipBoxBackIconPaddingLink,
+
+
+		flipBoxBackIconBorderTypeUnits,
+		flipBoxBackIconBorderTypeDesktop,
+		flipBoxBackIconBorderTypeTablet,
+		flipBoxBackIconBorderTypeMobile,
+		flipBoxBackIconBorderTypeLink,
+		flipBoxBackIconBorder,
+		flipBoxBackIconBorderColorSwitcher,
+		flipBoxBackIconBorderColor,
+		flipBoxBackIconBorderHoverColor,
+		flipBoxBackIconBorderRadiusUnits,
+		flipBoxBackIconBorderRadiusDesktop,
+		flipBoxBackIconBorderRadiusTablet,
+		flipBoxBackIconBorderRadiusMobile,
+		flipBoxBackIconBorderRadiusLink,
+		/** End Flip Box Back Icon Attribute */
 
 		/** Start Flip Box Back Button Attribute */
 		flipBoxBackButtonText,
@@ -381,6 +421,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const flipBoxItemBackBorderRadiusGetTablet = `${flipBoxItemBackBorderRadiusTablet.top}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.right}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.bottom}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.left}${flipBoxItemBackBorderRadiusUnits[deviceType]}`;
 	const flipBoxItemBackBorderRadiusGetMobile = `${flipBoxItemBackBorderRadiusMobile.top}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.right}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.bottom}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.left}${flipBoxItemBackBorderRadiusUnits[deviceType]}`;
 
+
+
+
+	/** Icon */
+	const flipBoxBackIconBorderTypeGetDesktop = `${flipBoxBackIconBorderTypeDesktop.top}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeDesktop.right}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeDesktop.bottom}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeDesktop.left}${flipBoxBackIconBorderTypeUnits[deviceType]}`;
+	const flipBoxBackIconBorderTypeGetTablet = `${flipBoxBackIconBorderTypeTablet.top}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeTablet.right}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeTablet.bottom}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeTablet.left}${flipBoxBackIconBorderTypeUnits[deviceType]}`;
+	const flipBoxBackIconBorderTypeGetMobile = `${flipBoxBackIconBorderTypeMobile.top}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeMobile.right}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeMobile.bottom}${flipBoxBackIconBorderTypeUnits[deviceType]} ${flipBoxBackIconBorderTypeMobile.left}${flipBoxBackIconBorderTypeUnits[deviceType]}`;
+
+	const flipBoxBackIconBorderRadiusGetDesktop = `${flipBoxBackIconBorderRadiusDesktop.top}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusDesktop.right}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusDesktop.bottom}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusDesktop.left}${flipBoxBackIconBorderRadiusUnits[deviceType]}`;
+	const flipBoxBackIconBorderRadiusGetTablet = `${flipBoxBackIconBorderRadiusTablet.top}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusTablet.right}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusTablet.bottom}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusTablet.left}${flipBoxBackIconBorderRadiusUnits[deviceType]}`;
+	const flipBoxBackIconBorderRadiusGetMobile = `${flipBoxBackIconBorderRadiusMobile.top}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusMobile.right}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusMobile.bottom}${flipBoxBackIconBorderRadiusUnits[deviceType]} ${flipBoxBackIconBorderRadiusMobile.left}${flipBoxBackIconBorderRadiusUnits[deviceType]}`;
+
+
+	const flipBoxBackIconPaddingGetDesktop = `${flipBoxBackIconPaddingDesktop.top}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingDesktop.right}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingDesktop.bottom}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingDesktop.left}${flipBoxBackIconPaddingUnits[deviceType]}`;
+	const flipBoxBackIconPaddingGetTablet = `${flipBoxBackIconPaddingTablet.top}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingTablet.right}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingTablet.bottom}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingTablet.left}${flipBoxBackIconPaddingUnits[deviceType]}`;
+	const flipBoxBackIconPaddingGetMobile = `${flipBoxBackIconPaddingMobile.top}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingMobile.right}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingMobile.bottom}${flipBoxBackIconPaddingUnits[deviceType]} ${flipBoxBackIconPaddingMobile.left}${flipBoxBackIconPaddingUnits[deviceType]}`;
+
+
+	const flipBoxBackIconMarginGetDesktop = `${flipBoxBackIconMarginDesktop.top}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginDesktop.right}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginDesktop.bottom}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginDesktop.left}${flipBoxBackIconMarginUnits[deviceType]}`;
+	const flipBoxBackIconMarginGetTablet = `${flipBoxBackIconMarginTablet.top}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginTablet.right}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginTablet.bottom}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginTablet.left}${flipBoxBackIconMarginUnits[deviceType]}`;
+	const flipBoxBackIconMarginGetMobile = `${flipBoxBackIconMarginMobile.top}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginMobile.right}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginMobile.bottom}${flipBoxBackIconMarginUnits[deviceType]} ${flipBoxBackIconMarginMobile.left}${flipBoxBackIconMarginUnits[deviceType]}`;
+
+
+
 	/** Title */
 	const flipBoxBackTitleMarginGetDesktop = `${flipBoxBackTitleMarginDesktop.top}${flipBoxBackTitleMarginUnits[deviceType]} ${flipBoxBackTitleMarginDesktop.right}${flipBoxBackTitleMarginUnits[deviceType]} ${flipBoxBackTitleMarginDesktop.bottom}${flipBoxBackTitleMarginUnits[deviceType]} ${flipBoxBackTitleMarginDesktop.left}${flipBoxBackTitleMarginUnits[deviceType]}`;
 	const flipBoxBackTitleMarginGetTablet = `${flipBoxBackTitleMarginTablet.top}${flipBoxBackTitleMarginUnits[deviceType]} ${flipBoxBackTitleMarginTablet.right}${flipBoxBackTitleMarginUnits[deviceType]} ${flipBoxBackTitleMarginTablet.bottom}${flipBoxBackTitleMarginUnits[deviceType]} ${flipBoxBackTitleMarginTablet.left}${flipBoxBackTitleMarginUnits[deviceType]}`;
@@ -433,6 +497,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  	${flipBoxFrontIconBgFontColor ? `background: ${flipBoxFrontIconBgFontColor};` : ''}
 				  	${flipBoxFrontIconPaddingGetDesktop ? `padding: ${flipBoxFrontIconPaddingGetDesktop};` : ''}
 				  	${flipBoxFrontIconMarginGetDesktop ? `margin: ${flipBoxFrontIconMarginGetDesktop};` : ''}
+				}
+
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+				  	${flipBoxBackIconSize.Desktop ? `width: ${flipBoxBackIconSize.Desktop}${flipBoxBackIconSizeUnits.Desktop};` : ''}
+				  	${flipBoxBackIconBorder ? `border: ${flipBoxBackIconBorder};` : ''}
+					${flipBoxBackIconBorderTypeGetDesktop ? `border-width: ${flipBoxBackIconBorderTypeGetDesktop};` : ''}
+					${flipBoxBackIconBorderRadiusGetDesktop ? `border-radius: ${flipBoxBackIconBorderRadiusGetDesktop};` : ''}
+					${flipBoxBackIconBorderColor ? `border-color: ${flipBoxBackIconBorderColor};` : ''}
+				  	${flipBoxBackIconFontColor ? `fill: ${flipBoxBackIconFontColor};` : ''}
+				  	${flipBoxBackIconBgFontColor ? `background: ${flipBoxBackIconBgFontColor};` : ''}
+				  	${flipBoxBackIconPaddingGetDesktop ? `padding: ${flipBoxBackIconPaddingGetDesktop};` : ''}
+				  	${flipBoxBackIconMarginGetDesktop ? `margin: ${flipBoxBackIconMarginGetDesktop};` : ''}
 				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-title {
 				  ${flipBoxFrontTitleFontColor ? `color: ${flipBoxFrontTitleFontColor};` : ''}
@@ -934,7 +1010,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</BaseControl>
 											{flipBoxTypeSwitcher === 'front' && (
 												<>
-
 													<FlipBoxFrontIconControl
 														attributes={attributes}
 														setAttributes={setAttributes}
@@ -945,7 +1020,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 											{flipBoxTypeSwitcher === 'back' && (
 												<>
-
+													<FlipBoxBackIconControl
+														attributes={attributes}
+														setAttributes={setAttributes}
+														clientId ={clientId}
+													/>
 												</>
 											)}
 										</PanelBody>
