@@ -10,6 +10,7 @@ import {
  * Internal dependencies
  */
 import Inspector from "./inspector";
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId}) {
@@ -25,18 +26,16 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         subHeadingTag,
         separatorPosition,
         subHeadingPosition,
+        headingIconAlign,
+        headingIcon,    
     } = attributes;
     
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({
+        className: `fb-advanced-heading-main-wrapper ${blockId}`,
+    });
+
 
     // Define the CSS as a string
-    const css = `
-        #${blockId} {
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
-    `;
     
     return (
         <>
@@ -54,8 +53,13 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                 />
             </BlockControls>
             
-            <div {...blockProps} id={blockId}>
+            <div {...blockProps}>
                 <div className={`fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
+
+
+                    {headingIconAlign === 'icon' && (
+                        <div className="fb-advanced-icon">{renderSVG(headingIcon)}</div>
+                    )}
 
                     {showSeparatorSwitcher && separatorPosition === "top" && (
                         <div className='fb-advanced-title-separator'></div>
@@ -67,6 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                             value={subHeadingText}
                             onChange={(value) => setAttributes({ subHeadingText: value })}
                             placeholder={__('Sub heading...', 'frontis-blocks')}
+                            className="fb-advanced-sub-heading"
                         />
                     )}
                     
@@ -75,7 +80,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                         value={headingText}
                         onChange={(value) => setAttributes({ headingText: value })}
                         placeholder={__('Advanced Heading', 'frontis-blocks')}
-                        className="fb-advanced"
+                        className="fb-advanced-heading"
                     />
 
                     {subHeadingSwitcher && subHeadingPosition === 'bottom' && (
@@ -84,6 +89,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                             value={subHeadingText}
                             onChange={(value) => setAttributes({ subHeadingText: value })}
                             placeholder={__('Sub heading...', 'frontis-blocks')}
+                            className="fb-advanced-sub-heading"
                         />
                     )}
                     

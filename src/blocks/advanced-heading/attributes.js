@@ -44,7 +44,7 @@ const attributes = {
 	},
     headingFontWeight : {
         type: "string",
-        default: ""
+        default: "600"
     },
     headingFontStyle : {
         type: "string",
@@ -122,8 +122,6 @@ const attributes = {
     headingBgColorHover: {
         type: 'string',
     },
-
-
     headingBorder: {
         type: 'string',
         default: "none",
@@ -636,32 +634,34 @@ const attributes = {
     },
     separatorColor: {
         type: "string",
+        default: "#399CFF",
     },
     separatorHoverColor: {
         type: "string",
+        default: "#399CFF",
     },
     separatorWidth: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '12',
+            Tablet: '12',
+            Mobile: '12'
         }
     },
     separatorWidthUnits: {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
 		}
 	},
     separatorHeight: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '2',
+            Tablet: '2',
+            Mobile: '2'
         }
     },
 	separatorHeightUnits: {
@@ -699,16 +699,12 @@ const attributes = {
 		type: 'string',
 		default: 'check',
 	},
-    headingIconAlignment: {
-		type: "string",
-		default: "center",
-	},
     headingIconSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '30',
+            Tablet: '30',
+            Mobile: '30'
         }
     },
     headingIconSizeUnits: {
@@ -722,9 +718,9 @@ const attributes = {
     headingIconBgSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '50',
+            Tablet: '50',
+            Mobile: '50'
         }
     },
     headingIconBgSizeUnits: {
@@ -753,7 +749,11 @@ const attributes = {
     },
     headingIconBgColor : {
         type: "string",
-        default: "#F72585"
+        default: ""
+    },
+    headingIconBgHoverColor: {
+        type: "string",
+        default: ""
     },
 
     headingIconBorder: {
@@ -823,28 +823,28 @@ const attributes = {
 	headingIconBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	headingIconBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	headingIconBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	headingIconBorderRadiusLink : {
@@ -965,7 +965,7 @@ const attributes = {
 	},
 	headingGlobalBorderColor: {
 		type: 'string',
-		default: "#ddd"
+		default: ""
 	},
 	headingGlobalBorderHoverColor: {
 		type: 'string',
@@ -981,28 +981,28 @@ const attributes = {
 	headingGlobalBorderDesktop: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	headingGlobalBorderTablet: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	headingGlobalBorderMobile: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	headingGlobalBorderLink : {
@@ -1023,28 +1023,28 @@ const attributes = {
 	headingGlobalBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	headingGlobalBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	headingGlobalBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	headingGlobalBorderRadiusLink : {
