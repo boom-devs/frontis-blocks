@@ -38,8 +38,11 @@
             }
         }
         h2 {
-            font-size: 24px;
+            font-size: 30px;
             font-weight: 500;
+            font-family: $heading-font-family;
+            color: $neutral-color-800;
+            
         }
     }
 }
@@ -132,7 +135,6 @@
     &-list {
         display: flex;
         flex-direction: column;
-        gap: $spacing-unit;
     }
 
     &-note {
@@ -152,18 +154,30 @@
     align-items: center;
     padding: $spacing-unit;
     background-color: $neutral-color-50;
-    border-radius: 8px;
+
+    &:first-child {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
 
     &.good {
         background-color: $success-color-50;
+        border: 1px solid $success-color-100;
     }
 
     &.warning {
         background-color: $warning-color-50;
+        border: 1px solid $warning-color-100;
     }
 
     &.error {
         background-color: $error-color-50;
+        border: 1px solid $error-color-100;
     }
 
     svg {
@@ -175,6 +189,7 @@
     .fb-requirement-label {
         flex: 1;
         font-weight: 500;
+        color: $neutral-color;
     }
 
     .fb-requirement-value {
