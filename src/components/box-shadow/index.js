@@ -4,7 +4,7 @@ import Control from './control';
 import { Dashicon, BaseControl, Button, Dropdown} from '@wordpress/components';
 import './editor.lazy.scss';
 
-export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, }) {
+export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, isBoxShadow=true }) {
 	const [boxShadow, setBoxShadow] = useState(initialShadowValue || [0, 0, 0, 0, '', '#00000000']);
 
 	useEffect(() => {
@@ -93,12 +93,14 @@ export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialS
 								value={boxShadow[2]}
 								onChangeHandler={(e) => onChangeHandler(e, 2)}
 							/>
-							<Control
-								label="Spread"
-								type="range"
-								value={boxShadow[3]}
-								onChangeHandler={(e) => onChangeHandler(e, 3)}
-							/>
+							{isBoxShadow && (
+								<Control
+									label="Spread"
+									type="range"
+									value={boxShadow[3]}
+									onChangeHandler={(e) => onChangeHandler(e, 3)}
+								/>
+							)}
 						</div>
 					)}
 				/>

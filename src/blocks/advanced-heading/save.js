@@ -1,4 +1,5 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
     const { 
@@ -12,6 +13,8 @@ export default function save({ attributes }) {
         subHeadingTag,
         separatorPosition,
         subHeadingPosition,
+        headingIconAlign,
+        headingIcon,
 
     } = attributes;
 
@@ -22,8 +25,23 @@ export default function save({ attributes }) {
 
     return (
         <>
+            <style>
+                {`
+                    .${blockId} .fb-advanced-icon {
+                        width: 30px;
+                        height: 30px;
+                    }
+                `}
+            </style>
             <div {...blockProps}>
                 <div className={`fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
+
+                    {headingIconAlign === 'icon' && (
+                        <div className="fb-advanced-icon">
+                            {renderSVG(headingIcon)}
+                        </div>
+                    )}
+
                     {showSeparatorSwitcher && separatorPosition === "top" && (
                         <div className='fb-advanced-title-separator'></div>
                     )}

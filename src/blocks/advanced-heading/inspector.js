@@ -182,7 +182,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         /** Start Icon */
         headingIconAlign,
         headingIcon,
-        headingIconAlignment,
         headingIconSize,
         headingIconSizeUnits,
         headingIconBgSize,
@@ -247,7 +246,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         /** End Global Style */
 
     } = attributes;
-    
+
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -566,12 +565,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingTabletBorderRadiusWidth = `${headingTabBorderRadius.top}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.right}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.bottom}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.left}${headingBorderRadiusUnits.Tablet}`;
     const headingMobileBorderRadiusWidth = `${headingMobileBorderRadius.top}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.right}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.bottom}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.left}${headingBorderRadiusUnits.Mobile}`;
     /** End Heading Border Radius */
-
-
-
-
-
-
 
 
     /** Start Sub Heading Padding */
@@ -1336,21 +1329,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, [headingFontFamily]);
     
-        // Define the CSS as a string
-        const css = `
-        #${blockId} {
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
-    `;
-    
     return (
         <>
         
             <style>
             {`
-                .fb-advanced-wrapper.${blockId} .fb-advanced {
+                .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
                     ${headingColor ? `color: ${headingColor};` : ''}
                     ${headingBgColor ? `background-color: ${headingBgColor};` : ''} 
                     ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
@@ -1367,36 +1351,212 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${headingDesktopBorderWidth ? `border-width: ${headingDesktopBorderWidth};` : ''}
                     ${headingDesktopBorderRadiusWidth ? `border-radius: ${headingDesktopBorderRadiusWidth};` : ''}
                     ${headingBorderColor ? `border-color: ${headingBorderColor};` : ''}
-                     transition: all .3s ease-in-out;
+                    ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
+                    ${headingTextStroke ? `
+                        -webkit-text-stroke: ${headingTextStroke}px;
+                        -moz-text-stroke: ${headingTextStroke}px;
+                        -ms-text-stroke: ${headingTextStroke}px;
+                        text-stroke: ${headingTextStroke}px;
+                    ` : ''} 
+                    ${headingBoxShadowCssValue ? `box-shadow: ${headingBoxShadowCssValue};` : ''}
+                    transition: all .3s ease-in-out;
                 }
-                .fb-advanced-wrapper.${blockId} .fb-advanced:hover {
-                    ${headingHoverColor !== undefined ? `color: ${headingHoverColor};` : ''}
-                    ${headingBorderHoverColor !== undefined ? `border-color: ${headingBorderHoverColor};` : ''}
+                .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+                    ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
+                    ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
+                    ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
+                }
+
+                .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+                    ${subHeadingColor ? `color: ${subHeadingColor};` : ''} 
+                    ${subHeadingBgColor ? `background-color: ${subHeadingBgColor};` : ''} 
+                    ${subHeadingFontFamily ? `font-family: ${subHeadingFontFamily};` : ''}
+                    ${subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
+                    ${subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
+                    ${subHeadingFontStyle ? `font-style: ${subHeadingFontStyle};` : ''}
+                    ${subHeadingTextTransform ? `text-transform: ${subHeadingTextTransform};` : ''}
+                    ${subHeadingTextDecoration ? `text-decoration: ${subHeadingTextDecoration};` : ''}
+                    ${subHeadingLetterSpacing.Desktop && subHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${subHeadingLetterSpacing.Desktop}${subHeadingLetterSpacingUnits.Desktop};` : ''}
+                    ${subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
+                    ${subHeadingDesktopPaddingWidth ? `padding: ${subHeadingDesktopPaddingWidth};` : ''}
+                    ${subHeadingDesktopMarginWidth ? `margin: ${subHeadingDesktopMarginWidth};` : ''}
+                    ${subHeadingBorder ? `border: ${subHeadingBorder};` : ''} 
+                    ${subHeadingDesktopBorderWidth ? `border-width: ${subHeadingDesktopBorderWidth};` : ''}
+                    ${subHeadingDesktopBorderRadiusWidth ? `border-radius: ${subHeadingDesktopBorderRadiusWidth};` : ''}
+                    ${subHeadingBorderColor ? `border-color: ${subHeadingBorderColor};` : ''}
+                    ${subHeadingTextShadowCssValue ? `text-shadow: ${subHeadingTextShadowCssValue};` : ''}
+                    ${subHeadingTextStroke ? `
+                        -webkit-text-stroke: ${subHeadingTextStroke}px;
+                        -moz-text-stroke: ${subHeadingTextStroke}px;
+                        -ms-text-stroke: ${subHeadingTextStroke}px;
+                        text-stroke: ${subHeadingTextStroke}px;
+                    ` : ''}
+                    ${subHeadingBoxShadowCssValue ? `box-shadow: ${subHeadingBoxShadowCssValue};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+                    
+                .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+                    ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''} 
+                    ${subHeadingBgColorHover ? `background-color: ${subHeadingBgColorHover};` : ''}
+                    ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
+                }
+
+                .${blockId} .fb-advanced-icon {
+                    ${headingIconBgSize.Desktop ? `width: ${headingIconBgSize.Desktop}${headingIconBgSizeUnits.Desktop};` : ''}
+                    ${headingIconBgSize.Desktop ? `height: ${headingIconBgSize.Desktop}${headingIconBgSizeUnits.Desktop};` : ''}
+                    ${headingIconBgColor ? `background-color: ${headingIconBgColor};` : ''}
+                    ${headingIconBorder ? `border: ${headingIconBorder};` : ''}
+                    ${headingIconDesktopBorderWidthValue ? `border-width: ${headingIconDesktopBorderWidthValue};` : ''}
+                    ${headingIconBorderColor ? `border-color: ${headingIconBorderColor};` : ''}
+                    ${headingIconDesktopBorderRadiusWidthValue ? `border-radius: ${headingIconDesktopBorderRadiusWidthValue};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+                .${blockId} .fb-advanced-icon svg {
+                    ${headingIconSize.Desktop ? `width: ${headingIconSize.Desktop}${headingIconSizeUnits.Desktop};` : ''}
+                    ${headingIconSize.Desktop ? `height: ${headingIconSize.Desktop}${headingIconSizeUnits.Desktop};` : ''}
+                    ${headingIconColor ? `fill: ${headingIconColor};` : ''}
+                }
+                .${blockId} .fb-advanced-icon:hover {
+                    ${headingIconHoverColor ? `color: ${headingIconHoverColor};` : ''}
+                    ${headingIconBgHoverColor ? `background-color: ${headingIconBgHoverColor};` : ''}
+                    ${headingIconBorderHoverColor ? `border-color: ${headingIconBorderHoverColor};` : ''}
+                }
+                .${blockId} .fb-advanced-icon:hover svg {
+                    ${headingIconHoverColor ? `fill: ${headingIconHoverColor};` : ''}
                 }
 
                 .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
                     display: inline-block;
-                    margin: 0 0 10px 0;
-                    width: 12%;
-                    margin-bottom: 15px;
-                    border-top: 2px ${separator} #0170b9;
+                    ${separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
+                    ${separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
+                    ${separator ? `border-top-style: ${separator};` : ''}
+                    ${separatorColor ? `border-top-color: ${separatorColor};` : ''}
+                    ${separatorPosition === 'bottom' ? 
+                        `${separatorSpacing.Desktop && separatorSpacingUnits.Desktop ? 
+                            `margin-top: ${separatorSpacing.Desktop}${separatorSpacingUnits.Desktop};` 
+                            : ''}`
+                        : separatorPosition === 'top' ?
+                        `${separatorSpacing.Desktop && separatorSpacingUnits.Desktop ? 
+                            `margin-bottom: ${separatorSpacing.Desktop}${separatorSpacingUnits.Desktop};` 
+                            : ''}`
+                        : ''}
+                }
+
+                .${blockId}.fb-advanced-wrapper {
+                    ${headingGlobalZIndex ? `z-index: ${headingGlobalZIndex};` : ''}
+                    ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''} 
+                    ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+                    ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
+                    ${headingGlobalBorder ? `border: ${headingGlobalBorder};` : ''} 
+                    ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+                    ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+                    ${headingGlobalBorderColor ? `border-color: ${headingGlobalBorderColor};` : ''}
+                    ${headingGlobalBoxShadowCssValue ? `box-shadow: ${headingGlobalBoxShadowCssValue};` : ''}
+                    transition: all .3s ease-in-out;
+                    position: relative;
+                }
+                .${blockId}.fb-advanced-wrapper:hover {
+                    ${headingGlobalBgHoverColor ? `background-color: ${headingGlobalBgHoverColor};` : ''}
+                    ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
                 }
 
                 @media only screen and (max-width: 1024px) {
-                    .fb-advanced-wrapper.${blockId} .fb-advanced {
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+                        ${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
+                        ${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
+                        ${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
                         ${headingTabletPaddingWidth ? `padding: ${headingTabletPaddingWidth};` : ''}
                         ${headingTabletMarginWidth ? `margin: ${headingTabletMarginWidth};` : ''}
                         ${headingTabletBorderWidth ? `border-width: ${headingTabletBorderWidth};` : ''}
                         ${headingTabletBorderRadiusWidth ? `border-radius: ${headingTabletBorderRadiusWidth};` : ''}
                     }
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+                        ${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
+                        ${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
+                        ${subHeadingLineHeight.Tablet && subHeadingLineHeightUnits.Tablet ? `line-height: ${subHeadingLineHeight.Tablet}${subHeadingLineHeightUnits.Tablet};` : ''}
+                        ${subHeadingTabletPaddingWidth ? `padding: ${subHeadingTabletPaddingWidth};` : ''}
+                        ${subHeadingTabletMarginWidth ? `margin: ${subHeadingTabletMarginWidth};` : ''}
+                        ${subHeadingTabletBorderWidth ? `border-width: ${subHeadingTabletBorderWidth};` : ''}
+                        ${subHeadingTabletBorderRadiusWidth ? `border-radius: ${subHeadingTabletBorderRadiusWidth};` : ''}
+                    }
+                    .${blockId} .fb-advanced-icon {
+                        ${headingIconBgSize.Tablet ? `width: ${headingIconBgSize.Tablet}${headingIconBgSizeUnits.Tablet};` : ''}
+                        ${headingIconBgSize.Tablet ? `height: ${headingIconBgSize.Tablet}${headingIconBgSizeUnits.Tablet};` : ''}
+                        ${headingIconTabletBorderWidthValue ? `border-width: ${headingIconTabletBorderWidthValue};` : ''}
+                        ${headingIconTabletBorderRadiusWidthValue ? `border-radius: ${headingIconTabletBorderRadiusWidthValue};` : ''}
+                    }
+                    .${blockId} .fb-advanced-icon svg {
+                        ${headingIconSize.Tablet ? `width: ${headingIconSize.Tablet}${headingIconSizeUnits.Tablet};` : ''}
+                        ${headingIconSize.Tablet ? `height: ${headingIconSize.Tablet}${headingIconSizeUnits.Tablet};` : ''}
+                    }
+                    .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
+                        ${separatorWidth.Tablet && separatorWidthUnits.Tablet ? `width: ${separatorWidth.Tablet}${separatorWidthUnits.Tablet};` : ''}
+                        ${separatorHeight.Tablet && separatorHeightUnits.Tablet ? `border-top-width: ${separatorHeight.Tablet}${separatorHeightUnits.Tablet};` : ''}
+                        ${separatorPosition === 'bottom' ? 
+                            `${separatorSpacing.Tablet && separatorSpacingUnits.Tablet ? 
+                                `margin-top: ${separatorSpacing.Tablet}${separatorSpacingUnits.Tablet};` 
+                                : ''}`
+                            : separatorPosition === 'top' ?
+                            `${separatorSpacing.Tablet && separatorSpacingUnits.Tablet ? 
+                                `margin-bottom: ${separatorSpacing.Tablet}${separatorSpacingUnits.Tablet};` 
+                                : ''}`
+                            : ''}
+                    }
+                    .${blockId}.fb-advanced-wrapper {
+                        ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+                        ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
+                        ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+                        ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+                    }
                 }
 
                 @media only screen and (max-width: 767px) {
-                    .fb-advanced-wrapper.${blockId} .fb-advanced {
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+                        ${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
+                        ${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
+                        ${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
                         ${headingMobilePaddingWidth ? `padding: ${headingMobilePaddingWidth};` : ''}
                         ${headingMobileMarginWidth ? `margin: ${headingMobileMarginWidth};` : ''}
                         ${headingMobileBorderWidth ? `border-width: ${headingMobileBorderWidth};` : ''}
                         ${headingMobileBorderRadiusWidth ? `border-radius: ${headingMobileBorderRadiusWidth};` : ''}
+                    }
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+                        ${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
+                        ${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
+                        ${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
+                        ${subHeadingMobilePaddingWidth ? `padding: ${subHeadingMobilePaddingWidth};` : ''}
+                        ${subHeadingMobileMarginWidth ? `margin: ${subHeadingMobileMarginWidth};` : ''}
+                        ${subHeadingMobileBorderWidth ? `border-width: ${subHeadingMobileBorderWidth};` : ''}
+                        ${subHeadingMobileBorderRadiusWidth ? `border-radius: ${subHeadingMobileBorderRadiusWidth};` : ''}
+                    }
+                    .${blockId} .fb-advanced-icon {
+                        ${headingIconBgSize.Mobile ? `width: ${headingIconBgSize.Mobile}${headingIconBgSizeUnits.Mobile};` : ''}
+                        ${headingIconBgSize.Mobile ? `height: ${headingIconBgSize.Mobile}${headingIconBgSizeUnits.Mobile};` : ''}
+                        ${headingIconMobileBorderWidthValue ? `border-width: ${headingIconMobileBorderWidthValue};` : ''}
+                        ${headingIconMobileBorderRadiusWidthValue ? `border-radius: ${headingIconMobileBorderRadiusWidthValue};` : ''}
+                    }
+                    .${blockId} .fb-advanced-icon svg {
+                        ${headingIconSize.Mobile ? `width: ${headingIconSize.Mobile}${headingIconSizeUnits.Mobile};` : ''}
+                        ${headingIconSize.Mobile ? `height: ${headingIconSize.Mobile}${headingIconSizeUnits.Mobile};` : ''}
+                    }
+                    .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
+                        ${separatorWidth.Mobile && separatorWidthUnits.Mobile ? `width: ${separatorWidth.Mobile}${separatorWidthUnits.Mobile};` : ''}
+                        ${separatorHeight.Mobile && separatorHeightUnits.Mobile ? `border-top-width: ${separatorHeight.Mobile}${separatorHeightUnits.Mobile};` : ''}
+                        ${separatorPosition === 'bottom' ? 
+                            `${separatorSpacing.Mobile && separatorSpacingUnits.Mobile ? 
+                                `margin-top: ${separatorSpacing.Mobile}${separatorSpacingUnits.Mobile};` 
+                                : ''}`
+                            : separatorPosition === 'top' ?
+                            `${separatorSpacing.Mobile && separatorSpacingUnits.Mobile ? 
+                                `margin-bottom: ${separatorSpacing.Mobile}${separatorSpacingUnits.Mobile};` 
+                                : ''}`
+                            : ''}
+                    }
+                    .${blockId}.fb-advanced-wrapper {
+                        ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+                        ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
+                        ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+                        ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
                     }
                 }
             `}
@@ -1646,6 +1806,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 onBoxShadowChange={(value) => setAttributes({ headingTextShadowValues: value })}
                                                 initialShadowValue={headingTextShadowValues}
                                                 onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
+                                                isBoxShadow={false}
                                             />
                                             <RangeControl
                                                 label={__("Text Stroke", "frontis-blocks")}
@@ -1800,6 +1961,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 onBoxShadowChange={(value) => setAttributes({ subHeadingTextShadowValues: value })}
                                                 initialShadowValue={subHeadingTextShadowValues}
                                                 onBoxShadowStyleChange={(value) => setAttributes({ subHeadingTextShadowCssValue: value })}
+                                                isBoxShadow={false}
                                             />
                                             <RangeControl
                                                 label={__("Text Stroke", "frontis-blocks")}
@@ -1924,7 +2086,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 />
                                                 <FB_Range
                                                     min={1}
-                                                    max={500}
+                                                    max={100}
                                                     label={__("Width", "frontis-blocks")}
                                                     rangeValue={separatorWidth} 
                                                     onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
@@ -1971,27 +2133,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             title={__("Icon", "frontis-blocks")}
                                             initialOpen={false}
                                             >
-
-                                            <BaseControl
-                                                label={__("Alignment", "frontis-blocks")}
-                                                id="fb-setting-text-alignment"
-                                                className="fb-setting-text-alignment"
-                                            >
-                                                    <ButtonGroup
-                                                        className="fb-setting-text-alignment-group-btn"
-                                                    >
-                                                        {TEXT_ALIGN.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ headingIconAlignment: item.value })}
-                                                                className={`fb-setting-text-alignment-single-btn ${headingIconAlignment === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                            </BaseControl>
-
                                             <FB_Range
                                                 min={1}
                                                 max={200}
@@ -2084,7 +2225,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 spacingCombineBtnHandler={handleHeadingIconBorderRadiusCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
-
                                             </PanelBody>
                                             
                                         )}
