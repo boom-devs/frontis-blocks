@@ -3,7 +3,7 @@ const flipBoxItemFrontAttributes = {
 	flipBoxItemFrontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '364',
 			Tablet: '',
 			Mobile: ''
 		}
