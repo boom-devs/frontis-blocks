@@ -27,7 +27,7 @@ const attributes = {
     },
     pricingIcon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'check',
 	},
 	/** End Header */
 
