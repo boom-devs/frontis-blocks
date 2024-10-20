@@ -4,7 +4,7 @@ import Control from './control';
 import { Dashicon, BaseControl, Button, Dropdown} from '@wordpress/components';
 import './editor.lazy.scss';
 
-export default function FB_BoxShadowControl({ onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, }) {
+export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, }) {
 	const [boxShadow, setBoxShadow] = useState(initialShadowValue || [0, 0, 0, 0, '', '#00000000']);
 
 	useEffect(() => {
@@ -44,7 +44,7 @@ export default function FB_BoxShadowControl({ onBoxShadowChange, initialShadowVa
 	return (
 		<>
 			<BaseControl 
-				label={__('Box Shadow', "frontis-blocks")}
+				label={label || __("Box Shadow", "frontis-blocks")}
 				className="fb-box-shadow-wrapper shadow-color"
 			>
 				<Dropdown
