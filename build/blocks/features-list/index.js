@@ -12164,9 +12164,12 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 function FB_BoxShadowControl(_ref) {
-  var onBoxShadowChange = _ref.onBoxShadowChange,
+  var label = _ref.label,
+    onBoxShadowChange = _ref.onBoxShadowChange,
     initialShadowValue = _ref.initialShadowValue,
-    onBoxShadowStyleChange = _ref.onBoxShadowStyleChange;
+    onBoxShadowStyleChange = _ref.onBoxShadowStyleChange,
+    _ref$isBoxShadow = _ref.isBoxShadow,
+    isBoxShadow = _ref$isBoxShadow === void 0 ? true : _ref$isBoxShadow;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialShadowValue || [0, 0, 0, 0, '', '#00000000']),
     _useState2 = _slicedToArray(_useState, 2),
     boxShadow = _useState2[0],
@@ -12202,7 +12205,7 @@ function FB_BoxShadowControl(_ref) {
     });
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Box Shadow', "frontis-blocks"),
+    label: label || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box Shadow", "frontis-blocks"),
     className: "fb-box-shadow-wrapper shadow-color"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dropdown, {
     className: "fb-box-shadow-icon-dropdown",
@@ -12261,7 +12264,7 @@ function FB_BoxShadowControl(_ref) {
         onChangeHandler: function onChangeHandler(e) {
           return _onChangeHandler(e, 2);
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), isBoxShadow && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
         label: "Spread",
         type: "range",
         value: boxShadow[3],
