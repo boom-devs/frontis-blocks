@@ -36,6 +36,7 @@ import FlipBoxFrontContentControl from "@Blocks/flip-box/style-control/flip-box-
 import FlipBoxBackTitleControl from "@Blocks/flip-box/style-control/flip-box-back-title-control";
 import FlipBoxBackContentControl from "@Blocks/flip-box/style-control/flip-box-back-content-control";
 import {ICON_ALIGN, TEXT_ALIGN} from "@Blocks/dual-button/constants/constants";
+import FlipBoxFrontButtonControl from "@Blocks/flip-box/style-control/flip-box-front-button-control";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -56,6 +57,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontButtonText,
 		flipBoxFrontButtonUrl,
 		flipBoxFrontButtonTargetUrl,
+
+		flipBoxFrontButtonFontColorSwitcher,
+		flipBoxFrontButtonFontColor,
+		flipBoxFrontButtonFontHoverColor,
+
+		flipBoxFrontButtonMarginUnits,
+		flipBoxFrontButtonMarginDesktop,
+		flipBoxFrontButtonMarginTablet,
+		flipBoxFrontButtonMarginMobile,
+		flipBoxFrontButtonMarginLink,
+
+		flipBoxFrontButtonFontFamily,
+		flipBoxFrontButtonFontSize,
+		flipBoxFrontButtonFontSizeUnits,
+		flipBoxFrontButtonFontWeight,
+		flipBoxFrontButtonFontStyle,
+		flipBoxFrontButtonTextTransform,
+		flipBoxFrontButtonTextDecoration,
+		flipBoxFrontButtonLetterSpacing,
+		flipBoxFrontButtonLetterSpacingUnits,
+		flipBoxFrontButtonLineHeight,
+		flipBoxFrontButtonLineHeightUnits,
 		/** End Flip Box Front Button Attribute */
 
 		/** Start Flip Box Back Button Attribute */
@@ -253,7 +276,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const flipBoxItemFrontBorderTypeGetTablet = `${flipBoxItemFrontBorderTypeTablet.top}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeTablet.right}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeTablet.bottom}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeTablet.left}${flipBoxItemFrontBorderTypeUnits[deviceType]}`;
 	const flipBoxItemFrontBorderTypeGetMobile = `${flipBoxItemFrontBorderTypeMobile.top}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeMobile.right}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeMobile.bottom}${flipBoxItemFrontBorderTypeUnits[deviceType]} ${flipBoxItemFrontBorderTypeMobile.left}${flipBoxItemFrontBorderTypeUnits[deviceType]}`;
 
-
 	const flipBoxItemFrontBorderRadiusGetDesktop = `${flipBoxItemFrontBorderRadiusDesktop.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
 	const flipBoxItemFrontBorderRadiusGetTablet = `${flipBoxItemFrontBorderRadiusTablet.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
 	const flipBoxItemFrontBorderRadiusGetMobile = `${flipBoxItemFrontBorderRadiusMobile.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
@@ -269,6 +291,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const flipBoxItemBackBorderRadiusGetTablet = `${flipBoxItemBackBorderRadiusTablet.top}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.right}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.bottom}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.left}${flipBoxItemBackBorderRadiusUnits[deviceType]}`;
 	const flipBoxItemBackBorderRadiusGetMobile = `${flipBoxItemBackBorderRadiusMobile.top}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.right}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.bottom}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.left}${flipBoxItemBackBorderRadiusUnits[deviceType]}`;
 	/** End Flip Box Item Back Control */
+
+	/** Start Flip Box Front Button Control */
+	const flipBoxFrontButtonMarginGetDesktop = `${flipBoxFrontButtonMarginDesktop.top}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginDesktop.right}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginDesktop.bottom}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginDesktop.left}${flipBoxFrontButtonMarginUnits[deviceType]}`;
+	const flipBoxFrontButtonMarginGetTablet = `${flipBoxFrontButtonMarginTablet.top}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginTablet.right}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginTablet.bottom}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginTablet.left}${flipBoxFrontButtonMarginUnits[deviceType]}`;
+	const flipBoxFrontButtonMarginGetMobile = `${flipBoxFrontButtonMarginMobile.top}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginMobile.right}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginMobile.bottom}${flipBoxFrontButtonMarginUnits[deviceType]} ${flipBoxFrontButtonMarginMobile.left}${flipBoxFrontButtonMarginUnits[deviceType]}`;
+	/** End Flip Box Front Button Control */
 
 	return (
 		<>
@@ -302,6 +330,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxFrontContentTextDecoration ? `text-decoration: ${flipBoxFrontContentTextDecoration};` : ''}
 				  ${flipBoxFrontContentLetterSpacing.Desktop ? `letter-spacing: ${flipBoxFrontContentLetterSpacing.Desktop}${flipBoxFrontContentLetterSpacingUnits.Desktop};` : ''}
 				  ${flipBoxFrontContentLineHeight.Desktop ? `line-height: ${flipBoxFrontContentLineHeight.Desktop}${flipBoxFrontContentLineHeightUnits.Desktop};` : ''}
+				}
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-front-button {
+				  ${flipBoxFrontButtonFontColor ? `color: ${flipBoxFrontButtonFontColor};` : ''}
+				  ${flipBoxFrontButtonFontFamily ? `font-family: ${flipBoxFrontButtonFontFamily};` : ''}
+				  ${flipBoxFrontButtonFontSize.Desktop ? `font-size: ${flipBoxFrontButtonFontSize.Desktop}${flipBoxFrontButtonFontSizeUnits.Desktop};` : ''}
+				  ${flipBoxFrontButtonFontWeight ? `font-weight: ${flipBoxFrontButtonFontWeight};` : ''}
+				  ${flipBoxFrontButtonFontStyle ? `font-style: ${flipBoxFrontButtonFontStyle};` : ''}
+				  ${flipBoxFrontButtonTextTransform ? `text-transform: ${flipBoxFrontButtonTextTransform};` : ''}
+				  ${flipBoxFrontButtonTextDecoration ? `text-decoration: ${flipBoxFrontButtonTextDecoration};` : ''}
+				  ${flipBoxFrontButtonLetterSpacing.Desktop ? `letter-spacing: ${flipBoxFrontButtonLetterSpacing.Desktop}${flipBoxFrontButtonLetterSpacingUnits.Desktop};` : ''}
+				  ${flipBoxFrontButtonLineHeight.Desktop ? `line-height: ${flipBoxFrontButtonLineHeight.Desktop}${flipBoxFrontButtonLineHeightUnits.Desktop};` : ''}
+				  ${flipBoxFrontButtonMarginGetDesktop ? `margin: ${flipBoxFrontButtonMarginGetDesktop};` : ''}
+				  display: inline-block;
+    			  width: 100%;
 				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-title {
 				  ${flipBoxBackTitleFontColor ? `color: ${flipBoxBackTitleFontColor};` : ''}
@@ -866,6 +908,46 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 														clientId ={clientId}
 													/>
+												</>
+											)}
+										</PanelBody>
+										<PanelBody
+											title={__("Button", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<BaseControl
+												label={__("Select Type", "frontis-block")}
+												className="fb-setting-color-panel-wrapper"
+											>
+												<ButtonGroup className="fb-setting-color-panel-btn">
+													{SELECT_TYPE.map((item, key) => (
+														<Button
+															key={key}
+															onClick={() => setAttributes({flipBoxTypeSwitcher: item.value})}
+															className={`fb-setting-color-panel-btn-switchr ${flipBoxTypeSwitcher === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
+											{flipBoxTypeSwitcher === 'front' && (
+												<>
+													<FlipBoxFrontButtonControl
+														attributes={attributes}
+														setAttributes={setAttributes}
+														clientId ={clientId}
+													/>
+												</>
+											)}
+
+											{flipBoxTypeSwitcher === 'back' && (
+												<>
+													{/*<FlipBoxBackContentControl*/}
+													{/*	attributes={attributes}*/}
+													{/*	setAttributes={setAttributes}*/}
+													{/*	clientId ={clientId}*/}
+													{/*/>*/}
 												</>
 											)}
 										</PanelBody>
