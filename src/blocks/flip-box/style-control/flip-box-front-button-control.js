@@ -32,19 +32,19 @@ export default function FlipBoxFrontButtonControl ({ attributes, setAttributes})
 
 	} = attributes;
 
-	/** Start Front Title Color */
-	const handleColorSwitcherChange = (value) => {
+	/** Start Front Button Color */
+	const flipBoxFrontButtonHandleColorSwitcherChange = (value) => {
 		setAttributes({ flipBoxFrontButtonFontColorSwitcher: value });
 	};
-	const handleGlobalColorChange = (value) => {
+	const flipBoxFrontButtonHandleGlobalColorChange = (value) => {
 		setAttributes({ flipBoxFrontButtonFontColor: value });
 	};
-	const handleGlobalHoverColorChange = (value) => {
+	const flipBoxFrontButtonHandleGlobalHoverColorChange = (value) => {
 		setAttributes({ flipBoxFrontButtonFontHoverColor: value });
 	};
-	/** End Front Title Color */
+	/** End Front Button Color */
 
-	const handleSpacingUnitHandlerFn = ( event, position ) => {
+	const flipBoxFrontButtonMarginHandleSpacingUnitHandler = ( event, position ) => {
 		const value = event.target.value;
 		if ( flipBoxFrontButtonMarginLink ) {
 			switch ( deviceType ) {
@@ -98,11 +98,11 @@ export default function FlipBoxFrontButtonControl ({ attributes, setAttributes})
 		}
 
 	}
-	const spacingCombineBtnHandlerFn = () => {
+	const flipBoxFrontButtonMarginSpacingCombineBtnHandlerFn = () => {
 		setAttributes( {flipBoxFrontButtonMarginLink: !flipBoxFrontButtonMarginLink} );
 	}
 
-	const flipBoxFrontButtonMarginUnitsHandler = (unit) => {
+	const flipBoxFrontButtonMarginSpacingUnitsHandler = (unit) => {
 		setAttributes( {
 			flipBoxFrontButtonMarginUnits: {
 				...flipBoxFrontButtonMarginUnits,
@@ -118,9 +118,9 @@ export default function FlipBoxFrontButtonControl ({ attributes, setAttributes})
 				globalColorSwitcher={flipBoxFrontButtonFontColorSwitcher}
 				globalColor={flipBoxFrontButtonFontColor}
 				globalHoverColor={flipBoxFrontButtonFontHoverColor}
-				handleColorSwitcherChange={handleColorSwitcherChange}
-				handleGlobalColorChange={handleGlobalColorChange}
-				handleGlobalHoverColorChange={handleGlobalHoverColorChange}
+				handleColorSwitcherChange={flipBoxFrontButtonHandleColorSwitcherChange}
+				handleGlobalColorChange={flipBoxFrontButtonHandleGlobalColorChange}
+				handleGlobalHoverColorChange={flipBoxFrontButtonHandleGlobalHoverColorChange}
 			/>
 			<FB_TypographyControl
 				fontFamily={flipBoxFrontButtonFontFamily}
@@ -162,14 +162,14 @@ export default function FlipBoxFrontButtonControl ({ attributes, setAttributes})
 			<FB_Spacing
 				label={ 'Margin' }
 				deviceType={deviceType}
-				spacingUnitsHandler={flipBoxFrontButtonMarginUnitsHandler}
+				spacingUnitsHandler={flipBoxFrontButtonMarginSpacingUnitsHandler}
 				spacingUnits={flipBoxFrontButtonMarginUnits}
 				spacingDesktop={flipBoxFrontButtonMarginDesktop}
 				spacingTablet={flipBoxFrontButtonMarginTablet}
 				spacingMobile={flipBoxFrontButtonMarginMobile}
-				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
+				handleSpacingUnitHandler={flipBoxFrontButtonMarginHandleSpacingUnitHandler}
 				spacingCombineBtn={flipBoxFrontButtonMarginLink}
-				spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
+				spacingCombineBtnHandler={flipBoxFrontButtonMarginSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
 			/>
 		</>
 	);
