@@ -21,9 +21,9 @@ function ProBanner() {
                     />
                 </svg>
               </span>
-              <h2>{ __('Upgrade to Pro', 'frontis-blocks') }</h2>
+              <h2>{ __('Upgrade to Pro for Access Premium Features!', 'frontis-blocks') }</h2>
           </div>
-              <p>{ __('Get access to all features and support by upgrading to Pro.', 'frontis-blocks') }</p>
+              <p>{ __('Unlock premium features from Frontis Blocks to elevate your Gutenberg website today! Enhance your design and functionality with ease, transforming your site effortlessly. Captivate your audience and take presence to the next level!', 'frontis-blocks') }</p>
               {window.frontisBlocksAdmin.isProActive === 'false' && (
                         <a 
                             href={window.frontisBlocksAdmin.pro_url} 

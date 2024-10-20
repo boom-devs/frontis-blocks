@@ -25,7 +25,7 @@ class Settings extends AjaxBase {
             'collapse_panel',
             'enable_templates_button',
             'save_blocks',
-            'get_blocks',
+            'get_active_blocks',
             'recaptcha_v2_site_key',
             'recaptcha_v2_secret_key',
             'recaptcha_v3_site_key',
@@ -205,56 +205,45 @@ class Settings extends AjaxBase {
     }
 
     // New method to get blocks
-    public function get_blocks() {
-        error_log('get_blocks method called');
+    public function get_active_blocks() {
+        error_log('get_active_blocks method called');
         
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
-            error_log('Invalid nonce in get_blocks');
+            error_log('Invalid nonce in get_active_blocks');
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
         
         if (!current_user_can('manage_options')) {
-            error_log('Insufficient permissions in get_blocks');
+            error_log('Insufficient permissions in get_active_blocks');
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
             return;
         }
-
+        
         try {
             $allBlocks = BlockList::get_instance()->get_blocks();
-            $defaultBlocks = BlockList::get_instance()->get_default_blocks();
+            $activeBlocks = get_option('fb_active_blocks', []);
 
-            // Check if fb_active_blocks option exists
-            $savedBlocks = get_option('fb_active_blocks', []);
-
-            error_log('Saved blocks (before processing): ' . print_r($savedBlocks, true));
-
-            // If fb_active_blocks doesn't exist or is empty, create it with default values
-            if ($savedBlocks === false || empty($savedBlocks)) {
-                error_log('fb_active_blocks not found or empty, creating with default values');
-                $savedBlocks = $defaultBlocks;
-                update_option('fb_active_blocks', $savedBlocks);
-            }
-
-            error_log('Saved blocks (after processing): ' . print_r($savedBlocks, true));
-            error_log('Default blocks: ' . print_r($defaultBlocks, true));
+            error_log('All blocks: ' . print_r($allBlocks, true));
+            error_log('Active blocks: ' . print_r($activeBlocks, true));
 
             $mergedBlocks = [];
             foreach ($allBlocks as $block) {
                 $slug = $block['slug'];
-                $mergedBlocks[$slug] = [
-                    'status' => isset($savedBlocks[$slug]) ? $savedBlocks[$slug] : $defaultBlocks[$slug],
-                    'info' => $block
+                $mergedBlocks[] = [
+                    ...block,
+                    'status' => isset($activeBlocks[$slug]) ? ($activeBlocks[$slug] ? '1' : '0') : '1'
                 ];
             }
 
             error_log('Merged blocks: ' . print_r($mergedBlocks, true));
             wp_send_json_success($mergedBlocks);
         } catch (\Exception $e) {
-            error_log('Exception in get_blocks: ' . $e->getMessage());
+            error_log('Exception in get_active_blocks: ' . $e->getMessage());
             wp_send_json_error(['message' => 'An error occurred while fetching blocks: ' . $e->getMessage()], 500);
         }
     }
+
     public function recaptcha_v2_site_key() {
         $this->handle_option_update('recaptcha_v2_site_key', 'text');
     }

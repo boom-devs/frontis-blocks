@@ -10,7 +10,7 @@ const Blocks = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const { ajaxurl, nonce } = window.frontisBlocksAdmin;
+  const { ajaxurl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
 
   useEffect(() => {
     getBlocks();
@@ -18,36 +18,21 @@ const Blocks = () => {
 
   const getBlocks = () => {
     console.log('Fetching blocks...');
-    jQuery.ajax({
+    window.jQuery.ajax({
       url: ajaxurl,
       type: 'POST',
       data: {
-        action: 'fb_get_blocks',
+        action: 'fb_get_active_blocks',
         security: nonce
       },
       success: function(response) {
         console.log('Raw response:', response);
-        try {
-          if (typeof response === 'string') {
-            response = JSON.parse(response);
-          }
-          console.log('Parsed response:', response);
-          if (response.success) {
-            const mergedBlocks = response.data || {};
-            const blocksArray = Object.entries(mergedBlocks).map(([slug, data]) => ({
-              ...data.info,
-              slug: slug,
-              status: data.status ? '1' : '0'
-            }));
-            console.log('Processed blocks:', blocksArray);
-            setBlocks(blocksArray);
-          } else {
-            console.error('Failed to fetch blocks:', response.data?.message || 'Unknown error');
-            toast.error(__('Failed to fetch blocks', 'frontis-blocks'));
-          }
-        } catch (error) {
-          console.error('Error processing response:', error);
-          toast.error(__('Error processing server response', 'frontis-blocks'));
+        if (response.success) {
+          console.log('Blocks data:', response.data);
+          setBlocks(response.data);
+        } else {
+          console.error('Failed to fetch blocks:', response.data?.message || 'Unknown error');
+          toast.error(__('Failed to fetch blocks', 'frontis-blocks'));
         }
         setIsLoading(false);
       },
@@ -69,7 +54,7 @@ const Blocks = () => {
 
     console.log('Blocks to save:', blocksToSave);
 
-    jQuery.ajax({
+    window.jQuery.ajax({
       url: ajaxurl,
       type: 'POST',
       data: {

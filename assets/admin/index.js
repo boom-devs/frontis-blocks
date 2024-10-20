@@ -290,47 +290,29 @@ var Blocks = function Blocks() {
     setSearchTerm = _useState8[1];
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     ajaxurl = _window$frontisBlocks.ajaxurl,
-    nonce = _window$frontisBlocks.nonce;
+    nonce = _window$frontisBlocks.nonce,
+    allBlocks = _window$frontisBlocks.blocks;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getBlocks();
   }, []);
   var getBlocks = function getBlocks() {
     console.log('Fetching blocks...');
-    jQuery.ajax({
+    window.jQuery.ajax({
       url: ajaxurl,
       type: 'POST',
       data: {
-        action: 'fb_get_blocks',
+        action: 'fb_get_active_blocks',
         security: nonce
       },
       success: function success(response) {
         console.log('Raw response:', response);
-        try {
-          if (typeof response === 'string') {
-            response = JSON.parse(response);
-          }
-          console.log('Parsed response:', response);
-          if (response.success) {
-            var mergedBlocks = response.data || {};
-            var blocksArray = Object.entries(mergedBlocks).map(function (_ref) {
-              var _ref2 = _slicedToArray(_ref, 2),
-                slug = _ref2[0],
-                data = _ref2[1];
-              return _objectSpread(_objectSpread({}, data.info), {}, {
-                slug: slug,
-                status: data.status ? '1' : '0'
-              });
-            });
-            console.log('Processed blocks:', blocksArray);
-            setBlocks(blocksArray);
-          } else {
-            var _response$data;
-            console.error('Failed to fetch blocks:', ((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error');
-            react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Failed to fetch blocks', 'frontis-blocks'));
-          }
-        } catch (error) {
-          console.error('Error processing response:', error);
-          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Error processing server response', 'frontis-blocks'));
+        if (response.success) {
+          console.log('Blocks data:', response.data);
+          setBlocks(response.data);
+        } else {
+          var _response$data;
+          console.error('Failed to fetch blocks:', ((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error');
+          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Failed to fetch blocks', 'frontis-blocks'));
         }
         setIsLoading(false);
       },
@@ -349,7 +331,7 @@ var Blocks = function Blocks() {
       return acc;
     }, {});
     console.log('Blocks to save:', blocksToSave);
-    jQuery.ajax({
+    window.jQuery.ajax({
       url: ajaxurl,
       type: 'POST',
       data: {
@@ -398,9 +380,9 @@ var Blocks = function Blocks() {
       }
     }, info);
   }, [blocks, searchTerm]);
-  var filteredCategories = selectedCategory === 'all' ? Object.entries(categoryInfo).filter(function (_ref3) {
-    var _ref4 = _slicedToArray(_ref3, 1),
-      category = _ref4[0];
+  var filteredCategories = selectedCategory === 'all' ? Object.entries(categoryInfo).filter(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 1),
+      category = _ref2[0];
     return category !== 'all';
   }) : [[selectedCategory, categoryInfo[selectedCategory]]];
   var clearSearch = function clearSearch() {
@@ -467,10 +449,10 @@ var Blocks = function Blocks() {
     onClick: handleDisableAll
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-category-filter"
-  }, Object.entries(categoryInfo).map(function (_ref5) {
-    var _ref6 = _slicedToArray(_ref5, 2),
-      category = _ref6[0],
-      count = _ref6[1].count;
+  }, Object.entries(categoryInfo).map(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+      category = _ref4[0],
+      count = _ref4[1].count;
     return /*#__PURE__*/React.createElement("button", {
       key: category,
       onClick: function onClick() {
@@ -478,10 +460,10 @@ var Blocks = function Blocks() {
       },
       className: "fb-blocks-category-button ".concat(selectedCategory === category ? 'fb-blocks-category-button--active' : '')
     }, category === 'all' ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('All', 'frontis-blocks') : category.charAt(0).toUpperCase() + category.slice(1), " (", count, ")");
-  })), filteredCategories.length > 0 ? filteredCategories.map(function (_ref7) {
-    var _ref8 = _slicedToArray(_ref7, 2),
-      category = _ref8[0],
-      categoryBlocks = _ref8[1].blocks;
+  })), filteredCategories.length > 0 ? filteredCategories.map(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+      category = _ref6[0],
+      categoryBlocks = _ref6[1].blocks;
     return /*#__PURE__*/React.createElement("div", {
       key: category,
       className: "fb-blocks-category-group fb-blocks-category-group--".concat(category)
@@ -570,7 +552,7 @@ function ProBanner() {
     strokeLinecap: "round",
     strokeWidth: 4,
     d: "M14.604 30.793h10.8"
-  }))), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade to Pro', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Get access to all features and support by upgrading to Pro.', 'frontis-blocks')), window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement("a", {
+  }))), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade to Pro for Access Premium Features!', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Unlock premium features from Frontis Blocks to elevate your Gutenberg website today! Enhance your design and functionality with ease, transforming your site effortlessly. Captivate your audience and take presence to the next level!', 'frontis-blocks')), window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement("a", {
     href: window.frontisBlocksAdmin.pro_url,
     className: "fb-upgrade-button",
     target: "_blank",
