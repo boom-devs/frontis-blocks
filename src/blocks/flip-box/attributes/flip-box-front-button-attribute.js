@@ -26,6 +26,25 @@ const flipBoxFrontButtonAttributes = {
 	},
 	/** End Color */
 
+	/** Start BG Color */
+	flipBoxFrontButtonBgFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	flipBoxFrontButtonBgFontColor: {
+		type: "string",
+		default: "#0d173bb3"
+	},
+	flipBoxFrontButtonBgFontHoverColor: {
+		type: 'string',
+		default: "#0d173bb3"
+	},
+	/** End BG Color */
+
+
+
+
+
 	/** Start Typography */
 	flipBoxFrontButtonFontFamily: {
 		type: 'string',
@@ -138,6 +157,148 @@ const flipBoxFrontButtonAttributes = {
 		default: true
 	},
 	/** End Margin */
+
+	/** Start Padding */
+	flipBoxFrontButtonPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	flipBoxFrontButtonPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxFrontButtonPaddingTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxFrontButtonPaddingMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxFrontButtonPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Border Type */
+	flipBoxFrontButtonBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	flipBoxFrontButtonBorderColor: {
+		type: "string",
+		default: ""
+	},
+	flipBoxFrontButtonBorderHoverColor: {
+		type: 'string',
+	},
+	flipBoxFrontButtonBorder: {
+		type: 'string',
+		default: "none",
+	},
+	flipBoxFrontButtonBorderTypeUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	flipBoxFrontButtonBorderTypeDesktop: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	flipBoxFrontButtonBorderTypeTablet: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	flipBoxFrontButtonBorderTypeMobile: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	flipBoxFrontButtonBorderTypeLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Type */
+
+	/** Start Border Radius */
+	flipBoxFrontButtonBorderRadiusUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	flipBoxFrontButtonBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxFrontButtonBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxFrontButtonBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxFrontButtonBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
+
 };
 
 export default flipBoxFrontButtonAttributes;
