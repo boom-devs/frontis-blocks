@@ -3,7 +3,7 @@ const flipBoxItemBackAttributes = {
 	flipBoxItemBackSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '364',
 			Tablet: '',
 			Mobile: ''
 		}
