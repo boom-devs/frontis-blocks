@@ -1,41 +1,41 @@
-const flipBoxFrontButtonAttributes = {
-	flipBoxFrontButtonText: {
+const flipBoxBackButtonAttributes = {
+	flipBoxBackButtonText: {
 		type: "string",
 		default: "Click Here",
 	},
-	flipBoxFrontButtonUrl: {
+	flipBoxBackButtonUrl: {
 		type: "string",
 		default: "",
 	},
-	flipBoxFrontButtonTargetUrl: {
+	flipBoxBackButtonTargetUrl: {
 		type: "boolean",
 	},
 
 	/** Start Color */
-	flipBoxFrontButtonFontColorSwitcher: {
+	flipBoxBackButtonFontColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	flipBoxFrontButtonFontColor: {
+	flipBoxBackButtonFontColor: {
 		type: "string",
 		default: "#0d173bb3"
 	},
-	flipBoxFrontButtonFontHoverColor: {
+	flipBoxBackButtonFontHoverColor: {
 		type: 'string',
 		default: "#0d173bb3"
 	},
 	/** End Color */
 
 	/** Start BG Color */
-	flipBoxFrontButtonBgFontColorSwitcher: {
+	flipBoxBackButtonBgFontColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	flipBoxFrontButtonBgFontColor: {
+	flipBoxBackButtonBgFontColor: {
 		type: "string",
 		default: "#0d173bb3"
 	},
-	flipBoxFrontButtonBgFontHoverColor: {
+	flipBoxBackButtonBgFontHoverColor: {
 		type: 'string',
 		default: "#0d173bb3"
 	},
@@ -46,11 +46,11 @@ const flipBoxFrontButtonAttributes = {
 
 
 	/** Start Typography */
-	flipBoxFrontButtonFontFamily: {
+	flipBoxBackButtonFontFamily: {
 		type: 'string',
 		default: 'inherit'
 	},
-	flipBoxFrontButtonFontSize: {
+	flipBoxBackButtonFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '18',
@@ -58,7 +58,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: '16'
 		}
 	},
-	flipBoxFrontButtonFontSizeUnits: {
+	flipBoxBackButtonFontSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -66,23 +66,23 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxFrontButtonFontWeight: {
+	flipBoxBackButtonFontWeight: {
 		type: 'string',
 		default: '400'
 	},
-	flipBoxFrontButtonFontStyle: {
+	flipBoxBackButtonFontStyle: {
 		type: 'string',
 		default: ''
 	},
-	flipBoxFrontButtonTextTransform: {
+	flipBoxBackButtonTextTransform: {
 		type: 'string',
 		default: ''
 	},
-	flipBoxFrontButtonTextDecoration: {
+	flipBoxBackButtonTextDecoration: {
 		type: 'string',
 		default: ''
 	},
-	flipBoxFrontButtonLetterSpacing: {
+	flipBoxBackButtonLetterSpacing: {
 		type: 'object',
 		default: {
 			Desktop: '',
@@ -90,7 +90,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: ''
 		}
 	},
-	flipBoxFrontButtonLetterSpacingUnits: {
+	flipBoxBackButtonLetterSpacingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -98,7 +98,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxFrontButtonLineHeight: {
+	flipBoxBackButtonLineHeight: {
 		type: 'object',
 		default: {
 			Desktop: '',
@@ -106,7 +106,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: ''
 		}
 	},
-	flipBoxFrontButtonLineHeightUnits: {
+	flipBoxBackButtonLineHeightUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -117,7 +117,7 @@ const flipBoxFrontButtonAttributes = {
 	/** End Typography */
 
 	/** Start Margin */
-	flipBoxFrontButtonMarginUnits : {
+	flipBoxBackButtonMarginUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -125,7 +125,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxFrontButtonMarginDesktop: {
+	flipBoxBackButtonMarginDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -134,7 +134,7 @@ const flipBoxFrontButtonAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxFrontButtonMarginTablet: {
+	flipBoxBackButtonMarginTablet: {
 		type: "object",
 		default: {
 			top: 0,
@@ -143,7 +143,7 @@ const flipBoxFrontButtonAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxFrontButtonMarginMobile: {
+	flipBoxBackButtonMarginMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -152,14 +152,14 @@ const flipBoxFrontButtonAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxFrontButtonMarginLink : {
+	flipBoxBackButtonMarginLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Margin */
 
 	/** Start Padding */
-	flipBoxFrontButtonPaddingUnits: {
+	flipBoxBackButtonPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -167,7 +167,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxFrontButtonPaddingDesktop: {
+	flipBoxBackButtonPaddingDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -176,7 +176,7 @@ const flipBoxFrontButtonAttributes = {
 			right: '',
 		},
 	},
-	flipBoxFrontButtonPaddingTablet: {
+	flipBoxBackButtonPaddingTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -185,7 +185,7 @@ const flipBoxFrontButtonAttributes = {
 			right: '',
 		},
 	},
-	flipBoxFrontButtonPaddingMobile: {
+	flipBoxBackButtonPaddingMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -194,29 +194,29 @@ const flipBoxFrontButtonAttributes = {
 			right: '',
 		},
 	},
-	flipBoxFrontButtonPaddingLink : {
+	flipBoxBackButtonPaddingLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Padding */
 
 	/** Start Border Type */
-	flipBoxFrontButtonBorderColorSwitcher: {
+	flipBoxBackButtonBorderColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	flipBoxFrontButtonBorderColor: {
+	flipBoxBackButtonBorderColor: {
 		type: "string",
 		default: ""
 	},
-	flipBoxFrontButtonBorderHoverColor: {
+	flipBoxBackButtonBorderHoverColor: {
 		type: 'string',
 	},
-	flipBoxFrontButtonBorder: {
+	flipBoxBackButtonBorder: {
 		type: 'string',
 		default: "none",
 	},
-	flipBoxFrontButtonBorderTypeUnits : {
+	flipBoxBackButtonBorderTypeUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -224,7 +224,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxFrontButtonBorderTypeDesktop: {
+	flipBoxBackButtonBorderTypeDesktop: {
 		type: "object",
 		default: {
 			top: 0,
@@ -233,7 +233,7 @@ const flipBoxFrontButtonAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxFrontButtonBorderTypeTablet: {
+	flipBoxBackButtonBorderTypeTablet: {
 		type: "object",
 		default: {
 			top: 0,
@@ -242,7 +242,7 @@ const flipBoxFrontButtonAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxFrontButtonBorderTypeMobile: {
+	flipBoxBackButtonBorderTypeMobile: {
 		type: "object",
 		default: {
 			top: 0,
@@ -251,14 +251,14 @@ const flipBoxFrontButtonAttributes = {
 			right: 0,
 		},
 	},
-	flipBoxFrontButtonBorderTypeLink : {
+	flipBoxBackButtonBorderTypeLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Border Type */
 
 	/** Start Border Radius */
-	flipBoxFrontButtonBorderRadiusUnits : {
+	flipBoxBackButtonBorderRadiusUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -266,7 +266,7 @@ const flipBoxFrontButtonAttributes = {
 			Mobile: 'px'
 		}
 	},
-	flipBoxFrontButtonBorderRadiusDesktop: {
+	flipBoxBackButtonBorderRadiusDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -275,7 +275,7 @@ const flipBoxFrontButtonAttributes = {
 			right: '',
 		},
 	},
-	flipBoxFrontButtonBorderRadiusTablet: {
+	flipBoxBackButtonBorderRadiusTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -284,7 +284,7 @@ const flipBoxFrontButtonAttributes = {
 			right: '',
 		},
 	},
-	flipBoxFrontButtonBorderRadiusMobile: {
+	flipBoxBackButtonBorderRadiusMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -293,7 +293,7 @@ const flipBoxFrontButtonAttributes = {
 			right: '',
 		},
 	},
-	flipBoxFrontButtonBorderRadiusLink : {
+	flipBoxBackButtonBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
@@ -301,4 +301,4 @@ const flipBoxFrontButtonAttributes = {
 
 };
 
-export default flipBoxFrontButtonAttributes;
+export default flipBoxBackButtonAttributes;
