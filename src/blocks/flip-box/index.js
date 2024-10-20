@@ -14,7 +14,7 @@ import flipBoxFrontIconAttributes from './attributes/flip-box-front-icon.js';
 import flipBoxBackIconAttributes from './attributes/flip-box-back-icon.js';
 import flipBoxFrontTitleAttributes from './attributes/flip-box-front-title-attribute.js';
 import flipBoxFrontContentAttributes from './attributes/flip-box-front-content-attribute.js';
-import flipBoxFrontButtonAttributes from './attributes/flip-box-front-button-attribute.js';
+import flipBoxBackButtonAttributes from './attributes/flip-box-back-button-attribute.js';
 import flipBoxBackTitleAttributes from './attributes/flip-box-back-title-attribute.js';
 import flipBoxBackContentAttributes from './attributes/flip-box-back-content-attribute.js';
 
@@ -27,7 +27,7 @@ const combinedAttributes = {
 	...flipBoxBackIconAttributes,
 	...flipBoxFrontTitleAttributes,
 	...flipBoxFrontContentAttributes,
-	...flipBoxFrontButtonAttributes,
+	...flipBoxBackButtonAttributes,
 	...flipBoxBackTitleAttributes,
 	...flipBoxBackContentAttributes,
 };
