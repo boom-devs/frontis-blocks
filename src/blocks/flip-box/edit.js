@@ -35,6 +35,7 @@ import FlipBoxFrontTitleControl from "@Blocks/flip-box/style-control/flip-box-fr
 import FlipBoxFrontContentControl from "@Blocks/flip-box/style-control/flip-box-front-content-control";
 import FlipBoxBackTitleControl from "@Blocks/flip-box/style-control/flip-box-back-title-control";
 import FlipBoxBackContentControl from "@Blocks/flip-box/style-control/flip-box-back-content-control";
+import {ICON_ALIGN, TEXT_ALIGN} from "@Blocks/dual-button/constants/constants";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -49,6 +50,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxFrontTitleHeadingTag,
 		flipBoxBackTitle,
 		flipBoxBackTitleHeadingTag,
+
+
+		/** Start Flip Box Front Button Attribute */
+		flipBoxFrontButtonText,
+		flipBoxFrontButtonUrl,
+		flipBoxFrontButtonTargetUrl,
+		/** End Flip Box Front Button Attribute */
+
+		/** Start Flip Box Back Button Attribute */
+		flipBoxBackButtonText,
+		flipBoxBackButtonUrl,
+		flipBoxBackButtonTargetUrl,
+		/** End Flip Box Back Button Attribute */
 
 		/** Start Flip Box Item Front Attribute */
 		flipBoxItemFrontSize,
@@ -195,6 +209,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxBackIconColor,
 
 	} = attributes;
+
+	// Prevent link navigation in the editor and focus on text
+	const handleButtonClick = (event) => {
+		event.preventDefault();
+	};
+
 
 	// Icon media remove handler
 	const removeFlipBoxFrontIconMedia = () => {
@@ -432,7 +452,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({mediaSwitcher: value})}
 													/>
 												</BaseControl>
-
 												<div className='fb-image-upload-field-wrapper'>
 													{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
 														<BaseControl>
@@ -503,6 +522,56 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<FBIconPicker value={flipBoxFrontIcon} setIconHandler={flipBoxFrontIconHandler}/>
 														</BaseControl>
 													)}
+												</div>
+
+												<TextControl
+													label={__("Button Text", "frontis-blocks")}
+													value={flipBoxFrontButtonText}
+													onChange={(value) => setAttributes({flipBoxFrontButtonText: value})}
+													className="fb-advanced-button-text"
+												/>
+												<div className="fb-link-control-wrapper">
+													<BaseControl
+														label={__("Button URL", "frontis-blocks")}
+													>
+														<div className="fb-link-control-inner-wrapper">
+															<TextControl
+																value={flipBoxFrontButtonUrl}
+																onChange={(value) => setAttributes({flipBoxFrontButtonUrl: value})}
+																className="fb-advanced-button-url"
+																placeholder={__('https://', 'frontis-blocks')}
+															/>
+															<Dropdown
+																className="fb-advanced-button-icon-dropdown"
+																contentClassName="fb-advanced-button-icon-dropdown-content"
+																popoverProps={{placement: 'bottom-start'}}
+																renderToggle={({isOpen, onToggle}) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+																		className="fb-advanced-button-icon-btn"
+																	>
+																		<Dashicon icon="color-picker"
+																				  className="fb-advanced-button-icon"/>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-advanced-button-icon-popup">
+																		<BaseControl
+																			className="fb-advanced-button-icon-popup-inner">
+																			<ToggleControl
+																				label={__("Open in new tab", "frontis-blocks")}
+																				checked={flipBoxFrontButtonTargetUrl}
+																				onChange={(value) => setAttributes({flipBoxFrontButtonTargetUrl: value})}
+																			/>
+																		</BaseControl>
+																	</div>
+																)}
+															/>
+														</div>
+													</BaseControl>
 												</div>
 											</>
 										)}
@@ -617,6 +686,56 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<FBIconPicker value={flipBoxBackIcon} setIconHandler={flipBoxBackIconHandler}/>
 														</BaseControl>
 													)}
+												</div>
+
+												<TextControl
+													label={__("Button Text", "frontis-blocks")}
+													value={flipBoxBackButtonText}
+													onChange={(value) => setAttributes({flipBoxBackButtonText: value})}
+													className="fb-advanced-button-text"
+												/>
+												<div className="fb-link-control-wrapper">
+													<BaseControl
+														label={__("Button URL", "frontis-blocks")}
+													>
+														<div className="fb-link-control-inner-wrapper">
+															<TextControl
+																value={flipBoxBackButtonUrl}
+																onChange={(value) => setAttributes({flipBoxBackButtonUrl: value})}
+																className="fb-advanced-button-url"
+																placeholder={__('https://', 'frontis-blocks')}
+															/>
+															<Dropdown
+																className="fb-advanced-button-icon-dropdown"
+																contentClassName="fb-advanced-button-icon-dropdown-content"
+																popoverProps={{placement: 'bottom-start'}}
+																renderToggle={({isOpen, onToggle}) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+																		className="fb-advanced-button-icon-btn"
+																	>
+																		<Dashicon icon="color-picker"
+																				  className="fb-advanced-button-icon"/>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-advanced-button-icon-popup">
+																		<BaseControl
+																			className="fb-advanced-button-icon-popup-inner">
+																			<ToggleControl
+																				label={__("Open in new tab", "frontis-blocks")}
+																				checked={flipBoxBackButtonTargetUrl}
+																				onChange={(value) => setAttributes({flipBoxBackButtonTargetUrl: value})}
+																			/>
+																		</BaseControl>
+																	</div>
+																)}
+															/>
+														</div>
+													</BaseControl>
 												</div>
 											</>
 										)}
@@ -785,6 +904,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										onChange={(value) => setAttributes({flipBoxFrontContent: value})}
 										className="fb-flip-box-front-content"
 									/>
+									<a
+										className="fb-flip-box-front-button"
+										href={flipBoxFrontButtonUrl}
+										target={flipBoxFrontButtonTargetUrl ? '_blank' : undefined}
+										rel={flipBoxFrontButtonTargetUrl ? 'noopener noreferrer' : undefined}
+										onClick={handleButtonClick}
+									>
+										<RichText
+											tagName="span"
+											value={flipBoxFrontButtonText}
+											onChange={(value) => setAttributes({flipBoxFrontButtonText: value})}
+											placeholder={__('Enter button text...', 'frontis-blocks')}
+											className="fb-flip-box-front-button-text"
+										/>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -812,7 +946,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										onChange={(value) => setAttributes({flipBoxBackContent: value})}
 										className="fb-flip-box-back-content"
 									/>
-									<a href={`#`} className="fb-flip-box-button">Read More</a>
+									<a
+										className="fb-flip-box-back-button"
+										href={flipBoxBackButtonUrl}
+										target={flipBoxBackButtonTargetUrl ? '_blank' : undefined}
+										rel={flipBoxBackButtonTargetUrl ? 'noopener noreferrer' : undefined}
+										onClick={handleButtonClick}
+									>
+										<RichText
+											tagName="span"
+											value={flipBoxBackButtonText}
+											onChange={(value) => setAttributes({flipBoxBackButtonText: value})}
+											placeholder={__('Enter button text...', 'frontis-blocks')}
+											className="fb-flip-box-back-button-text"
+										/>
+									</a>
 								</div>
 							</div>
 						</div>
