@@ -25,7 +25,10 @@ class Admin {
 
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
+
+        add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
     }
+
 
     public function add_menu_page(){
         add_menu_page(
@@ -307,6 +310,16 @@ class Admin {
         ];
 
         return new \WP_REST_Response($health_info, 200);
+    }
+
+    public function enqueue_editor_assets() {
+        $script_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.js';
+        $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
+        $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
+
+        wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar.js', $script_asset['dependencies'], '1.0.0', true);
+        
+        wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar.css', array(), '1.0.0');
     }
 
 }
