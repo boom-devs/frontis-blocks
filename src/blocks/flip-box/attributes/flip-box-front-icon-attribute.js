@@ -10,14 +10,14 @@ const flipBoxFrontIconAttributes = {
 	},
 	flipBoxFrontIcon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'lightbulb',
 	},
 
 	// Icon Size
 	flipBoxFrontIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '80',
+			Desktop: '70',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -39,11 +39,11 @@ const flipBoxFrontIconAttributes = {
 	},
 	flipBoxFrontIconFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	flipBoxFrontIconFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	/** End Color */
 

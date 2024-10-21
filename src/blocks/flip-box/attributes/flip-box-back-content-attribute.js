@@ -27,8 +27,8 @@ const flipBoxBackContentAttributes = {
 		type: 'object',
 		default: {
 			Desktop: '18',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	flipBoxBackContentFontSizeUnits: {

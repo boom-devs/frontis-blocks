@@ -10,14 +10,14 @@ const flipBoxBackIconAttributes = {
 	},
 	flipBoxBackIcon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'lightbulb',
 	},
 
 	// Icon Size
 	flipBoxBackIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '80',
+			Desktop: '70',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -39,11 +39,11 @@ const flipBoxBackIconAttributes = {
 	},
 	flipBoxBackIconFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#F97255"
 	},
 	flipBoxBackIconFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#F97255"
 	},
 	/** End Color */
 
@@ -54,11 +54,11 @@ const flipBoxBackIconAttributes = {
 	},
 	flipBoxBackIconBgFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	flipBoxBackIconBgFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	/** End BG Color */
 

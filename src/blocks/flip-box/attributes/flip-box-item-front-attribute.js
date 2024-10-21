@@ -144,28 +144,28 @@ const flipBoxItemFrontAttributes = {
 	flipBoxItemFrontBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '15',
+			bottom: '15',
+			left: '15',
+			right: '15',
 		},
 	},
 	flipBoxItemFrontBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '15',
+			bottom: '15',
+			left: '15',
+			right: '15',
 		},
 	},
 	flipBoxItemFrontBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '15',
+			bottom: '15',
+			left: '15',
+			right: '15',
 		},
 	},
 	flipBoxItemFrontBorderRadiusLink : {

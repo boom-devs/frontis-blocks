@@ -31,9 +31,9 @@ const flipBoxFrontTitleAttributes = {
 	flipBoxFrontTitleFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '18',
-			Tablet: '16',
-			Mobile: '16'
+			Desktop: '32',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	flipBoxFrontTitleFontSizeUnits: {
@@ -46,7 +46,7 @@ const flipBoxFrontTitleAttributes = {
 	},
 	flipBoxFrontTitleFontWeight: {
 		type: 'string',
-		default: '400'
+		default: '600'
 	},
 	flipBoxFrontTitleFontStyle: {
 		type: 'string',
