@@ -35,7 +35,7 @@ import {
     TEXT_ALIGN,
     HEADING,
     SEPERATOR_STYLES,
-    FONT_FAMILIES,
+    PRESETS,
     BORDER_STYLES,
     ICON_ALIGN,
 } from "./constants/constants";
@@ -184,6 +184,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         separatorSpacingUnits,
 
         /** Start Icon */
+        headingIconSwitcher,
         headingIconAlign,
         headingIcon,
         headingIconSize,
@@ -249,10 +250,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingGlobalBoxShadowCssValue,
         /** End Global Style */
         /** Start Background Image */
+        headingBackgroundImageEnabled,
         headingBackgroundImageUrl,
         headingBackgroundImageAlt,
         headingBackgroundImageID,
         /** End Background Image */
+
+        headingPresetStyle,
 
     } = attributes;
 
@@ -279,6 +283,52 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             setAttributes({ headingBackgroundImageUrl: defaultImageUrl });
         }
     }, []);
+
+
+
+    /** Start Preset Style */
+    const changeAdvancedHeadingPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-0": {
+                subHeadingSwitcher: false,
+                showSeparatorSwitcher: false,
+                headingBackgroundImageEnabled: false,
+                headingIconSwitcher: false,
+            },
+            "preset-1": {
+                subHeadingSwitcher: true,
+                subHeadingPosition: "bottom",
+                showSeparatorSwitcher: true,
+                separatorPosition: "bottom",
+                headingBackgroundImageEnabled: true,
+                headingIconSwitcher: false,
+            },
+            "preset-2": {
+                subHeadingSwitcher: true,
+                subHeadingPosition: "top",
+                showSeparatorSwitcher: false,
+                separatorPosition: "top",
+                headingBackgroundImageEnabled: false,
+                headingIconSwitcher: true,
+            },
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                headingPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Advanced Heading: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style */
+
+
+
+
     
 
     /** Start Heading Padding */
@@ -1380,11 +1430,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ` : ''} 
                     ${headingBoxShadowCssValue ? `box-shadow: ${headingBoxShadowCssValue};` : ''}
 
-                    ${headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `background-image: url(${headingBackgroundImageUrl});` : ''}
-                    ${headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `-webkit-background-clip: text;` : ''}
-                    ${headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `-webkit-text-fill-color: transparent;` : ''}
-                    ${headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `background-position: center;` : ''}
-                    ${headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `background-size: contain;` : ''}
+                    ${headingBackgroundImageEnabled && headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `
+                        background-image: url(${headingBackgroundImageUrl});
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-position: center;
+                        background-size: contain;
+                    ` : ''}
                     transition: all .3s ease-in-out;
                 }
 
@@ -1619,11 +1671,38 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                     <>
                                         <div className="fb-advanced-wrapper">
                                             <PanelBody
-                                                title={__("Heading", "frontis-blocks")}
+                                                title={__("General", "frontis-blocks")}
                                                 initialOpen={true}
                                             >
+                                                <SelectControl
+                                                    label={__("Preset Style", "frontis-blocks")}
+                                                    value={headingPresetStyle}
+                                                    options={PRESETS}
+                                                    onChange={(selected) => changeAdvancedHeadingPreset(selected)}
+                                                />
                                                 <BaseControl
-                                                    label={__("Heading Alignment", "frontis-blocks")}
+                                                    label={__("Element Visibility", "frontis-blocks")}
+                                                    className="fb-setting-show-hide-elements" 
+                                                >
+                                                    <ToggleControl
+                                                        label={__("Show Sub Heading", "frontis-blocks")}
+                                                        checked={subHeadingSwitcher}
+                                                        onChange={(value) => setAttributes({ subHeadingSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Separator", "frontis-blocks")}
+                                                        checked={showSeparatorSwitcher}
+                                                        onChange={(value) => setAttributes({ showSeparatorSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Icon", "frontis-blocks")}
+                                                        checked={headingIconSwitcher}
+                                                        onChange={(value) => setAttributes({ headingIconSwitcher: value })}
+                                                    />
+                                                </BaseControl>
+
+                                                <BaseControl
+                                                    label={__("Alignment", "frontis-blocks")}
                                                     id="fb-setting-text-alignment"
                                                     className="fb-setting-text-alignment"
                                                 >
@@ -1641,7 +1720,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         ))}
                                                     </ButtonGroup>
                                                 </BaseControl>
-
+                                            </PanelBody>
+                                            <PanelBody
+                                                title={__("Heading", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
                                                 <BaseControl
                                                     label={__("Heading Tag", "frontis-blocks")}
                                                         id="fb-setting-text-alignment"
@@ -1670,119 +1753,108 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 />
                                             </PanelBody>
                                         </div>
-                                        <div className="fb-advanced-sub-heading-wrapper">
+                                        {subHeadingSwitcher && (
                                             <PanelBody
                                                 title={__("Sub Heading", "frontis-blocks")}
                                                 initialOpen={false}
+                                                className="fb-advanced-sub-heading-wrapper"
                                             >
-                                                <ToggleControl
-                                                    label={__("Show Sub Heading", "frontis-blocks")}
-                                                    checked={subHeadingSwitcher}
-                                                    onChange={(value) => setAttributes({ subHeadingSwitcher: value })}
-                                                />
-
-                                                {subHeadingSwitcher && (
-                                                    <>
-                                                        <BaseControl className="fb-advanced-sub-heading-position" >
-                                                            <SelectControl
-                                                                label={__("Sub Heading Position", "frontis-blocks")}
-                                                                value={subHeadingPosition}
-                                                                options={SUBHEADING_POSITION}
-                                                                onChange={(value) => setAttributes({ subHeadingPosition: value})}
-                                                            />
-                                                        </BaseControl>
-                                                        <BaseControl
-                                                            label={__("Sub Heading Tag", "frontis-blocks")}
-                                                            className="fb-setting-text-alignment"
-                                                        >
-                                                            <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                                                                {HEADING.map((item, key) => (
-                                                                    <Button
-                                                                        key={key}
-                                                                        onClick={() => setAttributes({ subHeadingTag: item.value })}
-                                                                        className={`fb-setting-text-alignment-single-btn ${subHeadingTag === item.value ? 'active' : ''}`}
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                ))}
-                                                            </ButtonGroup>
-                                                            
-                                                        </BaseControl>
-
-                                                        <TextareaControl
-                                                            label={__("Sub Heading Text", "frontis-blocks")}
-                                                            value={subHeadingText}
-                                                            onChange={(value) => setAttributes({ subHeadingText: value })}
-                                                            className="fb-advanced-sub-heading-text"
+                                                <>
+                                                    <BaseControl className="fb-advanced-sub-heading-position" >
+                                                        <SelectControl
+                                                            label={__("Sub Heading Position", "frontis-blocks")}
+                                                            value={subHeadingPosition}
+                                                            options={SUBHEADING_POSITION}
+                                                            onChange={(value) => setAttributes({ subHeadingPosition: value})}
                                                         />
-                                                    </>
-                                                )}
-                                            </PanelBody>
-                                        </div>
-
-                                        <div className="fb-advanced-separator-wrapper">
-                                            <PanelBody
-                                                title={__("Separator", "frontis-blocks")}
-                                                initialOpen={false}
-                                                className="fb-advanced-Heading-separator"
-                                            >
-                                                <ToggleControl
-                                                    label={__("Show Separator", "frontis-blocks")}
-                                                    checked={showSeparatorSwitcher}
-                                                    onChange={(value) => setAttributes({ showSeparatorSwitcher: value })}
-                                                />
-                                                { showSeparatorSwitcher && (
-                                                    <>
-                                                        <BaseControl className="fb-advanced-separator-position" >
-                                                            <SelectControl
-                                                                label={__("Separator Position", "frontis-blocks")}
-                                                                value={separatorPosition}
-                                                                options={SEPARATOR_POSITION}
-                                                                onChange={(value) => setAttributes({ separatorPosition: value})}
-                                                            />
-                                                        </BaseControl>
-
-                                                        <BaseControl className="fb-advanced-separator-style" >
-                                                            <SelectControl
-                                                                label={__("Separator Style", "frontis-blocks")}
-                                                                value={separator}
-                                                                options={SEPERATOR_STYLES}
-                                                                onChange={(value) => setAttributes({ separator: value })}
-                                                            />
-                                                        </BaseControl>
-                                                    </>
-                                                )}
-                                            </PanelBody>
-                                            <PanelBody
-                                                title={__("Icon", "frontis-blocks")}
-                                                initialOpen={false}
-                                            >
-                                                <div className='fb-advanced-heading-icon-wrapper'>
+                                                    </BaseControl>
                                                     <BaseControl
-                                                        label={__("Icon", "frontis-blocks")}
-                                                            id="fb-setting-text-alignment"
-                                                            className="fb-setting-text-alignment"
+                                                        label={__("Sub Heading Tag", "frontis-blocks")}
+                                                        className="fb-setting-text-alignment"
                                                     >
-                                                        <ButtonGroup
-                                                            className="fb-setting-text-alignment-group-btn"
-                                                        >
-                                                            {ICON_ALIGN.map((item, key) => (
+                                                        <ButtonGroup className="fb-setting-text-alignment-group-btn">
+                                                            {HEADING.map((item, key) => (
                                                                 <Button
                                                                     key={key}
-                                                                    onClick={() => setAttributes({ headingIconAlign: item.value })}
-                                                                    className={`fb-setting-text-alignment-single-btn ${headingIconAlign === item.value ? 'active' : ''}`}
+                                                                    onClick={() => setAttributes({ subHeadingTag: item.value })}
+                                                                    className={`fb-setting-text-alignment-single-btn ${subHeadingTag === item.value ? 'active' : ''}`}
                                                                 >
                                                                     {item.label}
                                                                 </Button>
                                                             ))}
                                                         </ButtonGroup>
-                                                        {headingIconAlign === 'icon' && (
-                                                            <FBIconPicker value={headingIcon} setIconHandler={headingIconHandler} /> 
-                                                        )}
+                                                        
                                                     </BaseControl>
-                                                </div>
+
+                                                    <TextareaControl
+                                                        label={__("Sub Heading Text", "frontis-blocks")}
+                                                        value={subHeadingText}
+                                                        onChange={(value) => setAttributes({ subHeadingText: value })}
+                                                        className="fb-advanced-sub-heading-text"
+                                                    />
+                                                </>
+
                                             </PanelBody>
-                                        </div>
+                                        )}
+                                        { showSeparatorSwitcher && (
+                                            <PanelBody
+                                                title={__("Separator", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-advanced-separator-wrapper"
+                                            >
+                                                <>
+                                                    <BaseControl className="fb-advanced-separator-position" >
+                                                        <SelectControl
+                                                            label={__("Separator Position", "frontis-blocks")}
+                                                            value={separatorPosition}
+                                                            options={SEPARATOR_POSITION}
+                                                            onChange={(value) => setAttributes({ separatorPosition: value})}
+                                                        />
+                                                    </BaseControl>
+
+                                                    <BaseControl className="fb-advanced-separator-style" >
+                                                        <SelectControl
+                                                            label={__("Separator Style", "frontis-blocks")}
+                                                            value={separator}
+                                                            options={SEPERATOR_STYLES}
+                                                            onChange={(value) => setAttributes({ separator: value })}
+                                                        />
+                                                    </BaseControl>
+                                                </>
+                                            </PanelBody>
+                                        )}
+                                        {headingIconSwitcher && (
+                                            <PanelBody
+                                                title={__("Icon", "frontis-blocks")}
+                                            initialOpen={false}
+                                            className="fb-advanced-heading-icon"
+                                        >
+                                            <div className='fb-advanced-heading-icon-wrapper'>
+                                                <BaseControl
+                                                    label={__("Icon", "frontis-blocks")}
+                                                        id="fb-setting-text-alignment"
+                                                        className="fb-setting-text-alignment"
+                                                >
+                                                    <ButtonGroup
+                                                        className="fb-setting-text-alignment-group-btn"
+                                                    >
+                                                        {ICON_ALIGN.map((item, key) => (
+                                                            <Button
+                                                                key={key}
+                                                                onClick={() => setAttributes({ headingIconAlign: item.value })}
+                                                                className={`fb-setting-text-alignment-single-btn ${headingIconAlign === item.value ? 'active' : ''}`}
+                                                            >
+                                                                {item.label}
+                                                            </Button>
+                                                        ))}
+                                                    </ButtonGroup>
+                                                    {headingIconAlign === 'icon' && (
+                                                        <FBIconPicker value={headingIcon} setIconHandler={headingIconHandler} /> 
+                                                    )}
+                                                </BaseControl>
+                                            </div>
+                                            </PanelBody>
+                                        )}
                                     </>
                                 )}
 
@@ -1865,6 +1937,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 handleGlobalColorChange={(value) => setAttributes({ headingBgColor: value })}
                                                 handleGlobalHoverColorChange={(value) => setAttributes({ headingBgColorHover: value })}
                                             />
+                                            <ToggleControl
+                                                label={__("Enable Background Image", "frontis-blocks")}
+                                                checked={headingBackgroundImageEnabled}
+                                                onChange={(value) => setAttributes({ headingBackgroundImageEnabled: value })}
+                                            />
+
+                                            {headingBackgroundImageEnabled && (
                                             <BaseControl
                                                 label={__("Background Image", "frontis-blocks")}
                                                 className="fb-advanced-heading-bg-image"
@@ -1938,7 +2017,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         Upload
                                                     </button>
                                                 )}
-                                            </BaseControl>
+                                                </BaseControl>
+                                            )}
 
                                             <SelectControl
                                                 label={__("Border Style", "frontis-blocks")}

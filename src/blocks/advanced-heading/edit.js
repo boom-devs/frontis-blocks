@@ -28,6 +28,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         subHeadingPosition,
         headingIconAlign,
         headingIcon,
+        headingIconSwitcher,
     } = attributes;
     
     const blockProps = useBlockProps({
@@ -57,7 +58,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                 <div className={`fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
 
 
-                    {headingIconAlign === 'icon' && (
+                    {headingIconAlign === 'icon' && headingIconSwitcher && (
                         <div className="fb-advanced-icon">{renderSVG(headingIcon)}</div>
                     )}
 
