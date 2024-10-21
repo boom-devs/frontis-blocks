@@ -27,7 +27,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         separatorPosition,
         subHeadingPosition,
         headingIconAlign,
-        headingIcon,    
+        headingIcon,
     } = attributes;
     
     const blockProps = useBlockProps({
