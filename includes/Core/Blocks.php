@@ -83,7 +83,7 @@ class Blocks
 
 					$localize_array = array_merge( $localize_array, $admin_localize_array );
 				}
-
+                $localize_array['pluginUrl'] = FB_PLUGIN_URL;
                 $localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
                 wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
             }
