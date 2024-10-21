@@ -33,7 +33,7 @@
     "@wordpress/hooks": "^4.6.0",
     "@wordpress/i18n": "^5.6.0",
     "@wordpress/keycodes": "^4.6.0",
-    "@wordpress/scripts": "^27.9.0",
+    "@wordpress/scripts": "^30.3.0",
     "mini-css-extract-plugin": "^2.9.1"
   },
   "dependencies": {
@@ -43,11 +43,11 @@
     "@wordpress/core-data": "^7.10.0",
     "@wordpress/editor": "^14.6.0",
     "@wordpress/icons": "^10.7.0",
-    "react-virtualized": "^9.22.5",
     "awesome-icon-picker": "^1.0.25",
     "classnames": "^2.5.1",
     "rc-switch": "^4.1.0",
+    "react-player": "^2.16.0",
     "react-toastify": "^10.0.5",
-    "react-player": "^2.16.0"
+    "react-virtualized": "^9.22.5"
   }
 }

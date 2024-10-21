@@ -94,7 +94,7 @@ export default function save({ attributes }) {
 	return (
 		<div {...blockProps} id={blockID}>
 			<div className={`fb-flip-box-wrapper ${blockID}`}>
-				<div className={`fb-flip-box-item`}>
+				<div className={`fb-flip-box-item ${flipBoxTypeSwitcher === 'back' ? 'active' : ''}`}>
 					<div className="fb-flip-box-front">
 						<div className="fb-flip-box-content">
 							<div className="fb-flip-box-content-inner">
@@ -106,8 +106,16 @@ export default function save({ attributes }) {
 										<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
 									)}
 								</div>
-								{flipBoxFrontTitle}
-								{flipBoxFrontContent}
+								<RichText.Content
+									tagName={flipBoxFrontTitleHeadingTag}
+									value={flipBoxFrontTitle}
+									className="fb-flip-box-title"
+								/>
+								<RichText.Content
+									tagName={'p'}
+									value={flipBoxFrontContent}
+									className="fb-flip-box-front-content"
+								/>
 							</div>
 						</div>
 					</div>
@@ -122,9 +130,28 @@ export default function save({ attributes }) {
 										<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
 									)}
 								</div>
-								{flipBoxBackTitle}
-								{flipBoxBackContent}
-								<a href={`#`} className="fb-flip-box-button">Read More</a>
+								<RichText.Content
+									tagName={flipBoxBackTitleHeadingTag}
+									value={flipBoxBackTitle}
+									className="fb-flip-box-title"
+								/>
+								<RichText.Content
+									tagName={'p'}
+									value={flipBoxBackContent}
+									className="fb-flip-box-back-content"
+								/>
+								<a
+									className="fb-flip-box-back-button"
+									href={flipBoxBackButtonUrl}
+									target={flipBoxBackButtonTargetUrl ? '_blank' : undefined}
+									rel={flipBoxBackButtonTargetUrl ? 'noopener noreferrer' : undefined}
+								>
+									<RichText.Content
+										tagName="span"
+										value={flipBoxBackButtonText}
+										className="fb-flip-box-back-button-text"
+									/>
+								</a>
 							</div>
 						</div>
 					</div>
