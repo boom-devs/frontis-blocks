@@ -15,7 +15,7 @@ export default function save({ attributes }) {
         subHeadingPosition,
         headingIconAlign,
         headingIcon,
-
+        headingIconSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -36,7 +36,7 @@ export default function save({ attributes }) {
             <div {...blockProps}>
                 <div className={`fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
 
-                    {headingIconAlign === 'icon' && (
+                    {headingIconAlign === 'icon' && headingIconSwitcher && (
                         <div className="fb-advanced-icon">
                             {renderSVG(headingIcon)}
                         </div>
