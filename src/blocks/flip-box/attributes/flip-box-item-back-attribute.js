@@ -17,7 +17,20 @@ const flipBoxItemBackAttributes = {
 		}
 	},
 	/** End Size */
-
+	/** Start BG Color */
+	flipBoxItemBackBgFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	flipBoxItemBackBgFontColor: {
+		type: "string",
+		default: "#F97255"
+	},
+	flipBoxItemBackBgFontHoverColor: {
+		type: 'string',
+		default: "#F97255"
+	},
+	/** End BG Color */
 	/** Start Padding */
 	flipBoxItemBackPaddingUnits: {
 		type: 'object',
