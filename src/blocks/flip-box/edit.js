@@ -189,6 +189,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 		/** Start Flip Box Item Front Attribute */
+		flipBoxItemFrontBgFontColorSwitcher,
+		flipBoxItemFrontBgFontColor,
+		flipBoxItemFrontBgFontHoverColor,
+
 		flipBoxItemFrontSize,
 		flipBoxItemFrontSizeUnits,
 		flipBoxItemFrontBorderTypeUnits,
@@ -209,6 +213,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 		/** Start Flip Box Item Back Attribute */
+		flipBoxItemBackBgFontColorSwitcher,
+		flipBoxItemBackBgFontColor,
+		flipBoxItemBackBgFontHoverColor,
+
 		flipBoxItemBackSize,
 		flipBoxItemBackSizeUnits,
 		flipBoxItemBackBorderTypeUnits,
@@ -486,6 +494,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemFrontBorderTypeGetDesktop ? `border-width: ${flipBoxItemFrontBorderTypeGetDesktop};` : ''}
 					${flipBoxItemFrontBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemFrontBorderRadiusGetDesktop};` : ''}
 					${flipBoxItemFrontBorderColor ? `border-color: ${flipBoxItemFrontBorderColor};` : ''}
+					${flipBoxItemFrontBgFontColor ? `background: ${flipBoxItemFrontBgFontColor};` : ''}
 				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
 				  	${flipBoxFrontIconSize.Desktop ? `width: ${flipBoxFrontIconSize.Desktop}${flipBoxFrontIconSizeUnits.Desktop};` : ''}
@@ -584,6 +593,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemBackBorderTypeGetDesktop ? `border-width: ${flipBoxItemBackBorderTypeGetDesktop};` : ''}
 					${flipBoxItemBackBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemBackBorderRadiusGetDesktop};` : ''}
 					${flipBoxItemBackBorderColor ? `border-color: ${flipBoxItemBackBorderColor};` : ''}
+					${flipBoxItemBackBgFontColor ? `background: ${flipBoxItemBackBgFontColor};` : ''}
 				}
 
 
