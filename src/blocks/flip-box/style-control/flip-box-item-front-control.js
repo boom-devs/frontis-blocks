@@ -9,6 +9,10 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 
 	const {
 		deviceType,
+		flipBoxItemFrontBgFontColorSwitcher,
+		flipBoxItemFrontBgFontColor,
+		flipBoxItemFrontBgFontHoverColor,
+
 		flipBoxItemFrontSize,
 		flipBoxItemFrontSizeUnits,
 		flipBoxItemFrontBorderTypeUnits,
@@ -180,6 +184,15 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 
 	return (
 		<>
+			<FB_Color
+				label={__("Color", "frontis-blocks")}
+				globalColorSwitcher={flipBoxItemFrontBgFontColorSwitcher}
+				globalColor={flipBoxItemFrontBgFontColor}
+				globalHoverColor={flipBoxItemFrontBgFontHoverColor}
+				handleColorSwitcherChange={(value) => setAttributes({ flipBoxItemFrontBgFontColorSwitcher: value })}
+				handleGlobalColorChange={(value) => setAttributes({ flipBoxItemFrontBgFontColor: value })}
+				handleGlobalHoverColorChange={(value) => setAttributes({ flipBoxItemFrontBgFontHoverColor: value })}
+			/>
 			<FB_Range
 				min={1}
 				max={1000}
