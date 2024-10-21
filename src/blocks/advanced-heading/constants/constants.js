@@ -33,7 +33,6 @@ export const PRESETS = [
 	{ label: __("Default", "frontis-blocks"), value: "preset-0" },
 	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
 	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
-	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
 ];
 
 export const TEXT_ALIGN = [
