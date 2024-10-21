@@ -1063,5 +1063,18 @@ const attributes = {
         default: '',
     },
     /** End Global Style */
+
+
+    /** Start Background Image */
+    headingBackgroundImageUrl: {
+        type: "string",
+    },
+    headingBackgroundImageAlt: {
+        type: "string",
+    },
+    headingBackgroundImageID: {
+        type: "number",
+    },
+    /** End Background Image */
 }
 export default attributes;
