@@ -691,9 +691,13 @@ const attributes = {
 
 
     /** Start Icon */
+    headingIconSwitcher: {
+        type: "boolean",
+        default: false,
+    },
     headingIconAlign: {
         type: "string",
-        default: "none",
+        default: "icon",
     },
     headingIcon: {
 		type: 'string',
@@ -1066,6 +1070,10 @@ const attributes = {
 
 
     /** Start Background Image */
+    headingBackgroundImageEnabled: {
+        type: "boolean",
+        default: false,
+    },
     headingBackgroundImageUrl: {
         type: "string",
     },
@@ -1076,5 +1084,10 @@ const attributes = {
         type: "number",
     },
     /** End Background Image */
+
+    headingPresetStyle: {
+        type: "string",
+        default: "preset-0",
+    },
 }
 export default attributes;
