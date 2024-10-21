@@ -182,7 +182,7 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 		<>
 			<FB_Range
 				min={1}
-				max={300}
+				max={1000}
 				label={__("Item Height", "frontis-blocks")}
 				rangeValue={flipBoxItemFrontSize}
 				onChangeHandler={flipBoxItemFrontSizeHandler}
@@ -191,7 +191,7 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 				units={flipBoxItemFrontSizeUnits}
 				setAttributes={setAttributes}
 				rangeStep={1}
-				resetFallbackValue={0}
+				resetFallbackValue={364}
 			/>
 			<SelectControl
 				label={__("Border Style", "frontis-blocks")}

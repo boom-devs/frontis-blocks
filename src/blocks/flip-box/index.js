@@ -10,10 +10,11 @@ import metadata from './block.json';
 import attributes from './attributes.js';
 import flipBoxItemFrontAttributes from './attributes/flip-box-item-front-attribute.js';
 import flipBoxItemBackAttributes from './attributes/flip-box-item-back-attribute.js';
-import flipBoxFrontIconAttributes from './attributes/flip-box-front-icon.js';
-import flipBoxBackIconAttributes from './attributes/flip-box-back-icon.js';
+import flipBoxFrontIconAttributes from './attributes/flip-box-front-icon-attribute.js';
+import flipBoxBackIconAttributes from './attributes/flip-box-back-icon-attribute.js';
 import flipBoxFrontTitleAttributes from './attributes/flip-box-front-title-attribute.js';
 import flipBoxFrontContentAttributes from './attributes/flip-box-front-content-attribute.js';
+import flipBoxBackButtonAttributes from './attributes/flip-box-back-button-attribute.js';
 import flipBoxBackTitleAttributes from './attributes/flip-box-back-title-attribute.js';
 import flipBoxBackContentAttributes from './attributes/flip-box-back-content-attribute.js';
 
@@ -26,8 +27,8 @@ const combinedAttributes = {
 	...flipBoxBackIconAttributes,
 	...flipBoxFrontTitleAttributes,
 	...flipBoxFrontContentAttributes,
+	...flipBoxBackButtonAttributes,
 	...flipBoxBackTitleAttributes,
-	...flipBoxFrontContentAttributes,
 	...flipBoxBackContentAttributes,
 };
 registerBlockType( metadata.name, {
