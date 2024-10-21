@@ -498,6 +498,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
 				  	${flipBoxFrontIconSize.Desktop ? `width: ${flipBoxFrontIconSize.Desktop}${flipBoxFrontIconSizeUnits.Desktop};` : ''}
+				  	${flipBoxFrontIconSize.Desktop ? `height: ${flipBoxFrontIconSize.Desktop}${flipBoxFrontIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxFrontIconBorder ? `border: ${flipBoxFrontIconBorder};` : ''}
 					${flipBoxFrontIconBorderTypeGetDesktop ? `border-width: ${flipBoxFrontIconBorderTypeGetDesktop};` : ''}
 					${flipBoxFrontIconBorderRadiusGetDesktop ? `border-radius: ${flipBoxFrontIconBorderRadiusGetDesktop};` : ''}
@@ -510,6 +511,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
 				  	${flipBoxBackIconSize.Desktop ? `width: ${flipBoxBackIconSize.Desktop}${flipBoxBackIconSizeUnits.Desktop};` : ''}
+				  	${flipBoxBackIconSize.Desktop ? `height: ${flipBoxBackIconSize.Desktop}${flipBoxBackIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxBackIconBorder ? `border: ${flipBoxBackIconBorder};` : ''}
 					${flipBoxBackIconBorderTypeGetDesktop ? `border-width: ${flipBoxBackIconBorderTypeGetDesktop};` : ''}
 					${flipBoxBackIconBorderRadiusGetDesktop ? `border-radius: ${flipBoxBackIconBorderRadiusGetDesktop};` : ''}
@@ -611,6 +613,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
 						${flipBoxFrontIconSize.Tablet ? `width: ${flipBoxFrontIconSize.Tablet}${flipBoxFrontIconSizeUnits.Tablet};` : ''}
+						${flipBoxFrontIconSize.Tablet ? `height: ${flipBoxFrontIconSize.Tablet}${flipBoxFrontIconSizeUnits.Tablet};` : ''}
 						${flipBoxFrontIconBorderTypeGetTablet ? `border-width: ${flipBoxFrontIconBorderTypeGetTablet};` : ''}
 						${flipBoxFrontIconBorderRadiusGetTablet ? `border-radius: ${flipBoxFrontIconBorderRadiusGetTablet};` : ''}
 						${flipBoxFrontIconPaddingGetTablet ? `padding: ${flipBoxFrontIconPaddingGetTablet};` : ''}
@@ -619,6 +622,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
 						${flipBoxBackIconSize.Tablet ? `width: ${flipBoxBackIconSize.Tablet}${flipBoxBackIconSizeUnits.Tablet};` : ''}
+						${flipBoxBackIconSize.Tablet ? `height: ${flipBoxBackIconSize.Tablet}${flipBoxBackIconSizeUnits.Tablet};` : ''}
 						${flipBoxBackIconBorderTypeGetTablet ? `border-width: ${flipBoxBackIconBorderTypeGetTablet};` : ''}
 						${flipBoxBackIconBorderRadiusGetTablet ? `border-radius: ${flipBoxBackIconBorderRadiusGetTablet};` : ''}
 						${flipBoxBackIconPaddingGetTablet ? `padding: ${flipBoxBackIconPaddingGetTablet};` : ''}
@@ -674,6 +678,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					}
 					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
 						${flipBoxFrontIconSize.Mobile ? `width: ${flipBoxFrontIconSize.Mobile}${flipBoxFrontIconSizeUnits.Mobile};` : ''}
+						${flipBoxFrontIconSize.Mobile ? `height: ${flipBoxFrontIconSize.Mobile}${flipBoxFrontIconSizeUnits.Mobile};` : ''}
 						${flipBoxFrontIconBorderTypeGetMobile ? `border-width: ${flipBoxFrontIconBorderTypeGetMobile};` : ''}
 						${flipBoxFrontIconBorderRadiusGetMobile ? `border-radius: ${flipBoxFrontIconBorderRadiusGetMobile};` : ''}
 						${flipBoxFrontIconPaddingGetMobile ? `padding: ${flipBoxFrontIconPaddingGetMobile};` : ''}
@@ -682,6 +687,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
 						${flipBoxBackIconSize.Mobile ? `width: ${flipBoxBackIconSize.Mobile}${flipBoxBackIconSizeUnits.Mobile};` : ''}
+						${flipBoxBackIconSize.Mobile ? `height: ${flipBoxBackIconSize.Mobile}${flipBoxBackIconSizeUnits.Mobile};` : ''}
 						${flipBoxBackIconBorderTypeGetMobile ? `border-width: ${flipBoxBackIconBorderTypeGetMobile};` : ''}
 						${flipBoxBackIconBorderRadiusGetMobile ? `border-radius: ${flipBoxBackIconBorderRadiusGetMobile};` : ''}
 						${flipBoxBackIconPaddingGetMobile ? `padding: ${flipBoxBackIconPaddingGetMobile};` : ''}
@@ -707,7 +713,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					  ${flipBoxBackButtonBorderRadiusGetMobile ? `border-radius: ${flipBoxBackButtonBorderRadiusGetMobile};` : ''}
 					  ${flipBoxBackButtonPaddingGetMobile ? `padding: ${flipBoxBackButtonPaddingGetMobile};` : ''}
 					  ${flipBoxBackButtonMarginGetMobile ? `margin: ${flipBoxBackButtonMarginGetMobile};` : ''}
-
 					}
 					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-title {
 					  ${flipBoxBackTitleFontSize.Mobile ? `font-size: ${flipBoxBackTitleFontSize.Mobile}${flipBoxBackTitleFontSizeUnits.Mobile};` : ''}
