@@ -14,6 +14,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
 /***/ "@wordpress/components":
 /*!************************************!*\
   !*** external ["wp","components"] ***!
@@ -155,11 +175,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -183,40 +207,45 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+
 var FrontisBlocksSidebar = function FrontisBlocksSidebar() {
-  var themeColors = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.useSelect)(function (select) {
-    return select('core/editor').getEditorSettings().colors;
+  var themeColors = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useSelect)(function (select) {
+    return select("core/editor").getEditorSettings().colors;
   }, []);
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     customColors = _useState2[0],
     setCustomColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)('solid'),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("solid"),
     _useState4 = _slicedToArray(_useState3, 2),
     activeTab = _useState4[0],
     setActiveTab = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(null),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(null),
     _useState6 = _slicedToArray(_useState5, 2),
     gradient = _useState6[0],
     setGradient = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)('#f00'),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("#f00"),
     _useState8 = _slicedToArray(_useState7, 2),
     primaryColor = _useState8[0],
     setPrimaryColor = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)('#0f0'),
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("#0f0"),
     _useState10 = _slicedToArray(_useState9, 2),
     secondaryColor = _useState10[0],
     setSecondaryColor = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)('#00f'),
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("#00f"),
     _useState12 = _slicedToArray(_useState11, 2),
     accentColor = _useState12[0],
     setAccentColor = _useState12[1];
-  console.log(gradient);
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    globalColors = _useState14[0],
+    setGlobalColors = _useState14[1];
   var addCustomColor = function addCustomColor() {
     var newColor = {
       id: "custom-color-".concat(customColors.length + 1),
       title: "Custom Color ".concat(customColors.length + 1),
-      color: '#000000'
+      color: "#000000"
     };
     setCustomColors([].concat(_toConsumableArray(customColors), [newColor]));
   };
@@ -228,18 +257,52 @@ var FrontisBlocksSidebar = function FrontisBlocksSidebar() {
     }));
   };
   var resetAll = function resetAll() {
-    setPrimaryColor('#f00');
-    setSecondaryColor('#0f0');
-    setAccentColor('#00f');
+    setPrimaryColor("#f00");
+    setSecondaryColor("#0f0");
+    setAccentColor("#00f");
     setCustomColors([]);
   };
+  var colorPanelArray = function colorPanelArray(colors, setColor) {
+    var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+    if (_typeof(colors) !== "object") {
+      return [];
+    }
+    var colorArr = [];
+    colors.map(function (colorObj, index) {
+      return colorArr.push({
+        label: colorObj.name || "Color",
+        value: colorObj.color,
+        onChange: function onChange(newColor) {
+          var _defaults$index;
+          setColor(index, newColor || ((_defaults$index = defaults[index]) === null || _defaults$index === void 0 ? void 0 : _defaults$index.color) || "#000");
+        }
+      });
+    });
+    return colorArr;
+  };
+  //Update Global Colors
+  var handleGlobalColorChange = function handleGlobalColorChange(index, color) {
+    var colors = _toConsumableArray(globalColors);
+    colors[index].color = color;
+    setGlobalColors(_toConsumableArray(colors));
+  };
+  var defaults = [{
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Primary Color", "frontis-blocks"),
+    value: '#f00'
+  }, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Secondary Color", "frontis-blocks"),
+    value: '#0f0'
+  }, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Accent Color", "frontis-blocks"),
+    value: "#00f"
+  }];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
     target: "frontis-blocks-sidebar"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('FB Global Settings', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebar, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebar, {
     name: "frontis-blocks-sidebar",
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('FB Global Settings', 'frontis-blocks')
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("FB Global Settings", "frontis-blocks")
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Settings', 'frontis-blocks')
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Color Settings", "frontis-blocks")
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TabPanel, {
     className: "frontis-blocks-color-tabs",
     activeClass: "active-tab",
@@ -247,110 +310,59 @@ var FrontisBlocksSidebar = function FrontisBlocksSidebar() {
       return setActiveTab(tabName);
     },
     tabs: [{
-      name: 'solid',
-      title: 'Solid'
+      name: "solid",
+      title: "Solid"
     }, {
-      name: 'gradient',
-      title: 'Gradient'
+      name: "gradient",
+      title: "Gradient"
     }]
   }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === 'solid' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalToolsPanel, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Global Colors', 'frontis-blocks'),
-      resetAll: resetAll
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalToolsPanelItem, {
-      hasValue: function hasValue() {
-        return true;
-      },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Primary Color', 'frontis-blocks'),
-      onDeselect: function onDeselect() {
-        return setPrimaryColor('#f00');
-      },
-      isShownByDefault: true
-    }, /*#__PURE__*/React.createElement(ColorDropdown, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Primary Color', 'frontis-blocks'),
-      initialColor: primaryColor,
-      onColorChange: function onColorChange(color) {
-        return setPrimaryColor(color);
-      },
-      themeColors: themeColors
-    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalToolsPanelItem, {
-      hasValue: function hasValue() {
-        return true;
-      },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Secondary Color', 'frontis-blocks'),
-      onDeselect: function onDeselect() {
-        return setSecondaryColor('#0f0');
-      },
-      isShownByDefault: true
-    }, /*#__PURE__*/React.createElement(ColorDropdown, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Secondary Color', 'frontis-blocks'),
-      initialColor: secondaryColor,
-      onColorChange: function onColorChange(color) {
-        return setSecondaryColor(color);
-      },
-      themeColors: themeColors
-    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalToolsPanelItem, {
-      hasValue: function hasValue() {
-        return true;
-      },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Accent Color', 'frontis-blocks'),
-      onDeselect: function onDeselect() {
-        return setAccentColor('#00f');
-      },
-      isShownByDefault: true
-    }, /*#__PURE__*/React.createElement(ColorDropdown, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Accent Color', 'frontis-blocks'),
-      initialColor: accentColor,
-      onColorChange: function onColorChange(color) {
-        return setAccentColor(color);
-      },
-      themeColors: themeColors
-    })), customColors === null || customColors === void 0 ? void 0 : customColors.map(function (customColor) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalToolsPanelItem, {
-        key: customColor.id,
-        hasValue: function hasValue() {
-          return true;
-        },
-        label: customColor.title,
-        onDeselect: function onDeselect() {
-          return updateCustomColor(customColor.id, '#000000');
-        },
-        isShownByDefault: true
-      }, /*#__PURE__*/React.createElement(ColorDropdown, {
-        title: customColor.title,
-        initialColor: customColor.color,
-        onColorChange: function onColorChange(color) {
-          return updateCustomColor(customColor.id, color);
-        },
-        themeColors: themeColors
-      }));
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-      isSecondary: true,
-      onClick: addCustomColor,
-      style: {
-        marginTop: '10px'
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add Custom Color', 'frontis-blocks'))), tab.name === 'gradient' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.GradientPicker, {
+    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Global Colors", "frontis-blocks"),
+      className: "fb-color-panel fb-global-color-panel",
+      initialOpen: true,
+      disableAlpha: true,
+      disableCustomGradients: false,
+      colorSettings: [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Primary Color", "frontis-blocks"),
+        value: primaryColor,
+        onChange: function onChange(newColor) {
+          return setPrimaryColor(newColor);
+        }
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Secondary Color", "frontis-blocks"),
+        value: secondaryColor,
+        onChange: function onChange(newColor) {
+          return setSecondaryColor(newColor);
+        }
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Accent Color", "frontis-blocks"),
+        value: accentColor,
+        onChange: function onChange(newColor) {
+          return setAccentColor(newColor);
+        }
+      }]
+    })), tab.name === "gradient" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.GradientPicker, {
       value: gradient,
       onChange: function onChange(currentGradient) {
         return setGradient(currentGradient);
       },
       gradients: [{
-        name: 'JShine',
-        gradient: 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)',
-        slug: 'jshine'
+        name: "JShine",
+        gradient: "linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)",
+        slug: "jshine"
       }, {
-        name: 'Moonlit Asteroid',
-        gradient: 'linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)',
-        slug: 'moonlit-asteroid'
+        name: "Moonlit Asteroid",
+        gradient: "linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)",
+        slug: "moonlit-asteroid"
       }, {
-        name: 'Rastafarie',
-        gradient: 'linear-gradient(135deg,#1E9600 0%, #FFF200 0%, #FF0000 100%)',
-        slug: 'rastafari'
+        name: "Rastafarie",
+        gradient: "linear-gradient(135deg,#1E9600 0%, #FFF200 0%, #FF0000 100%)",
+        slug: "rastafari"
       }]
     }));
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Global Typography', 'frontis-blocks')
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Global Typography", "frontis-blocks")
   })));
 };
 var ColorDropdown = function ColorDropdown(_ref) {
@@ -358,10 +370,10 @@ var ColorDropdown = function ColorDropdown(_ref) {
     initialColor = _ref.initialColor,
     onColorChange = _ref.onColorChange,
     themeColors = _ref.themeColors;
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(initialColor),
-    _useState14 = _slicedToArray(_useState13, 2),
-    color = _useState14[0],
-    setColor = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(initialColor),
+    _useState16 = _slicedToArray(_useState15, 2),
+    color = _useState16[0],
+    setColor = _useState16[1];
   var handleColorChange = function handleColorChange(newColor) {
     setColor(newColor);
     onColorChange(newColor);
@@ -383,7 +395,7 @@ var ColorDropdown = function ColorDropdown(_ref) {
     renderContent: function renderContent() {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
         colors: [{
-          name: 'Theme Colors',
+          name: "Theme Colors",
           colors: themeColors
         }],
         value: color,
@@ -392,9 +404,9 @@ var ColorDropdown = function ColorDropdown(_ref) {
     }
   });
 };
-(0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('frontis-blocks-sidebar', {
+(0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)("frontis-blocks-sidebar", {
   render: FrontisBlocksSidebar,
-  icon: 'block-default'
+  icon: "block-default"
 });
 /******/ })()
 ;
