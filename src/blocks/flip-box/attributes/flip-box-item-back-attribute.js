@@ -24,11 +24,11 @@ const flipBoxItemBackAttributes = {
 	},
 	flipBoxItemBackBgFontColor: {
 		type: "string",
-		default: "#efeff1"
+		default: "#F97255"
 	},
 	flipBoxItemBackBgFontHoverColor: {
 		type: 'string',
-		default: "#efeff1"
+		default: "#F97255"
 	},
 	/** End BG Color */
 	/** Start Padding */
