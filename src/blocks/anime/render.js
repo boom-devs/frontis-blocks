@@ -1,12 +1,12 @@
-import {__} from "@wordpress/i18n";
-
-const { createHigherOrderComponent } = wp.compose;
-import { useState } from 'react';
-import { InspectorControls, BlockControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, TextareaControl, Button, IconButton, SelectControl, Toolbar, ToolbarButton  } from '@wordpress/components';
-import { edit } from '@wordpress/icons';
 import ElementTriggered from "@Blocks/anime/element-triggered";
 import FbElementInteraction from "@Blocks/anime/element-triggered/element-interaction";
+import { BlockControls, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, Toolbar, ToolbarButton } from '@wordpress/components';
+import { __ } from "@wordpress/i18n";
+import { edit } from '@wordpress/icons';
+import './editor.scss';
+
+const { createHigherOrderComponent } = wp.compose;
 
 export default  createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {

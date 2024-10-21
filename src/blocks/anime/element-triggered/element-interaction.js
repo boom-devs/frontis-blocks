@@ -1,11 +1,8 @@
-import {__} from "@wordpress/i18n";
-import { useState, useEffect } from 'react';
-import {BaseControl, Button, Modal, ToggleControl, TextControl, PanelBody, Draggable} from '@wordpress/components';
-import {Icon, more, plus} from '@wordpress/icons';
 import FbHelpText from "@Blocks/anime/helpText";
-import { rectSortingStrategy } from "@dnd-kit/sortable";
-import MultiPleContainer from "@Blocks/anime/multiPleContainer";
-import MultipleContainers from "@Blocks/anime/multiPleContainer";
+import { BaseControl, Button, PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { __ } from "@wordpress/i18n";
+import { Icon, plus } from '@wordpress/icons';
+import ElementActioinsTimeLine from './elementsActions';
 
 export default function FbElementInteraction({attributes, setAttributes}) {
 	const {
@@ -14,6 +11,68 @@ export default function FbElementInteraction({attributes, setAttributes}) {
 		animeElementActionActive,
 		selectedAnimeElementName
 	} = attributes;
+
+
+	const actions = [
+		{
+			'0.00': {
+				elements: {
+					scale: {
+						properties: {
+							scale: 10
+						}
+					},
+                    move: {
+						properties: {
+							scale: 10
+						}
+					},
+					scales: {
+						properties: {
+							scale: 15
+						}
+					},
+					rotate: {
+						properties: {
+							rotate: 10
+						}
+					}
+				}
+			},
+			'0.50': {
+				elements: {
+					scale: {
+						properties: {
+							scale: 15
+						}
+					},
+					rotate: {
+						properties: {
+							rotate: 10
+						}
+					}
+				}
+			},
+			'0.1': 'End'
+		}
+	];
+
+	const actionsName = [
+		{
+			move: {
+				directions: {
+					x: 10,
+					y: 15,
+					z: 0
+				}
+			}
+		},
+		{
+			rotate: {
+				rotate: '100'
+			}
+		}
+	];
 	return (
 		<div className={'fb-element-interaction-for-block'}>
 			<div>
@@ -46,7 +105,11 @@ export default function FbElementInteraction({attributes, setAttributes}) {
 						</div>
 
 						<div className={'fb-element-action-timeline-holder'}>
-							<MultipleContainers itemCount={5} vertical />
+							{/* <MultipleContainers itemCount={5} vertical /> */}
+							<div class="fb-elements-actions-timeline" >
+								<ElementActioinsTimeLine actions={actions} />
+								{/* <MultipleContainers vertical /> */}
+							</div>
 						</div>
 					</PanelBody>
 				</BaseControl>

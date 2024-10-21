@@ -55,6 +55,14 @@
   cursor: pointer;
 }
 
+.single_action_name {
+  display: flex;
+}
+
+.single_action_name p {
+  margin-top: 0;
+}
+
 .fb-help-text {
   color: #c2bbbb;
 }
