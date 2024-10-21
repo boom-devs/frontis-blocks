@@ -25,7 +25,7 @@ class Settings extends AjaxBase {
             'collapse_panel',
             'enable_templates_button',
             'save_blocks',
-            'get_active_blocks',
+            'get_blocks',
             'recaptcha_v2_site_key',
             'recaptcha_v2_secret_key',
             'recaptcha_v3_site_key',
@@ -204,44 +204,29 @@ class Settings extends AjaxBase {
         }
     }
 
-    // New method to get blocks
-    public function get_active_blocks() {
-        error_log('get_active_blocks method called');
-        
+    public function get_blocks() {
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
-            error_log('Invalid nonce in get_active_blocks');
+            error_log('Invalid nonce in get_blocks');
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
         
         if (!current_user_can('manage_options')) {
-            error_log('Insufficient permissions in get_active_blocks');
+            error_log('Insufficient permissions in get_blocks');
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
             return;
         }
+
+        $activeBlocks = get_option('fb_active_blocks', []);
         
-        try {
-            $allBlocks = BlockList::get_instance()->get_blocks();
-            $activeBlocks = get_option('fb_active_blocks', []);
+        // Ensure all blocks from BlockList are included, defaulting to false if not in activeBlocks
+        $allBlocks = BlockList::get_instance()->get_blocks();
+        $completeBlocks = array_merge(
+            array_fill_keys(array_keys($allBlocks), false),
+            $activeBlocks
+        );
 
-            error_log('All blocks: ' . print_r($allBlocks, true));
-            error_log('Active blocks: ' . print_r($activeBlocks, true));
-
-            $mergedBlocks = [];
-            foreach ($allBlocks as $block) {
-                $slug = $block['slug'];
-                $mergedBlocks[] = [
-                    ...block,
-                    'status' => isset($activeBlocks[$slug]) ? ($activeBlocks[$slug] ? '1' : '0') : '1'
-                ];
-            }
-
-            error_log('Merged blocks: ' . print_r($mergedBlocks, true));
-            wp_send_json_success($mergedBlocks);
-        } catch (\Exception $e) {
-            error_log('Exception in get_active_blocks: ' . $e->getMessage());
-            wp_send_json_error(['message' => 'An error occurred while fetching blocks: ' . $e->getMessage()], 500);
-        }
+        wp_send_json_success($completeBlocks);
     }
 
     public function recaptcha_v2_site_key() {

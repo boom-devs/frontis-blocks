@@ -11,6 +11,7 @@ module.exports = {
   ...defaultConfig,
   entry: {
     index: path.resolve(process.cwd(), 'admin', 'index.js'),
+    sidebar: path.resolve(process.cwd(), 'admin', 'sidebar', 'index.js'),
   },
   output: {
     path: path.resolve(process.cwd(), 'assets', 'admin'),

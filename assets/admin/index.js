@@ -289,30 +289,48 @@ var Blocks = function Blocks() {
     searchTerm = _useState8[0],
     setSearchTerm = _useState8[1];
   var _window$frontisBlocks = window.frontisBlocksAdmin,
-    ajaxurl = _window$frontisBlocks.ajaxurl,
+    ajaxUrl = _window$frontisBlocks.ajaxUrl,
     nonce = _window$frontisBlocks.nonce,
     allBlocks = _window$frontisBlocks.blocks;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getBlocks();
   }, []);
   var getBlocks = function getBlocks() {
-    console.log('Fetching blocks...');
-    window.jQuery.ajax({
-      url: ajaxurl,
+    jQuery.ajax({
+      url: ajaxUrl,
       type: 'POST',
       data: {
-        action: 'fb_get_active_blocks',
+        action: 'fb_get_blocks',
         security: nonce
       },
       success: function success(response) {
         console.log('Raw response:', response);
-        if (response.success) {
-          console.log('Blocks data:', response.data);
-          setBlocks(response.data);
-        } else {
-          var _response$data;
-          console.error('Failed to fetch blocks:', ((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error');
-          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Failed to fetch blocks', 'frontis-blocks'));
+        try {
+          if (typeof response === 'string') {
+            response = JSON.parse(response);
+          }
+          console.log('Parsed response:', response);
+          if (response.success) {
+            var activeBlocks = response.data || {};
+            var updatedBlocks = Object.entries(allBlocks).map(function (_ref) {
+              var _ref2 = _slicedToArray(_ref, 2),
+                slug = _ref2[0],
+                blockData = _ref2[1];
+              return _objectSpread(_objectSpread({}, blockData), {}, {
+                slug: slug,
+                status: activeBlocks[slug] ? '1' : '0'
+              });
+            });
+            console.log('Processed blocks:', updatedBlocks);
+            setBlocks(updatedBlocks);
+          } else {
+            var _response$data;
+            console.error('Failed to fetch blocks:', ((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error');
+            react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Failed to fetch blocks', 'frontis-blocks'));
+          }
+        } catch (error) {
+          console.error('Error processing response:', error);
+          react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Error processing server response', 'frontis-blocks'));
         }
         setIsLoading(false);
       },
@@ -331,8 +349,8 @@ var Blocks = function Blocks() {
       return acc;
     }, {});
     console.log('Blocks to save:', blocksToSave);
-    window.jQuery.ajax({
-      url: ajaxurl,
+    jQuery.ajax({
+      url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_save_blocks',
@@ -344,6 +362,7 @@ var Blocks = function Blocks() {
         if (response.success) {
           console.log('Blocks saved successfully');
           react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Blocks saved successfully', 'frontis-blocks'));
+          setBlocks(updatedBlocks); // Update the local state with the saved blocks
         } else {
           var _response$data2;
           console.error('Failed to save blocks:', ((_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.message) || 'Unknown error');
@@ -380,9 +399,9 @@ var Blocks = function Blocks() {
       }
     }, info);
   }, [blocks, searchTerm]);
-  var filteredCategories = selectedCategory === 'all' ? Object.entries(categoryInfo).filter(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 1),
-      category = _ref2[0];
+  var filteredCategories = selectedCategory === 'all' ? Object.entries(categoryInfo).filter(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 1),
+      category = _ref4[0];
     return category !== 'all';
   }) : [[selectedCategory, categoryInfo[selectedCategory]]];
   var clearSearch = function clearSearch() {
@@ -449,10 +468,10 @@ var Blocks = function Blocks() {
     onClick: handleDisableAll
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-category-filter"
-  }, Object.entries(categoryInfo).map(function (_ref3) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-      category = _ref4[0],
-      count = _ref4[1].count;
+  }, Object.entries(categoryInfo).map(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+      category = _ref6[0],
+      count = _ref6[1].count;
     return /*#__PURE__*/React.createElement("button", {
       key: category,
       onClick: function onClick() {
@@ -460,10 +479,10 @@ var Blocks = function Blocks() {
       },
       className: "fb-blocks-category-button ".concat(selectedCategory === category ? 'fb-blocks-category-button--active' : '')
     }, category === 'all' ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('All', 'frontis-blocks') : category.charAt(0).toUpperCase() + category.slice(1), " (", count, ")");
-  })), filteredCategories.length > 0 ? filteredCategories.map(function (_ref5) {
-    var _ref6 = _slicedToArray(_ref5, 2),
-      category = _ref6[0],
-      categoryBlocks = _ref6[1].blocks;
+  })), filteredCategories.length > 0 ? filteredCategories.map(function (_ref7) {
+    var _ref8 = _slicedToArray(_ref7, 2),
+      category = _ref8[0],
+      categoryBlocks = _ref8[1].blocks;
     return /*#__PURE__*/React.createElement("div", {
       key: category,
       className: "fb-blocks-category-group fb-blocks-category-group--".concat(category)

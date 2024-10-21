@@ -10,29 +10,43 @@ const Blocks = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const { ajaxurl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
+  const { ajaxUrl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
 
   useEffect(() => {
     getBlocks();
   }, []);
 
   const getBlocks = () => {
-    console.log('Fetching blocks...');
-    window.jQuery.ajax({
-      url: ajaxurl,
+    jQuery.ajax({
+      url: ajaxUrl,
       type: 'POST',
       data: {
-        action: 'fb_get_active_blocks',
+        action: 'fb_get_blocks',
         security: nonce
       },
       success: function(response) {
         console.log('Raw response:', response);
-        if (response.success) {
-          console.log('Blocks data:', response.data);
-          setBlocks(response.data);
-        } else {
-          console.error('Failed to fetch blocks:', response.data?.message || 'Unknown error');
-          toast.error(__('Failed to fetch blocks', 'frontis-blocks'));
+        try {
+          if (typeof response === 'string') {
+            response = JSON.parse(response);
+          }
+          console.log('Parsed response:', response);
+          if (response.success) {
+            const activeBlocks = response.data || {};
+            const updatedBlocks = Object.entries(allBlocks).map(([slug, blockData]) => ({
+              ...blockData,
+              slug: slug,
+              status: activeBlocks[slug] ? '1' : '0'
+            }));
+            console.log('Processed blocks:', updatedBlocks);
+            setBlocks(updatedBlocks);
+          } else {
+            console.error('Failed to fetch blocks:', response.data?.message || 'Unknown error');
+            toast.error(__('Failed to fetch blocks', 'frontis-blocks'));
+          }
+        } catch (error) {
+          console.error('Error processing response:', error);
+          toast.error(__('Error processing server response', 'frontis-blocks'));
         }
         setIsLoading(false);
       },
@@ -54,8 +68,8 @@ const Blocks = () => {
 
     console.log('Blocks to save:', blocksToSave);
 
-    window.jQuery.ajax({
-      url: ajaxurl,
+    jQuery.ajax({
+      url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_save_blocks',
@@ -67,6 +81,7 @@ const Blocks = () => {
         if (response.success) {
           console.log('Blocks saved successfully');
           toast.success(__('Blocks saved successfully', 'frontis-blocks'));
+          setBlocks(updatedBlocks); // Update the local state with the saved blocks
         } else {
           console.error('Failed to save blocks:', response.data?.message || 'Unknown error');
           toast.error(__('Failed to save blocks', 'frontis-blocks'));
