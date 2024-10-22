@@ -191,9 +191,37 @@ class Settings extends AjaxBase {
             return;
         }
 
+        // echo print_r($blocks, true);
+        // die();
+
+        // error_log('Blocks to save: ' . print_r($blocks, true));
+
+        $activeBlocks = get_option('fb_active_blocks');
+
+        if($activeBlocks) {
+            foreach ($blocks as $key => $value) {
+                if ($value === true) {
+                    $activeBlocks[$key] = true;
+                } else {
+                    $activeBlocks[$key] = false;
+                }
+            }
+
+            $blocks = $activeBlocks;
+        }
+
         error_log('Blocks to save: ' . print_r($blocks, true));
 
-        $updated = update_option('fb_active_blocks', $blocks);
+        $updated = update_option('fb_active_blocks', $blocks, true);
+
+        // $my_array = array(
+        //     'key1' => 'value1',
+        //     'key2' => 'value2',
+        //     'key3' => 'value3',
+        // );
+        
+        // // Save the array to the database
+        // $updated = update_option('my_custom_option', $blocks);
 
         if ($updated) {
             error_log('Blocks updated successfully');
