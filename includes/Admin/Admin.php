@@ -25,7 +25,10 @@ class Admin {
 
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
+
+        add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
     }
+
 
     public function add_menu_page(){
         add_menu_page(
@@ -75,6 +78,7 @@ class Admin {
         // Localize the script with new data
         wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', array(
             'blocks' => $blocks,
+            'defaultBlocks' => BlockList::get_instance()->get_default_blocks(),
             'nonce' => wp_create_nonce('fb_settings_nonce'),
             'adminUrl' => admin_url(),
             'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -197,6 +201,14 @@ class Admin {
                 return current_user_can('manage_options');
             },
         ]);
+
+        register_rest_route('wp/v2/frontis-blocks', '/system-health', [
+            'methods' => 'GET',
+            'callback' => [$this, 'get_system_health'],
+            'permission_callback' => function () {
+                return current_user_can('manage_options');
+            },
+        ]);
     }
 
     /**
@@ -246,6 +258,68 @@ class Admin {
         }
 
         return new \WP_REST_Response(['success' => true, 'data' => $options], 200);
+    }
+
+    public function get_system_health() {
+        $health_info = [
+            [
+                'label' => __('PHP Version', 'frontis-blocks'),
+                'value' => phpversion(),
+                'status' => version_compare(phpversion(), '7.4', '>=') ? 'good' : 'error',
+            ],
+            [
+                'label' => __('WordPress Version', 'frontis-blocks'),
+                'value' => get_bloginfo('version'),
+                'status' => version_compare(get_bloginfo('version'), '5.8', '>=') ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Memory Limit', 'frontis-blocks'),
+                'value' => ini_get('memory_limit'),
+                'status' => (intval(ini_get('memory_limit')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max Execution Time', 'frontis-blocks'),
+                'value' => ini_get('max_execution_time') . 's',
+                'status' => (ini_get('max_execution_time') >= 30) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Frontis Blocks Version', 'frontis-blocks'),
+                'value' => FB_VERSION,
+                'status' => version_compare(FB_VERSION, '1.0.0', '>=') ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Upload max filesize', 'frontis-blocks'),
+                'value' => ini_get('upload_max_filesize'),
+                'status' => (intval(ini_get('upload_max_filesize')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Post max size', 'frontis-blocks'),
+                'value' => ini_get('post_max_size'),
+                'status' => (intval(ini_get('post_max_size')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max input vars', 'frontis-blocks'),
+                'value' => ini_get('max_input_vars'),
+                'status' => (intval(ini_get('max_input_vars')) >= 1000) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max execution time', 'frontis-blocks'),
+                'value' => ini_get('max_execution_time') . 's',
+                'status' => (ini_get('max_execution_time') >= 30) ? 'good' : 'warning',
+            ],
+        ];
+
+        return new \WP_REST_Response($health_info, 200);
+    }
+
+    public function enqueue_editor_assets() {
+        $script_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.js';
+        $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.asset.php';
+        $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
+
+        wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar.js', $script_asset['dependencies'], '1.0.0', true);
+
+        wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar.css', array(), '1.0.0');
     }
 
 }
