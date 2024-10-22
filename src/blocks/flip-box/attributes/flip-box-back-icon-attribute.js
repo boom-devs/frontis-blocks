@@ -1,6 +1,6 @@
 const flipBoxBackIconAttributes = {
 
-	flipBoxBackMediaSwitcher : {
+	flipBoxBackIconMediaSwitcher : {
 		type: "string",
 		default: "icon"
 	},
