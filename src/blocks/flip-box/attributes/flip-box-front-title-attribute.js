@@ -5,7 +5,7 @@ const flipBoxFrontTitleAttributes = {
 	},
 	flipBoxFrontTitleHeadingTag: {
 		type : "string",
-		default: "h2"
+		default: "h3"
 	},
 
 	/** Start Color */

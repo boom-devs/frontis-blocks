@@ -1,11 +1,11 @@
 const flipBoxBackTitleAttributes = {
 	flipBoxBackTitle: {
 		type: "string",
-		default: "Front Title Here"
+		default: "Back Title Here"
 	},
 	flipBoxBackTitleHeadingTag: {
 		type : "string",
-		default: "h2"
+		default: "h3"
 	},
 
 	/** Start Color */

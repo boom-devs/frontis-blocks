@@ -45,9 +45,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		flipBoxTypeSwitcher,
-		flipBoxFrontIcon,
-		mediaSwitcher,
-		flipBoxFrontIconMediaUrl,
+
 		deviceType,
 		flipBoxFrontTitle,
 		flipBoxFrontTitleHeadingTag,
@@ -57,10 +55,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 		/** Start Flip Box Front Icon Attribute */
+		flipBoxFrontIconMediaSwitcher,
+		flipBoxFrontIconMediaUrl,
+		flipBoxFrontIcon,
+		flipBoxFrontIconFontColor,
+
 		flipBoxFrontIconSize,
 		flipBoxFrontIconSizeUnits,
 		flipBoxFrontIconFontColorSwitcher,
-		flipBoxFrontIconFontColor,
+
 		flipBoxFrontIconFontHoverColor,
 		flipBoxFrontIconBgFontColorSwitcher,
 		flipBoxFrontIconBgFontColor,
@@ -96,6 +99,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		/** End Flip Box Front Icon Attribute */
 
 		/** Start Flip Box Back Icon Attribute */
+		flipBoxBackIconMediaSwitcher,
+		flipBoxBackIconMediaUrl,
+		flipBoxBackIcon,
+
 		flipBoxBackIconSize,
 		flipBoxBackIconSizeUnits,
 		flipBoxBackIconFontColorSwitcher,
@@ -335,11 +342,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxBackContentLineHeightUnits,
 		/** End Flip Box Back Content Attribute */
 
-		flipBoxBackMediaSwitcher,
-		flipBoxBackIconMediaUrl,
-		flipBoxBackIcon,
-		flipBoxBackIconColor,
-
 	} = attributes;
 
 	// Prevent link navigation in the editor and focus on text
@@ -347,17 +349,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		event.preventDefault();
 	};
 
-
 	// Icon media remove handler
 	const removeFlipBoxFrontIconMedia = () => {
 		setAttributes({
-			flipBoxFrontIconMediaID: '',
+			flipBoxFrontIconMediaId: '',
 			flipBoxFrontIconMediaUrl: ''
 		});
 	}
 	const removeFlipBoxBackIconMedia = () => {
 		setAttributes({
-			flipBoxBackIconMediaID: '',
+			flipBoxBackIconMediaId: '',
 			flipBoxBackIconMediaUrl: ''
 		});
 	}
@@ -780,6 +781,86 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 										{flipBoxTypeSwitcher === 'front' && (
 											<>
+												<BaseControl className="fb-sub-heading-position">
+													<SelectControl
+														label={__("Media Type", "frontis-block")}
+														value={flipBoxFrontIconMediaSwitcher}
+														options={mediaType}
+														onChange={(value) => setAttributes({flipBoxFrontIconMediaSwitcher: value})}
+													/>
+												</BaseControl>
+												<div className='fb-image-upload-field-wrapper'>
+													{flipBoxFrontIconMediaSwitcher === 'image' && (
+														<BaseControl>
+															<MediaUploadCheck>
+																<MediaUpload
+																	onSelect={(media) => {
+																		setAttributes({
+																			flipBoxFrontIconMediaId: media['id'],
+																			flipBoxFrontIconMediaUrl: media['url'],
+																			flipBoxFrontIconMediaWidth: media['width'],
+																			flipBoxFrontIconMediaHeight: media['height']
+																		});
+																	}}
+																	type="image"
+																	value={attributes.flipBoxFrontIconMediaId}
+																	render={({open}) => {
+																		return (
+																			<Button
+																				className={attributes.flipBoxFrontIconMediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+																				onClick={open}
+																			>
+																				{attributes.flipBoxFrontIconMediaId == 0 && __('Select Icon Image', 'ultimate-addons-for-gutenberg-blocks')}
+																				{attributes.flipBoxFrontIconMediaId != 0 &&
+																					<ResponsiveWrapper
+																						naturalWidth={attributes.flipBoxFrontIconMediaWidth}
+																						naturalHeight={attributes.flipBoxFrontIconMediaHeight}>
+																						<img
+																							src={attributes.flipBoxFrontIconMediaUrl}/>
+																					</ResponsiveWrapper>
+																				}
+																			</Button>
+																		);
+																	}}
+																/>
+															</MediaUploadCheck>
+															{attributes.flipBoxFrontIconMediaId != 0 &&
+																<HStack className='editor-post-featured-image__actions'>
+																	<Button
+																		className='editor-post-featured-image__action'
+																		onClick={() => removeFlipBoxFrontIconMedia()}>{__('Remove', 'frontis-block')}</Button>
+																	<MediaUploadCheck>
+																		<MediaUpload
+																			title={__('Replace image', 'frontis-block')}
+																			value={attributes.flipBoxFrontIconMediaId}
+																			onSelect={(media) => {
+																				setAttributes({
+																					flipBoxFrontIconMediaId: media['id'],
+																					flipBoxFrontIconMediaUrl: media['url'],
+																					flipBoxFrontIconMediaWidth: media['width'],
+																					flipBoxFrontIconMediaHeight: media['height']
+																				});
+																			}}
+																			type="image"
+																			render={({open}) => (
+																				<Button
+																					className='editor-post-featured-image__action'
+																					onClick={open}>{__('Replace', 'frontis-block')}</Button>
+																			)}
+																		/>
+																	</MediaUploadCheck>
+																</HStack>
+															}
+														</BaseControl>
+													)}
+
+													{flipBoxFrontIconMediaSwitcher === 'icon' && (
+														<BaseControl>
+															<FBIconPicker value={flipBoxFrontIcon} setIconHandler={flipBoxFrontIconHandler}/>
+														</BaseControl>
+													)}
+												</div>
+
 												<TextControl
 													tagName={flipBoxFrontTitleHeadingTag}
 													label={__('Title', 'frontis-blocks')}
@@ -810,42 +891,47 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													value={flipBoxFrontContent}
 													onChange={(value) => setAttributes({ flipBoxFrontContent: value })}
 												/>
+
+											</>
+										)}
+										{flipBoxTypeSwitcher === 'back' && (
+											<>
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
-														label={__("Front Icon: Media Type", "frontis-block")}
-														value={mediaSwitcher}
+														label={__("Back Icon: Media Type", "frontis-block")}
+														value={flipBoxBackMediaSwitcher}
 														options={mediaType}
-														onChange={(value) => setAttributes({mediaSwitcher: value})}
+														onChange={(value) => setAttributes({flipBoxBackMediaSwitcher: value})}
 													/>
 												</BaseControl>
 												<div className='fb-image-upload-field-wrapper'>
-													{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
+													{flipBoxBackIconMediaSwitcher === 'image' && (
 														<BaseControl>
 															<MediaUploadCheck>
 																<MediaUpload
 																	onSelect={(media) => {
 																		setAttributes({
-																			flipBoxFrontIconMediaID: media['id'],
-																			flipBoxFrontIconMediaUrl: media['url'],
-																			flipBoxFrontIconMediaWidth: media['width'],
-																			flipBoxFrontIconMediaHeight: media['height']
+																			flipBoxBackIconMediaId: media['id'],
+																			flipBoxBackIconMediaUrl: media['url'],
+																			flipBoxBackIconMediaWidth: media['width'],
+																			flipBoxBackIconMediaHeight: media['height']
 																		});
 																	}}
 																	type="image"
-																	value={attributes.flipBoxFrontIconMediaID}
+																	value={attributes.flipBoxBackIconMediaId}
 																	render={({open}) => {
 																		return (
 																			<Button
-																				className={attributes.flipBoxFrontIconMediaID == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+																				className={attributes.flipBoxBackIconMediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
 																				onClick={open}
 																			>
-																				{attributes.flipBoxFrontIconMediaID == 0 && __('Select Icon Image', 'frontis-blocks')}
-																				{attributes.flipBoxFrontIconMediaID != 0 &&
+																				{attributes.flipBoxBackIconMediaId == 0 && __('Select Icon Image', 'ultimate-addons-for-gutenberg-blocks')}
+																				{attributes.flipBoxBackIconMediaId != 0 &&
 																					<ResponsiveWrapper
-																						naturalWidth={attributes.flipBoxFrontIconMediaWidth}
-																						naturalHeight={attributes.flipBoxFrontIconMediaHeight}>
+																						naturalWidth={attributes.flipBoxBackIconMediaWidth}
+																						naturalHeight={attributes.flipBoxBackIconMediaHeight}>
 																						<img
-																							src={attributes.flipBoxFrontIconMediaUrl}/>
+																							src={attributes.flipBoxBackIconMediaUrl}/>
 																					</ResponsiveWrapper>
 																				}
 																			</Button>
@@ -853,7 +939,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																	}}
 																/>
 															</MediaUploadCheck>
-															{attributes.flipBoxFrontIconMediaID != 0 &&
+															{attributes.flipBoxBackIconMediaId != 0 &&
 																<HStack className='editor-post-featured-image__actions'>
 																	<Button
 																		className='editor-post-featured-image__action'
@@ -861,13 +947,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																	<MediaUploadCheck>
 																		<MediaUpload
 																			title={__('Replace image', 'frontis-block')}
-																			value={attributes.flipBoxFrontIconMediaID}
+																			value={attributes.flipBoxBackIconMediaId}
 																			onSelect={(media) => {
 																				setAttributes({
-																					flipBoxFrontIconMediaID: media['id'],
-																					flipBoxFrontIconMediaUrl: media['url'],
-																					flipBoxFrontIconMediaWidth: media['width'],
-																					flipBoxFrontIconMediaHeight: media['height']
+																					flipBoxBackIconMediaId: media['id'],
+																					flipBoxBackIconMediaUrl: media['url'],
+																					flipBoxBackIconMediaWidth: media['width'],
+																					flipBoxBackIconMediaHeight: media['height']
 																				});
 																			}}
 																			type="image"
@@ -883,16 +969,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														</BaseControl>
 													)}
 
-													{mediaSwitcher === 'icon' && (
+													{flipBoxBackIconMediaSwitcher === 'icon' && (
 														<BaseControl>
-															<FBIconPicker value={flipBoxFrontIcon} setIconHandler={flipBoxFrontIconHandler}/>
+															<FBIconPicker value={flipBoxBackIcon} setIconHandler={flipBoxBackIconHandler}/>
 														</BaseControl>
 													)}
 												</div>
-											</>
-										)}
-										{flipBoxTypeSwitcher === 'back' && (
-											<>
+
 												<TextControl
 													tagName={flipBoxBackTitleHeadingTag}
 													label={__('Title', 'frontis-blocks')}
@@ -923,86 +1006,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													value={flipBoxBackContent}
 													onChange={(value) => setAttributes({ flipBoxBackContent: value })}
 												/>
-												<BaseControl className="fb-sub-heading-position">
-													<SelectControl
-														label={__("Back Icon: Media Type", "frontis-block")}
-														value={flipBoxBackMediaSwitcher}
-														options={mediaType}
-														onChange={(value) => setAttributes({flipBoxBackMediaSwitcher: value})}
-													/>
-												</BaseControl>
-
-												<div className='fb-image-upload-field-wrapper'>
-													{flipBoxBackMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
-														<BaseControl>
-															<MediaUploadCheck>
-																<MediaUpload
-																	onSelect={(media) => {
-																		setAttributes({
-																			flipBoxBackIconMediaID: media['id'],
-																			flipBoxBackIconMediaUrl: media['url'],
-																			flipBoxBackIconMediaWidth: media['width'],
-																			flipBoxBackIconMediaHeight: media['height']
-																		});
-																	}}
-																	type="image"
-																	value={attributes.flipBoxBackIconMediaID}
-																	render={({open}) => {
-																		return (
-																			<Button
-																				className={attributes.flipBoxBackIconMediaID == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-																				onClick={open}
-																			>
-																				{attributes.flipBoxBackIconMediaID == 0 && __('Select Icon Image', 'frontis-blocks')}
-																				{attributes.flipBoxBackIconMediaID != 0 &&
-																					<ResponsiveWrapper
-																						naturalWidth={attributes.flipBoxBackIconMediaWidth}
-																						naturalHeight={attributes.flipBoxBackIconMediaHeight}>
-																						<img
-																							src={attributes.flipBoxBackIconMediaUrl}/>
-																					</ResponsiveWrapper>
-																				}
-																			</Button>
-																		);
-																	}}
-																/>
-															</MediaUploadCheck>
-															{attributes.flipBoxBackIconMediaID != 0 &&
-																<HStack className='editor-post-featured-image__actions'>
-																	<Button
-																		className='editor-post-featured-image__action'
-																		onClick={() => removeFlipBoxBackIconMedia()}>{__('Remove', 'frontis-block')}</Button>
-																	<MediaUploadCheck>
-																		<MediaUpload
-																			title={__('Replace image', 'frontis-block')}
-																			value={attributes.flipBoxBackIconMediaID}
-																			onSelect={(media) => {
-																				setAttributes({
-																					flipBoxBackIconMediaID: media['id'],
-																					flipBoxBackIconMediaUrl: media['url'],
-																					flipBoxBackIconMediaWidth: media['width'],
-																					flipBoxBackIconMediaHeight: media['height']
-																				});
-																			}}
-																			type="image"
-																			render={({open}) => (
-																				<Button
-																					className='editor-post-featured-image__action'
-																					onClick={open}>{__('Replace', 'frontis-block')}</Button>
-																			)}
-																		/>
-																	</MediaUploadCheck>
-																</HStack>
-															}
-														</BaseControl>
-													)}
-
-													{flipBoxBackMediaSwitcher === 'icon' && (
-														<BaseControl>
-															<FBIconPicker value={flipBoxBackIcon} setIconHandler={flipBoxBackIconHandler}/>
-														</BaseControl>
-													)}
-												</div>
 
 												<TextControl
 													label={__("Button Text", "frontis-blocks")}
@@ -1257,10 +1260,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<div className="fb-flip-box-content">
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
-										{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
+										{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
 											<img src={attributes.flipBoxFrontIconMediaUrl}/>
 										)}
-										{mediaSwitcher === 'icon' && (
+										{flipBoxFrontIconMediaSwitcher === 'icon' && (
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
 										)}
 									</div>
@@ -1284,10 +1287,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<div className="fb-flip-box-content">
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
-										{flipBoxBackMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
+										{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
 											<img src={attributes.flipBoxBackIconMediaUrl}/>
 										)}
-										{flipBoxBackMediaSwitcher === 'icon' && (
+										{flipBoxBackIconMediaSwitcher === 'icon' && (
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
 										)}
 									</div>

@@ -7,9 +7,7 @@ export default function save({ attributes }) {
 	const {
 		blockID,
 		flipBoxTypeSwitcher,
-		flipBoxFrontIcon,
-		mediaSwitcher,
-		flipBoxFrontIconMediaUrl,
+
 		deviceType,
 		flipBoxFrontTitle,
 		flipBoxFrontTitleHeadingTag,
@@ -19,10 +17,15 @@ export default function save({ attributes }) {
 
 
 		/** Start Flip Box Front Icon Attribute */
+		flipBoxFrontIconMediaSwitcher,
+		flipBoxFrontIconMediaUrl,
+		flipBoxFrontIcon,
+		flipBoxFrontIconFontColor,
+
 		flipBoxFrontIconSize,
 		flipBoxFrontIconSizeUnits,
 		flipBoxFrontIconFontColorSwitcher,
-		flipBoxFrontIconFontColor,
+
 		flipBoxFrontIconFontHoverColor,
 		flipBoxFrontIconBgFontColorSwitcher,
 		flipBoxFrontIconBgFontColor,
@@ -58,6 +61,10 @@ export default function save({ attributes }) {
 		/** End Flip Box Front Icon Attribute */
 
 		/** Start Flip Box Back Icon Attribute */
+		flipBoxBackIconMediaSwitcher,
+		flipBoxBackIconMediaUrl,
+		flipBoxBackIcon,
+
 		flipBoxBackIconSize,
 		flipBoxBackIconSizeUnits,
 		flipBoxBackIconFontColorSwitcher,
@@ -297,11 +304,6 @@ export default function save({ attributes }) {
 		flipBoxBackContentLineHeightUnits,
 		/** End Flip Box Back Content Attribute */
 
-		flipBoxBackMediaSwitcher,
-		flipBoxBackIconMediaUrl,
-		flipBoxBackIcon,
-		flipBoxBackIconColor,
-
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -314,10 +316,10 @@ export default function save({ attributes }) {
 						<div className="fb-flip-box-content">
 							<div className="fb-flip-box-content-inner">
 								<div className={`fb-flip-box-icon-wrapper`}>
-									{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
+									{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
 										<img src={attributes.flipBoxFrontIconMediaUrl}/>
 									)}
-									{mediaSwitcher === 'icon' && (
+									{flipBoxFrontIconMediaSwitcher === 'icon' && (
 										<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
 									)}
 								</div>
@@ -338,10 +340,10 @@ export default function save({ attributes }) {
 						<div className="fb-flip-box-content">
 							<div className="fb-flip-box-content-inner">
 								<div className={`fb-flip-box-icon-wrapper`}>
-									{flipBoxBackMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
+									{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
 										<img src={attributes.flipBoxBackIconMediaUrl}/>
 									)}
-									{flipBoxBackMediaSwitcher === 'icon' && (
+									{flipBoxBackIconMediaSwitcher === 'icon' && (
 										<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
 									)}
 								</div>
