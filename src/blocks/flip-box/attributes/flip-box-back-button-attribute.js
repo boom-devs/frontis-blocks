@@ -18,11 +18,11 @@ const flipBoxBackButtonAttributes = {
 	},
 	flipBoxBackButtonFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	flipBoxBackButtonFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	/** End Color */
 
@@ -33,11 +33,11 @@ const flipBoxBackButtonAttributes = {
 	},
 	flipBoxBackButtonBgFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: ""
 	},
 	flipBoxBackButtonBgFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: ""
 	},
 	/** End BG Color */
 
@@ -54,8 +54,8 @@ const flipBoxBackButtonAttributes = {
 		type: 'object',
 		default: {
 			Desktop: '18',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	flipBoxBackButtonFontSizeUnits: {
@@ -80,7 +80,7 @@ const flipBoxBackButtonAttributes = {
 	},
 	flipBoxBackButtonTextDecoration: {
 		type: 'string',
-		default: ''
+		default: 'none'
 	},
 	flipBoxBackButtonLetterSpacing: {
 		type: 'object',
