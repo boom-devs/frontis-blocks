@@ -57,6 +57,10 @@
 		//min-height: 364px;
 		transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
 		backface-visibility: hidden;
+
+		.fb-flip-box-icon-img img {
+			width: 100%;
+		}
 	}
 
 	.fb-flip-box-content {
