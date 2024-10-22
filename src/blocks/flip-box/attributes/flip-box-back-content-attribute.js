@@ -10,11 +10,11 @@ const flipBoxBackContentAttributes = {
 	},
 	flipBoxBackContentFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	flipBoxBackContentFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	/** End Color */
 

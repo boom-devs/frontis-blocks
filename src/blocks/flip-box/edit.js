@@ -545,7 +545,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxFrontContentLineHeight.Desktop ? `line-height: ${flipBoxFrontContentLineHeight.Desktop}${flipBoxFrontContentLineHeightUnits.Desktop};` : ''}
 				  ${flipBoxFrontContentMarginGetDesktop ? `margin: ${flipBoxFrontContentMarginGetDesktop};` : ''}
 				}
-				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
 				  display: inline-block;
 				  ${flipBoxBackButtonFontColor ? `color: ${flipBoxBackButtonFontColor};` : ''}
 				  ${flipBoxBackButtonBgFontColor ? `background: ${flipBoxBackButtonBgFontColor};` : ''}
@@ -640,7 +640,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					  ${flipBoxFrontContentLineHeight.Tablet ? `line-height: ${flipBoxFrontContentLineHeight.Tablet}${flipBoxFrontContentLineHeightUnits.Tablet};` : ''}
 					  ${flipBoxFrontContentMarginGetTablet ? `margin: ${flipBoxFrontContentMarginGetTablet};` : ''}
 					}
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
 					  ${flipBoxBackButtonFontSize.Tablet ? `font-size: ${flipBoxBackButtonFontSize.Tablet}${flipBoxBackButtonFontSizeUnits.Tablet};` : ''}
 					  ${flipBoxBackButtonLetterSpacing.Tablet ? `letter-spacing: ${flipBoxBackButtonLetterSpacing.Tablet}${flipBoxBackButtonLetterSpacingUnits.Tablet};` : ''}
 					  ${flipBoxBackButtonLineHeight.Tablet ? `line-height: ${flipBoxBackButtonLineHeight.Tablet}${flipBoxBackButtonLineHeightUnits.Tablet};` : ''}
@@ -705,7 +705,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					  ${flipBoxFrontContentLineHeight.Mobile ? `line-height: ${flipBoxFrontContentLineHeight.Mobile}${flipBoxFrontContentLineHeightUnits.Mobile};` : ''}
 					  ${flipBoxFrontContentMarginGetMobile ? `margin: ${flipBoxFrontContentMarginGetMobile};` : ''}
 					}
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
 					  ${flipBoxBackButtonFontSize.Mobile ? `font-size: ${flipBoxBackButtonFontSize.Mobile}${flipBoxBackButtonFontSizeUnits.Mobile};` : ''}
 					  ${flipBoxBackButtonLetterSpacing.Mobile ? `letter-spacing: ${flipBoxBackButtonLetterSpacing.Mobile}${flipBoxBackButtonLetterSpacingUnits.Mobile};` : ''}
 					  ${flipBoxBackButtonLineHeight.Mobile ? `line-height: ${flipBoxBackButtonLineHeight.Mobile}${flipBoxBackButtonLineHeightUnits.Mobile};` : ''}
