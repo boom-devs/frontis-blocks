@@ -1089,5 +1089,82 @@ const attributes = {
         type: "string",
         default: "preset-0",
     },
+    activeLineSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    activeLineAfterWidth: {
+        type: 'object',
+        default: {
+            Desktop: '100',
+            Tablet: '100',
+            Mobile: '100'
+        }
+    },
+    activeLineAfterWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
+	},
+    activeLineAfterHeight: {
+        type: 'object',
+        default: {
+            Desktop: '2',
+            Tablet: '2',
+            Mobile: '2'
+        }
+    },
+    activeLineAfterHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    activeLineAfterColor: {
+        type: "string",
+        default: "#B0D7FF",
+    },
+
+    activeLineBeforeWidth: {
+        type: 'object',
+        default: {
+            Desktop: '30',
+            Tablet: '30',
+            Mobile: '30'
+        }
+    },
+    activeLineBeforeWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%'
+        }
+    },
+    activeLineBeforeHeight: {
+        type: 'object',
+        default: {
+            Desktop: '3',
+            Tablet: '3',
+            Mobile: '3'
+        }
+    },
+    activeLineBeforeHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    activeLineBeforeColor: {
+        type: "string",
+        default: "#399CFF",
+    },
 }
 export default attributes;

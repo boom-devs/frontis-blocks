@@ -21,6 +21,8 @@ import {
     MediaUpload,
     MediaUploadCheck,
     Placeholder,
+    PanelRow,
+
 
 } from '@wordpress/components';
 
@@ -257,8 +259,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         /** End Background Image */
 
         headingPresetStyle,
-
+        activeLineSwitcher,
+        activeLineAfterWidth,
+        activeLineAfterWidthUnits,
+        activeLineAfterHeight,
+        activeLineAfterHeightUnits,
+        activeLineAfterColor,
+        activeLineBeforeWidth,
+        activeLineBeforeWidthUnits,
+        activeLineBeforeHeight,
+        activeLineBeforeHeightUnits,
+        activeLineBeforeColor,
     } = attributes;
+
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -294,22 +307,23 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 showSeparatorSwitcher: false,
                 headingBackgroundImageEnabled: false,
                 headingIconSwitcher: false,
+                headingTextShadowCssValue: "none",
             },
             "preset-1": {
+                subHeadingSwitcher: true,
+                showSeparatorSwitcher: false,
+                headingBackgroundImageEnabled: false,
+                headingIconSwitcher: false,
+                headingTextShadowCssValue: "0px 18px 0px #399cff1a;",
+            },
+            "preset-2": {
                 subHeadingSwitcher: true,
                 subHeadingPosition: "bottom",
                 showSeparatorSwitcher: true,
                 separatorPosition: "bottom",
                 headingBackgroundImageEnabled: true,
                 headingIconSwitcher: false,
-            },
-            "preset-2": {
-                subHeadingSwitcher: true,
-                subHeadingPosition: "top",
-                showSeparatorSwitcher: false,
-                separatorPosition: "top",
-                headingBackgroundImageEnabled: false,
-                headingIconSwitcher: true,
+                headingTextShadowCssValue: "none",
             },
         };
 
@@ -1421,6 +1435,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${headingDesktopBorderWidth ? `border-width: ${headingDesktopBorderWidth};` : ''}
                     ${headingDesktopBorderRadiusWidth ? `border-radius: ${headingDesktopBorderRadiusWidth};` : ''}
                     ${headingBorderColor ? `border-color: ${headingBorderColor};` : ''}
+                    
                     ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
                     ${headingTextStroke ? `
                         -webkit-text-stroke: ${headingTextStroke}px;
@@ -1505,12 +1520,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${headingIconHoverColor ? `fill: ${headingIconHoverColor};` : ''}
                 }
 
-                .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
+                .${blockId}.fb-advanced-wrapper .fb-advanced-title-separator {
                     display: inline-block;
-                    ${separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
-                    ${separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
-                    ${separator ? `border-top-style: ${separator};` : ''}
-                    ${separatorColor ? `border-top-color: ${separatorColor};` : ''}
+                    ${separator !== 'zigzag' && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
+                    ${separator !== 'zigzag' && separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
+                    ${separator !== 'zigzag' ? `border-top-style: ${separator};` : ''}
+                    ${separator !== 'zigzag' && separatorColor ? `border-top-color: ${separatorColor};` : ''}
                     ${separatorPosition === 'bottom' ? 
                         `${separatorSpacing.Desktop && separatorSpacingUnits.Desktop ? 
                             `margin-top: ${separatorSpacing.Desktop}${separatorSpacingUnits.Desktop};` 
@@ -1521,7 +1536,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             : ''}`
                         : ''}
                 }
-
                 .${blockId}.fb-advanced-wrapper {
                     ${headingGlobalZIndex ? `z-index: ${headingGlobalZIndex};` : ''}
                     ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''} 
@@ -1538,6 +1552,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 .${blockId}.fb-advanced-wrapper:hover {
                     ${headingGlobalBgHoverColor ? `background-color: ${headingGlobalBgHoverColor};` : ''}
                     ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
+                }
+
+                .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+                    ${activeLineAfterWidth.Desktop && activeLineAfterWidthUnits.Desktop ? `width: ${activeLineAfterWidth.Desktop}${activeLineAfterWidthUnits.Desktop};` : ''}
+                    ${activeLineAfterHeight.Desktop && activeLineAfterHeightUnits.Desktop ? `height: ${activeLineAfterHeight.Desktop}${activeLineAfterHeightUnits.Desktop};` : ''}
+                    ${activeLineAfterColor ? `background-color: ${activeLineAfterColor};` : ''}
+                }
+
+                .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+                    ${activeLineBeforeWidth.Desktop && activeLineBeforeWidthUnits.Desktop ? `width: ${activeLineBeforeWidth.Desktop}${activeLineBeforeWidthUnits.Desktop};` : ''}
+                    ${activeLineBeforeHeight.Desktop && activeLineBeforeHeightUnits.Desktop ? `height: ${activeLineBeforeHeight.Desktop}${activeLineBeforeHeightUnits.Desktop};` : ''}
+                    ${activeLineBeforeColor ? `background-color: ${activeLineBeforeColor};` : ''}
                 }
 
                 @media only screen and (max-width: 1024px) {
@@ -1588,6 +1614,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
                         ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
                     }
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+                        ${activeLineAfterWidth.Tablet && activeLineAfterWidthUnits.Tablet ? `width: ${activeLineAfterWidth.Tablet}${activeLineAfterWidthUnits.Tablet};` : ''}
+                        ${activeLineAfterHeight.Tablet && activeLineAfterHeightUnits.Tablet ? `height: ${activeLineAfterHeight.Tablet}${activeLineAfterHeightUnits.Tablet};` : ''}
+                    }
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+                        ${activeLineBeforeWidth.Tablet && activeLineBeforeWidthUnits.Tablet ? `width: ${activeLineBeforeWidth.Tablet}${activeLineBeforeWidthUnits.Tablet};` : ''}
+                        ${activeLineBeforeHeight.Tablet && activeLineBeforeHeightUnits.Tablet ? `height: ${activeLineBeforeHeight.Tablet}${activeLineBeforeHeightUnits.Tablet};` : ''}
+                    }
                 }
 
                 @media only screen and (max-width: 767px) {
@@ -1637,6 +1671,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
                         ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
                         ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+                    }
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+                        ${activeLineAfterWidth.Mobile && activeLineAfterWidthUnits.Mobile ? `width: ${activeLineAfterWidth.Mobile}${activeLineAfterWidthUnits.Mobile};` : ''}
+                        ${activeLineAfterHeight.Mobile && activeLineAfterHeightUnits.Mobile ? `height: ${activeLineAfterHeight.Mobile}${activeLineAfterHeightUnits.Mobile};` : ''}
+                    }
+                    .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+                        ${activeLineBeforeWidth.Mobile && activeLineBeforeWidthUnits.Mobile ? `width: ${activeLineBeforeWidth.Mobile}${activeLineBeforeWidthUnits.Mobile};` : ''}
+                        ${activeLineBeforeHeight.Mobile && activeLineBeforeHeightUnits.Mobile ? `height: ${activeLineBeforeHeight.Mobile}${activeLineBeforeHeightUnits.Mobile};` : ''}
                     }
                 }
             `}
@@ -1816,7 +1858,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         <SelectControl
                                                             label={__("Separator Style", "frontis-blocks")}
                                                             value={separator}
-                                                            options={SEPERATOR_STYLES}
+                                                            options={[
+                                                                { label: __('Solid', 'frontis-blocks'), value: 'solid' },
+                                                                { label: __('Dashed', 'frontis-blocks'), value: 'dashed' },
+                                                                { label: __('Dotted', 'frontis-blocks'), value: 'dotted' },
+                                                                { label: __('Double', 'frontis-blocks'), value: 'double' },
+                                                                { label: __('Zigzag', 'frontis-blocks'), value: 'zigzag' }
+                                                            ]}
                                                             onChange={(value) => setAttributes({ separator: value })}
                                                         />
                                                     </BaseControl>
@@ -2018,6 +2066,163 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     </button>
                                                 )}
                                                 </BaseControl>
+                                            )}
+
+                                            <ToggleControl
+                                                label={__("Active Line", "frontis-blocks")}
+                                                checked={activeLineSwitcher}
+                                                onChange={(value) => setAttributes({ activeLineSwitcher: value })}
+                                            />
+
+                                            {activeLineSwitcher && (
+                                                <>
+                                                    <BaseControl 
+                                                        label={__("Before Line Color", "frontis-blocks")}
+                                                        className="fb-setting-color-setting-wrapper"
+                                                    >
+                                                        <Dropdown
+                                                            className="fb-setting-color-setting-icon-dropdown"
+                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                            popoverProps={{ placement: 'bottom-start' }}
+                                                            renderToggle={({ isOpen, onToggle }) => (
+                                                                <Button
+                                                                    variant="primary"
+                                                                    onClick={onToggle}
+                                                                    aria-expanded={isOpen}
+                                                                    className="fb-setting-color-setting-icon-btn"
+                                                                >
+                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                                </Button>
+                                                            )}
+                                                            renderContent={() => (
+                                                                <div className="fb-setting-color-setting-icon-popup">
+                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                        <div className="fb-setting-normal-color">
+                                                                            <ColorPicker
+                                                                                color={activeLineBeforeColor}
+                                                                                onChange={(value) => setAttributes({ activeLineBeforeColor: value })}
+                                                                                enableAlpha={true}
+                                                                            />
+                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                            <ColorPalette
+                                                                                colors={[
+                                                                                    { color: '#F72585' },
+                                                                                    { color: '#7209B7' },
+                                                                                    { color: '#3A0CA3' },
+                                                                                    { color: '#4361EE' },
+                                                                                    { color: '#4CC9F0' },
+                                                                                ]}
+                                                                                disableCustomColors={true}
+                                                                                value={activeLineBeforeColor}
+                                                                                onChange={(value) => setAttributes({ activeLineBeforeColor: value })}
+                                                                            />
+                                                                        </div>
+                                                                    </BaseControl>
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </BaseControl>
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={100}
+                                                        label={__("Line Width", "frontis-blocks")}
+                                                        rangeValue={activeLineBeforeWidth} 
+                                                        onChangeHandler={(value) => setAttributes({ activeLineBeforeWidth: value })}
+                                                        rangeUnitHandler={(value) => setAttributes({ activeLineBeforeWidthUnits: value })}
+                                                        deviceType={deviceType}
+                                                        units={activeLineBeforeWidthUnits}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                    />
+
+                                                    <FB_Range
+                                                        min={1}
+                                                        max={20}
+                                                        label={__("Line Height", "frontis-blocks")}
+                                                        rangeValue={activeLineBeforeHeight}
+                                                        onChangeHandler={(value) => setAttributes({ activeLineBeforeHeight: value })}
+                                                        rangeUnitHandler={(value) => setAttributes({ activeLineBeforeHeightUnits: value })}
+                                                        deviceType={deviceType}
+                                                        units={activeLineBeforeHeightUnits}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                    />
+
+                                                    <BaseControl 
+                                                        label={__("After Line Color", "frontis-blocks")}
+                                                        className="fb-setting-color-setting-wrapper"
+                                                    >
+                                                        <Dropdown
+                                                            className="fb-setting-color-setting-icon-dropdown"
+                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                            popoverProps={{ placement: 'bottom-start' }}
+                                                            renderToggle={({ isOpen, onToggle }) => (
+                                                                <Button
+                                                                    variant="primary"
+                                                                    onClick={onToggle}
+                                                                    aria-expanded={isOpen}
+                                                                    className="fb-setting-color-setting-icon-btn"
+                                                                >
+                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                                </Button>
+                                                            )}
+                                                            renderContent={() => (
+                                                                <div className="fb-setting-color-setting-icon-popup">
+                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                        <div className="fb-setting-normal-color">
+                                                                            <ColorPicker
+                                                                                color={activeLineAfterColor}
+                                                                                onChange={(value) => setAttributes({ activeLineAfterColor: value })}
+                                                                                enableAlpha={true}
+                                                                            />
+                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                            <ColorPalette
+                                                                                colors={[
+                                                                                    { color: '#F72585' },
+                                                                                    { color: '#7209B7' },
+                                                                                    { color: '#3A0CA3' },
+                                                                                    { color: '#4361EE' },
+                                                                                    { color: '#4CC9F0' },
+                                                                                ]}
+                                                                                disableCustomColors={true}
+                                                                                value={activeLineAfterColor}
+                                                                                onChange={(value) => setAttributes({ activeLineAfterColor: value })}
+                                                                            />
+                                                                        </div>
+                                                                    </BaseControl>
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </BaseControl>
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={100}
+                                                        label={__("Line Width", "frontis-blocks")}
+                                                        rangeValue={activeLineAfterWidth}
+                                                        onChangeHandler={(value) => setAttributes({ activeLineAfterWidth: value })}
+                                                        rangeUnitHandler={(value) => setAttributes({ activeLineAfterWidthUnits: value })}
+                                                        deviceType={deviceType}
+                                                        units={activeLineAfterWidthUnits}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                    />
+                                                    <FB_Range
+                                                        min={1}
+                                                        max={20}
+                                                        label={__("Line Height", "frontis-blocks")}
+                                                        rangeValue={activeLineAfterHeight}
+                                                        onChangeHandler={(value) => setAttributes({ activeLineAfterHeight: value })}
+                                                        rangeUnitHandler={(value) => setAttributes({ activeLineAfterHeightUnits: value })}
+                                                        deviceType={deviceType}
+                                                        units={activeLineAfterHeightUnits}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                    />
+                                                </>
                                             )}
 
                                             <SelectControl
@@ -2267,32 +2472,37 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     handleGlobalColorChange={(value) => setAttributes({ separatorColor: value })}
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ separatorHoverColor: value })}
                                                 />
-                                                <FB_Range
-                                                    min={1}
-                                                    max={100}
-                                                    label={__("Width", "frontis-blocks")}
-                                                    rangeValue={separatorWidth} 
-                                                    onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ separatorWidthUnits: value })}
-                                                    deviceType={deviceType}
-                                                    units={separatorWidthUnits}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={""}
-                                                />
-                                                <FB_Range
-                                                    min={1}
-                                                    max={100}
-                                                    label={__("Height", "frontis-blocks")}
-                                                    rangeValue={separatorHeight} 
-                                                    onChangeHandler={(value) => setAttributes({ separatorHeight: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ separatorHeightUnits: value })}
-                                                    deviceType={deviceType}
-                                                    units={separatorHeightUnits}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={""}
-                                                />
+                                                
+                                                {separator !== 'zigzag' && (
+                                                    <>
+                                                        <FB_Range
+                                                            min={1}
+                                                            max={100}
+                                                            label={__("Width", "frontis-blocks")}
+                                                            rangeValue={separatorWidth} 
+                                                            onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ separatorWidthUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={separatorWidthUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={""}
+                                                        />
+                                                        <FB_Range
+                                                            min={1}
+                                                            max={100}
+                                                            label={__("Height", "frontis-blocks")}
+                                                            rangeValue={separatorHeight} 
+                                                            onChangeHandler={(value) => setAttributes({ separatorHeight: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ separatorHeightUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={separatorHeightUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={""}
+                                                        />
+                                                    </>
+                                                )}
                                                 <FB_Range
                                                     min={1}
                                                     max={100}
