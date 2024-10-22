@@ -172,6 +172,14 @@ const flipBoxItemBackAttributes = {
 		default: true
 	},
 	/** End Padding */
+
+	/** Start Alignment */
+	flipBoxItemBackAlignment: {
+		type: "string",
+		default: "center",
+	},
+	/** End Alignment */
+
 };
 
 export default flipBoxItemBackAttributes;

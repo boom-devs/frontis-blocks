@@ -200,6 +200,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemFrontBgFontColor,
 		flipBoxItemFrontBgFontHoverColor,
 
+		flipBoxItemFrontAlignment,
+
 		flipBoxItemFrontSize,
 		flipBoxItemFrontSizeUnits,
 		flipBoxItemFrontBorderTypeUnits,
@@ -229,6 +231,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemBackBgFontColorSwitcher,
 		flipBoxItemBackBgFontColor,
 		flipBoxItemBackBgFontHoverColor,
+
+		flipBoxItemBackAlignment,
 
 		flipBoxItemBackSize,
 		flipBoxItemBackSizeUnits,
@@ -382,12 +386,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}
 
 	useEffect(() => {
-		if (!blockID) {
+		if (clientId && typeof clientId === 'string') {
 			setAttributes({
-				blockID: "flip-box" + clientId.slice(0, 8),
+				blockID: "flip-box-" + clientId.slice(0, 8),
 			});
 		}
-	}, [blockID, clientId, setAttributes]);
+	}, [clientId]);
 
 	const blockProps = useBlockProps();
 
@@ -1299,7 +1303,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<div className={`fb-flip-box-wrapper ${blockID}`}>
 					<div className={`fb-flip-box-item ${flipBoxTypeSwitcher === 'back' ? 'active' : ''}`}>
 						<div className="fb-flip-box-front">
-							<div className="fb-flip-box-content">
+							<div className="fb-flip-box-content" style={{textAlign: flipBoxItemFrontAlignment}}>
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
 										{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
@@ -1326,7 +1330,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							</div>
 						</div>
 						<div className="fb-flip-box-back">
-							<div className="fb-flip-box-content">
+							<div className="fb-flip-box-content" style={{textAlign: flipBoxItemBackAlignment}}>
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
 										{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
