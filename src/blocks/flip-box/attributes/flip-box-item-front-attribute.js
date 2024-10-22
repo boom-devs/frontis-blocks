@@ -174,6 +174,13 @@ const flipBoxItemFrontAttributes = {
 	},
 	/** End Padding */
 
+	/** Start Alignment */
+	flipBoxItemFrontAlignment: {
+		type: "string",
+		default: "center",
+	},
+	/** End Alignment */
+
 };
 
 export default flipBoxItemFrontAttributes;

@@ -4,7 +4,8 @@ import FB_Color from '@Components/color';
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
 import {BORDER_STYLES} from "@Blocks/countdown/constants/constants";
-import {SelectControl} from "@wordpress/components";
+import {BaseControl, Button, ButtonGroup, SelectControl} from "@wordpress/components";
+import {TEXT_ALIGN} from "@Blocks/advanced-heading/constants/constants";
 export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 
 	const {
@@ -34,6 +35,8 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 		flipBoxItemBackPaddingTablet,
 		flipBoxItemBackPaddingMobile,
 		flipBoxItemBackPaddingLink,
+
+		flipBoxItemBackAlignment
 
 	} = attributes;
 
@@ -329,6 +332,26 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 				spacingCombineBtn={flipBoxItemBackPaddingLink}
 				spacingCombineBtnHandler={flipBoxItemBackPaddingSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
 			/>
+
+			<BaseControl
+				label={__("Alignment", "frontis-blocks")}
+				id="fb-setting-text-alignment"
+				className="fb-setting-text-alignment"
+			>
+				<ButtonGroup
+					className="fb-setting-text-alignment-group-btn"
+				>
+					{TEXT_ALIGN.map((item, key) => (
+						<Button
+							key={key}
+							onClick={() => setAttributes({ flipBoxItemBackAlignment: item.value })}
+							className={`fb-setting-text-alignment-single-btn ${flipBoxItemBackAlignment === item.value ? 'active' : ''}`}
+						>
+							{item.label}
+						</Button>
+					))}
+				</ButtonGroup>
+			</BaseControl>
 		</>
 	);
 };
