@@ -39,12 +39,18 @@ class Blocks
         ];
 
         $blocks_list = BlockList::get_instance()->get_blocks();
+        $active_blocks = get_option('fb_active_blocks');
 
         if (!empty($blocks_list)) {
             foreach ($blocks_list as $block) {
                 $slug = $block['slug'];
-                $package = $block['package'];
+                if(is_array($active_blocks) && !empty($active_blocks)) {
+                    if(!$active_blocks[$slug]) {
+                        continue;
+                    }
+                }
 
+                $package = $block['package'];
                 $plugin_dir = FB_PLUGIN_PATH;
                 $blocks_dir = FB_BLOCKS_DIR . $slug;
                 $plugin_slug = 'frontis-blocks';
