@@ -17,7 +17,7 @@ const flipBoxFrontIconAttributes = {
 	flipBoxFrontIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '70',
+			Desktop: '40',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -116,10 +116,10 @@ const flipBoxFrontIconAttributes = {
 	flipBoxFrontIconPaddingDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
 		},
 	},
 	flipBoxFrontIconPaddingTablet: {
@@ -215,10 +215,10 @@ const flipBoxFrontIconAttributes = {
 	flipBoxFrontIconBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	flipBoxFrontIconBorderRadiusTablet: {
