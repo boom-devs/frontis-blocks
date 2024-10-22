@@ -87,9 +87,7 @@ var App = function App() {
     })
   }, function (tab) {
     var _TabMenus$find;
-    var activeTabData = _TabMenu__WEBPACK_IMPORTED_MODULE_5__["default"].find(function (t) {
-      return t.id === tab.name;
-    });
+    // const activeTabData = TabMenus.find(t => t.id === tab.name);
     return /*#__PURE__*/React.createElement("div", {
       className: "frontis-blocks-tab-content"
     }, (_TabMenus$find = _TabMenu__WEBPACK_IMPORTED_MODULE_5__["default"].find(function (tab) {
@@ -186,12 +184,12 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var BlockCard = function BlockCard(_ref) {
   var block = _ref.block,
     onChange = _ref.onChange;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(block.status === 'true'),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(block.status === '1'),
     _useState2 = _slicedToArray(_useState, 2),
     isChecked = _useState2[0],
     setIsChecked = _useState2[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    setIsChecked(block.status === 'true');
+    setIsChecked(block.status === '1');
   }, [block.status]);
   var handleChange = function handleChange(checked) {
     onChange(block.slug, checked);
@@ -2520,6 +2518,7 @@ var TabPanel = function TabPanel(_ref) {
   var className = _ref.className,
     activeClass = _ref.activeClass,
     onSelect = _ref.onSelect,
+    initialTabName = _ref.initialTabName,
     tabs = _ref.tabs,
     children = _ref.children;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)((_tabs$ = tabs[0]) === null || _tabs$ === void 0 ? void 0 : _tabs$.name),
@@ -2540,7 +2539,7 @@ var TabPanel = function TabPanel(_ref) {
   }, tabs.map(function (tab) {
     return /*#__PURE__*/React.createElement("button", {
       key: tab.name,
-      className: "fb-blocks-tab-button ".concat(activeTab === tab.name ? "".concat(activeClass, " fb-blocks-active-tab") : ''),
+      className: "fb-blocks-tab-button ".concat(initialTabName === tab.name ? "".concat(activeClass, " fb-blocks-active-tab") : ''),
       onClick: function onClick() {
         return handleTabChange(tab.name);
       }

@@ -170,7 +170,6 @@ class Settings extends AjaxBase {
 
     // New method to save blocks
     public function save_blocks() {
-        error_log('save_blocks method called');
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
             error_log('Invalid nonce in save_blocks');
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
@@ -184,6 +183,7 @@ class Settings extends AjaxBase {
         }
 
         $blocks = isset($_POST['blocks']) ? json_decode(stripslashes($_POST['blocks']), true) : [];
+        $activeBlocks = get_option('fb_active_blocks');
 
         if (!is_array($blocks)) {
             error_log('Invalid blocks data in save_blocks: ' . print_r($blocks, true));
@@ -191,9 +191,19 @@ class Settings extends AjaxBase {
             return;
         }
 
-        error_log('Blocks to save: ' . print_r($blocks, true));
+        if($activeBlocks) {
+            foreach ($blocks as $key => $value) {
+                if ($value === true) {
+                    $activeBlocks[$key] = true;
+                } else {
+                    $activeBlocks[$key] = false;
+                }
+            }
 
-        $updated = update_option('fb_active_blocks', $blocks);
+            $blocks = $activeBlocks;
+        }
+
+        $updated = update_option('fb_active_blocks', $blocks, true);
 
         if ($updated) {
             error_log('Blocks updated successfully');
