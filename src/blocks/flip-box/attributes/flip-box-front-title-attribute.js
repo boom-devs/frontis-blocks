@@ -106,8 +106,8 @@ const flipBoxFrontTitleAttributes = {
 	flipBoxFrontTitleMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
+			top: 20,
+			bottom: 20,
 			left: 0,
 			right: 0,
 		},

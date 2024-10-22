@@ -79,7 +79,7 @@ $flipBoxFrontIconMarginGetMobile = $flipBoxFrontIconMarginMobile['top'] . $flipB
 
 /** Front Title Margin */
 $flipBoxFrontTitleMarginUnits = isset($block_attributes['flipBoxFrontTitleMarginUnits']) ? $block_attributes['flipBoxFrontTitleMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxFrontTitleMarginDesktop = isset($block_attributes['flipBoxFrontTitleMarginDesktop']) ? $block_attributes['flipBoxFrontTitleMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxFrontTitleMarginDesktop = isset($block_attributes['flipBoxFrontTitleMarginDesktop']) ? $block_attributes['flipBoxFrontTitleMarginDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '', 'right' => '');
 $flipBoxFrontTitleMarginTablet = isset($block_attributes['flipBoxFrontTitleMarginTablet']) ? $block_attributes['flipBoxFrontTitleMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontTitleMarginMobile = isset($block_attributes['flipBoxFrontTitleMarginMobile']) ? $block_attributes['flipBoxFrontTitleMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontTitleMarginGetDesktop = $flipBoxFrontTitleMarginDesktop['top'] . $flipBoxFrontTitleMarginUnits['Desktop'] . ' ' . $flipBoxFrontTitleMarginDesktop['right'] . $flipBoxFrontTitleMarginUnits['Desktop'] . ' ' . $flipBoxFrontTitleMarginDesktop['bottom'] . $flipBoxFrontTitleMarginUnits['Desktop'] . ' ' . $flipBoxFrontTitleMarginDesktop['left'] . $flipBoxFrontTitleMarginUnits['Desktop'];
@@ -204,7 +204,7 @@ $flipBoxBackIconMarginGetMobile = $flipBoxBackIconMarginMobile['top'] . $flipBox
 
 /** Back Title Margin */
 $flipBoxBackTitleMarginUnits = isset($block_attributes['flipBoxBackTitleMarginUnits']) ? $block_attributes['flipBoxBackTitleMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackTitleMarginDesktop = isset($block_attributes['flipBoxBackTitleMarginDesktop']) ? $block_attributes['flipBoxBackTitleMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxBackTitleMarginDesktop = isset($block_attributes['flipBoxBackTitleMarginDesktop']) ? $block_attributes['flipBoxBackTitleMarginDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '', 'right' => '');
 $flipBoxBackTitleMarginTablet = isset($block_attributes['flipBoxBackTitleMarginTablet']) ? $block_attributes['flipBoxBackTitleMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackTitleMarginMobile = isset($block_attributes['flipBoxBackTitleMarginMobile']) ? $block_attributes['flipBoxBackTitleMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackTitleMarginGetDesktop = $flipBoxBackTitleMarginDesktop['top'] . $flipBoxBackTitleMarginUnits['Desktop'] . ' ' . $flipBoxBackTitleMarginDesktop['right'] . $flipBoxBackTitleMarginUnits['Desktop'] . ' ' . $flipBoxBackTitleMarginDesktop['bottom'] . $flipBoxBackTitleMarginUnits['Desktop'] . ' ' . $flipBoxBackTitleMarginDesktop['left'] . $flipBoxBackTitleMarginUnits['Desktop'];
