@@ -101,6 +101,18 @@ const attributes = {
     headingTextStroke: {
         type: 'number',
     },
+    headingTextStrokeColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    headingTextStrokeColor: {
+        type: 'string',
+        default: '#399CFF',
+    },
+    headingTextStrokeHoverColor: {
+        type: 'string',
+        default: '#399CFF',
+    },
 
     headingColorSwitcher : {
         type: "string",
