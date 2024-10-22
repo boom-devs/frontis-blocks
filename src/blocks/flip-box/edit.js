@@ -497,7 +497,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemFrontBorderColor ? `border-color: ${flipBoxItemFrontBorderColor};` : ''}
 					${flipBoxItemFrontBgFontColor ? `background: ${flipBoxItemFrontBgFontColor};` : ''}
 				}
-				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
+					display: inline-block;
 				  	${flipBoxFrontIconSize.Desktop ? `width: ${flipBoxFrontIconSize.Desktop}${flipBoxFrontIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxFrontIconSize.Desktop ? `height: ${flipBoxFrontIconSize.Desktop}${flipBoxFrontIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxFrontIconBorder ? `border: ${flipBoxFrontIconBorder};` : ''}
@@ -510,7 +512,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  	${flipBoxFrontIconMarginGetDesktop ? `margin: ${flipBoxFrontIconMarginGetDesktop};` : ''}
 				}
 
-				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
 				  	${flipBoxBackIconSize.Desktop ? `width: ${flipBoxBackIconSize.Desktop}${flipBoxBackIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxBackIconSize.Desktop ? `height: ${flipBoxBackIconSize.Desktop}${flipBoxBackIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxBackIconBorder ? `border: ${flipBoxBackIconBorder};` : ''}
@@ -612,7 +615,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${flipBoxItemBackBorderRadiusGetTablet ? `border-radius: ${flipBoxItemBackBorderRadiusGetTablet};` : ''}
 					}
 
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
 						${flipBoxFrontIconSize.Tablet ? `width: ${flipBoxFrontIconSize.Tablet}${flipBoxFrontIconSizeUnits.Tablet};` : ''}
 						${flipBoxFrontIconSize.Tablet ? `height: ${flipBoxFrontIconSize.Tablet}${flipBoxFrontIconSizeUnits.Tablet};` : ''}
 						${flipBoxFrontIconBorderTypeGetTablet ? `border-width: ${flipBoxFrontIconBorderTypeGetTablet};` : ''}
@@ -621,7 +625,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${flipBoxFrontIconMarginGetTablet ? `margin: ${flipBoxFrontIconMarginGetTablet};` : ''}
 					}
 
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
 						${flipBoxBackIconSize.Tablet ? `width: ${flipBoxBackIconSize.Tablet}${flipBoxBackIconSizeUnits.Tablet};` : ''}
 						${flipBoxBackIconSize.Tablet ? `height: ${flipBoxBackIconSize.Tablet}${flipBoxBackIconSizeUnits.Tablet};` : ''}
 						${flipBoxBackIconBorderTypeGetTablet ? `border-width: ${flipBoxBackIconBorderTypeGetTablet};` : ''}
@@ -677,7 +682,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${flipBoxItemBackBorderTypeGetMobile ? `border-width: ${flipBoxItemBackBorderTypeGetMobile};` : ''}
 						${flipBoxItemBackBorderRadiusGetMobile ? `border-radius: ${flipBoxItemBackBorderRadiusGetMobile};` : ''}
 					}
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
 						${flipBoxFrontIconSize.Mobile ? `width: ${flipBoxFrontIconSize.Mobile}${flipBoxFrontIconSizeUnits.Mobile};` : ''}
 						${flipBoxFrontIconSize.Mobile ? `height: ${flipBoxFrontIconSize.Mobile}${flipBoxFrontIconSizeUnits.Mobile};` : ''}
 						${flipBoxFrontIconBorderTypeGetMobile ? `border-width: ${flipBoxFrontIconBorderTypeGetMobile};` : ''}
@@ -686,7 +692,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${flipBoxFrontIconMarginGetMobile ? `margin: ${flipBoxFrontIconMarginGetMobile};` : ''}
 					}
 
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
 						${flipBoxBackIconSize.Mobile ? `width: ${flipBoxBackIconSize.Mobile}${flipBoxBackIconSizeUnits.Mobile};` : ''}
 						${flipBoxBackIconSize.Mobile ? `height: ${flipBoxBackIconSize.Mobile}${flipBoxBackIconSizeUnits.Mobile};` : ''}
 						${flipBoxBackIconBorderTypeGetMobile ? `border-width: ${flipBoxBackIconBorderTypeGetMobile};` : ''}
@@ -1261,7 +1268,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
 										{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
-											<img src={attributes.flipBoxFrontIconMediaUrl}/>
+											<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxFrontIconMediaUrl}/></div>
 										)}
 										{flipBoxFrontIconMediaSwitcher === 'icon' && (
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
@@ -1288,7 +1295,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
 										{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
-											<img src={attributes.flipBoxBackIconMediaUrl}/>
+											<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxBackIconMediaUrl}/></div>
 										)}
 										{flipBoxBackIconMediaSwitcher === 'icon' && (
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
