@@ -5,7 +5,13 @@ import { Dashicon, BaseControl, Button, Dropdown} from '@wordpress/components';
 import './editor.lazy.scss';
 
 export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, isBoxShadow=true }) {
-	const [boxShadow, setBoxShadow] = useState(initialShadowValue || [0, 0, 0, 0, '', '#00000000']);
+	const [boxShadow, setBoxShadow] = useState(() => {
+		if (isBoxShadow) {
+			return initialShadowValue || [0, 0, 0, 0, '', '#00000000'];
+		} else {
+			return initialShadowValue || [0, 0, 0, '', '#00000000'];
+		}
+	});
 
 	useEffect(() => {
 		onBoxShadowChange(boxShadow);
@@ -13,24 +19,26 @@ export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialS
 
 	useEffect(() => {
         const boxShadowStyle = boxShadow.map((value, index) => {
-            if (index === 4) return value;
-            if (index === 5) return value;
+            if (index === (isBoxShadow ? 4 : 3)) return value;
+            if (index === (isBoxShadow ? 5 : 4)) return value;
             return `${value}px`;
         }).join(' ');
 
         if (onBoxShadowStyleChange) {
             onBoxShadowStyleChange(boxShadowStyle);
         }
-    }, [boxShadow, onBoxShadowStyleChange]);
+    }, [boxShadow, onBoxShadowStyleChange, isBoxShadow]);
 
 	function onChangeHandler(value, index) {
 		setBoxShadow((prevBoxShadow) => {
 			const newBoxShadow = [...prevBoxShadow];
+			const colorIndex = isBoxShadow ? 5 : 4;
+			const insetIndex = isBoxShadow ? 4 : 3;
 			switch (index) {
-				case 5:
+				case colorIndex:
 					newBoxShadow[index] = value;
 					break;
-				case 4:
+				case insetIndex:
 					newBoxShadow[index] = value ? 'inset' : '';
 					break;
 				default:
@@ -66,14 +74,14 @@ export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialS
 							<Control
 								label="Inset"
 								type="checkbox"
-								value={boxShadow[4] === 'inset'}
-								onChangeHandler={(e) => onChangeHandler(e, 4)}
+								value={boxShadow[isBoxShadow ? 4 : 3] === 'inset'}
+								onChangeHandler={(e) => onChangeHandler(e, isBoxShadow ? 4 : 3)}
 							/>
 							<Control
 								label="Color"
 								type="color"
-								value={boxShadow[5]}
-								onChangeHandler={(e) => onChangeHandler(e, 5)}
+								value={boxShadow[isBoxShadow ? 5 : 4]}
+								onChangeHandler={(e) => onChangeHandler(e, isBoxShadow ? 5 : 4)}
 							/>
 							<Control
 								label="Offset X"

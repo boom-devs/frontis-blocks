@@ -4672,7 +4672,13 @@ function FB_BoxShadowControl(_ref) {
     onBoxShadowStyleChange = _ref.onBoxShadowStyleChange,
     _ref$isBoxShadow = _ref.isBoxShadow,
     isBoxShadow = _ref$isBoxShadow === void 0 ? true : _ref$isBoxShadow;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialShadowValue || [0, 0, 0, 0, '', '#00000000']),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
+      if (isBoxShadow) {
+        return initialShadowValue || [0, 0, 0, 0, '', '#00000000'];
+      } else {
+        return initialShadowValue || [0, 0, 0, '', '#00000000'];
+      }
+    }),
     _useState2 = _slicedToArray(_useState, 2),
     boxShadow = _useState2[0],
     setBoxShadow = _useState2[1];
@@ -4681,22 +4687,24 @@ function FB_BoxShadowControl(_ref) {
   }, [boxShadow, onBoxShadowChange]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var boxShadowStyle = boxShadow.map(function (value, index) {
-      if (index === 4) return value;
-      if (index === 5) return value;
+      if (index === (isBoxShadow ? 4 : 3)) return value;
+      if (index === (isBoxShadow ? 5 : 4)) return value;
       return "".concat(value, "px");
     }).join(' ');
     if (onBoxShadowStyleChange) {
       onBoxShadowStyleChange(boxShadowStyle);
     }
-  }, [boxShadow, onBoxShadowStyleChange]);
+  }, [boxShadow, onBoxShadowStyleChange, isBoxShadow]);
   function _onChangeHandler(value, index) {
     setBoxShadow(function (prevBoxShadow) {
       var newBoxShadow = _toConsumableArray(prevBoxShadow);
+      var colorIndex = isBoxShadow ? 5 : 4;
+      var insetIndex = isBoxShadow ? 4 : 3;
       switch (index) {
-        case 5:
+        case colorIndex:
           newBoxShadow[index] = value;
           break;
-        case 4:
+        case insetIndex:
           newBoxShadow[index] = value ? 'inset' : '';
           break;
         default:
@@ -4734,16 +4742,16 @@ function FB_BoxShadowControl(_ref) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
         label: "Inset",
         type: "checkbox",
-        value: boxShadow[4] === 'inset',
+        value: boxShadow[isBoxShadow ? 4 : 3] === 'inset',
         onChangeHandler: function onChangeHandler(e) {
-          return _onChangeHandler(e, 4);
+          return _onChangeHandler(e, isBoxShadow ? 4 : 3);
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
         label: "Color",
         type: "color",
-        value: boxShadow[5],
+        value: boxShadow[isBoxShadow ? 5 : 4],
         onChangeHandler: function onChangeHandler(e) {
-          return _onChangeHandler(e, 5);
+          return _onChangeHandler(e, isBoxShadow ? 5 : 4);
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
         label: "Offset X",
@@ -8270,6 +8278,9 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Playfair Display SC", "frontis-blocks"),
   value: "Playfair Display SC"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Plus Jakarta Sans", "frontis-blocks"),
+  value: "Plus Jakarta Sans"
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Podkova", "frontis-blocks"),
   value: "Podkova"
