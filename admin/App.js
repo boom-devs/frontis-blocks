@@ -64,7 +64,7 @@ const App = () => {
                     activeClass="active-tab"
                     onSelect={handleTabChange}
                     initialTabName={currentTab}
-                    tabs={TabMenus.map(tab => ({
+                    tabs={TabMenus.map(tab => ( {
                         name: tab.id,
                         title: tab.label,
                         icon: tab.icon,
@@ -72,7 +72,7 @@ const App = () => {
                     }))}
                 >
                     {(tab) => {
-                        const activeTabData = TabMenus.find(t => t.id === tab.name);
+                        // const activeTabData = TabMenus.find(t => t.id === tab.name);
                         return (
                             <div className="frontis-blocks-tab-content">
                                  {TabMenus.find(tab => tab.id === activeTab)?.comp}
