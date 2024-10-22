@@ -163,6 +163,8 @@ module.exports = window["wp"]["plugins"];
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
 /*!********************************!*\
   !*** ./admin/sidebar/index.js ***!
   \********************************/
@@ -408,6 +410,8 @@ var ColorDropdown = function ColorDropdown(_ref) {
   render: FrontisBlocksSidebar,
   icon: "block-default"
 });
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=sidebar.js.map
