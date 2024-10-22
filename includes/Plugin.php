@@ -5,6 +5,7 @@ namespace FrontisBlocks;
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Core\Blocks;
+use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
@@ -162,5 +163,7 @@ final class Plugin {
         Admin::get_instance();
 
         Settings::get_instance()->register_ajax_events();
+
+        InitialActivatedBlocks::blocks();
     }
 }
