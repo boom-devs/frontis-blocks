@@ -29,6 +29,12 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 		flipBoxItemBackBorderRadiusMobile,
 		flipBoxItemBackBorderRadiusLink,
 
+		flipBoxItemBackPaddingUnits,
+		flipBoxItemBackPaddingDesktop,
+		flipBoxItemBackPaddingTablet,
+		flipBoxItemBackPaddingMobile,
+		flipBoxItemBackPaddingLink,
+
 	} = attributes;
 
 
@@ -179,6 +185,75 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 	}
 	/** End Border Radius*/
 
+	/** Start Padding */
+	const flipBoxItemBackPaddingHandleSpacingUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( flipBoxItemBackPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						flipBoxItemBackPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						flipBoxItemBackPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						flipBoxItemBackPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {flipBoxItemBackPaddingDesktop: {...flipBoxItemBackPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {flipBoxItemBackPaddingTablet: {...flipBoxItemBackPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {flipBoxItemBackPaddingMobile: {...flipBoxItemBackPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const flipBoxItemBackPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes( {flipBoxItemBackPaddingLink: !flipBoxItemBackPaddingLink} );
+	}
+
+	const flipBoxItemBackPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes( {
+			flipBoxItemBackPaddingUnits: {
+				...flipBoxItemBackPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Padding */
+
 	return (
 		<>
 			<FB_Color
@@ -241,6 +316,18 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 				handleColorSwitcherChange={(value) => setAttributes({ flipBoxItemBackBorderColorSwitcher: value })}
 				handleGlobalColorChange={(value) => setAttributes({ flipBoxItemBackBorderColor: value })}
 				handleGlobalHoverColorChange={(value) => setAttributes({ flipBoxItemBackBorderHoverColor: value })}
+			/>
+			<FB_Spacing
+				label={ 'Padding' }
+				deviceType={deviceType}
+				spacingUnitsHandler={flipBoxItemBackPaddingSpacingUnitsHandler}
+				spacingUnits={flipBoxItemBackPaddingUnits}
+				spacingDesktop={flipBoxItemBackPaddingDesktop}
+				spacingTablet={flipBoxItemBackPaddingTablet}
+				spacingMobile={flipBoxItemBackPaddingMobile}
+				handleSpacingUnitHandler={flipBoxItemBackPaddingHandleSpacingUnitHandler}
+				spacingCombineBtn={flipBoxItemBackPaddingLink}
+				spacingCombineBtnHandler={flipBoxItemBackPaddingSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
 			/>
 		</>
 	);
