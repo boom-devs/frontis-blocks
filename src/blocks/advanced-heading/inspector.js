@@ -75,6 +75,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingTextShadowValues,
         headingTextShadowCssValue,
         headingTextStroke,
+        headingTextStrokeColorSwitcher,
+        headingTextStrokeColor,
+        headingTextStrokeHoverColor,
+
 
         headingColorSwitcher,
         headingColor,
@@ -251,6 +255,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingGlobalBoxShadowValues,
         headingGlobalBoxShadowCssValue,
         /** End Global Style */
+
         /** Start Background Image */
         headingBackgroundImageEnabled,
         headingBackgroundImageUrl,
@@ -315,6 +320,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingBackgroundImageEnabled: false,
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "0px 18px 0px #399cff1a;",
+                headingColor: "transparent",
+                headingTextStroke: "2",
+                headingTextStrokeColor: "#399CFF",
+                headingTextStrokeHoverColor: "#399CFF",
             },
             "preset-2": {
                 subHeadingSwitcher: true,
@@ -1438,11 +1447,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     
                     ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
                     ${headingTextStroke ? `
-                        -webkit-text-stroke: ${headingTextStroke}px;
-                        -moz-text-stroke: ${headingTextStroke}px;
-                        -ms-text-stroke: ${headingTextStroke}px;
-                        text-stroke: ${headingTextStroke}px;
-                    ` : ''} 
+                        -webkit-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
+                        -moz-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
+                        -ms-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
+                        text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
+                    ` : ''}
                     ${headingBoxShadowCssValue ? `box-shadow: ${headingBoxShadowCssValue};` : ''}
 
                     ${headingBackgroundImageEnabled && headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `
@@ -1460,6 +1469,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
                     ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
                     ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
+                    ${headingTextStrokeHoverColor ? `
+                        -webkit-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
+                        -moz-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
+                        -ms-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
+                        text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
+                    ` : ''}
                 }
 
                 .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
@@ -1966,6 +1981,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 allowReset={true}
                                                 resetFallbackValue={''}
 
+                                            />
+                                            <FB_Color
+                                                label={__("Text Stroke Color", "frontis-blocks")}
+                                                globalColorSwitcher={headingTextStrokeColorSwitcher}
+                                                globalColor={headingTextStrokeColor}
+                                                globalHoverColor={headingTextStrokeHoverColor}
+                                                handleColorSwitcherChange={(value) => setAttributes({ headingTextStrokeColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ headingTextStrokeColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingHoverColor: value })}
                                             />
                                             <FB_Color
                                                 label={__("Text Color", "frontis-blocks")}
@@ -2520,11 +2544,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             </PanelBody>
                                         ) }
 
-                                        {headingIconAlign !== "none" && (
+                                        {headingIconAlign !== "none" && headingIconSwitcher && (
 
                                             <PanelBody
-                                            title={__("Icon", "frontis-blocks")}
-                                            initialOpen={false}
+                                                title={__("Icon", "frontis-blocks")}
+                                                initialOpen={false}
                                             >
                                             <FB_Range
                                                 min={1}
