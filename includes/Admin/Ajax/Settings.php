@@ -170,7 +170,6 @@ class Settings extends AjaxBase {
 
     // New method to save blocks
     public function save_blocks() {
-        error_log('save_blocks method called');
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
             error_log('Invalid nonce in save_blocks');
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
@@ -184,19 +183,13 @@ class Settings extends AjaxBase {
         }
 
         $blocks = isset($_POST['blocks']) ? json_decode(stripslashes($_POST['blocks']), true) : [];
+        $activeBlocks = get_option('fb_active_blocks');
 
         if (!is_array($blocks)) {
             error_log('Invalid blocks data in save_blocks: ' . print_r($blocks, true));
             wp_send_json_error(['message' => 'Invalid blocks data'], 400);
             return;
         }
-
-        // echo print_r($blocks, true);
-        // die();
-
-        // error_log('Blocks to save: ' . print_r($blocks, true));
-
-        $activeBlocks = get_option('fb_active_blocks');
 
         if($activeBlocks) {
             foreach ($blocks as $key => $value) {
@@ -210,18 +203,7 @@ class Settings extends AjaxBase {
             $blocks = $activeBlocks;
         }
 
-        error_log('Blocks to save: ' . print_r($blocks, true));
-
         $updated = update_option('fb_active_blocks', $blocks, true);
-
-        // $my_array = array(
-        //     'key1' => 'value1',
-        //     'key2' => 'value2',
-        //     'key3' => 'value3',
-        // );
-        
-        // // Save the array to the database
-        // $updated = update_option('my_custom_option', $blocks);
 
         if ($updated) {
             error_log('Blocks updated successfully');
