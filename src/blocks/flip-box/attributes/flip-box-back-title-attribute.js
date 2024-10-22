@@ -1,11 +1,11 @@
 const flipBoxBackTitleAttributes = {
 	flipBoxBackTitle: {
 		type: "string",
-		default: "Front Title Here"
+		default: "Back Title Here"
 	},
 	flipBoxBackTitleHeadingTag: {
 		type : "string",
-		default: "h2"
+		default: "h3"
 	},
 
 	/** Start Color */
@@ -15,11 +15,11 @@ const flipBoxBackTitleAttributes = {
 	},
 	flipBoxBackTitleFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	flipBoxBackTitleFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	/** End Color */
 
@@ -31,9 +31,9 @@ const flipBoxBackTitleAttributes = {
 	flipBoxBackTitleFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '18',
-			Tablet: '16',
-			Mobile: '16'
+			Desktop: '32',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	flipBoxBackTitleFontSizeUnits: {
@@ -46,7 +46,7 @@ const flipBoxBackTitleAttributes = {
 	},
 	flipBoxBackTitleFontWeight: {
 		type: 'string',
-		default: '400'
+		default: '600'
 	},
 	flipBoxBackTitleFontStyle: {
 		type: 'string',
@@ -106,8 +106,8 @@ const flipBoxBackTitleAttributes = {
 	flipBoxBackTitleMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
+			top: 20,
+			bottom: 20,
 			left: 0,
 			right: 0,
 		},

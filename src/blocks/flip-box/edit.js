@@ -45,9 +45,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		flipBoxTypeSwitcher,
-		flipBoxFrontIcon,
-		mediaSwitcher,
-		flipBoxFrontIconMediaUrl,
+
 		deviceType,
 		flipBoxFrontTitle,
 		flipBoxFrontTitleHeadingTag,
@@ -57,10 +55,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 		/** Start Flip Box Front Icon Attribute */
+		flipBoxFrontIconMediaSwitcher,
+		flipBoxFrontIconMediaUrl,
+		flipBoxFrontIcon,
+		flipBoxFrontIconFontColor,
+
 		flipBoxFrontIconSize,
 		flipBoxFrontIconSizeUnits,
 		flipBoxFrontIconFontColorSwitcher,
-		flipBoxFrontIconFontColor,
+
 		flipBoxFrontIconFontHoverColor,
 		flipBoxFrontIconBgFontColorSwitcher,
 		flipBoxFrontIconBgFontColor,
@@ -96,6 +99,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		/** End Flip Box Front Icon Attribute */
 
 		/** Start Flip Box Back Icon Attribute */
+		flipBoxBackIconMediaSwitcher,
+		flipBoxBackIconMediaUrl,
+		flipBoxBackIcon,
+
 		flipBoxBackIconSize,
 		flipBoxBackIconSizeUnits,
 		flipBoxBackIconFontColorSwitcher,
@@ -193,6 +200,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemFrontBgFontColor,
 		flipBoxItemFrontBgFontHoverColor,
 
+		flipBoxItemFrontAlignment,
+
 		flipBoxItemFrontSize,
 		flipBoxItemFrontSizeUnits,
 		flipBoxItemFrontBorderTypeUnits,
@@ -209,6 +218,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemFrontBorderRadiusTablet,
 		flipBoxItemFrontBorderRadiusMobile,
 		flipBoxItemFrontBorderRadiusLink,
+
+		flipBoxItemFrontPaddingUnits,
+		flipBoxItemFrontPaddingDesktop,
+		flipBoxItemFrontPaddingTablet,
+		flipBoxItemFrontPaddingMobile,
+		flipBoxItemFrontPaddingLink,
 		/** End Flip Box Item Front Attribute */
 
 
@@ -216,6 +231,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemBackBgFontColorSwitcher,
 		flipBoxItemBackBgFontColor,
 		flipBoxItemBackBgFontHoverColor,
+
+		flipBoxItemBackAlignment,
 
 		flipBoxItemBackSize,
 		flipBoxItemBackSizeUnits,
@@ -233,6 +250,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemBackBorderRadiusTablet,
 		flipBoxItemBackBorderRadiusMobile,
 		flipBoxItemBackBorderRadiusLink,
+
+		flipBoxItemBackPaddingUnits,
+		flipBoxItemBackPaddingDesktop,
+		flipBoxItemBackPaddingTablet,
+		flipBoxItemBackPaddingMobile,
+		flipBoxItemBackPaddingLink,
 		/** End Flip Box Item Back Attribute */
 
 		/** Start Flip Box Front Title Attribute */
@@ -335,11 +358,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxBackContentLineHeightUnits,
 		/** End Flip Box Back Content Attribute */
 
-		flipBoxBackMediaSwitcher,
-		flipBoxBackIconMediaUrl,
-		flipBoxBackIcon,
-		flipBoxBackIconColor,
-
 	} = attributes;
 
 	// Prevent link navigation in the editor and focus on text
@@ -347,17 +365,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		event.preventDefault();
 	};
 
-
 	// Icon media remove handler
 	const removeFlipBoxFrontIconMedia = () => {
 		setAttributes({
-			flipBoxFrontIconMediaID: '',
+			flipBoxFrontIconMediaId: '',
 			flipBoxFrontIconMediaUrl: ''
 		});
 	}
 	const removeFlipBoxBackIconMedia = () => {
 		setAttributes({
-			flipBoxBackIconMediaID: '',
+			flipBoxBackIconMediaId: '',
 			flipBoxBackIconMediaUrl: ''
 		});
 	}
@@ -369,12 +386,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}
 
 	useEffect(() => {
-		if (!blockID) {
+		if (clientId && typeof clientId === 'string') {
 			setAttributes({
-				blockID: "flip-box" + clientId.slice(0, 8),
+				blockID: "flip-box-" + clientId.slice(0, 8),
 			});
 		}
-	}, [blockID, clientId, setAttributes]);
+	}, [clientId]);
 
 	const blockProps = useBlockProps();
 
@@ -388,6 +405,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const flipBoxItemFrontBorderRadiusGetDesktop = `${flipBoxItemFrontBorderRadiusDesktop.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusDesktop.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
 	const flipBoxItemFrontBorderRadiusGetTablet = `${flipBoxItemFrontBorderRadiusTablet.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusTablet.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
 	const flipBoxItemFrontBorderRadiusGetMobile = `${flipBoxItemFrontBorderRadiusMobile.top}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.right}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.bottom}${flipBoxItemFrontBorderRadiusUnits[deviceType]} ${flipBoxItemFrontBorderRadiusMobile.left}${flipBoxItemFrontBorderRadiusUnits[deviceType]}`;
+
+	const flipBoxItemFrontPaddingGetDesktop = `${flipBoxItemFrontPaddingDesktop.top}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingDesktop.right}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingDesktop.bottom}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingDesktop.left}${flipBoxItemFrontPaddingUnits[deviceType]}`;
+	const flipBoxItemFrontPaddingGetTablet = `${flipBoxItemFrontPaddingTablet.top}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingTablet.right}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingTablet.bottom}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingTablet.left}${flipBoxItemFrontPaddingUnits[deviceType]}`;
+	const flipBoxItemFrontPaddingGetMobile = `${flipBoxItemFrontPaddingMobile.top}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingMobile.right}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingMobile.bottom}${flipBoxItemFrontPaddingUnits[deviceType]} ${flipBoxItemFrontPaddingMobile.left}${flipBoxItemFrontPaddingUnits[deviceType]}`;
 
 	/** Icon */
 	const flipBoxFrontIconBorderTypeGetDesktop = `${flipBoxFrontIconBorderTypeDesktop.top}${flipBoxFrontIconBorderTypeUnits[deviceType]} ${flipBoxFrontIconBorderTypeDesktop.right}${flipBoxFrontIconBorderTypeUnits[deviceType]} ${flipBoxFrontIconBorderTypeDesktop.bottom}${flipBoxFrontIconBorderTypeUnits[deviceType]} ${flipBoxFrontIconBorderTypeDesktop.left}${flipBoxFrontIconBorderTypeUnits[deviceType]}`;
@@ -429,7 +450,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const flipBoxItemBackBorderRadiusGetTablet = `${flipBoxItemBackBorderRadiusTablet.top}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.right}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.bottom}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusTablet.left}${flipBoxItemBackBorderRadiusUnits[deviceType]}`;
 	const flipBoxItemBackBorderRadiusGetMobile = `${flipBoxItemBackBorderRadiusMobile.top}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.right}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.bottom}${flipBoxItemBackBorderRadiusUnits[deviceType]} ${flipBoxItemBackBorderRadiusMobile.left}${flipBoxItemBackBorderRadiusUnits[deviceType]}`;
 
-
+	const flipBoxItemBackPaddingGetDesktop = `${flipBoxItemBackPaddingDesktop.top}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingDesktop.right}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingDesktop.bottom}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingDesktop.left}${flipBoxItemBackPaddingUnits[deviceType]}`;
+	const flipBoxItemBackPaddingGetTablet = `${flipBoxItemBackPaddingTablet.top}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingTablet.right}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingTablet.bottom}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingTablet.left}${flipBoxItemBackPaddingUnits[deviceType]}`;
+	const flipBoxItemBackPaddingGetMobile = `${flipBoxItemBackPaddingMobile.top}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingMobile.right}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingMobile.bottom}${flipBoxItemBackPaddingUnits[deviceType]} ${flipBoxItemBackPaddingMobile.left}${flipBoxItemBackPaddingUnits[deviceType]}`;
 
 
 	/** Icon */
@@ -496,8 +519,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemFrontBorderColor ? `border-color: ${flipBoxItemFrontBorderColor};` : ''}
 					${flipBoxItemFrontBgFontColor ? `background: ${flipBoxItemFrontBgFontColor};` : ''}
 				}
-				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
+					${flipBoxItemFrontPaddingGetDesktop ? `padding: ${flipBoxItemFrontPaddingGetDesktop};` : ''}
+				}
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-content-inner {
+					${flipBoxItemBackPaddingGetDesktop ? `padding: ${flipBoxItemBackPaddingGetDesktop};` : ''}
+				}
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
+					display: inline-block;
 				  	${flipBoxFrontIconSize.Desktop ? `width: ${flipBoxFrontIconSize.Desktop}${flipBoxFrontIconSizeUnits.Desktop};` : ''}
+				  	${flipBoxFrontIconSize.Desktop ? `height: ${flipBoxFrontIconSize.Desktop}${flipBoxFrontIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxFrontIconBorder ? `border: ${flipBoxFrontIconBorder};` : ''}
 					${flipBoxFrontIconBorderTypeGetDesktop ? `border-width: ${flipBoxFrontIconBorderTypeGetDesktop};` : ''}
 					${flipBoxFrontIconBorderRadiusGetDesktop ? `border-radius: ${flipBoxFrontIconBorderRadiusGetDesktop};` : ''}
@@ -508,8 +540,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  	${flipBoxFrontIconMarginGetDesktop ? `margin: ${flipBoxFrontIconMarginGetDesktop};` : ''}
 				}
 
-				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
 				  	${flipBoxBackIconSize.Desktop ? `width: ${flipBoxBackIconSize.Desktop}${flipBoxBackIconSizeUnits.Desktop};` : ''}
+				  	${flipBoxBackIconSize.Desktop ? `height: ${flipBoxBackIconSize.Desktop}${flipBoxBackIconSizeUnits.Desktop};` : ''}
 				  	${flipBoxBackIconBorder ? `border: ${flipBoxBackIconBorder};` : ''}
 					${flipBoxBackIconBorderTypeGetDesktop ? `border-width: ${flipBoxBackIconBorderTypeGetDesktop};` : ''}
 					${flipBoxBackIconBorderRadiusGetDesktop ? `border-radius: ${flipBoxBackIconBorderRadiusGetDesktop};` : ''}
@@ -543,7 +577,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxFrontContentLineHeight.Desktop ? `line-height: ${flipBoxFrontContentLineHeight.Desktop}${flipBoxFrontContentLineHeightUnits.Desktop};` : ''}
 				  ${flipBoxFrontContentMarginGetDesktop ? `margin: ${flipBoxFrontContentMarginGetDesktop};` : ''}
 				}
-				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
 				  display: inline-block;
 				  ${flipBoxBackButtonFontColor ? `color: ${flipBoxBackButtonFontColor};` : ''}
 				  ${flipBoxBackButtonBgFontColor ? `background: ${flipBoxBackButtonBgFontColor};` : ''}
@@ -608,17 +642,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${flipBoxItemBackBorderTypeGetTablet ? `border-width: ${flipBoxItemBackBorderTypeGetTablet};` : ''}
 						${flipBoxItemBackBorderRadiusGetTablet ? `border-radius: ${flipBoxItemBackBorderRadiusGetTablet};` : ''}
 					}
-
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
+						${flipBoxItemFrontPaddingGetTablet ? `padding: ${flipBoxItemFrontPaddingGetTablet};` : ''}
+					}
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-content-inner {
+						${flipBoxItemBackPaddingGetTablet ? `padding: ${flipBoxItemBackPaddingGetTablet};` : ''}
+					}
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
 						${flipBoxFrontIconSize.Tablet ? `width: ${flipBoxFrontIconSize.Tablet}${flipBoxFrontIconSizeUnits.Tablet};` : ''}
+						${flipBoxFrontIconSize.Tablet ? `height: ${flipBoxFrontIconSize.Tablet}${flipBoxFrontIconSizeUnits.Tablet};` : ''}
 						${flipBoxFrontIconBorderTypeGetTablet ? `border-width: ${flipBoxFrontIconBorderTypeGetTablet};` : ''}
 						${flipBoxFrontIconBorderRadiusGetTablet ? `border-radius: ${flipBoxFrontIconBorderRadiusGetTablet};` : ''}
 						${flipBoxFrontIconPaddingGetTablet ? `padding: ${flipBoxFrontIconPaddingGetTablet};` : ''}
 						${flipBoxFrontIconMarginGetTablet ? `margin: ${flipBoxFrontIconMarginGetTablet};` : ''}
 					}
 
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
 						${flipBoxBackIconSize.Tablet ? `width: ${flipBoxBackIconSize.Tablet}${flipBoxBackIconSizeUnits.Tablet};` : ''}
+						${flipBoxBackIconSize.Tablet ? `height: ${flipBoxBackIconSize.Tablet}${flipBoxBackIconSizeUnits.Tablet};` : ''}
 						${flipBoxBackIconBorderTypeGetTablet ? `border-width: ${flipBoxBackIconBorderTypeGetTablet};` : ''}
 						${flipBoxBackIconBorderRadiusGetTablet ? `border-radius: ${flipBoxBackIconBorderRadiusGetTablet};` : ''}
 						${flipBoxBackIconPaddingGetTablet ? `padding: ${flipBoxBackIconPaddingGetTablet};` : ''}
@@ -636,7 +679,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					  ${flipBoxFrontContentLineHeight.Tablet ? `line-height: ${flipBoxFrontContentLineHeight.Tablet}${flipBoxFrontContentLineHeightUnits.Tablet};` : ''}
 					  ${flipBoxFrontContentMarginGetTablet ? `margin: ${flipBoxFrontContentMarginGetTablet};` : ''}
 					}
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
 					  ${flipBoxBackButtonFontSize.Tablet ? `font-size: ${flipBoxBackButtonFontSize.Tablet}${flipBoxBackButtonFontSizeUnits.Tablet};` : ''}
 					  ${flipBoxBackButtonLetterSpacing.Tablet ? `letter-spacing: ${flipBoxBackButtonLetterSpacing.Tablet}${flipBoxBackButtonLetterSpacingUnits.Tablet};` : ''}
 					  ${flipBoxBackButtonLineHeight.Tablet ? `line-height: ${flipBoxBackButtonLineHeight.Tablet}${flipBoxBackButtonLineHeightUnits.Tablet};` : ''}
@@ -672,16 +715,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${flipBoxItemBackBorderTypeGetMobile ? `border-width: ${flipBoxItemBackBorderTypeGetMobile};` : ''}
 						${flipBoxItemBackBorderRadiusGetMobile ? `border-radius: ${flipBoxItemBackBorderRadiusGetMobile};` : ''}
 					}
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
+						${flipBoxItemFrontPaddingGetMobile ? `padding: ${flipBoxItemFrontPaddingGetMobile};` : ''}
+					}
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-content-inner {
+						${flipBoxItemBackPaddingGetMobile ? `padding: ${flipBoxItemBackPaddingGetMobile};` : ''}
+					}
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
 						${flipBoxFrontIconSize.Mobile ? `width: ${flipBoxFrontIconSize.Mobile}${flipBoxFrontIconSizeUnits.Mobile};` : ''}
+						${flipBoxFrontIconSize.Mobile ? `height: ${flipBoxFrontIconSize.Mobile}${flipBoxFrontIconSizeUnits.Mobile};` : ''}
 						${flipBoxFrontIconBorderTypeGetMobile ? `border-width: ${flipBoxFrontIconBorderTypeGetMobile};` : ''}
 						${flipBoxFrontIconBorderRadiusGetMobile ? `border-radius: ${flipBoxFrontIconBorderRadiusGetMobile};` : ''}
 						${flipBoxFrontIconPaddingGetMobile ? `padding: ${flipBoxFrontIconPaddingGetMobile};` : ''}
 						${flipBoxFrontIconMarginGetMobile ? `margin: ${flipBoxFrontIconMarginGetMobile};` : ''}
 					}
 
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
 						${flipBoxBackIconSize.Mobile ? `width: ${flipBoxBackIconSize.Mobile}${flipBoxBackIconSizeUnits.Mobile};` : ''}
+						${flipBoxBackIconSize.Mobile ? `height: ${flipBoxBackIconSize.Mobile}${flipBoxBackIconSizeUnits.Mobile};` : ''}
 						${flipBoxBackIconBorderTypeGetMobile ? `border-width: ${flipBoxBackIconBorderTypeGetMobile};` : ''}
 						${flipBoxBackIconBorderRadiusGetMobile ? `border-radius: ${flipBoxBackIconBorderRadiusGetMobile};` : ''}
 						${flipBoxBackIconPaddingGetMobile ? `padding: ${flipBoxBackIconPaddingGetMobile};` : ''}
@@ -699,7 +752,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					  ${flipBoxFrontContentLineHeight.Mobile ? `line-height: ${flipBoxFrontContentLineHeight.Mobile}${flipBoxFrontContentLineHeightUnits.Mobile};` : ''}
 					  ${flipBoxFrontContentMarginGetMobile ? `margin: ${flipBoxFrontContentMarginGetMobile};` : ''}
 					}
-					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
 					  ${flipBoxBackButtonFontSize.Mobile ? `font-size: ${flipBoxBackButtonFontSize.Mobile}${flipBoxBackButtonFontSizeUnits.Mobile};` : ''}
 					  ${flipBoxBackButtonLetterSpacing.Mobile ? `letter-spacing: ${flipBoxBackButtonLetterSpacing.Mobile}${flipBoxBackButtonLetterSpacingUnits.Mobile};` : ''}
 					  ${flipBoxBackButtonLineHeight.Mobile ? `line-height: ${flipBoxBackButtonLineHeight.Mobile}${flipBoxBackButtonLineHeightUnits.Mobile};` : ''}
@@ -707,7 +760,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					  ${flipBoxBackButtonBorderRadiusGetMobile ? `border-radius: ${flipBoxBackButtonBorderRadiusGetMobile};` : ''}
 					  ${flipBoxBackButtonPaddingGetMobile ? `padding: ${flipBoxBackButtonPaddingGetMobile};` : ''}
 					  ${flipBoxBackButtonMarginGetMobile ? `margin: ${flipBoxBackButtonMarginGetMobile};` : ''}
-
 					}
 					.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-title {
 					  ${flipBoxBackTitleFontSize.Mobile ? `font-size: ${flipBoxBackTitleFontSize.Mobile}${flipBoxBackTitleFontSizeUnits.Mobile};` : ''}
@@ -775,6 +827,86 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 										{flipBoxTypeSwitcher === 'front' && (
 											<>
+												<BaseControl className="fb-sub-heading-position">
+													<SelectControl
+														label={__("Media Type", "frontis-block")}
+														value={flipBoxFrontIconMediaSwitcher}
+														options={mediaType}
+														onChange={(value) => setAttributes({flipBoxFrontIconMediaSwitcher: value})}
+													/>
+												</BaseControl>
+												<div className='fb-image-upload-field-wrapper'>
+													{flipBoxFrontIconMediaSwitcher === 'image' && (
+														<BaseControl>
+															<MediaUploadCheck>
+																<MediaUpload
+																	onSelect={(media) => {
+																		setAttributes({
+																			flipBoxFrontIconMediaId: media['id'],
+																			flipBoxFrontIconMediaUrl: media['url'],
+																			flipBoxFrontIconMediaWidth: media['width'],
+																			flipBoxFrontIconMediaHeight: media['height']
+																		});
+																	}}
+																	type="image"
+																	value={attributes.flipBoxFrontIconMediaId}
+																	render={({open}) => {
+																		return (
+																			<Button
+																				className={attributes.flipBoxFrontIconMediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+																				onClick={open}
+																			>
+																				{attributes.flipBoxFrontIconMediaId == 0 && __('Select Icon Image', 'ultimate-addons-for-gutenberg-blocks')}
+																				{attributes.flipBoxFrontIconMediaId != 0 &&
+																					<ResponsiveWrapper
+																						naturalWidth={attributes.flipBoxFrontIconMediaWidth}
+																						naturalHeight={attributes.flipBoxFrontIconMediaHeight}>
+																						<img
+																							src={attributes.flipBoxFrontIconMediaUrl}/>
+																					</ResponsiveWrapper>
+																				}
+																			</Button>
+																		);
+																	}}
+																/>
+															</MediaUploadCheck>
+															{attributes.flipBoxFrontIconMediaId != 0 &&
+																<HStack className='editor-post-featured-image__actions'>
+																	<Button
+																		className='editor-post-featured-image__action'
+																		onClick={() => removeFlipBoxFrontIconMedia()}>{__('Remove', 'frontis-block')}</Button>
+																	<MediaUploadCheck>
+																		<MediaUpload
+																			title={__('Replace image', 'frontis-block')}
+																			value={attributes.flipBoxFrontIconMediaId}
+																			onSelect={(media) => {
+																				setAttributes({
+																					flipBoxFrontIconMediaId: media['id'],
+																					flipBoxFrontIconMediaUrl: media['url'],
+																					flipBoxFrontIconMediaWidth: media['width'],
+																					flipBoxFrontIconMediaHeight: media['height']
+																				});
+																			}}
+																			type="image"
+																			render={({open}) => (
+																				<Button
+																					className='editor-post-featured-image__action'
+																					onClick={open}>{__('Replace', 'frontis-block')}</Button>
+																			)}
+																		/>
+																	</MediaUploadCheck>
+																</HStack>
+															}
+														</BaseControl>
+													)}
+
+													{flipBoxFrontIconMediaSwitcher === 'icon' && (
+														<BaseControl>
+															<FBIconPicker value={flipBoxFrontIcon} setIconHandler={flipBoxFrontIconHandler}/>
+														</BaseControl>
+													)}
+												</div>
+
 												<TextControl
 													tagName={flipBoxFrontTitleHeadingTag}
 													label={__('Title', 'frontis-blocks')}
@@ -805,42 +937,47 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													value={flipBoxFrontContent}
 													onChange={(value) => setAttributes({ flipBoxFrontContent: value })}
 												/>
+
+											</>
+										)}
+										{flipBoxTypeSwitcher === 'back' && (
+											<>
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
-														label={__("Front Icon: Media Type", "frontis-block")}
-														value={mediaSwitcher}
+														label={__("Back Icon: Media Type", "frontis-block")}
+														value={flipBoxBackIconMediaSwitcher}
 														options={mediaType}
-														onChange={(value) => setAttributes({mediaSwitcher: value})}
+														onChange={(value) => setAttributes({flipBoxBackIconMediaSwitcher: value})}
 													/>
 												</BaseControl>
 												<div className='fb-image-upload-field-wrapper'>
-													{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
+													{flipBoxBackIconMediaSwitcher === 'image' && (
 														<BaseControl>
 															<MediaUploadCheck>
 																<MediaUpload
 																	onSelect={(media) => {
 																		setAttributes({
-																			flipBoxFrontIconMediaID: media['id'],
-																			flipBoxFrontIconMediaUrl: media['url'],
-																			flipBoxFrontIconMediaWidth: media['width'],
-																			flipBoxFrontIconMediaHeight: media['height']
+																			flipBoxBackIconMediaId: media['id'],
+																			flipBoxBackIconMediaUrl: media['url'],
+																			flipBoxBackIconMediaWidth: media['width'],
+																			flipBoxBackIconMediaHeight: media['height']
 																		});
 																	}}
 																	type="image"
-																	value={attributes.flipBoxFrontIconMediaID}
+																	value={attributes.flipBoxBackIconMediaId}
 																	render={({open}) => {
 																		return (
 																			<Button
-																				className={attributes.flipBoxFrontIconMediaID == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+																				className={attributes.flipBoxBackIconMediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
 																				onClick={open}
 																			>
-																				{attributes.flipBoxFrontIconMediaID == 0 && __('Select Icon Image', 'frontis-blocks')}
-																				{attributes.flipBoxFrontIconMediaID != 0 &&
+																				{attributes.flipBoxBackIconMediaId == 0 && __('Select Icon Image', 'ultimate-addons-for-gutenberg-blocks')}
+																				{attributes.flipBoxBackIconMediaId != 0 &&
 																					<ResponsiveWrapper
-																						naturalWidth={attributes.flipBoxFrontIconMediaWidth}
-																						naturalHeight={attributes.flipBoxFrontIconMediaHeight}>
+																						naturalWidth={attributes.flipBoxBackIconMediaWidth}
+																						naturalHeight={attributes.flipBoxBackIconMediaHeight}>
 																						<img
-																							src={attributes.flipBoxFrontIconMediaUrl}/>
+																							src={attributes.flipBoxBackIconMediaUrl}/>
 																					</ResponsiveWrapper>
 																				}
 																			</Button>
@@ -848,7 +985,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																	}}
 																/>
 															</MediaUploadCheck>
-															{attributes.flipBoxFrontIconMediaID != 0 &&
+															{attributes.flipBoxBackIconMediaId != 0 &&
 																<HStack className='editor-post-featured-image__actions'>
 																	<Button
 																		className='editor-post-featured-image__action'
@@ -856,13 +993,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																	<MediaUploadCheck>
 																		<MediaUpload
 																			title={__('Replace image', 'frontis-block')}
-																			value={attributes.flipBoxFrontIconMediaID}
+																			value={attributes.flipBoxBackIconMediaId}
 																			onSelect={(media) => {
 																				setAttributes({
-																					flipBoxFrontIconMediaID: media['id'],
-																					flipBoxFrontIconMediaUrl: media['url'],
-																					flipBoxFrontIconMediaWidth: media['width'],
-																					flipBoxFrontIconMediaHeight: media['height']
+																					flipBoxBackIconMediaId: media['id'],
+																					flipBoxBackIconMediaUrl: media['url'],
+																					flipBoxBackIconMediaWidth: media['width'],
+																					flipBoxBackIconMediaHeight: media['height']
 																				});
 																			}}
 																			type="image"
@@ -878,16 +1015,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														</BaseControl>
 													)}
 
-													{mediaSwitcher === 'icon' && (
+													{flipBoxBackIconMediaSwitcher === 'icon' && (
 														<BaseControl>
-															<FBIconPicker value={flipBoxFrontIcon} setIconHandler={flipBoxFrontIconHandler}/>
+															<FBIconPicker value={flipBoxBackIcon} setIconHandler={flipBoxBackIconHandler}/>
 														</BaseControl>
 													)}
 												</div>
-											</>
-										)}
-										{flipBoxTypeSwitcher === 'back' && (
-											<>
+
 												<TextControl
 													tagName={flipBoxBackTitleHeadingTag}
 													label={__('Title', 'frontis-blocks')}
@@ -918,86 +1052,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													value={flipBoxBackContent}
 													onChange={(value) => setAttributes({ flipBoxBackContent: value })}
 												/>
-												<BaseControl className="fb-sub-heading-position">
-													<SelectControl
-														label={__("Back Icon: Media Type", "frontis-block")}
-														value={flipBoxBackMediaSwitcher}
-														options={mediaType}
-														onChange={(value) => setAttributes({flipBoxBackMediaSwitcher: value})}
-													/>
-												</BaseControl>
-
-												<div className='fb-image-upload-field-wrapper'>
-													{flipBoxBackMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
-														<BaseControl>
-															<MediaUploadCheck>
-																<MediaUpload
-																	onSelect={(media) => {
-																		setAttributes({
-																			flipBoxBackIconMediaID: media['id'],
-																			flipBoxBackIconMediaUrl: media['url'],
-																			flipBoxBackIconMediaWidth: media['width'],
-																			flipBoxBackIconMediaHeight: media['height']
-																		});
-																	}}
-																	type="image"
-																	value={attributes.flipBoxBackIconMediaID}
-																	render={({open}) => {
-																		return (
-																			<Button
-																				className={attributes.flipBoxBackIconMediaID == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-																				onClick={open}
-																			>
-																				{attributes.flipBoxBackIconMediaID == 0 && __('Select Icon Image', 'frontis-blocks')}
-																				{attributes.flipBoxBackIconMediaID != 0 &&
-																					<ResponsiveWrapper
-																						naturalWidth={attributes.flipBoxBackIconMediaWidth}
-																						naturalHeight={attributes.flipBoxBackIconMediaHeight}>
-																						<img
-																							src={attributes.flipBoxBackIconMediaUrl}/>
-																					</ResponsiveWrapper>
-																				}
-																			</Button>
-																		);
-																	}}
-																/>
-															</MediaUploadCheck>
-															{attributes.flipBoxBackIconMediaID != 0 &&
-																<HStack className='editor-post-featured-image__actions'>
-																	<Button
-																		className='editor-post-featured-image__action'
-																		onClick={() => removeFlipBoxBackIconMedia()}>{__('Remove', 'frontis-block')}</Button>
-																	<MediaUploadCheck>
-																		<MediaUpload
-																			title={__('Replace image', 'frontis-block')}
-																			value={attributes.flipBoxBackIconMediaID}
-																			onSelect={(media) => {
-																				setAttributes({
-																					flipBoxBackIconMediaID: media['id'],
-																					flipBoxBackIconMediaUrl: media['url'],
-																					flipBoxBackIconMediaWidth: media['width'],
-																					flipBoxBackIconMediaHeight: media['height']
-																				});
-																			}}
-																			type="image"
-																			render={({open}) => (
-																				<Button
-																					className='editor-post-featured-image__action'
-																					onClick={open}>{__('Replace', 'frontis-block')}</Button>
-																			)}
-																		/>
-																	</MediaUploadCheck>
-																</HStack>
-															}
-														</BaseControl>
-													)}
-
-													{flipBoxBackMediaSwitcher === 'icon' && (
-														<BaseControl>
-															<FBIconPicker value={flipBoxBackIcon} setIconHandler={flipBoxBackIconHandler}/>
-														</BaseControl>
-													)}
-												</div>
 
 												<TextControl
 													label={__("Button Text", "frontis-blocks")}
@@ -1249,13 +1303,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<div className={`fb-flip-box-wrapper ${blockID}`}>
 					<div className={`fb-flip-box-item ${flipBoxTypeSwitcher === 'back' ? 'active' : ''}`}>
 						<div className="fb-flip-box-front">
-							<div className="fb-flip-box-content">
+							<div className="fb-flip-box-content" style={{textAlign: flipBoxItemFrontAlignment}}>
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
-										{mediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
-											<img src={attributes.flipBoxFrontIconMediaUrl}/>
+										{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
+											<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxFrontIconMediaUrl}/></div>
 										)}
-										{mediaSwitcher === 'icon' && (
+										{flipBoxFrontIconMediaSwitcher === 'icon' && (
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
 										)}
 									</div>
@@ -1276,13 +1330,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							</div>
 						</div>
 						<div className="fb-flip-box-back">
-							<div className="fb-flip-box-content">
+							<div className="fb-flip-box-content" style={{textAlign: flipBoxItemBackAlignment}}>
 								<div className="fb-flip-box-content-inner">
 									<div className={`fb-flip-box-icon-wrapper`}>
-										{flipBoxBackMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
-											<img src={attributes.flipBoxBackIconMediaUrl}/>
+										{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
+											<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxBackIconMediaUrl}/></div>
 										)}
-										{flipBoxBackMediaSwitcher === 'icon' && (
+										{flipBoxBackIconMediaSwitcher === 'icon' && (
 											<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
 										)}
 									</div>
