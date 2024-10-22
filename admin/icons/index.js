@@ -150,3 +150,26 @@ export const PricingIcon = () => (
     </defs>
   </svg>
 );
+
+export const CheckIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="#4CAF50"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.6}
+      d="m4 10.858 3.429 3.428L16 5.715"
+    />
+  </svg>
+);
+
+export const XIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="#E43242"
+      strokeLinecap="round"
+      strokeWidth={1.5}
+      d="m14 6-8 8m0-8 8 8"
+    />
+  </svg>
+);

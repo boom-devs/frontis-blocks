@@ -3,6 +3,7 @@
 namespace FrontisBlocks\Admin\Ajax;
 
 use FrontisBlocks\Traits\Singleton;
+use FrontisBlocks\Config\BlockList;
 
 class Settings extends AjaxBase {
 
@@ -23,6 +24,18 @@ class Settings extends AjaxBase {
             'enable_quick_action_bar',
             'collapse_panel',
             'enable_templates_button',
+            'save_blocks',
+            'get_blocks',
+            'recaptcha_v2_site_key',
+            'recaptcha_v2_secret_key',
+            'recaptcha_v3_site_key',
+            'recaptcha_v3_secret_key',
+            'google_maps_api_key',
+            'instagram_access_token',
+            'coming_soon_mode',
+            'maintenance_mode',
+            'coming_soon_page_id',
+            'maintenance_page_id',
         ];
 
         $this->init_ajax_events($ajax_events);
@@ -154,4 +167,107 @@ class Settings extends AjaxBase {
                 return sanitize_text_field($value);
         }
     }
+
+    // New method to save blocks
+    public function save_blocks() {
+        error_log('save_blocks method called');
+        if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+            error_log('Invalid nonce in save_blocks');
+            wp_send_json_error(['message' => 'Invalid nonce'], 400);
+            return;
+        }
+        
+        if (!current_user_can('manage_options')) {
+            error_log('Insufficient permissions in save_blocks');
+            wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+            return;
+        }
+
+        $blocks = isset($_POST['blocks']) ? json_decode(stripslashes($_POST['blocks']), true) : [];
+
+        if (!is_array($blocks)) {
+            error_log('Invalid blocks data in save_blocks: ' . print_r($blocks, true));
+            wp_send_json_error(['message' => 'Invalid blocks data'], 400);
+            return;
+        }
+
+        error_log('Blocks to save: ' . print_r($blocks, true));
+
+        $updated = update_option('fb_active_blocks', $blocks);
+
+        if ($updated) {
+            error_log('Blocks updated successfully');
+            wp_send_json_success(['message' => 'Blocks updated successfully']);
+        } else {
+            error_log('Failed to update blocks');
+            wp_send_json_error(['message' => 'Failed to update blocks']);
+        }
+    }
+
+    public function get_blocks() {
+        if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+            error_log('Invalid nonce in get_blocks');
+            wp_send_json_error(['message' => 'Invalid nonce'], 400);
+            return;
+        }
+        
+        if (!current_user_can('manage_options')) {
+            error_log('Insufficient permissions in get_blocks');
+            wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+            return;
+        }
+
+        $activeBlocks = get_option('fb_active_blocks', []);
+        
+        // Ensure all blocks from BlockList are included, defaulting to false if not in activeBlocks
+        $allBlocks = BlockList::get_instance()->get_blocks();
+        $completeBlocks = array_merge(
+            array_fill_keys(array_keys($allBlocks), false),
+            $activeBlocks
+        );
+
+        wp_send_json_success($completeBlocks);
+    }
+
+    public function recaptcha_v2_site_key() {
+        $this->handle_option_update('recaptcha_v2_site_key', 'text');
+    }
+
+    public function recaptcha_v2_secret_key() {
+        $this->handle_option_update('recaptcha_v2_secret_key', 'text');
+    }
+
+    public function recaptcha_v3_site_key() {
+        $this->handle_option_update('recaptcha_v3_site_key', 'text');
+    }
+
+    public function recaptcha_v3_secret_key() {
+        $this->handle_option_update('recaptcha_v3_secret_key', 'text');
+    }
+
+    public function google_maps_api_key() {
+        $this->handle_option_update('google_maps_api_key', 'text');
+    }
+
+    public function instagram_access_token() {
+        $this->handle_option_update('instagram_access_token', 'text');
+    }
+
+    public function coming_soon_mode() {
+        $this->handle_option_update('coming_soon_mode', 'boolean');
+    }
+
+    public function maintenance_mode() {
+        $this->handle_option_update('maintenance_mode', 'boolean');
+    }
+
+    public function coming_soon_page_id() {
+        $this->handle_option_update('coming_soon_page_id', 'text');
+    }
+
+    public function maintenance_page_id() {
+        $this->handle_option_update('maintenance_page_id', 'text');
+    }
+
+    
 }

@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useMemo } from '@wordpress/element';
 import BlockCard from './BlockCard';
+import { toast } from 'react-toastify';
 
 import '../../assets/css/switch.css';
 
@@ -8,22 +9,90 @@ const Blocks = () => {
   const [blocks, setBlocks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [ searchTerm, setSearchTerm ] = useState('');
-  const { ajaxurl, nonce } = window.frontisBlocksAdmin;
+  const [searchTerm, setSearchTerm] = useState('');
+  const { ajaxUrl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
 
   useEffect(() => {
-    const loadBlocks = () => {
-      const blocksData = window.frontisBlocksAdmin?.blocks;
-      
-      if (blocksData && typeof blocksData === 'object') {
-        const blocksArray = Object.values(blocksData);
-        setBlocks(blocksArray);
-      }
-      setIsLoading(false);
-    };
-
-    loadBlocks();
+    getBlocks();
   }, []);
+
+  const getBlocks = () => {
+    jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_get_blocks',
+        security: nonce
+      },
+      success: function(response) {
+        console.log('Raw response:', response);
+        try {
+          if (typeof response === 'string') {
+            response = JSON.parse(response);
+          }
+          console.log('Parsed response:', response);
+          if (response.success) {
+            const activeBlocks = response.data || {};
+            const updatedBlocks = Object.entries(allBlocks).map(([slug, blockData]) => ({
+              ...blockData,
+              slug: slug,
+              status: activeBlocks[slug] ? '1' : '0'
+            }));
+            console.log('Processed blocks:', updatedBlocks);
+            setBlocks(updatedBlocks);
+          } else {
+            console.error('Failed to fetch blocks:', response.data?.message || 'Unknown error');
+            toast.error(__('Failed to fetch blocks', 'frontis-blocks'));
+          }
+        } catch (error) {
+          console.error('Error processing response:', error);
+          toast.error(__('Error processing server response', 'frontis-blocks'));
+        }
+        setIsLoading(false);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error('Error fetching blocks:', textStatus, errorThrown);
+        console.log('Response text:', jqXHR.responseText);
+        toast.error(__('Error fetching blocks', 'frontis-blocks'));
+        setIsLoading(false);
+      }
+    });
+  };
+
+  const saveBlocks = (updatedBlocks) => {
+    console.log('Saving blocks:', updatedBlocks);
+    const blocksToSave = updatedBlocks.reduce((acc, block) => {
+      acc[block.slug] = block.status === '1';
+      return acc;
+    }, {});
+
+    console.log('Blocks to save:', blocksToSave);
+
+    jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_save_blocks',
+        security: nonce,
+        blocks: JSON.stringify(blocksToSave)
+      },
+      success: function(response) {
+        console.log('Save blocks response:', response);
+        if (response.success) {
+          console.log('Blocks saved successfully');
+          toast.success(__('Blocks saved successfully', 'frontis-blocks'));
+          setBlocks(updatedBlocks); // Update the local state with the saved blocks
+        } else {
+          console.error('Failed to save blocks:', response.data?.message || 'Unknown error');
+          toast.error(__('Failed to save blocks', 'frontis-blocks'));
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error('Error saving blocks:', textStatus, errorThrown);
+        toast.error(__('Error saving blocks', 'frontis-blocks'));
+      }
+    });
+  };
 
   const categoryInfo = useMemo(() => {
     const filteredBlocks = blocks.filter(block => 
@@ -53,20 +122,23 @@ const Blocks = () => {
   };
 
   const handleEnableAll = () => {
-    setBlocks(prevBlocks => prevBlocks.map(block => ({ ...block, status: 'true' })));
+    const updatedBlocks = blocks.map(block => ({ ...block, status: '1' }));
+    setBlocks(updatedBlocks);
+    saveBlocks(updatedBlocks);
   };
 
   const handleDisableAll = () => {
-    setBlocks(prevBlocks => prevBlocks.map(block => ({ ...block, status: 'false' })));
+    const updatedBlocks = blocks.map(block => ({ ...block, status: '0' }));
+    setBlocks(updatedBlocks);
+    saveBlocks(updatedBlocks);
   };
 
   const handleBlockChange = (slug, enabled) => {
-    setBlocks(prevBlocks => prevBlocks.map(block => 
-      block.slug === slug ? { ...block, status: enabled ? 'true' : 'false' } : block
-    ));
-
-    // Here you might want to add an AJAX call to update the server
-    // updateBlockStatus(slug, enabled);
+    const updatedBlocks = blocks.map(block => 
+      block.slug === slug ? { ...block, status: enabled ? '1' : '0' } : block
+    );
+    setBlocks(updatedBlocks);
+    saveBlocks(updatedBlocks);
   };
 
   if (isLoading) {
