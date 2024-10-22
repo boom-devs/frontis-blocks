@@ -323,7 +323,9 @@ $css_content = "
     " . ($flipBoxItemFrontBorderColor ? "border-color: " . $flipBoxItemFrontBorderColor . ";" : "") . "
     " . ($flipBoxItemFrontBgFontColor ? "background: " . $flipBoxItemFrontBgFontColor . ";" : "") . "
 }
-.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
+    display: inline-block;
     " . ($flipBoxFrontIconSize['Desktop'] ? "width: " . $flipBoxFrontIconSize['Desktop'] . $flipBoxFrontIconSizeUnits['Desktop'] . ";" : "") . "
     " . ($flipBoxFrontIconSize['Desktop'] ? "height: " . $flipBoxFrontIconSize['Desktop'] . $flipBoxFrontIconSizeUnits['Desktop'] . ";" : "") . "
     " . ($flipBoxFrontIconBorder ? "border: " . $flipBoxFrontIconBorder . ";" : "") . "
@@ -336,7 +338,8 @@ $css_content = "
     " . ($flipBoxFrontIconMarginGetDesktop ? "margin: " . $flipBoxFrontIconMarginGetDesktop . ";" : "") . "
 }
 
-.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
     " . ($flipBoxBackIconSize['Desktop'] ? "width: " . $flipBoxBackIconSize['Desktop'] . $flipBoxBackIconSizeUnits['Desktop'] . ";" : "") . "
     " . ($flipBoxBackIconSize['Desktop'] ? "height: " . $flipBoxBackIconSize['Desktop'] . $flipBoxBackIconSizeUnits['Desktop'] . ";" : "") . "
     " . ($flipBoxBackIconBorder ? "border: " . $flipBoxBackIconBorder . ";" : "") . "
@@ -438,7 +441,8 @@ $css_content = "
         " . ($flipBoxItemBackBorderTypeGetTablet ? "border-width: " . $flipBoxItemBackBorderTypeGetTablet . ";" : "") . "
         " . ($flipBoxItemBackBorderRadiusGetTablet ? "border-radius: " . $flipBoxItemBackBorderRadiusGetTablet . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
         " . ($flipBoxFrontIconSize['Tablet'] ? "width: " . $flipBoxFrontIconSize['Tablet'] . $flipBoxFrontIconSizeUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxFrontIconSize['Tablet'] ? "height: " . $flipBoxFrontIconSize['Tablet'] . $flipBoxFrontIconSizeUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxFrontIconBorderTypeGetTablet ? "border-width: " . $flipBoxFrontIconBorderTypeGetTablet . ";" : "") . "
@@ -446,7 +450,8 @@ $css_content = "
         " . ($flipBoxFrontIconPaddingGetTablet ? "padding: " . $flipBoxFrontIconPaddingGetTablet . ";" : "") . "
         " . ($flipBoxFrontIconMarginGetTablet ? "margin: " . $flipBoxFrontIconMarginGetTablet . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
         " . ($flipBoxBackIconSize['Tablet'] ? "width: " . $flipBoxBackIconSize['Tablet'] . $flipBoxBackIconSizeUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxBackIconSize['Tablet'] ? "height: " . $flipBoxBackIconSize['Tablet'] . $flipBoxBackIconSizeUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxBackIconBorderTypeGetTablet ? "border-width: " . $flipBoxBackIconBorderTypeGetTablet . ";" : "") . "
@@ -501,7 +506,8 @@ $css_content = "
         " . ($flipBoxItemBackBorderTypeGetMobile ? "border-width: " . $flipBoxItemBackBorderTypeGetMobile . ";" : "") . "
         " . ($flipBoxItemBackBorderRadiusGetMobile ? "border-radius: " . $flipBoxItemBackBorderRadiusGetMobile . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
         " . ($flipBoxFrontIconSize['Mobile'] ? "width: " . $flipBoxFrontIconSize['Mobile'] . $flipBoxFrontIconSizeUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxFrontIconSize['Mobile'] ? "height: " . $flipBoxFrontIconSize['Mobile'] . $flipBoxFrontIconSizeUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxFrontIconBorderTypeGetMobile ? "border-width: " . $flipBoxFrontIconBorderTypeGetMobile . ";" : "") . "
@@ -509,7 +515,8 @@ $css_content = "
         " . ($flipBoxFrontIconPaddingGetMobile ? "padding: " . $flipBoxFrontIconPaddingGetMobile . ";" : "") . "
         " . ($flipBoxFrontIconMarginGetMobile ? "margin: " . $flipBoxFrontIconMarginGetMobile . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
         " . ($flipBoxBackIconSize['Mobile'] ? "width: " . $flipBoxBackIconSize['Mobile'] . $flipBoxBackIconSizeUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxBackIconSize['Mobile'] ? "height: " . $flipBoxBackIconSize['Mobile'] . $flipBoxBackIconSizeUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxBackIconBorderTypeGetMobile ? "border-width: " . $flipBoxBackIconBorderTypeGetMobile . ";" : "") . "

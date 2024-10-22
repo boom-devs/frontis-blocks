@@ -317,7 +317,7 @@ export default function save({ attributes }) {
 							<div className="fb-flip-box-content-inner">
 								<div className={`fb-flip-box-icon-wrapper`}>
 									{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
-										<img src={attributes.flipBoxFrontIconMediaUrl}/>
+										<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxFrontIconMediaUrl}/></div>
 									)}
 									{flipBoxFrontIconMediaSwitcher === 'icon' && (
 										<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
@@ -341,7 +341,7 @@ export default function save({ attributes }) {
 							<div className="fb-flip-box-content-inner">
 								<div className={`fb-flip-box-icon-wrapper`}>
 									{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
-										<img src={attributes.flipBoxBackIconMediaUrl}/>
+										<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxBackIconMediaUrl}/></div>
 									)}
 									{flipBoxBackIconMediaSwitcher === 'icon' && (
 										<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
