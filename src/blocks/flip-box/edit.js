@@ -1353,21 +1353,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										onChange={(value) => setAttributes({flipBoxBackContent: value})}
 										className="fb-flip-box-back-content"
 									/>
-									<a
-										className="fb-flip-box-back-button"
-										href={flipBoxBackButtonUrl}
-										target={flipBoxBackButtonTargetUrl ? '_blank' : undefined}
-										rel={flipBoxBackButtonTargetUrl ? 'noopener noreferrer' : undefined}
-										onClick={handleButtonClick}
-									>
-										<RichText
-											tagName="span"
-											value={flipBoxBackButtonText}
-											onChange={(value) => setAttributes({flipBoxBackButtonText: value})}
-											placeholder={__('Enter button text...', 'frontis-blocks')}
-											className="fb-flip-box-back-button-text"
-										/>
-									</a>
+									{attributes.flipBoxBackButtonText ? (
+										<a
+											className="fb-flip-box-back-button"
+											href={flipBoxBackButtonUrl}
+											target={flipBoxBackButtonTargetUrl ? '_blank' : undefined}
+											rel={flipBoxBackButtonTargetUrl ? 'noopener noreferrer' : undefined}
+											onClick={handleButtonClick}
+										>
+											<RichText
+												tagName="span"
+												value={flipBoxBackButtonText}
+												onChange={(value) => setAttributes({flipBoxBackButtonText: value})}
+												className="fb-flip-box-back-button-text"
+											/>
+										</a>
+									) : null}
 								</div>
 							</div>
 						</div>
