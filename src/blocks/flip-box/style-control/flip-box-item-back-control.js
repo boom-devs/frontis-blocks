@@ -182,7 +182,7 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 	return (
 		<>
 			<FB_Color
-				label={__("Color", "frontis-blocks")}
+				label={__("Background Color", "frontis-blocks")}
 				globalColorSwitcher={flipBoxItemBackBgFontColorSwitcher}
 				globalColor={flipBoxItemBackBgFontColor}
 				globalHoverColor={flipBoxItemBackBgFontHoverColor}
