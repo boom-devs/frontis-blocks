@@ -906,9 +906,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
 														label={__("Back Icon: Media Type", "frontis-block")}
-														value={flipBoxBackMediaSwitcher}
+														value={flipBoxBackIconMediaSwitcher}
 														options={mediaType}
-														onChange={(value) => setAttributes({flipBoxBackMediaSwitcher: value})}
+														onChange={(value) => setAttributes({flipBoxBackIconMediaSwitcher: value})}
 													/>
 												</BaseControl>
 												<div className='fb-image-upload-field-wrapper'>
