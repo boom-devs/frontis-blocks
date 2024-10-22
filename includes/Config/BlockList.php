@@ -306,4 +306,9 @@ class BlockList
 	{
 		return isset($this->blocks[$slug]) ? $this->blocks[$slug] : null;
 	}
+
+    public function get_default_blocks() {
+        //now return init blocks
+        return $this->blocks;
+    }
 }
