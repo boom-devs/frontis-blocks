@@ -4,7 +4,9 @@ import FB_Color from '@Components/color';
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
 import {BORDER_STYLES} from "@Blocks/countdown/constants/constants";
-import {SelectControl} from "@wordpress/components";
+import {BaseControl, Button, ButtonGroup, SelectControl} from "@wordpress/components";
+import {AlignmentToolbar, BlockControls} from "@wordpress/block-editor";
+import {TEXT_ALIGN} from "@Blocks/advanced-heading/constants/constants";
 export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 
 	const {
@@ -30,6 +32,12 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 		flipBoxItemFrontBorderRadiusMobile,
 		flipBoxItemFrontBorderRadiusLink,
 
+		flipBoxItemFrontPaddingUnits,
+		flipBoxItemFrontPaddingDesktop,
+		flipBoxItemFrontPaddingTablet,
+		flipBoxItemFrontPaddingMobile,
+		flipBoxItemFrontPaddingLink,
+		flipBoxItemFrontAlignment
 	} = attributes;
 
 
@@ -180,12 +188,79 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 	}
 	/** End Border Radius*/
 
+	/** Start Padding */
+	const flipBoxItemFrontPaddingHandleSpacingUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( flipBoxItemFrontPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						flipBoxItemFrontPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						flipBoxItemFrontPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						flipBoxItemFrontPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {flipBoxItemFrontPaddingDesktop: {...flipBoxItemFrontPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {flipBoxItemFrontPaddingTablet: {...flipBoxItemFrontPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {flipBoxItemFrontPaddingMobile: {...flipBoxItemFrontPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
+	}
+	const flipBoxItemFrontPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes( {flipBoxItemFrontPaddingLink: !flipBoxItemFrontPaddingLink} );
+	}
+
+	const flipBoxItemFrontPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes( {
+			flipBoxItemFrontPaddingUnits: {
+				...flipBoxItemFrontPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Padding */
 
 	return (
 		<>
 			<FB_Color
-				label={__("Color", "frontis-blocks")}
+				label={__("Background Color", "frontis-blocks")}
 				globalColorSwitcher={flipBoxItemFrontBgFontColorSwitcher}
 				globalColor={flipBoxItemFrontBgFontColor}
 				globalHoverColor={flipBoxItemFrontBgFontHoverColor}
@@ -245,6 +320,39 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 				handleGlobalColorChange={(value) => setAttributes({ flipBoxItemFrontBorderColor: value })}
 				handleGlobalHoverColorChange={(value) => setAttributes({ flipBoxItemFrontBorderHoverColor: value })}
 			/>
+			<FB_Spacing
+				label={ 'Padding' }
+				deviceType={deviceType}
+				spacingUnitsHandler={flipBoxItemFrontPaddingSpacingUnitsHandler}
+				spacingUnits={flipBoxItemFrontPaddingUnits}
+				spacingDesktop={flipBoxItemFrontPaddingDesktop}
+				spacingTablet={flipBoxItemFrontPaddingTablet}
+				spacingMobile={flipBoxItemFrontPaddingMobile}
+				handleSpacingUnitHandler={flipBoxItemFrontPaddingHandleSpacingUnitHandler}
+				spacingCombineBtn={flipBoxItemFrontPaddingLink}
+				spacingCombineBtnHandler={flipBoxItemFrontPaddingSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
+			/>
+
+			<BaseControl
+				label={__("Alignment", "frontis-blocks")}
+				id="fb-setting-text-alignment"
+				className="fb-setting-text-alignment"
+			>
+				<ButtonGroup
+					className="fb-setting-text-alignment-group-btn"
+				>
+					{TEXT_ALIGN.map((item, key) => (
+						<Button
+							key={key}
+							onClick={() => setAttributes({ flipBoxItemFrontAlignment: item.value })}
+							className={`fb-setting-text-alignment-single-btn ${flipBoxItemFrontAlignment === item.value ? 'active' : ''}`}
+						>
+							{item.label}
+						</Button>
+					))}
+				</ButtonGroup>
+			</BaseControl>
+
 		</>
 	);
 };

@@ -1,6 +1,8 @@
 .fb-blocks {
   &-container {
-    // Styles for the main container
+    padding: 24px;
+    background-color: $white-color;
+    border-radius: 14px;
   }
 
   &-header {
@@ -81,10 +83,10 @@
   }
 
   &-button {
-    padding: $button-padding;
+    padding: $spacing-unit * 2 $spacing-unit * 3;
     margin-left: $spacing-unit;
     background-color: $light-gray;
-    border: 1px solid $border-color;
+    border: none;
     border-radius: $border-radius;
     cursor: pointer;
     transition: background-color $transition-duration;
@@ -94,20 +96,20 @@
     }
 
     &.fb-blocks-enable-all {
-      background-color: $success-color;
-      color: $tab-active-background;
+      background-color: $primary-color;
+      color: $white-color;
 
       &:hover {
-        background-color: darken($success-color, 5%);
+        background-color: darken($primary-color, 5%);
       }
     }
 
     &.fb-blocks-disable-all {
-      background-color: $error-color;
-      color: $tab-active-background;
+      background-color: $neutral-color-50;
+      color: $neutral-color-900;
 
       &:hover {
-        background-color: darken($error-color, 5%);
+        background-color: darken($neutral-color-50, 5%);
       }
     }
   }

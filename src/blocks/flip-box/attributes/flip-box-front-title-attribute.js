@@ -5,7 +5,7 @@ const flipBoxFrontTitleAttributes = {
 	},
 	flipBoxFrontTitleHeadingTag: {
 		type : "string",
-		default: "h2"
+		default: "h3"
 	},
 
 	/** Start Color */
@@ -31,9 +31,9 @@ const flipBoxFrontTitleAttributes = {
 	flipBoxFrontTitleFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '18',
-			Tablet: '16',
-			Mobile: '16'
+			Desktop: '32',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	flipBoxFrontTitleFontSizeUnits: {
@@ -46,7 +46,7 @@ const flipBoxFrontTitleAttributes = {
 	},
 	flipBoxFrontTitleFontWeight: {
 		type: 'string',
-		default: '400'
+		default: '600'
 	},
 	flipBoxFrontTitleFontStyle: {
 		type: 'string',
@@ -106,8 +106,8 @@ const flipBoxFrontTitleAttributes = {
 	flipBoxFrontTitleMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
+			top: 20,
+			bottom: 20,
 			left: 0,
 			right: 0,
 		},

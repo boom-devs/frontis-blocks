@@ -8,7 +8,7 @@ $blockID = isset( $block_attributes['blockID'] ) ? sanitize_text_field( $block_a
 $flipBoxItemFrontBgFontColor = isset($block_attributes['flipBoxItemFrontBgFontColor']) ? sanitize_hex_color($block_attributes['flipBoxItemFrontBgFontColor']) : '#efeff1';
 $flipBoxItemFrontBgFontHoverColor = isset($block_attributes['flipBoxItemFrontBgFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxItemFrontBgFontHoverColor']) : '#efeff1';
 
-$flipBoxItemFrontSize = isset($block_attributes['flipBoxItemFrontSize']) ? $block_attributes['flipBoxItemFrontSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$flipBoxItemFrontSize = isset($block_attributes['flipBoxItemFrontSize']) ? $block_attributes['flipBoxItemFrontSize'] : array('Desktop' => '364', 'Tablet' => '', 'Mobile' => '');
 $flipBoxItemFrontSizeUnits = isset($block_attributes['flipBoxItemFrontSizeUnits']) ? $block_attributes['flipBoxItemFrontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
 $flipBoxItemFrontBorder = isset($block_attributes['flipBoxItemFrontBorder']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBorder']) : '';
@@ -22,15 +22,24 @@ $flipBoxItemFrontBorderTypeGetTablet = $flipBoxItemFrontBorderTypeTablet['top'] 
 $flipBoxItemFrontBorderTypeGetMobile = $flipBoxItemFrontBorderTypeMobile['top'] . $flipBoxItemFrontBorderTypeUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderTypeMobile['right'] . $flipBoxItemFrontBorderTypeUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderTypeMobile['bottom'] . $flipBoxItemFrontBorderTypeUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderTypeMobile['left'] . $flipBoxItemFrontBorderTypeUnits['Mobile'];
 
 $flipBoxItemFrontBorderRadiusUnits = isset($block_attributes['flipBoxItemFrontBorderRadiusUnits']) ? $block_attributes['flipBoxItemFrontBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxItemFrontBorderRadiusDesktop = isset($block_attributes['flipBoxItemFrontBorderRadiusDesktop']) ? $block_attributes['flipBoxItemFrontBorderRadiusDesktop'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
-$flipBoxItemFrontBorderRadiusTablet = isset($block_attributes['flipBoxItemFrontBorderRadiusTablet']) ? $block_attributes['flipBoxItemFrontBorderRadiusTablet'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
-$flipBoxItemFrontBorderRadiusMobile = isset($block_attributes['flipBoxItemFrontBorderRadiusMobile']) ? $block_attributes['flipBoxItemFrontBorderRadiusMobile'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
+$flipBoxItemFrontBorderRadiusDesktop = isset($block_attributes['flipBoxItemFrontBorderRadiusDesktop']) ? $block_attributes['flipBoxItemFrontBorderRadiusDesktop'] : array('top' => '15', 'bottom' => '15', 'left' => '15', 'right' => '15');
+$flipBoxItemFrontBorderRadiusTablet = isset($block_attributes['flipBoxItemFrontBorderRadiusTablet']) ? $block_attributes['flipBoxItemFrontBorderRadiusTablet'] : array('top' => '15', 'bottom' => '15', 'left' => '15', 'right' => '15');
+$flipBoxItemFrontBorderRadiusMobile = isset($block_attributes['flipBoxItemFrontBorderRadiusMobile']) ? $block_attributes['flipBoxItemFrontBorderRadiusMobile'] : array('top' => '15', 'bottom' => '15', 'left' => '15', 'right' => '15');
 $flipBoxItemFrontBorderRadiusGetDesktop = $flipBoxItemFrontBorderRadiusDesktop['top'] . $flipBoxItemFrontBorderRadiusUnits['Desktop'] . ' ' . $flipBoxItemFrontBorderRadiusDesktop['right'] . $flipBoxItemFrontBorderRadiusUnits['Desktop'] . ' ' . $flipBoxItemFrontBorderRadiusDesktop['bottom'] . $flipBoxItemFrontBorderRadiusUnits['Desktop'] . ' ' . $flipBoxItemFrontBorderRadiusDesktop['left'] . $flipBoxItemFrontBorderRadiusUnits['Desktop'];
 $flipBoxItemFrontBorderRadiusGetTablet = $flipBoxItemFrontBorderRadiusTablet['top'] . $flipBoxItemFrontBorderRadiusUnits['Tablet'] . ' ' . $flipBoxItemFrontBorderRadiusTablet['right'] . $flipBoxItemFrontBorderRadiusUnits['Tablet'] . ' ' . $flipBoxItemFrontBorderRadiusTablet['bottom'] . $flipBoxItemFrontBorderRadiusUnits['Tablet'] . ' ' . $flipBoxItemFrontBorderRadiusTablet['left'] . $flipBoxItemFrontBorderRadiusUnits['Tablet'];
 $flipBoxItemFrontBorderRadiusGetMobile = $flipBoxItemFrontBorderRadiusMobile['top'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderRadiusMobile['right'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderRadiusMobile['bottom'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderRadiusMobile['left'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'];
 
+
+$flipBoxItemFrontPaddingUnits = isset($block_attributes['flipBoxItemFrontPaddingUnits']) ? $block_attributes['flipBoxItemFrontPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$flipBoxItemFrontPaddingDesktop = isset($block_attributes['flipBoxItemFrontPaddingDesktop']) ? $block_attributes['flipBoxItemFrontPaddingDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxItemFrontPaddingTablet = isset($block_attributes['flipBoxItemFrontPaddingTablet']) ? $block_attributes['flipBoxItemFrontPaddingTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxItemFrontPaddingMobile = isset($block_attributes['flipBoxItemFrontPaddingMobile']) ? $block_attributes['flipBoxItemFrontPaddingMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxItemFrontPaddingGetDesktop = $flipBoxItemFrontPaddingDesktop['top'] . $flipBoxItemFrontPaddingUnits['Desktop'] . ' ' . $flipBoxItemFrontPaddingDesktop['right'] . $flipBoxItemFrontPaddingUnits['Desktop'] . ' ' . $flipBoxItemFrontPaddingDesktop['bottom'] . $flipBoxItemFrontPaddingUnits['Desktop'] . ' ' . $flipBoxItemFrontPaddingDesktop['left'] . $flipBoxItemFrontPaddingUnits['Desktop'];
+$flipBoxItemFrontPaddingGetTablet = $flipBoxItemFrontPaddingTablet['top'] . $flipBoxItemFrontPaddingUnits['Tablet'] . ' ' . $flipBoxItemFrontPaddingTablet['right'] . $flipBoxItemFrontPaddingUnits['Tablet'] . ' ' . $flipBoxItemFrontPaddingTablet['bottom'] . $flipBoxItemFrontPaddingUnits['Tablet'] . ' ' . $flipBoxItemFrontPaddingTablet['left'] . $flipBoxItemFrontPaddingUnits['Tablet'];
+$flipBoxItemFrontPaddingGetMobile = $flipBoxItemFrontPaddingMobile['top'] . $flipBoxItemFrontPaddingUnits['Mobile'] . ' ' . $flipBoxItemFrontPaddingMobile['right'] . $flipBoxItemFrontPaddingUnits['Mobile'] . ' ' . $flipBoxItemFrontPaddingMobile['bottom'] . $flipBoxItemFrontPaddingUnits['Mobile'] . ' ' . $flipBoxItemFrontPaddingMobile['left'] . $flipBoxItemFrontPaddingUnits['Mobile'];
+
 /** Front Icon*/
-$flipBoxFrontIconSize = isset($block_attributes['flipBoxFrontIconSize']) ? $block_attributes['flipBoxFrontIconSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$flipBoxFrontIconSize = isset($block_attributes['flipBoxFrontIconSize']) ? $block_attributes['flipBoxFrontIconSize'] : array('Desktop' => '40', 'Tablet' => '', 'Mobile' => '');
 $flipBoxFrontIconSizeUnits = isset($block_attributes['flipBoxFrontIconSizeUnits']) ? $block_attributes['flipBoxFrontIconSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
 $flipBoxFrontIconFontColor = isset($block_attributes['flipBoxFrontIconFontColor']) ? sanitize_hex_color($block_attributes['flipBoxFrontIconFontColor']) : '#ffffff';
@@ -61,7 +70,7 @@ $flipBoxFrontIconBorderRadiusGetMobile = $flipBoxFrontIconBorderRadiusMobile['to
 
 /** Front Icon Padding */
 $flipBoxFrontIconPaddingUnits = isset($block_attributes['flipBoxFrontIconPaddingUnits']) ? $block_attributes['flipBoxFrontIconPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxFrontIconPaddingDesktop = isset($block_attributes['flipBoxFrontIconPaddingDesktop']) ? $block_attributes['flipBoxFrontIconPaddingDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxFrontIconPaddingDesktop = isset($block_attributes['flipBoxFrontIconPaddingDesktop']) ? $block_attributes['flipBoxFrontIconPaddingDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '20', 'right' => '20');
 $flipBoxFrontIconPaddingTablet = isset($block_attributes['flipBoxFrontIconPaddingTablet']) ? $block_attributes['flipBoxFrontIconPaddingTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontIconPaddingMobile = isset($block_attributes['flipBoxFrontIconPaddingMobile']) ? $block_attributes['flipBoxFrontIconPaddingMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontIconPaddingGetDesktop = $flipBoxFrontIconPaddingDesktop['top'] . $flipBoxFrontIconPaddingUnits['Desktop'] . ' ' . $flipBoxFrontIconPaddingDesktop['right'] . $flipBoxFrontIconPaddingUnits['Desktop'] . ' ' . $flipBoxFrontIconPaddingDesktop['bottom'] . $flipBoxFrontIconPaddingUnits['Desktop'] . ' ' . $flipBoxFrontIconPaddingDesktop['left'] . $flipBoxFrontIconPaddingUnits['Desktop'];
@@ -79,7 +88,7 @@ $flipBoxFrontIconMarginGetMobile = $flipBoxFrontIconMarginMobile['top'] . $flipB
 
 /** Front Title Margin */
 $flipBoxFrontTitleMarginUnits = isset($block_attributes['flipBoxFrontTitleMarginUnits']) ? $block_attributes['flipBoxFrontTitleMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxFrontTitleMarginDesktop = isset($block_attributes['flipBoxFrontTitleMarginDesktop']) ? $block_attributes['flipBoxFrontTitleMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxFrontTitleMarginDesktop = isset($block_attributes['flipBoxFrontTitleMarginDesktop']) ? $block_attributes['flipBoxFrontTitleMarginDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '0', 'right' => '0');
 $flipBoxFrontTitleMarginTablet = isset($block_attributes['flipBoxFrontTitleMarginTablet']) ? $block_attributes['flipBoxFrontTitleMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontTitleMarginMobile = isset($block_attributes['flipBoxFrontTitleMarginMobile']) ? $block_attributes['flipBoxFrontTitleMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontTitleMarginGetDesktop = $flipBoxFrontTitleMarginDesktop['top'] . $flipBoxFrontTitleMarginUnits['Desktop'] . ' ' . $flipBoxFrontTitleMarginDesktop['right'] . $flipBoxFrontTitleMarginUnits['Desktop'] . ' ' . $flipBoxFrontTitleMarginDesktop['bottom'] . $flipBoxFrontTitleMarginUnits['Desktop'] . ' ' . $flipBoxFrontTitleMarginDesktop['left'] . $flipBoxFrontTitleMarginUnits['Desktop'];
@@ -89,9 +98,9 @@ $flipBoxFrontTitleMarginGetMobile = $flipBoxFrontTitleMarginMobile['top'] . $fli
 
 /** Front Title Typography */
 $flipBoxFrontTitleFontFamily = isset($block_attributes['flipBoxFrontTitleFontFamily']) ? sanitize_text_field($block_attributes['flipBoxFrontTitleFontFamily']) : 'inherit';
-$flipBoxFrontTitleFontSize = isset($block_attributes['flipBoxFrontTitleFontSize']) ? $block_attributes['flipBoxFrontTitleFontSize'] : array('Desktop' => '62', 'Tablet' => '58', 'Mobile' => '52');
+$flipBoxFrontTitleFontSize = isset($block_attributes['flipBoxFrontTitleFontSize']) ? $block_attributes['flipBoxFrontTitleFontSize'] : array('Desktop' => '32', 'Tablet' => '', 'Mobile' => '');
 $flipBoxFrontTitleFontSizeUnits = isset($block_attributes['flipBoxFrontTitleFontSizeUnits']) ? $block_attributes['flipBoxFrontTitleFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxFrontTitleFontWeight = isset($block_attributes['flipBoxFrontTitleFontWeight']) ? sanitize_text_field($block_attributes['flipBoxFrontTitleFontWeight']) : '700';
+$flipBoxFrontTitleFontWeight = isset($block_attributes['flipBoxFrontTitleFontWeight']) ? sanitize_text_field($block_attributes['flipBoxFrontTitleFontWeight']) : '600';
 $flipBoxFrontTitleFontStyle = isset($block_attributes['flipBoxFrontTitleFontStyle']) ? sanitize_text_field($block_attributes['flipBoxFrontTitleFontStyle']) : '';
 $flipBoxFrontTitleTextTransform = isset($block_attributes['flipBoxFrontTitleTextTransform']) ? sanitize_text_field($block_attributes['flipBoxFrontTitleTextTransform']) : '';
 $flipBoxFrontTitleTextDecoration = isset($block_attributes['flipBoxFrontTitleTextDecoration']) ? sanitize_text_field($block_attributes['flipBoxFrontTitleTextDecoration']) : '';
@@ -113,9 +122,9 @@ $flipBoxFrontContentMarginGetMobile = $flipBoxFrontContentMarginMobile['top'] . 
 
 /** Front Content Typography */
 $flipBoxFrontContentFontFamily = isset($block_attributes['flipBoxFrontContentFontFamily']) ? sanitize_text_field($block_attributes['flipBoxFrontContentFontFamily']) : 'inherit';
-$flipBoxFrontContentFontSize = isset($block_attributes['flipBoxFrontContentFontSize']) ? $block_attributes['flipBoxFrontContentFontSize'] : array('Desktop' => '62', 'Tablet' => '58', 'Mobile' => '52');
+$flipBoxFrontContentFontSize = isset($block_attributes['flipBoxFrontContentFontSize']) ? $block_attributes['flipBoxFrontContentFontSize'] : array('Desktop' => '18', 'Tablet' => '', 'Mobile' => '');
 $flipBoxFrontContentFontSizeUnits = isset($block_attributes['flipBoxFrontContentFontSizeUnits']) ? $block_attributes['flipBoxFrontContentFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxFrontContentFontWeight = isset($block_attributes['flipBoxFrontContentFontWeight']) ? sanitize_text_field($block_attributes['flipBoxFrontContentFontWeight']) : '700';
+$flipBoxFrontContentFontWeight = isset($block_attributes['flipBoxFrontContentFontWeight']) ? sanitize_text_field($block_attributes['flipBoxFrontContentFontWeight']) : '400';
 $flipBoxFrontContentFontStyle = isset($block_attributes['flipBoxFrontContentFontStyle']) ? sanitize_text_field($block_attributes['flipBoxFrontContentFontStyle']) : '';
 $flipBoxFrontContentTextTransform = isset($block_attributes['flipBoxFrontContentTextTransform']) ? sanitize_text_field($block_attributes['flipBoxFrontContentTextTransform']) : '';
 $flipBoxFrontContentTextDecoration = isset($block_attributes['flipBoxFrontContentTextDecoration']) ? sanitize_text_field($block_attributes['flipBoxFrontContentTextDecoration']) : '';
@@ -133,7 +142,7 @@ $flipBoxFrontContentFontHoverColor = isset($block_attributes['flipBoxFrontConten
 $flipBoxItemBackBgFontColor = isset($block_attributes['flipBoxItemBackBgFontColor']) ? sanitize_hex_color($block_attributes['flipBoxItemBackBgFontColor']) : '#F97255';
 $flipBoxItemBackBgFontHoverColor = isset($block_attributes['flipBoxItemBackBgFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxItemBackBgFontHoverColor']) : '#F97255';
 
-$flipBoxItemBackSize = isset($block_attributes['flipBoxItemBackSize']) ? $block_attributes['flipBoxItemBackSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$flipBoxItemBackSize = isset($block_attributes['flipBoxItemBackSize']) ? $block_attributes['flipBoxItemBackSize'] : array('Desktop' => '364', 'Tablet' => '', 'Mobile' => '');
 $flipBoxItemBackSizeUnits = isset($block_attributes['flipBoxItemBackSizeUnits']) ? $block_attributes['flipBoxItemBackSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
 $flipBoxItemBackBorder = isset($block_attributes['flipBoxItemFrontBorder']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBorder']) : '';
@@ -147,15 +156,24 @@ $flipBoxItemBackBorderTypeGetTablet = $flipBoxItemBackBorderTypeTablet['top'] . 
 $flipBoxItemBackBorderTypeGetMobile = $flipBoxItemBackBorderTypeMobile['top'] . $flipBoxItemBackBorderTypeUnits['Mobile'] . ' ' . $flipBoxItemBackBorderTypeMobile['right'] . $flipBoxItemBackBorderTypeUnits['Mobile'] . ' ' . $flipBoxItemBackBorderTypeMobile['bottom'] . $flipBoxItemBackBorderTypeUnits['Mobile'] . ' ' . $flipBoxItemBackBorderTypeMobile['left'] . $flipBoxItemBackBorderTypeUnits['Mobile'];
 
 $flipBoxItemBackBorderRadiusUnits = isset($block_attributes['flipBoxItemBackBorderRadiusUnits']) ? $block_attributes['flipBoxItemBackBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxItemBackBorderRadiusDesktop = isset($block_attributes['flipBoxItemBackBorderRadiusDesktop']) ? $block_attributes['flipBoxItemBackBorderRadiusDesktop'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
-$flipBoxItemBackBorderRadiusTablet = isset($block_attributes['flipBoxItemBackBorderRadiusTablet']) ? $block_attributes['flipBoxItemBackBorderRadiusTablet'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
-$flipBoxItemBackBorderRadiusMobile = isset($block_attributes['flipBoxItemBackBorderRadiusMobile']) ? $block_attributes['flipBoxItemBackBorderRadiusMobile'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
+$flipBoxItemBackBorderRadiusDesktop = isset($block_attributes['flipBoxItemBackBorderRadiusDesktop']) ? $block_attributes['flipBoxItemBackBorderRadiusDesktop'] : array('top' => '15', 'bottom' => '15', 'left' => '15', 'right' => '15');
+$flipBoxItemBackBorderRadiusTablet = isset($block_attributes['flipBoxItemBackBorderRadiusTablet']) ? $block_attributes['flipBoxItemBackBorderRadiusTablet'] : array('top' => '15', 'bottom' => '15', 'left' => '15', 'right' => '15');
+$flipBoxItemBackBorderRadiusMobile = isset($block_attributes['flipBoxItemBackBorderRadiusMobile']) ? $block_attributes['flipBoxItemBackBorderRadiusMobile'] : array('top' => '15', 'bottom' => '15', 'left' => '15', 'right' => '15');
 $flipBoxItemBackBorderRadiusGetDesktop = $flipBoxItemBackBorderRadiusDesktop['top'] . $flipBoxItemBackBorderRadiusUnits['Desktop'] . ' ' . $flipBoxItemBackBorderRadiusDesktop['right'] . $flipBoxItemBackBorderRadiusUnits['Desktop'] . ' ' . $flipBoxItemBackBorderRadiusDesktop['bottom'] . $flipBoxItemBackBorderRadiusUnits['Desktop'] . ' ' . $flipBoxItemBackBorderRadiusDesktop['left'] . $flipBoxItemBackBorderRadiusUnits['Desktop'];
 $flipBoxItemBackBorderRadiusGetTablet = $flipBoxItemBackBorderRadiusTablet['top'] . $flipBoxItemBackBorderRadiusUnits['Tablet'] . ' ' . $flipBoxItemBackBorderRadiusTablet['right'] . $flipBoxItemBackBorderRadiusUnits['Tablet'] . ' ' . $flipBoxItemBackBorderRadiusTablet['bottom'] . $flipBoxItemBackBorderRadiusUnits['Tablet'] . ' ' . $flipBoxItemBackBorderRadiusTablet['left'] . $flipBoxItemBackBorderRadiusUnits['Tablet'];
 $flipBoxItemBackBorderRadiusGetMobile = $flipBoxItemBackBorderRadiusMobile['top'] . $flipBoxItemBackBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemBackBorderRadiusMobile['right'] . $flipBoxItemBackBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemBackBorderRadiusMobile['bottom'] . $flipBoxItemBackBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemBackBorderRadiusMobile['left'] . $flipBoxItemBackBorderRadiusUnits['Mobile'];
 
+$flipBoxItemBackPaddingUnits = isset($block_attributes['flipBoxItemBackPaddingUnits']) ? $block_attributes['flipBoxItemBackPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$flipBoxItemBackPaddingDesktop = isset($block_attributes['flipBoxItemBackPaddingDesktop']) ? $block_attributes['flipBoxItemBackPaddingDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxItemBackPaddingTablet = isset($block_attributes['flipBoxItemBackPaddingTablet']) ? $block_attributes['flipBoxItemBackPaddingTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxItemBackPaddingMobile = isset($block_attributes['flipBoxItemBackPaddingMobile']) ? $block_attributes['flipBoxItemBackPaddingMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxItemBackPaddingGetDesktop = $flipBoxItemBackPaddingDesktop['top'] . $flipBoxItemBackPaddingUnits['Desktop'] . ' ' . $flipBoxItemBackPaddingDesktop['right'] . $flipBoxItemBackPaddingUnits['Desktop'] . ' ' . $flipBoxItemBackPaddingDesktop['bottom'] . $flipBoxItemBackPaddingUnits['Desktop'] . ' ' . $flipBoxItemBackPaddingDesktop['left'] . $flipBoxItemBackPaddingUnits['Desktop'];
+$flipBoxItemBackPaddingGetTablet = $flipBoxItemBackPaddingTablet['top'] . $flipBoxItemBackPaddingUnits['Tablet'] . ' ' . $flipBoxItemBackPaddingTablet['right'] . $flipBoxItemBackPaddingUnits['Tablet'] . ' ' . $flipBoxItemBackPaddingTablet['bottom'] . $flipBoxItemBackPaddingUnits['Tablet'] . ' ' . $flipBoxItemBackPaddingTablet['left'] . $flipBoxItemBackPaddingUnits['Tablet'];
+$flipBoxItemBackPaddingGetMobile = $flipBoxItemBackPaddingMobile['top'] . $flipBoxItemBackPaddingUnits['Mobile'] . ' ' . $flipBoxItemBackPaddingMobile['right'] . $flipBoxItemBackPaddingUnits['Mobile'] . ' ' . $flipBoxItemBackPaddingMobile['bottom'] . $flipBoxItemBackPaddingUnits['Mobile'] . ' ' . $flipBoxItemBackPaddingMobile['left'] . $flipBoxItemBackPaddingUnits['Mobile'];
+
+
 /** Back Icon */
-$flipBoxBackIconSize = isset($block_attributes['flipBoxBackIconSize']) ? $block_attributes['flipBoxBackIconSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$flipBoxBackIconSize = isset($block_attributes['flipBoxBackIconSize']) ? $block_attributes['flipBoxBackIconSize'] : array('Desktop' => '40', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackIconSizeUnits = isset($block_attributes['flipBoxBackIconSizeUnits']) ? $block_attributes['flipBoxBackIconSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
 $flipBoxBackIconFontColor = isset($block_attributes['flipBoxBackIconFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackIconFontColor']) : '#F97255';
@@ -186,7 +204,7 @@ $flipBoxBackIconBorderRadiusGetMobile = $flipBoxBackIconBorderRadiusMobile['top'
 
 /** Back Icon Padding */
 $flipBoxBackIconPaddingUnits = isset($block_attributes['flipBoxBackIconPaddingUnits']) ? $block_attributes['flipBoxBackIconPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackIconPaddingDesktop = isset($block_attributes['flipBoxBackIconPaddingDesktop']) ? $block_attributes['flipBoxBackIconPaddingDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxBackIconPaddingDesktop = isset($block_attributes['flipBoxBackIconPaddingDesktop']) ? $block_attributes['flipBoxBackIconPaddingDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '20', 'right' => '20');
 $flipBoxBackIconPaddingTablet = isset($block_attributes['flipBoxBackIconPaddingTablet']) ? $block_attributes['flipBoxBackIconPaddingTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackIconPaddingMobile = isset($block_attributes['flipBoxBackIconPaddingMobile']) ? $block_attributes['flipBoxBackIconPaddingMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackIconPaddingGetDesktop = $flipBoxBackIconPaddingDesktop['top'] . $flipBoxBackIconPaddingUnits['Desktop'] . ' ' . $flipBoxBackIconPaddingDesktop['right'] . $flipBoxBackIconPaddingUnits['Desktop'] . ' ' . $flipBoxBackIconPaddingDesktop['bottom'] . $flipBoxBackIconPaddingUnits['Desktop'] . ' ' . $flipBoxBackIconPaddingDesktop['left'] . $flipBoxBackIconPaddingUnits['Desktop'];
@@ -204,7 +222,7 @@ $flipBoxBackIconMarginGetMobile = $flipBoxBackIconMarginMobile['top'] . $flipBox
 
 /** Back Title Margin */
 $flipBoxBackTitleMarginUnits = isset($block_attributes['flipBoxBackTitleMarginUnits']) ? $block_attributes['flipBoxBackTitleMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackTitleMarginDesktop = isset($block_attributes['flipBoxBackTitleMarginDesktop']) ? $block_attributes['flipBoxBackTitleMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxBackTitleMarginDesktop = isset($block_attributes['flipBoxBackTitleMarginDesktop']) ? $block_attributes['flipBoxBackTitleMarginDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '0', 'right' => '0');
 $flipBoxBackTitleMarginTablet = isset($block_attributes['flipBoxBackTitleMarginTablet']) ? $block_attributes['flipBoxBackTitleMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackTitleMarginMobile = isset($block_attributes['flipBoxBackTitleMarginMobile']) ? $block_attributes['flipBoxBackTitleMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackTitleMarginGetDesktop = $flipBoxBackTitleMarginDesktop['top'] . $flipBoxBackTitleMarginUnits['Desktop'] . ' ' . $flipBoxBackTitleMarginDesktop['right'] . $flipBoxBackTitleMarginUnits['Desktop'] . ' ' . $flipBoxBackTitleMarginDesktop['bottom'] . $flipBoxBackTitleMarginUnits['Desktop'] . ' ' . $flipBoxBackTitleMarginDesktop['left'] . $flipBoxBackTitleMarginUnits['Desktop'];
@@ -214,9 +232,9 @@ $flipBoxBackTitleMarginGetMobile = $flipBoxBackTitleMarginMobile['top'] . $flipB
 
 /** Back Title Typography */
 $flipBoxBackTitleFontFamily = isset($block_attributes['flipBoxBackTitleFontFamily']) ? sanitize_text_field($block_attributes['flipBoxBackTitleFontFamily']) : 'inherit';
-$flipBoxBackTitleFontSize = isset($block_attributes['flipBoxBackTitleFontSize']) ? $block_attributes['flipBoxBackTitleFontSize'] : array('Desktop' => '62', 'Tablet' => '58', 'Mobile' => '52');
+$flipBoxBackTitleFontSize = isset($block_attributes['flipBoxBackTitleFontSize']) ? $block_attributes['flipBoxBackTitleFontSize'] : array('Desktop' => '32', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackTitleFontSizeUnits = isset($block_attributes['flipBoxBackTitleFontSizeUnits']) ? $block_attributes['flipBoxBackTitleFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackTitleFontWeight = isset($block_attributes['flipBoxBackTitleFontWeight']) ? sanitize_text_field($block_attributes['flipBoxBackTitleFontWeight']) : '700';
+$flipBoxBackTitleFontWeight = isset($block_attributes['flipBoxBackTitleFontWeight']) ? sanitize_text_field($block_attributes['flipBoxBackTitleFontWeight']) : '600';
 $flipBoxBackTitleFontStyle = isset($block_attributes['flipBoxBackTitleFontStyle']) ? sanitize_text_field($block_attributes['flipBoxBackTitleFontStyle']) : '';
 $flipBoxBackTitleTextTransform = isset($block_attributes['flipBoxBackTitleTextTransform']) ? sanitize_text_field($block_attributes['flipBoxBackTitleTextTransform']) : '';
 $flipBoxBackTitleTextDecoration = isset($block_attributes['flipBoxBackTitleTextDecoration']) ? sanitize_text_field($block_attributes['flipBoxBackTitleTextDecoration']) : '';
@@ -224,8 +242,8 @@ $flipBoxBackTitleLetterSpacing = isset($block_attributes['flipBoxBackTitleLetter
 $flipBoxBackTitleLetterSpacingUnits = isset($block_attributes['flipBoxBackTitleLetterSpacingUnits']) ? $block_attributes['flipBoxBackTitleLetterSpacingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $flipBoxBackTitleLineHeight = isset($block_attributes['flipBoxBackTitleLineHeight']) ? $block_attributes['flipBoxBackTitleLineHeight'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackTitleLineHeightUnits = isset($block_attributes['flipBoxBackTitleLineHeightUnits']) ? $block_attributes['flipBoxBackTitleLineHeightUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackTitleFontColor = isset($block_attributes['flipBoxBackTitleFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackTitleFontColor']) : '';
-$flipBoxBackTitleFontHoverColor = isset($block_attributes['flipBoxBackTitleFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackTitleFontHoverColor']) : '';
+$flipBoxBackTitleFontColor = isset($block_attributes['flipBoxBackTitleFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackTitleFontColor']) : '#ffffff';
+$flipBoxBackTitleFontHoverColor = isset($block_attributes['flipBoxBackTitleFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackTitleFontHoverColor']) : '#ffffff';
 
 /** Back Content Margin */
 $flipBoxBackContentMarginUnits = isset($block_attributes['flipBoxBackContentMarginUnits']) ? $block_attributes['flipBoxBackContentMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
@@ -238,9 +256,9 @@ $flipBoxBackContentMarginGetMobile = $flipBoxBackContentMarginMobile['top'] . $f
 
 /** Back Content Typography */
 $flipBoxBackContentFontFamily = isset($block_attributes['flipBoxBackContentFontFamily']) ? sanitize_text_field($block_attributes['flipBoxBackContentFontFamily']) : 'inherit';
-$flipBoxBackContentFontSize = isset($block_attributes['flipBoxBackContentFontSize']) ? $block_attributes['flipBoxBackContentFontSize'] : array('Desktop' => '62', 'Tablet' => '58', 'Mobile' => '52');
+$flipBoxBackContentFontSize = isset($block_attributes['flipBoxBackContentFontSize']) ? $block_attributes['flipBoxBackContentFontSize'] : array('Desktop' => '18', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackContentFontSizeUnits = isset($block_attributes['flipBoxBackContentFontSizeUnits']) ? $block_attributes['flipBoxBackContentFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackContentFontWeight = isset($block_attributes['flipBoxBackContentFontWeight']) ? sanitize_text_field($block_attributes['flipBoxBackContentFontWeight']) : '700';
+$flipBoxBackContentFontWeight = isset($block_attributes['flipBoxBackContentFontWeight']) ? sanitize_text_field($block_attributes['flipBoxBackContentFontWeight']) : '400';
 $flipBoxBackContentFontStyle = isset($block_attributes['flipBoxBackContentFontStyle']) ? sanitize_text_field($block_attributes['flipBoxBackContentFontStyle']) : '';
 $flipBoxBackContentTextTransform = isset($block_attributes['flipBoxBackContentTextTransform']) ? sanitize_text_field($block_attributes['flipBoxBackContentTextTransform']) : '';
 $flipBoxBackContentTextDecoration = isset($block_attributes['flipBoxBackContentTextDecoration']) ? sanitize_text_field($block_attributes['flipBoxBackContentTextDecoration']) : '';
@@ -248,23 +266,27 @@ $flipBoxBackContentLetterSpacing = isset($block_attributes['flipBoxBackContentLe
 $flipBoxBackContentLetterSpacingUnits = isset($block_attributes['flipBoxBackContentLetterSpacingUnits']) ? $block_attributes['flipBoxBackContentLetterSpacingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $flipBoxBackContentLineHeight = isset($block_attributes['flipBoxBackContentLineHeight']) ? $block_attributes['flipBoxBackContentLineHeight'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackContentLineHeightUnits = isset($block_attributes['flipBoxBackContentLineHeightUnits']) ? $block_attributes['flipBoxBackContentLineHeightUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackContentFontColor = isset($block_attributes['flipBoxBackContentFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackContentFontColor']) : '';
-$flipBoxBackContentFontHoverColor = isset($block_attributes['flipBoxBackContentFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackContentFontHoverColor']) : '';
+$flipBoxBackContentFontColor = isset($block_attributes['flipBoxBackContentFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackContentFontColor']) : '#ffffff';
+$flipBoxBackContentFontHoverColor = isset($block_attributes['flipBoxBackContentFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackContentFontHoverColor']) : '#ffffff';
 
 /** Back Button Typography */
 $flipBoxBackButtonFontFamily = isset($block_attributes['flipBoxBackButtonFontFamily']) ? sanitize_text_field($block_attributes['flipBoxBackButtonFontFamily']) : 'inherit';
-$flipBoxBackButtonFontSize = isset($block_attributes['flipBoxBackButtonFontSize']) ? $block_attributes['flipBoxBackButtonFontSize'] : array('Desktop' => '62', 'Tablet' => '58', 'Mobile' => '52');
+$flipBoxBackButtonFontSize = isset($block_attributes['flipBoxBackButtonFontSize']) ? $block_attributes['flipBoxBackButtonFontSize'] : array('Desktop' => '18', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackButtonFontSizeUnits = isset($block_attributes['flipBoxBackButtonFontSizeUnits']) ? $block_attributes['flipBoxBackButtonFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackButtonFontWeight = isset($block_attributes['flipBoxBackButtonFontWeight']) ? sanitize_text_field($block_attributes['flipBoxBackButtonFontWeight']) : '700';
+$flipBoxBackButtonFontWeight = isset($block_attributes['flipBoxBackButtonFontWeight']) ? sanitize_text_field($block_attributes['flipBoxBackButtonFontWeight']) : '400';
 $flipBoxBackButtonFontStyle = isset($block_attributes['flipBoxBackButtonFontStyle']) ? sanitize_text_field($block_attributes['flipBoxBackButtonFontStyle']) : '';
 $flipBoxBackButtonTextTransform = isset($block_attributes['flipBoxBackButtonTextTransform']) ? sanitize_text_field($block_attributes['flipBoxBackButtonTextTransform']) : '';
-$flipBoxBackButtonTextDecoration = isset($block_attributes['flipBoxBackButtonTextDecoration']) ? sanitize_text_field($block_attributes['flipBoxBackButtonTextDecoration']) : '';
+$flipBoxBackButtonTextDecoration = isset($block_attributes['flipBoxBackButtonTextDecoration']) ? sanitize_text_field($block_attributes['flipBoxBackButtonTextDecoration']) : 'none';
 $flipBoxBackButtonLetterSpacing = isset($block_attributes['flipBoxBackButtonLetterSpacing']) ? $block_attributes['flipBoxBackButtonLetterSpacing'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackButtonLetterSpacingUnits = isset($block_attributes['flipBoxBackButtonLetterSpacingUnits']) ? $block_attributes['flipBoxBackButtonLetterSpacingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $flipBoxBackButtonLineHeight = isset($block_attributes['flipBoxBackButtonLineHeight']) ? $block_attributes['flipBoxBackButtonLineHeight'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackButtonLineHeightUnits = isset($block_attributes['flipBoxBackButtonLineHeightUnits']) ? $block_attributes['flipBoxBackButtonLineHeightUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackButtonFontColor = isset($block_attributes['flipBoxBackButtonFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonFontColor']) : '';
-$flipBoxBackButtonFontHoverColor = isset($block_attributes['flipBoxBackButtonFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonFontHoverColor']) : '';
+$flipBoxBackButtonFontColor = isset($block_attributes['flipBoxBackButtonFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonFontColor']) : '#ffffff';
+$flipBoxBackButtonFontHoverColor = isset($block_attributes['flipBoxBackButtonFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonFontHoverColor']) : '#ffffff';
+
+$flipBoxBackButtonBgFontColor = isset($block_attributes['flipBoxBackButtonBgFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonBgFontColor']) : '';
+$flipBoxBackButtonBgFontHoverColor = isset($block_attributes['flipBoxBackButtonBgFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonBgFontHoverColor']) : '';
+
 
 /** Back Button Border*/
 $flipBoxBackButtonBorder = isset($block_attributes['flipBoxBackButtonBorder']) ? sanitize_text_field($block_attributes['flipBoxBackButtonBorder']) : '';
@@ -278,9 +300,9 @@ $flipBoxBackButtonBorderTypeGetTablet = $flipBoxBackButtonBorderTypeTablet['top'
 $flipBoxBackButtonBorderTypeGetMobile = $flipBoxBackButtonBorderTypeMobile['top'] . $flipBoxBackButtonBorderTypeUnits['Mobile'] . ' ' . $flipBoxBackButtonBorderTypeMobile['right'] . $flipBoxBackButtonBorderTypeUnits['Mobile'] . ' ' . $flipBoxBackButtonBorderTypeMobile['bottom'] . $flipBoxBackButtonBorderTypeUnits['Mobile'] . ' ' . $flipBoxBackButtonBorderTypeMobile['left'] . $flipBoxBackButtonBorderTypeUnits['Mobile'];
 
 $flipBoxBackButtonBorderRadiusUnits = isset($block_attributes['flipBoxBackButtonBorderRadiusUnits']) ? $block_attributes['flipBoxBackButtonBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackButtonBorderRadiusDesktop = isset($block_attributes['flipBoxBackButtonBorderRadiusDesktop']) ? $block_attributes['flipBoxBackButtonBorderRadiusDesktop'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
-$flipBoxBackButtonBorderRadiusTablet = isset($block_attributes['flipBoxBackButtonBorderRadiusTablet']) ? $block_attributes['flipBoxBackButtonBorderRadiusTablet'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
-$flipBoxBackButtonBorderRadiusMobile = isset($block_attributes['flipBoxBackButtonBorderRadiusMobile']) ? $block_attributes['flipBoxBackButtonBorderRadiusMobile'] : array('top' => '500', 'bottom' => '500', 'left' => '500', 'right' => '500');
+$flipBoxBackButtonBorderRadiusDesktop = isset($block_attributes['flipBoxBackButtonBorderRadiusDesktop']) ? $block_attributes['flipBoxBackButtonBorderRadiusDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxBackButtonBorderRadiusTablet = isset($block_attributes['flipBoxBackButtonBorderRadiusTablet']) ? $block_attributes['flipBoxBackButtonBorderRadiusTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxBackButtonBorderRadiusMobile = isset($block_attributes['flipBoxBackButtonBorderRadiusMobile']) ? $block_attributes['flipBoxBackButtonBorderRadiusMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackButtonBorderRadiusGetDesktop = $flipBoxBackButtonBorderRadiusDesktop['top'] . $flipBoxBackButtonBorderRadiusUnits['Desktop'] . ' ' . $flipBoxBackButtonBorderRadiusDesktop['right'] . $flipBoxBackButtonBorderRadiusUnits['Desktop'] . ' ' . $flipBoxBackButtonBorderRadiusDesktop['bottom'] . $flipBoxBackButtonBorderRadiusUnits['Desktop'] . ' ' . $flipBoxBackButtonBorderRadiusDesktop['left'] . $flipBoxBackButtonBorderRadiusUnits['Desktop'];
 $flipBoxBackButtonBorderRadiusGetTablet = $flipBoxBackButtonBorderRadiusTablet['top'] . $flipBoxBackButtonBorderRadiusUnits['Tablet'] . ' ' . $flipBoxBackButtonBorderRadiusTablet['right'] . $flipBoxBackButtonBorderRadiusUnits['Tablet'] . ' ' . $flipBoxBackButtonBorderRadiusTablet['bottom'] . $flipBoxBackButtonBorderRadiusUnits['Tablet'] . ' ' . $flipBoxBackButtonBorderRadiusTablet['left'] . $flipBoxBackButtonBorderRadiusUnits['Tablet'];
 $flipBoxBackButtonBorderRadiusGetMobile = $flipBoxBackButtonBorderRadiusMobile['top'] . $flipBoxBackButtonBorderRadiusUnits['Mobile'] . ' ' . $flipBoxBackButtonBorderRadiusMobile['right'] . $flipBoxBackButtonBorderRadiusUnits['Mobile'] . ' ' . $flipBoxBackButtonBorderRadiusMobile['bottom'] . $flipBoxBackButtonBorderRadiusUnits['Mobile'] . ' ' . $flipBoxBackButtonBorderRadiusMobile['left'] . $flipBoxBackButtonBorderRadiusUnits['Mobile'];
@@ -319,8 +341,17 @@ $css_content = "
     " . ($flipBoxItemFrontBorderColor ? "border-color: " . $flipBoxItemFrontBorderColor . ";" : "") . "
     " . ($flipBoxItemFrontBgFontColor ? "background: " . $flipBoxItemFrontBgFontColor . ";" : "") . "
 }
-.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
+	" . ($flipBoxItemFrontPaddingGetDesktop ? "padding: " . $flipBoxItemFrontPaddingGetDesktop . ";" : "") . "
+}
+.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-content-inner {
+	" . ($flipBoxItemBackPaddingGetDesktop ? "padding: " . $flipBoxItemBackPaddingGetDesktop . ";" : "") . "
+}
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
+    display: inline-block;
     " . ($flipBoxFrontIconSize['Desktop'] ? "width: " . $flipBoxFrontIconSize['Desktop'] . $flipBoxFrontIconSizeUnits['Desktop'] . ";" : "") . "
+    " . ($flipBoxFrontIconSize['Desktop'] ? "height: " . $flipBoxFrontIconSize['Desktop'] . $flipBoxFrontIconSizeUnits['Desktop'] . ";" : "") . "
     " . ($flipBoxFrontIconBorder ? "border: " . $flipBoxFrontIconBorder . ";" : "") . "
     " . ($flipBoxFrontIconBorderTypeGetDesktop ? "border-width: " . $flipBoxFrontIconBorderTypeGetDesktop . ";" : "") . "
     " . ($flipBoxFrontIconBorderRadiusGetDesktop ? "border-radius: " . $flipBoxFrontIconBorderRadiusGetDesktop . ";" : "") . "
@@ -331,8 +362,10 @@ $css_content = "
     " . ($flipBoxFrontIconMarginGetDesktop ? "margin: " . $flipBoxFrontIconMarginGetDesktop . ";" : "") . "
 }
 
-.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
     " . ($flipBoxBackIconSize['Desktop'] ? "width: " . $flipBoxBackIconSize['Desktop'] . $flipBoxBackIconSizeUnits['Desktop'] . ";" : "") . "
+    " . ($flipBoxBackIconSize['Desktop'] ? "height: " . $flipBoxBackIconSize['Desktop'] . $flipBoxBackIconSizeUnits['Desktop'] . ";" : "") . "
     " . ($flipBoxBackIconBorder ? "border: " . $flipBoxBackIconBorder . ";" : "") . "
     " . ($flipBoxBackIconBorderTypeGetDesktop ? "border-width: " . $flipBoxBackIconBorderTypeGetDesktop . ";" : "") . "
     " . ($flipBoxBackIconBorderRadiusGetDesktop ? "border-radius: " . $flipBoxBackIconBorderRadiusGetDesktop . ";" : "") . "
@@ -369,7 +402,7 @@ $css_content = "
     " . ($flipBoxFrontContentMarginGetDesktop ? "margin: " . $flipBoxFrontContentMarginGetDesktop . ";" : "") . "
 }
 
-.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
     display: inline-block;
     " . ($flipBoxBackButtonFontColor ? "color: " . $flipBoxBackButtonFontColor . ";" : "") . "
     " . ($flipBoxBackButtonBgFontColor ? "background: " . $flipBoxBackButtonBgFontColor . ";" : "") . "
@@ -432,15 +465,25 @@ $css_content = "
         " . ($flipBoxItemBackBorderTypeGetTablet ? "border-width: " . $flipBoxItemBackBorderTypeGetTablet . ";" : "") . "
         " . ($flipBoxItemBackBorderRadiusGetTablet ? "border-radius: " . $flipBoxItemBackBorderRadiusGetTablet . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+    .fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
+		" . ($flipBoxItemFrontPaddingGetTablet ? "padding: " . $flipBoxItemFrontPaddingGetTablet . ";" : "") . "
+	}
+	.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-content-inner {
+		" . ($flipBoxItemBackPaddingGetTablet ? "padding: " . $flipBoxItemBackPaddingGetTablet . ";" : "") . "
+	}
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
         " . ($flipBoxFrontIconSize['Tablet'] ? "width: " . $flipBoxFrontIconSize['Tablet'] . $flipBoxFrontIconSizeUnits['Tablet'] . ";" : "") . "
+        " . ($flipBoxFrontIconSize['Tablet'] ? "height: " . $flipBoxFrontIconSize['Tablet'] . $flipBoxFrontIconSizeUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxFrontIconBorderTypeGetTablet ? "border-width: " . $flipBoxFrontIconBorderTypeGetTablet . ";" : "") . "
         " . ($flipBoxFrontIconBorderRadiusGetTablet ? "border-radius: " . $flipBoxFrontIconBorderRadiusGetTablet . ";" : "") . "
         " . ($flipBoxFrontIconPaddingGetTablet ? "padding: " . $flipBoxFrontIconPaddingGetTablet . ";" : "") . "
         " . ($flipBoxFrontIconMarginGetTablet ? "margin: " . $flipBoxFrontIconMarginGetTablet . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
         " . ($flipBoxBackIconSize['Tablet'] ? "width: " . $flipBoxBackIconSize['Tablet'] . $flipBoxBackIconSizeUnits['Tablet'] . ";" : "") . "
+        " . ($flipBoxBackIconSize['Tablet'] ? "height: " . $flipBoxBackIconSize['Tablet'] . $flipBoxBackIconSizeUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxBackIconBorderTypeGetTablet ? "border-width: " . $flipBoxBackIconBorderTypeGetTablet . ";" : "") . "
         " . ($flipBoxBackIconBorderRadiusGetTablet ? "border-radius: " . $flipBoxBackIconBorderRadiusGetTablet . ";" : "") . "
         " . ($flipBoxBackIconPaddingGetTablet ? "padding: " . $flipBoxBackIconPaddingGetTablet . ";" : "") . "
@@ -458,7 +501,7 @@ $css_content = "
         " . ($flipBoxFrontContentLineHeight['Tablet'] ? "line-height: " . $flipBoxFrontContentLineHeight['Tablet'] . $flipBoxFrontContentLineHeightUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxFrontContentMarginGetTablet ? "margin: " . $flipBoxFrontContentMarginGetTablet . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
         " . ($flipBoxBackButtonFontSize['Tablet'] ? "font-size: " . $flipBoxBackButtonFontSize['Tablet'] . $flipBoxBackButtonFontSizeUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxBackButtonLetterSpacing['Tablet'] ? "letter-spacing: " . $flipBoxBackButtonLetterSpacing['Tablet'] . $flipBoxBackButtonLetterSpacingUnits['Tablet'] . ";" : "") . "
         " . ($flipBoxBackButtonLineHeight['Tablet'] ? "line-height: " . $flipBoxBackButtonLineHeight['Tablet'] . $flipBoxBackButtonLineHeightUnits['Tablet'] . ";" : "") . "
@@ -493,15 +536,25 @@ $css_content = "
         " . ($flipBoxItemBackBorderTypeGetMobile ? "border-width: " . $flipBoxItemBackBorderTypeGetMobile . ";" : "") . "
         " . ($flipBoxItemBackBorderRadiusGetMobile ? "border-radius: " . $flipBoxItemBackBorderRadiusGetMobile . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg {
+    .fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
+		" . ($flipBoxItemFrontPaddingGetMobile ? "padding: " . $flipBoxItemFrontPaddingGetMobile . ";" : "") . "
+	}
+	.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-content-inner {
+		" . ($flipBoxItemBackPaddingGetMobile ? "padding: " . $flipBoxItemBackPaddingGetMobile . ";" : "") . "
+	}
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-icon-img {
         " . ($flipBoxFrontIconSize['Mobile'] ? "width: " . $flipBoxFrontIconSize['Mobile'] . $flipBoxFrontIconSizeUnits['Mobile'] . ";" : "") . "
+        " . ($flipBoxFrontIconSize['Mobile'] ? "height: " . $flipBoxFrontIconSize['Mobile'] . $flipBoxFrontIconSizeUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxFrontIconBorderTypeGetMobile ? "border-width: " . $flipBoxFrontIconBorderTypeGetMobile . ";" : "") . "
         " . ($flipBoxFrontIconBorderRadiusGetMobile ? "border-radius: " . $flipBoxFrontIconBorderRadiusGetMobile . ";" : "") . "
         " . ($flipBoxFrontIconPaddingGetMobile ? "padding: " . $flipBoxFrontIconPaddingGetMobile . ";" : "") . "
         " . ($flipBoxFrontIconMarginGetMobile ? "margin: " . $flipBoxFrontIconMarginGetMobile . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg {
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon svg,
+	.fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-icon-img {
         " . ($flipBoxBackIconSize['Mobile'] ? "width: " . $flipBoxBackIconSize['Mobile'] . $flipBoxBackIconSizeUnits['Mobile'] . ";" : "") . "
+        " . ($flipBoxBackIconSize['Mobile'] ? "height: " . $flipBoxBackIconSize['Mobile'] . $flipBoxBackIconSizeUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxBackIconBorderTypeGetMobile ? "border-width: " . $flipBoxBackIconBorderTypeGetMobile . ";" : "") . "
         " . ($flipBoxBackIconBorderRadiusGetMobile ? "border-radius: " . $flipBoxBackIconBorderRadiusGetMobile . ";" : "") . "
         " . ($flipBoxBackIconPaddingGetMobile ? "padding: " . $flipBoxBackIconPaddingGetMobile . ";" : "") . "
@@ -519,7 +572,7 @@ $css_content = "
         " . ($flipBoxFrontContentLineHeight['Mobile'] ? "line-height: " . $flipBoxFrontContentLineHeight['Mobile'] . $flipBoxFrontContentLineHeightUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxFrontContentMarginGetMobile ? "margin: " . $flipBoxFrontContentMarginGetMobile . ";" : "") . "
     }
-    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-front .fb-flip-box-back-button {
+    .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
         " . ($flipBoxBackButtonFontSize['Mobile'] ? "font-size: " . $flipBoxBackButtonFontSize['Mobile'] . $flipBoxBackButtonFontSizeUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxBackButtonLetterSpacing['Mobile'] ? "letter-spacing: " . $flipBoxBackButtonLetterSpacing['Mobile'] . $flipBoxBackButtonLetterSpacingUnits['Mobile'] . ";" : "") . "
         " . ($flipBoxBackButtonLineHeight['Mobile'] ? "line-height: " . $flipBoxBackButtonLineHeight['Mobile'] . $flipBoxBackButtonLineHeightUnits['Mobile'] . ";" : "") . "

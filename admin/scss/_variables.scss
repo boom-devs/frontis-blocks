@@ -1,9 +1,56 @@
-// Colors
+// Colors primary
 $primary-color: #4B9DEF;
-$secondary-color: #0a4b78;
+$primary-color-50: #EDF5FD;
+$primary-color-100: #DBEBFC;
+$primary-color-200: #B7D8F9;
+$primary-color-300: #93C4F5;
+$primary-color-400: #6FB1F2;
+$primary-color-600: #3C7FC3;
+$primary-color-700: #2D6296;
+$primary-color-800: #1F446A;
+$primary-color-850: #10273D;
+$primary-color-900: #081827;
+
+// Neutral Color
+$white-color: #FFFFFF;
+$neutral-color: #6A758E;
+$neutral-color-50: #F7F7F7;
+$neutral-color-100: #E1E3E8;
+$neutral-color-200: #C3C8D2;
+$neutral-color-300: #A6ACBB;
+$neutral-color-400: #8891A5;
+$neutral-color-600: #555E72;
+$neutral-color-700: #404655;
+$neutral-color-800: #2A2F39;
+$neutral-color-850: #20232B;
+$neutral-color-900: #15171C;
+$neutral-color-950: #0B0C0E;
+
+// Success Color
 $success-color: #4CAF50;
-$warning-color: #ffb900;
+$success-color-50: #EDF7EE;
+$success-color-100: #DBEFDC;
+$success-color-200: #B7DFB9;
+$success-color-300: #94CF96;
+$success-color-400: #70BF73;
+
+// Warning Color
+$warning-color: #F89B2E;
+$warning-color-50: #FEF5EA;
+$warning-color-100: #FEEBD5;
+$warning-color-200: #FCD7AB;
+$warning-color-300: #FBC382;
+$warning-color-400: #F9AF58;
+
+// Error Color
 $error-color: #E43242;
+$error-color-50: #FCEBEC;
+$error-color-100: #FAD6D9;
+$error-color-200: #F4ADB3;
+$error-color-300: #EF848E;
+$error-color-400: #E95B68;
+
+// Text Color
 $text-color: #1e1e1e;
 $light-gray: #f0f0f1;
 $medium-gray: #ddd;
@@ -13,8 +60,8 @@ $text-muted: #6c6c6c;
 // Typography
 $base-font-size: 14px;
 $base-line-height: 1.5;
-$heading-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-$body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$heading-font-family: "Plus Jakarta Sans", sans-serif;
+$body-font-family: "Work Sans", sans-serif;
 
 // Spacing
 $spacing-unit: 8px;

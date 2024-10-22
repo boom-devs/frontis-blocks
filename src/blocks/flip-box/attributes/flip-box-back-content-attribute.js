@@ -10,11 +10,11 @@ const flipBoxBackContentAttributes = {
 	},
 	flipBoxBackContentFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	flipBoxBackContentFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	/** End Color */
 
@@ -27,8 +27,8 @@ const flipBoxBackContentAttributes = {
 		type: 'object',
 		default: {
 			Desktop: '18',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	flipBoxBackContentFontSizeUnits: {

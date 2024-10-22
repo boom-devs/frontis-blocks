@@ -1,6 +1,6 @@
 const flipBoxFrontIconAttributes = {
 
-	mediaSwitcher : {
+	flipBoxFrontIconMediaSwitcher : {
 		type: "string",
 		default: "icon"
 	},
@@ -10,14 +10,14 @@ const flipBoxFrontIconAttributes = {
 	},
 	flipBoxFrontIcon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'lightbulb',
 	},
 
 	// Icon Size
 	flipBoxFrontIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '80',
+			Desktop: '40',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -39,11 +39,11 @@ const flipBoxFrontIconAttributes = {
 	},
 	flipBoxFrontIconFontColor: {
 		type: "string",
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	flipBoxFrontIconFontHoverColor: {
 		type: 'string',
-		default: "#0d173bb3"
+		default: "#ffffff"
 	},
 	/** End Color */
 
@@ -116,10 +116,10 @@ const flipBoxFrontIconAttributes = {
 	flipBoxFrontIconPaddingDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
 		},
 	},
 	flipBoxFrontIconPaddingTablet: {
@@ -215,10 +215,10 @@ const flipBoxFrontIconAttributes = {
 	flipBoxFrontIconBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	flipBoxFrontIconBorderRadiusTablet: {

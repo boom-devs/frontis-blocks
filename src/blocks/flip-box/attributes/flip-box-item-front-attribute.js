@@ -33,48 +33,6 @@ const flipBoxItemFrontAttributes = {
 	},
 	/** End BG Color */
 
-	/** Start Padding */
-	flipBoxItemFrontPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	flipBoxItemFrontPaddingDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	flipBoxItemFrontPaddingTablet: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	flipBoxItemFrontPaddingMobile: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	flipBoxItemFrontPaddingLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Padding */
-
 	/** Start Border Type */
 	flipBoxItemFrontBorderColorSwitcher: {
 		type: "string",
@@ -144,28 +102,28 @@ const flipBoxItemFrontAttributes = {
 	flipBoxItemFrontBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '15',
+			bottom: '15',
+			left: '15',
+			right: '15',
 		},
 	},
 	flipBoxItemFrontBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '15',
+			bottom: '15',
+			left: '15',
+			right: '15',
 		},
 	},
 	flipBoxItemFrontBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '15',
+			bottom: '15',
+			left: '15',
+			right: '15',
 		},
 	},
 	flipBoxItemFrontBorderRadiusLink : {
@@ -173,6 +131,55 @@ const flipBoxItemFrontAttributes = {
 		default: true
 	},
 	/** End Border Radius */
+
+	/** Start Padding */
+	flipBoxItemFrontPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	flipBoxItemFrontPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxItemFrontPaddingTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxItemFrontPaddingMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxItemFrontPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Alignment */
+	flipBoxItemFrontAlignment: {
+		type: "string",
+		default: "center",
+	},
+	/** End Alignment */
 
 };
 

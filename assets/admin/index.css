@@ -1,6 +1,10 @@
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/react-toastify/dist/ReactToastify.css ***!
-  \****************************************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/scss/admin.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap);
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/react-toastify/dist/ReactToastify.css ***!
+  \********************************************************************************************************************************************************************************************************/
 :root {
   --toastify-color-light: #fff;
   --toastify-color-dark: #121212;
@@ -694,9 +698,9 @@
 }
 
 /*# sourceMappingURL=ReactToastify.css.map */
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./assets/css/switch.css ***!
-  \***********************************************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./assets/css/switch.css ***!
+  \***************************************************************************************************************************************************************************/
 .rc-switch {
   position: relative;
   display: inline-block;
@@ -800,9 +804,14 @@
   }
 }
 
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/scss/admin.scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/scss/admin.scss (1) ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+.fb-blocks-container {
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
+}
 .fb-blocks-header {
   display: flex;
   justify-content: space-between;
@@ -874,10 +883,10 @@
   color: #1e1e1e;
 }
 .fb-blocks-button {
-  padding: 8px 16px;
+  padding: 16px 24px;
   margin-left: 8px;
   background-color: #f0f0f1;
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -886,18 +895,18 @@
   background-color: rgb(226.8103448276, 226.8103448276, 228.6896551724);
 }
 .fb-blocks-button.fb-blocks-enable-all {
-  background-color: #4CAF50;
-  color: #fff;
+  background-color: #4B9DEF;
+  color: #FFFFFF;
 }
 .fb-blocks-button.fb-blocks-enable-all:hover {
-  background-color: rgb(68.2788844622, 157.2211155378, 71.8725099602);
+  background-color: rgb(51.5816326531, 144.25, 236.9183673469);
 }
 .fb-blocks-button.fb-blocks-disable-all {
-  background-color: #E43242;
-  color: #fff;
+  background-color: #F7F7F7;
+  color: #15171C;
 }
 .fb-blocks-button.fb-blocks-disable-all:hover {
-  background-color: rgb(223.1142241379, 29.3857758621, 46.7995689655);
+  background-color: rgb(234.25, 234.25, 234.25);
 }
 .fb-blocks-category-filter {
   display: flex;
@@ -1037,8 +1046,11 @@
 }
 
 .fb-blocks-settings {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Work Sans", sans-serif;
   color: #1e1e1e;
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
 }
 .fb-blocks-settings h2 {
   font-size: 23px;
@@ -1239,10 +1251,37 @@
   margin-left: 10px;
 }
 
+.fb-upgrade-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  background-color: #F89B2E;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.fb-upgrade-button svg {
+  height: 24px;
+  width: 24px;
+  margin-left: 8px;
+}
+.fb-upgrade-button:hover {
+  background-color: rgb(235.125, 130.5, 7.875);
+  color: #FFFFFF;
+}
+.fb-upgrade-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(248, 155, 46, 0.5);
+}
+
 .fb-blocks-integration {
   margin: 20px auto;
-  background-color: #fff;
-  border-radius: 4px;
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
 }
 .fb-blocks-integration .integration-section {
   padding: 24px;
@@ -1350,6 +1389,9 @@
 .fb-blocks-pricing {
   max-width: 100%;
   margin: 0 auto;
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 14px;
 }
 .fb-blocks-pricing h2 {
   text-align: center;
@@ -1381,12 +1423,12 @@
 .fb-blocks-pricing .fb-pricing-header h2 {
   font-size: 24px;
   font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 .fb-blocks-pricing .fb-pricing-header p {
   font-size: 14px;
   font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 .fb-blocks-pricing .fb-pricing-type {
   display: block;
@@ -1467,9 +1509,199 @@
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+.fb-blocks-dashboard {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+.fb-blocks-dashboard-left {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.fb-blocks-dashboard-right {
+  width: 30%;
+}
+
+.fb-pro-banner {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 16px;
+}
+.fb-pro-banner .fb-pro-title-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.fb-pro-banner .fb-pro-title-flex span {
+  width: 100px;
+  height: 100px;
+  background-color: #FEF5EA;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fb-pro-banner .fb-pro-title-flex span svg {
+  width: 40px;
+  height: 40px;
+}
+.fb-pro-banner .fb-pro-title-flex h2 {
+  font-size: 30px;
+  font-weight: 500;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #2A2F39;
+}
+
+.fb-video-banner {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+}
+.fb-video-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+}
+.fb-video-banner-content h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1F446A;
+  margin: 0;
+}
+.fb-video-banner-content p {
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  color: #555E72;
+  margin-bottom: 16px;
+}
+
+.fb-create-page-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 20px 16px;
+  background-color: #F7F7F7;
+  color: #1F446A;
+  border: none;
+  border-radius: 4px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+.fb-create-page-button:hover {
+  background-color: #E1E3E8;
+}
+.fb-create-page-button span {
+  margin-left: 8px;
+  font-size: 20px;
+}
+
+.fb-video-wrapper {
+  width: 100%;
+  padding-bottom: 56.25%;
+  position: relative;
+  overflow: hidden;
+}
+.fb-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fb-system-requirements {
+  background-color: #FFFFFF;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.fb-system-requirements h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.fb-system-requirements-list {
+  display: flex;
+  flex-direction: column;
+}
+.fb-system-requirements-note {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #E1E3E8;
+}
+.fb-system-requirements-note p {
+  font-size: 14px;
+  color: #555E72;
+}
+
+.fb-system-requirement-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #F7F7F7;
+}
+.fb-system-requirement-item:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.fb-system-requirement-item:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.fb-system-requirement-item.good {
+  background-color: #EDF7EE;
+  border: 1px solid #DBEFDC;
+}
+.fb-system-requirement-item.warning {
+  background-color: #FEF5EA;
+  border: 1px solid #FEEBD5;
+}
+.fb-system-requirement-item.error {
+  background-color: #FCEBEC;
+  border: 1px solid #FAD6D9;
+}
+.fb-system-requirement-item svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+.fb-system-requirement-item .fb-requirement-label {
+  flex: 1;
+  font-weight: 500;
+  color: #6A758E;
+}
+.fb-system-requirement-item .fb-requirement-value {
+  font-weight: 600;
+}
+
+#frontis-blocks-admin {
+  background-color: #f5f7fa;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI2NTgiIHZpZXdCb3g9IjAgMCAxOTIwIDY1OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxnIG9wYWNpdHk9IjAuMyIgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZl81NTQzXzM2NzIpIj4NCjxlbGxpcHNlIGN4PSI5NjAiIHJ4PSI2NDUiIHJ5PSIyNTgiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl81NTQzXzM2NzIpIi8+DQo8L2c+DQo8ZGVmcz4NCjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZl81NTQzXzM2NzIiIHg9Ii04NSIgeT0iLTY1OCIgd2lkdGg9IjIwOTAiIGhlaWdodD0iMTMxNiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPg0KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4NCjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9InNoYXBlIi8+DQo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyMDAiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl81NTQzXzM2NzIiLz4NCjwvZmlsdGVyPg0KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzU1NDNfMzY3MiIgeDE9IjMxNSIgeTE9IjIuNDI1MjJlLTA1IiB4Mj0iMTYwNSIgeTI9Ii0xLjEyNDYyZS0wNSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KPHN0b3Agc3RvcC1jb2xvcj0iI0MyRTBGRSIvPg0KPHN0b3Agb2Zmc2V0PSIwLjI1IiBzdG9wLWNvbG9yPSIjRkZENkE3Ii8+DQo8c3RvcCBvZmZzZXQ9IjAuNTI1IiBzdG9wLWNvbG9yPSIjRDJGREQzIi8+DQo8c3RvcCBvZmZzZXQ9IjAuNzUiIHN0b3AtY29sb3I9IiNGRTkyOUMiLz4NCjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0QwOUFGRiIvPg0KPC9saW5lYXJHcmFkaWVudD4NCjwvZGVmcz4NCjwvc3ZnPg0K);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
+  padding: 20px 0;
+  margin-left: -20px;
+}
+
 .frontis-blocks-admin {
   display: flex;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 .frontis-blocks-admin .frontis-blocks-menu-list {
   width: 280px;
@@ -1552,7 +1784,6 @@
   align-items: center;
   margin-bottom: 20px;
   padding: 8px 20px;
-  margin-top: 30px;
 }
 .fb-header-top-left svg {
   height: 62px;
@@ -1563,30 +1794,6 @@
   font-weight: bold;
   color: #1e1e1e;
   margin: 0;
-}
-.fb-header-top-right .fb-upgrade-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 20px;
-  background-color: #ffb900;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-.fb-header-top-right .fb-upgrade-button svg {
-  height: 24px;
-  width: 24px;
-  margin-left: 8px;
-}
-.fb-header-top-right .fb-upgrade-button:hover {
-  background-color: #cc9400;
-}
-.fb-header-top-right .fb-upgrade-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 185, 0, 0.5);
 }
 
 .fb-blocks-tab-panel {
@@ -1619,28 +1826,24 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #555d66;
-  font-size: 13px;
-  font-weight: 400;
+  color: #555E72;
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
 }
 .fb-blocks-tab-button:hover {
-  color: #0073aa;
+  color: #4B9DEF;
 }
 .fb-blocks-tab-button.fb-blocks-active-tab {
-  color: #fff;
-  background-color: #4B9DEF;
+  color: #4B9DEF;
+  background-color: #EDF5FD;
   border-radius: 8px;
 }
 .fb-blocks-tab-button svg {
   width: 20px;
   height: 20px;
   margin-right: 8px;
-}
-
-.fb-blocks-tab-content {
-  padding: 24px;
-  background-color: #fff;
-  border-radius: 14px;
 }
 
 .fb-blocks-version {
