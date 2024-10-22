@@ -4,10 +4,10 @@ import Switch from 'rc-switch';
 import { Doc, Link } from '../icons';
 
 const BlockCard = ({ block, onChange }) => {
-    const [isChecked, setIsChecked] = useState(block.status === 'true');
+    const [isChecked, setIsChecked] = useState(block.status === '1');
 
     useEffect(() => {
-        setIsChecked(block.status === 'true');
+        setIsChecked(block.status === '1');
     }, [block.status]);
 
     const handleChange = (checked) => {

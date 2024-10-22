@@ -184,12 +184,12 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var BlockCard = function BlockCard(_ref) {
   var block = _ref.block,
     onChange = _ref.onChange;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(block.status === 'true'),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(block.status === '1'),
     _useState2 = _slicedToArray(_useState, 2),
     isChecked = _useState2[0],
     setIsChecked = _useState2[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    setIsChecked(block.status === 'true');
+    setIsChecked(block.status === '1');
   }, [block.status]);
   var handleChange = function handleChange(checked) {
     onChange(block.slug, checked);
