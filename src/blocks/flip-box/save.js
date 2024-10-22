@@ -162,6 +162,8 @@ export default function save({ attributes }) {
 		flipBoxItemFrontBgFontColor,
 		flipBoxItemFrontBgFontHoverColor,
 
+		flipBoxItemFrontAlignment,
+
 		flipBoxItemFrontSize,
 		flipBoxItemFrontSizeUnits,
 		flipBoxItemFrontBorderTypeUnits,
@@ -178,6 +180,12 @@ export default function save({ attributes }) {
 		flipBoxItemFrontBorderRadiusTablet,
 		flipBoxItemFrontBorderRadiusMobile,
 		flipBoxItemFrontBorderRadiusLink,
+
+		flipBoxItemFrontPaddingUnits,
+		flipBoxItemFrontPaddingDesktop,
+		flipBoxItemFrontPaddingTablet,
+		flipBoxItemFrontPaddingMobile,
+		flipBoxItemFrontPaddingLink,
 		/** End Flip Box Item Front Attribute */
 
 
@@ -185,6 +193,8 @@ export default function save({ attributes }) {
 		flipBoxItemBackBgFontColorSwitcher,
 		flipBoxItemBackBgFontColor,
 		flipBoxItemBackBgFontHoverColor,
+
+		flipBoxItemBackAlignment,
 
 		flipBoxItemBackSize,
 		flipBoxItemBackSizeUnits,
@@ -202,6 +212,12 @@ export default function save({ attributes }) {
 		flipBoxItemBackBorderRadiusTablet,
 		flipBoxItemBackBorderRadiusMobile,
 		flipBoxItemBackBorderRadiusLink,
+
+		flipBoxItemBackPaddingUnits,
+		flipBoxItemBackPaddingDesktop,
+		flipBoxItemBackPaddingTablet,
+		flipBoxItemBackPaddingMobile,
+		flipBoxItemBackPaddingLink,
 		/** End Flip Box Item Back Attribute */
 
 		/** Start Flip Box Front Title Attribute */
@@ -313,7 +329,7 @@ export default function save({ attributes }) {
 			<div className={`fb-flip-box-wrapper ${blockID}`}>
 				<div className={`fb-flip-box-item`}>
 					<div className="fb-flip-box-front">
-						<div className="fb-flip-box-content">
+						<div className="fb-flip-box-content" style={{textAlign: flipBoxItemFrontAlignment}}>
 							<div className="fb-flip-box-content-inner">
 								<div className={`fb-flip-box-icon-wrapper`}>
 									{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
@@ -337,7 +353,7 @@ export default function save({ attributes }) {
 						</div>
 					</div>
 					<div className="fb-flip-box-back">
-						<div className="fb-flip-box-content">
+						<div className="fb-flip-box-content" style={{textAlign: flipBoxItemBackAlignment}}>
 							<div className="fb-flip-box-content-inner">
 								<div className={`fb-flip-box-icon-wrapper`}>
 									{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
@@ -357,18 +373,21 @@ export default function save({ attributes }) {
 									value={flipBoxBackContent}
 									className="fb-flip-box-back-content"
 								/>
-								<a
-									className="fb-flip-box-back-button"
-									href={flipBoxBackButtonUrl}
-									target={flipBoxBackButtonTargetUrl ? '_blank' : undefined}
-									rel={flipBoxBackButtonTargetUrl ? 'noopener noreferrer' : undefined}
-								>
-									<RichText.Content
-										tagName="span"
-										value={flipBoxBackButtonText}
-										className="fb-flip-box-back-button-text"
-									/>
-								</a>
+								{attributes.flipBoxBackButtonText ? (
+									<a
+										className="fb-flip-box-back-button"
+										href={flipBoxBackButtonUrl}
+										target={flipBoxBackButtonTargetUrl ? '_blank' : undefined}
+										rel={flipBoxBackButtonTargetUrl ? 'noopener noreferrer' : undefined}
+									>
+										<RichText.Content
+											tagName="span"
+											value={attributes.flipBoxBackButtonText}
+											className="fb-flip-box-back-button-text"
+										/>
+									</a>
+								) : null}
+
 							</div>
 						</div>
 					</div>
