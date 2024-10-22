@@ -30,6 +30,12 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 		flipBoxItemFrontBorderRadiusMobile,
 		flipBoxItemFrontBorderRadiusLink,
 
+		flipBoxItemFrontPaddingUnits,
+		flipBoxItemFrontPaddingDesktop,
+		flipBoxItemFrontPaddingTablet,
+		flipBoxItemFrontPaddingMobile,
+		flipBoxItemFrontPaddingLink,
+
 	} = attributes;
 
 
@@ -180,7 +186,74 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 	}
 	/** End Border Radius*/
 
+	/** Start Padding */
+	const flipBoxItemFrontPaddingHandleSpacingUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( flipBoxItemFrontPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						flipBoxItemFrontPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						flipBoxItemFrontPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						flipBoxItemFrontPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {flipBoxItemFrontPaddingDesktop: {...flipBoxItemFrontPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {flipBoxItemFrontPaddingTablet: {...flipBoxItemFrontPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {flipBoxItemFrontPaddingMobile: {...flipBoxItemFrontPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
+	}
+	const flipBoxItemFrontPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes( {flipBoxItemFrontPaddingLink: !flipBoxItemFrontPaddingLink} );
+	}
+
+	const flipBoxItemFrontPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes( {
+			flipBoxItemFrontPaddingUnits: {
+				...flipBoxItemFrontPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Padding */
 
 	return (
 		<>
@@ -244,6 +317,18 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 				handleColorSwitcherChange={(value) => setAttributes({ flipBoxItemFrontBorderColorSwitcher: value })}
 				handleGlobalColorChange={(value) => setAttributes({ flipBoxItemFrontBorderColor: value })}
 				handleGlobalHoverColorChange={(value) => setAttributes({ flipBoxItemFrontBorderHoverColor: value })}
+			/>
+			<FB_Spacing
+				label={ 'Padding' }
+				deviceType={deviceType}
+				spacingUnitsHandler={flipBoxItemFrontPaddingSpacingUnitsHandler}
+				spacingUnits={flipBoxItemFrontPaddingUnits}
+				spacingDesktop={flipBoxItemFrontPaddingDesktop}
+				spacingTablet={flipBoxItemFrontPaddingTablet}
+				spacingMobile={flipBoxItemFrontPaddingMobile}
+				handleSpacingUnitHandler={flipBoxItemFrontPaddingHandleSpacingUnitHandler}
+				spacingCombineBtn={flipBoxItemFrontPaddingLink}
+				spacingCombineBtnHandler={flipBoxItemFrontPaddingSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
 			/>
 		</>
 	);

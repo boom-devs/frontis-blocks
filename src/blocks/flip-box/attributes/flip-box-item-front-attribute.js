@@ -33,48 +33,6 @@ const flipBoxItemFrontAttributes = {
 	},
 	/** End BG Color */
 
-	/** Start Padding */
-	flipBoxItemFrontPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	flipBoxItemFrontPaddingDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	flipBoxItemFrontPaddingTablet: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	flipBoxItemFrontPaddingMobile: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	flipBoxItemFrontPaddingLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Padding */
-
 	/** Start Border Type */
 	flipBoxItemFrontBorderColorSwitcher: {
 		type: "string",
@@ -173,6 +131,48 @@ const flipBoxItemFrontAttributes = {
 		default: true
 	},
 	/** End Border Radius */
+
+	/** Start Padding */
+	flipBoxItemFrontPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	flipBoxItemFrontPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxItemFrontPaddingTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxItemFrontPaddingMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	flipBoxItemFrontPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
 
 };
 
