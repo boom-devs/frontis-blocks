@@ -342,7 +342,7 @@ export default function FlipBoxBackIconControl ({ attributes, setAttributes}) {
 				units={flipBoxBackIconSizeUnits}
 				setAttributes={setAttributes}
 				rangeStep={1}
-				resetFallbackValue={80}
+				resetFallbackValue={40}
 			/>
 			<FB_Color
 				label={__("Color", "frontis-blocks")}

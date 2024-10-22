@@ -30,7 +30,7 @@ $flipBoxItemFrontBorderRadiusGetTablet = $flipBoxItemFrontBorderRadiusTablet['to
 $flipBoxItemFrontBorderRadiusGetMobile = $flipBoxItemFrontBorderRadiusMobile['top'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderRadiusMobile['right'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderRadiusMobile['bottom'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemFrontBorderRadiusMobile['left'] . $flipBoxItemFrontBorderRadiusUnits['Mobile'];
 
 /** Front Icon*/
-$flipBoxFrontIconSize = isset($block_attributes['flipBoxFrontIconSize']) ? $block_attributes['flipBoxFrontIconSize'] : array('Desktop' => '70', 'Tablet' => '', 'Mobile' => '');
+$flipBoxFrontIconSize = isset($block_attributes['flipBoxFrontIconSize']) ? $block_attributes['flipBoxFrontIconSize'] : array('Desktop' => '40', 'Tablet' => '', 'Mobile' => '');
 $flipBoxFrontIconSizeUnits = isset($block_attributes['flipBoxFrontIconSizeUnits']) ? $block_attributes['flipBoxFrontIconSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
 $flipBoxFrontIconFontColor = isset($block_attributes['flipBoxFrontIconFontColor']) ? sanitize_hex_color($block_attributes['flipBoxFrontIconFontColor']) : '#ffffff';
@@ -61,7 +61,7 @@ $flipBoxFrontIconBorderRadiusGetMobile = $flipBoxFrontIconBorderRadiusMobile['to
 
 /** Front Icon Padding */
 $flipBoxFrontIconPaddingUnits = isset($block_attributes['flipBoxFrontIconPaddingUnits']) ? $block_attributes['flipBoxFrontIconPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxFrontIconPaddingDesktop = isset($block_attributes['flipBoxFrontIconPaddingDesktop']) ? $block_attributes['flipBoxFrontIconPaddingDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxFrontIconPaddingDesktop = isset($block_attributes['flipBoxFrontIconPaddingDesktop']) ? $block_attributes['flipBoxFrontIconPaddingDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '20', 'right' => '20');
 $flipBoxFrontIconPaddingTablet = isset($block_attributes['flipBoxFrontIconPaddingTablet']) ? $block_attributes['flipBoxFrontIconPaddingTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontIconPaddingMobile = isset($block_attributes['flipBoxFrontIconPaddingMobile']) ? $block_attributes['flipBoxFrontIconPaddingMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxFrontIconPaddingGetDesktop = $flipBoxFrontIconPaddingDesktop['top'] . $flipBoxFrontIconPaddingUnits['Desktop'] . ' ' . $flipBoxFrontIconPaddingDesktop['right'] . $flipBoxFrontIconPaddingUnits['Desktop'] . ' ' . $flipBoxFrontIconPaddingDesktop['bottom'] . $flipBoxFrontIconPaddingUnits['Desktop'] . ' ' . $flipBoxFrontIconPaddingDesktop['left'] . $flipBoxFrontIconPaddingUnits['Desktop'];
@@ -155,7 +155,7 @@ $flipBoxItemBackBorderRadiusGetTablet = $flipBoxItemBackBorderRadiusTablet['top'
 $flipBoxItemBackBorderRadiusGetMobile = $flipBoxItemBackBorderRadiusMobile['top'] . $flipBoxItemBackBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemBackBorderRadiusMobile['right'] . $flipBoxItemBackBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemBackBorderRadiusMobile['bottom'] . $flipBoxItemBackBorderRadiusUnits['Mobile'] . ' ' . $flipBoxItemBackBorderRadiusMobile['left'] . $flipBoxItemBackBorderRadiusUnits['Mobile'];
 
 /** Back Icon */
-$flipBoxBackIconSize = isset($block_attributes['flipBoxBackIconSize']) ? $block_attributes['flipBoxBackIconSize'] : array('Desktop' => '70', 'Tablet' => '', 'Mobile' => '');
+$flipBoxBackIconSize = isset($block_attributes['flipBoxBackIconSize']) ? $block_attributes['flipBoxBackIconSize'] : array('Desktop' => '40', 'Tablet' => '', 'Mobile' => '');
 $flipBoxBackIconSizeUnits = isset($block_attributes['flipBoxBackIconSizeUnits']) ? $block_attributes['flipBoxBackIconSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
 $flipBoxBackIconFontColor = isset($block_attributes['flipBoxBackIconFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackIconFontColor']) : '#F97255';
@@ -186,7 +186,7 @@ $flipBoxBackIconBorderRadiusGetMobile = $flipBoxBackIconBorderRadiusMobile['top'
 
 /** Back Icon Padding */
 $flipBoxBackIconPaddingUnits = isset($block_attributes['flipBoxBackIconPaddingUnits']) ? $block_attributes['flipBoxBackIconPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$flipBoxBackIconPaddingDesktop = isset($block_attributes['flipBoxBackIconPaddingDesktop']) ? $block_attributes['flipBoxBackIconPaddingDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$flipBoxBackIconPaddingDesktop = isset($block_attributes['flipBoxBackIconPaddingDesktop']) ? $block_attributes['flipBoxBackIconPaddingDesktop'] : array('top' => '20', 'bottom' => '20', 'left' => '20', 'right' => '20');
 $flipBoxBackIconPaddingTablet = isset($block_attributes['flipBoxBackIconPaddingTablet']) ? $block_attributes['flipBoxBackIconPaddingTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackIconPaddingMobile = isset($block_attributes['flipBoxBackIconPaddingMobile']) ? $block_attributes['flipBoxBackIconPaddingMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
 $flipBoxBackIconPaddingGetDesktop = $flipBoxBackIconPaddingDesktop['top'] . $flipBoxBackIconPaddingUnits['Desktop'] . ' ' . $flipBoxBackIconPaddingDesktop['right'] . $flipBoxBackIconPaddingUnits['Desktop'] . ' ' . $flipBoxBackIconPaddingDesktop['bottom'] . $flipBoxBackIconPaddingUnits['Desktop'] . ' ' . $flipBoxBackIconPaddingDesktop['left'] . $flipBoxBackIconPaddingUnits['Desktop'];
