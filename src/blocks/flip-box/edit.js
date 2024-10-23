@@ -230,6 +230,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemFrontBackgroundImageAlt,
 		flipBoxItemFrontBackgroundImageID,
 
+		flipBoxItemFrontBgImagePositionType,
+		flipBoxItemFrontBgImageAttachmentType,
+		flipBoxItemFrontBgImageRepeatType,
+		flipBoxItemFrontBgImageSizeType,
 		/** End Flip Box Item Front Attribute */
 
 
@@ -262,6 +266,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemBackPaddingTablet,
 		flipBoxItemBackPaddingMobile,
 		flipBoxItemBackPaddingLink,
+
+		flipBoxItemBackBackgroundImageEnabled,
+		flipBoxItemBackBackgroundImageUrl,
+		flipBoxItemBackBackgroundImageAlt,
+		flipBoxItemBackBackgroundImageID,
+
+		flipBoxItemBackBgImagePositionType,
+		flipBoxItemBackBgImageAttachmentType,
+		flipBoxItemBackBgImageRepeatType,
+		flipBoxItemBackBgImageSizeType,
 		/** End Flip Box Item Back Attribute */
 
 		/** Start Flip Box Front Title Attribute */
@@ -527,9 +541,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 					${flipBoxItemFrontBackgroundImageEnabled && flipBoxItemFrontBackgroundImageUrl && flipBoxItemFrontBackgroundImageUrl !== 'null' ? `
                         background-image: url(${flipBoxItemFrontBackgroundImageUrl});
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        background-size: cover;
+                        background-position: ${flipBoxItemFrontBgImagePositionType};
+                        background-repeat: ${flipBoxItemFrontBgImageRepeatType};
+                        background-size: ${flipBoxItemFrontBgImageSizeType};
                     ` : ''}
 				}
 
@@ -642,6 +656,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemBackBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemBackBorderRadiusGetDesktop};` : ''}
 					${flipBoxItemBackBorderColor ? `border-color: ${flipBoxItemBackBorderColor};` : ''}
 					${flipBoxItemBackBgFontColor ? `background: ${flipBoxItemBackBgFontColor};` : ''}
+
+					${flipBoxItemBackBackgroundImageEnabled && flipBoxItemBackBackgroundImageUrl && flipBoxItemBackBackgroundImageUrl !== 'null' ? `
+                        background-image: url(${flipBoxItemBackBackgroundImageUrl});
+                        background-position: ${flipBoxItemBackBgImagePositionType};
+                        background-repeat: ${flipBoxItemBackBgImageRepeatType};
+                        background-size: ${flipBoxItemBackBgImageSizeType};
+                    ` : ''}
 				}
 
 

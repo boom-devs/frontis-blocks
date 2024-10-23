@@ -1,3 +1,5 @@
+import {SELECT_BG_REPEAT_TYPE} from "@Blocks/flip-box/constants/constants";
+
 const flipBoxItemFrontAttributes = {
 	/** Start Size */
 	flipBoxItemFrontSize: {
@@ -46,6 +48,22 @@ const flipBoxItemFrontAttributes = {
 	},
 	flipBoxItemFrontBackgroundImageID: {
 		type: "number",
+	},
+	flipBoxItemFrontBgImagePositionType: {
+		type: 'string',
+		default: "center center",
+	},
+	flipBoxItemFrontBgImageAttachmentType: {
+		type: 'string',
+		default: "scroll",
+	},
+	flipBoxItemFrontBgImageRepeatType: {
+		type: 'string',
+		default: "no-repeat",
+	},
+	flipBoxItemFrontBgImageSizeType: {
+		type: 'string',
+		default: "auto",
 	},
 	/** End Background Image */
 

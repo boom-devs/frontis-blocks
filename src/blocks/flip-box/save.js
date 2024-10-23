@@ -186,6 +186,16 @@ export default function save({ attributes }) {
 		flipBoxItemFrontPaddingTablet,
 		flipBoxItemFrontPaddingMobile,
 		flipBoxItemFrontPaddingLink,
+
+		flipBoxItemFrontBackgroundImageEnabled,
+		flipBoxItemFrontBackgroundImageUrl,
+		flipBoxItemFrontBackgroundImageAlt,
+		flipBoxItemFrontBackgroundImageID,
+
+		flipBoxItemFrontBgImagePositionType,
+		flipBoxItemFrontBgImageAttachmentType,
+		flipBoxItemFrontBgImageRepeatType,
+		flipBoxItemFrontBgImageSizeType,
 		/** End Flip Box Item Front Attribute */
 
 
@@ -218,6 +228,16 @@ export default function save({ attributes }) {
 		flipBoxItemBackPaddingTablet,
 		flipBoxItemBackPaddingMobile,
 		flipBoxItemBackPaddingLink,
+
+		flipBoxItemBackBackgroundImageEnabled,
+		flipBoxItemBackBackgroundImageUrl,
+		flipBoxItemBackBackgroundImageAlt,
+		flipBoxItemBackBackgroundImageID,
+
+		flipBoxItemBackBgImagePositionType,
+		flipBoxItemBackBgImageAttachmentType,
+		flipBoxItemBackBgImageRepeatType,
+		flipBoxItemBackBgImageSizeType,
 		/** End Flip Box Item Back Attribute */
 
 		/** Start Flip Box Front Title Attribute */
