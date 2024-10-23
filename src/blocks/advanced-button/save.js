@@ -10,6 +10,7 @@ export default function save({ attributes }) {
         buttonTargetUrl,
         buttonIconAlign,
         buttonIcon,
+        buttonIconPosition,
     } = attributes;
 
     const blockProps = useBlockProps.save();
@@ -25,13 +26,20 @@ export default function save({ attributes }) {
                         target={buttonTargetUrl ? '_blank' : undefined}
                         rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                     >
+                        {buttonIconPosition === 'left' && buttonIconAlign === 'icon-text' &&(
+                            <div className="fb-advanced-button-icon-wrapper">
+                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}  
                         <RichText.Content
                             tagName="span"
                             value={buttonText}
                             className="fb-advanced-button-text"
                         />
-                        {buttonIcon && buttonIconAlign === 'icon' && (
-                            <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                        {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' &&(
+                            <div className="fb-advanced-button-icon-wrapper">
+                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
                         )}
                     </a>
                 </div>
