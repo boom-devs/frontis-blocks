@@ -224,6 +224,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemFrontPaddingTablet,
 		flipBoxItemFrontPaddingMobile,
 		flipBoxItemFrontPaddingLink,
+
+		flipBoxItemFrontBackgroundImageEnabled,
+		flipBoxItemFrontBackgroundImageUrl,
+		flipBoxItemFrontBackgroundImageAlt,
+		flipBoxItemFrontBackgroundImageID,
+
 		/** End Flip Box Item Front Attribute */
 
 
@@ -518,7 +524,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemFrontBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemFrontBorderRadiusGetDesktop};` : ''}
 					${flipBoxItemFrontBorderColor ? `border-color: ${flipBoxItemFrontBorderColor};` : ''}
 					${flipBoxItemFrontBgFontColor ? `background: ${flipBoxItemFrontBgFontColor};` : ''}
+
+					${flipBoxItemFrontBackgroundImageEnabled && flipBoxItemFrontBackgroundImageUrl && flipBoxItemFrontBackgroundImageUrl !== 'null' ? `
+                        background-image: url(${flipBoxItemFrontBackgroundImageUrl});
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    ` : ''}
 				}
+
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
 					${flipBoxItemFrontPaddingGetDesktop ? `padding: ${flipBoxItemFrontPaddingGetDesktop};` : ''}
 				}
