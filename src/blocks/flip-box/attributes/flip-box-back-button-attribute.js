@@ -41,10 +41,6 @@ const flipBoxBackButtonAttributes = {
 	},
 	/** End BG Color */
 
-
-
-
-
 	/** Start Typography */
 	flipBoxBackButtonFontFamily: {
 		type: 'string',
@@ -115,6 +111,17 @@ const flipBoxBackButtonAttributes = {
 		}
 	},
 	/** End Typography */
+
+	/** Start Box Shadow */
+	flipBoxBackButtonBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	flipBoxBackButtonBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Box Shadow */
 
 	/** Start Margin */
 	flipBoxBackButtonMarginUnits : {

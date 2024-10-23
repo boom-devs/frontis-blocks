@@ -5,6 +5,7 @@ import FB_Range from "@Components/range";
 import FB_TypographyControl from "@Components/typography-control";
 import {SelectControl} from "@wordpress/components";
 import {BORDER_STYLES} from "@Blocks/countdown/constants/constants";
+import FB_BoxShadowControl from "@Components/box-shadow";
 
 export default function FlipBoxBackButtonControl ({ attributes, setAttributes}) {
 
@@ -41,7 +42,6 @@ export default function FlipBoxBackButtonControl ({ attributes, setAttributes}) 
 		flipBoxBackButtonLineHeight,
 		flipBoxBackButtonLineHeightUnits,
 
-
 		flipBoxBackButtonBorderTypeUnits,
 		flipBoxBackButtonBorderTypeDesktop,
 		flipBoxBackButtonBorderTypeTablet,
@@ -57,6 +57,8 @@ export default function FlipBoxBackButtonControl ({ attributes, setAttributes}) 
 		flipBoxBackButtonBorderRadiusMobile,
 		flipBoxBackButtonBorderRadiusLink,
 
+		flipBoxBackButtonBoxShadowValues,
+		flipBoxBackButtonBoxShadowCssValue
 	} = attributes;
 
 	/** Start Padding */
@@ -437,7 +439,12 @@ export default function FlipBoxBackButtonControl ({ attributes, setAttributes}) 
 				handleGlobalColorChange={(value) => setAttributes({ flipBoxBackButtonBorderColor: value })}
 				handleGlobalHoverColorChange={(value) => setAttributes({ flipBoxBackButtonBorderHoverColor: value })}
 			/>
-
+			<FB_BoxShadowControl
+				label={__("Box Shadow", "frontis-blocks")}
+				onBoxShadowChange={(value) => setAttributes({ flipBoxBackButtonBoxShadowValues: value })}
+				initialShadowValue={flipBoxBackButtonBoxShadowValues}
+				onBoxShadowStyleChange={(value) => setAttributes({ flipBoxBackButtonBoxShadowCssValue: value })}
+			/>
 			<FB_Spacing
 				label={ 'Padding' }
 				deviceType={deviceType}
