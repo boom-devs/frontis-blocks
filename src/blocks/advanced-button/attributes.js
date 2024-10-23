@@ -22,6 +22,7 @@ const attributes = {
     buttonTargetUrl: {
         type: "boolean",
     },
+    /** Start Button Text Style */
     buttonWidth: {
 		type: 'object',
 		default: {
@@ -304,29 +305,21 @@ const attributes = {
         type: "boolean",
         default: true
     },
+    /** End Style */    
     buttonIconAlign: {
         type: "string",
-        default: "no-icon",
+        default: "none",
     },
     buttonIcon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'angle-right',
 	},
+    buttonIconPosition: {
+        type: "string",
+        default: "right",
+    },
     buttonZIndex: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	buttonZIndexUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
+		type: 'number',
 	},
 }
 export default attributes;

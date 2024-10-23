@@ -26,6 +26,7 @@ import {
     TEXT_ALIGN,
     ICON_ALIGN,
     BORDER_STYLES,
+    ICON_POSITION,
 } from "./constants/constants";
 
 import { useState, useEffect } from "@wordpress/element";
@@ -102,9 +103,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         buttonIconAlign,
         buttonIcon,
+        buttonIconPosition,
         buttonZIndex,
-        buttonZIndexUnits,
-        customCSS,
     } = attributes;    
     
     useEffect(() => {
@@ -486,7 +486,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${buttonDesktopBorderRadiusStr ? `border-radius: ${buttonDesktopBorderRadiusStr};` : ''}
                     ${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
                     ${buttonboxShadowCssValue ? `box-shadow: ${buttonboxShadowCssValue};` : ''}
-                    ${buttonZIndex.Desktop && buttonZIndexUnits.Desktop ? `z-index: ${buttonZIndex.Desktop}${buttonZIndexUnits.Desktop};` : ''}
                     ${buttonWidth.Desktop && buttonWidthUnits.Desktop ? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};` : ''}
                     display: ${buttonAlignment === 'justify' ? 'flex' : 'inline-flex'};
                     transition: all 0.3s ease;
@@ -517,7 +516,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         ${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
                         ${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
                         ${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
-                        ${buttonZIndex.Tablet && buttonZIndexUnits.Tablet ? `z-index: ${buttonZIndex.Tablet}${buttonZIndexUnits.Tablet};` : ''}
                     }
                 }
 
@@ -532,7 +530,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         ${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
                         ${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
                         ${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
-                        ${buttonZIndex.Mobile && buttonZIndexUnits.Mobile ? `z-index: ${buttonZIndex.Mobile}${buttonZIndexUnits.Mobile};` : ''}
                 }
             `}
             </style>
@@ -595,12 +592,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     onChange={(value) => setAttributes({ buttonText: value })}
                                                     className="fb-advanced-button-text"
                                                 />
-                                                <FB_UrlControl
-                                                    url={buttonUrl}
-                                                    onChangeUrl={(value) => setAttributes({ buttonUrl: value })}
-                                                    openInNewTab={buttonTargetUrl}
-                                                    onChangeOpenInNewTab={(value) => setAttributes({ buttonTargetUrl: value })}
-                                                />
                                                 <div className='fb-advanced-btn-icon-wrapper'>
                                                     <BaseControl
                                                         label={__("Icon", "frontis-blocks")}
@@ -625,6 +616,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         )}
                                                     </BaseControl>
                                                 </div>
+                                                <FB_UrlControl
+                                                    url={buttonUrl}
+                                                    onChangeUrl={(value) => setAttributes({ buttonUrl: value })}
+                                                    openInNewTab={buttonTargetUrl}
+                                                    onChangeOpenInNewTab={(value) => setAttributes({ buttonTargetUrl: value })}
+                                                />
                                             </PanelBody>
                                         </div>
                                     </>
@@ -633,7 +630,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody
-                                            title={__("Styles", "frontis-blocks")}
+                                            title={__("Text Styles", "frontis-blocks")}
                                             initialOpen={true}
                                         >
                                             <FB_Range
@@ -708,6 +705,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 handleGlobalHoverColorChange={(value) => setAttributes({ buttonBgHoverColor: value })}
                                             />
 
+                                        </PanelBody>
+                                        <PanelBody
+                                            title={__("Icon Styles", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <SelectControl
+                                                label={__("Icon Position", "frontis-blocks")}
+                                                value={buttonIconPosition}
+                                                options={ICON_POSITION}
+                                                onChange={(value) => setAttributes({ buttonIconPosition: value })}
+                                            />
                                         </PanelBody>
                                         <PanelBody
                                             title={__("Border and Shadow", "frontis-blocks")}
@@ -799,18 +807,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <PanelBody
                                                     initialOpen={true}
                                                 >
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100000000}
-                                                        label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={buttonZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ buttonZIndex: value })}
-                                                        rangeUnitHandler={(value) => setAttributes({ buttonZIndexUnits: value })}
-                                                        deviceType={deviceType}
-                                                        units={buttonZIndexUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
+													<RangeControl
+														value={buttonZIndex}
+														onChange={(value) => setAttributes({ buttonZIndex: value === 0 ? undefined : value })}
+														min={0}
+														max={10000000}
+														step={1}
+														allowReset
+														resetFallbackValue={''}
                                                     />
                                                 </PanelBody>
                                             </div>
