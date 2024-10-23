@@ -428,7 +428,6 @@ $css_content = "
 }
 
 .fb-flip-box-wrapper." . $blockID . " .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
-    display: inline-block;
     " . ($flipBoxBackButtonFontColor ? "color: " . $flipBoxBackButtonFontColor . ";" : "") . "
     " . ($flipBoxBackButtonBgFontColor ? "background: " . $flipBoxBackButtonBgFontColor . ";" : "") . "
     " . ($flipBoxBackButtonFontFamily ? "font-family: " . $flipBoxBackButtonFontFamily . ";" : "") . "

@@ -58,7 +58,8 @@ export default function FlipBoxBackButtonControl ({ attributes, setAttributes}) 
 		flipBoxBackButtonBorderRadiusLink,
 
 		flipBoxBackButtonBoxShadowValues,
-		flipBoxBackButtonBoxShadowCssValue
+		flipBoxBackButtonBoxShadowCssValue,
+
 	} = attributes;
 
 	/** Start Padding */
