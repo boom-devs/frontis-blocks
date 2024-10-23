@@ -859,6 +859,191 @@ const attributes = {
 	buttonBgHoverColor : {
 		type: "string"
 	},
+	globalZIndex : {
+        type: "number",
+    },
+	globalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    globalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalMarginDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    globalBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    globalBgColor : {
+        type: "string",
+    },
+    globalBgHoverColor: {
+        type: 'string',
+    },
+
+
+    globalBorder: {
+        type: 'string',
+        default: "none",
+    },
+    globalBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    globalBorderColor: {
+        type: 'string',
+    },
+    globalBorderHoverColor: {
+        type: 'string',
+    },
+    globalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalBorderDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    globalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
 }
 //
 export default attributes;

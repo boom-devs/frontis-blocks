@@ -94,6 +94,19 @@ export const BORDER_STYLES = [
 	{ label: __("Ridge", "frontis-block"), value: "ridge" },
 ];
 
+export const ICON_POSITION = [
+	{ label: __("Left", "frontis-block"), value: "left" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+];
+
+export const INFO_ICON_POSITION = [
+    { label: __("Top", "frontis-block"), value: "top" },
+    { label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	
+];
+
 export const FONT_FAMILYS = [
     { label: __("Default", "frontis-block"), value: "Default" },
     { label: __("ABeeZee", "frontis-block"), value: "ABeeZee" },

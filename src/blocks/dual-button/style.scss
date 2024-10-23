@@ -1,4 +1,4 @@
-.fb-advanced-button-wrapper {
+.fb-advanced-button-container {
     .fb-advanced-button {
         align-items: center;
         display: inline-flex;
@@ -37,16 +37,3 @@
 	}
 }
 
-.fb-advanced-button-icon {
-    display: block;
-    position: relative;
-    z-index: 1;
-    svg {
-        display: block;
-        height: 16px;
-        width: 16px;
-        fill: #fff;
-        box-sizing: content-box;
-        margin-left: 10px;
-    }
-}

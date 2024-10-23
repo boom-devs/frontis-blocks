@@ -9,7 +9,7 @@ const attributes = {
 	},
 	infoBoxBg: {
 		type: 'string',
-		default: ''
+		default: '#EBF5FF'
 	},
 	mediaSwitcher : {
 		type: "string",
@@ -51,6 +51,113 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+    mediaBgWidth: {
+		type: 'object',
+		default: {
+			Desktop: 50,
+			Tablet: 50,
+			Mobile: 50
+		}
+	},
+	mediaBgWidthDesktop: {
+		type: "number",
+		default: 20
+	},
+	mediaBgWidthTablet: {
+		type: "number",
+		default: 20
+	},
+	mediaBgWidthMobile: {
+		type: "number",
+		default: 20
+	},
+	mediaBgWidthUnitsSave: {
+		type: "string",
+		default: "px"
+	},
+	mediaBgWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    mediaBgHeight: {
+		type: 'object',
+		default: {
+			Desktop: 50,
+			Tablet: 50,
+			Mobile: 50
+		}
+	},
+	mediaBgHeightDesktop: {
+		type: "number",
+		default: 20
+	},
+	mediaBgHeightTablet: {
+		type: "number",
+		default: 20
+	},
+	mediaBgHeightMobile: {
+		type: "number",
+		default: 20
+	},
+	mediaBgHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	btnIconSize: {
+		type: 'object',
+		default: {
+			Desktop: 16,
+			Tablet: 16,
+			Mobile: 16
+		}
+	},
+	btnIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    btnIconColorSwitcher: {
+		type: 'string',
+        default: 'normal'
+	},
+    btnIconColor: {
+		type: 'string',
+        default: '#ffffff'
+	},
+    btnIconHoverColor: {
+		type: 'string',
+        default: '#ffffff'
+	},
+    mediaIconColor: {
+		type: 'string',
+        default: '#ffffff'
+	},
+    mediaIconHoverColor: {
+		type: 'string',
+	},
+	mediaIconColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+    btnIconPosition: {
+		type: 'string',
+        default: 'left'
+	},
+    infoIconPosition: {
+		type: 'string',
+        default: 'top'
+	},
     height: {
         type: 'number',
         default: 50
@@ -63,6 +170,10 @@ const attributes = {
 		type: 'string',
 		default: 'face-smile',
 	},
+	btnIcon: {
+		type: 'string',
+		default: 'angle-right',
+	},
     boxBgColor: {
         type: 'string',
         default: '#fff'
@@ -71,6 +182,17 @@ const attributes = {
 		type: 'string',
 	},
 	boxBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+    mediaBgColor: {
+        type: 'string',
+        default: '#fff'
+    },
+	mediaBgHoverColor: {
+		type: 'string',
+	},
+	mediaBgColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
@@ -108,7 +230,7 @@ const attributes = {
     },
     Heading_Text: {
         type : "string",
-        default: "Info Title"
+        default: "Fast Loading Speed"
     },
     Heading_Tag: {
         type : "string",
@@ -120,7 +242,7 @@ const attributes = {
     },
     Heading_Font_Size: {
         type: "number",
-        default: 35
+        default: 24
     },
     Heading_Font_size_units: {
         type: "string",
@@ -484,9 +606,13 @@ const attributes = {
     //Info Button
     info_Button_Text: {
         type: "string",
-        default: "Button Text"
+        default: "Learn More"
     },
     info_Button_Switcher: {
+        type: "boolean",
+        default: true,
+    },
+    buttonIconSwitcher: {
         type: "boolean",
         default: true,
     },
@@ -854,11 +980,376 @@ const attributes = {
 	},
 	buttonBgColor : {
 		type: "string",
-		default: '#4361EE'
+		default: ''
 	},
 	buttonBgHoverColor : {
 		type: "string"
 	},
+	globalZIndex : {
+        type: "number",
+    },
+	globalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    globalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalMarginDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    globalBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    globalBgColor : {
+        type: "string",
+        default: '#EBF5FF'
+    },
+    globalBgHoverColor: {
+        type: 'string',
+    },
+    globalBorder: {
+        type: 'string',
+        default: "none",
+    },
+    globalBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    globalBorderColor: {
+        type: 'string',
+    },
+    globalBorderHoverColor: {
+        type: 'string',
+    },
+    globalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalBorderDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    globalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    mediaPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaPaddingTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaPaddingMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    mediaMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaMarginDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaMarginTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaMarginMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    mediaBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    mediaBgColor: {
+        type: "string",
+    },
+    mediaBgHoverColor: {
+        type: "string",
+    },
+    mediaBorder: {
+        type: "string",
+        default: "none",
+    },
+    mediaBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    mediaBorderColor: {
+        type: "string",
+    },
+    mediaBorderHoverColor: {
+        type: "string",
+    },
+    mediaBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaBorderDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaBorderTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaBorderMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    mediaBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    mediaBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    }
+    
 }
 //
 export default attributes;
