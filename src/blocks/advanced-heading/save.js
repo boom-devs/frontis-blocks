@@ -39,11 +39,13 @@ export default function save({ attributes }) {
             <div {...blockProps}>
                 <div className={`fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
 
-                    {headingIconAlign === 'icon' && headingIconSwitcher && (
-                        <div className="fb-advanced-icon">
+                    <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
+                        {headingIconAlign === 'icon' && headingIconSwitcher && (
+                            <div className="fb-advanced-icon">
                             {renderSVG(headingIcon)}
-                        </div>
-                    )}
+                            </div>
+                        )}
+                    </div>
 
                     {showSeparatorSwitcher && separatorPosition === "top" && (
                         <div className='fb-advanced-title-separator'>

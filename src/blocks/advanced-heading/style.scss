@@ -1,7 +1,11 @@
-.fb-advanced-icon {
+.fb-advanced-icon-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
+    .fb-advanced-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .fb-advanced-heading-wrapper {
