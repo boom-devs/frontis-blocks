@@ -166,6 +166,17 @@ const flipBoxItemFrontAttributes = {
 	},
 	/** End Border Radius */
 
+	/** Start Box Shadow */
+	flipBoxItemFrontBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	flipBoxItemFrontBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Box Shadow */
+
 	/** Start Padding */
 	flipBoxItemFrontPaddingUnits: {
 		type: 'object',

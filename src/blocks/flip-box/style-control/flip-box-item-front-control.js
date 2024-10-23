@@ -8,6 +8,7 @@ import {BaseControl, Button, ButtonGroup, SelectControl, ToggleControl} from "@w
 import {AlignmentToolbar, BlockControls} from "@wordpress/block-editor";
 import {TEXT_ALIGN} from "@Blocks/advanced-heading/constants/constants";
 import {useEffect} from "@wordpress/element";
+import FB_BoxShadowControl from "@Components/box-shadow";
 export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 
 	const {
@@ -32,6 +33,9 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 		flipBoxItemFrontBorderRadiusTablet,
 		flipBoxItemFrontBorderRadiusMobile,
 		flipBoxItemFrontBorderRadiusLink,
+
+		flipBoxItemFrontBoxShadowValues,
+		flipBoxItemFrontBoxShadowCssValue,
 
 		flipBoxItemFrontPaddingUnits,
 		flipBoxItemFrontPaddingDesktop,
@@ -406,8 +410,6 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 					/>
 				</>
 			)}
-
-
 			<FB_Range
 				min={1}
 				max={1000}
@@ -459,6 +461,12 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 				handleColorSwitcherChange={(value) => setAttributes({ flipBoxItemFrontBorderColorSwitcher: value })}
 				handleGlobalColorChange={(value) => setAttributes({ flipBoxItemFrontBorderColor: value })}
 				handleGlobalHoverColorChange={(value) => setAttributes({ flipBoxItemFrontBorderHoverColor: value })}
+			/>
+			<FB_BoxShadowControl
+				label={__("Box Shadow", "frontis-blocks")}
+				onBoxShadowChange={(value) => setAttributes({ flipBoxItemFrontBoxShadowValues: value })}
+				initialShadowValue={flipBoxItemFrontBoxShadowValues}
+				onBoxShadowStyleChange={(value) => setAttributes({ flipBoxItemFrontBoxShadowCssValue: value })}
 			/>
 			<FB_Spacing
 				label={ 'Padding' }
