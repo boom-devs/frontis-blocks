@@ -25,9 +25,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         buttonIcon,
         buttonZIndex,
         buttonIconAlign,
+        buttonIconPosition,
     } = attributes;
 
     const blockProps = useBlockProps();
+
+    console.log(buttonIconAlign);
+    
     
 
     // Prevent link navigation in the editor and focus on text
@@ -60,15 +64,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                         onClick={handleButtonClick}
                     >
-                        <RichText
-                            tagName="span"
+                        {buttonIconPosition === 'left' && buttonIconAlign === 'icon-text' && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconAlign !== 'icon-only' && (
+                            <RichText
+                                tagName="span"
                             value={buttonText}
                             onChange={(value) => setAttributes({ buttonText: value })}
                             placeholder={__('Enter button text...', 'frontis-blocks')}
-                            className="fb-advanced-button-text"
-                        />
-                        {buttonIconAlign === 'icon' && (
-                          <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                                className="fb-advanced-button-text"
+                            />
+                        )}
+
+                        {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconPosition === 'icon-only' && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
                         )}
                     </a>
                 </div>

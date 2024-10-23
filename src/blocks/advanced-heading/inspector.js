@@ -313,6 +313,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingBackgroundImageEnabled: false,
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
+                headingColor: "",
+                headingTextStroke: "",
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
             },
             "preset-1": {
                 subHeadingSwitcher: true,
@@ -333,6 +337,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingBackgroundImageEnabled: true,
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
+                headingColor: "",
+                headingTextStroke: "",
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
             },
         };
 
