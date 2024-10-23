@@ -293,8 +293,11 @@ function ElementActioinsTimeLine(_ref) {
   };
   var handleDragOver = function handleDragOver(e, id) {
     var element = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    e.preventDefault();
-    console.log("Drag over: " + element);
+    e.stopPropagation();
+    setTimeout(function () {
+      console.log("Drag over: " + element);
+    }, 0);
+
     // const draggedOverItem = tasks.find(task => task.id === id);
     // if (draggedItem === draggedOverItem) {
     //   return;

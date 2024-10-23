@@ -15,11 +15,15 @@ export default function ElementActioinsTimeLine({actions}) {
         e.dataTransfer.setData("id", id);
         setDraggedItem(id);
       };
-    
-      const handleDragOver = (e, id, element = null) => {
-        e.preventDefault();
 
-        console.log("Drag over: "+element)
+      const handleDragOver = (e, id, element = null) => {
+		  e.stopPropagation();
+
+		  setTimeout(() => {
+			  console.log("Drag over: "+element)
+		  }, 0);
+
+
         // const draggedOverItem = tasks.find(task => task.id === id);
         // if (draggedItem === draggedOverItem) {
         //   return;
@@ -33,7 +37,7 @@ export default function ElementActioinsTimeLine({actions}) {
         // );
         // setTasks(items);
       };
-    
+
     const handleDragEnd = () => {
         setDraggedItem(null);
     };
