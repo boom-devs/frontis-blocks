@@ -219,6 +219,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemFrontBorderRadiusMobile,
 		flipBoxItemFrontBorderRadiusLink,
 
+		flipBoxItemFrontBoxShadowCssValue,
+
 		flipBoxItemFrontPaddingUnits,
 		flipBoxItemFrontPaddingDesktop,
 		flipBoxItemFrontPaddingTablet,
@@ -234,6 +236,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemFrontBgImageAttachmentType,
 		flipBoxItemFrontBgImageRepeatType,
 		flipBoxItemFrontBgImageSizeType,
+
 		/** End Flip Box Item Front Attribute */
 
 
@@ -260,6 +263,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxItemBackBorderRadiusTablet,
 		flipBoxItemBackBorderRadiusMobile,
 		flipBoxItemBackBorderRadiusLink,
+
+		flipBoxItemBackBoxShadowCssValue,
 
 		flipBoxItemBackPaddingUnits,
 		flipBoxItemBackPaddingDesktop,
@@ -538,6 +543,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemFrontBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemFrontBorderRadiusGetDesktop};` : ''}
 					${flipBoxItemFrontBorderColor ? `border-color: ${flipBoxItemFrontBorderColor};` : ''}
 					${flipBoxItemFrontBgFontColor ? `background: ${flipBoxItemFrontBgFontColor};` : ''}
+					${flipBoxItemFrontBoxShadowCssValue ? `box-shadow: ${flipBoxItemFrontBoxShadowCssValue};` : ''}
 
 					${flipBoxItemFrontBackgroundImageEnabled && flipBoxItemFrontBackgroundImageUrl && flipBoxItemFrontBackgroundImageUrl !== 'null' ? `
                         background-image: url(${flipBoxItemFrontBackgroundImageUrl});
@@ -656,7 +662,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${flipBoxItemBackBorderRadiusGetDesktop ? `border-radius: ${flipBoxItemBackBorderRadiusGetDesktop};` : ''}
 					${flipBoxItemBackBorderColor ? `border-color: ${flipBoxItemBackBorderColor};` : ''}
 					${flipBoxItemBackBgFontColor ? `background: ${flipBoxItemBackBgFontColor};` : ''}
-
+					${flipBoxItemBackBoxShadowCssValue ? `box-shadow: ${flipBoxItemBackBoxShadowCssValue};` : ''}
 					${flipBoxItemBackBackgroundImageEnabled && flipBoxItemBackBackgroundImageUrl && flipBoxItemBackBackgroundImageUrl !== 'null' ? `
                         background-image: url(${flipBoxItemBackBackgroundImageUrl});
                         background-position: ${flipBoxItemBackBgImagePositionType};
