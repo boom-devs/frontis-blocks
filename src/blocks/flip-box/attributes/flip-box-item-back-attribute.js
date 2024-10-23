@@ -32,6 +32,38 @@ const flipBoxItemBackAttributes = {
 	},
 	/** End BG Color */
 
+	/** Start Background Image */
+	flipBoxItemBackBackgroundImageEnabled: {
+		type: "boolean",
+		default: false,
+	},
+	flipBoxItemBackBackgroundImageUrl: {
+		type: "string",
+	},
+	flipBoxItemBackBackgroundImageAlt: {
+		type: "string",
+	},
+	flipBoxItemBackBackgroundImageID: {
+		type: "number",
+	},
+	flipBoxItemBackBgImagePositionType: {
+		type: 'string',
+		default: "center center",
+	},
+	flipBoxItemBackBgImageAttachmentType: {
+		type: 'string',
+		default: "scroll",
+	},
+	flipBoxItemBackBgImageRepeatType: {
+		type: 'string',
+		default: "no-repeat",
+	},
+	flipBoxItemBackBgImageSizeType: {
+		type: 'string',
+		default: "auto",
+	},
+	/** End Background Image */
+
 	/** Start Border Type */
 	flipBoxItemBackBorderColorSwitcher: {
 		type: "string",

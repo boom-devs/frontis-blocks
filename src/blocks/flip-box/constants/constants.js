@@ -13,6 +13,37 @@ export const separator_LINE_SIZE = "separatorLineSize";
 export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
+
+/** Start Backgorund Image */
+export const SELECT_BG_IMAGE_POSITION_TYPE = [
+	{ label: "Center Center", value: "center center" },
+	{ label: "Center Left", value: "center left" },
+	{ label: "Center Right", value: "center right" },
+	{ label: "Top Center", value: "top center" },
+	{ label: "Top Left", value: "top left" },
+	{ label: "Top Right", value: "top right" },
+	{ label: "Bottom Center", value: "bottom center" },
+	{ label: "Bottom Left", value: "bottom left" },
+	{ label: "Bottom Right", value: "bottom right" },
+];
+export const SELECT_BG_IMAGE_ATTACHMENT_TYPE = [
+	{ label: "Scroll", value: "scroll" },
+	{ label: "Fixed", value: "fixed" },
+];
+export const SELECT_BG_IMAGE_REPEAT_TYPE = [
+	{ label: "No-repeat", value: "no-repeat" },
+	{ label: "Repeat", value: "repeat" },
+	{ label: "Repeat-x", value: "repeat-x" },
+	{ label: "Repeat-y", value: "repeat-y" },
+];
+export const SELECT_BG_IMAGE_SIZE_TYPE = [
+	{ label: "Auto", value: "auto" },
+	{ label: "Cover", value: "cover" },
+	{ label: "Contain", value: "contain" },
+];
+/** End Backgorund Image */
+
+
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "em", value: "em" },
