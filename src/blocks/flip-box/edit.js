@@ -1352,7 +1352,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										tagName={flipBoxFrontTitleHeadingTag}
 										value={flipBoxFrontTitle}
 										onChange={(value) => setAttributes({flipBoxFrontTitle: value})}
-										placeholder={__('Flip Box Front Title', 'frontis-block')}
 										className="fb-flip-box-title"
 									/>
 									<RichText
@@ -1379,7 +1378,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										tagName={flipBoxBackTitleHeadingTag}
 										value={flipBoxBackTitle}
 										onChange={(value) => setAttributes({flipBoxBackTitle: value})}
-										placeholder={__('Flip Box Back Title', 'frontis-block')}
 										className="fb-flip-box-title"
 									/>
 									<RichText
