@@ -30,6 +30,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 		gridTemplateColumns,
 		gridTemplateRows,
 		gridGap,
+		paddingTop,
+		paddingRight,
+		paddingBottom,
+		paddingLeft,
+		marginTop,
+		marginRight,
+		marginBottom,
+		marginLeft,
 	} = attributes;
 
 	return (
