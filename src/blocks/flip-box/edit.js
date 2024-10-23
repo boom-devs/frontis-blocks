@@ -192,6 +192,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxBackButtonBorderRadiusTablet,
 		flipBoxBackButtonBorderRadiusMobile,
 		flipBoxBackButtonBorderRadiusLink,
+
+		flipBoxBackButtonBoxShadowValues,
+		flipBoxBackButtonBoxShadowCssValue,
+
 		/** End Flip Box Back Button Attribute */
 
 
@@ -627,6 +631,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxBackButtonBorderTypeGetDesktop ? `border-width: ${flipBoxBackButtonBorderTypeGetDesktop};` : ''}
 				  ${flipBoxBackButtonBorderRadiusGetDesktop ? `border-radius: ${flipBoxBackButtonBorderRadiusGetDesktop};` : ''}
 				  ${flipBoxBackButtonBorderColor ? `border-color: ${flipBoxBackButtonBorderColor};` : ''}
+				  ${flipBoxBackButtonBoxShadowCssValue ? `box-shadow: ${flipBoxBackButtonBoxShadowCssValue};` : ''}
 				  ${flipBoxBackButtonPaddingGetDesktop ? `padding: ${flipBoxBackButtonPaddingGetDesktop};` : ''}
 				  ${flipBoxBackButtonMarginGetDesktop ? `margin: ${flipBoxBackButtonMarginGetDesktop};` : ''}
 

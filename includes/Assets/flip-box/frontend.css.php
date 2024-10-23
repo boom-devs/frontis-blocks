@@ -304,7 +304,7 @@ $flipBoxBackButtonFontHoverColor = isset($block_attributes['flipBoxBackButtonFon
 
 $flipBoxBackButtonBgFontColor = isset($block_attributes['flipBoxBackButtonBgFontColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonBgFontColor']) : '';
 $flipBoxBackButtonBgFontHoverColor = isset($block_attributes['flipBoxBackButtonBgFontHoverColor']) ? sanitize_hex_color($block_attributes['flipBoxBackButtonBgFontHoverColor']) : '';
-
+$flipBoxBackButtonBoxShadowCssValue = isset($block_attributes['flipBoxBackButtonBoxShadowCssValue']) ? sanitize_text_field($block_attributes['flipBoxBackButtonBoxShadowCssValue']) : '';
 
 /** Back Button Border*/
 $flipBoxBackButtonBorder = isset($block_attributes['flipBoxBackButtonBorder']) ? sanitize_text_field($block_attributes['flipBoxBackButtonBorder']) : '';
@@ -443,6 +443,7 @@ $css_content = "
     " . ($flipBoxBackButtonBorderTypeGetDesktop ? "border-width: " . $flipBoxBackButtonBorderTypeGetDesktop . ";" : "") . "
     " . ($flipBoxBackButtonBorderRadiusGetDesktop ? "border-radius: " . $flipBoxBackButtonBorderRadiusGetDesktop . ";" : "") . "
     " . ($flipBoxBackButtonBorderColor ? "border-color: " . $flipBoxBackButtonBorderColor . ";" : "") . "
+    " . ($flipBoxBackButtonBoxShadowCssValue ? "box-shadow: $flipBoxBackButtonBoxShadowCssValue;" : "") . "
     " . ($flipBoxBackButtonPaddingGetDesktop ? "padding: " . $flipBoxBackButtonPaddingGetDesktop . ";" : "") . "
     " . ($flipBoxBackButtonMarginGetDesktop ? "margin: " . $flipBoxBackButtonMarginGetDesktop . ";" : "") . "
 }
