@@ -33,6 +33,22 @@ const flipBoxItemFrontAttributes = {
 	},
 	/** End BG Color */
 
+	/** Start Background Image */
+	flipBoxItemFrontBackgroundImageEnabled: {
+		type: "boolean",
+		default: false,
+	},
+	flipBoxItemFrontBackgroundImageUrl: {
+		type: "string",
+	},
+	flipBoxItemFrontBackgroundImageAlt: {
+		type: "string",
+	},
+	flipBoxItemFrontBackgroundImageID: {
+		type: "number",
+	},
+	/** End Background Image */
+
 	/** Start Border Type */
 	flipBoxItemFrontBorderColorSwitcher: {
 		type: "string",
