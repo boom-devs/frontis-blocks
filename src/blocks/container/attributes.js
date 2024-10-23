@@ -94,22 +94,36 @@ const attributes = {
 	textColor: {
 		type: "string",
 	},
-	padding: {
-		type: "object",
-		default: {
-			top: "20px",
-			right: "20px",
-			bottom: "20px",
-			left: "20px",
-		},
+	paddingTop: {
+		type: "number",
+		default: 0,
 	},
-	margin: {
-		type: "object",
-		default: {
-			top: "0px",
-			right: "0px",
-			bottom: "0px",
-			left: "0px",
-		},
+	paddingRight: {
+		type: "number",
+		default: 0,
+	},
+	paddingBottom: {
+		type: "number",
+		default: 0,
+	},
+	paddingLeft: {
+		type: "number",
+		default: 0,
+	},
+	marginTop: {
+		type: "number",
+		default: 0,
+	},
+	marginRight: {
+		type: "number",
+		default: 0,
+	},
+	marginBottom: {
+		type: "number",
+		default: 0,
+	},
+	marginLeft: {
+		type: "number",
+		default: 0,
 	},
 };
