@@ -292,7 +292,19 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
                 'doc'       => 'https://wpmessiah.com/docs/post-grid',
                 'demo'      => 'https://wpmessiah.com/demo/post-grid',
-            ]
+            ],
+            // pro inactive block
+            'pro-test' => [
+                'slug'      => 'pro-test',
+                'title'     => 'Pro Test',
+                'package'   => 'pro',
+                'category'  => 'content',
+                'badge'     => 'pro',
+                'status'    => 'false',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/pro-test',
+                'demo'      => 'https://wpmessiah.com/demo/pro-test',
+            ],
         ];
 		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
 	}
