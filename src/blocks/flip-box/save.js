@@ -154,6 +154,12 @@ export default function save({ attributes }) {
 		flipBoxBackButtonBorderRadiusTablet,
 		flipBoxBackButtonBorderRadiusMobile,
 		flipBoxBackButtonBorderRadiusLink,
+
+		flipBoxBackButtonBoxShadowValues,
+		flipBoxBackButtonBoxShadowCssValue,
+
+		flipBoxBackButtonIconAlign,
+		flipBoxBackButtonIcon,
 		/** End Flip Box Back Button Attribute */
 
 
@@ -181,6 +187,8 @@ export default function save({ attributes }) {
 		flipBoxItemFrontBorderRadiusMobile,
 		flipBoxItemFrontBorderRadiusLink,
 
+		flipBoxItemFrontBoxShadowCssValue,
+
 		flipBoxItemFrontPaddingUnits,
 		flipBoxItemFrontPaddingDesktop,
 		flipBoxItemFrontPaddingTablet,
@@ -196,6 +204,7 @@ export default function save({ attributes }) {
 		flipBoxItemFrontBgImageAttachmentType,
 		flipBoxItemFrontBgImageRepeatType,
 		flipBoxItemFrontBgImageSizeType,
+
 		/** End Flip Box Item Front Attribute */
 
 
@@ -222,6 +231,8 @@ export default function save({ attributes }) {
 		flipBoxItemBackBorderRadiusTablet,
 		flipBoxItemBackBorderRadiusMobile,
 		flipBoxItemBackBorderRadiusLink,
+
+		flipBoxItemBackBoxShadowCssValue,
 
 		flipBoxItemBackPaddingUnits,
 		flipBoxItemBackPaddingDesktop,
@@ -405,6 +416,9 @@ export default function save({ attributes }) {
 											value={attributes.flipBoxBackButtonText}
 											className="fb-flip-box-back-button-text"
 										/>
+										{flipBoxBackButtonIconAlign === 'icon' && (
+											<span className="fb-flip-box-back-button-icon">{renderSVG(flipBoxBackButtonIcon)}</span>
+										)}
 									</a>
 								) : null}
 

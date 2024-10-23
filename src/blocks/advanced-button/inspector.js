@@ -1,10 +1,10 @@
 import { __ } from '@wordpress/i18n';
 
-import { 
-    InspectorControls, 
+import {
+    InspectorControls,
 } from '@wordpress/block-editor';
 
-import { 
+import {
     SelectControl,
     PanelBody,
     TabPanel,
@@ -40,7 +40,7 @@ import FB_UrlControl from '@Components/url-control';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
-    const { 
+    const {
         blockId,
         deviceType,
         buttonAlignment,
@@ -105,8 +105,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonZIndex,
         buttonZIndexUnits,
         customCSS,
-    } = attributes;    
-    
+    } = attributes;
+
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -463,12 +463,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		setAttributes({buttonIcon: IconName})
 
 	}
-    
-    
+
+
     return (
         <>
             <style>
-            {` 
+            {`
                 .fb-advanced-button-wrapper.${blockId} .fb-advanced-button {
                     ${buttonBgColor ? `background-color: ${buttonBgColor};` : ''}
                     ${buttonFontFamily ? `font-family: ${buttonFontFamily};` : ''}
@@ -621,7 +621,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             ))}
                                                         </ButtonGroup>
                                                         {buttonIconAlign === 'icon' && (
-                                                            <FBIconPicker value={buttonIcon} setIconHandler={iconHandler} /> 
+                                                            <FBIconPicker value={buttonIcon} setIconHandler={iconHandler} />
                                                         )}
                                                     </BaseControl>
                                                 </div>

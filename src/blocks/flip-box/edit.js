@@ -196,6 +196,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipBoxBackButtonBoxShadowValues,
 		flipBoxBackButtonBoxShadowCssValue,
 
+		flipBoxBackButtonIconAlign,
+		flipBoxBackButtonIcon,
 		/** End Flip Box Back Button Attribute */
 
 
@@ -413,6 +415,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const flipBoxBackIconHandler = (iconName) => {
 		setAttributes({flipBoxBackIcon: iconName})
 	}
+	const flipBoxBackButtonIconHandler = (iconName) => {
+		setAttributes({flipBoxBackButtonIcon: iconName})
+	}
 
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
@@ -616,7 +621,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				  ${flipBoxFrontContentMarginGetDesktop ? `margin: ${flipBoxFrontContentMarginGetDesktop};` : ''}
 				}
 				.fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-back .fb-flip-box-back-button {
-				  display: inline-block;
 				  ${flipBoxBackButtonFontColor ? `color: ${flipBoxBackButtonFontColor};` : ''}
 				  ${flipBoxBackButtonBgFontColor ? `background: ${flipBoxBackButtonBgFontColor};` : ''}
 				  ${flipBoxBackButtonFontFamily ? `font-family: ${flipBoxBackButtonFontFamily};` : ''}
@@ -1148,6 +1152,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														</div>
 													</BaseControl>
 												</div>
+
+												<div className='fb-advanced-btn-icon-wrapper'>
+													<BaseControl
+														label={__("Button Icon", "frontis-blocks")}
+														id="fb-setting-text-alignment"
+														className="fb-setting-text-alignment"
+													>
+														<ButtonGroup
+															className="fb-setting-text-alignment-group-btn"
+														>
+															{ICON_ALIGN.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() => setAttributes({ flipBoxBackButtonIconAlign: item.value })}
+																	className={`fb-setting-text-alignment-single-btn ${flipBoxBackButtonIconAlign === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+														{flipBoxBackButtonIconAlign === 'icon' && (
+															<FBIconPicker value={flipBoxBackButtonIcon} setIconHandler={flipBoxBackButtonIconHandler} />
+														)}
+													</BaseControl>
+												</div>
 											</>
 										)}
 
@@ -1411,6 +1440,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({flipBoxBackButtonText: value})}
 												className="fb-flip-box-back-button-text"
 											/>
+											{flipBoxBackButtonIconAlign === 'icon' && (
+												<span className="fb-flip-box-back-button-icon">{renderSVG(flipBoxBackButtonIcon)}</span>
+											)}
 										</a>
 									) : null}
 								</div>
