@@ -3,12 +3,13 @@
 namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
-use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Core\Blocks;
-use FrontisBlocks\Core\InitialActivatedBlocks;
-use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
+use FrontisBlocks\Admin\Ajax\Settings;
+use FrontisBlocks\Admin\Ajax\GlobalSettings;
+use FrontisBlocks\Assets\GenerateFrontendCss;
+use FrontisBlocks\Core\InitialActivatedBlocks;
 
 final class Plugin {
     /**
@@ -133,7 +134,7 @@ final class Plugin {
      * Initialize classes
      */
     private function init_classes() {
-       	$this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
+       	$this->asset = Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
 
 
        //load blocks
@@ -165,5 +166,7 @@ final class Plugin {
         Settings::get_instance()->register_ajax_events();
 
         InitialActivatedBlocks::blocks();
+
+        GlobalSettings::get_instance()->register_global_settings_events();
     }
 }

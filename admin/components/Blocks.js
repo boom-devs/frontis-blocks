@@ -2,8 +2,16 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useMemo } from '@wordpress/element';
 import BlockCard from './BlockCard';
 import { toast } from 'react-toastify';
+import { All, Content, Creative } from '../icons';
 
 import '../../assets/css/switch.css';
+
+// Add this mapping object after the imports
+const categoryIcons = {
+  all: All,
+  content: Content,
+  creative: Creative,
+};
 
 const Blocks = () => {
   const [blocks, setBlocks] = useState([]);
@@ -25,12 +33,10 @@ const Blocks = () => {
         security: nonce
       },
       success: function(response) {
-        console.log('Raw response:', response);
         try {
           if (typeof response === 'string') {
             response = JSON.parse(response);
           }
-          console.log('Parsed response:', response);
           if (response.success) {
             const activeBlocks = response.data || {};
             const updatedBlocks = Object.entries(allBlocks).map(([slug, blockData]) => ({
@@ -38,21 +44,16 @@ const Blocks = () => {
               slug: slug,
               status: activeBlocks[slug] ? '1' : '0'
             }));
-            console.log('Processed blocks:', updatedBlocks);
             setBlocks(updatedBlocks);
           } else {
-            console.error('Failed to fetch blocks:', response.data?.message || 'Unknown error');
             toast.error(__('Failed to fetch blocks', 'frontis-blocks'));
           }
         } catch (error) {
-          console.error('Error processing response:', error);
           toast.error(__('Error processing server response', 'frontis-blocks'));
         }
         setIsLoading(false);
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        console.error('Error fetching blocks:', textStatus, errorThrown);
-        console.log('Response text:', jqXHR.responseText);
         toast.error(__('Error fetching blocks', 'frontis-blocks'));
         setIsLoading(false);
       }
@@ -60,13 +61,10 @@ const Blocks = () => {
   };
 
   const saveBlocks = (updatedBlocks) => {
-    console.log('Saving blocks:', updatedBlocks);
     const blocksToSave = updatedBlocks.reduce((acc, block) => {
       acc[block.slug] = block.status === '1';
       return acc;
     }, {});
-
-    console.log('Blocks to save:', blocksToSave);
 
     jQuery.ajax({
       url: ajaxUrl,
@@ -77,18 +75,14 @@ const Blocks = () => {
         blocks: JSON.stringify(blocksToSave)
       },
       success: function(response) {
-        console.log('Save blocks response:', response);
         if (response.success) {
-          console.log('Blocks saved successfully');
           toast.success(__('Blocks saved successfully', 'frontis-blocks'));
           setBlocks(updatedBlocks); // Update the local state with the saved blocks
         } else {
-          console.error('Failed to save blocks:', response.data?.message || 'Unknown error');
           toast.error(__('Failed to save blocks', 'frontis-blocks'));
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        console.error('Error saving blocks:', textStatus, errorThrown);
         toast.error(__('Error saving blocks', 'frontis-blocks'));
       }
     });
@@ -175,15 +169,24 @@ const Blocks = () => {
         </div>
       </div>
       <div className="fb-blocks-category-filter">
-        {Object.entries(categoryInfo).map(([category, { count }]) => (
-          <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className={`fb-blocks-category-button ${selectedCategory === category ? 'fb-blocks-category-button--active' : ''}`}
-          >
-            {category === 'all' ? __('All', 'frontis-blocks') : category.charAt(0).toUpperCase() + category.slice(1)} ({count})
-          </button>
-        ))}
+        {Object.entries(categoryInfo).map(([category, { count }]) => {
+          const IconComponent = categoryIcons[category] || All;  // Use All as default
+          return (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`fb-blocks-category-button ${selectedCategory === category ? 'fb-blocks-category-button--active' : ''}`}
+            >
+              <span className="fb-blocks-category-button-icon">
+                <IconComponent />
+              </span>
+              <span className="fb-blocks-category-button-title">
+                {category === 'all' ? __('All', 'frontis-blocks') : category.charAt(0).toUpperCase() + category.slice(1)}
+              </span>
+              <span className="fb-blocks-category-button-count">{count}</span>
+            </button>
+          );
+        })}
       </div>
       {filteredCategories.length > 0 ? (
         filteredCategories.map(([category, { blocks: categoryBlocks }]) => (
