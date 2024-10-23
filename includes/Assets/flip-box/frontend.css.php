@@ -11,6 +11,8 @@ $flipBoxItemFrontBgFontHoverColor = isset($block_attributes['flipBoxItemFrontBgF
 $flipBoxItemFrontSize = isset($block_attributes['flipBoxItemFrontSize']) ? $block_attributes['flipBoxItemFrontSize'] : array('Desktop' => '364', 'Tablet' => '', 'Mobile' => '');
 $flipBoxItemFrontSizeUnits = isset($block_attributes['flipBoxItemFrontSizeUnits']) ? $block_attributes['flipBoxItemFrontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
+$flipBoxItemFrontBoxShadowCssValue = isset($block_attributes['flipBoxItemFrontBoxShadowCssValue']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBoxShadowCssValue']) : '';
+
 $flipBoxItemFrontBackgroundImageEnabled = isset($block_attributes['flipBoxItemFrontBackgroundImageEnabled']) ? rest_sanitize_boolean($block_attributes['flipBoxItemFrontBackgroundImageEnabled']) : false;
 $flipBoxItemFrontBackgroundImageUrl = isset($block_attributes['flipBoxItemFrontBackgroundImageUrl']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBackgroundImageUrl']) : '';
 $flipBoxItemFrontBgImagePositionType = isset($block_attributes['flipBoxItemFrontBgImagePositionType']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBgImagePositionType']) : 'center center';
@@ -151,6 +153,8 @@ $flipBoxItemBackBgFontHoverColor = isset($block_attributes['flipBoxItemBackBgFon
 
 $flipBoxItemBackSize = isset($block_attributes['flipBoxItemBackSize']) ? $block_attributes['flipBoxItemBackSize'] : array('Desktop' => '364', 'Tablet' => '', 'Mobile' => '');
 $flipBoxItemBackSizeUnits = isset($block_attributes['flipBoxItemBackSizeUnits']) ? $block_attributes['flipBoxItemBackSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+
+$flipBoxItemBackBoxShadowCssValue = isset($block_attributes['flipBoxItemBackBoxShadowCssValue']) ? sanitize_text_field($block_attributes['flipBoxItemBackBoxShadowCssValue']) : '';
 
 $flipBoxItemBackBackgroundImageEnabled = isset($block_attributes['flipBoxItemBackBackgroundImageEnabled']) ? rest_sanitize_boolean($block_attributes['flipBoxItemBackBackgroundImageEnabled']) : false;
 $flipBoxItemBackBackgroundImageUrl = isset($block_attributes['flipBoxItemBackBackgroundImageUrl']) ? sanitize_text_field($block_attributes['flipBoxItemBackBackgroundImageUrl']) : '';
@@ -354,6 +358,7 @@ $css_content = "
     " . ($flipBoxItemFrontBorderRadiusGetDesktop ? "border-radius: " . $flipBoxItemFrontBorderRadiusGetDesktop . ";" : "") . "
     " . ($flipBoxItemFrontBorderColor ? "border-color: " . $flipBoxItemFrontBorderColor . ";" : "") . "
     " . ($flipBoxItemFrontBgFontColor ? "background: " . $flipBoxItemFrontBgFontColor . ";" : "") . "
+    " . ($flipBoxItemFrontBoxShadowCssValue ? "box-shadow: $flipBoxItemFrontBoxShadowCssValue;" : "") . "
 	" . ($flipBoxItemFrontBackgroundImageEnabled && $flipBoxItemFrontBackgroundImageUrl && $flipBoxItemFrontBackgroundImageUrl !== 'null' ? "
 			background-image: url(${flipBoxItemFrontBackgroundImageUrl});
 			background-position: ${flipBoxItemFrontBgImagePositionType};
@@ -472,6 +477,7 @@ $css_content = "
     " . ($flipBoxItemBackBorderRadiusGetDesktop ? "border-radius: " . $flipBoxItemBackBorderRadiusGetDesktop . ";" : "") . "
     " . ($flipBoxItemBackBorderColor ? "border-color: " . $flipBoxItemBackBorderColor . ";" : "") . "
     " . ($flipBoxItemBackBgFontColor ? "background: " . $flipBoxItemBackBgFontColor . ";" : "") . "
+    " . ($flipBoxItemBackBoxShadowCssValue ? "box-shadow: $flipBoxItemBackBoxShadowCssValue;" : "") . "
     " . ($flipBoxItemBackBackgroundImageEnabled && $flipBoxItemBackBackgroundImageUrl && $flipBoxItemBackBackgroundImageUrl !== 'null' ? "
 			background-image: url(${flipBoxItemBackBackgroundImageUrl});
 			background-position: ${flipBoxItemBackBgImagePositionType};
