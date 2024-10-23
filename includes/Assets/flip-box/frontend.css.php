@@ -11,6 +11,13 @@ $flipBoxItemFrontBgFontHoverColor = isset($block_attributes['flipBoxItemFrontBgF
 $flipBoxItemFrontSize = isset($block_attributes['flipBoxItemFrontSize']) ? $block_attributes['flipBoxItemFrontSize'] : array('Desktop' => '364', 'Tablet' => '', 'Mobile' => '');
 $flipBoxItemFrontSizeUnits = isset($block_attributes['flipBoxItemFrontSizeUnits']) ? $block_attributes['flipBoxItemFrontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
+$flipBoxItemFrontBackgroundImageEnabled = isset($block_attributes['flipBoxItemFrontBackgroundImageEnabled']) ? rest_sanitize_boolean($block_attributes['flipBoxItemFrontBackgroundImageEnabled']) : false;
+$flipBoxItemFrontBackgroundImageUrl = isset($block_attributes['flipBoxItemFrontBackgroundImageUrl']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBackgroundImageUrl']) : '';
+$flipBoxItemFrontBgImagePositionType = isset($block_attributes['flipBoxItemFrontBgImagePositionType']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBgImagePositionType']) : 'center center';
+$flipBoxItemFrontBgImageAttachmentType = isset($block_attributes['flipBoxItemFrontBgImageAttachmentType']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBgImageAttachmentType']) : 'scroll';
+$flipBoxItemFrontBgImageRepeatType = isset($block_attributes['flipBoxItemFrontBgImageRepeatType']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBgImageRepeatType']) : 'no-repeat';
+$flipBoxItemFrontBgImageSizeType = isset($block_attributes['flipBoxItemFrontBgImageSizeType']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBgImageSizeType']) : 'auto';
+
 $flipBoxItemFrontBorder = isset($block_attributes['flipBoxItemFrontBorder']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBorder']) : '';
 $flipBoxItemFrontBorderColor = isset($block_attributes['flipBoxItemFrontBorderColor']) ? sanitize_hex_color($block_attributes['flipBoxItemFrontBorderColor']) : '';
 $flipBoxItemFrontBorderTypeUnits = isset($block_attributes['flipBoxItemFrontBorderTypeUnits']) ? $block_attributes['flipBoxItemFrontBorderTypeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
@@ -144,6 +151,13 @@ $flipBoxItemBackBgFontHoverColor = isset($block_attributes['flipBoxItemBackBgFon
 
 $flipBoxItemBackSize = isset($block_attributes['flipBoxItemBackSize']) ? $block_attributes['flipBoxItemBackSize'] : array('Desktop' => '364', 'Tablet' => '', 'Mobile' => '');
 $flipBoxItemBackSizeUnits = isset($block_attributes['flipBoxItemBackSizeUnits']) ? $block_attributes['flipBoxItemBackSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+
+$flipBoxItemBackBackgroundImageEnabled = isset($block_attributes['flipBoxItemBackBackgroundImageEnabled']) ? rest_sanitize_boolean($block_attributes['flipBoxItemBackBackgroundImageEnabled']) : false;
+$flipBoxItemBackBackgroundImageUrl = isset($block_attributes['flipBoxItemBackBackgroundImageUrl']) ? sanitize_text_field($block_attributes['flipBoxItemBackBackgroundImageUrl']) : '';
+$flipBoxItemBackBgImagePositionType = isset($block_attributes['flipBoxItemBackBgImagePositionType']) ? sanitize_text_field($block_attributes['flipBoxItemBackBgImagePositionType']) : 'center center';
+$flipBoxItemBackBgImageAttachmentType = isset($block_attributes['flipBoxItemBackBgImageAttachmentType']) ? sanitize_text_field($block_attributes['flipBoxItemBackBgImageAttachmentType']) : 'scroll';
+$flipBoxItemBackBgImageRepeatType = isset($block_attributes['flipBoxItemBackBgImageRepeatType']) ? sanitize_text_field($block_attributes['flipBoxItemBackBgImageRepeatType']) : 'no-repeat';
+$flipBoxItemBackBgImageSizeType = isset($block_attributes['flipBoxItemBackBgImageSizeType']) ? sanitize_text_field($block_attributes['flipBoxItemBackBgImageSizeType']) : 'auto';
 
 $flipBoxItemBackBorder = isset($block_attributes['flipBoxItemFrontBorder']) ? sanitize_text_field($block_attributes['flipBoxItemFrontBorder']) : '';
 $flipBoxItemBackBorderColor = isset($block_attributes['flipBoxItemFrontBorderColor']) ? sanitize_hex_color($block_attributes['flipBoxItemFrontBorderColor']) : '';
@@ -340,6 +354,12 @@ $css_content = "
     " . ($flipBoxItemFrontBorderRadiusGetDesktop ? "border-radius: " . $flipBoxItemFrontBorderRadiusGetDesktop . ";" : "") . "
     " . ($flipBoxItemFrontBorderColor ? "border-color: " . $flipBoxItemFrontBorderColor . ";" : "") . "
     " . ($flipBoxItemFrontBgFontColor ? "background: " . $flipBoxItemFrontBgFontColor . ";" : "") . "
+	" . ($flipBoxItemFrontBackgroundImageEnabled && $flipBoxItemFrontBackgroundImageUrl && $flipBoxItemFrontBackgroundImageUrl !== 'null' ? "
+			background-image: url(${flipBoxItemFrontBackgroundImageUrl});
+			background-position: ${flipBoxItemFrontBgImagePositionType};
+			background-repeat: ${flipBoxItemFrontBgImageRepeatType};
+			background-size: ${flipBoxItemFrontBgImageSizeType};
+		" : "") . "
 }
 .fb-flip-box-wrapper.${blockID} .fb-flip-box-item .fb-flip-box-front .fb-flip-box-content-inner {
 	" . ($flipBoxItemFrontPaddingGetDesktop ? "padding: " . $flipBoxItemFrontPaddingGetDesktop . ";" : "") . "
@@ -452,6 +472,12 @@ $css_content = "
     " . ($flipBoxItemBackBorderRadiusGetDesktop ? "border-radius: " . $flipBoxItemBackBorderRadiusGetDesktop . ";" : "") . "
     " . ($flipBoxItemBackBorderColor ? "border-color: " . $flipBoxItemBackBorderColor . ";" : "") . "
     " . ($flipBoxItemBackBgFontColor ? "background: " . $flipBoxItemBackBgFontColor . ";" : "") . "
+    " . ($flipBoxItemBackBackgroundImageEnabled && $flipBoxItemBackBackgroundImageUrl && $flipBoxItemBackBackgroundImageUrl !== 'null' ? "
+			background-image: url(${flipBoxItemBackBackgroundImageUrl});
+			background-position: ${flipBoxItemBackBgImagePositionType};
+			background-repeat: ${flipBoxItemBackBgImageRepeatType};
+			background-size: ${flipBoxItemBackBgImageSizeType};
+		" : "") . "
 }
 // Tablet media query
 @media only screen and (max-width: 1024px) {
