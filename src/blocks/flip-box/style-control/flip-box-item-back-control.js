@@ -11,6 +11,7 @@ import {
 	SELECT_BG_IMAGE_POSITION_TYPE,
 	SELECT_BG_IMAGE_REPEAT_TYPE, SELECT_BG_IMAGE_SIZE_TYPE
 } from "@Blocks/flip-box/constants/constants";
+import FB_BoxShadowControl from "@Components/box-shadow";
 export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 
 	const {
@@ -34,6 +35,9 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 		flipBoxItemBackBorderRadiusTablet,
 		flipBoxItemBackBorderRadiusMobile,
 		flipBoxItemBackBorderRadiusLink,
+
+		flipBoxItemBackBoxShadowValues,
+		flipBoxItemBackBoxShadowCssValue,
 
 		flipBoxItemBackPaddingUnits,
 		flipBoxItemBackPaddingDesktop,
@@ -447,6 +451,12 @@ export default function FlipBoxItemBackControl ({ attributes, setAttributes}) {
 				handleColorSwitcherChange={(value) => setAttributes({ flipBoxItemBackBorderColorSwitcher: value })}
 				handleGlobalColorChange={(value) => setAttributes({ flipBoxItemBackBorderColor: value })}
 				handleGlobalHoverColorChange={(value) => setAttributes({ flipBoxItemBackBorderHoverColor: value })}
+			/>
+			<FB_BoxShadowControl
+				label={__("Box Shadow", "frontis-blocks")}
+				onBoxShadowChange={(value) => setAttributes({ flipBoxItemBackBoxShadowValues: value })}
+				initialShadowValue={flipBoxItemBackBoxShadowValues}
+				onBoxShadowStyleChange={(value) => setAttributes({ flipBoxItemBackBoxShadowCssValue: value })}
 			/>
 			<FB_Spacing
 				label={ 'Padding' }
