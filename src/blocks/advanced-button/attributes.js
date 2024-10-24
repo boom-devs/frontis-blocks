@@ -219,11 +219,11 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    buttonboxShadowValues: {
+    buttonBoxShadowValues: { 
         type: 'array',
         default: [],
     },
-    buttonboxShadowCssValue: {
+    buttonBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
@@ -353,17 +353,17 @@ const attributes = {
         default: "#fff"
     },
 
-    buttonBgColorSwitcher : {
+    buttonIconBgColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    buttonBgColor : {
+    buttonIconBgColor : {
         type: "string",
-        default: "#399CFF"
+        default: ""
     },
-    buttonBgHoverColor: {
+    buttonIconBgHoverColor: {
         type: 'string',
-        default: "#399CFF"
+        default: ""
     },
     buttonIconBorder: {
         type: 'string',
