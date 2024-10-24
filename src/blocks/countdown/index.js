@@ -13,6 +13,7 @@ import countDownItemGapAttributes from "./attributes/countdown-item-gap-attribut
 import countDownItemBorderTypeAttributes from "./attributes/countdown-item-border-type-attribute.js";
 import countDownItemBorderRadiusAttributes from "./attributes/countdown-item-border-radius-attribute.js";
 import countDownItemBgColorControl from "./attributes/countdown-item-bg-color-attribute.js";
+import countDownSeparatorAttributes from "./attributes/separator.js";
 import digitAttributes from "./attributes/digit.js";
 import labelAttributes from "./attributes/label.js";
 
@@ -24,6 +25,7 @@ const combinedAttributes = {
 	...countDownItemBorderTypeAttributes,
 	...countDownItemBorderRadiusAttributes,
 	...countDownItemBgColorControl,
+	...countDownSeparatorAttributes,
 	...digitAttributes,
 	...labelAttributes,
 };

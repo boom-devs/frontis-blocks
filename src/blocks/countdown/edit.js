@@ -30,6 +30,8 @@ import CountDownItemBorderRadiusControl from "./style-control/countdown-item-bor
 import CountDownDigitTypographyControl from "./style-control/countdown-digit-typograpy-control";
 import CountDownLabelTypographyControl from "./style-control/countdown-label-typograpy-control";
 import CountDownItemBgColorControl from "./style-control/countdown-item-bg-color-control";
+import CountDownSeparatorControl from "./style-control/countdown-separator-control";
+import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
 
 
 
@@ -37,6 +39,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		deviceType,
+
+
+
+
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -49,8 +55,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showSeconds,
 
 
-		// Countdown item
+		// Countdown Separator
+		countDownSeparatorFontColorSwitcher,
+		countDownSeparatorFontColor,
+		countDownSeparatorFontHoverColor,
 
+		countDownSeparatorFontFamily,
+		countDownSeparatorFontSize,
+		countDownSeparatorFontSizeUnits,
+		countDownSeparatorFontWeight,
+		countDownSeparatorFontStyle,
+		countDownSeparatorTextTransform,
+		countDownSeparatorTextDecoration,
+		countDownSeparatorLetterSpacing,
+		countDownSeparatorLetterSpacingUnits,
+		countDownSeparatorLineHeight,
+		countDownSeparatorLineHeightUnits,
+
+		countDownSeparatorHorizontalGap,
+		countDownSeparatorHorizontalGapUnits,
+		countDownSeparatorVerticalGap,
+		countDownSeparatorVerticalGapUnits,
+
+		// Countdown item
 		countDownItemSize,
 		countDownItemSizeUnits,
 
@@ -195,6 +222,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${countDownItemBorderRadiusGetDesktop ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
 					${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
 				}
+				.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
+						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
+                        content: '${countDownSeparatorType}';
+                        right: -20px;
+
+                        ${countDownSeparatorFontColor ? `color: ${countDownSeparatorFontColor};` : ''}
+						${countDownSeparatorFontFamily ? `font-family: ${countDownSeparatorFontFamily};` : ''}
+						${countDownSeparatorFontSize.Desktop ? `font-size: ${countDownSeparatorFontSize.Desktop}${countDownSeparatorFontSizeUnits.Desktop};` : ''}
+						${countDownSeparatorFontWeight ? `font-weight: ${countDownSeparatorFontWeight};` : ''}
+						${countDownSeparatorFontStyle ? `font-style: ${countDownSeparatorFontStyle};` : ''}
+						${countDownSeparatorTextTransform ? `text-transform: ${countDownSeparatorTextTransform};` : ''}
+						${countDownSeparatorTextDecoration ? `text-decoration: ${countDownSeparatorTextDecoration};` : ''}
+						${countDownSeparatorLetterSpacing.Desktop ? `letter-spacing: ${countDownSeparatorLetterSpacing.Desktop}${countDownSeparatorLetterSpacingUnits.Desktop};` : ''}
+						${countDownSeparatorLineHeight.Desktop ? `line-height: ${countDownSeparatorLineHeight.Desktop}${countDownSeparatorLineHeightUnits.Desktop};` : ''}
+
+                    ` : ''}
+				}
+
 
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 					${digitFontColor ? `color: ${digitFontColor};` : ''}
@@ -347,6 +392,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({ countDownLabelSecond: value })}
 											/>
 										</PanelBody>
+										<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
+											<ToggleControl
+												label={__("Show Separator", "frontis-blocks")}
+												checked={countDownSeparatorEnabled}
+												onChange={(value) => setAttributes({ countDownSeparatorEnabled: value })}
+											/>
+											{countDownSeparatorEnabled && (
+												<SelectControl
+													label={__("Separator Type", "frontis-blocks")}
+													value={countDownSeparatorType}
+													options={SELECT_SEPARATOR_TYPE}
+													onChange={(value) => setAttributes({ countDownSeparatorType: value })}
+												/>
+											)}
+										</PanelBody>
 									</>
 								)}
 
@@ -405,7 +465,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												clientId ={clientId}
 											/>
 										</PanelBody>
-
+										{countDownSeparatorEnabled && (
+										<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
+											<CountDownSeparatorControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
+										)}
 									</>
 								)}
 							</div>
