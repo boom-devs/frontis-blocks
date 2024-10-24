@@ -99,7 +99,7 @@ export default function CountDownSeparatorControl ({ attributes, setAttributes})
 
 			<FB_Range
 				min={1}
-				max={300}
+				max={100}
 				label={__("Horizontal Spacing", "frontis-blocks")}
 				rangeValue={countDownSeparatorHorizontalGap}
 				onChangeHandler={(value) => setAttributes({ countDownSeparatorHorizontalGap: value })}
@@ -108,12 +108,12 @@ export default function CountDownSeparatorControl ({ attributes, setAttributes})
 				units={countDownSeparatorHorizontalGapUnits}
 				setAttributes={setAttributes}
 				rangeStep={1}
-				resetFallbackValue={25}
+				resetFallbackValue={70}
 			/>
 
 			<FB_Range
 				min={1}
-				max={300}
+				max={100}
 				label={__("Vertical Spacing", "frontis-blocks")}
 				rangeValue={countDownSeparatorVerticalGap}
 				onChangeHandler={(value) => setAttributes({ countDownSeparatorVerticalGap: value })}
@@ -122,7 +122,7 @@ export default function CountDownSeparatorControl ({ attributes, setAttributes})
 				units={countDownSeparatorVerticalGapUnits}
 				setAttributes={setAttributes}
 				rangeStep={1}
-				resetFallbackValue={25}
+				resetFallbackValue={20}
 			/>
 		</>
 	);
