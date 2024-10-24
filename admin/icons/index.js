@@ -232,3 +232,135 @@ export const FBIcon = () => (
     />
   </svg>
 );
+export const EditorOption = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="#399CFF"
+      strokeWidth={2}
+      d="M6.25 11a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5ZM17.75 22.5a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5ZM6.25 22.5a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Z"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="m20.868 2.94.692.692a1.5 1.5 0 0 1 0 2.121l-3.627 3.696a2 2 0 0 1-1.047.552l-2.248.488a.5.5 0 0 1-.595-.594l.478-2.235a2 2 0 0 1 .552-1.047l3.674-3.674a1.5 1.5 0 0 1 2.12 0Z"
+    />
+  </svg>
+);
+
+export const AssetGeneration = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M20.5 6h-11C5.787 6 3 8.685 3 12.5M3.5 19h11c3.713 0 6.5-2.685 6.5-6.5"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M18.5 3.5S21 5.341 21 6s-2.5 2.5-2.5 2.5M5.5 16.5S3 18.341 3 19s2.5 2.5 2.5 2.5"
+    />
+  </svg>
+);
+
+export const EditorEnhancement = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="currentColor"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="m16.425 5.105.99-.99a2.1 2.1 0 0 1 2.97 2.97l-.99.99m-2.97-2.97-6.66 6.66a3.96 3.96 0 0 0-1.041 1.84L8 16.5l2.896-.724a3.96 3.96 0 0 0 1.84-1.042l6.659-6.659m-2.97-2.97 2.97 2.97"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M19 14c0 3.288 0 4.931-.908 6.038a3.996 3.996 0 0 1-.554.554c-1.107.908-2.75.908-6.038.908H11c-3.771 0-5.657 0-6.828-1.172C3 19.157 3 17.271 3 13.5V13c0-3.287 0-4.931.908-6.038.166-.202.352-.388.554-.554C5.57 5.5 7.212 5.5 10.5 5.5"
+    />
+  </svg>
+);
+
+export const VersionControl = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="m8.643 3.646-1.705.788C4.313 5.647 3 6.254 3 7.25c0 .996 1.313 1.603 3.938 2.816l1.705.788C10.295 11.618 11.121 12 12 12s1.705-.382 3.357-1.146l1.705-.788C19.687 8.853 21 8.246 21 7.25c0-.996-1.313-1.603-3.938-2.816l-1.705-.788C13.705 2.882 12.879 2.5 12 2.5s-1.705.382-3.357 1.146Z"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M20.788 11.598c.141.198.212.406.212.633 0 .982-1.313 1.58-3.938 2.777l-1.705.777c-1.652.752-2.478 1.129-3.357 1.129s-1.705-.377-3.357-1.13l-1.705-.776C4.313 13.81 3 13.213 3 12.23c0-.227.07-.435.212-.633"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M20.377 16.766c.415.33.623.66.623 1.051 0 .982-1.313 1.58-3.938 2.776l-1.705.777c-1.652.753-2.478 1.13-3.357 1.13s-1.705-.377-3.357-1.13l-1.705-.777C4.313 19.397 3 18.8 3 17.817c0-.39.208-.72.623-1.051"
+    />
+  </svg>
+);
+
+export const Performance = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="m6.194 11.896 5.998-8.084c.47-.632 1.348-.239 1.348.603v6.258c0 .505.345.913.77.913h2.918c.663 0 1.016.927.578 1.518l-5.998 8.084c-.47.632-1.348.239-1.348-.603v-6.258c0-.505-.345-.913-.77-.913H6.771c-.663 0-1.016-.927-.578-1.518Z"
+    />
+  </svg>
+);
+
+export const SiteVisibility = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M2.5 8.687c.104-2.1.415-3.41 1.347-4.34.93-.932 2.24-1.243 4.34-1.347M21.5 8.687c-.104-2.1-.415-3.41-1.347-4.34-.93-.932-2.24-1.243-4.34-1.347m0 19c2.1-.104 3.41-.415 4.34-1.347.932-.93 1.243-2.24 1.347-4.34M8.187 22c-2.1-.104-3.41-.415-4.34-1.347-.932-.93-1.243-2.24-1.347-4.34"
+    />
+    <path
+      stroke="currentColor"
+      strokeWidth={2}
+      d="M19.635 11.818c.243.304.365.457.365.682 0 .225-.122.378-.365.682C18.542 14.55 15.751 17.5 12 17.5s-6.542-2.95-7.635-4.318C4.122 12.878 4 12.725 4 12.5c0-.225.122-.378.365-.682C5.458 10.45 8.249 7.5 12 7.5s6.542 2.95 7.635 4.318Z"
+    />
+    <path
+      stroke="currentColor"
+      strokeWidth={2}
+      d="M14 12.5a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"
+    />
+  </svg>
+);
+
+export const ThemeFont = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M6.999 10c-.24-1.995.916-2.403 5-2.5m0 0c4.123.1 5.341.598 5 2.5m-5-2.5v10m-2 0h4"
+    />
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M3.891 4.391C2.5 5.782 2.5 8.021 2.5 12.5c0 4.478 0 6.718 1.391 8.109S7.521 22 12 22c4.478 0 6.718 0 8.109-1.391C21.5 19.217 21.5 16.979 21.5 12.5c0-4.478 0-6.718-1.391-8.109C18.717 3 16.479 3 12 3 7.522 3 5.282 3 3.891 4.391Z"
+    />
+  </svg>
+);
