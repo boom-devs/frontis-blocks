@@ -5,10 +5,20 @@ namespace FrontisBlocks\Admin\Ajax;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 
+/**
+ * Settings
+ *
+ * @package FrontisBlocks
+ */
 class Settings extends AjaxBase {
 
     use Singleton;
 
+    /**
+     * register_ajax_events
+     *
+     * @return void
+     */
     public function register_ajax_events() {
         $ajax_events = [
             'get_options',
@@ -111,6 +121,13 @@ class Settings extends AjaxBase {
         $this->handle_option_update('enable_templates_button', 'boolean');
     }
 
+    /**
+     * handle_option_update
+     *
+     * @param string $option_name
+     * @param string $type
+     * @return void
+     */
     private function handle_option_update($option_name, $type) {
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
@@ -155,6 +172,13 @@ class Settings extends AjaxBase {
         }
     }
 
+    /**
+     * sanitize_option_value
+     *
+     * @param mixed $value
+     * @param string $type
+     * @return mixed
+     */
     private function sanitize_option_value($value, $type) {
         switch ($type) {
             case 'number':
@@ -171,13 +195,11 @@ class Settings extends AjaxBase {
     // New method to save blocks
     public function save_blocks() {
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
-            error_log('Invalid nonce in save_blocks');
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
         
         if (!current_user_can('manage_options')) {
-            error_log('Insufficient permissions in save_blocks');
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
             return;
         }
@@ -186,7 +208,6 @@ class Settings extends AjaxBase {
         $activeBlocks = get_option('fb_active_blocks');
 
         if (!is_array($blocks)) {
-            error_log('Invalid blocks data in save_blocks: ' . print_r($blocks, true));
             wp_send_json_error(['message' => 'Invalid blocks data'], 400);
             return;
         }
@@ -206,10 +227,8 @@ class Settings extends AjaxBase {
         $updated = update_option('fb_active_blocks', $blocks, true);
 
         if ($updated) {
-            error_log('Blocks updated successfully');
             wp_send_json_success(['message' => 'Blocks updated successfully']);
         } else {
-            error_log('Failed to update blocks');
             wp_send_json_error(['message' => 'Failed to update blocks']);
         }
     }
