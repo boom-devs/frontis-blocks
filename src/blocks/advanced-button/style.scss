@@ -21,36 +21,31 @@
             color: #ffffff;
             transition: all .3s ease-in-out;
         }
-    }
-}
-
-
-.fb-advanced-button {
-    .fb-advanced-button-icon-wrapper {
-        display: flex;
-        align-items: center;
-
-        .fb-advanced-button-icon {
+        .fb-advanced-button-icon-wrapper {
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-            svg {
-                display: block;
-                height: 16px;
-                width: 16px;
-                fill: #fff;
-                box-sizing: content-box;
+            &.left {
+                margin-right: 10px;
             }
-        }        
-    }
+            
+            &.right {
+                margin-left: 10px;
+            }
     
-    &.left {
-        margin-right: 10px;
-    }
-    
-    &.right {
-        margin-left: 10px;
+            .fb-advanced-button-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+                svg {
+                    display: block;
+                    height: 16px;
+                    width: 16px;
+                    fill: #fff;
+                    box-sizing: content-box;
+                }
+            }        
+        }
     }
 }
