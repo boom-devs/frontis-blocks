@@ -13,11 +13,11 @@ const countDownSeparatorAttributes = {
 	},
 	countDownSeparatorFontColor: {
 		type: "string",
-		default: "#FFFFFF"
+		default: "#15171C"
 	},
 	countDownSeparatorFontHoverColor: {
 		type: 'string',
-		default: "#FFFFFF"
+		default: "#15171C"
 	},
 	countDownSeparatorFontFamily: {
 		type: 'string',
@@ -111,7 +111,7 @@ const countDownSeparatorAttributes = {
 	countDownSeparatorVerticalGap: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '20',
 			Tablet: '',
 			Mobile: ''
 		}

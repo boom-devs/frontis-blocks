@@ -56,6 +56,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 		// Countdown Separator
+		countDownSeparatorEnabled,
+		countDownSeparatorType,
+
 		countDownSeparatorFontColorSwitcher,
 		countDownSeparatorFontColor,
 		countDownSeparatorFontHoverColor,
@@ -225,8 +228,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
 						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
                         content: '${countDownSeparatorType}';
-                        right: -20px;
-
+						${countDownSeparatorHorizontalGap.Desktop ? `top: ${countDownSeparatorHorizontalGap.Desktop}${countDownSeparatorHorizontalGapUnits.Desktop};` : ''}
+						${countDownSeparatorVerticalGap.Desktop ? `right: -${countDownSeparatorVerticalGap.Desktop}${countDownSeparatorVerticalGapUnits.Desktop};` : ''}
                         ${countDownSeparatorFontColor ? `color: ${countDownSeparatorFontColor};` : ''}
 						${countDownSeparatorFontFamily ? `font-family: ${countDownSeparatorFontFamily};` : ''}
 						${countDownSeparatorFontSize.Desktop ? `font-size: ${countDownSeparatorFontSize.Desktop}${countDownSeparatorFontSizeUnits.Desktop};` : ''}
@@ -275,6 +278,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${countDownItemBorderTypeGetTablet ? `border-width: ${countDownItemBorderTypeGetTablet};` : ''}
 						${countDownItemBorderRadiusGetTablet ? `border-radius: ${countDownItemBorderRadiusGetTablet};` : ''}
 					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
+						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
+						${countDownSeparatorHorizontalGap.Tablet ? `top: ${countDownSeparatorHorizontalGap.Tablet}${countDownSeparatorHorizontalGapUnits.Tablet};` : ''}
+						${countDownSeparatorVerticalGap.Tablet ? `right: -${countDownSeparatorVerticalGap.Tablet}${countDownSeparatorVerticalGapUnits.Tablet};` : ''}
+						${countDownSeparatorFontSize.Tablet ? `font-size: ${countDownSeparatorFontSize.Tablet}${countDownSeparatorFontSizeUnits.Tablet};` : ''}
+						${countDownSeparatorLetterSpacing.Tablet ? `letter-spacing: ${countDownSeparatorLetterSpacing.Tablet}${countDownSeparatorLetterSpacingUnits.Tablet};` : ''}
+						${countDownSeparatorLineHeight.Tablet ? `line-height: ${countDownSeparatorLineHeight.Tablet}${countDownSeparatorLineHeightUnits.Tablet};` : ''}
+
+                    ` : ''}
+					}
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 						${digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ''}
 						${digitLetterSpacing.Tablet ? `letter-spacing: ${digitLetterSpacing.Tablet}${digitLetterSpacingUnits.Tablet};` : ''}
@@ -296,6 +309,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${countDownItemSize.Mobile ? `height: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};` : ''}
 						${countDownItemBorderTypeGetMobile ? `border-width: ${countDownItemBorderTypeGetMobile};` : ''}
 						${countDownItemBorderRadiusGetMobile ? `border-radius: ${countDownItemBorderRadiusGetMobile};` : ''}
+					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
+						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
+						${countDownSeparatorHorizontalGap.Mobile ? `top: ${countDownSeparatorHorizontalGap.Mobile}${countDownSeparatorHorizontalGapUnits.Mobile};` : ''}
+						${countDownSeparatorVerticalGap.Mobile ? `right: -${countDownSeparatorVerticalGap.Mobile}${countDownSeparatorVerticalGapUnits.Mobile};` : ''}
+						${countDownSeparatorFontSize.Mobile ? `font-size: ${countDownSeparatorFontSize.Mobile}${countDownSeparatorFontSizeUnits.Mobile};` : ''}
+						${countDownSeparatorLetterSpacing.Mobile ? `letter-spacing: ${countDownSeparatorLetterSpacing.Mobile}${countDownSeparatorLetterSpacingUnits.Mobile};` : ''}
+						${countDownSeparatorLineHeight.Mobile ? `line-height: ${countDownSeparatorLineHeight.Mobile}${countDownSeparatorLineHeightUnits.Mobile};` : ''}
+
+                    ` : ''}
 					}
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 						${digitFontSize.Mobile ? `font-size: ${digitFontSize.Mobile}${digitFontSizeUnits.Mobile};` : ''}
