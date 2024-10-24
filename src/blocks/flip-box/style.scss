@@ -47,6 +47,20 @@
 		//		}
 		//	}
 		//}
+
+		.fb-flip-box-back-button {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+
+			.fb-flip-box-back-button-icon {
+				display: flex;
+
+				svg {
+					width: 20px;
+				}
+			}
+		}
 	}
 	.fb-flip-box-front,
 	.fb-flip-box-back {

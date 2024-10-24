@@ -9,5 +9,19 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		position: relative;
+
+		&:last-child {
+			&:before {
+				display: none;
+			}
+		}
+	}
+
+	.fb-count-down-item:before{
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
 	}
 }
