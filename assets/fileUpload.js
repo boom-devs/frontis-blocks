@@ -23,7 +23,8 @@
 
             var table = null;
             var tableBody = null;
-            // Creates a table containing file information.
+            // Creates a table containing file information.;
+
             function createTable() {
                 table = $(`
                     <table>

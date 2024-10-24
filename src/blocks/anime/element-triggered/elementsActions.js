@@ -4,6 +4,8 @@ export default function ElementActioinsTimeLine({actions}) {
 
     const [initialActions, setInitialActions] = useState(actions);
     const [draggedItem, setDraggedItem] = useState(null);
+	const [dragStart, setDragStart] = useState(null);
+	const [dragOver, setDragOver] = useState(null);
 
 
 
@@ -12,15 +14,22 @@ export default function ElementActioinsTimeLine({actions}) {
     }
 
       const handleDragStart = (e, id, element = null) => {
-        e.dataTransfer.setData("id", id);
-        setDraggedItem(id);
+		  e.stopPropagation();
+		  setTimeout(() => {
+			  setDraggedItem(id);
+			  // console.log(initialActions)
+			  console.log('After drag start initial actions')
+			  console.log("Drag start: "+element +' : ' + id)
+		  }, 0);
       };
 
       const handleDragOver = (e, id, element = null) => {
 		  e.stopPropagation();
 
 		  setTimeout(() => {
-			  console.log("Drag over: "+element)
+			  // console.log(initialActions)
+			  console.log('After drag over initial actions')
+			  console.log("Drag over: "+element +' : ' + id)
 		  }, 0);
 
 

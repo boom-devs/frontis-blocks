@@ -283,19 +283,34 @@ function ElementActioinsTimeLine(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     draggedItem = _useState4[0],
     setDraggedItem = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    dragStart = _useState6[0],
+    setDragStart = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    dragOver = _useState8[0],
+    setDragOver = _useState8[1];
   if (actions.length === 0) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "No actions available");
   }
   var handleDragStart = function handleDragStart(e, id) {
     var element = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    e.dataTransfer.setData("id", id);
-    setDraggedItem(id);
+    e.stopPropagation();
+    setTimeout(function () {
+      setDraggedItem(id);
+      // console.log(initialActions)
+      console.log('After drag start initial actions');
+      console.log("Drag start: " + element + ' : ' + id);
+    }, 0);
   };
   var handleDragOver = function handleDragOver(e, id) {
     var element = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
     e.stopPropagation();
     setTimeout(function () {
-      console.log("Drag over: " + element);
+      // console.log(initialActions)
+      console.log('After drag over initial actions');
+      console.log("Drag over: " + element + ' : ' + id);
     }, 0);
 
     // const draggedOverItem = tasks.find(task => task.id === id);
