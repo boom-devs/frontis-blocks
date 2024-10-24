@@ -89,6 +89,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		countDownItemBgColor,
 
+		/** Background Image */
+		countDownItemBgImageEnabled,
+		countDownItemBgImageUrl,
+		countDownItemBgImageAlt,
+		countDownItemBgImageID,
+
+		countDownItemBgImagePositionType,
+		countDownItemBgImageAttachmentType,
+		countDownItemBgImageRepeatType,
+		countDownItemBgImageSizeType,
+
 		// Border Type
 		countDownItemBorder,
 		countDownItemBorderColor,
@@ -224,6 +235,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${countDownItemBorderTypeGetDesktop ? `border-width: ${countDownItemBorderTypeGetDesktop};` : ''}
 					${countDownItemBorderRadiusGetDesktop ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
 					${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
+
+					${countDownItemBgImageEnabled && countDownItemBgImageUrl && countDownItemBgImageUrl !== 'null' ? `
+                        background-image: url(${countDownItemBgImageUrl});
+                        background-position: ${countDownItemBgImagePositionType};
+                        background-repeat: ${countDownItemBgImageRepeatType};
+                        background-size: ${countDownItemBgImageSizeType};
+                    ` : ''}
 				}
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
 						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
