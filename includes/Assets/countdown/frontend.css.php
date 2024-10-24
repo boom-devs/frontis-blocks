@@ -66,6 +66,27 @@ $labelLineHeightUnits = isset($block_attributes['labelLineHeightUnits']) ? $bloc
 $labelFontColor = isset($block_attributes['labelFontColor']) ? sanitize_hex_color($block_attributes['labelFontColor']) : '#fff';
 $labelFontHoverColor = isset($block_attributes['labelFontHoverColor']) ? sanitize_hex_color($block_attributes['labelFontHoverColor']) : '';
 
+/** Separator */
+$countDownSeparatorHorizontalGap = isset($block_attributes['countDownSeparatorHorizontalGap']) ? $block_attributes['countDownSeparatorHorizontalGap'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$countDownSeparatorHorizontalGapUnits = isset($block_attributes['countDownSeparatorHorizontalGapUnits']) ? $block_attributes['countDownSeparatorHorizontalGapUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownSeparatorVerticalGap = isset($block_attributes['countDownSeparatorVerticalGap']) ? $block_attributes['countDownSeparatorVerticalGap'] : array('Desktop' => '18', 'Tablet' => '', 'Mobile' => '');
+$countDownSeparatorVerticalGapUnits = isset($block_attributes['countDownSeparatorVerticalGapUnits']) ? $block_attributes['countDownSeparatorVerticalGapUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+
+$countDownSeparatorType = isset($block_attributes['countDownSeparatorType']) ? sanitize_text_field($block_attributes['countDownSeparatorType']) : ':';
+
+$countDownSeparatorFontFamily = isset($block_attributes['countDownSeparatorFontFamily']) ? sanitize_text_field($block_attributes['countDownSeparatorFontFamily']) : 'inherit';
+$countDownSeparatorFontSize = isset($block_attributes['countDownSeparatorFontSize']) ? $block_attributes['countDownSeparatorFontSize'] : array('Desktop' => '48', 'Tablet' => '40', 'Mobile' => '38');
+$countDownSeparatorFontSizeUnits = isset($block_attributes['countDownSeparatorFontSizeUnits']) ? $block_attributes['countDownSeparatorFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownSeparatorFontWeight = isset($block_attributes['countDownSeparatorFontWeight']) ? sanitize_text_field($block_attributes['countDownSeparatorFontWeight']) : '700';
+$countDownSeparatorFontStyle = isset($block_attributes['countDownSeparatorFontStyle']) ? sanitize_text_field($block_attributes['countDownSeparatorFontStyle']) : '';
+$countDownSeparatorTextTransform = isset($block_attributes['countDownSeparatorTextTransform']) ? sanitize_text_field($block_attributes['countDownSeparatorTextTransform']) : '';
+$countDownSeparatorTextDecoration = isset($block_attributes['countDownSeparatorTextDecoration']) ? sanitize_text_field($block_attributes['countDownSeparatorTextDecoration']) : '';
+$countDownSeparatorLetterSpacing = isset($block_attributes['countDownSeparatorLetterSpacing']) ? $block_attributes['countDownSeparatorLetterSpacing'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$countDownSeparatorLetterSpacingUnits = isset($block_attributes['countDownSeparatorLetterSpacingUnits']) ? $block_attributes['countDownSeparatorLetterSpacingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownSeparatorLineHeight = isset($block_attributes['countDownSeparatorLineHeight']) ? $block_attributes['countDownSeparatorLineHeight'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
+$countDownSeparatorLineHeightUnits = isset($block_attributes['countDownSeparatorLineHeightUnits']) ? $block_attributes['countDownSeparatorLineHeightUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownSeparatorFontColor = isset($block_attributes['countDownSeparatorFontColor']) ? sanitize_hex_color($block_attributes['countDownSeparatorFontColor']) : '#15171C';
+$countDownSeparatorFontHoverColor = isset($block_attributes['countDownSeparatorFontHoverColor']) ? sanitize_hex_color($block_attributes['countDownSeparatorFontHoverColor']) : '';
 
 
 // Generate CSS content
@@ -81,6 +102,22 @@ $css_content = "
 		" . ($countDownItemBgColor ? "background: $countDownItemBgColor;" : "") . "
 		" . ($countDownItemSize['Desktop'] && $countDownItemSizeUnits['Desktop'] ? "width: {$countDownItemSize['Desktop']}{$countDownItemSizeUnits['Desktop']};" : "") . "
 		" . ($countDownItemSize['Desktop'] && $countDownItemSizeUnits['Desktop'] ? "height: {$countDownItemSize['Desktop']}{$countDownItemSizeUnits['Desktop']};" : "") . "
+	}
+	.fb-count-down-wrapper.$block_ID .fb-count-down-item:before {
+
+		" . ($countDownSeparatorType ? "content: '$countDownSeparatorType';" : "") . "
+
+		" . ($countDownSeparatorHorizontalGap['Desktop'] && $countDownSeparatorHorizontalGapUnits['Desktop'] ? "top: {$countDownSeparatorHorizontalGap['Desktop']}{$countDownSeparatorHorizontalGapUnits['Desktop']};" : "") . "
+		" . ($countDownSeparatorVerticalGap['Desktop'] && $countDownSeparatorVerticalGapUnits['Desktop'] ? "right: -{$countDownSeparatorVerticalGap['Desktop']}{$countDownSeparatorVerticalGapUnits['Desktop']};" : "") . "
+		" . ($countDownSeparatorFontColor ? "color: $countDownSeparatorFontColor;" : "") . "
+		" . ($countDownSeparatorFontFamily ? "font-family: $countDownSeparatorFontFamily;" : "") . "
+		" . ($countDownSeparatorFontSize['Desktop'] && $countDownSeparatorFontSizeUnits['Desktop'] ? "font-size: {$countDownSeparatorFontSize['Desktop']}{$countDownSeparatorFontSizeUnits['Desktop']};" : "") . "
+		" . ($countDownSeparatorFontWeight ? "font-weight: $countDownSeparatorFontWeight;" : "") . "
+		" . ($countDownSeparatorFontStyle ? "font-style: $countDownSeparatorFontStyle;" : "") . "
+		" . ($countDownSeparatorTextTransform ? "text-transform: $countDownSeparatorTextTransform;" : "") . "
+		" . ($countDownSeparatorTextDecoration ? "text-decoration: $countDownSeparatorTextDecoration;" : "") . "
+		" . ($countDownSeparatorLetterSpacing['Desktop'] && $countDownSeparatorLetterSpacingUnits['Desktop'] ? "letter-spacing: {$countDownSeparatorLetterSpacing['Desktop']}{$countDownSeparatorLetterSpacingUnits['Desktop']};" : "") . "
+		" . ($countDownSeparatorLineHeight['Desktop'] && $countDownSeparatorLineHeightUnits['Desktop'] ? "line-height: {$countDownSeparatorLineHeight['Desktop']}{$countDownSeparatorLineHeightUnits['Desktop']};" : "") . "
 	}
 	.fb-count-down-wrapper.$block_ID .fb-count-down-item .fb-count-down-time{
 		" . ($digitFontColor ? "color: $digitFontColor;" : "") . "
