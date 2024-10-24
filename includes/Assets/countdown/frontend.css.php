@@ -6,6 +6,13 @@ $block_ID = isset( $block_attributes['blockID'] ) ? sanitize_text_field( $block_
 
 $countDownItemBgColor = isset($block_attributes['countDownItemBgColor']) ? sanitize_hex_color($block_attributes['countDownItemBgColor']) : '#F97255';
 
+$countDownItemBgImageEnabled = isset($block_attributes['countDownItemBgImageEnabled']) ? rest_sanitize_boolean($block_attributes['countDownItemBgImageEnabled']) : false;
+$countDownItemBgImageUrl = isset($block_attributes['countDownItemBgImageUrl']) ? sanitize_text_field($block_attributes['countDownItemBgImageUrl']) : '';
+$countDownItemBgImagePositionType = isset($block_attributes['countDownItemBgImagePositionType']) ? sanitize_text_field($block_attributes['countDownItemBgImagePositionType']) : 'center center';
+$countDownItemBgImageAttachmentType = isset($block_attributes['countDownItemBgImageAttachmentType']) ? sanitize_text_field($block_attributes['countDownItemBgImageAttachmentType']) : 'scroll';
+$countDownItemBgImageRepeatType = isset($block_attributes['countDownItemBgImageRepeatType']) ? sanitize_text_field($block_attributes['countDownItemBgImageRepeatType']) : 'no-repeat';
+$countDownItemBgImageSizeType = isset($block_attributes['countDownItemBgImageSizeType']) ? sanitize_text_field($block_attributes['countDownItemBgImageSizeType']) : 'auto';
+
 /** Start Border */
 $countDownItemBorder = isset($block_attributes['countDownItemBorder']) ? sanitize_text_field($block_attributes['countDownItemBorder']) : '';
 $countDownItemBorderColor = isset($block_attributes['countDownItemBorderColor']) ? sanitize_hex_color($block_attributes['countDownItemBorderColor']) : '';
@@ -102,6 +109,13 @@ $css_content = "
 		" . ($countDownItemBgColor ? "background: $countDownItemBgColor;" : "") . "
 		" . ($countDownItemSize['Desktop'] && $countDownItemSizeUnits['Desktop'] ? "width: {$countDownItemSize['Desktop']}{$countDownItemSizeUnits['Desktop']};" : "") . "
 		" . ($countDownItemSize['Desktop'] && $countDownItemSizeUnits['Desktop'] ? "height: {$countDownItemSize['Desktop']}{$countDownItemSizeUnits['Desktop']};" : "") . "
+
+		" . ($countDownItemBgImageEnabled && $countDownItemBgImageUrl && $countDownItemBgImageUrl !== 'null' ? "
+			background-image: url(${countDownItemBgImageUrl});
+			background-position: ${countDownItemBgImagePositionType};
+			background-repeat: ${countDownItemBgImageRepeatType};
+			background-size: ${countDownItemBgImageSizeType};
+		" : "") . "
 	}
 	.fb-count-down-wrapper.$block_ID .fb-count-down-item:before {
 
