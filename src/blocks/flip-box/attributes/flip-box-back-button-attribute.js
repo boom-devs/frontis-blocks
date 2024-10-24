@@ -11,6 +11,15 @@ const flipBoxBackButtonAttributes = {
 		type: "boolean",
 	},
 
+	flipBoxBackButtonIconAlign: {
+		type: "string",
+		default: "no-icon",
+	},
+	flipBoxBackButtonIcon: {
+		type: 'string',
+		default: 'circle-check',
+	},
+
 	/** Start Color */
 	flipBoxBackButtonFontColorSwitcher: {
 		type: "string",
