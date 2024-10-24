@@ -101,7 +101,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonMobileMargin,
 		buttonMarginLink,
 
-<<<<<<< HEAD
         buttonIconAlign,
         buttonIcon,
         buttonIconPosition,
@@ -383,77 +382,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
         }
     }
-=======
-		buttonIconAlign,
-		buttonIcon,
-		buttonIconPosition,
-		buttonZIndex,
-	} = attributes;
-
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockId: "fb-advanced-button-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-
-	/** Start padding */
-	const handlePaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( buttonPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						buttonDesktopPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						buttonTabPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						buttonMobilePadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {buttonDesktopPadding: {...buttonDesktopPadding, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {buttonTabPadding: {...buttonTabPadding, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {buttonMobilePadding: {...buttonMobilePadding, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-	}
->>>>>>> 51ae3d20640fd6dba696e3685c37bcff498fbbed
 
 	const handlePaddingCombineBtn = () => {
 		setAttributes( {buttonPaddingLink: !buttonPaddingLink} );
@@ -1168,7 +1096,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													</ButtonGroup>
 												</BaseControl>
 
-<<<<<<< HEAD
                                                 <TextControl
                                                     label={__("Text", "frontis-blocks")}
                                                     value={buttonText}
@@ -1209,48 +1136,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         </div>
                                     </>
                                 )}
-=======
-												<TextControl
-													label={__("Text", "frontis-blocks")}
-													value={buttonText}
-													onChange={(value) => setAttributes({ buttonText: value })}
-													className="fb-advanced-button-text"
-												/>
-												<div className='fb-advanced-btn-icon-wrapper'>
-													<BaseControl
-														label={__("Icon", "frontis-blocks")}
-														id="fb-setting-text-alignment"
-														className="fb-setting-text-alignment"
-													>
-														<ButtonGroup
-															className="fb-setting-text-alignment-group-btn"
-														>
-															{ICON_ALIGN.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() => setAttributes({ buttonIconAlign: item.value })}
-																	className={`fb-setting-text-alignment-single-btn ${buttonIconAlign === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-														{buttonIconAlign === 'icon' && (
-															<FBIconPicker value={buttonIcon} setIconHandler={iconHandler} />
-														)}
-													</BaseControl>
-												</div>
-												<FB_UrlControl
-													url={buttonUrl}
-													onChangeUrl={(value) => setAttributes({ buttonUrl: value })}
-													openInNewTab={buttonTargetUrl}
-													onChangeOpenInNewTab={(value) => setAttributes({ buttonTargetUrl: value })}
-												/>
-											</PanelBody>
-										</div>
-									</>
-								)}
->>>>>>> 51ae3d20640fd6dba696e3685c37bcff498fbbed
 
 								{tab.name === "styles" && (
 									<>
@@ -1330,7 +1215,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 												handleGlobalHoverColorChange={(value) => setAttributes({ buttonBgHoverColor: value })}
 											/>
 
-<<<<<<< HEAD
                                         </PanelBody>
                                         <PanelBody title="Padding and Margin" initialOpen={false}>
                                             <FB_Spacing
@@ -1523,109 +1407,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													title={__("Z Index", "frontis-blocks")}
 													initialOpen={true}
 													className='fb-setting-z-index-header'
-=======
-										</PanelBody>
-										<PanelBody
-											title={__("Icon Styles", "frontis-blocks")}
-											initialOpen={false}
-										>
-											<SelectControl
-												label={__("Icon Position", "frontis-blocks")}
-												value={buttonIconPosition}
-												options={ICON_POSITION}
-												onChange={(value) => setAttributes({ buttonIconPosition: value })}
-											/>
-										</PanelBody>
-										<PanelBody
-											title={__("Border and Shadow", "frontis-blocks")}
-											initialOpen={false}
-											className="fb-setting-border-setting-wrapper"
-										>
-											<SelectControl
-												label={__("Border Style", "frontis-blocks")}
-												value={buttonBorder}
-												options={BORDER_STYLES}
-												onChange={(value) => setAttributes({ buttonBorder: value })}
-											/>
-
-											<FB_Color
-												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={buttonBorderColorSwitcher}
-												globalColor={buttonBorderColor}
-												globalHoverColor={buttonBorderHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ buttonBorderColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ buttonBorderHoverColor: value })}
-											/>
-											<FB_Spacing
-												label={__("Border", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleBorderUnitsChange}
-												spacingUnits={buttonBorderUnits}
-												spacingDesktop={buttonDesktopBorderWidth}
-												spacingTablet={buttonTabBorderWidth}
-												spacingMobile={buttonMobileBorderWidth}
-												handleSpacingUnitHandler={handleBorderWidthChange}
-												spacingCombineBtn={buttonBorderLink}
-												spacingCombineBtnHandler={handleBorderLinkToggle}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleBorderRadiusUnitsChange}
-												spacingUnits={buttonBorderRadiusUnits}
-												spacingDesktop={buttonDesktopBorderRadiusWidth}
-												spacingTablet={buttonTabBorderRadiusWidth}
-												spacingMobile={buttonMobileBorderRadiusWidth}
-												handleSpacingUnitHandler={handleBorderRadiusChange}
-												spacingCombineBtn={buttonBorderRadiusLink}
-												spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
-												setAttributes={setAttributes}
-											/>
-											<FB_BoxShadowControl
-												onBoxShadowChange={(value) => setAttributes({ buttonboxShadowValues: value })}
-												initialShadowValue={buttonboxShadowValues}
-												onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
-											/>
-										</PanelBody>
-										<PanelBody title="Padding and Margin" initialOpen={false}>
-											<FB_Spacing
-												label={__("Padding", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handlePaddingUnitsHandler}
-												spacingUnits={buttonPaddingUnits}
-												spacingDesktop={buttonDesktopPadding}
-												spacingTablet={buttonTabPadding}
-												spacingMobile={buttonMobilePadding}
-												handleSpacingUnitHandler={handlePaddingUnitChange}
-												spacingCombineBtn={buttonPaddingLink}
-												spacingCombineBtnHandler={handlePaddingCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Margin", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleMarginUnitsHandler}
-												spacingUnits={buttonMarginUnits}
-												spacingDesktop={buttonDesktopMargin}
-												spacingTablet={buttonTabMargin}
-												spacingMobile={buttonMobileMargin}
-												handleSpacingUnitHandler={handleMarginUnitChange}
-												spacingCombineBtn={buttonMarginLink}
-												spacingCombineBtnHandler={handleMarginCombineBtn}
-												setAttributes={setAttributes}
-											/>
-										</PanelBody>
-									</>
-								)}
-								{tab.name === "advanced" && (
-									<>
-										<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-z-index-wrapper">
-												<PanelBody
-													initialOpen={true}
->>>>>>> 51ae3d20640fd6dba696e3685c37bcff498fbbed
 												>
 													<RangeControl
 														value={buttonGlobalZIndex}
@@ -1637,7 +1418,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														resetFallbackValue={''}
 													/>
 												</PanelBody>
-<<<<<<< HEAD
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
 													<FB_Spacing 
@@ -1743,17 +1523,3 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             </>
     );
 }
-=======
-											</div>
-										</div>
-									</>
-								)}
-							</div>
-						)}
-					</TabPanel>
-				</div>
-			</InspectorControls>
-		</>
-	);
-}
->>>>>>> 51ae3d20640fd6dba696e3685c37bcff498fbbed
