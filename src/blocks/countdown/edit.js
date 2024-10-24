@@ -127,12 +127,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Generate unique block ID if not set
 	useEffect(() => {
-		if (!blockID) {
+		if (clientId && typeof clientId === 'string') {
 			setAttributes({
 				blockID: "countdown-" + clientId.slice(0, 8),
 			});
 		}
-	}, [blockID, clientId, setAttributes]);
+	}, [clientId]);
 
 	// Countdown Timer Logic
 	useEffect(() => {
