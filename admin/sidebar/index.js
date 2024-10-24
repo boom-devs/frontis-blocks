@@ -25,6 +25,7 @@ import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import { FBIcon } from '../icons';
 import "./sidebar.scss";
+import jQuery from 'jquery';
 
 const defaultsColors = [
     {
@@ -192,13 +193,39 @@ const FrontisBlocksSidebar = () => {
         const colors = [...globalColors];
         colors[index].color = color;
         setGlobalColors([...colors]);
+        updateColorsViaAjax(colors, 'global');
     };
     //Update Gradient Colors
     const setGradientColor = (index, color) => {
         const colors = [...gradientColors];
         colors[index].color = color;
         setGradientColors([...colors]);
+        updateColorsViaAjax(colors, 'gradient');
     };
+
+	const updateColorsViaAjax = (colors, type) => {
+		const action = type === 'global' ? 'fb_update_global_colors' : 'fb_update_global_gradients';
+
+		jQuery.ajax({
+			url: window.frontisBlocksAdminSidebar.ajaxUrl,
+			type: 'POST',
+			data: {
+				action: action,
+				nonce: window.frontisBlocksAdminSidebar.nonce,
+				colors: JSON.stringify(colors)
+			},
+			success: function(response) {
+				if (response.success) {
+					console.log(`${type} colors updated successfully`);
+				} else {
+					console.error(`Failed to update ${type} colors:`, response.data);
+				}
+			},
+			error: function(xhr, status, error) {
+				console.error(`Ajax error when updating ${type} colors:`, error);
+			}
+		});
+	};
 
 	return (
 		<>
