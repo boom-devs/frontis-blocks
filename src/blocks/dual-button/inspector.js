@@ -632,7 +632,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		<>
 			<style>
 				{`
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
+                .fb-dual-button-container.${blockID} .fb-advanced-button {
                     ${ButtonBgColor !== undefined ? `background-color: ${ButtonBgColor};` : ''}
                     font-family: ${ButtonFontFamily !== 'default' ? ButtonFontFamily : ButtonFontFamily};
                     font-size: ${ButtonFontSize !== undefined ? `${ButtonFontSize}${ButtonFontSizeUnits}` : ''};
@@ -651,18 +651,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ''};
                     width: ${ButtonWidth !== undefined ? `${ButtonWidth}%` : ''};
                 }
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button .fb-advanced-button-text {
+                .fb-dual-button-container.${blockID} .fb-advanced-button .fb-advanced-button-text {
                     ${ButtonColor !== undefined ? `color: ${ButtonColor};` : ''}
                 }
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button:hover .fb-advanced-button-text {
+                .fb-dual-button-container.${blockID} .fb-advanced-button:hover .fb-advanced-button-text {
                     ${ButtonHoverColor !== undefined ? `color: ${ButtonHoverColor};` : ''}
                 }
 
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button:hover {
+                .fb-dual-button-container.${blockID} .fb-advanced-button:hover {
                     ${ButtonBgHoverColor !== undefined ? `background-color: ${ButtonBgHoverColor};` : ''}
                 }
                 @media only screen and (max-width: 1024px) {
-                    .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
+                    .fb-dual-button-container.${blockID} .fb-advanced-button {
                         padding: ${buttonTabPadding};
                         margin: ${buttonTabMargin};
                         border-width: ${ButtonTabBorderWidth.top}${ButtonBorderUnits} ${ButtonTabBorderWidth.right}${ButtonBorderUnits} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits} ${ButtonTabBorderWidth.left}${ButtonBorderUnits} !important;
@@ -671,7 +671,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 }
 
                 @media only screen and (max-width: 767px) {
-                    .fb-advanced-button-wrapper.${blockID} .fb-advanced-button {
+                    .fb-dual-button-container.${blockID} .fb-advanced-button {
                         padding: ${buttonMobilePadding};
                         margin: ${buttonMobileMargin};
                         border-width: ${ButtonMobileBorderWidth.top}${ButtonBorderUnits} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits} !important;
@@ -679,7 +679,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     }
                 }
 
-                .fb-advanced-button-wrapper.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
+                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
                     ${connectorBgColor !== undefined ? `background-color: ${connectorBgColor};` : ''}
                     font-family: ${connectorFontFamily !== 'default' ? connectorFontFamily : connectorFontFamily};
                     font-size: ${connectorFontSize !== undefined ? `${connectorFontSize}${connectorFontSizeUnits}` : ''};
@@ -693,19 +693,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
                 }
                 @media only screen and (max-width: 1024px) {
-                .fb-advanced-button-wrapper.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
+                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
                 width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
                 height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
                 }
                 }
                 @media only screen and (max-width: 767px) {
-                .fb-advanced-button-wrapper.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
+                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
                 width: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
                 height: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
                 }
                 }
 
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button.fb-dual-button-two {
+                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two {
                     ${ButtonBgColor !== undefined ? `background-color: ${ButtonBgColor};` : ''}
                     border: ${ButtonTwoBorder};
                     border-width: ${buttonBorderDesktopWidth};
@@ -713,14 +713,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${ButtonTwoBorderColor !== undefined ? `border-color: ${ButtonTwoBorderColor};` : ''}
                 }
                 @media only screen and  (max-width:1024px){
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button.fb-dual-button-two {
+                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two {
                     border: ${ButtonTwoBorder};
                     border-width: ${buttonBorderTabletWidth};
                     border-radius: ${buttonBorderRadiusTabletWidth};
                 }
                 }
                 @media only screen and  (max-width:727px){
-                .fb-advanced-button-wrapper.${blockID} .fb-advanced-button.fb-dual-button-two {
+                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two {
                     border: ${ButtonTwoBorder};
                     border-width: ${buttonBorderMobileWidth};
                     border-radius: ${buttonBorderRadiusMobileWidth};
@@ -756,7 +756,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === 'general' && (
 									<>
-										<div className="fb-advanced-button-wrapper">
+										<div className="fb-dual-button-container">
 											{/*Button One*/}
 											<div className="fb-dual-button-one-wrapper">
 												<PanelBody

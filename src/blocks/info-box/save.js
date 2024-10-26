@@ -163,7 +163,10 @@ export default function save({ attributes }) {
 		mediaSizeUnits,
 		mediaSizeUnitsSave,
 		mediaSizeDesktop,
-		Sub_Heading_Tag
+		Sub_Heading_Tag,
+		btnIconPosition,
+		buttonIconSwitcher,
+		btnIcon
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -212,7 +215,11 @@ export default function save({ attributes }) {
 					/>
 				)}
 				{info_Button_Switcher && (
-					<div className="fb-info-btn-wrapper">
+					
+					<div className="fb-info-btn-wrapper" style={{
+						flexDirection:
+							btnIconPosition === "left" ? "row-reverse" : "row",
+					}}>
 						<a className="fb-info-button" >
 							<RichText.Content
 								value={info_Button_Text}
@@ -221,9 +228,12 @@ export default function save({ attributes }) {
 								style={{textAlign: buttonAlignment}}
 							/>
 						</a>
-
+						{buttonIconSwitcher && (
+						<div className="fb-btn-icon-wrapper">
+							{renderSVG(btnIcon)}
+						</div>
+					)}
 					</div>
-
 				)}
 			</div>
 			</div>

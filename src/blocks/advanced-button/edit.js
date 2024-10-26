@@ -73,10 +73,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         {buttonIconAlign !== 'icon-only' && (
                             <RichText
                                 tagName="span"
-                            value={buttonText}
-                            onChange={(value) => setAttributes({ buttonText: value })}
-                            placeholder={__('Enter button text...', 'frontis-blocks')}
-                                className="fb-advanced-button-text"
+                                value={buttonText}
+                                onChange={(value) => setAttributes({ buttonText: value })}
+                                placeholder={__('Enter button text...', 'frontis-blocks')}
+                                className={`fb-advanced-button-text`}
                             />
                         )}
 
@@ -86,8 +86,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
                         )}
 
-                        {buttonIconPosition === 'icon-only' && (
-                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                        {buttonIconAlign === 'icon-only' && (
+                            <div className={`fb-advanced-button-icon-wrapper`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
                             </div>
                         )}

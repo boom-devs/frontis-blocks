@@ -510,10 +510,23 @@ $white_color: #ffffff;
 	}
 }
 //Info Button
-.fb-info-button-wrapper{
-	.info-btn-url-input{
-		input{
-			width: 100%;
+.fb-info-box-content-wrapper-inner{
+	gap: 20px;
+	.fb-icon-wrapper{
+		line-height: 0;
+	}
+	.fb-info-btn-wrapper{
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		.fb-btn-icon-wrapper{
+			line-height: 0;
 		}
 	}
+	.fb-info-media-wrapper{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
+
