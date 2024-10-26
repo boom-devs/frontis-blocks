@@ -1,13 +1,14 @@
 import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import Switch from "rc-switch";
+import { toast } from 'react-toastify';
 
 const Performance = () => {
 	const [options, setOptions] = useState({
 		google_fonts: false,
 		preload_local_fonts: false,
 	});
-
+	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
 	useEffect(() => {
 		fetchOptions();

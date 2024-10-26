@@ -11,12 +11,15 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   All: () => (/* binding */ All),
+/* harmony export */   AssetGenerationIcon: () => (/* binding */ AssetGenerationIcon),
 /* harmony export */   BlockIcon: () => (/* binding */ BlockIcon),
 /* harmony export */   CheckIcon: () => (/* binding */ CheckIcon),
 /* harmony export */   Content: () => (/* binding */ Content),
 /* harmony export */   Creative: () => (/* binding */ Creative),
 /* harmony export */   Crown: () => (/* binding */ Crown),
 /* harmony export */   Doc: () => (/* binding */ Doc),
+/* harmony export */   EditorEnhancementIcon: () => (/* binding */ EditorEnhancementIcon),
+/* harmony export */   EditorOptionIcon: () => (/* binding */ EditorOptionIcon),
 /* harmony export */   FBIcon: () => (/* binding */ FBIcon),
 /* harmony export */   FrontisIcon: () => (/* binding */ FrontisIcon),
 /* harmony export */   Grid: () => (/* binding */ Grid),
@@ -25,7 +28,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Link: () => (/* binding */ Link),
 /* harmony export */   Logo: () => (/* binding */ Logo),
 /* harmony export */   OptionsIcon: () => (/* binding */ OptionsIcon),
+/* harmony export */   PerformanceIcon: () => (/* binding */ PerformanceIcon),
 /* harmony export */   PricingIcon: () => (/* binding */ PricingIcon),
+/* harmony export */   SiteVisibilityIcon: () => (/* binding */ SiteVisibilityIcon),
+/* harmony export */   ThemeFontIcon: () => (/* binding */ ThemeFontIcon),
+/* harmony export */   VersionControlIcon: () => (/* binding */ VersionControlIcon),
 /* harmony export */   XIcon: () => (/* binding */ XIcon)
 /* harmony export */ });
 var FrontisIcon = function FrontisIcon() {
@@ -256,6 +263,131 @@ var FBIcon = function FBIcon() {
   }), /*#__PURE__*/React.createElement("path", {
     fill: "#399CFF",
     d: "m9.272 5.798-2.071 1.2-1.405.815a1.322 1.322 0 0 1-1.327 0l-1.41-.814L5.127 5.8l1.407-.816a1.322 1.322 0 0 1 1.328 0l1.41.814Z"
+  }));
+};
+var EditorOptionIcon = function EditorOptionIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "#399CFF",
+    strokeWidth: 2,
+    d: "M6.25 11a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5ZM17.75 22.5a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5ZM6.25 22.5a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Z"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "m20.868 2.94.692.692a1.5 1.5 0 0 1 0 2.121l-3.627 3.696a2 2 0 0 1-1.047.552l-2.248.488a.5.5 0 0 1-.595-.594l.478-2.235a2 2 0 0 1 .552-1.047l3.674-3.674a1.5 1.5 0 0 1 2.12 0Z"
+  }));
+};
+var AssetGenerationIcon = function AssetGenerationIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M20.5 6h-11C5.787 6 3 8.685 3 12.5M3.5 19h11c3.713 0 6.5-2.685 6.5-6.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M18.5 3.5S21 5.341 21 6s-2.5 2.5-2.5 2.5M5.5 16.5S3 18.341 3 19s2.5 2.5 2.5 2.5"
+  }));
+};
+var EditorEnhancementIcon = function EditorEnhancementIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "m16.425 5.105.99-.99a2.1 2.1 0 0 1 2.97 2.97l-.99.99m-2.97-2.97-6.66 6.66a3.96 3.96 0 0 0-1.041 1.84L8 16.5l2.896-.724a3.96 3.96 0 0 0 1.84-1.042l6.659-6.659m-2.97-2.97 2.97 2.97"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M19 14c0 3.288 0 4.931-.908 6.038a3.996 3.996 0 0 1-.554.554c-1.107.908-2.75.908-6.038.908H11c-3.771 0-5.657 0-6.828-1.172C3 19.157 3 17.271 3 13.5V13c0-3.287 0-4.931.908-6.038.166-.202.352-.388.554-.554C5.57 5.5 7.212 5.5 10.5 5.5"
+  }));
+};
+var VersionControlIcon = function VersionControlIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "m8.643 3.646-1.705.788C4.313 5.647 3 6.254 3 7.25c0 .996 1.313 1.603 3.938 2.816l1.705.788C10.295 11.618 11.121 12 12 12s1.705-.382 3.357-1.146l1.705-.788C19.687 8.853 21 8.246 21 7.25c0-.996-1.313-1.603-3.938-2.816l-1.705-.788C13.705 2.882 12.879 2.5 12 2.5s-1.705.382-3.357 1.146Z"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M20.788 11.598c.141.198.212.406.212.633 0 .982-1.313 1.58-3.938 2.777l-1.705.777c-1.652.752-2.478 1.129-3.357 1.129s-1.705-.377-3.357-1.13l-1.705-.776C4.313 13.81 3 13.213 3 12.23c0-.227.07-.435.212-.633"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M20.377 16.766c.415.33.623.66.623 1.051 0 .982-1.313 1.58-3.938 2.776l-1.705.777c-1.652.753-2.478 1.13-3.357 1.13s-1.705-.377-3.357-1.13l-1.705-.777C4.313 19.397 3 18.8 3 17.817c0-.39.208-.72.623-1.051"
+  }));
+};
+var PerformanceIcon = function PerformanceIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "m6.194 11.896 5.998-8.084c.47-.632 1.348-.239 1.348.603v6.258c0 .505.345.913.77.913h2.918c.663 0 1.016.927.578 1.518l-5.998 8.084c-.47.632-1.348.239-1.348-.603v-6.258c0-.505-.345-.913-.77-.913H6.771c-.663 0-1.016-.927-.578-1.518Z"
+  }));
+};
+var SiteVisibilityIcon = function SiteVisibilityIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M2.5 8.687c.104-2.1.415-3.41 1.347-4.34.93-.932 2.24-1.243 4.34-1.347M21.5 8.687c-.104-2.1-.415-3.41-1.347-4.34-.93-.932-2.24-1.243-4.34-1.347m0 19c2.1-.104 3.41-.415 4.34-1.347.932-.93 1.243-2.24 1.347-4.34M8.187 22c-2.1-.104-3.41-.415-4.34-1.347-.932-.93-1.243-2.24-1.347-4.34"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeWidth: 2,
+    d: "M19.635 11.818c.243.304.365.457.365.682 0 .225-.122.378-.365.682C18.542 14.55 15.751 17.5 12 17.5s-6.542-2.95-7.635-4.318C4.122 12.878 4 12.725 4 12.5c0-.225.122-.378.365-.682C5.458 10.45 8.249 7.5 12 7.5s6.542 2.95 7.635 4.318Z"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeWidth: 2,
+    d: "M14 12.5a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"
+  }));
+};
+var ThemeFontIcon = function ThemeFontIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M6.999 10c-.24-1.995.916-2.403 5-2.5m0 0c4.123.1 5.341.598 5 2.5m-5-2.5v10m-2 0h4"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M3.891 4.391C2.5 5.782 2.5 8.021 2.5 12.5c0 4.478 0 6.718 1.391 8.109S7.521 22 12 22c4.478 0 6.718 0 8.109-1.391C21.5 19.217 21.5 16.979 21.5 12.5c0-4.478 0-6.718-1.391-8.109C18.717 3 16.479 3 12 3 7.522 3 5.282 3 3.891 4.391Z"
   }));
 };
 
@@ -4059,6 +4191,16 @@ module.exports = window["React"];
 
 /***/ }),
 
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = window["jQuery"];
+
+/***/ }),
+
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -4232,6 +4374,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../icons */ "./admin/icons/index.js");
 /* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_12__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -4248,6 +4392,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -4450,12 +4595,36 @@ var FrontisBlocksSidebar = function FrontisBlocksSidebar() {
     var colors = _toConsumableArray(globalColors);
     colors[index].color = color;
     setGlobalColors(_toConsumableArray(colors));
+    updateColorsViaAjax(colors, 'global');
   };
   //Update Gradient Colors
   var setGradientColor = function setGradientColor(index, color) {
     var colors = _toConsumableArray(gradientColors);
     colors[index].color = color;
     setGradientColors(_toConsumableArray(colors));
+    updateColorsViaAjax(colors, 'gradient');
+  };
+  var updateColorsViaAjax = function updateColorsViaAjax(colors, type) {
+    var action = type === 'global' ? 'fb_update_global_colors' : 'fb_update_global_gradients';
+    jquery__WEBPACK_IMPORTED_MODULE_12___default().ajax({
+      url: window.frontisBlocksAdminSidebar.ajaxUrl,
+      type: 'POST',
+      data: {
+        action: action,
+        nonce: window.frontisBlocksAdminSidebar.nonce,
+        colors: JSON.stringify(colors)
+      },
+      success: function success(response) {
+        if (response.success) {
+          console.log("".concat(type, " colors updated successfully"));
+        } else {
+          console.error("Failed to update ".concat(type, " colors:"), response.data);
+        }
+      },
+      error: function error(xhr, status, _error) {
+        console.error("Ajax error when updating ".concat(type, " colors:"), _error);
+      }
+    });
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
     target: "frontis-blocks-sidebar"

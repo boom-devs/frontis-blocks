@@ -232,7 +232,7 @@ export const FBIcon = () => (
     />
   </svg>
 );
-export const EditorOption = () => (
+export const EditorOptionIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="#399CFF"
@@ -249,7 +249,7 @@ export const EditorOption = () => (
   </svg>
 );
 
-export const AssetGeneration = () => (
+export const AssetGenerationIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
@@ -268,7 +268,7 @@ export const AssetGeneration = () => (
   </svg>
 );
 
-export const EditorEnhancement = () => (
+export const EditorEnhancementIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
@@ -286,7 +286,7 @@ export const EditorEnhancement = () => (
   </svg>
 );
 
-export const VersionControl = () => (
+export const VersionControlIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
@@ -312,7 +312,7 @@ export const VersionControl = () => (
   </svg>
 );
 
-export const Performance = () => (
+export const PerformanceIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
@@ -324,7 +324,7 @@ export const Performance = () => (
   </svg>
 );
 
-export const SiteVisibility = () => (
+export const SiteVisibilityIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
@@ -346,7 +346,7 @@ export const SiteVisibility = () => (
   </svg>
 );
 
-export const ThemeFont = () => (
+export const ThemeFontIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"

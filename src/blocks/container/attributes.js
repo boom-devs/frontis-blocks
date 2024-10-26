@@ -91,6 +91,10 @@ const attributes = {
 	backgroundColor: {
 		type: "string",
 	},
+	backgroundGradient: {
+		type: "string",
+		default: "",
+	},
 	textColor: {
 		type: "string",
 	},

@@ -1,7 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { Button, SelectControl } from '@wordpress/components';
 import Switch from 'rc-switch';
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
+import { toast } from 'react-toastify';
 
 const VersionControl = () => {
   const [options, setOptions] = useState({
@@ -10,7 +11,7 @@ const VersionControl = () => {
     enable_legacy_block: false,
   });
 
-
+  const { ajaxUrl, nonce } = window.frontisBlocksAdmin;
   useEffect(() => {
     fetchOptions();
   }, []);
