@@ -67,6 +67,7 @@ const attributes = {
         type: "string",
         default: "left",
     },
+    /** Icon Styles */
     socialIconSize: {
 		type: 'object',
 		default: {
@@ -251,6 +252,9 @@ const attributes = {
             right: 20,
         },
     },
+    /*End Icon Styles */
+
+    /*Global Styles */
     socialIconPaddingLink : {
         type : "boolean",
         default: true
@@ -435,6 +439,7 @@ const attributes = {
         type : "boolean",
         default: true
     },
+    /*End Global Styles */
 
 };
 

@@ -30,6 +30,8 @@ import CountDownItemBorderRadiusControl from "./style-control/countdown-item-bor
 import CountDownDigitTypographyControl from "./style-control/countdown-digit-typograpy-control";
 import CountDownLabelTypographyControl from "./style-control/countdown-label-typograpy-control";
 import CountDownItemBgColorControl from "./style-control/countdown-item-bg-color-control";
+import CountDownSeparatorControl from "./style-control/countdown-separator-control";
+import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
 
 
 
@@ -37,6 +39,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		deviceType,
+
+
+
+
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -49,8 +55,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showSeconds,
 
 
-		// Countdown item
+		// Countdown Separator
+		countDownSeparatorEnabled,
+		countDownSeparatorType,
 
+		countDownSeparatorFontColorSwitcher,
+		countDownSeparatorFontColor,
+		countDownSeparatorFontHoverColor,
+
+		countDownSeparatorFontFamily,
+		countDownSeparatorFontSize,
+		countDownSeparatorFontSizeUnits,
+		countDownSeparatorFontWeight,
+		countDownSeparatorFontStyle,
+		countDownSeparatorTextTransform,
+		countDownSeparatorTextDecoration,
+		countDownSeparatorLetterSpacing,
+		countDownSeparatorLetterSpacingUnits,
+		countDownSeparatorLineHeight,
+		countDownSeparatorLineHeightUnits,
+
+		countDownSeparatorHorizontalGap,
+		countDownSeparatorHorizontalGapUnits,
+		countDownSeparatorVerticalGap,
+		countDownSeparatorVerticalGapUnits,
+
+		// Countdown item
 		countDownItemSize,
 		countDownItemSizeUnits,
 
@@ -58,6 +88,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownItemGapUnits,
 
 		countDownItemBgColor,
+
+		/** Background Image */
+		countDownItemBgImageEnabled,
+		countDownItemBgImageUrl,
+		countDownItemBgImageAlt,
+		countDownItemBgImageID,
+
+		countDownItemBgImagePositionType,
+		countDownItemBgImageAttachmentType,
+		countDownItemBgImageRepeatType,
+		countDownItemBgImageSizeType,
 
 		// Border Type
 		countDownItemBorder,
@@ -127,12 +168,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Generate unique block ID if not set
 	useEffect(() => {
-		if (!blockID) {
+		if (clientId && typeof clientId === 'string') {
 			setAttributes({
 				blockID: "countdown-" + clientId.slice(0, 8),
 			});
 		}
-	}, [blockID, clientId, setAttributes]);
+	}, [clientId]);
 
 	// Countdown Timer Logic
 	useEffect(() => {
@@ -194,7 +235,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					${countDownItemBorderTypeGetDesktop ? `border-width: ${countDownItemBorderTypeGetDesktop};` : ''}
 					${countDownItemBorderRadiusGetDesktop ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
 					${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
+
+					${countDownItemBgImageEnabled && countDownItemBgImageUrl && countDownItemBgImageUrl !== 'null' ? `
+                        background-image: url(${countDownItemBgImageUrl});
+                        background-position: ${countDownItemBgImagePositionType};
+                        background-repeat: ${countDownItemBgImageRepeatType};
+                        background-size: ${countDownItemBgImageSizeType};
+                    ` : ''}
 				}
+				.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
+						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
+                        content: '${countDownSeparatorType}';
+						${countDownSeparatorHorizontalGap.Desktop ? `top: ${countDownSeparatorHorizontalGap.Desktop}${countDownSeparatorHorizontalGapUnits.Desktop};` : ''}
+						${countDownSeparatorVerticalGap.Desktop ? `right: -${countDownSeparatorVerticalGap.Desktop}${countDownSeparatorVerticalGapUnits.Desktop};` : ''}
+                        ${countDownSeparatorFontColor ? `color: ${countDownSeparatorFontColor};` : ''}
+						${countDownSeparatorFontFamily ? `font-family: ${countDownSeparatorFontFamily};` : ''}
+						${countDownSeparatorFontSize.Desktop ? `font-size: ${countDownSeparatorFontSize.Desktop}${countDownSeparatorFontSizeUnits.Desktop};` : ''}
+						${countDownSeparatorFontWeight ? `font-weight: ${countDownSeparatorFontWeight};` : ''}
+						${countDownSeparatorFontStyle ? `font-style: ${countDownSeparatorFontStyle};` : ''}
+						${countDownSeparatorTextTransform ? `text-transform: ${countDownSeparatorTextTransform};` : ''}
+						${countDownSeparatorTextDecoration ? `text-decoration: ${countDownSeparatorTextDecoration};` : ''}
+						${countDownSeparatorLetterSpacing.Desktop ? `letter-spacing: ${countDownSeparatorLetterSpacing.Desktop}${countDownSeparatorLetterSpacingUnits.Desktop};` : ''}
+						${countDownSeparatorLineHeight.Desktop ? `line-height: ${countDownSeparatorLineHeight.Desktop}${countDownSeparatorLineHeightUnits.Desktop};` : ''}
+
+                    ` : ''}
+				}
+
 
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 					${digitFontColor ? `color: ${digitFontColor};` : ''}
@@ -230,6 +296,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${countDownItemBorderTypeGetTablet ? `border-width: ${countDownItemBorderTypeGetTablet};` : ''}
 						${countDownItemBorderRadiusGetTablet ? `border-radius: ${countDownItemBorderRadiusGetTablet};` : ''}
 					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
+						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
+						${countDownSeparatorHorizontalGap.Tablet ? `top: ${countDownSeparatorHorizontalGap.Tablet}${countDownSeparatorHorizontalGapUnits.Tablet};` : ''}
+						${countDownSeparatorVerticalGap.Tablet ? `right: -${countDownSeparatorVerticalGap.Tablet}${countDownSeparatorVerticalGapUnits.Tablet};` : ''}
+						${countDownSeparatorFontSize.Tablet ? `font-size: ${countDownSeparatorFontSize.Tablet}${countDownSeparatorFontSizeUnits.Tablet};` : ''}
+						${countDownSeparatorLetterSpacing.Tablet ? `letter-spacing: ${countDownSeparatorLetterSpacing.Tablet}${countDownSeparatorLetterSpacingUnits.Tablet};` : ''}
+						${countDownSeparatorLineHeight.Tablet ? `line-height: ${countDownSeparatorLineHeight.Tablet}${countDownSeparatorLineHeightUnits.Tablet};` : ''}
+
+                    ` : ''}
+					}
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 						${digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ''}
 						${digitLetterSpacing.Tablet ? `letter-spacing: ${digitLetterSpacing.Tablet}${digitLetterSpacingUnits.Tablet};` : ''}
@@ -251,6 +327,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						${countDownItemSize.Mobile ? `height: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};` : ''}
 						${countDownItemBorderTypeGetMobile ? `border-width: ${countDownItemBorderTypeGetMobile};` : ''}
 						${countDownItemBorderRadiusGetMobile ? `border-radius: ${countDownItemBorderRadiusGetMobile};` : ''}
+					}
+					.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
+						${countDownSeparatorEnabled && countDownSeparatorType && countDownSeparatorType !== 'null' ? `
+						${countDownSeparatorHorizontalGap.Mobile ? `top: ${countDownSeparatorHorizontalGap.Mobile}${countDownSeparatorHorizontalGapUnits.Mobile};` : ''}
+						${countDownSeparatorVerticalGap.Mobile ? `right: -${countDownSeparatorVerticalGap.Mobile}${countDownSeparatorVerticalGapUnits.Mobile};` : ''}
+						${countDownSeparatorFontSize.Mobile ? `font-size: ${countDownSeparatorFontSize.Mobile}${countDownSeparatorFontSizeUnits.Mobile};` : ''}
+						${countDownSeparatorLetterSpacing.Mobile ? `letter-spacing: ${countDownSeparatorLetterSpacing.Mobile}${countDownSeparatorLetterSpacingUnits.Mobile};` : ''}
+						${countDownSeparatorLineHeight.Mobile ? `line-height: ${countDownSeparatorLineHeight.Mobile}${countDownSeparatorLineHeightUnits.Mobile};` : ''}
+
+                    ` : ''}
 					}
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 						${digitFontSize.Mobile ? `font-size: ${digitFontSize.Mobile}${digitFontSizeUnits.Mobile};` : ''}
@@ -347,6 +433,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({ countDownLabelSecond: value })}
 											/>
 										</PanelBody>
+										<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
+											<ToggleControl
+												label={__("Show Separator", "frontis-blocks")}
+												checked={countDownSeparatorEnabled}
+												onChange={(value) => setAttributes({ countDownSeparatorEnabled: value })}
+											/>
+											{countDownSeparatorEnabled && (
+												<SelectControl
+													label={__("Separator Type", "frontis-blocks")}
+													value={countDownSeparatorType}
+													options={SELECT_SEPARATOR_TYPE}
+													onChange={(value) => setAttributes({ countDownSeparatorType: value })}
+												/>
+											)}
+										</PanelBody>
 									</>
 								)}
 
@@ -405,7 +506,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												clientId ={clientId}
 											/>
 										</PanelBody>
-
+										{countDownSeparatorEnabled && (
+										<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
+											<CountDownSeparatorControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
+										)}
 									</>
 								)}
 							</div>

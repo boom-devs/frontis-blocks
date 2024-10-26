@@ -3,10 +3,6 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
-	HeadingColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
 
 	// Show Hide Label Attributes
 	showDays: {
