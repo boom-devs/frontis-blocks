@@ -33,15 +33,65 @@ const attributes = {
 			alt: "",
 		},
 	},
-	imageWidth: {
+	imageUrl : {
+		type: "string",
+	},
+	imageAlter : {
+		type: "string",
+	},
+	imageID : {
 		type: "number",
-		default: 300
+	},
+	mediaSize: {
+		type: 'object',
+		default: {
+			Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+		}
+	},
+	mediaHeight: {
+		type: 'object',
+		default: {
+			Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+		}
+	},
+	mediaSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	mediaHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
 	},
 	imageSize: {
 		type: "string",
 	},
+	imageFit: {
+		type: "string",
+	},
+	imageHover: {
+		type: "string",
+	},
 	imageCaption: {
 		type: "string",
+	},
+	captionPosition: {
+		type: "string",
+	},
+	captionAlignment: {
+		type: "string",
+		default: "left",
 	},
 	selectedImgIndex: {
 		type: "number",
@@ -49,6 +99,256 @@ const attributes = {
 	displayCaption: {
 		type: "boolean",
 		default: false,
+	},
+	displayTitle: {
+		type: "boolean",
+		default: false,
+	},
+	titleText: {
+		type: "string",
+		default: "Fly in the sky"
+	},
+	titleTag: {
+		type : "string",
+		default: "h2"
+	},
+	titlePosition: {
+		type: "string",
+		default: "center"
+	},
+	titleHoverEffects: {
+		type: "string",
+		default: "tilt"
+	},
+	HeadingFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	HeadingFontSize: {
+		type: "number",
+		default: 35
+	},
+	HeadingFontSizeUnits: {
+		type: "string",
+		default: "px"
+	},
+	HeadingFontWeight : {
+		type: "string",
+		default: "700"
+	},
+	HeadingFontStyle : {
+		type: "string",
+		default: "normal"
+	},
+	HeadingTextTransform : {
+		type: "string",
+		default: "none"
+	},
+	HeadingTextDecoration : {
+		type: "string",
+		default: "none"
+	},
+	HeadingLetterSpacing : {
+		type: "number",
+	},
+	HeadingLetterSpacingUnits : {
+		type: "string",
+		default: "px"
+	},
+	HeadingLineHeight : {
+		type: "number",
+	},
+	HeadingLineHeightUnits : {
+		type: "string",
+		default: "px"
+	},
+
+	HeadingColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	HeadingColor : {
+		type: "string",
+		default: "#ffffff"
+	},
+	HeadingHoverColor: {
+		type: 'string',
+	},
+	HeadingBackgroundColor: {
+		type: 'string',
+	},
+	HeadingBorder: {
+		type: 'string',
+		default: "none",
+	},
+	HeadingBorderColor: {
+		type: 'string',
+	},
+	HeadingBorderHoverColor: {
+		type: 'string',
+	},
+	HeadingBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	HeadingBorderUnits : {
+		type: "string",
+		default: "px"
+	},
+	HeadingDesktopBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingTabBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingMobileBorderWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	HeadingBorderRadiusUnits : {
+		type: "string",
+		default: "px"
+	},
+	HeadingDesktopBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingTabBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingMobileBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	HeadingPaddingUnits : {
+		type: "string",
+		default: "px"
+	},
+	HeadingDesktopPadding: {
+		type: "object",
+		default: {
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
+		},
+	},
+	HeadingTabPadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingMobilePadding: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	HeadingMarginUnits : {
+		type: "string",
+		default: "px"
+	},
+	HeadingDesktopMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingTabMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingMobileMargin: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	HeadingMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	autoHeightSwitch: {
+		type: "boolean",
+		default: false,
+	},
+	autoFitSwitch: {
+		type: "boolean",
+		default: false,
+	},
+	linkSwitch: {
+		type: "boolean",
+		default: false,
+	},
+	linkUrl: {
+		type: "string",
+		default: "",
+	},
+	linkTargetUrl: {
+		type: "boolean",
 	},
 	captionColor: {
 		type: "string",
@@ -105,6 +405,18 @@ const attributes = {
 	openInNewTab: {
 		type: "boolean",
 		default: false,
+	},
+	imgSquare: {
+		type: "string",
+		default: '',
+	},
+	imgCircle: {
+		type: "string",
+		default: '',
+	},
+	imgRounded: {
+		type: "string",
+		default: '',
 	},
 	autoHeight: {
 		type: "boolean",

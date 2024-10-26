@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import {__} from '@wordpress/i18n';
 import {
 	useBlockProps,
 	RichText,
@@ -6,16 +6,16 @@ import {
 	AlignmentToolbar, MediaReplaceFlow, MediaPlaceholder,
 	MediaUpload, MediaUploadCheck
 } from '@wordpress/block-editor';
-import { upload } from '@wordpress/icons';
+import {upload} from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import Inspector from "./inspector";
 import './editor.scss';
-import {Button} from "@wordpress/components";
+import {Button, ToolbarButton, ToolbarGroup} from "@wordpress/components";
 
-export default function Edit({ attributes, setAttributes, clientId}) {
+export default function Edit({attributes, setAttributes, clientId}) {
 	const {
 		blockID,
 		image,
@@ -23,101 +23,118 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 		imageLink,
 		imageAlt,
 		imageCaption,
-		imageWidth
+		imageWidth,
+		imageUrl,
+		imgRounded,
+		imgSquare,
+		imgCircle,
+		imageStyle,
+		displayCaption,
+		captionAlignment,
+		imageSize,
+		linkSwitch,
+		linkTargetUrl,
+		linkUrl,
+		imageHover,
+		imageFit,
+		displayTitle,
+		titleText,
+		titleTag,
+		titlePosition
 	} = attributes;
-
 
 	const blockProps = useBlockProps();
 
-	const setImageAttributes = (media) => {
-		if (!media || !media.url) {
-			setAttributes({
-				imageLink: null,
-				imageId: null,
-				imageAlt: null,
-			});
-			return;
-		}
-		setAttributes({
-			imageLink: media.url,
-			imageId: media.id,
-			imageAlt: media?.alt,
-		});
+	const handleLinkClick = (event) => {
+		event.preventDefault();
 	};
-
-	const urls = image.url;
 
 	return (
 		<>
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId ={clientId}
+				clientId={clientId}
 			/>
-
-			{/*<BlockControls>*/}
-			{/*	<AlignmentToolbar*/}
-			{/*		value={HeadingAlignment}*/}
-			{/*		onChange={(value) => setAttributes({ HeadingAlignment: value })}*/}
-			{/*		controls={['left', 'center', 'right', 'justify']}*/}
-			{/*	/>*/}
-			{/*</BlockControls>*/}
+			<BlockControls>
+				{imageUrl && (
+					<ToolbarGroup>
+						<ToolbarButton
+							onClick={() => setAttributes({
+								imageId: '',
+								imageUrl: '',
+								imageAlt: '',
+							})}
+							icon="trash"
+						/>
+						<MediaUploadCheck>
+							<MediaUpload
+								onSelect={(media) => setAttributes({
+									imageId: media.id,
+									imageUrl: media.url,
+									imageAlt: media.alt,
+								})}
+								allowedTypes={['image']}
+								value={imageId}
+								render={({open}) => (
+									<ToolbarButton
+										onClick={open}
+										icon="edit"
+									/>
+								)}
+							/>
+						</MediaUploadCheck>
+					</ToolbarGroup>
+				)}
+			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				{/*<MediaPlaceholder*/}
-				{/*	value={imageId}*/}
-				{/*	accept="image/*"*/}
-				{/*	allowedTypes={['image']}*/}
-				{/*	onSelect={setImageAttributes}*/}
-				{/*	multiple={false}*/}
-				{/*	handleUpload={true}*/}
-				{/*	labels = { { title: __("Upload image", "frontis-block") } }*/}
-				{/*/>*/}
+				<div className={`fb-advanced-image-wrapper ${blockID}`}>
+					<div className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
+						<div className="fb-advanced-image-inner">
+							{imageUrl ? (
+									<img src={imageUrl} alt={imageAlt}/>
+								) : (
+									<MediaPlaceholder
+										onSelect={(media) => setAttributes({
+											imageId: media.id,
+											imageUrl: media.url,
+											imageAlt: media.alt,
+										})}
+										allowedTypes={['image']}
+										multiple={false}
+										labels={{title: 'Add Author Image'}}
+									/>
+								)}
 
-				{urls === '' ? (
-					<MediaPlaceholder
-						onSelect={(image) => {
-							setAttributes({
-								image,
-								imageCaption: image.caption,
-							});
-						}}
-						accept="image/*"
-						allowedTypes={["image"]}
-						mediaLibraryButton={({ open }) => {
-							return (
-								<Button
-									icon={upload}
-									variant="primary"
-									label={__('Add image from media')}
-									showTooltip
-									tooltipPosition="top center"
-									onClick={() => {
-										open();
-									}}
+						</div>
+						{displayTitle && (
+							<div className="fb-advanced-image-title">
+								<div className="fb-advanced-image-title-inner">
+									<RichText
+										tagName={titleTag}
+										value={titleText}
+										onChange={(value) => setAttributes({titleText: value})}
+										placeholder="Add your title here..."
+										className="fb-advanced-title"
+									/>
+								</div>
+							</div>
+						)
+						}
+						{displayCaption && (
+							<div className="fb-advanced-image-caption">
+								<RichText
+									tagName='figcaption'
+									value={imageCaption}
+									onChange={(value) => setAttributes({imageCaption: value})}
+									placeholder="Add your caption here..."
 								/>
-							);
-						}}
-
-						// multiple
-						labels={{
-							title: "Upload Image",
-							instructions:
-								"Drag media file, upload or select image from your library.",
-						}}
-					/>
-				) : (
-					<div
-						className={`fb-image-wrapper fb-image-parent-${blockID}`}
-					>
-						<figure
-							className={`fb-advanced-image-wrapper ${blockID}`}
-							data-id={blockID}
-						>
-							<img src={urls} alt={image.alt}/>
-						</figure>
+							</div>
+						)
+						}
 					</div>
-				)}
+				</div>
 			</div>
 		</>
 	);

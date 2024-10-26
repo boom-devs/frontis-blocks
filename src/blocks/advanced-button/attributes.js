@@ -219,11 +219,11 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    buttonboxShadowValues: {
+    buttonBoxShadowValues: { 
         type: 'array',
         default: [],
     },
-    buttonboxShadowCssValue: {
+    buttonBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
@@ -306,6 +306,9 @@ const attributes = {
         default: true
     },
     /** End Style */    
+
+
+    /** Icon Settings */
     buttonIconAlign: {
         type: "string",
         default: "none",
@@ -318,8 +321,369 @@ const attributes = {
         type: "string",
         default: "right",
     },
-    buttonZIndex: {
-		type: 'number',
+    /** End Icon Settings */
+
+    /** Icon Styles */
+    buttonIconSize: {
+        type: 'object',
+        default: {
+            Desktop: 16,
+            Tablet: 16,
+            Mobile: 16
+        }
+    },
+    buttonIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    buttonIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    buttonIconColor: {
+        type: "string",
+        default: "#fff"
+    },
+    buttonIconHoverColor: {
+        type: 'string',
+        default: "#fff"
+    },
+
+    buttonIconBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    buttonIconBgColor : {
+        type: "string",
+        default: ""
+    },
+    buttonIconBgHoverColor: {
+        type: 'string',
+        default: ""
+    },
+    buttonIconBorder: {
+        type: 'string',
+        default: "none",
+    },
+    buttonIconBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    buttonIconBorderColor: {
+        type: 'string',
+    },
+    buttonIconBorderHoverColor: {
+        type: 'string',
+    },
+    buttonIconBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    buttonIconBorderDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    buttonIconBorderTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    buttonIconBorderMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    buttonIconBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    buttonIconBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    buttonIconBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    buttonIconBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    buttonIconBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    buttonIconBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    buttonIconGapSize: {
+        type: 'object',
+        default: {
+            Desktop: 10,
+            Tablet: 10,
+            Mobile: 10
+        }
+    },
+    buttonIconGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Icon Styles */
+
+	/** Start Global Setting */
+	buttonGlobalZIndex : {
+        type: "number",
+    },
+	/** Start Padding */
+	buttonGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
+	buttonGlobalPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Margin */
+	buttonGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonGlobalMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
+
+	/** Start Background */
+	buttonGlobalBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	buttonGlobalBgColor : {
+		type: "string",
+	},
+	buttonGlobalBgHoverColor: {
+		type: 'string',
+	},
+	/** End Background */
+
+	/** Start Border */
+	buttonGlobalBorder: {
+		type: 'string',
+		default: "none",
+	},
+	buttonGlobalBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	buttonGlobalBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	buttonGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	buttonGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonGlobalBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	buttonGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonGlobalBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonGlobalBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	buttonGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    buttonGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    /** End Global Style */
 }
 export default attributes;

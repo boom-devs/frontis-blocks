@@ -11,6 +11,9 @@ export default function save({ attributes }) {
         buttonIconAlign,
         buttonIcon,
         buttonIconPosition,
+        buttonIconSize,
+        buttonIconColor,
+
     } = attributes;
 
     const blockProps = useBlockProps.save();
@@ -26,18 +29,28 @@ export default function save({ attributes }) {
                         target={buttonTargetUrl ? '_blank' : undefined}
                         rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                     >
-                        {buttonIconPosition === 'left' && buttonIconAlign === 'icon-text' &&(
-                            <div className="fb-advanced-button-icon-wrapper">
+                        {buttonIconPosition === 'left' && buttonIconAlign === 'icon-text' && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}> 
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
                             </div>
-                        )}  
-                        <RichText.Content
-                            tagName="span"
-                            value={buttonText}
-                            className="fb-advanced-button-text"
-                        />
-                        {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' &&(
-                            <div className="fb-advanced-button-icon-wrapper">
+                        )}
+
+                        {buttonIconAlign !== 'icon-only' && (
+                            <RichText.Content
+                                tagName="span"
+                                value={buttonText}
+                                className={`fb-advanced-button-text`}
+                            />
+                        )}
+
+                        {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconAlign === 'icon-only' && (
+                            <div className={`fb-advanced-button-icon-wrapper`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
                             </div>
                         )}
