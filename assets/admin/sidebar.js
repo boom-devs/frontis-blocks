@@ -670,54 +670,42 @@ function FrontisBlocksSidebar() {
     _useState8 = _slicedToArray(_useState7, 2),
     globalColors = _useState8[0],
     setGlobalColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
+      fontFamily: '',
+      fontSize: '',
+      fontSizeUnits: 'px',
+      fontWeight: '',
+      fontStyle: '',
+      textTransform: '',
+      textDecoration: '',
+      letterSpacing: '',
+      letterSpacingUnits: 'px',
+      lineHeight: '',
+      lineHeightUnits: ''
+    }),
     _useState10 = _slicedToArray(_useState9, 2),
-    textFontFamily = _useState10[0],
-    setTextFontFamily = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    heading = _useState10[0],
+    setHeading = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
+      fontFamily: '',
+      fontSize: '',
+      fontSizeUnits: 'px',
+      fontWeight: '',
+      fontStyle: '',
+      textTransform: '',
+      textDecoration: '',
+      letterSpacing: '',
+      letterSpacingUnits: 'px',
+      lineHeight: '',
+      lineHeightUnits: ''
+    }),
     _useState12 = _slicedToArray(_useState11, 2),
-    textFontSize = _useState12[0],
-    setTextFontSize = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('px'),
+    body = _useState12[0],
+    setBody = _useState12[1];
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('Desktop'),
     _useState14 = _slicedToArray(_useState13, 2),
-    textFontSizeUnits = _useState14[0],
-    setTextFontSizeUnits = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
-    _useState16 = _slicedToArray(_useState15, 2),
-    textFontWeight = _useState16[0],
-    setTextFontWeight = _useState16[1];
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
-    _useState18 = _slicedToArray(_useState17, 2),
-    textFontStyle = _useState18[0],
-    setTextFontStyle = _useState18[1];
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
-    _useState20 = _slicedToArray(_useState19, 2),
-    textTextTransform = _useState20[0],
-    setTextTextTransform = _useState20[1];
-  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
-    _useState22 = _slicedToArray(_useState21, 2),
-    textTextDecoration = _useState22[0],
-    setTextTextDecoration = _useState22[1];
-  var _useState23 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
-    _useState24 = _slicedToArray(_useState23, 2),
-    textLetterSpacing = _useState24[0],
-    setTextLetterSpacing = _useState24[1];
-  var _useState25 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('px'),
-    _useState26 = _slicedToArray(_useState25, 2),
-    textLetterSpacingUnits = _useState26[0],
-    setTextLetterSpacingUnits = _useState26[1];
-  var _useState27 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
-    _useState28 = _slicedToArray(_useState27, 2),
-    textLineHeight = _useState28[0],
-    setTextLineHeight = _useState28[1];
-  var _useState29 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
-    _useState30 = _slicedToArray(_useState29, 2),
-    textLineHeightUnits = _useState30[0],
-    setTextLineHeightUnits = _useState30[1];
-  var _useState31 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('Desktop'),
-    _useState32 = _slicedToArray(_useState31, 2),
-    deviceType = _useState32[0],
-    setDeviceType = _useState32[1];
+    deviceType = _useState14[0],
+    setDeviceType = _useState14[1];
   // const currentDeviceType = useDeviceType();
 
   // useEffect(() => {
@@ -850,53 +838,143 @@ function FrontisBlocksSidebar() {
     })));
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Typography", "frontis-blocks")
-  }, /*#__PURE__*/React.createElement(_Components_typography_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    fontFamily: textFontFamily,
+  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heading Typography", "frontis-blocks")), /*#__PURE__*/React.createElement(_Components_typography_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    fontFamily: heading.fontFamily,
     onChangeFontFamily: function onChangeFontFamily(value) {
-      return setTextFontFamily(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        fontFamily: value
+      }));
     },
-    fontSize: textFontSize,
+    fontSize: heading.fontSize,
     onChangeFontSize: function onChangeFontSize(value) {
-      return setTextFontSize(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        fontSize: value
+      }));
     },
-    fontSizeUnits: textFontSizeUnits,
+    fontSizeUnits: heading.fontSizeUnits,
     onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-      return setTextFontSizeUnits(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        fontSizeUnits: value
+      }));
     },
-    fontWeight: textFontWeight,
+    fontWeight: heading.fontWeight,
     onChangeFontWeight: function onChangeFontWeight(value) {
-      return setTextFontWeight(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        fontWeight: value
+      }));
     },
-    fontStyle: textFontStyle,
+    fontStyle: heading.fontStyle,
     onChangeFontStyle: function onChangeFontStyle(value) {
-      return setTextFontStyle(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        fontStyle: value
+      }));
     },
-    textTransform: textTextTransform,
+    textTransform: heading.textTransform,
     onChangeTextTransform: function onChangeTextTransform(value) {
-      return setTextTextTransform(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        textTransform: value
+      }));
     },
-    textDecoration: textTextDecoration,
+    textDecoration: heading.textDecoration,
     onChangeTextDecoration: function onChangeTextDecoration(value) {
-      return setTextTextDecoration(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        textDecoration: value
+      }));
     },
-    letterSpacing: textLetterSpacing,
+    letterSpacing: heading.letterSpacing,
     onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-      return setTextLetterSpacing(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        letterSpacing: value
+      }));
     },
-    letterSpacingUnits: textLetterSpacingUnits,
+    letterSpacingUnits: heading.letterSpacingUnits,
     onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-      return setTextLetterSpacingUnits(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        letterSpacingUnits: value
+      }));
     },
-    lineHeight: textLineHeight,
+    lineHeight: heading.lineHeight,
     onChangeLineHeight: function onChangeLineHeight(value) {
-      return setTextLineHeight(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        lineHeight: value
+      }));
     },
-    lineHeightUnits: textLineHeightUnits,
+    lineHeightUnits: heading.lineHeightUnits,
     onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-      return setTextLineHeightUnits(value);
+      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
+        lineHeightUnits: value
+      }));
     },
     deviceType: deviceType
-  })))));
+  }), /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Body Typography", "frontis-blocks")), /*#__PURE__*/React.createElement(_Components_typography_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    fontFamily: body.fontFamily,
+    onChangeFontFamily: function onChangeFontFamily(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        fontFamily: value
+      }));
+    },
+    fontSize: body.fontSize,
+    onChangeFontSize: function onChangeFontSize(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        fontSize: value
+      }));
+    },
+    fontSizeUnits: body.fontSizeUnits,
+    onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        fontSizeUnits: value
+      }));
+    },
+    fontWeight: body.fontWeight,
+    onChangeFontWeight: function onChangeFontWeight(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        fontWeight: value
+      }));
+    },
+    fontStyle: body.fontStyle,
+    onChangeFontStyle: function onChangeFontStyle(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        fontStyle: value
+      }));
+    },
+    textTransform: body.textTransform,
+    onChangeTextTransform: function onChangeTextTransform(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        textTransform: value
+      }));
+    },
+    textDecoration: body.textDecoration,
+    onChangeTextDecoration: function onChangeTextDecoration(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        textDecoration: value
+      }));
+    },
+    letterSpacing: body.letterSpacing,
+    onChangeLetterSpacing: function onChangeLetterSpacing(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        letterSpacing: value
+      }));
+    },
+    letterSpacingUnits: body.letterSpacingUnits,
+    onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        letterSpacingUnits: value
+      }));
+    },
+    lineHeight: body.lineHeight,
+    onChangeLineHeight: function onChangeLineHeight(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        lineHeight: value
+      }));
+    },
+    lineHeightUnits: body.lineHeightUnits,
+    onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
+      return setBody(_objectSpread(_objectSpread({}, body), {}, {
+        lineHeightUnits: value
+      }));
+    },
+    deviceType: deviceType
+  }))))));
 }
 ;
 var ColorDropdown = function ColorDropdown(_ref) {
@@ -904,10 +982,10 @@ var ColorDropdown = function ColorDropdown(_ref) {
     initialColor = _ref.initialColor,
     onColorChange = _ref.onColorChange,
     themeColors = _ref.themeColors;
-  var _useState33 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(initialColor),
-    _useState34 = _slicedToArray(_useState33, 2),
-    color = _useState34[0],
-    setColor = _useState34[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(initialColor),
+    _useState16 = _slicedToArray(_useState15, 2),
+    color = _useState16[0],
+    setColor = _useState16[1];
   var handleColorChange = function handleColorChange(newColor) {
     setColor(newColor);
     onColorChange(newColor);

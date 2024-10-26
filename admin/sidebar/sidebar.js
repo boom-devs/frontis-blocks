@@ -118,17 +118,34 @@ export default function FrontisBlocksSidebar() {
 	const [globalColors, setGlobalColors] = useState([]);
     
 
-	const [textFontFamily, setTextFontFamily] = useState('');
-	const [textFontSize, setTextFontSize] = useState('');
-	const [textFontSizeUnits, setTextFontSizeUnits] = useState('px');
-	const [textFontWeight, setTextFontWeight] = useState('');
-	const [textFontStyle, setTextFontStyle] = useState('');
-	const [textTextTransform, setTextTextTransform] = useState('');
-	const [textTextDecoration, setTextTextDecoration] = useState('');
-	const [textLetterSpacing, setTextLetterSpacing] = useState('');
-	const [textLetterSpacingUnits, setTextLetterSpacingUnits] = useState('px');
-	const [textLineHeight, setTextLineHeight] = useState('');
-	const [textLineHeightUnits, setTextLineHeightUnits] = useState('');
+	const [heading, setHeading] = useState({
+		fontFamily: '',
+		fontSize: '',
+		fontSizeUnits: 'px',
+		fontWeight: '',
+		fontStyle: '',
+		textTransform: '',
+		textDecoration: '',
+		letterSpacing: '',
+		letterSpacingUnits: 'px',
+		lineHeight: '',
+		lineHeightUnits: '',
+	});
+
+	const [body, setBody] = useState({
+		fontFamily: '',
+		fontSize: '',
+		fontSizeUnits: 'px',
+		fontWeight: '',
+		fontStyle: '',
+		textTransform: '',
+		textDecoration: '',
+		letterSpacing: '',
+		letterSpacingUnits: 'px',
+		lineHeight: '',
+		lineHeightUnits: '',
+	});
+
 	const [deviceType, setDeviceType] = useState('Desktop');
 	// const currentDeviceType = useDeviceType();
 
@@ -282,46 +299,64 @@ export default function FrontisBlocksSidebar() {
 				</PanelBody>
 				<PanelBody
 					title={__("Global Typography", "frontis-blocks")}
-				>
+                    >
+                        <>
+					<h3>{__("Heading Typography", "frontis-blocks")}</h3>
 					<FB_TypographyControl
-						fontFamily={textFontFamily}
-						onChangeFontFamily={(value) => setTextFontFamily(value)}
-
-						fontSize={textFontSize}
-						onChangeFontSize={(value) => setTextFontSize(value)}
-
-						fontSizeUnits={textFontSizeUnits}
-						onChangeFontSizeUnit={(value) => setTextFontSizeUnits(value)}
-
-						fontWeight={textFontWeight}
-						onChangeFontWeight={(value) => setTextFontWeight(value)}
-
-						fontStyle={textFontStyle}
-						onChangeFontStyle={(value) => setTextFontStyle(value)}
-
-						textTransform={textTextTransform}
-						onChangeTextTransform={(value) => setTextTextTransform(value)}
-
-						textDecoration={textTextDecoration}
-						onChangeTextDecoration={(value) => setTextTextDecoration(value)}
-
-						letterSpacing={textLetterSpacing}
-						onChangeLetterSpacing={(value) => setTextLetterSpacing(value)}
-
-						letterSpacingUnits={textLetterSpacingUnits}
-						onChangeLetterSpacingUnit={(value) => setTextLetterSpacingUnits(value)}
-
-						lineHeight={textLineHeight}
-						onChangeLineHeight={(value) => setTextLineHeight(value)}
-
-						lineHeightUnits={textLineHeightUnits}
-						onChangeLineHeightUnit={(value) => setTextLineHeightUnits(value)}
-
+						fontFamily={heading.fontFamily}
+						onChangeFontFamily={(value) => setHeading({...heading, fontFamily: value})}
+						fontSize={heading.fontSize}
+						onChangeFontSize={(value) => setHeading({...heading, fontSize: value})}
+						fontSizeUnits={heading.fontSizeUnits}
+						onChangeFontSizeUnit={(value) => setHeading({...heading, fontSizeUnits: value})}
+						fontWeight={heading.fontWeight}
+						onChangeFontWeight={(value) => setHeading({...heading, fontWeight: value})}
+						fontStyle={heading.fontStyle}
+						onChangeFontStyle={(value) => setHeading({...heading, fontStyle: value})}
+						textTransform={heading.textTransform}
+						onChangeTextTransform={(value) => setHeading({...heading, textTransform: value})}
+						textDecoration={heading.textDecoration}
+						onChangeTextDecoration={(value) => setHeading({...heading, textDecoration: value})}
+						letterSpacing={heading.letterSpacing}
+						onChangeLetterSpacing={(value) => setHeading({...heading, letterSpacing: value})}
+						letterSpacingUnits={heading.letterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setHeading({...heading, letterSpacingUnits: value})}
+						lineHeight={heading.lineHeight}
+						onChangeLineHeight={(value) => setHeading({...heading, lineHeight: value})}
+						lineHeightUnits={heading.lineHeightUnits}
+						onChangeLineHeightUnit={(value) => setHeading({...heading, lineHeightUnits: value})}
 						deviceType={deviceType}
 					/>
-                    </PanelBody>
-                </div>
-				
+
+					<h3>{__("Body Typography", "frontis-blocks")}</h3>
+					<FB_TypographyControl
+						fontFamily={body.fontFamily}
+						onChangeFontFamily={(value) => setBody({...body, fontFamily: value})}
+						fontSize={body.fontSize}
+						onChangeFontSize={(value) => setBody({...body, fontSize: value})}
+						fontSizeUnits={body.fontSizeUnits}
+						onChangeFontSizeUnit={(value) => setBody({...body, fontSizeUnits: value})}
+						fontWeight={body.fontWeight}
+						onChangeFontWeight={(value) => setBody({...body, fontWeight: value})}
+						fontStyle={body.fontStyle}
+						onChangeFontStyle={(value) => setBody({...body, fontStyle: value})}
+						textTransform={body.textTransform}
+						onChangeTextTransform={(value) => setBody({...body, textTransform: value})}
+						textDecoration={body.textDecoration}
+						onChangeTextDecoration={(value) => setBody({...body, textDecoration: value})}
+						letterSpacing={body.letterSpacing}
+						onChangeLetterSpacing={(value) => setBody({...body, letterSpacing: value})}
+						letterSpacingUnits={body.letterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setBody({...body, letterSpacingUnits: value})}
+						lineHeight={body.lineHeight}
+						onChangeLineHeight={(value) => setBody({...body, lineHeight: value})}
+						lineHeightUnits={body.lineHeightUnits}
+						onChangeLineHeightUnit={(value) => setBody({...body, lineHeightUnits: value})}
+						deviceType={deviceType}
+                            />
+                        </>
+				</PanelBody>
+				</div>
 			</PluginSidebar>
 		</>
 	);
