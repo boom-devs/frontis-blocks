@@ -45,9 +45,9 @@ class Blocks
             foreach ($blocks_list as $block) {
                 $slug = $block['slug'];
                 if(is_array($active_blocks) && !empty($active_blocks)) {
-                    if(!$active_blocks[$slug]) {
-                        continue;
-                    }
+				 	if(array_key_exists($slug, $active_blocks) && !$active_blocks[$slug]) {
+						continue;
+					}
                 }
 
                 $package = $block['package'];
@@ -59,7 +59,7 @@ class Blocks
                     error_log($blocks_dir);
                     continue;
                 }
-                
+
                 $localize_array = [];
 
                 // Register the block
@@ -76,7 +76,7 @@ class Blocks
                 // Enqueue block editor script and pass localized data
                 $editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
                 wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
-                 
+
 				if ( is_admin() ) {
 					$admin_localize_array = [
 						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),

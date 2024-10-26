@@ -5,7 +5,8 @@ import {
     Blocks,
     Settings,
     Integration,
-    Pricing
+    Pricing,
+	CustomIcons
 } from "./components";
 
 import {
@@ -40,7 +41,13 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
         icon: <IntegrationsIcon />,
         label: __("Integrations", "frontis-blocks"),
         comp: <Integration />
-    }
+    },
+	{
+		id: 'custom_icons',
+		icon: <IntegrationsIcon />,
+		label: __("Custom icons", "frontis-blocks"),
+		comp: <CustomIcons />
+	}
 ]);
 // Add pricing tab if not pro
 if (window.frontisBlocksAdmin.isProActive === 'false') {
