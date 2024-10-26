@@ -4,13 +4,14 @@ use FrontisBlocks\Assets\EnqueueBlocksCss;
 $block_attributes = $block['attrs'];
 $blockId = isset($block_attributes['block_id']) ? sanitize_text_field($block_attributes['block_id']) : '';
 
-
+// Extract attributes
 $layoutType = isset($block_attributes['layoutType']) ? esc_attr($block_attributes['layoutType']) : 'flex';
 $containerWidth = isset($block_attributes['containerWidth']) ? esc_attr($block_attributes['containerWidth']) : 'full-width';
 $contentBoxWidth = isset($block_attributes['contentBoxWidth']) ? intval($block_attributes['contentBoxWidth']) : 1140;
 $minimumHeight = isset($block_attributes['minimumHeight']) ? intval($block_attributes['minimumHeight']) : 0;
 $overflow = isset($block_attributes['overflow']) ? esc_attr($block_attributes['overflow']) : 'visible';
 $backgroundColor = isset($block_attributes['backgroundColor']) ? esc_attr($block_attributes['backgroundColor']) : 'transparent';
+$backgroundGradient = isset($block_attributes['backgroundGradient']) ? esc_attr($block_attributes['backgroundGradient']) : '';
 $textColor = isset($block_attributes['textColor']) ? esc_attr($block_attributes['textColor']) : 'inherit';
 $paddingTop = isset($block_attributes['paddingTop']) ? intval($block_attributes['paddingTop']) : 0;
 $paddingRight = isset($block_attributes['paddingRight']) ? intval($block_attributes['paddingRight']) : 0;
@@ -37,7 +38,7 @@ $css_content = "
     " . ($containerWidth === 'content-width' ? "max-width: {$contentBoxWidth}px;" : '') . "
     min-height: {$minimumHeight}px;
     overflow: {$overflow};
-    background-color: {$backgroundColor};
+    " . ($backgroundGradient ? "background: {$backgroundGradient};" : "background-color: {$backgroundColor};") . "
     color: {$textColor};
     padding-top: {$paddingTop}px;
     padding-right: {$paddingRight}px;

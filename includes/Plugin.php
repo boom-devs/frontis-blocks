@@ -168,5 +168,6 @@ final class Plugin {
         InitialActivatedBlocks::blocks();
 
         GlobalSettings::get_instance()->register_global_settings_events();
+        
     }
 }
