@@ -13,8 +13,6 @@ import {
     customColorKey,
     gradientColorKey,
     customGradientColorKey,
-    globalTypoKey,
-    blockDefaultsKey,
 } from "./constant";
 
 /**
@@ -23,8 +21,6 @@ import {
 import {
     updateGlobalStyle,
     getGlobalSettings,
-    updateBlockDefaults,
-    getBlockDefaults
 } from '../fetch';
 
 /**
@@ -100,21 +96,6 @@ export function FETCH_CUSTOM_GRADIENT_COLORS() {
             else {
                 return false
             }
-        }
-        else {
-            return false
-        }
-    });
-}
-
-/**
- * Fetch Block Defaults from Database using AJAX
- * @returns {Object || false}
- */
-export function FETCH_BLOCK_DEFAULTS() {
-    return getBlockDefaults().then(response => {
-        if (response && ebJsonStringCheck(response) && typeof JSON.parse(response) === 'object') {
-            return JSON.parse(response)
         }
         else {
             return false

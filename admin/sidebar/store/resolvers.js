@@ -35,25 +35,3 @@ export function* getCustomGradientColors() {
     let customGradientColors = yield actions.fetchCustomGradientColor();
     return actions.setCustomGradientColors(customGradientColors)
 }
-
-/**
- * getBlockDefaults resolver
- * @returns
- */
-export function* getBlockDefaults() {
-    let value = yield actions.fetchBlockDefaults();
-    return actions.setBlockDefault(value)
-}
-
-
-// /**
-//  * getBlockDefaults resolver
-//  * @returns
-//  */
-// export function* getIsSaving() {
-//     let value = yield actions.fetchIsSaving();
-
-//     console.log('fetch', value)
-
-//     return actions.setIsSaving(value)
-// }
