@@ -33,8 +33,6 @@ import {
 import {
     updateGlobalStyle,
     getGlobalSettings,
-    updateBlockDefaults,
-    getBlockDefaults
 } from '../fetch';
 
 /**

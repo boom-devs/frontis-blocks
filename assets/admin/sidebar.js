@@ -530,6 +530,417 @@ var GradientColorPallet = function GradientColorPallet(props) {
 
 /***/ }),
 
+/***/ "./admin/sidebar/sidebar.js":
+/*!**********************************!*\
+  !*** ./admin/sidebar/sidebar.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ FrontisBlocksSidebar)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Components_typography_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/typography-control */ "./src/components/typography-control/index.js");
+/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/sidebar/components/GradientColorPallet.js");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../icons */ "./admin/icons/index.js");
+/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_11__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+
+
+
+
+
+
+var defaultsColors = [{
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Primary Color", "frontis-blocks"),
+  "color": '#f00000',
+  "slug": 'primary-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
+  "color": '#0f0',
+  "slug": 'secondary-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
+  "color": '#00f',
+  "slug": 'tertiary-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
+  "color": "#00f",
+  "slug": 'accent-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
+  "color": '#000',
+  "slug": 'text-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
+  "color": '#00f',
+  "slug": 'link-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
+  "color": '#00f',
+  "slug": 'link-hover-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
+  "color": '#000',
+  "slug": 'background-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Color", "frontis-blocks"),
+  "color": '#FFFFFF',
+  "slug": 'button-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Background Color", "frontis-blocks"),
+  "color": '#000',
+  "slug": 'button-background-color'
+}];
+var gradientDefaults = [{
+  "color": "linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%)",
+  "name": "Primary Color",
+  "slug": "gradientPrimary",
+  "var": "--fb-gradient-primary-color"
+}, {
+  "color": "linear-gradient(90deg, hsla(18, 76%, 85%, 1) 0%, hsla(203, 69%, 84%, 1) 100%)",
+  "name": "Secondary Color",
+  "slug": "gradientSecondary",
+  "var": "--fb-gradient-secondary-color"
+}, {
+  "color": "linear-gradient(90deg, hsla(248, 21%, 15%, 1) 0%, hsla(250, 14%, 61%, 1) 100%)",
+  "name": "Tertiary Color",
+  "slug": "gradientTertiary",
+  "var": "--fb-gradient-tertiary-color"
+}, {
+  "color": "linear-gradient(90deg, rgb(250, 250, 250) 0%, rgb(233, 233, 233) 49%, rgb(244, 243, 243) 100%)",
+  "name": "Background Color",
+  "slug": "gradientBackground",
+  "var": "--fb-gradient-background-color"
+}];
+function FrontisBlocksSidebar() {
+  var themeColors = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.useSelect)(function (select) {
+    return select("core/editor").getEditorSettings().colors;
+  }, []);
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    customColors = _useState2[0],
+    setCustomColors = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)("solid"),
+    _useState4 = _slicedToArray(_useState3, 2),
+    activeTab = _useState4[0],
+    setActiveTab = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    gradientColors = _useState6[0],
+    setGradientColors = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    globalColors = _useState8[0],
+    setGlobalColors = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    textFontFamily = _useState10[0],
+    setTextFontFamily = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    textFontSize = _useState12[0],
+    setTextFontSize = _useState12[1];
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('px'),
+    _useState14 = _slicedToArray(_useState13, 2),
+    textFontSizeUnits = _useState14[0],
+    setTextFontSizeUnits = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState16 = _slicedToArray(_useState15, 2),
+    textFontWeight = _useState16[0],
+    setTextFontWeight = _useState16[1];
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState18 = _slicedToArray(_useState17, 2),
+    textFontStyle = _useState18[0],
+    setTextFontStyle = _useState18[1];
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState20 = _slicedToArray(_useState19, 2),
+    textTextTransform = _useState20[0],
+    setTextTextTransform = _useState20[1];
+  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState22 = _slicedToArray(_useState21, 2),
+    textTextDecoration = _useState22[0],
+    setTextTextDecoration = _useState22[1];
+  var _useState23 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState24 = _slicedToArray(_useState23, 2),
+    textLetterSpacing = _useState24[0],
+    setTextLetterSpacing = _useState24[1];
+  var _useState25 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('px'),
+    _useState26 = _slicedToArray(_useState25, 2),
+    textLetterSpacingUnits = _useState26[0],
+    setTextLetterSpacingUnits = _useState26[1];
+  var _useState27 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState28 = _slicedToArray(_useState27, 2),
+    textLineHeight = _useState28[0],
+    setTextLineHeight = _useState28[1];
+  var _useState29 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState30 = _slicedToArray(_useState29, 2),
+    textLineHeightUnits = _useState30[0],
+    setTextLineHeightUnits = _useState30[1];
+  var _useState31 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('Desktop'),
+    _useState32 = _slicedToArray(_useState31, 2),
+    deviceType = _useState32[0],
+    setDeviceType = _useState32[1];
+  // const currentDeviceType = useDeviceType();
+
+  // useEffect(() => {
+  // 	setDeviceType(currentDeviceType);
+  // }, [currentDeviceType]);
+
+  //Initial UseEffect, Set Defualt color if Store is empty
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    //Set Global Colors
+    if (globalColors.length === 0) {
+      setGlobalColors(defaultsColors);
+    }
+
+    //Set Gradient Colors
+    if (gradientColors.length === 0) {
+      setGradientColors(gradientDefaults);
+    }
+  }, []);
+  var handleDeviceTypeChange = function handleDeviceTypeChange(newDeviceType) {
+    setDeviceType(newDeviceType);
+  };
+  var addCustomColor = function addCustomColor() {
+    var newColor = {
+      id: "custom-color-".concat(customColors.length + 1),
+      title: "Custom Color ".concat(customColors.length + 1),
+      color: "#000000"
+    };
+    setCustomColors([].concat(_toConsumableArray(customColors), [newColor]));
+  };
+  var updateCustomColor = function updateCustomColor(id, newColor) {
+    setCustomColors(customColors.map(function (color) {
+      return color.id === id ? _objectSpread(_objectSpread({}, color), {}, {
+        color: newColor
+      }) : color;
+    }));
+  };
+  var colorPanelArray = function colorPanelArray(colors, setColor) {
+    var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+    if (_typeof(colors) !== "object") {
+      return [];
+    }
+    var colorArr = [];
+    colors.map(function (colorObj, index) {
+      return colorArr.push({
+        label: colorObj.name || "Color",
+        value: colorObj.color,
+        onChange: function onChange(newColor) {
+          var _defaults$index;
+          setColor(index, newColor || ((_defaults$index = defaults[index]) === null || _defaults$index === void 0 ? void 0 : _defaults$index.color) || "#000");
+        }
+      });
+    });
+    return colorArr;
+  };
+
+  //Update Global Colors
+  var setGlobalColor = function setGlobalColor(index, color) {
+    var colors = _toConsumableArray(globalColors);
+    colors[index].color = color;
+    setGlobalColors(_toConsumableArray(colors));
+    updateColorsViaAjax(colors, 'global');
+  };
+  //Update Gradient Colors
+  var setGradientColor = function setGradientColor(index, color) {
+    var colors = _toConsumableArray(gradientColors);
+    colors[index].color = color;
+    setGradientColors(_toConsumableArray(colors));
+    updateColorsViaAjax(colors, 'gradient');
+  };
+  var updateColorsViaAjax = function updateColorsViaAjax(colors, type) {
+    var action = type === 'global' ? 'fb_update_global_colors' : 'fb_update_global_gradients';
+    jquery__WEBPACK_IMPORTED_MODULE_11___default().ajax({
+      url: window.frontisBlocksAdminSidebar.ajaxUrl,
+      type: 'POST',
+      data: {
+        action: action,
+        nonce: window.frontisBlocksAdminSidebar.nonce,
+        colors: JSON.stringify(colors)
+      },
+      success: function success(response) {
+        if (response.success) {
+          console.log("".concat(type, " colors updated successfully"));
+        } else {
+          console.error("Failed to update ".concat(type, " colors:"), response.data);
+        }
+      },
+      error: function error(xhr, status, _error) {
+        console.error("Ajax error when updating ".concat(type, " colors:"), _error);
+      }
+    });
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
+    target: "frontis-blocks-sidebar"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebar, {
+    name: "frontis-blocks-sidebar",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks"),
+    className: "fb-global-controls"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-panel-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color Settings", "frontis-blocks")
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
+    className: "fb-blocks-color-tabs",
+    activeClass: "active-tab",
+    onSelect: function onSelect(tabName) {
+      return setActiveTab(tabName);
+    },
+    tabs: [{
+      name: "solid",
+      title: "Solid"
+    }, {
+      name: "gradient",
+      title: "Gradient"
+    }]
+  }, function (tab) {
+    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Colors", "frontis-blocks"),
+      className: "fb-color-panel fb-global-color-panel",
+      initialOpen: true,
+      disableAlpha: true,
+      disableCustomGradients: false,
+      colorSettings: colorPanelArray(globalColors, setGlobalColor, defaultsColors)
+    })), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      title: "Gradient Colors",
+      colors: gradientColors,
+      setColor: setGradientColor,
+      setColors: setGradientColors,
+      wrapperClass: "fb-gradient-color-panel",
+      resetAction: true
+    })));
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Typography", "frontis-blocks")
+  }, /*#__PURE__*/React.createElement(_Components_typography_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    fontFamily: textFontFamily,
+    onChangeFontFamily: function onChangeFontFamily(value) {
+      return setTextFontFamily(value);
+    },
+    fontSize: textFontSize,
+    onChangeFontSize: function onChangeFontSize(value) {
+      return setTextFontSize(value);
+    },
+    fontSizeUnits: textFontSizeUnits,
+    onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
+      return setTextFontSizeUnits(value);
+    },
+    fontWeight: textFontWeight,
+    onChangeFontWeight: function onChangeFontWeight(value) {
+      return setTextFontWeight(value);
+    },
+    fontStyle: textFontStyle,
+    onChangeFontStyle: function onChangeFontStyle(value) {
+      return setTextFontStyle(value);
+    },
+    textTransform: textTextTransform,
+    onChangeTextTransform: function onChangeTextTransform(value) {
+      return setTextTextTransform(value);
+    },
+    textDecoration: textTextDecoration,
+    onChangeTextDecoration: function onChangeTextDecoration(value) {
+      return setTextTextDecoration(value);
+    },
+    letterSpacing: textLetterSpacing,
+    onChangeLetterSpacing: function onChangeLetterSpacing(value) {
+      return setTextLetterSpacing(value);
+    },
+    letterSpacingUnits: textLetterSpacingUnits,
+    onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
+      return setTextLetterSpacingUnits(value);
+    },
+    lineHeight: textLineHeight,
+    onChangeLineHeight: function onChangeLineHeight(value) {
+      return setTextLineHeight(value);
+    },
+    lineHeightUnits: textLineHeightUnits,
+    onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
+      return setTextLineHeightUnits(value);
+    },
+    deviceType: deviceType
+  })))));
+}
+;
+var ColorDropdown = function ColorDropdown(_ref) {
+  var title = _ref.title,
+    initialColor = _ref.initialColor,
+    onColorChange = _ref.onColorChange,
+    themeColors = _ref.themeColors;
+  var _useState33 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(initialColor),
+    _useState34 = _slicedToArray(_useState33, 2),
+    color = _useState34[0],
+    setColor = _useState34[1];
+  var handleColorChange = function handleColorChange(newColor) {
+    setColor(newColor);
+    onColorChange(newColor);
+  };
+  return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+    className: "frontis-blocks-color-dropdown",
+    contentClassName: "frontis-blocks-color-dropdown__content",
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+        onToggle = _ref2.onToggle;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        onClick: onToggle,
+        "aria-expanded": isOpen,
+        className: "frontis-blocks-color-dropdown__toggle"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
+        colorValue: color
+      }), /*#__PURE__*/React.createElement("span", null, title));
+    },
+    renderContent: function renderContent() {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+        colors: [{
+          name: "Theme Colors",
+          colors: themeColors
+        }],
+        value: color,
+        onChange: handleColorChange
+      });
+    }
+  });
+};
+
+/***/ }),
+
 /***/ "./src/components/range/index.js":
 /*!***************************************!*\
   !*** ./src/components/range/index.js ***!
@@ -4356,407 +4767,14 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/plugins */ "@wordpress/plugins");
 /* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_plugins__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Components_typography_control__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Components/typography-control */ "./src/components/typography-control/index.js");
-/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/sidebar/components/GradientColorPallet.js");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../icons */ "./admin/icons/index.js");
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_12__);
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons */ "./admin/icons/index.js");
+/* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidebar */ "./admin/sidebar/sidebar.js");
 
 
 
-
-
-
-
-
-
-
-
-
-
-var defaultsColors = [{
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Primary Color", "frontis-blocks"),
-  "color": '#f00000',
-  "slug": 'primary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Secondary Color", "frontis-blocks"),
-  "color": '#0f0',
-  "slug": 'secondary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Tertiary Color", "frontis-blocks"),
-  "color": '#00f',
-  "slug": 'tertiary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Accent Color", "frontis-blocks"),
-  "color": "#00f",
-  "slug": 'accent-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Text Color", "frontis-blocks"),
-  "color": '#000',
-  "slug": 'text-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Link Color", "frontis-blocks"),
-  "color": '#00f',
-  "slug": 'link-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Link Hover Color", "frontis-blocks"),
-  "color": '#00f',
-  "slug": 'link-hover-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Background Color", "frontis-blocks"),
-  "color": '#000',
-  "slug": 'background-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Button Color", "frontis-blocks"),
-  "color": '#FFFFFF',
-  "slug": 'button-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Button Background Color", "frontis-blocks"),
-  "color": '#000',
-  "slug": 'button-background-color'
-}];
-var gradientDefaults = [{
-  "color": "linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%)",
-  "name": "Primary Color",
-  "slug": "gradientPrimary",
-  "var": "--fb-gradient-primary-color"
-}, {
-  "color": "linear-gradient(90deg, hsla(18, 76%, 85%, 1) 0%, hsla(203, 69%, 84%, 1) 100%)",
-  "name": "Secondary Color",
-  "slug": "gradientSecondary",
-  "var": "--fb-gradient-secondary-color"
-}, {
-  "color": "linear-gradient(90deg, hsla(248, 21%, 15%, 1) 0%, hsla(250, 14%, 61%, 1) 100%)",
-  "name": "Tertiary Color",
-  "slug": "gradientTertiary",
-  "var": "--fb-gradient-tertiary-color"
-}, {
-  "color": "linear-gradient(90deg, rgb(250, 250, 250) 0%, rgb(233, 233, 233) 49%, rgb(244, 243, 243) 100%)",
-  "name": "Background Color",
-  "slug": "gradientBackground",
-  "var": "--fb-gradient-background-color"
-}];
-var FrontisBlocksSidebar = function FrontisBlocksSidebar() {
-  var themeColors = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.useSelect)(function (select) {
-    return select("core/editor").getEditorSettings().colors;
-  }, []);
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    customColors = _useState2[0],
-    setCustomColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)("solid"),
-    _useState4 = _slicedToArray(_useState3, 2),
-    activeTab = _useState4[0],
-    setActiveTab = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)([]),
-    _useState6 = _slicedToArray(_useState5, 2),
-    gradientColors = _useState6[0],
-    setGradientColors = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)([]),
-    _useState8 = _slicedToArray(_useState7, 2),
-    globalColors = _useState8[0],
-    setGlobalColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState10 = _slicedToArray(_useState9, 2),
-    textFontFamily = _useState10[0],
-    setTextFontFamily = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState12 = _slicedToArray(_useState11, 2),
-    textFontSize = _useState12[0],
-    setTextFontSize = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)('px'),
-    _useState14 = _slicedToArray(_useState13, 2),
-    textFontSizeUnits = _useState14[0],
-    setTextFontSizeUnits = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState16 = _slicedToArray(_useState15, 2),
-    textFontWeight = _useState16[0],
-    setTextFontWeight = _useState16[1];
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState18 = _slicedToArray(_useState17, 2),
-    textFontStyle = _useState18[0],
-    setTextFontStyle = _useState18[1];
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState20 = _slicedToArray(_useState19, 2),
-    textTextTransform = _useState20[0],
-    setTextTextTransform = _useState20[1];
-  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState22 = _slicedToArray(_useState21, 2),
-    textTextDecoration = _useState22[0],
-    setTextTextDecoration = _useState22[1];
-  var _useState23 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState24 = _slicedToArray(_useState23, 2),
-    textLetterSpacing = _useState24[0],
-    setTextLetterSpacing = _useState24[1];
-  var _useState25 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)('px'),
-    _useState26 = _slicedToArray(_useState25, 2),
-    textLetterSpacingUnits = _useState26[0],
-    setTextLetterSpacingUnits = _useState26[1];
-  var _useState27 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState28 = _slicedToArray(_useState27, 2),
-    textLineHeight = _useState28[0],
-    setTextLineHeight = _useState28[1];
-  var _useState29 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(''),
-    _useState30 = _slicedToArray(_useState29, 2),
-    textLineHeightUnits = _useState30[0],
-    setTextLineHeightUnits = _useState30[1];
-  var _useState31 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)('Desktop'),
-    _useState32 = _slicedToArray(_useState31, 2),
-    deviceType = _useState32[0],
-    setDeviceType = _useState32[1];
-  // const currentDeviceType = useDeviceType();
-
-  // useEffect(() => {
-  // 	setDeviceType(currentDeviceType);
-  // }, [currentDeviceType]);
-
-  //Initial UseEffect, Set Defualt color if Store is empty
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useEffect)(function () {
-    //Set Global Colors
-    if (globalColors.length === 0) {
-      setGlobalColors(defaultsColors);
-    }
-
-    //Set Gradient Colors
-    if (gradientColors.length === 0) {
-      setGradientColors(gradientDefaults);
-    }
-  }, []);
-  var handleDeviceTypeChange = function handleDeviceTypeChange(newDeviceType) {
-    setDeviceType(newDeviceType);
-  };
-  var addCustomColor = function addCustomColor() {
-    var newColor = {
-      id: "custom-color-".concat(customColors.length + 1),
-      title: "Custom Color ".concat(customColors.length + 1),
-      color: "#000000"
-    };
-    setCustomColors([].concat(_toConsumableArray(customColors), [newColor]));
-  };
-  var updateCustomColor = function updateCustomColor(id, newColor) {
-    setCustomColors(customColors.map(function (color) {
-      return color.id === id ? _objectSpread(_objectSpread({}, color), {}, {
-        color: newColor
-      }) : color;
-    }));
-  };
-  var colorPanelArray = function colorPanelArray(colors, setColor) {
-    var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    if (_typeof(colors) !== "object") {
-      return [];
-    }
-    var colorArr = [];
-    colors.map(function (colorObj, index) {
-      return colorArr.push({
-        label: colorObj.name || "Color",
-        value: colorObj.color,
-        onChange: function onChange(newColor) {
-          var _defaults$index;
-          setColor(index, newColor || ((_defaults$index = defaults[index]) === null || _defaults$index === void 0 ? void 0 : _defaults$index.color) || "#000");
-        }
-      });
-    });
-    return colorArr;
-  };
-
-  //Update Global Colors
-  var setGlobalColor = function setGlobalColor(index, color) {
-    var colors = _toConsumableArray(globalColors);
-    colors[index].color = color;
-    setGlobalColors(_toConsumableArray(colors));
-    updateColorsViaAjax(colors, 'global');
-  };
-  //Update Gradient Colors
-  var setGradientColor = function setGradientColor(index, color) {
-    var colors = _toConsumableArray(gradientColors);
-    colors[index].color = color;
-    setGradientColors(_toConsumableArray(colors));
-    updateColorsViaAjax(colors, 'gradient');
-  };
-  var updateColorsViaAjax = function updateColorsViaAjax(colors, type) {
-    var action = type === 'global' ? 'fb_update_global_colors' : 'fb_update_global_gradients';
-    jquery__WEBPACK_IMPORTED_MODULE_12___default().ajax({
-      url: window.frontisBlocksAdminSidebar.ajaxUrl,
-      type: 'POST',
-      data: {
-        action: action,
-        nonce: window.frontisBlocksAdminSidebar.nonce,
-        colors: JSON.stringify(colors)
-      },
-      success: function success(response) {
-        if (response.success) {
-          console.log("".concat(type, " colors updated successfully"));
-        } else {
-          console.error("Failed to update ".concat(type, " colors:"), response.data);
-        }
-      },
-      error: function error(xhr, status, _error) {
-        console.error("Ajax error when updating ".concat(type, " colors:"), _error);
-      }
-    });
-  };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
-    target: "frontis-blocks-sidebar"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebar, {
-    name: "frontis-blocks-sidebar",
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("FB Global Settings", "frontis-blocks"),
-    className: "fb-global-controls"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-panel-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Color Settings", "frontis-blocks")
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TabPanel, {
-    className: "fb-blocks-color-tabs",
-    activeClass: "active-tab",
-    onSelect: function onSelect(tabName) {
-      return setActiveTab(tabName);
-    },
-    tabs: [{
-      name: "solid",
-      title: "Solid"
-    }, {
-      name: "gradient",
-      title: "Gradient"
-    }]
-  }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Global Colors", "frontis-blocks"),
-      className: "fb-color-panel fb-global-color-panel",
-      initialOpen: true,
-      disableAlpha: true,
-      disableCustomGradients: false,
-      colorSettings: colorPanelArray(globalColors, setGlobalColor, defaultsColors)
-    })), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      title: "Gradient Colors",
-      colors: gradientColors,
-      setColor: setGradientColor,
-      setColors: setGradientColors,
-      wrapperClass: "fb-gradient-color-panel",
-      resetAction: true
-    })));
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Global Typography", "frontis-blocks")
-  }, /*#__PURE__*/React.createElement(_Components_typography_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    fontFamily: textFontFamily,
-    onChangeFontFamily: function onChangeFontFamily(value) {
-      return setTextFontFamily(value);
-    },
-    fontSize: textFontSize,
-    onChangeFontSize: function onChangeFontSize(value) {
-      return setTextFontSize(value);
-    },
-    fontSizeUnits: textFontSizeUnits,
-    onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-      return setTextFontSizeUnits(value);
-    },
-    fontWeight: textFontWeight,
-    onChangeFontWeight: function onChangeFontWeight(value) {
-      return setTextFontWeight(value);
-    },
-    fontStyle: textFontStyle,
-    onChangeFontStyle: function onChangeFontStyle(value) {
-      return setTextFontStyle(value);
-    },
-    textTransform: textTextTransform,
-    onChangeTextTransform: function onChangeTextTransform(value) {
-      return setTextTextTransform(value);
-    },
-    textDecoration: textTextDecoration,
-    onChangeTextDecoration: function onChangeTextDecoration(value) {
-      return setTextTextDecoration(value);
-    },
-    letterSpacing: textLetterSpacing,
-    onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-      return setTextLetterSpacing(value);
-    },
-    letterSpacingUnits: textLetterSpacingUnits,
-    onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-      return setTextLetterSpacingUnits(value);
-    },
-    lineHeight: textLineHeight,
-    onChangeLineHeight: function onChangeLineHeight(value) {
-      return setTextLineHeight(value);
-    },
-    lineHeightUnits: textLineHeightUnits,
-    onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-      return setTextLineHeightUnits(value);
-    },
-    deviceType: deviceType
-  })))));
-};
-var ColorDropdown = function ColorDropdown(_ref) {
-  var title = _ref.title,
-    initialColor = _ref.initialColor,
-    onColorChange = _ref.onColorChange,
-    themeColors = _ref.themeColors;
-  var _useState33 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(initialColor),
-    _useState34 = _slicedToArray(_useState33, 2),
-    color = _useState34[0],
-    setColor = _useState34[1];
-  var handleColorChange = function handleColorChange(newColor) {
-    setColor(newColor);
-    onColorChange(newColor);
-  };
-  return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dropdown, {
-    className: "frontis-blocks-color-dropdown",
-    contentClassName: "frontis-blocks-color-dropdown__content",
-    renderToggle: function renderToggle(_ref2) {
-      var isOpen = _ref2.isOpen,
-        onToggle = _ref2.onToggle;
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-        onClick: onToggle,
-        "aria-expanded": isOpen,
-        className: "frontis-blocks-color-dropdown__toggle"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorIndicator, {
-        colorValue: color
-      }), /*#__PURE__*/React.createElement("span", null, title));
-    },
-    renderContent: function renderContent() {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
-        colors: [{
-          name: "Theme Colors",
-          colors: themeColors
-        }],
-        value: color,
-        onChange: handleColorChange
-      });
-    }
-  });
-};
 (0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)("frontis-blocks-sidebar", {
-  render: FrontisBlocksSidebar,
-  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_10__.FBIcon, null)
+  render: _sidebar__WEBPACK_IMPORTED_MODULE_2__["default"],
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_1__.FBIcon, null)
 });
 /******/ })()
 ;
