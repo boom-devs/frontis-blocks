@@ -1348,7 +1348,15 @@ const attributes = {
     mediaBorderRadiusLink: {
         type: "boolean",
         default: true
-    }
+    },
+    boxGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    boxGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
     
 }
 //

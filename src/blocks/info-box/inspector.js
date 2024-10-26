@@ -71,6 +71,7 @@ import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_ResponsiveControl from "@Components/responsive-control";
 import FB_Range from "@Components/range";
+import FB_BoxShadowControl from '@Components/box-shadow';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -320,7 +321,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaBgHeightUnits,
 		mediaIconColor,
 		mediaIconHoverColor,
-		mediaIconColorSwitcher
+		mediaIconColorSwitcher,
+		boxGlobalBoxShadowValues,
+		boxGlobalBoxShadowCssValue
 	} = attributes;
 
 	useEffect(() => {
@@ -2487,6 +2490,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												? `border-color: ${globalBorderColor};`
 												: ""
 										};
+					${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ''}
                     transition: all .3s ease-in-out;
                 }
                 .fb-info-box-content-wrapper.${blockID}:hover {
@@ -8150,7 +8154,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</PanelBody>
 												<PanelBody
-													title={__("Border and Radius", "frontis-blocks")}
+													title={__("Border and Shadow", "frontis-blocks")}
 													initialOpen={false}
 												>
 													<SelectControl
@@ -8197,7 +8201,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 
 													<FB_Spacing
-														label={__("Radius Border", "frontis-blocks")}
+														label={__("Border Radius", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={
 															handleGlobalBorderRadiusUnitsHandler
@@ -8214,6 +8218,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															handleGlobalBorderRadiusCombineBtn
 														}
 														setAttributes={setAttributes}
+													/>
+													<FB_BoxShadowControl
+														onBoxShadowChange={(value) => setAttributes({ boxGlobalBoxShadowValues: value })}
+														initialShadowValue={boxGlobalBoxShadowValues}
+														onBoxShadowStyleChange={(value) => setAttributes({ boxGlobalBoxShadowCssValue: value })}
 													/>
 												</PanelBody>
 											</div>
