@@ -36,7 +36,7 @@ class Settings extends AjaxBase {
             'maintenance_mode',
             'coming_soon_page_id',
             'maintenance_page_id',
-            'get_custom_icons'
+            'upload_custom_icons'
         ];
 
         $this->init_ajax_events($ajax_events);
@@ -309,7 +309,7 @@ class Settings extends AjaxBase {
 
     }
 
-    public function get_custom_icons() {
+    public function upload_custom_icons() {
     	if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 			return;
@@ -423,10 +423,7 @@ class Settings extends AjaxBase {
 				unlink($tempZipFile);
 			}
 
-			var_dump($custom_icons);
-
-// 			$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-custom-icons';
-// 			$filesInDirectory = scandir($upload_directory);
+			update_option('fb_custom_icons', $custom_icons, true);
 		}
     }
 }

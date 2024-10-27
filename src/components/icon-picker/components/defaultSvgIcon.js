@@ -1,3 +1,5 @@
+import {applyFilters} from "@wordpress/hooks";
+
 const defaultIcons = [
 	[
 		"0",
@@ -2310,4 +2312,6 @@ const defaultIcons = [
 	]
 ];
 
-export default defaultIcons;
+const fb_icons_name = applyFilters('frontisblocks/iconsname', defaultIcons);
+
+export default fb_icons_name;

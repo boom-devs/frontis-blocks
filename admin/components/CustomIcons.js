@@ -27,7 +27,7 @@ const CustomIcons = () => {
 			url: ajaxUrl,
 			type: 'POST',
 			data: {
-				action: 'fb_get_custom_icons',
+				action: 'fb_upload_custom_icons',
 				security: nonce,
 				keys: keys,
 			},
