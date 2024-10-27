@@ -289,9 +289,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const testimonialImageTabletBorderRadiusWidth = `${TestimonialImageTabRadiusWidth.top}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.right}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.bottom}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.left}${TestimonialImageRadiusUnits.Tablet}`;
     const testimonialImageMobileBorderRadiusWidth = `${TestimonialImageMobileRadiusWidth.top}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.right}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.bottom}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.left}${TestimonialImageRadiusUnits.Mobile}`;
     /** End Testimonial Image Border Radius */
-    
-
-
 
 
     	/** Start Global padding */
@@ -624,7 +621,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `height: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
                         fill: ${TestimonialQuoteIconColor};
                     }
-                    .fb-testimonial-quote-icon:hover svg {
+                    .${blockID} .fb-testimonial-quote-icon:hover svg {
                         fill: ${TestimonialQuoteIconHoverColor};
                     }
                     .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
