@@ -197,10 +197,10 @@ $media_size_mobile = isset($block_attributes['mediaSize']['Mobile']) ? sanitize_
 $media_size_units_mobile = isset($block_attributes['mediaSizeUnits']['Mobile']) ? sanitize_text_field($block_attributes['mediaSizeUnits']['Mobile']) : 'px';
 //Box Style
 // Define padding units and values for each device type (Desktop, Tablet, Mobile)
-$info_box_padding_units = isset($block_attributes['infoBoxPaddingUnits']) ? $block_attributes['infoBoxPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$info_box_desktop_padding = isset($block_attributes['infoBoxDesktopPadding']) ? $block_attributes['infoBoxDesktopPadding'] : array('top' => '40', 'right' => '40', 'bottom' => '40', 'left' => '40');
-$info_box_tablet_padding = isset($block_attributes['infoBoxTabletPadding']) ? $block_attributes['infoBoxTabletPadding'] : array('top' => '20', 'right' => '20', 'bottom' => '20', 'left' => '20');
-$info_box_mobile_padding = isset($block_attributes['infoBoxMobilePadding']) ? $block_attributes['infoBoxMobilePadding'] : array('top' => '10', 'right' => '10', 'bottom' => '10', 'left' => '10');
+$info_box_padding_units = isset($block_attributes['globalPaddingUnits']) ? $block_attributes['globalPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$info_box_desktop_padding = isset($block_attributes['globalPaddingDesktop']) ? $block_attributes['globalPaddingDesktop'] : array('top' => '40', 'right' => '40', 'bottom' => '40', 'left' => '40');
+$info_box_tablet_padding = isset($block_attributes['globalPaddingTablet']) ? $block_attributes['globalPaddingTablet'] : array('top' => '20', 'right' => '20', 'bottom' => '20', 'left' => '20');
+$info_box_mobile_padding = isset($block_attributes['globalPaddingMobile']) ? $block_attributes['globalPaddingMobile'] : array('top' => '10', 'right' => '10', 'bottom' => '10', 'left' => '10');
 
 // Padding strings for each device type
 $box_padding_desktop = $info_box_desktop_padding['top'] . $info_box_padding_units['Desktop'] . ' ' . $info_box_desktop_padding['right'] . $info_box_padding_units['Desktop'] . ' ' . $info_box_desktop_padding['bottom'] . $info_box_padding_units['Desktop'] . ' ' . $info_box_desktop_padding['left'] . $info_box_padding_units['Desktop'];
@@ -230,10 +230,10 @@ $box_border_width_tablet = $info_box_tablet_border_width['top'] . $info_box_bord
 $box_border_width_mobile = $info_box_mobile_border_width['top'] . $info_box_border_units['Mobile'] . ' ' . $info_box_mobile_border_width['right'] . $info_box_border_units['Mobile'] . ' ' . $info_box_mobile_border_width['bottom'] . $info_box_border_units['Mobile'] . ' ' . $info_box_mobile_border_width['left'] . $info_box_border_units['Mobile'];
 
 // Define border radius units and values for each device type
-$info_box_border_radius_units = isset($block_attributes['infoBoxBorderRadiusUnits']) ? $block_attributes['infoBoxBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$info_box_desktop_border_radius_width = isset($block_attributes['infoBoxDesktopBorderRadiusWidth']) ? $block_attributes['infoBoxDesktopBorderRadiusWidth'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
-$info_box_tablet_border_radius_width = isset($block_attributes['infoBoxTabletBorderRadiusWidth']) ? $block_attributes['infoBoxTabletBorderRadiusWidth'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
-$info_box_mobile_border_radius_width = isset($block_attributes['infoBoxMobileBorderRadiusWidth']) ? $block_attributes['infoBoxMobileBorderRadiusWidth'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$info_box_border_radius_units = isset($block_attributes['globalBorderRadiusUnits']) ? $block_attributes['globalBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$info_box_desktop_border_radius_width = isset($block_attributes['globalBorderRadiusDesktop']) ? $block_attributes['globalBorderRadiusDesktop'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$info_box_tablet_border_radius_width = isset($block_attributes['globalBorderRadiusTablet']) ? $block_attributes['globalBorderRadiusTablet'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$info_box_mobile_border_radius_width = isset($block_attributes['globalBorderRadiusMobile']) ? $block_attributes['globalBorderRadiusMobile'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
 
 // Border radius strings for each device type
 $box_border_radius_width_desktop = $info_box_desktop_border_radius_width['top'] . $info_box_border_radius_units['Desktop'] . ' ' . $info_box_desktop_border_radius_width['right'] . $info_box_border_radius_units['Desktop'] . ' ' . $info_box_desktop_border_radius_width['bottom'] . $info_box_border_radius_units['Desktop'] . ' ' . $info_box_desktop_border_radius_width['left'] . $info_box_border_radius_units['Desktop'];
@@ -313,8 +313,8 @@ $media_bg_width_units_desktop = isset($block_attributes['mediaBgWidthUnits']['De
 $media_bg_height_desktop = isset($block_attributes['mediaBgHeight']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgHeight']['Desktop']) : '25';
 $media_bg_height_units_desktop = isset($block_attributes['mediaBgHeightUnits']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgHeightUnits']['Desktop']) : 'px';
 
-$media_bg_color = isset($block_attributes['mediaBgColor']) ? sanitize_hex_color($block_attributes['mediaBgColor']) : '#ffffff';
-$media_bg_hover_color = isset($block_attributes['mediaBgHoverColor']) ? sanitize_hex_color($block_attributes['mediaBgHoverColor']) : '#ffffff';
+$media_bg_color = isset($block_attributes['mediaBgColor']) ? sanitize_hex_color($block_attributes['mediaBgColor']) : '';
+$media_bg_hover_color = isset($block_attributes['mediaBgHoverColor']) ? sanitize_hex_color($block_attributes['mediaBgHoverColor']) : '';
 $media_border = isset($block_attributes['mediaBorder']) ? sanitize_text_field($block_attributes['mediaBorder']) : 'none';
 
 /** Start Header Border Radius */

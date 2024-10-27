@@ -51,6 +51,10 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+    mediaBgTypeImage: {
+		type: "string",
+		default: ''
+	},
     mediaBgWidth: {
 		type: 'object',
 		default: {
@@ -1253,6 +1257,10 @@ const attributes = {
     },
     mediaBgColor: {
         type: "string",
+    },
+    bgType: {
+        type: "string",
+        default: "color",
     },
     mediaBgHoverColor: {
         type: "string",

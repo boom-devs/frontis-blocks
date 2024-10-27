@@ -74,6 +74,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									placeholder={__('Enter button text...', 'frontis-blocks')}
 									className="fb-advanced-button-text"
 								/>
+								
 								<div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
 							</a>
 						</div>

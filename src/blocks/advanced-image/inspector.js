@@ -672,6 +672,10 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 															label: __("Pattern", "frontis-blocks"),
 															value: "pattern"
 														},
+														{
+															label: __("Overlay", "frontis-blocks"),
+															value: "overlay-simple"
+														},
 													]}
 													onChange={(newStyle) => setAttributes({imageStyle: newStyle})}
 													__nextHasNoMarginBottom
@@ -760,6 +764,7 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 																{label: __("Bottom Left", "frontis-blocks"), value: "bottom-left"},
 																{label: __("Bottom Center", "frontis-blocks"), value: "bottom-center"},
 																{label: __("Bottom Right", "frontis-blocks"), value: "bottom-right"},
+																{label: __("Vertically Center", "frontis-blocks"), value: "vertical-center"},
 															]}
 															onChange={(value) => setAttributes({titlePosition: value})}
 															__nextHasNoMarginBottom
