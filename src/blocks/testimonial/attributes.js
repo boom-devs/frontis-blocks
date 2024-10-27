@@ -12,6 +12,10 @@ const attributes = {
         default: "center",
     },
 
+    TestimonialImageSwitcher: {
+        type: "boolean",
+        default: true,
+    },
     TestimonialImageUrl : {
         type: "string",
     },
@@ -22,17 +26,45 @@ const attributes = {
         type: "number",
     },
 
+    TitleSwitcher: {
+        type: "boolean",
+        default: true,
+    },
+    TestimonialTitle: {
+        type: "string",
+        default: "A game changer for us"
+    },
+
+    DescSwitcher: {
+        type: "boolean",
+        default: true,
+    },
     TestimonialDesc: {
         type : "string",
         default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+
+    AuthorSwitcher: {
+        type: "boolean",
+        default: true,
     },
     TestimonialAuthor: {
         type : "string",
         default: "John Doe"
     },
+
+    DesignationSwitcher: {
+        type: "boolean",
+        default: true,
+    },
     TestimonialDesignation: {
         type : "string",
         default: "CEO, Company Name"
+    },
+
+    RatingSwitcher: {
+        type: "boolean",
+        default: true,
     },
     TestimonialRatingNumber: {
         type : "number",
@@ -46,6 +78,10 @@ const attributes = {
         type: "string",
         default: "icon",
     },
+    QuoteIconSwitcher: {
+        type: "boolean",
+        default: true,
+    },
     TestimonialQuoteIcon: {
         type: 'string',
         default: 'quote-left',
@@ -56,52 +92,56 @@ const attributes = {
     },
 
 
-    TestimonialImageWidthDesktop: {
-        type: "number",
-        default: 100
-    },
-    TestimonialImageWidthTablet: {
-        type: "number",
-        default: 100
-    },
-    TestimonialImageWidthMobile: {
-        type: "number",
-        default: 100
-    },
-    TestimonialImageWidthUnits : {
-        type: "string",
-        default: "px"
-    },
-
-    TestimonialImageRadiusUnits : {
-        type: "string",
-        default: "%"
-    },
-    TestimonialImageDesktopRadiusWidth: {
+    TestimonialImageWidth: {
         type: "object",
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
-        },
+            Desktop: 100,
+            Tablet: 100,
+            Mobile: 100
+        }
     },
-    TestimonialImagelTabRadiusWidth: {
+    TestimonialImageWidthUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+
+    TestimonialImageRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
+    },
+    TestimonialImageDesktopRadiusWidth: {
         type: "object", 
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: "50",
+            bottom: "50",
+            left: "50",
+            right: "50",
+        },
+    },
+    TestimonialImageTabRadiusWidth: {
+        type: "object", 
+        default: {
+            top: "50",
+            bottom: "50",
+            left: "50",
+            right: "50",
         },
     },
     TestimonialImageMobileRadiusWidth: {
-        type: "object",
+        type: "object", 
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: "50",
+            bottom: "50",
+            left: "50",
+            right: "50",
         },
     },
     TestimonialImageRadiusLink : {
@@ -109,28 +149,27 @@ const attributes = {
         default: true
     },
 
-    TestimonialQuoteIconSizeDesktop: {
-        type: "number",
-        default: 100
-    },
-    TestimonialQuoteIconSizeTablet: {
-        type: "number",
-        default: 100
-    },
-    TestimonialQuoteIconSizeMobile: {
-        type: "number",
-        default: 100
+    TestimonialQuoteIconSize: {
+        type: 'object',
+        default: {
+            Desktop: 100,
+            Tablet: 100,
+            Mobile: 100
+        }
     },
     TestimonialQuoteIconSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
-
-    TestimonialQuoteIconColorSwitcher : {
+    TestimonialQuoteIconColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    TestimonialQuoteIconColor : {
+    TestimonialQuoteIconColor: {
         type: "string",
         default: "#399CFF"
     },
@@ -139,87 +178,167 @@ const attributes = {
         default: "#399CFF"
     },
 
+    TestimonialTitleFontFamily: {
+        type: "string",
+        default: "inherit",
+    },
+    TestimonialTitleFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    TestimonialTitleFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    TestimonialTitleFontWeight: {
+        type: "string",
+        default: "600"
+    },
+    TestimonialTitleFontStyle: {
+        type: "string",
+        default: "normal"
+    },
+    TestimonialTitleTextTransform: {
+        type: "string",
+        default: "none"
+    },
+    TestimonialTitleTextDecoration: {
+        type: "string",
+        default: "none"
+    },
+    TestimonialTitleLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    TestimonialTitleLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    TestimonialTitleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    TestimonialTitleLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    TestimonialTitleColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    TestimonialTitleColor: {
+        type: "string",
+        default: ""
+    },
+    TestimonialTitleHoverColor: {
+        type: 'string',
+        default: ""
+    },
+
 
     TestimonialDescFontFamily: {
         type: "string",
         default: "inherit",
     },
-    TestimonialDescFontSizeDesktop: {
-        type: "number",
-        default: 18
-    },
-    TestimonialDescFontSizeTablet: {
-        type: "number",
-        default: 18
-    },
-    TestimonialDescFontSizeMobile: {
-        type: "number",
-        default: 18
+    TestimonialDescFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     TestimonialDescFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    TestimonialDescFontWeight : {
+    TestimonialDescFontWeight: {
         type: "string",
         default: "400"
     },
-    TestimonialDescFontStyle : {
+    TestimonialDescFontStyle: {
         type: "string",
         default: "normal"
     },
-    TestimonialDescTextTransform : {
+    TestimonialDescTextTransform: {
         type: "string",
         default: "none"
     },
-    TestimonialDescTextDecoration : {
+    TestimonialDescTextDecoration: {
         type: "string",
         default: "none"
     },
-    TestimonialDescLetterSpacingDesktop: {
-        type: "number",
-        default: ''
+    TestimonialDescLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    TestimonialDescLetterSpacingTablet: {
-        type: "number",
-        default: ''
+    TestimonialDescLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    TestimonialDescLetterSpacingMobile: {
-        type: "number",
-        default: ''
+    TestimonialDescLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    TestimonialDescLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+    TestimonialDescLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    TestimonialDescLineHeightDesktop: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialDescLineHeightTablet: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialDescLineHeightMobile: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialDescLineHeightUnits : {
-        type: "string",
-        default: "px"
-    },
-
-    TestimonialDescColorSwitcher : {
+    TestimonialDescColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    TestimonialDescColor : {
+    TestimonialDescColor: {
         type: "string",
-        default: "#000"
+        default: ""
     },
     TestimonialDescHoverColor: {
         type: 'string',
-        default: "#000"
+        default: ""
     },
 
 
@@ -227,82 +346,81 @@ const attributes = {
         type: "string",
         default: "inherit",
     },
-    TestimonialAuthorFontSizeDesktop: {
-        type: "number",
-        default: 20
-    },
-    TestimonialAuthorFontSizeTablet: {
-        type: "number",
-        default: 20
-    },
-    TestimonialAuthorFontSizeMobile: {
-        type: "number",
-        default: 20
+    TestimonialAuthorFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     TestimonialAuthorFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    TestimonialAuthorFontWeight : {
+    TestimonialAuthorFontWeight: {
         type: "string",
         default: "700"
     },
-    TestimonialAuthorFontStyle : {
+    TestimonialAuthorFontStyle: {
         type: "string",
         default: "normal"
     },
-    TestimonialAuthorTextTransform : {
+    TestimonialAuthorTextTransform: {
         type: "string",
         default: "none"
     },
-    TestimonialAuthorTextDecoration : {
+    TestimonialAuthorTextDecoration: {
         type: "string",
         default: "none"
     },
-    TestimonialAuthorLetterSpacingDesktop: {
-        type: "number",
-        default: ''
+    TestimonialAuthorLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    TestimonialAuthorLetterSpacingTablet: {
-        type: "number",
-        default: ''
+    TestimonialAuthorLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    TestimonialAuthorLetterSpacingMobile: {
-        type: "number",
-        default: ''
+    TestimonialAuthorLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    TestimonialAuthorLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+    TestimonialAuthorLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    TestimonialAuthorLineHeightDesktop: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialAuthorLineHeightTablet: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialAuthorLineHeightMobile: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialAuthorLineHeightUnits : {
-        type: "string",
-        default: "px"
-    },
-
-    TestimonialAuthorColorSwitcher : {
+    TestimonialAuthorColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    TestimonialAuthorColor : {
+    TestimonialAuthorColor: {
         type: "string",
-        default: "#000"
+        default: ""
     },
     TestimonialAuthorHoverColor: {
         type: 'string',
-        default: "#000"
+        default: ""
     },
 
 
@@ -310,107 +428,105 @@ const attributes = {
         type: "string",
         default: "inherit",
     },
-    TestimonialDesignationFontSizeDesktop: {
-        type: "number",
-        default: 16
-    },
-    TestimonialDesignationFontSizeTablet: {
-        type: "number",
-        default: 16
-    },
-    TestimonialDesignationFontSizeMobile: {
-        type: "number",
-        default: 16
+    TestimonialDesignationFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     TestimonialDesignationFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    TestimonialDesignationFontWeight : {
+    TestimonialDesignationFontWeight: {
         type: "string",
-        default: "400"
+        default: ""
     },
-    TestimonialDesignationFontStyle : {
+    TestimonialDesignationFontStyle: {
+        type: "string",
+        default: ""
+    },
+    TestimonialDesignationTextTransform: {
+        type: "string",
+        default: ""
+    },
+    TestimonialDesignationTextDecoration: {
+        type: "string",
+        default: ""
+    },
+    TestimonialDesignationLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    TestimonialDesignationLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    TestimonialDesignationLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    TestimonialDesignationLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    TestimonialDesignationColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    TestimonialDesignationTextTransform : {
+    TestimonialDesignationColor: {
         type: "string",
-        default: "none"
-    },
-    TestimonialDesignationTextDecoration : {
-        type: "string",
-        default: "none"
-    },
-    TestimonialDesignationLetterSpacingDesktop: {
-        type: "number",
-        default: ''
-    },
-    TestimonialDesignationLetterSpacingTablet: {
-        type: "number",
-        default: ''
-    },
-    TestimonialDesignationLetterSpacingMobile: {
-        type: "number",
-        default: ''
-    },
-    TestimonialDesignationLetterSpacingUnits : {
-        type: "string",
-        default: "px"
-    },
-    TestimonialDesignationLineHeightDesktop: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialDesignationLineHeightTablet: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialDesignationLineHeightMobile: {
-        type: "number",
-        default: "inherit",
-    },
-    TestimonialDesignationLineHeightUnits : {
-        type: "string",
-        default: "px"
-    },
-
-    TestimonialDesignationColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    TestimonialDesignationColor : {
-        type: "string",
-        default: "#777"
+        default: ""
     },
     TestimonialDesignationHoverColor: {
         type: 'string',
-        default: "#777"
+        default: ""
     },
 
 
-    TestimonialRatingIconSizeDesktop: {
-        type: "number",
-        default: 20
-    },
-    TestimonialRatingIconSizeTablet: {
-        type: "number",
-        default: 20
-    },
-    TestimonialRatingIconSizeMobile: {
-        type: "number",
-        default: 20
+    TestimonialRatingIconSize: {
+        type: 'object',
+        default: {
+            Desktop: 20,
+            Tablet: 20,
+            Mobile: 20
+        }
     },
     TestimonialRatingIconSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
-
-    TestimonialRatingIconColorSwitcher : {
+    TestimonialRatingIconColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    TestimonialRatingIconColor : {
+    TestimonialRatingIconColor: {
         type: "string",
         default: "#FFB400"
     },
@@ -419,191 +535,217 @@ const attributes = {
         default: "#FFB400"
     },
 
-    TestimonialZIndex : {
+
+	/** Start Global Setting */
+	TestimonialGlobalZIndex : {
         type: "number",
     },
-    TestimonialPaddingUnits : {
-        type: "string",
-        default: "px"
-    },
-    TestimonialDesktopPadding: {
-        type: "object", 
-        default: {
-            top: 30,
-            bottom: 30,
-            left: 30,
-            right: 30,
-        },
-    },
-    TestimonialTabPadding: {
-        type: "object", 
-        default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
-        },
-    },
-    TestimonialMobilePadding: {
-        type: "object", 
-        default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
-        },
-    },
-    TestimonialPaddingLink : {
-        type : "boolean",
-        default: true
-    },
-    TestimonialMarginUnits : {
-        type: "string",
-        default: "px"
-    },
-    TestimonialDesktopMargin: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    TestimonialTabMargin: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    TestimonialMobileMargin: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    TestimonialMarginLink : {
-        type : "boolean",
-        default: true
-    },
+	/** Start Padding */
+	TestimonialGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	TestimonialGlobalPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
+		},
+	},
+	TestimonialGlobalPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
+		},
+	},
+	TestimonialGlobalPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
+		},
+	},
+	TestimonialGlobalPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
 
-    TestimonialBgColorSwitcher : {
-        type: "string",
-        default: "normal"
+	/** Start Margin */
+	TestimonialGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	TestimonialGlobalMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialGlobalMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialGlobalMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialGlobalMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
+
+	/** Start Background */
+	TestimonialGlobalBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	TestimonialGlobalBgColor : {
+		type: "string",
+	},
+	TestimonialGlobalBgHoverColor: {
+		type: 'string',
+	},
+	/** End Background */
+
+	/** Start Border */
+	TestimonialGlobalBorder: {
+		type: 'string',
+		default: "none",
+	},
+	TestimonialGlobalBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	TestimonialGlobalBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	TestimonialGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	TestimonialGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	TestimonialGlobalBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialGlobalBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialGlobalBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialGlobalBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	TestimonialGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	TestimonialGlobalBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	TestimonialGlobalBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	TestimonialGlobalBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	TestimonialGlobalBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	TestimonialGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
     },
-    TestimonialBgColor : {
-        type: "string"
-    },
-    TestimonialBgHoverColor: {
+    TestimonialGlobalBoxShadowCssValue: {
         type: 'string',
+        default: '',
     },
-
-
-
-    TestimonialBorder: {
-        type: 'string',
-        default: "none",
-    },
-    TestimonialBorderColor: {
-        type: 'string',
-    },
-    TestimonialBorderHoverColor: {
-        type: 'string',
-    },
-    TestimonialBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-
-    TestimonialBorderUnits : {
-        type: "string",
-        default: "px"
-    },
-    TestimonialDesktopBorderWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    TestimonialTabBorderWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    TestimonialMobileBorderWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    TestimonialBorderLink : {
-        type : "boolean",
-        default: true
-    },
-
-    TestimonialBorderRadiusUnits : {
-        type: "string",
-        default: "px"
-    },
-    TestimonialDesktopBorderRadiusWidth: {
-        type: "object", 
-        default: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-        },
-    },
-    TestimonialTabBorderRadiusWidth: {
-        type: "object", 
-        default: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-        },
-    },
-    TestimonialMobileBorderRadiusWidth: {
-        type: "object", 
-        default: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-        },
-    },
-    TestimonialBorderRadiusLink : {
-        type : "boolean",
-        default: true
-    },
-    TestimonialDesktopSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    TestimonialTabletSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    TestimonialMobileSwitcher: {
-        type: "boolean",
-        default: false,
-    },
+    /** End Global Style */
     
 };
 
