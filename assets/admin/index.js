@@ -140,6 +140,11 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
+}, {
+  id: 'custom_icons',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom icons", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.CustomIcons, null)
 }]);
 // Add pricing tab if not pro
 if (window.frontisBlocksAdmin.isProActive === 'false') {
@@ -500,6 +505,100 @@ var Blocks = function Blocks() {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No blocks found.', 'frontis-blocks')));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Blocks);
+
+/***/ }),
+
+/***/ "./admin/components/CustomIcons.js":
+/*!*****************************************!*\
+  !*** ./admin/components/CustomIcons.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+
+var CustomIcons = function CustomIcons() {
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)({
+      coming_soon_mode: false,
+      maintenance_mode: false,
+      coming_soon_page_id: '',
+      maintenance_page_id: ''
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    options = _useState2[0],
+    setOptions = _useState2[1];
+  var _window$frontisBlocks = window.frontisBlocksAdmin,
+    nonce = _window$frontisBlocks.nonce,
+    ajaxUrl = _window$frontisBlocks.ajaxUrl;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    fetchOptions();
+  }, []);
+  var fetchOptions = function fetchOptions() {
+    var keys = Object.keys(options);
+    jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_upload_custom_icons',
+        security: nonce,
+        keys: keys
+      },
+      success: function success(response) {
+        console.log(response);
+        if (response.success) {
+          // setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
+        } else {
+          // toast.error(__(`Failed to fetch options: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
+          // 	position: "top-right",
+          // 	autoClose: 5000,
+          // 	hideProgressBar: false,
+          // 	closeOnClick: true,
+          // 	pauseOnHover: true,
+          // 	draggable: true,
+          // });
+        }
+      },
+      error: function error(xhr, status, _error) {
+        // toast.error(__(`Failed to fetch options: ${status} - ${error}`, 'frontis-blocks'), {
+        // 	position: "top-right",
+        // 	autoClose: 5000,
+        // 	hideProgressBar: false,
+        // 	closeOnClick: true,
+        // 	pauseOnHover: true,
+        // 	draggable: true,
+        // });
+      }
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Hello world");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomIcons);
 
 /***/ }),
 
@@ -2613,6 +2712,7 @@ var ConfirmationModal = function ConfirmationModal(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Blocks: () => (/* reexport safe */ _Blocks__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   CustomIcons: () => (/* reexport safe */ _CustomIcons__WEBPACK_IMPORTED_MODULE_6__["default"]),
 /* harmony export */   Dashboard: () => (/* reexport safe */ _Dashboard__WEBPACK_IMPORTED_MODULE_0__["default"]),
 /* harmony export */   Integration: () => (/* reexport safe */ _Integration__WEBPACK_IMPORTED_MODULE_2__["default"]),
 /* harmony export */   Pricing: () => (/* reexport safe */ _Pricing__WEBPACK_IMPORTED_MODULE_5__["default"]),
@@ -2625,6 +2725,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Settings */ "./admin/components/Settings.js");
 /* harmony import */ var _TabPanel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TabPanel */ "./admin/components/TabPanel.js");
 /* harmony import */ var _Pricing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Pricing */ "./admin/components/Pricing.js");
+/* harmony import */ var _CustomIcons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CustomIcons */ "./admin/components/CustomIcons.js");
+
 
 
 
