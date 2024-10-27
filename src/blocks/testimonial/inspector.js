@@ -24,13 +24,17 @@ import {
     UNIT_TYPES,
     TEXT_ALIGN,
     ICON_ALIGN,
-    HEADING,
+    Testimonial,
     FONT_FAMILYS,
     BORDER_STYLES,
 } from "./constants/constants";
 
-import FB_ResponsiveControl from '@Components/responsive-control';
 import FBIconPicker from "../../components/icon-picker";
+import FB_Color from '@Components/color';
+import FB_TypographyControl from '@Components/typography-control';
+import FB_Range from '@Components/range';
+import FB_Spacing from '@Components/spacing';
+import FB_BoxShadowControl from '@Components/box-shadow';
 
 import './editor.scss';
 
@@ -39,139 +43,144 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockID,
         deviceType,
         TestimonialAlignment,
+
+        TestimonialImageSwitcher,
+        TestimonialImageUrl,
+        TestimonialImageAlt,
+        TestimonialImageID,
+
+        TitleSwitcher,
+        TestimonialTitle,
+        DescSwitcher,
         TestimonialDesc,
+        AuthorSwitcher,
         TestimonialAuthor,
+        DesignationSwitcher,
         TestimonialDesignation,
+        RatingSwitcher,
         TestimonialRatingNumber,
         TestimonialRatingicon,
         TestimonialRatinIconAlign,
+        QuoteIconSwitcher,
         TestimonialQuoteIcon,
         TestimonialQuoteIconAlign,
 
-        TestimonialImageWidthDesktop,
-        TestimonialImageWidthTablet,
-        TestimonialImageWidthMobile,
+        TestimonialImageWidth,
         TestimonialImageWidthUnits,
 
         TestimonialImageRadiusUnits,
         TestimonialImageDesktopRadiusWidth,
-        TestimonialImagelTabRadiusWidth,
+        TestimonialImageTabRadiusWidth,
         TestimonialImageMobileRadiusWidth,
         TestimonialImageRadiusLink,
 
-        TestimonialQuoteIconSizeDesktop,
-        TestimonialQuoteIconSizeTablet,
-        TestimonialQuoteIconSizeMobile,
+        TestimonialQuoteIconSize,
         TestimonialQuoteIconSizeUnits,
         TestimonialQuoteIconColorSwitcher,
         TestimonialQuoteIconColor,
         TestimonialQuoteIconHoverColor,
 
+        TestimonialTitleFontFamily,
+        TestimonialTitleFontSize,
+        TestimonialTitleFontSizeUnits,
+        TestimonialTitleFontWeight,
+        TestimonialTitleFontStyle,
+        TestimonialTitleTextTransform,
+        TestimonialTitleTextDecoration,
+        TestimonialTitleLetterSpacing,
+        TestimonialTitleLetterSpacingUnits,
+        TestimonialTitleLineHeight,
+        TestimonialTitleLineHeightUnits,
+        TestimonialTitleColorSwitcher,
+        TestimonialTitleColor,
+        TestimonialTitleHoverColor,
+
         TestimonialDescFontFamily,
-        TestimonialDescFontSizeDesktop,
-        TestimonialDescFontSizeTablet,
-        TestimonialDescFontSizeMobile,
+        TestimonialDescFontSize,
         TestimonialDescFontSizeUnits,
         TestimonialDescFontWeight,
         TestimonialDescFontStyle,
         TestimonialDescTextTransform,
         TestimonialDescTextDecoration,
-        TestimonialDescLetterSpacingDesktop,
-        TestimonialDescLetterSpacingTablet,
-        TestimonialDescLetterSpacingMobile,
+        TestimonialDescLetterSpacing,
         TestimonialDescLetterSpacingUnits,
-        TestimonialDescLineHeightDesktop,
-        TestimonialDescLineHeightTablet,
-        TestimonialDescLineHeightMobile,
+        TestimonialDescLineHeight,
         TestimonialDescLineHeightUnits,
         TestimonialDescColorSwitcher,
         TestimonialDescColor,
         TestimonialDescHoverColor,
 
         TestimonialAuthorFontFamily,
-        TestimonialAuthorFontSizeDesktop,
-        TestimonialAuthorFontSizeTablet,
-        TestimonialAuthorFontSizeMobile,
+        TestimonialAuthorFontSize,
         TestimonialAuthorFontSizeUnits,
         TestimonialAuthorFontWeight,
         TestimonialAuthorFontStyle,
         TestimonialAuthorTextTransform,
         TestimonialAuthorTextDecoration,
-        TestimonialAuthorLetterSpacingDesktop,
-        TestimonialAuthorLetterSpacingTablet,
-        TestimonialAuthorLetterSpacingMobile,
+        TestimonialAuthorLetterSpacing,
         TestimonialAuthorLetterSpacingUnits,
-        TestimonialAuthorLineHeightDesktop,
-        TestimonialAuthorLineHeightTablet,
-        TestimonialAuthorLineHeightMobile,
+        TestimonialAuthorLineHeight,
         TestimonialAuthorLineHeightUnits,
         TestimonialAuthorColorSwitcher,
         TestimonialAuthorColor,
         TestimonialAuthorHoverColor,
 
         TestimonialDesignationFontFamily,
-        TestimonialDesignationFontSizeDesktop,
-        TestimonialDesignationFontSizeTablet,
-        TestimonialDesignationFontSizeMobile,
+        TestimonialDesignationFontSize,
         TestimonialDesignationFontSizeUnits,
         TestimonialDesignationFontWeight,
         TestimonialDesignationFontStyle,
         TestimonialDesignationTextTransform,
         TestimonialDesignationTextDecoration,
-        TestimonialDesignationLetterSpacingDesktop,
-        TestimonialDesignationLetterSpacingTablet,
-        TestimonialDesignationLetterSpacingMobile,
+        TestimonialDesignationLetterSpacing,
         TestimonialDesignationLetterSpacingUnits,
-        TestimonialDesignationLineHeightDesktop,
-        TestimonialDesignationLineHeightTablet,
-        TestimonialDesignationLineHeightMobile,
+        TestimonialDesignationLineHeight,
         TestimonialDesignationLineHeightUnits,
         TestimonialDesignationColorSwitcher,
         TestimonialDesignationColor,
         TestimonialDesignationHoverColor,
 
-        TestimonialRatingIconSizeDesktop,
-        TestimonialRatingIconSizeTablet,
-        TestimonialRatingIconSizeMobile,
+        TestimonialRatingIconSize,
         TestimonialRatingIconSizeUnits,
         TestimonialRatingIconColorSwitcher,
         TestimonialRatingIconColor,
         TestimonialRatingIconHoverColor,
 
-        TestimonialZIndex,
-        TestimonialPaddingUnits,
-        TestimonialDesktopPadding,
-        TestimonialTabPadding,
-        TestimonialMobilePadding,
-        TestimonialPaddingLink,
-        TestimonialMarginUnits,
-        TestimonialDesktopMargin,
-        TestimonialTabMargin,
-        TestimonialMobileMargin,
-        TestimonialMarginLink,
+        TestimonialGlobalZIndex,
+        TestimonialGlobalPaddingUnits,
+        TestimonialGlobalPaddingDesktop,
+        TestimonialGlobalPaddingTablet,
+        TestimonialGlobalPaddingMobile,
+        TestimonialGlobalPaddingLink,
+        TestimonialGlobalMarginUnits,
+        TestimonialGlobalMarginDesktop,
+        TestimonialGlobalMarginTablet,
+        TestimonialGlobalMarginMobile,
+        TestimonialGlobalMarginLink,
 
-        TestimonialBgColorSwitcher,
-        TestimonialBgColor,
-        TestimonialBgHoverColor,
+        TestimonialGlobalBgColorSwitcher,
+        TestimonialGlobalBgColor,
+        TestimonialGlobalBgHoverColor,
 
-        TestimonialBorder,
-        TestimonialBorderColor,
-        TestimonialBorderHoverColor,
-        TestimonialBorderColorSwitcher,
-        TestimonialBorderUnits,
-        TestimonialDesktopBorderWidth,
-        TestimonialTabBorderWidth,
-        TestimonialMobileBorderWidth,
-        TestimonialBorderLink,
-        TestimonialBorderRadiusUnits,
-        TestimonialDesktopBorderRadiusWidth,
-        TestimonialTabBorderRadiusWidth,
-        TestimonialMobileBorderRadiusWidth,
-        TestimonialBorderRadiusLink,
+        TestimonialGlobalBorder,
+        TestimonialGlobalBorderColor,
+        TestimonialGlobalBorderHoverColor,
+        TestimonialGlobalBorderColorSwitcher,
 
-        TestimonialDesktopSwitcher,
-        TestimonialTabletSwitcher,
-        TestimonialMobileSwitcher,
+        TestimonialGlobalBorderUnits,
+        TestimonialGlobalBorderDesktop,
+        TestimonialGlobalBorderTablet,
+        TestimonialGlobalBorderMobile,
+        TestimonialGlobalBorderLink,
+
+        TestimonialGlobalBorderRadiusUnits,
+        TestimonialGlobalBorderRadiusDesktop,
+        TestimonialGlobalBorderRadiusTablet,
+        TestimonialGlobalBorderRadiusMobile,
+        TestimonialGlobalBorderRadiusLink,
+
+        TestimonialGlobalBoxShadowValues,
+        TestimonialGlobalBoxShadowCssValue,
 
     } = attributes;
 
@@ -192,504 +201,494 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	}
 
-    /** Start Image Border Radius Width */
-    const [previousImageBorderRadiusWidth, setPreviousImageBorderRadiusWidth] = useState(TestimonialImageDesktopRadiusWidth);
-    /** Function to update all Border Width values */
-    const updateAllImageBorderRadiusWidth = (value, device) => {
-        switch(device) {
-            case 'Desktop':
-                setAttributes({
-                    TestimonialImageDesktopRadiusWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    TestimonialImagelTabRadiusWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    TestimonialImageMobileRadiusWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    };
 
-    /** Function to handle input change */
-    const handleImageBorderRadiusWidthInputChange = (e, direction) => {
-        const value = e.target.value;
-        switch(deviceType) {
-            case 'Desktop':
-                setAttributes({ TestimonialImageDesktopRadiusWidth: { ...TestimonialImageDesktopRadiusWidth, [direction]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ TestimonialImagelTabRadiusWidth: { ...TestimonialImagelTabRadiusWidth, [direction]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ TestimonialImageMobileRadiusWidth: { ...TestimonialImageMobileRadiusWidth, [direction]: value } });
-                break;
-            default:
-                break;
+    let defaultImageUrl = '';
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
+    }
+    
+    // Set default value for TestimonialImageUrl
+    useEffect(() => {
+        if (!TestimonialImageUrl) {
+            setAttributes({ TestimonialImageUrl: defaultImageUrl });
         }
-        /** Update all padding values if TestimonialImageRadiusLink is true */
+    }, []);
+
+    /** Start Testimonial Image Border Radius */
+    const testimonialImageBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
         if (TestimonialImageRadiusLink) {
-            updateAllImageBorderRadiusWidth(value, deviceType);
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialImageDesktopRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialImageTabRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialImageMobileRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialImageDesktopRadiusWidth: { ...TestimonialImageDesktopRadiusWidth, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialImageTabRadiusWidth: { ...TestimonialImageTabRadiusWidth, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialImageMobileRadiusWidth: { ...TestimonialImageMobileRadiusWidth, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
         }
     };
 
-    /** Function to handle TestimonialImageRadiusLink toggle */
-    const handleImageBorderRadiusWidthLinkToggle = () => {
-        if (!TestimonialImageRadiusLink) {
-            setAttributes({ TestimonialImageDesktopRadiusWidth: previousImageBorderRadiusWidth });
-        }
-        /** setTestimonialImageRadiusLinkLink(!TestimonialImageRadiusLink) */
-        setAttributes({TestimonialImageRadiusLink: !TestimonialImageRadiusLink})
+    const testimonialImageBorderRadiusLinkBtn = () => {
+        setAttributes({
+            TestimonialImageRadiusLink: !TestimonialImageRadiusLink
+        });
     };
 
-    /** Update previousImageBorderRadiusWidth state when Border Width changes */
-    useEffect(() => {
-        setPreviousImageBorderRadiusWidth(TestimonialImageDesktopRadiusWidth);
-    }, [TestimonialImageDesktopRadiusWidth]);
-
-    /** Function to handle device click for Border Width */
-    const handleBorderRadiusWidthDeviceClick = (device) => {
-        setAttributes({ deviceType: device });
+    const testimonialImageBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialImageRadiusUnits: {
+                ...TestimonialImageRadiusUnits,
+                [deviceType]: unit
+            }
+        });
     };
 
-    /** Default Border Width for desktop (using HeadingDesktopBorderWidth) */
-    const ImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImageDesktopRadiusWidth.left}${TestimonialImageRadiusUnits}`;
-    const ImageTabBorderRadiusWidth     = `${TestimonialImagelTabRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImagelTabRadiusWidth.left}${TestimonialImageRadiusUnits}`;
-    const ImageMobileBorderRadiusWidth  = `${TestimonialImageMobileRadiusWidth.top}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.right}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.bottom}${TestimonialImageRadiusUnits} ${TestimonialImageMobileRadiusWidth.left}${TestimonialImageRadiusUnits}`;
-    /** End Border Radius Width */ 
-
-    /** Start Padding */
-    const [previousPadding, setPreviousPadding] = useState(TestimonialDesktopPadding);
-    /** Function to update all padding values */
-    const updateAllPadding = (value, device) => {
-        switch(device) {
-            case 'Desktop':
-                setAttributes({
-                    TestimonialDesktopPadding: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    TestimonialTabPadding: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    TestimonialMobilePadding: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    };
-
-    /** Function to handle input change */
-    const handlePaddingInputChange = (e, direction) => {
-        const value = e.target.value;
-        switch(deviceType) {
-            case 'Desktop':
-                setAttributes({ TestimonialDesktopPadding: { ...TestimonialDesktopPadding, [direction]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ TestimonialTabPadding: { ...TestimonialTabPadding, [direction]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ TestimonialMobilePadding: { ...TestimonialMobilePadding, [direction]: value } });
-                break;
-            default:
-                break;
-        }
-        /** Update all padding values if TestimonialPaddingLink is true */
-        if (TestimonialPaddingLink) {
-            updateAllPadding(value, deviceType);
-        }
-    };
-
-    /** Function to handle TestimonialPaddingLink toggle */
-    const handleTestimonialPaddingLinkToggle = () => {
-        if (!TestimonialPaddingLink) {
-            setAttributes({ TestimonialDesktopPadding: previousPadding });
-        }
-        /** setTestimonialPaddingLink(!TestimonialPaddingLink) */
-        setAttributes({TestimonialPaddingLink: !TestimonialPaddingLink})
-    };
-
-    /** Update previousPadding state when padding changes */
-    useEffect(() => {
-        setPreviousPadding(TestimonialDesktopPadding);
-    }, [TestimonialDesktopPadding]);
-
-    /** Default padding for desktop (using desktop_padding) */
-    const DesktopPadding = `${TestimonialDesktopPadding.top}${TestimonialPaddingUnits} ${TestimonialDesktopPadding.right}${TestimonialPaddingUnits} ${TestimonialDesktopPadding.bottom}${TestimonialPaddingUnits} ${TestimonialDesktopPadding.left}${TestimonialPaddingUnits}`;
-    const TabPadding = `${TestimonialTabPadding.top}${TestimonialPaddingUnits} ${TestimonialTabPadding.right}${TestimonialPaddingUnits} ${TestimonialTabPadding.bottom}${TestimonialPaddingUnits} ${TestimonialTabPadding.left}${TestimonialPaddingUnits}`;
-    const MobilePadding = `${TestimonialMobilePadding.top}${TestimonialPaddingUnits} ${TestimonialMobilePadding.right}${TestimonialPaddingUnits} ${TestimonialMobilePadding.bottom}${TestimonialPaddingUnits} ${TestimonialMobilePadding.left}${TestimonialPaddingUnits}`;
-    /** End Padding */
-
-    /** Start Margin */
-    const [previousMargin, setPreviousMargin] = useState(TestimonialDesktopMargin);
-    /** Function to update all margin values */
-    const updateAllMargin = (value, device) => {
-        switch(device) {
-            case 'Desktop':
-                setAttributes({
-                    TestimonialDesktopMargin: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    TestimonialTabMargin: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    TestimonialMobileMargin: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    };
-
-    /** Function to handle input change */
-    const handleMarginInputChange = (e, direction) => {
-        const value = e.target.value;
-        switch(deviceType) {
-            case 'Desktop':
-                setAttributes({ TestimonialDesktopMargin: { ...TestimonialDesktopMargin, [direction]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ TestimonialTabMargin: { ...TestimonialTabMargin, [direction]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ TestimonialMobileMargin: { ...TestimonialMobileMargin, [direction]: value } });
-                break;
-            default:
-                break;
-        }
-        /** Update all margin values if marginLink is true */
-        if (TestimonialMarginLink) {
-            updateAllMargin(value, deviceType);
-        }
-    };
-
-    /** Function to handle marginLink toggle */
-    const handleMarginLinkToggle = () => {
-        if (!TestimonialMarginLink) {
-            setAttributes({ TestimonialDesktopMargin: previousMargin });
-        }
-        /** setmarginLink(!marginLink) */
-        setAttributes({TestimonialMarginLink: !TestimonialMarginLink})
-    };
-
-    /** Update previousMargin state when margin changes */
-    useEffect(() => {
-        setPreviousMargin(TestimonialDesktopMargin);
-    }, [TestimonialDesktopMargin]);
-
-    /** Default margin for desktop (using desktop_margin) */
-    const DesktopMargin  = `${TestimonialDesktopMargin.top}${TestimonialMarginUnits} ${TestimonialDesktopMargin.right}${TestimonialMarginUnits} ${TestimonialDesktopMargin.bottom}${TestimonialMarginUnits} ${TestimonialDesktopMargin.left}${TestimonialMarginUnits}`;
-    const TabMargin      = `${TestimonialTabMargin.top}${TestimonialMarginUnits} ${TestimonialTabMargin.right}${TestimonialMarginUnits} ${TestimonialTabMargin.bottom}${TestimonialMarginUnits} ${TestimonialTabMargin.left}${TestimonialMarginUnits}`;
-    const MobileMargin   = `${TestimonialMobileMargin.top}${TestimonialMarginUnits} ${TestimonialMobileMargin.right}${TestimonialMarginUnits} ${TestimonialMobileMargin.bottom}${TestimonialMarginUnits} ${TestimonialMobileMargin.left}${TestimonialMarginUnits}`;
-    /** End Margin */
+    /** Default border radius for Testimonial Image */
+    const testimonialImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth.top}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.right}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.bottom}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.left}${TestimonialImageRadiusUnits.Desktop}`;
+    const testimonialImageTabletBorderRadiusWidth = `${TestimonialImageTabRadiusWidth.top}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.right}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.bottom}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.left}${TestimonialImageRadiusUnits.Tablet}`;
+    const testimonialImageMobileBorderRadiusWidth = `${TestimonialImageMobileRadiusWidth.top}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.right}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.bottom}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.left}${TestimonialImageRadiusUnits.Mobile}`;
+    /** End Testimonial Image Border Radius */
+    
 
 
-    /** Start Border Width */
-    const [previousBorderWidth, setPreviousBorderWidth] = useState(TestimonialDesktopBorderWidth);
-    /** Function to update all Border Width values */
-    const updateAllBorderWidth = (value, device) => {
-        switch(device) {
-            case 'Desktop':
-                setAttributes({
-                    TestimonialDesktopBorderWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    TestimonialTabBorderWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    TestimonialMobileBorderWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    };
 
-    /** Function to handle input change */
-    const handleBorderWidthInputChange = (e, direction) => {
-        const value = e.target.value;
-        switch(deviceType) {
-            case 'Desktop':
-                setAttributes({ TestimonialDesktopBorderWidth: { ...TestimonialDesktopBorderWidth, [direction]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ TestimonialTabBorderWidth: { ...TestimonialTabBorderWidth, [direction]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ TestimonialMobileBorderWidth: { ...TestimonialMobileBorderWidth, [direction]: value } });
-                break;
-            default:
-                break;
-        }
-        /** Update all padding values if TestimonialBorderLink is true */
-        if (TestimonialBorderLink) {
-            updateAllBorderWidth(value, deviceType);
-        }
-    };
 
-    /** Function to handle TestimonialBorderLink toggle */
-    const handleBorderWidthLinkToggle = () => {
-        if (!TestimonialBorderLink) {
-            setAttributes({ TestimonialDesktopBorderWidth: previousBorderWidth });
-        }
-        /** setTestimonialBorderLinkLink(!TestimonialBorderLink) */
-        setAttributes({TestimonialBorderLink: !TestimonialBorderLink})
-    };
+    	/** Start Global padding */
+	const handleGlobalPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( TestimonialGlobalPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						TestimonialGlobalPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						TestimonialGlobalPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						TestimonialGlobalPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {TestimonialGlobalPaddingDesktop: {...TestimonialGlobalPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {TestimonialGlobalPaddingTablet: {...TestimonialGlobalPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {TestimonialGlobalPaddingMobile: {...TestimonialGlobalPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
-    /** Update previousborderWidth state when Border Width changes */
-    useEffect(() => {
-        setPreviousBorderWidth(TestimonialDesktopBorderWidth);
-    }, [TestimonialDesktopBorderWidth]);
+	}
 
-    /** Default Border Width for desktop (using TestimonialDesktopBorderWidth) */
-    const DesktopBorderWidth = `${TestimonialDesktopBorderWidth.top}${TestimonialBorderUnits} ${TestimonialDesktopBorderWidth.right}${TestimonialBorderUnits} ${TestimonialDesktopBorderWidth.bottom}${TestimonialBorderUnits} ${TestimonialDesktopBorderWidth.left}${TestimonialBorderUnits}`;
-    const TabBorderWidth     = `${TestimonialTabBorderWidth.top}${TestimonialBorderUnits} ${TestimonialTabBorderWidth.right}${TestimonialBorderUnits} ${TestimonialTabBorderWidth.bottom}${TestimonialBorderUnits} ${TestimonialTabBorderWidth.left}${TestimonialBorderUnits}`;
-    const MobileBorderWidth  = `${TestimonialMobileBorderWidth.top}${TestimonialBorderUnits} ${TestimonialMobileBorderWidth.right}${TestimonialBorderUnits} ${TestimonialMobileBorderWidth.bottom}${TestimonialBorderUnits} ${TestimonialMobileBorderWidth.left}${TestimonialBorderUnits}`;
-    /** End Border Width */
+	const handleGlobalPaddingCombineBtn = () => {
+		setAttributes( {TestimonialGlobalPaddingLink: !TestimonialGlobalPaddingLink} );
+	}
 
-    /** Start Border Radius Width */
-    const [previousBorderRadiusWidth, setPreviousBorderRadiusWidth] = useState(TestimonialDesktopBorderRadiusWidth);
-    /** Function to update all Border Width values */
-    const updateAllBorderRadiusWidth = (value, device) => {
-        switch(device) {
-            case 'Desktop':
-                setAttributes({
-                    TestimonialDesktopBorderRadiusWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    TestimonialTabBorderRadiusWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    TestimonialMobileBorderRadiusWidth: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    };
+	const handleGlobalPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			TestimonialGlobalPaddingUnits: {
+				...TestimonialGlobalPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const globalDesktopPadding    = `${TestimonialGlobalPaddingDesktop.top}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.right}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.bottom}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.left}${TestimonialGlobalPaddingUnits.Desktop}`;
+	const globalTabletPadding     = `${TestimonialGlobalPaddingTablet.top}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.right}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.bottom}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.left}${TestimonialGlobalPaddingUnits.Tablet}`;
+	const globalMobilePadding     = `${TestimonialGlobalPaddingMobile.top}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.right}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.bottom}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.left}${TestimonialGlobalPaddingUnits.Mobile}`;
+	/** End Global Padding */
+	
+	/** Start Global Margin */
+	const handleGlobalMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( TestimonialGlobalMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						TestimonialGlobalMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						TestimonialGlobalMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						TestimonialGlobalMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {TestimonialGlobalMarginDesktop: {...TestimonialGlobalMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {TestimonialGlobalMarginTablet: {...TestimonialGlobalMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {TestimonialGlobalMarginMobile: {...TestimonialGlobalMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
-    /** Function to handle input change */
-    const handleBorderRadiusWidthInputChange = (e, direction) => {
-        const value = e.target.value;
-        switch(deviceType) {
-            case 'Desktop':
-                setAttributes({ TestimonialDesktopBorderRadiusWidth: { ...TestimonialDesktopBorderRadiusWidth, [direction]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ TestimonialTabBorderRadiusWidth: { ...TestimonialTabBorderRadiusWidth, [direction]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ TestimonialMobileBorderRadiusWidth: { ...TestimonialMobileBorderRadiusWidth, [direction]: value } });
-                break;
-            default:
-                break;
-        }
-        /** Update all padding values if TestimonialBorderRadiusLink is true */
-        if (TestimonialBorderRadiusLink) {
-            updateAllBorderRadiusWidth(value, deviceType);
-        }
-    };
+	}
 
-    /** Function to handle TestimonialBorderRadiusLink toggle */
-    const handleBorderRadiusWidthLinkToggle = () => {
-        if (!TestimonialBorderRadiusLink) {
-            setAttributes({ TestimonialDesktopBorderRadiusWidth: previousBorderRadiusWidth });
-        }
-        /** setTestimonialBorderRadiusLinkLink(!TestimonialBorderRadiusLink) */
-        setAttributes({TestimonialBorderRadiusLink: !TestimonialBorderRadiusLink})
-    };
+	const handleGlobalMarginCombineBtn = () => {
+		setAttributes( {TestimonialGlobalMarginLink: !TestimonialGlobalMarginLink} );
+	}
 
-    /** Update previousBorderRadiusWidth state when Border Width changes */
-    useEffect(() => {
-        setPreviousBorderRadiusWidth(TestimonialDesktopBorderRadiusWidth);
-    }, [TestimonialDesktopBorderRadiusWidth]);
+	const handleGlobalMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			TestimonialGlobalMarginUnits: {
+				...TestimonialGlobalMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
 
-    /** Default Border Width for desktop (using TestimonialDesktopBorderWidth) */
-    const DesktopBorderRadiusWidth = `${TestimonialDesktopBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialDesktopBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
-    const TabBorderRadiusWidth = `${TestimonialTabBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialTabBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
-    const MobileBorderRadiusWidth = `${TestimonialMobileBorderRadiusWidth.top}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.right}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.bottom}${TestimonialBorderRadiusUnits} ${TestimonialMobileBorderRadiusWidth.left}${TestimonialBorderRadiusUnits}`;
-    /** End Border Radius Width */     
+	const globalDesktopMargin = `${TestimonialGlobalMarginDesktop.top}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.right}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.bottom}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.left}${TestimonialGlobalMarginUnits.Desktop}`;
+	const globalTabletMargin = `${TestimonialGlobalMarginTablet.top}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.right}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.bottom}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.left}${TestimonialGlobalMarginUnits.Tablet}`;
+	const globalMobileMargin = `${TestimonialGlobalMarginMobile.top}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.right}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.bottom}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.left}${TestimonialGlobalMarginUnits.Mobile}`;
+	/** End Global Margin */
+
+	/** Start Global border */
+	const handleGlobalBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( TestimonialGlobalBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						TestimonialGlobalBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						TestimonialGlobalBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						TestimonialGlobalBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {TestimonialGlobalBorderDesktop: {...TestimonialGlobalBorderDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {TestimonialGlobalBorderTablet: {...TestimonialGlobalBorderTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {TestimonialGlobalBorderMobile: {...TestimonialGlobalBorderMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleGlobalBorderCombineBtn = () => {
+		setAttributes( {TestimonialGlobalBorderLink: !TestimonialGlobalBorderLink} );
+	}
+
+	const handleGlobalBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			TestimonialGlobalBorderUnits: {
+				...TestimonialGlobalBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const globalDesktopBorderWidth = `${TestimonialGlobalBorderDesktop.top}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.right}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.bottom}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.left}${TestimonialGlobalBorderUnits.Desktop}`;
+	const globalTabletBorderWidth = `${TestimonialGlobalBorderTablet.top}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.right}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.bottom}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.left}${TestimonialGlobalBorderUnits.Tablet}`;
+	const globalMobileBorderWidth = `${TestimonialGlobalBorderMobile.top}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.right}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.bottom}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.left}${TestimonialGlobalBorderUnits.Mobile}`;
+	/** End Border */
+
+
+	/** Start Global border radius*/
+	const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( TestimonialGlobalBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						TestimonialGlobalBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						TestimonialGlobalBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						TestimonialGlobalBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {TestimonialGlobalBorderRadiusDesktop: {...TestimonialGlobalBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {TestimonialGlobalBorderRadiusTablet: {...TestimonialGlobalBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {TestimonialGlobalBorderRadiusMobile: {...TestimonialGlobalBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleGlobalBorderRadiusCombineBtn = () => {
+		setAttributes( {TestimonialGlobalBorderRadiusLink: !TestimonialGlobalBorderRadiusLink} );
+	}
+
+	const handleGlobalBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			TestimonialGlobalBorderRadiusUnits: {
+				...TestimonialGlobalBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Global border */
+
+	/** End Global Border Radius */
+	const globalDesktopBorderRadiusWidth = `${TestimonialGlobalBorderRadiusDesktop.top}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.right}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.bottom}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.left}${TestimonialGlobalBorderRadiusUnits.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet.top}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.right}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.bottom}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.left}${TestimonialGlobalBorderRadiusUnits.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile.top}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.right}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.bottom}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.left}${TestimonialGlobalBorderRadiusUnits.Mobile}`;
+	/** End Border Radius */
 
     return (
         <>
             <style>
                 {`
                     .fb-testimonial-main-wrapper.${blockID} {
-                        z-index: ${TestimonialZIndex !== undefined ? TestimonialZIndex : ''} !important;
+                        z-index: ${TestimonialGlobalZIndex !== undefined ? TestimonialGlobalZIndex : ''} !important; 
                     }
                     .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
-                        ${TestimonialBgColor !== undefined ? `background-color: ${TestimonialBgColor};` : ''};
-                        padding: ${DesktopPadding};
-                        margin: ${DesktopMargin};
-                        border: ${TestimonialBorder};
-                        border-width: ${DesktopBorderWidth};
-                        border-radius: ${DesktopBorderRadiusWidth} !important;
-                        ${TestimonialBorderColor !== undefined ? `border-color: ${TestimonialBorderColor};` : ''};
+                        ${TestimonialGlobalBgColor ? `background-color: ${TestimonialGlobalBgColor};` : ''} 
+                        ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+                        ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
+                        ${TestimonialGlobalBorder ? `border: ${TestimonialGlobalBorder};` : ''} 
+                        ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+                        ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+                        ${TestimonialGlobalBorderColor ? `border-color: ${TestimonialGlobalBorderColor};` : ''}
+                        ${TestimonialGlobalBoxShadowCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowCssValue};` : ''}
                         transition: all .3s ease-in-out;
+                        position: relative;
                     }
                     .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section:hover {
-                        ${TestimonialBgHoverColor !== undefined ? `background-color: ${TestimonialBgHoverColor};` : ''};
-                        ${TestimonialBorderHoverColor !== undefined ? `border-color: ${TestimonialBorderHoverColor};` : ''};
+                        ${TestimonialGlobalBgHoverColor ? `background-color: ${TestimonialGlobalBgHoverColor};` : ''} 
+                        ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
                     }
                     .${blockID} .fb-testimonial-image img {
-                        width: ${TestimonialImageWidthDesktop}${TestimonialImageWidthUnits};
-                        height: ${TestimonialImageWidthDesktop}${TestimonialImageWidthUnits};
-                        border-radius: ${ImageDesktopBorderRadiusWidth};
+                        ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
+                        ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
+                        border-radius: ${testimonialImageDesktopBorderRadiusWidth};
                     }
                     .${blockID} .fb-testimonial-quote-icon svg {
-                        width: ${TestimonialQuoteIconSizeDesktop}${TestimonialQuoteIconSizeUnits};
-                        height: ${TestimonialQuoteIconSizeDesktop}${TestimonialQuoteIconSizeUnits};
+                        ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
+                        ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `height: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
                         fill: ${TestimonialQuoteIconColor};
                     }
                     .fb-testimonial-quote-icon:hover svg {
                         fill: ${TestimonialQuoteIconHoverColor};
                     }
+                    .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+                        ${TestimonialTitleFontFamily ? `font-family: ${TestimonialTitleFontFamily};` : ''}
+                        ${TestimonialTitleFontSize.Desktop && TestimonialTitleFontSizeUnits.Desktop ? `font-size: ${TestimonialTitleFontSize.Desktop}${TestimonialTitleFontSizeUnits.Desktop};` : ''}
+                        ${TestimonialTitleFontWeight ? `font-weight: ${TestimonialTitleFontWeight};` : ''}
+                        ${TestimonialTitleFontStyle ? `font-style: ${TestimonialTitleFontStyle};` : ''}
+                        ${TestimonialTitleTextTransform ? `text-transform: ${TestimonialTitleTextTransform};` : ''}
+                        ${TestimonialTitleTextDecoration ? `text-decoration: ${TestimonialTitleTextDecoration};` : ''}
+                        ${TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
+                        ${TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
+                        ${TestimonialTitleColor ? `color: ${TestimonialTitleColor};` : ''}
+                    }
+                    .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
+                        ${TestimonialTitleHoverColor ? `color: ${TestimonialTitleHoverColor};` : ''}
+                    }
                     .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
-                        font-family: ${TestimonialDescFontFamily};
-                        font-size: ${TestimonialDescFontSizeDesktop}${TestimonialDescFontSizeUnits};
-                        font-weight: ${TestimonialDescFontWeight};
-                        font-style: ${TestimonialDescFontStyle};
-                        text-transform: ${TestimonialDescTextTransform};
-                        text-decoration: ${TestimonialDescTextDecoration};
-                        letter-spacing: ${TestimonialDescLetterSpacingDesktop}${TestimonialDescLetterSpacingUnits};
-                        line-height: ${TestimonialDescLineHeightDesktop}${TestimonialDescLineHeightUnits};
-                        color: ${TestimonialDescColor};
+                        ${TestimonialDescFontFamily ? `font-family: ${TestimonialDescFontFamily};` : ''}
+                        ${TestimonialDescFontSize.Desktop && TestimonialDescFontSizeUnits.Desktop ? `font-size: ${TestimonialDescFontSize.Desktop}${TestimonialDescFontSizeUnits.Desktop};` : ''}
+                        ${TestimonialDescFontWeight ? `font-weight: ${TestimonialDescFontWeight};` : ''}
+                        ${TestimonialDescFontStyle ? `font-style: ${TestimonialDescFontStyle};` : ''}
+                        ${TestimonialDescTextTransform ? `text-transform: ${TestimonialDescTextTransform};` : ''}
+                        ${TestimonialDescTextDecoration ? `text-decoration: ${TestimonialDescTextDecoration};` : ''}
+                        ${TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
+                        ${TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
+                        ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
                     }
                     .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
-                        color: ${TestimonialDescHoverColor};
+                        ${TestimonialDescHoverColor ? `color: ${TestimonialDescHoverColor};` : ''}
                     }
 
                     .${blockID} .fb-testimonial-userinfo-container .fb-user {
                         font-family: ${TestimonialAuthorFontFamily};
-                        font-size: ${TestimonialAuthorFontSizeDesktop}${TestimonialAuthorFontSizeUnits};
+                        font-size: ${TestimonialAuthorFontSize.Desktop}${TestimonialAuthorFontSizeUnits.Desktop};
                         font-weight: ${TestimonialAuthorFontWeight};
                         font-style: ${TestimonialAuthorFontStyle};
                         text-transform: ${TestimonialAuthorTextTransform};
                         text-decoration: ${TestimonialAuthorTextDecoration};
-                        letter-spacing: ${TestimonialAuthorLetterSpacingDesktop}${TestimonialAuthorLetterSpacingUnits};
-                        line-height: ${TestimonialAuthorLineHeightDesktop}${TestimonialAuthorLineHeightUnits};
+                        letter-spacing: ${TestimonialAuthorLetterSpacing.Desktop}${TestimonialAuthorLetterSpacingUnits.Desktop};
+                        line-height: ${TestimonialAuthorLineHeight.Desktop}${TestimonialAuthorLineHeightUnits.Desktop};
                         color: ${TestimonialAuthorColor};
                     }
                     .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
-                        color: ${TestimonialAuthorHoverColor};
+                        ${TestimonialAuthorHoverColor ? `color: ${TestimonialAuthorHoverColor};` : ''}
                     }
 
                     .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                         font-family: ${TestimonialDesignationFontFamily};
-                        font-size: ${TestimonialDesignationFontSizeDesktop}${TestimonialDesignationFontSizeUnits};
+                        font-size: ${TestimonialDesignationFontSize.Desktop}${TestimonialDesignationFontSizeUnits.Desktop};
                         font-weight: ${TestimonialDesignationFontWeight};
                         font-style: ${TestimonialDesignationFontStyle};
                         text-transform: ${TestimonialDesignationTextTransform};
                         text-decoration: ${TestimonialDesignationTextDecoration};
-                        letter-spacing: ${TestimonialDesignationLetterSpacingDesktop}${TestimonialDesignationLetterSpacingUnits};
-                        line-height: ${TestimonialDesignationLineHeightDesktop}${TestimonialDesignationLineHeightUnits};
+                        letter-spacing: ${TestimonialDesignationLetterSpacing.Desktop}${TestimonialDesignationLetterSpacingUnits.Desktop};
+                        line-height: ${TestimonialDesignationLineHeight.Desktop}${TestimonialDesignationLineHeightUnits.Desktop};
                         color: ${TestimonialDesignationColor};
                     }
                     .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
-                        color: ${TestimonialDesignationHoverColor};
+                        ${TestimonialDesignationHoverColor ? `color: ${TestimonialDesignationHoverColor};` : ''}
                     }
 
                     .${blockID} .fb-testimonial-rating-icon svg {
-                        width: ${TestimonialRatingIconSizeDesktop}${TestimonialRatingIconSizeUnits};
-                        height: ${TestimonialRatingIconSizeDesktop}${TestimonialRatingIconSizeUnits};
+                        width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
+                        height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
                         fill: ${TestimonialRatingIconColor};
                     }
                     .${blockID} .fb-testimonial-rating-icon:hover svg {
@@ -698,75 +697,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     @media only screen and (max-width: 1024px) {
                         .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
-                            padding: ${TabPadding};
-                            margin: ${TabMargin};
-                            border-width: ${TabBorderWidth};
-                            border-radius: ${TabBorderRadiusWidth} !important;
+                            ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+                            ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+                            ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+                            ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
                         }
                         .${blockID} .fb-testimonial-image img {
-                            width: ${TestimonialImageWidthTablet}${TestimonialImageWidthUnits};
-                            height: ${TestimonialImageWidthTablet}${TestimonialImageWidthUnits};
-                            border-radius: ${ImageTabBorderRadiusWidth};
+                            ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `width: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
+                            ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `height: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
+                            border-radius: ${testimonialImageTabletBorderRadiusWidth};
                         }
-                        .${blockID} .fb-testimonial-quote-icon svg {
-                            width: ${TestimonialQuoteIconSizeTablet}${TestimonialQuoteIconSizeUnits};
-                            height: ${TestimonialQuoteIconSizeTablet}${TestimonialQuoteIconSizeUnits};
+                        .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+                            ${TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
+                            ${TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
+                            ${TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
                         }
                         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
-                            font-size: ${TestimonialDescFontSizeTablet}${TestimonialDescFontSizeUnits};
-                            letter-spacing: ${TestimonialDescLetterSpacingTablet}${TestimonialDescLetterSpacingUnits};
-                            line-height: ${TestimonialDescLineHeightTablet}${TestimonialDescLineHeightUnits};
+                            ${TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
+                            ${TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
+                            ${TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user {
-                            font-size: ${TestimonialAuthorFontSizeTablet}${TestimonialDescFontSizeUnits};
-                            letter-spacing: ${TestimonialAuthorLetterSpacingTablet}${TestimonialDescLetterSpacingUnits};
-                            line-height: ${TestimonialAuthorLineHeightTablet}${TestimonialDescLineHeightUnits};
+                            font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};
+                            letter-spacing: ${TestimonialAuthorLetterSpacing.Tablet}${TestimonialAuthorLetterSpacingUnits.Tablet};
+                            line-height: ${TestimonialAuthorLineHeight.Tablet}${TestimonialAuthorLineHeightUnits.Tablet};
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
-                            font-size: ${TestimonialDesignationFontSizeTablet}${TestimonialDescFontSizeUnits};
-                            letter-spacing: ${TestimonialDesignationLetterSpacingTablet}${TestimonialDescLetterSpacingUnits};
-                            line-height: ${TestimonialDesignationLineHeightTablet}${TestimonialDescLineHeightUnits};
-                        }
-                        .${blockID} .fb-testimonial-rating-icon svg {
-                            width: ${TestimonialRatingIconSizeTablet}${TestimonialRatingIconSizeUnits};
-                            height: ${TestimonialRatingIconSizeTablet}${TestimonialRatingIconSizeUnits};
+                            font-size: ${TestimonialDesignationFontSize.Tablet}${TestimonialDesignationFontSizeUnits.Tablet};
+                            letter-spacing: ${TestimonialDesignationLetterSpacing.Tablet}${TestimonialDesignationLetterSpacingUnits.Tablet};
+                            line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};
                         }
                     }
-
                     @media only screen and (max-width: 767px) {
-                        .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
-                            padding: ${MobilePadding};
-                            margin: ${MobileMargin};
-                            border-width: ${MobileBorderWidth};
-                            border-radius: ${MobileBorderRadiusWidth} !important;
+                        .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
+                            ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+                            ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+                            ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+                            ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
                         }
                         .${blockID} .fb-testimonial-image img {
-                            width: ${TestimonialImageWidthMobile}${TestimonialImageWidthUnits};
-                            height: ${TestimonialImageWidthMobile}${TestimonialImageWidthUnits};
-                            border-radius: ${ImageMobileBorderRadiusWidth};
+                            ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `width: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
+                            ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `height: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
+                            border-radius: ${testimonialImageMobileBorderRadiusWidth};
                         }
-                        .${blockID} .fb-testimonial-quote-icon svg {
-                            width: ${TestimonialQuoteIconSizeMobile}${TestimonialQuoteIconSizeUnits};
-                            height: ${TestimonialQuoteIconSizeMobile}${TestimonialQuoteIconSizeUnits};
+                        .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+                            ${TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
+                            ${TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
+                            ${TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
                         }
                         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
-                            font-size: ${TestimonialDescFontSizeMobile}${TestimonialDescFontSizeUnits};
-                            letter-spacing: ${TestimonialDescLetterSpacingMobile}${TestimonialDescLetterSpacingUnits};
-                            line-height: ${TestimonialDescLineHeightMobile}${TestimonialDescLineHeightUnits};
+                            ${TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
+                            ${TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
+                            ${TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user {
-                            font-size: ${TestimonialAuthorFontSizeMobile}${TestimonialDescFontSizeUnits};
-                            letter-spacing: ${TestimonialAuthorLetterSpacingMobile}${TestimonialDescLetterSpacingUnits};
-                            line-height: ${TestimonialAuthorLineHeightMobile}${TestimonialDescLineHeightUnits};
+                            font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};
+                            letter-spacing: ${TestimonialAuthorLetterSpacing.Mobile}${TestimonialAuthorLetterSpacingUnits.Mobile};
+                            line-height: ${TestimonialAuthorLineHeight.Mobile}${TestimonialAuthorLineHeightUnits.Mobile};
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
-                            font-size: ${TestimonialDesignationFontSizeMobile}${TestimonialDescFontSizeUnits};
-                            letter-spacing: ${TestimonialDesignationLetterSpacingMobile}${TestimonialDescLetterSpacingUnits};
-                            line-height: ${TestimonialDesignationLineHeightMobile}${TestimonialDescLineHeightUnits};
-                        }
-                        .${blockID} .fb-testimonial-rating-icon svg {
-                            width: ${TestimonialRatingIconSizeMobile}${TestimonialRatingIconSizeUnits};
-                            height: ${TestimonialRatingIconSizeMobile}${TestimonialRatingIconSizeUnits};
+                            font-size: ${TestimonialDesignationFontSize.Mobile}${TestimonialDesignationFontSizeUnits.Mobile};
+                            letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};
+                            line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};
                         }
                     }
                 `}
@@ -802,6 +794,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             title={__("Testimonial Info", "frontis-blocks")}
                                             initialOpen={true}
                                         >
+                                                <BaseControl
+                                                    label={__("Element Visibility", "frontis-blocks")}
+                                                    className="fb-setting-show-hide-elements" 
+                                                >
+                                                    <ToggleControl
+                                                        label={__("Show Image", "frontis-blocks")}
+                                                        checked={TestimonialImageSwitcher}
+                                                        onChange={(value) => setAttributes({ TestimonialImageSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Title", "frontis-blocks")}
+                                                        checked={TitleSwitcher}
+                                                        onChange={(value) => setAttributes({ TitleSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Description", "frontis-blocks")}
+                                                        checked={DescSwitcher}
+                                                        onChange={(value) => setAttributes({ DescSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Author", "frontis-blocks")}
+                                                        checked={AuthorSwitcher}
+                                                        onChange={(value) => setAttributes({ AuthorSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Designation", "frontis-blocks")}
+                                                        checked={DesignationSwitcher}
+                                                        onChange={(value) => setAttributes({ DesignationSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Quote Icon", "frontis-blocks")}
+                                                        checked={QuoteIconSwitcher}
+                                                        onChange={(value) => setAttributes({ QuoteIconSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Rating", "frontis-blocks")}
+                                                        checked={RatingSwitcher}
+                                                        onChange={(value) => setAttributes({ RatingSwitcher: value })}
+                                                    />
+                                                </BaseControl>
 
                                                 <BaseControl
                                                     label={__("Alignment", "frontis-blocks")}
@@ -822,26 +854,118 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         ))}
                                                     </ButtonGroup>
                                                 </BaseControl>
+
+                                                {TitleSwitcher && (
+                                                <TextareaControl
+                                                    label={__("Title", "frontis-blocks")}
+                                                    value={TestimonialTitle}
+                                                    onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                                                    className="fb-testimonial-title"
+                                                />
+                                                )}
+                                                {DescSwitcher && (
                                                 <TextareaControl
                                                     label={__("Description", "frontis-blocks")}
                                                     value={TestimonialDesc}
                                                     onChange={(value) => setAttributes({ TestimonialDesc: value })}
                                                     className="fb-testimonial-desc"
                                                 />
+                                                )}
+                                                {AuthorSwitcher && (
                                                 <TextareaControl
                                                     label={__("Author", "frontis-blocks")}
                                                     value={TestimonialAuthor}
                                                     onChange={(value) => setAttributes({ TestimonialAuthor: value })}
                                                     className="fb-testimonial-author"
                                                 />
+                                                )}
+                                                {DesignationSwitcher && (
                                                 <TextareaControl
                                                     label={__("Designation", "frontis-blocks")}
                                                     value={TestimonialDesignation}
                                                     onChange={(value) => setAttributes({ TestimonialDesignation: value })}
                                                     className="fb-testimonial-desi"
                                                 />
+                                                )}
 
-                                                <div className='fb-setting-icon-wrapper'>
+                                                {TestimonialImageSwitcher && (
+                                                <BaseControl
+                                                    className="fb-testimonial-image"
+                                                >
+                                                    {TestimonialImageUrl ? (
+                                                        <div className="fb-testimonial-image-control" style={{backgroundImage: `url(${TestimonialImageUrl})`}}>
+                                                            <button
+                                                                className='fb-testimonial-image-delete'
+                                                                onClick={() => {
+                                                                    setAttributes({
+                                                                        TestimonialImageUrl: null,
+                                                                        TestimonialImageAlt: null,
+                                                                        TestimonialImageID: null,
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4D4D4D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15 9L9 15" stroke="#4D4D4D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 9L15 15" stroke="#4D4D4D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                                            </button>
+                                                            <button
+                                                                className='fb-testimonial-image-replace-btn'
+                                                                onClick={() => {
+                                                                    const mediaUploader = wp.media({
+                                                                        title: __('Select or Upload Testimonial Image', 'frontis-blocks'),
+                                                                        button: {
+                                                                            text: __('Use this image', 'frontis-blocks'),
+                                                                        },
+                                                                        multiple: false
+                                                                    });
+
+                                                                    mediaUploader.on('select', function() {
+                                                                        const attachment = mediaUploader.state().get('selection').first().toJSON();
+                                                                        setAttributes({
+                                                                            TestimonialImageUrl: attachment.url,
+                                                                            TestimonialImageAlt: attachment.alt,
+                                                                            TestimonialImageID: attachment.id,
+                                                                        });
+                                                                    });
+
+                                                                    mediaUploader.open();
+                                                                }}
+                                                            >
+                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.827 16.379C9.77912 16.9085 8.60041 17.1235 7.43311 16.9979C6.2658 16.8722 5.15981 16.4115 4.24861 15.6711C3.33741 14.9308 2.65996 13.9426 2.29804 12.8257C1.93611 11.7088 1.90518 10.5111 2.20897 9.37703L7.62097 10.827C7.09144 9.77918 6.87652 8.60047 7.00213 7.43317C7.12774 6.26586 7.58853 5.15987 8.32886 4.24867C9.06919 3.33747 10.0574 2.66003 11.1743 2.2981C12.2912 1.93617 13.4889 1.90524 14.623 2.20903L13.173 7.62103C14.2208 7.0915 15.3995 6.87658 16.5668 7.00219C17.7341 7.1278 18.8401 7.58859 19.7513 8.32892C20.6625 9.06926 21.34 10.0575 21.7019 11.1744C22.0638 12.2912 22.0948 13.489 21.791 14.623L16.379 13.173C16.9085 14.2209 17.1234 15.3996 16.9978 16.5669C16.8722 17.7342 16.4114 18.8402 15.6711 19.7514C14.9307 20.6626 13.9425 21.34 12.8256 21.702C11.7088 22.0639 10.511 22.0948 9.37697 21.791L10.827 16.379Z" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M12 12V12.01" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+                                                                Replace
+                                                            </button>
+                                                        </div>
+                                                    ) : (
+                                                        <button
+                                                            className='fb-testimonial-image-upload-btn'
+                                                            onClick={() => {
+                                                                const mediaUploader = wp.media({
+                                                                    title: __('Select or Upload Testimonial Image', 'frontis-blocks'),
+                                                                    button: {
+                                                                        text: __('Use this image', 'frontis-blocks'),
+                                                                    },
+                                                                    multiple: false
+                                                                });
+
+                                                                mediaUploader.on('select', function() {
+                                                                    const attachment = mediaUploader.state().get('selection').first().toJSON();
+                                                                    setAttributes({
+                                                                        TestimonialImageUrl: attachment.url,
+                                                                        TestimonialImageAlt: attachment.alt,
+                                                                        TestimonialImageID: attachment.id,
+                                                                    });
+                                                                });
+
+                                                                mediaUploader.open();
+                                                            }}
+                                                        >
+                                                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path></svg>
+                                                            Upload
+                                                        </button>
+                                                    )}
+                                                    </BaseControl>
+                                                )}
+
+                                                {QuoteIconSwitcher && (
+                                                    <div className='fb-setting-icon-wrapper'>
                                                     <BaseControl
                                                         label={__("Quote Icon", "frontis-blocks")}
                                                             id="fb-setting-text-alignment"
@@ -865,32 +989,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         )}
                                                     </BaseControl>
                                                 </div>
+                                                )}
 
-                                                <div className='fb-setting-icon-wrapper'>
-                                                    <BaseControl
-                                                        label={__("Rating Icon", "frontis-blocks")}
+                                                {RatingSwitcher && (
+                                                    <div className='fb-setting-icon-wrapper'>
+                                                        <BaseControl
+                                                            label={__("Rating Icon", "frontis-blocks")}
                                                             id="fb-setting-text-alignment"
                                                             className="fb-setting-text-alignment"
-                                                    >
-                                                        <ButtonGroup
-                                                            className="fb-setting-text-alignment-group-btn"
                                                         >
-                                                            {ICON_ALIGN.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ TestimonialRatinIconAlign: item.value })}
-                                                                    className={`fb-setting-text-alignment-single-btn ${TestimonialRatinIconAlign === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                        {TestimonialRatinIconAlign === 'icon' && (
-                                                            <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
-                                                        )}
-                                                    </BaseControl>
-                                                </div>
-                                                {TestimonialRatinIconAlign === 'icon' && (
+                                                            <ButtonGroup
+                                                                className="fb-setting-text-alignment-group-btn"
+                                                            >
+                                                                {ICON_ALIGN.map((item, key) => (
+                                                                    <Button
+                                                                        key={key}
+                                                                        onClick={() => setAttributes({ TestimonialRatinIconAlign: item.value })}
+                                                                        className={`fb-setting-text-alignment-single-btn ${TestimonialRatinIconAlign === item.value ? 'active' : ''}`}
+                                                                    >
+                                                                        {item.label}
+                                                                    </Button>
+                                                                ))}
+                                                            </ButtonGroup>
+                                                            {TestimonialRatinIconAlign === 'icon' && (
+                                                                <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
+                                                            )}
+                                                        </BaseControl>
+                                                    </div>
+                                                )}
+                                                {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
                                                     <div className="fb-setting-rating-rangecontrol">
                                                         <RangeControl
                                                             label={__("Rating Number", "frontis-blocks")}
@@ -911,1463 +1038,329 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "styles" && (
                                     <>
-                                        <PanelBody
-                                            title={__("Image", "frontis-blocks")}
-                                            initialOpen={false}
-                                            className="fb-setting-testimonial-image-wrapper"
-                                        >
-                                            <div className="fb-setting-fontsize-wrapper">
-                                                <div className="fb-setting-fontsize-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Image Width", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-fontsize-units">
-                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ TestimonialImageWidthUnits: item.value })}
-                                                                    className={`fb-setting-fontsize-units-switcher ${TestimonialImageWidthUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-fontsize-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? TestimonialImageWidthDesktop : deviceType === "Tablet" ? TestimonialImageWidthTablet : TestimonialImageWidthMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ TestimonialImageWidthDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ TestimonialImageWidthTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ TestimonialImageWidthMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={500}
-                                                        allowReset
-                                                        resetFallbackValue={100}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="fb-setting-spacing-container">
-                                                <div className="fb-setting-spacing-inner-container">
-                                                    {/* Border radius Width */}
-                                                    <div className="fb-setting-spacing-label-container">
-                                                        <FB_ResponsiveControl labelText={__('Border Radius', 'frontis-block')} device={deviceType} deviceHandler={handleBorderRadiusWidthDeviceClick}/>
-                                                        <div className="fb-setting-units-type">
-                                                            <ButtonGroup className="fb-setting-units-type-wrap">
-                                                                {UNIT_TYPES.map((item, key) => (
-                                                                    <Button
-                                                                        key={key}
-                                                                        onClick={() => setAttributes({ TestimonialImageRadiusUnits: item.value })}
-                                                                        className={`fb-setting-units-type-switcher ${ TestimonialImageRadiusUnits === item.value ? 'active' : ''}`}
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                ))}
-                                                            </ButtonGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="fb-setting-spacing-input-container">
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="top"
-                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.top : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.top : TestimonialImageMobileRadiusWidth.top}
-                                                                onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'top')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="right"
-                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.right : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.right : TestimonialImageMobileRadiusWidth.right}
-                                                                onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'right')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="bottom"
-                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.bottom : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.bottom : TestimonialImageMobileRadiusWidth.bottom}
-                                                                onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'bottom')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
-                                                            <input
-                                                                type="number"
-                                                                name="left"
-                                                                value={deviceType === 'Desktop' ? TestimonialImageDesktopRadiusWidth.left : deviceType === 'Tablet' ? TestimonialImagelTabRadiusWidth.left : TestimonialImageMobileRadiusWidth.left}
-                                                                onChange={(e) => handleImageBorderRadiusWidthInputChange(e, 'left')}
-                                                            />
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-wrapper">
-                                                            <label className="fb-setting-spacing-input-label"></label>
-                                                            <span
-                                                                className={`dashicons ${TestimonialImageRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${TestimonialImageRadiusLink ? 'is-checked' : ''}`}
-                                                                onClick={handleImageBorderRadiusWidthLinkToggle}
-                                                            >
-                                                            </span>
-                                                        </div>
-                                                    </div>                          
-                                                </div>
-                                            </div>
-                                        </PanelBody>
-                                        <PanelBody
-                                            title={__("Quote Icon", "frontis-blocks")}
-                                            initialOpen={false}
-                                            className="fb-setting-feature-icon-wrapper"
-                                        >
-
-                                            <div className="fb-setting-fontsize-wrapper">
-                                                <div className="fb-setting-fontsize-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Icon Size", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-fontsize-units">
-                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ TestimonialQuoteIconSizeUnits: item.value })}
-                                                                    className={`fb-setting-fontsize-units-switcher ${TestimonialQuoteIconSizeUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-fontsize-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? TestimonialQuoteIconSizeDesktop : deviceType === "Tablet" ? TestimonialQuoteIconSizeTablet : TestimonialQuoteIconSizeMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ TestimonialQuoteIconSizeDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ TestimonialQuoteIconSizeTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ TestimonialQuoteIconSizeMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={300}
-                                                        allowReset
-                                                        resetFallbackValue={100}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <BaseControl
-                                                label={__("Icon Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
+                                        {TestimonialImageSwitcher && (
+                                            <PanelBody
+                                                title={__("Image", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-testimonial-image-wrapper"
                                             >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ TestimonialQuoteIconColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${TestimonialQuoteIconColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Image Width", "frontis-blocks")}
+                                                    rangeValue={TestimonialImageWidth} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialImageWidth: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialImageWidthUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialImageWidthUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                />
 
-                                            {TestimonialQuoteIconColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialQuoteIconColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialQuoteIconColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
+                                                <FB_Spacing
+                                                    label={__("Border Radius", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={testimonialImageBorderRadiusUnitsHandler}
+                                                    spacingUnits={TestimonialImageRadiusUnits}
+                                                    spacingDesktop={TestimonialImageDesktopRadiusWidth}
+                                                    spacingTablet={TestimonialImageTabRadiusWidth}
+                                                    spacingMobile={TestimonialImageMobileRadiusWidth}
+                                                    handleSpacingUnitHandler={testimonialImageBorderRadiusUnitsChange}
+                                                    spacingCombineBtn={TestimonialImageRadiusLink}
+                                                    spacingCombineBtnHandler={testimonialImageBorderRadiusLinkBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            </PanelBody>
+                                        )}
+                                        {QuoteIconSwitcher && (
+                                            <PanelBody
+                                                title={__("Quote Icon", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-feature-icon-wrapper"
+                                            >
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Icon Size", "frontis-blocks")}
+                                                    rangeValue={TestimonialQuoteIconSize} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconSize: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconSizeUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialQuoteIconSizeUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                />
 
-                                            {TestimonialQuoteIconColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialQuoteIconHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialQuoteIconHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
+                                                <FB_Color
+                                                    label={__("Icon Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialQuoteIconColorSwitcher}
+                                                    globalColor={TestimonialQuoteIconColor}
+                                                    globalHoverColor={TestimonialQuoteIconHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
+                                                />
 
-                                        </PanelBody>
-                                        <PanelBody
+                                                </PanelBody>
+                                        )}
+                                        {TitleSwitcher && (
+                                            <PanelBody
+                                                    title={__("Title", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-testimonial-title-wrapper"
+                                            >
+                                                <FB_TypographyControl
+                                                    fontFamily={TestimonialTitleFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value })}
+
+                                                    fontSize={TestimonialTitleFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ TestimonialTitleFontSize: value })}
+
+                                                    fontSizeUnits={TestimonialTitleFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ TestimonialTitleFontSizeUnits: value })}
+
+                                                    fontWeight={TestimonialTitleFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialTitleFontWeight: value })}
+
+                                                    fontStyle={TestimonialTitleFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialTitleFontStyle: value })}
+
+                                                    textTransform={TestimonialTitleTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialTitleTextTransform: value })}
+
+                                                    textDecoration={TestimonialTitleTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialTitleTextDecoration: value })}
+
+                                                    letterSpacing={TestimonialTitleLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialTitleLetterSpacing: value })}
+
+                                                    letterSpacingUnits={TestimonialTitleLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialTitleLetterSpacingUnits: value })}
+
+                                                    lineHeight={TestimonialTitleLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialTitleLineHeight: value })}
+
+                                                    lineHeightUnits={TestimonialTitleLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ TestimonialTitleLineHeightUnits: value })}
+
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Color
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialTitleColorSwitcher}
+                                                    globalColor={TestimonialTitleColor}
+                                                    globalHoverColor={TestimonialTitleHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialTitleColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialTitleColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialTitleHoverColor: value })}
+                                                />
+
+                                            </PanelBody>
+                                        )}
+
+                                        {DescSwitcher && (
+                                            <PanelBody
                                             title={__("Description", "frontis-blocks")}
                                             initialOpen={false}
                                             className="fb-setting-testimonial-description-wrapper"
                                         >
+                                            <FB_TypographyControl
+                                                fontFamily={TestimonialDescFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ TestimonialDescFontFamily: value })}
 
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={TestimonialDescFontFamily}
-                                                                        onChange={(value) => setAttributes({ TestimonialDescFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialDescFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${TestimonialDescFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={deviceType === "Desktop" ? TestimonialDescFontSizeDesktop : deviceType === "Tablet" ? TestimonialDescFontSizeTablet : TestimonialDescFontSizeMobile}
-                                                                            onChange={(value) => {
-                                                                                if (deviceType === "Desktop") {
-                                                                                    setAttributes({ TestimonialDescFontSizeDesktop: value });
-                                                                                } else if (deviceType === "Tablet") {
-                                                                                    setAttributes({ TestimonialDescFontSizeTablet: value });
-                                                                                } else if (deviceType === "Mobile") {
-                                                                                    setAttributes({ TestimonialDescFontSizeMobile: value });
-                                                                                }
-                                                                            }}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            allowReset
-                                                                            resetFallbackValue={18}
-                                                                        />
-                                                                    </div>
-                                                                </div>
+                                                fontSize={TestimonialDescFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ TestimonialDescFontSize: value })}
 
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "700" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={TestimonialDescFontWeight}
-                                                                        onChange={(value) => setAttributes({ TestimonialDescFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={TestimonialDescFontStyle}
-                                                                        onChange={(value) => setAttributes({ TestimonialDescFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={TestimonialDescTextTransform}
-                                                                        onChange={(value) => setAttributes({ TestimonialDescTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={TestimonialDescTextDecoration}
-                                                                        onChange={(value) => setAttributes({ TestimonialDescTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialDescLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${TestimonialDescLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? TestimonialDescLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialDescLetterSpacingTablet : TestimonialDescLetterSpacingMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ TestimonialDescLetterSpacingDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ TestimonialDescLetterSpacingTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ TestimonialDescLetterSpacingMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={0}
-                                                                    />
-                                                                </div>
+                                                fontSizeUnits={TestimonialDescFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDescFontSizeUnits: value })}
 
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialDescLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${TestimonialDescLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? TestimonialDescLineHeightDesktop : deviceType === "Tablet" ? TestimonialDescLineHeightTablet : TestimonialDescLineHeightMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ TestimonialDescLineHeightDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ TestimonialDescLineHeightTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ TestimonialDescLineHeightMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={1}
-                                                                    />
-                                                                </div>
+                                                fontWeight={TestimonialDescFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ TestimonialDescFontWeight: value })}
 
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl
+                                                fontStyle={TestimonialDescFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ TestimonialDescFontStyle: value })}
+
+                                                textTransform={TestimonialDescTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ TestimonialDescTextTransform: value })}
+
+                                                textDecoration={TestimonialDescTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ TestimonialDescTextDecoration: value })}
+
+                                                letterSpacing={TestimonialDescLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ TestimonialDescLetterSpacing: value })}
+
+                                                letterSpacingUnits={TestimonialDescLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDescLetterSpacingUnits: value })}
+
+                                                lineHeight={TestimonialDescLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ TestimonialDescLineHeight: value })}
+
+                                                lineHeightUnits={TestimonialDescLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDescLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+                                            <FB_Color
                                                 label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
+                                                globalColorSwitcher={TestimonialDescColorSwitcher}
+                                                globalColor={TestimonialDescColor}
+                                                globalHoverColor={TestimonialDescHoverColor}
+                                                handleColorSwitcherChange={(value) => setAttributes({ TestimonialDescColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ TestimonialDescColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialDescHoverColor: value })}
+                                            />
+
+                                            </PanelBody>
+                                        )}
+
+                                        {AuthorSwitcher && (
+                                            <PanelBody
+                                                title={__("Author", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-testimonial-author-wrapper"
                                             >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ TestimonialDescColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${TestimonialDescColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                <FB_TypographyControl
+                                                    fontFamily={TestimonialAuthorFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialAuthorFontFamily: value })}
 
-                                            {TestimonialDescColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialDescColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDescColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialDescColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDescColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
+                                                    fontSize={TestimonialAuthorFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ TestimonialAuthorFontSize: value })}
 
-                                            {TestimonialDescColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialDescHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDescHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialDescHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDescHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
-                                        </PanelBody>
-                                        <PanelBody
-                                            title={__("Author", "frontis-blocks")}
-                                            initialOpen={false}
-                                            className="fb-setting-testimonial-author-wrapper"
-                                        >
+                                                    fontSizeUnits={TestimonialAuthorFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ TestimonialAuthorFontSizeUnits: value })}
 
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={TestimonialAuthorFontFamily}
-                                                                        onChange={(value) => setAttributes({ TestimonialAuthorFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialAuthorFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${TestimonialAuthorFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={deviceType === "Desktop" ? TestimonialAuthorFontSizeDesktop : deviceType === "Tablet" ? TestimonialAuthorFontSizeTablet : TestimonialAuthorFontSizeMobile}
-                                                                            onChange={(value) => {
-                                                                                if (deviceType === "Desktop") {
-                                                                                    setAttributes({ TestimonialAuthorFontSizeDesktop: value });
-                                                                                } else if (deviceType === "Tablet") {
-                                                                                    setAttributes({ TestimonialAuthorFontSizeTablet: value });
-                                                                                } else if (deviceType === "Mobile") {
-                                                                                    setAttributes({ TestimonialAuthorFontSizeMobile: value });
-                                                                                }
-                                                                            }}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            allowReset
-                                                                            resetFallbackValue={18}
-                                                                        />
-                                                                    </div>
-                                                                </div>
+                                                    fontWeight={TestimonialAuthorFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialAuthorFontWeight: value })}
 
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "700" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={TestimonialAuthorFontWeight}
-                                                                        onChange={(value) => setAttributes({ TestimonialAuthorFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={TestimonialAuthorFontStyle}
-                                                                        onChange={(value) => setAttributes({ TestimonialAuthorFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={TestimonialAuthorTextTransform}
-                                                                        onChange={(value) => setAttributes({ TestimonialAuthorTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={TestimonialAuthorTextDecoration}
-                                                                        onChange={(value) => setAttributes({ TestimonialAuthorTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialAuthorLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${TestimonialAuthorLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? TestimonialAuthorLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialAuthorLetterSpacingTablet : TestimonialAuthorLetterSpacingMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ TestimonialAuthorLetterSpacingDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ TestimonialAuthorLetterSpacingTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ TestimonialAuthorLetterSpacingMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={0}
-                                                                    />
-                                                                </div>
+                                                    fontStyle={TestimonialAuthorFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialAuthorFontStyle: value })}
 
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialAuthorLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${TestimonialAuthorLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? TestimonialAuthorLineHeightDesktop : deviceType === "Tablet" ? TestimonialAuthorLineHeightTablet : TestimonialAuthorLineHeightMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ TestimonialAuthorLineHeightDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ TestimonialAuthorLineHeightTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ TestimonialAuthorLineHeightMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={1}
-                                                                    />
-                                                                </div>
+                                                    textTransform={TestimonialAuthorTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialAuthorTextTransform: value })}
 
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
+                                                    textDecoration={TestimonialAuthorTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialAuthorTextDecoration: value })}
+
+                                                    letterSpacing={TestimonialAuthorLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialAuthorLetterSpacing: value })}
+
+                                                    letterSpacingUnits={TestimonialAuthorLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialAuthorLetterSpacingUnits: value })}
+
+                                                    lineHeight={TestimonialAuthorLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialAuthorLineHeight: value })}
+
+                                                    lineHeightUnits={TestimonialAuthorLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ TestimonialAuthorLineHeightUnits: value })}
+
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
                                                 />
-                                            </BaseControl>
-                                            <BaseControl
-                                                label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ TestimonialAuthorColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${TestimonialAuthorColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
-
-                                            {TestimonialAuthorColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialAuthorColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialAuthorColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialAuthorColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialAuthorColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
-
-                                            {TestimonialAuthorColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialAuthorHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialAuthorHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialAuthorHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialAuthorHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
-                                        </PanelBody>
-                                        <PanelBody
-                                            title={__("Designation", "frontis-blocks")}
-                                            initialOpen={false}
-                                            className="fb-setting-testimonial-designation-wrapper"
-                                        >
-
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={TestimonialDesignationFontFamily}
-                                                                        onChange={(value) => setAttributes({ TestimonialDesignationFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialDesignationFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${TestimonialDesignationFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={deviceType === "Desktop" ? TestimonialDesignationFontSizeDesktop : deviceType === "Tablet" ? TestimonialDesignationFontSizeTablet : TestimonialDesignationFontSizeMobile}
-                                                                            onChange={(value) => {
-                                                                                if (deviceType === "Desktop") {
-                                                                                    setAttributes({ TestimonialDesignationFontSizeDesktop: value });
-                                                                                } else if (deviceType === "Tablet") {
-                                                                                    setAttributes({ TestimonialDesignationFontSizeTablet: value });
-                                                                                } else if (deviceType === "Mobile") {
-                                                                                    setAttributes({ TestimonialDesignationFontSizeMobile: value });
-                                                                                }
-                                                                            }}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            allowReset
-                                                                            resetFallbackValue={16}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "700" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={TestimonialDesignationFontWeight}
-                                                                        onChange={(value) => setAttributes({ TestimonialDesignationFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={TestimonialDesignationFontStyle}
-                                                                        onChange={(value) => setAttributes({ TestimonialDesignationFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={TestimonialDesignationTextTransform}
-                                                                        onChange={(value) => setAttributes({ TestimonialDesignationTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={TestimonialDesignationTextDecoration}
-                                                                        onChange={(value) => setAttributes({ TestimonialDesignationTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialDesignationLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${TestimonialDesignationLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? TestimonialDesignationLetterSpacingDesktop : deviceType === "Tablet" ? TestimonialDesignationLetterSpacingTablet : TestimonialDesignationLetterSpacingMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ TestimonialDesignationLetterSpacingDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ TestimonialDesignationLetterSpacingTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ TestimonialDesignationLetterSpacingMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={0}
-                                                                    />
-                                                                </div>
-
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ TestimonialDesignationLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${TestimonialDesignationLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? TestimonialDesignationLineHeightDesktop : deviceType === "Tablet" ? TestimonialDesignationLineHeightTablet : TestimonialDesignationLineHeightMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ TestimonialDesignationLineHeightDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ TestimonialDesignationLineHeightTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ TestimonialDesignationLineHeightMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={1}
-                                                                    />
-                                                                </div>
-
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
+                                                <FB_Color
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialAuthorColorSwitcher}
+                                                    globalColor={TestimonialAuthorColor}
+                                                    globalHoverColor={TestimonialAuthorHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialAuthorColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialAuthorHoverColor: value })}
                                                 />
-                                            </BaseControl>
-                                            <BaseControl
-                                                label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
+
+                                            </PanelBody>
+                                        )}
+
+                                        {DesignationSwitcher && (
+                                            <PanelBody
+                                                title={__("Designation", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-testimonial-designation-wrapper"
                                             >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ TestimonialDesignationColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${TestimonialDesignationColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                <FB_TypographyControl
+                                                    fontFamily={TestimonialDesignationFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialDesignationFontFamily: value })}
 
-                                            {TestimonialDesignationColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialDesignationColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDesignationColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialDesignationColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDesignationColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
+                                                    fontSize={TestimonialDesignationFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ TestimonialDesignationFontSize: value })}
 
-                                            {TestimonialDesignationColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialDesignationHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDesignationHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialDesignationHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialDesignationHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
-                                        </PanelBody>
-                                        <PanelBody
-                                            title={__("Rating Icon", "frontis-blocks")}
-                                            initialOpen={false}
-                                            className="fb-setting-feature-icon-wrapper"
-                                        >
+                                                    fontSizeUnits={TestimonialDesignationFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDesignationFontSizeUnits: value })}
 
-                                            <div className="fb-setting-fontsize-wrapper">
-                                                <div className="fb-setting-fontsize-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Icon Size", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-fontsize-units">
-                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ TestimonialRatingIconSizeUnits: item.value })}
-                                                                    className={`fb-setting-fontsize-units-switcher ${TestimonialRatingIconSizeUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-fontsize-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? TestimonialRatingIconSizeDesktop : deviceType === "Tablet" ? TestimonialRatingIconSizeTablet : TestimonialRatingIconSizeMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ TestimonialRatingIconSizeDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ TestimonialRatingIconSizeTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ TestimonialRatingIconSizeMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={100}
-                                                        allowReset
-                                                        resetFallbackValue={20}
-                                                    />
-                                                </div>
-                                            </div>
+                                                    fontWeight={TestimonialDesignationFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialDesignationFontWeight: value })}
 
-                                            <BaseControl
-                                                label={__("Rating Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
+                                                    fontStyle={TestimonialDesignationFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialDesignationFontStyle: value })}
+
+                                                    textTransform={TestimonialDesignationTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialDesignationTextTransform: value })}
+
+                                                    textDecoration={TestimonialDesignationTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialDesignationTextDecoration: value })}
+
+                                                    letterSpacing={TestimonialDesignationLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialDesignationLetterSpacing: value })}
+
+                                                    letterSpacingUnits={TestimonialDesignationLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDesignationLetterSpacingUnits: value })}
+
+                                                    lineHeight={TestimonialDesignationLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialDesignationLineHeight: value })}
+
+                                                    lineHeightUnits={TestimonialDesignationLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDesignationLineHeightUnits: value })}
+
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Color
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialDesignationColorSwitcher}
+                                                    globalColor={TestimonialDesignationColor}
+                                                    globalHoverColor={TestimonialDesignationHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialDesignationColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialDesignationColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialDesignationHoverColor: value })}
+                                                />
+
+                                            </PanelBody>
+                                        )}
+
+                                        {RatingSwitcher && (
+                                            <PanelBody
+                                                title={__("Rating Icon", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-feature-icon-wrapper"
                                             >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ TestimonialRatingIconColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${TestimonialRatingIconColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Icon Size", "frontis-blocks")}
+                                                    rangeValue={TestimonialRatingIconSize} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconSize: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconSizeUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialRatingIconSizeUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                />
 
-                                            {TestimonialRatingIconColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialRatingIconColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialRatingIconColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialRatingIconColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialRatingIconColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
+                                                <FB_Color
+                                                    label={__("Rating Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialRatingIconColorSwitcher}
+                                                    globalColor={TestimonialRatingIconColor}
+                                                    globalHoverColor={TestimonialRatingIconHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialRatingIconColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
+                                                />
 
-                                            {TestimonialRatingIconColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={TestimonialRatingIconHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={TestimonialRatingIconHoverColor}
-                                                                            onChange={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
-
-                                        </PanelBody>
+                                            </PanelBody>
+                                        )}
                                     </>
                                 )}
                             {tab.name === "advanced" && (
@@ -2380,577 +1373,108 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 className='fb-setting-z-index-header'
                                             >
                                                 <RangeControl
-                                                    value={TestimonialZIndex}
-                                                    onChange={(value) => setAttributes({ TestimonialZIndex: value === 0 ? undefined : value })}
-                                                    min={1}
-                                                    max={100}
+                                                    value={TestimonialGlobalZIndex}
+                                                    onChange={(value) => setAttributes({ TestimonialGlobalZIndex: value === 0 ? undefined : value })}
+                                                    min={0}
+                                                    max={10000000}
                                                     step={1}
                                                     allowReset
-                                                    resetFallbackValue={undefined}
+                                                    resetFallbackValue={''}
                                                 />
                                             </PanelBody>
-                                            <PanelBody
-                                             title={__("Padding & Margin", "frontis-blocks")}
-                                             initialOpen={false}
-                                             >
-                                                <div className="fb-setting-spacing-container">
-                                                    <div className="fb-setting-spacing-inner-container">
-                                                        {/* Padding */}
-                                                        <div className="fb-setting-spacing-label-container">
-                                                            <FB_ResponsiveControl
-                                                                labelText={__('Padding', 'frontis-block')}
-                                                                device={deviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                            />
-                                                            <div className="fb-setting-units-type">
-                                                                <ButtonGroup className="fb-setting-units-type-wrap">
-                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                        <Button
-                                                                            key={key}
-                                                                            onClick={() => setAttributes({ TestimonialPaddingUnits: item.value })}
-                                                                            className={`fb-setting-units-type-switcher ${ TestimonialPaddingUnits === item.value ? 'active' : ''}`}
-                                                                        >
-                                                                            {item.label}
-                                                                        </Button>
-                                                                    ))}
-                                                                </ButtonGroup>
-                                                            </div>
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-container">
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="top"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.top : deviceType === 'Tablet' ? TestimonialTabPadding.top : TestimonialMobilePadding.top}
-                                                                    onChange={(e) => handlePaddingInputChange(e, 'top')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="right"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.right : deviceType === 'Tablet' ? TestimonialTabPadding.right : TestimonialMobilePadding.right}
-                                                                    onChange={(e) => handlePaddingInputChange(e, 'right')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="bottom"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.bottom : deviceType === 'Tablet' ? TestimonialTabPadding.bottom : TestimonialMobilePadding.bottom}
-                                                                    onChange={(e) => handlePaddingInputChange(e, 'bottom')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="left"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopPadding.left : deviceType === 'Tablet' ? TestimonialTabPadding.left : TestimonialMobilePadding.left}
-                                                                    onChange={(e) => handlePaddingInputChange(e, 'left')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label"></label>
-                                                                <span
-                                                                    className={`dashicons ${TestimonialPaddingLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${TestimonialPaddingLink ? 'is-checked' : ''}`}
-                                                                    onClick={handleTestimonialPaddingLinkToggle}
-                                                                >
-                                                                </span>
-                                                            </div>
-                                                        </div>                          
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-spacing-container">
-                                                    <div className="fb-setting-spacing-inner-container">
-                                                        {/* Margin */}
-                                                        <div className="fb-setting-spacing-label-container">
-                                                            <FB_ResponsiveControl
-                                                                labelText={__('Margin', 'frontis-block')}
-                                                                device={deviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                            />
-                                                            <div className="fb-setting-units-type">
-                                                                <ButtonGroup className="fb-setting-units-type-wrap">
-                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                        <Button
-                                                                            key={key}
-                                                                            onClick={() => setAttributes({ TestimonialMarginUnits: item.value })}
-                                                                            className={`fb-setting-units-type-switcher ${ TestimonialMarginUnits === item.value ? 'active' : ''}`}
-                                                                        >
-                                                                            {item.label}
-                                                                        </Button>
-                                                                    ))}
-                                                                </ButtonGroup>
-                                                            </div>
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-container">
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="top"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.top : deviceType === 'Tablet' ? TestimonialTabMargin.top : TestimonialMobileMargin.top}
-                                                                    onChange={(e) => handleMarginInputChange(e, 'top')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="right"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.right : deviceType === 'Tablet' ? TestimonialTabMargin.right : TestimonialMobileMargin.right}
-                                                                    onChange={(e) => handleMarginInputChange(e, 'right')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="bottom"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.bottom : deviceType === 'Tablet' ? TestimonialTabMargin.bottom : TestimonialMobileMargin.bottom}
-                                                                    onChange={(e) => handleMarginInputChange(e, 'bottom')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="left"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopMargin.left : deviceType === 'Tablet' ? TestimonialTabMargin.left : TestimonialMobileMargin.left}
-                                                                    onChange={(e) => handleMarginInputChange(e, 'left')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label"></label>
-                                                                <span
-                                                                    className={`dashicons ${TestimonialMarginLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${TestimonialMarginLink ? 'is-checked' : ''}`}
-                                                                    onClick={handleMarginLinkToggle}
-                                                                >
-                                                                </span>
-                                                            </div>
-                                                        </div>                          
-                                                    </div>
-                                                </div>                                       
+
+                                            <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+                                                <FB_Spacing 
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+                                                    spacingUnits={TestimonialGlobalPaddingUnits}
+                                                    spacingDesktop={TestimonialGlobalPaddingDesktop}
+                                                    spacingTablet={TestimonialGlobalPaddingTablet}
+                                                    spacingMobile={TestimonialGlobalPaddingMobile}
+                                                    handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+                                                    spacingCombineBtn={TestimonialGlobalPaddingLink}
+                                                    spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Spacing 
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+                                                    spacingUnits={TestimonialGlobalMarginUnits}
+                                                    spacingDesktop={TestimonialGlobalMarginDesktop}
+                                                    spacingTablet={TestimonialGlobalMarginTablet}
+                                                    spacingMobile={TestimonialGlobalMarginMobile}
+                                                    handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+                                                    spacingCombineBtn={TestimonialGlobalMarginLink}
+                                                    spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
                                             </PanelBody>
+
                                             <PanelBody title="Background Color" initialOpen={false} >
-                                                <BaseControl
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ TestimonialBgColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${TestimonialBgColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-
-                                                {TestimonialBgColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={TestimonialBgColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBgColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={TestimonialBgColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBgColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                                {TestimonialBgColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={TestimonialBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBgHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={TestimonialBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBgHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
+                                                <FB_Color
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialGlobalBgColorSwitcher}
+                                                    globalColor={TestimonialGlobalBgColor}
+                                                    globalHoverColor={TestimonialGlobalBgHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialGlobalBgColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialGlobalBgColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialGlobalBgHoverColor: value })}
+                                                />
                                             </PanelBody>
+                                            <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
-                                            <PanelBody
-                                                title={__("Border & Border radius", "frontis-blocks")}
-                                                initialOpen={false}
-                                                className="fb-setting-border-setting-wrapper"
-                                                >
-                                                    <SelectControl
+                                                <SelectControl
                                                         label={__("Border Style", "frontis-blocks")}
-                                                        value={TestimonialBorder}
+                                                        value={TestimonialGlobalBorder}
                                                         options={BORDER_STYLES}
-                                                        onChange={(value) => setAttributes({ TestimonialBorder: value })}
-                                                    />
+                                                        onChange={(value) => setAttributes({ TestimonialGlobalBorder: value })}
+                                                />
 
-                                                <BaseControl
+                                                <FB_Color
                                                     label={__("Border Color", "frontis-blocks")}
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ TestimonialBorderColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${TestimonialBorderColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-
-                                                {TestimonialBorderColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={TestimonialBorderColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBorderColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={TestimonialBorderColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBorderColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                                {TestimonialBorderColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={TestimonialBorderHoverColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBorderHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={TestimonialBorderHoverColor}
-                                                                                onChange={(value) => setAttributes({ TestimonialBorderHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                                <div className="fb-setting-spacing-container">
-                                                    <div className="fb-setting-spacing-inner-container">
-                                                        {/* Border Width */}
-                                                        <div className="fb-setting-spacing-label-container">
-                                                            <FB_ResponsiveControl
-                                                                labelText={__('Border', 'frontis-block')}
-                                                                device={deviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                            />
-                                                            <div className="fb-setting-units-type">
-                                                                <ButtonGroup className="fb-setting-units-type-wrap">
-                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                        <Button
-                                                                            key={key}
-                                                                            onClick={() => setAttributes({ TestimonialBorderUnits: item.value })}
-                                                                            className={`fb-setting-units-type-switcher ${ TestimonialBorderUnits === item.value ? 'active' : ''}`}
-                                                                        >
-                                                                            {item.label}
-                                                                        </Button>
-                                                                    ))}
-                                                                </ButtonGroup>
-                                                            </div>
-
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-container">
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="top"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.top : deviceType === 'Tablet' ? TestimonialTabBorderWidth.top : TestimonialMobileBorderWidth.top}
-                                                                    onChange={(e) => handleBorderWidthInputChange(e, 'top')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="right"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.right : deviceType === 'Tablet' ? TestimonialTabBorderWidth.right : TestimonialMobileBorderWidth.right}
-                                                                    onChange={(e) => handleBorderWidthInputChange(e, 'right')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="bottom"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.bottom : deviceType === 'Tablet' ? TestimonialTabBorderWidth.bottom : TestimonialMobileBorderWidth.bottom}
-                                                                    onChange={(e) => handleBorderWidthInputChange(e, 'bottom')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="left"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderWidth.left : deviceType === 'Tablet' ? TestimonialTabBorderWidth.left : TestimonialMobileBorderWidth.left}
-                                                                    onChange={(e) => handleBorderWidthInputChange(e, 'left')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label"></label>
-                                                                <span
-                                                                    className={`dashicons ${TestimonialBorderLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${TestimonialBorderLink ? 'is-checked' : ''}`}
-                                                                    onClick={handleBorderWidthLinkToggle}
-                                                                >
-                                                                </span>
-                                                            </div>
-                                                        </div>                          
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-spacing-container">
-                                                    <div className="fb-setting-spacing-inner-container">
-                                                        {/* Border radius Width */}
-                                                        <div className="fb-setting-spacing-label-container">
-                                                            <FB_ResponsiveControl
-                                                                labelText={__('Border Radius', 'frontis-block')}
-                                                                device={deviceType}
-                                                                deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                            />
-                                                            <div className="fb-setting-units-type">
-                                                                <ButtonGroup className="fb-setting-units-type-wrap">
-                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                        <Button
-                                                                            key={key}
-                                                                            onClick={() => setAttributes({ TestimonialBorderRadiusUnits: item.value })}
-                                                                            className={`fb-setting-units-type-switcher ${ TestimonialBorderRadiusUnits === item.value ? 'active' : ''}`}
-                                                                        >
-                                                                            {item.label}
-                                                                        </Button>
-                                                                    ))}
-                                                                </ButtonGroup>
-                                                            </div>
-                                                        </div>
-                                                        <div className="fb-setting-spacing-input-container">
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Top", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="top"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.top : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.top : TestimonialMobileBorderRadiusWidth.top}
-                                                                    onChange={(e) => handleBorderRadiusWidthInputChange(e, 'top')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Right", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="right"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.right : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.right : TestimonialMobileBorderRadiusWidth.right}
-                                                                    onChange={(e) => handleBorderRadiusWidthInputChange(e, 'right')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Bottom", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="bottom"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.bottom : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.bottom : TestimonialMobileBorderRadiusWidth.bottom}
-                                                                    onChange={(e) => handleBorderRadiusWidthInputChange(e, 'bottom')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label">{__("Left", "frontis-blocks")}</label>
-                                                                <input
-                                                                    type="number"
-                                                                    name="left"
-                                                                    value={deviceType === 'Desktop' ? TestimonialDesktopBorderRadiusWidth.left : deviceType === 'Tablet' ? TestimonialTabBorderRadiusWidth.left : TestimonialMobileBorderRadiusWidth.left}
-                                                                    onChange={(e) => handleBorderRadiusWidthInputChange(e, 'left')}
-                                                                />
-                                                            </div>
-                                                            <div className="fb-setting-spacing-input-wrapper">
-                                                                <label className="fb-setting-spacing-input-label"></label>
-                                                                <span
-                                                                    className={`dashicons ${TestimonialBorderRadiusLink ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${TestimonialBorderRadiusLink ? 'is-checked' : ''}`}
-                                                                    onClick={handleBorderRadiusWidthLinkToggle}
-                                                                >
-                                                                </span>
-                                                            </div>
-                                                        </div>                          
-                                                    </div>
-                                                </div>
-                                            </PanelBody>
-
-                                            <PanelBody
-                                                title={__("Responsive Control", "frontis-blocks")}
-                                                initialOpen={false}
-                                                className="fb-setting-responsive-control-wrapper"
-                                            >
-                                                <ToggleControl
-                                                    label={__("Hide on Desktop", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={TestimonialDesktopSwitcher}
-                                                    onChange={(value) => setAttributes({ TestimonialDesktopSwitcher: value })}
+                                                    globalColorSwitcher={TestimonialGlobalBorderColorSwitcher}
+                                                    globalColor={TestimonialGlobalBorderColor}
+                                                    globalHoverColor={TestimonialGlobalBorderHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialGlobalBorderColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialGlobalBorderColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialGlobalBorderHoverColor: value })}
                                                 />
-                                                <ToggleControl
-                                                    label={__("Hide on Tablet", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={TestimonialTabletSwitcher}
-                                                    onChange={(value) => setAttributes({ TestimonialTabletSwitcher: value })}
+
+                                                <FB_Spacing 
+                                                    label={__("Border", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+                                                    spacingUnits={TestimonialGlobalBorderUnits}
+                                                    spacingDesktop={TestimonialGlobalBorderDesktop}
+                                                    spacingTablet={TestimonialGlobalBorderTablet}
+                                                    spacingMobile={TestimonialGlobalBorderMobile}
+                                                    handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+                                                    spacingCombineBtn={TestimonialGlobalBorderLink}
+                                                    spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+                                                    setAttributes={setAttributes}
                                                 />
-                                                <ToggleControl
-                                                    label={__("Hide on Mobile", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={TestimonialMobileSwitcher}
-                                                    onChange={(value) => setAttributes({ TestimonialMobileSwitcher: value })}
+
+                                                <FB_Spacing 
+                                                    label={__("Border Radius", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+                                                    spacingUnits={TestimonialGlobalBorderRadiusUnits}
+                                                    spacingDesktop={TestimonialGlobalBorderRadiusDesktop}
+                                                    spacingTablet={TestimonialGlobalBorderRadiusTablet}
+                                                    spacingMobile={TestimonialGlobalBorderRadiusMobile}
+                                                    handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+                                                    spacingCombineBtn={TestimonialGlobalBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_BoxShadowControl
+                                                    onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowValues: value })}
+                                                    initialShadowValue={TestimonialGlobalBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowCssValue: value })}
                                                 />
                                             </PanelBody>
-
                                         </div>
                                     </div>
                                 </>

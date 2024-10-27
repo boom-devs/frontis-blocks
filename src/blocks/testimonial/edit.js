@@ -21,16 +21,24 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
+        TestimonialImageSwitcher,
         TestimonialImageUrl,
         TestimonialImageAlt,
         TestimonialImageID,
         TestimonialAlignment,
+        TitleSwitcher,
+        TestimonialTitle,
+        DescSwitcher,
         TestimonialDesc,
+        AuthorSwitcher,
         TestimonialAuthor,
+        DesignationSwitcher,
         TestimonialDesignation,
+        RatingSwitcher,
         TestimonialRatingNumber,
         TestimonialRatingicon,
         TestimonialRatinIconAlign,
+        QuoteIconSwitcher,
         TestimonialQuoteIcon,
         TestimonialQuoteIconAlign,
 
@@ -62,7 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
 
             <BlockControls>
-                {TestimonialImageUrl && (
+                {TestimonialImageUrl && TestimonialImageSwitcher && (
                     <ToolbarGroup>
                         <ToolbarButton
                             onClick={() => setAttributes({
@@ -98,57 +106,76 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <div className={`fb-testimonial-wrapper ${blockID}`}>
                         <div className="fb-testimonial-inner-wrapper">
                             <div className='fb-testimonial-container'>
-                                <div className="fb-testimonial-image-wrapper">
-                                    <div className="fb-testimonial-image-inner-wrapper">
-                                        <div className="fb-testimonial-image">
-                                            {TestimonialImageUrl ? (
-                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
-                                            ) : (
-                                                <MediaPlaceholder
-                                                    onSelect={(media) => setAttributes({
-                                                        TestimonialImageID: media.id,
-                                                        TestimonialImageUrl: media.url,
-                                                        TestimonialImageAlt: media.alt,
-                                                    })}
-                                                    allowedTypes={['image']}
-                                                    multiple={false}
-                                                    labels={{ title: 'Add Author Image' }}
-                                                />
-                                            )}
+                                {TestimonialImageSwitcher && (
+                                    <div className="fb-testimonial-image-wrapper">
+                                        <div className="fb-testimonial-image-inner-wrapper">
+                                            <div className="fb-testimonial-image">
+                                                {TestimonialImageUrl ? (
+                                                    <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
+                                                ) : (
+                                                    <MediaPlaceholder
+                                                        onSelect={(media) => setAttributes({
+                                                            TestimonialImageID: media.id,
+                                                            TestimonialImageUrl: media.url,
+                                                            TestimonialImageAlt: media.alt,
+                                                        })}
+                                                        allowedTypes={['image']}
+                                                        multiple={false}
+                                                        labels={{ title: 'Add Author Image' }}
+                                                    />
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                )}
                                 <div className="fb-testimonial-description-container">
-                                    {TestimonialQuoteIconAlign === 'icon' && (
+                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
                                         <div className="fb-testimonial-quote-icon">
                                             {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
                                         </div>
                                     )}
-                                    <div className="fb-testimonial-userdesc-container">
-                                        <RichText
-                                            tagName="p"
-                                            value={TestimonialDesc}
-                                            onChange={(value) => setAttributes({ TestimonialDesc: value })}
-                                            placeholder={__('John Doe', 'frontis-blocks')}
-                                            className="fb-user-desc"
-                                        />
-                                    </div>
+                                    {TitleSwitcher && (
+                                        <div className="fb-testimonial-title-container">
+                                            <RichText
+                                                tagName="h3"
+                                                value={TestimonialTitle}
+                                                onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                                                placeholder={__('Testimonial Title', 'frontis-blocks')}
+                                                className="fb-testimonial-title"
+                                            />
+                                        </div>
+                                    )}
+                                    {DescSwitcher && (
+                                        <div className="fb-testimonial-userdesc-container">
+                                            <RichText
+                                                tagName="p"
+                                                value={TestimonialDesc}
+                                                onChange={(value) => setAttributes({ TestimonialDesc: value })}
+                                                placeholder={__('Testimonial Description', 'frontis-blocks')}
+                                                className="fb-user-desc"
+                                            />
+                                        </div>
+                                    )}
                                     <div className="fb-testimonial-userinfo-container">
-                                        <RichText
-                                            tagName="div"
-                                            value={TestimonialAuthor}
-                                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
-                                            placeholder={__('John Doe', 'frontis-blocks')}
-                                            className="fb-user"
-                                        />
-                                        <RichText
-                                            tagName="span"
-                                            value={TestimonialDesignation}
-                                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
-                                            placeholder={__('CEO, Company Name', 'frontis-blocks')}
-                                            className="fb-user-designation"
-                                        />
-                                        {TestimonialRatinIconAlign === 'icon' && (
+                                        {AuthorSwitcher && (
+                                            <RichText
+                                                tagName="div"
+                                                value={TestimonialAuthor}
+                                                onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                                                placeholder={__('John Doe', 'frontis-blocks')}
+                                                className="fb-user"
+                                            />
+                                        )}
+                                        {DesignationSwitcher && (
+                                            <RichText
+                                                tagName="span"
+                                                value={TestimonialDesignation}
+                                                onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                                                placeholder={__('CEO, Company Name', 'frontis-blocks')}
+                                                className="fb-user-designation"
+                                            />
+                                        )}
+                                        {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
                                             <div className="fb-testimonial-rating">
                                                 {renderRatingIcons()}
                                             </div>
