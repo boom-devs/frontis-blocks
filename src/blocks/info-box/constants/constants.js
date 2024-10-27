@@ -107,6 +107,12 @@ export const INFO_ICON_POSITION = [
 	
 ];
 
+export const BG_TYPE = [
+    { label: __("Image", "frontis-block"), value: "image" },
+    { label: __("Color", "frontis-block"), value: "color" },
+	
+];
+
 export const FONT_FAMILYS = [
     { label: __("Default", "frontis-block"), value: "Default" },
     { label: __("ABeeZee", "frontis-block"), value: "ABeeZee" },

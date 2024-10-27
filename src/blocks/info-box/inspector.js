@@ -63,6 +63,7 @@ import {
 	mediaType,
 	ICON_POSITION,
 	INFO_ICON_POSITION,
+	BG_TYPE,
 } from "./constants/constants";
 
 import { useState, createRef, useEffect } from "@wordpress/element";
@@ -71,7 +72,7 @@ import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_ResponsiveControl from "@Components/responsive-control";
 import FB_Range from "@Components/range";
-import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_BoxShadowControl from "@Components/box-shadow";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -323,7 +324,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaIconHoverColor,
 		mediaIconColorSwitcher,
 		boxGlobalBoxShadowValues,
-		boxGlobalBoxShadowCssValue
+		boxGlobalBoxShadowCssValue,
+		mediaBgTypeImage,
+		bgType,
 	} = attributes;
 
 	useEffect(() => {
@@ -341,6 +344,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			infoMediaId: "",
 			infoMediaUrl: "",
+		});
+	};
+
+	const removeMediaBg = () => {
+		setAttributes({
+			mediaBgId: "",
+			mediaBgTypeImage: "",
 		});
 	};
 
@@ -1044,7 +1054,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const handleMarginDeviceClick = (device) => {
 		setAttributes({ DeviceType: device });
 	};
-
 	/** Default margin for desktop (using desktop_margin) */
 	const margin = `${Heading_Desktop_Margin.top}${Heading_padding_units} ${Heading_Desktop_Margin.right}${Heading_padding_units} ${Heading_Desktop_Margin.bottom}${Heading_padding_units} ${Heading_Desktop_Margin.left}${Heading_padding_units}`;
 	/** End Margin */
@@ -2490,7 +2499,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												? `border-color: ${globalBorderColor};`
 												: ""
 										};
-					${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ''}
+					${
+						boxGlobalBoxShadowCssValue
+							? `box-shadow: ${boxGlobalBoxShadowCssValue};`
+							: ""
+					}
                     transition: all .3s ease-in-out;
                 }
                 .fb-info-box-content-wrapper.${blockID}:hover {
@@ -2921,15 +2934,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper{
                 	width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};
                 	height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};
-					${mediaBgColor !== undefined ? `background-color: ${mediaBgColor};` : "#ffffff"}
+					${mediaBgTypeImage ? `background-image: url(${mediaBgTypeImage});` : `background-color: ${mediaBgColor || ""};`}
 					padding: ${mediaDesktopPadding};
                     margin: ${mediaDesktopMargin};
                     border: ${mediaBorder};
                     border-width: ${mediaBorderDesktopWidth};
                     border-radius: ${mediaBorderRadiusDesktopWidth};
+					background-repeat: none;
+					background-size: cover;
                 }
 				.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper{
-					${mediaBgHoverColor !== undefined ? `background-color: ${mediaBgHoverColor};` : "#ffffff"}
+					${
+						mediaBgHoverColor !== undefined
+							? `background-color: ${mediaBgHoverColor};`
+							: "#ffffff"
+					}
 				}
 				@media only screen and (max-width: 1024px) {
                 .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper{
@@ -2958,7 +2977,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${mediaIconColor !== undefined ? `fill: ${mediaIconColor};` : "#ffffff"}
 				}
 				.fb-info-box-content-wrapper.${blockID}:hover .fb-icon-wrapper svg{
-					${mediaIconHoverColor !== undefined ? `fill: ${mediaIconHoverColor};` : "#ffffff"}
+					${
+						mediaIconHoverColor !== undefined
+							? `fill: ${mediaIconHoverColor};`
+							: "#ffffff"
+					}
 				}
                 .fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper{
 					${mediaBgHoverColor !== undefined ? `fill: ${mediaBgHoverColor};` : "#ffffff"}
@@ -3079,6 +3102,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												<div className="fb-image-upload-field-wrapper">
 													{mediaSwitcher === "image" && (
+														<>
 														<BaseControl>
 															<MediaUploadCheck>
 																<MediaUpload
@@ -3105,7 +3129,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																				{attributes.infoMediaId == 0 &&
 																					__(
 																						"Select Icon Image",
-																						"ultimate-addons-for-gutenberg-blocks",
+																						"frontis-blocks",
 																					)}
 																				{attributes.infoMediaId != 0 && (
 																					<ResponsiveWrapper
@@ -3163,6 +3187,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																</HStack>
 															)}
 														</BaseControl>
+														</>
+														
+														
 													)}
 
 													{mediaSwitcher === "icon" && (
@@ -3392,840 +3419,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === "styles" && (
 									<>
 										{/*Box Style*/}
-										<PanelBody
-											title={__("Box", "frontis-block")}
-											initialOpen={false}
-										>
-											{/*Background*/}
-											<BaseControl
-												label={__("Background Color", "frontis-block")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() =>
-																setAttributes({
-																	boxBgColorSwitcher: item.value,
-																})
-															}
-															className={`fb-setting-color-panel-btn-switchr ${
-																boxBgColorSwitcher === item.value
-																	? "active"
-																	: ""
-															}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
 
-											{boxBgColorSwitcher === "normal" && (
-												<BaseControl
-													label={__("Nomal Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={boxBgColor}
-																			onChange={(value) =>
-																				setAttributes({ boxBgColor: value })
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={boxBgColor}
-																			onChange={(value) =>
-																				setAttributes({ boxBgColor: value })
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											{boxBgColorSwitcher === "hover" && (
-												<BaseControl
-													label={__("Hover Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={boxBgHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					boxBgHoverColor: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={boxBgHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					boxBgHoverColor: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-											{/*Spacing*/}
-											<Heading>Spacing</Heading>
-											{/*Padding control*/}
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Padding */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Padding", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleBoxPaddingDeviceClick}
-														/>
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				infoBoxPaddingUnits: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			infoBoxPaddingUnits === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopPadding.top
-																		: DeviceType === "Tablet"
-																		? infoBoxTabPadding.top
-																		: infoBoxMobilePadding.top
-																}
-																onChange={(e) =>
-																	handleBoxPaddingInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopPadding.right
-																		: DeviceType === "Tablet"
-																		? infoBoxTabPadding.right
-																		: infoBoxMobilePadding.right
-																}
-																onChange={(e) =>
-																	handleBoxPaddingInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopPadding.bottom
-																		: DeviceType === "Tablet"
-																		? infoBoxTabPadding.bottom
-																		: infoBoxMobilePadding.bottom
-																}
-																onChange={(e) =>
-																	handleBoxPaddingInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopPadding.left
-																		: DeviceType === "Tablet"
-																		? infoBoxTabPadding.left
-																		: infoBoxMobilePadding.left
-																}
-																onChange={(e) =>
-																	handleBoxPaddingInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	paddingLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${paddingLink ? "is-checked" : ""}`}
-																onClick={handleBoxPaddingLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
-											{/*Margin control*/}
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Margin */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Margin", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleBoxMarginDeviceClick}
-														/>
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				infoBoxMarginUnits: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			infoBoxMarginUnits === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopMargin.top
-																		: DeviceType === "Tablet"
-																		? infoBoxTabMargin.top
-																		: infoBoxMobileMargin.top
-																}
-																onChange={(e) =>
-																	handleBoxMarginInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopMargin.right
-																		: DeviceType === "Tablet"
-																		? infoBoxTabMargin.right
-																		: infoBoxMobileMargin.right
-																}
-																onChange={(e) =>
-																	handleBoxMarginInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopMargin.bottom
-																		: DeviceType === "Tablet"
-																		? infoBoxTabMargin.bottom
-																		: infoBoxMobileMargin.bottom
-																}
-																onChange={(e) =>
-																	handleBoxMarginInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopMargin.left
-																		: DeviceType === "Tablet"
-																		? infoBoxTabMargin.left
-																		: infoBoxMobileMargin.left
-																}
-																onChange={(e) =>
-																	handleBoxMarginInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	infoBoxMarginLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${infoBoxMarginLink ? "is-checked" : ""}`}
-																onClick={handleBoxMarginLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
-											{/*Border*/}
-											<Heading>Border</Heading>
-											<SelectControl
-												label={__("Border Style", "frontis-block")}
-												value={Heading_Border}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ infoBoxBorder: value })
-												}
-											/>
-
-											<BaseControl
-												label={__("Border Color", "frontis-block")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() =>
-																setAttributes({
-																	infoBoxBorderColorSwitcher: item.value,
-																})
-															}
-															className={`fb-setting-color-panel-btn-switchr ${
-																infoBoxBorderColorSwitcher === item.value
-																	? "active"
-																	: ""
-															}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
-
-											{infoBoxBorderColorSwitcher === "normal" && (
-												<BaseControl
-													label={__("Nomal Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={Heading_Border_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					infoBoxBorderColor: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={Heading_Border_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					infoBoxBorderColor: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											{infoBoxBorderColorSwitcher === "hover" && (
-												<BaseControl
-													label={__("Hover Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={infoBoxBorderHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					infoBoxBorderHoverColor: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={Heading_Border_Hover_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Border_Hover_Color: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Border Width */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Border Width", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleBoxBorderWidthDeviceClick}
-														/>
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				infoBoxBorderUnits: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			infoBoxBorderUnits === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderWidth.top
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderWidth.top
-																		: infoBoxMobileBorderWidth.top
-																}
-																onChange={(e) =>
-																	handleBoxBorderWidthInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderWidth.right
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderWidth.right
-																		: infoBoxMobileBorderWidth.right
-																}
-																onChange={(e) =>
-																	handleBoxBorderWidthInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderWidth.bottom
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderWidth.bottom
-																		: infoBoxMobileBorderWidth.bottom
-																}
-																onChange={(e) =>
-																	handleBoxBorderWidthInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderWidth.left
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderWidth.left
-																		: infoBoxMobileBorderWidth.left
-																}
-																onChange={(e) =>
-																	handleBoxBorderWidthInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	borderLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${borderLink ? "is-checked" : ""}`}
-																onClick={handleBoxBorderWidthLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Border radius Width */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Border Radius", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={
-																handleBoxBorderRadiusWidthDeviceClick
-															}
-														/>
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				infoBoxBorderRadiusUnits: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			infoBoxBorderRadiusUnits === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderRadiusWidth.top
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderRadiusWidth.top
-																		: infoBoxMobileBorderRadiusWidth.top
-																}
-																onChange={(e) =>
-																	handleBoxBorderRadiusWidthInputChange(
-																		e,
-																		"top",
-																	)
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderRadiusWidth.right
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderRadiusWidth.right
-																		: infoBoxMobileBorderRadiusWidth.right
-																}
-																onChange={(e) =>
-																	handleBoxBorderRadiusWidthInputChange(
-																		e,
-																		"right",
-																	)
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderRadiusWidth.bottom
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderRadiusWidth.bottom
-																		: infoBoxMobileBorderRadiusWidth.bottom
-																}
-																onChange={(e) =>
-																	handleBoxBorderRadiusWidthInputChange(
-																		e,
-																		"bottom",
-																	)
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? infoBoxDesktopBorderRadiusWidth.left
-																		: DeviceType === "Tablet"
-																		? infoBoxTabBorderRadiusWidth.left
-																		: infoBoxMobileBorderRadiusWidth.left
-																}
-																onChange={(e) =>
-																	handleBoxBorderRadiusWidthInputChange(
-																		e,
-																		"left",
-																	)
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	borderRadiusLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${borderRadiusLink ? "is-checked" : ""}`}
-																onClick={handleBoxBorderRadiusWidthLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</PanelBody>
-										{/*Image Style*/}
+										{/*Image/Icon Style*/}
 										<PanelBody
 											title={__("Image/Icon", "frontis-block")}
 											initialOpen={false}
@@ -4244,158 +3439,273 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												resetFallbackValue={50}
 											/>
 											{/*Background*/}
-											<BaseControl
-												label={__("Background Color", "frontis-block")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() =>
-																setAttributes({
-																	mediaBgColorSwitcher: item.value,
-																})
-															}
-															className={`fb-setting-color-panel-btn-switchr ${
-																mediaBgColorSwitcher === item.value
-																	? "active"
-																	: ""
-															}`}
+											<SelectControl
+												label={__("Background Type", "frontis-block")}
+												options={BG_TYPE}
+												value={bgType}
+												onChange={(value) =>
+													setAttributes({
+														bgType: value,
+													})
+												}
+											/>
+											{bgType === "image" && (
+												<>
+													<BaseControl>
+															<MediaUploadCheck>
+																<MediaUpload
+																	onSelect={(media) => {
+																		setAttributes({
+																			mediaBgId: media["id"],
+																			mediaBgTypeImage: media["url"],
+																			mediaBgWidth: media["width"],
+																			mediaBgHeight: media["height"],
+																		});
+																	}}
+																	type="image"
+																	value={attributes.mediaBgId}
+																	render={({ open }) => {
+																		return (
+																			<Button
+																				className={
+																					attributes.mediaBgId == 0
+																						? "editor-post-featured-image__toggle"
+																						: "editor-post-featured-image__preview"
+																				}
+																				onClick={open}
+																			>
+																				{attributes.mediaBgId == 0 &&
+																					__(
+																						"Select Icon Image",
+																						"frontis-blocks",
+																					)}
+																				{attributes.mediaBgId != 0 && (
+																					<ResponsiveWrapper
+																						naturalWidth={
+																							attributes.mediaBgWidth
+																						}
+																						naturalHeight={
+																							attributes.mediaBgHeight
+																						}
+																					>
+																						<img
+																							src={attributes.mediaBgTypeImage}
+																						/>
+																					</ResponsiveWrapper>
+																				)}
+																			</Button>
+																		);
+																	}}
+																/>
+															</MediaUploadCheck>
+															{attributes.mediaBgId != 0 && (
+																<HStack className="editor-post-featured-image__actions">
+																	<Button
+																		className="editor-post-featured-image__action"
+																		onClick={() => removeMediaBg()}
+																	>
+																		{__("Remove", "frontis-block")}
+																	</Button>
+																	<MediaUploadCheck>
+																		<MediaUpload
+																			title={__(
+																				"Replace image",
+																				"frontis-block",
+																			)}
+																			value={attributes.mediaBgId}
+																			onSelect={(media) => {
+																				setAttributes({
+																					mediaBgId: media["id"],
+																					mediaBgTypeImage: media["url"],
+																					mediaBgWidth: media["width"],
+																					mediaBgHeight: media["height"],
+																				});
+																			}}
+																			type="image"
+																			render={({ open }) => (
+																				<Button
+																					className="editor-post-featured-image__action"
+																					onClick={open}
+																				>
+																					{__("Replace", "frontis-block")}
+																				</Button>
+																			)}
+																		/>
+																	</MediaUploadCheck>
+																</HStack>
+															)}
+													</BaseControl>
+
+													
+												</>
+											)}
+											{bgType === "color" && (
+												<>
+													<BaseControl
+														label={__("Background Color", "frontis-block")}
+														className="fb-setting-color-panel-wrapper"
+													>
+														<ButtonGroup className="fb-setting-color-panel-btn">
+															{NORMAL_HOVER.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() =>
+																		setAttributes({
+																			mediaBgColorSwitcher: item.value,
+																		})
+																	}
+																	className={`fb-setting-color-panel-btn-switchr ${
+																		mediaBgColorSwitcher === item.value
+																			? "active"
+																			: ""
+																	}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+													</BaseControl>
+
+													{mediaBgColorSwitcher === "normal" && (
+														<BaseControl
+															label={__("Nomal Color", "frontis-block")}
+															className="fb-setting-color-setting-wrapper"
 														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
-
-											{mediaBgColorSwitcher === "normal" && (
-												<BaseControl
-													label={__("Nomal Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
+															<Dropdown
+																className="fb-setting-color-setting-icon-dropdown"
+																contentClassName="fb-setting-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: "bottom-start" }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		aria-label={__(
+																			"Toggle Typography Settings",
+																			"frontis-block",
+																		)}
+																		className="fb-setting-color-setting-icon-btn"
+																	>
+																		<Dashicon
+																			icon="color-picker"
+																			className="fb-setting-color-setting-icon"
+																		/>
+																	</Button>
 																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={mediaBgColor}
-																			onChange={(value) =>
-																				setAttributes({ mediaBgColor: value })
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={mediaBgColor}
-																			onChange={(value) =>
-																				setAttributes({ mediaBgColor: value })
-																			}
-																		/>
+																renderContent={() => (
+																	<div className="fb-setting-color-setting-icon-popup">
+																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																			<div className="fb-setting-normal-color">
+																				<ColorPicker
+																					color={mediaBgColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							mediaBgColor: value,
+																						})
+																					}
+																					enableAlpha={true}
+																				/>
+																				<div className="fb-setting-color-label">
+																					{__(
+																						"Default Colors",
+																						"frontis-block",
+																					)}
+																				</div>
+																				<ColorPalette
+																					colors={[
+																						{ color: "#F72585" },
+																						{ color: "#7209B7" },
+																						{ color: "#3A0CA3" },
+																						{ color: "#4361EE" },
+																						{ color: "#4CC9F0" },
+																					]}
+																					disableCustomColors={true}
+																					value={mediaBgColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							mediaBgColor: value,
+																						})
+																					}
+																				/>
+																			</div>
+																		</BaseControl>
 																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
+																)}
+															/>
+														</BaseControl>
+													)}
+
+													{mediaBgColorSwitcher === "hover" && (
+														<BaseControl
+															label={__("Hover Color", "frontis-block")}
+															className="fb-setting-color-setting-wrapper"
+														>
+															<Dropdown
+																className="fb-setting-color-setting-icon-dropdown"
+																contentClassName="fb-setting-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: "bottom-start" }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		aria-label={__(
+																			"Toggle Typography Settings",
+																			"frontis-block",
+																		)}
+																		className="fb-setting-color-setting-icon-btn"
+																	>
+																		<Dashicon
+																			icon="color-picker"
+																			className="fb-setting-color-setting-icon"
+																		/>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-setting-color-setting-icon-popup">
+																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																			<div className="fb-setting-hover-color">
+																				<ColorPicker
+																					color={mediaBgHoverColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							mediaBgHoverColor: value,
+																						})
+																					}
+																					enableAlpha={true}
+																				/>
+																				<div className="fb-setting-hover-color-label">
+																					{__(
+																						"Default Colors",
+																						"frontis-block",
+																					)}
+																				</div>
+																				<ColorPalette
+																					colors={[
+																						{ color: "#F72585" },
+																						{ color: "#7209B7" },
+																						{ color: "#3A0CA3" },
+																						{ color: "#4361EE" },
+																						{ color: "#4CC9F0" },
+																					]}
+																					disableCustomColors={true}
+																					value={mediaBgHoverColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							mediaBgHoverColor: value,
+																						})
+																					}
+																				/>
+																			</div>
+																		</BaseControl>
+																	</div>
+																)}
+															/>
+														</BaseControl>
+													)}
+												</>
 											)}
 
-											{mediaBgColorSwitcher === "hover" && (
-												<BaseControl
-													label={__("Hover Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={mediaBgHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					mediaBgHoverColor: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={mediaBgHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					mediaBgHoverColor: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
 											<FB_Range
 												min={1}
 												max={300}
@@ -4423,9 +3733,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												resetFallbackValue={50}
 											/>
 
-
-										{/*Background*/}
-										<BaseControl
+											{/*Background*/}
+											<BaseControl
 												label={__("Icon Color", "frontis-block")}
 												className="fb-setting-color-panel-wrapper"
 											>
@@ -4618,7 +3927,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 
 											<FB_Spacing
-												label={__("Radius Border", "frontis-blocks")}
+												label={__("Border Radius", "frontis-blocks")}
 												deviceType={deviceType}
 												spacingUnitsHandler={
 													handleMediaBorderRadiusUnitsHandler
@@ -7233,160 +6542,170 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											{/* Button Icon color */}
 											{buttonIconSwitcher && (
 												<>
-												{/* Start Button Bg Color*/}
-											<BaseControl
-											label={__("Icon Color", "frontis-block")}
-											className="fb-setting-color-panel-wrapper"
-										>
-											<ButtonGroup className="fb-setting-color-panel-btn">
-												{NORMAL_HOVER.map((item, key) => (
-													<Button
-														key={key}
-														onClick={() =>
-															setAttributes({
-																btnIconColorSwitcher: item.value,
-															})
-														}
-														className={`fb-setting-color-panel-btn-switchr ${
-															btnIconColorSwitcher === item.value
-																? "active"
-																: ""
-														}`}
+													{/* Start Button Bg Color*/}
+													<BaseControl
+														label={__("Icon Color", "frontis-block")}
+														className="fb-setting-color-panel-wrapper"
 													>
-														{item.label}
-													</Button>
-												))}
-											</ButtonGroup>
-										</BaseControl>
+														<ButtonGroup className="fb-setting-color-panel-btn">
+															{NORMAL_HOVER.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() =>
+																		setAttributes({
+																			btnIconColorSwitcher: item.value,
+																		})
+																	}
+																	className={`fb-setting-color-panel-btn-switchr ${
+																		btnIconColorSwitcher === item.value
+																			? "active"
+																			: ""
+																	}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+													</BaseControl>
 
-										{btnIconColorSwitcher === "normal" && (
-											<BaseControl
-												label={__("Nomal Color", "frontis-block")}
-												className="fb-setting-color-setting-wrapper"
-											>
-												<Dropdown
-													className="fb-setting-color-setting-icon-dropdown"
-													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: "bottom-start" }}
-													renderToggle={({ isOpen, onToggle }) => (
-														<Button
-															variant="primary"
-															onClick={onToggle}
-															aria-expanded={isOpen}
-															aria-label={__(
-																"Toggle Typography Settings",
-																"frontis-block",
-															)}
-															className="fb-setting-color-setting-icon-btn"
+													{btnIconColorSwitcher === "normal" && (
+														<BaseControl
+															label={__("Nomal Color", "frontis-block")}
+															className="fb-setting-color-setting-wrapper"
 														>
-															<Dashicon
-																icon="color-picker"
-																className="fb-setting-color-setting-icon"
-															/>
-														</Button>
-													)}
-													renderContent={() => (
-														<div className="fb-setting-color-setting-icon-popup">
-															<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																<div className="fb-setting-normal-color">
-																	<ColorPicker
-																		color={btnIconColor}
-																		onChange={(value) =>
-																			setAttributes({ btnIconColor: value })
-																		}
-																		enableAlpha={true}
-																	/>
-																	<div className="fb-setting-color-label">
-																		{__("Default Colors", "frontis-block")}
+															<Dropdown
+																className="fb-setting-color-setting-icon-dropdown"
+																contentClassName="fb-setting-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: "bottom-start" }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		aria-label={__(
+																			"Toggle Typography Settings",
+																			"frontis-block",
+																		)}
+																		className="fb-setting-color-setting-icon-btn"
+																	>
+																		<Dashicon
+																			icon="color-picker"
+																			className="fb-setting-color-setting-icon"
+																		/>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-setting-color-setting-icon-popup">
+																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																			<div className="fb-setting-normal-color">
+																				<ColorPicker
+																					color={btnIconColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							btnIconColor: value,
+																						})
+																					}
+																					enableAlpha={true}
+																				/>
+																				<div className="fb-setting-color-label">
+																					{__(
+																						"Default Colors",
+																						"frontis-block",
+																					)}
+																				</div>
+																				<ColorPalette
+																					colors={[
+																						{ color: "#F72585" },
+																						{ color: "#7209B7" },
+																						{ color: "#3A0CA3" },
+																						{ color: "#4361EE" },
+																						{ color: "#4CC9F0" },
+																					]}
+																					disableCustomColors={true}
+																					value={btnIconColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							btnIconColor: value,
+																						})
+																					}
+																				/>
+																			</div>
+																		</BaseControl>
 																	</div>
-																	<ColorPalette
-																		colors={[
-																			{ color: "#F72585" },
-																			{ color: "#7209B7" },
-																			{ color: "#3A0CA3" },
-																			{ color: "#4361EE" },
-																			{ color: "#4CC9F0" },
-																		]}
-																		disableCustomColors={true}
-																		value={btnIconColor}
-																		onChange={(value) =>
-																			setAttributes({ btnIconColor: value })
-																		}
-																	/>
-																</div>
-															</BaseControl>
-														</div>
+																)}
+															/>
+														</BaseControl>
 													)}
-												/>
-											</BaseControl>
-										)}
 
-										{btnIconColorSwitcher === "hover" && (
-											<BaseControl
-												label={__("Hover Color", "frontis-block")}
-												className="fb-setting-color-setting-wrapper"
-											>
-												<Dropdown
-													className="fb-setting-color-setting-icon-dropdown"
-													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: "bottom-start" }}
-													renderToggle={({ isOpen, onToggle }) => (
-														<Button
-															variant="primary"
-															onClick={onToggle}
-															aria-expanded={isOpen}
-															aria-label={__(
-																"Toggle Typography Settings",
-																"frontis-block",
-															)}
-															className="fb-setting-color-setting-icon-btn"
+													{btnIconColorSwitcher === "hover" && (
+														<BaseControl
+															label={__("Hover Color", "frontis-block")}
+															className="fb-setting-color-setting-wrapper"
 														>
-															<Dashicon
-																icon="color-picker"
-																className="fb-setting-color-setting-icon"
-															/>
-														</Button>
-													)}
-													renderContent={() => (
-														<div className="fb-setting-color-setting-icon-popup">
-															<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																<div className="fb-setting-hover-color">
-																	<ColorPicker
-																		color={btnIconHoverColor}
-																		onChange={(value) =>
-																			setAttributes({
-																				btnIconHoverColor: value,
-																			})
-																		}
-																		enableAlpha={true}
-																	/>
-																	<div className="fb-setting-hover-color-label">
-																		{__("Default Colors", "frontis-block")}
+															<Dropdown
+																className="fb-setting-color-setting-icon-dropdown"
+																contentClassName="fb-setting-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: "bottom-start" }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		aria-label={__(
+																			"Toggle Typography Settings",
+																			"frontis-block",
+																		)}
+																		className="fb-setting-color-setting-icon-btn"
+																	>
+																		<Dashicon
+																			icon="color-picker"
+																			className="fb-setting-color-setting-icon"
+																		/>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-setting-color-setting-icon-popup">
+																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
+																			<div className="fb-setting-hover-color">
+																				<ColorPicker
+																					color={btnIconHoverColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							btnIconHoverColor: value,
+																						})
+																					}
+																					enableAlpha={true}
+																				/>
+																				<div className="fb-setting-hover-color-label">
+																					{__(
+																						"Default Colors",
+																						"frontis-block",
+																					)}
+																				</div>
+																				<ColorPalette
+																					colors={[
+																						{ color: "#F72585" },
+																						{ color: "#7209B7" },
+																						{ color: "#3A0CA3" },
+																						{ color: "#4361EE" },
+																						{ color: "#4CC9F0" },
+																					]}
+																					disableCustomColors={true}
+																					value={btnIconHoverColor}
+																					onChange={(value) =>
+																						setAttributes({
+																							btnIconHoverColor: value,
+																						})
+																					}
+																				/>
+																			</div>
+																		</BaseControl>
 																	</div>
-																	<ColorPalette
-																		colors={[
-																			{ color: "#F72585" },
-																			{ color: "#7209B7" },
-																			{ color: "#3A0CA3" },
-																			{ color: "#4361EE" },
-																			{ color: "#4CC9F0" },
-																		]}
-																		disableCustomColors={true}
-																		value={btnIconHoverColor}
-																		onChange={(value) =>
-																			setAttributes({
-																				btnIconHoverColor: value,
-																			})
-																		}
-																	/>
-																</div>
-															</BaseControl>
-														</div>
+																)}
+															/>
+														</BaseControl>
 													)}
-												/>
-											</BaseControl>
-											)}
-											</>
+												</>
 											)}
 											{/*Spacing*/}
 											<Heading>Spacing</Heading>
@@ -8220,9 +7539,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 													/>
 													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ boxGlobalBoxShadowValues: value })}
+														onBoxShadowChange={(value) =>
+															setAttributes({ boxGlobalBoxShadowValues: value })
+														}
 														initialShadowValue={boxGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ boxGlobalBoxShadowCssValue: value })}
+														onBoxShadowStyleChange={(value) =>
+															setAttributes({
+																boxGlobalBoxShadowCssValue: value,
+															})
+														}
 													/>
 												</PanelBody>
 											</div>
