@@ -15,6 +15,7 @@ node_modules/
 package-lock.json
 yarn.lock
 build
+dist
 
 
 style-blocks/
@@ -22,4 +23,3 @@ blocks/**/index.js.LICENSE.txt
 *.log
 
 .prettierrc
-

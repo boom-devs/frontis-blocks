@@ -6,25 +6,18 @@ import {
 	Button,
 	ColorPalette,
 	ColorIndicator,
-	TabPanel,
-	GradientPicker,
-	__experimentalToolsPanel as ToolsPanel,
-	__experimentalToolsPanelItem as ToolsPanelItem,
-	__experimentalUseDeviceType as useDeviceType,
+    TabPanel,
+    Dashicon
 } from "@wordpress/components";
 import {
 	PanelColorSettings,
-	__experimentalColorGradientControl as ColorGradientControl,
-	BlockPreview,
 } from "@wordpress/block-editor";
 import FB_TypographyControl from '@Components/typography-control';
 import GradientColorPallet from './components/GradientColorPallet';
-import { createBlock, store as blocksStore } from "@wordpress/blocks";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
-import { FBIcon } from '../icons';
 import "./sidebar.scss";
-import jQuery from 'jquery';
+
 
 const defaultsColors = [
     {
@@ -170,22 +163,7 @@ export default function FrontisBlocksSidebar() {
 		setDeviceType(newDeviceType);
 	};
 
-	const addCustomColor = () => {
-		const newColor = {
-			id: `custom-color-${customColors.length + 1}`,
-			title: `Custom Color ${customColors.length + 1}`,
-			color: "#000000",
-		};
-		setCustomColors([...customColors, newColor]);
-	};
-
-	const updateCustomColor = (id, newColor) => {
-		setCustomColors(
-			customColors.map((color) =>
-				color.id === id ? { ...color, color: newColor } : color,
-			),
-		);
-	};
+	
 
 	const colorPanelArray = (colors, setColor, defaults = []) => {
 		if (typeof colors !== "object") {
@@ -217,6 +195,11 @@ export default function FrontisBlocksSidebar() {
         colors[index].color = color;
         setGradientColors([...colors]);
         updateColorsViaAjax(colors, 'gradient');
+    };
+    const setCustomColor = (index, color) => {
+        const colors = [...customColors];
+        colors[index].color = color;
+        setCustomColors([...colors]);
     };
 
 	const updateColorsViaAjax = (colors, type) => {
@@ -275,7 +258,29 @@ export default function FrontisBlocksSidebar() {
 											disableAlpha={true}
 											disableCustomGradients={false}
                                             colorSettings={ colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
-                                        />
+                                            />
+                                            {customColors && customColors.length > 0 && (
+                                                <ColorPalletWrapper
+                                                    colorPanelArray={colorPanelArray}
+                                                    customColors={customColors}
+                                                    setCustomColor={setCustomColor}
+                                                    setCustomColors={setCustomColors}
+                                                />
+                                            )}
+                                            <div className="add-custom-color">
+                                                <Button
+                                                    className="add-custom-color-btn"
+                                                    onClick={() => setCustomColors([
+                                                        ...customColors,
+                                                        {
+                                                            color: '#000000',
+                                                            name: `Custom Color ${customColors.length + 1}`,
+                                                            slug: `custom-color-${customColors.length + 1}`,
+                                                            var: `--eb-custom-color-${customColors.length + 1}`
+                                                        }
+                                                    ])}
+                                                >Add Custom Color <Dashicon icon={"plus"} /></Button>
+                                            </div>
                                         
 									</>
 								)}
