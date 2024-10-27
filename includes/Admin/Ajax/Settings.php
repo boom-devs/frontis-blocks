@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace FrontisBlocks\Admin\Ajax;
 
@@ -36,6 +36,7 @@ class Settings extends AjaxBase {
             'maintenance_mode',
             'coming_soon_page_id',
             'maintenance_page_id',
+            'get_custom_icons'
         ];
 
         $this->init_ajax_events($ajax_events);
@@ -46,7 +47,7 @@ class Settings extends AjaxBase {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
-        
+
         if (!current_user_can('manage_options')) {
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
             return;
@@ -116,7 +117,7 @@ class Settings extends AjaxBase {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
-        
+
         if (!current_user_can('manage_options')) {
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
             return;
@@ -134,7 +135,7 @@ class Settings extends AjaxBase {
         }
 
         $updated = update_option("fb_$option_name", $value);
-        
+
         if ($updated) {
             wp_send_json_success(['message' => 'Option updated successfully']);
         } else {
@@ -147,8 +148,8 @@ class Settings extends AjaxBase {
                 $error_message .= ': Unknown reason';
             }
             wp_send_json_error([
-                'message' => $error_message, 
-                'old_value' => $old_value, 
+                'message' => $error_message,
+                'old_value' => $old_value,
                 'new_value' => $value,
                 'option_name' => "fb_$option_name"
             ]);
@@ -175,7 +176,7 @@ class Settings extends AjaxBase {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
-        
+
         if (!current_user_can('manage_options')) {
             error_log('Insufficient permissions in save_blocks');
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
@@ -220,7 +221,7 @@ class Settings extends AjaxBase {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
-        
+
         if (!current_user_can('manage_options')) {
             error_log('Insufficient permissions in get_blocks');
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
@@ -228,7 +229,7 @@ class Settings extends AjaxBase {
         }
 
         $activeBlocks = get_option('fb_active_blocks', []);
-        
+
         // Ensure all blocks from BlockList are included, defaulting to false if not in activeBlocks
         $allBlocks = BlockList::get_instance()->get_blocks();
         $completeBlocks = array_merge(
@@ -279,5 +280,153 @@ class Settings extends AjaxBase {
         $this->handle_option_update('maintenance_page_id', 'text');
     }
 
-    
+    public function generate_custom_icons() {
+    	// Path to the SVG file
+		$filePath = "$extractPath/$filename.svg";
+
+		if (file_exists($filePath)) {
+			// Load the SVG file content
+			$svgContent = file_get_contents($filePath);
+
+			// Extract width, height, and path data using regex
+			preg_match('/width="(\d+)"/', $svgContent, $widthMatches);
+			preg_match('/height="(\d+)"/', $svgContent, $heightMatches);
+			preg_match('/<path[^>]*d="([^"]*)"/', $svgContent, $pathMatches);
+
+			// Structure the SVG data in the desired format
+			$svgData[$filename] = [
+				"svg" => [
+					"solid" => [
+						"width" => (int)($widthMatches[1] ?? 0),
+						"height" => (int)($heightMatches[1] ?? 0),
+						"path" => $pathMatches[1] ?? '',
+					],
+				],
+				"label" => $filename,
+				"custom_categories" => [$post_title],
+			];
+		}
+
+    }
+
+    public function get_custom_icons() {
+    	if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
+		}
+
+		if ( ! class_exists( 'PclZip' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/class-pclzip.php';
+        }
+
+		global $wpdb;
+		$meta_key = 'fb_custom_icon';
+
+		// Prepare the SQL query
+		$query = $wpdb->prepare(
+			"SELECT p.ID, p.post_title, p.post_name, pm.meta_value AS fb_custom_icon
+			 FROM {$wpdb->prefix}posts p
+			 JOIN {$wpdb->prefix}postmeta pm ON p.ID = pm.post_id
+			 WHERE p.post_status = %s
+			   AND p.post_type = %s
+			   AND pm.meta_key = %s",
+			'publish',   // Post status
+			'post',      // Post type
+			$meta_key    // Meta key
+		);
+
+		// Execute the query and get results
+		$results = $wpdb->get_results($query);
+
+		if($results) {
+			$custom_icons = [];
+			foreach($results as $key => $single_icon) {
+				$icon_url = $single_icon->fb_custom_icon;
+				$fileName = pathinfo(basename($icon_url), PATHINFO_FILENAME);
+				$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-custom-icons/'.$fileName;
+				if (!is_dir($upload_directory)) {
+					mkdir($upload_directory, 0755, true);
+				}
+
+				$tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
+
+				$ch = curl_init($icon_url);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+				$data = curl_exec($ch);
+				file_put_contents($tempZipFile, $data);
+				$zip = new \PclZip($tempZipFile);
+
+				$extractResult = $zip->extract(PCLZIP_OPT_PATH, $upload_directory);
+
+				if ($extractResult == 0) {
+					header("Content-type: application/json; charset=utf-8");
+					http_response_code(405);
+					echo json_encode(
+						array(
+							"message" => "Failed to extract ZIP file.",
+							"status" => true,
+						)
+					);
+					return false;
+				} else {
+					$filesInDirectory = scandir($upload_directory);
+					if($filesInDirectory) {
+						foreach($filesInDirectory as $single_dir_icon) {
+							// Skip special entries '.' and '..'
+							if ($single_dir_icon === '.' || $single_dir_icon === '..') {
+								continue;
+							}
+
+							$file = $upload_directory . '/' . $single_dir_icon;
+
+							// Check if it's a file before attempting to read
+							if (is_file($file) && file_exists($file)) {
+								$svgContent = @file_get_contents($file); // Suppress warnings with '@'
+								$icon_name = pathinfo(basename($file), PATHINFO_FILENAME);
+								if ($svgContent === false) {
+									error_log("Failed to read file: $file");
+								} else {
+									// Extract width and height from SVG tag
+                                    preg_match('/width="([0-9]+)px"/', $svgContent, $widthMatch);
+                                    preg_match('/height="([0-9]+)px"/', $svgContent, $heightMatch);
+
+                                    $width = isset($widthMatch[1]) ? (int)$widthMatch[1] : 320;  // Default width if not found
+                                    $height = isset($heightMatch[1]) ? (int)$heightMatch[1] : 512; // Default height if not found
+
+                                    // Remove XML declaration and <svg> tag attributes, keeping only inner SVG elements
+                                    $svgContent = preg_replace('/<\?xml.*\?>/', '', $svgContent); // Remove XML declaration
+                                    $svgContent = preg_replace('/<svg[^>]*>|<\/svg>/', '', $svgContent); // Remove <svg> tags and attributes
+
+                                    // Prepare the formatted array
+                                    $custom_icons[$icon_name] = [
+                                            "svg" => [
+                                                "solid" => [
+                                                    "width" => $width,
+                                                    "height" => $height,
+                                                    "path" => trim($svgContent),
+                                                ],
+                                            ],
+                                            "label" => "0",
+                                            "custom_categories" => [$single_icon->post_name],
+                                            "custom_icon" => true
+                                    ];
+								}
+							} else {
+								error_log("File does not exist or is not a file: $file");
+							}
+						}
+					}
+				}
+
+				unlink($tempZipFile);
+			}
+
+			var_dump($custom_icons);
+
+// 			$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-custom-icons';
+// 			$filesInDirectory = scandir($upload_directory);
+		}
+    }
 }
