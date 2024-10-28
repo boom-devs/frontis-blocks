@@ -22,8 +22,8 @@ import {
 import {useState, useEffect} from "@wordpress/element";
 import FB_ResponsiveControl from '@Components/responsive-control';
 import './editor.scss';
-import {BORDER_STYLES, NORMAL_HOVER, UNIT_TYPES} from "../advanced-button/constants/constants";
-import {FONT_FAMILYS, HEADING, TEXT_ALIGN} from "@Blocks/advanced-heading/constants/constants";
+// import {BORDER_STYLES, NORMAL_HOVER, UNIT_TYPES} from "../advanced-button/constants/constants";
+// import {FONT_FAMILYS, HEADING, TEXT_ALIGN} from "@Blocks/advanced-heading/constants/constants";
 import FB_Range from "@Components/range";
 
 export default function Inspector({attributes, setAttributes, clientId}) {
@@ -1164,12 +1164,12 @@ export default function Inspector({attributes, setAttributes, clientId}) {
 														<div className="fb-setting-typography-popup">
 															<BaseControl className="fb-setting-typography-popup-inner" >
 																<div className="fb-setting-fontfamily-wrapper">
-																	<SelectControl
-																		label={__("Font Family", "frontis-blocks")}
-																		options={FONT_FAMILYS}
-																		value={HeadingFontFamily}
-																		onChange={(value) => setAttributes({ HeadingFontFamily: value })}
-																	/>
+																	{/*<SelectControl*/}
+																	{/*	label={__("Font Family", "frontis-blocks")}*/}
+																	{/*	options={FONT_FAMILYS}*/}
+																	{/*	value={HeadingFontFamily}*/}
+																	{/*	onChange={(value) => setAttributes({ HeadingFontFamily: value })}*/}
+																	{/*/>*/}
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
