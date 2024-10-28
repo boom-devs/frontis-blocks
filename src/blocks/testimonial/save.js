@@ -10,6 +10,7 @@ export default function save({ attributes }) {
         TestimonialAlignment,
         TitleSwitcher,
         TestimonialTitle,
+        TestimonialTitleTag,
         DescSwitcher,
         TestimonialDesc,
         AuthorSwitcher,
@@ -46,45 +47,47 @@ export default function save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-testimonial-section fb-testimonia-section-${TestimonialAlignment}`}>
+                <div className={`fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`}>
                     <div className={`fb-testimonial-wrapper ${blockID}`}>
                         <div className="fb-testimonial-inner-wrapper">
                             <div className='fb-testimonial-container'>
-                                {TestimonialImageSwitcher && (
-                                    <div className="fb-testimonial-image-wrapper">
-                                        <div className="fb-testimonial-image-inner-wrapper">
-                                            <div className="fb-testimonial-image">
-                                                {TestimonialImageUrl && (
-                                                    <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
-                                                )}
-                                            </div>
-                                        </div>
+                                {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                    <div className="fb-testimonial-rating">
+                                        {renderRatingIcons()}
                                     </div>
                                 )}
-                                <div className="fb-testimonial-description-container">
-                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
-                                        <div className="fb-testimonial-quote-icon">
-                                            {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
-                                        </div>
-                                    )}
-                                    {TitleSwitcher && (
-                                        <div className="fb-testimonial-title-container">
-                                            <RichText.Content
-                                                tagName="h3"
-                                                value={TestimonialTitle}
-                                                className="fb-testimonial-title"
-                                            />
-                                        </div>
-                                    )}
-                                    {DescSwitcher && (
-                                        <div className="fb-testimonial-userinfo-container">
-                                            <RichText.Content
-                                                tagName="p"
-                                                value={TestimonialDesc}
-                                                className="fb-user-desc"
-                                            />
-                                        </div>
-                                    )}
+                                {TitleSwitcher && (
+                                    <div className="fb-testimonial-title-container">
+                                        <RichText.Content
+                                            tagName={TestimonialTitleTag}
+                                            value={TestimonialTitle}
+                                            className="fb-testimonial-title"
+                                        />
+                                    </div>
+                                )}
+                                {DescSwitcher && (
+                                    <div className="fb-testimonial-userdesc-container">
+                                        <RichText.Content
+                                            tagName="p"
+                                            value={TestimonialDesc}
+                                            className="fb-user-desc"
+                                        />
+                                    </div>
+                                )}
+                                <div className="fb-testimonial-author-container">
+                                    <div className='fb-testimonial-author-image-container'>
+                                        {TestimonialImageSwitcher && (
+                                            <div className="fb-testimonial-image-wrapper">
+                                                <div className="fb-testimonial-image-inner-wrapper">
+                                                    <div className="fb-testimonial-image">
+                                                        {TestimonialImageUrl && (
+                                                            <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                     <div className="fb-testimonial-userinfo-container">
                                         {AuthorSwitcher && (
                                             <RichText.Content
@@ -100,13 +103,13 @@ export default function save({ attributes }) {
                                                 className="fb-user-designation"
                                             />
                                         )}
-                                        {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
-                                            <div className="fb-testimonial-rating">
-                                                {renderRatingIcons()}
-                                            </div>
-                                        )}
                                     </div>
                                 </div>
+                                {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
+                                    <div className="fb-testimonial-quote-icon">
+                                        {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
