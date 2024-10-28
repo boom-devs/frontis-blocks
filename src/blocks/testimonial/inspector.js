@@ -27,6 +27,8 @@ import {
     Testimonial,
     FONT_FAMILYS,
     BORDER_STYLES,
+    HEADING,
+    PRESETS,
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
@@ -42,6 +44,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         deviceType,
+        TestimonialPresetStyle,
         TestimonialAlignment,
 
         TestimonialImageSwitcher,
@@ -74,12 +77,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialImageMobileRadiusWidth,
         TestimonialImageRadiusLink,
 
+        TestimonialImageSpacingUnits,
+        TestimonialImageSpacing,
+        TestimonialAuthorSpacing,
+        TestimonialAuthorSpacingUnits,
+
         TestimonialQuoteIconSize,
         TestimonialQuoteIconSizeUnits,
         TestimonialQuoteIconColorSwitcher,
         TestimonialQuoteIconColor,
         TestimonialQuoteIconHoverColor,
+        TestimonialQuoteIconPositionSwitcher,
+        TestimonialQuoteIconTopPosition,
+        TestimonialQuoteIconTopPositionUnits,
+        TestimonialQuoteIconLeftPosition,
+        TestimonialQuoteIconLeftPositionUnits,
 
+        TestimonialTitleTag,
         TestimonialTitleFontFamily,
         TestimonialTitleFontSize,
         TestimonialTitleFontSizeUnits,
@@ -94,6 +108,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialTitleColorSwitcher,
         TestimonialTitleColor,
         TestimonialTitleHoverColor,
+        TestimonialTitleSpacingUnits,
+        TestimonialTitleSpacing,
 
         TestimonialDescFontFamily,
         TestimonialDescFontSize,
@@ -109,6 +125,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDescColorSwitcher,
         TestimonialDescColor,
         TestimonialDescHoverColor,
+        TestimonialDescSpacingUnits,    
+        TestimonialDescSpacing,
 
         TestimonialAuthorFontFamily,
         TestimonialAuthorFontSize,
@@ -145,6 +163,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialRatingIconColorSwitcher,
         TestimonialRatingIconColor,
         TestimonialRatingIconHoverColor,
+        TestimonialRatingIconSpacing,
+        TestimonialRatingIconSpacingUnits,
 
         TestimonialGlobalZIndex,
         TestimonialGlobalPaddingUnits,
@@ -213,6 +233,131 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             setAttributes({ TestimonialImageUrl: defaultImageUrl });
         }
     }, []);
+
+
+    /** Start Preset Style */
+    const changeTestimonialPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-0": {
+                RatingSwitcher: true,
+                TitleSwitcher: true,
+                DescSwitcher: true,
+                TestimonialImageSwitcher: true,
+                AuthorSwitcher: true,
+                DesignationSwitcher: true,
+                QuoteIconSwitcher: false,
+                TestimonialQuoteIconPositionSwitcher: false,
+                TestimonialDescSpacing: {
+                    Desktop: "15",
+                    Tablet: "15",
+                    Mobile: "15",
+                },
+                TestimonialRatingIconSpacing: {
+                    Desktop: "0",
+                    Tablet: "0",
+                    Mobile: "0",
+                },
+            },
+            "preset-1": {
+                RatingSwitcher: true,
+                TitleSwitcher: false,
+                DescSwitcher: true,
+                TestimonialImageSwitcher: true,
+                AuthorSwitcher: true,
+                DesignationSwitcher: true,
+                QuoteIconSwitcher: false,
+                TestimonialQuoteIconPositionSwitcher: false,
+                TestimonialDescSpacing: {
+                    Desktop: "15",
+                    Tablet: "15",
+                    Mobile: "15",
+                },
+                TestimonialRatingIconSpacing: {
+                    Desktop: "0",
+                    Tablet: "0",
+                    Mobile: "0",
+                },
+            },
+            "preset-2": {
+                RatingSwitcher: true,
+                TitleSwitcher: false,
+                DescSwitcher: true,
+                TestimonialImageSwitcher: true,
+                AuthorSwitcher: true,
+                DesignationSwitcher: true,
+                QuoteIconSwitcher: true,
+                TestimonialQuoteIconPositionSwitcher: true,
+                TestimonialQuoteIconTopPosition: {
+                    Desktop: "3",
+                    Tablet: "3",
+                    Mobile: "3",
+                },
+                TestimonialQuoteIconLeftPosition: {
+                    Desktop: "85",
+                    Tablet: "85",
+                    Mobile: "85",
+                },
+                TestimonialDescSpacing: {
+                    Desktop: "15",
+                    Tablet: "15",
+                    Mobile: "15",
+                },
+                TestimonialRatingIconSpacing: {
+                    Desktop: "0",
+                    Tablet: "0",
+                    Mobile: "0",
+                },
+            },
+            "preset-3": {
+                RatingSwitcher: true,
+                TitleSwitcher: false,
+                DescSwitcher: true,
+                TestimonialImageSwitcher: true,
+                AuthorSwitcher: true,
+                DesignationSwitcher: true,
+                QuoteIconSwitcher: true,
+                TestimonialQuoteIconPositionSwitcher: true,
+                TestimonialQuoteIconTopPosition: {
+                    Desktop: "3",
+                    Tablet: "3",
+                    Mobile: "3",
+                },
+                TestimonialQuoteIconLeftPosition: {
+                    Desktop: "85",
+                    Tablet: "85",
+                    Mobile: "85",
+                },
+                TestimonialAuthorSpacing: {
+                    Desktop: "0",
+                    Tablet: "0",
+                    Mobile: "0",
+                },
+                TestimonialDescSpacing: {
+                    Desktop: "0",
+                    Tablet: "0",
+                    Mobile: "0",
+                },
+                TestimonialRatingIconSpacing: {
+                    Desktop: "15",
+                    Tablet: "15",
+                    Mobile: "15",
+                },
+            },
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                TestimonialPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Testimonial: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style */
+
 
     /** Start Testimonial Image Border Radius */
     const testimonialImageBorderRadiusUnitsChange = (event, position) => {
@@ -593,7 +738,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             <style>
                 {`
                     .fb-testimonial-main-wrapper.${blockID} {
-                        z-index: ${TestimonialGlobalZIndex !== undefined ? TestimonialGlobalZIndex : ''} !important; 
+                        z-index: ${TestimonialGlobalZIndex !== undefined ? TestimonialGlobalZIndex : ''} !important;
+                        position: relative;
+                        overflow: hidden;
                     }
                     .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
                         ${TestimonialGlobalBgColor ? `background-color: ${TestimonialGlobalBgColor};` : ''} 
@@ -611,10 +758,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialGlobalBgHoverColor ? `background-color: ${TestimonialGlobalBgHoverColor};` : ''} 
                         ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
                     }
+                    .${blockID} .fb-testimonial-author-container {
+                        margin-top: ${TestimonialAuthorSpacing.Desktop ? `${TestimonialAuthorSpacing.Desktop}${TestimonialAuthorSpacingUnits.Desktop}` : '0'};
+                    }
                     .${blockID} .fb-testimonial-image img {
                         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
                         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
                         border-radius: ${testimonialImageDesktopBorderRadiusWidth};
+                        margin-right: ${TestimonialImageSpacing.Desktop ? `${TestimonialImageSpacing.Desktop}${TestimonialImageSpacingUnits.Desktop}` : '0'}
+                    }
+                    .${blockID} .fb-testimonial-quote-icon {
+                        ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
+                        ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Desktop && TestimonialQuoteIconTopPositionUnits.Desktop ? `${TestimonialQuoteIconTopPosition.Desktop}${TestimonialQuoteIconTopPositionUnits.Desktop}` : '0'};` : ''}
+                        ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Desktop && TestimonialQuoteIconLeftPositionUnits.Desktop ? `${TestimonialQuoteIconLeftPosition.Desktop}${TestimonialQuoteIconLeftPositionUnits.Desktop}` : '0'};` : ''}
                     }
                     .${blockID} .fb-testimonial-quote-icon svg {
                         ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
@@ -626,7 +782,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     }
                     .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
                         ${TestimonialTitleFontFamily ? `font-family: ${TestimonialTitleFontFamily};` : ''}
-                        ${TestimonialTitleFontSize.Desktop && TestimonialTitleFontSizeUnits.Desktop ? `font-size: ${TestimonialTitleFontSize.Desktop}${TestimonialTitleFontSizeUnits.Desktop};` : ''}
+                        ${TestimonialTitleFontSize.Desktop && TestimonialTitleFontSizeUnits.Desktop ? `font-size: ${TestimonialTitleFontSize.Desktop}${TestimonialTitleFontSizeUnits.Desktop};` : '24px'}
                         ${TestimonialTitleFontWeight ? `font-weight: ${TestimonialTitleFontWeight};` : ''}
                         ${TestimonialTitleFontStyle ? `font-style: ${TestimonialTitleFontStyle};` : ''}
                         ${TestimonialTitleTextTransform ? `text-transform: ${TestimonialTitleTextTransform};` : ''}
@@ -634,6 +790,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
                         ${TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
                         ${TestimonialTitleColor ? `color: ${TestimonialTitleColor};` : ''}
+                        margin: ${TestimonialTitleSpacing.Desktop ? `${TestimonialTitleSpacing.Desktop}${TestimonialTitleSpacingUnits.Desktop}` : '0'} 0;
                     }
                     .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
                         ${TestimonialTitleHoverColor ? `color: ${TestimonialTitleHoverColor};` : ''}
@@ -648,6 +805,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
                         ${TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
                         ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
+                        margin: ${TestimonialDescSpacing.Desktop ? `${TestimonialDescSpacing.Desktop}${TestimonialDescSpacingUnits.Desktop}` : '0'} 0;
                     }
                     .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
                         ${TestimonialDescHoverColor ? `color: ${TestimonialDescHoverColor};` : ''}
@@ -683,6 +841,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialDesignationHoverColor ? `color: ${TestimonialDesignationHoverColor};` : ''}
                     }
 
+                    .${blockID} .fb-testimonial-rating {
+                        margin: ${TestimonialRatingIconSpacing.Desktop ? `${TestimonialRatingIconSpacing.Desktop}${TestimonialRatingIconSpacingUnits.Desktop}` : '0'} 0;
+                    }
+
                     .${blockID} .fb-testimonial-rating-icon svg {
                         width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
                         height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
@@ -699,20 +861,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
                             ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
                         }
+                    .${blockID} .fb-testimonial-quote-icon {
+                        ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
+                        ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Tablet && TestimonialQuoteIconTopPositionUnits.Tablet ? `${TestimonialQuoteIconTopPosition.Tablet}${TestimonialQuoteIconTopPositionUnits.Tablet}` : '0'};` : ''}
+                        ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
+                    }
+                        .${blockID} .fb-testimonial-author-container {
+                            margin-top: ${TestimonialAuthorSpacing.Tablet ? `${TestimonialAuthorSpacing.Tablet}${TestimonialAuthorSpacingUnits.Tablet}` : '0'};
+                        }
+
+                        .${blockID} .fb-testimonial-rating {
+                            margin: ${TestimonialRatingIconSpacing.Tablet ? `${TestimonialRatingIconSpacing.Tablet}${TestimonialRatingIconSpacingUnits.Tablet}` : '0'} 0;
+                        }
                         .${blockID} .fb-testimonial-image img {
                             ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `width: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
                             ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `height: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
                             border-radius: ${testimonialImageTabletBorderRadiusWidth};
+                            margin-right: ${TestimonialImageSpacing.Tablet ? `${TestimonialImageSpacing.Tablet}${TestimonialImageSpacingUnits.Tablet}` : '0'}
                         }
                         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
                             ${TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
                             ${TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
                             ${TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
+                            margin: ${TestimonialTitleSpacing.Tablet ? `${TestimonialTitleSpacing.Tablet}${TestimonialTitleSpacingUnits.Tablet}` : '0'} 0;
                         }
                         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                             ${TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
                             ${TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
                             ${TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
+                            margin: ${TestimonialDescSpacing.Tablet ? `${TestimonialDescSpacing.Tablet}${TestimonialDescSpacingUnits.Tablet}` : '0'} 0;
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user {
                             font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};
@@ -732,20 +909,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
                             ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
                         }
+                        .${blockID} .fb-testimonial-rating {
+                            margin: ${TestimonialRatingIconSpacing.Mobile ? `${TestimonialRatingIconSpacing.Mobile}${TestimonialRatingIconSpacingUnits.Mobile}` : '0'} 0;
+                        }
+                        .${blockID} .fb-testimonial-quote-icon {
+                            ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
+                            ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Mobile && TestimonialQuoteIconTopPositionUnits.Mobile ? `${TestimonialQuoteIconTopPosition.Mobile}${TestimonialQuoteIconTopPositionUnits.Mobile}` : '0'};` : ''}
+                            ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Mobile && TestimonialQuoteIconLeftPositionUnits.Mobile ? `${TestimonialQuoteIconLeftPosition.Mobile}${TestimonialQuoteIconLeftPositionUnits.Mobile}` : '0'};` : ''}
+                        }
+
+                        .${blockID} .fb-testimonial-author-container {
+                            margin-top: ${TestimonialAuthorSpacing.Mobile ? `${TestimonialAuthorSpacing.Mobile}${TestimonialAuthorSpacingUnits.Mobile}` : '0'};
+                        }
                         .${blockID} .fb-testimonial-image img {
                             ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `width: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
                             ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `height: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
                             border-radius: ${testimonialImageMobileBorderRadiusWidth};
+                            margin-right: ${TestimonialImageSpacing.Mobile ? `${TestimonialImageSpacing.Mobile}${TestimonialImageSpacingUnits.Mobile}` : '0'}
                         }
                         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
                             ${TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
                             ${TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
                             ${TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
+                            margin: ${TestimonialTitleSpacing.Mobile ? `${TestimonialTitleSpacing.Mobile}${TestimonialTitleSpacingUnits.Mobile}` : '0'} 0;
                         }
                         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                             ${TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
                             ${TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
                             ${TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
+                            margin: ${TestimonialDescSpacing.Mobile ? `${TestimonialDescSpacing.Mobile}${TestimonialDescSpacingUnits.Mobile}` : '0'} 0;
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user {
                             font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};
@@ -791,14 +983,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             title={__("Testimonial Info", "frontis-blocks")}
                                             initialOpen={true}
                                         >
+                                                <SelectControl
+                                                    label={__("Preset Style", "frontis-blocks")}
+                                                    value={TestimonialPresetStyle}
+                                                    options={PRESETS}
+                                                    onChange={(selected) => changeTestimonialPreset(selected)}
+                                                />
                                                 <BaseControl
                                                     label={__("Element Visibility", "frontis-blocks")}
                                                     className="fb-setting-show-hide-elements" 
                                                 >
                                                     <ToggleControl
-                                                        label={__("Show Image", "frontis-blocks")}
-                                                        checked={TestimonialImageSwitcher}
-                                                        onChange={(value) => setAttributes({ TestimonialImageSwitcher: value })}
+                                                        label={__("Show Rating", "frontis-blocks")}
+                                                        checked={RatingSwitcher}
+                                                        onChange={(value) => setAttributes({ RatingSwitcher: value })}
                                                     />
                                                     <ToggleControl
                                                         label={__("Show Title", "frontis-blocks")}
@@ -809,6 +1007,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         label={__("Show Description", "frontis-blocks")}
                                                         checked={DescSwitcher}
                                                         onChange={(value) => setAttributes({ DescSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Avatar", "frontis-blocks")}
+                                                        checked={TestimonialImageSwitcher}
+                                                        onChange={(value) => setAttributes({ TestimonialImageSwitcher: value })}
                                                     />
                                                     <ToggleControl
                                                         label={__("Show Author", "frontis-blocks")}
@@ -824,11 +1027,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         label={__("Show Quote Icon", "frontis-blocks")}
                                                         checked={QuoteIconSwitcher}
                                                         onChange={(value) => setAttributes({ QuoteIconSwitcher: value })}
-                                                    />
-                                                    <ToggleControl
-                                                        label={__("Show Rating", "frontis-blocks")}
-                                                        checked={RatingSwitcher}
-                                                        onChange={(value) => setAttributes({ RatingSwitcher: value })}
                                                     />
                                                 </BaseControl>
 
@@ -852,12 +1050,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </ButtonGroup>
                                                 </BaseControl>
 
+                                                {RatingSwitcher && (
+                                                    <div className='fb-setting-icon-wrapper'>
+                                                        <BaseControl
+                                                            label={__("Rating Icon", "frontis-blocks")}
+                                                            id="fb-setting-text-alignment"
+                                                            className="fb-setting-text-alignment"
+                                                        >
+                                                            <ButtonGroup
+                                                                className="fb-setting-text-alignment-group-btn"
+                                                            >
+                                                                {ICON_ALIGN.map((item, key) => (
+                                                                    <Button
+                                                                        key={key}
+                                                                        onClick={() => setAttributes({ TestimonialRatinIconAlign: item.value })}
+                                                                        className={`fb-setting-text-alignment-single-btn ${TestimonialRatinIconAlign === item.value ? 'active' : ''}`}
+                                                                    >
+                                                                        {item.label}
+                                                                    </Button>
+                                                                ))}
+                                                            </ButtonGroup>
+                                                            {TestimonialRatinIconAlign === 'icon' && (
+                                                                <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
+                                                            )}
+                                                        </BaseControl>
+                                                    </div>
+                                                )}
+                                                {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                                    <div className="fb-setting-rating-rangecontrol">
+                                                        <RangeControl
+                                                            label={__("Rating Number", "frontis-blocks")}
+                                                            value={TestimonialRatingNumber}
+                                                            onChange={(value) => setAttributes({ TestimonialRatingNumber: value })}
+                                                            min={1}
+                                                            max={5}
+                                                            allowReset
+                                                            resetFallbackValue={5}
+                                                        />
+                                                    </div>
+                                                )}
+
                                                 {TitleSwitcher && (
                                                 <TextareaControl
                                                     label={__("Title", "frontis-blocks")}
                                                     value={TestimonialTitle}
                                                     onChange={(value) => setAttributes({ TestimonialTitle: value })}
-                                                    className="fb-testimonial-title"
+                                                    className="fb-testimonial-title-control"
                                                 />
                                                 )}
                                                 {DescSwitcher && (
@@ -865,29 +1103,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     label={__("Description", "frontis-blocks")}
                                                     value={TestimonialDesc}
                                                     onChange={(value) => setAttributes({ TestimonialDesc: value })}
-                                                    className="fb-testimonial-desc"
-                                                />
-                                                )}
-                                                {AuthorSwitcher && (
-                                                <TextareaControl
-                                                    label={__("Author", "frontis-blocks")}
-                                                    value={TestimonialAuthor}
-                                                    onChange={(value) => setAttributes({ TestimonialAuthor: value })}
-                                                    className="fb-testimonial-author"
-                                                />
-                                                )}
-                                                {DesignationSwitcher && (
-                                                <TextareaControl
-                                                    label={__("Designation", "frontis-blocks")}
-                                                    value={TestimonialDesignation}
-                                                    onChange={(value) => setAttributes({ TestimonialDesignation: value })}
-                                                    className="fb-testimonial-desi"
+                                                    className="fb-testimonial-desc-control"
                                                 />
                                                 )}
 
                                                 {TestimonialImageSwitcher && (
                                                 <BaseControl
-                                                    className="fb-testimonial-image"
+                                                    className="fb-testimonial-image-control-wrapper"
+                                                    label={__("Avatar", "frontis-blocks")}
                                                 >
                                                     {TestimonialImageUrl ? (
                                                         <div className="fb-testimonial-image-control" style={{backgroundImage: `url(${TestimonialImageUrl})`}}>
@@ -960,6 +1183,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     )}
                                                     </BaseControl>
                                                 )}
+                                                {AuthorSwitcher && (
+                                                <TextareaControl
+                                                    label={__("Author", "frontis-blocks")}
+                                                    value={TestimonialAuthor}
+                                                    onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                                                    className="fb-testimonial-author-control"
+                                                />
+                                                )}
+                                                {DesignationSwitcher && (
+                                                <TextareaControl
+                                                    label={__("Designation", "frontis-blocks")}
+                                                    value={TestimonialDesignation}
+                                                    onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                                                    className="fb-testimonial-designation-control"
+                                                />
+                                                )}
 
                                                 {QuoteIconSwitcher && (
                                                     <div className='fb-setting-icon-wrapper'>
@@ -988,46 +1227,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </div>
                                                 )}
 
-                                                {RatingSwitcher && (
-                                                    <div className='fb-setting-icon-wrapper'>
-                                                        <BaseControl
-                                                            label={__("Rating Icon", "frontis-blocks")}
-                                                            id="fb-setting-text-alignment"
-                                                            className="fb-setting-text-alignment"
-                                                        >
-                                                            <ButtonGroup
-                                                                className="fb-setting-text-alignment-group-btn"
-                                                            >
-                                                                {ICON_ALIGN.map((item, key) => (
-                                                                    <Button
-                                                                        key={key}
-                                                                        onClick={() => setAttributes({ TestimonialRatinIconAlign: item.value })}
-                                                                        className={`fb-setting-text-alignment-single-btn ${TestimonialRatinIconAlign === item.value ? 'active' : ''}`}
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                ))}
-                                                            </ButtonGroup>
-                                                            {TestimonialRatinIconAlign === 'icon' && (
-                                                                <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
-                                                            )}
-                                                        </BaseControl>
-                                                    </div>
-                                                )}
-                                                {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
-                                                    <div className="fb-setting-rating-rangecontrol">
-                                                        <RangeControl
-                                                            label={__("Rating Number", "frontis-blocks")}
-                                                            value={TestimonialRatingNumber}
-                                                            onChange={(value) => setAttributes({ TestimonialRatingNumber: value })}
-                                                            min={1}
-                                                            max={5}
-                                                            allowReset
-                                                            resetFallbackValue={5}
-                                                        />
-                                                    </div>
-                                                )}
-
                                         </PanelBody>
 
                                     </>
@@ -1035,44 +1234,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "styles" && (
                                     <>
-                                        {TestimonialImageSwitcher && (
+                                    
+                                        {RatingSwitcher && (
                                             <PanelBody
-                                                title={__("Image", "frontis-blocks")}
-                                                initialOpen={false}
-                                                className="fb-setting-testimonial-image-wrapper"
-                                            >
-                                                <FB_Range
-                                                    min={0}
-                                                    max={100}
-                                                    label={__("Image Width", "frontis-blocks")}
-                                                    rangeValue={TestimonialImageWidth} 
-                                                    onChangeHandler={(value) => setAttributes({ TestimonialImageWidth: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialImageWidthUnits: value })}
-                                                    deviceType={deviceType}
-                                                    units={TestimonialImageWidthUnits}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={""}
-                                                />
-
-                                                <FB_Spacing
-                                                    label={__("Border Radius", "frontis-blocks")}
-                                                    deviceType={deviceType}
-                                                    spacingUnitsHandler={testimonialImageBorderRadiusUnitsHandler}
-                                                    spacingUnits={TestimonialImageRadiusUnits}
-                                                    spacingDesktop={TestimonialImageDesktopRadiusWidth}
-                                                    spacingTablet={TestimonialImageTabRadiusWidth}
-                                                    spacingMobile={TestimonialImageMobileRadiusWidth}
-                                                    handleSpacingUnitHandler={testimonialImageBorderRadiusUnitsChange}
-                                                    spacingCombineBtn={TestimonialImageRadiusLink}
-                                                    spacingCombineBtnHandler={testimonialImageBorderRadiusLinkBtn}
-                                                    setAttributes={setAttributes}
-                                                />
-                                            </PanelBody>
-                                        )}
-                                        {QuoteIconSwitcher && (
-                                            <PanelBody
-                                                title={__("Quote Icon", "frontis-blocks")}
+                                                title={__("Rating Icon", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-feature-icon-wrapper"
                                             >
@@ -1080,27 +1245,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     min={0}
                                                     max={100}
                                                     label={__("Icon Size", "frontis-blocks")}
-                                                    rangeValue={TestimonialQuoteIconSize} 
-                                                    onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconSize: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconSizeUnits: value })}
+                                                    rangeValue={TestimonialRatingIconSize} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconSize: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconSizeUnits: value })}
                                                     deviceType={deviceType}
-                                                    units={TestimonialQuoteIconSizeUnits}
+                                                    units={TestimonialRatingIconSizeUnits}
                                                     setAttributes={setAttributes}
                                                     rangeStep={1}
                                                     resetFallbackValue={""}
                                                 />
 
                                                 <FB_Color
-                                                    label={__("Icon Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialQuoteIconColorSwitcher}
-                                                    globalColor={TestimonialQuoteIconColor}
-                                                    globalHoverColor={TestimonialQuoteIconHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
+                                                    label={__("Rating Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialRatingIconColorSwitcher}
+                                                    globalColor={TestimonialRatingIconColor}
+                                                    globalHoverColor={TestimonialRatingIconHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialRatingIconColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
+                                                />
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Spacing", "frontis-blocks")}
+                                                    rangeValue={TestimonialRatingIconSpacing} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconSpacing: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconSpacingUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialRatingIconSpacingUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
                                                 />
 
-                                                </PanelBody>
+                                            </PanelBody>
                                         )}
                                         {TitleSwitcher && (
                                             <PanelBody
@@ -1108,6 +1286,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialOpen={false}
                                                 className="fb-setting-testimonial-title-wrapper"
                                             >
+
+                                                <BaseControl
+                                                    label={__("Title Tag", "frontis-blocks")}
+                                                        id="fb-setting-text-alignment"
+                                                        className="fb-setting-text-alignment"
+                                                >
+                                                    <ButtonGroup
+                                                        className="fb-setting-text-alignment-group-btn"
+                                                     >
+                                                        {HEADING.map((item, key) => (
+                                                            <Button
+                                                                key={key}
+                                                                onClick={() => setAttributes({ TestimonialTitleTag: item.value })}
+                                                                className={`fb-setting-text-alignment-single-btn ${ TestimonialTitleTag === item.value ? 'active' : ''}`}
+                                                            >
+                                                                {item.label}
+                                                            </Button>
+                                                        ))}
+                                                    </ButtonGroup>
+                                                </BaseControl>
                                                 <FB_TypographyControl
                                                     fontFamily={TestimonialTitleFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value })}
@@ -1153,6 +1351,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     handleColorSwitcherChange={(value) => setAttributes({ TestimonialTitleColorSwitcher: value })}
                                                     handleGlobalColorChange={(value) => setAttributes({ TestimonialTitleColor: value })}
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialTitleHoverColor: value })}
+                                                />
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Spacing", "frontis-blocks")}
+                                                    rangeValue={TestimonialTitleSpacing} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialTitleSpacing: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialTitleSpacingUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialTitleSpacingUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
                                                 />
 
                                             </PanelBody>
@@ -1210,13 +1421,88 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 handleGlobalColorChange={(value) => setAttributes({ TestimonialDescColor: value })}
                                                 handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialDescHoverColor: value })}
                                             />
+                                            <FB_Range
+                                                min={0}
+                                                max={100}
+                                                label={__("Spacing", "frontis-blocks")}
+                                                rangeValue={TestimonialDescSpacing} 
+                                                onChangeHandler={(value) => setAttributes({ TestimonialDescSpacing: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ TestimonialDescSpacingUnits: value })}
+                                                deviceType={deviceType}
+                                                units={TestimonialDescSpacingUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                            />
 
+                                            </PanelBody>
+                                        )}
+
+                                        {TestimonialImageSwitcher && (
+                                            <PanelBody
+                                                title={__("Avatar", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-testimonial-image-wrapper"
+                                            >
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Image Width", "frontis-blocks")}
+                                                    rangeValue={TestimonialImageWidth} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialImageWidth: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialImageWidthUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialImageWidthUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                />
+
+                                                <FB_Spacing
+                                                    label={__("Border Radius", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={testimonialImageBorderRadiusUnitsHandler}
+                                                    spacingUnits={TestimonialImageRadiusUnits}
+                                                    spacingDesktop={TestimonialImageDesktopRadiusWidth}
+                                                    spacingTablet={TestimonialImageTabRadiusWidth}
+                                                    spacingMobile={TestimonialImageMobileRadiusWidth}
+                                                    handleSpacingUnitHandler={testimonialImageBorderRadiusUnitsChange}
+                                                    spacingCombineBtn={TestimonialImageRadiusLink}
+                                                    spacingCombineBtnHandler={testimonialImageBorderRadiusLinkBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Margin Top", "frontis-blocks")}
+                                                    rangeValue={TestimonialAuthorSpacing} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialAuthorSpacing: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialAuthorSpacingUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialAuthorSpacingUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                />
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Margin Right", "frontis-blocks")}
+                                                    rangeValue={TestimonialImageSpacing} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialImageSpacing: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialImageSpacingUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={TestimonialImageSpacingUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                />
                                             </PanelBody>
                                         )}
 
                                         {AuthorSwitcher && (
                                             <PanelBody
-                                                title={__("Author", "frontis-blocks")}
+                                                title={__("Author Name", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-testimonial-author-wrapper"
                                             >
@@ -1272,7 +1558,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         {DesignationSwitcher && (
                                             <PanelBody
-                                                title={__("Designation", "frontis-blocks")}
+                                                title={__("Author Designation", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-testimonial-designation-wrapper"
                                             >
@@ -1325,10 +1611,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             </PanelBody>
                                         )}
-
-                                        {RatingSwitcher && (
+                                        {QuoteIconSwitcher && (
                                             <PanelBody
-                                                title={__("Rating Icon", "frontis-blocks")}
+                                                title={__("Quote Icon", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-feature-icon-wrapper"
                                             >
@@ -1336,26 +1621,61 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     min={0}
                                                     max={100}
                                                     label={__("Icon Size", "frontis-blocks")}
-                                                    rangeValue={TestimonialRatingIconSize} 
-                                                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconSize: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconSizeUnits: value })}
+                                                    rangeValue={TestimonialQuoteIconSize} 
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconSize: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconSizeUnits: value })}
                                                     deviceType={deviceType}
-                                                    units={TestimonialRatingIconSizeUnits}
+                                                    units={TestimonialQuoteIconSizeUnits}
                                                     setAttributes={setAttributes}
                                                     rangeStep={1}
                                                     resetFallbackValue={""}
                                                 />
 
                                                 <FB_Color
-                                                    label={__("Rating Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialRatingIconColorSwitcher}
-                                                    globalColor={TestimonialRatingIconColor}
-                                                    globalHoverColor={TestimonialRatingIconHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialRatingIconColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
+                                                    label={__("Icon Color", "frontis-blocks")}
+                                                    globalColorSwitcher={TestimonialQuoteIconColorSwitcher}
+                                                    globalColor={TestimonialQuoteIconColor}
+                                                    globalHoverColor={TestimonialQuoteIconHoverColor}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
                                                 />
-
+                                                <ToggleControl
+                                                    label={__("Position", "frontis-blocks")}
+                                                    checked={TestimonialQuoteIconPositionSwitcher}
+                                                    onChange={(value) => setAttributes({ TestimonialQuoteIconPositionSwitcher: value })}
+                                                />
+                                                
+                                                {TestimonialQuoteIconPositionSwitcher && (
+                                                    <>
+                                                        <FB_Range
+                                                            min={0}
+                                                            max={100}
+                                                            label={__("Top", "frontis-blocks")}
+                                                            rangeValue={TestimonialQuoteIconTopPosition} 
+                                                            onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconTopPosition: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconTopPositionUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={TestimonialQuoteIconTopPositionUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={""}
+                                                        />
+                                                        <FB_Range
+                                                            min={0}
+                                                            max={100}
+                                                            label={__("Left", "frontis-blocks")}
+                                                            rangeValue={TestimonialQuoteIconLeftPosition} 
+                                                            onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconLeftPosition: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconLeftPositionUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={TestimonialQuoteIconLeftPositionUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={""}
+                                                        />
+                                                    </>
+                                                )}  
                                             </PanelBody>
                                         )}
                                     </>
