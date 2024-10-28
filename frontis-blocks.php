@@ -36,3 +36,6 @@ function wm_frontis_blocks(){
 
 //Kick of the plugin.
 wm_frontis_blocks();
+$custom_icons_categories = get_option('fb_custom_icons', true);
+
+// 		var_dump($custom_icons_categories);

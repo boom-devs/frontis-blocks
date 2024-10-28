@@ -2312,6 +2312,6 @@ const defaultIcons = [
 	]
 ];
 
-const fb_icons_name = applyFilters('frontisblocks/iconsname', defaultIcons);
+const fb_icons_name = applyFilters('frontisblocks_iconsname', defaultIcons);
 
 export default fb_icons_name;

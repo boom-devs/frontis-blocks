@@ -60,7 +60,11 @@ class Blocks
                     continue;
                 }
 
-                $localize_array = [];
+                $localize_array = [
+					'nonce' => wp_create_nonce('fb_settings_nonce'),
+					'ajaxUrl' => admin_url('admin-ajax.php'),
+					'restUrl' => get_rest_url(),
+                ];
 
                 // Register the block
                 $rb = register_block_type($blocks_dir);

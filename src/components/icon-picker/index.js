@@ -8,8 +8,11 @@ import {
 	Button, Modal, Tooltip
 } from "@wordpress/components";
 import './editor.scss';
+import {addAction, addFilter, applyFilters, hasFilter} from "@wordpress/hooks";
+import {toast} from "react-toastify";
 
 export default function FBIconPicker(props) {
+	const { ajaxUrl, nonce } = window.FrontisBlocksData;
 	const { value, setIconHandler } = props;
 	const [showIconPicker, setIconPickerModal] = useState(false);
 	const closeModal = () => setIconPickerModal( false );
@@ -18,18 +21,7 @@ export default function FBIconPicker(props) {
 	const [filteredDefaultIcons, setFilteredDefaultIcons] = useState(defaultSvgIcon);
 	const [selectedCat, setSelectedCat] = useState('all-icons');
 	const [svgIcon, setSvgIcon] = useState([]);
-
-	const iconPickerModal = () => {
-		setIconPickerModal(true);
-	}
-
-	// Insert icon
-	const fbInsertIcon = () => {
-		setIconHandler(insertIcon);
-		setIconPickerModal(false);
-	}
-
-	const categories = [
+	const [categories, setCategories] = useState([
 		{
 			slug: 'all-icons',
 			title: __('All Icons', 'ultimate-addons-for-gutenberg')
@@ -78,7 +70,60 @@ export default function FBIconPicker(props) {
 			slug: 'others',
 			title: __('Others', 'ultimate-addons-for-gutenberg')
 		}
-	];
+	]);
+
+	const iconPickerModal = () => {
+		setIconPickerModal(true);
+	}
+
+	// Insert icon
+	const fbInsertIcon = () => {
+		setIconHandler(insertIcon);
+		setIconPickerModal(false);
+	}
+
+	const updateCategories = (categoriesData) => {
+
+		console.log(categoriesData)
+
+
+		if(categoriesData) {
+			// Merge arrays without duplicates in slug or title
+			const mergedArray = [...categories];
+
+			categoriesData.categories.forEach((newItem) => {
+				const isDuplicate = mergedArray.some(
+					(item) => item.slug === newItem.slug || item.title === newItem.title
+				);
+
+				if (!isDuplicate) {
+					mergedArray.push(newItem);
+				}
+			});
+
+			setCategories(mergedArray);
+		}
+	}
+
+	const updateIconsName = (names) => {
+		console.log("From filter")
+		console.log(names)
+	}
+
+
+	const fetCustomIconsCategories = () => {
+		jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_get_custom_icons_category',
+				security: nonce
+			},
+			success: function(response) {
+				updateCategories(response.data);
+			}
+		});
+	}
 
 	// Filter icon list
 	const filterIconList = (cat) => {
@@ -225,6 +270,9 @@ export default function FBIconPicker(props) {
 	}
 
 	useEffect( () => {
+		console.log("Hello world")
+		fetCustomIconsCategories();
+
 		fetchSvgIcons().then(icons => {
 			if (icons) {
 				setSvgIcon(icons);
