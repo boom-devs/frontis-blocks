@@ -9,7 +9,7 @@ const attributes = {
     },
     TestimonialPresetStyle: {
         type: "string",
-        default: "preset-0",
+        default: "preset-1",
     },
     TestimonialAlignment: {
         type: "string",
@@ -152,38 +152,88 @@ const attributes = {
         type : "boolean",
         default: true
     },
-    TestimonialImageSpacing: {
-        type: "object",
+
+    /** Start Margin */
+    TestimonialImageMarginUnits: {
+        type: 'object',
         default: {
-            Desktop: 15,
-            Tablet: 15,
-            Mobile: 15
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
         }
     },
-    TestimonialImageSpacingUnits: {
-        type: "object",
+    TestimonialImageMarginDesktop: {
+        type: "object", 
         default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px"
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '14',
+        },
+    },
+    TestimonialImageMarginTablet: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '14',
+        },
+    },
+    TestimonialImageMarginMobile: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '14',
+        },
+    },
+    TestimonialImageMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Margin */
+
+    /** Start Image Icon Position */
+    TestimonialImagePositionSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    TestimonialImageTopPosition: {
+        type: 'object',
+        default: {
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
         }
     },
-    TestimonialAuthorSpacing: {
-        type: "object",
+    TestimonialImageTopPositionUnits: {
+        type: 'object',
         default: {
-            Desktop: '24',
-            Tablet: '24',
-            Mobile: '24'
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%'
         }
     },
-    TestimonialAuthorSpacingUnits: {
-        type: "object",
+
+    TestimonialImageLeftPosition: {
+        type: 'object',
         default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px"
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
+        }
+    },  
+    TestimonialImageLeftPositionUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%'
         }
     },
+    /** End Image Icon Position */
 
 
     TestimonialQuoteIconSize: {
@@ -251,7 +301,52 @@ const attributes = {
             Mobile: '%'
         }
     },
+    
+    /** Start Quote Icon Margin */
+    TestimonialQuoteIconMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    TestimonialQuoteIconMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialQuoteIconMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialQuoteIconMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialQuoteIconMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Quote Icon Margin */
 
+
+
+    /** Start Title */
     TestimonialTitleTag: {
         type: "string",
         default: "h3"
@@ -337,23 +432,47 @@ const attributes = {
         default: ""
     },
 
-    TestimonialTitleSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    TestimonialTitleSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '15',
-            Tablet: '15',
-            Mobile: '15'
-        }
-    },
-
+    /** Start Margin */
+    TestimonialTitleMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	TestimonialTitleMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '14',
+			bottom: '14',
+			left: '0',
+			right: '0',
+		},
+	},
+	TestimonialTitleMarginTablet: {
+		type: "object", 
+		default: {
+			top: '14',
+			bottom: '14',
+			left: '0',
+			right: '0',
+		},
+	},
+	TestimonialTitleMarginMobile: {
+		type: "object", 
+		default: {
+			top: '14',
+			bottom: '14',
+			left: '0',
+			right: '0',
+		},
+	},
+	TestimonialTitleMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
 
     TestimonialDescFontFamily: {
         type: "string",
@@ -435,22 +554,47 @@ const attributes = {
         type: 'string',
         default: ""
     },
-    TestimonialDescSpacingUnits: {
+    /** Start Margin */
+    TestimonialDescMarginUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
             Tablet: 'px',
-            Mobile: 'px',
+            Mobile: 'px'
         }
     },
-    TestimonialDescSpacing: {
-        type: 'object',
+    TestimonialDescMarginDesktop: {
+        type: "object", 
         default: {
-            Desktop: '15',
-            Tablet: '15',
-            Mobile: '15'
-        }
+            top: '0',
+            bottom: '24',
+            left: '0',
+            right: '0',
+        },
     },
+    TestimonialDescMarginTablet: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '24',
+            left: '0',
+            right: '0',
+        },
+    },
+    TestimonialDescMarginMobile: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '24',
+            left: '0',
+            right: '0',
+        },
+    },
+    TestimonialDescMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Margin */
 
 
     TestimonialAuthorFontFamily: {
@@ -534,6 +678,48 @@ const attributes = {
         default: ""
     },
 
+    /** Start Margin */
+    TestimonialAuthorMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    TestimonialAuthorMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialAuthorMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialAuthorMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialAuthorMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Margin */
+
 
     TestimonialDesignationFontFamily: {
         type: "string",
@@ -616,6 +802,48 @@ const attributes = {
         default: ""
     },
 
+        /** Start Margin */
+    TestimonialDesignationMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    TestimonialDesignationMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialDesignationMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialDesignationMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    TestimonialDesignationMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Margin */
+
 
     TestimonialRatingIconSize: {
         type: 'object',
@@ -645,22 +873,48 @@ const attributes = {
         type: 'string',
         default: "#FFB400"
     },
-    TestimonialRatingIconSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    TestimonialRatingIconSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
+
+    /** Start Margin */
+	TestimonialRatingIconMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	TestimonialRatingIconMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialRatingIconMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialRatingIconMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	TestimonialRatingIconMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
 
 
 	/** Start Global Setting */
