@@ -29,7 +29,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		ButtonTwoUrl,
 		ButtonTwoTargetUrl,
 		connectorText,
-		connectorSwitcher
+		connectorSwitcher,
+		buttonIconAlign,
+		buttonTwoIconAlign,
+		btnIconPosition,
+		btnTwoIconPosition,
+		buttonsDirection
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -58,7 +63,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
             <div {...blockProps} id={blockID}>
                 <div className={`fb-dual-button-container ${blockID}`} >
-					<div className="fb-dual-button-wrapper" style={{ justifyContent: ButtonAlignment }}>
+					<div className="fb-dual-button-wrapper" style={{ 
+						justifyContent: ButtonAlignment, 
+						flexDirection:
+                            	buttonsDirection === "vertical"
+                                ? "row"
+                                : buttonsDirection === "horizontal"
+                                ? "column"
+                                : "row",
+						}}>
 						<div className="fb-dual-button-one-wrapper">
 							<a
 								className="fb-advanced-button fb-dual-button-one"
@@ -66,6 +79,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								target={ButtonTargetUrl ? '_blank' : undefined}
 								rel={ButtonTargetUrl ? 'noopener noreferrer' : undefined}
 								onClick={handleButtonClick}
+								style ={{
+								flexDirection:
+                            	btnIconPosition === "left"
+                                ? "row-reverse"
+                                : btnIconPosition === "right"
+                                ? "row"
+                                : "row-reverse",
+								}}
 							>
 								<RichText
 									tagName="span"
@@ -74,8 +95,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									placeholder={__('Enter button text...', 'frontis-blocks')}
 									className="fb-advanced-button-text"
 								/>
-								
-								<div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
+							{buttonIconAlign === 'icon-text' && (
+                            <div className={`fb-advanced-button-icon-wrapper`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
+                            </div>
+                        )}
 							</a>
 						</div>
 						{connectorSwitcher && (
@@ -96,6 +120,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								target={ButtonTwoTargetUrl ? '_blank' : undefined}
 								rel={ButtonTwoTargetUrl ? 'noopener noreferrer' : undefined}
 								onClick={handleButtonClick}
+								style = {{
+								flexDirection:
+                            	btnTwoIconPosition === "left"
+                                ? "row-reverse"
+                                : btnTwoIconPosition === "right"
+                                ? "row"
+                                : "row-reverse",
+								
+								}}
 							>
 								<RichText
 									tagName="span"
@@ -104,7 +137,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									placeholder={__('Enter button text...', 'frontis-blocks')}
 									className="fb-advanced-button-text"
 								/>
-								<div className="fb-advanced-button-icon">{renderSVG(ButtonTwoIcon)}</div>
+							{buttonTwoIconAlign === 'icon-text' && (
+                            <div className={`fb-advanced-button-icon-wrapper`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(ButtonTwoIcon)}</div>
+                            </div>
+                        )}
 							</a>
 						</div>
 					</div>
