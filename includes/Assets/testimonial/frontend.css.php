@@ -30,7 +30,7 @@ $QuoteIconSwitcher              = isset($block_attributes['QuoteIconSwitcher']) 
 $TestimonialQuoteIcon           = isset($block_attributes['TestimonialQuoteIcon']) ? sanitize_text_field($block_attributes['TestimonialQuoteIcon']) : 'quote-left';
 $TestimonialQuoteIconAlign      = isset($block_attributes['TestimonialQuoteIconAlign']) ? sanitize_text_field($block_attributes['TestimonialQuoteIconAlign']) : 'icon';
 
-$TestimonialImageWidth          = isset($block_attributes['TestimonialImageWidth']) ? $block_attributes['TestimonialImageWidth'] : array('Desktop' => 100, 'Tablet' => 100, 'Mobile' => 100);
+$TestimonialImageWidth          = isset($block_attributes['TestimonialImageWidth']) ? $block_attributes['TestimonialImageWidth'] : array('Desktop' => 60, 'Tablet' => 60, 'Mobile' => 60);
 $TestimonialImageWidthUnits     = isset($block_attributes['TestimonialImageWidthUnits']) ? $block_attributes['TestimonialImageWidthUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
 $TestimonialImageRadiusUnits        = isset($block_attributes['TestimonialImageRadiusUnits']) ? $block_attributes['TestimonialImageRadiusUnits'] : array('Desktop' => '%', 'Tablet' => '%', 'Mobile' => '%');
@@ -38,22 +38,59 @@ $TestimonialImageDesktopRadiusWidth = isset($block_attributes['TestimonialImageD
 $TestimonialImageTabRadiusWidth     = isset($block_attributes['TestimonialImageTabRadiusWidth']) ? $block_attributes['TestimonialImageTabRadiusWidth'] : array('top' => '50', 'bottom' => '50', 'left' => '50', 'right' => '50');
 $TestimonialImageMobileRadiusWidth  = isset($block_attributes['TestimonialImageMobileRadiusWidth']) ? $block_attributes['TestimonialImageMobileRadiusWidth'] : array('top' => '50', 'bottom' => '50', 'left' => '50', 'right' => '50');
 $TestimonialImageRadiusLink         = isset($block_attributes['TestimonialImageRadiusLink']) ? rest_sanitize_boolean($block_attributes['TestimonialImageRadiusLink']) : true;
+
+$TestimonialImageMarginUnits = isset($block_attributes['TestimonialImageMarginUnits']) ? $block_attributes['TestimonialImageMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$TestimonialImageMarginDesktop = isset($block_attributes['TestimonialImageMarginDesktop']) ? $block_attributes['TestimonialImageMarginDesktop'] : array('top' => '0', 'bottom' => '0', 'left' => '0', 'right' => '14');
+$TestimonialImageMarginTablet = isset($block_attributes['TestimonialImageMarginTablet']) ? $block_attributes['TestimonialImageMarginTablet'] : array('top' => '0', 'bottom' => '0', 'left' => '0', 'right' => '14');
+$TestimonialImageMarginMobile = isset($block_attributes['TestimonialImageMarginMobile']) ? $block_attributes['TestimonialImageMarginMobile'] : array('top' => '0', 'bottom' => '0', 'left' => '0', 'right' => '14');
+$TestimonialImageMarginLink = isset($block_attributes['TestimonialImageMarginLink']) ? rest_sanitize_boolean($block_attributes['TestimonialImageMarginLink']) : true;
+
+$testimonialImageDesktopMargin = $TestimonialImageMarginDesktop['top'] . $TestimonialImageMarginUnits['Desktop'] . ' ' . $TestimonialImageMarginDesktop['right'] . $TestimonialImageMarginUnits['Desktop'] . ' ' . $TestimonialImageMarginDesktop['bottom'] . $TestimonialImageMarginUnits['Desktop'] . ' ' . $TestimonialImageMarginDesktop['left'] . $TestimonialImageMarginUnits['Desktop'];
+$testimonialImageTabletMargin = $TestimonialImageMarginTablet['top'] . $TestimonialImageMarginUnits['Tablet'] . ' ' . $TestimonialImageMarginTablet['right'] . $TestimonialImageMarginUnits['Tablet'] . ' ' . $TestimonialImageMarginTablet['bottom'] . $TestimonialImageMarginUnits['Tablet'] . ' ' . $TestimonialImageMarginTablet['left'] . $TestimonialImageMarginUnits['Tablet'];
+$testimonialImageMobileMargin = $TestimonialImageMarginMobile['top'] . $TestimonialImageMarginUnits['Mobile'] . ' ' . $TestimonialImageMarginMobile['right'] . $TestimonialImageMarginUnits['Mobile'] . ' ' . $TestimonialImageMarginMobile['bottom'] . $TestimonialImageMarginUnits['Mobile'] . ' ' . $TestimonialImageMarginMobile['left'] . $TestimonialImageMarginUnits['Mobile'];
+/** End Testimonial Image Margin */
+
+/** Testimonial Image Position */
+$TestimonialImagePositionSwitcher = isset($block_attributes['TestimonialImagePositionSwitcher']) ? rest_sanitize_boolean($block_attributes['TestimonialImagePositionSwitcher']) : false;
+$TestimonialImageTopPosition = isset($block_attributes['TestimonialImageTopPosition']) ? $block_attributes['TestimonialImageTopPosition'] : array('Desktop' => '0', 'Tablet' => '0', 'Mobile' => '0');
+$TestimonialImageTopPositionUnits = isset($block_attributes['TestimonialImageTopPositionUnits']) ? $block_attributes['TestimonialImageTopPositionUnits'] : array('Desktop' => '%', 'Tablet' => '%', 'Mobile' => '%');
+$TestimonialImageLeftPosition = isset($block_attributes['TestimonialImageLeftPosition']) ? $block_attributes['TestimonialImageLeftPosition'] : array('Desktop' => '0', 'Tablet' => '0', 'Mobile' => '0');
+$TestimonialImageLeftPositionUnits = isset($block_attributes['TestimonialImageLeftPositionUnits']) ? $block_attributes['TestimonialImageLeftPositionUnits'] : array('Desktop' => '%', 'Tablet' => '%', 'Mobile' => '%');
+/** End Testimonial Image Position */
+
 /** Default border radius for Testimonial Image */
 $testimonialImageDesktopBorderRadiusWidth   = $TestimonialImageDesktopRadiusWidth['top'] . $TestimonialImageRadiusUnits['Desktop'] . ' ' . $TestimonialImageDesktopRadiusWidth['right'] . $TestimonialImageRadiusUnits['Desktop'] . ' ' . $TestimonialImageDesktopRadiusWidth['bottom'] . $TestimonialImageRadiusUnits['Desktop'] . ' ' . $TestimonialImageDesktopRadiusWidth['left'] . $TestimonialImageRadiusUnits['Desktop'];
 $testimonialImageTabletBorderRadiusWidth    = $TestimonialImageTabRadiusWidth['top'] . $TestimonialImageRadiusUnits['Tablet'] . ' ' . $TestimonialImageTabRadiusWidth['right'] . $TestimonialImageRadiusUnits['Tablet'] . ' ' . $TestimonialImageTabRadiusWidth['bottom'] . $TestimonialImageRadiusUnits['Tablet'] . ' ' . $TestimonialImageTabRadiusWidth['left'] . $TestimonialImageRadiusUnits['Tablet'];
 $testimonialImageMobileBorderRadiusWidth    = $TestimonialImageMobileRadiusWidth['top'] . $TestimonialImageRadiusUnits['Mobile'] . ' ' . $TestimonialImageMobileRadiusWidth['right'] . $TestimonialImageRadiusUnits['Mobile'] . ' ' . $TestimonialImageMobileRadiusWidth['bottom'] . $TestimonialImageRadiusUnits['Mobile'] . ' ' . $TestimonialImageMobileRadiusWidth['left'] . $TestimonialImageRadiusUnits['Mobile'];
 /** End Testimonial Image Border Radius */
 
-$TestimonialQuoteIconSize           = isset($block_attributes['TestimonialQuoteIconSize']) ? $block_attributes['TestimonialQuoteIconSize'] : array('Desktop' => 100, 'Tablet' => 100, 'Mobile' => 100);
+$TestimonialQuoteIconSize           = isset($block_attributes['TestimonialQuoteIconSize']) ? $block_attributes['TestimonialQuoteIconSize'] : array('Desktop' => 60, 'Tablet' => 60, 'Mobile' => 60);
 $TestimonialQuoteIconSizeUnits      = isset($block_attributes['TestimonialQuoteIconSizeUnits']) ? $block_attributes['TestimonialQuoteIconSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $TestimonialQuoteIconColorSwitcher  = isset($block_attributes['TestimonialQuoteIconColorSwitcher']) ? $block_attributes['TestimonialQuoteIconColorSwitcher'] : 'normal';
 $TestimonialQuoteIconColor          = isset($block_attributes['TestimonialQuoteIconColor']) ? $block_attributes['TestimonialQuoteIconColor'] : '#399CFF';
 $TestimonialQuoteIconHoverColor     = isset($block_attributes['TestimonialQuoteIconHoverColor']) ? $block_attributes['TestimonialQuoteIconHoverColor'] : '#399CFF';
 
+$TestimonialQuoteIconPositionSwitcher = isset($block_attributes['TestimonialQuoteIconPositionSwitcher']) ? rest_sanitize_boolean($block_attributes['TestimonialQuoteIconPositionSwitcher']) : false;
+$TestimonialQuoteIconTopPosition = isset($block_attributes['TestimonialQuoteIconTopPosition']) ? $block_attributes['TestimonialQuoteIconTopPosition'] : array('Desktop' => '0', 'Tablet' => '0', 'Mobile' => '0');
+$TestimonialQuoteIconTopPositionUnits = isset($block_attributes['TestimonialQuoteIconTopPositionUnits']) ? $block_attributes['TestimonialQuoteIconTopPositionUnits'] : array('Desktop' => '%', 'Tablet' => '%', 'Mobile' => '%');
+$TestimonialQuoteIconLeftPosition = isset($block_attributes['TestimonialQuoteIconLeftPosition']) ? $block_attributes['TestimonialQuoteIconLeftPosition'] : array('Desktop' => '0', 'Tablet' => '0', 'Mobile' => '0');
+$TestimonialQuoteIconLeftPositionUnits = isset($block_attributes['TestimonialQuoteIconLeftPositionUnits']) ? $block_attributes['TestimonialQuoteIconLeftPositionUnits'] : array('Desktop' => '%', 'Tablet' => '%', 'Mobile' => '%');
+$TestimonialQuoteIconMarginUnits = isset($block_attributes['TestimonialQuoteIconMarginUnits']) ? $block_attributes['TestimonialQuoteIconMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$TestimonialQuoteIconMarginDesktop = isset($block_attributes['TestimonialQuoteIconMarginDesktop']) ? $block_attributes['TestimonialQuoteIconMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialQuoteIconMarginTablet = isset($block_attributes['TestimonialQuoteIconMarginTablet']) ? $block_attributes['TestimonialQuoteIconMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialQuoteIconMarginMobile = isset($block_attributes['TestimonialQuoteIconMarginMobile']) ? $block_attributes['TestimonialQuoteIconMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialQuoteIconMarginLink = isset($block_attributes['TestimonialQuoteIconMarginLink']) ? rest_sanitize_boolean($block_attributes['TestimonialQuoteIconMarginLink']) : true;
+/** End Testimonial Quote Icon Margin */
+$testimonialQuoteIconDesktopMargin = $TestimonialQuoteIconMarginDesktop['top'] . $TestimonialQuoteIconMarginUnits['Desktop'] . ' ' . $TestimonialQuoteIconMarginDesktop['right'] . $TestimonialQuoteIconMarginUnits['Desktop'] . ' ' . $TestimonialQuoteIconMarginDesktop['bottom'] . $TestimonialQuoteIconMarginUnits['Desktop'] . ' ' . $TestimonialQuoteIconMarginDesktop['left'] . $TestimonialQuoteIconMarginUnits['Desktop'];
+$testimonialQuoteIconTabletMargin = $TestimonialQuoteIconMarginTablet['top'] . $TestimonialQuoteIconMarginUnits['Tablet'] . ' ' . $TestimonialQuoteIconMarginTablet['right'] . $TestimonialQuoteIconMarginUnits['Tablet'] . ' ' . $TestimonialQuoteIconMarginTablet['bottom'] . $TestimonialQuoteIconMarginUnits['Tablet'] . ' ' . $TestimonialQuoteIconMarginTablet['left'] . $TestimonialQuoteIconMarginUnits['Tablet'];
+$testimonialQuoteIconMobileMargin = $TestimonialQuoteIconMarginMobile['top'] . $TestimonialQuoteIconMarginUnits['Mobile'] . ' ' . $TestimonialQuoteIconMarginMobile['right'] . $TestimonialQuoteIconMarginUnits['Mobile'] . ' ' . $TestimonialQuoteIconMarginMobile['bottom'] . $TestimonialQuoteIconMarginUnits['Mobile'] . ' ' . $TestimonialQuoteIconMarginMobile['left'] . $TestimonialQuoteIconMarginUnits['Mobile'];
+/** End Testimonial Quote Icon Margin */
+
+$TestimonialTitleTag                = isset($block_attributes['TestimonialTitleTag']) ? sanitize_text_field($block_attributes['TestimonialTitleTag']) : 'h3';
 $TestimonialTitleFontFamily         = isset($block_attributes['TestimonialTitleFontFamily']) ? sanitize_text_field($block_attributes['TestimonialTitleFontFamily']) : 'inherit';
 $TestimonialTitleFontSize           = isset($block_attributes['TestimonialTitleFontSize']) ? $block_attributes['TestimonialTitleFontSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
 $TestimonialTitleFontSizeUnits      = isset($block_attributes['TestimonialTitleFontSizeUnits']) ? $block_attributes['TestimonialTitleFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$TestimonialTitleFontWeight         = isset($block_attributes['TestimonialTitleFontWeight']) ? sanitize_text_field($block_attributes['TestimonialTitleFontWeight']) : '600';
+$TestimonialTitleFontWeight         = isset($block_attributes['TestimonialTitleFontWeight']) ? sanitize_text_field($block_attributes['TestimonialTitleFontWeight']) : '';
 $TestimonialTitleFontStyle          = isset($block_attributes['TestimonialTitleFontStyle']) ? sanitize_text_field($block_attributes['TestimonialTitleFontStyle']) : 'normal';
 $TestimonialTitleTextTransform      = isset($block_attributes['TestimonialTitleTextTransform']) ? sanitize_text_field($block_attributes['TestimonialTitleTextTransform']) : 'none';
 $TestimonialTitleTextDecoration     = isset($block_attributes['TestimonialTitleTextDecoration']) ? sanitize_text_field($block_attributes['TestimonialTitleTextDecoration']) : 'none';
@@ -64,6 +101,18 @@ $TestimonialTitleLineHeightUnits    = isset($block_attributes['TestimonialTitleL
 $TestimonialTitleColorSwitcher      = isset($block_attributes['TestimonialTitleColorSwitcher']) ? sanitize_text_field($block_attributes['TestimonialTitleColorSwitcher']) : 'normal';
 $TestimonialTitleColor              = isset($block_attributes['TestimonialTitleColor']) ? sanitize_text_field($block_attributes['TestimonialTitleColor']) : '';
 $TestimonialTitleHoverColor         = isset($block_attributes['TestimonialTitleHoverColor']) ? sanitize_text_field($block_attributes['TestimonialTitleHoverColor']) : '';
+
+/** Start Testimonial Title Margin */
+$TestimonialTitleMarginUnits        = isset($block_attributes['TestimonialTitleMarginUnits']) ? $block_attributes['TestimonialTitleMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$TestimonialTitleMarginDesktop      = isset($block_attributes['TestimonialTitleMarginDesktop']) ? $block_attributes['TestimonialTitleMarginDesktop'] : array('top' => '14', 'bottom' => '14', 'left' => '0', 'right' => '0');
+$TestimonialTitleMarginTablet       = isset($block_attributes['TestimonialTitleMarginTablet']) ? $block_attributes['TestimonialTitleMarginTablet'] : array('top' => '14', 'bottom' => '14', 'left' => '0', 'right' => '0');
+$TestimonialTitleMarginMobile       = isset($block_attributes['TestimonialTitleMarginMobile']) ? $block_attributes['TestimonialTitleMarginMobile'] : array('top' => '14', 'bottom' => '14', 'left' => '0', 'right' => '0');
+$TestimonialTitleMarginLink         = isset($block_attributes['TestimonialTitleMarginLink']) ? rest_sanitize_boolean($block_attributes['TestimonialTitleMarginLink']) : true;
+
+$testimonialTitleDesktopMargin      = $TestimonialTitleMarginDesktop['top'] . $TestimonialTitleMarginUnits['Desktop'] . ' ' . $TestimonialTitleMarginDesktop['right'] . $TestimonialTitleMarginUnits['Desktop'] . ' ' . $TestimonialTitleMarginDesktop['bottom'] . $TestimonialTitleMarginUnits['Desktop'] . ' ' . $TestimonialTitleMarginDesktop['left'] . $TestimonialTitleMarginUnits['Desktop'];
+$testimonialTitleTabletMargin       = $TestimonialTitleMarginTablet['top'] . $TestimonialTitleMarginUnits['Tablet'] . ' ' . $TestimonialTitleMarginTablet['right'] . $TestimonialTitleMarginUnits['Tablet'] . ' ' . $TestimonialTitleMarginTablet['bottom'] . $TestimonialTitleMarginUnits['Tablet'] . ' ' . $TestimonialTitleMarginTablet['left'] . $TestimonialTitleMarginUnits['Tablet'];
+$testimonialTitleMobileMargin       = $TestimonialTitleMarginMobile['top'] . $TestimonialTitleMarginUnits['Mobile'] . ' ' . $TestimonialTitleMarginMobile['right'] . $TestimonialTitleMarginUnits['Mobile'] . ' ' . $TestimonialTitleMarginMobile['bottom'] . $TestimonialTitleMarginUnits['Mobile'] . ' ' . $TestimonialTitleMarginMobile['left'] . $TestimonialTitleMarginUnits['Mobile'];
+/** End Testimonial Title Margin */
 
 $TestimonialDescFontFamily         = isset($block_attributes['TestimonialDescFontFamily']) ? sanitize_text_field($block_attributes['TestimonialDescFontFamily']) : 'inherit';
 $TestimonialDescFontSize           = isset($block_attributes['TestimonialDescFontSize']) ? $block_attributes['TestimonialDescFontSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
@@ -79,6 +128,18 @@ $TestimonialDescLineHeightUnits    = isset($block_attributes['TestimonialDescLin
 $TestimonialDescColorSwitcher      = isset($block_attributes['TestimonialDescColorSwitcher']) ? sanitize_text_field($block_attributes['TestimonialDescColorSwitcher']) : 'normal';
 $TestimonialDescColor              = isset($block_attributes['TestimonialDescColor']) ? sanitize_text_field($block_attributes['TestimonialDescColor']) : '';
 $TestimonialDescHoverColor         = isset($block_attributes['TestimonialDescHoverColor']) ? sanitize_text_field($block_attributes['TestimonialDescHoverColor']) : '';
+/** Start Testimonial Desc Margin */
+$TestimonialDescMarginUnits        = isset($block_attributes['TestimonialDescMarginUnits']) ? $block_attributes['TestimonialDescMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$TestimonialDescMarginDesktop      = isset($block_attributes['TestimonialDescMarginDesktop']) ? $block_attributes['TestimonialDescMarginDesktop'] : array('top' => '0', 'bottom' => '24', 'left' => '0', 'right' => '0');
+$TestimonialDescMarginTablet       = isset($block_attributes['TestimonialDescMarginTablet']) ? $block_attributes['TestimonialDescMarginTablet'] : array('top' => '0', 'bottom' => '24', 'left' => '0', 'right' => '0');
+$TestimonialDescMarginMobile       = isset($block_attributes['TestimonialDescMarginMobile']) ? $block_attributes['TestimonialDescMarginMobile'] : array('top' => '0', 'bottom' => '24', 'left' => '0', 'right' => '0');
+$TestimonialDescMarginLink         = isset($block_attributes['TestimonialDescMarginLink']) ? rest_sanitize_boolean($block_attributes['TestimonialDescMarginLink']) : true;
+
+$testimonialDescDesktopMargin      = $TestimonialDescMarginDesktop['top'] . $TestimonialDescMarginUnits['Desktop'] . ' ' . $TestimonialDescMarginDesktop['right'] . $TestimonialDescMarginUnits['Desktop'] . ' ' . $TestimonialDescMarginDesktop['bottom'] . $TestimonialDescMarginUnits['Desktop'] . ' ' . $TestimonialDescMarginDesktop['left'] . $TestimonialDescMarginUnits['Desktop'];
+$testimonialDescTabletMargin       = $TestimonialDescMarginTablet['top'] . $TestimonialDescMarginUnits['Tablet'] . ' ' . $TestimonialDescMarginTablet['right'] . $TestimonialDescMarginUnits['Tablet'] . ' ' . $TestimonialDescMarginTablet['bottom'] . $TestimonialDescMarginUnits['Tablet'] . ' ' . $TestimonialDescMarginTablet['left'] . $TestimonialDescMarginUnits['Tablet'];
+$testimonialDescMobileMargin       = $TestimonialDescMarginMobile['top'] . $TestimonialDescMarginUnits['Mobile'] . ' ' . $TestimonialDescMarginMobile['right'] . $TestimonialDescMarginUnits['Mobile'] . ' ' . $TestimonialDescMarginMobile['bottom'] . $TestimonialDescMarginUnits['Mobile'] . ' ' . $TestimonialDescMarginMobile['left'] . $TestimonialDescMarginUnits['Mobile'];
+/** End Testimonial Desc Margin */
+
 
 $TestimonialAuthorFontFamily         = isset($block_attributes['TestimonialAuthorFontFamily']) ? sanitize_text_field($block_attributes['TestimonialAuthorFontFamily']) : 'inherit';
 $TestimonialAuthorFontSize           = isset($block_attributes['TestimonialAuthorFontSize']) ? $block_attributes['TestimonialAuthorFontSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
@@ -95,6 +156,19 @@ $TestimonialAuthorColorSwitcher      = isset($block_attributes['TestimonialAutho
 $TestimonialAuthorColor              = isset($block_attributes['TestimonialAuthorColor']) ? sanitize_text_field($block_attributes['TestimonialAuthorColor']) : '';
 $TestimonialAuthorHoverColor         = isset($block_attributes['TestimonialAuthorHoverColor']) ? sanitize_text_field($block_attributes['TestimonialAuthorHoverColor']) : '';
 
+/** Start Testimonial Author Margin */
+$TestimonialAuthorMarginUnits        = isset($block_attributes['TestimonialAuthorMarginUnits']) ? $block_attributes['TestimonialAuthorMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$TestimonialAuthorMarginDesktop      = isset($block_attributes['TestimonialAuthorMarginDesktop']) ? $block_attributes['TestimonialAuthorMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialAuthorMarginTablet       = isset($block_attributes['TestimonialAuthorMarginTablet']) ? $block_attributes['TestimonialAuthorMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialAuthorMarginMobile       = isset($block_attributes['TestimonialAuthorMarginMobile']) ? $block_attributes['TestimonialAuthorMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialAuthorMarginLink         = isset($block_attributes['TestimonialAuthorMarginLink']) ? rest_sanitize_boolean($block_attributes['TestimonialAuthorMarginLink']) : true;
+
+$testimonialAuthorDesktopMargin      = $TestimonialAuthorMarginDesktop['top'] . $TestimonialAuthorMarginUnits['Desktop'] . ' ' . $TestimonialAuthorMarginDesktop['right'] . $TestimonialAuthorMarginUnits['Desktop'] . ' ' . $TestimonialAuthorMarginDesktop['bottom'] . $TestimonialAuthorMarginUnits['Desktop'] . ' ' . $TestimonialAuthorMarginDesktop['left'] . $TestimonialAuthorMarginUnits['Desktop'];
+$testimonialAuthorTabletMargin       = $TestimonialAuthorMarginTablet['top'] . $TestimonialAuthorMarginUnits['Tablet'] . ' ' . $TestimonialAuthorMarginTablet['right'] . $TestimonialAuthorMarginUnits['Tablet'] . ' ' . $TestimonialAuthorMarginTablet['bottom'] . $TestimonialAuthorMarginUnits['Tablet'] . ' ' . $TestimonialAuthorMarginTablet['left'] . $TestimonialAuthorMarginUnits['Tablet'];
+$testimonialAuthorMobileMargin       = $TestimonialAuthorMarginMobile['top'] . $TestimonialAuthorMarginUnits['Mobile'] . ' ' . $TestimonialAuthorMarginMobile['right'] . $TestimonialAuthorMarginUnits['Mobile'] . ' ' . $TestimonialAuthorMarginMobile['bottom'] . $TestimonialAuthorMarginUnits['Mobile'] . ' ' . $TestimonialAuthorMarginMobile['left'] . $TestimonialAuthorMarginUnits['Mobile'];
+/** End Testimonial Author Margin */
+
+
 $TestimonialDesignationFontFamily         = isset($block_attributes['TestimonialDesignationFontFamily']) ? sanitize_text_field($block_attributes['TestimonialDesignationFontFamily']) : 'inherit';
 $TestimonialDesignationFontSize           = isset($block_attributes['TestimonialDesignationFontSize']) ? $block_attributes['TestimonialDesignationFontSize'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
 $TestimonialDesignationFontSizeUnits      = isset($block_attributes['TestimonialDesignationFontSizeUnits']) ? $block_attributes['TestimonialDesignationFontSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
@@ -110,11 +184,36 @@ $TestimonialDesignationColorSwitcher      = isset($block_attributes['Testimonial
 $TestimonialDesignationColor              = isset($block_attributes['TestimonialDesignationColor']) ? sanitize_text_field($block_attributes['TestimonialDesignationColor']) : '';
 $TestimonialDesignationHoverColor         = isset($block_attributes['TestimonialDesignationHoverColor']) ? sanitize_text_field($block_attributes['TestimonialDesignationHoverColor']) : '';
 
+/** Start Testimonial Designation Margin */
+$TestimonialDesignationMarginUnits        = isset($block_attributes['TestimonialDesignationMarginUnits']) ? $block_attributes['TestimonialDesignationMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$TestimonialDesignationMarginDesktop      = isset($block_attributes['TestimonialDesignationMarginDesktop']) ? $block_attributes['TestimonialDesignationMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialDesignationMarginTablet       = isset($block_attributes['TestimonialDesignationMarginTablet']) ? $block_attributes['TestimonialDesignationMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialDesignationMarginMobile       = isset($block_attributes['TestimonialDesignationMarginMobile']) ? $block_attributes['TestimonialDesignationMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialDesignationMarginLink         = isset($block_attributes['TestimonialDesignationMarginLink']) ? rest_sanitize_boolean($block_attributes['TestimonialDesignationMarginLink']) : true;
+
+$testimonialDesignationDesktopMargin      = $TestimonialDesignationMarginDesktop['top'] . $TestimonialDesignationMarginUnits['Desktop'] . ' ' . $TestimonialDesignationMarginDesktop['right'] . $TestimonialDesignationMarginUnits['Desktop'] . ' ' . $TestimonialDesignationMarginDesktop['bottom'] . $TestimonialDesignationMarginUnits['Desktop'] . ' ' . $TestimonialDesignationMarginDesktop['left'] . $TestimonialDesignationMarginUnits['Desktop'];
+$testimonialDesignationTabletMargin       = $TestimonialDesignationMarginTablet['top'] . $TestimonialDesignationMarginUnits['Tablet'] . ' ' . $TestimonialDesignationMarginTablet['right'] . $TestimonialDesignationMarginUnits['Tablet'] . ' ' . $TestimonialDesignationMarginTablet['bottom'] . $TestimonialDesignationMarginUnits['Tablet'] . ' ' . $TestimonialDesignationMarginTablet['left'] . $TestimonialDesignationMarginUnits['Tablet'];
+$testimonialDesignationMobileMargin       = $TestimonialDesignationMarginMobile['top'] . $TestimonialDesignationMarginUnits['Mobile'] . ' ' . $TestimonialDesignationMarginMobile['right'] . $TestimonialDesignationMarginUnits['Mobile'] . ' ' . $TestimonialDesignationMarginMobile['bottom'] . $TestimonialDesignationMarginUnits['Mobile'] . ' ' . $TestimonialDesignationMarginMobile['left'] . $TestimonialDesignationMarginUnits['Mobile'];
+/** End Testimonial Designation Margin */
+
+
 $TestimonialRatingIconSize              = isset($block_attributes['TestimonialRatingIconSize']) ? $block_attributes['TestimonialRatingIconSize'] : array('Desktop' => 20, 'Tablet' => 20, 'Mobile' => 20);
 $TestimonialRatingIconSizeUnits         = isset($block_attributes['TestimonialRatingIconSizeUnits']) ? $block_attributes['TestimonialRatingIconSizeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $TestimonialRatingIconColorSwitcher     = isset($block_attributes['TestimonialRatingIconColorSwitcher']) ? sanitize_text_field($block_attributes['TestimonialRatingIconColorSwitcher']) : 'normal';
 $TestimonialRatingIconColor             = isset($block_attributes['TestimonialRatingIconColor']) ? sanitize_text_field($block_attributes['TestimonialRatingIconColor']) : '#FFB400';
 $TestimonialRatingIconHoverColor        = isset($block_attributes['TestimonialRatingIconHoverColor']) ? sanitize_text_field($block_attributes['TestimonialRatingIconHoverColor']) : '#FFB400';
+
+/** Start Testimonial Rating Icon Margin */
+$TestimonialRatingIconMarginUnits        = isset($block_attributes['TestimonialRatingIconMarginUnits']) ? $block_attributes['TestimonialRatingIconMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$TestimonialRatingIconMarginDesktop      = isset($block_attributes['TestimonialRatingIconMarginDesktop']) ? $block_attributes['TestimonialRatingIconMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialRatingIconMarginTablet       = isset($block_attributes['TestimonialRatingIconMarginTablet']) ? $block_attributes['TestimonialRatingIconMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialRatingIconMarginMobile       = isset($block_attributes['TestimonialRatingIconMarginMobile']) ? $block_attributes['TestimonialRatingIconMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$TestimonialRatingIconMarginLink         = isset($block_attributes['TestimonialRatingIconMarginLink']) ? rest_sanitize_boolean($block_attributes['TestimonialRatingIconMarginLink']) : true;
+
+$testimonialRatingIconDesktopMargin      = $TestimonialRatingIconMarginDesktop['top'] . $TestimonialRatingIconMarginUnits['Desktop'] . ' ' . $TestimonialRatingIconMarginDesktop['right'] . $TestimonialRatingIconMarginUnits['Desktop'] . ' ' . $TestimonialRatingIconMarginDesktop['bottom'] . $TestimonialRatingIconMarginUnits['Desktop'] . ' ' . $TestimonialRatingIconMarginDesktop['left'] . $TestimonialRatingIconMarginUnits['Desktop'];
+$testimonialRatingIconTabletMargin       = $TestimonialRatingIconMarginTablet['top'] . $TestimonialRatingIconMarginUnits['Tablet'] . ' ' . $TestimonialRatingIconMarginTablet['right'] . $TestimonialRatingIconMarginUnits['Tablet'] . ' ' . $TestimonialRatingIconMarginTablet['bottom'] . $TestimonialRatingIconMarginUnits['Tablet'] . ' ' . $TestimonialRatingIconMarginTablet['left'] . $TestimonialRatingIconMarginUnits['Tablet'];
+$testimonialRatingIconMobileMargin       = $TestimonialRatingIconMarginMobile['top'] . $TestimonialRatingIconMarginUnits['Mobile'] . ' ' . $TestimonialRatingIconMarginMobile['right'] . $TestimonialRatingIconMarginUnits['Mobile'] . ' ' . $TestimonialRatingIconMarginMobile['bottom'] . $TestimonialRatingIconMarginUnits['Mobile'] . ' ' . $TestimonialRatingIconMarginMobile['left'] . $TestimonialRatingIconMarginUnits['Mobile'];
+/** End Testimonial Rating Icon Margin */
 
 $TestimonialGlobalZIndex                = isset($block_attributes['TestimonialGlobalZIndex']) ? $block_attributes['TestimonialGlobalZIndex'] : '';
 $TestimonialGlobalPaddingUnits          = isset($block_attributes['TestimonialGlobalPaddingUnits']) ? $block_attributes['TestimonialGlobalPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
@@ -140,7 +239,7 @@ $globalMobileMargin                     = $TestimonialGlobalMarginMobile['top'] 
 /** End Global Margin */
 
 $TestimonialGlobalBgColorSwitcher       = isset($block_attributes['TestimonialGlobalBgColorSwitcher']) ? $block_attributes['TestimonialGlobalBgColorSwitcher'] : 'normal';
-$TestimonialGlobalBgColor               = isset($block_attributes['TestimonialGlobalBgColor']) ? $block_attributes['TestimonialGlobalBgColor'] : '';
+$TestimonialGlobalBgColor               = isset($block_attributes['TestimonialGlobalBgColor']) ? $block_attributes['TestimonialGlobalBgColor'] : '#fefaf3';
 $TestimonialGlobalBgHoverColor          = isset($block_attributes['TestimonialGlobalBgHoverColor']) ? $block_attributes['TestimonialGlobalBgHoverColor'] : '';
 
 $TestimonialGlobalBorder                = isset($block_attributes['TestimonialGlobalBorder']) ? $block_attributes['TestimonialGlobalBorder'] : 'none';
@@ -173,14 +272,15 @@ $globalMobileBorderRadiusWidth          = $TestimonialGlobalBorderRadiusMobile['
 $TestimonialGlobalBoxShadowValues       = isset($block_attributes['TestimonialGlobalBoxShadowValues']) ? $block_attributes['TestimonialGlobalBoxShadowValues'] : [];
 $TestimonialGlobalBoxShadowCssValue     = isset($block_attributes['TestimonialGlobalBoxShadowCssValue']) ? $block_attributes['TestimonialGlobalBoxShadowCssValue'] : '';
 
-
+$TestimonialPresetStyle = isset($block_attributes['TestimonialPresetStyle']) ? $block_attributes['TestimonialPresetStyle'] : 'preset-1';
 // Generate CSS content
 $css_content = "
 
-    .${blockID}.fb-testimonial-main-wrapper {
+     .fb-testimonial-main-wrapper.${blockID} {
         " . ($TestimonialGlobalZIndex ? "z-index: $TestimonialGlobalZIndex;" : "") . "
+        position: relative;
     }
-    .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
+    .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
         " . ($TestimonialGlobalBgColor ? "background-color: $TestimonialGlobalBgColor;" : "") . "
         " . ($globalDesktopPadding ? "padding: $globalDesktopPadding;" : "") . "
         " . ($globalDesktopMargin ? "margin: $globalDesktopMargin;" : "") . "
@@ -197,11 +297,23 @@ $css_content = "
         " . ($TestimonialGlobalBorderHoverColor ? "border-color: $TestimonialGlobalBorderHoverColor;" : "") . "
     }
 
-    .${blockID} .fb-testimonial-image img {
+    .${blockID} .fb-testimonial-image img { 
         " . ($TestimonialImageWidth['Desktop'] && $TestimonialImageWidthUnits['Desktop'] ? "width: {$TestimonialImageWidth['Desktop']}{$TestimonialImageWidthUnits['Desktop']};" : "") . "
         " . ($TestimonialImageWidth['Desktop'] && $TestimonialImageWidthUnits['Desktop'] ? "height: {$TestimonialImageWidth['Desktop']}{$TestimonialImageWidthUnits['Desktop']};" : "") . "
         border-radius: {$testimonialImageDesktopBorderRadiusWidth};
+        " . ($testimonialImageDesktopMargin ? "margin: {$testimonialImageDesktopMargin};" : "") . "
+        " . ($TestimonialImagePositionSwitcher ? "position: absolute;" : "") . "
+        " . ($TestimonialImagePositionSwitcher ? "top: " . ($TestimonialImageTopPosition['Desktop'] && $TestimonialImageTopPositionUnits['Desktop'] ? "{$TestimonialImageTopPosition['Desktop']}{$TestimonialImageTopPositionUnits['Desktop']}" : "0") . ";" : "") . "
+        " . ($TestimonialImagePositionSwitcher ? "left: " . ($TestimonialImageLeftPosition['Desktop'] && $TestimonialImageLeftPositionUnits['Desktop'] ? "{$TestimonialImageLeftPosition['Desktop']}{$TestimonialImageLeftPositionUnits['Desktop']}" : "0") . ";" : "") . "
     }
+
+    .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-quote-icon {
+        " . ($TestimonialQuoteIconPositionSwitcher ? "position: absolute;" : "") . "
+        " . ($TestimonialQuoteIconPositionSwitcher ? "top: " . ($TestimonialQuoteIconTopPosition['Desktop'] && $TestimonialQuoteIconTopPositionUnits['Desktop'] ? "{$TestimonialQuoteIconTopPosition['Desktop']}{$TestimonialQuoteIconTopPositionUnits['Desktop']}" : "0") . ";" : "") . "
+        " . ($TestimonialQuoteIconPositionSwitcher ? "left: " . ($TestimonialQuoteIconLeftPosition['Desktop'] && $TestimonialQuoteIconLeftPositionUnits['Desktop'] ? "{$TestimonialQuoteIconLeftPosition['Desktop']}{$TestimonialQuoteIconLeftPositionUnits['Desktop']}" : "0") . ";" : "") . "
+        " . ($testimonialQuoteIconDesktopMargin ? "margin: {$testimonialQuoteIconDesktopMargin};" : "") . "
+    }
+
 
     .${blockID} .fb-testimonial-quote-icon svg {
         " . ($TestimonialQuoteIconSize['Desktop'] && $TestimonialQuoteIconSizeUnits['Desktop'] ? "width: {$TestimonialQuoteIconSize['Desktop']}{$TestimonialQuoteIconSizeUnits['Desktop']};" : "") . "
@@ -223,6 +335,7 @@ $css_content = "
         " . ($TestimonialTitleLetterSpacing['Desktop'] && $TestimonialTitleLetterSpacingUnits['Desktop'] ? "letter-spacing: {$TestimonialTitleLetterSpacing['Desktop']}{$TestimonialTitleLetterSpacingUnits['Desktop']};" : "") . "
         " . ($TestimonialTitleLineHeight['Desktop'] && $TestimonialTitleLineHeightUnits['Desktop'] ? "line-height: {$TestimonialTitleLineHeight['Desktop']}{$TestimonialTitleLineHeightUnits['Desktop']};" : "") . "
         " . ($TestimonialTitleColor ? "color: $TestimonialTitleColor;" : "") . "
+        " . ($testimonialTitleDesktopMargin ? "margin: {$testimonialTitleDesktopMargin};" : "") . "
     }
     .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
         " . ($TestimonialTitleHoverColor ? "color: $TestimonialTitleHoverColor;" : "") . "
@@ -238,6 +351,7 @@ $css_content = "
         " . ($TestimonialDescLetterSpacing['Desktop'] && $TestimonialDescLetterSpacingUnits['Desktop'] ? "letter-spacing: {$TestimonialDescLetterSpacing['Desktop']}{$TestimonialDescLetterSpacingUnits['Desktop']};" : "") . "
         " . ($TestimonialDescLineHeight['Desktop'] && $TestimonialDescLineHeightUnits['Desktop'] ? "line-height: {$TestimonialDescLineHeight['Desktop']}{$TestimonialDescLineHeightUnits['Desktop']};" : "") . "
         " . ($TestimonialDescColor ? "color: $TestimonialDescColor;" : "") . "
+        " . ($testimonialDescDesktopMargin ? "margin: {$testimonialDescDesktopMargin};" : "") . "
     }
     .${blockID}.fb-testimonial-userdesc-container .fb-user-desc:hover {
         " . ($TestimonialDescHoverColor ? "color: $TestimonialDescHoverColor;" : "") . "
@@ -252,6 +366,7 @@ $css_content = "
         " . ($TestimonialAuthorLetterSpacing['Desktop'] && $TestimonialAuthorLetterSpacingUnits['Desktop'] ? "letter-spacing: {$TestimonialAuthorLetterSpacing['Desktop']}{$TestimonialAuthorLetterSpacingUnits['Desktop']};" : "") . "
         " . ($TestimonialAuthorLineHeight['Desktop'] && $TestimonialAuthorLineHeightUnits['Desktop'] ? "line-height: {$TestimonialAuthorLineHeight['Desktop']}{$TestimonialAuthorLineHeightUnits['Desktop']};" : "") . "
         " . ($TestimonialAuthorColor ? "color: $TestimonialAuthorColor;" : "") . "
+        " . ($testimonialAuthorDesktopMargin ? "margin: {$testimonialAuthorDesktopMargin};" : "") . "
     }
     .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
         " . ($TestimonialAuthorHoverColor ? "color: $TestimonialAuthorHoverColor;" : "") . "
@@ -267,9 +382,15 @@ $css_content = "
         " . ($TestimonialDesignationLetterSpacing['Desktop'] && $TestimonialDesignationLetterSpacingUnits['Desktop'] ? "letter-spacing: {$TestimonialDesignationLetterSpacing['Desktop']}{$TestimonialDesignationLetterSpacingUnits['Desktop']};" : "") . "
         " . ($TestimonialDesignationLineHeight['Desktop'] && $TestimonialDesignationLineHeightUnits['Desktop'] ? "line-height: {$TestimonialDesignationLineHeight['Desktop']}{$TestimonialDesignationLineHeightUnits['Desktop']};" : "") . "
         " . ($TestimonialDesignationColor ? "color: $TestimonialDesignationColor;" : "") . "
+        " . ($testimonialDesignationDesktopMargin ? "margin: {$testimonialDesignationDesktopMargin};" : "") . " 
     }
     .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
         " . ($TestimonialDesignationHoverColor ? "color: $TestimonialDesignationHoverColor;" : "") . "
+    }
+
+    .${blockID} .fb-testimonial-rating {
+        " . ($testimonialRatingIconDesktopMargin ? "margin: $testimonialRatingIconDesktopMargin;" : "") . "
+        
     }
 
     .${blockID} .fb-testimonial-rating-icon svg {
@@ -280,6 +401,12 @@ $css_content = "
     .${blockID} .fb-testimonial-rating-icon:hover svg {
         " . ($TestimonialRatingIconHoverColor ? "fill: $TestimonialRatingIconHoverColor;" : "") . "
     }
+    .${blockID} .fb-testimonial-author-container {
+        " . ($TestimonialPresetStyle === "preset-5" ? "display: flex; align-items: center; justify-content: space-between;" : "") . "
+    }
+    .${blockID} .fb-user-desc {
+        " . ($TestimonialPresetStyle === "preset-5" ? "padding-top: 24px; color: #fff;" : "") . "
+    }
 
     @media only screen and (max-width: 1024px) {
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
@@ -288,33 +415,57 @@ $css_content = "
             " . ($globalTabletBorderWidth ? "border-width: $globalTabletBorderWidth;" : "") . "
             " . ($globalTabletBorderRadiusWidth ? "border-radius: $globalTabletBorderRadiusWidth;" : "") . "
         }
+
+        .${blockID} .fb-testimonial-quote-icon {
+            " . ($TestimonialQuoteIconPositionSwitcher ? "position: absolute;" : "") . "
+            " . ($TestimonialQuoteIconPositionSwitcher && $TestimonialQuoteIconTopPosition['Tablet'] && $TestimonialQuoteIconTopPositionUnits['Tablet'] ? "top: {$TestimonialQuoteIconTopPosition['Tablet']}{$TestimonialQuoteIconTopPositionUnits['Tablet']};" : "") . "
+            " . ($TestimonialQuoteIconPositionSwitcher && $TestimonialQuoteIconLeftPosition['Tablet'] && $TestimonialQuoteIconLeftPositionUnits['Tablet'] ? "left: {$TestimonialQuoteIconLeftPosition['Tablet']}{$TestimonialQuoteIconLeftPositionUnits['Tablet']};" : "") . "
+            " . ($testimonialQuoteIconTabletMargin ? "margin: $testimonialQuoteIconTabletMargin;" : "") . "
+        }
+
+        .${blockID} .fb-testimonial-rating {
+            " . ($testimonialRatingIconTabletMargin ? `margin: ${testimonialRatingIconTabletMargin};` : "") . "
+        }
+
         .${blockID} .fb-testimonial-image img {
             " . ($TestimonialImageWidth['Tablet'] && $TestimonialImageWidthUnits['Tablet'] ? "width: {$TestimonialImageWidth['Tablet']}{$TestimonialImageWidthUnits['Tablet']};" : "") . "
             " . ($TestimonialImageWidth['Tablet'] && $TestimonialImageWidthUnits['Tablet'] ? "height: {$TestimonialImageWidth['Tablet']}{$TestimonialImageWidthUnits['Tablet']};" : "") . "
             " . ($testimonialImageTabletBorderRadiusWidth ? "border-radius: $testimonialImageTabletBorderRadiusWidth;" : "") . "
+            " . ($testimonialImageTabletMargin ? "margin: $testimonialImageTabletMargin;" : "") . "
+            " . ($TestimonialImagePositionSwitcher ? "position: absolute;" : "") . "
+            " . ($TestimonialImagePositionSwitcher && $TestimonialImageTopPosition['Tablet'] && $TestimonialImageTopPositionUnits['Tablet'] ? "top: {$TestimonialImageTopPosition['Tablet']}{$TestimonialImageTopPositionUnits['Tablet']};" : "") . "
+            " . ($TestimonialImagePositionSwitcher && $TestimonialImageLeftPosition['Tablet'] && $TestimonialImageLeftPositionUnits['Tablet'] ? "left: {$TestimonialImageLeftPosition['Tablet']}{$TestimonialImageLeftPositionUnits['Tablet']};" : "") . "
         }
         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
             " . ($TestimonialTitleFontSize['Tablet'] && $TestimonialTitleFontSizeUnits['Tablet'] ? "font-size: {$TestimonialTitleFontSize['Tablet']}{$TestimonialTitleFontSizeUnits['Tablet']};" : "") . "
             " . ($TestimonialTitleLetterSpacing['Tablet'] && $TestimonialTitleLetterSpacingUnits['Tablet'] ? "letter-spacing: {$TestimonialTitleLetterSpacing['Tablet']}{$TestimonialTitleLetterSpacingUnits['Tablet']};" : "") . "
             " . ($TestimonialTitleLineHeight['Tablet'] && $TestimonialTitleLineHeightUnits['Tablet'] ? "line-height: {$TestimonialTitleLineHeight['Tablet']}{$TestimonialTitleLineHeightUnits['Tablet']};" : "") . "
+            " . ($testimonialTitleTabletMargin ? "margin: $testimonialTitleTabletMargin;" : "") . "
         }
 
         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
             " . ($TestimonialDescFontSize['Tablet'] && $TestimonialDescFontSizeUnits['Tablet'] ? "font-size: {$TestimonialDescFontSize['Tablet']}{$TestimonialDescFontSizeUnits['Tablet']};" : "") . "
             " . ($TestimonialDescLetterSpacing['Tablet'] && $TestimonialDescLetterSpacingUnits['Tablet'] ? "letter-spacing: {$TestimonialDescLetterSpacing['Tablet']}{$TestimonialDescLetterSpacingUnits['Tablet']};" : "") . "
             " . ($TestimonialDescLineHeight['Tablet'] && $TestimonialDescLineHeightUnits['Tablet'] ? "line-height: {$TestimonialDescLineHeight['Tablet']}{$TestimonialDescLineHeightUnits['Tablet']};" : "") . "
+            " . ($testimonialDescTabletMargin ? "margin: $testimonialDescTabletMargin;" : "") . "
         }
 
         .${blockID} .fb-testimonial-userinfo-container .fb-user {
             " . ($TestimonialAuthorFontSize['Tablet'] && $TestimonialAuthorFontSizeUnits['Tablet'] ? "font-size: {$TestimonialAuthorFontSize['Tablet']}{$TestimonialAuthorFontSizeUnits['Tablet']};" : "") . "
             " . ($TestimonialAuthorLetterSpacing['Tablet'] && $TestimonialAuthorLetterSpacingUnits['Tablet'] ? "letter-spacing: {$TestimonialAuthorLetterSpacing['Tablet']}{$TestimonialAuthorLetterSpacingUnits['Tablet']};" : "") . "
             " . ($TestimonialAuthorLineHeight['Tablet'] && $TestimonialAuthorLineHeightUnits['Tablet'] ? "line-height: {$TestimonialAuthorLineHeight['Tablet']}{$TestimonialAuthorLineHeightUnits['Tablet']};" : "") . "
+            " . ($testimonialAuthorTabletMargin ? "margin: $testimonialAuthorTabletMargin;" : "") . "
         }
 
         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
             " . ($TestimonialDesignationFontSize['Tablet'] && $TestimonialDesignationFontSizeUnits['Tablet'] ? "font-size: {$TestimonialDesignationFontSize['Tablet']}{$TestimonialDesignationFontSizeUnits['Tablet']};" : "") . "
             " . ($TestimonialDesignationLetterSpacing['Tablet'] && $TestimonialDesignationLetterSpacingUnits['Tablet'] ? "letter-spacing: {$TestimonialDesignationLetterSpacing['Tablet']}{$TestimonialDesignationLetterSpacingUnits['Tablet']};" : "") . "
             " . ($TestimonialDesignationLineHeight['Tablet'] && $TestimonialDesignationLineHeightUnits['Tablet'] ? "line-height: {$TestimonialDesignationLineHeight['Tablet']}{$TestimonialDesignationLineHeightUnits['Tablet']};" : "") . "
+            " . ($testimonialDesignationTabletMargin ? "margin: $testimonialDesignationTabletMargin;" : "") . "
+        }
+
+        .${blockID} .fb-testimonial-rating-icon svg {
+            " . ($testimonialRatingIconTabletMargin ? "margin: $testimonialRatingIconTabletMargin;" : "") . "
         }
     }
 
@@ -325,33 +476,51 @@ $css_content = "
             " . ($globalMobileBorderWidth ? "border-width: $globalMobileBorderWidth;" : "") . "
             " . ($globalMobileBorderRadiusWidth ? "border-radius: $globalMobileBorderRadiusWidth;" : "") . "
         }
+        .${blockID} .fb-testimonial-rating {
+            " . ($testimonialRatingIconMobileMargin ? "margin: $testimonialRatingIconMobileMargin;" : "") . "
+        }
+        .${blockID} .fb-testimonial-quote-icon {
+            " . ($TestimonialQuoteIconPositionSwitcher ? "position: absolute;" : "") . "
+            " . ($TestimonialQuoteIconPositionSwitcher && $TestimonialQuoteIconTopPosition['Mobile'] && $TestimonialQuoteIconTopPositionUnits['Mobile'] ? "top: {$TestimonialQuoteIconTopPosition['Mobile']}{$TestimonialQuoteIconTopPositionUnits['Mobile']};" : "") . "
+            " . ($TestimonialQuoteIconPositionSwitcher && $TestimonialQuoteIconLeftPosition['Mobile'] && $TestimonialQuoteIconLeftPositionUnits['Mobile'] ? "left: {$TestimonialQuoteIconLeftPosition['Mobile']}{$TestimonialQuoteIconLeftPositionUnits['Mobile']};" : "") . "
+            " . ($testimonialQuoteIconMobileMargin ? "margin: $testimonialQuoteIconMobileMargin;" : "") . "
+        }
+
         .${blockID} .fb-testimonial-image img {
             " . ($TestimonialImageWidth['Mobile'] && $TestimonialImageWidthUnits['Mobile'] ? "width: {$TestimonialImageWidth['Mobile']}{$TestimonialImageWidthUnits['Mobile']};" : "") . "
             " . ($TestimonialImageWidth['Mobile'] && $TestimonialImageWidthUnits['Mobile'] ? "height: {$TestimonialImageWidth['Mobile']}{$TestimonialImageWidthUnits['Mobile']};" : "") . "
             " . ($testimonialImageMobileBorderRadiusWidth ? "border-radius: $testimonialImageMobileBorderRadiusWidth;" : "") . "
+            " . ($testimonialImageMobileMargin ? "margin: $testimonialImageMobileMargin;" : "") . "
+            " . ($TestimonialImagePositionSwitcher ? "position: absolute;" : "") . "
+            " . ($TestimonialImagePositionSwitcher && $TestimonialImageTopPosition['Mobile'] && $TestimonialImageTopPositionUnits['Mobile'] ? "top: {$TestimonialImageTopPosition['Mobile']}{$TestimonialImageTopPositionUnits['Mobile']};" : "") . "
+            " . ($TestimonialImagePositionSwitcher && $TestimonialImageLeftPosition['Mobile'] && $TestimonialImageLeftPositionUnits['Mobile'] ? "left: {$TestimonialImageLeftPosition['Mobile']}{$TestimonialImageLeftPositionUnits['Mobile']};" : "") . "
         }
         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
             " . ($TestimonialTitleFontSize['Mobile'] && $TestimonialTitleFontSizeUnits['Mobile'] ? "font-size: {$TestimonialTitleFontSize['Mobile']}{$TestimonialTitleFontSizeUnits['Mobile']};" : "") . "
             " . ($TestimonialTitleLetterSpacing['Mobile'] && $TestimonialTitleLetterSpacingUnits['Mobile'] ? "letter-spacing: {$TestimonialTitleLetterSpacing['Mobile']}{$TestimonialTitleLetterSpacingUnits['Mobile']};" : "") . "
             " . ($TestimonialTitleLineHeight['Mobile'] && $TestimonialTitleLineHeightUnits['Mobile'] ? "line-height: {$TestimonialTitleLineHeight['Mobile']}{$TestimonialTitleLineHeightUnits['Mobile']};" : "") . "
+            " . ($testimonialTitleMobileMargin ? "margin: $testimonialTitleMobileMargin;" : "") . "
         }
 
         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
             " . ($TestimonialDescFontSize['Mobile'] && $TestimonialDescFontSizeUnits['Mobile'] ? "font-size: {$TestimonialDescFontSize['Mobile']}{$TestimonialDescFontSizeUnits['Mobile']};" : "") . "
             " . ($TestimonialDescLetterSpacing['Mobile'] && $TestimonialDescLetterSpacingUnits['Mobile'] ? "letter-spacing: {$TestimonialDescLetterSpacing['Mobile']}{$TestimonialDescLetterSpacingUnits['Mobile']};" : "") . "
             " . ($TestimonialDescLineHeight['Mobile'] && $TestimonialDescLineHeightUnits['Mobile'] ? "line-height: {$TestimonialDescLineHeight['Mobile']}{$TestimonialDescLineHeightUnits['Mobile']};" : "") . "
+            " . ($testimonialDescMobileMargin ? "margin: $testimonialDescMobileMargin;" : "") . "
         }
 
         .${blockID} .fb-testimonial-userinfo-container .fb-user {
             " . ($TestimonialAuthorFontSize['Mobile'] && $TestimonialAuthorFontSizeUnits['Mobile'] ? "font-size: {$TestimonialAuthorFontSize['Mobile']}{$TestimonialAuthorFontSizeUnits['Mobile']};" : "") . "
             " . ($TestimonialAuthorLetterSpacing['Mobile'] && $TestimonialAuthorLetterSpacingUnits['Mobile'] ? "letter-spacing: {$TestimonialAuthorLetterSpacing['Mobile']}{$TestimonialAuthorLetterSpacingUnits['Mobile']};" : "") . "
             " . ($TestimonialAuthorLineHeight['Mobile'] && $TestimonialAuthorLineHeightUnits['Mobile'] ? "line-height: {$TestimonialAuthorLineHeight['Mobile']}{$TestimonialAuthorLineHeightUnits['Mobile']};" : "") . "
+            " . ($testimonialAuthorMobileMargin ? "margin: $testimonialAuthorMobileMargin;" : "") . "
         }
 
         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
             " . ($TestimonialDesignationFontSize['Mobile'] && $TestimonialDesignationFontSizeUnits['Mobile'] ? "font-size: {$TestimonialDesignationFontSize['Mobile']}{$TestimonialDesignationFontSizeUnits['Mobile']};" : "") . "
             " . ($TestimonialDesignationLetterSpacing['Mobile'] && $TestimonialDesignationLetterSpacingUnits['Mobile'] ? "letter-spacing: {$TestimonialDesignationLetterSpacing['Mobile']}{$TestimonialDesignationLetterSpacingUnits['Mobile']};" : "") . "
             " . ($TestimonialDesignationLineHeight['Mobile'] && $TestimonialDesignationLineHeightUnits['Mobile'] ? "line-height: {$TestimonialDesignationLineHeight['Mobile']}{$TestimonialDesignationLineHeightUnits['Mobile']};" : "") . "
+            " . ($testimonialDesignationMobileMargin ? "margin: $testimonialDesignationMobileMargin;" : "") . "
         }
     }
 }
