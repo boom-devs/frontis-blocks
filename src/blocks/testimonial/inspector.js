@@ -1569,9 +1569,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialGlobalBgHoverColor ? `background-color: ${TestimonialGlobalBgHoverColor};` : ''} 
                         ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
                     }
-                    .${blockID} .fb-testimonial-author-container {
-
-                    }
+  
                     .${blockID} .fb-testimonial-image img {
                         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
                         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
@@ -1738,9 +1736,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};
                             ${testimonialDesignationTabletMargin ? `margin: ${testimonialDesignationTabletMargin};` : ''}
                         }
-                        .${blockID} .fb-testimonial-rating-icon svg {
-                            ${testimonialQuoteIconTabletMargin ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
-                        }
                     }
                     @media only screen and (max-width: 767px) {
                         .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
@@ -1792,10 +1787,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};
                             line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};
                             ${testimonialDesignationMobileMargin ? `margin: ${testimonialDesignationMobileMargin};` : ''}
-                        }
-                        .${blockID} .fb-testimonial-rating-icon svg {
-                            ${testimonialQuoteIconMobileMargin ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
-                        }   
+                        }  
                     }
                 `}
             </style>

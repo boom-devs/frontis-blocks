@@ -373,7 +373,7 @@ const attributes = {
     },
     TestimonialTitleFontWeight: {
         type: "string",
-        default: "600"
+        default: ""
     },
     TestimonialTitleFontStyle: {
         type: "string",
