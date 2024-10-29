@@ -61,7 +61,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className="fb-dual-button-wrapper" style={{ justifyContent: ButtonAlignment }}>
 						<div className="fb-dual-button-one-wrapper">
 							<a
-								className="fb-advanced-button"
+								className="fb-advanced-button fb-dual-button-one"
 								href={ButtonUrl}
 								target={ButtonTargetUrl ? '_blank' : undefined}
 								rel={ButtonTargetUrl ? 'noopener noreferrer' : undefined}
@@ -89,7 +89,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							/>
 						</div>
 						)}
-						<div className="fb-dual-button-one-wrapper">
+						<div className="fb-dual-button-two-wrapper">
 							<a
 								className="fb-advanced-button  fb-dual-button-two"
 								href={ButtonTwoUrl}
