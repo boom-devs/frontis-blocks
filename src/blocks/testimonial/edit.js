@@ -110,7 +110,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             <div className='fb-testimonial-container'>
 
 
-                            {TestimonialPresetStyle === "preset-3" ? (
+                            {TestimonialPresetStyle === "preset-4" ? (
                                     <>
                                         <div className="fb-testimonial-author-container">
                                             <div className='fb-testimonial-author-inner-container'>

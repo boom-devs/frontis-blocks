@@ -77,10 +77,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialImageMobileRadiusWidth,
         TestimonialImageRadiusLink,
 
-        TestimonialImageSpacingUnits,
-        TestimonialImageSpacing,
-        TestimonialAuthorSpacing,
-        TestimonialAuthorSpacingUnits,
+        TestimonialImageMarginUnits,
+        TestimonialImageMarginDesktop,
+        TestimonialImageMarginTablet,
+        TestimonialImageMarginMobile,
+        TestimonialImageMarginLink,
+
+        TestimonialImagePositionSwitcher,
+        TestimonialImageTopPosition,
+        TestimonialImageTopPositionUnits,
+        TestimonialImageLeftPosition,
+        TestimonialImageLeftPositionUnits,
 
         TestimonialQuoteIconSize,
         TestimonialQuoteIconSizeUnits,
@@ -92,6 +99,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialQuoteIconTopPositionUnits,
         TestimonialQuoteIconLeftPosition,
         TestimonialQuoteIconLeftPositionUnits,
+        TestimonialQuoteIconMarginUnits,
+        TestimonialQuoteIconMarginDesktop,
+        TestimonialQuoteIconMarginTablet,
+        TestimonialQuoteIconMarginMobile,
+        TestimonialQuoteIconMarginLink,
+
+
 
         TestimonialTitleTag,
         TestimonialTitleFontFamily,
@@ -108,8 +122,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialTitleColorSwitcher,
         TestimonialTitleColor,
         TestimonialTitleHoverColor,
-        TestimonialTitleSpacingUnits,
-        TestimonialTitleSpacing,
+        TestimonialTitleMarginUnits,
+        TestimonialTitleMarginDesktop,
+        TestimonialTitleMarginTablet,
+        TestimonialTitleMarginMobile,
+        TestimonialTitleMarginLink,
+
+        // TestimonialTitleSpacingUnits,
+        // TestimonialTitleSpacing,
 
         TestimonialDescFontFamily,
         TestimonialDescFontSize,
@@ -125,8 +145,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDescColorSwitcher,
         TestimonialDescColor,
         TestimonialDescHoverColor,
-        TestimonialDescSpacingUnits,    
-        TestimonialDescSpacing,
+        TestimonialDescMarginUnits,
+        TestimonialDescMarginDesktop,
+        TestimonialDescMarginTablet,
+        TestimonialDescMarginMobile,
+        TestimonialDescMarginLink,
 
         TestimonialAuthorFontFamily,
         TestimonialAuthorFontSize,
@@ -143,6 +166,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialAuthorColor,
         TestimonialAuthorHoverColor,
 
+        TestimonialAuthorMarginUnits,
+        TestimonialAuthorMarginDesktop,
+        TestimonialAuthorMarginTablet,
+        TestimonialAuthorMarginMobile,
+        TestimonialAuthorMarginLink,
+
         TestimonialDesignationFontFamily,
         TestimonialDesignationFontSize,
         TestimonialDesignationFontSizeUnits,
@@ -157,14 +186,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDesignationColorSwitcher,
         TestimonialDesignationColor,
         TestimonialDesignationHoverColor,
+        TestimonialDesignationMarginUnits,
+        TestimonialDesignationMarginDesktop,
+        TestimonialDesignationMarginTablet,
+        TestimonialDesignationMarginMobile,
+        TestimonialDesignationMarginLink,
 
         TestimonialRatingIconSize,
         TestimonialRatingIconSizeUnits,
         TestimonialRatingIconColorSwitcher,
         TestimonialRatingIconColor,
         TestimonialRatingIconHoverColor,
-        TestimonialRatingIconSpacing,
-        TestimonialRatingIconSpacingUnits,
+        TestimonialRatingIconMarginUnits,
+        TestimonialRatingIconMarginDesktop,
+        TestimonialRatingIconMarginTablet,
+        TestimonialRatingIconMarginMobile,
+        TestimonialRatingIconMarginLink,
 
         TestimonialGlobalZIndex,
         TestimonialGlobalPaddingUnits,
@@ -238,7 +275,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Start Preset Style */
     const changeTestimonialPreset = (selectedPreset) => {
         const presetConfigurations = {
-            "preset-0": {
+            "preset-1": {
                 RatingSwitcher: true,
                 TitleSwitcher: true,
                 DescSwitcher: true,
@@ -247,36 +284,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 DesignationSwitcher: true,
                 QuoteIconSwitcher: false,
                 TestimonialQuoteIconPositionSwitcher: false,
-                TestimonialDescSpacing: {
-                    Desktop: "15",
-                    Tablet: "15",
-                    Mobile: "15",
+                TestimonialDescMarginDesktop: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
                 },
-                TestimonialRatingIconSpacing: {
-                    Desktop: "0",
-                    Tablet: "0",
-                    Mobile: "0",
+                TestimonialRatingIconMarginDesktop: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
                 },
-            },
-            "preset-1": {
-                RatingSwitcher: true,
-                TitleSwitcher: false,
-                DescSwitcher: true,
-                TestimonialImageSwitcher: true,
-                AuthorSwitcher: true,
-                DesignationSwitcher: true,
-                QuoteIconSwitcher: false,
-                TestimonialQuoteIconPositionSwitcher: false,
-                TestimonialDescSpacing: {
-                    Desktop: "15",
-                    Tablet: "15",
-                    Mobile: "15",
+                TestimonialImagePositionSwitcher: false,
+                TestimonialImageWidth: {
+                    Desktop: '60',
+                    Tablet: '60',
+                    Mobile: '60',
                 },
-                TestimonialRatingIconSpacing: {
-                    Desktop: "0",
-                    Tablet: "0",
-                    Mobile: "0",
+                TestimonialImageDesktopRadiusWidth: {
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
                 },
+                TestimonialImageTabletRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialImageMobileRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialAuthorMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialDesignationMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+
             },
             "preset-2": {
                 RatingSwitcher: true,
@@ -285,28 +341,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 TestimonialImageSwitcher: true,
                 AuthorSwitcher: true,
                 DesignationSwitcher: true,
-                QuoteIconSwitcher: true,
-                TestimonialQuoteIconPositionSwitcher: true,
-                TestimonialQuoteIconTopPosition: {
-                    Desktop: "3",
-                    Tablet: "3",
-                    Mobile: "3",
+                QuoteIconSwitcher: false,
+                TestimonialQuoteIconPositionSwitcher: false,
+                TestimonialDescMarginDesktop: {
+                    top: '16',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
                 },
-                TestimonialQuoteIconLeftPosition: {
-                    Desktop: "85",
-                    Tablet: "85",
-                    Mobile: "85",
+                TestimonialRatingIconMarginDesktop: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
                 },
-                TestimonialDescSpacing: {
-                    Desktop: "15",
-                    Tablet: "15",
-                    Mobile: "15",
+                TestimonialImagePositionSwitcher: false,
+                TestimonialImageWidth: {
+                    Desktop: '60',
+                    Tablet: '60',
+                    Mobile: '60',
                 },
-                TestimonialRatingIconSpacing: {
-                    Desktop: "0",
-                    Tablet: "0",
-                    Mobile: "0",
+                TestimonialImageDesktopRadiusWidth: {
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
                 },
+                TestimonialImageTabletRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialImageMobileRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialAuthorMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialDesignationMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+
             },
             "preset-3": {
                 RatingSwitcher: true,
@@ -327,20 +412,201 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     Tablet: "85",
                     Mobile: "85",
                 },
-                TestimonialAuthorSpacing: {
-                    Desktop: "0",
-                    Tablet: "0",
-                    Mobile: "0",
+                TestimonialDescMarginDesktop: {
+                    top: '32',
+                    bottom: '32',
+                    left: '0',
+                    right: '0',
                 },
-                TestimonialDescSpacing: {
-                    Desktop: "0",
-                    Tablet: "0",
-                    Mobile: "0",
+                TestimonialRatingIconMarginDesktop: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
                 },
-                TestimonialRatingIconSpacing: {
-                    Desktop: "15",
-                    Tablet: "15",
-                    Mobile: "15",
+                TestimonialImagePositionSwitcher: false,
+                TestimonialImageWidth: {
+                    Desktop: '60',
+                    Tablet: '60',
+                    Mobile: '60',
+                },
+                TestimonialImageDesktopRadiusWidth: {
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialImageTabletRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialImageMobileRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialAuthorMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialDesignationMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+            },
+            "preset-4": {
+                RatingSwitcher: true,
+                TitleSwitcher: false,
+                DescSwitcher: true,
+                TestimonialImageSwitcher: true,
+                AuthorSwitcher: true,
+                DesignationSwitcher: true,
+                QuoteIconSwitcher: true,
+                TestimonialQuoteIconPositionSwitcher: true,
+                TestimonialQuoteIconTopPosition: {
+                    Desktop: "3",
+                    Tablet: "3",
+                    Mobile: "3",
+                },
+                TestimonialQuoteIconLeftPosition: {
+                    Desktop: "85",
+                    Tablet: "85",
+                    Mobile: "85",
+                },
+                TestimonialDescMarginDesktop: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialRatingIconMarginDesktop: {
+                    top: '36',
+                    bottom: '16',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialImagePositionSwitcher: true,
+                TestimonialImageTopPosition: {
+                    Desktop: '-5',
+                    Tablet: '-5',
+                    Mobile: '-5',
+                },
+                TestimonialImageLeftPosition: {
+                    Desktop: '-2',
+                    Tablet: '-2',
+                    Mobile: '-2',
+                },
+
+                TestimonialImageDesktopRadiusWidth: {
+                    top: '10',
+                    right: '10',
+                    bottom: '10',
+                    left: '10',
+                },
+                TestimonialImageTabletRadiusWidth :{
+                    top: '10',
+                    right: '10',
+                    bottom: '10',
+                    left: '10',
+                },
+                TestimonialImageMobileRadiusWidth :{
+                    top: '10',
+                    right: '10',
+                    bottom: '10',
+                    left: '10',
+                },
+
+                TestimonialImageWidth: {
+                    Desktop: '110',
+                    Tablet: '110',
+                    Mobile: '110',
+                },
+                TestimonialAuthorMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '100',
+                    right: '0',
+                },
+                TestimonialDesignationMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '100',
+                    right: '0',
+                },
+            },
+            "preset-5": {
+                RatingSwitcher: true,
+                TitleSwitcher: false,
+                DescSwitcher: true,
+                TestimonialImageSwitcher: true,
+                AuthorSwitcher: true,
+                DesignationSwitcher: true,
+                QuoteIconSwitcher: true,
+                TestimonialQuoteIconPositionSwitcher: true,
+                TestimonialQuoteIconTopPosition: {
+                    Desktop: "3",
+                    Tablet: "3",
+                    Mobile: "3",
+                },
+                TestimonialQuoteIconLeftPosition: {
+                    Desktop: "85",
+                    Tablet: "85",
+                    Mobile: "85",
+                },
+                TestimonialDescMarginDesktop: {
+                    top: '24',
+                    bottom: '32',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialRatingIconMarginDesktop: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialImagePositionSwitcher: false,
+                TestimonialImageWidth: {
+                    Desktop: '60',
+                    Tablet: '60',
+                    Mobile: '60',
+                },
+                TestimonialImageDesktopRadiusWidth: {
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialImageTabletRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialImageMobileRadiusWidth :{
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50',
+                },
+                TestimonialAuthorMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                TestimonialDesignationMarginDesktop : {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
                 },
             },
         };
@@ -357,6 +623,542 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     };
     /** End Preset Style */
+
+    console.log(TestimonialImageDesktopRadiusWidth);
+    
+
+
+    /** Start Testimonial Rating Icon Margin */
+    const testimonialRatingIconMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialRatingIconMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialRatingIconMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialRatingIconMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialRatingIconMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialRatingIconMarginDesktop: { ...TestimonialRatingIconMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialRatingIconMarginTablet: { ...TestimonialRatingIconMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialRatingIconMarginMobile: { ...TestimonialRatingIconMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const testimonialRatingIconMarginLinkBtn = () => {
+        setAttributes({
+            TestimonialRatingIconMarginLink: !TestimonialRatingIconMarginLink
+        });
+    };
+
+    const testimonialRatingIconMarginUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialRatingIconMarginUnits: {
+                ...TestimonialRatingIconMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Default margin for Testimonial Rating Icon */
+    const testimonialRatingIconDesktopMargin = `${TestimonialRatingIconMarginDesktop.top}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.right}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.bottom}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.left}${TestimonialRatingIconMarginUnits.Desktop}`;
+    const testimonialRatingIconTabletMargin = `${TestimonialRatingIconMarginTablet.top}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.right}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.bottom}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.left}${TestimonialRatingIconMarginUnits.Tablet}`;
+    const testimonialRatingIconMobileMargin = `${TestimonialRatingIconMarginMobile.top}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.right}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.bottom}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.left}${TestimonialRatingIconMarginUnits.Mobile}`;
+    /** End Testimonial Rating Icon Margin */
+
+
+    /** Start Testimonial Title Margin */
+    const testimonialTitleMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialTitleMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialTitleMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialTitleMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialTitleMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialTitleMarginDesktop: { ...TestimonialTitleMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialTitleMarginTablet: { ...TestimonialTitleMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialTitleMarginMobile: { ...TestimonialTitleMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const testimonialTitleMarginLinkBtn = () => {
+        setAttributes({
+            TestimonialTitleMarginLink: !TestimonialTitleMarginLink
+        });
+    };
+
+    const testimonialTitleMarginUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialTitleMarginUnits: {
+                ...TestimonialTitleMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const testimonialTitleDesktopMargin = `${TestimonialTitleMarginDesktop.top}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.right}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.bottom}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.left}${TestimonialTitleMarginUnits.Desktop}`;
+    const testimonialTitleTabletMargin = `${TestimonialTitleMarginTablet.top}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.right}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.bottom}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.left}${TestimonialTitleMarginUnits.Tablet}`;
+    const testimonialTitleMobileMargin = `${TestimonialTitleMarginMobile.top}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.right}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.bottom}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.left}${TestimonialTitleMarginUnits.Mobile}`;
+    /** End Testimonial Title Margin */
+
+
+    /** Start Testimonial Desc Margin */
+    const testimonialDescMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialDescMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialDescMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialDescMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialDescMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialDescMarginDesktop: { ...TestimonialDescMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialDescMarginTablet: { ...TestimonialDescMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialDescMarginMobile: { ...TestimonialDescMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const testimonialDescMarginLinkBtn = () => {
+        setAttributes({
+            TestimonialDescMarginLink: !TestimonialDescMarginLink
+        });
+    };
+
+    const testimonialDescMarginUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialDescMarginUnits: {
+                ...TestimonialDescMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const testimonialDescDesktopMargin = `${TestimonialDescMarginDesktop.top}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.right}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.bottom}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.left}${TestimonialDescMarginUnits.Desktop}`;
+    const testimonialDescTabletMargin = `${TestimonialDescMarginTablet.top}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.right}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.bottom}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.left}${TestimonialDescMarginUnits.Tablet}`;
+    const testimonialDescMobileMargin = `${TestimonialDescMarginMobile.top}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.right}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.bottom}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.left}${TestimonialDescMarginUnits.Mobile}`;
+    /** End Testimonial Desc Margin */
+
+
+    /** Start Testimonial Image Margin */
+    const testimonialImageMarginChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialImageMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialImageMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialImageMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialImageMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialImageMarginDesktop: { ...TestimonialImageMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialImageMarginTablet: { ...TestimonialImageMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialImageMarginMobile: { ...TestimonialImageMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const testimonialImageMarginToggle = () => {
+        setAttributes({
+            TestimonialImageMarginLink: !TestimonialImageMarginLink
+        });
+    };
+
+    const testimonialImageMarginUnitChange = (unit) => {
+        setAttributes({
+            TestimonialImageMarginUnits: {
+                ...TestimonialImageMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const testimonialImageDesktopMargin = `${TestimonialImageMarginDesktop.top}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.right}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.bottom}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.left}${TestimonialImageMarginUnits.Desktop}`;
+    const testimonialImageTabletMargin = `${TestimonialImageMarginTablet.top}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.right}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.bottom}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.left}${TestimonialImageMarginUnits.Tablet}`;
+    const testimonialImageMobileMargin = `${TestimonialImageMarginMobile.top}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.right}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.bottom}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.left}${TestimonialImageMarginUnits.Mobile}`;
+    /** End Testimonial Image Margin */
+
+
+    /** Start Testimonial Author Margin */
+    const testimonialAuthorMarginChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialAuthorMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialAuthorMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialAuthorMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialAuthorMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialAuthorMarginDesktop: { ...TestimonialAuthorMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialAuthorMarginTablet: { ...TestimonialAuthorMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialAuthorMarginMobile: { ...TestimonialAuthorMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const testimonialAuthorMarginToggle = () => {
+        setAttributes({
+            TestimonialAuthorMarginLink: !TestimonialAuthorMarginLink
+        });
+    };
+
+    const testimonialAuthorMarginUnitChange = (unit) => {
+        setAttributes({
+            TestimonialAuthorMarginUnits: {
+                ...TestimonialAuthorMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const testimonialAuthorDesktopMargin = `${TestimonialAuthorMarginDesktop.top}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.right}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.bottom}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.left}${TestimonialAuthorMarginUnits.Desktop}`;
+    const testimonialAuthorTabletMargin = `${TestimonialAuthorMarginTablet.top}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.right}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.bottom}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.left}${TestimonialAuthorMarginUnits.Tablet}`;
+    const testimonialAuthorMobileMargin = `${TestimonialAuthorMarginMobile.top}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.right}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.bottom}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.left}${TestimonialAuthorMarginUnits.Mobile}`;
+    /** End Testimonial Author Margin */
+
+
+    /** Start Testimonial Designation Margin */
+    const testimonialDesignationMarginChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialDesignationMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialDesignationMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialDesignationMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialDesignationMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialDesignationMarginDesktop: { ...TestimonialDesignationMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialDesignationMarginTablet: { ...TestimonialDesignationMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialDesignationMarginMobile: { ...TestimonialDesignationMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const testimonialDesignationMarginToggle = () => {
+        setAttributes({
+            TestimonialDesignationMarginLink: !TestimonialDesignationMarginLink
+        });
+    };
+
+    const testimonialDesignationMarginUnitChange = (unit) => {
+        setAttributes({
+            TestimonialDesignationMarginUnits: {
+                ...TestimonialDesignationMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const testimonialDesignationDesktopMargin = `${TestimonialDesignationMarginDesktop.top}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.right}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.bottom}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.left}${TestimonialDesignationMarginUnits.Desktop}`;
+    const testimonialDesignationTabletMargin = `${TestimonialDesignationMarginTablet.top}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.right}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.bottom}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.left}${TestimonialDesignationMarginUnits.Tablet}`;
+    const testimonialDesignationMobileMargin = `${TestimonialDesignationMarginMobile.top}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.right}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.bottom}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.left}${TestimonialDesignationMarginUnits.Mobile}`;
+    /** End Testimonial Designation Margin */
+
+
+    /** Start Testimonial Quote Icon Margin */
+    const testimonialQuoteIconMarginChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialQuoteIconMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialQuoteIconMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialQuoteIconMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialQuoteIconMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialQuoteIconMarginDesktop: { ...TestimonialQuoteIconMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialQuoteIconMarginTablet: { ...TestimonialQuoteIconMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialQuoteIconMarginMobile: { ...TestimonialQuoteIconMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const testimonialQuoteIconMarginToggle = () => {
+        setAttributes({
+            TestimonialQuoteIconMarginLink: !TestimonialQuoteIconMarginLink
+        });
+    };
+
+    const testimonialQuoteIconMarginUnitChange = (unit) => {
+        setAttributes({
+            TestimonialQuoteIconMarginUnits: {
+                ...TestimonialQuoteIconMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const testimonialQuoteIconDesktopMargin = `${TestimonialQuoteIconMarginDesktop.top}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.right}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.bottom}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.left}${TestimonialQuoteIconMarginUnits.Desktop}`;
+    const testimonialQuoteIconTabletMargin = `${TestimonialQuoteIconMarginTablet.top}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.right}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.bottom}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.left}${TestimonialQuoteIconMarginUnits.Tablet}`;
+    const testimonialQuoteIconMobileMargin = `${TestimonialQuoteIconMarginMobile.top}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.right}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.bottom}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.left}${TestimonialQuoteIconMarginUnits.Mobile}`;
+    /** End Testimonial Quote Icon Margin */
 
 
     /** Start Testimonial Image Border Radius */
@@ -740,7 +1542,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     .fb-testimonial-main-wrapper.${blockID} {
                         z-index: ${TestimonialGlobalZIndex !== undefined ? TestimonialGlobalZIndex : ''} !important;
                         position: relative;
-                        overflow: hidden;
                     }
                     .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
                         ${TestimonialGlobalBgColor ? `background-color: ${TestimonialGlobalBgColor};` : ''} 
@@ -759,13 +1560,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
                     }
                     .${blockID} .fb-testimonial-author-container {
-                        margin-top: ${TestimonialAuthorSpacing.Desktop ? `${TestimonialAuthorSpacing.Desktop}${TestimonialAuthorSpacingUnits.Desktop}` : '0'};
+
                     }
                     .${blockID} .fb-testimonial-image img {
                         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
                         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
                         border-radius: ${testimonialImageDesktopBorderRadiusWidth};
-                        margin-right: ${TestimonialImageSpacing.Desktop ? `${TestimonialImageSpacing.Desktop}${TestimonialImageSpacingUnits.Desktop}` : '0'}
+                        ${testimonialImageDesktopMargin ? `margin: ${testimonialImageDesktopMargin};` : ''}
+                        ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
+                        ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Desktop && TestimonialImageTopPositionUnits.Desktop ? `${TestimonialImageTopPosition.Desktop}${TestimonialImageTopPositionUnits.Desktop}` : '0'};` : ''}
+                        ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Desktop && TestimonialImageLeftPositionUnits.Desktop ? `${TestimonialImageLeftPosition.Desktop}${TestimonialImageLeftPositionUnits.Desktop}` : '0'};` : ''}
                     }
                     .${blockID} .fb-testimonial-quote-icon {
                         ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
@@ -790,7 +1594,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
                         ${TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
                         ${TestimonialTitleColor ? `color: ${TestimonialTitleColor};` : ''}
-                        margin: ${TestimonialTitleSpacing.Desktop ? `${TestimonialTitleSpacing.Desktop}${TestimonialTitleSpacingUnits.Desktop}` : '0'} 0;
+                        ${testimonialTitleDesktopMargin ? `margin: ${testimonialTitleDesktopMargin};` : ''}
+                        
                     }
                     .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
                         ${TestimonialTitleHoverColor ? `color: ${TestimonialTitleHoverColor};` : ''}
@@ -805,7 +1610,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
                         ${TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
                         ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
-                        margin: ${TestimonialDescSpacing.Desktop ? `${TestimonialDescSpacing.Desktop}${TestimonialDescSpacingUnits.Desktop}` : '0'} 0;
+                        ${testimonialDescDesktopMargin ? `margin: ${testimonialDescDesktopMargin};` : ''}
                     }
                     .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
                         ${TestimonialDescHoverColor ? `color: ${TestimonialDescHoverColor};` : ''}
@@ -821,6 +1626,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         letter-spacing: ${TestimonialAuthorLetterSpacing.Desktop}${TestimonialAuthorLetterSpacingUnits.Desktop};
                         line-height: ${TestimonialAuthorLineHeight.Desktop}${TestimonialAuthorLineHeightUnits.Desktop};
                         color: ${TestimonialAuthorColor};
+                        ${testimonialAuthorDesktopMargin ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
                     }
                     .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
                         ${TestimonialAuthorHoverColor ? `color: ${TestimonialAuthorHoverColor};` : ''}
@@ -836,19 +1642,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         letter-spacing: ${TestimonialDesignationLetterSpacing.Desktop}${TestimonialDesignationLetterSpacingUnits.Desktop};
                         line-height: ${TestimonialDesignationLineHeight.Desktop}${TestimonialDesignationLineHeightUnits.Desktop};
                         color: ${TestimonialDesignationColor};
+                        ${testimonialDesignationDesktopMargin ? `margin: ${testimonialDesignationDesktopMargin};` : ''}
                     }
                     .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
                         ${TestimonialDesignationHoverColor ? `color: ${TestimonialDesignationHoverColor};` : ''}
                     }
 
                     .${blockID} .fb-testimonial-rating {
-                        margin: ${TestimonialRatingIconSpacing.Desktop ? `${TestimonialRatingIconSpacing.Desktop}${TestimonialRatingIconSpacingUnits.Desktop}` : '0'} 0;
+                        ${testimonialRatingIconDesktopMargin ? `margin: ${testimonialRatingIconDesktopMargin};` : ''}
+                       
                     }
 
                     .${blockID} .fb-testimonial-rating-icon svg {
                         width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
                         height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
                         fill: ${TestimonialRatingIconColor};
+                        ${testimonialQuoteIconDesktopMargin ? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
                     }
                     .${blockID} .fb-testimonial-rating-icon:hover svg {
                         fill: ${TestimonialRatingIconHoverColor};
@@ -867,39 +1676,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
                     }
                         .${blockID} .fb-testimonial-author-container {
-                            margin-top: ${TestimonialAuthorSpacing.Tablet ? `${TestimonialAuthorSpacing.Tablet}${TestimonialAuthorSpacingUnits.Tablet}` : '0'};
+
                         }
 
                         .${blockID} .fb-testimonial-rating {
-                            margin: ${TestimonialRatingIconSpacing.Tablet ? `${TestimonialRatingIconSpacing.Tablet}${TestimonialRatingIconSpacingUnits.Tablet}` : '0'} 0;
+                            ${testimonialRatingIconTabletMargin ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
                         }
                         .${blockID} .fb-testimonial-image img {
                             ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `width: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
                             ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `height: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
                             border-radius: ${testimonialImageTabletBorderRadiusWidth};
-                            margin-right: ${TestimonialImageSpacing.Tablet ? `${TestimonialImageSpacing.Tablet}${TestimonialImageSpacingUnits.Tablet}` : '0'}
+                            ${testimonialImageTabletMargin ? `margin: ${testimonialImageTabletMargin};` : ''}
+                            ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
+                            ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Tablet && TestimonialImageTopPositionUnits.Tablet ? `${TestimonialImageTopPosition.Tablet}${TestimonialImageTopPositionUnits.Tablet}` : '0'};` : ''}
+                            ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Tablet && TestimonialImageLeftPositionUnits.Tablet ? `${TestimonialImageLeftPosition.Tablet}${TestimonialImageLeftPositionUnits.Tablet}` : '0'};` : ''}
                         }
                         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
                             ${TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
                             ${TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
                             ${TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
-                            margin: ${TestimonialTitleSpacing.Tablet ? `${TestimonialTitleSpacing.Tablet}${TestimonialTitleSpacingUnits.Tablet}` : '0'} 0;
+                            ${testimonialTitleTabletMargin ? `margin: ${testimonialTitleTabletMargin};` : ''}
                         }
                         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                             ${TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
                             ${TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
                             ${TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
-                            margin: ${TestimonialDescSpacing.Tablet ? `${TestimonialDescSpacing.Tablet}${TestimonialDescSpacingUnits.Tablet}` : '0'} 0;
+                            ${testimonialDescTabletMargin ? `margin: ${testimonialDescTabletMargin};` : ''}
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user {
                             font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};
                             letter-spacing: ${TestimonialAuthorLetterSpacing.Tablet}${TestimonialAuthorLetterSpacingUnits.Tablet};
                             line-height: ${TestimonialAuthorLineHeight.Tablet}${TestimonialAuthorLineHeightUnits.Tablet};
+                            ${testimonialAuthorTabletMargin ? `margin: ${testimonialAuthorTabletMargin};` : ''}
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                             font-size: ${TestimonialDesignationFontSize.Tablet}${TestimonialDesignationFontSizeUnits.Tablet};
                             letter-spacing: ${TestimonialDesignationLetterSpacing.Tablet}${TestimonialDesignationLetterSpacingUnits.Tablet};
                             line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};
+                            ${testimonialDesignationTabletMargin ? `margin: ${testimonialDesignationTabletMargin};` : ''}
+                        }
+                        .${blockID} .fb-testimonial-rating-icon svg {
+                            ${testimonialQuoteIconTabletMargin ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
                         }
                     }
                     @media only screen and (max-width: 767px) {
@@ -910,7 +1727,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
                         }
                         .${blockID} .fb-testimonial-rating {
-                            margin: ${TestimonialRatingIconSpacing.Mobile ? `${TestimonialRatingIconSpacing.Mobile}${TestimonialRatingIconSpacingUnits.Mobile}` : '0'} 0;
+                            ${testimonialRatingIconMobileMargin ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
                         }
                         .${blockID} .fb-testimonial-quote-icon {
                             ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
@@ -918,37 +1735,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Mobile && TestimonialQuoteIconLeftPositionUnits.Mobile ? `${TestimonialQuoteIconLeftPosition.Mobile}${TestimonialQuoteIconLeftPositionUnits.Mobile}` : '0'};` : ''}
                         }
 
-                        .${blockID} .fb-testimonial-author-container {
-                            margin-top: ${TestimonialAuthorSpacing.Mobile ? `${TestimonialAuthorSpacing.Mobile}${TestimonialAuthorSpacingUnits.Mobile}` : '0'};
-                        }
                         .${blockID} .fb-testimonial-image img {
                             ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `width: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
                             ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `height: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
                             border-radius: ${testimonialImageMobileBorderRadiusWidth};
-                            margin-right: ${TestimonialImageSpacing.Mobile ? `${TestimonialImageSpacing.Mobile}${TestimonialImageSpacingUnits.Mobile}` : '0'}
+                            ${testimonialImageMobileMargin ? `margin: ${testimonialImageMobileMargin};` : ''}
+                            ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
+                            ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Mobile && TestimonialImageTopPositionUnits.Mobile ? `${TestimonialImageTopPosition.Mobile}${TestimonialImageTopPositionUnits.Mobile}` : '0'};` : ''}
+                            ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Mobile && TestimonialImageLeftPositionUnits.Mobile ? `${TestimonialImageLeftPosition.Mobile}${TestimonialImageLeftPositionUnits.Mobile}` : '0'};` : ''}
                         }
                         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
                             ${TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
                             ${TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
                             ${TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
-                            margin: ${TestimonialTitleSpacing.Mobile ? `${TestimonialTitleSpacing.Mobile}${TestimonialTitleSpacingUnits.Mobile}` : '0'} 0;
+                            ${testimonialTitleMobileMargin ? `margin: ${testimonialTitleMobileMargin};` : ''}
+
                         }
                         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                             ${TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
                             ${TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
                             ${TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
-                            margin: ${TestimonialDescSpacing.Mobile ? `${TestimonialDescSpacing.Mobile}${TestimonialDescSpacingUnits.Mobile}` : '0'} 0;
+                            ${testimonialDescMobileMargin ? `margin: ${testimonialDescMobileMargin};` : ''}
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user {
                             font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};
                             letter-spacing: ${TestimonialAuthorLetterSpacing.Mobile}${TestimonialAuthorLetterSpacingUnits.Mobile};
                             line-height: ${TestimonialAuthorLineHeight.Mobile}${TestimonialAuthorLineHeightUnits.Mobile};
+                            ${testimonialAuthorMobileMargin ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
                         }
                         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                             font-size: ${TestimonialDesignationFontSize.Mobile}${TestimonialDesignationFontSizeUnits.Mobile};
                             letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};
                             line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};
+                            ${testimonialDesignationMobileMargin ? `margin: ${testimonialDesignationMobileMargin};` : ''}
                         }
+                        .${blockID} .fb-testimonial-rating-icon svg {
+                            ${testimonialQuoteIconMobileMargin ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
+                        }   
                     }
                 `}
             </style>
@@ -1264,18 +2087,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     handleGlobalColorChange={(value) => setAttributes({ TestimonialRatingIconColor: value })}
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
                                                 />
-                                                <FB_Range
-                                                    min={0}
-                                                    max={100}
-                                                    label={__("Spacing", "frontis-blocks")}
-                                                    rangeValue={TestimonialRatingIconSpacing} 
-                                                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconSpacing: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconSpacingUnits: value })}
+
+
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
                                                     deviceType={deviceType}
-                                                    units={TestimonialRatingIconSpacingUnits}
+                                                    spacingUnitsHandler={testimonialRatingIconMarginUnitsHandler}
+                                                    spacingUnits={TestimonialRatingIconMarginUnits}
+                                                    spacingDesktop={TestimonialRatingIconMarginDesktop}
+                                                    spacingTablet={TestimonialRatingIconMarginTablet}
+                                                    spacingMobile={TestimonialRatingIconMarginMobile}
+                                                    handleSpacingUnitHandler={testimonialRatingIconMarginUnitsChange}
+                                                    spacingCombineBtn={TestimonialRatingIconMarginLink}
+                                                    spacingCombineBtnHandler={testimonialRatingIconMarginLinkBtn}
                                                     setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={""}
                                                 />
 
                                             </PanelBody>
@@ -1352,18 +2177,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     handleGlobalColorChange={(value) => setAttributes({ TestimonialTitleColor: value })}
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialTitleHoverColor: value })}
                                                 />
-                                                <FB_Range
-                                                    min={0}
-                                                    max={100}
-                                                    label={__("Spacing", "frontis-blocks")}
-                                                    rangeValue={TestimonialTitleSpacing} 
-                                                    onChangeHandler={(value) => setAttributes({ TestimonialTitleSpacing: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialTitleSpacingUnits: value })}
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
                                                     deviceType={deviceType}
-                                                    units={TestimonialTitleSpacingUnits}
+                                                    spacingUnitsHandler={testimonialTitleMarginUnitsHandler}
+                                                    spacingUnits={TestimonialTitleMarginUnits}
+                                                    spacingDesktop={TestimonialTitleMarginDesktop}
+                                                    spacingTablet={TestimonialTitleMarginTablet}
+                                                    spacingMobile={TestimonialTitleMarginMobile}
+                                                    handleSpacingUnitHandler={testimonialTitleMarginUnitsChange}
+                                                    spacingCombineBtn={TestimonialTitleMarginLink}
+                                                    spacingCombineBtnHandler={testimonialTitleMarginLinkBtn}
                                                     setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={""}
                                                 />
 
                                             </PanelBody>
@@ -1421,18 +2246,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 handleGlobalColorChange={(value) => setAttributes({ TestimonialDescColor: value })}
                                                 handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialDescHoverColor: value })}
                                             />
-                                            <FB_Range
-                                                min={0}
-                                                max={100}
-                                                label={__("Spacing", "frontis-blocks")}
-                                                rangeValue={TestimonialDescSpacing} 
-                                                onChangeHandler={(value) => setAttributes({ TestimonialDescSpacing: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ TestimonialDescSpacingUnits: value })}
+                                            <FB_Spacing
+                                                label={__("Margin", "frontis-blocks")}
                                                 deviceType={deviceType}
-                                                units={TestimonialDescSpacingUnits}
+                                                spacingUnitsHandler={testimonialDescMarginUnitsHandler}
+                                                spacingUnits={TestimonialDescMarginUnits}
+                                                spacingDesktop={TestimonialDescMarginDesktop}
+                                                spacingTablet={TestimonialDescMarginTablet}
+                                                spacingMobile={TestimonialDescMarginMobile}
+                                                handleSpacingUnitHandler={testimonialDescMarginUnitsChange}
+                                                spacingCombineBtn={TestimonialDescMarginLink}
+                                                spacingCombineBtnHandler={testimonialDescMarginLinkBtn}
                                                 setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
                                             />
 
                                             </PanelBody>
@@ -1446,7 +2271,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             >
                                                 <FB_Range
                                                     min={0}
-                                                    max={100}
+                                                    max={200}
                                                     label={__("Image Width", "frontis-blocks")}
                                                     rangeValue={TestimonialImageWidth} 
                                                     onChangeHandler={(value) => setAttributes({ TestimonialImageWidth: value })}
@@ -1471,32 +2296,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     spacingCombineBtnHandler={testimonialImageBorderRadiusLinkBtn}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_Range
-                                                    min={0}
-                                                    max={100}
-                                                    label={__("Margin Top", "frontis-blocks")}
-                                                    rangeValue={TestimonialAuthorSpacing} 
-                                                    onChangeHandler={(value) => setAttributes({ TestimonialAuthorSpacing: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialAuthorSpacingUnits: value })}
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
                                                     deviceType={deviceType}
-                                                    units={TestimonialAuthorSpacingUnits}
+                                                    spacingUnitsHandler={testimonialImageMarginUnitChange}
+                                                    spacingUnits={TestimonialImageMarginUnits}
+                                                    spacingDesktop={TestimonialImageMarginDesktop}
+                                                    spacingTablet={TestimonialImageMarginTablet}
+                                                    spacingMobile={TestimonialImageMarginMobile}
+                                                    handleSpacingUnitHandler={testimonialImageMarginChange}
+                                                    spacingCombineBtn={TestimonialImageMarginLink}
+                                                    spacingCombineBtnHandler={testimonialImageMarginToggle}
                                                     setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={""}
                                                 />
-                                                <FB_Range
-                                                    min={0}
-                                                    max={100}
-                                                    label={__("Margin Right", "frontis-blocks")}
-                                                    rangeValue={TestimonialImageSpacing} 
-                                                    onChangeHandler={(value) => setAttributes({ TestimonialImageSpacing: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ TestimonialImageSpacingUnits: value })}
-                                                    deviceType={deviceType}
-                                                    units={TestimonialImageSpacingUnits}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={""}
+
+                                                <ToggleControl
+                                                    label={__("Position", "frontis-blocks")}
+                                                    checked={TestimonialImagePositionSwitcher}
+                                                    onChange={(value) => setAttributes({ TestimonialImagePositionSwitcher: value })}
                                                 />
+                                                
+                                                {TestimonialImagePositionSwitcher && (
+                                                    <>
+                                                        <FB_Range
+                                                            min={-100}
+                                                            max={100}
+                                                            label={__("Top", "frontis-blocks")}
+                                                            rangeValue={TestimonialImageTopPosition} 
+                                                            onChangeHandler={(value) => setAttributes({ TestimonialImageTopPosition: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ TestimonialImageTopPositionUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={TestimonialImageTopPositionUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={""}
+                                                        />
+                                                        <FB_Range
+                                                            min={-100}
+                                                            max={100}
+                                                            label={__("Left", "frontis-blocks")}
+                                                            rangeValue={TestimonialImageLeftPosition} 
+                                                            onChangeHandler={(value) => setAttributes({ TestimonialImageLeftPosition: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ TestimonialImageLeftPositionUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={TestimonialImageLeftPositionUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={""}
+                                                        />
+                                                    </>
+                                                )}
                                             </PanelBody>
                                         )}
 
@@ -1551,6 +2400,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     handleColorSwitcherChange={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
                                                     handleGlobalColorChange={(value) => setAttributes({ TestimonialAuthorColor: value })}
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialAuthorHoverColor: value })}
+                                                />
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={testimonialAuthorMarginUnitChange}
+                                                    spacingUnits={TestimonialAuthorMarginUnits}
+                                                    spacingDesktop={TestimonialAuthorMarginDesktop}
+                                                    spacingTablet={TestimonialAuthorMarginTablet}
+                                                    spacingMobile={TestimonialAuthorMarginMobile}
+                                                    handleSpacingUnitHandler={testimonialAuthorMarginChange}
+                                                    spacingCombineBtn={TestimonialAuthorMarginLink}
+                                                    spacingCombineBtnHandler={testimonialAuthorMarginToggle}
+                                                    setAttributes={setAttributes}
                                                 />
 
                                             </PanelBody>
@@ -1609,6 +2471,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialDesignationHoverColor: value })}
                                                 />
 
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={testimonialDesignationMarginUnitChange}
+                                                    spacingUnits={TestimonialDesignationMarginUnits}
+                                                    spacingDesktop={TestimonialDesignationMarginDesktop}
+                                                    spacingTablet={TestimonialDesignationMarginTablet}
+                                                    spacingMobile={TestimonialDesignationMarginMobile}
+                                                    handleSpacingUnitHandler={testimonialDesignationMarginChange}
+                                                    spacingCombineBtn={TestimonialDesignationMarginLink}
+                                                    spacingCombineBtnHandler={testimonialDesignationMarginToggle}
+                                                    setAttributes={setAttributes}
+                                                />
+
                                             </PanelBody>
                                         )}
                                         {QuoteIconSwitcher && (
@@ -1639,6 +2515,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     handleColorSwitcherChange={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
                                                     handleGlobalColorChange={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
+                                                />
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={testimonialQuoteIconMarginUnitChange}
+                                                    spacingUnits={TestimonialQuoteIconMarginUnits}
+                                                    spacingDesktop={TestimonialQuoteIconMarginDesktop}
+                                                    spacingTablet={TestimonialQuoteIconMarginTablet}
+                                                    spacingMobile={TestimonialQuoteIconMarginMobile}
+                                                    handleSpacingUnitHandler={testimonialQuoteIconMarginChange}
+                                                    spacingCombineBtn={TestimonialQuoteIconMarginLink}
+                                                    spacingCombineBtnHandler={testimonialQuoteIconMarginToggle}
+                                                    setAttributes={setAttributes}
                                                 />
                                                 <ToggleControl
                                                     label={__("Position", "frontis-blocks")}
