@@ -128,9 +128,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialTitleMarginMobile,
         TestimonialTitleMarginLink,
 
-        // TestimonialTitleSpacingUnits,
-        // TestimonialTitleSpacing,
-
         TestimonialDescFontFamily,
         TestimonialDescFontSize,
         TestimonialDescFontSizeUnits,
@@ -332,6 +329,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
+                TestimonialGlobalBgColor : '#fefaf3',
+                TestimonialDescColor : '',
+                TestimonialAuthorColor : '',
 
             },
             "preset-2": {
@@ -391,6 +391,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
+                TestimonialGlobalBgColor : '#f7f7f7',
+                TestimonialDescColor : '',
+                TestimonialAuthorColor : '',
 
             },
             "preset-3": {
@@ -460,6 +463,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
+                TestimonialGlobalBgColor : '#f7f7f7',
+                TestimonialDescColor : '',
+                TestimonialAuthorColor : '',
             },
             "preset-4": {
                 RatingSwitcher: true,
@@ -540,6 +546,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '100',
                     right: '0',
                 },
+                TestimonialGlobalBgColor : '#f7f7f7',
+                TestimonialDescColor : '',
+                TestimonialAuthorColor : '',
             },
             "preset-5": {
                 RatingSwitcher: true,
@@ -547,7 +556,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 DescSwitcher: true,
                 TestimonialImageSwitcher: true,
                 AuthorSwitcher: true,
-                DesignationSwitcher: true,
+                DesignationSwitcher: false,
                 QuoteIconSwitcher: true,
                 TestimonialQuoteIconPositionSwitcher: true,
                 TestimonialQuoteIconTopPosition: {
@@ -556,9 +565,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     Mobile: "3",
                 },
                 TestimonialQuoteIconLeftPosition: {
-                    Desktop: "85",
-                    Tablet: "85",
-                    Mobile: "85",
+                    Desktop: "5",
+                    Tablet: "5",
+                    Mobile: "5",
                 },
                 TestimonialDescMarginDesktop: {
                     top: '24',
@@ -574,9 +583,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 },
                 TestimonialImagePositionSwitcher: false,
                 TestimonialImageWidth: {
-                    Desktop: '60',
-                    Tablet: '60',
-                    Mobile: '60',
+                    Desktop: '40',
+                    Tablet: '40',
+                    Mobile: '40',
                 },
                 TestimonialImageDesktopRadiusWidth: {
                     top: '50',
@@ -608,6 +617,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
+                TestimonialGlobalBgColor : '#404655',
+                TestimonialDescColor : '#ffffff',
+                TestimonialAuthorColor : '#ffffff',
             },
         };
 
@@ -623,8 +635,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     };
     /** End Preset Style */
-
-    console.log(TestimonialImageDesktopRadiusWidth);
     
 
 
@@ -1575,6 +1585,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
                         ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Desktop && TestimonialQuoteIconTopPositionUnits.Desktop ? `${TestimonialQuoteIconTopPosition.Desktop}${TestimonialQuoteIconTopPositionUnits.Desktop}` : '0'};` : ''}
                         ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Desktop && TestimonialQuoteIconLeftPositionUnits.Desktop ? `${TestimonialQuoteIconLeftPosition.Desktop}${TestimonialQuoteIconLeftPositionUnits.Desktop}` : '0'};` : ''}
+                        ${testimonialQuoteIconDesktopMargin ? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
                     }
                     .${blockID} .fb-testimonial-quote-icon svg {
                         ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
@@ -1657,10 +1668,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
                         height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
                         fill: ${TestimonialRatingIconColor};
-                        ${testimonialQuoteIconDesktopMargin ? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
                     }
                     .${blockID} .fb-testimonial-rating-icon:hover svg {
                         fill: ${TestimonialRatingIconHoverColor};
+                    }
+
+                    .${blockID} .fb-testimonial-author-container {
+                        ${TestimonialPresetStyle === "preset-5" ? 
+                            `
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            ` : ''}
+                    }
+                    .${blockID} .fb-user-desc {
+                         ${TestimonialPresetStyle === "preset-5" ? 
+                            `
+                            padding-top: 24px;
+                            ` : ''}
                     }
 
                     @media only screen and (max-width: 1024px) {
@@ -1670,13 +1695,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
                             ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
                         }
-                    .${blockID} .fb-testimonial-quote-icon {
-                        ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
-                        ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Tablet && TestimonialQuoteIconTopPositionUnits.Tablet ? `${TestimonialQuoteIconTopPosition.Tablet}${TestimonialQuoteIconTopPositionUnits.Tablet}` : '0'};` : ''}
-                        ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
-                    }
-                        .${blockID} .fb-testimonial-author-container {
-
+                        .${blockID} .fb-testimonial-quote-icon {
+                            ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
+                            ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Tablet && TestimonialQuoteIconTopPositionUnits.Tablet ? `${TestimonialQuoteIconTopPosition.Tablet}${TestimonialQuoteIconTopPositionUnits.Tablet}` : '0'};` : ''}
+                            ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
+                            ${testimonialQuoteIconTabletMargin ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
                         }
 
                         .${blockID} .fb-testimonial-rating {
@@ -1733,6 +1756,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
                             ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Mobile && TestimonialQuoteIconTopPositionUnits.Mobile ? `${TestimonialQuoteIconTopPosition.Mobile}${TestimonialQuoteIconTopPositionUnits.Mobile}` : '0'};` : ''}
                             ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Mobile && TestimonialQuoteIconLeftPositionUnits.Mobile ? `${TestimonialQuoteIconLeftPosition.Mobile}${TestimonialQuoteIconLeftPositionUnits.Mobile}` : '0'};` : ''}
+                            ${testimonialQuoteIconMobileMargin ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
                         }
 
                         .${blockID} .fb-testimonial-image img {
