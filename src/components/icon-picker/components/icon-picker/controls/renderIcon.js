@@ -19,7 +19,10 @@ const mergeOldNewArray = (data, iconCustomData) => {
 		customIconArray.push(iconCustomData.slice(i, i + chunkSize));
 	}
 
-	data = data ? JSON.parse(data) : [];
+
+	console.log(customIconArray)
+
+	// data = data ? JSON.parse(data) : [];
 
 	return data.concat(customIconArray);
 }
@@ -27,19 +30,8 @@ const mergeOldNewArray = (data, iconCustomData) => {
 // Function to check if data exists in localStorage
 const getDataFromLocalStorage = () => {
 	let data = localStorage.getItem('iconData');
-	let iconCustomData = localStorage.getItem('iconCustomData');
-	iconCustomData = iconCustomData ? JSON.parse(iconCustomData) : [];
-
-	const chunkSize = 8; // Maximum items per sub-array
-	const customIconArray = [];
-
-	for (let i = 0; i < iconCustomData.length; i += chunkSize) {
-		customIconArray.push(iconCustomData.slice(i, i + chunkSize));
-	}
-
-	data = data ? JSON.parse(data) : [];
-
-	return mergeOldNewArray(data, iconCustomData);
+	data = data ? JSON.parse(data) : null;
+	return data;
 };
 
 // Fetch SVG icons from the API
@@ -58,7 +50,8 @@ const fetchFromApi = () => {
 			return response.json();
 		})
 		.then(data => {
-			localStorage.setItem('iconData', JSON.stringify(data)); // Store data in localStorage
+			localStorage.setItem('iconData', JSON.stringify(data));
+			fetchCustomIcons();
 			return data;
 		})
 		.catch(error => {
@@ -79,7 +72,6 @@ const fetchCustomIcons = () => {
 		});
 		if(response.data) {
 			localStorage.setItem('iconCustomData', JSON.stringify(response.data.icons));
-			return response.data.icons;
 		}
 	} catch (error) {
 		console.error('Error fetching custom icons:', error);
@@ -94,7 +86,6 @@ function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 	if (!data) {
 		fetchFromApi().then(fetchedData => {
 			data = fetchedData;
-			// console.log(data); // Log or use the fetched data
 		});
 	}
 

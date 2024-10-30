@@ -20,19 +20,20 @@ const fetchSvgIcons = async () => {
 	// Function to check if data exists in localStorage
 	const getDataFromLocalStorage = () => {
 		let data = localStorage.getItem('iconData');
-		let iconCustomData = localStorage.getItem('iconCustomData');
-		iconCustomData = iconCustomData ? JSON.parse(iconCustomData) : [];
+		// let iconCustomData = localStorage.getItem('iconCustomData');
+		// iconCustomData = iconCustomData ? JSON.parse(iconCustomData) : [];
+		//
+		// const chunkSize = 8; // Maximum items per sub-array
+		// const customIconArray = [];
+		//
+		// for (let i = 0; i < iconCustomData.length; i += chunkSize) {
+		// 	customIconArray.push(iconCustomData.slice(i, i + chunkSize));
+		// }
 
-		const chunkSize = 8; // Maximum items per sub-array
-		const customIconArray = [];
+		data = data ? JSON.parse(data) : null;
 
-		for (let i = 0; i < iconCustomData.length; i += chunkSize) {
-			customIconArray.push(iconCustomData.slice(i, i + chunkSize));
-		}
-
-		data = data ? JSON.parse(data) : [];
-
-		return mergeOldNewArray(data, iconCustomData);
+		// return mergeOldNewArray(data, iconCustomData);
+		return data;
 	};
 
 	// Fetch SVG icons from the API
@@ -71,6 +72,8 @@ const fetchSvgIcons = async () => {
 				}
 			});
 			if(response.data) {
+				console.log("Custom icon data")
+				console.log(response.data.icons);
 				localStorage.setItem('iconCustomData', JSON.stringify(response.data.icons));
 				return response.data.icons;
 			}
@@ -82,10 +85,10 @@ const fetchSvgIcons = async () => {
 	// Get data from localStorage or fetch from API
 	let data = getDataFromLocalStorage();
 	if (!data) {
-		const apiIconData = await fetchFromApi();
-		const customIcons = await fetchCustomIcons();
+		data = await fetchFromApi();
+		// const customIcons = await fetchCustomIcons();
 
-		data = mergeOldNewArray(apiIconData, customIcons);
+		// data = mergeOldNewArray(apiIconData, customIcons);
 	}
 
 	return data; // Return the fetched or retrieved data
