@@ -361,6 +361,22 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	buttonsGap: {
+		type: 'object',
+		default: {
+			Desktop: 0,
+			Tablet: 0,
+			Mobile: 0
+		}
+	},
+	buttonsGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	//Button Two
 	ButtonTwoAlignment: {
 		type: "string",
@@ -635,5 +651,71 @@ const attributes = {
 		type: "number",
 	},
 
+	buttonIconAlign: {
+        type: "string",
+        default: "none",
+    },
+	buttonTwoIconAlign: {
+        type: "string",
+        default: "none",
+    },
+	buttonIconPosition: {
+        type: "string",
+        default: "right",
+    },
+	btnIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    btnIconColor: {
+        type: "string"
+    },
+    btnIconHoverColor: {
+        type: 'string',
+    },
+	btnIconPosition: {
+        type: 'string',
+		default: 'right'
+    },
+	btnTwoIconPosition: {
+        type: 'string',
+		default: 'right'
+    },
+	btnIconSize: {
+		type: 'object',
+		default: {
+			Desktop: 35,
+			Tablet: 25,
+			Mobile: 15
+		}
+	},
+	btnIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	btnIconSpacing: {
+		type: 'object',
+		default: {
+			Desktop: 10,
+			Tablet: 10,
+			Mobile: 10
+		}
+	},
+	btnIconSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	buttonsDirection: {
+        type: 'string',
+		default: 'vertical'
+    },
 }
 export default attributes;

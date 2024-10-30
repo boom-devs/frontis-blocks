@@ -21,7 +21,6 @@
     }
 	.fb-dual-button-wrapper {
 		display: flex;
-		align-items: center;
 	}
 	.fb-dual-button-connector{
 		position: relative;
@@ -35,16 +34,17 @@
 		border-radius: 50px;
 		text-align: center;
 	}
-}
-.fb-advanced-button-icon {
-    display: block;
-    position: relative;
-    z-index: 1;
-    svg {
+    .fb-advanced-button-icon {
         display: block;
-        height: 16px;
-        width: 16px;
-        fill: #fff;
-        box-sizing: content-box;
+        position: relative;
+        z-index: 1;
+        svg {
+            display: block;
+            height: auto;
+            width: 16px;
+            fill: #fff;
+            box-sizing: content-box;
+        }
     }
 }
+

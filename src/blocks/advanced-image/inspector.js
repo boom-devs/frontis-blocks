@@ -22,8 +22,8 @@ import {
 import {useState, useEffect} from "@wordpress/element";
 import FB_ResponsiveControl from '@Components/responsive-control';
 import './editor.scss';
-import {BORDER_STYLES, NORMAL_HOVER, UNIT_TYPES} from "../advanced-button/constants/constants";
-import {FONT_FAMILYS, HEADING, TEXT_ALIGN} from "@Blocks/advanced-heading/constants/constants";
+import {BORDER_STYLES, NORMAL_HOVER, UNIT_TYPES} from "../advanced-image/constants/constants";
+import {FONT_FAMILYS, HEADING, TEXT_ALIGN} from "@Blocks/advanced-image/constants/constants";
 import FB_Range from "@Components/range";
 
 export default function Inspector({attributes, setAttributes, clientId}) {

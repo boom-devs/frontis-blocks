@@ -24,10 +24,19 @@ export const NORMAL_HOVER = [
 	{ label: "Hover", value: "hover" },
 ];
 
+export const ICON_POSITION = [
+	{ label: "Left", value: "left" },
+	{ label: "Right", value: "right" },
+];
+export const BUTTONS_DIRECTION = [
+	{ label: "Vertical", value: "vertical" },
+	{ label: "Horizontal", value: "horizontal" },
+];
+
 export const ICON_ALIGN = [
-	{ label: __(<Dashicon icon={"remove"} />), value: "no-icon" },
-	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
-	{ label: __(<Dashicon icon={"info"} />), value: "icon-only" },
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon-only" },
 ];
 
 export const TEXT_ALIGN = [
