@@ -7,11 +7,11 @@ const countDownItemWrapperAttributes = {
 	},
 	countDownItemWrapperBgFontColor: {
 		type: "string",
-		default: "#F97255"
+		default: ""
 	},
 	countDownItemWrapperBgFontHoverColor: {
 		type: 'string',
-		default: "#F97255"
+		default: ""
 	},
 	/** End BG Color */
 
@@ -116,28 +116,28 @@ const countDownItemWrapperAttributes = {
 	countDownItemWrapperBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '15',
-			bottom: '15',
-			left: '15',
-			right: '15',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '15',
-			bottom: '15',
-			left: '15',
-			right: '15',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '15',
-			bottom: '15',
-			left: '15',
-			right: '15',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderRadiusLink : {
