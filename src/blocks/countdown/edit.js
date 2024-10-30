@@ -23,6 +23,9 @@ import './editor.scss';
 import {BORDER_STYLES, FONT_FAMILYS, NORMAL_HOVER, UNIT_TYPES} from "../advanced-heading/constants/constants";
 import ResponsiveControl from "../../components/responsivecontrol";
 
+import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-wrapper-bg-color-control";
+import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";
+import CountDownItemWrapperPaddingMarginControl from "./style-control/countdown-item-wrapper-padding-margin-control";
 import CountDownItemSizeControl from "./style-control/countdown-item-size-control";
 import CountDownItemGapControl from "./style-control/countdown-item-gap-control";
 import CountDownItemBorderTypeControl from "./style-control/countdown-item-border-type-control";
@@ -39,9 +42,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		deviceType,
-
-
-
 
 		countDownLabelDay,
 		countDownLabelHour,
@@ -515,6 +515,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											/>
 										</PanelBody>
 										)}
+									</>
+								)}
+
+								{tab.name === "advanced" && (
+									<>
+										<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
+											<CountDownItemWrapperBgColorControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
+										<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
+											<CountDownItemWrapperBorderControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
+										<PanelBody title={__("Padding/Margin", "frontis-blocks")} initialOpen={false}>
+											<CountDownItemWrapperPaddingMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
 									</>
 								)}
 							</div>
