@@ -2,20 +2,21 @@ import { __ } from "@wordpress/i18n";
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
 import {
 	PanelBody,
-	Dropdown,
+	PanelRow,
 	Button,
-	ColorPalette,
-	ColorIndicator,
     TabPanel,
-    Dashicon
+    Dashicon,
+    TextareaControl
 } from "@wordpress/components";
 import {
 	PanelColorSettings,
 } from "@wordpress/block-editor";
 import FB_TypographyControl from '@Components/typography-control';
 import GradientColorPallet from './components/GradientColorPallet';
+import ColorPalletWrapper from './components/ColorPalletWrapper';
 import { useState, useEffect } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
+import { useSelect, useDispatch, compose } from "@wordpress/data";
+import { withSelect } from '@wordpress/data';
 import "./sidebar.scss";
 
 
@@ -100,7 +101,7 @@ const gradientDefaults = [
     }
 ];
 
-export default function FrontisBlocksSidebar() {
+function FrontisBlocksSidebar(props) {
 	const themeColors = useSelect((select) => {
 		return select("core/editor").getEditorSettings().colors;
 	}, []);
@@ -109,6 +110,7 @@ export default function FrontisBlocksSidebar() {
 	const [activeTab, setActiveTab] = useState("solid");
     const [gradientColors, setGradientColors] = useState([]);
 	const [globalColors, setGlobalColors] = useState([]);
+	const [customCSS, setCustomCSS] = useState('');
     
 
 	const [heading, setHeading] = useState({
@@ -187,14 +189,14 @@ export default function FrontisBlocksSidebar() {
         const colors = [...globalColors];
         colors[index].color = color;
         setGlobalColors([...colors]);
-        updateColorsViaAjax(colors, 'global');
+        updateGlobalColors(colors);
     };
     //Update Gradient Colors
     const setGradientColor = (index, color) => {
         const colors = [...gradientColors];
         colors[index].color = color;
         setGradientColors([...colors]);
-        updateColorsViaAjax(colors, 'gradient');
+        updateGradientColors(colors);
     };
     const setCustomColor = (index, color) => {
         const colors = [...customColors];
@@ -202,28 +204,40 @@ export default function FrontisBlocksSidebar() {
         setCustomColors([...colors]);
     };
 
-	const updateColorsViaAjax = (colors, type) => {
-		const action = type === 'global' ? 'fb_update_global_colors' : 'fb_update_global_gradients';
+	const { 
+        saveGlobalColors, 
+        saveGradientColors,
+        saveCustomColors,
+        saveTypography 
+    } = useDispatch('frontis-blocks');
 
-		jQuery.ajax({
-			url: window.frontisBlocksAdminSidebar.ajaxUrl,
-			type: 'POST',
-			data: {
-				action: action,
-				nonce: window.frontisBlocksAdminSidebar.nonce,
-				colors: JSON.stringify(colors)
-			},
-			success: function(response) {
-				if (response.success) {
-					console.log(`${type} colors updated successfully`);
-				} else {
-					console.error(`Failed to update ${type} colors:`, response.data);
-				}
-			},
-			error: function(xhr, status, error) {
-				console.error(`Ajax error when updating ${type} colors:`, error);
-			}
+	const updateGlobalColors = (colors) => {
+		saveGlobalColors(colors);
+	};
+
+	const updateGradientColors = (colors) => {
+		saveGradientColors(colors);
+	};
+
+	const updateCustomColors = (colors) => {
+		saveCustomColors(colors);
+	};
+
+	const updateTypography = (type, values) => {
+		saveTypography({
+			type,
+			...values
 		});
+	};
+
+	const handleHeadingChange = (values) => {
+		setHeading(values);
+		updateTypography('heading', values);
+	};
+
+	const handleBodyChange = (values) => {
+		setBody(values);
+		updateTypography('body', values);
 	};
 
 	return (
@@ -360,7 +374,13 @@ export default function FrontisBlocksSidebar() {
 						deviceType={deviceType}
                             />
                         </>
-				</PanelBody>
+					</PanelBody>
+					<PanelBody title={__("Custom CSS", "frontis-blocks")}>
+						<TextareaControl
+							value={customCSS}
+							onChange={(value) => setCustomCSS(value)}
+						/>
+					</PanelBody>
 				</div>
 			</PluginSidebar>
 		</>
@@ -368,40 +388,14 @@ export default function FrontisBlocksSidebar() {
 };
 
 
-const ColorDropdown = ({ title, initialColor, onColorChange, themeColors }) => {
-	const [color, setColor] = useState(initialColor);
-
-	const handleColorChange = (newColor) => {
-		setColor(newColor);
-		onColorChange(newColor);
+export default withSelect((select) => {
+	return {
+		globalColors: select("frontis-blocks").getGlobalColors(),
+		customColors: select("frontis-blocks").getCustomColors(),
+		gradientColors: select("frontis-blocks").getGradientColors(),
+		customGradientColors: select("frontis-blocks").getCustomGradientColors(),
+		typography: select("frontis-blocks").getTypography(),
+		isLoading: select("frontis-blocks").getIsLoading(),
+		error: select("frontis-blocks").getError()
 	};
-
-	return (
-		<Dropdown
-			className="frontis-blocks-color-dropdown"
-			contentClassName="frontis-blocks-color-dropdown__content"
-			renderToggle={({ isOpen, onToggle }) => (
-				<Button
-					onClick={onToggle}
-					aria-expanded={isOpen}
-					className="frontis-blocks-color-dropdown__toggle"
-				>
-					<ColorIndicator colorValue={color} />
-					<span>{title}</span>
-				</Button>
-			)}
-			renderContent={() => (
-				<ColorPalette
-					colors={[
-						{
-							name: "Theme Colors",
-							colors: themeColors,
-						},
-					]}
-					value={color}
-					onChange={handleColorChange}
-				/>
-			)}
-		/>
-	);
-};
+})(FrontisBlocksSidebar);

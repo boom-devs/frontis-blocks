@@ -21,19 +21,59 @@ class GlobalSettings extends AjaxBase {
     public function register_global_settings_events() {
         $events = [
             'update_global_colors',
-            'update_global_gradients',
+            'update_gradient_colors',
+            'update_custom_colors',
+            'update_custom_gradient_colors',
+            'update_typography',
+            'get_global_colors',
+            'get_gradient_colors',
+            'get_custom_colors',
+            'get_custom_gradient_colors',
+            'get_typography'
         ];
 
         $this->init_ajax_events($events);
     }
 
-
     public function update_global_colors() {
         $this->handle_option_update('global_colors', 'array');
     }
 
-    public function update_global_gradients() {
-        $this->handle_option_update('global_gradients', 'array');
+    public function update_gradient_colors() {
+        $this->handle_option_update('gradient_colors', 'array');
+    }
+
+    public function update_custom_colors() {
+        $this->handle_option_update('custom_colors', 'array');
+    }
+
+    public function update_custom_gradient_colors() {
+        $this->handle_option_update('custom_gradient_colors', 'array');
+    }
+
+    public function update_typography() {
+        $this->handle_option_update('typography', 'array');
+    }
+
+    public function get_global_colors() {
+        return get_option('fb_global_colors');
+    }
+
+    public function get_gradient_colors() {
+        return get_option('fb_gradient_colors');
+    }
+
+    public function get_custom_colors() {
+        return get_option('fb_custom_colors');
+    }
+
+    public function get_custom_gradient_colors() {
+        return get_option('fb_custom_gradient_colors');
+    }
+
+    public function get_typography() {
+        $typography = get_option('fb_typography', []);
+        wp_send_json_success($typography);
     }
 
     /**

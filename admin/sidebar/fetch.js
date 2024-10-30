@@ -1,8 +1,8 @@
 /**
  * Define AJAX Action names
  */
-const updateGlobalStyleAction = 'fb_global_styles_update';
-const getGlobalStyleAction = 'fb_global_styles_get';
+const updateGlobalStyleAction = 'fb_update_global_colors';
+const getGlobalStyleAction = 'fb_get_global_colors';
 
 const {nonce, ajaxUrl} = window.frontisBlocksAdminSidebar;
 
@@ -12,7 +12,7 @@ const {nonce, ajaxUrl} = window.frontisBlocksAdminSidebar;
  * @param {*} value
  * @returns {object}
  */
-export const updateGlobalStyle = (value, key = 'global_colors') => {
+export const updateGlobalStyle = (value, key = 'fb_update_global_colors') => {
     let data = new FormData();
     data.append("action", updateGlobalStyleAction);
     data.append("fb_sidebar_nonce", nonce);

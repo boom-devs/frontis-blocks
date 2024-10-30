@@ -1,69 +1,94 @@
 /**
- * Store Setup
+ * WordPress dependencies
  */
 import {
     createReduxStore,
     register,
     select,
     subscribe,
-    dispatch,
-    combineReducers
+    dispatch
 } from '@wordpress/data';
 
-import * as actions from "./actions"
-import * as selectors from "./selectors"
-import * as controls from "./controls"
-import * as resolvers from "./resolvers"
-import reducer from "./reducer"
+/**
+ * Internal dependencies
+ */
+import * as actions from "./actions";
+import * as selectors from "./selectors";
+import * as controls from "./controls";
+import * as resolvers from "./resolvers";
+import reducer from "./reducer";
+import { STORE_KEY, DEFAULT_STATE } from './constant';
 
 /**
  * Create WP Redux Store
  */
-const store = createReduxStore(
-    'frontis-blocks',
-    {
-        reducer,
-        actions,
-        selectors,
-        controls,
-        resolvers
-    }
-);
+const storeConfig = {
+    reducer,
+    actions,
+    selectors,
+    controls,
+    resolvers,
+    initialState: DEFAULT_STATE
+};
 
+/**
+ * Register the store
+ */
+export const store = createReduxStore(STORE_KEY, storeConfig);
 register(store);
 
 /**
  * Save Global Values on Save Page/Post
  */
-
 subscribe(() => {
     const isSavingPost = select('core/editor').isSavingPost();
     const isAutosavingPost = select('core/editor').isAutosavingPost();
+    const isLoading = select(STORE_KEY).getIsLoading();
 
-    const fbIsSaving = select('frontis-blocks').getIsSaving()
-
-    if (!fbIsSaving || isAutosavingPost || !isSavingPost) {
+    if (isLoading || isAutosavingPost || !isSavingPost) {
         return;
     }
 
-    /**
-     * Action
-     */
-    //Global Colors
-    const globalColors = select('frontis-blocks').getGlobalColors()
-    dispatch('frontis-blocks').saveGlobalColors(globalColors)
+    const storeDispatch = dispatch(STORE_KEY);
+    const storeSelect = select(STORE_KEY);
 
-    //Custom Colors
-    const customColors = select('frontis-blocks').getCustomColors()
-    dispatch('frontis-blocks').saveCustomColors(customColors)
+    try {
+        // Set loading state
+        storeDispatch.setLoading(true);
 
-    //Gradient Colors
-    const gradientColors = select('frontis-blocks').getGradientColors()
-    dispatch('frontis-blocks').saveGradientColors(gradientColors)
+        // Save all colors
+        const globalColors = storeSelect.getGlobalColors();
+        if (globalColors?.length) {
+            storeDispatch.saveGlobalColors(globalColors);
+        }
 
-    //Custom Gradient Colors
-    const gradientCustomColors = select('frontis-blocks').getCustomGradientColors()
-    dispatch('frontis-blocks').saveCustomGradientColors(gradientCustomColors)
+        const customColors = storeSelect.getCustomColors();
+        if (customColors?.length) {
+            storeDispatch.saveCustomColors(customColors);
+        }
 
-    dispatch('frontis-blocks').setIsSaving(false)
+        const gradientColors = storeSelect.getGradientColors();
+        if (gradientColors?.length) {
+            storeDispatch.saveGradientColors(gradientColors);
+        }
+
+        const customGradientColors = storeSelect.getCustomGradientColors();
+        if (customGradientColors?.length) {
+            storeDispatch.saveCustomGradientColors(customGradientColors);
+        }
+
+        // Save typography
+        const typography = storeSelect.getTypography();
+        if (Object.keys(typography).length) {
+            storeDispatch.setTypography(typography);
+        }
+
+    } catch (error) {
+        console.error('Error saving settings:', error);
+        storeDispatch.setError(error.message);
+    } finally {
+        storeDispatch.setLoading(false);
+    }
 });
+
+export default store;
