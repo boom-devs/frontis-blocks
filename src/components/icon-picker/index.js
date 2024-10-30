@@ -82,48 +82,54 @@ export default function FBIconPicker(props) {
 		setIconPickerModal(false);
 	}
 
-	const updateCategories = (categoriesData) => {
-
-		console.log(categoriesData)
-
-
+	const updateCustomIcons = (categoriesData) => {
 		if(categoriesData) {
 			// Merge arrays without duplicates in slug or title
-			const mergedArray = [...categories];
+			const mergedCategoryArray = [...categories];
 
 			categoriesData.categories.forEach((newItem) => {
-				const isDuplicate = mergedArray.some(
+				const isDuplicate = mergedCategoryArray.some(
 					(item) => item.slug === newItem.slug || item.title === newItem.title
 				);
 
 				if (!isDuplicate) {
-					mergedArray.push(newItem);
+					mergedCategoryArray.push(newItem);
 				}
 			});
 
-			setCategories(mergedArray);
+			if(categoriesData.names.length > 0) {
+				const chunkSize = 8; // Maximum items per sub-array
+				const customNamesArray = [];
+
+				for (let i = 0; i < categoriesData.names.length; i += chunkSize) {
+					customNamesArray.push(categoriesData.names.slice(i, i + chunkSize));
+				}
+
+				const newDefaultIcons = defaultIcons.concat(customNamesArray);
+				setDefaultIcons(newDefaultIcons);
+				setFilteredDefaultIcons(newDefaultIcons);
+			}
+			setCategories(mergedCategoryArray);
 		}
 	}
 
-	const updateIconsName = (names) => {
-		console.log("From filter")
-		console.log(names)
-	}
-
-
-	const fetCustomIconsCategories = () => {
-		jQuery.ajax({
-			url: ajaxUrl,
-			type: 'POST',
-			data: {
-				action: 'fb_get_custom_icons_category',
-				security: nonce
-			},
-			success: function(response) {
-				updateCategories(response.data);
+	const fetchCustomIcons = async () => {
+		try {
+			const response = await jQuery.ajax({
+				url: ajaxUrl,
+				type: 'POST',
+				data: {
+					action: 'fb_get_custom_icons_category',
+					security: nonce
+				}
+			});
+			if(response.data) {
+				updateCustomIcons(response.data);
 			}
-		});
-	}
+		} catch (error) {
+			console.error('Error fetching custom icons:', error);
+		}
+	};
 
 	// Filter icon list
 	const filterIconList = (cat) => {
@@ -269,10 +275,8 @@ export default function FBIconPicker(props) {
 		);
 	}
 
-	useEffect( () => {
-		console.log("Hello world")
-		fetCustomIconsCategories();
-
+	useEffect( async () => {
+		await fetchCustomIcons();
 		fetchSvgIcons().then(icons => {
 			if (icons) {
 				setSvgIcon(icons);

@@ -1,6 +1,4 @@
-import {applyFilters} from "@wordpress/hooks";
-
-const defaultIcons = [
+const fb_icons_name = [
 	[
 		"0",
 		"1",
@@ -2311,7 +2309,4 @@ const defaultIcons = [
 		"zhihu"
 	]
 ];
-
-const fb_icons_name = applyFilters('frontisblocks_iconsname', defaultIcons);
-
 export default fb_icons_name;
