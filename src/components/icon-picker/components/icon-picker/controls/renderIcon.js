@@ -6,14 +6,40 @@
  */
 
 import parseSVG from './parseIcon';
-
+const { ajaxUrl, nonce } = window.FrontisBlocksData;
 const url = 'https://svg-icons.boomdevs.com/';
 const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
 
 // Function to check if data exists in localStorage
+const mergeOldNewArray = (data, iconCustomData) => {
+	const chunkSize = 8; // Maximum items per sub-array
+	const customIconArray = [];
+
+	for (let i = 0; i < iconCustomData.length; i += chunkSize) {
+		customIconArray.push(iconCustomData.slice(i, i + chunkSize));
+	}
+
+	data = data ? JSON.parse(data) : [];
+
+	return data.concat(customIconArray);
+}
+
+// Function to check if data exists in localStorage
 const getDataFromLocalStorage = () => {
-	const data = localStorage.getItem('iconData');
-	return data ? JSON.parse(data) : null;
+	let data = localStorage.getItem('iconData');
+	let iconCustomData = localStorage.getItem('iconCustomData');
+	iconCustomData = iconCustomData ? JSON.parse(iconCustomData) : [];
+
+	const chunkSize = 8; // Maximum items per sub-array
+	const customIconArray = [];
+
+	for (let i = 0; i < iconCustomData.length; i += chunkSize) {
+		customIconArray.push(iconCustomData.slice(i, i + chunkSize));
+	}
+
+	data = data ? JSON.parse(data) : [];
+
+	return mergeOldNewArray(data, iconCustomData);
 };
 
 // Fetch SVG icons from the API
@@ -41,12 +67,28 @@ const fetchFromApi = () => {
 		});
 };
 
+const fetchCustomIcons = () => {
+	try {
+		const response = jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_get_custom_icons_category',
+				security: nonce
+			}
+		});
+		if(response.data) {
+			localStorage.setItem('iconCustomData', JSON.stringify(response.data.icons));
+			return response.data.icons;
+		}
+	} catch (error) {
+		console.error('Error fetching custom icons:', error);
+	}
+}
+
 // Get data from localStorage or fetch from API
-
-
 function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 	svg = parseSVG( svg );
-
 
 	let data = getDataFromLocalStorage();
 	if (!data) {
@@ -57,6 +99,10 @@ function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 	}
 
 	const svgIcon = data;
+
+	if(!svgIcon) {
+		return;
+	}
 
 	let fontAwesome;
 	fontAwesome = svgIcon[ svg ];

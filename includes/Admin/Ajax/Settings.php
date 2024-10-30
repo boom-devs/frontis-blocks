@@ -38,8 +38,7 @@ class Settings extends AjaxBase {
             'coming_soon_page_id',
             'maintenance_page_id',
             'upload_custom_icons',
-            'get_custom_icons_category',
-            'get_custom_icon_names'
+            'get_custom_icons_category'
         ];
 
         $this->init_ajax_events($ajax_events);
@@ -319,18 +318,11 @@ class Settings extends AjaxBase {
 
 		if($categories) {
 			$icons_name = get_option('fb_custom_icons_name');
-			wp_send_json_success(['categories' => $categories, 'names' => $icons_name]);
+			$icons = get_option('fb_custom_icons');
+			wp_send_json_success(['categories' => $categories, 'names' => $icons_name, 'icons' => $icons]);
 		}else {
 		 	wp_send_json_error(['message' => 'Categories not found']);
 	 	}
-    }
-
-    public function get_custom_icon_names() {
-		$icons = get_option('fb_custom_icons');
-
-		if($icons) {
-			var_dump($icons);
-		}
     }
 
     public function upload_custom_icons() {
