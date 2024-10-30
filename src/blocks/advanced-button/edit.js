@@ -29,8 +29,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const blockProps = useBlockProps();
-
-    console.log(buttonIconAlign);
     
     
 
