@@ -8,8 +8,6 @@ import {
 	Button, Modal, Tooltip
 } from "@wordpress/components";
 import './editor.scss';
-import {addAction, addFilter, applyFilters, hasFilter} from "@wordpress/hooks";
-import {toast} from "react-toastify";
 
 export default function FBIconPicker(props) {
 	const { ajaxUrl, nonce } = window.FrontisBlocksData;
@@ -282,6 +280,8 @@ export default function FBIconPicker(props) {
 				setSvgIcon(icons);
 			}
 		});
+
+		console.log("Hello world")
 	}, [])
 	return (
 		<Fragment>
