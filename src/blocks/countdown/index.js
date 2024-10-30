@@ -8,6 +8,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
+import countDownItemWrapperAttributes from "./attributes/countdown-item-wrapper-attribute.js";
 import countDownItemSizeAttributes from "./attributes/countdown-item-size-attribute.js";
 import countDownItemGapAttributes from "./attributes/countdown-item-gap-attribute.js";
 import countDownItemBorderTypeAttributes from "./attributes/countdown-item-border-type-attribute.js";
@@ -20,6 +21,7 @@ import labelAttributes from "./attributes/label.js";
 // Merge attributes and digitAttributes
 const combinedAttributes = {
 	...attributes,
+	...countDownItemWrapperAttributes,
 	...countDownItemSizeAttributes,
 	...countDownItemGapAttributes,
 	...countDownItemBorderTypeAttributes,
