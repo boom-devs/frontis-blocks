@@ -1,37 +1,70 @@
-import * as actions from "./actions";
+import { getSettings } from '../api';
+import { ActionTypes, OptionKeys } from './constant';
+import {
+    setGlobalColors,
+    setCustomColors,
+    setGradientColors,
+    setCustomGradientColors,
+    setTypography,
+    setError
+} from './actions';
 
 /**
- * getGlobalColors resolver
- * @returns
+ * Get Global Colors Resolver
  */
 export function* getGlobalColors() {
-    let globalColors = yield actions.fetchGlobalColor();
-    return actions.setGlobalColors(globalColors)
+    try {
+        const colors = yield getSettings(OptionKeys.GLOBAL_COLORS);
+        return setGlobalColors(colors);
+    } catch (error) {
+        return setError(error.message);
+    }
 }
 
 /**
- * getCustomColors resolver
- * @returns
+ * Get Custom Colors Resolver
  */
 export function* getCustomColors() {
-    let customColors = yield actions.fetchCustomColor();
-    return actions.setCustomColors(customColors)
+    try {
+        const colors = yield getSettings(OptionKeys.CUSTOM_COLORS);
+        return setCustomColors(colors);
+    } catch (error) {
+        return setError(error.message);
+    }
 }
 
 /**
- * getGradientColors resolver
- * @returns
+ * Get Gradient Colors Resolver
  */
 export function* getGradientColors() {
-    let gradientColors = yield actions.fetchGradientColor();
-    return actions.setGradientColors(gradientColors)
+    try {
+        const colors = yield getSettings(OptionKeys.GRADIENT_COLORS);
+        return setGradientColors(colors);
+    } catch (error) {
+        return setError(error.message);
+    }
 }
 
 /**
- * getCustomGradientColors resolver
- * @returns
+ * Get Custom Gradient Colors Resolver
  */
 export function* getCustomGradientColors() {
-    let customGradientColors = yield actions.fetchCustomGradientColor();
-    return actions.setCustomGradientColors(customGradientColors)
+    try {
+        const colors = yield getSettings(OptionKeys.CUSTOM_GRADIENT_COLORS);
+        return setCustomGradientColors(colors);
+    } catch (error) {
+        return setError(error.message);
+    }
+}
+
+/**
+ * Get Typography Resolver
+ */
+export function* getTypography() {
+    try {
+        const typography = yield getSettings(OptionKeys.TYPOGRAPHY);
+        return setTypography(typography);
+    } catch (error) {
+        return setError(error.message);
+    }
 }

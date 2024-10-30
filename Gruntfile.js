@@ -8,6 +8,16 @@ module.exports = function(grunt) {
       dist: ['dist']
     },
 
+    // Shell commands
+    shell: {
+      // composerInstall: {
+      //   command: 'composer install --no-dev --optimize-autoloader'
+      // },
+      npmBuild: {
+        command: 'npm run build'
+      }
+    },
+
     // Copy files to dist
     copy: {
       main: {
@@ -37,7 +47,7 @@ module.exports = function(grunt) {
               '!webpack.config.admin.js',
               '!**/*.map'
             ],
-            dest: 'dist/'
+            dest: 'dist/<%= pkg.name %>/'
           }
         ]
       }
@@ -57,9 +67,9 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          cwd: 'dist',
+          cwd: 'dist/<%= pkg.name %>',
           src: ['**/*.css', '!**/*.min.css'],
-          dest: 'dist',
+          dest: 'dist/<%= pkg.name %>',
           ext: '.min.css'
         }]
       }
@@ -73,9 +83,9 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          cwd: 'dist',
+          cwd: 'dist/<%= pkg.name %>',
           src: ['**/*.js', '!**/*.min.js'],
-          dest: 'dist',
+          dest: 'dist/<%= pkg.name %>',
           ext: '.min.js'
         }]
       }
@@ -84,23 +94,24 @@ module.exports = function(grunt) {
     // Create zip file
     compress: {
       main: {
-        options: {
-          archive: 'dist/frontis-blocks.zip'
-        },
-        files: [
-          {
-            expand: true,
-            cwd: 'dist/',
-            src: ['**/*'],
-            dest: 'frontis-blocks/'
-          }
-        ]
+          options: {
+              archive: 'dist/<%= pkg.name %>-<%= pkg.version %>.zip'
+          },
+          files: [
+              {
+                  expand: true,
+                  cwd: 'dist/<%= pkg.name %>',
+                  src: ['**'],
+                  dest: '<%= pkg.name %>/'
+              }
+          ]
       }
     }
   });
 
   // Load the plugins
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -110,10 +121,12 @@ module.exports = function(grunt) {
   // Build task(s)
   grunt.registerTask('build', [
     'clean',
+    // 'shell:composerInstall',
+    // 'shell:npmBuild',
     'copy',
     'wp_readme_to_markdown',
     'cssmin',
     'uglify',
-    // 'compress'
+    'compress'
   ]);
 };

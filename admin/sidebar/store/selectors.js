@@ -1,60 +1,51 @@
 /**
- * Selector: Get Global Colors
- * @param {*} state
- * @returns
+ * Get Global Colors
  */
-export function getGlobalColors(state) {
-    const { globalColors } = state
-    return globalColors;
-}
+export const getGlobalColors = (state) => state.globalColors || [];
 
 /**
- * Selector: Get Global Colors by Item
- * @param {*} state
- * @param {*} item
- * @returns
+ * Get Custom Colors
  */
-export function getGlobalColorsByItem(state, item) {
-    const { globalColors } = state
-    return globalColors[item]
-}
+export const getCustomColors = (state) => state.customColors || [];
 
 /**
- * Selector: Get Custom Colors
- * @param {*} state
- * @returns
+ * Get Gradient Colors
  */
-export function getCustomColors(state) {
-    const { customColors } = state
-    return customColors;
-}
+export const getGradientColors = (state) => state.gradientColors || [];
 
 /**
- * Selector: Get Gradient Colors
- * @param {*} state
- * @returns
+ * Get Custom Gradient Colors
  */
-export function getGradientColors(state) {
-    const { gradientColors } = state
-    return gradientColors;
-}
+export const getCustomGradientColors = (state) => state.customGradientColors || [];
 
 /**
- * Selector: Get Custom Gradient Colors
- * @param {*} state
- * @returns
+ * Get Typography Settings
  */
-export function getCustomGradientColors(state) {
-    const { customGradientColors } = state
-    return customGradientColors;
-}
+export const getTypography = (state) => state.globalTypography || {};
 
 /**
- * Selector: Get Is Saving
- * @param {*} state
- * @returns
+ * Get Typography by Type (heading/body)
  */
-export function getIsSaving(state) {
-    const { isSaving } = state
-    return isSaving
-}
+export const getTypographyByType = (state, type) => state.globalTypography?.[type] || {};
+
+/**
+ * Get Loading State
+ */
+export const getIsLoading = (state) => state.isLoading || false;
+
+/**
+ * Get Error State
+ */
+export const getError = (state) => state.error || null;
+
+/**
+ * Get Global Color by Slug
+ */
+export const getGlobalColorBySlug = (state, slug) => 
+    state.globalColors?.find(color => color.slug === slug)?.color || null;
+
+/**
+ * Get Gradient Color by Slug
+ */
+export const getGradientColorBySlug = (state, slug) =>
+    state.gradientColors?.find(color => color.slug === slug)?.color || null;

@@ -1,73 +1,71 @@
-import {
-    DEFAULT_STATE,
-    SET_GLOBAL_COLORS,
-    SAVE_GLOBAL_COLORS,
-    FETCH_GLOBAL_COLORS,
-    SET_CUSTOM_COLORS,
-    SAVE_CUSTOM_COLORS,
-    FETCH_CUSTOM_COLORS,
-    SET_GRADIENT_COLORS,
-    SAVE_GRADIENT_COLORS,
-    FETCH_GRADIENT_COLORS,
-    SET_CUSTOM_GRADIENT_COLORS,
-    SAVE_CUSTOM_GRADIENT_COLORS,
-    FETCH_CUSTOM_GRADIENT_COLORS,
-    SET_IS_SAVING,
-    FETCH_IS_SAVING
-} from "./constant"
+import { ActionTypes, DEFAULT_STATE } from './constant';
 
 export default function reducer(state = DEFAULT_STATE, action) {
     switch (action.type) {
-        case SET_GLOBAL_COLORS:
+        // Global Colors
+        case ActionTypes.SET_GLOBAL_COLORS:
+        case ActionTypes.SAVE_GLOBAL_COLORS:
             return {
                 ...state,
-                globalColors: [
-                    ...action.value,
-                ],
+                globalColors: [...action.value]
             };
-        case FETCH_GLOBAL_COLORS:
-            return state
-        case SET_CUSTOM_COLORS:
+        case ActionTypes.FETCH_GLOBAL_COLORS:
+            return state;
+
+        // Custom Colors
+        case ActionTypes.SET_CUSTOM_COLORS:
+        case ActionTypes.SAVE_CUSTOM_COLORS:
             return {
                 ...state,
-                customColors: [
-                    ...action.value,
-                ],
+                customColors: [...action.value]
             };
-        case FETCH_CUSTOM_COLORS:
-            return state
-        case SET_GRADIENT_COLORS:
+        case ActionTypes.FETCH_CUSTOM_COLORS:
+            return state;
+
+        // Gradient Colors
+        case ActionTypes.SET_GRADIENT_COLORS:
+        case ActionTypes.SAVE_GRADIENT_COLORS:
             return {
                 ...state,
-                gradientColors: [
-                    ...action.value,
-                ],
+                gradientColors: [...action.value]
             };
-        case FETCH_GRADIENT_COLORS:
-            return state
-        case SET_CUSTOM_GRADIENT_COLORS:
+        case ActionTypes.FETCH_GRADIENT_COLORS:
+            return state;
+
+        // Custom Gradient Colors
+        case ActionTypes.SET_CUSTOM_GRADIENT_COLORS:
+        case ActionTypes.SAVE_CUSTOM_GRADIENT_COLORS:
             return {
                 ...state,
-                customGradientColors: [
-                    ...action.value,
-                ],
+                customGradientColors: [...action.value]
             };
-        case SAVE_GLOBAL_COLORS:
-        case SAVE_CUSTOM_COLORS:
-        case SAVE_GRADIENT_COLORS:
-        case SAVE_CUSTOM_GRADIENT_COLORS:
-            return {
-                ...state
-            }
-        case FETCH_CUSTOM_GRADIENT_COLORS:
-            return state
-        case SET_IS_SAVING:
+        case ActionTypes.FETCH_CUSTOM_GRADIENT_COLORS:
+            return state;
+
+        // Typography
+        case ActionTypes.SET_TYPOGRAPHY:
             return {
                 ...state,
-                isSaving: action.value,
+                globalTypography: {
+                    ...state.globalTypography,
+                    [action.value.type]: action.value
+                }
             };
-        case FETCH_IS_SAVING:
-            return state
+
+        // Loading State
+        case ActionTypes.SET_LOADING:
+            return {
+                ...state,
+                isLoading: action.value
+            };
+
+        // Error State
+        case ActionTypes.SET_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            };
+
         default:
             return state;
     }
