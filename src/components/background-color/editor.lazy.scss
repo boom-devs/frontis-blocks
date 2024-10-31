@@ -49,6 +49,7 @@ $border_color: #dddddd;
 }
 
 .fb-setting-background-color-setting-icon-dropdown-content {
+    z-index: 99999;
     .components-popover__content {
         padding: 15px;
         min-width: 260px;
@@ -79,11 +80,102 @@ $border_color: #dddddd;
                 font-size: 13px;
                 font-weight: 400;
                 color: $secondary_color !important;
-                box-shadow: inset 0 0 0 1px $background_color;
+                box-shadow: inset 0 0 0 1px $background_color !important;
                 &.active {
-                    background-color: $background_color;
+                    background-color: $background_color !important;
                 }
             }
         }
+    }
+}
+
+
+.fb-background-image-control-wrapper {
+    margin-bottom: 16px;
+    .components-base-control__field {
+        display: block;
+    }
+    .fb-background-image-control {
+        background-color: #ccc;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 6px;
+        height: 150px;
+        margin-bottom: 16px;
+        padding: 2px;
+        position: relative;
+        width: 100%;
+        .fb-background-image-delete {
+            margin: 0 8px !important;
+            padding: 0 !important;
+            position: absolute;
+            right: 0;
+
+            align-items: center;
+            background: none;
+            border: 0;
+            border-radius: 2px;
+            cursor: pointer;
+            display: inline-flex;
+            font-family: inherit;
+            font-weight: 400;
+            height: 36px;
+            text-decoration: none;
+            transition: box-shadow .1s linear;
+
+            svg {
+                fill: none;
+                filter: drop-shadow(1px 1px 3px rgb(100, 100, 100));
+            }
+        }
+        .fb-background-image-replace-btn {
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+            background: hsla(0, 0%, 95%, .749);
+            border-radius: 0 0 6px 6px;
+            bottom: 0;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            left: 0;
+            position: absolute;
+            transition: .3s;
+            width: 100%;
+            color: #000;
+            font-size: 13px;
+
+            align-items: center;
+            border: 0;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 400;
+            height: 36px;
+            margin: 0;
+            padding: 6px 12px;
+            text-decoration: none;
+            svg {
+                fill: none;
+            }
+        }
+    }
+    .fb-background-image-upload-btn {
+        background-color: #f2f2f2;
+        background-image: url(transparent-bg-demo.png);
+        border: 1px solid #e9e8eb;
+        border-radius: 6px;
+        height: 130px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        cursor: pointer;
+        font-weight: 400;
+        margin: 0;
+        text-decoration: none;
+        transition: box-shadow .1s linear;
     }
 }

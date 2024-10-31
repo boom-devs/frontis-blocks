@@ -7,44 +7,69 @@ import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
     const { blockId,
-        backgroundType, 
-        globalClassicColor,
-        globalGradientColor,
-        customGradientSwitcher,
-        customGradientInputValue,
+        testBackgroundType, 
+        testGlobalClassicColor,
+        testGlobalGradientColor,
+        testCustomGradientSwitcher,
+        testCustomGradientInputValue,
+        testBackgroundColorStyle,
+        testBackgroundImageUrl,
+        testBackgroundImageAlt,
+        testBackgroundImageID,
+        testBackgroundImagePosition,
+        testBackgroundImageAttachment,
+        testBackgroundImageRepeat,
+        testBackgroundImageSize
     } = attributes;
 
     const blockProps = useBlockProps();
 
-    // Determine the background color based on conditions
-    const backgroundColor =
-        backgroundType === 'gradient'
-            ? (customGradientSwitcher && customGradientInputValue ? customGradientInputValue : globalGradientColor)
-            : globalClassicColor;
 
-    console.log(backgroundColor || 'transparent');
     return (
         <>
             <InspectorControls>
                 <PanelBody title={__("Post Grid", "frontis-blocks")} initialOpen={true}>
                     <FB_BackgroundColor
-                        backgroundType={backgroundType}
-                        setBackgroundType={(value) => setAttributes({ backgroundType: value })}
-                        classicColor={globalClassicColor}
-                        setClassicColor={(value) => setAttributes({ globalClassicColor: value })}
-                        gradientColor={globalGradientColor}
-                        setGradientColor={(value) => setAttributes({ globalGradientColor: value })}
-                        customGradientSwitcher={customGradientSwitcher}
-                        setCustomGradientSwitcher={(value) => setAttributes({ customGradientSwitcher: value })}
-                        customGradientInputValue={customGradientInputValue}
-                        setCustomGradientInputValue={(value) => setAttributes({ customGradientInputValue: value })}
+                        backgroundType={testBackgroundType}
+                        setBackgroundType={(value) => setAttributes({ testBackgroundType: value })}
+                        classicColor={testGlobalClassicColor}
+                        setClassicColor={(value) => setAttributes({ testGlobalClassicColor: value })}
+                        gradientColor={testGlobalGradientColor}
+                        setGradientColor={(value) => setAttributes({ testGlobalGradientColor: value })}
+                        customGradientSwitcher={testCustomGradientSwitcher}
+                        setCustomGradientSwitcher={(value) => setAttributes({ testCustomGradientSwitcher: value })}
+                        customGradientInputValue={testCustomGradientInputValue}
+                        setCustomGradientInputValue={(value) => setAttributes({ testCustomGradientInputValue: value })}
+                        backgroundColorStyle={(value) => setAttributes({ testBackgroundColorStyle: value })}
+                        backgroundImageUrl={testBackgroundImageUrl}
+                        setBackgroundImageUrl={(value) => setAttributes({ testBackgroundImageUrl: value })}
+                        backgroundImageAlt={testBackgroundImageAlt}
+                        setBackgroundImageAlt={(value) => setAttributes({ testBackgroundImageAlt: value })}
+                        backgroundImageID={testBackgroundImageID}
+                        setBackgroundImageID={(value) => setAttributes({ testBackgroundImageID: value })}
+                        backgroundImagePosition={testBackgroundImagePosition}
+                        setBackgroundImagePosition={(value) => setAttributes({ testBackgroundImagePosition: value })}
+                        backgroundImageAttachment={testBackgroundImageAttachment}
+                        setBackgroundImageAttachment={(value) => setAttributes({ testBackgroundImageAttachment: value })}
+                        backgroundImageRepeat={testBackgroundImageRepeat}
+                        setBackgroundImageRepeat={(value) => setAttributes({ testBackgroundImageRepeat: value })}
+                        backgroundImageSize={testBackgroundImageSize}
+                        setBackgroundImageSize={(value) => setAttributes({ testBackgroundImageSize: value })}
                     />
                 </PanelBody>
             </InspectorControls>
 
             <style>{`
                 .fb-post-grid-title {
-                    background: ${backgroundColor || 'transparent'};
+                    ${testBackgroundImageUrl && testBackgroundImageUrl !== 'null' ? `
+                        ${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : ''}
+                        ${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : ''}
+                        ${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : ''}
+                        ${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : ''}
+                        ${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : ''}
+                    ` : `
+                        background: ${testBackgroundColorStyle};
+                    `}
                 }
             `}</style>
 
