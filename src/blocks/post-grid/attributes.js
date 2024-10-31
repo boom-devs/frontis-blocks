@@ -8,24 +8,56 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
-    backgroundType: {
+    testBackgroundType: {
         type: "string",
         default: "classic"
     },
-    globalClassicColor: {
+    testGlobalClassicColor: {
         type: "string",
     },
-    globalGradientColor: {
+    testGlobalGradientColor: {
         type: "string",
     },
-    customGradientSwitcher: {
+    testCustomGradientSwitcher: {
         type: "boolean",
         default: false
     },
-    customGradientInputValue: {
+    testCustomGradientInputValue: {
         type: "string",
         default: ""
-    }
+    },
+    testBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
 };
 
 export default attributes;
