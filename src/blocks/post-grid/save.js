@@ -3,12 +3,28 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockId,
-        testBackgroundColorStyle,
+        testBackgroundType,
+        testCustomGradientSwitcher,
+        testCustomGradientInputValue,
+        testGradientColor,
         testBackgroundImageUrl,
         testBackgroundImagePosition,
         testBackgroundImageAttachment,
         testBackgroundImageRepeat,
-        testBackgroundImageSize
+        testBackgroundImageSize,
+        testClassicColor,
+
+        hoverBackgroundType,
+        hoverCustomGradientSwitcher,
+        hoverCustomGradientInputValue,
+        hoverGradientColor,
+        hoverBackgroundImageUrl,
+        hoverBackgroundImagePosition,
+        hoverBackgroundImageAttachment,
+        hoverBackgroundImageRepeat,
+        hoverBackgroundImageSize,
+        hoverClassicColor,
+        
     } = attributes;
 
     const blockProps = useBlockProps.save();
@@ -17,14 +33,29 @@ export default function save({ attributes }) {
         <>
             <style>{`
                 .fb-post-grid-title {
-                    ${testBackgroundImageUrl && testBackgroundImageUrl !== 'null' ? `
+                    ${testBackgroundType === 'gradient' ? `
+                        background: ${testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor};
+                    ` : testBackgroundImageUrl && testBackgroundImageUrl !== 'null' ? `
                         ${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : ''}
                         ${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : ''}
                         ${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : ''}
                         ${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : ''}
                         ${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : ''}
                     ` : `
-                        background: ${testBackgroundColorStyle};
+                        background: ${testClassicColor};
+                    `}
+                }
+                .fb-post-grid-title:hover {
+                    ${hoverBackgroundType === 'gradient' ? `
+                        background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor};
+                    ` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== 'null' ? `
+                        ${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : ''}
+                        ${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : ''}
+                        ${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : ''}
+                        ${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : ''}
+                        ${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : ''}
+                    ` : `
+                        background: ${hoverClassicColor};
                     `}
                 }
             `}</style>

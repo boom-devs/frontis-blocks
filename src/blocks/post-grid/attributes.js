@@ -8,14 +8,18 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
+    testBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
     testBackgroundType: {
         type: "string",
         default: "classic"
     },
-    testGlobalClassicColor: {
+    testClassicColor: {
         type: "string",
     },
-    testGlobalGradientColor: {
+    testGradientColor: {
         type: "string",
     },
     testCustomGradientSwitcher: {
@@ -55,6 +59,56 @@ const attributes = {
         default: ""
     },
     testBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    hoverClassicColor: {
+        type: "string",
+    },
+    hoverGradientColor: {
+        type: "string",
+    },
+    hoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    hoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageRepeat: {
         type: "string",
         default: ""
     },
