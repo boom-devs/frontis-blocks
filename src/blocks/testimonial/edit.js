@@ -111,7 +111,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                                 {TestimonialPresetStyle === "preset-4" ? (
                                     <>
-                                        <div className="fb-testimonial-author-container">
+                                        <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}>
                                             <div className='fb-testimonial-author-inner-container'>
                                                 <div className='fb-testimonial-author-image-container'>
                                                     {TestimonialImageSwitcher && (
@@ -215,7 +215,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             </div>
                                         )}
 
-                                        <div className="fb-testimonial-author-container">
+                                        <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}>
                                             <div className='fb-testimonial-author-inner-container'>
                                                 <div className='fb-testimonial-author-image-container'>
                                                     {TestimonialImageSwitcher && (
@@ -302,7 +302,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             </div>
                                         )}
 
-                                        <div className="fb-testimonial-author-container">
+                                        <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}> 
                                             <div className='fb-testimonial-author-inner-container'>
                                                 <div className='fb-testimonial-author-image-container'>
                                                     {TestimonialImageSwitcher && (

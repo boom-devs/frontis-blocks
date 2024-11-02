@@ -128,7 +128,7 @@ export default function Save({ attributes }) {
                                             />
                                         </div>
                                     )}
-                                    <div className="fb-testimonial-author-container">
+                                    <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}>
                                         <div className="fb-testimonial-author-inner-container">
                                             <div className="fb-testimonial-author-image-container">
                                                 {TestimonialImageSwitcher && TestimonialImageUrl && (
@@ -191,7 +191,7 @@ export default function Save({ attributes }) {
                                             />
                                         </div>
                                     )}
-                                    <div className="fb-testimonial-author-container">
+                                    <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}>
                                         <div className="fb-testimonial-author-inner-container">
                                             <div className="fb-testimonial-author-image-container">
                                                 {TestimonialImageSwitcher && TestimonialImageUrl && (
