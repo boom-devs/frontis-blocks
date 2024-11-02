@@ -2,7 +2,11 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
-import FB_BackgroundColor from '@Components/background-color';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+import FB_ImageControl from '@Components/image-control';
+import FB_GradientColorControl from '@Components/gradient-color-control';
+import FB_ColorControl from '@Components/color-control';
+import FB_SwitcherControl from '@Components/switcher-control';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -35,6 +39,22 @@ export default function Edit({ attributes, setAttributes }) {
         hoverBackgroundImageRepeat,
         hoverBackgroundImageSize,
 
+
+
+        globalBackgroundImageUrl,
+        globalBackgroundImageAlt,
+        globalBackgroundImageID,
+        globalBackgroundImagePosition,
+        globalBackgroundImageAttachment,
+        globalBackgroundImageRepeat,
+        globalBackgroundImageSize,
+
+
+        globalCustomGradientSwitcher,
+        globalCustomGradientInputValue,
+        globalGradientColor,
+        globalColor,
+        globalSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -44,7 +64,7 @@ export default function Edit({ attributes, setAttributes }) {
         <>
             <InspectorControls>
                 <PanelBody title={__("Background Color", "frontis-blocks")} initialOpen={true}>
-                    <FB_BackgroundColor
+                    <FB_BackgroundColorControl
                         bgColorSwitcher={testBgColorSwitcher}
                         setBgColorSwitcher={(value) => setAttributes({ testBgColorSwitcher: value })}
                         
