@@ -112,6 +112,64 @@ const attributes = {
         type: "string",
         default: ""
     },
+
+
+
+    globalBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+
+
+
+    // Attributes added as per file context
+    globalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    globalCustomGradientInputValue: {
+        type: "string",
+    },
+    globalGradientColor: {
+        type: "string",
+    },
+    globalColor: {
+        type: "string",
+    },
+    globalSwitcher: {
+        type: "string",
+        default: "normal"
+    }
 };
 
 export default attributes;
