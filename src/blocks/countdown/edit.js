@@ -23,6 +23,9 @@ import './editor.scss';
 import {BORDER_STYLES, FONT_FAMILYS, NORMAL_HOVER, UNIT_TYPES} from "../advanced-heading/constants/constants";
 import ResponsiveControl from "../../components/responsivecontrol";
 
+import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-wrapper-bg-color-control";
+import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";
+import CountDownItemWrapperPaddingMarginControl from "./style-control/countdown-item-wrapper-padding-margin-control";
 import CountDownItemSizeControl from "./style-control/countdown-item-size-control";
 import CountDownItemGapControl from "./style-control/countdown-item-gap-control";
 import CountDownItemBorderTypeControl from "./style-control/countdown-item-border-type-control";
@@ -39,9 +42,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		deviceType,
-
-
-
 
 		countDownLabelDay,
 		countDownLabelHour,
@@ -144,6 +144,55 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		labelLineHeight,
 		labelLineHeightUnits,
 
+		/** Start Item Wrapper */
+		countDownItemWrapperBgFontColorSwitcher,
+		countDownItemWrapperBgFontColor,
+		countDownItemWrapperBgFontHoverColor,
+
+		countDownItemWrapperBoxShadowValues,
+		countDownItemWrapperBoxShadowCssValue,
+
+		/** Start Background Image */
+		countDownItemWrapperBackgroundImageEnabled,
+		countDownItemWrapperBackgroundImageUrl,
+		countDownItemWrapperBackgroundImageAlt,
+		countDownItemWrapperBackgroundImageID,
+
+		countDownItemWrapperBgImagePositionType,
+		countDownItemWrapperBgImageAttachmentType,
+		countDownItemWrapperBgImageRepeatType,
+		countDownItemWrapperBgImageSizeType,
+		/** End Background Image */
+
+
+		countDownItemWrapperBorderTypeUnits,
+		countDownItemWrapperBorderTypeDesktop,
+		countDownItemWrapperBorderTypeTablet,
+		countDownItemWrapperBorderTypeMobile,
+		countDownItemWrapperBorderTypeLink,
+		countDownItemWrapperBorder,
+		countDownItemWrapperBorderColorSwitcher,
+		countDownItemWrapperBorderColor,
+		countDownItemWrapperBorderHoverColor,
+		countDownItemWrapperBorderRadiusUnits,
+		countDownItemWrapperBorderRadiusDesktop,
+		countDownItemWrapperBorderRadiusTablet,
+		countDownItemWrapperBorderRadiusMobile,
+		countDownItemWrapperBorderRadiusLink,
+
+		countDownItemWrapperPaddingUnits,
+		countDownItemWrapperPaddingDesktop,
+		countDownItemWrapperPaddingTablet,
+		countDownItemWrapperPaddingMobile,
+		countDownItemWrapperPaddingLink,
+
+		countDownItemWrapperMarginUnits,
+		countDownItemWrapperMarginDesktop,
+		countDownItemWrapperMarginTablet,
+		countDownItemWrapperMarginMobile,
+		countDownItemWrapperMarginLink,
+		/** End Item Wrapper */
+
 	} = attributes;
 
 	const [timeRemaining, setTimeRemaining] = useState({});
@@ -206,6 +255,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	{/* Inspector Controls */}
+	{/* Countdown Item Wrapper Control */}
+	const countDownItemWrapperBorderTypeGetDesktop = `${countDownItemWrapperBorderTypeDesktop.top}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.right}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.bottom}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.left}${countDownItemWrapperBorderTypeUnits[deviceType]}`;
+	const countDownItemWrapperBorderTypeGetTablet = `${countDownItemWrapperBorderTypeTablet.top}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.right}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.bottom}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.left}${countDownItemWrapperBorderTypeUnits[deviceType]}`;
+	const countDownItemWrapperBorderTypeGetMobile = `${countDownItemWrapperBorderTypeMobile.top}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeMobile.right}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeMobile.bottom}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeMobile.left}${countDownItemWrapperBorderTypeUnits[deviceType]}`;
+
+
+	const countDownItemWrapperBorderRadiusGetDesktop = `${countDownItemWrapperBorderRadiusDesktop.top}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusDesktop.right}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusDesktop.bottom}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusDesktop.left}${countDownItemWrapperBorderRadiusUnits[deviceType]}`;
+	const countDownItemWrapperBorderRadiusGetTablet = `${countDownItemWrapperBorderRadiusTablet.top}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusTablet.right}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusTablet.bottom}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusTablet.left}${countDownItemWrapperBorderRadiusUnits[deviceType]}`;
+	const countDownItemWrapperBorderRadiusGetMobile = `${countDownItemWrapperBorderRadiusMobile.top}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusMobile.right}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusMobile.bottom}${countDownItemWrapperBorderRadiusUnits[deviceType]} ${countDownItemWrapperBorderRadiusMobile.left}${countDownItemWrapperBorderRadiusUnits[deviceType]}`;
+
+	const countDownItemWrapperPaddingGetDesktop = `${countDownItemWrapperPaddingDesktop.top}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingDesktop.right}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingDesktop.bottom}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingDesktop.left}${countDownItemWrapperPaddingUnits[deviceType]}`;
+	const countDownItemWrapperPaddingGetTablet = `${countDownItemWrapperPaddingTablet.top}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingTablet.right}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingTablet.bottom}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingTablet.left}${countDownItemWrapperPaddingUnits[deviceType]}`;
+	const countDownItemWrapperPaddingGetMobile = `${countDownItemWrapperPaddingMobile.top}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingMobile.right}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingMobile.bottom}${countDownItemWrapperPaddingUnits[deviceType]} ${countDownItemWrapperPaddingMobile.left}${countDownItemWrapperPaddingUnits[deviceType]}`;
+
+	const countDownItemWrapperMarginGetDesktop = `${countDownItemWrapperMarginDesktop.top}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginDesktop.right}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginDesktop.bottom}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginDesktop.left}${countDownItemWrapperMarginUnits[deviceType]}`;
+	const countDownItemWrapperMarginGetTablet = `${countDownItemWrapperMarginTablet.top}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginTablet.right}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginTablet.bottom}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginTablet.left}${countDownItemWrapperMarginUnits[deviceType]}`;
+	const countDownItemWrapperMarginGetMobile = `${countDownItemWrapperMarginMobile.top}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginMobile.right}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginMobile.bottom}${countDownItemWrapperMarginUnits[deviceType]} ${countDownItemWrapperMarginMobile.left}${countDownItemWrapperMarginUnits[deviceType]}`;
+
 
 	{/* Countdown Item Control */}
 	const countDownItemBorderTypeGetDesktop = `${countDownItemBorderTypeDesktop.top}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.right}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.bottom}${countDownItemBorderTypeUnits[deviceType]} ${countDownItemBorderTypeDesktop.left}${countDownItemBorderTypeUnits[deviceType]}`;
@@ -218,6 +285,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const countDownItemBorderRadiusGetMobile = `${countDownItemBorderRadiusMobile.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.left}${countDownItemBorderRadiusUnits[deviceType]}`;
 
 
+
+
+
 	return (
 		<>
 
@@ -225,6 +295,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				{`
              	.fb-count-down-wrapper.${blockID} {
 					${countDownItemGap.Desktop ? `gap: ${countDownItemGap.Desktop}${countDownItemGapUnits.Desktop};` : ''}
+					${countDownItemWrapperBgFontColor ? `background: ${countDownItemWrapperBgFontColor};` : ''}
+					${countDownItemWrapperBorder ? `border: ${countDownItemWrapperBorder};` : ''}
+					${countDownItemWrapperBorderTypeGetDesktop ? `border-width: ${countDownItemWrapperBorderTypeGetDesktop};` : ''}
+					${countDownItemWrapperBorderRadiusGetDesktop ? `border-radius: ${countDownItemWrapperBorderRadiusGetDesktop};` : ''}
+					${countDownItemWrapperBorderColor ? `border-color: ${countDownItemWrapperBorderColor};` : ''}
+
+					${countDownItemWrapperBackgroundImageEnabled && countDownItemWrapperBackgroundImageUrl && countDownItemWrapperBackgroundImageUrl !== 'null' ? `
+                        background-image: url(${countDownItemWrapperBackgroundImageUrl});
+                        background-position: ${countDownItemWrapperBgImagePositionType};
+                        background-repeat: ${countDownItemWrapperBgImageRepeatType};
+                        background-size: ${countDownItemWrapperBgImageSizeType};
+                    ` : ''}
+                    ${countDownItemWrapperPaddingGetDesktop ? `padding: ${countDownItemWrapperPaddingGetDesktop};` : ''}
+                    ${countDownItemWrapperMarginGetDesktop ? `margin: ${countDownItemWrapperMarginGetDesktop};` : ''}
 				}
 
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item {
@@ -289,6 +373,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				@media only screen and (max-width: 1024px) {
 					.fb-count-down-wrapper.${blockID} {
 						${countDownItemGap.Tablet ? `gap: ${countDownItemGap.Tablet}${countDownItemGapUnits.Tablet};` : ''}
+						${countDownItemWrapperBorderTypeGetTablet ? `border-width: ${countDownItemWrapperBorderTypeGetTablet};` : ''}
+						${countDownItemWrapperBorderRadiusGetTablet ? `border-radius: ${countDownItemWrapperBorderRadiusGetTablet};` : ''}
+						${countDownItemWrapperPaddingGetTablet ? `padding: ${countDownItemWrapperPaddingGetTablet};` : ''}
+						${countDownItemWrapperMarginGetTablet ? `margin: ${countDownItemWrapperMarginGetTablet};` : ''}
 					}
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item {
 						${countDownItemSize.Tablet ? `width: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};` : ''}
@@ -321,6 +409,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				@media only screen and (max-width: 767px) {
 					.fb-count-down-wrapper.${blockID} {
 						${countDownItemGap.Mobile ? `gap: ${countDownItemGap.Mobile}${countDownItemGapUnits.Mobile};` : ''}
+						${countDownItemWrapperBorderTypeGetMobile ? `border-width: ${countDownItemWrapperBorderTypeGetMobile};` : ''}
+						${countDownItemWrapperBorderRadiusGetMobile ? `border-radius: ${countDownItemWrapperBorderRadiusGetMobile};` : ''}
+						${countDownItemWrapperPaddingGetMobile ? `padding: ${countDownItemWrapperPaddingGetMobile};` : ''}
+						${countDownItemWrapperMarginGetMobile ? `margin: ${countDownItemWrapperMarginGetMobile};` : ''}
 					}
 					.fb-count-down-wrapper.${blockID} .fb-count-down-item {
 						${countDownItemSize.Mobile ? `width: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};` : ''}
@@ -515,6 +607,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											/>
 										</PanelBody>
 										)}
+									</>
+								)}
+
+								{tab.name === "advanced" && (
+									<>
+										<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
+											<CountDownItemWrapperBgColorControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
+										<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
+											<CountDownItemWrapperBorderControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
+										<PanelBody title={__("Padding/Margin", "frontis-blocks")} initialOpen={false}>
+											<CountDownItemWrapperPaddingMarginControl
+												attributes={attributes}
+												setAttributes={setAttributes}
+												clientId ={clientId}
+											/>
+										</PanelBody>
 									</>
 								)}
 							</div>

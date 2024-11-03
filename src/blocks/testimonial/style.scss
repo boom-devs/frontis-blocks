@@ -27,6 +27,17 @@
     }
 
     .fb-testimonial-author-container {
+        display: flex;
+        align-items: center;
+        &.left {
+           justify-content: flex-start;
+        }
+        &.center {
+            justify-content: center;
+        }
+        &.right {
+            justify-content: flex-end;
+        }
         .fb-testimonial-author-inner-container {
             display: flex;
             align-items: center;
