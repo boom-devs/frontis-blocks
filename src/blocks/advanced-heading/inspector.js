@@ -1,10 +1,10 @@
 import { __ } from '@wordpress/i18n';
 
-import { 
-    InspectorControls, 
+import {
+    InspectorControls,
 } from '@wordpress/block-editor';
 
-import { 
+import {
     SelectControl,
     PanelBody,
     TabPanel,
@@ -22,8 +22,6 @@ import {
     MediaUploadCheck,
     Placeholder,
     PanelRow,
-
-
 } from '@wordpress/components';
 
 /**
@@ -52,10 +50,10 @@ import FB_BoxShadowControl from '@Components/box-shadow';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
-    const { 
+    const {
         blockId,
         deviceType,
-        headingText, 
+        headingText,
         headingTag,
         headingAlignment,
 
@@ -173,7 +171,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         subHeadingTabMargin,
         subHeadingMobileMargin,
         subHeadingMarginLink,
-        /** End Sub Heading */  
+        /** End Sub Heading */
 
         /** Start Separator */
         separator,
@@ -294,7 +292,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     if (typeof FrontisBlocksData !== 'undefined') {
         defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.svg';
     }
-    
+
     // Set default value for headingBackgroundImageUrl
     useEffect(() => {
         if (!headingBackgroundImageUrl) {
@@ -360,7 +358,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
 
-    
+
 
     /** Start Heading Padding */
     const headingPaddingUnitsChange = (event, position) => {
@@ -1193,7 +1191,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const globalTabletPadding     = `${headingGlobalPaddingTablet.top}${headingGlobalPaddingUnits.Tablet} ${headingGlobalPaddingTablet.right}${headingGlobalPaddingUnits.Tablet} ${headingGlobalPaddingTablet.bottom}${headingGlobalPaddingUnits.Tablet} ${headingGlobalPaddingTablet.left}${headingGlobalPaddingUnits.Tablet}`;
 	const globalMobilePadding     = `${headingGlobalPaddingMobile.top}${headingGlobalPaddingUnits.Mobile} ${headingGlobalPaddingMobile.right}${headingGlobalPaddingUnits.Mobile} ${headingGlobalPaddingMobile.bottom}${headingGlobalPaddingUnits.Mobile} ${headingGlobalPaddingMobile.left}${headingGlobalPaddingUnits.Mobile}`;
 	/** End Global Padding */
-	
+
 	/** Start Global Margin */
 	const handleGlobalMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1429,15 +1427,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             document.head.appendChild(linkElement);
         }
     }, [headingFontFamily]);
-    
+
     return (
         <>
-        
+
             <style>
             {`
                 .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
                     ${headingColor ? `color: ${headingColor};` : ''}
-                    ${headingBgColor ? `background-color: ${headingBgColor};` : ''} 
+                    ${headingBgColor ? `background-color: ${headingBgColor};` : ''}
                     ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
                     ${headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
                     ${headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
@@ -1448,11 +1446,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
                     ${headingDesktopPaddingWidth ? `padding: ${headingDesktopPaddingWidth};` : ''}
                     ${headingDesktopMarginWidth ? `margin: ${headingDesktopMarginWidth};` : ''}
-                    ${headingBorder ? `border: ${headingBorder};` : ''} 
+                    ${headingBorder ? `border: ${headingBorder};` : ''}
                     ${headingDesktopBorderWidth ? `border-width: ${headingDesktopBorderWidth};` : ''}
                     ${headingDesktopBorderRadiusWidth ? `border-radius: ${headingDesktopBorderRadiusWidth};` : ''}
                     ${headingBorderColor ? `border-color: ${headingBorderColor};` : ''}
-                    
+
                     ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
                     ${headingTextStroke ? `
                         -webkit-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
@@ -1472,7 +1470,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     transition: all .3s ease-in-out;
                 }
 
-                
+
                 .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
                     ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
                     ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
@@ -1486,8 +1484,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 }
 
                 .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
-                    ${subHeadingColor ? `color: ${subHeadingColor};` : ''} 
-                    ${subHeadingBgColor ? `background-color: ${subHeadingBgColor};` : ''} 
+                    ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
+                    ${subHeadingBgColor ? `background-color: ${subHeadingBgColor};` : ''}
                     ${subHeadingFontFamily ? `font-family: ${subHeadingFontFamily};` : ''}
                     ${subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
                     ${subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
@@ -1498,7 +1496,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
                     ${subHeadingDesktopPaddingWidth ? `padding: ${subHeadingDesktopPaddingWidth};` : ''}
                     ${subHeadingDesktopMarginWidth ? `margin: ${subHeadingDesktopMarginWidth};` : ''}
-                    ${subHeadingBorder ? `border: ${subHeadingBorder};` : ''} 
+                    ${subHeadingBorder ? `border: ${subHeadingBorder};` : ''}
                     ${subHeadingDesktopBorderWidth ? `border-width: ${subHeadingDesktopBorderWidth};` : ''}
                     ${subHeadingDesktopBorderRadiusWidth ? `border-radius: ${subHeadingDesktopBorderRadiusWidth};` : ''}
                     ${subHeadingBorderColor ? `border-color: ${subHeadingBorderColor};` : ''}
@@ -1512,9 +1510,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${subHeadingBoxShadowCssValue ? `box-shadow: ${subHeadingBoxShadowCssValue};` : ''}
                     transition: all .3s ease-in-out;
                 }
-                    
+
                 .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
-                    ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''} 
+                    ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''}
                     ${subHeadingBgColorHover ? `background-color: ${subHeadingBgColorHover};` : ''}
                     ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
                 }
@@ -1549,22 +1547,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${separator !== 'zigzag' && separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
                     ${separator !== 'zigzag' ? `border-top-style: ${separator};` : ''}
                     ${separator !== 'zigzag' && separatorColor ? `border-top-color: ${separatorColor};` : ''}
-                    ${separatorPosition === 'bottom' ? 
-                        `${separatorSpacing.Desktop && separatorSpacingUnits.Desktop ? 
-                            `margin-top: ${separatorSpacing.Desktop}${separatorSpacingUnits.Desktop};` 
+                    ${separatorPosition === 'bottom' ?
+                        `${separatorSpacing.Desktop && separatorSpacingUnits.Desktop ?
+                            `margin-top: ${separatorSpacing.Desktop}${separatorSpacingUnits.Desktop};`
                             : ''}`
                         : separatorPosition === 'top' ?
-                        `${separatorSpacing.Desktop && separatorSpacingUnits.Desktop ? 
-                            `margin-bottom: ${separatorSpacing.Desktop}${separatorSpacingUnits.Desktop};` 
+                        `${separatorSpacing.Desktop && separatorSpacingUnits.Desktop ?
+                            `margin-bottom: ${separatorSpacing.Desktop}${separatorSpacingUnits.Desktop};`
                             : ''}`
                         : ''}
                 }
                 .${blockId}.fb-advanced-wrapper {
                     ${headingGlobalZIndex ? `z-index: ${headingGlobalZIndex};` : ''}
-                    ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''} 
+                    ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''}
                     ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-                    ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
-                    ${headingGlobalBorder ? `border: ${headingGlobalBorder};` : ''} 
+                    ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
+                    ${headingGlobalBorder ? `border: ${headingGlobalBorder};` : ''}
                     ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
                     ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
                     ${headingGlobalBorderColor ? `border-color: ${headingGlobalBorderColor};` : ''}
@@ -1621,19 +1619,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
                         ${separatorWidth.Tablet && separatorWidthUnits.Tablet ? `width: ${separatorWidth.Tablet}${separatorWidthUnits.Tablet};` : ''}
                         ${separatorHeight.Tablet && separatorHeightUnits.Tablet ? `border-top-width: ${separatorHeight.Tablet}${separatorHeightUnits.Tablet};` : ''}
-                        ${separatorPosition === 'bottom' ? 
-                            `${separatorSpacing.Tablet && separatorSpacingUnits.Tablet ? 
-                                `margin-top: ${separatorSpacing.Tablet}${separatorSpacingUnits.Tablet};` 
+                        ${separatorPosition === 'bottom' ?
+                            `${separatorSpacing.Tablet && separatorSpacingUnits.Tablet ?
+                                `margin-top: ${separatorSpacing.Tablet}${separatorSpacingUnits.Tablet};`
                                 : ''}`
                             : separatorPosition === 'top' ?
-                            `${separatorSpacing.Tablet && separatorSpacingUnits.Tablet ? 
-                                `margin-bottom: ${separatorSpacing.Tablet}${separatorSpacingUnits.Tablet};` 
+                            `${separatorSpacing.Tablet && separatorSpacingUnits.Tablet ?
+                                `margin-bottom: ${separatorSpacing.Tablet}${separatorSpacingUnits.Tablet};`
                                 : ''}`
                             : ''}
                     }
                     .${blockId}.fb-advanced-wrapper {
                         ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-                        ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
+                        ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
                         ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
                         ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
                     }
@@ -1679,19 +1677,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
                         ${separatorWidth.Mobile && separatorWidthUnits.Mobile ? `width: ${separatorWidth.Mobile}${separatorWidthUnits.Mobile};` : ''}
                         ${separatorHeight.Mobile && separatorHeightUnits.Mobile ? `border-top-width: ${separatorHeight.Mobile}${separatorHeightUnits.Mobile};` : ''}
-                        ${separatorPosition === 'bottom' ? 
-                            `${separatorSpacing.Mobile && separatorSpacingUnits.Mobile ? 
-                                `margin-top: ${separatorSpacing.Mobile}${separatorSpacingUnits.Mobile};` 
+                        ${separatorPosition === 'bottom' ?
+                            `${separatorSpacing.Mobile && separatorSpacingUnits.Mobile ?
+                                `margin-top: ${separatorSpacing.Mobile}${separatorSpacingUnits.Mobile};`
                                 : ''}`
                             : separatorPosition === 'top' ?
-                            `${separatorSpacing.Mobile && separatorSpacingUnits.Mobile ? 
-                                `margin-bottom: ${separatorSpacing.Mobile}${separatorSpacingUnits.Mobile};` 
+                            `${separatorSpacing.Mobile && separatorSpacingUnits.Mobile ?
+                                `margin-bottom: ${separatorSpacing.Mobile}${separatorSpacingUnits.Mobile};`
                                 : ''}`
                             : ''}
                     }
                     .${blockId}.fb-advanced-wrapper {
                         ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-                        ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
+                        ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
                         ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
                         ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
                     }
@@ -1747,7 +1745,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 />
                                                 <BaseControl
                                                     label={__("Element Visibility", "frontis-blocks")}
-                                                    className="fb-setting-show-hide-elements" 
+                                                    className="fb-setting-show-hide-elements"
                                                 >
                                                     <ToggleControl
                                                         label={__("Show Sub Heading", "frontis-blocks")}
@@ -1848,7 +1846,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                 </Button>
                                                             ))}
                                                         </ButtonGroup>
-                                                        
+
                                                     </BaseControl>
 
                                                     <TextareaControl
@@ -1920,7 +1918,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         ))}
                                                     </ButtonGroup>
                                                     {headingIconAlign === 'icon' && (
-                                                        <FBIconPicker value={headingIcon} setIconHandler={headingIconHandler} /> 
+                                                        <FBIconPicker value={headingIcon} setIconHandler={headingIconHandler} />
                                                     )}
                                                 </BaseControl>
                                             </div>
@@ -1984,7 +1982,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 value={headingTextStroke}
                                                 onChange={(value) => setAttributes({ headingTextStroke: value })}
                                                 min={1}
-                                                max={10}   
+                                                max={10}
                                                 step={1}
                                                 allowReset={true}
                                                 resetFallbackValue={''}
@@ -2108,7 +2106,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                             {activeLineSwitcher && (
                                                 <>
-                                                    <BaseControl 
+                                                    <BaseControl
                                                         label={__("Before Line Color", "frontis-blocks")}
                                                         className="fb-setting-color-setting-wrapper"
                                                     >
@@ -2158,7 +2156,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         min={0}
                                                         max={100}
                                                         label={__("Line Width", "frontis-blocks")}
-                                                        rangeValue={activeLineBeforeWidth} 
+                                                        rangeValue={activeLineBeforeWidth}
                                                         onChangeHandler={(value) => setAttributes({ activeLineBeforeWidth: value })}
                                                         rangeUnitHandler={(value) => setAttributes({ activeLineBeforeWidthUnits: value })}
                                                         deviceType={deviceType}
@@ -2182,7 +2180,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         resetFallbackValue={""}
                                                     />
 
-                                                    <BaseControl 
+                                                    <BaseControl
                                                         label={__("After Line Color", "frontis-blocks")}
                                                         className="fb-setting-color-setting-wrapper"
                                                     >
@@ -2388,7 +2386,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 value={subHeadingTextStroke}
                                                 onChange={(value) => setAttributes({ subHeadingTextStroke: value })}
                                                 min={1}
-                                                max={10}   
+                                                max={10}
                                                 step={1}
                                                 allowReset={true}
                                                 resetFallbackValue={''}
@@ -2504,14 +2502,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     handleGlobalColorChange={(value) => setAttributes({ separatorColor: value })}
                                                     handleGlobalHoverColorChange={(value) => setAttributes({ separatorHoverColor: value })}
                                                 />
-                                                
+
                                                 {separator !== 'zigzag' && (
                                                     <>
                                                         <FB_Range
                                                             min={1}
                                                             max={100}
                                                             label={__("Width", "frontis-blocks")}
-                                                            rangeValue={separatorWidth} 
+                                                            rangeValue={separatorWidth}
                                                             onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
                                                             rangeUnitHandler={(value) => setAttributes({ separatorWidthUnits: value })}
                                                             deviceType={deviceType}
@@ -2524,7 +2522,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             min={1}
                                                             max={100}
                                                             label={__("Height", "frontis-blocks")}
-                                                            rangeValue={separatorHeight} 
+                                                            rangeValue={separatorHeight}
                                                             onChangeHandler={(value) => setAttributes({ separatorHeight: value })}
                                                             rangeUnitHandler={(value) => setAttributes({ separatorHeightUnits: value })}
                                                             deviceType={deviceType}
@@ -2539,7 +2537,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     min={1}
                                                     max={100}
                                                     label={__("Spacing", "frontis-blocks")}
-                                                    rangeValue={separatorSpacing} 
+                                                    rangeValue={separatorSpacing}
                                                     onChangeHandler={(value) => setAttributes({ separatorSpacing: value })}
                                                     rangeUnitHandler={(value) => setAttributes({ separatorSpacingUnits: value })}
                                                     deviceType={deviceType}
@@ -2623,7 +2621,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 handleGlobalHoverColorChange={(value) => setAttributes({ headingIconBorderHoverColor: value })}
                                             />
 
-                                            <FB_Spacing 
+                                            <FB_Spacing
                                                 label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleHeadingIconBorderUnitsHandler}
@@ -2637,7 +2635,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 setAttributes={setAttributes}
                                             />
 
-                                            <FB_Spacing 
+                                            <FB_Spacing
                                                 label={__("Border Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleHeadingIconBorderRadiusUnitsHandler}
@@ -2651,9 +2649,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 setAttributes={setAttributes}
                                             />
                                             </PanelBody>
-                                            
+
                                         )}
-                                        
+
                                     </>
                                 )}
                             {tab.name === "advanced" && (
@@ -2677,7 +2675,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-													<FB_Spacing 
+													<FB_Spacing
 														label={__("Padding", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
@@ -2690,7 +2688,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_Spacing 
+													<FB_Spacing
 														label={__("Margin", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleGlobalMarginUnitsHandler}
@@ -2735,7 +2733,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														handleGlobalHoverColorChange={(value) => setAttributes({ headingGlobalBorderHoverColor: value })}
 													/>
 
-													<FB_Spacing 
+													<FB_Spacing
 														label={__("Border", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleGlobalBorderUnitsHandler}
@@ -2749,7 +2747,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														setAttributes={setAttributes}
 													/>
 
-													<FB_Spacing 
+													<FB_Spacing
 														label={__("Border Radius", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
