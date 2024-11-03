@@ -510,17 +510,27 @@ $white_color: #ffffff;
 	}
 }
 //Info Button
-.fb-info-button-wrapper{
-	.info-btn-url-input{
-		input{
-			width: 100%;
+.fb-cta-content-wrapper-inner{
+	gap: 20px;
+	.fb-icon-wrapper{
+		line-height: 0;
+	}
+	.fb-cta-btn-wrapper{
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		.fb-btn-icon-wrapper{
+			line-height: 0;
 		}
 	}
+	.fb-cta-media-wrapper{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.fb-cta-buttons-wrapper{
+		display: flex;
+		align-items: center;
+	}
 }
-.fb-cta-content-wrapper-inner{
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	max-width: 80%;
-	margin: 0 auto;
-}
+
