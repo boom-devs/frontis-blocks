@@ -30,9 +30,6 @@ import {
 	__experimentalHStack as HStack,
 	__experimentalHeading as Heading,
 } from "@wordpress/components";
-
-import FB_Spacing from "@Components/spacing";
-import FB_Color from "@Components/color";
 /**
  * Internal depencencies
  */
@@ -73,6 +70,10 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_ResponsiveControl from "@Components/responsive-control";
 import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_Spacing from "@Components/spacing";
+import FB_Color from "@Components/color";
+import FB_TypographyControl from '@Components/typography-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -334,6 +335,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoDesktopPadding,
 		btnTwoTabPadding,
 		btnTwoMobilePadding,
+		btnTwoPaddingLink,
 		btnTwoMarginUnits,
 		btnTwoDesktopMargin,
 		btnTwoTabMargin,
@@ -345,13 +347,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoBorderColor,
 		btnTwoHoverBorderColor,
 		btnTwoBorderUnits,
-		btnTwoDesktopBorderWidth,
-		btnTwoTabBorderWidth,
-		btnTwoMobileBorderWidth,
+		btnTwoDesktopBorder,
+		btnTwoTabBorder,
+		btnTwoMobileBorder,
 		btnTwoBorderRadiusUnits,
-		btnTwoDesktopBorderRadiusWidth,
-		btnTwoTabBorderRadiusWidth,
-		btnTwoMobileBorderRadiusWidth,
+		btnTwoDesktopBorderRadius,
+		btnTwoTabBorderRadius,
+		btnTwoMobileBorderRadius,
 		btnTwoIcon,
 		btnTwoIconSize,
 		btnTwoIconSizeUnits,
@@ -359,6 +361,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoIconColor,
 		btnTwoIconHoverColor,
 		btnTwoIconPosition,
+		buttonTwoFontFamily,
+		buttonTwoFontSize,
+		buttonTwoFontSizeUnits,
+		buttonTwoFontWeight,
+		buttonTwoFontStyle,
+		buttonTwoTextTransform,
+		buttonTwoTextDecoration,
+		buttonTwoLetterSpacing,
+		buttonTwoLetterSpacingUnits,
+		buttonTwoLineHeight,
+		buttonTwoLineHeightUnits,
+		buttonTwoColorSwitcher,
+		buttonTwoTextColor,
+		buttonTwoTextHoverColor,
+		buttonTwoBgColorSwitcher,
+		buttonTwoBgColor,
+		buttonTwoBgHoverColor,
+		btnTwoBorderLink,
+		btnTwoBorderradiusUnits,
+		btnTwoDesktopBorderradiusWidth,
+		btnTwoTabBorderradiusWidth,
+		btnTwoMobileBorderradiusWidth,
+		btnTwoBorderRadiusLink,
+		testBgColorSwitcher,
+		testBackgroundType,
+		testClassicColor,
+		testGradientColor,
+		testCustomGradientSwitcher,
+		testCustomGradientInputValue,
+		testBackgroundColorStyle,
+		testBackgroundImageUrl,
+		testBackgroundImageAlt,
+		testBackgroundImageID,
+		testBackgroundImagePosition,
+		testBackgroundImageAttachment,
+		testBackgroundImageSize,
+		testBackgroundImageRepeat,
+		hoverBackgroundType,
+		hoverClassicColor,
+		hoverGradientColor,
+		hoverCustomGradientSwitcher,
+		hoverCustomGradientInputValue,
+		hoverBackgroundColorStyle,
+		hoverBackgroundImageUrl,
+		hoverBackgroundImageAlt,
+		hoverBackgroundImageID,
+		hoverBackgroundImagePosition,
+		hoverBackgroundImageAttachment,
+		hoverBackgroundImageSize,
+		hoverBackgroundImageRepeat,
+		globalBackgroundImageUrl,
+		globalBackgroundImageAlt,
+		globalBackgroundImageID,
+		globalBackgroundImagePosition,
+		globalBackgroundImageAttachment,
+		globalBackgroundImageRepeat,
+		globalBackgroundImageSize,
+		globalCustomGradientSwitcher,
+		globalCustomGradientInputValue,
+		globalGradientColor,
+		globalColor,
+		globalSwitcher
 	} = attributes;
 
 	useEffect(() => {
@@ -1893,91 +1957,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const btnTwoMobilePaddingWidth = `${btnTwoMobilePadding.top}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.right}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.bottom}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.left}${btnTwoPaddingUnits.Mobile}`;
 	/** End button two Padding */
 
-	/** Start Heading Margin */
-	const headingMarginUnitsChange = (event, position) => {
-		const value = event.target.value;
-		if (headingMarginLink) {
-			switch (deviceType) {
-				case "Desktop":
-					setAttributes({
-						headingDesktopMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value,
-						},
-					});
-					break;
-				case "Tablet":
-					setAttributes({
-						headingTabMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value,
-						},
-					});
-					break;
-				case "Mobile":
-					setAttributes({
-						headingMobileMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value,
-						},
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case "Desktop":
-					setAttributes({
-						headingDesktopMargin: {
-							...headingDesktopMargin,
-							[position]: value,
-						},
-					});
-					break;
-				case "Tablet":
-					setAttributes({
-						headingTabMargin: { ...headingTabMargin, [position]: value },
-					});
-					break;
-				case "Mobile":
-					setAttributes({
-						headingMobileMargin: { ...headingMobileMargin, [position]: value },
-					});
-					break;
-				default:
-					break;
-			}
-		}
-	};
-
-	const headingMarginLinkBtn = () => {
-		setAttributes({
-			headingMarginLink: !headingMarginLink,
-		});
-	};
-
-	const headingMarginUnitsHandler = (unit) => {
-		setAttributes({
-			headingMarginUnits: {
-				...headingMarginUnits,
-				[deviceType]: unit,
-			},
-		});
-	};
-
-	/** Default margin for Heading */
-	const headingDesktopMarginWidth = `${headingDesktopMargin.top}${headingMarginUnits.Desktop} ${headingDesktopMargin.right}${headingMarginUnits.Desktop} ${headingDesktopMargin.bottom}${headingMarginUnits.Desktop} ${headingDesktopMargin.left}${headingMarginUnits.Desktop}`;
-	const headingTabletMarginWidth = `${headingTabMargin.top}${headingMarginUnits.Tablet} ${headingTabMargin.right}${headingMarginUnits.Tablet} ${headingTabMargin.bottom}${headingMarginUnits.Tablet} ${headingTabMargin.left}${headingMarginUnits.Tablet}`;
-	const headingMobileMarginWidth = `${headingMobileMargin.top}${headingMarginUnits.Mobile} ${headingMobileMargin.right}${headingMarginUnits.Mobile} ${headingMobileMargin.bottom}${headingMarginUnits.Mobile} ${headingMobileMargin.left}${headingMarginUnits.Mobile}`;
-	/** End Heading Margin */
-
 	/** Start btnTwo Margin */
 	const btnTwoMarginUnitsChange = (event, position) => {
 		const value = event.target.value;
@@ -2920,11 +2899,6 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 			<style>
 				{`
 				.fb-cta-content-wrapper.${blockID} {
-                    ${
-											globalBgColor !== undefined
-												? `background-color: ${globalBgColor};`
-												: ""
-										};
                     padding: ${DesktopPadding};
                     margin: ${DesktopMargin};
                     border: ${globalBorder};
@@ -2940,6 +2914,17 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 							? `box-shadow: ${boxGlobalBoxShadowCssValue};`
 							: ""
 					}
+					${testBackgroundType === 'gradient' ? `
+                        background: ${testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor};
+                    ` : testBackgroundImageUrl && testBackgroundImageUrl !== 'null' ? `
+                        ${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : ''}
+                        ${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : ''}
+                        ${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : ''}
+                        ${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : ''}
+                        ${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : ''}
+                    ` : `
+                        background: ${testClassicColor};
+                    `}
                     transition: all .3s ease-in-out;
                 }
                 .fb-cta-content-wrapper.${blockID}:hover {
@@ -2953,6 +2938,17 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												? `border-color: ${globalBorderHoverColor};`
 												: ""
 										};
+										${testBackgroundType === 'gradient' ? `
+                        background: ${testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor};
+                    ` : testBackgroundImageUrl && testBackgroundImageUrl !== 'null' ? `
+                        ${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : ''}
+                        ${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : ''}
+                        ${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : ''}
+                        ${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : ''}
+                        ${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : ''}
+                    ` : `
+                        background: ${testClassicColor};
+                    `}
                 }
 
                 @media only screen and (max-width: 1024px){
@@ -3268,6 +3264,7 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
                     padding: ${buttonPadding};
                     margin: ${buttonMargin};
                     border: ${infoButtonBorder};
+					${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ''}
                     border-width: ${buttonBorderWidth};
                     border-radius: ${buttonBorderRadiusWidth};
                 }
@@ -3383,31 +3380,31 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 											? buttonTwoFontFamily
 											: buttonTwoFontFamily
 									};
-                    font-size: ${
-											buttonTwoFontSize !== undefined
-												? `${buttonTwoFontSize}${buttonTwoFontSizeUnits}`
-												: ""
-										};
+                    
+					${buttonTwoFontSize.Desktop && buttonTwoFontSizeUnits.Desktop ? `font-size: ${buttonTwoFontSize.Desktop}${buttonTwoFontSizeUnits.Desktop};` : ''}
                     font-weight: ${buttonTwoFontWeight};
                     font-style: ${buttonTwoFontStyle};
                     text-transform: ${buttonTwoTextTransform};
                     text-decoration: ${buttonTwoTextDecoration};
-                    padding: ${buttonPadding};
-                    margin: ${buttonMargin};
-                    border: ${infoButtonBorder};
-                    border-width: ${buttonBorderWidth};
-                    border-radius: ${buttonBorderRadiusWidth};
+					${buttonTwoLetterSpacing.Desktop && buttonTwoLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonTwoLetterSpacing.Desktop}${buttonTwoLetterSpacingUnits.Desktop};` : ''}
+                    ${buttonTwoLineHeight.Desktop && buttonTwoLineHeightUnits.Desktop ? `line-height: ${buttonTwoLineHeight.Desktop}${buttonTwoLineHeightUnits.Desktop};` : ''}
+                    padding: ${btnTwoDesktopPaddingWidth};
+                    margin: ${btnTwoDesktopMarginWidth};
+                    border: ${btnTwoBorder};
+					${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ''}
+                    border-width: ${btnTwoDesktopBorderWidthStyle};
+                    border-radius: ${btnTwoDesktopBorderRadiusWidthStyle};
                 }
 
                 .fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
                 	${
-										buttonTextHoverColor !== undefined
-											? `color: ${buttonTextHoverColor};`
+										buttonTwoTextHoverColor !== undefined
+											? `color: ${buttonTwoTextHoverColor};`
 											: ""
 									}
                 	${
-										buttonBgHoverColor !== undefined
-											? `background-color: ${buttonBgHoverColor};`
+										buttonTwoBgHoverColor !== undefined
+											? `background-color: ${buttonTwoBgHoverColor};`
 											: ""
 									}
                 }
@@ -3567,21 +3564,39 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
                 }
                 }
 
-				.fb-cta-content-wrapper.${blockID} .fb-btn-icon-wrapper svg{
+				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
                 	width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 					${btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff"}
                 }
-				.fb-cta-content-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg{
+				.fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
 					${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : "#ffffff"}
                 }
                 @media only screen and (max-width: 1024px) {
-                .fb-cta-content-wrapper.${blockID} .fb-btn-icon-wrapper svg{
+                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
                 	width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
                 }
                 }
                 @media only screen and (max-width: 767px) {
-                .fb-cta-content-wrapper.${blockID} .fb-btn-icon-wrapper svg{
+                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
                 	width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
+                }
+                }
+
+				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
+                	width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
+					${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : "#ffffff"}
+                }
+				.fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
+					${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff"}
+                }
+                @media only screen and (max-width: 1024px) {
+                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
+                	width: ${btnTwoIconSize.Tablet}${btnTwoIconSizeUnits.Tablet};
+                }
+                }
+                @media only screen and (max-width: 767px) {
+                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
+                	width: ${btnTwoIconSize.Mobile}${btnTwoIconSizeUnits.Mobile};
                 }
                 }
             `}
@@ -5839,7 +5854,7 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 										</PanelBody>
 										{/*Button One Style*/}
 										<PanelBody
-											title={__("Button", "frontis-block")}
+											title={__("Button One", "frontis-block")}
 											className="fb-cta-button-setting-wrapper"
 											initialOpen={false}
 										>
@@ -7345,7 +7360,7 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												</div>
 											</div>
 										</PanelBody>
-										{/* Button Two */}
+										{/* Button Two Style */}
 										<PanelBody
 											title={__("Button Two", "frontis-blocks")}
 											initialOpen={true}
@@ -7429,6 +7444,21 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 													setAttributes({ buttonTwoBgHoverColor: value })
 												}
 											/>
+											<FB_Color
+												label={__("Icon Color", "frontis-blocks")}
+												globalColorSwitcher={btnTwoIconColorSwitcher}
+												globalColor={btnTwoIconColor}
+												globalHoverColor={btnTwoIconHoverColor}
+												handleColorSwitcherChange={(value) =>
+													setAttributes({ btnTwoIconColorSwitcher: value })
+												}
+												handleGlobalColorChange={(value) =>
+													setAttributes({ btnTwoIconColor: value })
+												}
+												handleGlobalHoverColorChange={(value) =>
+													setAttributes({ btnTwoIconHoverColor: value })
+												}
+											/>
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
@@ -7483,9 +7513,9 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												deviceType={deviceType}
 												spacingUnitsHandler={btnTwoBorderUnitsHandler}
 												spacingUnits={btnTwoBorderUnits}
-												spacingDesktop={btnTwoDesktopBorderWidth}
-												spacingTablet={btnTwoTabBorderWidth}
-												spacingMobile={btnTwoMobileBorderWidth}
+												spacingDesktop={btnTwoDesktopBorder}
+												spacingTablet={btnTwoTabBorder}
+												spacingMobile={btnTwoMobileBorder}
 												handleSpacingUnitHandler={btnTwoBorderUnitsChange}
 												spacingCombineBtn={btnTwoBorderLink}
 												spacingCombineBtnHandler={btnTwoBorderLinkBtn}
@@ -7495,10 +7525,10 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												label={__("Border Radius", "frontis-blocks")}
 												deviceType={deviceType}
 												spacingUnitsHandler={btnTwoBorderRadiusUnitsHandler}
-												spacingUnits={btnTwoBorderradiusUnits}
-												spacingDesktop={btnTwoDesktopBorderradiusWidth}
-												spacingTablet={btnTwoTabBorderradiusWidth}
-												spacingMobile={btnTwoMobileBorderradiusWidth}
+												spacingUnits={btnTwoBorderRadiusUnits}
+												spacingDesktop={btnTwoDesktopBorderRadius}
+												spacingTablet={btnTwoTabBorderRadius}
+												spacingMobile={btnTwoMobileBorderRadius}
 												handleSpacingUnitHandler={
 													btnTwoBorderRadiusUnitsChange
 												}
@@ -7575,19 +7605,61 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												</PanelBody>
 
 												<PanelBody title="Background" initialOpen={false}>
-													<FB_Color
-														label={__("Background Color", "frontis-blocks")}
-														globalColorSwitcher={globalBgColorSwitcher}
-														globalColor={globalBgColor}
-														globalHoverColor={globalBgHoverColor}
-														handleColorSwitcherChange={
-															handleGlobalBgColorSwitcherChange
-														}
-														handleGlobalColorChange={handleGlobalBgColorChange}
-														handleGlobalHoverColorChange={
-															handleGlobalBgHoverColorChange
-														}
-													/>
+													
+													<FB_BackgroundColorControl
+													bgColorSwitcher={testBgColorSwitcher}
+													setBgColorSwitcher={(value) => setAttributes({ testBgColorSwitcher: value })}
+													
+													normalBackgroundType={testBackgroundType}
+													setNormalBackgroundType={(value) => setAttributes({ testBackgroundType: value })}
+													normalClassicColor={testClassicColor}
+													setNormalClassicColor={(value) => setAttributes({ testClassicColor: value })}
+													normalGradientColor={testGradientColor}
+													setNormalGradientColor={(value) => setAttributes({ testGradientColor: value })}
+													normalCustomGradientSwitcher={testCustomGradientSwitcher}
+													setNormalCustomGradientSwitcher={(value) => setAttributes({ testCustomGradientSwitcher: value })}
+													normalCustomGradientInputValue={testCustomGradientInputValue}
+													setNormalCustomGradientInputValue={(value) => setAttributes({ testCustomGradientInputValue: value })}
+													normalBackgroundImageUrl={testBackgroundImageUrl}
+													setNormalBackgroundImageUrl={(value) => setAttributes({ testBackgroundImageUrl: value })}
+													normalBackgroundImageAlt={testBackgroundImageAlt}
+													setNormalBackgroundImageAlt={(value) => setAttributes({ testBackgroundImageAlt: value })}
+													normalBackgroundImageID={testBackgroundImageID}
+													setNormalBackgroundImageID={(value) => setAttributes({ testBackgroundImageID: value })}
+													normalBackgroundImagePosition={testBackgroundImagePosition}
+													setNormalBackgroundImagePosition={(value) => setAttributes({ testBackgroundImagePosition: value })}
+													normalBackgroundImageAttachment={testBackgroundImageAttachment}
+													setNormalBackgroundImageAttachment={(value) => setAttributes({ testBackgroundImageAttachment: value })}
+													normalBackgroundImageRepeat={testBackgroundImageRepeat}
+													setNormalBackgroundImageRepeat={(value) => setAttributes({ testBackgroundImageRepeat: value })}
+													normalBackgroundImageSize={testBackgroundImageSize}
+													setNormalBackgroundImageSize={(value) => setAttributes({ testBackgroundImageSize: value })}
+													
+													hoverBackgroundType={hoverBackgroundType}
+													setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value })}
+													hoverClassicColor={hoverClassicColor}
+													setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value })}
+													hoverGradientColor={hoverGradientColor} 
+													setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value })}
+													hoverCustomGradientSwitcher={hoverCustomGradientSwitcher}
+													setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value })}
+													hoverCustomGradientInputValue={hoverCustomGradientInputValue}
+													setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value })}
+													hoverBackgroundImageUrl={hoverBackgroundImageUrl}
+													setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value })}
+													hoverBackgroundImageAlt={hoverBackgroundImageAlt}
+													setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value })}
+													hoverBackgroundImageID={hoverBackgroundImageID}
+													setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value })}
+													hoverBackgroundImagePosition={hoverBackgroundImagePosition}
+													setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value })}
+													hoverBackgroundImageAttachment={hoverBackgroundImageAttachment}
+													setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value })}
+													hoverBackgroundImageRepeat={hoverBackgroundImageRepeat}
+													setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value })}
+													hoverBackgroundImageSize={hoverBackgroundImageSize}
+													setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value })}
+												/>
 												</PanelBody>
 												<PanelBody
 													title={__("Border and Shadow", "frontis-blocks")}

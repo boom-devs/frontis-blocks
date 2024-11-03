@@ -813,12 +813,20 @@ const attributes = {
 		default: "inherit",
 	},
 	buttonTwoFontSize: {
-		type: "number",
-		default: 14
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	buttonTwoFontSizeUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	buttonTwoFontWeight: {
 		type: "string",
@@ -837,18 +845,36 @@ const attributes = {
 		default: "none"
 	},
 	buttonTwoLetterSpacing: {
-		type: "number",
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	buttonTwoLetterSpacingUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	buttonTwoLineHeight: {
-		type: "number",
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	buttonTwoLineHeightUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	// Button Color
 	buttonTwoColorSwitcher: {
@@ -890,8 +916,12 @@ const attributes = {
 		default: ""
 	},
 	btnTwoPaddingUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	btnTwoDesktopPadding: {
 		type: "object",
@@ -926,8 +956,12 @@ const attributes = {
     },
 	//Button Margin
 	btnTwoMarginUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	btnTwoDesktopMargin: {
 		type: "object",
@@ -980,10 +1014,14 @@ const attributes = {
 		type: 'string',
 	},
 	btnTwoBorderUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	btnTwoDesktopBorderWidth: {
+	btnTwoDesktopBorder: {
 		type: "object",
 		default: {
 			top: 0,
@@ -992,7 +1030,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	btnTwoTabBorderWidth: {
+	btnTwoTabBorder: {
 		type: "object",
 		default: {
 			top: 0,
@@ -1001,7 +1039,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	btnTwoMobileBorderWidth: {
+	btnTwoMobileBorder: {
 		type: "object",
 		default: {
 			top: 0,
@@ -1015,11 +1053,15 @@ const attributes = {
         default: true
     },
 	//Button Border Radius
-	btnTwoBorderradiusUnits: {
-		type: "string",
-		default: "px"
+	btnTwoBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	btnTwoDesktopBorderradiusWidth: {
+	btnTwoDesktopBorderRadius: {
 		type: "object",
 		default: {
 			top: 0,
@@ -1028,7 +1070,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	btnTwoTabBorderradiusWidth: {
+	btnTwoTabBorderRadius: {
 		type: "object",
 		default: {
 			top: 0,
@@ -1037,7 +1079,7 @@ const attributes = {
 			right: 0,
 		},
 	},
-	btnTwoMobileBorderradiusWidth: {
+	btnTwoMobileBorderRadius: {
 		type: "object",
 		default: {
 			top: 0,
@@ -1632,7 +1674,168 @@ const attributes = {
         type: 'string',
         default: '',
     },
+	testBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    testBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    testClassicColor: {
+        type: "string",
+    },
+    testGradientColor: {
+        type: "string",
+    },
+    testCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    testCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    hoverClassicColor: {
+        type: "string",
+    },
+    hoverGradientColor: {
+        type: "string",
+    },
+    hoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    hoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
 
+
+
+    globalBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+
+
+
+    // Attributes added as per file context
+    globalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    globalCustomGradientInputValue: {
+        type: "string",
+    },
+    globalGradientColor: {
+        type: "string",
+    },
+    globalColor: {
+        type: "string",
+    },
+    globalSwitcher: {
+        type: "string",
+        default: "normal"
+    }
 }
 //
 export default attributes;
