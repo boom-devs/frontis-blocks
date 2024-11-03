@@ -20,6 +20,8 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Facebook',
                 socialIconTargetUrl: false,
+                socialIconColor: '',
+                socialIconBgColor: '',
             },
             {
                 id: 'item-2',
@@ -27,6 +29,8 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Twitter',
                 socialIconTargetUrl: false,
+                socialIconColor: '',
+                socialIconBgColor: '',
             },
             {
                 id: 'item-3',
@@ -34,6 +38,8 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Youtube',
                 socialIconTargetUrl: false,
+                socialIconColor: '',
+                socialIconBgColor: '',
             },
             {
                 id: 'item-4',
@@ -41,6 +47,8 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Behance',
                 socialIconTargetUrl: false,
+                socialIconColor: '',
+                socialIconBgColor: '',
             },
         ],
         items: {
@@ -65,9 +73,23 @@ const attributes = {
                 socialIconTargetUrl: {
                     type: "boolean",
                 },
+                socialIconColor: {
+                    type: "string",
+                    default: "",
+                },
+                socialIconBgColor: {
+                    type: "string",
+                    default: "",
+                },
             }
         }
     },
+
+    singleIconColorStyle: {
+        type: "string",
+        default: "",
+    },
+    
     socialAlignment: {
         type: "string",
         default: "left",
@@ -76,9 +98,9 @@ const attributes = {
     socialIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: 20,
+			Tablet: 20,
+			Mobile: 20
 		}
 	},
 	socialIconSizeUnits: {
@@ -89,32 +111,31 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    socialIconColorSwitcher: {
+    socialIconGlobalColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    socialIconColor: {
+    socialIconGlobalColor: {
         type: "string",
-        default: "#fff"
+        default: "#399CFF"
     },
-    socialIconHoverColor: {
+    socialIconGlobalHoverColor: {
         type: 'string',
-        default: "#fff"
+        default: "#399CFF"
     },
-
-    socialIconBgColorSwitcher : {
+    socialIconBgGlobalColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    socialIconBgColor : {
+    socialIconBgGlobalColor : {
         type: "string",
     },
-    socialIconBgHoverColor: {
+    socialIconBgGlobalHoverColor: {
         type: 'string',
     },
     socialIconBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     socialIconBorderColorSwitcher : {
         type: "string",
@@ -122,6 +143,7 @@ const attributes = {
     },
     socialIconBorderColor: {
         type: 'string',
+        default: "#E1E3E8"
     },
     socialIconBorderHoverColor: {
         type: 'string',
@@ -137,28 +159,28 @@ const attributes = {
     socialIconBorderDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderTablet: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderLink : {
@@ -168,36 +190,36 @@ const attributes = {
     socialIconBorderRadiusUnits: {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
 		}
     },
     socialIconBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50', 
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusLink : {
@@ -231,28 +253,28 @@ const attributes = {
     socialIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 14,
-            right: 14,
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     socialIconPaddingTablet: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 14,
-            right: 14,
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     socialIconPaddingMobile: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 14,
-            right: 14,
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     /*End Icon Styles */
@@ -265,7 +287,6 @@ const attributes = {
     },
     socialBgColor : {
         type: "string",
-        default: "#399CFF"
     },
     socialBgHoverColor: {
         type: 'string',
@@ -376,28 +397,28 @@ const attributes = {
     socialPaddingDesktop: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     socialPaddingTablet: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     socialPaddingMobile: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     socialPaddingLink : {

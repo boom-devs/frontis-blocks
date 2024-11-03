@@ -44,13 +44,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Icon Styles */
         socialIconSize,
         socialIconSizeUnits,
-        socialIconColorSwitcher,
-        socialIconColor,
-        socialIconHoverColor,
+        socialIconGlobalColorSwitcher,
+        socialIconGlobalColor,
+        socialIconGlobalHoverColor,
 
-        socialIconBgColorSwitcher,
-        socialIconBgColor,
-        socialIconBgHoverColor,
+        socialIconBgGlobalColorSwitcher,
+        socialIconBgGlobalColor,
+        socialIconBgGlobalHoverColor,
 
         socialIconBorder,
         socialIconBorderColorSwitcher,
@@ -152,6 +152,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialGlobalBoxShadowValues,
         socialGlobalBoxShadowCssValue,
 
+		singleIconColorStyle,
+
 
     } = attributes;
 
@@ -179,7 +181,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             id: `item-${socialItems.length + 1}`, 
             socialIconTitle: `Title ${socialItems.length + 1}`,
             socialIconUrl: '', 
-            socialIcon: 'facebook-f'
+            socialIcon: 'facebook-f',
+            socialIconTargetUrl: false,
+            socialIconColor: '',
+            socialIconBgColor: '',
         };
         setAttributes({ socialItems: [...socialItems, newItem] });
     };
@@ -196,6 +201,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ socialItems: updatedItems });
     };
 
+    useEffect(() => {
+        let singleIconColorStyle = '';
+        socialItems.forEach(item => {
+            if (item.socialIconColor) {
+                const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
+                    fill: ${item.socialIconColor};
+                }`;
+                singleIconColorStyle += colorStyle;
+            }
+            if (item.socialIconBgColor) {
+                const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+                    background-color: ${item.socialIconBgColor};
+                }`;
+                singleIconColorStyle += bgColorStyle;
+            }
+        });
+        setAttributes({ singleIconColorStyle: singleIconColorStyle });
+    }, [socialItems, blockID]);
+
+	console.log(singleIconColorStyle);
 
     /** Start Icon border */
     const handleSocialIconBorderUnitChange = ( event, position ) => {
@@ -1025,6 +1050,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             <style>
             {`
+
+				${singleIconColorStyle}
                 .${blockID}.fb-social-wrapper {
                     ${socialGlobalZIndex ? `z-index: ${socialGlobalZIndex};` : ''}
                     ${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
@@ -1061,14 +1088,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${socialBorderHoverColor ? `border-color: ${socialBorderHoverColor};` : ''}
                 }
                 .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-                    background-color: ${socialIconBgColor};
+					${socialIconBgGlobalColor ? `background-color: ${socialIconBgGlobalColor};` : ''} 
+					${IconPaddingDesktop ? `padding: ${IconPaddingDesktop};` : ''}
                     ${socialIconBorder ? `border: ${socialIconBorder};` : ''} 
                     ${IconBorderDesktopWidth ? `border-width: ${IconBorderDesktopWidth};` : ''}
                     ${IconBorderRadiusDesktopWidth ? `border-radius: ${IconBorderRadiusDesktopWidth};` : ''}
                     ${socialIconBorderColor ? `border-color: ${socialIconBorderColor};` : ''}
                 }
                 .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
-                    background-color: ${socialIconBgHoverColor};
+                    background-color: ${socialIconBgGlobalHoverColor};
                     ${socialIconBorderHoverColor ? `border-color: ${socialIconBorderHoverColor};` : ''}
 
                 }
@@ -1077,10 +1105,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     height: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
                 }
                 .${blockID} .fb-social-list-item .fb-social-icon-link svg{
-                    fill: ${socialIconColor};
+                    fill: ${socialIconGlobalColor};
                 }
                 .${blockID} .fb-social-list-item .fb-social-icon-link:hover svg{
-                    fill: ${socialIconHoverColor};
+                    fill: ${socialIconGlobalHoverColor};
                 }
 
                 @media only screen and (max-width: 1024px) {
@@ -1095,6 +1123,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         column-gap: ${socialGapSize.Tablet}${socialGapUnits.Tablet}; 
                     }
                     .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+                        ${IconPaddingTablet ? `padding: ${IconPaddingTablet};` : ''}
                         ${IconBorderTabletWidth ? `border-width: ${IconBorderTabletWidth};` : ''}
                         ${IconBorderRadiusTabletWidth ? `border-radius: ${IconBorderRadiusTabletWidth};` : ''}
                     }
@@ -1111,6 +1140,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         column-gap: ${socialGapSize.Mobile}${socialGapUnits.Mobile};
                     }
                     .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+                        ${IconPaddingMobile ? `padding: ${IconPaddingMobile};` : ''}
                         ${IconBorderMobileWidth ? `border-width: ${IconBorderMobileWidth};` : ''}
                         ${IconBorderRadiusMobileWidth ? `border-radius: ${IconBorderRadiusMobileWidth};` : ''}
                     }
@@ -1215,22 +1245,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Color
                                                 label={__("Icon Color", "frontis-blocks")}
-                                                globalColorSwitcher={socialIconColorSwitcher}
-                                                globalColor={socialIconColor}
-                                                globalHoverColor={socialIconHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ socialIconColorSwitcher: value })} 
-                                                handleGlobalColorChange={(value) => setAttributes({ socialIconColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialIconHoverColor: value })}
+                                                globalColorSwitcher={socialIconGlobalColorSwitcher}
+                                                globalColor={socialIconGlobalColor}
+                                                globalHoverColor={socialIconGlobalHoverColor}
+                                                handleColorSwitcherChange={(value) => setAttributes({ socialIconGlobalColorSwitcher: value })} 
+                                                handleGlobalColorChange={(value) => setAttributes({ socialIconGlobalColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialIconGlobalHoverColor: value })}
                                             />
 
                                             <FB_Color
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={socialIconBgColorSwitcher}
-                                                globalColor={socialIconBgColor}
-                                                globalHoverColor={socialIconBgHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ socialIconBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ socialIconBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialIconBgHoverColor: value })}
+                                                globalColorSwitcher={socialIconBgGlobalColorSwitcher}	
+                                                globalColor={socialIconBgGlobalColor}
+                                                globalHoverColor={socialIconBgGlobalHoverColor}
+                                                handleColorSwitcherChange={(value) => setAttributes({ socialIconBgGlobalColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ socialIconBgGlobalColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialIconBgGlobalHoverColor: value })}
                                             />
                                             <SelectControl
                                                 label={__("Border Style", "frontis-blocks")}
@@ -1273,6 +1303,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 handleSpacingUnitHandler={handleSocialIconBorderRadiusUnitChange}
                                                 spacingCombineBtn={socialIconBorderRadiusLink}
                                                 spacingCombineBtnHandler={handleSocialIconBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+											<FB_Spacing 
+                                                label={__("Padding", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={socialIconspacingUnitsHandler}
+                                                spacingUnits={socialIconPaddingUnits}
+                                                spacingDesktop={socialIconPaddingDesktop}
+                                                spacingTablet={socialIconPaddingTablet}
+                                                spacingMobile={socialIconPaddingMobile}
+                                                handleSpacingUnitHandler={handleSocialIconPaddingUnitChange}
+                                                spacingCombineBtn={socialIconPaddingLink}
+                                                spacingCombineBtnHandler={handleSocialIconPaddingCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
                                         </PanelBody>
