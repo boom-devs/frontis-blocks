@@ -4,6 +4,55 @@ use FrontisBlocks\Assets\EnqueueBlocksCss;
 $block_attributes = $block['attrs'];
 $block_ID = isset( $block_attributes['blockID'] ) ? sanitize_text_field( $block_attributes['blockID'] ) : '';
 
+/** Start CountDown Item Wrapper */
+$countDownItemWrapperBgFontColor = isset($block_attributes['countDownItemWrapperBgFontColor']) ? sanitize_hex_color($block_attributes['countDownItemWrapperBgFontColor']) : '';
+$countDownItemWrapperBackgroundImageEnabled = isset($block_attributes['countDownItemWrapperBackgroundImageEnabled']) ? rest_sanitize_boolean($block_attributes['countDownItemWrapperBackgroundImageEnabled']) : false;
+$countDownItemWrapperBackgroundImageUrl = isset($block_attributes['countDownItemWrapperBackgroundImageUrl']) ? sanitize_text_field($block_attributes['countDownItemWrapperBackgroundImageUrl']) : '';
+$countDownItemWrapperBgImagePositionType = isset($block_attributes['countDownItemWrapperBgImagePositionType']) ? sanitize_text_field($block_attributes['countDownItemWrapperBgImagePositionType']) : 'center center';
+$countDownItemWrapperBgImageAttachmentType = isset($block_attributes['countDownItemWrapperBgImageAttachmentType']) ? sanitize_text_field($block_attributes['countDownItemWrapperBgImageAttachmentType']) : 'scroll';
+$countDownItemWrapperBgImageRepeatType = isset($block_attributes['countDownItemWrapperBgImageRepeatType']) ? sanitize_text_field($block_attributes['countDownItemWrapperBgImageRepeatType']) : 'no-repeat';
+$countDownItemWrapperBgImageSizeType = isset($block_attributes['countDownItemWrapperBgImageSizeType']) ? sanitize_text_field($block_attributes['countDownItemWrapperBgImageSizeType']) : 'auto';
+
+$countDownItemWrapperBorder = isset($block_attributes['countDownItemWrapperBorder']) ? sanitize_text_field($block_attributes['countDownItemWrapperBorder']) : '';
+$countDownItemWrapperBorderColor = isset($block_attributes['countDownItemWrapperBorderColor']) ? sanitize_hex_color($block_attributes['countDownItemWrapperBorderColor']) : '';
+$countDownItemWrapperBorderTypeUnits = isset($block_attributes['countDownItemWrapperBorderTypeUnits']) ? $block_attributes['countDownItemWrapperBorderTypeUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownItemWrapperBorderTypeDesktop = isset($block_attributes['countDownItemWrapperBorderTypeDesktop']) ? $block_attributes['countDownItemWrapperBorderTypeDesktop'] : array('top' => '1', 'bottom' => '1', 'left' => '1', 'right' => '1');
+$countDownItemWrapperBorderTypeTablet = isset($block_attributes['countDownItemWrapperBorderTypeTablet']) ? $block_attributes['countDownItemWrapperBorderTypeTablet'] : array('top' => '1', 'bottom' => '1', 'left' => '1', 'right' => '1');
+$countDownItemWrapperBorderTypeMobile = isset($block_attributes['countDownItemWrapperBorderTypeMobile']) ? $block_attributes['countDownItemWrapperBorderTypeMobile'] : array('top' => '1', 'bottom' => '1', 'left' => '1', 'right' => '1');
+$countDownItemWrapperBorderTypeGetDesktop = $countDownItemWrapperBorderTypeDesktop['top'] . $countDownItemWrapperBorderTypeUnits['Desktop'] . ' ' . $countDownItemWrapperBorderTypeDesktop['right'] . $countDownItemWrapperBorderTypeUnits['Desktop'] . ' ' . $countDownItemWrapperBorderTypeDesktop['bottom'] . $countDownItemWrapperBorderTypeUnits['Desktop'] . ' ' . $countDownItemWrapperBorderTypeDesktop['left'] . $countDownItemWrapperBorderTypeUnits['Desktop'];
+$countDownItemWrapperBorderTypeGetTablet = $countDownItemWrapperBorderTypeTablet['top'] . $countDownItemWrapperBorderTypeUnits['Tablet'] . ' ' . $countDownItemWrapperBorderTypeTablet['right'] . $countDownItemWrapperBorderTypeUnits['Tablet'] . ' ' . $countDownItemWrapperBorderTypeTablet['bottom'] . $countDownItemWrapperBorderTypeUnits['Tablet'] . ' ' . $countDownItemWrapperBorderTypeTablet['left'] . $countDownItemWrapperBorderTypeUnits['Tablet'];
+$countDownItemWrapperBorderTypeGetMobile = $countDownItemWrapperBorderTypeMobile['top'] . $countDownItemWrapperBorderTypeUnits['Mobile'] . ' ' . $countDownItemWrapperBorderTypeMobile['right'] . $countDownItemWrapperBorderTypeUnits['Mobile'] . ' ' . $countDownItemWrapperBorderTypeMobile['bottom'] . $countDownItemWrapperBorderTypeUnits['Mobile'] . ' ' . $countDownItemWrapperBorderTypeMobile['left'] . $countDownItemWrapperBorderTypeUnits['Mobile'];
+
+$countDownItemWrapperBorderRadiusUnits = isset($block_attributes['countDownItemWrapperBorderRadiusUnits']) ? $block_attributes['countDownItemWrapperBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownItemWrapperBorderRadiusDesktop = isset($block_attributes['countDownItemWrapperBorderRadiusDesktop']) ? $block_attributes['countDownItemWrapperBorderRadiusDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperBorderRadiusTablet = isset($block_attributes['countDownItemWrapperBorderRadiusTablet']) ? $block_attributes['countDownItemWrapperBorderRadiusTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperBorderRadiusMobile = isset($block_attributes['countDownItemWrapperBorderRadiusMobile']) ? $block_attributes['countDownItemWrapperBorderRadiusMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperBorderRadiusGetDesktop = $countDownItemWrapperBorderRadiusDesktop['top'] . $countDownItemWrapperBorderRadiusUnits['Desktop'] . ' ' . $countDownItemWrapperBorderRadiusDesktop['right'] . $countDownItemWrapperBorderRadiusUnits['Desktop'] . ' ' . $countDownItemWrapperBorderRadiusDesktop['bottom'] . $countDownItemWrapperBorderRadiusUnits['Desktop'] . ' ' . $countDownItemWrapperBorderRadiusDesktop['left'] . $countDownItemWrapperBorderRadiusUnits['Desktop'];
+$countDownItemWrapperBorderRadiusGetTablet = $countDownItemWrapperBorderRadiusTablet['top'] . $countDownItemWrapperBorderRadiusUnits['Tablet'] . ' ' . $countDownItemWrapperBorderRadiusTablet['right'] . $countDownItemWrapperBorderRadiusUnits['Tablet'] . ' ' . $countDownItemWrapperBorderRadiusTablet['bottom'] . $countDownItemWrapperBorderRadiusUnits['Tablet'] . ' ' . $countDownItemWrapperBorderRadiusTablet['left'] . $countDownItemWrapperBorderRadiusUnits['Tablet'];
+$countDownItemWrapperBorderRadiusGetMobile = $countDownItemWrapperBorderRadiusMobile['top'] . $countDownItemWrapperBorderRadiusUnits['Mobile'] . ' ' . $countDownItemWrapperBorderRadiusMobile['right'] . $countDownItemWrapperBorderRadiusUnits['Mobile'] . ' ' . $countDownItemWrapperBorderRadiusMobile['bottom'] . $countDownItemWrapperBorderRadiusUnits['Mobile'] . ' ' . $countDownItemWrapperBorderRadiusMobile['left'] . $countDownItemWrapperBorderRadiusUnits['Mobile'];
+
+
+$countDownItemWrapperPaddingUnits = isset($block_attributes['countDownItemWrapperPaddingUnits']) ? $block_attributes['countDownItemWrapperPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownItemWrapperPaddingDesktop = isset($block_attributes['countDownItemWrapperPaddingDesktop']) ? $block_attributes['countDownItemWrapperPaddingDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperPaddingTablet = isset($block_attributes['countDownItemWrapperPaddingTablet']) ? $block_attributes['countDownItemWrapperPaddingTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperPaddingMobile = isset($block_attributes['countDownItemWrapperPaddingMobile']) ? $block_attributes['countDownItemWrapperPaddingMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperPaddingGetDesktop = $countDownItemWrapperPaddingDesktop['top'] . $countDownItemWrapperPaddingUnits['Desktop'] . ' ' . $countDownItemWrapperPaddingDesktop['right'] . $countDownItemWrapperPaddingUnits['Desktop'] . ' ' . $countDownItemWrapperPaddingDesktop['bottom'] . $countDownItemWrapperPaddingUnits['Desktop'] . ' ' . $countDownItemWrapperPaddingDesktop['left'] . $countDownItemWrapperPaddingUnits['Desktop'];
+$countDownItemWrapperPaddingGetTablet = $countDownItemWrapperPaddingTablet['top'] . $countDownItemWrapperPaddingUnits['Tablet'] . ' ' . $countDownItemWrapperPaddingTablet['right'] . $countDownItemWrapperPaddingUnits['Tablet'] . ' ' . $countDownItemWrapperPaddingTablet['bottom'] . $countDownItemWrapperPaddingUnits['Tablet'] . ' ' . $countDownItemWrapperPaddingTablet['left'] . $countDownItemWrapperPaddingUnits['Tablet'];
+$countDownItemWrapperPaddingGetMobile = $countDownItemWrapperPaddingMobile['top'] . $countDownItemWrapperPaddingUnits['Mobile'] . ' ' . $countDownItemWrapperPaddingMobile['right'] . $countDownItemWrapperPaddingUnits['Mobile'] . ' ' . $countDownItemWrapperPaddingMobile['bottom'] . $countDownItemWrapperPaddingUnits['Mobile'] . ' ' . $countDownItemWrapperPaddingMobile['left'] . $countDownItemWrapperPaddingUnits['Mobile'];
+
+$countDownItemWrapperMarginUnits = isset($block_attributes['countDownItemWrapperMarginUnits']) ? $block_attributes['countDownItemWrapperMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$countDownItemWrapperMarginDesktop = isset($block_attributes['countDownItemWrapperMarginDesktop']) ? $block_attributes['countDownItemWrapperMarginDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperMarginTablet = isset($block_attributes['countDownItemWrapperMarginTablet']) ? $block_attributes['countDownItemWrapperMarginTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperMarginMobile = isset($block_attributes['countDownItemWrapperMarginMobile']) ? $block_attributes['countDownItemWrapperMarginMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$countDownItemWrapperMarginGetDesktop = $countDownItemWrapperMarginDesktop['top'] . $countDownItemWrapperMarginUnits['Desktop'] . ' ' . $countDownItemWrapperMarginDesktop['right'] . $countDownItemWrapperMarginUnits['Desktop'] . ' ' . $countDownItemWrapperMarginDesktop['bottom'] . $countDownItemWrapperMarginUnits['Desktop'] . ' ' . $countDownItemWrapperMarginDesktop['left'] . $countDownItemWrapperMarginUnits['Desktop'];
+$countDownItemWrapperMarginGetTablet = $countDownItemWrapperMarginTablet['top'] . $countDownItemWrapperMarginUnits['Tablet'] . ' ' . $countDownItemWrapperMarginTablet['right'] . $countDownItemWrapperMarginUnits['Tablet'] . ' ' . $countDownItemWrapperMarginTablet['bottom'] . $countDownItemWrapperMarginUnits['Tablet'] . ' ' . $countDownItemWrapperMarginTablet['left'] . $countDownItemWrapperMarginUnits['Tablet'];
+$countDownItemWrapperMarginGetMobile = $countDownItemWrapperMarginMobile['top'] . $countDownItemWrapperMarginUnits['Mobile'] . ' ' . $countDownItemWrapperMarginMobile['right'] . $countDownItemWrapperMarginUnits['Mobile'] . ' ' . $countDownItemWrapperMarginMobile['bottom'] . $countDownItemWrapperMarginUnits['Mobile'] . ' ' . $countDownItemWrapperMarginMobile['left'] . $countDownItemWrapperMarginUnits['Mobile'];
+
+/** End CountDown Item Wrapper */
+
+
+
+
 $countDownItemBgColor = isset($block_attributes['countDownItemBgColor']) ? sanitize_hex_color($block_attributes['countDownItemBgColor']) : '#F97255';
 
 $countDownItemBgImageEnabled = isset($block_attributes['countDownItemBgImageEnabled']) ? rest_sanitize_boolean($block_attributes['countDownItemBgImageEnabled']) : false;
@@ -100,6 +149,20 @@ $countDownSeparatorFontHoverColor = isset($block_attributes['countDownSeparatorF
 $css_content = "
 	.fb-count-down-wrapper.$block_ID{
 		" . ($countDownItemGap['Desktop'] && $countDownItemGapUnits['Desktop'] ? "gap: {$countDownItemGap['Desktop']}{$countDownItemGapUnits['Desktop']};" : "") . "
+
+		" . ($countDownItemWrapperBorderTypeGetDesktop ? "border-width: $countDownItemWrapperBorderTypeGetDesktop;" : "") . "
+		" . ($countDownItemWrapperBorderRadiusGetDesktop ? "border-radius: $countDownItemWrapperBorderRadiusGetDesktop;" : "") . "
+		" . ($countDownItemWrapperBorder ? "border: $countDownItemWrapperBorder;" : "") . "
+		" . ($countDownItemWrapperBorderColor ? "border-color: $countDownItemWrapperBorderColor;" : "") . "
+		" . ($countDownItemWrapperBgFontColor ? "background: $countDownItemWrapperBgFontColor;" : "") . "
+		" . ($countDownItemWrapperPaddingGetDesktop ? "padding: " . $countDownItemWrapperPaddingGetDesktop . ";" : "") . "
+		" . ($countDownItemWrapperMarginGetDesktop ? "margin: " . $countDownItemWrapperMarginGetDesktop . ";" : "") . "
+		" . ($countDownItemWrapperBackgroundImageEnabled && $countDownItemWrapperBackgroundImageUrl && $countDownItemWrapperBackgroundImageUrl !== 'null' ? "
+			background-image: url(${countDownItemWrapperBackgroundImageUrl});
+			background-position: ${countDownItemWrapperBgImagePositionType};
+			background-repeat: ${countDownItemWrapperBgImageRepeatType};
+			background-size: ${countDownItemWrapperBgImageSizeType};
+		" : "") . "
 	}
 	.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 		" . ($countDownItemBorderTypeGetDesktop ? "border-width: $countDownItemBorderTypeGetDesktop;" : "") . "
@@ -159,6 +222,10 @@ $css_content = "
 	@media only screen and (max-width: 1024px) {
 		.fb-count-down-wrapper.$block_ID{
 			" . ($countDownItemGap['Tablet'] && $countDownItemGapUnits['Tablet'] ? "gap: {$countDownItemGap['Tablet']}{$countDownItemGapUnits['Tablet']};" : "") . "
+			" . ($countDownItemWrapperBorderTypeGetTablet ? "border-width: $countDownItemWrapperBorderTypeGetTablet;" : "") . "
+			" . ($countDownItemWrapperBorderRadiusGetTablet ? "border-radius: $countDownItemWrapperBorderRadiusGetTablet;" : "") . "
+			" . ($countDownItemWrapperPaddingGetTablet ? "padding: " . $countDownItemWrapperPaddingGetTablet . ";" : "") . "
+			" . ($countDownItemWrapperMarginGetTablet ? "margin: " . $countDownItemWrapperMarginGetTablet . ";" : "") . "
 		}
 		.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 			" . ($countDownItemBorderTypeGetTablet ? "border-width: $countDownItemBorderTypeGetTablet;" : "") . "
@@ -181,6 +248,10 @@ $css_content = "
 	@media only screen and (max-width: 767px) {
 		.fb-count-down-wrapper.$block_ID{
 			" . ($countDownItemGap['Mobile'] && $countDownItemGapUnits['Mobile'] ? "gap: {$countDownItemGap['Mobile']}{$countDownItemGapUnits['Mobile']};" : "") . "
+			" . ($countDownItemWrapperBorderTypeGetMobile ? "border-width: $countDownItemWrapperBorderTypeGetMobile;" : "") . "
+			" . ($countDownItemWrapperBorderRadiusGetMobile ? "border-radius: $countDownItemWrapperBorderRadiusGetMobile;" : "") . "
+			" . ($countDownItemWrapperPaddingGetMobile ? "padding: " . $countDownItemWrapperPaddingGetMobile . ";" : "") . "
+			" . ($countDownItemWrapperMarginGetMobile ? "margin: " . $countDownItemWrapperMarginGetMobile . ";" : "") . "
 		}
 		.fb-count-down-wrapper.$block_ID .fb-count-down-item {
 			" . ($countDownItemBorderTypeGetMobile ? "border-width: $countDownItemBorderTypeGetMobile;" : "") . "
