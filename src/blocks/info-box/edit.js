@@ -110,6 +110,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								/>
 							)}
 							{info_Button_Switcher && (
+								<div className="fb-info-btn-container"
+								style={{ textAlign: buttonAlignment }}
+								>
 								<div
 									className="fb-info-btn-wrapper"
 									style={{
@@ -125,7 +128,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										}
 										placeholder={__("Info Button", "frontis-block")}
 										className="fb-info-button"
-										style={{ textAlign: buttonAlignment }}
+										
 									/>
 									{buttonIconSwitcher && (
 										<div className="fb-btn-icon-wrapper">
@@ -133,6 +136,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</div>
 									)}
 								</div>
+								</div>
+								
 							)}
 						</div>
 					</div>
