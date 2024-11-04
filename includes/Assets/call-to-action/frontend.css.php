@@ -407,6 +407,17 @@ $btn_icon_color = isset($block_attributes['btnIconColor']) ? sanitize_hex_color(
 $btn_icon_hover_color = isset($block_attributes['btnIconHoverColor']) ? sanitize_hex_color($block_attributes['btnIconHoverColor']) : '#ffffff';
 $media_icon_color = isset($block_attributes['mediaIconColor']) ? sanitize_hex_color($block_attributes['mediaIconColor']) : '#ffffff';
 $media_icon_hover_color = isset($block_attributes['mediaIconHoverColor']) ? sanitize_hex_color($block_attributes['mediaIconHoverColor']) : '#ffffff';
+$box_global_box_shadow_css_value = isset($block_attributes['boxGlobalBoxShadowCssValue']) ? sanitize_hex_color($block_attributes['boxGlobalBoxShadowCssValue']) : '';
+$test_background_type = isset($block_attributes['testBackgroundType']) ? sanitize_hex_color($block_attributes['testBackgroundType']) : '';
+$test_custom_gradient_switcher = isset($block_attributes['testCustomGradientSwitcher']) ? sanitize_hex_color($block_attributes['testCustomGradientSwitcher']) : '';
+$test_custom_gradient_input_value = isset($block_attributes['testCustomGradientInputValue']) ? sanitize_hex_color($block_attributes['testCustomGradientInputValue']) : '';
+$test_gradient_color = isset($block_attributes['testGradientColor']) ? sanitize_hex_color($block_attributes['testGradientColor']) : '';
+$test_background_image_url = isset($block_attributes['testBackgroundImageUrl']) ? sanitize_hex_color($block_attributes['testBackgroundImageUrl']) : '';
+$test_background_image_position = isset($block_attributes['testBackgroundImagePosition']) ? sanitize_hex_color($block_attributes['testBackgroundImagePosition']) : '';
+$test_background_image_attachment = isset($block_attributes['testBackgroundImageAttachment']) ? sanitize_hex_color($block_attributes['testBackgroundImageAttachment']) : '';
+$test_background_image_repeat = isset($block_attributes['testBackgroundImageRepeat']) ? sanitize_hex_color($block_attributes['testBackgroundImageRepeat']) : '';
+$test_background_image_size = isset($block_attributes['testBackgroundImageSize']) ? sanitize_hex_color($block_attributes['testBackgroundImageSize']) : '';
+$test_classic_color = isset($block_attributes['testClassicColor']) ? sanitize_hex_color($block_attributes['testClassicColor']) : '';
 
 $css_content = "
 .fb-cta-content-wrapper.{$block_id} {
@@ -416,7 +427,18 @@ $css_content = "
     border-width: {$box_border_width_desktop};
     border-radius: {$box_border_radius_width_desktop};
     " . (!empty($info_box_border_color) ? "border-color: {$info_box_border_color};" : '') . "
-    " . (!empty($box_bg_color) ? "background-color: {$box_bg_color};" : '') . "
+    " . (!empty($box_global_box_shadow_css_value) ? "box-shadow: {$box_global_box_shadow_css_value};" : '') . "
+    " . ($test_background_type === 'gradient' ? "
+        background: " . ($test_custom_gradient_switcher && !empty($test_custom_gradient_input_value) ? $test_custom_gradient_input_value : $test_gradient_color) . ";
+    " : (!empty($test_background_image_url) && $test_background_image_url !== 'null' ? "
+        background-image: url({$test_background_image_url});
+        background-position: {$test_background_image_position};
+        background-attachment: {$test_background_image_attachment};
+        background-repeat: {$test_background_image_repeat};
+        background-size: {$test_background_image_size};
+    " : "
+        background: {$test_classic_color};
+    ")) . "
     text-align: {$content_alignment};
     transition: all .3s ease-in-out;
 }
