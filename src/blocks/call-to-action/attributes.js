@@ -935,19 +935,19 @@ const attributes = {
 	btnTwoTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	btnTwoMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	btnTwoPaddingLink : {
@@ -1024,28 +1024,28 @@ const attributes = {
 	btnTwoDesktopBorder: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	btnTwoTabBorder: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	btnTwoMobileBorder: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	btnTwoBorderLink : {

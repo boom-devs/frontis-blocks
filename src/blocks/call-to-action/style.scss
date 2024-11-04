@@ -1,3 +1,4 @@
+//Info Button
 .fb-cta-content-wrapper-inner{
 	gap: 20px;
 	.fb-icon-wrapper{
@@ -16,5 +17,8 @@
 		align-items: center;
 		justify-content: center;
 	}
+	.fb-cta-buttons-wrapper{
+		display: flex;
+		align-items: center;
+	}
 }
-

@@ -340,7 +340,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoDesktopMargin,
 		btnTwoTabMargin,
 		btnTwoMobileMargin,
-		btnTwoActiveMarginDevice,
 		btnTwoMarginLink,
 		btnTwoBorderColorSwitcher,
 		btnTwoBorder,
@@ -1669,207 +1668,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const [boxPreviousBorderWidth, setBoxPreviousBorderWidth] = useState(
 		infoBoxDesktopBorderWidth,
 	);
-	/** Function to update all Border Width values */
-	const updateBoxBorderWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxBorderWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderWidth: {
-						...infoBoxDesktopBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderWidth: {
-						...infoBoxTabBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderWidth: {
-						...infoBoxMobileBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderLink is true */
-		if (borderLink) {
-			updateBoxBorderWidth(value, deviceType);
-		}
-	};
-
-	/** Function to handle borderLink toggle */
-	const handleBoxBorderWidthLinkToggle = () => {
-		if (!borderLink) {
-			setAttributes({ infoBoxDesktopBorderWidth: boxPreviousBorderWidth });
-		}
-		/** setborderLinkLink(!borderLink) */
-		setAttributes({ borderLink: !borderLink });
-	};
-
-	/** Update previousborderWidth state when Border Width changes */
-	useEffect(() => {
-		setBoxPreviousBorderWidth(infoBoxDesktopBorderWidth);
-	}, [infoBoxDesktopBorderWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleBoxBorderWidthDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const boxBorderWidth = `${infoBoxDesktopBorderWidth.top}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.right}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.bottom}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.left}${infoBoxBorderUnits}`;
-	/** End Border Width */
-
-	/** Start Border Radius Width */
-	const [boxPreviousBorderRadiusWidth, setBoxPreviousBorderRadiusWidth] =
-		useState(infoBoxDesktopBorderRadiusWidth);
-	/** Function to update all Border Width values */
-	const updateBoxBorderRadiusWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxBorderRadiusWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (activeBorderRadiusDevice) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderRadiusWidth: {
-						...infoBoxDesktopBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderRadiusWidth: {
-						...infoBoxTabBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderRadiusWidth: {
-						...infoBoxMobileBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderRadiusLink is true */
-		if (borderRadiusLink) {
-			updateBoxBorderRadiusWidth(value, deviceType);
-		}
-	};
-
-	/** Function to handle borderRadiusLink toggle */
-	const handleBoxBorderRadiusWidthLinkToggle = () => {
-		if (!borderRadiusLink) {
-			setAttributes({
-				infoBoxDesktopBorderRadiusWidth: boxPreviousBorderRadiusWidth,
-			});
-		}
-		/** setborderRadiusLinkLink(!borderRadiusLink) */
-		setAttributes({ borderRadiusLink: !borderRadiusLink });
-	};
-
-	/** Update previousBorderRadiusWidth state when Border Width changes */
-	useEffect(() => {
-		setBoxPreviousBorderRadiusWidth(infoBoxDesktopBorderRadiusWidth);
-	}, [infoBoxDesktopBorderRadiusWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleBoxBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const boxBorderRadiusWidth = `${infoBoxDesktopBorderRadiusWidth.top}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.right}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.bottom}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.left}${infoBoxBorderRadiusUnits}`;
-	/** End Border Radius Width */
+	
 
 	/** Button Two */
 	/** Start Heading Padding */
@@ -2115,7 +1914,7 @@ const btnTwoTabletBorderWidthStyle = `${btnTwoTabBorder.top}${btnTwoBorderUnits.
 const btnTwoMobileBorderWidthStyle = `${btnTwoMobileBorder.top}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.right}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.bottom}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.left}${btnTwoBorderUnits.Mobile}`;
 /** End btnTwo Border */
 
-/** Start btnTwo Border Radius */
+/** Start Button Two Border Radius */
 const btnTwoBorderRadiusUnitsChange = (event, position) => {
     const value = event.target.value;
     if (btnTwoBorderRadiusLink) {
@@ -3411,83 +3210,19 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 
                 @media only screen and (max-width: 1024px) {
                     .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                        padding: ${
-													infoButtonTabPadding.top
-												}${infoButtonPaddingUnits} ${
-													infoButtonTabPadding.right
-												}${infoButtonPaddingUnits} ${
-													infoButtonTabPadding.bottom
-												}${infoButtonPaddingUnits} ${
-													infoButtonTabPadding.left
-												}${infoButtonPaddingUnits} !important;
-                        margin: ${
-													infoButtonTabMargin.top
-												}${infoButtonMarginUnits} ${
-													infoButtonTabMargin.right
-												}${infoButtonMarginUnits} ${
-													infoButtonTabMargin.bottom
-												}${infoButtonMarginUnits} ${
-													infoButtonTabMargin.left
-												}${infoButtonMarginUnits} !important;
-                        border-width: ${
-													infoButtonTabBorderWidth.top
-												}${infoButtonBorderUnits} ${
-													infoButtonTabBorderWidth.right
-												}${infoButtonBorderUnits} ${
-													infoButtonTabBorderWidth.bottom
-												}${infoButtonBorderUnits} ${
-													infoButtonTabBorderWidth.left
-												}${infoButtonBorderUnits} !important;
-                        border-radius: ${
-													infoBtnTabBorderradiusWidth.top
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.right
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.bottom
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.left
-												}${infoBtnBorderradiusUnits} !important;
+                        padding: ${btnTwoTabletPaddingWidth} !important;
+                        margin: ${btnTwoTabletMarginWidth} !important;
+                        border-width: ${btnTwoTabletBorderWidthStyle} !important;
+                        border-radius: ${btnTwoTabletBorderRadiusWidthStyle} !important;
                     }
                 }
 
                 @media only screen and (max-width: 767px) {
                     .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                        padding: ${
-													infoButtonMobilePadding.top
-												}${infoButtonPaddingUnits} ${
-													infoButtonMobilePadding.right
-												}${infoButtonPaddingUnits} ${
-													infoButtonMobilePadding.bottom
-												}${infoButtonPaddingUnits} ${
-													infoButtonMobilePadding.left
-												}${infoButtonPaddingUnits} !important;
-                        margin: ${
-													infoButtonMobileMargin.top
-												}${infoButtonMarginUnits} ${
-													infoButtonMobileMargin.right
-												}${infoButtonMarginUnits} ${
-													infoButtonMobileMargin.bottom
-												}${infoButtonMarginUnits} ${
-													infoButtonMobileMargin.left
-												}${infoButtonMarginUnits} !important;
-                        border-width: ${
-													infoButtonMobileBorderWidth.top
-												}${infoButtonBorderUnits} ${
-													infoButtonMobileBorderWidth.right
-												}${infoButtonBorderUnits} ${
-													infoButtonMobileBorderWidth.bottom
-												}${infoButtonBorderUnits} ${
-													infoButtonMobileBorderWidth.left
-												}${infoButtonBorderUnits} !important;
-                        border-radius: ${
-													infoBtnTabBorderradiusWidth.top
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.right
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.bottom
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.left
-												}${infoBtnBorderradiusUnits} !important;
+                        padding: ${btnTwoMobilePaddingWidth} !important;
+                        margin: ${btnTwoMobileMarginWidth} !important;
+                        border-width: ${btnTwoMobileBorderWidthStyle} !important;
+                        border-radius: ${btnTwoMobileBorderRadiusWidthStyle} !important;
                     }
                 }
 
