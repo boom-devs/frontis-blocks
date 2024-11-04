@@ -36,7 +36,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <div className="fb-social-links-wrapper">
                         <ul className="fb-socials">
                             {socialItems.map(item => (
-                                <li key={item.id} className="fb-social-list-item">
+                                <li key={item.id} className={`fb-social-list-item single-item-${item.id}`}>
                                     <a
                                         className="fb-social-icon-link" 
                                         href={item.socialIconUrl} 
