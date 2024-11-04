@@ -23,6 +23,12 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
 ];
 
+export const PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+];
+
 export const BORDER_STYLES = [
 	{ label: __("None", "frontis-blocks"), value: "none" },
 	{ label: __("Solid", "frontis-blocks"), value: "solid" },

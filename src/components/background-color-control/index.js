@@ -16,6 +16,7 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import './editor.lazy.scss';
 
 const FB_BackgroundColorControl = ({
+    label = __("Background Color", "frontis-blocks"),
     bgColorSwitcher,
     setBgColorSwitcher,
 
@@ -68,6 +69,9 @@ const FB_BackgroundColorControl = ({
     setHoverBackgroundImageRepeat,
     hoverBackgroundImageSize = '',
     setHoverBackgroundImageSize,
+
+    isBackgroundImage = true,
+
 }) => {
 
     const BACKGROUND_TYPES = [
@@ -79,6 +83,7 @@ const FB_BackgroundColorControl = ({
 
         <>
             <FB_SwitcherControl
+                label={label}
                 globalSwitcher={bgColorSwitcher}
                 setGlobalSwitcher={(value) => setBgColorSwitcher(value)}
             />
@@ -129,23 +134,25 @@ const FB_BackgroundColorControl = ({
                                             setGlobalColor={(value) => setNormalClassicColor(value)}
                                         />
 
-                                        <FB_ImageControl
-                                            label={__("Background Image", "frontis-blocks")}
-                                            globalBackgroundImageUrl={normalBackgroundImageUrl}
-                                            setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
-                                            globalBackgroundImageAlt={normalBackgroundImageAlt}
-                                            setGlobalBackgroundImageAlt={(value) => setNormalBackgroundImageAlt(value)}
-                                            globalBackgroundImageID={normalBackgroundImageID}
-                                            setGlobalBackgroundImageID={(value) => setNormalBackgroundImageID(value)}
-                                            globalBackgroundImagePosition={normalBackgroundImagePosition}
-                                            setGlobalBackgroundImagePosition={(value) => setNormalBackgroundImagePosition(value)}
-                                            globalBackgroundImageAttachment={normalBackgroundImageAttachment}
-                                            setGlobalBackgroundImageAttachment={(value) => setNormalBackgroundImageAttachment(value)}
-                                            globalBackgroundImageRepeat={normalBackgroundImageRepeat}
-                                            setGlobalBackgroundImageRepeat={(value) => setNormalBackgroundImageRepeat(value)}
-                                            globalBackgroundImageSize={normalBackgroundImageSize}
-                                            setGlobalBackgroundImageSize={(value) => setNormalBackgroundImageSize(value)}
-                                        />
+                                        {isBackgroundImage && (
+                                            <FB_ImageControl
+                                                label={__("Background Image", "frontis-blocks")}
+                                                globalBackgroundImageUrl={normalBackgroundImageUrl}
+                                                setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
+                                                globalBackgroundImageAlt={normalBackgroundImageAlt}
+                                                setGlobalBackgroundImageAlt={(value) => setNormalBackgroundImageAlt(value)}
+                                                globalBackgroundImageID={normalBackgroundImageID}
+                                                setGlobalBackgroundImageID={(value) => setNormalBackgroundImageID(value)}
+                                                globalBackgroundImagePosition={normalBackgroundImagePosition}
+                                                setGlobalBackgroundImagePosition={(value) => setNormalBackgroundImagePosition(value)}
+                                                globalBackgroundImageAttachment={normalBackgroundImageAttachment}
+                                                setGlobalBackgroundImageAttachment={(value) => setNormalBackgroundImageAttachment(value)}
+                                                globalBackgroundImageRepeat={normalBackgroundImageRepeat}
+                                                setGlobalBackgroundImageRepeat={(value) => setNormalBackgroundImageRepeat(value)}
+                                                globalBackgroundImageSize={normalBackgroundImageSize}
+                                                setGlobalBackgroundImageSize={(value) => setNormalBackgroundImageSize(value)}
+                                            />
+                                        )}
                                                 
                                     </>
                                 )}
@@ -210,23 +217,26 @@ const FB_BackgroundColorControl = ({
                                             globalColor={hoverClassicColor}
                                             setGlobalColor={(value) => setHoverClassicColor(value)}
                                         />
-                                        <FB_ImageControl
-                                            label={__("Background Image", "frontis-blocks")}
-                                            globalBackgroundImageUrl={hoverBackgroundImageUrl}
-                                            setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
-                                            globalBackgroundImageAlt={hoverBackgroundImageAlt}
-                                            setGlobalBackgroundImageAlt={(value) => setHoverBackgroundImageAlt(value)}
-                                            globalBackgroundImageID={hoverBackgroundImageID}
-                                            setGlobalBackgroundImageID={(value) => setHoverBackgroundImageID(value)}
-                                            globalBackgroundImagePosition={hoverBackgroundImagePosition}
-                                            setGlobalBackgroundImagePosition={(value) => setHoverBackgroundImagePosition(value)}
-                                            globalBackgroundImageAttachment={hoverBackgroundImageAttachment}
-                                            setGlobalBackgroundImageAttachment={(value) => setHoverBackgroundImageAttachment(value)}
-                                            globalBackgroundImageRepeat={hoverBackgroundImageRepeat}
-                                            setGlobalBackgroundImageRepeat={(value) => setHoverBackgroundImageRepeat(value)}
-                                            globalBackgroundImageSize={hoverBackgroundImageSize}
-                                            setGlobalBackgroundImageSize={(value) => setHoverBackgroundImageSize(value)}
-                                        />
+
+                                        {isBackgroundImage && (
+                                            <FB_ImageControl
+                                                label={__("Background Image", "frontis-blocks")}
+                                                globalBackgroundImageUrl={hoverBackgroundImageUrl}
+                                                setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
+                                                globalBackgroundImageAlt={hoverBackgroundImageAlt}
+                                                setGlobalBackgroundImageAlt={(value) => setHoverBackgroundImageAlt(value)}
+                                                globalBackgroundImageID={hoverBackgroundImageID}
+                                                setGlobalBackgroundImageID={(value) => setHoverBackgroundImageID(value)}
+                                                globalBackgroundImagePosition={hoverBackgroundImagePosition}
+                                                setGlobalBackgroundImagePosition={(value) => setHoverBackgroundImagePosition(value)}
+                                                globalBackgroundImageAttachment={hoverBackgroundImageAttachment}
+                                                setGlobalBackgroundImageAttachment={(value) => setHoverBackgroundImageAttachment(value)}
+                                                globalBackgroundImageRepeat={hoverBackgroundImageRepeat}
+                                                setGlobalBackgroundImageRepeat={(value) => setHoverBackgroundImageRepeat(value)}
+                                                globalBackgroundImageSize={hoverBackgroundImageSize}
+                                                setGlobalBackgroundImageSize={(value) => setHoverBackgroundImageSize(value)}
+                                            />
+                                        )}
                                     </>
                                 )}
 
