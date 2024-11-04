@@ -8,7 +8,7 @@ $block_id = isset($block_attributes['blockID']) ? sanitize_text_field($block_att
 $heading_color = isset($block_attributes['Heading_Color']) ? sanitize_hex_color($block_attributes['Heading_Color']) : '';
 $heading_background_color = isset($block_attributes['Heading_Background_Color']) ? sanitize_hex_color($block_attributes['Heading_Background_Color']) : '';
 $heading_font_family = isset($block_attributes['Heading_Font_Family']) && $block_attributes['Heading_Font_Family'] !== 'default' ? sanitize_text_field($block_attributes['Heading_Font_Family']) : 'default';
-$heading_font_size = isset($block_attributes['Heading_Font_Size']) ? sanitize_text_field($block_attributes['Heading_Font_Size']) : '35';
+$heading_font_size = isset($block_attributes['Heading_Font_Size']) ? sanitize_text_field($block_attributes['Heading_Font_Size']) : '24';
 $heading_font_size_units = isset($block_attributes['Heading_Font_size_units']) ? sanitize_text_field($block_attributes['Heading_Font_size_units']) : 'px';
 $heading_font_weight = isset($block_attributes['Heading_Font_Weight']) ? sanitize_text_field($block_attributes['Heading_Font_Weight']) : 'normal';
 $heading_font_style = isset($block_attributes['Heading_Font_Style']) ? sanitize_text_field($block_attributes['Heading_Font_Style']) : 'normal';
@@ -56,7 +56,7 @@ $heading_desktop_border_radius_width_left = isset($block_attributes['Heading_Des
 
 $border_radius_width = "{$heading_desktop_border_radius_width_top}{$heading_border_radius_units} {$heading_desktop_border_radius_width_right}{$heading_border_radius_units} {$heading_desktop_border_radius_width_bottom}{$heading_border_radius_units} {$heading_desktop_border_radius_width_left}{$heading_border_radius_units}";
 //Heading Hover
-$heading_hover_color = isset($block_attributes['Heading_Hover_Color']) ? sanitize_text_field($block_attributes['Heading_Hover_Color']) : '';
+$heading_hover_color = isset($block_attributes['Heading_Hover_Color']) ? sanitize_text_field($block_attributes['Heading_Hover_Color']) : '#ffffff';
 $heading_border_hover_color = isset($block_attributes['Heading_Border_Hover_Color']) ? sanitize_text_field($block_attributes['Heading_Border_Hover_Color']) : '';
 //Tab
 // Padding
@@ -157,7 +157,7 @@ $desc_desktop_margin_left = isset($block_attributes['descDesktopMargin']['left']
 $desc_margin_units = isset($block_attributes['descMarginUnits']) ? sanitize_text_field($block_attributes['descMarginUnits']) : 'px';
 $desc_margin = "{$desc_desktop_margin_top}{$desc_margin_units} {$desc_desktop_margin_right}{$desc_margin_units} {$desc_desktop_margin_bottom}{$desc_margin_units} {$desc_desktop_margin_left}{$desc_margin_units}";
 //Description hover
-$sub_heading_hover_color = isset($block_attributes['SubHeadingHoverColor']) ? sanitize_text_field($block_attributes['SubHeadingHoverColor']) : '';
+$sub_heading_hover_color = isset($block_attributes['SubHeadingHoverColor']) ? sanitize_text_field($block_attributes['SubHeadingHoverColor']) : '#ffffff';
 //Description Responsive
 // Tab padding and margin
 $sub_heading_tab_padding_top = isset($block_attributes['SubHeadingTabPadding']['top']) ? sanitize_text_field($block_attributes['SubHeadingTabPadding']['top']) : '0';
@@ -231,9 +231,9 @@ $box_border_width_mobile = $info_box_mobile_border_width['top'] . $info_box_bord
 
 // Define border radius units and values for each device type
 $info_box_border_radius_units = isset($block_attributes['globalBorderRadiusUnits']) ? $block_attributes['globalBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$info_box_desktop_border_radius_width = isset($block_attributes['globalBorderRadiusDesktop']) ? $block_attributes['globalBorderRadiusDesktop'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
-$info_box_tablet_border_radius_width = isset($block_attributes['globalBorderRadiusTablet']) ? $block_attributes['globalBorderRadiusTablet'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
-$info_box_mobile_border_radius_width = isset($block_attributes['globalBorderRadiusMobile']) ? $block_attributes['globalBorderRadiusMobile'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$info_box_desktop_border_radius_width = isset($block_attributes['globalBorderRadiusDesktop']) ? $block_attributes['globalBorderRadiusDesktop'] : array('top' => '6', 'right' => '6', 'bottom' => '6', 'left' => '6');
+$info_box_tablet_border_radius_width = isset($block_attributes['globalBorderRadiusTablet']) ? $block_attributes['globalBorderRadiusTablet'] : array('top' => '6', 'right' => '6', 'bottom' => '6', 'left' => '6');
+$info_box_mobile_border_radius_width = isset($block_attributes['globalBorderRadiusMobile']) ? $block_attributes['globalBorderRadiusMobile'] : array('top' => '6', 'right' => '6', 'bottom' => '6', 'left' => '6');
 
 // Border radius strings for each device type
 $box_border_radius_width_desktop = $info_box_desktop_border_radius_width['top'] . $info_box_border_radius_units['Desktop'] . ' ' . $info_box_desktop_border_radius_width['right'] . $info_box_border_radius_units['Desktop'] . ' ' . $info_box_desktop_border_radius_width['bottom'] . $info_box_border_radius_units['Desktop'] . ' ' . $info_box_desktop_border_radius_width['left'] . $info_box_border_radius_units['Desktop'];
@@ -244,10 +244,10 @@ $box_border_radius_width_mobile = $info_box_mobile_border_radius_width['top'] . 
 $info_box_border_color = isset($block_attributes['infoBoxBorderColor']) ? $block_attributes['infoBoxBorderColor'] : '';
 $info_box_border_type = isset($block_attributes['infoBoxBorderType']) ? $block_attributes['infoBoxBorderType'] : 'solid';
 
-$info_box_border = isset($block_attributes['infoBoxBorder']) ? sanitize_text_field($block_attributes['infoBoxBorder']) : 'none';
+$info_box_border = isset($block_attributes['globalBorder']) ? sanitize_text_field($block_attributes['globalBorder']) : 'none';
 $info_box_border_color = isset($block_attributes['infoBoxBorderColor']) ? sanitize_text_field($block_attributes['infoBoxBorderColor']) : '';
-$box_bg_color = isset($block_attributes['globalBgColor']) ? sanitize_text_field($block_attributes['globalBgColor']) : '#ffffff';
-$box_bg_hover_color = isset($block_attributes['globalBgHoverColor']) ? sanitize_text_field($block_attributes['globalBgHoverColor']) : '';
+$box_bg_color = isset($block_attributes['globalBgColor']) ? sanitize_text_field($block_attributes['globalBgColor']) : '#EBF5FF';
+$box_bg_hover_color = isset($block_attributes['globalBgHoverColor']) ? sanitize_text_field($block_attributes['globalBgHoverColor']) : '#399CFF';
 $content_alignment = isset($block_attributes['contentAlignment']) ? sanitize_text_field($block_attributes['contentAlignment']) : 'left';
 
 //Button Styles
@@ -292,8 +292,8 @@ $button_border_tablet = $info_button_tablet_border_width['top'] . $info_button_b
 $button_border_mobile = $info_button_mobile_border_width['top'] . $info_button_border_units['Mobile'] . ' ' . $info_button_mobile_border_width['right'] . $info_button_border_units['Mobile'] . ' ' . $info_button_mobile_border_width['bottom'] . $info_button_border_units['Mobile'] . ' ' . $info_button_mobile_border_width['left'] . $info_button_border_units['Mobile'];
 
 //Button typography
-$button_text_color = isset($block_attributes['buttonTextColor']) ? sanitize_hex_color($block_attributes['buttonTextColor']) : '';
-$button_text_hover_color = isset($block_attributes['buttonTextHoverColor']) ? sanitize_hex_color($block_attributes['buttonTextHoverColor']) : '';
+$button_text_color = isset($block_attributes['buttonTextColor']) ? sanitize_hex_color($block_attributes['buttonTextColor']) : '#399CFF';
+$button_text_hover_color = isset($block_attributes['buttonTextHoverColor']) ? sanitize_hex_color($block_attributes['buttonTextHoverColor']) : '#ffffff';
 $button_bg_color = isset($block_attributes['ButtonBgColor']) ? sanitize_hex_color($block_attributes['ButtonBgColor']) : '';
 $button_font_family = isset($block_attributes['ButtonFontFamily']) ? sanitize_text_field($block_attributes['ButtonFontFamily']) : '';
 $button_font_size = isset($block_attributes['ButtonFontSize']) ? sanitize_text_field($block_attributes['ButtonFontSize']) : '14';
@@ -307,21 +307,21 @@ $info_button_border = isset($block_attributes['InfoButtonBorder']) ? sanitize_te
 //Hover
 $button_bg_hover_color = isset($block_attributes['ButtonBgHoverColor']) ? sanitize_hex_color($block_attributes['ButtonBgHoverColor']) : '';
 
-$media_bg_width_desktop = isset($block_attributes['mediaBgWidth']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgWidth']['Desktop']) : '25';
+$media_bg_width_desktop = isset($block_attributes['mediaBgWidth']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgWidth']['Desktop']) : '76';
 $media_bg_width_units_desktop = isset($block_attributes['mediaBgWidthUnits']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgWidthUnits']['Desktop']) : 'px';
 
-$media_bg_height_desktop = isset($block_attributes['mediaBgHeight']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgHeight']['Desktop']) : '25';
+$media_bg_height_desktop = isset($block_attributes['mediaBgHeight']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgHeight']['Desktop']) : '76';
 $media_bg_height_units_desktop = isset($block_attributes['mediaBgHeightUnits']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgHeightUnits']['Desktop']) : 'px';
 
-$media_bg_color = isset($block_attributes['mediaBgColor']) ? sanitize_hex_color($block_attributes['mediaBgColor']) : '';
-$media_bg_hover_color = isset($block_attributes['mediaBgHoverColor']) ? sanitize_hex_color($block_attributes['mediaBgHoverColor']) : '';
+$media_bg_color = isset($block_attributes['mediaBgColor']) ? sanitize_hex_color($block_attributes['mediaBgColor']) : '#399CFF';
+$media_bg_hover_color = isset($block_attributes['mediaBgHoverColor']) ? sanitize_hex_color($block_attributes['mediaBgHoverColor']) : '#ffffff';
 $media_border = isset($block_attributes['mediaBorder']) ? sanitize_text_field($block_attributes['mediaBorder']) : 'none';
 
 /** Start Header Border Radius */
 $media_desktop_border_radius_units = isset($block_attributes['mediaBorderRadiusUnits']) ? $block_attributes['mediaBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$media_desktop_border_radius = isset($block_attributes['mediaBorderRadiusDesktop']) ? $block_attributes['mediaBorderRadiusDesktop'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
-$media_tablet_border_radius = isset($block_attributes['mediaBorderRadiusTablet']) ? $block_attributes['mediaBorderRadiusTablet'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
-$media_mobile_border_radius = isset($block_attributes['mediaBorderRadiusMobile']) ? $block_attributes['mediaBorderRadiusMobile'] : array('top' => '', 'bottom' => '', 'left' => '', 'right' => '');
+$media_desktop_border_radius = isset($block_attributes['mediaBorderRadiusDesktop']) ? $block_attributes['mediaBorderRadiusDesktop'] : array('top' => '50', 'bottom' => '50', 'left' => '50', 'right' => '50');
+$media_tablet_border_radius = isset($block_attributes['mediaBorderRadiusTablet']) ? $block_attributes['mediaBorderRadiusTablet'] : array('top' => '50', 'bottom' => '50', 'left' => '50', 'right' => '50');
+$media_mobile_border_radius = isset($block_attributes['mediaBorderRadiusMobile']) ? $block_attributes['mediaBorderRadiusMobile'] : array('top' => '50', 'bottom' => '50', 'left' => '50', 'right' => '50');
 // Construct border radius strings for each device type
 $media_desktop_border_radius_width = $media_desktop_border_radius['top'] . $media_desktop_border_radius_units['Desktop'] . ' ' . $media_desktop_border_radius['right'] . $media_desktop_border_radius_units['Desktop'] . ' ' . $media_desktop_border_radius['bottom'] . $media_desktop_border_radius_units['Desktop'] . ' ' . $media_desktop_border_radius['left'] . $media_desktop_border_radius_units['Desktop'];
 $media_tablet_border_radius_width = $media_tablet_border_radius['top'] . $media_desktop_border_radius_units['Tablet'] . ' ' . $media_tablet_border_radius['right'] . $media_desktop_border_radius_units['Tablet'] . ' ' . $media_tablet_border_radius['bottom'] . $media_desktop_border_radius_units['Tablet'] . ' ' . $media_tablet_border_radius['left'] . $media_desktop_border_radius_units['Tablet'];
@@ -403,10 +403,10 @@ $btn_icon_size_units_tablet = isset($block_attributes['btnIconSizeUnits']['Table
 
 $btn_icon_size_mobile = isset($block_attributes['btnIconSize']['Mobile']) ? sanitize_text_field($block_attributes['btnIconSize']['Mobile']) : '16';
 $btn_icon_size_units_mobile = isset($block_attributes['btnIconSizeUnits']['Mobile']) ? sanitize_text_field($block_attributes['btnIconSizeUnits']['Mobile']) : 'px';
-$btn_icon_color = isset($block_attributes['btnIconColor']) ? sanitize_hex_color($block_attributes['btnIconColor']) : '#ffffff';
+$btn_icon_color = isset($block_attributes['btnIconColor']) ? sanitize_hex_color($block_attributes['btnIconColor']) : '#399CFF';
 $btn_icon_hover_color = isset($block_attributes['btnIconHoverColor']) ? sanitize_hex_color($block_attributes['btnIconHoverColor']) : '#ffffff';
 $media_icon_color = isset($block_attributes['mediaIconColor']) ? sanitize_hex_color($block_attributes['mediaIconColor']) : '#ffffff';
-$media_icon_hover_color = isset($block_attributes['mediaIconHoverColor']) ? sanitize_hex_color($block_attributes['mediaIconHoverColor']) : '#ffffff';
+$media_icon_hover_color = isset($block_attributes['mediaIconHoverColor']) ? sanitize_hex_color($block_attributes['mediaIconHoverColor']) : '#399CFF';
 
 $css_content = "
 .fb-info-box-content-wrapper.{$block_id} {
