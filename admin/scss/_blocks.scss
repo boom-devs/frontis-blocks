@@ -1,0 +1,274 @@
+.fb-blocks {
+  &-container {
+    padding: 24px;
+    background-color: $white-color;
+    border-radius: 14px;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-unit * 2.5;
+
+    &-left, &-right {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-title {
+    font-size: $base-font-size * 1.7;
+    margin-right: $spacing-unit * 2.5;
+  }
+
+  &-search {
+    position: relative;
+    width: $sidebar-width + $spacing-unit * 2.5;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    display: flex;
+    align-items: center;
+    
+    &::before { 
+      content: '\f179';
+      font-family: dashicons;
+      position: absolute;
+      left: $spacing-unit;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $dark-gray;
+      font-size: $base-font-size * 1.4;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    &-input[type="text"] {
+      width: 100%;
+      padding: $input-padding $input-padding $input-padding ($spacing-unit * 4.5);
+      padding-right: $spacing-unit * 3.75;
+      border: none;
+      border-radius: $border-radius;
+      font-size: $base-font-size;
+      background: transparent;
+
+      &::placeholder {
+        color: $medium-gray;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 1px $primary-color;
+      }
+    }
+
+    &-clear {
+      position: absolute;
+      right: $spacing-unit;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: $base-font-size * 1.3;
+      color: $dark-gray;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+
+      &:hover {
+        color: $text-color;
+      }
+    }
+  }
+
+  &-button {
+    padding: $spacing-unit * 2 $spacing-unit * 3;
+    margin-left: $spacing-unit;
+    background-color: $light-gray;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: darken($light-gray, 5%);
+    }
+
+    &.fb-blocks-enable-all {
+      background-color: $primary-color;
+      color: $white-color;
+
+      &:hover {
+        background-color: darken($primary-color, 5%);
+      }
+    }
+
+    &.fb-blocks-disable-all {
+      background-color: $neutral-color-50;
+      color: $neutral-color-900;
+
+      &:hover {
+        background-color: darken($neutral-color-50, 5%);
+      }
+    }
+  }
+
+  &-category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-unit;
+    margin-bottom: $spacing-unit * 2.5;
+  }
+
+  &-category-button {
+    padding: $spacing-unit ($spacing-unit * 1.5);
+    background-color: $light-gray;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: darken($light-gray, 5%);
+    }
+
+    &--active {
+      background-color: $primary-color;
+      color: $tab-active-background;
+      border-color: $primary-color;
+
+      &:hover {
+        background-color: darken($primary-color, 5%);
+      }
+    }
+  }
+
+  &-category-group {
+    margin-bottom: $spacing-unit * 3.75;
+  }
+
+  &-category-title {
+    font-size: $base-font-size * 1.5;
+    font-weight: bold;
+    margin-bottom: $spacing-unit * 2.5;
+    color: $text-color;
+  }
+
+  &-category-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-unit * 2.5;
+  }
+
+  &-no-results {
+    font-style: italic;
+    color: $dark-gray;
+  }
+}
+
+.frontis-blocks-search {
+  position: relative;
+  width: 300px;
+
+  &::before {
+    content: '\f179'; // WordPress dashicons search icon
+    font-family: dashicons;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #757575;
+    font-size: 20px;
+    z-index: 1;
+    pointer-events: none; // This ensures the icon doesn't interfere with input interactions
+  }
+
+  .frontis-blocks-search-input {
+    width: 100%;
+    padding: 8px 12px 8px 35px; // Increased left padding to accommodate the icon
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #007cba;
+      box-shadow: 0 0 0 1px #007cba;
+    }
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+}
+
+.fb-block-card {
+  display: flex;
+  align-items: center;
+  padding: $spacing-unit * 2.5 $spacing-unit * 2;
+  border: 1px solid $border-color;
+  border-radius: $border-radius * 3;
+  background-color: $light-gray;
+  transition: box-shadow $transition-duration;
+
+  &:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  &-icon {
+    flex: 0 0 $spacing-unit * 6.25;
+    margin-right: $spacing-unit * 2;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &-content {
+    flex: 1;
+  }
+
+  &-title {
+    margin: 0 0 $spacing-unit / 2;
+    font-size: $base-font-size * 1.14;
+    font-weight: 600;
+  }
+
+  &-links {
+    display: flex;
+    gap: $spacing-unit;
+  }
+
+  &-link {
+    font-size: $base-font-size * 0.86;
+    color: $text-color;
+    text-decoration: none;
+
+    svg {
+      height: $spacing-unit * 2;
+      width: $spacing-unit * 2;
+      margin-right: $spacing-unit / 2;
+    }
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+
+  &-switch {
+    flex: 0 0 auto;
+    margin-left: $spacing-unit * 2;
+
+    &-label {
+      display: flex;
+      align-items: center;
+    }
+
+    &-input {
+      margin-left: $spacing-unit;
+    }
+  }
+}

@@ -1,0 +1,135 @@
+.fb-blocks-integration {
+  margin: $spacing-unit * 2.5 auto;
+  padding: 24px;
+  background-color: $white-color;
+  border-radius: 14px;
+
+  .integration-section {
+    padding: $spacing-unit * 3;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .section-content {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -#{$spacing-unit * 1.5};
+    }
+
+    .section-left {
+      flex: 0 0 30%;
+      padding: 0 $spacing-unit * 1.5;
+    }
+
+    .section-right {
+      flex: 0 0 60%;
+      padding: 0 $spacing-unit * 1.5;
+    }
+
+    h2 {
+      font-size: $base-font-size + 8px;
+      margin-bottom: $spacing-unit * 1.5;
+      color: $text-color;
+      font-weight: 600;
+    }
+
+    .description {
+      color: $text-muted;
+      margin-bottom: $spacing-unit * 2.5;
+      line-height: 1.5;
+    }
+
+    .recaptcha-version {
+      margin-bottom: $spacing-unit * 3;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h3 {
+        font-size: $base-font-size + 2px;
+        margin-bottom: $spacing-unit * 1.5;
+        color: $text-color;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .components-base-control {
+    margin-bottom: $spacing-unit * 2;
+
+    .components-base-control__label {
+      font-weight: 500;
+      margin-bottom: $spacing-unit * 0.5;
+      display: block;
+      color: $text-color;
+    }
+
+    .components-text-control__input {
+      width: 100%;
+      padding: $input-padding;
+      border: 1px solid $input-border-color;
+      border-radius: $border-radius;
+      height: $input-height;
+      background-color: #f9f9f9;
+
+      &:focus {
+        box-shadow: 0 0 0 1px $primary-color;
+        border-color: $primary-color;
+      }
+    }
+  }
+
+  .api-documentation {
+    display: inline-block;
+    margin-top: $spacing-unit;
+    color: $primary-color;
+    text-decoration: none;
+    font-size: $base-font-size - 2px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 782px) {
+  .fb-blocks-integration {
+    .integration-section {
+      padding: $spacing-unit * 2;
+
+      .section-content {
+        flex-direction: column;
+      }
+
+      .section-left,
+      .section-right {
+        flex: 0 0 100%;
+        padding: 0;
+      }
+
+      .section-left {
+        margin-bottom: $spacing-unit * 2;
+      }
+
+      h2 {
+        font-size: $base-font-size + 6px;
+      }
+
+      .recaptcha-version {
+        margin-bottom: $spacing-unit * 2.5;
+
+        h3 {
+          font-size: $base-font-size;
+        }
+      }
+    }
+
+    .components-base-control {
+      margin-bottom: $spacing-unit * 2;
+    }
+  }
+}

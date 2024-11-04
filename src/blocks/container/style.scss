@@ -1,0 +1,44 @@
+.fb-container {
+	display: flex;
+	flex-wrap: wrap;
+
+	&.fb-container-two-columns .fb-column {
+		width: 50%;
+	}
+	&.fb-container-three-columns .fb-column {
+		width: 33.33%;
+	}
+	&.fb-container-four-columns .fb-column {
+		width: 25%;
+	}
+	&.fb-container-two-rows-two-columns .fb-column {
+		width: 50%;
+	}
+	&.fb-container-three-columns-wide-center {
+		.fb-column-25 {
+			width: 25%;
+		}
+		.fb-column-50 {
+			width: 50%;
+		}
+	}
+	&.fb-container-two-thirds-one-third,
+	&.fb-container-one-third-two-thirds {
+		.fb-column-33 {
+			width: 33.33%;
+		}
+		.fb-column-66 {
+			width: 66.67%;
+		}
+	}
+	&.fb-container-two-rows-three-columns .fb-column {
+		width: 33.33%;
+	}
+
+	// Responsive adjustments
+	@media (max-width: 768px) {
+		.fb-column {
+			width: 100% !important;
+		}
+	}
+}

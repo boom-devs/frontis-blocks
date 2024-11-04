@@ -1,0 +1,3066 @@
+import { __ } from '@wordpress/i18n';
+import { InspectorControls } from '@wordpress/block-editor';
+import { useState, useEffect } from '@wordpress/element';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+
+
+import { 
+    SelectControl,
+    PanelBody,
+    TabPanel,
+    BaseControl,
+    Button,
+    ButtonGroup,
+    ToggleControl,
+    TextControl,
+    Dropdown,
+    Dashicon,
+    RangeControl,
+    ColorPicker,
+    ColorPalette,
+} from '@wordpress/components';
+
+import {
+    TEXT_ALIGN,
+    BORDER_STYLES,
+    PRESETS,
+} from "./constants/constants";
+
+import SortableItem from './sortableItem';
+import FB_ResponsiveControl from '@Components/responsive-control';
+
+import './editor.scss';
+import FB_Spacing from '../../components/spacing';
+import FB_Color from '../../components/color';
+import FB_Range from '../../components/range';
+import FB_TypographyControl from '../../components/typography-control';
+import FBIconPicker from '../../components/icon-picker';
+
+export default function Inspector({ attributes, setAttributes, clientId }) {
+    const { 
+        blockID,
+        DeviceType,
+
+        GalleryPresetStyle,
+        GalleryType,
+        GalleryItems,
+
+        GalleryItemHeight,
+        GalleryItemHeightUnits,
+
+        ImageOverlayStyle,
+        ImageOverlayStyleType,
+        ImageOverlayColor,
+
+        GalleryColumnNumberDesktop,
+        GalleryColumnNumberTablet,
+        GalleryColumnNumberMobile,
+
+        GalleryImageGap,
+        GalleryImageGapUnits,
+
+        GalleryButtonSwitcher,
+        GalleryButtonText,
+        GalleryButtonLink,
+
+        ImageAlignment,
+        ImageFitCover,
+
+        ImageWidth,
+        ImageWidthUnits,
+
+        ImageHeight,
+        ImageHeightUnits,
+
+        GalleryButtonAlignment,
+        GalleryButtonFontFamily,
+        GalleryButtonFontSize,
+        GalleryButtonFontSizeUnits,
+        GalleryButtonFontWeight,
+        GalleryButtonFontStyle,
+        GalleryButtonTextTransform,
+        GalleryButtonTextDecoration,
+        GalleryButtonLetterSpacing,
+        GalleryButtonLetterSpacingUnits,
+        GalleryButtonLineHeight,
+        GalleryButtonLineHeightUnits,
+        GalleryButtonColorSwitcher,
+        GalleryButtonColor,
+        GalleryButtonHoverColor,
+        GalleryButtonBGColorSwitcher,
+        GalleryButtonBGColor,
+        GalleryButtonBGHoverColor,
+
+        ButtonBorder,
+        ButtonBorderColor,
+        ButtonBorderHoverColor,
+        ButtonBorderColorSwitcher,
+
+        ButtonPaddingUnits,
+        ButtonDesktopPadding,
+        ButtonTabPadding,
+        ButtonMobilePadding,
+        ButtonPaddingLink,
+        ButtonMarginUnits,
+        ButtonDesktopMargin,
+        ButtonTabMargin,
+        ButtonMobileMargin,
+        ButtonMarginLink,
+        ButtonBorderUnits,
+        ButtonDesktopBorderWidth,
+        ButtonTabBorderWidth,
+        ButtonMobileBorderWidth,
+        ButtonBorderLink,
+        ButtonBorderRadiusUnits,
+        ButtonDesktopBorderRadiusWidth,
+        ButtonTabBorderRadiusWidth,
+        ButtonMobileBorderRadiusWidth,
+        ButtonBorderRadiusLink,
+        
+        GalleryZIndex,
+        GalleryPaddingUnits,
+        GalleryDesktopPadding,
+        GalleryTabPadding,
+        GalleryMobilePadding,
+        GalleryPaddingLink,
+        GalleryMarginUnits,
+        GalleryDesktopMargin,
+        GalleryTabMargin,
+        GalleryMobileMargin,
+        GalleryMarginLink,
+
+        GalleryBgColorSwitcher,
+        GalleryBgColor,
+        GalleryBgHoverColor,
+
+        GalleryBorder,
+        GalleryBorderColor,
+        GalleryBorderHoverColor,
+        GalleryBorderColorSwitcher,
+        GalleryBorderUnits,
+        GalleryDesktopBorderWidth,
+        GalleryTabBorderWidth,
+        GalleryMobileBorderWidth,
+        GalleryBorderLink,
+        GalleryBorderRadiusUnits,
+        GalleryBorderRadiusDesktop,
+        GalleryBorderRadiusTablet,
+        GalleryBorderRadiusMobile,
+        GalleryBorderRadiusLink,
+
+        GalleryDesktopSwitcher,
+        GalleryTabletSwitcher,
+        GalleryMobileSwitcher,
+
+        // Image border
+        imageBorder,
+        imageBorderColor,
+        imageBorderHoverColor,
+        imageBorderColorSwitcher,
+        imageBorderUnits,
+        imageDesktopBorderWidth,
+        imageTabBorderWidth,
+        imageMobileBorderWidth,
+        imageBorderLink,
+        imageBorderRadiusUnits,
+        imageDesktopBorderRadiusWidth,
+        imageTabBorderRadiusWidth,
+        imageMobileBorderRadiusWidth,
+        imageBorderRadiusLink,
+
+        // Lightbox Icon
+        lightboxIconSwitcher,
+        lightboxIcon,
+        lightboxIconSize,
+        lightboxIconSizeUnits,
+        lightboxColorSwitcher,
+        lightboxColor,
+        lightboxHoverColor,
+        lightboxBGColorSwitcher,
+        lightboxBGColor,
+        lightboxBGHoverColor,
+        lightboxBorder,
+        lightboxBorderColor,
+        lightboxBorderHoverColor,
+        lightboxBorderColorSwitcher,
+        lightboxPaddingUnits,
+        lightboxDesktopPadding,
+        lightboxTabPadding,
+        lightboxMobilePadding,
+        lightboxPaddingLink,
+        lightboxBorderUnits,
+        lightboxDesktopBorderWidth,
+        lightboxTabBorderWidth,
+        lightboxMobileBorderWidth,
+        lightboxBorderLink,
+        lightboxBorderRadiusUnits,
+        lightboxDesktopBorderRadiusWidth,
+        lightboxTabBorderRadiusWidth,
+        lightboxMobileBorderRadiusWidth,
+        lightboxBorderRadiusLink,
+
+    } = attributes;
+    
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-gallery-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = GalleryItems.findIndex(item => item.id === active.id);
+            const newIndex = GalleryItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(GalleryItems, oldIndex, newIndex);
+            setAttributes({ GalleryItems: updatedItems });
+        }
+    };
+
+    const handleAddItem = () => {
+        const newItem = { id: `image-${GalleryItems.length + 1}`, title: `Image ${GalleryItems.length + 1}`, column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: { id: 0} };
+        setAttributes({ GalleryItems: [...GalleryItems, newItem] });
+    };
+
+    const handleChangeItem = (id, key, value) => {
+        const updatedItems = GalleryItems.map(item => 
+            item.id === id ? { ...item, [key]: value } : item
+        );
+        setAttributes({ GalleryItems: updatedItems });
+    };
+
+    const handleDeleteItem = (id) => {
+        const updatedItems = GalleryItems.filter(item => item.id !== id);
+        setAttributes({ GalleryItems: updatedItems });
+    };
+
+    const handleRemoveMedia = (id, key, value) => {
+		const updatedItems = GalleryItems.map(item => 
+            item.id === id ? { ...item, [key]: value } : item
+        );
+        setAttributes({ GalleryItems: updatedItems });
+	}
+
+     /** Start Preset Style */
+     const changeGalleryPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+                DeviceType: "Desktop",
+                GalleryType: "grid",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-5",
+                        title: "Image 5",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-6",
+                        title: "Image 6",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    }
+                ],
+                GalleryPresetStyle: "preset-1",
+                GalleryItemHeight: {
+                    Desktop: 410,
+                    Tablet: 300,
+                    Mobile: 200
+                },
+                ImageOverlayStyle: "none",
+                lightboxIconSwitcher: true,
+                lightboxIcon: "plus",
+                lightboxIconSize: {
+                    Desktop: 24,
+                    Tablet: 24,
+                    Mobile: 24
+                },
+                lightboxColor: "#000",
+                lightboxHoverColor: "#000",
+                lightboxBGColor: "#fff",
+                lightboxBorder: "solid",
+                lightboxBorderColor: "#399cff",
+                lightboxDesktopPadding: {
+                    top: 16,
+                    right: 16,
+                    bottom: 16,
+                    left: 16
+                },
+                lightboxDesktopBorderWidth: {
+                    top: 3,
+                    right: 3,
+                    bottom: 3,
+                    left: 3
+                },
+                lightboxDesktopBorderRadiusWidth: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                },
+                GalleryColumnNumberDesktop: 3,
+                GalleryColumnNumberTablet: 2,
+                GalleryColumnNumberMobile: 1,
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 15,
+                    Mobile: 10
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: 32,
+                    bottom: 32,
+                    left: 32,
+                    right: 32,
+                }
+            },
+            "preset-2": {
+                DeviceType: "Desktop",
+                GalleryType: "grid",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-5",
+                        title: "Image 5",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-6",
+                        title: "Image 6",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    }
+                ],
+                GalleryPresetStyle: "preset-2",
+                GalleryItemHeight: {
+                    Desktop: 411,
+                    Tablet: 300,
+                    Mobile: 200
+                },
+                ImageOverlayStyle: "black_white",
+                lightboxIconSwitcher: true,
+                lightboxIcon: "plus",
+                lightboxIconSize: {
+                    Desktop: 24,
+                    Tablet: 24,
+                    Mobile: 24
+                },
+                lightboxColorSwitcher: "normal",
+                lightboxColor: "#000",
+                lightboxHoverColor: "#000",
+                lightboxBGColorSwitcher: "normal",
+                lightboxBGColor: "#fff",
+                lightboxBGHoverColor: "#fff",
+                lightboxBorder: "solid",
+                lightboxBorderColor: "#f89b2e",
+                lightboxDesktopPadding: {
+                    top: 16,
+                    right: 16,
+                    bottom: 16,
+                    left: 16
+                },
+                lightboxDesktopBorderWidth: {
+                    top: 2,
+                    right: 2,
+                    bottom: 2,
+                    left: 2
+                },
+                lightboxBorderRadiusUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                lightboxDesktopBorderRadiusWidth: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                },
+                GalleryColumnNumberDesktop: 3,
+                GalleryColumnNumberTablet: 2,
+                GalleryColumnNumberMobile: 1,
+                GalleryImageGap: {
+                    Desktop: 6,
+                    Tablet: 15,
+                    Mobile: 10
+                },
+                ImageFitCover: true,
+                imageBorder: "none",
+                imageDesktopBorderRadiusWidth: {
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                }
+            },
+            "preset-3": {
+                    DeviceType: "Desktop",
+                    GalleryType: "mesonry",
+                    GalleryItems: [
+                        {
+                            id: "image-1",
+                            title: "Image 1",
+                            column: {
+                                desktop: 2,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 2,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        },
+                        {
+                            id: "image-2",
+                            title: "Image 2",
+                            column: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 2,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        },
+                        {
+                            id: "image-3",
+                            title: "Image 3",
+                            column: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        },
+                        {
+                            id: "image-4",
+                            title: "Image 4",
+                            column: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        }
+                    ],
+                    GalleryPresetStyle: "preset-3",
+                    lightboxIconSwitcher: false,
+                    GalleryItemHeight: {
+                        Desktop: 410,
+                        Tablet: 410,
+                        Mobile: 410
+                    },
+                    GalleryColumnNumberDesktop: 4,
+                    GalleryImageGap: {
+                        Desktop: 30,
+                        Tablet: 30,
+                        Mobile: 30
+                    },
+                    GalleryImageGapUnits: {
+                        Desktop: "px",
+                        Tablet: "px",
+                        Mobile: "px"
+                    },
+                    imageDesktopBorderRadiusWidth: {
+                        top: 24,
+                        bottom: 24,
+                        left: 24,
+                        right: 24,
+                    },
+            },
+            "preset-4": {
+                DeviceType: "Desktop",
+                GalleryType: "mesonry",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        column: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        column: {
+                            desktop: 1,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        desc: "",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 1,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        desc: "",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-5",
+                        title: "Image 5",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-6",
+                        title: "Image 6",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    }
+                ],
+                GalleryPresetStyle: "preset-4",
+                lightboxIconSwitcher: false,
+                GalleryItemHeight: {
+                    Desktop: 410,
+                    Tablet: 410,
+                    Mobile: 410
+                },
+                ImageOverlayStyle: "overlay",
+                ImageOverlayStyleType: "top",
+                ImageOverlayColor: "rgba(0 0 0 / 0.7)",
+                GalleryColumnNumberDesktop: 4,
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 30,
+                    Mobile: 30
+                },
+                GalleryImageGapUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: 24,
+                    bottom: 24,
+                    left: 24,
+                    right: 24,
+                },
+            },
+            "preset-5": {
+                DeviceType: "Desktop",
+                GalleryType: "mesonry",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                ],
+                GalleryPresetStyle: "preset-5",
+                lightboxIconSwitcher: false,
+                GalleryItemHeight: {
+                    Desktop: 410,
+                    Tablet: 410,
+                    Mobile: 410
+                },
+                GalleryItemHeightUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                ImageOverlayStyle: "overlay",
+                ImageOverlayStyleType: "bottom",
+                ImageOverlayColor: "rgba(0 0 0 / 0.7)",
+                GalleryColumnNumberDesktop: 3,
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 30,
+                    Mobile: 30
+                },
+                GalleryImageGapUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: 24,
+                    bottom: 24,
+                    left: 24,
+                    right: 24,
+                },
+            },
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                GalleryPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Testimonial: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style */
+
+    // FB_Color for image Border
+    const imageBorderColorSwitcherChange = (value) => {
+        setAttributes({ imageBorderColorSwitcher: value });
+    };
+    const imageBorderColorChange = (value) => {
+        setAttributes({ imageBorderColor: value });
+    };
+    const imageBorderHoverColorChange = (value) => {
+        setAttributes({ imageBorderHoverColor: value });
+    };
+
+    /** GalleryBg Color */
+    const handleGalleryBgColorSwitcherChange = (value) => {
+        setAttributes({ GalleryBgColorSwitcher: value });
+    };
+    const handleGalleryBgColorChange = (value) => {
+        setAttributes({ GalleryBgColor: value });
+    };
+    const handleGalleryBgHoverColorChange = (value) => {
+        setAttributes({ GalleryBgHoverColor: value });
+    };
+    
+    /** GalleryBorder Color */
+    const handleGalleryBorderColorSwitcherChange = (value) => {
+        setAttributes({ GalleryBorderColorSwitcher: value });
+    };
+    const handleGalleryBorderColorChange = (value) => {
+        setAttributes({ GalleryBorderColor: value });
+    };
+    const handleGalleryBorderHoverColorChange = (value) => {
+        setAttributes({ GalleryBorderHoverColor: value });
+    };
+
+    /** GalleryButton Color */
+    const handleGalleryButtonColorSwitcherChange = (value) => {
+        setAttributes({ GalleryButtonColorSwitcher: value });
+    };
+    const handleGalleryButtonColorChange = (value) => {
+        setAttributes({ GalleryButtonColor: value });
+    };
+    const handleGalleryButtonHoverColorChange = (value) => {
+        setAttributes({ GalleryButtonHoverColor: value });
+    };
+
+    /** GalleryButtonBG Color */
+    const handleGalleryButtonBGColorSwitcherChange = (value) => {
+        setAttributes({ GalleryButtonBGColorSwitcher: value });
+    };
+    const handleGalleryButtonBGColorChange = (value) => {
+        setAttributes({ GalleryButtonBGColor: value });
+    };
+    const handleGalleryButtonBGHoverColorChange = (value) => {
+        setAttributes({ GalleryButtonBGHoverColor: value });
+    };
+
+    /** ButtonBorder Color */
+    const handleButtonBorderColorSwitcherChange = (value) => {
+        setAttributes({ ButtonBorderColorSwitcher: value });
+    };
+    const handleButtonBorderColorChange = (value) => {
+        setAttributes({ ButtonBorderColor: value });
+    };
+    const handleButtonBorderHoverColorChange = (value) => {
+        setAttributes({ ButtonBorderHoverColor: value });
+    };
+
+    /** lightbox Color */
+    const handleLightboxColorSwitcherChange = (value) => {
+        setAttributes({ lightboxColorSwitcher: value });
+    };
+    const handleLightboxColorChange = (value) => {
+        setAttributes({ lightboxColor: value });
+    };
+    const handleLightboxHoverColorChange = (value) => {
+        setAttributes({ lightboxHoverColor: value });
+    };
+
+    /** lightboxBG Color */
+    const handleLightboxBGColorSwitcherChange = (value) => {
+        setAttributes({ lightboxBGColorSwitcher: value });
+    };
+    const handleLightboxBGColorChange = (value) => {
+        setAttributes({ lightboxBGColor: value });
+    };
+    const handleLightboxBGHoverColorChange = (value) => {
+        setAttributes({ lightboxBGHoverColor: value });
+    };
+
+    /** lightboxBorder Color */
+    const handleLightboxBorderColorSwitcherChange = (value) => {
+        setAttributes({ lightboxBorderColorSwitcher: value });
+    };
+    const handleLightboxBorderColorChange = (value) => {
+        setAttributes({ lightboxBorderColor: value });
+    };
+    const handleLightboxBorderHoverColorChange = (value) => {
+        setAttributes({ lightboxBorderHoverColor: value });
+    };
+
+    
+    /** Item Height */
+    const GalleryItemHeightHandler = (value) => {
+        setAttributes({ GalleryItemHeight: value });
+    };
+
+    const GalleryItemHeightUnitsHandler = (value) => {
+        setAttributes({ GalleryItemHeightUnits: value });
+    };
+
+    /** Item Gap */
+    const GalleryImageGapHandler = (value) => {
+        setAttributes({ GalleryImageGap: value });
+    };
+
+    const GalleryImageGapUnitsHandler = (value) => {
+        setAttributes({ GalleryImageGapUnits: value });
+    };
+
+    /** Image Width */
+    const ImageWidthHandler = (value) => {
+        setAttributes({ ImageWidth: value });
+    };
+
+    const ImageWidthUnitsHandler = (value) => {
+        setAttributes({ ImageWidthUnits: value });
+    };
+
+    /** Image Height */
+    const ImageHeightHandler = (value) => {
+        setAttributes({ ImageHeight: value });
+    };
+
+    const ImageHeightUnitsHandler = (value) => {
+        setAttributes({ ImageHeightUnits: value });
+    };
+
+    /** Lightbox icon size */
+    const lightboxIconSizeHandler = (value) => {
+        setAttributes({ lightboxIconSize: value });
+    };
+
+    const lightboxIconSizeUnitsHandler = (value) => {
+        setAttributes({ lightboxIconSizeUnits: value });
+    };
+
+    
+    // Button Margin Functionb
+    const handleButtonMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( ButtonMarginLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        ButtonDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        ButtonTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        ButtonMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {ButtonDesktopMargin: {...ButtonDesktopMargin, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {ButtonTabMargin: {...ButtonTabMargin, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {ButtonMobileMargin: {...ButtonMobileMargin, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleButtonMarginCombineBtn = () => {
+        setAttributes( {ButtonMarginLink: !ButtonMarginLink} );
+    }
+
+    const handleButtonMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            ButtonMarginUnits: {
+                ...ButtonMarginUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const ButtonMarginDesktopWidth = `${ButtonDesktopMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.left}${ButtonMarginUnits[DeviceType]}`;
+    const ButtonMarginTabletWidth = `${ButtonTabMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.left}${ButtonMarginUnits[DeviceType]}`;
+    const ButtonMarginMobileWidth = `${ButtonMobileMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.left}${ButtonMarginUnits[DeviceType]}`;
+
+    // Button Padding Functionb
+    const handleButtonPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( ButtonPaddingLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        ButtonDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        ButtonTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        ButtonMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {ButtonDesktopPadding: {...ButtonDesktopPadding, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {ButtonTabPadding: {...ButtonTabPadding, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {ButtonMobilePadding: {...ButtonMobilePadding, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleButtonPaddingCombineBtn = () => {
+        setAttributes( {ButtonPaddingLink: !ButtonPaddingLink} );
+    }
+
+    const handleButtonPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            ButtonPaddingUnits: {
+                ...ButtonPaddingUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const ButtonPaddingDesktopWidth = `${ButtonDesktopPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.left}${ButtonPaddingUnits[DeviceType]}`;
+    const ButtonPaddingTabletWidth = `${ButtonTabPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.left}${ButtonPaddingUnits[DeviceType]}`;
+    const ButtonPaddingMobileWidth = `${ButtonMobilePadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.left}${ButtonPaddingUnits[DeviceType]}`;
+
+    // Button Border Function
+    const handleButtonBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( ButtonBorderLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        ButtonDesktopBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        ButtonTabBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        ButtonMobileBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {ButtonDesktopBorderWidth: {...ButtonDesktopBorderWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {ButtonTabBorderWidth: {...ButtonTabBorderWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {ButtonMobileBorderWidth: {...ButtonMobileBorderWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleButtonBorderCombineBtn = () => {
+        setAttributes( {ButtonBorderLink: !ButtonBorderLink} );
+    }
+
+    const handleButtonBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            ButtonBorderUnits: {
+                ...ButtonBorderUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const ButtonBorderDesktopWidth = `${ButtonDesktopBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
+    const ButtonBorderTabletWidth = `${ButtonTabBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
+    const ButtonBorderMobileWidth = `${ButtonMobileBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
+
+
+    // Button BorderRadius Function
+    const handleButtonBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( ButtonBorderRadiusLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        ButtonDesktopBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        ButtonTabBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        ButtonMobileBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {ButtonDesktopBorderRadiusWidth: {...ButtonDesktopBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {ButtonTabBorderRadiusWidth: {...ButtonTabBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {ButtonMobileBorderRadiusWidth: {...ButtonMobileBorderRadiusWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleButtonBorderRadiusCombineBtn = () => {
+        setAttributes( {ButtonBorderRadiusLink: !ButtonBorderRadiusLink} );
+    }
+
+    const handleButtonBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            ButtonBorderRadiusUnits: {
+                ...ButtonBorderRadiusUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const ButtonBorderRadiusDesktopWidth = `${ButtonDesktopBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
+    const ButtonBorderRadiusTabletWidth = `${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
+    const ButtonBorderRadiusMobileWidth = `${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
+
+
+
+    // Gallery Margin Functionb
+    const handleGalleryMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( GalleryMarginLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        GalleryDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        GalleryTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        GalleryMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {GalleryDesktopMargin: {...GalleryDesktopMargin, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {GalleryTabMargin: {...GalleryTabMargin, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {GalleryMobileMargin: {...GalleryMobileMargin, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleGalleryMarginCombineBtn = () => {
+        setAttributes( {GalleryMarginLink: !GalleryMarginLink} );
+    }
+
+    const handleGalleryMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            GalleryMarginUnits: {
+                ...GalleryMarginUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const GalleryMarginDesktopWidth = `${GalleryDesktopMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.left}${GalleryMarginUnits[DeviceType]}`;
+    const GalleryMarginTabletWidth = `${GalleryTabMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.left}${GalleryMarginUnits[DeviceType]}`;
+    const GalleryMarginMobileWidth = `${GalleryMobileMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.left}${GalleryMarginUnits[DeviceType]}`;
+
+
+    // Gallery Padding Functionb
+    const handleGalleryPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( GalleryPaddingLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        GalleryDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        GalleryTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        GalleryMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {GalleryDesktopPadding: {...GalleryDesktopPadding, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {GalleryTabPadding: {...GalleryTabPadding, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {GalleryMobilePadding: {...GalleryMobilePadding, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleGalleryPaddingCombineBtn = () => {
+        setAttributes( {GalleryPaddingLink: !GalleryPaddingLink} );
+    }
+
+    const handleGalleryPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            GalleryPaddingUnits: {
+                ...GalleryPaddingUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const GalleryPaddingDesktopWidth = `${GalleryDesktopPadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.left}${GalleryPaddingUnits[DeviceType]}`;
+    const GalleryPaddingTabletWidth = `${GalleryTabPadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.left}${GalleryPaddingUnits[DeviceType]}`;
+    const GalleryPaddingMobileWidth = `${GalleryMobilePadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.left}${GalleryPaddingUnits[DeviceType]}`;
+
+
+    // Gallery BorderWidth Function
+    const handleGalleryBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( GalleryBorderLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        GalleryDesktopBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        GalleryTabBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        GalleryMobileBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {GalleryDesktopBorderWidth: {...GalleryDesktopBorderWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {GalleryTabBorderWidth: {...GalleryTabBorderWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {GalleryMobileBorderWidth: {...GalleryMobileBorderWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleGalleryBorderCombineBtn = () => {
+        setAttributes( {GalleryBorderLink: !GalleryBorderLink} );
+    }
+
+    const handleGalleryBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            GalleryBorderUnits: {
+                ...GalleryBorderUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const GalleryBorderDesktopWidth = `${GalleryDesktopBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
+    const GalleryBorderTabletWidth = `${GalleryTabBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
+    const GalleryBorderMobileWidth = `${GalleryMobileBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
+
+
+    // Gallery BorderRadiusWidth Function
+    const handleGalleryBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( GalleryBorderRadiusLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        GalleryBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        GalleryBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        GalleryBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {GalleryBorderRadiusDesktop: {...GalleryBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {GalleryBorderRadiusTablet: {...GalleryBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {GalleryBorderRadiusMobile: {...GalleryBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleGalleryBorderRadiusCombineBtn = () => {
+        setAttributes( {GalleryBorderRadiusLink: !GalleryBorderRadiusLink} );
+    }
+
+    const handleGalleryBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            GalleryBorderRadiusUnits: {
+                ...GalleryBorderRadiusUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const GalleryBorderRadiusDesktopWidth = `${GalleryBorderRadiusDesktop.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusDesktop.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusDesktop.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusDesktop.left}${GalleryBorderRadiusUnits[DeviceType]}`;
+    const GalleryBorderRadiusTabletWidth = `${GalleryBorderRadiusTablet.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusTablet.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusTablet.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusTablet.left}${GalleryBorderRadiusUnits[DeviceType]}`;
+    const GalleryBorderRadiusMobileWidth = `${GalleryBorderRadiusMobile.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusMobile.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusMobile.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusMobile.left}${GalleryBorderRadiusUnits[DeviceType]}`;
+
+
+    // image BorderWidth Function
+	const handleImageBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( imageBorderLink ) {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						imageDesktopBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						imageTabBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						imageMobileBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {imageDesktopBorderWidth: {...imageDesktopBorderWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {imageTabBorderWidth: {...imageTabBorderWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {imageMobileBorderWidth: {...imageMobileBorderWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	
+	}
+	
+	const handleImageBorderCombineBtn = () => {
+		setAttributes( {imageBorderLink: !imageBorderLink} );
+	}
+	
+	const handleImageBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			imageBorderUnits: {
+				...imageBorderUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
+	
+	const imageDesktopBorder = `${imageDesktopBorderWidth.top}${imageBorderUnits[DeviceType]} ${imageDesktopBorderWidth.right}${imageBorderUnits[DeviceType]} ${imageDesktopBorderWidth.bottom}${imageBorderUnits[DeviceType]} ${imageDesktopBorderWidth.left}${imageBorderUnits[DeviceType]}`;
+	const imageTabBorder = `${imageTabBorderWidth.top}${imageBorderUnits[DeviceType]} ${imageTabBorderWidth.right}${imageBorderUnits[DeviceType]} ${imageTabBorderWidth.bottom}${imageBorderUnits[DeviceType]} ${imageTabBorderWidth.left}${imageBorderUnits[DeviceType]}`;
+	const imageMobileBorder = `${imageMobileBorderWidth.top}${imageBorderUnits[DeviceType]} ${imageMobileBorderWidth.right}${imageBorderUnits[DeviceType]} ${imageMobileBorderWidth.bottom}${imageBorderUnits[DeviceType]} ${imageMobileBorderWidth.left}${imageBorderUnits[DeviceType]}`;
+	
+	
+	// image BorderRadiusWidth Function
+	const handleImageBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( imageBorderRadiusLink ) {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						imageDesktopBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						imageTabBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						imageMobileBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( DeviceType ) {
+				case 'Desktop':
+					setAttributes( {imageDesktopBorderRadiusWidth: {...imageDesktopBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {imageTabBorderRadiusWidth: {...imageTabBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {imageMobileBorderRadiusWidth: {...imageMobileBorderRadiusWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	
+	}
+	
+	const handleImageBorderRadiusCombineBtn = () => {
+		setAttributes( {imageBorderRadiusLink: !imageBorderRadiusLink} );
+	}
+	
+	const handleImageBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			imageBorderRadiusUnits: {
+				...imageBorderRadiusUnits,
+				[DeviceType]: unit
+			}
+		})
+	}
+	
+	const imageDesktopBorderRadius = `${imageDesktopBorderRadiusWidth.top}${imageBorderRadiusUnits[DeviceType]} ${imageDesktopBorderRadiusWidth.right}${imageBorderRadiusUnits[DeviceType]} ${imageDesktopBorderRadiusWidth.bottom}${imageBorderRadiusUnits[DeviceType]} ${imageDesktopBorderRadiusWidth.left}${imageBorderRadiusUnits[DeviceType]}`;
+	const imageTabBorderRadius = `${imageTabBorderRadiusWidth.top}${imageBorderRadiusUnits[DeviceType]} ${imageTabBorderRadiusWidth.right}${imageBorderRadiusUnits[DeviceType]} ${imageTabBorderRadiusWidth.bottom}${imageBorderRadiusUnits[DeviceType]} ${imageTabBorderRadiusWidth.left}${imageBorderRadiusUnits[DeviceType]}`;
+	const imageMobileBorderRadius = `${imageMobileBorderRadiusWidth.top}${imageBorderRadiusUnits[DeviceType]} ${imageMobileBorderRadiusWidth.right}${imageBorderRadiusUnits[DeviceType]} ${imageMobileBorderRadiusWidth.bottom}${imageBorderRadiusUnits[DeviceType]} ${imageMobileBorderRadiusWidth.left}${imageBorderRadiusUnits[DeviceType]}`;
+	
+
+    // lightbox Padding Functionb
+    const handleLightboxPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( lightboxPaddingLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        lightboxDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        lightboxTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        lightboxMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {lightboxDesktopPadding: {...lightboxDesktopPadding, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {lightboxTabPadding: {...lightboxTabPadding, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {lightboxMobilePadding: {...lightboxMobilePadding, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleLightboxPaddingCombineBtn = () => {
+        setAttributes( {lightboxPaddingLink: !lightboxPaddingLink} );
+    }
+
+    const handleLightboxPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            lightboxPaddingUnits: {
+                ...lightboxPaddingUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const lightboxDesktopPaddingWidth = `${lightboxDesktopPadding.top}${lightboxPaddingUnits[DeviceType]} ${lightboxDesktopPadding.right}${lightboxPaddingUnits[DeviceType]} ${lightboxDesktopPadding.bottom}${lightboxPaddingUnits[DeviceType]} ${lightboxDesktopPadding.left}${lightboxPaddingUnits[DeviceType]}`;
+    const lightboxTabPaddingWidth = `${lightboxTabPadding.top}${lightboxPaddingUnits[DeviceType]} ${lightboxTabPadding.right}${lightboxPaddingUnits[DeviceType]} ${lightboxTabPadding.bottom}${lightboxPaddingUnits[DeviceType]} ${lightboxTabPadding.left}${lightboxPaddingUnits[DeviceType]}`;
+    const lightboxMobilePaddingWidth = `${lightboxMobilePadding.top}${lightboxPaddingUnits[DeviceType]} ${lightboxMobilePadding.right}${lightboxPaddingUnits[DeviceType]} ${lightboxMobilePadding.bottom}${lightboxPaddingUnits[DeviceType]} ${lightboxMobilePadding.left}${lightboxPaddingUnits[DeviceType]}`;
+
+
+    // lightbox BorderWidth Function
+    const handleLightboxBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( lightboxBorderLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        lightboxDesktopBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        lightboxTabBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        lightboxMobileBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {lightboxDesktopBorderWidth: {...lightboxDesktopBorderWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {lightboxTabBorderWidth: {...lightboxTabBorderWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {lightboxMobileBorderWidth: {...lightboxMobileBorderWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleLightboxBorderCombineBtn = () => {
+        setAttributes( {lightboxBorderLink: !lightboxBorderLink} );
+    }
+
+    const handleLightboxBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            lightboxBorderUnits: {
+                ...lightboxBorderUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const lightboxDesktopBorder = `${lightboxDesktopBorderWidth.top}${lightboxBorderUnits[DeviceType]} ${lightboxDesktopBorderWidth.right}${lightboxBorderUnits[DeviceType]} ${lightboxDesktopBorderWidth.bottom}${lightboxBorderUnits[DeviceType]} ${lightboxDesktopBorderWidth.left}${lightboxBorderUnits[DeviceType]}`;
+    const lightboxTabBorder = `${lightboxTabBorderWidth.top}${lightboxBorderUnits[DeviceType]} ${lightboxTabBorderWidth.right}${lightboxBorderUnits[DeviceType]} ${lightboxTabBorderWidth.bottom}${lightboxBorderUnits[DeviceType]} ${lightboxTabBorderWidth.left}${lightboxBorderUnits[DeviceType]}`;
+    const lightboxMobileBorder = `${lightboxMobileBorderWidth.top}${lightboxBorderUnits[DeviceType]} ${lightboxMobileBorderWidth.right}${lightboxBorderUnits[DeviceType]} ${lightboxMobileBorderWidth.bottom}${lightboxBorderUnits[DeviceType]} ${lightboxMobileBorderWidth.left}${lightboxBorderUnits[DeviceType]}`;
+
+
+    // lightbox BorderRadiusWidth Function
+    const handleLightboxBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( lightboxBorderRadiusLink ) {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        lightboxDesktopBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        lightboxTabBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        lightboxMobileBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( DeviceType ) {
+                case 'Desktop':
+                    setAttributes( {lightboxDesktopBorderRadiusWidth: {...lightboxDesktopBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {lightboxTabBorderRadiusWidth: {...lightboxTabBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {lightboxMobileBorderRadiusWidth: {...lightboxMobileBorderRadiusWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleLightboxBorderRadiusCombineBtn = () => {
+        setAttributes( {lightboxBorderRadiusLink: !lightboxBorderRadiusLink} );
+    }
+
+    const handleLightboxBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            lightboxBorderRadiusUnits: {
+                ...lightboxBorderRadiusUnits,
+                [DeviceType]: unit
+            }
+        })
+    }
+
+    const lightboxDesktopBorderRadius = `${lightboxDesktopBorderRadiusWidth.top}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxDesktopBorderRadiusWidth.right}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxDesktopBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxDesktopBorderRadiusWidth.left}${lightboxBorderRadiusUnits[DeviceType]}`;
+    const lightboxTabBorderRadius = `${lightboxTabBorderRadiusWidth.top}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxTabBorderRadiusWidth.right}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxTabBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxTabBorderRadiusWidth.left}${lightboxBorderRadiusUnits[DeviceType]}`;
+    const lightboxMobileBorderRadius = `${lightboxMobileBorderRadiusWidth.top}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxMobileBorderRadiusWidth.right}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxMobileBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxMobileBorderRadiusWidth.left}${lightboxBorderRadiusUnits[DeviceType]}`;
+
+
+    const lightboxIconHandler = (IconName) => {
+		setAttributes({lightboxIcon: IconName})
+	}
+    
+
+    return (
+        <>
+            <style>
+            {`
+                .fb-gallery-main-wrapper.${blockID} {
+                    position: relative;
+                    overflow: hidden;
+                    ${GalleryBgColor !== undefined ? `background-color: ${GalleryBgColor};` : ''};
+                    padding: ${GalleryPaddingDesktopWidth};
+                    margin: ${GalleryMarginDesktopWidth};
+                    border-style: ${GalleryBorder};
+                    border-width: ${GalleryBorderDesktopWidth};
+                    ${GalleryBorderColor !== undefined ? `border-color: ${GalleryBorderColor};` : ''};
+                    border-radius: ${GalleryBorderRadiusDesktopWidth};
+                    transition: all .3s ease-in-out;
+                    ${GalleryZIndex !== undefined ? `z-index: ${GalleryZIndex}` : ''};
+                }
+                .fb-gallery-main-wrapper.${blockID}:hover {
+                    ${GalleryBgHoverColor !== undefined ? `background-color: ${GalleryBgHoverColor};` : ''};
+                    ${GalleryBorderHoverColor !== undefined ? `border-color: ${GalleryBorderHoverColor};` : ''};
+                }
+
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
+                    display: grid;
+                    grid-template-columns: repeat(${DeviceType == 'Desktop' ? GalleryColumnNumberDesktop : DeviceType == 'Tablet' ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}, 1fr);
+                    grid-gap: ${DeviceType == 'Desktop' ? `${GalleryImageGap.Desktop}${GalleryImageGapUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryImageGap.Tablet}${GalleryImageGapUnits.Tablet}` : `${GalleryImageGap.Mobile}${GalleryImageGapUnits.Mobile}`};
+                    grid-auto-rows: ${DeviceType == 'Desktop' ? `${GalleryItemHeight.Desktop}${GalleryItemHeightUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryItemHeight.Tablet}${GalleryItemHeightUnits.Tablet}` : `${GalleryItemHeight.Mobile}${GalleryItemHeightUnits.Mobile}`};
+                }
+                
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    border-style: ${imageBorder};
+                    border-width: ${imageDesktopBorder};
+                    border-color: ${imageBorderColor};
+                    border-radius: ${imageDesktopBorderRadius};
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
+                    position: absolute;
+                    top: 0;
+                    ${ImageAlignment === 'left' && 'left: 0'};
+                    ${ImageAlignment === 'right' && 'right: 0; left: unset'};
+                    ${ImageAlignment === 'center' && 'left: 50%'};
+                    ${ImageAlignment === 'center' && 'transform: translateX(-50%);'};
+                    width: ${DeviceType == 'Desktop' ? `${ImageWidth.Desktop}${ImageWidthUnits.Desktop}` : DeviceType == 'Tablet' ? `${ImageWidth.Tablet}${ImageWidthUnits.Tablet}` : `${ImageWidth.Mobile}${ImageWidthUnits.Mobile}`};
+                    height: ${DeviceType == 'Desktop' ? `${ImageHeight.Desktop}${ImageHeightUnits.Desktop}` : DeviceType == 'Tablet' ? `${ImageHeight.Tablet}${ImageHeightUnits.Tablet}` : `${ImageHeight.Mobile}${ImageHeightUnits.Mobile}`};
+                    ${ImageFitCover === true && 'object-fit: cover'};
+                    ${ImageOverlayStyle == 'black_white' && 'filter: grayscale(100%)'};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
+                    ${ImageOverlayStyle == 'black_white' && 'filter: grayscale(0)'};
+                    transition: all 0.3s ease-in-out;
+                }
+
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper {
+                    ${GalleryButtonSwitcher == true && 'display: flex'};
+                    ${GalleryButtonSwitcher == true && `justify-content: ${GalleryButtonAlignment}`};
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                    ${GalleryButtonSwitcher == true && `border-style: ${ButtonBorder}`};
+                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher !== undefined && `border-color: ${ButtonBorderColor}`};
+                    ${GalleryButtonSwitcher == true && `border-width: ${ButtonBorderDesktopWidth}`};
+                    ${GalleryButtonSwitcher == true && `border-radius: ${ButtonBorderRadiusDesktopWidth}`};
+                    ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginDesktopWidth}`};
+                    ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingDesktopWidth}`};
+                    ${GalleryButtonSwitcher == true && `font-family: ${GalleryButtonFontFamily}`};
+                    ${GalleryButtonSwitcher == true && `font-size: ${DeviceType == 'Desktop' ? `${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet}` : `${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile}`}`};
+                    ${GalleryButtonSwitcher == true && `font-weight: ${GalleryButtonFontWeight}`};
+                    ${GalleryButtonSwitcher == true && `font-style: ${GalleryButtonFontStyle}`};
+                    ${GalleryButtonSwitcher == true && `text-transform: ${GalleryButtonTextTransform}`};
+                    ${GalleryButtonSwitcher == true && `text-decoration: ${GalleryButtonTextDecoration}`};
+                    ${GalleryButtonSwitcher == true && `letter-spacing: ${DeviceType == 'Desktop' ? `${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet}` : `${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile}`}`};
+                    ${GalleryButtonSwitcher == true && `line-height: ${DeviceType == 'Desktop' ? `${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet}` : `${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile}`}`};
+                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `color: ${GalleryButtonColor}`};
+                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `background-color: ${GalleryButtonBGColor}`};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn:hover {
+                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'hover' && `color: ${GalleryButtonHoverColor}`};
+                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'hover' && `background-color: ${GalleryButtonBGHoverColor}`};
+                    transition: all 0.3s ease-in-out;
+                }
+                    
+                @media only screen and (max-width: 1024px) {
+                    .fb-gallery-main-wrapper.${blockID} {
+                        padding: ${GalleryPaddingTabletWidth};
+                        margin: ${GalleryMarginTabletWidth};
+                        border-radius: ${GalleryBorderRadiusTabletWidth};
+                    }
+
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                        ${GalleryButtonSwitcher == true && `border-radius: ${ButtonBorderRadiusTabletWidth}`};
+                        ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginTabletWidth}`};
+                        ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingTabletWidth}`};
+                    }
+
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                        border-width: ${imageTabBorder};
+                        border-radius: ${imageTabBorderRadius};
+                    }
+                }
+
+                @media only screen and (max-width: 767px) {
+                    .fb-gallery-main-wrapper.${blockID} {
+                        padding: ${GalleryPaddingMobileWidth};
+                        margin: ${GalleryMarginMobileWidth};
+                        border-radius: ${GalleryBorderRadiusMobileWidth};
+                    }
+
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                        ${GalleryButtonSwitcher == true && `border-radius: ${ButtonBorderRadiusMobileWidth}`};
+                        ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginMobileWidth}`};
+                        ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingMobileWidth}`};
+                    }
+
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                        border-width: ${imageMobileBorder};
+                        border-radius: ${imageMobileBorderRadius};
+                    }
+                }
+
+            `}
+            { ImageOverlayStyle === 'overlay' && `
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
+                    ${ImageOverlayStyleType === 'zoominout' && 'transform: scale(1.001)'};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
+                    ${ImageOverlayStyleType === 'zoominout' && 'transform: scale(1.05)'};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-overlay {
+                    position: absolute;
+                    content: '';
+                    ${ImageOverlayStyleType === 'top' && 'top: -100%'};
+                    ${ImageOverlayStyleType === 'top' && 'left: 0'};
+                    ${ImageOverlayStyleType === 'bottom' && 'top: 100%'};
+                    ${ImageOverlayStyleType === 'bottom' && 'left: 0'};
+                    ${ImageOverlayStyleType === 'left' && 'top: 0'};
+                    ${ImageOverlayStyleType === 'left' && 'left: -100%'};
+                    ${ImageOverlayStyleType === 'right' && 'top: 0'};
+                    ${ImageOverlayStyleType === 'right' && 'left: 100%'};
+                    width: 100%;
+                    height: 100%;
+                    background-color: ${ImageOverlayColor};
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: all 0.3s ease-in-out;
+                }  
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-overlay {
+                    ${ImageOverlayStyleType == 'top' && 'top: 0'};
+                    ${ImageOverlayStyleType == 'bottom' && 'top: 0'};
+                    ${ImageOverlayStyleType == 'left' && 'left: 0'};
+                    ${ImageOverlayStyleType == 'right' && 'left: 0'};
+                    visibility: visible;
+                    opacity: 1;
+                    transition: all 0.3s ease-in-out;
+                }
+            `}
+            { lightboxIconSwitcher === true && `
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    padding: ${lightboxDesktopPaddingWidth};
+                    background-color: ${lightboxBGColor};
+                    border-style: ${lightboxBorder};
+                    border-width: ${lightboxDesktopBorder};
+                    border-color: ${lightboxBorderColor};
+                    border-radius: ${lightboxDesktopBorderRadius};
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-lightbox-icon-wrapper {
+                    visibility: visible;
+                    opacity: 1;
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover {
+                    background-color: ${lightboxBGHoverColor};
+                    border-color: ${lightboxBorderHoverColor};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                    fill: ${lightboxColor};
+                    width: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};
+                    height: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover .fb-lightbox-icon {
+                    fill: ${lightboxHoverColor};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon svg {
+                    width: 100%;
+                    height: 100%;
+                }
+                
+                @media only screen and (max-width: 1024px) {
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                        padding: ${lightboxTabPaddingWidth};
+                        border-width: ${lightboxTabBorder};
+                        border-radius: ${lightboxTabBorderRadius};
+                    }
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                        width: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};
+                        height: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};
+                    }
+                }
+                @media only screen and (max-width: 767px) {
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                        padding: ${lightboxMobilePaddingWidth};
+                        border-width: ${lightboxMobileBorder};
+                        border-radius: ${lightboxMobileBorderRadius};
+                    }
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                        width: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};
+                        height: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};
+                    }
+                }
+            ` }
+            </style>
+
+            <InspectorControls key="controls">
+                <div className="fb-inspector-control">
+                    <TabPanel
+                        className="fb-parent-tab-panel"
+                        activeClass="active-tab"
+                        tabs={[
+                            {
+                                name: "general",
+                                title: "General",
+                                className: "fb-tab general",
+                            },
+                            {
+                                name: "styles",
+                                title: "Style",
+                                className: "fb-tab styles",
+                            },
+                            {
+                                name: "advanced",
+                                title: "Advanced",
+                                className: "fb-tab advanced",
+                            },
+                        ]}
+                    >
+                        {(tab) => (
+                            <div className={"fb-tab-controls" + tab.name}>
+                                {tab.name === 'general' && (
+                                    <>
+                                    
+                                        <PanelBody
+                                            title={__("Gallery Layout", "frontis-blocks")}
+                                            initialOpen={true}
+                                        >
+                                            <SelectControl
+                                                label={__("Preset Style", "frontis-blocks")}
+                                                value={GalleryPresetStyle}
+                                                options={PRESETS}
+                                                onChange={(selected) => changeGalleryPreset(selected)}
+                                            />
+
+                                            <BaseControl
+                                                label={__("Layouts", "frontis-blocks")}
+                                                className="fb-setting-layouts-wrapper"
+                                            >
+                                                <SelectControl
+                                                    value={attributes.GalleryType}
+                                                    options={[
+                                                        { label: __("Grid Layout", "frontis-blocks"), value: "gird" },
+                                                        { label: __("Mesonry Layout", "frontis-blocks"), value: "mesonry" },
+                                                    ]}
+                                                    onChange={(value) => setAttributes({ GalleryType: value })}
+                                                />
+                                            </BaseControl>
+
+                                            <BaseControl
+                                                label={__("Image Styles", "frontis-blocks")}
+                                                className="fb-setting-image-style-wrapper"
+                                            >
+                                                <SelectControl
+                                                    value={attributes.ImageOverlayStyle}
+                                                    options={[
+                                                        { label: __("None", "frontis-blocks"), value: "none" },
+                                                        { label: __("Black & White", "frontis-blocks"), value: "black_white" },
+                                                        { label: __("Color Overlay", "frontis-blocks"), value: "overlay" },
+                                                    ]}
+                                                    onChange={(value) => setAttributes({ ImageOverlayStyle: value })}
+                                                />
+                                            </BaseControl>
+
+                                            <div className="fb-setting-spacing-container">
+                                                <div className="fb-setting-spacing-inner-container">
+                                                    <FB_ResponsiveControl
+                                                        labelText={__("Columns", "frontis-blocks")}
+                                                        device={DeviceType}
+                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                    />
+                                                </div>
+                                                <div className="fb-setting-columns-rangecontrol">
+                                                    <RangeControl
+                                                        value={DeviceType === "Desktop" ? GalleryColumnNumberDesktop : DeviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
+                                                        onChange={(value) => {
+                                                            if (DeviceType === "Desktop") {
+                                                                setAttributes({ GalleryColumnNumberDesktop: value });
+                                                            } else if (DeviceType === "Tablet") {
+                                                                setAttributes({ GalleryColumnNumberTablet: value });
+                                                            } else if (DeviceType === "Mobile") {
+                                                                setAttributes({ GalleryColumnNumberMobile: value });
+                                                            }
+                                                        }}
+                                                        min={1}
+                                                        max={12}
+                                                        allowReset
+                                                        resetFallbackValue={3}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <FB_Range
+                                                min={1}
+                                                max={1000}
+                                                label={__("Image Height", "frontis-blocks")}
+                                                rangeValue={GalleryItemHeight}
+                                                onChangeHandler={GalleryItemHeightHandler}
+                                                rangeUnitHandler={GalleryItemHeightUnitsHandler}
+                                                DeviceType={DeviceType}
+                                                units={GalleryItemHeightUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={200}
+                                            />
+
+                                            <FB_Range
+                                                min={1}
+                                                max={1000}
+                                                label={__("Image Gap", "frontis-blocks")}
+                                                rangeValue={GalleryImageGap}
+                                                onChangeHandler={GalleryImageGapHandler}
+                                                rangeUnitHandler={GalleryImageGapUnitsHandler}
+                                                DeviceType={DeviceType}
+                                                units={GalleryImageGapUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={200}
+                                            />
+
+                                        </PanelBody>
+
+                                        <PanelBody
+                                            title={__("Image Gallery Item", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <div className="fb-gallery-wrapper">
+                                                <DndContext
+                                                    collisionDetection={closestCenter}
+                                                    onDragEnd={handleDragEnd}
+                                                >
+                                                    <SortableContext items={GalleryItems.map(item => item.id)}>
+                                                        <ul className='dnd-items-wrapper'>
+                                                            {GalleryItems.map((item) => (
+                                                                <SortableItem
+                                                                    key={item.id}
+                                                                    id={item.id}
+                                                                    item={item}
+                                                                    setAttributes={setAttributes}
+                                                                    DeviceType={DeviceType}
+                                                                    GalleryType={GalleryType}
+                                                                    GalleryColumnNumberMobile={GalleryColumnNumberMobile}
+                                                                    GalleryColumnNumberTablet={GalleryColumnNumberTablet}
+                                                                    GalleryColumnNumberDesktop={GalleryColumnNumberDesktop}
+                                                                    handleChangeItem={handleChangeItem}
+                                                                    handleDeleteItem={handleDeleteItem}
+                                                                    handleRemoveMedia={handleRemoveMedia}
+                                                                />
+                                                            ))}
+                                                        </ul>
+                                                    </SortableContext>
+                                                    <Button isPrimary onClick={handleAddItem}>
+                                                        {__("Add Image", "frontis-blocks")}
+                                                    </Button>
+                                                </DndContext>
+                                            </div>
+                                            
+                                        </PanelBody>
+                                    
+                                        <PanelBody
+                                            title={__("Lightbox Icon", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <ToggleControl
+                                                label={__("Enable Icon", "frontis-blocks")}
+                                                className="fb-setting-responsive-control"
+                                                checked={lightboxIconSwitcher}
+                                                onChange={(value) => setAttributes({ lightboxIconSwitcher: value })}
+                                            />
+                                            {lightboxIconSwitcher === true && <>
+                                                <BaseControl label={__("Icon", "frontis-blocks")}>
+                                                    <FBIconPicker 
+                                                        value={lightboxIcon} 
+                                                        setIconHandler={lightboxIconHandler} 
+                                                    />
+                                                </BaseControl>
+                                            </>}
+                                        </PanelBody>
+
+                                        <PanelBody
+                                            title={__("Button", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <ToggleControl
+                                                label={__("Enable Button", "frontis-blocks")}
+                                                className="fb-setting-responsive-control"
+                                                checked={GalleryButtonSwitcher}
+                                                onChange={(value) => setAttributes({ GalleryButtonSwitcher: value })}
+                                            />
+                                        
+                                            { GalleryButtonSwitcher == true &&
+                                            <>
+                                                <TextControl
+                                                    label={__("Button Text", "frontis-blocks")}
+                                                    value={GalleryButtonText}
+                                                    onChange={(value) => setAttributes({ GalleryButtonText: value })}
+                                                    className="sh-heading-text"
+                                                />
+
+                                                <TextControl
+                                                    label={__("Button Link", "frontis-blocks")}
+                                                    value={GalleryButtonLink}
+                                                    onChange={(value) => setAttributes({ GalleryButtonLink: value })}
+                                                    className="sh-heading-text"
+                                                />
+                                            </>
+                                            }
+
+                                        </PanelBody>
+                                    </>
+                                )}
+
+                                {tab.name === "styles" && (
+                                    <>
+                                        <PanelBody
+                                            title={__("Image Setting", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <BaseControl
+                                                label={__("Alignment", "frontis-blocks")}
+                                                id="fb-setting-image-alignment"
+                                                className="fb-setting-image-alignment"
+                                            >
+                                                <ButtonGroup
+                                                    className="fb-setting-image-alignment-group-btn"
+                                                >
+                                                    {TEXT_ALIGN.map((item, key) => (
+                                                        <Button
+                                                            key={key}
+                                                            onClick={() => setAttributes({ ImageAlignment: item.value })}
+                                                            className={`fb-setting-image-alignment-single-btn ${ImageAlignment === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
+                                            </BaseControl>
+
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Width", "frontis-blocks")}
+                                                rangeValue={ImageWidth}
+                                                onChangeHandler={ImageWidthHandler}
+                                                rangeUnitHandler={ImageWidthUnitsHandler}
+                                                DeviceType={DeviceType}
+                                                units={ImageWidthUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={100}
+                                            />
+                                            
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Height", "frontis-blocks")}
+                                                rangeValue={ImageHeight}
+                                                onChangeHandler={ImageHeightHandler}
+                                                rangeUnitHandler={ImageHeightUnitsHandler}
+                                                DeviceType={DeviceType}
+                                                units={ImageHeightUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={100}
+                                            />
+
+                                            <ToggleControl
+                                                label={__("Object Fit Cover", "frontis-blocks")}
+                                                className="fb-setting-image-fit-toggle"
+                                                checked={ImageFitCover}
+                                                onChange={(value) => setAttributes({ ImageFitCover: value })}
+                                            />
+
+                                            <PanelBody
+                                                title={__("Border & Border radius", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-border-setting-wrapper"
+                                                >
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={imageBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ imageBorder: value })}
+                                                />
+
+                                                <FB_Color
+                                                    label={__("Border Color", "frontis-blocks")}
+                                                    globalColorSwitcher={imageBorderColorSwitcher}
+                                                    globalColor={imageBorderColor}
+                                                    globalHoverColor={imageBorderHoverColor}
+                                                    handleColorSwitcherChange={imageBorderColorSwitcherChange}
+                                                    handleGlobalColorChange={imageBorderColorChange}
+                                                    handleGlobalHoverColorChange={imageBorderHoverColorChange}
+                                                />
+
+                                                <FB_Spacing
+                                                    label={__("Border Width", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleImageBorderUnitsHandler}
+                                                    spacingUnits={imageBorderUnits}
+                                                    spacingDesktop={imageDesktopBorderWidth}
+                                                    spacingTablet={imageTabBorderWidth}
+                                                    spacingMobile={imageMobileBorderWidth}
+                                                    handleSpacingUnitHandler={handleImageBorderUnitChange}
+                                                    spacingCombineBtn={imageBorderLink}
+                                                    spacingCombineBtnHandler={handleImageBorderCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleImageBorderRadiusUnitsHandler}
+                                                    spacingUnits={imageBorderRadiusUnits}
+                                                    spacingDesktop={imageDesktopBorderRadiusWidth}
+                                                    spacingTablet={imageTabBorderRadiusWidth}
+                                                    spacingMobile={imageMobileBorderRadiusWidth}
+                                                    handleSpacingUnitHandler={handleImageBorderRadiusUnitChange}
+                                                    spacingCombineBtn={imageBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleImageBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            </PanelBody>
+                                        </PanelBody>
+
+                                        { ImageOverlayStyle == 'overlay' &&
+                                            <PanelBody
+                                                title={__("Overlay Styles", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+
+                                                <BaseControl
+                                                    label={__("Overlay Styles", "frontis-blocks")}
+                                                    className="fb-setting-image-style-wrapper"
+                                                >
+                                                    <SelectControl
+                                                        value={attributes.ImageOverlayStyleType}
+                                                        options={[
+                                                            { label: __("From Top", "frontis-blocks"), value: "top" },
+                                                            { label: __("From Bottom", "frontis-blocks"), value: "bottom" },
+                                                            { label: __("From Left", "frontis-blocks"), value: "left" },
+                                                            { label: __("From Right", "frontis-blocks"), value: "right" },
+                                                            { label: __("Zoom In Out", "frontis-blocks"), value: "zoominout" },
+                                                        ]}
+                                                        onChange={(value) => setAttributes({ ImageOverlayStyleType: value })}
+                                                    />
+                                                </BaseControl>
+
+                                                <BaseControl 
+                                                    label={__("Overlay Color", "frontis-blocks")}
+                                                    className="fb-setting-color-setting-wrapper"
+                                                >
+                                                    <Dropdown
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                        popoverProps={{ placement: 'bottom-start' }}
+                                                        renderToggle={({ isOpen, onToggle }) => (
+                                                            <Button
+                                                                variant="primary"
+                                                                onClick={onToggle}
+                                                                aria-expanded={isOpen}
+                                                                className="fb-setting-color-setting-icon-btn"
+                                                            >
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                            </Button>
+                                                        )}
+                                                        renderContent={() => (
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
+                                                                        <ColorPicker
+                                                                            color={ImageOverlayColor}
+                                                                            onChange={(value) => setAttributes({ ImageOverlayColor: value })}
+                                                                            enableAlpha={true}
+                                                                        />
+                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <ColorPalette
+                                                                            colors={[
+                                                                                { color: '#F72585' },
+                                                                                { color: '#7209B7' },
+                                                                                { color: '#3A0CA3' },
+                                                                                { color: '#4361EE' },
+                                                                                { color: '#4CC9F0' },
+                                                                            ]}
+                                                                            disableCustomColors={true}
+                                                                            value={ImageOverlayColor}
+                                                                            onChange={(value) => setAttributes({ ImageOverlayColor: value })}
+                                                                        />
+                                                                    </div>
+                                                                </BaseControl>
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </BaseControl>
+                                            </PanelBody>
+
+                                        }
+
+                                        { GalleryButtonSwitcher == true &&
+                                        
+                                            <PanelBody
+                                                title={__("Gallery Button", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-gallery-button-wrapper"
+                                            >
+                                                <BaseControl
+                                                    label={__("Alignment", "frontis-blocks")}
+                                                    id="fb-setting-image-alignment"
+                                                    className="fb-setting-image-alignment"
+                                                >
+                                                    <ButtonGroup
+                                                        className="fb-setting-image-alignment-group-btn"
+                                                    >
+                                                        {TEXT_ALIGN.map((item, key) => (
+                                                            <Button
+                                                                key={key}
+                                                                onClick={() => setAttributes({ GalleryButtonAlignment: item.value })}
+                                                                className={`fb-setting-image-alignment-single-btn ${GalleryButtonAlignment === item.value ? 'active' : ''}`}
+                                                            >
+                                                                {item.label}
+                                                            </Button>
+                                                        ))}
+                                                    </ButtonGroup>
+                                                </BaseControl>
+
+                                                <FB_TypographyControl
+                                                    fontFamily={GalleryButtonFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ GalleryButtonFontFamily: value })}
+                                                    
+                                                    fontSize={GalleryButtonFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ GalleryButtonFontSize: value })}
+                                                    
+                                                    fontSizeUnits={GalleryButtonFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ GalleryButtonFontSizeUnits: value })}
+                                                    
+                                                    fontWeight={GalleryButtonFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ GalleryButtonFontWeight: value })}
+                                                    
+                                                    fontStyle={GalleryButtonFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ GalleryButtonFontStyle: value })}
+                                                    
+                                                    textTransform={GalleryButtonTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ GalleryButtonTextTransform: value })}
+                                                    
+                                                    textDecoration={GalleryButtonTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ GalleryButtonTextDecoration: value })}
+                                                    
+                                                    letterSpacing={GalleryButtonLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ GalleryButtonLetterSpacing: value })}
+                                                    
+                                                    letterSpacingUnits={GalleryButtonLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ GalleryButtonLetterSpacingUnits: value })}
+                                                    
+                                                    lineHeight={GalleryButtonLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ GalleryButtonLineHeight: value })}
+                                                    
+                                                    lineHeightUnits={GalleryButtonLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ GalleryButtonLineHeightUnits: value })}
+                                                    
+                                                    DeviceType={DeviceType}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Color
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColorSwitcher={GalleryButtonColorSwitcher}
+                                                    globalColor={GalleryButtonColor}
+                                                    globalHoverColor={GalleryButtonHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryButtonColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryButtonColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryButtonHoverColorChange}
+                                                />
+
+
+                                                <FB_Color
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    globalColorSwitcher={GalleryButtonBGColorSwitcher}
+                                                    globalColor={GalleryButtonBGColor}
+                                                    globalHoverColor={GalleryButtonBGHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryButtonBGColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryButtonBGColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryButtonBGHoverColorChange}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleButtonMarginUnitsHandler}
+                                                    spacingUnits={ButtonMarginUnits}
+                                                    spacingDesktop={ButtonDesktopMargin}
+                                                    spacingTablet={ButtonTabMargin}
+                                                    spacingMobile={ButtonMobileMargin}
+                                                    handleSpacingUnitHandler={handleButtonMarginUnitChange}
+                                                    spacingCombineBtn={ButtonMarginLink}
+                                                    spacingCombineBtnHandler={handleButtonMarginCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleButtonPaddingUnitsHandler}
+                                                    spacingUnits={ButtonPaddingUnits}
+                                                    spacingDesktop={ButtonDesktopPadding}
+                                                    spacingTablet={ButtonTabPadding}
+                                                    spacingMobile={ButtonMobilePadding}
+                                                    handleSpacingUnitHandler={handleButtonPaddingUnitChange}
+                                                    spacingCombineBtn={ButtonPaddingLink}
+                                                    spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                            </PanelBody>
+                                            
+                                        
+                                        }
+                                        { GalleryButtonSwitcher == true &&
+                                        
+                                        <PanelBody
+                                            title={__("Button Border & Border radius", "frontis-blocks")}
+                                            initialOpen={false}
+                                            className="fb-setting-border-setting-wrapper"
+                                            >
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={ButtonBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ ButtonBorder: value })}
+                                                />
+
+                                            <FB_Color
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalColorSwitcher={ButtonBorderColorSwitcher}
+                                                globalColor={ButtonBorderColor}
+                                                globalHoverColor={ButtonBorderHoverColor}
+                                                handleColorSwitcherChange={handleButtonBorderColorSwitcherChange}
+                                                handleGlobalColorChange={handleButtonBorderColorChange}
+                                                handleGlobalHoverColorChange={handleButtonBorderHoverColorChange}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Border Width", "frontis-blocks")}
+                                                DeviceType={DeviceType}
+                                                spacingUnitsHandler={handleButtonBorderUnitsHandler}
+                                                spacingUnits={ButtonBorderUnits}
+                                                spacingDesktop={ButtonDesktopBorderWidth}
+                                                spacingTablet={ButtonTabBorderWidth}
+                                                spacingMobile={ButtonMobileBorderWidth}
+                                                handleSpacingUnitHandler={handleButtonBorderUnitChange}
+                                                spacingCombineBtn={ButtonBorderLink}
+                                                spacingCombineBtnHandler={handleButtonBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Border Radius Width", "frontis-blocks")}
+                                                DeviceType={DeviceType}
+                                                spacingUnitsHandler={handleButtonBorderRadiusUnitsHandler}
+                                                spacingUnits={ButtonBorderRadiusUnits}
+                                                spacingDesktop={ButtonDesktopBorderRadiusWidth}
+                                                spacingTablet={ButtonTabBorderRadiusWidth}
+                                                spacingMobile={ButtonMobileBorderRadiusWidth}
+                                                handleSpacingUnitHandler={handleButtonBorderRadiusUnitChange}
+                                                spacingCombineBtn={ButtonBorderRadiusLink}
+                                                spacingCombineBtnHandler={handleButtonBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+                                        </PanelBody>
+                                        
+                                        }
+
+                                        { lightboxIconSwitcher === true &&
+                                        <>
+                                            <PanelBody
+                                                title={__("Lightbox", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-border-setting-wrapper"
+                                                >
+                                                <FB_Range
+                                                    min={1}
+                                                    max={100}
+                                                    label={__("Size", "frontis-blocks")}
+                                                    rangeValue={lightboxIconSize}
+                                                    onChangeHandler={lightboxIconSizeHandler}
+                                                    rangeUnitHandler={lightboxIconSizeUnitsHandler}
+                                                    DeviceType={DeviceType}
+                                                    units={lightboxIconSizeUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={100}
+                                                />
+                                                <FB_Spacing
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleLightboxPaddingUnitsHandler}
+                                                    spacingUnits={lightboxPaddingUnits}
+                                                    spacingDesktop={lightboxDesktopPadding}
+                                                    spacingTablet={lightboxTabPadding}
+                                                    spacingMobile={lightboxMobilePadding}
+                                                    handleSpacingUnitHandler={handleLightboxPaddingUnitChange}
+                                                    spacingCombineBtn={lightboxPaddingLink}
+                                                    spacingCombineBtnHandler={handleLightboxPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Color
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColorSwitcher={lightboxColorSwitcher}
+                                                    globalColor={lightboxColor}
+                                                    globalHoverColor={lightboxHoverColor}
+                                                    handleColorSwitcherChange={handleLightboxColorSwitcherChange}
+                                                    handleGlobalColorChange={handleLightboxColorChange}
+                                                    handleGlobalHoverColorChange={handleLightboxHoverColorChange}
+                                                />
+												<FB_Color
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    globalColorSwitcher={lightboxBGColorSwitcher}
+                                                    globalColor={lightboxBGColor}
+                                                    globalHoverColor={lightboxBGHoverColor}
+                                                    handleColorSwitcherChange={handleLightboxBGColorSwitcherChange}
+                                                    handleGlobalColorChange={handleLightboxBGColorChange}
+                                                    handleGlobalHoverColorChange={handleLightboxBGHoverColorChange}
+                                                /> 
+                                            </PanelBody>
+
+                                            <PanelBody
+                                                title={__("Lightbox Border & Border radius", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-border-setting-wrapper"
+                                            >
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={lightboxBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ lightboxBorder: value })}
+                                                />
+
+                                                <FB_Color
+                                                    label={__("Border Color", "frontis-blocks")}
+                                                    globalColorSwitcher={lightboxBorderColorSwitcher}
+                                                    globalColor={lightboxBorderColor}
+                                                    globalHoverColor={lightboxBorderHoverColor}
+                                                    handleColorSwitcherChange={handleLightboxBorderColorSwitcherChange}
+                                                    handleGlobalColorChange={handleLightboxBorderColorChange}
+                                                    handleGlobalHoverColorChange={handleLightboxBorderHoverColorChange}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Border Width", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleLightboxBorderUnitsHandler}
+                                                    spacingUnits={lightboxBorderUnits}
+                                                    spacingDesktop={lightboxDesktopBorderWidth}
+                                                    spacingTablet={lightboxTabBorderWidth}
+                                                    spacingMobile={lightboxMobileBorderWidth}
+                                                    handleSpacingUnitHandler={handleLightboxBorderUnitChange}
+                                                    spacingCombineBtn={lightboxBorderLink}
+                                                    spacingCombineBtnHandler={handleLightboxBorderCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleLightboxBorderRadiusUnitsHandler}
+                                                    spacingUnits={lightboxBorderRadiusUnits}
+                                                    spacingDesktop={lightboxDesktopBorderRadiusWidth}
+                                                    spacingTablet={lightboxTabBorderRadiusWidth}
+                                                    spacingMobile={lightboxMobileBorderRadiusWidth}
+                                                    handleSpacingUnitHandler={handleLightboxBorderRadiusUnitChange}
+                                                    spacingCombineBtn={lightboxBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleLightboxBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            </PanelBody>
+                                        </>   
+                                        }
+
+                                    </>
+                                )}
+                            {tab.name === "advanced" && (
+                                <>
+                                    <div className="fb-setting-advanced-tab-wrapper">
+                                        <div className="fb-setting-inner-wrapper">
+                                            
+                                            <PanelBody
+                                                title={__("Z Index", "frontis-blocks")}
+                                                initialOpen={true}
+                                                className='fb-setting-z-index-header'
+                                            >
+                                                <RangeControl
+                                                    value={GalleryZIndex}
+                                                    onChange={(value) => setAttributes({ GalleryZIndex: value === 0 ? undefined : value })}
+                                                    min={1}
+                                                    max={100}
+                                                    step={1}
+                                                    allowReset
+                                                    resetFallbackValue={undefined}
+                                                />
+                                            </PanelBody>
+                                            <PanelBody
+                                             title={__("Padding & Margin", "frontis-blocks")}
+                                             initialOpen={false}
+                                             >
+
+                                                <FB_Spacing 
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleGalleryMarginUnitsHandler}
+                                                    spacingUnits={GalleryMarginUnits}
+                                                    spacingDesktop={GalleryDesktopMargin}
+                                                    spacingTablet={GalleryTabMargin}
+                                                    spacingMobile={GalleryMobileMargin}
+                                                    handleSpacingUnitHandler={handleGalleryMarginUnitChange}
+                                                    spacingCombineBtn={GalleryMarginLink}
+                                                    spacingCombineBtnHandler={handleGalleryMarginCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleGalleryPaddingUnitsHandler}
+                                                    spacingUnits={GalleryPaddingUnits}
+                                                    spacingDesktop={GalleryDesktopPadding}
+                                                    spacingTablet={GalleryTabPadding}
+                                                    spacingMobile={GalleryMobilePadding}
+                                                    handleSpacingUnitHandler={handleGalleryPaddingUnitChange}
+                                                    spacingCombineBtn={GalleryPaddingLink}
+                                                    spacingCombineBtnHandler={handleGalleryPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />                                     
+                                            </PanelBody>
+                                            <PanelBody title="Background Color" initialOpen={false} >
+                                                <FB_Color
+                                                    globalColorSwitcher={GalleryBgColorSwitcher}
+                                                    globalColor={GalleryBgColor}
+                                                    globalHoverColor={GalleryBgHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryBgColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryBgColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryBgHoverColorChange}
+                                                />
+                                            </PanelBody>
+
+                                            <PanelBody
+                                                title={__("Border & Border radius", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-border-setting-wrapper"
+                                                >
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={GalleryBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ GalleryBorder: value })}
+                                                />
+
+                                                <FB_Color
+                                                    label={__("Border Color", "frontis-blocks")}
+                                                    globalColorSwitcher={GalleryBorderColorSwitcher}
+                                                    globalColor={GalleryBorderColor}
+                                                    globalHoverColor={GalleryBorderHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryBorderColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryBorderColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryBorderHoverColorChange}
+                                                />
+                                                <FB_Spacing 
+                                                    label={__("Border Width", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleGalleryBorderUnitsHandler}
+                                                    spacingUnits={GalleryBorderUnits}
+                                                    spacingDesktop={GalleryDesktopBorderWidth}
+                                                    spacingTablet={GalleryTabBorderWidth}
+                                                    spacingMobile={GalleryMobileBorderWidth}
+                                                    handleSpacingUnitHandler={handleGalleryBorderUnitChange}
+                                                    spacingCombineBtn={GalleryBorderLink}
+                                                    spacingCombineBtnHandler={handleGalleryBorderCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    DeviceType={DeviceType}
+                                                    spacingUnitsHandler={handleGalleryBorderRadiusUnitsHandler}
+                                                    spacingUnits={GalleryBorderRadiusUnits}
+                                                    spacingDesktop={GalleryBorderRadiusDesktop}
+                                                    spacingTablet={GalleryBorderRadiusTablet}
+                                                    spacingMobile={GalleryBorderRadiusMobile}
+                                                    handleSpacingUnitHandler={handleGalleryBorderRadiusUnitChange}
+                                                    spacingCombineBtn={GalleryBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleGalleryBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            </PanelBody>
+
+                                            <PanelBody
+                                                title={__("Responsive Control", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-responsive-control-wrapper"
+                                            >
+                                                <ToggleControl
+                                                    label={__("Hide on Desktop", "frontis-blocks")}
+                                                    className="fb-setting-responsive-control"
+                                                    checked={GalleryDesktopSwitcher}
+                                                    onChange={(value) => setAttributes({ GalleryDesktopSwitcher: value })}
+                                                />
+                                                <ToggleControl
+                                                    label={__("Hide on Tablet", "frontis-blocks")}
+                                                    className="fb-setting-responsive-control"
+                                                    checked={GalleryTabletSwitcher}
+                                                    onChange={(value) => setAttributes({ GalleryTabletSwitcher: value })}
+                                                />
+                                                <ToggleControl
+                                                    label={__("Hide on Mobile", "frontis-blocks")}
+                                                    className="fb-setting-responsive-control"
+                                                    checked={GalleryMobileSwitcher}
+                                                    onChange={(value) => setAttributes({ GalleryMobileSwitcher: value })}
+                                                />
+                                            </PanelBody>
+
+                                        </div>
+                                    </div>
+                                </>
+                                )}
+                            </div>
+                        )}
+                    </TabPanel>
+                </div>
+            </InspectorControls>
+        </>   
+    );
+}
