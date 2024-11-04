@@ -19,6 +19,12 @@ const attributes = {
         type: 'string',
         default: ''
     },
+    infoMediaAlt: {
+        type: "string",
+    },
+    infoMediaID: {
+        type: "number",
+    },
 	mediaSize: {
 		type: 'object',
 		default: {
@@ -58,9 +64,9 @@ const attributes = {
     mediaBgWidth: {
 		type: 'object',
 		default: {
-			Desktop: 50,
-			Tablet: 50,
-			Mobile: 50
+			Desktop: 76,
+			Tablet: 76,
+			Mobile: 76
 		}
 	},
 	mediaBgWidthDesktop: {
@@ -90,9 +96,9 @@ const attributes = {
     mediaBgHeight: {
 		type: 'object',
 		default: {
-			Desktop: 50,
-			Tablet: 50,
-			Mobile: 50
+			Desktop: 76,
+			Tablet: 76,
+			Mobile: 76
 		}
 	},
 	mediaBgHeightDesktop: {
@@ -137,7 +143,7 @@ const attributes = {
 	},
     btnIconColor: {
 		type: 'string',
-        default: '#ffffff'
+        default: '#399CFF'
 	},
     btnIconHoverColor: {
 		type: 'string',
@@ -149,6 +155,7 @@ const attributes = {
 	},
     mediaIconHoverColor: {
 		type: 'string',
+        default: "#399CFF"
 	},
 	mediaIconColorSwitcher : {
 		type: "string",
@@ -176,7 +183,7 @@ const attributes = {
 	},
 	btnIcon: {
 		type: 'string',
-		default: 'angle-right',
+		default: 'arrow-up-right-from-square',
 	},
     boxBgColor: {
         type: 'string',
@@ -191,7 +198,7 @@ const attributes = {
 	},
     titleColor: {
         type: 'string',
-        default: '#000'
+        default: '#15171C'
     },
     borderRadius: {
         type: 'number',
@@ -276,10 +283,12 @@ const attributes = {
         default: "normal"
     },
     Heading_Color : {
-        type: "string"
+        type: "string",
+        defalt: "#15171C"
     },
     Heading_Hover_Color: {
         type: 'string',
+        defalt: "#ffffff"
     },
     Heading_Background_Color: {
         type: 'string',
@@ -503,10 +512,12 @@ const attributes = {
         default: "normal"
     },
     SubHeadingColor : {
-        type: "string"
+        type: "string",
+        default: "#555E72"
     },
     SubHeadingHoverColor : {
-        type: "string"
+        type: "string",
+        default: "#ffffff"
     },
     Sub_Heading_Text: {
         type: "string",
@@ -620,10 +631,10 @@ const attributes = {
 	infoButtonDesktopPadding: {
 		type: "object",
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
 		},
 	},
 	infoButtonTabPadding: {
@@ -962,10 +973,11 @@ const attributes = {
 	},
 	buttonTextColor : {
 		type: "string",
-		default: '#ffffff'
+		default: '#399CFF'
 	},
 	buttonTextHoverColor : {
-		type: "string"
+		type: "string",
+        default: "#ffffff"
 	},
 	buttonBgColorSwitcher : {
 		type: "string",
@@ -992,10 +1004,10 @@ const attributes = {
     globalPaddingDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 32,
+            bottom: 32,
+            left: 32,
+            right: 32,
         },
     },
     globalPaddingTablet: {
@@ -1068,7 +1080,8 @@ const attributes = {
         default: '#EBF5FF'
     },
     globalBgHoverColor: {
-        type: 'string',
+        type: "string",
+        default: "#399CFF"
     },
     globalBorder: {
         type: 'string',
@@ -1134,10 +1147,10 @@ const attributes = {
     globalBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 6,
+            bottom: 6,
+            left: 6,
+            right: 6,
         },
     },
     globalBorderRadiusTablet: {
@@ -1246,6 +1259,7 @@ const attributes = {
     },
     mediaBgColor: {
         type: "string",
+        default: "#399CFF"
     },
     bgType: {
         type: "string",
@@ -1253,6 +1267,7 @@ const attributes = {
     },
     mediaBgHoverColor: {
         type: "string",
+        default: "#ffffff"
     },
     mediaBorder: {
         type: "string",
@@ -1318,33 +1333,42 @@ const attributes = {
     mediaBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 50,
+            bottom: 50,
+            left: 50,
+            right: 50,
         },
     },
     mediaBorderRadiusTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 50,
+            bottom: 50,
+            left: 50,
+            right: 50,
         },
     },
     mediaBorderRadiusMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: 50,
+            bottom: 50,
+            left: 50,
+            right: 50,
         },
     },
     mediaBorderRadiusLink: {
         type: "boolean",
         default: true
+    },
+    infoMediaBackgroundImageUrl: {
+        type: "string",
+    },
+    infoMediaBackgroundImageAlt: {
+        type: "string",
+    },
+    infoMediaBackgroundImageID: {
+        type: "number",
     },
     boxGlobalBoxShadowValues: {
         type: 'array',
@@ -1354,6 +1378,110 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    mediaBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    mediaBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    mediaClassicColor: {
+        type: "string",
+    },
+    mediaGradientColor: {
+        type: "string",
+    },
+    mediaCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    mediaCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    mediaHoverClassicColor: {
+        type: "string",
+    },
+    mediaHoverGradientColor: {
+        type: "string",
+    },
+    mediaHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    mediaHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },    
 
 }
 //
