@@ -408,6 +408,29 @@ $btn_icon_hover_color = isset($block_attributes['btnIconHoverColor']) ? sanitize
 $media_icon_color = isset($block_attributes['mediaIconColor']) ? sanitize_hex_color($block_attributes['mediaIconColor']) : '#ffffff';
 $media_icon_hover_color = isset($block_attributes['mediaIconHoverColor']) ? sanitize_hex_color($block_attributes['mediaIconHoverColor']) : '#399CFF';
 
+$media_background_type = isset($block_attributes['mediaBackgroundType']) ? sanitize_text_field($block_attributes['mediaBackgroundType']) : '';
+$media_custom_gradient_switcher = isset($block_attributes['mediaCustomGradientSwitcher']) ? sanitize_text_field($block_attributes['mediaCustomGradientSwitcher']) : '';
+$media_custom_gradient_input_value = isset($block_attributes['mediaCustomGradientInputValue']) ? sanitize_text_field($block_attributes['mediaCustomGradientInputValue']) : '';
+$media_gradient_color = isset($block_attributes['mediaGradientColor']) ? sanitize_hex_color($block_attributes['mediaGradientColor']) : '';
+$media_background_image_url = isset($block_attributes['mediaBackgroundImageUrl']) ? esc_url($block_attributes['mediaBackgroundImageUrl']) : '';
+$media_background_image_position = isset($block_attributes['mediaBackgroundImagePosition']) ? sanitize_text_field($block_attributes['mediaBackgroundImagePosition']) : '';
+$media_background_image_attachment = isset($block_attributes['mediaBackgroundImageAttachment']) ? sanitize_text_field($block_attributes['mediaBackgroundImageAttachment']) : '';
+$media_background_image_repeat = isset($block_attributes['mediaBackgroundImageRepeat']) ? sanitize_text_field($block_attributes['mediaBackgroundImageRepeat']) : '';
+$media_background_image_size = isset($block_attributes['mediaBackgroundImageSize']) ? sanitize_text_field($block_attributes['mediaBackgroundImageSize']) : '';
+$media_classic_color = isset($block_attributes['mediaClassicColor']) ? sanitize_hex_color($block_attributes['mediaClassicColor']) : '';
+// Hover
+$media_hover_background_type = isset($block_attributes['mediaHoverBackgroundType']) ? sanitize_text_field($block_attributes['mediaHoverBackgroundType']) : '';
+$media_hover_custom_gradient_switcher = isset($block_attributes['mediaHoverCustomGradientSwitcher']) ? sanitize_text_field($block_attributes['mediaHoverCustomGradientSwitcher']) : '';
+$media_hover_custom_gradient_input_value = isset($block_attributes['mediaHoverCustomGradientInputValue']) ? sanitize_text_field($block_attributes['mediaHoverCustomGradientInputValue']) : '';
+$media_hover_gradient_color = isset($block_attributes['mediaHoverGradientColor']) ? sanitize_hex_color($block_attributes['mediaHoverGradientColor']) : '';
+$media_hover_background_image_url = isset($block_attributes['mediaHoverBackgroundImageUrl']) ? esc_url($block_attributes['mediaHoverBackgroundImageUrl']) : '';
+$media_hover_background_image_position = isset($block_attributes['mediaHoverBackgroundImagePosition']) ? sanitize_text_field($block_attributes['mediaHoverBackgroundImagePosition']) : '';
+$media_hover_background_image_attachment = isset($block_attributes['mediaHoverBackgroundImageAttachment']) ? sanitize_text_field($block_attributes['mediaHoverBackgroundImageAttachment']) : '';
+$media_hover_background_image_repeat = isset($block_attributes['mediaHoverBackgroundImageRepeat']) ? sanitize_text_field($block_attributes['mediaHoverBackgroundImageRepeat']) : '';
+$media_hover_background_image_size = isset($block_attributes['mediaHoverBackgroundImageSize']) ? sanitize_text_field($block_attributes['mediaHoverBackgroundImageSize']) : '';
+$media_hover_classic_color = isset($block_attributes['mediaHoverClassicColor']) ? sanitize_hex_color($block_attributes['mediaHoverClassicColor']) : '';
+
+
 $css_content = "
 .fb-info-box-content-wrapper.{$block_id} {
     padding: {$box_padding_desktop};
@@ -553,7 +576,18 @@ $css_content = "
     .fb-info-box-content-wrapper.{$block_id} .fb-info-media-wrapper {
     width: {$media_bg_width_desktop}{$media_bg_width_units_desktop};
     height: {$media_bg_height_desktop}{$media_bg_height_units_desktop};
-    background-color: {$media_bg_color};
+    " . ($media_background_type === 'gradient' ? "
+        background: " . ($media_custom_gradient_switcher && !empty($media_custom_gradient_input_value) ? $media_custom_gradient_input_value : $media_gradient_color) . ";
+    " : (!empty($media_background_image_url) && $media_background_image_url !== 'null' ? "
+        background-image: url({$media_background_image_url});
+        background-position: {$media_background_image_position};
+        background-attachment: {$media_background_image_attachment};
+        background-repeat: {$media_background_image_repeat};
+        background-size: {$media_background_image_size};
+    " : "
+        background: {$media_classic_color};
+    ")) . "
+
     padding: {$media_desktop_padding};
     margin: {$media_desktop_margin};
     border: {$media_border_desktop_width};
@@ -561,7 +595,18 @@ $css_content = "
     border-radius: {$media_desktop_border_radius_width};
     }
     .fb-info-box-content-wrapper.{$block_id}:hover .fb-info-media-wrapper {
-    background-color: {$media_bg_hover_color};
+    " . ($media_hover_background_type === 'gradient' ? "
+        background: " . ($media_hover_custom_gradient_switcher && !empty($media_hover_custom_gradient_input_value) ? $media_hover_custom_gradient_input_value : $media_hover_gradient_color) . ";
+    " : (!empty($media_hover_background_image_url) && $media_hover_background_image_url !== 'null' ? "
+        background-image: url({$media_hover_background_image_url});
+        background-position: {$media_hover_background_image_position};
+        background-attachment: {$media_hover_background_image_attachment};
+        background-repeat: {$media_hover_background_image_repeat};
+        background-size: {$media_hover_background_image_size};
+    " : "
+        background: {$media_hover_classic_color};
+    ")) . "
+
     }
     @media (max-width: 1024px) {
     .fb-info-box-content-wrapper.{$block_id} .fb-info-media-wrapper {

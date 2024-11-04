@@ -5,10 +5,10 @@ use FrontisBlocks\Assets\EnqueueBlocksCss;
 $block_attributes = $block['attrs'];
 
 $block_id = isset($block_attributes['blockID']) ? sanitize_text_field($block_attributes['blockID']) : '';
-$heading_color = isset($block_attributes['Heading_Color']) ? sanitize_hex_color($block_attributes['Heading_Color']) : '';
+$heading_color = isset($block_attributes['Heading_Color']) ? sanitize_hex_color($block_attributes['Heading_Color']) : '#ffffff';
 $heading_background_color = isset($block_attributes['Heading_Background_Color']) ? sanitize_hex_color($block_attributes['Heading_Background_Color']) : '';
 $heading_font_family = isset($block_attributes['Heading_Font_Family']) && $block_attributes['Heading_Font_Family'] !== 'default' ? sanitize_text_field($block_attributes['Heading_Font_Family']) : 'default';
-$heading_font_size = isset($block_attributes['Heading_Font_Size']) ? sanitize_text_field($block_attributes['Heading_Font_Size']) : '35';
+$heading_font_size = isset($block_attributes['Heading_Font_Size']) ? sanitize_text_field($block_attributes['Heading_Font_Size']) : '72';
 $heading_font_size_units = isset($block_attributes['Heading_Font_size_units']) ? sanitize_text_field($block_attributes['Heading_Font_size_units']) : 'px';
 $heading_font_weight = isset($block_attributes['Heading_Font_Weight']) ? sanitize_text_field($block_attributes['Heading_Font_Weight']) : 'normal';
 $heading_font_style = isset($block_attributes['Heading_Font_Style']) ? sanitize_text_field($block_attributes['Heading_Font_Style']) : 'normal';
@@ -198,7 +198,7 @@ $media_size_units_mobile = isset($block_attributes['mediaSizeUnits']['Mobile']) 
 //Box Style
 // Define padding units and values for each device type (Desktop, Tablet, Mobile)
 $info_box_padding_units = isset($block_attributes['globalPaddingUnits']) ? $block_attributes['globalPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
-$info_box_desktop_padding = isset($block_attributes['globalPaddingDesktop']) ? $block_attributes['globalPaddingDesktop'] : array('top' => '40', 'right' => '40', 'bottom' => '40', 'left' => '40');
+$info_box_desktop_padding = isset($block_attributes['globalPaddingDesktop']) ? $block_attributes['globalPaddingDesktop'] : array('top' => '120', 'right' => '60', 'bottom' => '120', 'left' => '60');
 $info_box_tablet_padding = isset($block_attributes['globalPaddingTablet']) ? $block_attributes['globalPaddingTablet'] : array('top' => '20', 'right' => '20', 'bottom' => '20', 'left' => '20');
 $info_box_mobile_padding = isset($block_attributes['globalPaddingMobile']) ? $block_attributes['globalPaddingMobile'] : array('top' => '10', 'right' => '10', 'bottom' => '10', 'left' => '10');
 
@@ -294,18 +294,77 @@ $button_border_mobile = $info_button_mobile_border_width['top'] . $info_button_b
 //Button typography
 $button_text_color = isset($block_attributes['buttonTextColor']) ? sanitize_hex_color($block_attributes['buttonTextColor']) : '';
 $button_text_hover_color = isset($block_attributes['buttonTextHoverColor']) ? sanitize_hex_color($block_attributes['buttonTextHoverColor']) : '';
-$button_bg_color = isset($block_attributes['ButtonBgColor']) ? sanitize_hex_color($block_attributes['ButtonBgColor']) : '';
-$button_font_family = isset($block_attributes['ButtonFontFamily']) ? sanitize_text_field($block_attributes['ButtonFontFamily']) : '';
-$button_font_size = isset($block_attributes['ButtonFontSize']) ? sanitize_text_field($block_attributes['ButtonFontSize']) : '14';
-$button_font_size_units = isset($block_attributes['ButtonFontSizeUnits']) ? sanitize_text_field($block_attributes['ButtonFontSizeUnits']) : 'px';
-$button_font_weight = isset($block_attributes['ButtonFontWeight']) ? sanitize_text_field($block_attributes['ButtonFontWeight']) : 'normal';
-$button_font_style = isset($block_attributes['ButtonFontStyle']) ? sanitize_text_field($block_attributes['ButtonFontStyle']) : 'normal';
-$button_text_transform = isset($block_attributes['ButtonTextTransform']) ? sanitize_text_field($block_attributes['ButtonTextTransform']) : 'none';
-$button_text_decoration = isset($block_attributes['ButtonTextDecoration']) ? sanitize_text_field($block_attributes['ButtonTextDecoration']) : 'none';
-$info_button_border = isset($block_attributes['InfoButtonBorder']) ? sanitize_text_field($block_attributes['InfoButtonBorder']) : '';
+$button_bg_color = isset($block_attributes['buttonBgColor']) ? sanitize_hex_color($block_attributes['buttonBgColor']) : '';
+$button_font_family = isset($block_attributes['buttonFontFamily']) ? sanitize_text_field($block_attributes['buttonFontFamily']) : '';
+$button_font_size = isset($block_attributes['buttonFontSize']) ? sanitize_text_field($block_attributes['buttonFontSize']) : '14';
+$button_font_size_units = isset($block_attributes['buttonFontSizeUnits']) ? sanitize_text_field($block_attributes['buttonFontSizeUnits']) : 'px';
+$button_font_weight = isset($block_attributes['buttonFontWeight']) ? sanitize_text_field($block_attributes['buttonFontWeight']) : 'normal';
+$button_font_style = isset($block_attributes['buttonFontStyle']) ? sanitize_text_field($block_attributes['buttonFontStyle']) : 'normal';
+$button_text_transform = isset($block_attributes['buttonTextTransform']) ? sanitize_text_field($block_attributes['buttonTextTransform']) : 'none';
+$button_text_decoration = isset($block_attributes['buttonTextDecoration']) ? sanitize_text_field($block_attributes['buttonTextDecoration']) : 'none';
+$info_button_border = isset($block_attributes['InfoButtonBorder']) ? sanitize_text_field($block_attributes['InfoButtonBorder']) : 'solid';
 
+$button_one_border_color = isset($block_attributes['infoButtonBorderColor']) ? sanitize_text_field($block_attributes['infoButtonBorderColor']) : '';
 //Hover
-$button_bg_hover_color = isset($block_attributes['ButtonBgHoverColor']) ? sanitize_hex_color($block_attributes['ButtonBgHoverColor']) : '';
+$button_bg_hover_color = isset($block_attributes['buttonBgHoverColor']) ? sanitize_hex_color($block_attributes['buttonBgHoverColor']) : '';
+
+//Button two
+$button_two_text_color = isset($block_attributes['buttonTwoTextColor']) ? sanitize_hex_color($block_attributes['buttonTwoTextColor']) : '';
+$button_two_text_hover_color = isset($block_attributes['buttonTwoTextHoverColor']) ? sanitize_hex_color($block_attributes['buttonTwoTextHoverColor']) : '';
+$button_two_bg_color = isset($block_attributes['buttonTwoBgColor']) ? sanitize_hex_color($block_attributes['buttonTwoBgColor']) : '';
+$button_two_font_family = isset($block_attributes['buttonTwoFontFamily']) ? sanitize_text_field($block_attributes['buttonTwoFontFamily']) : '';
+$button_two_font_size = isset($block_attributes['buttonTwoFontSize']) ? sanitize_text_field($block_attributes['buttonTwoFontSize']) : '14';
+$button_two_font_size_units = isset($block_attributes['buttonTwoFontSizeUnits']) ? sanitize_text_field($block_attributes['buttonTwoFontSizeUnits']) : 'px';
+$button_two_font_weight = isset($block_attributes['buttonTwoFontWeight']) ? sanitize_text_field($block_attributes['buttonTwoFontWeight']) : 'normal';
+$button_two_font_style = isset($block_attributes['buttonTwoFontStyle']) ? sanitize_text_field($block_attributes['buttonTwoFontStyle']) : 'normal';
+$button_two_text_transform = isset($block_attributes['buttonTwoTextTransform']) ? sanitize_text_field($block_attributes['buttonTwoTextTransform']) : 'none';
+$button_two_text_decoration = isset($block_attributes['buttonTwoTextDecoration']) ? sanitize_text_field($block_attributes['buttonTwoTextDecoration']) : 'none';
+$info_button_two_border = isset($block_attributes['btnTwoBorder']) ? sanitize_text_field($block_attributes['btnTwoBorder']) : 'solid';
+
+$button_two_border_color = isset($block_attributes['btnTwoBorderColor']) ? sanitize_text_field($block_attributes['btnTwoBorderColor']) : '';
+// Hover
+$button_two_bg_hover_color = isset($block_attributes['buttonTwoBgHoverColor']) ? sanitize_hex_color($block_attributes['buttonTwoBgHoverColor']) : '';
+
+//Button two spacing
+$button_two_padding_units = isset($block_attributes['btnTwoPaddingUnits']) ? $block_attributes['btnTwoPaddingUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$button_two_desktop_padding = isset($block_attributes['btnTwoDesktopPadding']) ? $block_attributes['btnTwoDesktopPadding'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_tablet_padding = isset($block_attributes['btnTwoTabPadding']) ? $block_attributes['btnTwoTabPadding'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_mobile_padding = isset($block_attributes['btnTwoMobilePadding']) ? $block_attributes['btnTwoMobilePadding'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+
+$button_two_margin_units = isset($block_attributes['btnTwoMarginUnits']) ? $block_attributes['btnTwoMarginUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$button_two_desktop_margin = isset($block_attributes['btnTwoDesktopMargin']) ? $block_attributes['btnTwoDesktopMargin'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_tablet_margin = isset($block_attributes['btnTwoTabMargin']) ? $block_attributes['btnTwoTabMargin'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_mobile_margin = isset($block_attributes['btnTwoMobileMargin']) ? $block_attributes['btnTwoMobileMargin'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+
+$button_two_borderradius_units = isset($block_attributes['btnTwoBorderRadiusUnits']) ? $block_attributes['btnTwoBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$button_two_desktop_borderradius_width = isset($block_attributes['btnTwoDesktopBorderRadius']) ? $block_attributes['btnTwoDesktopBorderRadius'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_tablet_borderradius_width = isset($block_attributes['btnTwoTabBorderRadius']) ? $block_attributes['btnTwoTabBorderRadius'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_mobile_borderradius_width = isset($block_attributes['btnTwoMobileBorderRadius']) ? $block_attributes['btnTwoMobileBorderRadius'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+
+$button_two_border_units = isset($block_attributes['btnTwoBorderUnits']) ? $block_attributes['btnTwoBorderUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
+$button_two_desktop_border_width = isset($block_attributes['btnTwoDesktopBorder']) ? $block_attributes['btnTwoDesktopBorder'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_tablet_border_width = isset($block_attributes['btnTwoTabBorder']) ? $block_attributes['btnTwoTabBorder'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+$button_two_mobile_border_width = isset($block_attributes['btnTwoMobileBorder']) ? $block_attributes['btnTwoMobileBorder'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
+
+// Padding strings for each device type
+$button_two_padding_desktop = $button_two_desktop_padding['top'] . $button_two_padding_units['Desktop'] . ' ' . $button_two_desktop_padding['right'] . $button_two_padding_units['Desktop'] . ' ' . $button_two_desktop_padding['bottom'] . $button_two_padding_units['Desktop'] . ' ' . $button_two_desktop_padding['left'] . $button_two_padding_units['Desktop'];
+$button_two_padding_tablet = $button_two_tablet_padding['top'] . $button_two_padding_units['Tablet'] . ' ' . $button_two_tablet_padding['right'] . $button_two_padding_units['Tablet'] . ' ' . $button_two_tablet_padding['bottom'] . $button_two_padding_units['Tablet'] . ' ' . $button_two_tablet_padding['left'] . $button_two_padding_units['Tablet'];
+$button_two_padding_mobile = $button_two_mobile_padding['top'] . $button_two_padding_units['Mobile'] . ' ' . $button_two_mobile_padding['right'] . $button_two_padding_units['Mobile'] . ' ' . $button_two_mobile_padding['bottom'] . $button_two_padding_units['Mobile'] . ' ' . $button_two_mobile_padding['left'] . $button_two_padding_units['Mobile'];
+
+// Margin strings for each device type
+$button_two_margin_desktop = $button_two_desktop_margin['top'] . $button_two_margin_units['Desktop'] . ' ' . $button_two_desktop_margin['right'] . $button_two_margin_units['Desktop'] . ' ' . $button_two_desktop_margin['bottom'] . $button_two_margin_units['Desktop'] . ' ' . $button_two_desktop_margin['left'] . $button_two_margin_units['Desktop'];
+$button_two_margin_tablet = $button_two_tablet_margin['top'] . $button_two_margin_units['Tablet'] . ' ' . $button_two_tablet_margin['right'] . $button_two_margin_units['Tablet'] . ' ' . $button_two_tablet_margin['bottom'] . $button_two_margin_units['Tablet'] . ' ' . $button_two_tablet_margin['left'] . $button_two_margin_units['Tablet'];
+$button_two_margin_mobile = $button_two_mobile_margin['top'] . $button_two_margin_units['Mobile'] . ' ' . $button_two_mobile_margin['right'] . $button_two_margin_units['Mobile'] . ' ' . $button_two_mobile_margin['bottom'] . $button_two_margin_units['Mobile'] . ' ' . $button_two_mobile_margin['left'] . $button_two_margin_units['Mobile'];
+
+// Border-radius strings for each device type
+$button_two_borderradius_desktop = $button_two_desktop_borderradius_width['top'] . $button_two_borderradius_units['Desktop'] . ' ' . $button_two_desktop_borderradius_width['right'] . $button_two_borderradius_units['Desktop'] . ' ' . $button_two_desktop_borderradius_width['bottom'] . $button_two_borderradius_units['Desktop'] . ' ' . $button_two_desktop_borderradius_width['left'] . $button_two_borderradius_units['Desktop'];
+$button_two_borderradius_tablet = $button_two_tablet_borderradius_width['top'] . $button_two_borderradius_units['Tablet'] . ' ' . $button_two_tablet_borderradius_width['right'] . $button_two_borderradius_units['Tablet'] . ' ' . $button_two_tablet_borderradius_width['bottom'] . $button_two_borderradius_units['Tablet'] . ' ' . $button_two_tablet_borderradius_width['left'] . $button_two_borderradius_units['Tablet'];
+$button_two_borderradius_mobile = $button_two_mobile_borderradius_width['top'] . $button_two_borderradius_units['Mobile'] . ' ' . $button_two_mobile_borderradius_width['right'] . $button_two_borderradius_units['Mobile'] . ' ' . $button_two_mobile_borderradius_width['bottom'] . $button_two_borderradius_units['Mobile'] . ' ' . $button_two_mobile_borderradius_width['left'] . $button_two_borderradius_units['Mobile'];
+
+// Border-width strings for each device type
+$button_two_border_desktop = $button_two_desktop_border_width['top'] . $button_two_border_units['Desktop'] . ' ' . $button_two_desktop_border_width['right'] . $button_two_border_units['Desktop'] . ' ' . $button_two_desktop_border_width['bottom'] . $button_two_border_units['Desktop'] . ' ' . $button_two_desktop_border_width['left'] . $button_two_border_units['Desktop'];
+$button_two_border_tablet = $button_two_tablet_border_width['top'] . $button_two_border_units['Tablet'] . ' ' . $button_two_tablet_border_width['right'] . $button_two_border_units['Tablet'] . ' ' . $button_two_tablet_border_width['bottom'] . $button_two_border_units['Tablet'] . ' ' . $button_two_tablet_border_width['left'] . $button_two_border_units['Tablet'];
+$button_two_border_mobile = $button_two_mobile_border_width['top'] . $button_two_border_units['Mobile'] . ' ' . $button_two_mobile_border_width['right'] . $button_two_border_units['Mobile'] . ' ' . $button_two_mobile_border_width['bottom'] . $button_two_border_units['Mobile'] . ' ' . $button_two_mobile_border_width['left'] . $button_two_border_units['Mobile'];
 
 $media_bg_width_desktop = isset($block_attributes['mediaBgWidth']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgWidth']['Desktop']) : '25';
 $media_bg_width_units_desktop = isset($block_attributes['mediaBgWidthUnits']['Desktop']) ? sanitize_text_field($block_attributes['mediaBgWidthUnits']['Desktop']) : 'px';
@@ -462,16 +521,7 @@ $css_content = "
         border-radius: {$box_border_radius_width_mobile} !important;
     }
 }
-.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-wrapper .fb-cta-button{
-    " . (!empty($button_text_color) ? "color: {$button_text_color};" : '') . "
-    font-family: {$button_font_family};
-    font-size: " . (!empty($button_font_size) ? "{$button_font_size}{$button_font_size_units}" : '') . ";
-    font-weight: {$button_font_weight};
-    font-style: {$button_font_style};
-    text-transform: {$button_text_transform};
-    text-decoration: {$button_text_decoration};
-}
-.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-wrapper {
+.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
     " . (!empty($button_bg_color) ? "background-color: {$button_bg_color};" : '') . "
     display: inline-flex;
     gap: 10px;
@@ -479,18 +529,28 @@ $css_content = "
     padding: {$button_padding_desktop};
     margin: {$button_margin_desktop};
     border: {$info_button_border};
+    " . (!empty($button_one_border_color) ? "border-color: {$button_one_border_color};" : '') . ";
     border-width: {$button_border_desktop};
     border-radius: {$button_borderradius_desktop};
+    font-family: {$button_font_family};
+    font-size: " . (!empty($button_font_size) ? "{$button_font_size}{$button_font_size_units}" : '') . ";
+    font-weight: {$button_font_weight};
+    font-style: {$button_font_style};
+    text-transform: {$button_text_transform};
+    text-decoration: {$button_text_decoration};
 }
-.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-wrapper .fb-btn-icon-wrapper {
-    line-height: 0;
+.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper .fb-info-button{
+    " . (!empty($button_text_color) ? "color: {$button_text_color};" : '') . "
 }
-.fb-cta-content-wrapper.{$block_id}:hover .fb-cta-btn-wrapper .fb-cta-button {
+.fb-cta-content-wrapper.{$block_id}:hover .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper .fb-info-button{
     " . (!empty($button_text_hover_color) ? "color: {$button_text_hover_color};" : '') . "
+}
+
+.fb-cta-content-wrapper.{$block_id}:hover .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper{
     " . (!empty($button_bg_hover_color) ? "background-color: {$button_bg_hover_color};" : '') . "
 }
 @media only screen and (max-width: 1024px) {
-    .fb-cta-content-wrapper.{$block_id} .fb-cta-btn-wrapper{
+    .fb-cta-content-wrapper.{$block_id} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper{
         padding: {$button_padding_tablet} !important;
         margin: {$button_margin_tablet} !important;
         border-width: {$button_border_tablet} !important;
@@ -499,13 +559,66 @@ $css_content = "
 }
 
 @media only screen and (max-width: 767px) {
-    .fb-cta-content-wrapper.{$block_id} .fb-cta-btn-wrapper{
+    .fb-cta-content-wrapper.{$block_id} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper{
         padding: {$button_padding_mobile} !important;
         margin: {$button_margin_mobile} !important;
         border-width: {$button_border_mobile} !important;
         border-radius: {$button_borderradius_mobile} !important;
     }
 }
+.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+    " . (!empty($button_two_bg_color) ? "background-color: {$button_two_bg_color};" : '') . "
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    padding: {$button_two_padding_desktop};
+    margin: {$button_two_margin_desktop};
+    border: {$info_button_two_border};
+    " . (!empty($button_two_border_color) ? "border-color: {$button_two_border_color};" : '') . ";
+    border-width: {$button_two_border_desktop};
+    border-radius: {$button_two_borderradius_desktop};
+    font-family: {$button_two_font_family};
+    font-size: " . (!empty($button_two_font_size) ? "{$button_two_font_size}{$button_two_font_size_units}" : '') . ";
+    font-weight: {$button_two_font_weight};
+    font-style: {$button_two_font_style};
+    text-transform: {$button_two_text_transform};
+    text-decoration: {$button_two_text_decoration};
+}
+
+.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-info-button {
+    " . (!empty($button_two_text_color) ? "color: {$button_two_text_color};" : '') . "
+}
+
+.fb-cta-content-wrapper.{$block_id}:hover .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-info-button {
+    " . (!empty($button_two_text_hover_color) ? "color: {$button_two_text_hover_color};" : '') . "
+}
+
+.fb-cta-content-wrapper.{$block_id}:hover .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+    " . (!empty($button_two_bg_hover_color) ? "background-color: {$button_two_bg_hover_color};" : '') . "
+}
+
+@media only screen and (max-width: 1024px) {
+    .fb-cta-content-wrapper.{$block_id} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+        padding: {$button_two_padding_tablet} !important;
+        margin: {$button_two_margin_tablet} !important;
+        border-width: {$button_two_border_tablet} !important;
+        border-radius: {$button_two_borderradius_tablet} !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .fb-cta-content-wrapper.{$block_id} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+        padding: {$button_two_padding_mobile} !important;
+        margin: {$button_two_margin_mobile} !important;
+        border-width: {$button_two_border_mobile} !important;
+        border-radius: {$button_two_borderradius_mobile} !important;
+    }
+}
+
+.fb-cta-content-wrapper.{$block_id} .fb-cta-btn-wrapper .fb-btn-icon-wrapper {
+    line-height: 0;
+}
+
 .$block_id.fb-cta-content-wrapper .fb-heading {
     " . (! empty($heading_color) ? "color: $heading_color;" : '') . "
     " . (! empty($heading_background_color) ? "background-color: $heading_background_color;" : '') . "
