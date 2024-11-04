@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import {
@@ -24,6 +24,7 @@ import {
     ICON_ALIGN,
     TEXT_ALIGN,
     BORDER_STYLES,
+	PRESETS,
 } from "./constants/constants";
 import SortableItem from './sortableItem';
 import FB_ResponsiveControl from '@Components/responsive-control';
@@ -152,7 +153,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialGlobalBoxShadowValues,
         socialGlobalBoxShadowCssValue,
 
-		singleIconColorStyle,
+		singleItemColorStyle,
+		socialIconsPresetStyle
 
 
     } = attributes;
@@ -182,9 +184,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             socialIconTitle: `Title ${socialItems.length + 1}`,
             socialIconUrl: '', 
             socialIcon: 'facebook-f',
+
             socialIconTargetUrl: false,
-            socialIconColor: '',
-            socialIconBgColor: '',
+			socialIconColorSwitcher: 'normal',
+			socialIconColor: '',
+			socialIconHoverColor: '',
+			socialIconBgColor: '',
+			socialIconHoverBgColor: '',
+
+			socialItemBgColorSwitcher: 'normal',
+
+			normalItemBackgroundType: 'classic',
+			normalItemClassicColor: '',
+			normalItemGradientColor: '',
+			normalItemCustomGradientSwitcher: false,
+			normalItemCustomGradientInputValue: '',
+
+			hoverItemBackgroundType: 'classic',
+			hoverItemClassicColor: '',
+			hoverItemGradientColor: '',
+			hoverItemCustomGradientSwitcher: false,
+			hoverItemCustomGradientInputValue: '',
         };
         setAttributes({ socialItems: [...socialItems, newItem] });
     };
@@ -200,27 +220,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         const updatedItems = socialItems.filter(item => item.id !== id);
         setAttributes({ socialItems: updatedItems });
     };
-
-    useEffect(() => {
-        let singleIconColorStyle = '';
-        socialItems.forEach(item => {
-            if (item.socialIconColor) {
-                const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
-                    fill: ${item.socialIconColor};
-                }`;
-                singleIconColorStyle += colorStyle;
-            }
-            if (item.socialIconBgColor) {
-                const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-                    background-color: ${item.socialIconBgColor};
-                }`;
-                singleIconColorStyle += bgColorStyle;
-            }
-        });
-        setAttributes({ singleIconColorStyle: singleIconColorStyle });
-    }, [socialItems, blockID]);
-
-	console.log(singleIconColorStyle);
 
     /** Start Icon border */
     const handleSocialIconBorderUnitChange = ( event, position ) => {
@@ -1043,6 +1042,109 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${socialGlobalBorderRadiusMobile.top}${socialGlobalBorderRadiusUnits.Mobile} ${socialGlobalBorderRadiusMobile.right}${socialGlobalBorderRadiusUnits.Mobile} ${socialGlobalBorderRadiusMobile.bottom}${socialGlobalBorderRadiusUnits.Mobile} ${socialGlobalBorderRadiusMobile.left}${socialGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
+
+	/** Start Social Item Color Style */
+	const socialItemColorStyle = useMemo(() => {
+        let style = '';
+        socialItems.forEach(item => {
+
+            if (item.socialIconColor) {
+                const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
+                    fill: ${item.socialIconColor};
+                }`;
+                style += colorStyle;
+            }
+            if (item.socialIconHoverColor) {
+                const hoverColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover svg {
+                    fill: ${item.socialIconHoverColor};
+                }`;
+                style += hoverColorStyle;
+            }
+
+            if (item.socialIconBgColor) {
+                const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+                    background-color: ${item.socialIconBgColor};
+                }`;
+                style += bgColorStyle;
+            }
+            if (item.socialIconHoverBgColor) {
+                const hoverBgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
+                    background-color: ${item.socialIconHoverBgColor};
+                }`;
+                style += hoverBgColorStyle;
+            }
+
+			const normalItemBackgroundType = item.normalItemBackgroundType;
+			if (normalItemBackgroundType === 'gradient') {
+				const gradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
+					background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : item.normalItemGradientColor};
+				}`;
+				style += gradientStyle;
+
+			} else {
+				const classicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
+					background: ${item.normalItemClassicColor};
+				}`;
+				style += classicStyle;
+			}
+
+			const hoverItemBackgroundType = item.hoverItemBackgroundType;
+			if (hoverItemBackgroundType === 'gradient') {
+				const hoverGradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
+					background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : item.hoverItemGradientColor};
+				}`;
+				style += hoverGradientStyle;
+
+			} else {
+				const hoverClassicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
+					background: ${item.hoverItemClassicColor};
+				}`;
+				style += hoverClassicStyle;
+			}
+
+
+        });
+        return style;
+    }, [socialItems, blockID]);
+
+    useEffect(() => {
+        setAttributes({ singleItemColorStyle: socialItemColorStyle });
+    }, [socialItemColorStyle]);
+	/** End Social Item Color Style */
+
+
+
+
+
+	/** Start Preset Style */
+	const changeSocialIconsPreset = (selectedPreset) => {
+		const presetConfigurations = {
+			"preset-1": {
+			},
+			"preset-2": {
+			},
+			"preset-3": {
+			},
+			"preset-4": {
+			},
+			"preset-5": {
+			},
+			"preset-6": {
+			},
+		};
+
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+		if (selectedPresetConfig) {
+			setAttributes({
+				socialIconsPresetStyle: selectedPreset,
+				...selectedPresetConfig,
+			});
+		} else {
+			console.warn(`Social Icons: Preset "${selectedPreset}" not found.`);
+		}
+	};
+	/** End Preset Style */
     
 
     return (
@@ -1051,7 +1153,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             <style>
             {`
 
-				${singleIconColorStyle}
+				${singleItemColorStyle}
                 .${blockID}.fb-social-wrapper {
                     ${socialGlobalZIndex ? `z-index: ${socialGlobalZIndex};` : ''}
                     ${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
@@ -1176,6 +1278,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === 'general' && (
                                     <>
                                         <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
+											<SelectControl
+                                                label={__("Preset Style", "frontis-blocks")}
+                                                value={socialIconsPresetStyle}
+                                                options={PRESETS}
+                                                onChange={(selected) => changeSocialIconsPreset(selected)}
+                                            />
                                             <BaseControl
                                                 label={__("Alignment", "frontis-blocks")}
                                                 id="fb-setting-text-alignment"

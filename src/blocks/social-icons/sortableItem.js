@@ -5,6 +5,8 @@ import { CSS } from '@dnd-kit/utilities';
 import { TextControl, Button, Dashicon, BaseControl, Dropdown, ToggleControl, ColorPicker } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
 import FB_ColorControl from '@Components/color-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -56,17 +58,77 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         />
                     </BaseControl>
 
-                    <FB_ColorControl
-                        label={__("Icon Color", "frontis-blocks")} 
-                        globalColor={item.socialIconColor}
-                        setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconColor', value)}
+
+                    <FB_SwitcherControl
+                        label={__("Icon Color", "frontis-blocks")}
+                        globalSwitcher={item.socialIconColorSwitcher}
+                        setGlobalSwitcher={(value) => handleChangeItem(item.id, 'socialIconColorSwitcher', value)}
                     />
 
-                    <FB_ColorControl
-                        label={__("Icon Background Color", "frontis-blocks")} 
-                        globalColor={item.socialIconBgColor}
-                        setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconBgColor', value)}
+                    {item.socialIconColorSwitcher === 'normal' && (
+                        <>
+                            <FB_ColorControl
+                                label={__("Color", "frontis-blocks")} 
+                                globalColor={item.socialIconColor}
+                                setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconColor', value)}
+                            />
+
+                            <FB_ColorControl
+                                label={__("Background Color", "frontis-blocks")} 
+                                globalColor={item.socialIconBgColor}
+                                setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconBgColor', value)}
+                            />
+                        </>
+                    )}
+
+                    {item.socialIconColorSwitcher === 'hover' && (
+                        <>
+                            <FB_ColorControl
+                                label={__("Color", "frontis-blocks")} 
+                                globalColor={item.socialIconHoverColor}
+                                setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconHoverColor', value)}
+                            />
+
+                            <FB_ColorControl
+                                label={__("Background Color", "frontis-blocks")} 
+                                globalColor={item.socialIconHoverBgColor}
+                                setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconHoverBgColor', value)}
+                            />
+                        </>
+                    )}
+
+                    <FB_BackgroundColorControl
+                        label={__("Item Background Color", "frontis-blocks")}
+                        bgColorSwitcher={item.socialItemBgColorSwitcher}
+                        setBgColorSwitcher={(value) => handleChangeItem(item.id, 'socialItemBgColorSwitcher', value)}
+                                
+                        normalBackgroundType={item.normalItemBackgroundType}
+                        setNormalBackgroundType={(value) => handleChangeItem(item.id, 'normalItemBackgroundType', value)}
+                        normalClassicColor={item.normalItemClassicColor}
+                        setNormalClassicColor={(value) => handleChangeItem(item.id, 'normalItemClassicColor', value)}
+                        normalGradientColor={item.normalItemGradientColor}
+                        setNormalGradientColor={(value) => handleChangeItem(item.id, 'normalItemGradientColor', value)}
+                        normalCustomGradientSwitcher={item.normalItemCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'normalItemCustomGradientSwitcher', value)}
+                        normalCustomGradientInputValue={item.normalItemCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => handleChangeItem(item.id, 'normalItemCustomGradientInputValue', value)}
+                                
+                        hoverBackgroundType={item.hoverItemBackgroundType}
+                        setHoverBackgroundType={(value) => handleChangeItem(item.id, 'hoverItemBackgroundType', value)}
+                        hoverClassicColor={item.hoverItemClassicColor}
+                        setHoverClassicColor={(value) => handleChangeItem(item.id, 'hoverItemClassicColor', value)}
+                        hoverGradientColor={item.hoverItemGradientColor} 
+                        setHoverGradientColor={(value) => handleChangeItem(item.id, 'hoverItemGradientColor', value)}
+                        hoverCustomGradientSwitcher={item.hoverItemCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientSwitcher', value)}
+                        hoverCustomGradientInputValue={item.hoverItemCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientInputValue', value)}
+
+                        isBackgroundImage={false}
                     />
+
+
+
 
                     <div className="fb-link-control-wrapper">
                         <BaseControl 
