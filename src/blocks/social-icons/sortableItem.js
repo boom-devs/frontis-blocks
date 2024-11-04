@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { TextControl, Button, Dashicon, BaseControl, Dropdown, ToggleControl } from '@wordpress/components';
+import { TextControl, Button, Dashicon, BaseControl, Dropdown, ToggleControl, ColorPicker } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
+import FB_ColorControl from '@Components/color-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -12,7 +13,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
-        backgroundColor: item.socialIconBgColor || 'transparent',
+        // backgroundColor: item.socialIconBgColor || 'transparent',
     };
 
     const toggleOpen = () => setIsOpen(!isOpen);
@@ -50,10 +51,22 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
                     <BaseControl label={__("Title", "frontis-blocks")}>
                         <TextControl
-                            value={item.socialIconTitle || __( `Social Item ${index + 1}`, "frontis-blocks" )} // Changed from item.Title to item.socialIconTitle
-                            onChange={(value) => handleChangeItem(item.id, 'socialIconTitle', value)} // Changed key from 'Title' to 'socialIconTitle'
+                            value={item.socialIconTitle || __( `Social Item ${index + 1}`, "frontis-blocks" )}
+                            onChange={(value) => handleChangeItem(item.id, 'socialIconTitle', value)}
                         />
                     </BaseControl>
+
+                    <FB_ColorControl
+                        label={__("Icon Color", "frontis-blocks")} 
+                        globalColor={item.socialIconColor}
+                        setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconColor', value)}
+                    />
+
+                    <FB_ColorControl
+                        label={__("Icon Background Color", "frontis-blocks")} 
+                        globalColor={item.socialIconBgColor}
+                        setGlobalColor={(value) => handleChangeItem(item.id, 'socialIconBgColor', value)}
+                    />
 
                     <div className="fb-link-control-wrapper">
                         <BaseControl 
