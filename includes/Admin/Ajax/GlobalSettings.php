@@ -29,7 +29,8 @@ class GlobalSettings extends AjaxBase {
             'get_gradient_colors',
             'get_custom_colors',
             'get_custom_gradient_colors',
-            'get_typography'
+            'get_typography',
+            'get_custom_css'
         ];
 
         $this->init_ajax_events($events);
@@ -56,25 +57,30 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function get_global_colors() {
-        return get_option('fb_global_colors');
+        return get_option('fb_global_colors', []);
     }
 
     public function get_gradient_colors() {
-        return get_option('fb_gradient_colors');
+        return get_option('fb_gradient_colors', []);
     }
 
     public function get_custom_colors() {
-        return get_option('fb_custom_colors');
+        return get_option('fb_custom_colors', []);
     }
 
     public function get_custom_gradient_colors() {
-        return get_option('fb_custom_gradient_colors');
+        return get_option('fb_custom_gradient_colors', []);
     }
 
     public function get_typography() {
         $typography = get_option('fb_typography', []);
         wp_send_json_success($typography);
     }
+
+    public function get_custom_css() {
+        return get_option('fb_custom_css', false);
+    }
+
 
     /**
      * handle_option_update
