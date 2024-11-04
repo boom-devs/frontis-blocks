@@ -153,11 +153,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialGlobalBoxShadowValues,
         socialGlobalBoxShadowCssValue,
 
+
+		socialIconsPresetStyle,
 		singleItemColorStyle,
-		socialIconsPresetStyle
+		singlesocialiconColor,
+		singlesocialiconHoverColor,
+		singlesocialiconBgColor,
+		singlesocialiconHoverBgColor,
+		normalItemGradientColors,
+		normalItemClassicColors,
+		hoverItemGradientColors,
+		hoverItemClassicColors,
 
 
     } = attributes;
+
+	console.log(singlesocialiconColor);
+	
 
 
     useEffect(() => {
@@ -1043,73 +1055,188 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Border Radius */
 
 
+	// /** Start Social Item Color Style */
+	// const socialItemColorStyle = useMemo(() => {
+    //     let style = '';
+    //     socialItems.forEach(item => {
+
+    //         if (item.socialIconColor) {
+    //             const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
+    //                 fill: ${item.socialIconColor};
+    //             }`;
+    //             style += colorStyle;
+    //         }
+    //         if (item.socialIconHoverColor) {
+    //             const hoverColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover svg {
+    //                 fill: ${item.socialIconHoverColor};
+    //             }`;
+    //             style += hoverColorStyle;
+    //         }
+
+    //         if (item.socialIconBgColor) {
+    //             const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+    //                 background-color: ${item.socialIconBgColor};
+    //             }`;
+    //             style += bgColorStyle;
+    //         }
+    //         if (item.socialIconHoverBgColor) {
+    //             const hoverBgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
+    //                 background-color: ${item.socialIconHoverBgColor};
+    //             }`;
+    //             style += hoverBgColorStyle;
+    //         }
+
+	// 		const normalItemBackgroundType = item.normalItemBackgroundType;
+	// 		if (normalItemBackgroundType === 'gradient') {
+	// 			const gradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
+	// 				background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : item.normalItemGradientColor};
+	// 			}`;
+	// 			style += gradientStyle;
+
+	// 		} else {
+	// 			const classicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
+	// 				background: ${item.normalItemClassicColor};
+	// 			}`;
+	// 			style += classicStyle;
+	// 		}
+
+	// 		const hoverItemBackgroundType = item.hoverItemBackgroundType;
+	// 		if (hoverItemBackgroundType === 'gradient') {
+	// 			const hoverGradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
+	// 				background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : item.hoverItemGradientColor};
+	// 			}`;
+	// 			style += hoverGradientStyle;
+
+	// 		} else {
+	// 			const hoverClassicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
+	// 				background: ${item.hoverItemClassicColor};
+	// 			}`;
+	// 			style += hoverClassicStyle;
+	// 		}
+
+
+    //     });
+    //     return style;
+    // }, [socialItems, blockID]);
+
+    // useEffect(() => {
+    //     setAttributes({ singleItemColorStyle: socialItemColorStyle });
+    // }, [socialItemColorStyle]);
+	// /** End Social Item Color Style */
+
+
 	/** Start Social Item Color Style */
 	const socialItemColorStyle = useMemo(() => {
-        let style = '';
-        socialItems.forEach(item => {
+		let style = '';
+		const socialIconColors = [];
+		const socialIconHoverColors = [];
+		const socialIconBgColors = [];
+		const socialIconHoverBgColors = [];
+		const normalItemGradientColors = [];
+		const normalItemClassicColors = [];
+		const hoverItemGradientColors = [];
+		const hoverItemClassicColors = [];
 
-            if (item.socialIconColor) {
-                const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
-                    fill: ${item.socialIconColor};
-                }`;
-                style += colorStyle;
-            }
-            if (item.socialIconHoverColor) {
-                const hoverColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover svg {
-                    fill: ${item.socialIconHoverColor};
-                }`;
-                style += hoverColorStyle;
-            }
+		socialItems.forEach((item) => {
+			if (item.socialIconColor) {
+				const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
+					fill: ${item.socialIconColor};
+				}`;
+				style += colorStyle;
+				socialIconColors.push(item.socialIconColor);
+			}
 
-            if (item.socialIconBgColor) {
-                const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-                    background-color: ${item.socialIconBgColor};
-                }`;
-                style += bgColorStyle;
-            }
-            if (item.socialIconHoverBgColor) {
-                const hoverBgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
-                    background-color: ${item.socialIconHoverBgColor};
-                }`;
-                style += hoverBgColorStyle;
-            }
+			if (item.socialIconHoverColor) {
+				const hoverColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover svg {
+					fill: ${item.socialIconHoverColor};
+				}`;
+				style += hoverColorStyle;
+				socialIconHoverColors.push(item.socialIconHoverColor);
+			}
 
-			const normalItemBackgroundType = item.normalItemBackgroundType;
-			if (normalItemBackgroundType === 'gradient') {
+			if (item.socialIconBgColor) {
+				const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+					background-color: ${item.socialIconBgColor};
+				}`;
+				style += bgColorStyle;
+				socialIconBgColors.push(item.socialIconBgColor);
+			}
+
+			if (item.socialIconHoverBgColor) {
+				const hoverBgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
+					background-color: ${item.socialIconHoverBgColor};
+				}`;
+				style += hoverBgColorStyle;
+				socialIconHoverBgColors.push(item.socialIconHoverBgColor);
+			}
+
+			if (item.normalItemBackgroundType === 'gradient') {
 				const gradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
 					background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : item.normalItemGradientColor};
 				}`;
 				style += gradientStyle;
-
+				normalItemGradientColors.push(item.normalItemCustomGradientInputValue || item.normalItemGradientColor);
 			} else {
 				const classicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
 					background: ${item.normalItemClassicColor};
 				}`;
 				style += classicStyle;
+				normalItemClassicColors.push(item.normalItemClassicColor);
 			}
 
-			const hoverItemBackgroundType = item.hoverItemBackgroundType;
-			if (hoverItemBackgroundType === 'gradient') {
+			if (item.hoverItemBackgroundType === 'gradient') {
 				const hoverGradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
 					background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : item.hoverItemGradientColor};
 				}`;
 				style += hoverGradientStyle;
-
+				hoverItemGradientColors.push(item.hoverItemCustomGradientInputValue || item.hoverItemGradientColor);
 			} else {
 				const hoverClassicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
 					background: ${item.hoverItemClassicColor};
 				}`;
 				style += hoverClassicStyle;
+				hoverItemClassicColors.push(item.hoverItemClassicColor);
 			}
+		});
 
+		return {
+			style,
+			socialIconColors,
+			socialIconHoverColors,
+			socialIconBgColors,
+			socialIconHoverBgColors,
+			normalItemGradientColors,
+			normalItemClassicColors,
+			hoverItemGradientColors,
+			hoverItemClassicColors
+		};
+	}, [socialItems, blockID]);
 
-        });
-        return style;
-    }, [socialItems, blockID]);
-
-    useEffect(() => {
-        setAttributes({ singleItemColorStyle: socialItemColorStyle });
-    }, [socialItemColorStyle]);
+	useEffect(() => {
+		const {
+			style,
+			socialIconColors,
+			socialIconHoverColors,
+			socialIconBgColors,
+			socialIconHoverBgColors,
+			normalItemGradientColors,
+			normalItemClassicColors,
+			hoverItemGradientColors,
+			hoverItemClassicColors
+		} = socialItemColorStyle;
+		
+		setAttributes({
+			singleItemColorStyle: style,
+			singlesocialiconColor: socialIconColors,
+			singlesocialiconHoverColor: socialIconHoverColors,
+			singlesocialiconBgColor: socialIconBgColors,
+			singlesocialiconHoverBgColor: socialIconHoverBgColors,
+			normalItemGradientColors: normalItemGradientColors,
+			normalItemClassicColors: normalItemClassicColors,
+			hoverItemGradientColors: hoverItemGradientColors,
+			hoverItemClassicColors: hoverItemClassicColors
+		});
+	}, [socialItemColorStyle]);
 	/** End Social Item Color Style */
 
 
@@ -1120,6 +1247,51 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const changeSocialIconsPreset = (selectedPreset) => {
 		const presetConfigurations = {
 			"preset-1": {
+				socialIconGlobalColor: "#399CFF",
+				socialIconGlobalHoverColor: "#399CFF",
+				socialBgColor: "#ffffff",
+				socialBgHoverColor: "#ffffff",
+				socialGapSize: {
+					Desktop: 20,
+					Tablet: 20,
+					Mobile: 20
+				},
+				socialPaddingDesktop: {
+					top: 20,
+					bottom: 20,
+					left: 20,
+					right: 20
+				},
+				socialPaddingTablet: {
+					top: 20,
+					bottom: 20,
+					left: 20,
+					right: 20
+				},
+				socialPaddingMobile: {
+					top: 20,
+					bottom: 20,
+					left: 20,
+					right: 20
+				},
+				socialBorderRadiusDesktop: {
+					top: 50,
+					bottom: 50,
+					left: 50,
+					right: 50
+				},
+				socialBorderRadiusTablet: {
+					top: 50,
+					bottom: 50,
+					left: 50,
+					right: 50
+				},
+				socialBorderRadiusMobile: {
+					top: 50,
+					bottom: 50,
+					left: 50,
+					right: 50
+				},
 			},
 			"preset-2": {
 			},
@@ -1130,6 +1302,51 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			"preset-5": {
 			},
 			"preset-6": {
+				socialIconGlobalColor: "#fff",
+				socialIconGlobalHoverColor: "#fff",
+				socialBgColor: "#15171C",
+				socialBgHoverColor: "#15171C",
+				socialGapSize: {
+					Desktop: 10,
+					Tablet: 10,
+					Mobile: 10
+				},
+				socialPaddingDesktop: {
+					top: 20,
+					bottom: 20,
+					left: 30,
+					right: 30
+				},
+				socialPaddingTablet: {
+					top: 20,
+					bottom: 20,
+					left: 30,
+					right: 30
+				},
+				socialPaddingMobile: {
+					top: 20,
+					bottom: 20,
+					left: 30,
+					right: 30
+				},
+				socialBorderRadiusDesktop: {
+					top: 5,
+					bottom: 5,
+					left: 5,
+					right: 5
+				},
+				socialBorderRadiusTablet: {
+					top: 5,
+					bottom: 5,
+					left: 5,
+					right: 5
+				},
+				socialBorderRadiusMobile: {
+					top: 5,
+					bottom: 5,
+					left: 5,
+					right: 5
+				},
 			},
 		};
 
