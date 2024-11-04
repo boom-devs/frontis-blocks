@@ -2,8 +2,8 @@
  * Import Constants
  */
 import { ActionTypes, OptionKeys } from './constant';
-import { updateSettings } from '../api';
-
+import { updateSettings, getSettings } from '../api';
+import { dispatch } from '@wordpress/data';
 /**
  * Action: Set Global Colors
  */

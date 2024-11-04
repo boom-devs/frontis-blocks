@@ -5,6 +5,7 @@ namespace FrontisBlocks;
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Utils\Enqueue;
+use FrontisBlocks\Core\UsedBlocks;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Admin\Ajax\GlobalSettings;
@@ -168,6 +169,8 @@ final class Plugin {
         InitialActivatedBlocks::blocks();
 
         GlobalSettings::get_instance()->register_global_settings_events();
+
+        // UsedBlocks::get_instance()->get_used_frontis_blocks();
         
     }
 }
