@@ -213,10 +213,37 @@ const attributes = {
         }
     },
 
+    /** Start repetar item style pass to this attribute */
     singleItemColorStyle: {
         type: "string",
         default: "",
     },
+    singlesocialiconColor: {
+        type: "string",
+    },
+    singlesocialiconHoverColor: {
+        type: "string",
+    },
+    singlesocialiconBgColor: {
+        type: "string",
+    },
+    singlesocialiconHoverBgColor: {
+        type: "string",
+    },
+    normalItemGradientColors: {
+        type: "string",
+    },
+    normalItemClassicColors: {
+        type: "string",
+    },
+    hoverItemGradientColors: {
+        type: "string",
+    },
+    hoverItemClassicColors: {
+        type: "string",
+    },
+    /** End repetar item style pass to this attribute */
+
 
     socialIconsPresetStyle: {
         type: "string",
@@ -268,7 +295,7 @@ const attributes = {
     },
     socialIconBorder: {
         type: 'string',
-        default: "solid",
+        default: "none",
     },
     socialIconBorderColorSwitcher : {
         type: "string",
@@ -276,7 +303,6 @@ const attributes = {
     },
     socialIconBorderColor: {
         type: 'string',
-        default: "#E1E3E8"
     },
     socialIconBorderHoverColor: {
         type: 'string',
@@ -292,28 +318,28 @@ const attributes = {
     socialIconBorderDesktop: {
         type: "object", 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderTablet: {
         type: "object", 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderMobile: {
         type: "object", 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderLink : {
@@ -331,50 +357,35 @@ const attributes = {
     socialIconBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: '50', 
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusLink : {
         type : "boolean",
         default: true
     },
-    socialIconGapSize: {
-		type: 'object',
-		default: {
-			Desktop: 20,
-			Tablet: 15,
-			Mobile: 15
-		}
-	},
-	socialIconGapUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+
     socialIconPaddingUnits: {
 		type: 'object',
 		default: {
@@ -386,28 +397,28 @@ const attributes = {
     socialIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: '15',
-            bottom: '15',
-            left: '15',
-            right: '15',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconPaddingTablet: {
         type: "object", 
         default: {
-            top: '15',
-            bottom: '15',
-            left: '15',
-            right: '15',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconPaddingMobile: {
         type: "object", 
         default: {
-            top: '15',
-            bottom: '15',
-            left: '15',
-            right: '15',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     /*End Icon Styles */
@@ -427,9 +438,10 @@ const attributes = {
     
     /*End Background Styles */
 
+    /** Border Styles */
     socialBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     socialBorderColorSwitcher : {
         type: "string",
@@ -437,9 +449,11 @@ const attributes = {
     },
     socialBorderColor: {
         type: 'string',
+        default: "#E1E3E8"
     },
     socialBorderHoverColor: {
         type: 'string',
+        default: "#E1E3E8"
     },
     socialBorderUnits: {
         type: 'object',
@@ -452,28 +466,28 @@ const attributes = {
     socialBorderDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialBorderTablet: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialBorderMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialBorderLink : {
@@ -491,34 +505,56 @@ const attributes = {
     socialBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50', 
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialBorderRadiusLink : {
         type : "boolean",
         default: true
     },
+
+
+    /** Gap Styles */
+    socialGapSize: {
+        type: 'object',
+        default: {
+            Desktop: 20,
+            Tablet: 15,
+            Mobile: 15
+        }
+    },
+    socialGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Gap Styles */
+
+    /** Padding Styles */
     socialPaddingUnits: {
         type: 'object',
         default: {
@@ -530,35 +566,37 @@ const attributes = {
     socialPaddingDesktop: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     socialPaddingTablet: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     socialPaddingMobile: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     socialPaddingLink : {
         type : "boolean",
         default: true
     },
+    /** End Padding Styles */
 
+    /** Margin Styles */
     socialMarginUnits: {
         type: 'object',
         default: {
@@ -598,24 +636,7 @@ const attributes = {
         type : "boolean",
         default: true
     },
-
-    socialGapSize: {
-        type: 'object',
-        default: {
-            Desktop: 20,
-            Tablet: 15,
-            Mobile: 15
-        }
-    },
-    socialGapUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-
+    /** End Margin Styles */
 
 
     /*Global Styles */
