@@ -1,7 +1,7 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import {Card} from "@wordpress/components";
+import { useBlockProps, RichText } from "@wordpress/block-editor";
+import { Card } from "@wordpress/components";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-import {__} from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 export default function save({ attributes }) {
 	const {
 		blockID,
@@ -166,76 +166,95 @@ export default function save({ attributes }) {
 		Sub_Heading_Tag,
 		btnIconPosition,
 		buttonIconSwitcher,
-		btnIcon
+		btnIcon,
+		infoIconPosition,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		id: blockID,
 	});
 
-
 	return (
-
 		<>
-
-			<div {...blockProps}>
-			<div
-				className={`fb-info-box-content-wrapper ${blockID}`}
-			>
-				<div className={`fb-info-box-content-wrapper-inner ${blockID}`}>
-					<div className="fb-info-media-wrapper" style={{textAlign: wrapperAlignment}}>
-						{mediaSwitcher === 'image' && (
-							<img src={attributes.infoMediaUrl}
-
+			<div {...blockProps} id={blockID}>
+				<div className={`fb-info-box-content-wrapper ${blockID}`}>
+					<div
+						className={`fb-info-box-content-wrapper-inner ${blockID}`}
+						style={{
+							display: "flex",
+							flexDirection:
+								infoIconPosition === "left"
+									? "row"
+									: infoIconPosition === "right"
+									? "row-reverse"
+									: infoIconPosition === "top"
+									? "column"
+									: "column-reverse",
+						}}
+					>
+						<div
+							className="fb-info-media-wrapper"
+							style={{
+								textAlign: wrapperAlignment,
+							}}
+						>
+							{mediaSwitcher === "image" && (
+								<img
+									src={attributes.infoMediaUrl}
+									alt={attributes.infoMediaAlt || ""}
+								/>
+							)}
+							{mediaSwitcher === "icon" && (
+								<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+							)}
+						</div>
+						<div className="fb-info-box-content-wrapper">
+							<RichText.Content
+								tagName={Heading_Tag}
+								value={Heading_Text}
+								className="fb-heading"
+								style={{ textAlign: Alignment }}
 							/>
-						)}
-						{mediaSwitcher === 'icon' && (
-							<div className="fb-icon-wrapper">
-								{renderSVG(icon)}
-							</div>
-						)}
+
+							{Sub_Heading_Switcher && (
+								<RichText.Content
+									tagName={Sub_Heading_Tag}
+									value={Sub_Heading_Text}
+									className="fb-description"
+									style={{ textAlign: descAlignment }}
+								/>
+							)}
+
+							{info_Button_Switcher && (
+								<div
+									className="fb-info-btn-container"
+									style={{ textAlign: buttonAlignment }}
+								>
+									<div
+										className="fb-info-btn-wrapper"
+										style={{
+											flexDirection:
+												btnIconPosition === "left" ? "row-reverse" : "row",
+										}}
+									>
+										<a className="fb-info-button">
+											<RichText.Content
+												value={info_Button_Text}
+												tagName={"span"}
+												className="fb-info-button"
+											/>
+										</a>
+										{buttonIconSwitcher && (
+											<div className="fb-btn-icon-wrapper">
+												{renderSVG(btnIcon)}
+											</div>
+										)}
+									</div>
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
-				<RichText.Content
-					tagName={Heading_Tag}
-					value={Heading_Text}
-					onChange={(value) => setAttributes({text: value})}
-					placeholder={__('Info Heading', 'frontis-block')}
-					className="fb-heading"
-					style={{textAlign: Alignment}}
-				/>
-				{Sub_Heading_Switcher && (
-					<RichText.Content
-						tagName={Sub_Heading_Tag}
-						value={Sub_Heading_Text}
-						onChange={(value) => setAttributes({Sub_Heading_Text: value})}
-						placeholder={__('Info description', 'frontis-block')}
-						className="fb-description"
-						style={{textAlign: descAlignment}}
-					/>
-				)}
-				{info_Button_Switcher && (
-					
-					<div className="fb-info-btn-wrapper" style={{
-						flexDirection:
-							btnIconPosition === "left" ? "row-reverse" : "row",
-					}}>
-						<a className="fb-info-button" >
-							<RichText.Content
-								value={info_Button_Text}
-								onChange={(value) => setAttributes({info_Button_Text: value})}
-								placeholder={__('Info Button', 'frontis-block')}
-								style={{textAlign: buttonAlignment}}
-							/>
-						</a>
-						{buttonIconSwitcher && (
-						<div className="fb-btn-icon-wrapper">
-							{renderSVG(btnIcon)}
-						</div>
-					)}
-					</div>
-				)}
-			</div>
 			</div>
 		</>
 	);
