@@ -15,6 +15,7 @@
 
                     .fb-social-list-item {
                         a{
+                            transition: all 0.3s;
                             &.fb-social-icon-link {
                                 box-sizing: border-box;
                                 text-decoration: none;
