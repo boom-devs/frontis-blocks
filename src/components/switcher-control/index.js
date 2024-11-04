@@ -3,7 +3,7 @@ import { Button, BaseControl, ButtonGroup } from '@wordpress/components';
 import './editor.lazy.scss';
 
 
-const FB_SwitcherControl = ({ globalSwitcher, setGlobalSwitcher }) => {
+const FB_SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {
 
     const NORMAL_HOVER = [
         { label: __('Normal', 'frontis-blocks'), value: 'normal' },
@@ -13,6 +13,7 @@ const FB_SwitcherControl = ({ globalSwitcher, setGlobalSwitcher }) => {
     return (
         <div className="fb-setting-switcher-container">
             <BaseControl
+                label={label}
                 className="fb-setting-switcher-panel-wrapper"
             >
                 <ButtonGroup className="fb-setting-switcher-panel-btn">

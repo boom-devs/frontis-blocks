@@ -20,8 +20,25 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Facebook',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
                 socialIconColor: '',
+                socialIconHoverColor: '',
                 socialIconBgColor: '',
+                socialIconHoverBgColor: '',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
             {
                 id: 'item-2',
@@ -29,8 +46,25 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Twitter',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
                 socialIconColor: '',
+                socialIconHoverColor: '',
                 socialIconBgColor: '',
+                socialIconHoverBgColor: '',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
             {
                 id: 'item-3',
@@ -38,8 +72,25 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Youtube',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
                 socialIconColor: '',
+                socialIconHoverColor: '',
                 socialIconBgColor: '',
+                socialIconHoverBgColor: '',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
             {
                 id: 'item-4',
@@ -47,8 +98,25 @@ const attributes = {
                 socialIconUrl: '#',
                 socialIconTitle: 'Behance',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
                 socialIconColor: '',
+                socialIconHoverColor: '',
                 socialIconBgColor: '',
+                socialIconHoverBgColor: '',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
         ],
         items: {
@@ -73,7 +141,16 @@ const attributes = {
                 socialIconTargetUrl: {
                     type: "boolean",
                 },
+
+                socialIconColorSwitcher: {
+                    type: "string",
+                    default: "normal",
+                },
                 socialIconColor: {
+                    type: "string",
+                    default: "",
+                },
+                socialIconHoverColor: {
                     type: "string",
                     default: "",
                 },
@@ -81,13 +158,69 @@ const attributes = {
                     type: "string",
                     default: "",
                 },
+                socialIconHoverBgColor: {
+                    type: "string",
+                    default: "",
+                },
+
+                socialItemBgColorSwitcher: {
+                    type: "string",
+                    default: "normal",
+                },
+
+                normalItemBackgroundType: {
+                    type: "string",
+                    default: "classic",
+                },
+                normalItemClassicColor: {
+                    type: "string",
+                    default: "",
+                },
+                normalItemGradientColor: {
+                    type: "string",
+                    default: null,
+                },
+                normalItemCustomGradientSwitcher: {
+                    type: "boolean",
+                    default: false,
+                },
+                normalItemCustomGradientInputValue: {
+                    type: "string",
+                    default: "",
+                },
+
+                hoverItemBackgroundType: {
+                    type: "string",
+                    default: "classic",
+                },
+                hoverItemClassicColor: {
+                    type: "string",
+                    default: "",
+                },
+                hoverItemGradientColor: {
+                    type: "string",
+                    default: null,
+                },
+                hoverItemCustomGradientSwitcher: {
+                    type: "boolean",
+                    default: false,
+                },
+                hoverItemCustomGradientInputValue: {
+                    type: "string",
+                    default: "",
+                },
             }
         }
     },
 
-    singleIconColorStyle: {
+    singleItemColorStyle: {
         type: "string",
         default: "",
+    },
+
+    socialIconsPresetStyle: {
+        type: "string",
+        default: "preset-1",
     },
     
     socialAlignment: {
