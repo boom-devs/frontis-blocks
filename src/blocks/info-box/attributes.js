@@ -1361,6 +1361,15 @@ const attributes = {
         type: "boolean",
         default: true
     },
+    infoMediaBackgroundImageUrl: {
+        type: "string",
+    },
+    infoMediaBackgroundImageAlt: {
+        type: "string",
+    },
+    infoMediaBackgroundImageID: {
+        type: "number",
+    },
     boxGlobalBoxShadowValues: {
         type: 'array',
         default: [],
@@ -1369,6 +1378,110 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    mediaBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    mediaBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    mediaClassicColor: {
+        type: "string",
+    },
+    mediaGradientColor: {
+        type: "string",
+    },
+    mediaCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    mediaCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    mediaBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    mediaHoverClassicColor: {
+        type: "string",
+    },
+    mediaHoverGradientColor: {
+        type: "string",
+    },
+    mediaHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    mediaHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    mediaHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },    
 
 }
 //
