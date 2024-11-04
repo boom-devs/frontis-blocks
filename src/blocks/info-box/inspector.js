@@ -33,6 +33,7 @@ import {
 
 import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
+import FB_BackgroundColorControl from '@Components/background-color-control';
 /**
  * Internal depencencies
  */
@@ -329,7 +330,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		bgType,
 		infoMediaID,
 		infoMediaAlt,
-		infoMediaUrl
+		infoMediaUrl,
+		mediaBackColorSwitcher,
+		mediaBackgroundType,
+		mediaClassicColor,
+		mediaGradientColor,
+		mediaCustomGradientSwitcher,
+		mediaCustomGradientInputValue,
+		mediaBackgroundColorStyle,
+		mediaBackgroundImageUrl,
+		mediaBackgroundImageAlt,
+		mediaBackgroundImageID,
+		mediaBackgroundImagePosition,
+		mediaBackgroundImageAttachment,
+		mediaBackgroundImageSize,
+		mediaBackgroundImageRepeat,
+		mediaHoverBackgroundType,
+		mediaHoverClassicColor,
+		mediaHoverGradientColor,
+		mediaHoverCustomGradientSwitcher,
+		mediaHoverCustomGradientInputValue,
+		mediaHoverBackgroundColorStyle,
+		mediaHoverBackgroundImageUrl,
+		mediaHoverBackgroundImageAlt,
+		mediaHoverBackgroundImageID,
+		mediaHoverBackgroundImagePosition,
+		mediaHoverBackgroundImageAttachment,
+		mediaHoverBackgroundImageSize,
+		mediaHoverBackgroundImageRepeat
 	} = attributes;
 
 	useEffect(() => {
@@ -2926,7 +2954,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper{
                 	width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};
                 	height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};
-					${mediaBgTypeImage ? `background-image: url(${mediaBgTypeImage});` : `background-color: ${mediaBgColor || ""};`}
+					${mediaBackgroundType === 'gradient' ? `
+						background: ${mediaCustomGradientSwitcher && mediaCustomGradientInputValue ? mediaCustomGradientInputValue : mediaGradientColor};
+					` : mediaBackgroundImageUrl && mediaBackgroundImageUrl !== 'null' ? `
+						${mediaBackgroundImageUrl ? `background-image: url(${mediaBackgroundImageUrl});` : ''}
+						${mediaBackgroundImagePosition ? `background-position: ${mediaBackgroundImagePosition};` : ''}
+						${mediaBackgroundImageAttachment ? `background-attachment: ${mediaBackgroundImageAttachment};` : ''}
+						${mediaBackgroundImageRepeat ? `background-repeat: ${mediaBackgroundImageRepeat};` : ''}
+						${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : ''}
+					` : `
+						background: ${mediaClassicColor};
+					`}
 					padding: ${mediaDesktopPadding};
                     margin: ${mediaDesktopMargin};
                     border: ${mediaBorder};
@@ -2936,11 +2974,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					background-size: cover;
                 }
 				.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper{
-					${
-						mediaBgHoverColor !== undefined
-							? `background-color: ${mediaBgHoverColor};`
-							: "#ffffff"
-					}
+					${mediaHoverBackgroundType === 'gradient' ? `
+						background: ${mediaHoverCustomGradientSwitcher && mediaHoverCustomGradientInputValue ? mediaHoverCustomGradientInputValue : mediaHoverGradientColor};
+					` : mediaHoverBackgroundImageUrl && mediaHoverBackgroundImageUrl !== 'null' ? `
+						${mediaHoverBackgroundImageUrl ? `background-image: url(${mediaHoverBackgroundImageUrl});` : ''}
+						${mediaHoverBackgroundImagePosition ? `background-position: ${mediaHoverBackgroundImagePosition};` : ''}
+						${mediaHoverBackgroundImageAttachment ? `background-attachment: ${mediaHoverBackgroundImageAttachment};` : ''}
+						${mediaHoverBackgroundImageRepeat ? `background-repeat: ${mediaHoverBackgroundImageRepeat};` : ''}
+						${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : ''}
+					` : `
+						background: ${mediaHoverClassicColor};
+					`}					
 				}
 				@media only screen and (max-width: 1024px) {
                 .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper{
@@ -3421,272 +3465,61 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												resetFallbackValue={50}
 											/>
 											{/*Background*/}
-											<SelectControl
-												label={__("Background Type", "frontis-block")}
-												options={BG_TYPE}
-												value={bgType}
-												onChange={(value) =>
-													setAttributes({
-														bgType: value,
-													})
-												}
-											/>
-											{bgType === "image" && (
-												<>
-													<BaseControl>
-															<MediaUploadCheck>
-																<MediaUpload
-																	onSelect={(media) => {
-																		setAttributes({
-																			mediaBgId: media["id"],
-																			mediaBgTypeImage: media["url"],
-																			mediaBgWidth: media["width"],
-																			mediaBgHeight: media["height"],
-																		});
-																	}}
-																	type="image"
-																	value={attributes.mediaBgId}
-																	render={({ open }) => {
-																		return (
-																			<Button
-																				className={
-																					attributes.mediaBgId == 0
-																						? "editor-post-featured-image__toggle"
-																						: "editor-post-featured-image__preview"
-																				}
-																				onClick={open}
-																			>
-																				{attributes.mediaBgId == 0 &&
-																					__(
-																						"Select Icon Image",
-																						"frontis-blocks",
-																					)}
-																				{attributes.mediaBgId != 0 && (
-																					<ResponsiveWrapper
-																						naturalWidth={
-																							attributes.mediaBgWidth
-																						}
-																						naturalHeight={
-																							attributes.mediaBgHeight
-																						}
-																					>
-																						<img
-																							src={attributes.mediaBgTypeImage}
-																						/>
-																					</ResponsiveWrapper>
-																				)}
-																			</Button>
-																		);
-																	}}
-																/>
-															</MediaUploadCheck>
-															{attributes.mediaBgId != 0 && (
-																<HStack className="editor-post-featured-image__actions">
-																	<Button
-																		className="editor-post-featured-image__action"
-																		onClick={() => removeMediaBg()}
-																	>
-																		{__("Remove", "frontis-block")}
-																	</Button>
-																	<MediaUploadCheck>
-																		<MediaUpload
-																			title={__(
-																				"Replace image",
-																				"frontis-block",
-																			)}
-																			value={attributes.mediaBgId}
-																			onSelect={(media) => {
-																				setAttributes({
-																					mediaBgId: media["id"],
-																					mediaBgTypeImage: media["url"],
-																					mediaBgWidth: media["width"],
-																					mediaBgHeight: media["height"],
-																				});
-																			}}
-																			type="image"
-																			render={({ open }) => (
-																				<Button
-																					className="editor-post-featured-image__action"
-																					onClick={open}
-																				>
-																					{__("Replace", "frontis-block")}
-																				</Button>
-																			)}
-																		/>
-																	</MediaUploadCheck>
-																</HStack>
-															)}
-													</BaseControl>
+											<FB_BackgroundColorControl
+											bgColorSwitcher={mediaBackColorSwitcher}
+											setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
 
-													
-												</>
-											)}
-											{bgType === "color" && (
-												<>
-													<BaseControl
-														label={__("Background Color", "frontis-block")}
-														className="fb-setting-color-panel-wrapper"
-													>
-														<ButtonGroup className="fb-setting-color-panel-btn">
-															{NORMAL_HOVER.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() =>
-																		setAttributes({
-																			mediaBgColorSwitcher: item.value,
-																		})
-																	}
-																	className={`fb-setting-color-panel-btn-switchr ${
-																		mediaBgColorSwitcher === item.value
-																			? "active"
-																			: ""
-																	}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
+											normalBackgroundType={mediaBackgroundType}
+											setNormalBackgroundType={(value) => setAttributes({ mediaBackgroundType: value })}
+											normalClassicColor={mediaClassicColor}
+											setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value })}
+											normalGradientColor={mediaGradientColor}
+											setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value })}
+											normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
+											setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
+											normalCustomGradientInputValue={mediaCustomGradientInputValue}
+											setNormalCustomGradientInputValue={(value) => setAttributes({ mediaCustomGradientInputValue: value })}
+											normalBackgroundImageUrl={mediaBackgroundImageUrl}
+											setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackgroundImageUrl: value })}
+											normalBackgroundImageAlt={mediaBackgroundImageAlt}
+											setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackgroundImageAlt: value })}
+											normalBackgroundImageID={mediaBackgroundImageID}
+											setNormalBackgroundImageID={(value) => setAttributes({ mediaBackgroundImageID: value })}
+											normalBackgroundImagePosition={mediaBackgroundImagePosition}
+											setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackgroundImagePosition: value })}
+											normalBackgroundImageAttachment={mediaBackgroundImageAttachment}
+											setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackgroundImageAttachment: value })}
+											normalBackgroundImageRepeat={mediaBackgroundImageRepeat}
+											setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackgroundImageRepeat: value })}
+											normalBackgroundImageSize={mediaBackgroundImageSize}
+											setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackgroundImageSize: value })}
 
-													{mediaBgColorSwitcher === "normal" && (
-														<BaseControl
-															label={__("Nomal Color", "frontis-block")}
-															className="fb-setting-color-setting-wrapper"
-														>
-															<Dropdown
-																className="fb-setting-color-setting-icon-dropdown"
-																contentClassName="fb-setting-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: "bottom-start" }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		aria-label={__(
-																			"Toggle Typography Settings",
-																			"frontis-block",
-																		)}
-																		className="fb-setting-color-setting-icon-btn"
-																	>
-																		<Dashicon
-																			icon="color-picker"
-																			className="fb-setting-color-setting-icon"
-																		/>
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-color-setting-icon-popup">
-																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																			<div className="fb-setting-normal-color">
-																				<ColorPicker
-																					color={mediaBgColor}
-																					onChange={(value) =>
-																						setAttributes({
-																							mediaBgColor: value,
-																						})
-																					}
-																					enableAlpha={true}
-																				/>
-																				<div className="fb-setting-color-label">
-																					{__(
-																						"Default Colors",
-																						"frontis-block",
-																					)}
-																				</div>
-																				<ColorPalette
-																					colors={[
-																						{ color: "#F72585" },
-																						{ color: "#7209B7" },
-																						{ color: "#3A0CA3" },
-																						{ color: "#4361EE" },
-																						{ color: "#4CC9F0" },
-																					]}
-																					disableCustomColors={true}
-																					value={mediaBgColor}
-																					onChange={(value) =>
-																						setAttributes({
-																							mediaBgColor: value,
-																						})
-																					}
-																				/>
-																			</div>
-																		</BaseControl>
-																	</div>
-																)}
-															/>
-														</BaseControl>
-													)}
+											hoverBackgroundType={mediaHoverBackgroundType}
+											setHoverBackgroundType={(value) => setAttributes({ mediaHoverBackgroundType: value })}
+											hoverClassicColor={mediaHoverClassicColor}
+											setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value })}
+											hoverGradientColor={mediaHoverGradientColor} 
+											setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value })}
+											hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
+											setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value })}
+											hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
+											setHoverCustomGradientInputValue={(value) => setAttributes({ mediaHoverCustomGradientInputValue: value })}
+											hoverBackgroundImageUrl={mediaHoverBackgroundImageUrl}
+											setHoverBackgroundImageUrl={(value) => setAttributes({ mediaHoverBackgroundImageUrl: value })}
+											hoverBackgroundImageAlt={mediaHoverBackgroundImageAlt}
+											setHoverBackgroundImageAlt={(value) => setAttributes({ mediaHoverBackgroundImageAlt: value })}
+											hoverBackgroundImageID={mediaHoverBackgroundImageID}
+											setHoverBackgroundImageID={(value) => setAttributes({ mediaHoverBackgroundImageID: value })}
+											hoverBackgroundImagePosition={mediaHoverBackgroundImagePosition}
+											setHoverBackgroundImagePosition={(value) => setAttributes({ mediaHoverBackgroundImagePosition: value })}
+											hoverBackgroundImageAttachment={mediaHoverBackgroundImageAttachment}
+											setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaHoverBackgroundImageAttachment: value })}
+											hoverBackgroundImageRepeat={mediaHoverBackgroundImageRepeat}
+											setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaHoverBackgroundImageRepeat: value })}
+											hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
+											setHoverBackgroundImageSize={(value) => setAttributes({ mediaHoverBackgroundImageSize: value })}
+										/>
 
-													{mediaBgColorSwitcher === "hover" && (
-														<BaseControl
-															label={__("Hover Color", "frontis-block")}
-															className="fb-setting-color-setting-wrapper"
-														>
-															<Dropdown
-																className="fb-setting-color-setting-icon-dropdown"
-																contentClassName="fb-setting-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: "bottom-start" }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		aria-label={__(
-																			"Toggle Typography Settings",
-																			"frontis-block",
-																		)}
-																		className="fb-setting-color-setting-icon-btn"
-																	>
-																		<Dashicon
-																			icon="color-picker"
-																			className="fb-setting-color-setting-icon"
-																		/>
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-color-setting-icon-popup">
-																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																			<div className="fb-setting-hover-color">
-																				<ColorPicker
-																					color={mediaBgHoverColor}
-																					onChange={(value) =>
-																						setAttributes({
-																							mediaBgHoverColor: value,
-																						})
-																					}
-																					enableAlpha={true}
-																				/>
-																				<div className="fb-setting-hover-color-label">
-																					{__(
-																						"Default Colors",
-																						"frontis-block",
-																					)}
-																				</div>
-																				<ColorPalette
-																					colors={[
-																						{ color: "#F72585" },
-																						{ color: "#7209B7" },
-																						{ color: "#3A0CA3" },
-																						{ color: "#4361EE" },
-																						{ color: "#4CC9F0" },
-																					]}
-																					disableCustomColors={true}
-																					value={mediaBgHoverColor}
-																					onChange={(value) =>
-																						setAttributes({
-																							mediaBgHoverColor: value,
-																						})
-																					}
-																				/>
-																			</div>
-																		</BaseControl>
-																	</div>
-																)}
-															/>
-														</BaseControl>
-													)}
-												</>
-											)}
 
 											<FB_Range
 												min={1}
