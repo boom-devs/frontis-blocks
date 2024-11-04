@@ -3,7 +3,7 @@ import FB_Spacing from '@Components/spacing';
 export default function TeamMemberContentPaddingControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		teamMemberContentPaddingUnits,
 		teamMemberContentPaddingDesktop,
 		teamMemberContentPaddingTab,
@@ -15,7 +15,7 @@ export default function TeamMemberContentPaddingControl ({ attributes, setAttrib
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberContentPaddingLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberContentPaddingDesktop: {
@@ -50,7 +50,7 @@ export default function TeamMemberContentPaddingControl ({ attributes, setAttrib
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberContentPaddingDesktop: {...teamMemberContentPaddingDesktop, [position]: value}} );
 					break;
@@ -74,7 +74,7 @@ export default function TeamMemberContentPaddingControl ({ attributes, setAttrib
 		setAttributes( {
 			teamMemberContentPaddingUnits: {
 				...teamMemberContentPaddingUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -83,7 +83,7 @@ export default function TeamMemberContentPaddingControl ({ attributes, setAttrib
 		<>
 			<FB_Spacing
 				label={ 'Padding' }
-				DeviceType={DeviceType}
+				deviceType={deviceType}
 				spacingUnitsHandler={teamMemberContentPaddingUnitsHandler}
 				spacingUnits={teamMemberContentPaddingUnits}
 				spacingDesktop={teamMemberContentPaddingDesktop}

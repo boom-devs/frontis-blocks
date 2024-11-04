@@ -22,7 +22,7 @@ import FB_TypographyControl from '../../../../components/typography-control';
 const Designation = ({ attributes, setAttributes }) => {
 
     const {
-        DeviceType,
+        deviceType,
         
         teamMemberDesignationColor,
         teamMemberDesignationFontFamily,
@@ -49,7 +49,7 @@ const Designation = ({ attributes, setAttributes }) => {
     const handleDesiMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( teamMemberDesignationMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         teamMemberDesignationMarginDesktop: {
@@ -84,7 +84,7 @@ const Designation = ({ attributes, setAttributes }) => {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {teamMemberDesignationMarginDesktop: {...teamMemberDesignationMarginDesktop, [position]: value}} );
                     break;
@@ -109,7 +109,7 @@ const Designation = ({ attributes, setAttributes }) => {
         setAttributes( {
             teamMemberDesignationMarginUnits: {
                 ...teamMemberDesignationMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -154,7 +154,7 @@ const Designation = ({ attributes, setAttributes }) => {
                 lineHeightUnits={teamMemberDesignationLineHeightUnits}
                 onChangeLineHeightUnit={(value) => setAttributes({ teamMemberDesignationLineHeightUnits: value })}
                                                     
-                DeviceType={DeviceType}
+                deviceType={deviceType}
                 setAttributes={setAttributes}
             />
 			
@@ -218,7 +218,7 @@ const Designation = ({ attributes, setAttributes }) => {
 
 			<FB_Spacing
 				label={__("Margin", "frontis-blocks")}
-				DeviceType={DeviceType}
+				deviceType={deviceType}
 				spacingUnitsHandler={handleDesiMarginUnitsHandler}
 				spacingUnits={teamMemberDesignationMarginUnits}
 				spacingDesktop={teamMemberDesignationMarginDesktop}

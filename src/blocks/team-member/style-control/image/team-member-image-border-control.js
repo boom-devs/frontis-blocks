@@ -20,7 +20,7 @@ import FB_Color from '../../../../components/color';
 export default function TeamMemberImageBorderControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		teamMemberImageBorderUnits,
 		teamMemberImageBorderDesktop,
 		teamMemberImageBorderTab,
@@ -41,7 +41,7 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberImageBorderLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberImageBorderDesktop: {
@@ -76,7 +76,7 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberImageBorderDesktop: {...teamMemberImageBorderDesktop, [position]: value}} );
 					break;
@@ -100,7 +100,7 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 		setAttributes( {
 			teamMemberImageBorderUnits: {
 				...teamMemberImageBorderUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -140,7 +140,7 @@ export default function TeamMemberImageBorderControl ({ attributes, setAttribute
 
 		<FB_Spacing
 			label={ 'Border' }
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			spacingUnitsHandler={teamMemberImageBorderUnitsHandler}
 			spacingUnits={teamMemberImageBorderUnits}
 			spacingDesktop={teamMemberImageBorderDesktop}

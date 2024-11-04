@@ -1,7 +1,7 @@
 const attributes = {
     // the following 4 attributes is must required for responsive options and asset generation for frontend
     // responsive control attributes ⬇
-    DeviceType: {
+    deviceType: {
         type: "string",
         default: "Desktop",
     },

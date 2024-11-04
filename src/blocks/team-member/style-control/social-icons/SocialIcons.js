@@ -8,7 +8,7 @@ import FB_Range from "../../../../components/range";
 const SocialIcons = ({attributes, setAttributes}) => {
 
     const {
-		DeviceType,
+		deviceType,
 
         teamMemberIconsSize,
         teamMemberIconsSizeUnits,
@@ -62,7 +62,7 @@ const SocialIcons = ({attributes, setAttributes}) => {
             	rangeValue={teamMemberIconsSize}
             	onChangeHandler={teamMemberIconsSizeHandler}
             	rangeUnitHandler={teamMemberIconsSizeUnitsHandler}
-            	DeviceType={DeviceType}
+            	deviceType={deviceType}
             	units={teamMemberIconsSizeUnits}
             	setAttributes={setAttributes}
             	rangeStep={1}
@@ -76,7 +76,7 @@ const SocialIcons = ({attributes, setAttributes}) => {
             	rangeValue={teamMemberIconsSpacing}
             	onChangeHandler={teamMemberIconsSpacingHandler}
             	rangeUnitHandler={teamMemberIconsSpacingUnitsHandler}
-            	DeviceType={DeviceType}
+            	deviceType={deviceType}
             	units={teamMemberIconsSpacingUnits}
             	setAttributes={setAttributes}
             	rangeStep={1}

@@ -6,7 +6,7 @@ export default function Save({ attributes }) {
 
     const { 
         blockID,
-        DeviceType,
+        deviceType,
 
         GalleryType,
         GalleryItems,
@@ -36,11 +36,11 @@ export default function Save({ attributes }) {
                                         className={`fb-image-gallery-item ${blockID}`}
                                         style={{
                                             ...(GalleryType === 'mesonry' && {
-                                            gridRow: DeviceType === 'Desktop'
+                                            gridRow: deviceType === 'Desktop'
                                                 ? item.row?.desktop > 1
                                                 ? `span ${item.row?.desktop}`
                                                 : 'unset'
-                                                : DeviceType === 'Tablet'
+                                                : deviceType === 'Tablet'
                                                 ? item.row?.tablet > 1
                                                 ? `span ${item.row?.tablet}`
                                                 : 'unset'
@@ -48,11 +48,11 @@ export default function Save({ attributes }) {
                                                 ? `span ${item.row?.mobile}`
                                                 : 'unset',
                                         
-                                            gridColumn: DeviceType === 'Desktop'
+                                            gridColumn: deviceType === 'Desktop'
                                                 ? item.column?.desktop > 1
                                                 ? `span ${item.column?.desktop}`
                                                 : 'unset'
-                                                : DeviceType === 'Tablet'
+                                                : deviceType === 'Tablet'
                                                 ? item.column?.tablet > 1
                                                 ? `span ${item.column?.tablet}`
                                                 : 'unset'

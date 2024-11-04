@@ -45,7 +45,7 @@ import FB_TypographyControl from '../../components/typography-control';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        DeviceType,
+        deviceType,
         accordionAlignment,
         accordionIconZIndex,
         accordionItems,
@@ -365,7 +365,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAccordionItemsPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( accordionItemsPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         accordionItemsDesktopPadding: {
@@ -400,7 +400,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {accordionItemsDesktopPadding: {...accordionItemsDesktopPadding, [position]: value}} );
                     break;
@@ -425,7 +425,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             accordionItemsPaddingUnits: {
                 ...accordionItemsPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -435,7 +435,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAccordionItemsBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( accordionItemsBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         accordionItemsDesktopBorderWidth: {
@@ -470,7 +470,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {accordionItemsDesktopBorderWidth: {...accordionItemsDesktopBorderWidth, [position]: value}} );
                     break;
@@ -495,7 +495,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             accordionItemsBorderUnits: {
                 ...accordionItemsBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -506,7 +506,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAccordionItemsBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( accordionItemsBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         accordionItemsDesktopBorderRadiusWidth: {
@@ -541,7 +541,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {accordionItemsDesktopBorderRadiusWidth: {...accordionItemsDesktopBorderRadiusWidth, [position]: value}} );
                     break;
@@ -566,7 +566,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             accordionItemsBorderRadiusUnits: {
                 ...accordionItemsBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -578,7 +578,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAccordionMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( accordionMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         accordionDesktopMargin: {
@@ -613,7 +613,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {accordionDesktopMargin: {...accordionDesktopMargin, [position]: value}} );
                     break;
@@ -638,7 +638,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             accordionMarginUnits: {
                 ...accordionMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -649,7 +649,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAccordionPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( accordionPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         accordionDesktopPadding: {
@@ -684,7 +684,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {accordionDesktopPadding: {...accordionDesktopPadding, [position]: value}} );
                     break;
@@ -709,7 +709,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             accordionPaddingUnits: {
                 ...accordionPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -720,7 +720,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAccordionBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( accordionBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         accordionDesktopBorderWidth: {
@@ -755,7 +755,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {accordionDesktopBorderWidth: {...accordionDesktopBorderWidth, [position]: value}} );
                     break;
@@ -780,7 +780,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             accordionBorderUnits: {
                 ...accordionBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -791,7 +791,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAccordionBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( accordionBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         accordionDesktopBorderRadiusWidth: {
@@ -826,7 +826,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {accordionDesktopBorderRadiusWidth: {...accordionDesktopBorderRadiusWidth, [position]: value}} );
                     break;
@@ -851,7 +851,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             accordionBorderRadiusUnits: {
                 ...accordionBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
@@ -1015,7 +1015,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             rangeValue={accordionItemGap}
                                             onChangeHandler={accordionItemGapHandler}
                                             rangeUnitHandler={accordionItemGapUnitsHandler}
-                                            DeviceType={DeviceType}
+                                            deviceType={deviceType}
                                             units={accordionItemGapUnits}
                                             setAttributes={setAttributes}
                                             rangeStep={1}
@@ -1070,7 +1070,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeValue={titleIconSize}
                                                         onChangeHandler={titleIconSizeHandler}
                                                         rangeUnitHandler={titleIconSizeUnitsHandler}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         units={titleIconSizeUnits}
                                                         setAttributes={setAttributes}
                                                         rangeStep={1}
@@ -1122,7 +1122,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeValue={titleSpacing}
                                                         onChangeHandler={titleSpacingHandler}
                                                         rangeUnitHandler={titleSpacingUnitsHandler}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         units={titleSpacingUnits}
                                                         setAttributes={setAttributes}
                                                         rangeStep={1}
@@ -1215,7 +1215,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     lineHeightUnits={titleLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
                                                     
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     setAttributes={setAttributes}
                                                 />
                                             <FB_Color
@@ -1244,7 +1244,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={prefixSuffixSpacing}
                                                 onChangeHandler={prefixSuffixSpacingHandler}
                                                 rangeUnitHandler={prefixSuffixSpacingUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={prefixSuffixSpacingUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -1262,7 +1262,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     rangeValue={titlePrefixIconSize}
                                                     onChangeHandler={titlePrefixIconSizeHandler}
                                                     rangeUnitHandler={titlePrefixIconSizeUnitsHandler}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     units={titlePrefixIconSizeUnits}
                                                     setAttributes={setAttributes}
                                                     rangeStep={1}
@@ -1281,7 +1281,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     rangeValue={titleSuffixIconSize}
                                                     onChangeHandler={titleSuffixIconSizeHandler}
                                                     rangeUnitHandler={titleSuffixIconSizeUnitsHandler}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     units={titleSuffixIconSizeUnits}
                                                     setAttributes={setAttributes}
                                                     rangeStep={1}
@@ -1299,7 +1299,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         >
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleAccordionItemsPaddingUnitsHandler}
                                                 spacingUnits={accordionItemsPaddingUnits}
                                                 spacingDesktop={accordionItemsDesktopPadding}
@@ -1338,7 +1338,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
                                                     <FB_Spacing 
                                                         label={__("Border Width", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderUnitsHandler}
                                                         spacingUnits={accordionItemsBorderUnits}
                                                         spacingDesktop={accordionItemsDesktopBorderWidth}
@@ -1352,7 +1352,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
                                                     <FB_Spacing 
                                                         label={__("Border Radius Width", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionItemsBorderRadiusUnits}
                                                         spacingDesktop={accordionItemsDesktopBorderRadiusWidth}
@@ -1393,7 +1393,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 >
                                                     <FB_Spacing
                                                         label={__("Margin", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionMarginUnitsHandler}
                                                         spacingUnits={accordionMarginUnits}
                                                         spacingDesktop={accordionDesktopMargin}
@@ -1407,7 +1407,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
                                                     <FB_Spacing 
                                                         label={__("Padding", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionPaddingUnitsHandler}
                                                         spacingUnits={accordionPaddingUnits}
                                                         spacingDesktop={accordionDesktopPadding}
@@ -1455,7 +1455,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
                                                     <FB_Spacing 
                                                         label={__("Border Width", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderUnitsHandler}
                                                         spacingUnits={accordionBorderUnits}
                                                         spacingDesktop={accordionDesktopBorderWidth}
@@ -1469,7 +1469,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
                                                     <FB_Spacing 
                                                         label={__("Border Radius Width", "frontis-blocks")}
-                                                        DeviceType={DeviceType}
+                                                        deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionBorderRadiusUnits}
                                                         spacingDesktop={accordionDesktopBorderRadiusWidth}

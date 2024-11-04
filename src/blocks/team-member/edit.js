@@ -52,7 +52,7 @@ import FB_Color from '../../components/color/index.js';
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
 
 		// Photo
 		teamMemberImageMediaID,
@@ -242,53 +242,53 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     });
 
 	{/* Team Member Content Control */}
-	const teamMemberContentBorderTypeGetDesktop = `${teamMemberContentBorderDesktop.top}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderDesktop.right}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderDesktop.bottom}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderDesktop.left}${teamMemberContentBorderUnits[DeviceType]}`;
-	const teamMemberContentBorderTypeGetTab = `${teamMemberContentBorderTab.top}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderTab.right}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderTab.bottom}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderTab.left}${teamMemberContentBorderUnits[DeviceType]}`;
-	const teamMemberContentBorderTypeGetMobile = `${teamMemberContentBorderMobile.top}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderMobile.right}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderMobile.bottom}${teamMemberContentBorderUnits[DeviceType]} ${teamMemberContentBorderMobile.left}${teamMemberContentBorderUnits[DeviceType]}`;
+	const teamMemberContentBorderTypeGetDesktop = `${teamMemberContentBorderDesktop.top}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderDesktop.right}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderDesktop.bottom}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderDesktop.left}${teamMemberContentBorderUnits[deviceType]}`;
+	const teamMemberContentBorderTypeGetTab = `${teamMemberContentBorderTab.top}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderTab.right}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderTab.bottom}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderTab.left}${teamMemberContentBorderUnits[deviceType]}`;
+	const teamMemberContentBorderTypeGetMobile = `${teamMemberContentBorderMobile.top}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderMobile.right}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderMobile.bottom}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderMobile.left}${teamMemberContentBorderUnits[deviceType]}`;
 
 
-	const teamMemberContentBorderRadiusGetDesktop = `${teamMemberContentBorderRadiusDesktop.top}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusDesktop.right}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusDesktop.bottom}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusDesktop.left}${teamMemberContentBorderRadiusUnits[DeviceType]}`;
-	const teamMemberContentBorderRadiusGetTab = `${teamMemberContentBorderRadiusTab.top}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusTab.right}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusTab.bottom}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusTab.left}${teamMemberContentBorderRadiusUnits[DeviceType]}`;
-	const teamMemberContentBorderRadiusGetMobile = `${teamMemberContentBorderRadiusMobile.top}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusMobile.right}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusMobile.bottom}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusMobile.left}${teamMemberContentBorderRadiusUnits[DeviceType]}`;
+	const teamMemberContentBorderRadiusGetDesktop = `${teamMemberContentBorderRadiusDesktop.top}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusDesktop.right}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusDesktop.bottom}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusDesktop.left}${teamMemberContentBorderRadiusUnits[deviceType]}`;
+	const teamMemberContentBorderRadiusGetTab = `${teamMemberContentBorderRadiusTab.top}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusTab.right}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusTab.bottom}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusTab.left}${teamMemberContentBorderRadiusUnits[deviceType]}`;
+	const teamMemberContentBorderRadiusGetMobile = `${teamMemberContentBorderRadiusMobile.top}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusMobile.right}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusMobile.bottom}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusMobile.left}${teamMemberContentBorderRadiusUnits[deviceType]}`;
 
 
-	const teamMemberContentMarginGetDesktop = `${teamMemberContentMarginDesktop.top}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginDesktop.right}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginDesktop.bottom}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginDesktop.left}${teamMemberContentMarginUnits[DeviceType]}`;
-	const teamMemberContentMarginGetTab = `${teamMemberContentMarginTab.top}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginTab.right}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginTab.bottom}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginTab.left}${teamMemberContentMarginUnits[DeviceType]}`;
-	const teamMemberContentMarginGetMobile = `${teamMemberContentMarginMobile.top}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginMobile.right}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginMobile.bottom}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginMobile.left}${teamMemberContentMarginUnits[DeviceType]}`;
+	const teamMemberContentMarginGetDesktop = `${teamMemberContentMarginDesktop.top}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginDesktop.right}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginDesktop.bottom}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginDesktop.left}${teamMemberContentMarginUnits[deviceType]}`;
+	const teamMemberContentMarginGetTab = `${teamMemberContentMarginTab.top}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginTab.right}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginTab.bottom}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginTab.left}${teamMemberContentMarginUnits[deviceType]}`;
+	const teamMemberContentMarginGetMobile = `${teamMemberContentMarginMobile.top}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginMobile.right}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginMobile.bottom}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginMobile.left}${teamMemberContentMarginUnits[deviceType]}`;
 
 
-	const teamMemberContentPaddingGetDesktop = `${teamMemberContentPaddingDesktop.top}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingDesktop.right}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingDesktop.bottom}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingDesktop.left}${teamMemberContentPaddingUnits[DeviceType]}`;
-	const teamMemberContentPaddingGetTab = `${teamMemberContentPaddingTab.top}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingTab.right}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingTab.bottom}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingTab.left}${teamMemberContentPaddingUnits[DeviceType]}`;
-	const teamMemberContentPaddingGetMobile = `${teamMemberContentPaddingMobile.top}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingMobile.right}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingMobile.bottom}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingMobile.left}${teamMemberContentPaddingUnits[DeviceType]}`;
+	const teamMemberContentPaddingGetDesktop = `${teamMemberContentPaddingDesktop.top}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingDesktop.right}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingDesktop.bottom}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingDesktop.left}${teamMemberContentPaddingUnits[deviceType]}`;
+	const teamMemberContentPaddingGetTab = `${teamMemberContentPaddingTab.top}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingTab.right}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingTab.bottom}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingTab.left}${teamMemberContentPaddingUnits[deviceType]}`;
+	const teamMemberContentPaddingGetMobile = `${teamMemberContentPaddingMobile.top}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingMobile.right}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingMobile.bottom}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingMobile.left}${teamMemberContentPaddingUnits[deviceType]}`;
 
 
 
 	{/* Team Member Image Control */}
-	const teamMemberImageBorderTypeGetDesktop = `${teamMemberImageBorderDesktop.top}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderDesktop.right}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderDesktop.bottom}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderDesktop.left}${teamMemberImageBorderUnits[DeviceType]}`;
-	const teamMemberImageBorderTypeGetTab = `${teamMemberImageBorderTab.top}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderTab.right}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderTab.bottom}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderTab.left}${teamMemberImageBorderUnits[DeviceType]}`;
-	const teamMemberImageBorderTypeGetMobile = `${teamMemberImageBorderMobile.top}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderMobile.right}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderMobile.bottom}${teamMemberImageBorderUnits[DeviceType]} ${teamMemberImageBorderMobile.left}${teamMemberImageBorderUnits[DeviceType]}`;
+	const teamMemberImageBorderTypeGetDesktop = `${teamMemberImageBorderDesktop.top}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderDesktop.right}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderDesktop.bottom}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderDesktop.left}${teamMemberImageBorderUnits[deviceType]}`;
+	const teamMemberImageBorderTypeGetTab = `${teamMemberImageBorderTab.top}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderTab.right}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderTab.bottom}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderTab.left}${teamMemberImageBorderUnits[deviceType]}`;
+	const teamMemberImageBorderTypeGetMobile = `${teamMemberImageBorderMobile.top}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderMobile.right}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderMobile.bottom}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderMobile.left}${teamMemberImageBorderUnits[deviceType]}`;
 
 
-	const teamMemberImageBorderRadiusGetDesktop = `${teamMemberImageBorderRadiusDesktop.top}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusDesktop.right}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusDesktop.bottom}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusDesktop.left}${teamMemberImageBorderRadiusUnits[DeviceType]}`;
-	const teamMemberImageBorderRadiusGetTab = `${teamMemberImageBorderRadiusTab.top}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusTab.right}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusTab.bottom}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusTab.left}${teamMemberImageBorderRadiusUnits[DeviceType]}`;
-	const teamMemberImageBorderRadiusGetMobile = `${teamMemberImageBorderRadiusMobile.top}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusMobile.right}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusMobile.bottom}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusMobile.left}${teamMemberImageBorderRadiusUnits[DeviceType]}`;
+	const teamMemberImageBorderRadiusGetDesktop = `${teamMemberImageBorderRadiusDesktop.top}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusDesktop.right}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusDesktop.bottom}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusDesktop.left}${teamMemberImageBorderRadiusUnits[deviceType]}`;
+	const teamMemberImageBorderRadiusGetTab = `${teamMemberImageBorderRadiusTab.top}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusTab.right}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusTab.bottom}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusTab.left}${teamMemberImageBorderRadiusUnits[deviceType]}`;
+	const teamMemberImageBorderRadiusGetMobile = `${teamMemberImageBorderRadiusMobile.top}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusMobile.right}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusMobile.bottom}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusMobile.left}${teamMemberImageBorderRadiusUnits[deviceType]}`;
 
 
-	const teamMemberImageMarginGetDesktop = `${teamMemberImageMarginDesktop.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.left}${teamMemberImageMarginUnits[DeviceType]}`;
-	const teamMemberImageMarginGetTab = `${teamMemberImageMarginTab.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.left}${teamMemberImageMarginUnits[DeviceType]}`;
-	const teamMemberImageMarginGetMobile = `${teamMemberImageMarginMobile.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.left}${teamMemberImageMarginUnits[DeviceType]}`;
+	const teamMemberImageMarginGetDesktop = `${teamMemberImageMarginDesktop.top}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginDesktop.right}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginDesktop.bottom}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginDesktop.left}${teamMemberImageMarginUnits[deviceType]}`;
+	const teamMemberImageMarginGetTab = `${teamMemberImageMarginTab.top}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginTab.right}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginTab.bottom}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginTab.left}${teamMemberImageMarginUnits[deviceType]}`;
+	const teamMemberImageMarginGetMobile = `${teamMemberImageMarginMobile.top}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginMobile.right}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginMobile.bottom}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginMobile.left}${teamMemberImageMarginUnits[deviceType]}`;
 
 
 	{/* Team Member Name Control */}
-	const teamMemberNameMarginGetDesktop = `${teamMemberNameMarginDesktop.top}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginDesktop.right}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginDesktop.bottom}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginDesktop.left}${teamMemberNameMarginUnits[DeviceType]}`;
-	const teamMemberNameMarginGetTab = `${teamMemberNameMarginTab.top}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginTab.right}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginTab.bottom}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginTab.left}${teamMemberNameMarginUnits[DeviceType]}`;
-	const teamMemberNameMarginGetMobile = `${teamMemberNameMarginMobile.top}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginMobile.right}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginMobile.bottom}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginMobile.left}${teamMemberNameMarginUnits[DeviceType]}`;
+	const teamMemberNameMarginGetDesktop = `${teamMemberNameMarginDesktop.top}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginDesktop.right}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginDesktop.bottom}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginDesktop.left}${teamMemberNameMarginUnits[deviceType]}`;
+	const teamMemberNameMarginGetTab = `${teamMemberNameMarginTab.top}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginTab.right}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginTab.bottom}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginTab.left}${teamMemberNameMarginUnits[deviceType]}`;
+	const teamMemberNameMarginGetMobile = `${teamMemberNameMarginMobile.top}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginMobile.right}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginMobile.bottom}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginMobile.left}${teamMemberNameMarginUnits[deviceType]}`;
 
 
 	{/* Team Member Designation Control */}
-	const teamMemberDesignationMarginGetDesktop = `${teamMemberDesignationMarginDesktop.top}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginDesktop.right}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginDesktop.bottom}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginDesktop.left}${teamMemberDesignationMarginUnits[DeviceType]}`;
-	const teamMemberDesignationMarginGetTab = `${teamMemberDesignationMarginTab.top}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginTab.right}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginTab.bottom}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginTab.left}${teamMemberDesignationMarginUnits[DeviceType]}`;
-	const teamMemberDesignationMarginGetMobile = `${teamMemberDesignationMarginMobile.top}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginMobile.right}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginMobile.bottom}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginMobile.left}${teamMemberDesignationMarginUnits[DeviceType]}`;
+	const teamMemberDesignationMarginGetDesktop = `${teamMemberDesignationMarginDesktop.top}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginDesktop.right}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginDesktop.bottom}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginDesktop.left}${teamMemberDesignationMarginUnits[deviceType]}`;
+	const teamMemberDesignationMarginGetTab = `${teamMemberDesignationMarginTab.top}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginTab.right}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginTab.bottom}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginTab.left}${teamMemberDesignationMarginUnits[deviceType]}`;
+	const teamMemberDesignationMarginGetMobile = `${teamMemberDesignationMarginMobile.top}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginMobile.right}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginMobile.bottom}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginMobile.left}${teamMemberDesignationMarginUnits[deviceType]}`;
 
 	useEffect(() => {
 		if (teamMemberDesignationFontFamily) {
@@ -349,7 +349,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const handleTeamMemberMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberMarginLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopMargin: {
@@ -384,7 +384,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopMargin: {...teamMemberDesktopMargin, [position]: value}} );
 					break;
@@ -409,21 +409,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes( {
 			teamMemberMarginUnits: {
 				...teamMemberMarginUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberMarginDesktopWidth = `${teamMemberDesktopMargin.top}${teamMemberMarginUnits[DeviceType]} ${teamMemberDesktopMargin.right}${teamMemberMarginUnits[DeviceType]} ${teamMemberDesktopMargin.bottom}${teamMemberMarginUnits[DeviceType]} ${teamMemberDesktopMargin.left}${teamMemberMarginUnits[DeviceType]}`;
-	const teamMemberMarginTabletWidth = `${teamMemberTabMargin.top}${teamMemberMarginUnits[DeviceType]} ${teamMemberTabMargin.right}${teamMemberMarginUnits[DeviceType]} ${teamMemberTabMargin.bottom}${teamMemberMarginUnits[DeviceType]} ${teamMemberTabMargin.left}${teamMemberMarginUnits[DeviceType]}`;
-	const teamMemberMarginMobileWidth = `${teamMemberMobileMargin.top}${teamMemberMarginUnits[DeviceType]} ${teamMemberMobileMargin.right}${teamMemberMarginUnits[DeviceType]} ${teamMemberMobileMargin.bottom}${teamMemberMarginUnits[DeviceType]} ${teamMemberMobileMargin.left}${teamMemberMarginUnits[DeviceType]}`;
+	const teamMemberMarginDesktopWidth = `${teamMemberDesktopMargin.top}${teamMemberMarginUnits[deviceType]} ${teamMemberDesktopMargin.right}${teamMemberMarginUnits[deviceType]} ${teamMemberDesktopMargin.bottom}${teamMemberMarginUnits[deviceType]} ${teamMemberDesktopMargin.left}${teamMemberMarginUnits[deviceType]}`;
+	const teamMemberMarginTabletWidth = `${teamMemberTabMargin.top}${teamMemberMarginUnits[deviceType]} ${teamMemberTabMargin.right}${teamMemberMarginUnits[deviceType]} ${teamMemberTabMargin.bottom}${teamMemberMarginUnits[deviceType]} ${teamMemberTabMargin.left}${teamMemberMarginUnits[deviceType]}`;
+	const teamMemberMarginMobileWidth = `${teamMemberMobileMargin.top}${teamMemberMarginUnits[deviceType]} ${teamMemberMobileMargin.right}${teamMemberMarginUnits[deviceType]} ${teamMemberMobileMargin.bottom}${teamMemberMarginUnits[deviceType]} ${teamMemberMobileMargin.left}${teamMemberMarginUnits[deviceType]}`;
 	
 	
 	// teamMember Padding Functionb
 	const handleTeamMemberPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberPaddingLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopPadding: {
@@ -458,7 +458,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopPadding: {...teamMemberDesktopPadding, [position]: value}} );
 					break;
@@ -483,21 +483,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes( {
 			teamMemberPaddingUnits: {
 				...teamMemberPaddingUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberPaddingDesktopWidth = `${teamMemberDesktopPadding.top}${teamMemberPaddingUnits[DeviceType]} ${teamMemberDesktopPadding.right}${teamMemberPaddingUnits[DeviceType]} ${teamMemberDesktopPadding.bottom}${teamMemberPaddingUnits[DeviceType]} ${teamMemberDesktopPadding.left}${teamMemberPaddingUnits[DeviceType]}`;
-	const teamMemberPaddingTabletWidth = `${teamMemberTabPadding.top}${teamMemberPaddingUnits[DeviceType]} ${teamMemberTabPadding.right}${teamMemberPaddingUnits[DeviceType]} ${teamMemberTabPadding.bottom}${teamMemberPaddingUnits[DeviceType]} ${teamMemberTabPadding.left}${teamMemberPaddingUnits[DeviceType]}`;
-	const teamMemberPaddingMobileWidth = `${teamMemberMobilePadding.top}${teamMemberPaddingUnits[DeviceType]} ${teamMemberMobilePadding.right}${teamMemberPaddingUnits[DeviceType]} ${teamMemberMobilePadding.bottom}${teamMemberPaddingUnits[DeviceType]} ${teamMemberMobilePadding.left}${teamMemberPaddingUnits[DeviceType]}`;
+	const teamMemberPaddingDesktopWidth = `${teamMemberDesktopPadding.top}${teamMemberPaddingUnits[deviceType]} ${teamMemberDesktopPadding.right}${teamMemberPaddingUnits[deviceType]} ${teamMemberDesktopPadding.bottom}${teamMemberPaddingUnits[deviceType]} ${teamMemberDesktopPadding.left}${teamMemberPaddingUnits[deviceType]}`;
+	const teamMemberPaddingTabletWidth = `${teamMemberTabPadding.top}${teamMemberPaddingUnits[deviceType]} ${teamMemberTabPadding.right}${teamMemberPaddingUnits[deviceType]} ${teamMemberTabPadding.bottom}${teamMemberPaddingUnits[deviceType]} ${teamMemberTabPadding.left}${teamMemberPaddingUnits[deviceType]}`;
+	const teamMemberPaddingMobileWidth = `${teamMemberMobilePadding.top}${teamMemberPaddingUnits[deviceType]} ${teamMemberMobilePadding.right}${teamMemberPaddingUnits[deviceType]} ${teamMemberMobilePadding.bottom}${teamMemberPaddingUnits[deviceType]} ${teamMemberMobilePadding.left}${teamMemberPaddingUnits[deviceType]}`;
 	
 	
 	// teamMember BorderWidth Function
 	const handleTeamMemberBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberBorderLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopBorderWidth: {
@@ -532,7 +532,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopBorderWidth: {...teamMemberDesktopBorderWidth, [position]: value}} );
 					break;
@@ -557,21 +557,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes( {
 			teamMemberBorderUnits: {
 				...teamMemberBorderUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberBorderDesktopWidth = `${teamMemberDesktopBorderWidth.top}${teamMemberBorderUnits[DeviceType]} ${teamMemberDesktopBorderWidth.right}${teamMemberBorderUnits[DeviceType]} ${teamMemberDesktopBorderWidth.bottom}${teamMemberBorderUnits[DeviceType]} ${teamMemberDesktopBorderWidth.left}${teamMemberBorderUnits[DeviceType]}`;
-	const teamMemberBorderTabletWidth = `${teamMemberTabBorderWidth.top}${teamMemberBorderUnits[DeviceType]} ${teamMemberTabBorderWidth.right}${teamMemberBorderUnits[DeviceType]} ${teamMemberTabBorderWidth.bottom}${teamMemberBorderUnits[DeviceType]} ${teamMemberTabBorderWidth.left}${teamMemberBorderUnits[DeviceType]}`;
-	const teamMemberBorderMobileWidth = `${teamMemberMobileBorderWidth.top}${teamMemberBorderUnits[DeviceType]} ${teamMemberMobileBorderWidth.right}${teamMemberBorderUnits[DeviceType]} ${teamMemberMobileBorderWidth.bottom}${teamMemberBorderUnits[DeviceType]} ${teamMemberMobileBorderWidth.left}${teamMemberBorderUnits[DeviceType]}`;
+	const teamMemberBorderDesktopWidth = `${teamMemberDesktopBorderWidth.top}${teamMemberBorderUnits[deviceType]} ${teamMemberDesktopBorderWidth.right}${teamMemberBorderUnits[deviceType]} ${teamMemberDesktopBorderWidth.bottom}${teamMemberBorderUnits[deviceType]} ${teamMemberDesktopBorderWidth.left}${teamMemberBorderUnits[deviceType]}`;
+	const teamMemberBorderTabletWidth = `${teamMemberTabBorderWidth.top}${teamMemberBorderUnits[deviceType]} ${teamMemberTabBorderWidth.right}${teamMemberBorderUnits[deviceType]} ${teamMemberTabBorderWidth.bottom}${teamMemberBorderUnits[deviceType]} ${teamMemberTabBorderWidth.left}${teamMemberBorderUnits[deviceType]}`;
+	const teamMemberBorderMobileWidth = `${teamMemberMobileBorderWidth.top}${teamMemberBorderUnits[deviceType]} ${teamMemberMobileBorderWidth.right}${teamMemberBorderUnits[deviceType]} ${teamMemberMobileBorderWidth.bottom}${teamMemberBorderUnits[deviceType]} ${teamMemberMobileBorderWidth.left}${teamMemberBorderUnits[deviceType]}`;
 	
 	
 	// teamMember BorderRadiusWidth Function
 	const handleTeamMemberBorderRadiusUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberBorderRadiusLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopBorderRadiusWidth: {
@@ -606,7 +606,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopBorderRadiusWidth: {...teamMemberDesktopBorderRadiusWidth, [position]: value}} );
 					break;
@@ -631,14 +631,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes( {
 			teamMemberBorderRadiusUnits: {
 				...teamMemberBorderRadiusUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberBorderRadiusDesktopWidth = `${teamMemberDesktopBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberDesktopBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberDesktopBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberDesktopBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[DeviceType]}`;
-	const teamMemberBorderRadiusTabletWidth = `${teamMemberTabBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberTabBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberTabBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberTabBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[DeviceType]}`;
-	const teamMemberBorderRadiusMobileWidth = `${teamMemberMobileBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberMobileBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberMobileBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberMobileBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[DeviceType]}`;
+	const teamMemberBorderRadiusDesktopWidth = `${teamMemberDesktopBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberDesktopBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberDesktopBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberDesktopBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[deviceType]}`;
+	const teamMemberBorderRadiusTabletWidth = `${teamMemberTabBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberTabBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberTabBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberTabBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[deviceType]}`;
+	const teamMemberBorderRadiusMobileWidth = `${teamMemberMobileBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberMobileBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberMobileBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberMobileBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[deviceType]}`;
 	
 
 	/** Team member bg Color */
@@ -1136,7 +1136,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 													<FB_Spacing
 														label={__("Margin", "frontis-blocks")}
-														DeviceType={DeviceType}
+														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberMarginUnitsHandler}
 														spacingUnits={teamMemberMarginUnits}
 														spacingDesktop={teamMemberDesktopMargin}
@@ -1150,7 +1150,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 													<FB_Spacing 
 														label={__("Padding", "frontis-blocks")}
-														DeviceType={DeviceType}
+														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberPaddingUnitsHandler}
 														spacingUnits={teamMemberPaddingUnits}
 														spacingDesktop={teamMemberDesktopPadding}
@@ -1197,7 +1197,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 													<FB_Spacing 
 														label={__("Border Width", "frontis-blocks")}
-														DeviceType={DeviceType}
+														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberBorderUnitsHandler}
 														spacingUnits={teamMemberBorderUnits}
 														spacingDesktop={teamMemberDesktopBorderWidth}
@@ -1211,7 +1211,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 													<FB_Spacing 
 														label={__("Border Radius Width", "frontis-blocks")}
-														DeviceType={DeviceType}
+														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberBorderRadiusUnitsHandler}
 														spacingUnits={teamMemberBorderRadiusUnits}
 														spacingDesktop={teamMemberDesktopBorderRadiusWidth}

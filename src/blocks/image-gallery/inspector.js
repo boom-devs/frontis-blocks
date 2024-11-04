@@ -40,7 +40,7 @@ import FBIconPicker from '../../components/icon-picker';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        DeviceType,
+        deviceType,
 
         GalleryPresetStyle,
         GalleryType,
@@ -249,7 +249,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      const changeGalleryPreset = (selectedPreset) => {
         const presetConfigurations = {
             "preset-1": {
-                DeviceType: "Desktop",
+                deviceType: "Desktop",
                 GalleryType: "grid",
                 GalleryItems: [
                     {
@@ -366,7 +366,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
             },
             "preset-2": {
-                DeviceType: "Desktop",
+                deviceType: "Desktop",
                 GalleryType: "grid",
                 GalleryItems: [
                     {
@@ -493,7 +493,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
             },
             "preset-3": {
-                    DeviceType: "Desktop",
+                    deviceType: "Desktop",
                     GalleryType: "mesonry",
                     GalleryItems: [
                         {
@@ -603,7 +603,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     },
             },
             "preset-4": {
-                DeviceType: "Desktop",
+                deviceType: "Desktop",
                 GalleryType: "mesonry",
                 GalleryItems: [
                     {
@@ -758,7 +758,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 },
             },
             "preset-5": {
-                DeviceType: "Desktop",
+                deviceType: "Desktop",
                 GalleryType: "mesonry",
                 GalleryItems: [
                     {
@@ -1040,7 +1040,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleButtonMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopMargin: {
@@ -1075,7 +1075,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopMargin: {...ButtonDesktopMargin, [position]: value}} );
                     break;
@@ -1100,20 +1100,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonMarginUnits: {
                 ...ButtonMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonMarginDesktopWidth = `${ButtonDesktopMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.left}${ButtonMarginUnits[DeviceType]}`;
-    const ButtonMarginTabletWidth = `${ButtonTabMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.left}${ButtonMarginUnits[DeviceType]}`;
-    const ButtonMarginMobileWidth = `${ButtonMobileMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.left}${ButtonMarginUnits[DeviceType]}`;
+    const ButtonMarginDesktopWidth = `${ButtonDesktopMargin.top}${ButtonMarginUnits[deviceType]} ${ButtonDesktopMargin.right}${ButtonMarginUnits[deviceType]} ${ButtonDesktopMargin.bottom}${ButtonMarginUnits[deviceType]} ${ButtonDesktopMargin.left}${ButtonMarginUnits[deviceType]}`;
+    const ButtonMarginTabletWidth = `${ButtonTabMargin.top}${ButtonMarginUnits[deviceType]} ${ButtonTabMargin.right}${ButtonMarginUnits[deviceType]} ${ButtonTabMargin.bottom}${ButtonMarginUnits[deviceType]} ${ButtonTabMargin.left}${ButtonMarginUnits[deviceType]}`;
+    const ButtonMarginMobileWidth = `${ButtonMobileMargin.top}${ButtonMarginUnits[deviceType]} ${ButtonMobileMargin.right}${ButtonMarginUnits[deviceType]} ${ButtonMobileMargin.bottom}${ButtonMarginUnits[deviceType]} ${ButtonMobileMargin.left}${ButtonMarginUnits[deviceType]}`;
 
     // Button Padding Functionb
     const handleButtonPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopPadding: {
@@ -1148,7 +1148,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopPadding: {...ButtonDesktopPadding, [position]: value}} );
                     break;
@@ -1173,20 +1173,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonPaddingUnits: {
                 ...ButtonPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonPaddingDesktopWidth = `${ButtonDesktopPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.left}${ButtonPaddingUnits[DeviceType]}`;
-    const ButtonPaddingTabletWidth = `${ButtonTabPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.left}${ButtonPaddingUnits[DeviceType]}`;
-    const ButtonPaddingMobileWidth = `${ButtonMobilePadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.left}${ButtonPaddingUnits[DeviceType]}`;
+    const ButtonPaddingDesktopWidth = `${ButtonDesktopPadding.top}${ButtonPaddingUnits[deviceType]} ${ButtonDesktopPadding.right}${ButtonPaddingUnits[deviceType]} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits[deviceType]} ${ButtonDesktopPadding.left}${ButtonPaddingUnits[deviceType]}`;
+    const ButtonPaddingTabletWidth = `${ButtonTabPadding.top}${ButtonPaddingUnits[deviceType]} ${ButtonTabPadding.right}${ButtonPaddingUnits[deviceType]} ${ButtonTabPadding.bottom}${ButtonPaddingUnits[deviceType]} ${ButtonTabPadding.left}${ButtonPaddingUnits[deviceType]}`;
+    const ButtonPaddingMobileWidth = `${ButtonMobilePadding.top}${ButtonPaddingUnits[deviceType]} ${ButtonMobilePadding.right}${ButtonPaddingUnits[deviceType]} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits[deviceType]} ${ButtonMobilePadding.left}${ButtonPaddingUnits[deviceType]}`;
 
     // Button Border Function
     const handleButtonBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopBorderWidth: {
@@ -1221,7 +1221,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopBorderWidth: {...ButtonDesktopBorderWidth, [position]: value}} );
                     break;
@@ -1246,21 +1246,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonBorderUnits: {
                 ...ButtonBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonBorderDesktopWidth = `${ButtonDesktopBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
-    const ButtonBorderTabletWidth = `${ButtonTabBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
-    const ButtonBorderMobileWidth = `${ButtonMobileBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
+    const ButtonBorderDesktopWidth = `${ButtonDesktopBorderWidth.top}${ButtonBorderUnits[deviceType]} ${ButtonDesktopBorderWidth.right}${ButtonBorderUnits[deviceType]} ${ButtonDesktopBorderWidth.bottom}${ButtonBorderUnits[deviceType]} ${ButtonDesktopBorderWidth.left}${ButtonBorderUnits[deviceType]}`;
+    const ButtonBorderTabletWidth = `${ButtonTabBorderWidth.top}${ButtonBorderUnits[deviceType]} ${ButtonTabBorderWidth.right}${ButtonBorderUnits[deviceType]} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits[deviceType]} ${ButtonTabBorderWidth.left}${ButtonBorderUnits[deviceType]}`;
+    const ButtonBorderMobileWidth = `${ButtonMobileBorderWidth.top}${ButtonBorderUnits[deviceType]} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits[deviceType]} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits[deviceType]} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits[deviceType]}`;
 
 
     // Button BorderRadius Function
     const handleButtonBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopBorderRadiusWidth: {
@@ -1295,7 +1295,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopBorderRadiusWidth: {...ButtonDesktopBorderRadiusWidth, [position]: value}} );
                     break;
@@ -1320,14 +1320,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonBorderRadiusUnits: {
                 ...ButtonBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonBorderRadiusDesktopWidth = `${ButtonDesktopBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
-    const ButtonBorderRadiusTabletWidth = `${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
-    const ButtonBorderRadiusMobileWidth = `${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
+    const ButtonBorderRadiusDesktopWidth = `${ButtonDesktopBorderRadiusWidth.top}${ButtonBorderRadiusUnits[deviceType]} ${ButtonDesktopBorderRadiusWidth.right}${ButtonBorderRadiusUnits[deviceType]} ${ButtonDesktopBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[deviceType]} ${ButtonDesktopBorderRadiusWidth.left}${ButtonBorderRadiusUnits[deviceType]}`;
+    const ButtonBorderRadiusTabletWidth = `${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits[deviceType]} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits[deviceType]} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[deviceType]} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits[deviceType]}`;
+    const ButtonBorderRadiusMobileWidth = `${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits[deviceType]} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits[deviceType]} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[deviceType]} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits[deviceType]}`;
 
 
 
@@ -1335,7 +1335,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGalleryMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         GalleryDesktopMargin: {
@@ -1370,7 +1370,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {GalleryDesktopMargin: {...GalleryDesktopMargin, [position]: value}} );
                     break;
@@ -1395,21 +1395,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryMarginUnits: {
                 ...GalleryMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryMarginDesktopWidth = `${GalleryDesktopMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.left}${GalleryMarginUnits[DeviceType]}`;
-    const GalleryMarginTabletWidth = `${GalleryTabMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.left}${GalleryMarginUnits[DeviceType]}`;
-    const GalleryMarginMobileWidth = `${GalleryMobileMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.left}${GalleryMarginUnits[DeviceType]}`;
+    const GalleryMarginDesktopWidth = `${GalleryDesktopMargin.top}${GalleryMarginUnits[deviceType]} ${GalleryDesktopMargin.right}${GalleryMarginUnits[deviceType]} ${GalleryDesktopMargin.bottom}${GalleryMarginUnits[deviceType]} ${GalleryDesktopMargin.left}${GalleryMarginUnits[deviceType]}`;
+    const GalleryMarginTabletWidth = `${GalleryTabMargin.top}${GalleryMarginUnits[deviceType]} ${GalleryTabMargin.right}${GalleryMarginUnits[deviceType]} ${GalleryTabMargin.bottom}${GalleryMarginUnits[deviceType]} ${GalleryTabMargin.left}${GalleryMarginUnits[deviceType]}`;
+    const GalleryMarginMobileWidth = `${GalleryMobileMargin.top}${GalleryMarginUnits[deviceType]} ${GalleryMobileMargin.right}${GalleryMarginUnits[deviceType]} ${GalleryMobileMargin.bottom}${GalleryMarginUnits[deviceType]} ${GalleryMobileMargin.left}${GalleryMarginUnits[deviceType]}`;
 
 
     // Gallery Padding Functionb
     const handleGalleryPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         GalleryDesktopPadding: {
@@ -1444,7 +1444,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {GalleryDesktopPadding: {...GalleryDesktopPadding, [position]: value}} );
                     break;
@@ -1469,21 +1469,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryPaddingUnits: {
                 ...GalleryPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryPaddingDesktopWidth = `${GalleryDesktopPadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.left}${GalleryPaddingUnits[DeviceType]}`;
-    const GalleryPaddingTabletWidth = `${GalleryTabPadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.left}${GalleryPaddingUnits[DeviceType]}`;
-    const GalleryPaddingMobileWidth = `${GalleryMobilePadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.left}${GalleryPaddingUnits[DeviceType]}`;
+    const GalleryPaddingDesktopWidth = `${GalleryDesktopPadding.top}${GalleryPaddingUnits[deviceType]} ${GalleryDesktopPadding.right}${GalleryPaddingUnits[deviceType]} ${GalleryDesktopPadding.bottom}${GalleryPaddingUnits[deviceType]} ${GalleryDesktopPadding.left}${GalleryPaddingUnits[deviceType]}`;
+    const GalleryPaddingTabletWidth = `${GalleryTabPadding.top}${GalleryPaddingUnits[deviceType]} ${GalleryTabPadding.right}${GalleryPaddingUnits[deviceType]} ${GalleryTabPadding.bottom}${GalleryPaddingUnits[deviceType]} ${GalleryTabPadding.left}${GalleryPaddingUnits[deviceType]}`;
+    const GalleryPaddingMobileWidth = `${GalleryMobilePadding.top}${GalleryPaddingUnits[deviceType]} ${GalleryMobilePadding.right}${GalleryPaddingUnits[deviceType]} ${GalleryMobilePadding.bottom}${GalleryPaddingUnits[deviceType]} ${GalleryMobilePadding.left}${GalleryPaddingUnits[deviceType]}`;
 
 
     // Gallery BorderWidth Function
     const handleGalleryBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         GalleryDesktopBorderWidth: {
@@ -1518,7 +1518,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {GalleryDesktopBorderWidth: {...GalleryDesktopBorderWidth, [position]: value}} );
                     break;
@@ -1543,21 +1543,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryBorderUnits: {
                 ...GalleryBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryBorderDesktopWidth = `${GalleryDesktopBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
-    const GalleryBorderTabletWidth = `${GalleryTabBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
-    const GalleryBorderMobileWidth = `${GalleryMobileBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
+    const GalleryBorderDesktopWidth = `${GalleryDesktopBorderWidth.top}${GalleryBorderUnits[deviceType]} ${GalleryDesktopBorderWidth.right}${GalleryBorderUnits[deviceType]} ${GalleryDesktopBorderWidth.bottom}${GalleryBorderUnits[deviceType]} ${GalleryDesktopBorderWidth.left}${GalleryBorderUnits[deviceType]}`;
+    const GalleryBorderTabletWidth = `${GalleryTabBorderWidth.top}${GalleryBorderUnits[deviceType]} ${GalleryTabBorderWidth.right}${GalleryBorderUnits[deviceType]} ${GalleryTabBorderWidth.bottom}${GalleryBorderUnits[deviceType]} ${GalleryTabBorderWidth.left}${GalleryBorderUnits[deviceType]}`;
+    const GalleryBorderMobileWidth = `${GalleryMobileBorderWidth.top}${GalleryBorderUnits[deviceType]} ${GalleryMobileBorderWidth.right}${GalleryBorderUnits[deviceType]} ${GalleryMobileBorderWidth.bottom}${GalleryBorderUnits[deviceType]} ${GalleryMobileBorderWidth.left}${GalleryBorderUnits[deviceType]}`;
 
 
     // Gallery BorderRadiusWidth Function
     const handleGalleryBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         GalleryBorderRadiusDesktop: {
@@ -1592,7 +1592,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {GalleryBorderRadiusDesktop: {...GalleryBorderRadiusDesktop, [position]: value}} );
                     break;
@@ -1617,21 +1617,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryBorderRadiusUnits: {
                 ...GalleryBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryBorderRadiusDesktopWidth = `${GalleryBorderRadiusDesktop.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusDesktop.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusDesktop.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusDesktop.left}${GalleryBorderRadiusUnits[DeviceType]}`;
-    const GalleryBorderRadiusTabletWidth = `${GalleryBorderRadiusTablet.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusTablet.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusTablet.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusTablet.left}${GalleryBorderRadiusUnits[DeviceType]}`;
-    const GalleryBorderRadiusMobileWidth = `${GalleryBorderRadiusMobile.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusMobile.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusMobile.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryBorderRadiusMobile.left}${GalleryBorderRadiusUnits[DeviceType]}`;
+    const GalleryBorderRadiusDesktopWidth = `${GalleryBorderRadiusDesktop.top}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusDesktop.right}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusDesktop.bottom}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusDesktop.left}${GalleryBorderRadiusUnits[deviceType]}`;
+    const GalleryBorderRadiusTabletWidth = `${GalleryBorderRadiusTablet.top}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusTablet.right}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusTablet.bottom}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusTablet.left}${GalleryBorderRadiusUnits[deviceType]}`;
+    const GalleryBorderRadiusMobileWidth = `${GalleryBorderRadiusMobile.top}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusMobile.right}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusMobile.bottom}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusMobile.left}${GalleryBorderRadiusUnits[deviceType]}`;
 
 
     // image BorderWidth Function
 	const handleImageBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( imageBorderLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						imageDesktopBorderWidth: {
@@ -1666,7 +1666,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {imageDesktopBorderWidth: {...imageDesktopBorderWidth, [position]: value}} );
 					break;
@@ -1691,21 +1691,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes( {
 			imageBorderUnits: {
 				...imageBorderUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const imageDesktopBorder = `${imageDesktopBorderWidth.top}${imageBorderUnits[DeviceType]} ${imageDesktopBorderWidth.right}${imageBorderUnits[DeviceType]} ${imageDesktopBorderWidth.bottom}${imageBorderUnits[DeviceType]} ${imageDesktopBorderWidth.left}${imageBorderUnits[DeviceType]}`;
-	const imageTabBorder = `${imageTabBorderWidth.top}${imageBorderUnits[DeviceType]} ${imageTabBorderWidth.right}${imageBorderUnits[DeviceType]} ${imageTabBorderWidth.bottom}${imageBorderUnits[DeviceType]} ${imageTabBorderWidth.left}${imageBorderUnits[DeviceType]}`;
-	const imageMobileBorder = `${imageMobileBorderWidth.top}${imageBorderUnits[DeviceType]} ${imageMobileBorderWidth.right}${imageBorderUnits[DeviceType]} ${imageMobileBorderWidth.bottom}${imageBorderUnits[DeviceType]} ${imageMobileBorderWidth.left}${imageBorderUnits[DeviceType]}`;
+	const imageDesktopBorder = `${imageDesktopBorderWidth.top}${imageBorderUnits[deviceType]} ${imageDesktopBorderWidth.right}${imageBorderUnits[deviceType]} ${imageDesktopBorderWidth.bottom}${imageBorderUnits[deviceType]} ${imageDesktopBorderWidth.left}${imageBorderUnits[deviceType]}`;
+	const imageTabBorder = `${imageTabBorderWidth.top}${imageBorderUnits[deviceType]} ${imageTabBorderWidth.right}${imageBorderUnits[deviceType]} ${imageTabBorderWidth.bottom}${imageBorderUnits[deviceType]} ${imageTabBorderWidth.left}${imageBorderUnits[deviceType]}`;
+	const imageMobileBorder = `${imageMobileBorderWidth.top}${imageBorderUnits[deviceType]} ${imageMobileBorderWidth.right}${imageBorderUnits[deviceType]} ${imageMobileBorderWidth.bottom}${imageBorderUnits[deviceType]} ${imageMobileBorderWidth.left}${imageBorderUnits[deviceType]}`;
 	
 	
 	// image BorderRadiusWidth Function
 	const handleImageBorderRadiusUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( imageBorderRadiusLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						imageDesktopBorderRadiusWidth: {
@@ -1740,7 +1740,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {imageDesktopBorderRadiusWidth: {...imageDesktopBorderRadiusWidth, [position]: value}} );
 					break;
@@ -1765,21 +1765,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes( {
 			imageBorderRadiusUnits: {
 				...imageBorderRadiusUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const imageDesktopBorderRadius = `${imageDesktopBorderRadiusWidth.top}${imageBorderRadiusUnits[DeviceType]} ${imageDesktopBorderRadiusWidth.right}${imageBorderRadiusUnits[DeviceType]} ${imageDesktopBorderRadiusWidth.bottom}${imageBorderRadiusUnits[DeviceType]} ${imageDesktopBorderRadiusWidth.left}${imageBorderRadiusUnits[DeviceType]}`;
-	const imageTabBorderRadius = `${imageTabBorderRadiusWidth.top}${imageBorderRadiusUnits[DeviceType]} ${imageTabBorderRadiusWidth.right}${imageBorderRadiusUnits[DeviceType]} ${imageTabBorderRadiusWidth.bottom}${imageBorderRadiusUnits[DeviceType]} ${imageTabBorderRadiusWidth.left}${imageBorderRadiusUnits[DeviceType]}`;
-	const imageMobileBorderRadius = `${imageMobileBorderRadiusWidth.top}${imageBorderRadiusUnits[DeviceType]} ${imageMobileBorderRadiusWidth.right}${imageBorderRadiusUnits[DeviceType]} ${imageMobileBorderRadiusWidth.bottom}${imageBorderRadiusUnits[DeviceType]} ${imageMobileBorderRadiusWidth.left}${imageBorderRadiusUnits[DeviceType]}`;
+	const imageDesktopBorderRadius = `${imageDesktopBorderRadiusWidth.top}${imageBorderRadiusUnits[deviceType]} ${imageDesktopBorderRadiusWidth.right}${imageBorderRadiusUnits[deviceType]} ${imageDesktopBorderRadiusWidth.bottom}${imageBorderRadiusUnits[deviceType]} ${imageDesktopBorderRadiusWidth.left}${imageBorderRadiusUnits[deviceType]}`;
+	const imageTabBorderRadius = `${imageTabBorderRadiusWidth.top}${imageBorderRadiusUnits[deviceType]} ${imageTabBorderRadiusWidth.right}${imageBorderRadiusUnits[deviceType]} ${imageTabBorderRadiusWidth.bottom}${imageBorderRadiusUnits[deviceType]} ${imageTabBorderRadiusWidth.left}${imageBorderRadiusUnits[deviceType]}`;
+	const imageMobileBorderRadius = `${imageMobileBorderRadiusWidth.top}${imageBorderRadiusUnits[deviceType]} ${imageMobileBorderRadiusWidth.right}${imageBorderRadiusUnits[deviceType]} ${imageMobileBorderRadiusWidth.bottom}${imageBorderRadiusUnits[deviceType]} ${imageMobileBorderRadiusWidth.left}${imageBorderRadiusUnits[deviceType]}`;
 	
 
     // lightbox Padding Functionb
     const handleLightboxPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( lightboxPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         lightboxDesktopPadding: {
@@ -1814,7 +1814,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {lightboxDesktopPadding: {...lightboxDesktopPadding, [position]: value}} );
                     break;
@@ -1839,21 +1839,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             lightboxPaddingUnits: {
                 ...lightboxPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const lightboxDesktopPaddingWidth = `${lightboxDesktopPadding.top}${lightboxPaddingUnits[DeviceType]} ${lightboxDesktopPadding.right}${lightboxPaddingUnits[DeviceType]} ${lightboxDesktopPadding.bottom}${lightboxPaddingUnits[DeviceType]} ${lightboxDesktopPadding.left}${lightboxPaddingUnits[DeviceType]}`;
-    const lightboxTabPaddingWidth = `${lightboxTabPadding.top}${lightboxPaddingUnits[DeviceType]} ${lightboxTabPadding.right}${lightboxPaddingUnits[DeviceType]} ${lightboxTabPadding.bottom}${lightboxPaddingUnits[DeviceType]} ${lightboxTabPadding.left}${lightboxPaddingUnits[DeviceType]}`;
-    const lightboxMobilePaddingWidth = `${lightboxMobilePadding.top}${lightboxPaddingUnits[DeviceType]} ${lightboxMobilePadding.right}${lightboxPaddingUnits[DeviceType]} ${lightboxMobilePadding.bottom}${lightboxPaddingUnits[DeviceType]} ${lightboxMobilePadding.left}${lightboxPaddingUnits[DeviceType]}`;
+    const lightboxDesktopPaddingWidth = `${lightboxDesktopPadding.top}${lightboxPaddingUnits[deviceType]} ${lightboxDesktopPadding.right}${lightboxPaddingUnits[deviceType]} ${lightboxDesktopPadding.bottom}${lightboxPaddingUnits[deviceType]} ${lightboxDesktopPadding.left}${lightboxPaddingUnits[deviceType]}`;
+    const lightboxTabPaddingWidth = `${lightboxTabPadding.top}${lightboxPaddingUnits[deviceType]} ${lightboxTabPadding.right}${lightboxPaddingUnits[deviceType]} ${lightboxTabPadding.bottom}${lightboxPaddingUnits[deviceType]} ${lightboxTabPadding.left}${lightboxPaddingUnits[deviceType]}`;
+    const lightboxMobilePaddingWidth = `${lightboxMobilePadding.top}${lightboxPaddingUnits[deviceType]} ${lightboxMobilePadding.right}${lightboxPaddingUnits[deviceType]} ${lightboxMobilePadding.bottom}${lightboxPaddingUnits[deviceType]} ${lightboxMobilePadding.left}${lightboxPaddingUnits[deviceType]}`;
 
 
     // lightbox BorderWidth Function
     const handleLightboxBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( lightboxBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         lightboxDesktopBorderWidth: {
@@ -1888,7 +1888,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {lightboxDesktopBorderWidth: {...lightboxDesktopBorderWidth, [position]: value}} );
                     break;
@@ -1913,21 +1913,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             lightboxBorderUnits: {
                 ...lightboxBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const lightboxDesktopBorder = `${lightboxDesktopBorderWidth.top}${lightboxBorderUnits[DeviceType]} ${lightboxDesktopBorderWidth.right}${lightboxBorderUnits[DeviceType]} ${lightboxDesktopBorderWidth.bottom}${lightboxBorderUnits[DeviceType]} ${lightboxDesktopBorderWidth.left}${lightboxBorderUnits[DeviceType]}`;
-    const lightboxTabBorder = `${lightboxTabBorderWidth.top}${lightboxBorderUnits[DeviceType]} ${lightboxTabBorderWidth.right}${lightboxBorderUnits[DeviceType]} ${lightboxTabBorderWidth.bottom}${lightboxBorderUnits[DeviceType]} ${lightboxTabBorderWidth.left}${lightboxBorderUnits[DeviceType]}`;
-    const lightboxMobileBorder = `${lightboxMobileBorderWidth.top}${lightboxBorderUnits[DeviceType]} ${lightboxMobileBorderWidth.right}${lightboxBorderUnits[DeviceType]} ${lightboxMobileBorderWidth.bottom}${lightboxBorderUnits[DeviceType]} ${lightboxMobileBorderWidth.left}${lightboxBorderUnits[DeviceType]}`;
+    const lightboxDesktopBorder = `${lightboxDesktopBorderWidth.top}${lightboxBorderUnits[deviceType]} ${lightboxDesktopBorderWidth.right}${lightboxBorderUnits[deviceType]} ${lightboxDesktopBorderWidth.bottom}${lightboxBorderUnits[deviceType]} ${lightboxDesktopBorderWidth.left}${lightboxBorderUnits[deviceType]}`;
+    const lightboxTabBorder = `${lightboxTabBorderWidth.top}${lightboxBorderUnits[deviceType]} ${lightboxTabBorderWidth.right}${lightboxBorderUnits[deviceType]} ${lightboxTabBorderWidth.bottom}${lightboxBorderUnits[deviceType]} ${lightboxTabBorderWidth.left}${lightboxBorderUnits[deviceType]}`;
+    const lightboxMobileBorder = `${lightboxMobileBorderWidth.top}${lightboxBorderUnits[deviceType]} ${lightboxMobileBorderWidth.right}${lightboxBorderUnits[deviceType]} ${lightboxMobileBorderWidth.bottom}${lightboxBorderUnits[deviceType]} ${lightboxMobileBorderWidth.left}${lightboxBorderUnits[deviceType]}`;
 
 
     // lightbox BorderRadiusWidth Function
     const handleLightboxBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( lightboxBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         lightboxDesktopBorderRadiusWidth: {
@@ -1962,7 +1962,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {lightboxDesktopBorderRadiusWidth: {...lightboxDesktopBorderRadiusWidth, [position]: value}} );
                     break;
@@ -1987,14 +1987,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             lightboxBorderRadiusUnits: {
                 ...lightboxBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const lightboxDesktopBorderRadius = `${lightboxDesktopBorderRadiusWidth.top}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxDesktopBorderRadiusWidth.right}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxDesktopBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxDesktopBorderRadiusWidth.left}${lightboxBorderRadiusUnits[DeviceType]}`;
-    const lightboxTabBorderRadius = `${lightboxTabBorderRadiusWidth.top}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxTabBorderRadiusWidth.right}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxTabBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxTabBorderRadiusWidth.left}${lightboxBorderRadiusUnits[DeviceType]}`;
-    const lightboxMobileBorderRadius = `${lightboxMobileBorderRadiusWidth.top}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxMobileBorderRadiusWidth.right}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxMobileBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[DeviceType]} ${lightboxMobileBorderRadiusWidth.left}${lightboxBorderRadiusUnits[DeviceType]}`;
+    const lightboxDesktopBorderRadius = `${lightboxDesktopBorderRadiusWidth.top}${lightboxBorderRadiusUnits[deviceType]} ${lightboxDesktopBorderRadiusWidth.right}${lightboxBorderRadiusUnits[deviceType]} ${lightboxDesktopBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[deviceType]} ${lightboxDesktopBorderRadiusWidth.left}${lightboxBorderRadiusUnits[deviceType]}`;
+    const lightboxTabBorderRadius = `${lightboxTabBorderRadiusWidth.top}${lightboxBorderRadiusUnits[deviceType]} ${lightboxTabBorderRadiusWidth.right}${lightboxBorderRadiusUnits[deviceType]} ${lightboxTabBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[deviceType]} ${lightboxTabBorderRadiusWidth.left}${lightboxBorderRadiusUnits[deviceType]}`;
+    const lightboxMobileBorderRadius = `${lightboxMobileBorderRadiusWidth.top}${lightboxBorderRadiusUnits[deviceType]} ${lightboxMobileBorderRadiusWidth.right}${lightboxBorderRadiusUnits[deviceType]} ${lightboxMobileBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[deviceType]} ${lightboxMobileBorderRadiusWidth.left}${lightboxBorderRadiusUnits[deviceType]}`;
 
 
     const lightboxIconHandler = (IconName) => {
@@ -2026,9 +2026,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
                     display: grid;
-                    grid-template-columns: repeat(${DeviceType == 'Desktop' ? GalleryColumnNumberDesktop : DeviceType == 'Tablet' ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}, 1fr);
-                    grid-gap: ${DeviceType == 'Desktop' ? `${GalleryImageGap.Desktop}${GalleryImageGapUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryImageGap.Tablet}${GalleryImageGapUnits.Tablet}` : `${GalleryImageGap.Mobile}${GalleryImageGapUnits.Mobile}`};
-                    grid-auto-rows: ${DeviceType == 'Desktop' ? `${GalleryItemHeight.Desktop}${GalleryItemHeightUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryItemHeight.Tablet}${GalleryItemHeightUnits.Tablet}` : `${GalleryItemHeight.Mobile}${GalleryItemHeightUnits.Mobile}`};
+                    grid-template-columns: repeat(${deviceType == 'Desktop' ? GalleryColumnNumberDesktop : deviceType == 'Tablet' ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}, 1fr);
+                    grid-gap: ${deviceType == 'Desktop' ? `${GalleryImageGap.Desktop}${GalleryImageGapUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryImageGap.Tablet}${GalleryImageGapUnits.Tablet}` : `${GalleryImageGap.Mobile}${GalleryImageGapUnits.Mobile}`};
+                    grid-auto-rows: ${deviceType == 'Desktop' ? `${GalleryItemHeight.Desktop}${GalleryItemHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryItemHeight.Tablet}${GalleryItemHeightUnits.Tablet}` : `${GalleryItemHeight.Mobile}${GalleryItemHeightUnits.Mobile}`};
                 }
                 
                 .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
@@ -2048,8 +2048,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${ImageAlignment === 'right' && 'right: 0; left: unset'};
                     ${ImageAlignment === 'center' && 'left: 50%'};
                     ${ImageAlignment === 'center' && 'transform: translateX(-50%);'};
-                    width: ${DeviceType == 'Desktop' ? `${ImageWidth.Desktop}${ImageWidthUnits.Desktop}` : DeviceType == 'Tablet' ? `${ImageWidth.Tablet}${ImageWidthUnits.Tablet}` : `${ImageWidth.Mobile}${ImageWidthUnits.Mobile}`};
-                    height: ${DeviceType == 'Desktop' ? `${ImageHeight.Desktop}${ImageHeightUnits.Desktop}` : DeviceType == 'Tablet' ? `${ImageHeight.Tablet}${ImageHeightUnits.Tablet}` : `${ImageHeight.Mobile}${ImageHeightUnits.Mobile}`};
+                    width: ${deviceType == 'Desktop' ? `${ImageWidth.Desktop}${ImageWidthUnits.Desktop}` : deviceType == 'Tablet' ? `${ImageWidth.Tablet}${ImageWidthUnits.Tablet}` : `${ImageWidth.Mobile}${ImageWidthUnits.Mobile}`};
+                    height: ${deviceType == 'Desktop' ? `${ImageHeight.Desktop}${ImageHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${ImageHeight.Tablet}${ImageHeightUnits.Tablet}` : `${ImageHeight.Mobile}${ImageHeightUnits.Mobile}`};
                     ${ImageFitCover === true && 'object-fit: cover'};
                     ${ImageOverlayStyle == 'black_white' && 'filter: grayscale(100%)'};
                     transition: all 0.3s ease-in-out;
@@ -2071,13 +2071,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginDesktopWidth}`};
                     ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingDesktopWidth}`};
                     ${GalleryButtonSwitcher == true && `font-family: ${GalleryButtonFontFamily}`};
-                    ${GalleryButtonSwitcher == true && `font-size: ${DeviceType == 'Desktop' ? `${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet}` : `${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile}`}`};
+                    ${GalleryButtonSwitcher == true && `font-size: ${deviceType == 'Desktop' ? `${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet}` : `${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile}`}`};
                     ${GalleryButtonSwitcher == true && `font-weight: ${GalleryButtonFontWeight}`};
                     ${GalleryButtonSwitcher == true && `font-style: ${GalleryButtonFontStyle}`};
                     ${GalleryButtonSwitcher == true && `text-transform: ${GalleryButtonTextTransform}`};
                     ${GalleryButtonSwitcher == true && `text-decoration: ${GalleryButtonTextDecoration}`};
-                    ${GalleryButtonSwitcher == true && `letter-spacing: ${DeviceType == 'Desktop' ? `${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet}` : `${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile}`}`};
-                    ${GalleryButtonSwitcher == true && `line-height: ${DeviceType == 'Desktop' ? `${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop}` : DeviceType == 'Tablet' ? `${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet}` : `${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile}`}`};
+                    ${GalleryButtonSwitcher == true && `letter-spacing: ${deviceType == 'Desktop' ? `${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet}` : `${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile}`}`};
+                    ${GalleryButtonSwitcher == true && `line-height: ${deviceType == 'Desktop' ? `${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet}` : `${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile}`}`};
                     ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `color: ${GalleryButtonColor}`};
                     ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `background-color: ${GalleryButtonBGColor}`};
                     transition: all 0.3s ease-in-out;
@@ -2302,19 +2302,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <div className="fb-setting-spacing-inner-container">
                                                     <FB_ResponsiveControl
                                                         labelText={__("Columns", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                        device={deviceType}
+                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                     />
                                                 </div>
                                                 <div className="fb-setting-columns-rangecontrol">
                                                     <RangeControl
-                                                        value={DeviceType === "Desktop" ? GalleryColumnNumberDesktop : DeviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
+                                                        value={deviceType === "Desktop" ? GalleryColumnNumberDesktop : deviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
                                                         onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
+                                                            if (deviceType === "Desktop") {
                                                                 setAttributes({ GalleryColumnNumberDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
+                                                            } else if (deviceType === "Tablet") {
                                                                 setAttributes({ GalleryColumnNumberTablet: value });
-                                                            } else if (DeviceType === "Mobile") {
+                                                            } else if (deviceType === "Mobile") {
                                                                 setAttributes({ GalleryColumnNumberMobile: value });
                                                             }
                                                         }}
@@ -2333,7 +2333,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={GalleryItemHeight}
                                                 onChangeHandler={GalleryItemHeightHandler}
                                                 rangeUnitHandler={GalleryItemHeightUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={GalleryItemHeightUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -2347,7 +2347,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={GalleryImageGap}
                                                 onChangeHandler={GalleryImageGapHandler}
                                                 rangeUnitHandler={GalleryImageGapUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={GalleryImageGapUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -2373,7 +2373,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     id={item.id}
                                                                     item={item}
                                                                     setAttributes={setAttributes}
-                                                                    DeviceType={DeviceType}
+                                                                    deviceType={deviceType}
                                                                     GalleryType={GalleryType}
                                                                     GalleryColumnNumberMobile={GalleryColumnNumberMobile}
                                                                     GalleryColumnNumberTablet={GalleryColumnNumberTablet}
@@ -2479,7 +2479,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={ImageWidth}
                                                 onChangeHandler={ImageWidthHandler}
                                                 rangeUnitHandler={ImageWidthUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={ImageWidthUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -2493,7 +2493,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeValue={ImageHeight}
                                                 onChangeHandler={ImageHeightHandler}
                                                 rangeUnitHandler={ImageHeightUnitsHandler}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 units={ImageHeightUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
@@ -2531,7 +2531,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing
                                                     label={__("Border Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleImageBorderUnitsHandler}
                                                     spacingUnits={imageBorderUnits}
                                                     spacingDesktop={imageDesktopBorderWidth}
@@ -2545,7 +2545,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Border Radius Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleImageBorderRadiusUnitsHandler}
                                                     spacingUnits={imageBorderRadiusUnits}
                                                     spacingDesktop={imageDesktopBorderRadiusWidth}
@@ -2693,7 +2693,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     lineHeightUnits={GalleryButtonLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ GalleryButtonLineHeightUnits: value })}
                                                     
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     setAttributes={setAttributes}
                                                 />
 
@@ -2720,7 +2720,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Margin", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleButtonMarginUnitsHandler}
                                                     spacingUnits={ButtonMarginUnits}
                                                     spacingDesktop={ButtonDesktopMargin}
@@ -2734,7 +2734,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Padding", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleButtonPaddingUnitsHandler}
                                                     spacingUnits={ButtonPaddingUnits}
                                                     spacingDesktop={ButtonDesktopPadding}
@@ -2776,7 +2776,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Border Width", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderUnitsHandler}
                                                 spacingUnits={ButtonBorderUnits}
                                                 spacingDesktop={ButtonDesktopBorderWidth}
@@ -2790,7 +2790,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Border Radius Width", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderRadiusUnitsHandler}
                                                 spacingUnits={ButtonBorderRadiusUnits}
                                                 spacingDesktop={ButtonDesktopBorderRadiusWidth}
@@ -2819,7 +2819,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     rangeValue={lightboxIconSize}
                                                     onChangeHandler={lightboxIconSizeHandler}
                                                     rangeUnitHandler={lightboxIconSizeUnitsHandler}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     units={lightboxIconSizeUnits}
                                                     setAttributes={setAttributes}
                                                     rangeStep={1}
@@ -2827,7 +2827,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                                 <FB_Spacing
                                                     label={__("Padding", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleLightboxPaddingUnitsHandler}
                                                     spacingUnits={lightboxPaddingUnits}
                                                     spacingDesktop={lightboxDesktopPadding}
@@ -2882,7 +2882,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Border Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleLightboxBorderUnitsHandler}
                                                     spacingUnits={lightboxBorderUnits}
                                                     spacingDesktop={lightboxDesktopBorderWidth}
@@ -2896,7 +2896,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Border Radius Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleLightboxBorderRadiusUnitsHandler}
                                                     spacingUnits={lightboxBorderRadiusUnits}
                                                     spacingDesktop={lightboxDesktopBorderRadiusWidth}
@@ -2940,7 +2940,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Margin", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryMarginUnitsHandler}
                                                     spacingUnits={GalleryMarginUnits}
                                                     spacingDesktop={GalleryDesktopMargin}
@@ -2954,7 +2954,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Padding", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryPaddingUnitsHandler}
                                                     spacingUnits={GalleryPaddingUnits}
                                                     spacingDesktop={GalleryDesktopPadding}
@@ -3000,7 +3000,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                                 <FB_Spacing 
                                                     label={__("Border Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderUnitsHandler}
                                                     spacingUnits={GalleryBorderUnits}
                                                     spacingDesktop={GalleryDesktopBorderWidth}
@@ -3014,7 +3014,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Border Radius Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderRadiusUnitsHandler}
                                                     spacingUnits={GalleryBorderRadiusUnits}
                                                     spacingDesktop={GalleryBorderRadiusDesktop}

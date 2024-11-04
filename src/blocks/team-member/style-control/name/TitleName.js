@@ -22,7 +22,7 @@ import FB_Color from "../../../../components/color";
 
 const TitleName = ({ attributes, setAttributes }) => {
 	const {
-		DeviceType,
+		deviceType,
 
 		teamMemberNameColorSwitcher,
 		teamMemberNameColor,
@@ -52,7 +52,7 @@ const TitleName = ({ attributes, setAttributes }) => {
 	const handleNameMarginUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (teamMemberNameMarginLink) {
-			switch (DeviceType) {
+			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
 						teamMemberNameMarginDesktop: {
@@ -87,7 +87,7 @@ const TitleName = ({ attributes, setAttributes }) => {
 					break;
 			}
 		} else {
-			switch (DeviceType) {
+			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
 						teamMemberNameMarginDesktop: {
@@ -126,7 +126,7 @@ const TitleName = ({ attributes, setAttributes }) => {
 		setAttributes({
 			teamMemberNameMarginUnits: {
 				...teamMemberNameMarginUnits,
-				[DeviceType]: unit,
+				[deviceType]: unit,
 			},
 		});
 	};
@@ -183,7 +183,7 @@ const TitleName = ({ attributes, setAttributes }) => {
                 lineHeightUnits={teamMemberNameLineHeightUnits}
                 onChangeLineHeightUnit={(value) => setAttributes({ teamMemberNameLineHeightUnits: value })}
                                                     
-                DeviceType={DeviceType}
+                deviceType={deviceType}
                 setAttributes={setAttributes}
             />
 
@@ -199,7 +199,7 @@ const TitleName = ({ attributes, setAttributes }) => {
 
 			<FB_Spacing
 				label={__("Margin", "frontis-blocks")}
-				DeviceType={DeviceType}
+				deviceType={deviceType}
 				spacingUnitsHandler={handleNmeMarginUnitsHandler}
 				spacingUnits={teamMemberNameMarginUnits}
 				spacingDesktop={teamMemberNameMarginDesktop}

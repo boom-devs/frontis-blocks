@@ -13,7 +13,7 @@ export default function TeamMemberImageSizeControl({
 
 	const { 
 
-		DeviceType,
+		deviceType,
 
 		teamMemberImageWidthUnits,
 		teamMemberImageWidth,
@@ -44,12 +44,12 @@ export default function TeamMemberImageSizeControl({
 		<>
 			<FB_Range
             	min={1}
-            	max={teamMemberImageWidthUnits[DeviceType] === '%' ? 100 : 1000}
+            	max={teamMemberImageWidthUnits[deviceType] === '%' ? 100 : 1000}
             	label={__("Width", "frontis-blocks")}
             	rangeValue={teamMemberImageWidth}
             	onChangeHandler={teamMemberImageWidthHandler}
             	rangeUnitHandler={teamMemberImageWidthUnitsHandler}
-            	DeviceType={DeviceType}
+            	deviceType={deviceType}
             	units={teamMemberImageWidthUnits}
             	setAttributes={setAttributes}
             	rangeStep={1}
@@ -58,12 +58,12 @@ export default function TeamMemberImageSizeControl({
 
 			<FB_Range
             	min={1}
-            	max={teamMemberImageHeightUnits[DeviceType] === '%' ? 100 : 1000}
+            	max={teamMemberImageHeightUnits[deviceType] === '%' ? 100 : 1000}
             	label={__("Height", "frontis-blocks")}
             	rangeValue={teamMemberImageHeight}
             	onChangeHandler={teamMemberImageHeightHandler}
             	rangeUnitHandler={teamMemberImageHeightUnitsHandler}
-            	DeviceType={DeviceType}
+            	deviceType={deviceType}
             	units={teamMemberImageHeightUnits}
             	setAttributes={setAttributes}
             	rangeStep={1}

@@ -5,7 +5,7 @@ export default function save({ attributes }) {
 
     const { 
         blockID,
-        DeviceType,
+        deviceType,
         
         classHook,
         accordionType,
