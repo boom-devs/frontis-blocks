@@ -17,10 +17,10 @@ const attributes = {
                 socialIconTitle: 'Facebook',
                 socialIconTargetUrl: false,
                 socialIconColorSwitcher: 'normal',
-                socialIconColor: '',
-                socialIconHoverColor: '',
-                socialIconBgColor: '',
-                socialIconHoverBgColor: '',
+                socialIconColor: '#1877F2',
+                socialIconHoverColor: '#1877F2',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
 
                 socialItemBgColorSwitcher: 'normal',
 
@@ -43,10 +43,10 @@ const attributes = {
                 socialIconTitle: 'Twitter',
                 socialIconTargetUrl: false,
                 socialIconColorSwitcher: 'normal',
-                socialIconColor: '',
-                socialIconHoverColor: '',
-                socialIconBgColor: '',
-                socialIconHoverBgColor: '',
+                socialIconColor: '#1DA1F2',
+                socialIconHoverColor: '#1DA1F2',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
 
                 socialItemBgColorSwitcher: 'normal',
 
@@ -69,10 +69,10 @@ const attributes = {
                 socialIconTitle: 'Youtube',
                 socialIconTargetUrl: false,
                 socialIconColorSwitcher: 'normal',
-                socialIconColor: '',
-                socialIconHoverColor: '',
-                socialIconBgColor: '',
-                socialIconHoverBgColor: '',
+                socialIconColor: '#FF0000',
+                socialIconHoverColor: '#FF0000',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
 
                 socialItemBgColorSwitcher: 'normal',
 
@@ -95,10 +95,10 @@ const attributes = {
                 socialIconTitle: 'Behance',
                 socialIconTargetUrl: false,
                 socialIconColorSwitcher: 'normal',
-                socialIconColor: '',
-                socialIconHoverColor: '',
-                socialIconBgColor: '',
-                socialIconHoverBgColor: '',
+                socialIconColor: '#1769FF',
+                socialIconHoverColor: '#1769FF',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
 
                 socialItemBgColorSwitcher: 'normal',
 
@@ -214,30 +214,6 @@ const attributes = {
         type: "string",
         default: "",
     },
-    singlesocialiconColor: {
-        type: "string",
-    },
-    singlesocialiconHoverColor: {
-        type: "string",
-    },
-    singlesocialiconBgColor: {
-        type: "string",
-    },
-    singlesocialiconHoverBgColor: {
-        type: "string",
-    },
-    normalItemGradientColors: {
-        type: "string",
-    },
-    normalItemClassicColors: {
-        type: "string",
-    },
-    hoverItemGradientColors: {
-        type: "string",
-    },
-    hoverItemClassicColors: {
-        type: "string",
-    },
     /** End repetar item style pass to this attribute */
 
 
@@ -291,7 +267,7 @@ const attributes = {
     },
     socialIconBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     socialIconBorderColorSwitcher : {
         type: "string",
@@ -299,6 +275,7 @@ const attributes = {
     },
     socialIconBorderColor: {
         type: 'string',
+        default: "#E1E3E8"
     },
     socialIconBorderHoverColor: {
         type: 'string',
@@ -314,28 +291,28 @@ const attributes = {
     socialIconBorderDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderTablet: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderLink : {
@@ -353,28 +330,28 @@ const attributes = {
     socialIconBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50', 
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusLink : {
@@ -393,28 +370,28 @@ const attributes = {
     socialIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     socialIconPaddingTablet: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     socialIconPaddingMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     /*End Icon Styles */
@@ -523,7 +500,7 @@ const attributes = {
     /** Border Styles */
     socialBorder: {
         type: 'string',
-        default: "solid",
+        default: "none",
     },
     socialBorderColorSwitcher : {
         type: "string",
@@ -531,11 +508,9 @@ const attributes = {
     },
     socialBorderColor: {
         type: 'string',
-        default: "#E1E3E8"
     },
     socialBorderHoverColor: {
         type: 'string',
-        default: "#E1E3E8"
     },
     socialBorderUnits: {
         type: 'object',
@@ -548,28 +523,28 @@ const attributes = {
     socialBorderDesktop: {
         type: "object", 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderTablet: {
         type: "object", 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderMobile: {
         type: "object", 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderLink : {
@@ -587,28 +562,28 @@ const attributes = {
     socialBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: '50', 
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialBorderRadiusLink : {
@@ -648,28 +623,28 @@ const attributes = {
     socialPaddingDesktop: {
         type: "object", 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialPaddingTablet: {
         type: "object", 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialPaddingMobile: {
         type: "object", 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialPaddingLink : {

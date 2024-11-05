@@ -176,19 +176,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		socialIconsPresetStyle,
 		singleItemColorStyle,
-		singlesocialiconColor,
-		singlesocialiconHoverColor,
-		singlesocialiconBgColor,
-		singlesocialiconHoverBgColor,
-		normalItemGradientColors,
-		normalItemClassicColors,
-		hoverItemGradientColors,
-		hoverItemClassicColors,
 
 
     } = attributes;
-
-	console.log(singlesocialiconColor);
 	
 
 
@@ -1075,190 +1065,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Border Radius */
 
 
-	// /** Start Social Item Color Style */
-	// const socialItemColorStyle = useMemo(() => {
-    //     let style = '';
-    //     socialItems.forEach(item => {
-
-    //         if (item.socialIconColor) {
-    //             const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
-    //                 fill: ${item.socialIconColor};
-    //             }`;
-    //             style += colorStyle;
-    //         }
-    //         if (item.socialIconHoverColor) {
-    //             const hoverColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover svg {
-    //                 fill: ${item.socialIconHoverColor};
-    //             }`;
-    //             style += hoverColorStyle;
-    //         }
-
-    //         if (item.socialIconBgColor) {
-    //             const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-    //                 background-color: ${item.socialIconBgColor};
-    //             }`;
-    //             style += bgColorStyle;
-    //         }
-    //         if (item.socialIconHoverBgColor) {
-    //             const hoverBgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
-    //                 background-color: ${item.socialIconHoverBgColor};
-    //             }`;
-    //             style += hoverBgColorStyle;
-    //         }
-
-	// 		const normalItemBackgroundType = item.normalItemBackgroundType;
-	// 		if (normalItemBackgroundType === 'gradient') {
-	// 			const gradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
-	// 				background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : item.normalItemGradientColor};
-	// 			}`;
-	// 			style += gradientStyle;
-
-	// 		} else {
-	// 			const classicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
-	// 				background: ${item.normalItemClassicColor};
-	// 			}`;
-	// 			style += classicStyle;
-	// 		}
-
-	// 		const hoverItemBackgroundType = item.hoverItemBackgroundType;
-	// 		if (hoverItemBackgroundType === 'gradient') {
-	// 			const hoverGradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
-	// 				background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : item.hoverItemGradientColor};
-	// 			}`;
-	// 			style += hoverGradientStyle;
-
-	// 		} else {
-	// 			const hoverClassicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
-	// 				background: ${item.hoverItemClassicColor};
-	// 			}`;
-	// 			style += hoverClassicStyle;
-	// 		}
-
-
-    //     });
-    //     return style;
-    // }, [socialItems, blockID]);
-
-    // useEffect(() => {
-    //     setAttributes({ singleItemColorStyle: socialItemColorStyle });
-    // }, [socialItemColorStyle]);
-	// /** End Social Item Color Style */
-
-
 	/** Start Social Item Color Style */
 	const socialItemColorStyle = useMemo(() => {
-		let style = '';
-		const socialIconColors = [];
-		const socialIconHoverColors = [];
-		const socialIconBgColors = [];
-		const socialIconHoverBgColors = [];
-		const normalItemGradientColors = [];
-		const normalItemClassicColors = [];
-		const hoverItemGradientColors = [];
-		const hoverItemClassicColors = [];
+        let style = '';
+        socialItems.forEach(item => {
 
-		socialItems.forEach((item) => {
-			if (item.socialIconColor) {
-				const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
-					fill: ${item.socialIconColor};
-				}`;
-				style += colorStyle;
-				socialIconColors.push(item.socialIconColor);
-			}
+            if (item.socialIconColor) {
+                const colorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg {
+                    fill: ${item.socialIconColor};
+                }`;
+                style += colorStyle;
+            }
+            if (item.socialIconHoverColor) {
+                const hoverColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover svg {
+                    fill: ${item.socialIconHoverColor};
+                }`;
+                style += hoverColorStyle;
+            }
 
-			if (item.socialIconHoverColor) {
-				const hoverColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover svg {
-					fill: ${item.socialIconHoverColor};
-				}`;
-				style += hoverColorStyle;
-				socialIconHoverColors.push(item.socialIconHoverColor);
-			}
+            if (item.socialIconBgColor) {
+                const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+                    background-color: ${item.socialIconBgColor};
+                }`;
+                style += bgColorStyle;
+            }
+            if (item.socialIconHoverBgColor) {
+                const hoverBgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
+                    background-color: ${item.socialIconHoverBgColor};
+                }`;
+                style += hoverBgColorStyle;
+            }
 
-			if (item.socialIconBgColor) {
-				const bgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-					background-color: ${item.socialIconBgColor};
-				}`;
-				style += bgColorStyle;
-				socialIconBgColors.push(item.socialIconBgColor);
-			}
-
-			if (item.socialIconHoverBgColor) {
-				const hoverBgColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
-					background-color: ${item.socialIconHoverBgColor};
-				}`;
-				style += hoverBgColorStyle;
-				socialIconHoverBgColors.push(item.socialIconHoverBgColor);
-			}
-
-			if (item.normalItemBackgroundType === 'gradient') {
+			const normalItemBackgroundType = item.normalItemBackgroundType;
+			if (normalItemBackgroundType === 'gradient') {
 				const gradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
 					background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : item.normalItemGradientColor};
 				}`;
 				style += gradientStyle;
-				normalItemGradientColors.push(item.normalItemCustomGradientInputValue || item.normalItemGradientColor);
+
 			} else {
 				const classicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
 					background: ${item.normalItemClassicColor};
 				}`;
 				style += classicStyle;
-				normalItemClassicColors.push(item.normalItemClassicColor);
 			}
 
-			if (item.hoverItemBackgroundType === 'gradient') {
+			const hoverItemBackgroundType = item.hoverItemBackgroundType;
+			if (hoverItemBackgroundType === 'gradient') {
 				const hoverGradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
 					background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : item.hoverItemGradientColor};
 				}`;
 				style += hoverGradientStyle;
-				hoverItemGradientColors.push(item.hoverItemCustomGradientInputValue || item.hoverItemGradientColor);
+
 			} else {
 				const hoverClassicStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link:hover {
 					background: ${item.hoverItemClassicColor};
 				}`;
 				style += hoverClassicStyle;
-				hoverItemClassicColors.push(item.hoverItemClassicColor);
 			}
-		});
 
-		return {
-			style,
-			socialIconColors,
-			socialIconHoverColors,
-			socialIconBgColors,
-			socialIconHoverBgColors,
-			normalItemGradientColors,
-			normalItemClassicColors,
-			hoverItemGradientColors,
-			hoverItemClassicColors
-		};
-	}, [socialItems, blockID]);
 
-	useEffect(() => {
-		const {
-			style,
-			socialIconColors,
-			socialIconHoverColors,
-			socialIconBgColors,
-			socialIconHoverBgColors,
-			normalItemGradientColors,
-			normalItemClassicColors,
-			hoverItemGradientColors,
-			hoverItemClassicColors
-		} = socialItemColorStyle;
-		
-		setAttributes({
-			singleItemColorStyle: style,
-			singlesocialiconColor: socialIconColors,
-			singlesocialiconHoverColor: socialIconHoverColors,
-			singlesocialiconBgColor: socialIconBgColors,
-			singlesocialiconHoverBgColor: socialIconHoverBgColors,
-			normalItemGradientColors: normalItemGradientColors,
-			normalItemClassicColors: normalItemClassicColors,
-			hoverItemGradientColors: hoverItemGradientColors,
-			hoverItemClassicColors: hoverItemClassicColors
-		});
-	}, [socialItemColorStyle]);
+        });
+        return style;
+    }, [socialItems, blockID]);
+
+    useEffect(() => {
+        setAttributes({ singleItemColorStyle: socialItemColorStyle });
+    }, [socialItemColorStyle]);
 	/** End Social Item Color Style */
-
 
 
 
@@ -1267,106 +1141,434 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const changeSocialIconsPreset = (selectedPreset) => {
 		const presetConfigurations = {
 			"preset-1": {
-				socialIconGlobalColor: "#399CFF",
-				socialIconGlobalHoverColor: "#399CFF",
-				socialBgColor: "#ffffff",
-				socialBgHoverColor: "#ffffff",
+				socialItems: socialItems.map((item, index) => {
+					switch (index) {
+						case 0:
+							return {
+								...item,
+								socialIconColor: "#1877F2",
+								socialIconHoverColor: "#1877F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 1:
+							return {
+								...item,
+								socialIconColor: "#1DA1F2",
+								socialIconHoverColor: "#1DA1F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 2:
+							return {
+								...item,
+								socialIconColor: "#FF0000",
+								socialIconHoverColor: "#FF0000",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 3:
+							return {
+								...item,
+								socialIconColor: "#1769FF",
+								socialIconHoverColor: "#1769FF",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						default:
+							return item;
+					}
+				}),
+
+				socialIconBorderColor: "#E1E3E8",
+				socialIconBorder: "solid",
 				socialGapSize: {
 					Desktop: 20,
 					Tablet: 20,
 					Mobile: 20
 				},
-				socialPaddingDesktop: {
+				socialIconPaddingDesktop: {
 					top: 20,
 					bottom: 20,
 					left: 20,
 					right: 20
 				},
-				socialPaddingTablet: {
+				socialIconPaddingTablet: {
 					top: 20,
 					bottom: 20,
 					left: 20,
 					right: 20
 				},
-				socialPaddingMobile: {
+				socialIconPaddingMobile: {
 					top: 20,
 					bottom: 20,
 					left: 20,
 					right: 20
 				},
-				socialBorderRadiusDesktop: {
+				socialIconBorderDesktop: {
+					top: 1,
+					bottom: 1,
+					left: 1,
+					right: 1,
+				},
+				socialIconBorderTablet: {
+					top: 1,
+					bottom: 1,
+					left: 1,
+					right: 1,
+				},
+				socialIconBorderMobile: {
+					top: 1,
+					bottom: 1,
+					left: 1,
+					right: 1,
+				},
+				socialIconBorderRadiusDesktop: {
 					top: 50,
 					bottom: 50,
 					left: 50,
 					right: 50
 				},
-				socialBorderRadiusTablet: {
+				socialIconBorderRadiusTablet: {
 					top: 50,
 					bottom: 50,
 					left: 50,
 					right: 50
 				},
-				socialBorderRadiusMobile: {
+				socialIconBorderRadiusMobile: {
 					top: 50,
 					bottom: 50,
 					left: 50,
 					right: 50
 				},
+				socialTitleSwitcher: false,
 			},
 			"preset-2": {
+				socialItems: socialItems.map((item, index) => {
+					switch (index) {
+						case 0:
+							return {
+								...item,
+								socialIconColor: "#ffffff",
+								socialIconHoverColor: "#ffffff",
+								socialIconBgColor: "#1877F2",
+								socialIconHoverBgColor: "#1877F2"
+							};
+						case 1:
+							return {
+								...item,
+								socialIconColor: "#ffffff",
+								socialIconHoverColor: "#ffffff",
+								socialIconBgColor: "#1DA1F2",
+								socialIconHoverBgColor: "#1DA1F2"
+							};
+						case 2:
+							return {
+								...item,
+								socialIconColor: "#ffffff",
+								socialIconHoverColor: "#ffffff",
+								socialIconBgColor: "#FF0000",
+								socialIconHoverBgColor: "#FF0000"
+							};
+						case 3:
+							return {
+								...item,
+								socialIconColor: "#ffffff",
+								socialIconHoverColor: "#ffffff",
+								socialIconBgColor: "#1769FF",
+								socialIconHoverBgColor: "#1769FF"
+							};
+						default:
+							return item;
+					}
+				}),
+				socialIconBorderColor: "",
+				socialIconBorder: "none",
+				socialGapSize: {
+					Desktop: 20,
+					Tablet: 20,
+					Mobile: 20
+				},
+				socialIconPaddingDesktop: {
+					top: 20,
+					bottom: 20,
+					left: 20,
+					right: 20
+				},
+				socialIconPaddingTablet: {
+					top: 20,
+					bottom: 20,
+					left: 20,
+					right: 20
+				},
+				socialIconPaddingMobile: {
+					top: 20,
+					bottom: 20,
+					left: 20,
+					right: 20
+				},
+				socialIconBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderRadiusDesktop: {
+					top: 50,
+					bottom: 50,
+					left: 50,
+					right: 50
+				},
+				socialIconBorderRadiusTablet: {
+					top: 50,
+					bottom: 50,
+					left: 50,
+					right: 50
+				},
+				socialIconBorderRadiusMobile: {
+					top: 50,
+					bottom: 50,
+					left: 50,
+					right: 50
+				},
+				socialTitleSwitcher: false,
 			},
 			"preset-3": {
+				socialItems: socialItems.map((item, index) => {
+					switch (index) {
+						case 0:
+							return {
+								...item,
+								socialIconColor: "#1877F2",
+								socialIconHoverColor: "#1877F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 1:
+							return {
+								...item,
+								socialIconColor: "#1DA1F2",
+								socialIconHoverColor: "#1DA1F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 2:
+							return {
+								...item,
+								socialIconColor: "#FF0000",
+								socialIconHoverColor: "#FF0000",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 3:
+							return {
+								...item,
+								socialIconColor: "#1769FF",
+								socialIconHoverColor: "#1769FF",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						default:
+							return item;
+					}
+				}),
+				socialTitleSwitcher: true,
 			},
 			"preset-4": {
+				socialItems: socialItems.map((item, index) => {
+					switch (index) {
+						case 0:
+							return {
+								...item,
+								socialIconColor: "#1877F2",
+								socialIconHoverColor: "#1877F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 1:
+							return {
+								...item,
+								socialIconColor: "#1DA1F2",
+								socialIconHoverColor: "#1DA1F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 2:
+							return {
+								...item,
+								socialIconColor: "#FF0000",
+								socialIconHoverColor: "#FF0000",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 3:
+							return {
+								...item,
+								socialIconColor: "#1769FF",
+								socialIconHoverColor: "#1769FF",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						default:
+							return item;
+					}
+				}),
+				socialTitleSwitcher: true,
 			},
 			"preset-5": {
+				socialItems: socialItems.map((item, index) => {
+					switch (index) {
+						case 0:
+							return {
+								...item,
+								socialIconColor: "#1877F2",
+								socialIconHoverColor: "#1877F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 1:
+							return {
+								...item,
+								socialIconColor: "#1DA1F2",
+								socialIconHoverColor: "#1DA1F2",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 2:
+							return {
+								...item,
+								socialIconColor: "#FF0000",
+								socialIconHoverColor: "#FF0000",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						case 3:
+							return {
+								...item,
+								socialIconColor: "#1769FF",
+								socialIconHoverColor: "#1769FF",
+								socialIconBgColor: "#ffffff",
+								socialIconHoverBgColor: "#ffffff"
+							};
+						default:
+							return item;
+					}
+				}),
+				socialTitleSwitcher: true,
 			},
 			"preset-6": {
-				socialIconGlobalColor: "#fff",
-				socialIconGlobalHoverColor: "#fff",
-				socialBgColor: "#15171C",
-				socialBgHoverColor: "#15171C",
+				socialItems: socialItems.map((item, index) => {
+					switch (index) {
+						case 0:
+							return {
+								...item,
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#15171C",
+								socialIconHoverBgColor: "#15171C"
+							};
+						case 1:
+							return {
+								...item,
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#15171C",
+								socialIconHoverBgColor: "#15171C"
+							};
+						case 2:
+							return {
+								...item,
+								socialIconColor: "#FFFFFF", 
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#15171C",
+								socialIconHoverBgColor: "#15171C"
+							};
+						case 3:
+							return {
+								...item,
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#15171C",
+								socialIconHoverBgColor: "#15171C"
+							};
+						default:
+							return item;
+					}
+				}),
+				socialIconBorder: "none",
+				socialIconBorderColor: "",
 				socialGapSize: {
 					Desktop: 10,
 					Tablet: 10,
 					Mobile: 10
 				},
-				socialPaddingDesktop: {
+				socialIconPaddingDesktop: {
 					top: 20,
 					bottom: 20,
 					left: 30,
 					right: 30
 				},
-				socialPaddingTablet: {
+				socialIconPaddingTablet: {
 					top: 20,
 					bottom: 20,
 					left: 30,
 					right: 30
 				},
-				socialPaddingMobile: {
+				socialIconPaddingMobile: {
 					top: 20,
 					bottom: 20,
 					left: 30,
 					right: 30
 				},
-				socialBorderRadiusDesktop: {
+				socialIconBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderRadiusDesktop: {
 					top: 5,
 					bottom: 5,
 					left: 5,
 					right: 5
 				},
-				socialBorderRadiusTablet: {
+				socialIconBorderRadiusTablet: {
 					top: 5,
 					bottom: 5,
 					left: 5,
 					right: 5
 				},
-				socialBorderRadiusMobile: {
+				socialIconBorderRadiusMobile: {
 					top: 5,
 					bottom: 5,
 					left: 5,
 					right: 5
 				},
+				socialTitleSwitcher: false,
 			},
 		};
 
