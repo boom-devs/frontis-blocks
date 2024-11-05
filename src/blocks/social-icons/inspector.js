@@ -1272,9 +1272,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBorderColor: "#E1E3E8",
 				socialIconBorder: "solid",
 				socialGapSize: {
-					Desktop: 20,
-					Tablet: 20,
-					Mobile: 20
+					Desktop: 10,
+					Tablet: 10,
+					Mobile: 10
 				},
 				socialIconPaddingDesktop: {
 					top: 20,
@@ -1283,16 +1283,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 20
 				},
 				socialIconPaddingTablet: {
-					top: 20,
-					bottom: 20,
-					left: 20,
-					right: 20
+					top: 15,
+					bottom: 15,
+					left: 15,
+					right: 15
 				},
 				socialIconPaddingMobile: {
-					top: 20,
-					bottom: 20,
-					left: 20,
-					right: 20
+					top: 10,
+					bottom: 10,
+					left: 10,
+					right: 10
 				},
 				socialIconBorderDesktop: {
 					top: 1,
@@ -1451,9 +1451,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBorderColor: "",
 				socialIconBorder: "none",
 				socialGapSize: {
-					Desktop: 20,
-					Tablet: 20,
-					Mobile: 20
+					Desktop: 10,
+					Tablet: 10,
+					Mobile: 10
 				},
 				socialIconPaddingDesktop: {
 					top: 20,
@@ -1462,16 +1462,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 20
 				},
 				socialIconPaddingTablet: {
-					top: 20,
-					bottom: 20,
-					left: 20,
-					right: 20
+					top: 15,
+					bottom: 15,
+					left: 15,
+					right: 15
 				},
 				socialIconPaddingMobile: {
-					top: 20,
-					bottom: 20,
-					left: 20,
-					right: 20
+					top: 10,
+					bottom: 10,
+					left: 10,
+					right: 10
 				},
 				socialIconBorderDesktop: {
 					top: 0,
@@ -1630,9 +1630,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBorderColor: "",
 				socialIconBorder: "none",
 				socialGapSize: {
-					Desktop: 20,
-					Tablet: 20,
-					Mobile: 20
+					Desktop: 10,
+					Tablet: 10,
+					Mobile: 10
 				},
 				socialIconPaddingDesktop: {
 					top: 0,
@@ -1727,22 +1727,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 14
 				},
 				socialPaddingMobile: {
-					top: 12,
-					bottom: 12,
-					left: 14,
-					right: 14
+					top: 10,
+					bottom: 10,
+					left: 12,
+					right: 12
 				},
 				socialTitleColor : "#FFFFFF",
 				socialTitleFontWeight : "500",
 				socialTitleFontSize : {
 					Desktop: "18",
-					Tablet: "18",
-					Mobile: "16"
+					Tablet: "16",
+					Mobile: "14"
 				},
 				socialTitleLineHeight : {
 					Desktop: "25",
 					Tablet: "25",
-					Mobile: "25"
+					Mobile: "20"
 				},
 				socialTitlePaddingDesktop: {
 					top: 0,
@@ -1809,9 +1809,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBorderColor: "",
 				socialIconBorder: "none",
 				socialGapSize: {
-					Desktop: 20,
-					Tablet: 20,
-					Mobile: 20
+					Desktop: 10,
+					Tablet: 10,
+					Mobile: 10
 				},
 				socialIconPaddingDesktop: {
 					top: 15,
@@ -1820,16 +1820,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 15
 				},
 				socialIconPaddingTablet: {
-					top: 15,
-					bottom: 15,
-					left: 15,
-					right: 15
+					top: 10,
+					bottom: 10,
+					left: 10,
+					right: 10
 				},
 				socialIconPaddingMobile: {
-					top: 15,
-					bottom: 15,
-					left: 15,
-					right: 15
+					top: 10,
+					bottom: 10,
+					left: 10,
+					right: 10
 				},
 				socialIconBorderDesktop: {
 					top: 0,
@@ -1915,13 +1915,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialTitleFontWeight : "500",
 				socialTitleFontSize : {
 					Desktop: "18",
-					Tablet: "18",
-					Mobile: "16"
+					Tablet: "14",
+					Mobile: "14"
 				},
 				socialTitleLineHeight : {
 					Desktop: "25",
 					Tablet: "25",
-					Mobile: "25"
+					Mobile: "20"
 				},
 				socialTitlePaddingDesktop: {
 					top: 12,
@@ -1930,16 +1930,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 15
 				},
 				socialTitlePaddingTablet: {
-					top: 12,
-					bottom: 12,
-					left: 8,
-					right: 15
+					top: 7,
+					bottom: 7,
+					left: 7,
+					right: 10
 				},
 				socialTitlePaddingMobile: {
-					top: 12,
-					bottom: 12,
-					left: 8,
-					right: 15
+					top: 7,
+					bottom: 7,
+					left: 7,
+					right: 10
 				},
 			},
 			"preset-5": {
@@ -1989,8 +1989,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBorder: "none",
 				socialGapSize: {
 					Desktop: 40,
-					Tablet: 40,
-					Mobile: 40
+					Tablet: 30,
+					Mobile: 20
 				},
 				socialIconPaddingDesktop: {
 					top: 0,
@@ -2095,13 +2095,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialTitleFontWeight : "500",
 				socialTitleFontSize : {
 					Desktop: "18",
-					Tablet: "18",
-					Mobile: "16"
+					Tablet: "16",
+					Mobile: "14"
 				},
 				socialTitleLineHeight : {
 					Desktop: "25",
 					Tablet: "25",
-					Mobile: "25"
+					Mobile: "20"
 				},
 				socialTitlePaddingDesktop: {
 					top: 0,
@@ -2179,16 +2179,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 30
 				},
 				socialIconPaddingTablet: {
-					top: 20,
-					bottom: 20,
-					left: 30,
-					right: 30
+					top: 15,
+					bottom: 15,
+					left: 25,
+					right: 25
 				},
 				socialIconPaddingMobile: {
-					top: 20,
-					bottom: 20,
-					left: 30,
-					right: 30
+					top: 10,
+					bottom: 10,
+					left: 15,
+					right: 15
 				},
 				socialIconBorderDesktop: {
 					top: 0,
@@ -2350,7 +2350,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${socialGlobalBorderHoverColor ? `border-color: ${socialGlobalBorderHoverColor};` : ''}
 			}
 			.${blockID} .fb-socials {
-				column-gap: ${socialGapSize.Desktop}${socialGapUnits.Desktop};
+				grid-gap: ${socialGapSize.Desktop}${socialGapUnits.Desktop};
 				justify-content: ${socialAlignment};
 			}
 			.${blockID} .fb-social-list-item .fb-social-icon-link{
@@ -2412,7 +2412,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
 				}
 				.${blockID} .fb-socials {
-					column-gap: ${socialGapSize.Tablet}${socialGapUnits.Tablet}; 
+					grid-gap: ${socialGapSize.Tablet}${socialGapUnits.Tablet}; 
 				}
 
 				.${blockID} .fb-social-list-item .fb-social-icon-link{
@@ -2427,6 +2427,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${IconBorderTabletWidth ? `border-width: ${IconBorderTabletWidth};` : ''}
 					${IconBorderRadiusTabletWidth ? `border-radius: ${IconBorderRadiusTabletWidth};` : ''}
 				}
+
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg{
+					width: ${socialIconSize.Tablet}${socialIconSizeUnits.Tablet}; 
+					height: ${socialIconSize.Tablet}${socialIconSizeUnits.Tablet};
+				}
+
 				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
 					${socialTitleFontSize.Tablet && socialTitleFontSizeUnits.Tablet ? `font-size: ${socialTitleFontSize.Tablet}${socialTitleFontSizeUnits.Tablet};` : ''}
 					${socialTitleLineHeight.Tablet && socialTitleLineHeightUnits.Tablet ? `line-height: ${socialTitleLineHeight.Tablet}${socialTitleLineHeightUnits.Tablet};` : ''}
@@ -2442,7 +2448,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
 				}
 				.${blockID} .fb-socials {
-					column-gap: ${socialGapSize.Mobile}${socialGapUnits.Mobile};
+					grid-gap: ${socialGapSize.Mobile}${socialGapUnits.Mobile};
 				}
 				.${blockID} .fb-social-list-item .fb-social-icon-link{
 					${socialMobilePadding ? `padding: ${socialMobilePadding};` : ''}
@@ -2454,6 +2460,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${IconPaddingMobile ? `padding: ${IconPaddingMobile};` : ''}
 					${IconBorderMobileWidth ? `border-width: ${IconBorderMobileWidth};` : ''}
 					${IconBorderRadiusMobileWidth ? `border-radius: ${IconBorderRadiusMobileWidth};` : ''}
+				}
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg{
+					width: ${socialIconSize.Mobile}${socialIconSizeUnits.Mobile}; 
+					height: ${socialIconSize.Mobile}${socialIconSizeUnits.Mobile};
 				}
 				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
 					${socialTitleFontSize.Mobile && socialTitleFontSizeUnits.Mobile ? `font-size: ${socialTitleFontSize.Mobile}${socialTitleFontSizeUnits.Mobile};` : ''}
@@ -2866,7 +2876,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={socialGapUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={20}
+                                                resetFallbackValue={10}
                                             />
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
