@@ -214,6 +214,10 @@ const attributes = {
         type: "string",
         default: "",
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
     /** End repetar item style pass to this attribute */
 
 

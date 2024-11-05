@@ -175,7 +175,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 		socialIconsPresetStyle,
-		singleItemColorStyle,
+		// singleItemColorStyle,
+		blockStyle,
 
 
     } = attributes;
@@ -1129,13 +1130,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         return style;
     }, [socialItems, blockID]);
 
-    useEffect(() => {
-        setAttributes({ singleItemColorStyle: socialItemColorStyle });
-    }, [socialItemColorStyle]);
-	/** End Social Item Color Style */
-
-
-
 
 	/** Start Preset Style */
 	const changeSocialIconsPreset = (selectedPreset) => {
@@ -1149,7 +1143,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1877F2",
 								socialIconHoverColor: "#1877F2",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						case 1:
 							return {
@@ -1157,7 +1152,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1DA1F2",
 								socialIconHoverColor: "#1DA1F2",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						case 2:
 							return {
@@ -1165,7 +1161,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#FF0000",
 								socialIconHoverColor: "#FF0000",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						case 3:
 							return {
@@ -1173,7 +1170,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1769FF",
 								socialIconHoverColor: "#1769FF",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						default:
 							return item;
@@ -1242,6 +1240,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 50
 				},
 				socialTitleSwitcher: false,
+				socialBorderRadiusDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitleColor : "#15171C",
+				socialTitleFontWeight : "500",
+				socialTitleFontSize : {
+					Desktop: "18",
+					Tablet: "18",
+					Mobile: "16"
+				},
+				socialTitleLineHeight : {
+					Desktop: "25",
+					Tablet: "25",
+					Mobile: "25"
+				},
 			},
 			"preset-2": {
 				socialItems: socialItems.map((item, index) => {
@@ -1252,7 +1298,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#ffffff",
 								socialIconHoverColor: "#ffffff",
 								socialIconBgColor: "#1877F2",
-								socialIconHoverBgColor: "#1877F2"
+								socialIconHoverBgColor: "#1877F2",
+								normalItemClassicColor: "",
 							};
 						case 1:
 							return {
@@ -1260,7 +1307,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#ffffff",
 								socialIconHoverColor: "#ffffff",
 								socialIconBgColor: "#1DA1F2",
-								socialIconHoverBgColor: "#1DA1F2"
+								socialIconHoverBgColor: "#1DA1F2",
+								normalItemClassicColor: "",
 							};
 						case 2:
 							return {
@@ -1268,7 +1316,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#ffffff",
 								socialIconHoverColor: "#ffffff",
 								socialIconBgColor: "#FF0000",
-								socialIconHoverBgColor: "#FF0000"
+								socialIconHoverBgColor: "#FF0000",
+								normalItemClassicColor: "",
 							};
 						case 3:
 							return {
@@ -1276,7 +1325,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#ffffff",
 								socialIconHoverColor: "#ffffff",
 								socialIconBgColor: "#1769FF",
-								socialIconHoverBgColor: "#1769FF"
+								socialIconHoverBgColor: "#1769FF",
+								normalItemClassicColor: "",
 							};
 						default:
 							return item;
@@ -1344,6 +1394,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 50
 				},
 				socialTitleSwitcher: false,
+				socialBorderRadiusDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitleColor : "#15171C",
+				socialTitleFontWeight : "500",
+				socialTitleFontSize : {
+					Desktop: "18",
+					Tablet: "18",
+					Mobile: "16"
+				},
+				socialTitleLineHeight : {
+					Desktop: "25",
+					Tablet: "25",
+					Mobile: "25"
+				},
 			},
 			"preset-3": {
 				socialItems: socialItems.map((item, index) => {
@@ -1351,40 +1449,153 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						case 0:
 							return {
 								...item,
-								socialIconColor: "#1877F2",
-								socialIconHoverColor: "#1877F2",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
+								normalItemClassicColor: "#1877F2",
 							};
 						case 1:
 							return {
 								...item,
-								socialIconColor: "#1DA1F2",
-								socialIconHoverColor: "#1DA1F2",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
+								normalItemClassicColor: "#1DA1F2",
 							};
 						case 2:
 							return {
 								...item,
-								socialIconColor: "#FF0000",
-								socialIconHoverColor: "#FF0000",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
+								normalItemClassicColor: "#E53935",
 							};
 						case 3:
 							return {
 								...item,
-								socialIconColor: "#1769FF",
-								socialIconHoverColor: "#1769FF",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
+								normalItemClassicColor: "#1769FF",
 							};
 						default:
 							return item;
 					}
 				}),
+				socialIconBorderColor: "",
+				socialIconBorder: "none",
+				socialGapSize: {
+					Desktop: 20,
+					Tablet: 20,
+					Mobile: 20
+				},
+				socialIconPaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 10
+				},
+				socialIconPaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 10
+				},
+				socialIconPaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 10
+				},
+				socialIconBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderRadiusDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconBorderRadiusTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconBorderRadiusMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
 				socialTitleSwitcher: true,
+				socialBorderRadiusDesktop: {
+					top: 4,
+					bottom: 4,
+					left: 4,
+					right: 4
+				},
+				socialBorderRadiusTablet: {
+					top: 4,
+					bottom: 4,
+					left: 4,
+					right: 4
+				},
+				socialBorderRadiusMobile: {
+					top: 4,
+					bottom: 4,
+					left: 4,
+					right: 4
+				},
+				socialPaddingDesktop: {
+					top: 12,
+					bottom: 12,
+					left: 14,
+					right: 14
+				},
+				socialPaddingTablet: {
+					top: 12,
+					bottom: 12,
+					left: 14,
+					right: 14
+				},
+				socialPaddingMobile: {
+					top: 12,
+					bottom: 12,
+					left: 14,
+					right: 14
+				},
+				socialTitleColor : "#FFFFFF",
+				socialTitleFontWeight : "500",
+				socialTitleFontSize : {
+					Desktop: "18",
+					Tablet: "18",
+					Mobile: "16"
+				},
+				socialTitleLineHeight : {
+					Desktop: "25",
+					Tablet: "25",
+					Mobile: "25"
+				},
 			},
 			"preset-4": {
 				socialItems: socialItems.map((item, index) => {
@@ -1395,7 +1606,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1877F2",
 								socialIconHoverColor: "#1877F2",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "#ffffff",
 							};
 						case 1:
 							return {
@@ -1403,7 +1615,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1DA1F2",
 								socialIconHoverColor: "#1DA1F2",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "#ffffff",
 							};
 						case 2:
 							return {
@@ -1411,7 +1624,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#FF0000",
 								socialIconHoverColor: "#FF0000",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "#ffffff",
 							};
 						case 3:
 							return {
@@ -1419,13 +1633,123 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1769FF",
 								socialIconHoverColor: "#1769FF",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "#ffffff",
 							};
 						default:
 							return item;
 					}
 				}),
+				socialIconBorderColor: "",
+				socialIconBorder: "none",
+				socialGapSize: {
+					Desktop: 20,
+					Tablet: 20,
+					Mobile: 20
+				},
+				socialIconPaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconPaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconPaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderRadiusDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconBorderRadiusTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconBorderRadiusMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
 				socialTitleSwitcher: true,
+				socialBorderRadiusDesktop: {
+					top: 4,
+					bottom: 4,
+					left: 4,
+					right: 4
+				},
+				socialBorderRadiusTablet: {
+					top: 4,
+					bottom: 4,
+					left: 4,
+					right: 4
+				},
+				socialBorderRadiusMobile: {
+					top: 4,
+					bottom: 4,
+					left: 4,
+					right: 4
+				},
+				socialPaddingDesktop: {
+					top: 12,
+					bottom: 12,
+					left: 14,
+					right: 14
+				},
+				socialPaddingTablet: {
+					top: 12,
+					bottom: 12,
+					left: 14,
+					right: 14
+				},
+				socialPaddingMobile: {
+					top: 12,
+					bottom: 12,
+					left: 14,
+					right: 14
+				},
+				socialTitleColor : "#15171C",
+				socialTitleFontWeight : "500",
+				socialTitleFontSize : {
+					Desktop: "18",
+					Tablet: "18",
+					Mobile: "16"
+				},
+				socialTitleLineHeight : {
+					Desktop: "25",
+					Tablet: "25",
+					Mobile: "25"
+				},
 			},
 			"preset-5": {
 				socialItems: socialItems.map((item, index) => {
@@ -1436,7 +1760,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1877F2",
 								socialIconHoverColor: "#1877F2",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						case 1:
 							return {
@@ -1444,7 +1769,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1DA1F2",
 								socialIconHoverColor: "#1DA1F2",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						case 2:
 							return {
@@ -1452,7 +1778,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#FF0000",
 								socialIconHoverColor: "#FF0000",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						case 3:
 							return {
@@ -1460,13 +1787,124 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#1769FF",
 								socialIconHoverColor: "#1769FF",
 								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff"
+								socialIconHoverBgColor: "#ffffff",
+								normalItemClassicColor: "",
 							};
 						default:
 							return item;
 					}
 				}),
+				socialIconBorderColor: "",
+				socialIconBorder: "none",
+				socialGapSize: {
+					Desktop: 40,
+					Tablet: 40,
+					Mobile: 40
+				},
+				socialIconPaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 10
+				},
+				socialIconPaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 10
+				},
+				socialIconPaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 10
+				},
+				socialIconBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
+				socialIconBorderRadiusDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconBorderRadiusTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialIconBorderRadiusMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
 				socialTitleSwitcher: true,
+				socialBorderRadiusDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitleColor : "#15171C",
+				socialTitleColor : "#15171C",
+				socialTitleFontWeight : "500",
+				socialTitleFontSize : {
+					Desktop: "18",
+					Tablet: "18",
+					Mobile: "16"
+				},
+				socialTitleLineHeight : {
+					Desktop: "25",
+					Tablet: "25",
+					Mobile: "25"
+				},
 			},
 			"preset-6": {
 				socialItems: socialItems.map((item, index) => {
@@ -1477,7 +1915,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#FFFFFF",
 								socialIconHoverColor: "#FFFFFF",
 								socialIconBgColor: "#15171C",
-								socialIconHoverBgColor: "#15171C"
+								socialIconHoverBgColor: "#15171C",
+								normalItemClassicColor: "",
 							};
 						case 1:
 							return {
@@ -1485,7 +1924,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#FFFFFF",
 								socialIconHoverColor: "#FFFFFF",
 								socialIconBgColor: "#15171C",
-								socialIconHoverBgColor: "#15171C"
+								socialIconHoverBgColor: "#15171C",
+								normalItemClassicColor: "",
 							};
 						case 2:
 							return {
@@ -1493,7 +1933,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#FFFFFF", 
 								socialIconHoverColor: "#FFFFFF",
 								socialIconBgColor: "#15171C",
-								socialIconHoverBgColor: "#15171C"
+								socialIconHoverBgColor: "#15171C",
+								normalItemClassicColor: "",
 							};
 						case 3:
 							return {
@@ -1501,7 +1942,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								socialIconColor: "#FFFFFF",
 								socialIconHoverColor: "#FFFFFF",
 								socialIconBgColor: "#15171C",
-								socialIconHoverBgColor: "#15171C"
+								socialIconHoverBgColor: "#15171C",
+								normalItemClassicColor: "",
 							};
 						default:
 							return item;
@@ -1569,6 +2011,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 5
 				},
 				socialTitleSwitcher: false,
+				socialBorderRadiusDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialBorderRadiusMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialPaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitleColor : "#15171C",
+				socialTitleColor : "#15171C",
+				socialTitleFontWeight : "500",
+				socialTitleFontSize : {
+					Desktop: "18",
+					Tablet: "18",
+					Mobile: "16"
+				},
+				socialTitleLineHeight : {
+					Desktop: "25",
+					Tablet: "25",
+					Mobile: "25"
+				},
 			},
 		};
 
@@ -1596,6 +2087,192 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				document.head.appendChild(linkElement);
 			}
 		}, [socialTitleFontFamily]);
+
+
+
+		const allBlockStyle = useMemo(() => `
+			.${blockID}.fb-social-wrapper {
+				${socialGlobalZIndex ? `z-index: ${socialGlobalZIndex};` : ''}
+				${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
+				${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+				${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
+				${socialGlobalBorder ? `border: ${socialGlobalBorder};` : ''} 
+				${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+				${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+				${socialGlobalBorderColor ? `border-color: ${socialGlobalBorderColor};` : ''}
+				${socialGlobalBoxShadowCssValue ? `box-shadow: ${socialGlobalBoxShadowCssValue};` : ''}
+				transition: all .3s ease-in-out;
+				position: relative;
+			}
+			.${blockID}.fb-social-wrapper:hover {
+				${socialGlobalBgHoverColor ? `background-color: ${socialGlobalBgHoverColor};` : ''}
+				${socialGlobalBorderHoverColor ? `border-color: ${socialGlobalBorderHoverColor};` : ''}
+			}
+			.${blockID} .fb-socials {
+				column-gap: ${socialGapSize.Desktop}${socialGapUnits.Desktop};
+				justify-content: ${socialAlignment};
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link{
+				${socialBgColor ? `background-color: ${socialBgColor};` : ''} 
+				${socialDesktopPadding ? `padding: ${socialDesktopPadding};` : ''}
+				${socialDesktopMargin ? `margin: ${socialDesktopMargin};` : ''}
+				${socialBorder ? `border: ${socialBorder};` : ''}  
+				${socialDesktopBorderWidth ? `border-width: ${socialDesktopBorderWidth};` : ''}
+				${socialDesktopBorderRadiusWidth ? `border-radius: ${socialDesktopBorderRadiusWidth};` : ''}
+				${socialBorderColor ? `border-color: ${socialBorderColor};` : ''}
+				transition: all .3s ease-in-out;
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link:hover {
+				${socialBgHoverColor ? `background-color: ${socialBgHoverColor};` : ''}
+				${socialBorderHoverColor ? `border-color: ${socialBorderHoverColor};` : ''}
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+				${socialIconBgGlobalColor ? `background-color: ${socialIconBgGlobalColor};` : ''} 
+				${IconPaddingDesktop ? `padding: ${IconPaddingDesktop};` : ''}
+				${socialIconBorder ? `border: ${socialIconBorder};` : ''} 
+				${IconBorderDesktopWidth ? `border-width: ${IconBorderDesktopWidth};` : ''}
+				${IconBorderRadiusDesktopWidth ? `border-radius: ${IconBorderRadiusDesktopWidth};` : ''}
+				${socialIconBorderColor ? `border-color: ${socialIconBorderColor};` : ''}
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
+				background-color: ${socialIconBgGlobalHoverColor};
+				${socialIconBorderHoverColor ? `border-color: ${socialIconBorderHoverColor};` : ''}
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg{
+				width: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
+				height: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link svg{
+				fill: ${socialIconGlobalColor};
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link:hover svg{
+				fill: ${socialIconGlobalHoverColor};
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
+				${socialTitleFontFamily ? `font-family: ${socialTitleFontFamily};` : ''}
+				${socialTitleFontSize.Desktop && socialTitleFontSizeUnits.Desktop ? `font-size: ${socialTitleFontSize.Desktop}${socialTitleFontSizeUnits.Desktop};` : ''}
+				${socialTitleFontWeight ? `font-weight: ${socialTitleFontWeight};` : ''}
+				${socialTitleFontStyle ? `font-style: ${socialTitleFontStyle};` : ''}
+				${socialTitleTextTransform ? `text-transform: ${socialTitleTextTransform};` : ''}
+				${socialTitleTextDecoration ? `text-decoration: ${socialTitleTextDecoration};` : ''}
+				${socialTitleLetterSpacing.Desktop && socialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${socialTitleLetterSpacing.Desktop}${socialTitleLetterSpacingUnits.Desktop};` : ''}
+				${socialTitleLineHeight.Desktop && socialTitleLineHeightUnits.Desktop ? `line-height: ${socialTitleLineHeight.Desktop}${socialTitleLineHeightUnits.Desktop};` : ''}
+				${socialTitleColor ? `color: ${socialTitleColor};` : ''} 
+			}
+			.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title:hover {
+				color: ${socialTitleHoverColor};
+			}
+			@media only screen and (max-width: 1024px) {
+				.${blockID}.fb-social-wrapper {
+					${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+					${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
+					${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+					${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+				}
+				.${blockID} .fb-socials {
+					column-gap: ${socialGapSize.Tablet}${socialGapUnits.Tablet}; 
+				}
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+					${IconPaddingTablet ? `padding: ${IconPaddingTablet};` : ''}
+					${IconBorderTabletWidth ? `border-width: ${IconBorderTabletWidth};` : ''}
+					${IconBorderRadiusTabletWidth ? `border-radius: ${IconBorderRadiusTabletWidth};` : ''}
+				}
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
+					${socialTitleFontSize.Tablet && socialTitleFontSizeUnits.Tablet ? `font-size: ${socialTitleFontSize.Tablet}${socialTitleFontSizeUnits.Tablet};` : ''}
+					${socialTitleLineHeight.Tablet && socialTitleLineHeightUnits.Tablet ? `line-height: ${socialTitleLineHeight.Tablet}${socialTitleLineHeightUnits.Tablet};` : ''}
+					${socialTitleLetterSpacing.Tablet && socialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${socialTitleLetterSpacing.Tablet}${socialTitleLetterSpacingUnits.Tablet};` : ''}
+				}	
+			}
+			@media only screen and (max-width: 767px) {
+				.${blockID}.fb-social-wrapper {
+					${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+					${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
+					${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+					${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+				}
+				.${blockID} .fb-socials {
+					column-gap: ${socialGapSize.Mobile}${socialGapUnits.Mobile};
+				}
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
+					${IconPaddingMobile ? `padding: ${IconPaddingMobile};` : ''}
+					${IconBorderMobileWidth ? `border-width: ${IconBorderMobileWidth};` : ''}
+					${IconBorderRadiusMobileWidth ? `border-radius: ${IconBorderRadiusMobileWidth};` : ''}
+				}
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
+					${socialTitleFontSize.Mobile && socialTitleFontSizeUnits.Mobile ? `font-size: ${socialTitleFontSize.Mobile}${socialTitleFontSizeUnits.Mobile};` : ''}
+					${socialTitleLineHeight.Mobile && socialTitleLineHeightUnits.Mobile ? `line-height: ${socialTitleLineHeight.Mobile}${socialTitleLineHeightUnits.Mobile};` : ''}
+					${socialTitleLetterSpacing.Mobile && socialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${socialTitleLetterSpacing.Mobile}${socialTitleLetterSpacingUnits.Mobile};` : ''}
+				}
+			}
+		`, [
+			blockID,
+			socialGlobalZIndex,
+			socialGlobalBgColor,
+			globalDesktopPadding,
+			globalDesktopMargin,
+			socialGlobalBorder,
+			globalDesktopBorderWidth,
+			globalDesktopBorderRadiusWidth,
+			socialGlobalBorderColor,
+			socialGlobalBoxShadowCssValue,
+			socialGlobalBgHoverColor,
+			socialGlobalBorderHoverColor,
+			socialGapSize,
+			socialGapUnits,
+			socialAlignment,
+			socialBgColor,
+			socialDesktopPadding,
+			socialDesktopMargin,
+			socialBorder,
+			socialDesktopBorderWidth,
+			socialDesktopBorderRadiusWidth,
+			socialBorderColor,
+			socialBgHoverColor,
+			socialBorderHoverColor,
+			socialIconBgGlobalColor,
+			IconPaddingDesktop,
+			socialIconBorder,
+			IconBorderDesktopWidth,
+			IconBorderRadiusDesktopWidth,
+			socialIconBorderColor,
+			socialIconBgGlobalHoverColor,
+			socialIconBorderHoverColor,
+			socialIconSize,
+			socialIconSizeUnits,
+			socialIconGlobalColor,
+			socialIconGlobalHoverColor,
+			socialTitleFontFamily,
+			socialTitleFontSize,
+			socialTitleFontSizeUnits,
+			socialTitleFontWeight,
+			socialTitleFontStyle,
+			socialTitleTextTransform,
+			socialTitleTextDecoration,
+			socialTitleLetterSpacing,
+			socialTitleLetterSpacingUnits,
+			socialTitleLineHeight,
+			socialTitleLineHeightUnits,
+			socialTitleColor,
+			socialTitleHoverColor,
+			globalTabletPadding,
+			globalTabletMargin,
+			globalTabletBorderWidth,
+			globalTabletBorderRadiusWidth,
+			IconPaddingTablet,
+			IconBorderTabletWidth,
+			IconBorderRadiusTabletWidth,
+			globalMobilePadding,
+			globalMobileMargin,
+			globalMobileBorderWidth,
+			globalMobileBorderRadiusWidth,
+			IconPaddingMobile,
+			IconBorderMobileWidth,
+			IconBorderRadiusMobileWidth
+		]);
+
+		useEffect(() => {
+			setAttributes({blockStyle: `${socialItemColorStyle}${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+		}, [socialItemColorStyle, allBlockStyle]);
     
 
     return (
@@ -1603,127 +2280,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             <style>
             {`
-
-				${singleItemColorStyle}
-                .${blockID}.fb-social-wrapper {
-                    ${socialGlobalZIndex ? `z-index: ${socialGlobalZIndex};` : ''}
-                    ${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
-                    ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-                    ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
-                    ${socialGlobalBorder ? `border: ${socialGlobalBorder};` : ''} 
-                    ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-                    ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-                    ${socialGlobalBorderColor ? `border-color: ${socialGlobalBorderColor};` : ''}
-                    ${socialGlobalBoxShadowCssValue ? `box-shadow: ${socialGlobalBoxShadowCssValue};` : ''}
-                    transition: all .3s ease-in-out;
-                    position: relative;
-                }
-                .${blockID}.fb-social-wrapper:hover {
-                    ${socialGlobalBgHoverColor ? `background-color: ${socialGlobalBgHoverColor};` : ''}
-                    ${socialGlobalBorderHoverColor ? `border-color: ${socialGlobalBorderHoverColor};` : ''}
-                }
-                .${blockID} .fb-socials {
-                    column-gap: ${socialGapSize.Desktop}${socialGapUnits.Desktop};
-                    justify-content: ${socialAlignment};
-                }
-                .${blockID} .fb-social-list-item .fb-social-icon-link{
-                    ${socialBgColor ? `background-color: ${socialBgColor};` : ''} 
-                    ${socialDesktopPadding ? `padding: ${socialDesktopPadding};` : ''}
-                    ${socialDesktopMargin ? `margin: ${socialDesktopMargin};` : ''}
-                    ${socialBorder ? `border: ${socialBorder};` : ''}  
-                    ${socialDesktopBorderWidth ? `border-width: ${socialDesktopBorderWidth};` : ''}
-                    ${socialDesktopBorderRadiusWidth ? `border-radius: ${socialDesktopBorderRadiusWidth};` : ''}
-                    ${socialBorderColor ? `border-color: ${socialBorderColor};` : ''}
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID} .fb-social-list-item .fb-social-icon-link:hover {
-                    ${socialBgHoverColor ? `background-color: ${socialBgHoverColor};` : ''}
-                    ${socialBorderHoverColor ? `border-color: ${socialBorderHoverColor};` : ''}
-                }
-                .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-					${socialIconBgGlobalColor ? `background-color: ${socialIconBgGlobalColor};` : ''} 
-					${IconPaddingDesktop ? `padding: ${IconPaddingDesktop};` : ''}
-                    ${socialIconBorder ? `border: ${socialIconBorder};` : ''} 
-                    ${IconBorderDesktopWidth ? `border-width: ${IconBorderDesktopWidth};` : ''}
-                    ${IconBorderRadiusDesktopWidth ? `border-radius: ${IconBorderRadiusDesktopWidth};` : ''}
-                    ${socialIconBorderColor ? `border-color: ${socialIconBorderColor};` : ''}
-                }
-                .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon:hover {
-                    background-color: ${socialIconBgGlobalHoverColor};
-                    ${socialIconBorderHoverColor ? `border-color: ${socialIconBorderHoverColor};` : ''}
-
-                }
-                .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg{
-                    width: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
-                    height: ${socialIconSize.Desktop}${socialIconSizeUnits.Desktop};
-                }
-                .${blockID} .fb-social-list-item .fb-social-icon-link svg{
-                    fill: ${socialIconGlobalColor};
-                }
-                .${blockID} .fb-social-list-item .fb-social-icon-link:hover svg{
-                    fill: ${socialIconGlobalHoverColor};
-                }
-
-				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
-                    ${socialTitleFontFamily ? `font-family: ${socialTitleFontFamily};` : ''}
-                    ${socialTitleFontSize.Desktop && socialTitleFontSizeUnits.Desktop ? `font-size: ${socialTitleFontSize.Desktop}${socialTitleFontSizeUnits.Desktop};` : ''}
-                    ${socialTitleFontWeight ? `font-weight: ${socialTitleFontWeight};` : ''}
-                    ${socialTitleFontStyle ? `font-style: ${socialTitleFontStyle};` : ''}
-                    ${socialTitleTextTransform ? `text-transform: ${socialTitleTextTransform};` : ''}
-                    ${socialTitleTextDecoration ? `text-decoration: ${socialTitleTextDecoration};` : ''}
-                    ${socialTitleLetterSpacing.Desktop && socialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${socialTitleLetterSpacing.Desktop}${socialTitleLetterSpacingUnits.Desktop};` : ''}
-                    ${socialTitleLineHeight.Desktop && socialTitleLineHeightUnits.Desktop ? `line-height: ${socialTitleLineHeight.Desktop}${socialTitleLineHeightUnits.Desktop};` : ''}
-                    ${socialTitleColor ? `color: ${socialTitleColor};` : ''} 
-				}
-				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title:hover {
-					color: ${socialTitleHoverColor};
-				}
-
-                @media only screen and (max-width: 1024px) {
-
-                    .${blockID}.fb-social-wrapper {
-                        ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-                        ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
-                        ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-                        ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-                    }
-                    .${blockID} .fb-socials {
-                        column-gap: ${socialGapSize.Tablet}${socialGapUnits.Tablet}; 
-                    }
-                    .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-                        ${IconPaddingTablet ? `padding: ${IconPaddingTablet};` : ''}
-                        ${IconBorderTabletWidth ? `border-width: ${IconBorderTabletWidth};` : ''}
-                        ${IconBorderRadiusTabletWidth ? `border-radius: ${IconBorderRadiusTabletWidth};` : ''}
-                    }
-					.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
-						${socialTitleFontSize.Tablet && socialTitleFontSizeUnits.Tablet ? `font-size: ${socialTitleFontSize.Tablet}${socialTitleFontSizeUnits.Tablet};` : ''}
-						${socialTitleLineHeight.Tablet && socialTitleLineHeightUnits.Tablet ? `line-height: ${socialTitleLineHeight.Tablet}${socialTitleLineHeightUnits.Tablet};` : ''}
-						${socialTitleLetterSpacing.Tablet && socialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${socialTitleLetterSpacing.Tablet}${socialTitleLetterSpacingUnits.Tablet};` : ''}
-					}	
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .${blockID}.fb-social-wrapper {
-                        ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-                        ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
-                        ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-                        ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-                    }
-                    .${blockID} .fb-socials {
-                        column-gap: ${socialGapSize.Mobile}${socialGapUnits.Mobile};
-                    }
-                    .${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
-                        ${IconPaddingMobile ? `padding: ${IconPaddingMobile};` : ''}
-                        ${IconBorderMobileWidth ? `border-width: ${IconBorderMobileWidth};` : ''}
-                        ${IconBorderRadiusMobileWidth ? `border-radius: ${IconBorderRadiusMobileWidth};` : ''}
-                    }
-					.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
-						${socialTitleFontSize.Mobile && socialTitleFontSizeUnits.Mobile ? `font-size: ${socialTitleFontSize.Mobile}${socialTitleFontSizeUnits.Mobile};` : ''}
-						${socialTitleLineHeight.Mobile && socialTitleLineHeightUnits.Mobile ? `line-height: ${socialTitleLineHeight.Mobile}${socialTitleLineHeightUnits.Mobile};` : ''}
-						${socialTitleLetterSpacing.Mobile && socialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${socialTitleLetterSpacing.Mobile}${socialTitleLetterSpacingUnits.Mobile};` : ''}
-					}
-                }
-
+				${blockStyle}
             `}
             </style>
             <InspectorControls key="controls">
