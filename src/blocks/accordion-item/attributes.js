@@ -1,0 +1,377 @@
+const attributes = {
+    // the following 4 attributes is must required for responsive options and asset generation for frontend
+    // responsive control attributes ⬇
+    deviceType: {
+        type: "string",
+        default: "Desktop",
+    },
+    // blockID attribute for making unique className and other uniqueness ⬇
+    blockID: {
+        type: "string",
+    },
+    blockRoot: {
+        type: "string",
+        default: "frontis_block",
+    },
+    // blockMeta is for keeping all the styles ⬇
+    blockMeta: {
+        type: "object",
+    },
+
+    itemId: {
+        type: "string",
+    },
+    title: {
+        type: "string",
+    },
+
+    clickable: {
+        type: "boolean",
+        default: false,
+    },
+    toggleClick: {
+        type: "boolean",
+        default: false,
+    },
+
+    accordionItemColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    accordionItemColor: {
+        type: "string",
+        default: "antiquewhite"
+    },
+    accordionItemHoverColor: {
+        type: 'string',
+        default: "antiquewhite"
+    },
+
+    iconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    iconColor: {
+        type: "string",
+        default: "#000000"
+    },
+    iconHoverColor: {
+        type: 'string',
+        default: "#000000"
+    },
+
+    inheritedAccordionType: {
+        type: "string",
+        default: "accordion",
+    },
+    inheritedTagName: {
+        type: "string",
+        default: "h3",
+    },
+    inheritedDisplayIcon: {
+        type: "boolean",
+        default: true,
+    },
+    inheritedTabIcon: {
+        type: "string",
+    },
+    inheritedExpandedIcon: {
+        type: "string",
+    },
+    faqSchema: {
+        type: "boolean",
+        default: false,
+    },
+    parentBlockID: {
+        type: "string",
+    },
+    titlePrefixType: {
+        type: "string",
+        default: "none",
+    },
+
+    titlePrefixColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    titlePrefixColor: {
+        type: "string",
+        default: "#000"
+    },
+    titlePrefixHoverColor: {
+        type: 'string',
+        default: "#000"
+    },
+
+    titlePrefixImgUrl: {
+        type: "string",
+        default: ''
+    },
+    titlePrefixImgId: {
+        type: "number",
+        default: 0
+    },
+    titlePrefixImgAlt: {
+        type: "string",
+        default: ''
+    },
+    titlePrefixImgWidth: {
+        type: "number",
+    },
+    titlePrefixImgHeight: {
+        type: "number",
+    },
+
+    titleSuffixType: {
+        type: "string",
+        default: "none",
+    },
+
+    titleSuffixColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    titleSuffixColor: {
+        type: "string",
+        default: "#000"
+    },
+    titleSuffixHoverColor: {
+        type: 'string',
+        default: "#000"
+    },
+
+    titleSuffixImgUrl: {
+        type: "string",
+        default: ''
+    },
+    titleSuffixImgId: {
+        type: "number",
+        default: 0
+    },
+    titleSuffixImgAlt: {
+        type: "string",
+        default: ''
+    },
+    titleSuffixImgWidth: {
+        type: "number",
+    },
+    titleSuffixImgHeight: {
+        type: "number",
+    },
+    
+    
+    titlePrefixIcon: {
+        type: "string",
+        default: "quote-left",
+    },
+    titleSuffixIcon: {
+        type: "string",
+        default: "quote-left",
+    },
+
+    accordionItemZIndex : {
+        type: "number",
+    },
+
+    accordionItemPaddingUnits : {
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    accordionItemDesktopPadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    accordionItemTabPadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    accordionItemMobilePadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    accordionItemPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+
+    accordionItemMarginUnits : {
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    accordionItemDesktopMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemTabMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemMobileMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemMarginLink : {
+        type : "boolean",
+        default: true
+    },
+
+    accordionItemBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    accordionItemBgColor : {
+        type: "string"
+    },
+    accordionItemBgHoverColor: {
+        type: 'string',
+    },
+
+
+
+    accordionItemBorder: {
+        type: 'string',
+        default: "none",
+    },
+    accordionItemBorderColor: {
+        type: 'string',
+    },
+    accordionItemBorderHoverColor: {
+        type: 'string',
+    },
+    accordionItemBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+
+    accordionItemBorderUnits : {
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    accordionItemDesktopBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemTabBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemMobileBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemBorderLink : {
+        type : "boolean",
+        default: true
+    },
+
+    accordionItemBorderRadiusUnits : {
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    accordionItemDesktopBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemTabBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemMobileBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    accordionItemBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    accordionItemDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    accordionItemTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    accordionItemMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+};
+
+export default attributes;

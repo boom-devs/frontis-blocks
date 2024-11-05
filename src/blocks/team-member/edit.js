@@ -9,26 +9,20 @@ import {
 	TabPanel,
 	PanelBody,
 	TextControl,
-	ColorPicker,
 	BaseControl,
 	RangeControl,
 	ToggleControl,
-	DateTimePicker,
-	Dropdown,
 	Button,
-	Dashicon,
 	SelectControl,
 	ButtonGroup,
-	ColorPalette,
-	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
+	ResponsiveWrapper, __experimentalHStack as HStack,
 } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
 import './editor.scss';
-import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, SELECT_TYPE, iconType, HEADING, NORMAL_HOVER} from "./constants/constants";
-import FBIconPicker from "../../components/icon-picker";
+import {BORDER_STYLES, HEADING} from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 import TeamMemberContentBorderControl from './style-control/content/team-member-content-border-control.js';
@@ -52,12 +46,13 @@ import TitleName from './style-control/name/TitleName.js';
 import SocialIcons from './style-control/social-icons/SocialIcons.js';
 import TeamMemberImageSizeControl from './style-control/image/team-member-image-size-control.js';
 import FB_Spacing from '../../components/spacing/index.js';
+import FB_Color from '../../components/color/index.js';
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		DeviceType,
+		deviceType,
 
 		// Photo
 		teamMemberImageMediaID,
@@ -66,15 +61,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberImageMediaWidth,
 		teamMemberImageMediaHeight,
 
-		teamMemberImageSizeWidthUnits,
-		teamMemberImageSizeWidthDesktop,
-		teamMemberImageSizeWidthTab,
-		teamMemberImageSizeWidthMobile,
+		teamMemberImageWidthUnits,
+		teamMemberImageWidth,
 
-		teamMemberImageSizeHeightUnits,
-		teamMemberImageSizeHeightDesktop,
-		teamMemberImageSizeHeightTab,
-		teamMemberImageSizeHeightMobile,
+		teamMemberImageHeightUnits,
+		teamMemberImageHeight,
 
 		// Team Image Margin
 		teamMemberImageMarginUnits,
@@ -86,13 +77,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		// Team Image Border Type
 		teamMemberImageBorder,
 		teamMemberImageBorderColor,
-		teamMemberImageBackgroundColor,
+		teamMemberImageBorderHoverColor,
+		teamMemberImageBGColor,
+		teamMemberImageBGHoverColor,
 
-		teamMemberImageBorderTypeUnits,
-		teamMemberImageBorderTypeDesktop,
-		teamMemberImageBorderTypeTab,
-		teamMemberImageBorderTypeMobile,
-		teamMemberImageBorderTypeLink,
+		teamMemberImageBorderUnits,
+		teamMemberImageBorderDesktop,
+		teamMemberImageBorderTab,
+		teamMemberImageBorderMobile,
+		teamMemberImageBorderLink,
 
 		// Team Image Border Radius
 		teamMemberImageBorderRadiusUnits,
@@ -111,22 +104,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberNameHoverColor,
 
 		teamMemberNameFontFamily,
-		teamMemberNameFontWeight,
-		teamMemberNameFontStyle,
-		teamMemberNameTextTransform,
-		teamMemberNameTextDecoration,
-		teamMemberNameFontSizeUnits,
-		teamMemberNameLineHeightUnits,
-		teamMemberNameFontSize,
-		teamMemberNameFontSizeTablet,
-		teamMemberNameFontSizeMobile,
-		teamMemberNameLineHeightDesktop,
-		teamMemberNameLineHeightTablet,
-		teamMemberNameLineHeightMobile,
-		teamMemberNameLetterSpacingDesktop,
-		teamMemberNameLetterSpacingTablet,
-		teamMemberNameLetterSpacingMobile,
-		teamMemberNameLetterSpacingUnits,
+        teamMemberNameFontSize,
+        teamMemberNameFontSizeUnits,
+        teamMemberNameFontWeight,
+        teamMemberNameFontStyle,
+        teamMemberNameTextTransform,
+        teamMemberNameTextDecoration,
+        teamMemberNameLetterSpacing,
+        teamMemberNameLetterSpacingUnits,
+        teamMemberNameLineHeight,
+        teamMemberNameLineHeightUnits,
 		teamMemberNameLoadGoogleFonts,
 
 		// Team Name Margin
@@ -142,22 +129,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationColor,
 		teamMemberDesignationLoadGoogleFonts,
 		teamMemberDesignationFontFamily,
-		teamMemberDesignationFontWeight,
-		teamMemberDesignationFontStyle,
-		teamMemberDesignationFontSizeUnits,
-		teamMemberDesignationFontSize,
-		teamMemberDesignationFontSizeMobile,
-		teamMemberDesignationFontSizeTablet,
-		teamMemberDesignationLineHeightUnits,
-		teamMemberDesignationLineHeightDesktop,
-		teamMemberDesignationLineHeightMobile,
-		teamMemberDesignationLineHeightTablet,
-		teamMemberDesignationLetterSpacingDesktop,
-		teamMemberDesignationLetterSpacingTablet,
-		teamMemberDesignationLetterSpacingMobile,
-		teamMemberDesignationLetterSpacingUnits,
-		teamMemberDesignationTextTransform,
-		teamMemberDesignationTextDecoration,
+        teamMemberDesignationFontSize,
+        teamMemberDesignationFontSizeUnits,
+        teamMemberDesignationFontWeight,
+        teamMemberDesignationFontStyle,
+        teamMemberDesignationTextTransform,
+        teamMemberDesignationTextDecoration,
+        teamMemberDesignationLetterSpacing,
+        teamMemberDesignationLetterSpacingUnits,
+        teamMemberDesignationLineHeight,
+        teamMemberDesignationLineHeightUnits,
 
 		// Team Designation Margin
 		teamMemberDesignationMarginUnits,
@@ -169,7 +150,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		// Team Content
 		teamMemberContentAlignment,
-		teamMemberContentBackgroundColor,
+		teamMemberContentBGColor,
+		teamMemberContentBGHoverColor,
 
 		// Team Content Padding
 		teamMemberContentPaddingUnits,
@@ -186,10 +168,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		// Team Content Border
 		teamMemberContentBorder,
 		teamMemberContentBorderColor,
-		teamMemberContentBorderTypeUnits,
-		teamMemberContentBorderTypeDesktop,
-		teamMemberContentBorderTypeTab,
-		teamMemberContentBorderTypeMobile,
+		teamMemberContentBorderHoverColor,
+		teamMemberContentBorderUnits,
+		teamMemberContentBorderDesktop,
+		teamMemberContentBorderTab,
+		teamMemberContentBorderMobile,
 
 		// Team Content Border Radius
 		teamMemberContentBorderRadiusUnits,
@@ -199,112 +182,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		// Social Profile
 		teamMemberSocialItems,
-		teamMemberSocialTag,
-		teamMemberSocialIconShape,
-		teamMemberSocialAlignment,
-		teamMemberSocialIconAlignment,
-		teamMemberSocialListGapDesktop,
-		teamMemberSocialListGapTablet,
-		teamMemberSocialListGapMobile,
-		teamMemberSocialListGapUnits,
-		teamMemberSocialIconColorSwitcher,
-		teamMemberSocialIconColor,
-		teamMemberSocialIconHoverColor,
-		teamMemberSocialIconBgColorSwitcher,
-		teamMemberSocialIconBgColor,
-		teamMemberSocialIconBgHoverColor,
-		teamMemberSocialIconSizeDesktop,
-		teamMemberSocialIconSizeTablet,
-		teamMemberSocialIconSizeMobile,
-		teamMemberSocialIconSizeUnits,
-		teamMemberSocialIconBgSizeDesktop,
-		teamMemberSocialIconBgSizeTablet,
-		teamMemberSocialIconBgSizeMobile,
-		teamMemberSocialIconBgSizeUnits,
-		teamMemberSocialIconSpacingDesktop,
-		teamMemberSocialIconSpacingTablet,
-		teamMemberSocialIconSpacingMobile,
-		teamMemberSocialIconSpacingUnits,
-		teamMemberSocialTitleFontFamily,
-		teamMemberSocialTitleFontSizeDesktop,
-		teamMemberSocialTitleFontSizeTablet,
-		teamMemberSocialTitleFontSizeMobile,
-		teamMemberSocialTitleFontSizeUnits,
-		teamMemberSocialTitleFontWeight,
-		teamMemberSocialTitleFontStyle,
-		teamMemberSocialTitleTextTransform,
-		teamMemberSocialTitleTextDecoration,
-		teamMemberSocialTitleLetterSpacingDesktop,
-		teamMemberSocialTitleLetterSpacingTablet,
-		teamMemberSocialTitleLetterSpacingMobile,
-		teamMemberSocialTitleLetterSpacingUnits,
-		teamMemberSocialTitleLineHeightDesktop,
-		teamMemberSocialTitleLineHeightTablet,
-		teamMemberSocialTitleLineHeightMobile,
-		teamMemberSocialTitleLineHeightUnits,
-		teamMemberSocialTitleColorSwitcher,
-		teamMemberSocialTitleColor,
-		teamMemberSocialTitleHoverColor,
-		teamMemberSocialDescFontFamily,
-		teamMemberSocialDescFontSizeDesktop,
-		teamMemberSocialDescFontSizeTablet,
-		teamMemberSocialDescFontSizeMobile,
-		teamMemberSocialDescFontSizeUnits,
-		teamMemberSocialDescFontWeight,
-		teamMemberSocialDescFontStyle,
-		teamMemberSocialDescTextTransform,
-		teamMemberSocialDescTextDecoration,
-		teamMemberSocialDescLetterSpacingDesktop,
-		teamMemberSocialDescLetterSpacingTablet,
-		teamMemberSocialDescLetterSpacingMobile,
-		teamMemberSocialDescLetterSpacingUnits,
-		teamMemberSocialDescLineHeightDesktop,
-		teamMemberSocialDescLineHeightTablet,
-		teamMemberSocialDescLineHeightMobile,
-		teamMemberSocialDescLineHeightUnits,
-		teamMemberSocialDescColorSwitcher,
-		teamMemberSocialDescColor,
-		teamMemberSocialDescHoverColor,
-		teamMemberSocialZIndex,
-		teamMemberSocialPaddingUnits,
-		teamMemberSocialDesktopPadding,
-		teamMemberSocialTabPadding,
-		teamMemberSocialMobilePadding,
-		teamMemberSocialPaddingLink,
-		teamMemberSocialMarginUnits,
-		teamMemberSocialDesktopMargin,
-		teamMemberSocialTabMargin,
-		teamMemberSocialMobileMargin,
-		teamMemberSocialMarginLink,
-		teamMemberSocialBgColorSwitcher,
-		teamMemberSocialBgColor,
-		teamMemberSocialBgHoverColor,
-		teamMemberSocialBorder,
-		teamMemberSocialBorderColor,
-		teamMemberSocialBorderHoverColor,
-		teamMemberSocialBorderColorSwitcher,
-		teamMemberSocialBorderUnits,
-		teamMemberSocialDesktopBorderWidth,
-		teamMemberSocialTabBorderWidth,
-		teamMemberSocialMobileBorderWidth,
-		teamMemberSocialBorderLink,
-		teamMemberSocialBorderRadiusUnits,
-		teamMemberSocialDesktopBorderRadiusWidth,
-		teamMemberSocialTabBorderRadiusWidth,
-		teamMemberSocialMobileBorderRadiusWidth,
-		teamMemberSocialBorderRadiusLink,
-		teamMemberSocialDesktopSwitcher,
-		teamMemberSocialTabletSwitcher,
-		teamMemberSocialMobileSwitcher,
 
 		// Social Icons
-        teamMemberIconsSizeDesktop,
-        teamMemberIconsSizeTablet,
-        teamMemberIconsSizeMobile,
+        teamMemberIconsSize,
         teamMemberIconsSizeUnits,
-        teamMemberIconsSpacingDesktop,
-        teamMemberIconsSpacingTablet,
-        teamMemberIconsSpacingMobile,
+        teamMemberIconsSpacing,
         teamMemberIconsSpacingUnits,
 		teamMemberIconsColorSwitcher,
 		teamMemberIconsColor,
@@ -322,9 +204,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberTabMargin,
 		teamMemberMobileMargin,
 		teamMemberMarginLink,
-		teamMemberBgColorSwitcher,
-		teamMemberBgColor,
-		teamMemberBgHoverColor,
+		teamMemberBGColorSwitcher,
+		teamMemberBGColor,
+		teamMemberBGHoverColor,
 		teamMemberBorder,
 		teamMemberBorderColor,
 		teamMemberBorderHoverColor,
@@ -360,53 +242,53 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     });
 
 	{/* Team Member Content Control */}
-	const teamMemberContentBorderTypeGetDesktop = `${teamMemberContentBorderTypeDesktop.top}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeDesktop.right}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeDesktop.bottom}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeDesktop.left}${teamMemberContentBorderTypeUnits[DeviceType]}`;
-	const teamMemberContentBorderTypeGetTab = `${teamMemberContentBorderTypeTab.top}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeTab.right}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeTab.bottom}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeTab.left}${teamMemberContentBorderTypeUnits[DeviceType]}`;
-	const teamMemberContentBorderTypeGetMobile = `${teamMemberContentBorderTypeMobile.top}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeMobile.right}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeMobile.bottom}${teamMemberContentBorderTypeUnits[DeviceType]} ${teamMemberContentBorderTypeMobile.left}${teamMemberContentBorderTypeUnits[DeviceType]}`;
+	const teamMemberContentBorderTypeGetDesktop = `${teamMemberContentBorderDesktop.top}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderDesktop.right}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderDesktop.bottom}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderDesktop.left}${teamMemberContentBorderUnits[deviceType]}`;
+	const teamMemberContentBorderTypeGetTab = `${teamMemberContentBorderTab.top}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderTab.right}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderTab.bottom}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderTab.left}${teamMemberContentBorderUnits[deviceType]}`;
+	const teamMemberContentBorderTypeGetMobile = `${teamMemberContentBorderMobile.top}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderMobile.right}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderMobile.bottom}${teamMemberContentBorderUnits[deviceType]} ${teamMemberContentBorderMobile.left}${teamMemberContentBorderUnits[deviceType]}`;
 
 
-	const teamMemberContentBorderRadiusGetDesktop = `${teamMemberContentBorderRadiusDesktop.top}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusDesktop.right}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusDesktop.bottom}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusDesktop.left}${teamMemberContentBorderRadiusUnits[DeviceType]}`;
-	const teamMemberContentBorderRadiusGetTab = `${teamMemberContentBorderRadiusTab.top}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusTab.right}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusTab.bottom}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusTab.left}${teamMemberContentBorderRadiusUnits[DeviceType]}`;
-	const teamMemberContentBorderRadiusGetMobile = `${teamMemberContentBorderRadiusMobile.top}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusMobile.right}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusMobile.bottom}${teamMemberContentBorderRadiusUnits[DeviceType]} ${teamMemberContentBorderRadiusMobile.left}${teamMemberContentBorderRadiusUnits[DeviceType]}`;
+	const teamMemberContentBorderRadiusGetDesktop = `${teamMemberContentBorderRadiusDesktop.top}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusDesktop.right}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusDesktop.bottom}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusDesktop.left}${teamMemberContentBorderRadiusUnits[deviceType]}`;
+	const teamMemberContentBorderRadiusGetTab = `${teamMemberContentBorderRadiusTab.top}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusTab.right}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusTab.bottom}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusTab.left}${teamMemberContentBorderRadiusUnits[deviceType]}`;
+	const teamMemberContentBorderRadiusGetMobile = `${teamMemberContentBorderRadiusMobile.top}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusMobile.right}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusMobile.bottom}${teamMemberContentBorderRadiusUnits[deviceType]} ${teamMemberContentBorderRadiusMobile.left}${teamMemberContentBorderRadiusUnits[deviceType]}`;
 
 
-	const teamMemberContentMarginGetDesktop = `${teamMemberContentMarginDesktop.top}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginDesktop.right}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginDesktop.bottom}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginDesktop.left}${teamMemberContentMarginUnits[DeviceType]}`;
-	const teamMemberContentMarginGetTab = `${teamMemberContentMarginTab.top}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginTab.right}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginTab.bottom}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginTab.left}${teamMemberContentMarginUnits[DeviceType]}`;
-	const teamMemberContentMarginGetMobile = `${teamMemberContentMarginMobile.top}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginMobile.right}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginMobile.bottom}${teamMemberContentMarginUnits[DeviceType]} ${teamMemberContentMarginMobile.left}${teamMemberContentMarginUnits[DeviceType]}`;
+	const teamMemberContentMarginGetDesktop = `${teamMemberContentMarginDesktop.top}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginDesktop.right}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginDesktop.bottom}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginDesktop.left}${teamMemberContentMarginUnits[deviceType]}`;
+	const teamMemberContentMarginGetTab = `${teamMemberContentMarginTab.top}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginTab.right}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginTab.bottom}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginTab.left}${teamMemberContentMarginUnits[deviceType]}`;
+	const teamMemberContentMarginGetMobile = `${teamMemberContentMarginMobile.top}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginMobile.right}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginMobile.bottom}${teamMemberContentMarginUnits[deviceType]} ${teamMemberContentMarginMobile.left}${teamMemberContentMarginUnits[deviceType]}`;
 
 
-	const teamMemberContentPaddingGetDesktop = `${teamMemberContentPaddingDesktop.top}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingDesktop.right}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingDesktop.bottom}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingDesktop.left}${teamMemberContentPaddingUnits[DeviceType]}`;
-	const teamMemberContentPaddingGetTab = `${teamMemberContentPaddingTab.top}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingTab.right}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingTab.bottom}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingTab.left}${teamMemberContentPaddingUnits[DeviceType]}`;
-	const teamMemberContentPaddingGetMobile = `${teamMemberContentPaddingMobile.top}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingMobile.right}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingMobile.bottom}${teamMemberContentPaddingUnits[DeviceType]} ${teamMemberContentPaddingMobile.left}${teamMemberContentPaddingUnits[DeviceType]}`;
+	const teamMemberContentPaddingGetDesktop = `${teamMemberContentPaddingDesktop.top}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingDesktop.right}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingDesktop.bottom}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingDesktop.left}${teamMemberContentPaddingUnits[deviceType]}`;
+	const teamMemberContentPaddingGetTab = `${teamMemberContentPaddingTab.top}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingTab.right}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingTab.bottom}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingTab.left}${teamMemberContentPaddingUnits[deviceType]}`;
+	const teamMemberContentPaddingGetMobile = `${teamMemberContentPaddingMobile.top}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingMobile.right}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingMobile.bottom}${teamMemberContentPaddingUnits[deviceType]} ${teamMemberContentPaddingMobile.left}${teamMemberContentPaddingUnits[deviceType]}`;
 
 
 
 	{/* Team Member Image Control */}
-	const teamMemberImageBorderTypeGetDesktop = `${teamMemberImageBorderTypeDesktop.top}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeDesktop.right}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeDesktop.bottom}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeDesktop.left}${teamMemberImageBorderTypeUnits[DeviceType]}`;
-	const teamMemberImageBorderTypeGetTab = `${teamMemberImageBorderTypeTab.top}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeTab.right}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeTab.bottom}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeTab.left}${teamMemberImageBorderTypeUnits[DeviceType]}`;
-	const teamMemberImageBorderTypeGetMobile = `${teamMemberImageBorderTypeMobile.top}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeMobile.right}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeMobile.bottom}${teamMemberImageBorderTypeUnits[DeviceType]} ${teamMemberImageBorderTypeMobile.left}${teamMemberImageBorderTypeUnits[DeviceType]}`;
+	const teamMemberImageBorderTypeGetDesktop = `${teamMemberImageBorderDesktop.top}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderDesktop.right}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderDesktop.bottom}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderDesktop.left}${teamMemberImageBorderUnits[deviceType]}`;
+	const teamMemberImageBorderTypeGetTab = `${teamMemberImageBorderTab.top}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderTab.right}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderTab.bottom}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderTab.left}${teamMemberImageBorderUnits[deviceType]}`;
+	const teamMemberImageBorderTypeGetMobile = `${teamMemberImageBorderMobile.top}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderMobile.right}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderMobile.bottom}${teamMemberImageBorderUnits[deviceType]} ${teamMemberImageBorderMobile.left}${teamMemberImageBorderUnits[deviceType]}`;
 
 
-	const teamMemberImageBorderRadiusGetDesktop = `${teamMemberImageBorderRadiusDesktop.top}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusDesktop.right}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusDesktop.bottom}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusDesktop.left}${teamMemberImageBorderRadiusUnits[DeviceType]}`;
-	const teamMemberImageBorderRadiusGetTab = `${teamMemberImageBorderRadiusTab.top}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusTab.right}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusTab.bottom}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusTab.left}${teamMemberImageBorderRadiusUnits[DeviceType]}`;
-	const teamMemberImageBorderRadiusGetMobile = `${teamMemberImageBorderRadiusMobile.top}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusMobile.right}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusMobile.bottom}${teamMemberImageBorderRadiusUnits[DeviceType]} ${teamMemberImageBorderRadiusMobile.left}${teamMemberImageBorderRadiusUnits[DeviceType]}`;
+	const teamMemberImageBorderRadiusGetDesktop = `${teamMemberImageBorderRadiusDesktop.top}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusDesktop.right}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusDesktop.bottom}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusDesktop.left}${teamMemberImageBorderRadiusUnits[deviceType]}`;
+	const teamMemberImageBorderRadiusGetTab = `${teamMemberImageBorderRadiusTab.top}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusTab.right}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusTab.bottom}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusTab.left}${teamMemberImageBorderRadiusUnits[deviceType]}`;
+	const teamMemberImageBorderRadiusGetMobile = `${teamMemberImageBorderRadiusMobile.top}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusMobile.right}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusMobile.bottom}${teamMemberImageBorderRadiusUnits[deviceType]} ${teamMemberImageBorderRadiusMobile.left}${teamMemberImageBorderRadiusUnits[deviceType]}`;
 
 
-	const teamMemberImageMarginGetDesktop = `${teamMemberImageMarginDesktop.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginDesktop.left}${teamMemberImageMarginUnits[DeviceType]}`;
-	const teamMemberImageMarginGetTab = `${teamMemberImageMarginTab.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginTab.left}${teamMemberImageMarginUnits[DeviceType]}`;
-	const teamMemberImageMarginGetMobile = `${teamMemberImageMarginMobile.top}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.right}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.bottom}${teamMemberImageMarginUnits[DeviceType]} ${teamMemberImageMarginMobile.left}${teamMemberImageMarginUnits[DeviceType]}`;
+	const teamMemberImageMarginGetDesktop = `${teamMemberImageMarginDesktop.top}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginDesktop.right}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginDesktop.bottom}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginDesktop.left}${teamMemberImageMarginUnits[deviceType]}`;
+	const teamMemberImageMarginGetTab = `${teamMemberImageMarginTab.top}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginTab.right}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginTab.bottom}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginTab.left}${teamMemberImageMarginUnits[deviceType]}`;
+	const teamMemberImageMarginGetMobile = `${teamMemberImageMarginMobile.top}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginMobile.right}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginMobile.bottom}${teamMemberImageMarginUnits[deviceType]} ${teamMemberImageMarginMobile.left}${teamMemberImageMarginUnits[deviceType]}`;
 
 
 	{/* Team Member Name Control */}
-	const teamMemberNameMarginGetDesktop = `${teamMemberNameMarginDesktop.top}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginDesktop.right}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginDesktop.bottom}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginDesktop.left}${teamMemberNameMarginUnits[DeviceType]}`;
-	const teamMemberNameMarginGetTab = `${teamMemberNameMarginTab.top}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginTab.right}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginTab.bottom}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginTab.left}${teamMemberNameMarginUnits[DeviceType]}`;
-	const teamMemberNameMarginGetMobile = `${teamMemberNameMarginMobile.top}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginMobile.right}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginMobile.bottom}${teamMemberNameMarginUnits[DeviceType]} ${teamMemberNameMarginMobile.left}${teamMemberNameMarginUnits[DeviceType]}`;
+	const teamMemberNameMarginGetDesktop = `${teamMemberNameMarginDesktop.top}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginDesktop.right}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginDesktop.bottom}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginDesktop.left}${teamMemberNameMarginUnits[deviceType]}`;
+	const teamMemberNameMarginGetTab = `${teamMemberNameMarginTab.top}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginTab.right}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginTab.bottom}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginTab.left}${teamMemberNameMarginUnits[deviceType]}`;
+	const teamMemberNameMarginGetMobile = `${teamMemberNameMarginMobile.top}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginMobile.right}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginMobile.bottom}${teamMemberNameMarginUnits[deviceType]} ${teamMemberNameMarginMobile.left}${teamMemberNameMarginUnits[deviceType]}`;
 
 
 	{/* Team Member Designation Control */}
-	const teamMemberDesignationMarginGetDesktop = `${teamMemberDesignationMarginDesktop.top}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginDesktop.right}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginDesktop.bottom}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginDesktop.left}${teamMemberDesignationMarginUnits[DeviceType]}`;
-	const teamMemberDesignationMarginGetTab = `${teamMemberDesignationMarginTab.top}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginTab.right}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginTab.bottom}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginTab.left}${teamMemberDesignationMarginUnits[DeviceType]}`;
-	const teamMemberDesignationMarginGetMobile = `${teamMemberDesignationMarginMobile.top}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginMobile.right}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginMobile.bottom}${teamMemberDesignationMarginUnits[DeviceType]} ${teamMemberDesignationMarginMobile.left}${teamMemberDesignationMarginUnits[DeviceType]}`;
+	const teamMemberDesignationMarginGetDesktop = `${teamMemberDesignationMarginDesktop.top}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginDesktop.right}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginDesktop.bottom}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginDesktop.left}${teamMemberDesignationMarginUnits[deviceType]}`;
+	const teamMemberDesignationMarginGetTab = `${teamMemberDesignationMarginTab.top}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginTab.right}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginTab.bottom}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginTab.left}${teamMemberDesignationMarginUnits[deviceType]}`;
+	const teamMemberDesignationMarginGetMobile = `${teamMemberDesignationMarginMobile.top}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginMobile.right}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginMobile.bottom}${teamMemberDesignationMarginUnits[deviceType]} ${teamMemberDesignationMarginMobile.left}${teamMemberDesignationMarginUnits[deviceType]}`;
 
 	useEffect(() => {
 		if (teamMemberDesignationFontFamily) {
@@ -464,10 +346,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		});
 	}
 
-	const handleteamMemberMarginUnitChange = ( event, position ) => {
+	const handleTeamMemberMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberMarginLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopMargin: {
@@ -502,7 +384,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopMargin: {...teamMemberDesktopMargin, [position]: value}} );
 					break;
@@ -519,29 +401,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	
 	}
 	
-	const handleteamMemberMarginCombineBtn = () => {
+	const handleTeamMemberMarginCombineBtn = () => {
 		setAttributes( {teamMemberMarginLink: !teamMemberMarginLink} );
 	}
 	
-	const handleteamMemberMarginUnitsHandler = (unit) => {
+	const handleTeamMemberMarginUnitsHandler = (unit) => {
 		setAttributes( {
 			teamMemberMarginUnits: {
 				...teamMemberMarginUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberMarginDesktopWidth = `${teamMemberDesktopMargin.top}${teamMemberMarginUnits[DeviceType]} ${teamMemberDesktopMargin.right}${teamMemberMarginUnits[DeviceType]} ${teamMemberDesktopMargin.bottom}${teamMemberMarginUnits[DeviceType]} ${teamMemberDesktopMargin.left}${teamMemberMarginUnits[DeviceType]}`;
-	const teamMemberMarginTabletWidth = `${teamMemberTabMargin.top}${teamMemberMarginUnits[DeviceType]} ${teamMemberTabMargin.right}${teamMemberMarginUnits[DeviceType]} ${teamMemberTabMargin.bottom}${teamMemberMarginUnits[DeviceType]} ${teamMemberTabMargin.left}${teamMemberMarginUnits[DeviceType]}`;
-	const teamMemberMarginMobileWidth = `${teamMemberMobileMargin.top}${teamMemberMarginUnits[DeviceType]} ${teamMemberMobileMargin.right}${teamMemberMarginUnits[DeviceType]} ${teamMemberMobileMargin.bottom}${teamMemberMarginUnits[DeviceType]} ${teamMemberMobileMargin.left}${teamMemberMarginUnits[DeviceType]}`;
+	const teamMemberMarginDesktopWidth = `${teamMemberDesktopMargin.top}${teamMemberMarginUnits[deviceType]} ${teamMemberDesktopMargin.right}${teamMemberMarginUnits[deviceType]} ${teamMemberDesktopMargin.bottom}${teamMemberMarginUnits[deviceType]} ${teamMemberDesktopMargin.left}${teamMemberMarginUnits[deviceType]}`;
+	const teamMemberMarginTabletWidth = `${teamMemberTabMargin.top}${teamMemberMarginUnits[deviceType]} ${teamMemberTabMargin.right}${teamMemberMarginUnits[deviceType]} ${teamMemberTabMargin.bottom}${teamMemberMarginUnits[deviceType]} ${teamMemberTabMargin.left}${teamMemberMarginUnits[deviceType]}`;
+	const teamMemberMarginMobileWidth = `${teamMemberMobileMargin.top}${teamMemberMarginUnits[deviceType]} ${teamMemberMobileMargin.right}${teamMemberMarginUnits[deviceType]} ${teamMemberMobileMargin.bottom}${teamMemberMarginUnits[deviceType]} ${teamMemberMobileMargin.left}${teamMemberMarginUnits[deviceType]}`;
 	
 	
 	// teamMember Padding Functionb
-	const handleteamMemberPaddingUnitChange = ( event, position ) => {
+	const handleTeamMemberPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberPaddingLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopPadding: {
@@ -576,7 +458,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopPadding: {...teamMemberDesktopPadding, [position]: value}} );
 					break;
@@ -593,29 +475,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	
 	}
 	
-	const handleteamMemberPaddingCombineBtn = () => {
+	const handleTeamMemberPaddingCombineBtn = () => {
 		setAttributes( {teamMemberPaddingLink: !teamMemberPaddingLink} );
 	}
 	
-	const handleteamMemberPaddingUnitsHandler = (unit) => {
+	const handleTeamMemberPaddingUnitsHandler = (unit) => {
 		setAttributes( {
 			teamMemberPaddingUnits: {
 				...teamMemberPaddingUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberPaddingDesktopWidth = `${teamMemberDesktopPadding.top}${teamMemberPaddingUnits[DeviceType]} ${teamMemberDesktopPadding.right}${teamMemberPaddingUnits[DeviceType]} ${teamMemberDesktopPadding.bottom}${teamMemberPaddingUnits[DeviceType]} ${teamMemberDesktopPadding.left}${teamMemberPaddingUnits[DeviceType]}`;
-	const teamMemberPaddingTabletWidth = `${teamMemberTabPadding.top}${teamMemberPaddingUnits[DeviceType]} ${teamMemberTabPadding.right}${teamMemberPaddingUnits[DeviceType]} ${teamMemberTabPadding.bottom}${teamMemberPaddingUnits[DeviceType]} ${teamMemberTabPadding.left}${teamMemberPaddingUnits[DeviceType]}`;
-	const teamMemberPaddingMobileWidth = `${teamMemberMobilePadding.top}${teamMemberPaddingUnits[DeviceType]} ${teamMemberMobilePadding.right}${teamMemberPaddingUnits[DeviceType]} ${teamMemberMobilePadding.bottom}${teamMemberPaddingUnits[DeviceType]} ${teamMemberMobilePadding.left}${teamMemberPaddingUnits[DeviceType]}`;
+	const teamMemberPaddingDesktopWidth = `${teamMemberDesktopPadding.top}${teamMemberPaddingUnits[deviceType]} ${teamMemberDesktopPadding.right}${teamMemberPaddingUnits[deviceType]} ${teamMemberDesktopPadding.bottom}${teamMemberPaddingUnits[deviceType]} ${teamMemberDesktopPadding.left}${teamMemberPaddingUnits[deviceType]}`;
+	const teamMemberPaddingTabletWidth = `${teamMemberTabPadding.top}${teamMemberPaddingUnits[deviceType]} ${teamMemberTabPadding.right}${teamMemberPaddingUnits[deviceType]} ${teamMemberTabPadding.bottom}${teamMemberPaddingUnits[deviceType]} ${teamMemberTabPadding.left}${teamMemberPaddingUnits[deviceType]}`;
+	const teamMemberPaddingMobileWidth = `${teamMemberMobilePadding.top}${teamMemberPaddingUnits[deviceType]} ${teamMemberMobilePadding.right}${teamMemberPaddingUnits[deviceType]} ${teamMemberMobilePadding.bottom}${teamMemberPaddingUnits[deviceType]} ${teamMemberMobilePadding.left}${teamMemberPaddingUnits[deviceType]}`;
 	
 	
 	// teamMember BorderWidth Function
-	const handleteamMemberBorderUnitChange = ( event, position ) => {
+	const handleTeamMemberBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberBorderLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopBorderWidth: {
@@ -650,7 +532,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopBorderWidth: {...teamMemberDesktopBorderWidth, [position]: value}} );
 					break;
@@ -667,29 +549,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	
 	}
 	
-	const handleteamMemberBorderCombineBtn = () => {
+	const handleTeamMemberBorderCombineBtn = () => {
 		setAttributes( {teamMemberBorderLink: !teamMemberBorderLink} );
 	}
 	
-	const handleteamMemberBorderUnitsHandler = (unit) => {
+	const handleTeamMemberBorderUnitsHandler = (unit) => {
 		setAttributes( {
 			teamMemberBorderUnits: {
 				...teamMemberBorderUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberBorderDesktopWidth = `${teamMemberDesktopBorderWidth.top}${teamMemberBorderUnits[DeviceType]} ${teamMemberDesktopBorderWidth.right}${teamMemberBorderUnits[DeviceType]} ${teamMemberDesktopBorderWidth.bottom}${teamMemberBorderUnits[DeviceType]} ${teamMemberDesktopBorderWidth.left}${teamMemberBorderUnits[DeviceType]}`;
-	const teamMemberBorderTabletWidth = `${teamMemberTabBorderWidth.top}${teamMemberBorderUnits[DeviceType]} ${teamMemberTabBorderWidth.right}${teamMemberBorderUnits[DeviceType]} ${teamMemberTabBorderWidth.bottom}${teamMemberBorderUnits[DeviceType]} ${teamMemberTabBorderWidth.left}${teamMemberBorderUnits[DeviceType]}`;
-	const teamMemberBorderMobileWidth = `${teamMemberMobileBorderWidth.top}${teamMemberBorderUnits[DeviceType]} ${teamMemberMobileBorderWidth.right}${teamMemberBorderUnits[DeviceType]} ${teamMemberMobileBorderWidth.bottom}${teamMemberBorderUnits[DeviceType]} ${teamMemberMobileBorderWidth.left}${teamMemberBorderUnits[DeviceType]}`;
+	const teamMemberBorderDesktopWidth = `${teamMemberDesktopBorderWidth.top}${teamMemberBorderUnits[deviceType]} ${teamMemberDesktopBorderWidth.right}${teamMemberBorderUnits[deviceType]} ${teamMemberDesktopBorderWidth.bottom}${teamMemberBorderUnits[deviceType]} ${teamMemberDesktopBorderWidth.left}${teamMemberBorderUnits[deviceType]}`;
+	const teamMemberBorderTabletWidth = `${teamMemberTabBorderWidth.top}${teamMemberBorderUnits[deviceType]} ${teamMemberTabBorderWidth.right}${teamMemberBorderUnits[deviceType]} ${teamMemberTabBorderWidth.bottom}${teamMemberBorderUnits[deviceType]} ${teamMemberTabBorderWidth.left}${teamMemberBorderUnits[deviceType]}`;
+	const teamMemberBorderMobileWidth = `${teamMemberMobileBorderWidth.top}${teamMemberBorderUnits[deviceType]} ${teamMemberMobileBorderWidth.right}${teamMemberBorderUnits[deviceType]} ${teamMemberMobileBorderWidth.bottom}${teamMemberBorderUnits[deviceType]} ${teamMemberMobileBorderWidth.left}${teamMemberBorderUnits[deviceType]}`;
 	
 	
 	// teamMember BorderRadiusWidth Function
-	const handleteamMemberBorderRadiusUnitChange = ( event, position ) => {
+	const handleTeamMemberBorderRadiusUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberBorderRadiusLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberDesktopBorderRadiusWidth: {
@@ -724,7 +606,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberDesktopBorderRadiusWidth: {...teamMemberDesktopBorderRadiusWidth, [position]: value}} );
 					break;
@@ -741,26 +623,47 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	
 	}
 	
-	const handleteamMemberBorderRadiusCombineBtn = () => {
+	const handleTeamMemberBorderRadiusCombineBtn = () => {
 		setAttributes( {teamMemberBorderRadiusLink: !teamMemberBorderRadiusLink} );
 	}
 	
-	const handleteamMemberBorderRadiusUnitsHandler = (unit) => {
+	const handleTeamMemberBorderRadiusUnitsHandler = (unit) => {
 		setAttributes( {
 			teamMemberBorderRadiusUnits: {
 				...teamMemberBorderRadiusUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
 	
-	const teamMemberBorderRadiusDesktopWidth = `${teamMemberDesktopBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberDesktopBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberDesktopBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberDesktopBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[DeviceType]}`;
-	const teamMemberBorderRadiusTabletWidth = `${teamMemberTabBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberTabBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberTabBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberTabBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[DeviceType]}`;
-	const teamMemberBorderRadiusMobileWidth = `${teamMemberMobileBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberMobileBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberMobileBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[DeviceType]} ${teamMemberMobileBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[DeviceType]}`;
+	const teamMemberBorderRadiusDesktopWidth = `${teamMemberDesktopBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberDesktopBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberDesktopBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberDesktopBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[deviceType]}`;
+	const teamMemberBorderRadiusTabletWidth = `${teamMemberTabBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberTabBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberTabBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberTabBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[deviceType]}`;
+	const teamMemberBorderRadiusMobileWidth = `${teamMemberMobileBorderRadiusWidth.top}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberMobileBorderRadiusWidth.right}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberMobileBorderRadiusWidth.bottom}${teamMemberBorderRadiusUnits[deviceType]} ${teamMemberMobileBorderRadiusWidth.left}${teamMemberBorderRadiusUnits[deviceType]}`;
 	
 
-	// console.log(attributes);
+	/** Team member bg Color */
+	const handleteamMemberBGColorSwitcherChange = (value) => {
+		setAttributes({ teamMemberBGColorSwitcher: value });
+	};
+	const handleteamMemberBGColorChange = (value) => {
+		setAttributes({ teamMemberBGColor: value });
+	};
+	const handleteamMemberBGHoverColorChange = (value) => {
+		setAttributes({ teamMemberBGHoverColor: value });
+	};
 
+	/** Team member border Color */
+	const handleTeamMemberBorderColorSwitcherChange = (value) => {
+		setAttributes({ teamMemberBorderColorSwitcher: value });
+	};
+	const handleTeamMemberBorderColorChange = (value) => {
+		setAttributes({ teamMemberBorderColor: value });
+	};
+	const handleTeamMemberBorderHoverColorChange = (value) => {
+		setAttributes({ teamMemberBorderHoverColor: value });
+	};
+
+	console.log(attributes);
 
 	return (
 		<>
@@ -768,7 +671,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				{`
 				.fb-team-member-main-wrapper.${blockID} {
 					position: relative;
-					${teamMemberBgColor !== undefined ? `background-color: ${teamMemberBgColor};` : ''};
+					${teamMemberBGColor !== undefined ? `background-color: ${teamMemberBGColor};` : ''};
 					padding: ${teamMemberPaddingDesktopWidth};
 					margin: ${teamMemberMarginDesktopWidth};
 					border-style: ${teamMemberBorder};
@@ -777,22 +680,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					border-radius: ${teamMemberBorderRadiusDesktopWidth};
 					transition: all .3s ease-in-out;
 					${teamMemberZIndex !== undefined ? `z-index: ${teamMemberZIndex}` : ''};
+					transition: all 0.3s ease-in-out;
 				}
 				.fb-team-member-main-wrapper.${blockID}:hover {
-					${teamMemberBgHoverColor !== undefined ? `background-color: ${teamMemberBgHoverColor};` : ''};
+					${teamMemberBGHoverColor !== undefined ? `background-color: ${teamMemberBGHoverColor};` : ''};
 					${teamMemberBorderHoverColor !== undefined ? `border-color: ${teamMemberBorderHoverColor};` : ''};
+					transition: all 0.3s ease-in-out;
 				}
 
                 .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
-					width: ${DeviceType === 'Desktop' ? teamMemberImageSizeWidthDesktop : DeviceType === 'Tablet' ? teamMemberImageSizeWidthTab : teamMemberImageSizeWidthMobile}${teamMemberImageSizeWidthUnits[DeviceType]};
-					height: ${DeviceType === 'Desktop' ? teamMemberImageSizeHeightDesktop : DeviceType === 'Tablet' ? teamMemberImageSizeHeightTab : teamMemberImageSizeHeightMobile}${teamMemberImageSizeHeightUnits[DeviceType]};
+					width: ${teamMemberImageWidth.Desktop}${teamMemberImageWidthUnits.Desktop};
+					height: ${teamMemberImageHeight.Desktop}${teamMemberImageHeightUnits.Desktop};
                     border: ${teamMemberImageBorder};
                     border-color: ${teamMemberImageBorderColor};
                     border-width: ${teamMemberImageBorderTypeGetDesktop};
                     border-radius: ${teamMemberImageBorderRadiusGetDesktop};
                     margin: ${teamMemberImageMarginGetDesktop};
+					transition: all 0.3s ease-in-out;
                 }
+                .fb-team-member-wrapper.${blockID}:hover .fb-team-member-image-wrapper {
+                    border-color: ${teamMemberImageBorderHoverColor};
+					transition: all 0.3s ease-in-out;
+                }
+
                 .fb-team-member-wrapper.${blockID} .fb-team-member-content {
+					position: relative;
 					display: flex;
 					flex-direction: column;
 					${teamMemberContentAlignment === 'left' && 'align-items: start'};
@@ -804,53 +716,67 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     border-radius: ${teamMemberContentBorderRadiusGetDesktop};
                     margin: ${teamMemberContentMarginGetDesktop};
                     padding: ${teamMemberContentPaddingGetDesktop};
-                    background: ${teamMemberContentBackgroundColor};
+                    background: ${teamMemberContentBGColor};
+					transition: all 0.3s ease-in-out;
+                }
+                .fb-team-member-wrapper.${blockID}:hover .fb-team-member-content {
+                    border-color: ${teamMemberContentBorderHoverColor};
+                    background: ${teamMemberContentBGHoverColor};
+					transition: all 0.3s ease-in-out;
                 }
                 .fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper .fb-team-member-image-overlay {
-                    background: ${teamMemberImageBackgroundColor};
+                    background: ${teamMemberImageBGColor};
+					transition: all 0.3s ease-in-out;
+                }
+                .fb-team-member-wrapper.${blockID}:hover .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+                    background: ${teamMemberImageBGHoverColor};
+					transition: all 0.3s ease-in-out;
                 }
 
          		.fb-team-member-wrapper.${blockID} .fb-team-member-name {
          		    font-family: ${teamMemberNameFontFamily !== 'default' ? teamMemberNameFontFamily : teamMemberNameFontFamily};
-                    font-size: ${teamMemberNameFontSize !== undefined ? `${teamMemberNameFontSize}${teamMemberNameFontSizeUnits}` : ''};
+                    font-size: ${teamMemberNameFontSize !== undefined ? `${teamMemberNameFontSize.Desktop}${teamMemberNameFontSizeUnits.Desktop}` : ''};
                     font-weight: ${teamMemberNameFontWeight};
                     font-style: ${teamMemberNameFontStyle};
                     text-transform: ${teamMemberNameTextTransform};
                     text-decoration: ${teamMemberNameTextDecoration};
-                    ${teamMemberNameLetterSpacingDesktop !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacingDesktop}${teamMemberNameLetterSpacingUnits};` : ''}
-                    ${teamMemberNameLineHeightDesktop !== undefined ? `line-height: ${teamMemberNameLineHeightDesktop}${teamMemberNameLineHeightUnits};` : ''}
-         			${teamMemberNameColorSwitcher === 'normal' && `color: ${teamMemberNameColor}`};
+                    ${teamMemberNameLetterSpacing !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacing.Desktop}${teamMemberNameLetterSpacingUnits.Desktop};` : ''}
+                    ${teamMemberNameLineHeight !== undefined ? `line-height: ${teamMemberNameLineHeight.Desktop}${teamMemberNameLineHeightUnits.Desktop};` : ''}
+         			color: ${teamMemberNameColor};
          			margin: ${teamMemberNameMarginGetDesktop};
+					transition: all 0.3s ease-in-out;
          		}
          		.fb-team-member-wrapper.${blockID} .fb-team-member-name:hover {
-         			${teamMemberNameColorSwitcher === 'hover' && `color: ${teamMemberNameHoverColor}`};
+         			color: ${teamMemberNameHoverColor};
+					transition: all 0.3s ease-in-out;
          		}
 
          		.fb-team-member-wrapper.${blockID} .fb-team-member-designation {
          		    font-family: ${teamMemberDesignationFontFamily !== 'default' ? teamMemberDesignationFontFamily : teamMemberDesignationFontFamily};
-                    font-size: ${teamMemberDesignationFontSize !== undefined ? `${teamMemberDesignationFontSize}${teamMemberDesignationFontSizeUnits}` : ''};
+                    font-size: ${teamMemberDesignationFontSize !== undefined ? `${teamMemberDesignationFontSize.Desktop}${teamMemberDesignationFontSizeUnits.Desktop}` : ''};
                     font-weight: ${teamMemberDesignationFontWeight};
                     font-style: ${teamMemberDesignationFontStyle};
                     text-transform: ${teamMemberDesignationTextTransform};
                     text-decoration: ${teamMemberDesignationTextDecoration};
-                    ${teamMemberDesignationLetterSpacingDesktop !== undefined ? `letter-spacing: ${teamMemberDesignationLetterSpacingDesktop}${teamMemberDesignationLetterSpacingUnits};` : ''}
-                    ${teamMemberDesignationLineHeightDesktop !== undefined ? `line-height: ${teamMemberDesignationLineHeightDesktop}${teamMemberDesignationLineHeightUnits};` : ''}
+                    ${teamMemberDesignationLetterSpacing !== undefined ? `letter-spacing: ${teamMemberDesignationLetterSpacing.Desktop}${teamMemberDesignationLetterSpacingUnits.Desktop};` : ''}
+                    ${teamMemberDesignationLineHeight !== undefined ? `line-height: ${teamMemberDesignationLineHeight.Desktop}${teamMemberDesignationLineHeightUnits.Desktop};` : ''}
          			color: ${teamMemberDesignationColor};
          			margin: ${teamMemberDesignationMarginGetDesktop};
+					transition: all 0.3s ease-in-out;
          		}
 
 				.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile {
 					display: flex;
-					gap: ${DeviceType === 'Desktop' ? teamMemberIconsSpacingDesktop : DeviceType === 'Tablet' ? teamMemberIconsSpacingTablet : teamMemberIconsSpacingMobile}${teamMemberIconsSpacingUnits};
+					gap: ${teamMemberIconsSpacing.Desktop}${teamMemberIconsSpacingUnits.Desktop};
 				}
 				.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile .fb-team-member-social-icon {
-					width: ${DeviceType === 'Desktop' ? teamMemberIconsSizeDesktop : DeviceType === 'Tablet' ? teamMemberIconsSizeTablet : teamMemberIconsSizeMobile}${teamMemberIconsSizeUnits};
-					height: ${DeviceType === 'Desktop' ? teamMemberIconsSizeDesktop : DeviceType === 'Tablet' ? teamMemberIconsSizeTablet : teamMemberIconsSizeMobile}${teamMemberIconsSizeUnits};
-					${teamMemberIconsColorSwitcher === 'normal' && `fill: ${teamMemberIconsColor}`};
+					width: ${teamMemberIconsSize.Desktop}${teamMemberIconsSizeUnits.Desktop};
+					height: ${teamMemberIconsSize.Desktop}${teamMemberIconsSizeUnits.Desktop};
+					fill: ${teamMemberIconsColor};
 					transition: all 0.3s ease-in-out;
 				}
 				.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile .fb-team-member-social-icon:hover {
-					${teamMemberIconsColorSwitcher === 'hover' && `fill: ${teamMemberIconsHoverColor}`}; 
+					fill: ${teamMemberIconsHoverColor}; 
 					transition: all 0.3s ease-in-out;
 				}
 
@@ -874,17 +800,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					}
 
 					.fb-team-member-wrapper.${blockID} .fb-team-member-name {
-						font-size: ${teamMemberNameFontSizeTablet !== undefined ? `${teamMemberNameFontSizeTablet}${teamMemberNameFontSizeUnits}` : ''};
-						${teamMemberNameLetterSpacingTablet !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacingTablet}${teamMemberNameLetterSpacingUnits};` : ''}
-						${teamMemberNameLineHeightTablet !== undefined ? `line-height: ${teamMemberNameLineHeightTablet}${teamMemberNameLineHeightUnits};` : ''}
+						font-size: ${teamMemberNameFontSize !== undefined ? `${teamMemberNameFontSize.Tablet}${teamMemberNameFontSizeUnits.Tablet}` : ''};
+						${teamMemberNameLetterSpacing !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacing.Tablet}${teamMemberNameLetterSpacingUnits.Tablet};` : ''}
+						${teamMemberNameLineHeight !== undefined ? `line-height: ${teamMemberNameLineHeight.Tablet}${teamMemberNameLineHeightUnits.Tablet};` : ''}
 						margin: ${teamMemberNameMarginGetTab};
 					}
 
 					.fb-team-member-wrapper.${blockID} .fb-team-member-designation {
-						font-size: ${teamMemberDesignationFontSizeTablet !== undefined ? `${teamMemberDesignationFontSizeTablet}${teamMemberDesignationFontSizeUnits}` : ''};
-						${teamMemberDesignationLetterSpacingTablet !== undefined ? `letter-spacing: ${teamMemberDesignationLetterSpacingTablet}${teamMemberDesignationLetterSpacingUnits};` : ''}
-						${teamMemberDesignationLineHeightTablet !== undefined ? `line-height: ${teamMemberDesignationLineHeightTablet}${teamMemberDesignationLineHeightUnits};` : ''}
+						font-size: ${teamMemberDesignationFontSize !== undefined ? `${teamMemberDesignationFontSize.Tablet}${teamMemberDesignationFontSizeUnits.Tablet}` : ''};
+						${teamMemberDesignationLetterSpacing !== undefined ? `letter-spacing: ${teamMemberDesignationLetterSpacing.Tablet}${teamMemberDesignationLetterSpacingUnits.Tablet};` : ''}
+						${teamMemberDesignationLineHeight !== undefined ? `line-height: ${teamMemberDesignationLineHeight.Tablet}${teamMemberDesignationLineHeightUnits.Tablet};` : ''}
 						margin: ${teamMemberDesignationMarginGetTab};
+					}
+						.fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
+						width: ${teamMemberImageWidth.Tablet}${teamMemberImageWidthUnits.Tablet};
+						height: ${teamMemberImageHeight.Tablet}${teamMemberImageHeightUnits.Tablet};
+					}
+					.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile {
+						gap: ${teamMemberIconsSpacing.Tablet}${teamMemberIconsSpacingUnits.Tablet};
+					}
+					.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile .fb-team-member-social-icon {
+						width: ${teamMemberIconsSize.Tablet}${teamMemberIconsSizeUnits.Tablet};
+						height: ${teamMemberIconsSize.Tablet}${teamMemberIconsSizeUnits.Tablet};
 					}
                 }
 
@@ -909,17 +846,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     }
 
 					.fb-team-member-wrapper.${blockID} .fb-team-member-name {
-						font-size: ${teamMemberNameFontSizeMobile !== undefined ? `${teamMemberNameFontSizeMobile}${teamMemberNameFontSizeUnits}` : ''};
-						${teamMemberNameLetterSpacingMobile !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacingMobile}${teamMemberNameLetterSpacingUnits};` : ''}
-						${teamMemberNameLineHeightMobile !== undefined ? `line-height: ${teamMemberNameLineHeightMobile}${teamMemberNameLineHeightUnits};` : ''}
+						font-size: ${teamMemberNameFontSize !== undefined ? `${teamMemberNameFontSize.Mobile}${teamMemberNameFontSizeUnits.Mobile}` : ''};
+						${teamMemberNameLetterSpacing !== undefined ? `letter-spacing: ${teamMemberNameLetterSpacing.Mobile}${teamMemberNameLetterSpacingUnits.Mobile};` : ''}
+						${teamMemberNameLineHeight !== undefined ? `line-height: ${teamMemberNameLineHeight.Mobile}${teamMemberNameLineHeightUnits.Mobile};` : ''}
 						margin: ${teamMemberNameMarginGetMobile};
 					}
 
 					.fb-team-member-wrapper.${blockID} .fb-team-member-designation {
-						font-size: ${teamMemberDesignationFontSizeMobile !== undefined ? `${teamMemberDesignationFontSizeMobile}${teamMemberDesignationFontSizeUnits}` : ''};
-						${teamMemberDesignationLetterSpacingMobile !== undefined ? `letter-spacing: ${teamMemberDesignationLetterSpacingMobile}${teamMemberDesignationLetterSpacingUnits};` : ''}
-						${teamMemberDesignationLineHeightMobile !== undefined ? `line-height: ${teamMemberDesignationLineHeightMobile}${teamMemberDesignationLineHeightUnits};` : ''}
+						font-size: ${teamMemberDesignationFontSize !== undefined ? `${teamMemberDesignationFontSize.Mobile}${teamMemberDesignationFontSizeUnits.Mobile}` : ''};
+						${teamMemberDesignationLetterSpacing !== undefined ? `letter-spacing: ${teamMemberDesignationLetterSpacing.Mobile}${teamMemberDesignationLetterSpacingUnits.Mobile};` : ''}
+						${teamMemberDesignationLineHeight !== undefined ? `line-height: ${teamMemberDesignationLineHeight.Mobile}${teamMemberDesignationLineHeightUnits.Mobile};` : ''}
 						margin: ${teamMemberDesignationMarginGetMobile};
+					}
+
+					.fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper {
+						width: ${teamMemberImageWidth.Mobile}${teamMemberImageWidthUnits.Mobile};
+						height: ${teamMemberImageHeight.Mobile}${teamMemberImageHeightUnits.Mobile};
+					}
+					.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile {
+						gap: ${teamMemberIconsSpacing.Mobile}${teamMemberIconsSpacingUnits.Mobile};
+					}
+					.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile .fb-team-member-social-icon {
+						width: ${teamMemberIconsSize.Mobile}${teamMemberIconsSizeUnits.Mobile};
+						height: ${teamMemberIconsSize.Mobile}${teamMemberIconsSizeUnits.Mobile};
 					}
                 }
             `}
@@ -1030,20 +979,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											
 
 											<TextControl
-												tagName={attributes.teamMemberNameHeadingTag}
+												tagName={teamMemberNameHeadingTag}
 												label={__('Name', 'frontis-blocks')}
-												value={attributes.teamMemberName}
+												value={teamMemberName}
 												onChange={(value) => setAttributes({ teamMemberName: value })}
 												placeholder={__('Wade Warren', 'frontis-block')}
 											/>
-											<BaseControl label={__("Heading Tag", "frontis-block")} className="fb-setting-tag-wrapper">
-												<ButtonGroup className="fb-setting-tag-inner-wrapper">
+											<BaseControl label={__("Name Tag", "frontis-block")} className="fb-setting-text-alignment">
+												<ButtonGroup className="fb-setting-text-alignment-group-btn">
 													{HEADING.map((item, key) => (
 														<Button
 															key={key}
 															onClick={() => setAttributes({ teamMemberNameHeadingTag: item.value })}
-															className={`fb-setting-tag-single-btn ${
-																attributes.teamMemberNameHeadingTag === item.value ? 'active' : ''
+															className={`fb-setting-text-alignment-single-btn ${
+																teamMemberNameHeadingTag === item.value ? 'active' : ''
 															}`}
 														>
 															{item.label}
@@ -1054,14 +1003,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 											<TextControl
 												label={__('Designation', 'frontis-blocks')}
-												value={attributes.teamMemberDesignation}
+												value={teamMemberDesignation}
 												onChange={(value) => setAttributes({ teamMemberDesignation: value })}
 											/>
-											{/*<TextareaControl*/}
-											{/*	label={__('Short Bio', 'frontis-blocks')}*/}
-											{/*	value={attributes.teamMemberContent}*/}
-											{/*	onChange={(value) => setAttributes({ teamMemberContent: value })}*/}
-											{/*/>*/}
 										</PanelBody>
 
 										<PanelBody title={__("Social Profiles", "frontis-blocks")} initialOpen={true}>
@@ -1152,12 +1096,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
-
-											{/*<TeamMemberImageSizeControl*/}
-											{/*	attributes={attributes}*/}
-											{/*	setAttributes={setAttributes}*/}
-											{/*	clientId ={clientId}*/}
-											{/*/>*/}
 										</PanelBody>
 
 										<TitleName attributes={attributes} setAttributes={setAttributes} />
@@ -1166,13 +1104,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 										<SocialIcons attributes={attributes} setAttributes={setAttributes} />
 
-
-										{/*<PanelBody*/}
-										{/*	title={__("Social Profile", "frontis-blocks")}*/}
-										{/*	initialOpen={false}*/}
-										{/*>*/}
-
-										{/*</PanelBody>*/}
 
 									</>
 								)}
@@ -1205,154 +1136,49 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 													<FB_Spacing
 														label={__("Margin", "frontis-blocks")}
-														DeviceType={DeviceType}
-														spacingUnitsHandler={handleteamMemberMarginUnitsHandler}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleTeamMemberMarginUnitsHandler}
 														spacingUnits={teamMemberMarginUnits}
 														spacingDesktop={teamMemberDesktopMargin}
 														spacingTablet={teamMemberTabMargin}
 														spacingMobile={teamMemberMobileMargin}
-														handleSpacingUnitHandler={handleteamMemberMarginUnitChange}
+														handleSpacingUnitHandler={handleTeamMemberMarginUnitChange}
 														spacingCombineBtn={teamMemberMarginLink}
-														spacingCombineBtnHandler={handleteamMemberMarginCombineBtn}
+														spacingCombineBtnHandler={handleTeamMemberMarginCombineBtn}
 														setAttributes={setAttributes}
 													/>
 
 													<FB_Spacing 
 														label={__("Padding", "frontis-blocks")}
-														DeviceType={DeviceType}
-														spacingUnitsHandler={handleteamMemberPaddingUnitsHandler}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleTeamMemberPaddingUnitsHandler}
 														spacingUnits={teamMemberPaddingUnits}
 														spacingDesktop={teamMemberDesktopPadding}
 														spacingTablet={teamMemberTabPadding}
 														spacingMobile={teamMemberMobilePadding}
-														handleSpacingUnitHandler={handleteamMemberPaddingUnitChange}
+														handleSpacingUnitHandler={handleTeamMemberPaddingUnitChange}
 														spacingCombineBtn={teamMemberPaddingLink}
-														spacingCombineBtnHandler={handleteamMemberPaddingCombineBtn}
+														spacingCombineBtnHandler={handleTeamMemberPaddingCombineBtn}
 														setAttributes={setAttributes}
 													/>                                     
 												</PanelBody>
 
 												<PanelBody title="Background Color" initialOpen={false} >
-													<BaseControl
-														className="fb-setting-color-panel-wrapper"
-													>
-														<ButtonGroup className="fb-setting-color-panel-btn">
-															{NORMAL_HOVER.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() => setAttributes({ teamMemberBgColorSwitcher: item.value })}
-																	className={`fb-setting-color-panel-btn-switchr ${teamMemberBgColorSwitcher === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
-
-													{teamMemberBgColorSwitcher === 'normal' && (
-														<BaseControl 
-															label={__("Nomal Color", "frontis-blocks")}
-															className="fb-setting-color-setting-wrapper"
-														>
-															<Dropdown
-																className="fb-setting-color-setting-icon-dropdown"
-																contentClassName="fb-setting-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: 'bottom-start' }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		className="fb-setting-color-setting-icon-btn"
-																	>
-																		<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-color-setting-icon-popup">
-																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																			<div className="fb-setting-normal-color">
-																				<ColorPicker
-																					color={teamMemberBgColor}
-																					onChange={(value) => setAttributes({ teamMemberBgColor: value })}
-																					enableAlpha={true}
-																				/>
-																				<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																				<ColorPalette
-																					colors={[
-																						{ color: '#F72585' },
-																						{ color: '#7209B7' },
-																						{ color: '#3A0CA3' },
-																						{ color: '#4361EE' },
-																						{ color: '#4CC9F0' },
-																					]}
-																					disableCustomColors={true}
-																					value={teamMemberBgColor}
-																					onChange={(value) => setAttributes({ teamMemberBgColor: value })}
-																				/>
-																			</div>
-																		</BaseControl>
-																	</div>
-																)}
-															/>
-														</BaseControl>
-													)}
-
-													{teamMemberBgColorSwitcher === 'hover' && (
-														<BaseControl 
-															label={__("Hover Color", "frontis-blocks")}
-															className="fb-setting-color-setting-wrapper"
-														>
-															<Dropdown
-																className="fb-setting-color-setting-icon-dropdown"
-																contentClassName="fb-setting-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: 'bottom-start' }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		className="fb-setting-color-setting-icon-btn"
-																	>
-																		<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-color-setting-icon-popup">
-																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																			<div className="fb-setting-hover-color">
-																				<ColorPicker
-																					color={teamMemberBgHoverColor}
-																					onChange={(value) => setAttributes({ teamMemberBgHoverColor: value })}
-																					enableAlpha={true}
-																				/>
-																				<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																				<ColorPalette
-																					colors={[
-																						{ color: '#F72585' },
-																						{ color: '#7209B7' },
-																						{ color: '#3A0CA3' },
-																						{ color: '#4361EE' },
-																						{ color: '#4CC9F0' },
-																					]}
-																					disableCustomColors={true}
-																					value={teamMemberBgHoverColor}
-																					onChange={(value) => setAttributes({ teamMemberBgHoverColor: value })}
-																				/>
-																			</div>
-																		</BaseControl>
-																	</div>
-																)}
-															/>
-														</BaseControl>
-													)}
+													<FB_Color
+														globalColorSwitcher={teamMemberBGColorSwitcher}
+														globalColor={teamMemberBGColor}
+														globalHoverColor={teamMemberBGHoverColor}
+														handleColorSwitcherChange={handleteamMemberBGColorSwitcherChange}
+														handleGlobalColorChange={handleteamMemberBGColorChange}
+														handleGlobalHoverColorChange={handleteamMemberBGHoverColorChange}
+													/>
 												</PanelBody>
 
 												<PanelBody
 													title={__("Border & Border radius", "frontis-blocks")}
 													initialOpen={false}
 													className="fb-setting-border-setting-wrapper"
-													>
+												>
 														<SelectControl
 															label={__("Border Style", "frontis-blocks")}
 															value={teamMemberBorder}
@@ -1360,148 +1186,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															onChange={(value) => setAttributes({ teamMemberBorder: value })}
 														/>
 
-													<BaseControl
-														label={__("Border Color", "frontis-blocks")}
-														className="fb-setting-color-panel-wrapper"
-													>
-														<ButtonGroup className="fb-setting-color-panel-btn">
-															{NORMAL_HOVER.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() => setAttributes({ teamMemberBorderColorSwitcher: item.value })}
-																	className={`fb-setting-color-panel-btn-switchr ${teamMemberBorderColorSwitcher === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
-
-													{teamMemberBorderColorSwitcher === 'normal' && (
-														<BaseControl 
-															label={__("Nomal Color", "frontis-blocks")}
-															className="fb-setting-color-setting-wrapper"
-														>
-															<Dropdown
-																className="fb-setting-color-setting-icon-dropdown"
-																contentClassName="fb-setting-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: 'bottom-start' }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-																		className="fb-setting-color-setting-icon-btn"
-																	>
-																		<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-color-setting-icon-popup">
-																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																			<div className="fb-setting-normal-color">
-																				<ColorPicker
-																					color={teamMemberBorderColor}
-																					onChange={(value) => setAttributes({ teamMemberBorderColor: value })}
-																					enableAlpha={true}
-																				/>
-																				<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																				<ColorPalette
-																					colors={[
-																						{ color: '#F72585' },
-																						{ color: '#7209B7' },
-																						{ color: '#3A0CA3' },
-																						{ color: '#4361EE' },
-																						{ color: '#4CC9F0' },
-																					]}
-																					disableCustomColors={true}
-																					value={teamMemberBorderColor}
-																					onChange={(value) => setAttributes({ teamMemberBorderColor: value })}
-																				/>
-																			</div>
-																		</BaseControl>
-																	</div>
-																)}
-															/>
-														</BaseControl>
-													)}
-
-													{teamMemberBorderColorSwitcher === 'hover' && (
-														<BaseControl 
-															label={__("Hover Color", "frontis-blocks")}
-															className="fb-setting-color-setting-wrapper"
-														>
-															<Dropdown
-																className="fb-setting-color-setting-icon-dropdown"
-																contentClassName="fb-setting-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: 'bottom-start' }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-																		className="fb-setting-color-setting-icon-btn"
-																	>
-																		<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-color-setting-icon-popup">
-																		<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																			<div className="fb-setting-hover-color">
-																				<ColorPicker
-																					color={teamMemberBorderHoverColor}
-																					onChange={(value) => setAttributes({ teamMemberBorderHoverColor: value })}
-																					enableAlpha={true}
-																				/>
-																				<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																				<ColorPalette
-																					colors={[
-																						{ color: '#F72585' },
-																						{ color: '#7209B7' },
-																						{ color: '#3A0CA3' },
-																						{ color: '#4361EE' },
-																						{ color: '#4CC9F0' },
-																					]}
-																					disableCustomColors={true}
-																					value={teamMemberBorderHoverColor}
-																					onChange={(value) => setAttributes({ teamMemberBorderHoverColor: value })}
-																				/>
-																			</div>
-																		</BaseControl>
-																	</div>
-																)}
-															/>
-														</BaseControl>
-													)}
+													<FB_Color
+														globalColorSwitcher={teamMemberBorderColorSwitcher}
+														globalColor={teamMemberBorderColor}
+														globalHoverColor={teamMemberBorderHoverColor}
+														handleColorSwitcherChange={handleTeamMemberBorderColorSwitcherChange}
+														handleGlobalColorChange={handleTeamMemberBorderColorChange}
+														handleGlobalHoverColorChange={handleTeamMemberBorderHoverColorChange}
+													/>
 
 													<FB_Spacing 
 														label={__("Border Width", "frontis-blocks")}
-														DeviceType={DeviceType}
-														spacingUnitsHandler={handleteamMemberBorderUnitsHandler}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleTeamMemberBorderUnitsHandler}
 														spacingUnits={teamMemberBorderUnits}
 														spacingDesktop={teamMemberDesktopBorderWidth}
 														spacingTablet={teamMemberTabBorderWidth}
 														spacingMobile={teamMemberMobileBorderWidth}
-														handleSpacingUnitHandler={handleteamMemberBorderUnitChange}
+														handleSpacingUnitHandler={handleTeamMemberBorderUnitChange}
 														spacingCombineBtn={teamMemberBorderLink}
-														spacingCombineBtnHandler={handleteamMemberBorderCombineBtn}
+														spacingCombineBtnHandler={handleTeamMemberBorderCombineBtn}
 														setAttributes={setAttributes}
 													/>
 
 													<FB_Spacing 
 														label={__("Border Radius Width", "frontis-blocks")}
-														DeviceType={DeviceType}
-														spacingUnitsHandler={handleteamMemberBorderRadiusUnitsHandler}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleTeamMemberBorderRadiusUnitsHandler}
 														spacingUnits={teamMemberBorderRadiusUnits}
 														spacingDesktop={teamMemberDesktopBorderRadiusWidth}
 														spacingTablet={teamMemberTabBorderRadiusWidth}
 														spacingMobile={teamMemberMobileBorderRadiusWidth}
-														handleSpacingUnitHandler={handleteamMemberBorderRadiusUnitChange}
+														handleSpacingUnitHandler={handleTeamMemberBorderRadiusUnitChange}
 														spacingCombineBtn={teamMemberBorderRadiusLink}
-														spacingCombineBtnHandler={handleteamMemberBorderRadiusCombineBtn}
+														spacingCombineBtnHandler={handleTeamMemberBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
 												</PanelBody>
@@ -1546,10 +1264,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image-overlay`}></div>
-							{attributes.teamMemberImageMediaUrl && (
-								<img src={attributes.teamMemberImageMediaUrl}/>
+							{teamMemberImageMediaUrl && (
+								<img src={teamMemberImageMediaUrl}/>
 							)}
 						</div>
+						<div className="fb-team-member-content-wrapper">
 						<div className={`fb-team-member-content`}>
 							<RichText
 								tagName={teamMemberNameHeadingTag}
@@ -1575,6 +1294,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									))}
 								</div>
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>

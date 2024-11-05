@@ -17,6 +17,28 @@ class BlockList
 
     private function init_blocks() {
         $this->blocks = [
+            'accordion' => [
+                'slug'      => 'accordion',
+                'title'     => 'Accordion',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'freemium',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/accordion',
+                'demo'      => 'https://wpmessiah.com/demo/accordion',
+            ],
+            'accordion-item' => [
+                'slug'      => 'accordion-item',
+                'title'     => 'Accordion Item',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'freemium',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/accordion-item',
+                'demo'      => 'https://wpmessiah.com/demo/accordion-item',
+            ],
             'advanced-heading' => [
                 'slug'      => 'advanced-heading',
                 'title'     => 'Advanced Heading',
@@ -182,7 +204,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/docs/testimonial',
                 'demo'      => 'https://wpmessiah.com/demo/testimonial',
             ],
-             'counter-number' => [
+            'counter-number' => [
                  'slug'      => 'counter-number',
                  'title'     => 'Counter Number',
                  'package'   => 'free',
