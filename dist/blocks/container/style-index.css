@@ -1,0 +1,41 @@
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/container/style.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+.fb-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.fb-container.fb-container-two-columns .fb-column {
+  width: 50%;
+}
+.fb-container.fb-container-three-columns .fb-column {
+  width: 33.33%;
+}
+.fb-container.fb-container-four-columns .fb-column {
+  width: 25%;
+}
+.fb-container.fb-container-two-rows-two-columns .fb-column {
+  width: 50%;
+}
+.fb-container.fb-container-three-columns-wide-center .fb-column-25 {
+  width: 25%;
+}
+.fb-container.fb-container-three-columns-wide-center .fb-column-50 {
+  width: 50%;
+}
+.fb-container.fb-container-two-thirds-one-third .fb-column-33, .fb-container.fb-container-one-third-two-thirds .fb-column-33 {
+  width: 33.33%;
+}
+.fb-container.fb-container-two-thirds-one-third .fb-column-66, .fb-container.fb-container-one-third-two-thirds .fb-column-66 {
+  width: 66.67%;
+}
+.fb-container.fb-container-two-rows-three-columns .fb-column {
+  width: 33.33%;
+}
+@media (max-width: 768px) {
+  .fb-container .fb-column {
+    width: 100% !important;
+  }
+}
+
+/*# sourceMappingURL=style-index.css.map*/
