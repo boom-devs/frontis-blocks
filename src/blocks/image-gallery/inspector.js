@@ -22,11 +22,9 @@ import {
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
     TEXT_ALIGN,
-    FONT_FAMILYS,
     BORDER_STYLES,
+    PRESETS,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -34,18 +32,21 @@ import FB_ResponsiveControl from '@Components/responsive-control';
 
 import './editor.scss';
 import FB_Spacing from '../../components/spacing';
+import FB_Color from '../../components/color';
+import FB_Range from '../../components/range';
+import FB_TypographyControl from '../../components/typography-control';
+import FBIconPicker from '../../components/icon-picker';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        DeviceType,
+        deviceType,
 
+        GalleryPresetStyle,
         GalleryType,
         GalleryItems,
 
-        GalleryItemHeightDesktop,
-        GalleryItemHeightTablet,
-        GalleryItemHeightMobile,
+        GalleryItemHeight,
         GalleryItemHeightUnits,
 
         ImageOverlayStyle,
@@ -56,9 +57,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         GalleryColumnNumberTablet,
         GalleryColumnNumberMobile,
 
-        GalleryImageGapDesktop,
-        GalleryImageGapTablet,
-        GalleryImageGapMobile,
+        GalleryImageGap,
         GalleryImageGapUnits,
 
         GalleryButtonSwitcher,
@@ -68,33 +67,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ImageAlignment,
         ImageFitCover,
 
-        ImageWidthDesktop,
-        ImageWidthTab,
-        ImageWidthMobile,
+        ImageWidth,
         ImageWidthUnits,
 
-        ImageHeightDesktop,
-        ImageHeightTab,
-        ImageHeightMobile,
+        ImageHeight,
         ImageHeightUnits,
 
         GalleryButtonAlignment,
         GalleryButtonFontFamily,
-        GalleryButtonFontSizeDesktop,
-        GalleryButtonFontSizeTablet,
-        GalleryButtonFontSizeMobile,
+        GalleryButtonFontSize,
         GalleryButtonFontSizeUnits,
         GalleryButtonFontWeight,
         GalleryButtonFontStyle,
         GalleryButtonTextTransform,
         GalleryButtonTextDecoration,
-        GalleryButtonLetterSpacingDesktop,
-        GalleryButtonLetterSpacingTablet,
-        GalleryButtonLetterSpacingMobile,
+        GalleryButtonLetterSpacing,
         GalleryButtonLetterSpacingUnits,
-        GalleryButtonLineHeightDesktop,
-        GalleryButtonLineHeightTablet,
-        GalleryButtonLineHeightMobile,
+        GalleryButtonLineHeight,
         GalleryButtonLineHeightUnits,
         GalleryButtonColorSwitcher,
         GalleryButtonColor,
@@ -155,14 +144,61 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         GalleryMobileBorderWidth,
         GalleryBorderLink,
         GalleryBorderRadiusUnits,
-        GalleryDesktopBorderRadiusWidth,
-        GalleryTabBorderRadiusWidth,
-        GalleryMobileBorderRadiusWidth,
+        GalleryBorderRadiusDesktop,
+        GalleryBorderRadiusTablet,
+        GalleryBorderRadiusMobile,
         GalleryBorderRadiusLink,
 
         GalleryDesktopSwitcher,
         GalleryTabletSwitcher,
         GalleryMobileSwitcher,
+
+        // Image border
+        imageBorder,
+        imageBorderColor,
+        imageBorderHoverColor,
+        imageBorderColorSwitcher,
+        imageBorderUnits,
+        imageDesktopBorderWidth,
+        imageTabBorderWidth,
+        imageMobileBorderWidth,
+        imageBorderLink,
+        imageBorderRadiusUnits,
+        imageDesktopBorderRadiusWidth,
+        imageTabBorderRadiusWidth,
+        imageMobileBorderRadiusWidth,
+        imageBorderRadiusLink,
+
+        // Lightbox Icon
+        lightboxIconSwitcher,
+        lightboxIcon,
+        lightboxIconSize,
+        lightboxIconSizeUnits,
+        lightboxColorSwitcher,
+        lightboxColor,
+        lightboxHoverColor,
+        lightboxBGColorSwitcher,
+        lightboxBGColor,
+        lightboxBGHoverColor,
+        lightboxBorder,
+        lightboxBorderColor,
+        lightboxBorderHoverColor,
+        lightboxBorderColorSwitcher,
+        lightboxPaddingUnits,
+        lightboxDesktopPadding,
+        lightboxTabPadding,
+        lightboxMobilePadding,
+        lightboxPaddingLink,
+        lightboxBorderUnits,
+        lightboxDesktopBorderWidth,
+        lightboxTabBorderWidth,
+        lightboxMobileBorderWidth,
+        lightboxBorderLink,
+        lightboxBorderRadiusUnits,
+        lightboxDesktopBorderRadiusWidth,
+        lightboxTabBorderRadiusWidth,
+        lightboxMobileBorderRadiusWidth,
+        lightboxBorderRadiusLink,
 
     } = attributes;
     
@@ -208,12 +244,803 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         );
         setAttributes({ GalleryItems: updatedItems });
 	}
+
+     /** Start Preset Style */
+     const changeGalleryPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+                deviceType: "Desktop",
+                GalleryType: "grid",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-5",
+                        title: "Image 5",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-6",
+                        title: "Image 6",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    }
+                ],
+                GalleryPresetStyle: "preset-1",
+                GalleryItemHeight: {
+                    Desktop: 410,
+                    Tablet: 300,
+                    Mobile: 200
+                },
+                ImageOverlayStyle: "none",
+                lightboxIconSwitcher: true,
+                lightboxIcon: "plus",
+                lightboxIconSize: {
+                    Desktop: 24,
+                    Tablet: 24,
+                    Mobile: 24
+                },
+                lightboxColor: "#000",
+                lightboxHoverColor: "#000",
+                lightboxBGColor: "#fff",
+                lightboxBorder: "solid",
+                lightboxBorderColor: "#399cff",
+                lightboxDesktopPadding: {
+                    top: 16,
+                    right: 16,
+                    bottom: 16,
+                    left: 16
+                },
+                lightboxDesktopBorderWidth: {
+                    top: 3,
+                    right: 3,
+                    bottom: 3,
+                    left: 3
+                },
+                lightboxDesktopBorderRadiusWidth: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                },
+                GalleryColumnNumberDesktop: 3,
+                GalleryColumnNumberTablet: 2,
+                GalleryColumnNumberMobile: 1,
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 15,
+                    Mobile: 10
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: 32,
+                    bottom: 32,
+                    left: 32,
+                    right: 32,
+                }
+            },
+            "preset-2": {
+                deviceType: "Desktop",
+                GalleryType: "grid",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-5",
+                        title: "Image 5",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-6",
+                        title: "Image 6",
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    }
+                ],
+                GalleryPresetStyle: "preset-2",
+                GalleryItemHeight: {
+                    Desktop: 411,
+                    Tablet: 300,
+                    Mobile: 200
+                },
+                ImageOverlayStyle: "black_white",
+                lightboxIconSwitcher: true,
+                lightboxIcon: "plus",
+                lightboxIconSize: {
+                    Desktop: 24,
+                    Tablet: 24,
+                    Mobile: 24
+                },
+                lightboxColorSwitcher: "normal",
+                lightboxColor: "#000",
+                lightboxHoverColor: "#000",
+                lightboxBGColorSwitcher: "normal",
+                lightboxBGColor: "#fff",
+                lightboxBGHoverColor: "#fff",
+                lightboxBorder: "solid",
+                lightboxBorderColor: "#f89b2e",
+                lightboxDesktopPadding: {
+                    top: 16,
+                    right: 16,
+                    bottom: 16,
+                    left: 16
+                },
+                lightboxDesktopBorderWidth: {
+                    top: 2,
+                    right: 2,
+                    bottom: 2,
+                    left: 2
+                },
+                lightboxBorderRadiusUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                lightboxDesktopBorderRadiusWidth: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                },
+                GalleryColumnNumberDesktop: 3,
+                GalleryColumnNumberTablet: 2,
+                GalleryColumnNumberMobile: 1,
+                GalleryImageGap: {
+                    Desktop: 6,
+                    Tablet: 15,
+                    Mobile: 10
+                },
+                ImageFitCover: true,
+                imageBorder: "none",
+                imageDesktopBorderRadiusWidth: {
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                }
+            },
+            "preset-3": {
+                    deviceType: "Desktop",
+                    GalleryType: "mesonry",
+                    GalleryItems: [
+                        {
+                            id: "image-1",
+                            title: "Image 1",
+                            column: {
+                                desktop: 2,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 2,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        },
+                        {
+                            id: "image-2",
+                            title: "Image 2",
+                            column: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 2,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        },
+                        {
+                            id: "image-3",
+                            title: "Image 3",
+                            column: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        },
+                        {
+                            id: "image-4",
+                            title: "Image 4",
+                            column: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            row: {
+                                desktop: 0,
+                                tablet: 0,
+                                mobile: 0
+                            },
+                            image: {
+                                id: 0,
+                                url: "",
+                                width: 0,
+                                height: 0
+                            }
+                        }
+                    ],
+                    GalleryPresetStyle: "preset-3",
+                    lightboxIconSwitcher: false,
+                    GalleryItemHeight: {
+                        Desktop: 410,
+                        Tablet: 410,
+                        Mobile: 410
+                    },
+                    GalleryColumnNumberDesktop: 4,
+                    GalleryImageGap: {
+                        Desktop: 30,
+                        Tablet: 30,
+                        Mobile: 30
+                    },
+                    GalleryImageGapUnits: {
+                        Desktop: "px",
+                        Tablet: "px",
+                        Mobile: "px"
+                    },
+                    imageDesktopBorderRadiusWidth: {
+                        top: 24,
+                        bottom: 24,
+                        left: 24,
+                        right: 24,
+                    },
+            },
+            "preset-4": {
+                deviceType: "Desktop",
+                GalleryType: "mesonry",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        column: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        column: {
+                            desktop: 1,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        desc: "",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 1,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        desc: "",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-5",
+                        title: "Image 5",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-6",
+                        title: "Image 6",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    }
+                ],
+                GalleryPresetStyle: "preset-4",
+                lightboxIconSwitcher: false,
+                GalleryItemHeight: {
+                    Desktop: 410,
+                    Tablet: 410,
+                    Mobile: 410
+                },
+                ImageOverlayStyle: "overlay",
+                ImageOverlayStyleType: "top",
+                ImageOverlayColor: "rgba(0 0 0 / 0.7)",
+                GalleryColumnNumberDesktop: 4,
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 30,
+                    Mobile: 30
+                },
+                GalleryImageGapUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: 24,
+                    bottom: 24,
+                    left: 24,
+                    right: 24,
+                },
+            },
+            "preset-5": {
+                deviceType: "Desktop",
+                GalleryType: "mesonry",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 2,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-4",
+                        title: "Image 4",
+                        column: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        row: {
+                            desktop: 0,
+                            tablet: 0,
+                            mobile: 0
+                        },
+                        image: {
+                            id: 0,
+                            url: "",
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                ],
+                GalleryPresetStyle: "preset-5",
+                lightboxIconSwitcher: false,
+                GalleryItemHeight: {
+                    Desktop: 410,
+                    Tablet: 410,
+                    Mobile: 410
+                },
+                GalleryItemHeightUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                ImageOverlayStyle: "overlay",
+                ImageOverlayStyleType: "bottom",
+                ImageOverlayColor: "rgba(0 0 0 / 0.7)",
+                GalleryColumnNumberDesktop: 3,
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 30,
+                    Mobile: 30
+                },
+                GalleryImageGapUnits: {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: 24,
+                    bottom: 24,
+                    left: 24,
+                    right: 24,
+                },
+            },
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                GalleryPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Testimonial: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style */
+
+    // FB_Color for image Border
+    const imageBorderColorSwitcherChange = (value) => {
+        setAttributes({ imageBorderColorSwitcher: value });
+    };
+    const imageBorderColorChange = (value) => {
+        setAttributes({ imageBorderColor: value });
+    };
+    const imageBorderHoverColorChange = (value) => {
+        setAttributes({ imageBorderHoverColor: value });
+    };
+
+    /** GalleryBg Color */
+    const handleGalleryBgColorSwitcherChange = (value) => {
+        setAttributes({ GalleryBgColorSwitcher: value });
+    };
+    const handleGalleryBgColorChange = (value) => {
+        setAttributes({ GalleryBgColor: value });
+    };
+    const handleGalleryBgHoverColorChange = (value) => {
+        setAttributes({ GalleryBgHoverColor: value });
+    };
+    
+    /** GalleryBorder Color */
+    const handleGalleryBorderColorSwitcherChange = (value) => {
+        setAttributes({ GalleryBorderColorSwitcher: value });
+    };
+    const handleGalleryBorderColorChange = (value) => {
+        setAttributes({ GalleryBorderColor: value });
+    };
+    const handleGalleryBorderHoverColorChange = (value) => {
+        setAttributes({ GalleryBorderHoverColor: value });
+    };
+
+    /** GalleryButton Color */
+    const handleGalleryButtonColorSwitcherChange = (value) => {
+        setAttributes({ GalleryButtonColorSwitcher: value });
+    };
+    const handleGalleryButtonColorChange = (value) => {
+        setAttributes({ GalleryButtonColor: value });
+    };
+    const handleGalleryButtonHoverColorChange = (value) => {
+        setAttributes({ GalleryButtonHoverColor: value });
+    };
+
+    /** GalleryButtonBG Color */
+    const handleGalleryButtonBGColorSwitcherChange = (value) => {
+        setAttributes({ GalleryButtonBGColorSwitcher: value });
+    };
+    const handleGalleryButtonBGColorChange = (value) => {
+        setAttributes({ GalleryButtonBGColor: value });
+    };
+    const handleGalleryButtonBGHoverColorChange = (value) => {
+        setAttributes({ GalleryButtonBGHoverColor: value });
+    };
+
+    /** ButtonBorder Color */
+    const handleButtonBorderColorSwitcherChange = (value) => {
+        setAttributes({ ButtonBorderColorSwitcher: value });
+    };
+    const handleButtonBorderColorChange = (value) => {
+        setAttributes({ ButtonBorderColor: value });
+    };
+    const handleButtonBorderHoverColorChange = (value) => {
+        setAttributes({ ButtonBorderHoverColor: value });
+    };
+
+    /** lightbox Color */
+    const handleLightboxColorSwitcherChange = (value) => {
+        setAttributes({ lightboxColorSwitcher: value });
+    };
+    const handleLightboxColorChange = (value) => {
+        setAttributes({ lightboxColor: value });
+    };
+    const handleLightboxHoverColorChange = (value) => {
+        setAttributes({ lightboxHoverColor: value });
+    };
+
+    /** lightboxBG Color */
+    const handleLightboxBGColorSwitcherChange = (value) => {
+        setAttributes({ lightboxBGColorSwitcher: value });
+    };
+    const handleLightboxBGColorChange = (value) => {
+        setAttributes({ lightboxBGColor: value });
+    };
+    const handleLightboxBGHoverColorChange = (value) => {
+        setAttributes({ lightboxBGHoverColor: value });
+    };
+
+    /** lightboxBorder Color */
+    const handleLightboxBorderColorSwitcherChange = (value) => {
+        setAttributes({ lightboxBorderColorSwitcher: value });
+    };
+    const handleLightboxBorderColorChange = (value) => {
+        setAttributes({ lightboxBorderColor: value });
+    };
+    const handleLightboxBorderHoverColorChange = (value) => {
+        setAttributes({ lightboxBorderHoverColor: value });
+    };
+
+    
+    /** Item Height */
+    const GalleryItemHeightHandler = (value) => {
+        setAttributes({ GalleryItemHeight: value });
+    };
+
+    const GalleryItemHeightUnitsHandler = (value) => {
+        setAttributes({ GalleryItemHeightUnits: value });
+    };
+
+    /** Item Gap */
+    const GalleryImageGapHandler = (value) => {
+        setAttributes({ GalleryImageGap: value });
+    };
+
+    const GalleryImageGapUnitsHandler = (value) => {
+        setAttributes({ GalleryImageGapUnits: value });
+    };
+
+    /** Image Width */
+    const ImageWidthHandler = (value) => {
+        setAttributes({ ImageWidth: value });
+    };
+
+    const ImageWidthUnitsHandler = (value) => {
+        setAttributes({ ImageWidthUnits: value });
+    };
+
+    /** Image Height */
+    const ImageHeightHandler = (value) => {
+        setAttributes({ ImageHeight: value });
+    };
+
+    const ImageHeightUnitsHandler = (value) => {
+        setAttributes({ ImageHeightUnits: value });
+    };
+
+    /** Lightbox icon size */
+    const lightboxIconSizeHandler = (value) => {
+        setAttributes({ lightboxIconSize: value });
+    };
+
+    const lightboxIconSizeUnitsHandler = (value) => {
+        setAttributes({ lightboxIconSizeUnits: value });
+    };
+
     
     // Button Margin Functionb
     const handleButtonMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopMargin: {
@@ -248,7 +1075,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopMargin: {...ButtonDesktopMargin, [position]: value}} );
                     break;
@@ -273,20 +1100,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonMarginUnits: {
                 ...ButtonMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonMarginDesktopWidth = `${ButtonDesktopMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonDesktopMargin.left}${ButtonMarginUnits[DeviceType]}`;
-    const ButtonMarginTabletWidth = `${ButtonTabMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonTabMargin.left}${ButtonMarginUnits[DeviceType]}`;
-    const ButtonMarginMobileWidth = `${ButtonMobileMargin.top}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.right}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.bottom}${ButtonMarginUnits[DeviceType]} ${ButtonMobileMargin.left}${ButtonMarginUnits[DeviceType]}`;
+    const ButtonMarginDesktopWidth = `${ButtonDesktopMargin.top}${ButtonMarginUnits[deviceType]} ${ButtonDesktopMargin.right}${ButtonMarginUnits[deviceType]} ${ButtonDesktopMargin.bottom}${ButtonMarginUnits[deviceType]} ${ButtonDesktopMargin.left}${ButtonMarginUnits[deviceType]}`;
+    const ButtonMarginTabletWidth = `${ButtonTabMargin.top}${ButtonMarginUnits[deviceType]} ${ButtonTabMargin.right}${ButtonMarginUnits[deviceType]} ${ButtonTabMargin.bottom}${ButtonMarginUnits[deviceType]} ${ButtonTabMargin.left}${ButtonMarginUnits[deviceType]}`;
+    const ButtonMarginMobileWidth = `${ButtonMobileMargin.top}${ButtonMarginUnits[deviceType]} ${ButtonMobileMargin.right}${ButtonMarginUnits[deviceType]} ${ButtonMobileMargin.bottom}${ButtonMarginUnits[deviceType]} ${ButtonMobileMargin.left}${ButtonMarginUnits[deviceType]}`;
 
     // Button Padding Functionb
     const handleButtonPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopPadding: {
@@ -321,7 +1148,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopPadding: {...ButtonDesktopPadding, [position]: value}} );
                     break;
@@ -346,20 +1173,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonPaddingUnits: {
                 ...ButtonPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonPaddingDesktopWidth = `${ButtonDesktopPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonDesktopPadding.left}${ButtonPaddingUnits[DeviceType]}`;
-    const ButtonPaddingTabletWidth = `${ButtonTabPadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonTabPadding.left}${ButtonPaddingUnits[DeviceType]}`;
-    const ButtonPaddingMobileWidth = `${ButtonMobilePadding.top}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.right}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits[DeviceType]} ${ButtonMobilePadding.left}${ButtonPaddingUnits[DeviceType]}`;
+    const ButtonPaddingDesktopWidth = `${ButtonDesktopPadding.top}${ButtonPaddingUnits[deviceType]} ${ButtonDesktopPadding.right}${ButtonPaddingUnits[deviceType]} ${ButtonDesktopPadding.bottom}${ButtonPaddingUnits[deviceType]} ${ButtonDesktopPadding.left}${ButtonPaddingUnits[deviceType]}`;
+    const ButtonPaddingTabletWidth = `${ButtonTabPadding.top}${ButtonPaddingUnits[deviceType]} ${ButtonTabPadding.right}${ButtonPaddingUnits[deviceType]} ${ButtonTabPadding.bottom}${ButtonPaddingUnits[deviceType]} ${ButtonTabPadding.left}${ButtonPaddingUnits[deviceType]}`;
+    const ButtonPaddingMobileWidth = `${ButtonMobilePadding.top}${ButtonPaddingUnits[deviceType]} ${ButtonMobilePadding.right}${ButtonPaddingUnits[deviceType]} ${ButtonMobilePadding.bottom}${ButtonPaddingUnits[deviceType]} ${ButtonMobilePadding.left}${ButtonPaddingUnits[deviceType]}`;
 
     // Button Border Function
     const handleButtonBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopBorderWidth: {
@@ -394,7 +1221,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopBorderWidth: {...ButtonDesktopBorderWidth, [position]: value}} );
                     break;
@@ -419,21 +1246,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonBorderUnits: {
                 ...ButtonBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonBorderDesktopWidth = `${ButtonDesktopBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonDesktopBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
-    const ButtonBorderTabletWidth = `${ButtonTabBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonTabBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
-    const ButtonBorderMobileWidth = `${ButtonMobileBorderWidth.top}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits[DeviceType]} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits[DeviceType]}`;
+    const ButtonBorderDesktopWidth = `${ButtonDesktopBorderWidth.top}${ButtonBorderUnits[deviceType]} ${ButtonDesktopBorderWidth.right}${ButtonBorderUnits[deviceType]} ${ButtonDesktopBorderWidth.bottom}${ButtonBorderUnits[deviceType]} ${ButtonDesktopBorderWidth.left}${ButtonBorderUnits[deviceType]}`;
+    const ButtonBorderTabletWidth = `${ButtonTabBorderWidth.top}${ButtonBorderUnits[deviceType]} ${ButtonTabBorderWidth.right}${ButtonBorderUnits[deviceType]} ${ButtonTabBorderWidth.bottom}${ButtonBorderUnits[deviceType]} ${ButtonTabBorderWidth.left}${ButtonBorderUnits[deviceType]}`;
+    const ButtonBorderMobileWidth = `${ButtonMobileBorderWidth.top}${ButtonBorderUnits[deviceType]} ${ButtonMobileBorderWidth.right}${ButtonBorderUnits[deviceType]} ${ButtonMobileBorderWidth.bottom}${ButtonBorderUnits[deviceType]} ${ButtonMobileBorderWidth.left}${ButtonBorderUnits[deviceType]}`;
 
 
     // Button BorderRadius Function
     const handleButtonBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( ButtonBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         ButtonDesktopBorderRadiusWidth: {
@@ -468,7 +1295,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {ButtonDesktopBorderRadiusWidth: {...ButtonDesktopBorderRadiusWidth, [position]: value}} );
                     break;
@@ -493,14 +1320,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             ButtonBorderRadiusUnits: {
                 ...ButtonBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const ButtonBorderRadiusDesktopWidth = `${ButtonDesktopBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonDesktopBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
-    const ButtonBorderRadiusTabletWidth = `${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
-    const ButtonBorderRadiusMobileWidth = `${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[DeviceType]} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits[DeviceType]}`;
+    const ButtonBorderRadiusDesktopWidth = `${ButtonDesktopBorderRadiusWidth.top}${ButtonBorderRadiusUnits[deviceType]} ${ButtonDesktopBorderRadiusWidth.right}${ButtonBorderRadiusUnits[deviceType]} ${ButtonDesktopBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[deviceType]} ${ButtonDesktopBorderRadiusWidth.left}${ButtonBorderRadiusUnits[deviceType]}`;
+    const ButtonBorderRadiusTabletWidth = `${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits[deviceType]} ${ButtonTabBorderRadiusWidth.right}${ButtonBorderRadiusUnits[deviceType]} ${ButtonTabBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[deviceType]} ${ButtonTabBorderRadiusWidth.left}${ButtonBorderRadiusUnits[deviceType]}`;
+    const ButtonBorderRadiusMobileWidth = `${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits[deviceType]} ${ButtonMobileBorderRadiusWidth.right}${ButtonBorderRadiusUnits[deviceType]} ${ButtonMobileBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits[deviceType]} ${ButtonMobileBorderRadiusWidth.left}${ButtonBorderRadiusUnits[deviceType]}`;
 
 
 
@@ -508,7 +1335,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleGalleryMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryMarginLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         GalleryDesktopMargin: {
@@ -543,7 +1370,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {GalleryDesktopMargin: {...GalleryDesktopMargin, [position]: value}} );
                     break;
@@ -568,21 +1395,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryMarginUnits: {
                 ...GalleryMarginUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryMarginDesktopWidth = `${GalleryDesktopMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryDesktopMargin.left}${GalleryMarginUnits[DeviceType]}`;
-    const GalleryMarginTabletWidth = `${GalleryTabMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryTabMargin.left}${GalleryMarginUnits[DeviceType]}`;
-    const GalleryMarginMobileWidth = `${GalleryMobileMargin.top}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.right}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.bottom}${GalleryMarginUnits[DeviceType]} ${GalleryMobileMargin.left}${GalleryMarginUnits[DeviceType]}`;
+    const GalleryMarginDesktopWidth = `${GalleryDesktopMargin.top}${GalleryMarginUnits[deviceType]} ${GalleryDesktopMargin.right}${GalleryMarginUnits[deviceType]} ${GalleryDesktopMargin.bottom}${GalleryMarginUnits[deviceType]} ${GalleryDesktopMargin.left}${GalleryMarginUnits[deviceType]}`;
+    const GalleryMarginTabletWidth = `${GalleryTabMargin.top}${GalleryMarginUnits[deviceType]} ${GalleryTabMargin.right}${GalleryMarginUnits[deviceType]} ${GalleryTabMargin.bottom}${GalleryMarginUnits[deviceType]} ${GalleryTabMargin.left}${GalleryMarginUnits[deviceType]}`;
+    const GalleryMarginMobileWidth = `${GalleryMobileMargin.top}${GalleryMarginUnits[deviceType]} ${GalleryMobileMargin.right}${GalleryMarginUnits[deviceType]} ${GalleryMobileMargin.bottom}${GalleryMarginUnits[deviceType]} ${GalleryMobileMargin.left}${GalleryMarginUnits[deviceType]}`;
 
 
     // Gallery Padding Functionb
     const handleGalleryPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryPaddingLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         GalleryDesktopPadding: {
@@ -617,7 +1444,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {GalleryDesktopPadding: {...GalleryDesktopPadding, [position]: value}} );
                     break;
@@ -642,21 +1469,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryPaddingUnits: {
                 ...GalleryPaddingUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryPaddingDesktopWidth = `${GalleryDesktopPadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryDesktopPadding.left}${GalleryPaddingUnits[DeviceType]}`;
-    const GalleryPaddingTabletWidth = `${GalleryTabPadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryTabPadding.left}${GalleryPaddingUnits[DeviceType]}`;
-    const GalleryPaddingMobileWidth = `${GalleryMobilePadding.top}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.right}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.bottom}${GalleryPaddingUnits[DeviceType]} ${GalleryMobilePadding.left}${GalleryPaddingUnits[DeviceType]}`;
+    const GalleryPaddingDesktopWidth = `${GalleryDesktopPadding.top}${GalleryPaddingUnits[deviceType]} ${GalleryDesktopPadding.right}${GalleryPaddingUnits[deviceType]} ${GalleryDesktopPadding.bottom}${GalleryPaddingUnits[deviceType]} ${GalleryDesktopPadding.left}${GalleryPaddingUnits[deviceType]}`;
+    const GalleryPaddingTabletWidth = `${GalleryTabPadding.top}${GalleryPaddingUnits[deviceType]} ${GalleryTabPadding.right}${GalleryPaddingUnits[deviceType]} ${GalleryTabPadding.bottom}${GalleryPaddingUnits[deviceType]} ${GalleryTabPadding.left}${GalleryPaddingUnits[deviceType]}`;
+    const GalleryPaddingMobileWidth = `${GalleryMobilePadding.top}${GalleryPaddingUnits[deviceType]} ${GalleryMobilePadding.right}${GalleryPaddingUnits[deviceType]} ${GalleryMobilePadding.bottom}${GalleryPaddingUnits[deviceType]} ${GalleryMobilePadding.left}${GalleryPaddingUnits[deviceType]}`;
 
 
     // Gallery BorderWidth Function
     const handleGalleryBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryBorderLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
                         GalleryDesktopBorderWidth: {
@@ -691,7 +1518,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {GalleryDesktopBorderWidth: {...GalleryDesktopBorderWidth, [position]: value}} );
                     break;
@@ -716,24 +1543,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryBorderUnits: {
                 ...GalleryBorderUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryBorderDesktopWidth = `${GalleryDesktopBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryDesktopBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
-    const GalleryBorderTabletWidth = `${GalleryTabBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryTabBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
-    const GalleryBorderMobileWidth = `${GalleryMobileBorderWidth.top}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.right}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.bottom}${GalleryBorderUnits[DeviceType]} ${GalleryMobileBorderWidth.left}${GalleryBorderUnits[DeviceType]}`;
+    const GalleryBorderDesktopWidth = `${GalleryDesktopBorderWidth.top}${GalleryBorderUnits[deviceType]} ${GalleryDesktopBorderWidth.right}${GalleryBorderUnits[deviceType]} ${GalleryDesktopBorderWidth.bottom}${GalleryBorderUnits[deviceType]} ${GalleryDesktopBorderWidth.left}${GalleryBorderUnits[deviceType]}`;
+    const GalleryBorderTabletWidth = `${GalleryTabBorderWidth.top}${GalleryBorderUnits[deviceType]} ${GalleryTabBorderWidth.right}${GalleryBorderUnits[deviceType]} ${GalleryTabBorderWidth.bottom}${GalleryBorderUnits[deviceType]} ${GalleryTabBorderWidth.left}${GalleryBorderUnits[deviceType]}`;
+    const GalleryBorderMobileWidth = `${GalleryMobileBorderWidth.top}${GalleryBorderUnits[deviceType]} ${GalleryMobileBorderWidth.right}${GalleryBorderUnits[deviceType]} ${GalleryMobileBorderWidth.bottom}${GalleryBorderUnits[deviceType]} ${GalleryMobileBorderWidth.left}${GalleryBorderUnits[deviceType]}`;
 
 
     // Gallery BorderRadiusWidth Function
     const handleGalleryBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
         if ( GalleryBorderRadiusLink ) {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        GalleryDesktopBorderRadiusWidth: {
+                        GalleryBorderRadiusDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -743,7 +1570,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        GalleryTabBorderRadiusWidth: {
+                        GalleryBorderRadiusTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -753,7 +1580,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        GalleryMobileBorderRadiusWidth: {
+                        GalleryBorderRadiusMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -765,15 +1592,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
             }
         } else {
-            switch ( DeviceType ) {
+            switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {GalleryDesktopBorderRadiusWidth: {...GalleryDesktopBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {GalleryBorderRadiusDesktop: {...GalleryBorderRadiusDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {GalleryTabBorderRadiusWidth: {...GalleryTabBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {GalleryBorderRadiusTablet: {...GalleryBorderRadiusTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {GalleryMobileBorderRadiusWidth: {...GalleryMobileBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {GalleryBorderRadiusMobile: {...GalleryBorderRadiusMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -790,15 +1617,389 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {
             GalleryBorderRadiusUnits: {
                 ...GalleryBorderRadiusUnits,
-                [DeviceType]: unit
+                [deviceType]: unit
             }
         })
     }
 
-    const GalleryBorderRadiusDesktopWidth = `${GalleryDesktopBorderRadiusWidth.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryDesktopBorderRadiusWidth.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryDesktopBorderRadiusWidth.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryDesktopBorderRadiusWidth.left}${GalleryBorderRadiusUnits[DeviceType]}`;
-    const GalleryBorderRadiusTabletWidth = `${GalleryTabBorderRadiusWidth.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryTabBorderRadiusWidth.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryTabBorderRadiusWidth.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryTabBorderRadiusWidth.left}${GalleryBorderRadiusUnits[DeviceType]}`;
-    const GalleryBorderRadiusMobileWidth = `${GalleryMobileBorderRadiusWidth.top}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryMobileBorderRadiusWidth.right}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryMobileBorderRadiusWidth.bottom}${GalleryBorderRadiusUnits[DeviceType]} ${GalleryMobileBorderRadiusWidth.left}${GalleryBorderRadiusUnits[DeviceType]}`;
+    const GalleryBorderRadiusDesktopWidth = `${GalleryBorderRadiusDesktop.top}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusDesktop.right}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusDesktop.bottom}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusDesktop.left}${GalleryBorderRadiusUnits[deviceType]}`;
+    const GalleryBorderRadiusTabletWidth = `${GalleryBorderRadiusTablet.top}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusTablet.right}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusTablet.bottom}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusTablet.left}${GalleryBorderRadiusUnits[deviceType]}`;
+    const GalleryBorderRadiusMobileWidth = `${GalleryBorderRadiusMobile.top}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusMobile.right}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusMobile.bottom}${GalleryBorderRadiusUnits[deviceType]} ${GalleryBorderRadiusMobile.left}${GalleryBorderRadiusUnits[deviceType]}`;
 
+
+    // image BorderWidth Function
+	const handleImageBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( imageBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						imageDesktopBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						imageTabBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						imageMobileBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {imageDesktopBorderWidth: {...imageDesktopBorderWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {imageTabBorderWidth: {...imageTabBorderWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {imageMobileBorderWidth: {...imageMobileBorderWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	
+	}
+	
+	const handleImageBorderCombineBtn = () => {
+		setAttributes( {imageBorderLink: !imageBorderLink} );
+	}
+	
+	const handleImageBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			imageBorderUnits: {
+				...imageBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	
+	const imageDesktopBorder = `${imageDesktopBorderWidth.top}${imageBorderUnits[deviceType]} ${imageDesktopBorderWidth.right}${imageBorderUnits[deviceType]} ${imageDesktopBorderWidth.bottom}${imageBorderUnits[deviceType]} ${imageDesktopBorderWidth.left}${imageBorderUnits[deviceType]}`;
+	const imageTabBorder = `${imageTabBorderWidth.top}${imageBorderUnits[deviceType]} ${imageTabBorderWidth.right}${imageBorderUnits[deviceType]} ${imageTabBorderWidth.bottom}${imageBorderUnits[deviceType]} ${imageTabBorderWidth.left}${imageBorderUnits[deviceType]}`;
+	const imageMobileBorder = `${imageMobileBorderWidth.top}${imageBorderUnits[deviceType]} ${imageMobileBorderWidth.right}${imageBorderUnits[deviceType]} ${imageMobileBorderWidth.bottom}${imageBorderUnits[deviceType]} ${imageMobileBorderWidth.left}${imageBorderUnits[deviceType]}`;
+	
+	
+	// image BorderRadiusWidth Function
+	const handleImageBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( imageBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						imageDesktopBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						imageTabBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						imageMobileBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {imageDesktopBorderRadiusWidth: {...imageDesktopBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {imageTabBorderRadiusWidth: {...imageTabBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {imageMobileBorderRadiusWidth: {...imageMobileBorderRadiusWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	
+	}
+	
+	const handleImageBorderRadiusCombineBtn = () => {
+		setAttributes( {imageBorderRadiusLink: !imageBorderRadiusLink} );
+	}
+	
+	const handleImageBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			imageBorderRadiusUnits: {
+				...imageBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	
+	const imageDesktopBorderRadius = `${imageDesktopBorderRadiusWidth.top}${imageBorderRadiusUnits[deviceType]} ${imageDesktopBorderRadiusWidth.right}${imageBorderRadiusUnits[deviceType]} ${imageDesktopBorderRadiusWidth.bottom}${imageBorderRadiusUnits[deviceType]} ${imageDesktopBorderRadiusWidth.left}${imageBorderRadiusUnits[deviceType]}`;
+	const imageTabBorderRadius = `${imageTabBorderRadiusWidth.top}${imageBorderRadiusUnits[deviceType]} ${imageTabBorderRadiusWidth.right}${imageBorderRadiusUnits[deviceType]} ${imageTabBorderRadiusWidth.bottom}${imageBorderRadiusUnits[deviceType]} ${imageTabBorderRadiusWidth.left}${imageBorderRadiusUnits[deviceType]}`;
+	const imageMobileBorderRadius = `${imageMobileBorderRadiusWidth.top}${imageBorderRadiusUnits[deviceType]} ${imageMobileBorderRadiusWidth.right}${imageBorderRadiusUnits[deviceType]} ${imageMobileBorderRadiusWidth.bottom}${imageBorderRadiusUnits[deviceType]} ${imageMobileBorderRadiusWidth.left}${imageBorderRadiusUnits[deviceType]}`;
+	
+
+    // lightbox Padding Functionb
+    const handleLightboxPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( lightboxPaddingLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        lightboxDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        lightboxTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        lightboxMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {lightboxDesktopPadding: {...lightboxDesktopPadding, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {lightboxTabPadding: {...lightboxTabPadding, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {lightboxMobilePadding: {...lightboxMobilePadding, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleLightboxPaddingCombineBtn = () => {
+        setAttributes( {lightboxPaddingLink: !lightboxPaddingLink} );
+    }
+
+    const handleLightboxPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            lightboxPaddingUnits: {
+                ...lightboxPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const lightboxDesktopPaddingWidth = `${lightboxDesktopPadding.top}${lightboxPaddingUnits[deviceType]} ${lightboxDesktopPadding.right}${lightboxPaddingUnits[deviceType]} ${lightboxDesktopPadding.bottom}${lightboxPaddingUnits[deviceType]} ${lightboxDesktopPadding.left}${lightboxPaddingUnits[deviceType]}`;
+    const lightboxTabPaddingWidth = `${lightboxTabPadding.top}${lightboxPaddingUnits[deviceType]} ${lightboxTabPadding.right}${lightboxPaddingUnits[deviceType]} ${lightboxTabPadding.bottom}${lightboxPaddingUnits[deviceType]} ${lightboxTabPadding.left}${lightboxPaddingUnits[deviceType]}`;
+    const lightboxMobilePaddingWidth = `${lightboxMobilePadding.top}${lightboxPaddingUnits[deviceType]} ${lightboxMobilePadding.right}${lightboxPaddingUnits[deviceType]} ${lightboxMobilePadding.bottom}${lightboxPaddingUnits[deviceType]} ${lightboxMobilePadding.left}${lightboxPaddingUnits[deviceType]}`;
+
+
+    // lightbox BorderWidth Function
+    const handleLightboxBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( lightboxBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        lightboxDesktopBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        lightboxTabBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        lightboxMobileBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {lightboxDesktopBorderWidth: {...lightboxDesktopBorderWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {lightboxTabBorderWidth: {...lightboxTabBorderWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {lightboxMobileBorderWidth: {...lightboxMobileBorderWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleLightboxBorderCombineBtn = () => {
+        setAttributes( {lightboxBorderLink: !lightboxBorderLink} );
+    }
+
+    const handleLightboxBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            lightboxBorderUnits: {
+                ...lightboxBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const lightboxDesktopBorder = `${lightboxDesktopBorderWidth.top}${lightboxBorderUnits[deviceType]} ${lightboxDesktopBorderWidth.right}${lightboxBorderUnits[deviceType]} ${lightboxDesktopBorderWidth.bottom}${lightboxBorderUnits[deviceType]} ${lightboxDesktopBorderWidth.left}${lightboxBorderUnits[deviceType]}`;
+    const lightboxTabBorder = `${lightboxTabBorderWidth.top}${lightboxBorderUnits[deviceType]} ${lightboxTabBorderWidth.right}${lightboxBorderUnits[deviceType]} ${lightboxTabBorderWidth.bottom}${lightboxBorderUnits[deviceType]} ${lightboxTabBorderWidth.left}${lightboxBorderUnits[deviceType]}`;
+    const lightboxMobileBorder = `${lightboxMobileBorderWidth.top}${lightboxBorderUnits[deviceType]} ${lightboxMobileBorderWidth.right}${lightboxBorderUnits[deviceType]} ${lightboxMobileBorderWidth.bottom}${lightboxBorderUnits[deviceType]} ${lightboxMobileBorderWidth.left}${lightboxBorderUnits[deviceType]}`;
+
+
+    // lightbox BorderRadiusWidth Function
+    const handleLightboxBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( lightboxBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        lightboxDesktopBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        lightboxTabBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        lightboxMobileBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {lightboxDesktopBorderRadiusWidth: {...lightboxDesktopBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {lightboxTabBorderRadiusWidth: {...lightboxTabBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {lightboxMobileBorderRadiusWidth: {...lightboxMobileBorderRadiusWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleLightboxBorderRadiusCombineBtn = () => {
+        setAttributes( {lightboxBorderRadiusLink: !lightboxBorderRadiusLink} );
+    }
+
+    const handleLightboxBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            lightboxBorderRadiusUnits: {
+                ...lightboxBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const lightboxDesktopBorderRadius = `${lightboxDesktopBorderRadiusWidth.top}${lightboxBorderRadiusUnits[deviceType]} ${lightboxDesktopBorderRadiusWidth.right}${lightboxBorderRadiusUnits[deviceType]} ${lightboxDesktopBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[deviceType]} ${lightboxDesktopBorderRadiusWidth.left}${lightboxBorderRadiusUnits[deviceType]}`;
+    const lightboxTabBorderRadius = `${lightboxTabBorderRadiusWidth.top}${lightboxBorderRadiusUnits[deviceType]} ${lightboxTabBorderRadiusWidth.right}${lightboxBorderRadiusUnits[deviceType]} ${lightboxTabBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[deviceType]} ${lightboxTabBorderRadiusWidth.left}${lightboxBorderRadiusUnits[deviceType]}`;
+    const lightboxMobileBorderRadius = `${lightboxMobileBorderRadiusWidth.top}${lightboxBorderRadiusUnits[deviceType]} ${lightboxMobileBorderRadiusWidth.right}${lightboxBorderRadiusUnits[deviceType]} ${lightboxMobileBorderRadiusWidth.bottom}${lightboxBorderRadiusUnits[deviceType]} ${lightboxMobileBorderRadiusWidth.left}${lightboxBorderRadiusUnits[deviceType]}`;
+
+
+    const lightboxIconHandler = (IconName) => {
+		setAttributes({lightboxIcon: IconName})
+	}
     
 
     return (
@@ -807,6 +2008,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             {`
                 .fb-gallery-main-wrapper.${blockID} {
                     position: relative;
+                    overflow: hidden;
                     ${GalleryBgColor !== undefined ? `background-color: ${GalleryBgColor};` : ''};
                     padding: ${GalleryPaddingDesktopWidth};
                     margin: ${GalleryMarginDesktopWidth};
@@ -823,11 +2025,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
 
                 .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
-                    grid-template-columns: repeat(${DeviceType == 'Desktop' ? GalleryColumnNumberDesktop : DeviceType == 'Tablet' ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}, 1fr);
-                    grid-gap: ${DeviceType == 'Desktop' ? GalleryImageGapDesktop : DeviceType == 'Tablet' ? GalleryImageGapTablet : GalleryImageGapMobile}${GalleryImageGapUnits};
-                    grid-auto-rows: ${DeviceType == 'Desktop' ? GalleryItemHeightDesktop : DeviceType == 'Tablet' ? GalleryItemHeightTablet : GalleryItemHeightMobile}${GalleryItemHeightUnits};
+                    display: grid;
+                    grid-template-columns: repeat(${deviceType == 'Desktop' ? GalleryColumnNumberDesktop : deviceType == 'Tablet' ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}, 1fr);
+                    grid-gap: ${deviceType == 'Desktop' ? `${GalleryImageGap.Desktop}${GalleryImageGapUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryImageGap.Tablet}${GalleryImageGapUnits.Tablet}` : `${GalleryImageGap.Mobile}${GalleryImageGapUnits.Mobile}`};
+                    grid-auto-rows: ${deviceType == 'Desktop' ? `${GalleryItemHeight.Desktop}${GalleryItemHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryItemHeight.Tablet}${GalleryItemHeightUnits.Tablet}` : `${GalleryItemHeight.Mobile}${GalleryItemHeightUnits.Mobile}`};
                 }
                 
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    border-style: ${imageBorder};
+                    border-width: ${imageDesktopBorder};
+                    border-color: ${imageBorderColor};
+                    border-radius: ${imageDesktopBorderRadius};
+                }
                 .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
                     position: absolute;
                     top: 0;
@@ -835,8 +2048,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${ImageAlignment === 'right' && 'right: 0; left: unset'};
                     ${ImageAlignment === 'center' && 'left: 50%'};
                     ${ImageAlignment === 'center' && 'transform: translateX(-50%);'};
-                    width: ${DeviceType == 'Desktop' ? ImageWidthDesktop : DeviceType == 'Tablet' ? ImageWidthTab : ImageWidthMobile}${ImageWidthUnits};
-                    height: ${DeviceType == 'Desktop' ? ImageHeightDesktop : DeviceType == 'Tablet' ? ImageHeightTab : ImageHeightMobile}${ImageHeightUnits};
+                    width: ${deviceType == 'Desktop' ? `${ImageWidth.Desktop}${ImageWidthUnits.Desktop}` : deviceType == 'Tablet' ? `${ImageWidth.Tablet}${ImageWidthUnits.Tablet}` : `${ImageWidth.Mobile}${ImageWidthUnits.Mobile}`};
+                    height: ${deviceType == 'Desktop' ? `${ImageHeight.Desktop}${ImageHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${ImageHeight.Tablet}${ImageHeightUnits.Tablet}` : `${ImageHeight.Mobile}${ImageHeightUnits.Mobile}`};
                     ${ImageFitCover === true && 'object-fit: cover'};
                     ${ImageOverlayStyle == 'black_white' && 'filter: grayscale(100%)'};
                     transition: all 0.3s ease-in-out;
@@ -858,13 +2071,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginDesktopWidth}`};
                     ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingDesktopWidth}`};
                     ${GalleryButtonSwitcher == true && `font-family: ${GalleryButtonFontFamily}`};
-                    ${GalleryButtonSwitcher == true && `font-size: ${DeviceType == 'Desktop' ? GalleryButtonFontSizeDesktop : DeviceType == 'Tablet' ? GalleryButtonFontSizeTablet : GalleryButtonFontSizeMobile}${GalleryButtonFontSizeUnits}`};
+                    ${GalleryButtonSwitcher == true && `font-size: ${deviceType == 'Desktop' ? `${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet}` : `${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile}`}`};
                     ${GalleryButtonSwitcher == true && `font-weight: ${GalleryButtonFontWeight}`};
                     ${GalleryButtonSwitcher == true && `font-style: ${GalleryButtonFontStyle}`};
                     ${GalleryButtonSwitcher == true && `text-transform: ${GalleryButtonTextTransform}`};
                     ${GalleryButtonSwitcher == true && `text-decoration: ${GalleryButtonTextDecoration}`};
-                    ${GalleryButtonSwitcher == true && `letter-spacing: ${DeviceType == 'Desktop' ? GalleryButtonLetterSpacingDesktop : DeviceType == 'Tablet' ? GalleryButtonLetterSpacingTablet : GalleryButtonLetterSpacingMobile}${GalleryButtonLetterSpacingUnits}`};
-                    ${GalleryButtonSwitcher == true && `line-height: ${DeviceType == 'Desktop' ? GalleryButtonLineHeightDesktop : DeviceType == 'Tablet' ? GalleryButtonLineHeightTablet : GalleryButtonLineHeightMobile}${GalleryButtonLineHeightUnits}`};
+                    ${GalleryButtonSwitcher == true && `letter-spacing: ${deviceType == 'Desktop' ? `${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet}` : `${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile}`}`};
+                    ${GalleryButtonSwitcher == true && `line-height: ${deviceType == 'Desktop' ? `${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet}` : `${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile}`}`};
                     ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `color: ${GalleryButtonColor}`};
                     ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `background-color: ${GalleryButtonBGColor}`};
                     transition: all 0.3s ease-in-out;
@@ -887,6 +2100,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginTabletWidth}`};
                         ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingTabletWidth}`};
                     }
+
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                        border-width: ${imageTabBorder};
+                        border-radius: ${imageTabBorderRadius};
+                    }
                 }
 
                 @media only screen and (max-width: 767px) {
@@ -900,6 +2118,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${GalleryButtonSwitcher == true && `border-radius: ${ButtonBorderRadiusMobileWidth}`};
                         ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginMobileWidth}`};
                         ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingMobileWidth}`};
+                    }
+
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                        border-width: ${imageMobileBorder};
+                        border-radius: ${imageMobileBorderRadius};
                     }
                 }
 
@@ -941,7 +2164,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     transition: all 0.3s ease-in-out;
                 }
             `}
+            { lightboxIconSwitcher === true && `
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    padding: ${lightboxDesktopPaddingWidth};
+                    background-color: ${lightboxBGColor};
+                    border-style: ${lightboxBorder};
+                    border-width: ${lightboxDesktopBorder};
+                    border-color: ${lightboxBorderColor};
+                    border-radius: ${lightboxDesktopBorderRadius};
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-lightbox-icon-wrapper {
+                    visibility: visible;
+                    opacity: 1;
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover {
+                    background-color: ${lightboxBGHoverColor};
+                    border-color: ${lightboxBorderHoverColor};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                    fill: ${lightboxColor};
+                    width: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};
+                    height: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover .fb-lightbox-icon {
+                    fill: ${lightboxHoverColor};
+                    transition: all 0.3s ease-in-out;
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon svg {
+                    width: 100%;
+                    height: 100%;
+                }
+                
+                @media only screen and (max-width: 1024px) {
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                        padding: ${lightboxTabPaddingWidth};
+                        border-width: ${lightboxTabBorder};
+                        border-radius: ${lightboxTabBorderRadius};
+                    }
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                        width: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};
+                        height: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};
+                    }
+                }
+                @media only screen and (max-width: 767px) {
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                        padding: ${lightboxMobilePaddingWidth};
+                        border-width: ${lightboxMobileBorder};
+                        border-radius: ${lightboxMobileBorderRadius};
+                    }
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                        width: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};
+                        height: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};
+                    }
+                }
+            ` }
             </style>
+
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -974,7 +2262,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             title={__("Gallery Layout", "frontis-blocks")}
                                             initialOpen={true}
                                         >
-                                            
+                                            <SelectControl
+                                                label={__("Preset Style", "frontis-blocks")}
+                                                value={GalleryPresetStyle}
+                                                options={PRESETS}
+                                                onChange={(selected) => changeGalleryPreset(selected)}
+                                            />
+
                                             <BaseControl
                                                 label={__("Layouts", "frontis-blocks")}
                                                 className="fb-setting-layouts-wrapper"
@@ -1008,19 +2302,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <div className="fb-setting-spacing-inner-container">
                                                     <FB_ResponsiveControl
                                                         labelText={__("Columns", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+                                                        device={deviceType}
+                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
                                                     />
                                                 </div>
                                                 <div className="fb-setting-columns-rangecontrol">
                                                     <RangeControl
-                                                        value={DeviceType === "Desktop" ? GalleryColumnNumberDesktop : DeviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
+                                                        value={deviceType === "Desktop" ? GalleryColumnNumberDesktop : deviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
                                                         onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
+                                                            if (deviceType === "Desktop") {
                                                                 setAttributes({ GalleryColumnNumberDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
+                                                            } else if (deviceType === "Tablet") {
                                                                 setAttributes({ GalleryColumnNumberTablet: value });
-                                                            } else if (DeviceType === "Mobile") {
+                                                            } else if (deviceType === "Mobile") {
                                                                 setAttributes({ GalleryColumnNumberMobile: value });
                                                             }
                                                         }}
@@ -1032,87 +2326,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </div>
                                             </div>
 
-                                            <div className="fb-setting-spacing-container">
-                                                <div className="fb-setting-spacing-inner-container">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Row Height", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-units-type">
-                                                        <ButtonGroup className="fb-setting-units-type-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ GalleryItemHeightUnits: item.value })}
-                                                                    className={`fb-setting-image-gap-units-switcher ${GalleryImageGapUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-image-gap-rangecontrol">
-                                                    <RangeControl
-                                                        value={DeviceType === "Desktop" ? GalleryItemHeightDesktop : DeviceType === "Tablet" ? GalleryItemHeightTablet : GalleryItemHeightMobile}
-                                                        onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
-                                                                setAttributes({ GalleryItemHeightDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
-                                                                setAttributes({ GalleryItemHeightTablet: value });
-                                                            } else if (DeviceType === "Mobile") {
-                                                                setAttributes({ GalleryItemHeightMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={1000}
-                                                        allowReset
-                                                        resetFallbackValue={250}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+                                                min={1}
+                                                max={1000}
+                                                label={__("Image Height", "frontis-blocks")}
+                                                rangeValue={GalleryItemHeight}
+                                                onChangeHandler={GalleryItemHeightHandler}
+                                                rangeUnitHandler={GalleryItemHeightUnitsHandler}
+                                                deviceType={deviceType}
+                                                units={GalleryItemHeightUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={200}
+                                            />
 
-                                            <div className="fb-setting-spacing-container">
-                                                <div className="fb-setting-spacing-inner-container">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Image Gap", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-image-gap-units">
-                                                        <ButtonGroup className="fb-setting-image-gap-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ GalleryImageGapUnits: item.value })}
-                                                                    className={`fb-setting-image-gap-units-switcher ${GalleryImageGapUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-image-gap-rangecontrol">
-                                                    <RangeControl
-                                                        value={DeviceType === "Desktop" ? GalleryImageGapDesktop : DeviceType === "Tablet" ? GalleryImageGapTablet : GalleryImageGapMobile}
-                                                        onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
-                                                                setAttributes({ GalleryImageGapDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
-                                                                setAttributes({ GalleryImageGapTablet: value });
-                                                            } else if (DeviceType === "Mobile") {
-                                                                setAttributes({ GalleryImageGapMobile: value });
-                                                            }
-                                                        }}
-                                                        min={0}
-                                                        max={100}
-                                                        allowReset
-                                                        resetFallbackValue={24}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+                                                min={1}
+                                                max={1000}
+                                                label={__("Image Gap", "frontis-blocks")}
+                                                rangeValue={GalleryImageGap}
+                                                onChangeHandler={GalleryImageGapHandler}
+                                                rangeUnitHandler={GalleryImageGapUnitsHandler}
+                                                deviceType={deviceType}
+                                                units={GalleryImageGapUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={200}
+                                            />
 
                                         </PanelBody>
 
@@ -1133,7 +2373,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     id={item.id}
                                                                     item={item}
                                                                     setAttributes={setAttributes}
-                                                                    DeviceType={DeviceType}
+                                                                    deviceType={deviceType}
                                                                     GalleryType={GalleryType}
                                                                     GalleryColumnNumberMobile={GalleryColumnNumberMobile}
                                                                     GalleryColumnNumberTablet={GalleryColumnNumberTablet}
@@ -1154,12 +2394,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         </PanelBody>
                                     
                                         <PanelBody
+                                            title={__("Lightbox Icon", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <ToggleControl
+                                                label={__("Enable Icon", "frontis-blocks")}
+                                                className="fb-setting-responsive-control"
+                                                checked={lightboxIconSwitcher}
+                                                onChange={(value) => setAttributes({ lightboxIconSwitcher: value })}
+                                            />
+                                            {lightboxIconSwitcher === true && <>
+                                                <BaseControl label={__("Icon", "frontis-blocks")}>
+                                                    <FBIconPicker 
+                                                        value={lightboxIcon} 
+                                                        setIconHandler={lightboxIconHandler} 
+                                                    />
+                                                </BaseControl>
+                                            </>}
+                                        </PanelBody>
+
+                                        <PanelBody
                                             title={__("Button", "frontis-blocks")}
                                             initialOpen={false}
                                         >
                                             <ToggleControl
                                                 label={__("Enable Button", "frontis-blocks")}
-                                                className="fb-setting-gallery-button-toggle"
+                                                className="fb-setting-responsive-control"
                                                 checked={GalleryButtonSwitcher}
                                                 onChange={(value) => setAttributes({ GalleryButtonSwitcher: value })}
                                             />
@@ -1212,87 +2472,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </ButtonGroup>
                                             </BaseControl>
 
-                                            <div className="fb-setting-image-width-wrapper">
-                                                <div className="fb-setting-image-width-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Image Width", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-image-width-units">
-                                                        <ButtonGroup className="fb-setting-image-width-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ ImageWidthUnits: item.value })}
-                                                                    className={`fb-setting-image-width-units-switcher ${ImageWidthUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-image-width-rangecontrol">
-                                                    <RangeControl
-                                                        value={DeviceType === "Desktop" ? ImageWidthDesktop : DeviceType === "Tablet" ? ImageWidthTab : ImageWidthMobile}
-                                                        onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
-                                                                setAttributes({ ImageWidthDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
-                                                                setAttributes({ ImageWidthTab: value });
-                                                            } else if (DeviceType === "Mobile") {
-                                                                setAttributes({ ImageWidthMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={ImageWidthUnits === '%' ? 100 : 800}
-                                                        allowReset
-                                                        resetFallbackValue={100}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="fb-setting-image-height-wrapper">
-                                                <div className="fb-setting-image-height-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Image Height", "frontis-blocks")}
-                                                        device={DeviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-image-height-units">
-                                                        <ButtonGroup className="fb-setting-image-height-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ ImageHeightUnits: item.value })}
-                                                                    className={`fb-setting-image-height-units-switcher ${ImageHeightUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-image-height-rangecontrol">
-                                                    <RangeControl
-                                                        value={DeviceType === "Desktop" ? ImageHeightDesktop : DeviceType === "Tablet" ? ImageHeightTab : ImageHeightMobile}
-                                                        onChange={(value) => {
-                                                            if (DeviceType === "Desktop") {
-                                                                setAttributes({ ImageHeightDesktop: value });
-                                                            } else if (DeviceType === "Tablet") {
-                                                                setAttributes({ ImageHeightTab: value });
-                                                            } else if (DeviceType === "Mobile") {
-                                                                setAttributes({ ImageHeightMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={ImageHeightUnits === '%' ? 100 : 800}
-                                                        allowReset
-                                                        resetFallbackValue={100}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Width", "frontis-blocks")}
+                                                rangeValue={ImageWidth}
+                                                onChangeHandler={ImageWidthHandler}
+                                                rangeUnitHandler={ImageWidthUnitsHandler}
+                                                deviceType={deviceType}
+                                                units={ImageWidthUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={100}
+                                            />
+                                            
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Height", "frontis-blocks")}
+                                                rangeValue={ImageHeight}
+                                                onChangeHandler={ImageHeightHandler}
+                                                rangeUnitHandler={ImageHeightUnitsHandler}
+                                                deviceType={deviceType}
+                                                units={ImageHeightUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={100}
+                                            />
 
                                             <ToggleControl
                                                 label={__("Object Fit Cover", "frontis-blocks")}
@@ -1300,6 +2506,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 checked={ImageFitCover}
                                                 onChange={(value) => setAttributes({ ImageFitCover: value })}
                                             />
+
+                                            <PanelBody
+                                                title={__("Border & Border radius", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-border-setting-wrapper"
+                                                >
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={imageBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ imageBorder: value })}
+                                                />
+
+                                                <FB_Color
+                                                    label={__("Border Color", "frontis-blocks")}
+                                                    globalColorSwitcher={imageBorderColorSwitcher}
+                                                    globalColor={imageBorderColor}
+                                                    globalHoverColor={imageBorderHoverColor}
+                                                    handleColorSwitcherChange={imageBorderColorSwitcherChange}
+                                                    handleGlobalColorChange={imageBorderColorChange}
+                                                    handleGlobalHoverColorChange={imageBorderHoverColorChange}
+                                                />
+
+                                                <FB_Spacing
+                                                    label={__("Border Width", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleImageBorderUnitsHandler}
+                                                    spacingUnits={imageBorderUnits}
+                                                    spacingDesktop={imageDesktopBorderWidth}
+                                                    spacingTablet={imageTabBorderWidth}
+                                                    spacingMobile={imageMobileBorderWidth}
+                                                    handleSpacingUnitHandler={handleImageBorderUnitChange}
+                                                    spacingCombineBtn={imageBorderLink}
+                                                    spacingCombineBtnHandler={handleImageBorderCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleImageBorderRadiusUnitsHandler}
+                                                    spacingUnits={imageBorderRadiusUnits}
+                                                    spacingDesktop={imageDesktopBorderRadiusWidth}
+                                                    spacingTablet={imageTabBorderRadiusWidth}
+                                                    spacingMobile={imageMobileBorderRadiusWidth}
+                                                    handleSpacingUnitHandler={handleImageBorderRadiusUnitChange}
+                                                    spacingCombineBtn={imageBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleImageBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            </PanelBody>
                                         </PanelBody>
 
                                         { ImageOverlayStyle == 'overlay' &&
@@ -1326,51 +2583,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </BaseControl>
 
                                                 <BaseControl 
-                                                label={__("Overlay Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
+                                                    label={__("Overlay Color", "frontis-blocks")}
+                                                    className="fb-setting-color-setting-wrapper"
                                                 >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={ImageOverlayColor}
-                                                                        onChange={(value) => setAttributes({ ImageOverlayColor: value })}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#000000b3' },
-                                                                            { color: '#ebc4c4b3' },
-                                                                            { color: '#6ca170b3' },
-                                                                            { color: '#6eb3cbb3' },
-                                                                            { color: '#b27ecbb3' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={ImageOverlayColor}
-                                                                        onChange={(value) => setAttributes({ ImageOverlayColor: value })}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
+                                                    <Dropdown
+                                                        className="fb-setting-color-setting-icon-dropdown"
+                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                                                        popoverProps={{ placement: 'bottom-start' }}
+                                                        renderToggle={({ isOpen, onToggle }) => (
+                                                            <Button
+                                                                variant="primary"
+                                                                onClick={onToggle}
+                                                                aria-expanded={isOpen}
+                                                                className="fb-setting-color-setting-icon-btn"
+                                                            >
+                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                                                            </Button>
+                                                        )}
+                                                        renderContent={() => (
+                                                            <div className="fb-setting-color-setting-icon-popup">
+                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                                                    <div className="fb-setting-normal-color">
+                                                                        <ColorPicker
+                                                                            color={ImageOverlayColor}
+                                                                            onChange={(value) => setAttributes({ ImageOverlayColor: value })}
+                                                                            enableAlpha={true}
+                                                                        />
+                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+                                                                        <ColorPalette
+                                                                            colors={[
+                                                                                { color: '#F72585' },
+                                                                                { color: '#7209B7' },
+                                                                                { color: '#3A0CA3' },
+                                                                                { color: '#4361EE' },
+                                                                                { color: '#4CC9F0' },
+                                                                            ]}
+                                                                            disableCustomColors={true}
+                                                                            value={ImageOverlayColor}
+                                                                            onChange={(value) => setAttributes({ ImageOverlayColor: value })}
+                                                                        />
+                                                                    </div>
+                                                                </BaseControl>
+                                                            </div>
+                                                        )}
+                                                    />
                                                 </BaseControl>
                                             </PanelBody>
 
@@ -1403,484 +2659,92 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </ButtonGroup>
                                                 </BaseControl>
 
-                                                <BaseControl 
-                                                    label={__("Typography", "frontis-blocks")}
-                                                    className="fb-setting-typography"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-dropdown-icon-wrapper"
-                                                        contentClassName="fb-setting-dropdown-icon-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-dropdown-icon-btn"
-                                                            >
-                                                                <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-typography-popup">
-                                                                <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                    <div className="fb-setting-fontfamily-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Family", "frontis-blocks")}
-                                                                            options={FONT_FAMILYS}
-                                                                            value={GalleryButtonFontFamily}
-                                                                            onChange={(value) => setAttributes({ GalleryButtonFontFamily: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-wrapper">
-                                                                        <div className="fb-setting-fontsize-header">
-                                                                            <FB_ResponsiveControl
-                                                                                labelText={__("Font Size", "frontis-blocks")}
-                                                                                device={DeviceType}
-                                                                                deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                                            />
-                                                                            <div className="fb-setting-fontsize-units">
-                                                                                <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ GalleryButtonFontSizeUnits: item.value })}
-                                                                                            className={`fb-setting-fontsize-units-switcher ${GalleryButtonFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-rangecontrol">
-                                                                            <RangeControl
-                                                                                value={DeviceType === "Desktop" ? GalleryButtonFontSizeDesktop : DeviceType === "Tablet" ? GalleryButtonFontSizeTablet : GalleryButtonFontSizeMobile}
-                                                                                onChange={(value) => {
-                                                                                    if (DeviceType === "Desktop") {
-                                                                                        setAttributes({ GalleryButtonFontSizeDesktop: value });
-                                                                                    } else if (DeviceType === "Tablet") {
-                                                                                        setAttributes({ GalleryButtonFontSizeTablet: value });
-                                                                                    } else if (DeviceType === "Mobile") {
-                                                                                        setAttributes({ GalleryButtonFontSizeMobile: value });
-                                                                                    }
-                                                                                }}
-                                                                                min={1}
-                                                                                max={200}
-                                                                                allowReset
-                                                                                resetFallbackValue={18}
-                                                                            />
-                                                                        </div>
-                                                                    </div>
+                                                <FB_TypographyControl
+                                                    fontFamily={GalleryButtonFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ GalleryButtonFontFamily: value })}
+                                                    
+                                                    fontSize={GalleryButtonFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ GalleryButtonFontSize: value })}
+                                                    
+                                                    fontSizeUnits={GalleryButtonFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ GalleryButtonFontSizeUnits: value })}
+                                                    
+                                                    fontWeight={GalleryButtonFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ GalleryButtonFontWeight: value })}
+                                                    
+                                                    fontStyle={GalleryButtonFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ GalleryButtonFontStyle: value })}
+                                                    
+                                                    textTransform={GalleryButtonTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ GalleryButtonTextTransform: value })}
+                                                    
+                                                    textDecoration={GalleryButtonTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ GalleryButtonTextDecoration: value })}
+                                                    
+                                                    letterSpacing={GalleryButtonLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ GalleryButtonLetterSpacing: value })}
+                                                    
+                                                    letterSpacingUnits={GalleryButtonLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ GalleryButtonLetterSpacingUnits: value })}
+                                                    
+                                                    lineHeight={GalleryButtonLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ GalleryButtonLineHeight: value })}
+                                                    
+                                                    lineHeightUnits={GalleryButtonLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ GalleryButtonLineHeightUnits: value })}
+                                                    
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                />
 
-                                                                    <div className="fb-setting-fontweight-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Weight", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "700" },
-                                                                                { label: __("100", "frontis-blocks"), value: "100" },
-                                                                                { label: __("200", "frontis-blocks"), value: "200" },
-                                                                                { label: __("300", "frontis-blocks"), value: "300" },
-                                                                                { label: __("400", "frontis-blocks"), value: "400" },
-                                                                                { label: __("500", "frontis-blocks"), value: "500" },
-                                                                                { label: __("600", "frontis-blocks"), value: "600" },
-                                                                                { label: __("700", "frontis-blocks"), value: "700" },
-                                                                                { label: __("800", "frontis-blocks"), value: "800" },
-                                                                                { label: __("900", "frontis-blocks"), value: "900" },
-                                                                            ]}
-                                                                            value={GalleryButtonFontWeight}
-                                                                            onChange={(value) => setAttributes({ GalleryButtonFontWeight: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-fontstyle-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Style", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                                { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                                { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                                { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                            ]}
-                                                                            value={GalleryButtonFontStyle}
-                                                                            onChange={(value) => setAttributes({ GalleryButtonFontStyle: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-texttransform-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Text Transform", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                                { label: __("None", "frontis-blocks"), value: "none" },
-                                                                                { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                                { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                                { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                            ]}
-                                                                            value={GalleryButtonTextTransform}
-                                                                            onChange={(value) => setAttributes({ GalleryButtonTextTransform: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-textdecoration-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Text Decoration", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                                { label: __("None", "frontis-blocks"), value: "none" },
-                                                                                { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                                { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                                { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                            ]}
-                                                                            value={GalleryButtonTextDecoration}
-                                                                            onChange={(value) => setAttributes({ GalleryButtonTextDecoration: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-letterspacing-wrapper">
-                                                                        <div className="fb-setting-letterspacing-header">
-                                                                            <FB_ResponsiveControl
-                                                                                labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                                device={DeviceType}
-                                                                                deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                                            />
-                                                                            <div className="fb-setting-letterspacing-units">
-                                                                                <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ GalleryButtonLetterSpacingUnits: item.value })}
-                                                                                            className={`fb-setting-letterspacing-units-switcher ${GalleryButtonLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <RangeControl
-                                                                            value={DeviceType === "Desktop" ? GalleryButtonLetterSpacingDesktop : DeviceType === "Tablet" ? GalleryButtonLetterSpacingTablet : GalleryButtonLetterSpacingMobile}
-                                                                            onChange={(value) => {
-                                                                                if (DeviceType === "Desktop") {
-                                                                                    setAttributes({ GalleryButtonLetterSpacingDesktop: value });
-                                                                                } else if (DeviceType === "Tablet") {
-                                                                                    setAttributes({ GalleryButtonLetterSpacingTablet: value });
-                                                                                } else if (DeviceType === "Mobile") {
-                                                                                    setAttributes({ GalleryButtonLetterSpacingMobile: value });
-                                                                                }
-                                                                            }}
-                                                                            min={-10}
-                                                                            max={100}
-                                                                            step={1}
-                                                                            allowReset
-                                                                            resetFallbackValue={0}
-                                                                        />
-                                                                    </div>
-
-                                                                    <div className="fb-setting-lineheight-wrapper">
-                                                                        <div className="fb-setting-lineheight-header">
-                                                                            <FB_ResponsiveControl
-                                                                                labelText={__("Line Height", "frontis-blocks")}
-                                                                                device={DeviceType}
-                                                                                deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
-                                                                            />
-                                                                            <div className="fb-setting-lineheight-units">
-                                                                                <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ GalleryButtonLineHeightUnits: item.value })}
-                                                                                            className={`fb-setting-lineheight-units-switcher ${GalleryButtonLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <RangeControl
-                                                                            value={DeviceType === "Desktop" ? GalleryButtonLineHeightDesktop : DeviceType === "Tablet" ? GalleryButtonLineHeightTablet : GalleryButtonLineHeightMobile}
-                                                                            onChange={(value) => {
-                                                                                if (DeviceType === "Desktop") {
-                                                                                    setAttributes({ GalleryButtonLineHeightDesktop: value });
-                                                                                } else if (DeviceType === "Tablet") {
-                                                                                    setAttributes({ GalleryButtonLineHeightTablet: value });
-                                                                                } else if (DeviceType === "Mobile") {
-                                                                                    setAttributes({ GalleryButtonLineHeightMobile: value });
-                                                                                }
-                                                                            }}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            step={1}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-
-                                                <BaseControl
+                                                <FB_Color
                                                     label={__("Color", "frontis-blocks")}
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ GalleryButtonColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${GalleryButtonColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
+                                                    globalColorSwitcher={GalleryButtonColorSwitcher}
+                                                    globalColor={GalleryButtonColor}
+                                                    globalHoverColor={GalleryButtonHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryButtonColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryButtonColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryButtonHoverColorChange}
+                                                />
 
-                                                {GalleryButtonColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryButtonColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryButtonColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
 
-                                                {GalleryButtonColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryButtonHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryButtonHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                                <BaseControl
+                                                <FB_Color
                                                     label={__("Background Color", "frontis-blocks")}
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ GalleryButtonBGColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${GalleryButtonBGColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
+                                                    globalColorSwitcher={GalleryButtonBGColorSwitcher}
+                                                    globalColor={GalleryButtonBGColor}
+                                                    globalHoverColor={GalleryButtonBGHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryButtonBGColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryButtonBGColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryButtonBGHoverColorChange}
+                                                />
 
-                                                {GalleryButtonBGColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryButtonBGColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonBGColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryButtonBGColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonBGColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
+                                                <FB_Spacing 
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleButtonMarginUnitsHandler}
+                                                    spacingUnits={ButtonMarginUnits}
+                                                    spacingDesktop={ButtonDesktopMargin}
+                                                    spacingTablet={ButtonTabMargin}
+                                                    spacingMobile={ButtonMobileMargin}
+                                                    handleSpacingUnitHandler={handleButtonMarginUnitChange}
+                                                    spacingCombineBtn={ButtonMarginLink}
+                                                    spacingCombineBtnHandler={handleButtonMarginCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
 
-                                                {GalleryButtonBGColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryButtonBGHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonBGHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryButtonBGHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryButtonBGHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                            <FB_Spacing 
-                                                label={__("Margin", "frontis-blocks")}
-                                                DeviceType={DeviceType}
-                                                spacingUnitsHandler={handleButtonMarginUnitsHandler}
-                                                spacingUnits={ButtonMarginUnits}
-                                                spacingDesktop={ButtonDesktopMargin}
-                                                spacingTablet={ButtonTabMargin}
-                                                spacingMobile={ButtonMobileMargin}
-                                                handleSpacingUnitHandler={handleButtonMarginUnitChange}
-                                                spacingCombineBtn={ButtonMarginLink}
-                                                spacingCombineBtnHandler={handleButtonMarginCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Padding", "frontis-blocks")}
-                                                DeviceType={DeviceType}
-                                                spacingUnitsHandler={handleButtonPaddingUnitsHandler}
-                                                spacingUnits={ButtonPaddingUnits}
-                                                spacingDesktop={ButtonDesktopPadding}
-                                                spacingTablet={ButtonTabPadding}
-                                                spacingMobile={ButtonMobilePadding}
-                                                handleSpacingUnitHandler={handleButtonPaddingUnitChange}
-                                                spacingCombineBtn={ButtonPaddingLink}
-                                                spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
+                                                <FB_Spacing 
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleButtonPaddingUnitsHandler}
+                                                    spacingUnits={ButtonPaddingUnits}
+                                                    spacingDesktop={ButtonDesktopPadding}
+                                                    spacingTablet={ButtonTabPadding}
+                                                    spacingMobile={ButtonMobilePadding}
+                                                    handleSpacingUnitHandler={handleButtonPaddingUnitChange}
+                                                    spacingCombineBtn={ButtonPaddingLink}
+                                                    spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
 
                                             </PanelBody>
                                             
@@ -1900,126 +2764,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChange={(value) => setAttributes({ ButtonBorder: value })}
                                                 />
 
-                                            <BaseControl
+                                            <FB_Color
                                                 label={__("Border Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ ButtonBorderColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${ButtonBorderColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
-
-                                            {ButtonBorderColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={ButtonBorderColor}
-                                                                            onChange={(value) => setAttributes({ ButtonBorderColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={ButtonBorderColor}
-                                                                            onChange={(value) => setAttributes({ ButtonBorderColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
-
-                                            {GalleryBorderColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={ButtonBorderHoverColor}
-                                                                            onChange={(value) => setAttributes({ ButtonBorderHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={ButtonBorderHoverColor}
-                                                                            onChange={(value) => setAttributes({ ButtonBorderHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
+                                                globalColorSwitcher={ButtonBorderColorSwitcher}
+                                                globalColor={ButtonBorderColor}
+                                                globalHoverColor={ButtonBorderHoverColor}
+                                                handleColorSwitcherChange={handleButtonBorderColorSwitcherChange}
+                                                handleGlobalColorChange={handleButtonBorderColorChange}
+                                                handleGlobalHoverColorChange={handleButtonBorderHoverColorChange}
+                                            />
 
                                             <FB_Spacing 
                                                 label={__("Border Width", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderUnitsHandler}
                                                 spacingUnits={ButtonBorderUnits}
                                                 spacingDesktop={ButtonDesktopBorderWidth}
@@ -2033,7 +2790,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Spacing 
                                                 label={__("Border Radius Width", "frontis-blocks")}
-                                                DeviceType={DeviceType}
+                                                deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderRadiusUnitsHandler}
                                                 spacingUnits={ButtonBorderRadiusUnits}
                                                 spacingDesktop={ButtonDesktopBorderRadiusWidth}
@@ -2046,6 +2803,112 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                         </PanelBody>
                                         
+                                        }
+
+                                        { lightboxIconSwitcher === true &&
+                                        <>
+                                            <PanelBody
+                                                title={__("Lightbox", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-border-setting-wrapper"
+                                                >
+                                                <FB_Range
+                                                    min={1}
+                                                    max={100}
+                                                    label={__("Size", "frontis-blocks")}
+                                                    rangeValue={lightboxIconSize}
+                                                    onChangeHandler={lightboxIconSizeHandler}
+                                                    rangeUnitHandler={lightboxIconSizeUnitsHandler}
+                                                    deviceType={deviceType}
+                                                    units={lightboxIconSizeUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={100}
+                                                />
+                                                <FB_Spacing
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleLightboxPaddingUnitsHandler}
+                                                    spacingUnits={lightboxPaddingUnits}
+                                                    spacingDesktop={lightboxDesktopPadding}
+                                                    spacingTablet={lightboxTabPadding}
+                                                    spacingMobile={lightboxMobilePadding}
+                                                    handleSpacingUnitHandler={handleLightboxPaddingUnitChange}
+                                                    spacingCombineBtn={lightboxPaddingLink}
+                                                    spacingCombineBtnHandler={handleLightboxPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Color
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColorSwitcher={lightboxColorSwitcher}
+                                                    globalColor={lightboxColor}
+                                                    globalHoverColor={lightboxHoverColor}
+                                                    handleColorSwitcherChange={handleLightboxColorSwitcherChange}
+                                                    handleGlobalColorChange={handleLightboxColorChange}
+                                                    handleGlobalHoverColorChange={handleLightboxHoverColorChange}
+                                                />
+												<FB_Color
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    globalColorSwitcher={lightboxBGColorSwitcher}
+                                                    globalColor={lightboxBGColor}
+                                                    globalHoverColor={lightboxBGHoverColor}
+                                                    handleColorSwitcherChange={handleLightboxBGColorSwitcherChange}
+                                                    handleGlobalColorChange={handleLightboxBGColorChange}
+                                                    handleGlobalHoverColorChange={handleLightboxBGHoverColorChange}
+                                                /> 
+                                            </PanelBody>
+
+                                            <PanelBody
+                                                title={__("Lightbox Border & Border radius", "frontis-blocks")}
+                                                initialOpen={false}
+                                                className="fb-setting-border-setting-wrapper"
+                                            >
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={lightboxBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ lightboxBorder: value })}
+                                                />
+
+                                                <FB_Color
+                                                    label={__("Border Color", "frontis-blocks")}
+                                                    globalColorSwitcher={lightboxBorderColorSwitcher}
+                                                    globalColor={lightboxBorderColor}
+                                                    globalHoverColor={lightboxBorderHoverColor}
+                                                    handleColorSwitcherChange={handleLightboxBorderColorSwitcherChange}
+                                                    handleGlobalColorChange={handleLightboxBorderColorChange}
+                                                    handleGlobalHoverColorChange={handleLightboxBorderHoverColorChange}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Border Width", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleLightboxBorderUnitsHandler}
+                                                    spacingUnits={lightboxBorderUnits}
+                                                    spacingDesktop={lightboxDesktopBorderWidth}
+                                                    spacingTablet={lightboxTabBorderWidth}
+                                                    spacingMobile={lightboxMobileBorderWidth}
+                                                    handleSpacingUnitHandler={handleLightboxBorderUnitChange}
+                                                    spacingCombineBtn={lightboxBorderLink}
+                                                    spacingCombineBtnHandler={handleLightboxBorderCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing 
+                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleLightboxBorderRadiusUnitsHandler}
+                                                    spacingUnits={lightboxBorderRadiusUnits}
+                                                    spacingDesktop={lightboxDesktopBorderRadiusWidth}
+                                                    spacingTablet={lightboxTabBorderRadiusWidth}
+                                                    spacingMobile={lightboxMobileBorderRadiusWidth}
+                                                    handleSpacingUnitHandler={handleLightboxBorderRadiusUnitChange}
+                                                    spacingCombineBtn={lightboxBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleLightboxBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            </PanelBody>
+                                        </>   
                                         }
 
                                     </>
@@ -2077,7 +2940,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Margin", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryMarginUnitsHandler}
                                                     spacingUnits={GalleryMarginUnits}
                                                     spacingDesktop={GalleryDesktopMargin}
@@ -2091,7 +2954,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Padding", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryPaddingUnitsHandler}
                                                     spacingUnits={GalleryPaddingUnits}
                                                     spacingDesktop={GalleryDesktopPadding}
@@ -2104,119 +2967,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />                                     
                                             </PanelBody>
                                             <PanelBody title="Background Color" initialOpen={false} >
-                                                <BaseControl
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ GalleryBgColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${GalleryBgColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-
-                                                {GalleryBgColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryBgColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBgColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryBgColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBgColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                                {GalleryBgColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBgHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBgHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
+                                                <FB_Color
+                                                    globalColorSwitcher={GalleryBgColorSwitcher}
+                                                    globalColor={GalleryBgColor}
+                                                    globalHoverColor={GalleryBgHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryBgColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryBgColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryBgHoverColorChange}
+                                                />
                                             </PanelBody>
 
                                             <PanelBody
@@ -2224,133 +2982,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialOpen={false}
                                                 className="fb-setting-border-setting-wrapper"
                                                 >
-                                                    <SelectControl
-                                                        label={__("Border Style", "frontis-blocks")}
-                                                        value={GalleryBorder}
-                                                        options={BORDER_STYLES}
-                                                        onChange={(value) => setAttributes({ GalleryBorder: value })}
-                                                    />
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={GalleryBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ GalleryBorder: value })}
+                                                />
 
-                                                <BaseControl
+                                                <FB_Color
                                                     label={__("Border Color", "frontis-blocks")}
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ GalleryBorderColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${GalleryBorderColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-
-                                                {GalleryBorderColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryBorderColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBorderColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryBorderColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBorderColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
-                                                {GalleryBorderColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={GalleryBorderHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBorderHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={GalleryBorderHoverColor}
-                                                                                onChange={(value) => setAttributes({ GalleryBorderHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-
+                                                    globalColorSwitcher={GalleryBorderColorSwitcher}
+                                                    globalColor={GalleryBorderColor}
+                                                    globalHoverColor={GalleryBorderHoverColor}
+                                                    handleColorSwitcherChange={handleGalleryBorderColorSwitcherChange}
+                                                    handleGlobalColorChange={handleGalleryBorderColorChange}
+                                                    handleGlobalHoverColorChange={handleGalleryBorderHoverColorChange}
+                                                />
                                                 <FB_Spacing 
                                                     label={__("Border Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderUnitsHandler}
                                                     spacingUnits={GalleryBorderUnits}
                                                     spacingDesktop={GalleryDesktopBorderWidth}
@@ -2364,12 +3014,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 <FB_Spacing 
                                                     label={__("Border Radius Width", "frontis-blocks")}
-                                                    DeviceType={DeviceType}
+                                                    deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderRadiusUnitsHandler}
                                                     spacingUnits={GalleryBorderRadiusUnits}
-                                                    spacingDesktop={GalleryDesktopBorderRadiusWidth}
-                                                    spacingTablet={GalleryTabBorderRadiusWidth}
-                                                    spacingMobile={GalleryMobileBorderRadiusWidth}
+                                                    spacingDesktop={GalleryBorderRadiusDesktop}
+                                                    spacingTablet={GalleryBorderRadiusTablet}
+                                                    spacingMobile={GalleryBorderRadiusMobile}
                                                     handleSpacingUnitHandler={handleGalleryBorderRadiusUnitChange}
                                                     spacingCombineBtn={GalleryBorderRadiusLink}
                                                     spacingCombineBtnHandler={handleGalleryBorderRadiusCombineBtn}
@@ -2411,8 +3061,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </TabPanel>
                 </div>
             </InspectorControls>
-
-
         </>   
     );
 }

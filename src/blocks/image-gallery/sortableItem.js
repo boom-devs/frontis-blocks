@@ -15,7 +15,7 @@ import {
 import FB_ResponsiveControl from '@Components/responsive-control';
 
 
-export default function SortableItem({ DeviceType, GalleryColumnNumberMobile, GalleryColumnNumberTablet, GalleryColumnNumberDesktop, GalleryType, id, item, handleChangeItem, handleDeleteItem, handleRemoveMedia, setAttributes }) {
+export default function SortableItem({ deviceType, GalleryColumnNumberMobile, GalleryColumnNumberTablet, GalleryColumnNumberDesktop, GalleryType, id, item, handleChangeItem, handleDeleteItem, handleRemoveMedia, setAttributes }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
     // const [FeatureIconAlign, setFeatureIconAlign] = useState( ICON_ALIGN[1].value );
@@ -109,24 +109,24 @@ export default function SortableItem({ DeviceType, GalleryColumnNumberMobile, Ga
 																<div className="fb-setting-columns-header">
 																	<FB_ResponsiveControl
 																		labelText={__("Column Span", "frontis-blocks")}
-																		device={DeviceType}
-																		deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+																		device={deviceType}
+																		deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
 																	/>
 																</div>
 																<div className="fb-setting-columns-rangecontrol">
 																	<RangeControl
-																		value={DeviceType === "Desktop" ? item.column?.desktop : DeviceType === "Tablet" ? item.column?.tablet : item.column?.mobile}
+																		value={deviceType === "Desktop" ? item.column?.desktop : deviceType === "Tablet" ? item.column?.tablet : item.column?.mobile}
 																		onChange={(value) => {
-																			if (DeviceType === "Desktop") {
+																			if (deviceType === "Desktop") {
 																				handleChangeItem(item.id, 'column', {...item.column, desktop: value});
-																			} else if (DeviceType === "Tablet") {
+																			} else if (deviceType === "Tablet") {
 																				handleChangeItem(item.id, 'column', {...item.column, tablet: value});
-																			} else if (DeviceType === "Mobile") {
+																			} else if (deviceType === "Mobile") {
 																				handleChangeItem(item.id, 'column', {...item.column, mobile: value});
 																			}
 																		}}
 																		min={1}
-																		max={DeviceType === "Desktop" ? GalleryColumnNumberDesktop : DeviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
+																		max={deviceType === "Desktop" ? GalleryColumnNumberDesktop : deviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
 																		allowReset
 																		resetFallbackValue={0}
 																	/>
@@ -139,19 +139,19 @@ export default function SortableItem({ DeviceType, GalleryColumnNumberMobile, Ga
 																<div className="fb-setting-columns-header">
 																	<FB_ResponsiveControl
 																		labelText={__("Row Span", "frontis-blocks")}
-																		device={DeviceType}
-																		deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
+																		device={deviceType}
+																		deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
 																	/>
 																</div>
 																<div className="fb-setting-columns-rangecontrol">
 																	<RangeControl
-																		value={DeviceType === "Desktop" ? item.row?.desktop : DeviceType === "Tablet" ? item.row?.tablet : item.row?.mobile}
+																		value={deviceType === "Desktop" ? item.row?.desktop : deviceType === "Tablet" ? item.row?.tablet : item.row?.mobile}
 																		onChange={(value) => {
-																			if (DeviceType === "Desktop") {
+																			if (deviceType === "Desktop") {
 																				handleChangeItem(item.id, 'row', {...item.row, desktop: value});
-																			} else if (DeviceType === "Tablet") {
+																			} else if (deviceType === "Tablet") {
 																				handleChangeItem(item.id, 'row', {...item.row, tablet: value});
-																			} else if (DeviceType === "Mobile") {
+																			} else if (deviceType === "Mobile") {
 																				handleChangeItem(item.id, 'row', {...item.row, mobile: value});
 																			}
 																		}}
