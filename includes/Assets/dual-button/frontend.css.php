@@ -64,7 +64,7 @@ $button_mobile_padding = $button_two_mobile_padding['top'] . $button_two_padding
 
 // Generate CSS content
 $css_content = "
-.$block_id .fb-advanced-button-wrapper .fb-advanced-button {
+.$block_id.fb-dual-button-container .fb-advanced-button {
     " . ( ! empty( $button_bg_color ) ? "background-color: $button_bg_color;" : '' ) . "
     font-family: " . ( $button_font_family !== 'default' ? $button_font_family : 'inherit' ) . ";
     font-size: " . ( ! empty( $button_font_size ) ? "{$button_font_size}{$button_font_size_units}" : 'inherit' ) . ";
@@ -72,11 +72,18 @@ $css_content = "
     font-style: " . ( ! empty( $button_font_style ) ? $button_font_style : 'normal' ) . ";
     padding: " . ( ! empty( $button_padding ) ? $button_padding : '10px' ) . ";
     margin: " . ( ! empty( $button_margin ) ? $button_margin : '0' ) . ";
-    border: " . ( ! empty( $button_border ) ? $button_border : 'none' ) . ";
-    padding: {$button_desktop_padding};
-    margin: {$button_desktop_margin};
-    border-radius: " . ( ! empty( $button_border_radius ) ? $button_border_radius : '4px' ) . ";
-    " . ( ! empty( $button_border_color ) ? "border-color: $button_border_color;" : '' ) . "
+}
+.$block_id.fb-dual-button-container .fb-advanced-button {
+    " . ( ! empty( $button_bg_color ) ? "background-color: $button_bg_color;" : '' ) . "
+    font-family: " . ( $button_font_family !== 'default' ? $button_font_family : 'inherit' ) . ";
+    font-size: " . ( ! empty( $button_font_size ) ? "{$button_font_size}{$button_font_size_units}" : 'inherit' ) . ";
+    font-weight: " . ( ! empty( $button_font_weight ) ? $button_font_weight : 'normal' ) . ";
+    font-style: " . ( ! empty( $button_font_style ) ? $button_font_style : 'normal' ) . ";
+    padding: " . ( ! empty( $button_padding ) ? $button_padding : '10px' ) . ";
+    margin: " . ( ! empty( $button_margin ) ? $button_margin : '0' ) . ";
+}
+.fb-dual-button-container.$block_id .fb-dual-button-wrapper{
+	gap: ;
 }
 ";
 

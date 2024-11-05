@@ -72,8 +72,8 @@ import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
-import FB_TypographyControl from '@Components/typography-control';
-import FB_BackgroundColorControl from '@Components/background-color-control';
+import FB_TypographyControl from "@Components/typography-control";
+import FB_BackgroundColorControl from "@Components/background-color-control";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -421,7 +421,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalCustomGradientInputValue,
 		globalGradientColor,
 		globalColor,
-		globalSwitcher
+		globalSwitcher,
 	} = attributes;
 
 	useEffect(() => {
@@ -1668,7 +1668,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const [boxPreviousBorderWidth, setBoxPreviousBorderWidth] = useState(
 		infoBoxDesktopBorderWidth,
 	);
-	
 
 	/** Button Two */
 	/** Start Heading Padding */
@@ -1756,6 +1755,88 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const btnTwoMobilePaddingWidth = `${btnTwoMobilePadding.top}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.right}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.bottom}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.left}${btnTwoPaddingUnits.Mobile}`;
 	/** End button two Padding */
 
+	/** Start Media padding */
+	const handleButtonTwoPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (btnTwoPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						btnTwoDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						btnTwoTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						btnTwoMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						btnTwoDesktopPadding: {
+							...btnTwoDesktopPadding,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						btnTwoTabPadding: { ...btnTwoTabPadding, [position]: value },
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						btnTwoMobilePadding: { ...btnTwoMobilePadding, [position]: value },
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleButtonTwoPaddingCombineBtn = () => {
+		setAttributes({ btnTwoPaddingLink: !btnTwoPaddingLink });
+	};
+
+	const handleButtonTwoPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			btnTwoPaddingUnits: {
+				...btnTwoPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Default padding for desktop (using desktop_padding) */
+	const buttonTwoDesktopPadding = `${btnTwoDesktopPadding.top}${btnTwoPaddingUnits.Desktop} ${btnTwoDesktopPadding.right}${btnTwoPaddingUnits.Desktop} ${btnTwoDesktopPadding.bottom}${btnTwoPaddingUnits.Desktop} ${btnTwoDesktopPadding.left}${btnTwoPaddingUnits.Desktop}`;
+	const buttonTwoTabletPadding = `${btnTwoTabPadding.top}${btnTwoPaddingUnits.Tablet} ${btnTwoTabPadding.right}${btnTwoPaddingUnits.Tablet} ${btnTwoTabPadding.bottom}${btnTwoPaddingUnits.Tablet} ${btnTwoTabPadding.left}${btnTwoPaddingUnits.Tablet}`;
+	const buttonTwoMobilePadding = `${btnTwoMobilePadding.top}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.right}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.bottom}${btnTwoPaddingUnits.Mobile} ${btnTwoMobilePadding.left}${btnTwoPaddingUnits.Mobile}`;
+
 	/** Start btnTwo Margin */
 	const btnTwoMarginUnitsChange = (event, position) => {
 		const value = event.target.value;
@@ -1839,156 +1920,177 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End btnTwo Margin */
 
 	/** Start btnTwo Border */
-const btnTwoBorderUnitsChange = (event, position) => {
-    const value = event.target.value;
-    if (btnTwoBorderLink) {
-        switch (deviceType) {
-            case 'Desktop':
-                setAttributes({
-                    btnTwoDesktopBorder: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    btnTwoTabBorder: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    btnTwoMobileBorder: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    } else {
-        switch (deviceType) {
-            case 'Desktop':
-                setAttributes({ btnTwoDesktopBorder: { ...btnTwoDesktopBorder, [position]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ btnTwoTabBorder: { ...btnTwoTabBorder, [position]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ btnTwoMobileBorder: { ...btnTwoMobileBorder, [position]: value } });
-                break;
-            default:
-                break;
-        }
-    }
-};
+	const btnTwoBorderUnitsChange = (event, position) => {
+		const value = event.target.value;
+		if (btnTwoBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						btnTwoDesktopBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						btnTwoTabBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						btnTwoMobileBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						btnTwoDesktopBorder: { ...btnTwoDesktopBorder, [position]: value },
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						btnTwoTabBorder: { ...btnTwoTabBorder, [position]: value },
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						btnTwoMobileBorder: { ...btnTwoMobileBorder, [position]: value },
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
-const btnTwoBorderLinkBtn = () => {
-    setAttributes({
-        btnTwoBorderLink: !btnTwoBorderLink
-    });
-};
+	const btnTwoBorderLinkBtn = () => {
+		setAttributes({
+			btnTwoBorderLink: !btnTwoBorderLink,
+		});
+	};
 
-const btnTwoBorderUnitsHandler = (unit) => {
-    setAttributes({
-        btnTwoBorderUnits: {
-            ...btnTwoBorderUnits,
-            [deviceType]: unit
-        }
-    });
-};
+	const btnTwoBorderUnitsHandler = (unit) => {
+		setAttributes({
+			btnTwoBorderUnits: {
+				...btnTwoBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
 
-/** Default border for btnTwo */
-const btnTwoDesktopBorderWidthStyle = `${btnTwoDesktopBorder.top}${btnTwoBorderUnits.Desktop} ${btnTwoDesktopBorder.right}${btnTwoBorderUnits.Desktop} ${btnTwoDesktopBorder.bottom}${btnTwoBorderUnits.Desktop} ${btnTwoDesktopBorder.left}${btnTwoBorderUnits.Desktop}`;
-const btnTwoTabletBorderWidthStyle = `${btnTwoTabBorder.top}${btnTwoBorderUnits.Tablet} ${btnTwoTabBorder.right}${btnTwoBorderUnits.Tablet} ${btnTwoTabBorder.bottom}${btnTwoBorderUnits.Tablet} ${btnTwoTabBorder.left}${btnTwoBorderUnits.Tablet}`;
-const btnTwoMobileBorderWidthStyle = `${btnTwoMobileBorder.top}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.right}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.bottom}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.left}${btnTwoBorderUnits.Mobile}`;
-/** End btnTwo Border */
+	/** Default border for btnTwo */
+	const btnTwoDesktopBorderWidthStyle = `${btnTwoDesktopBorder.top}${btnTwoBorderUnits.Desktop} ${btnTwoDesktopBorder.right}${btnTwoBorderUnits.Desktop} ${btnTwoDesktopBorder.bottom}${btnTwoBorderUnits.Desktop} ${btnTwoDesktopBorder.left}${btnTwoBorderUnits.Desktop}`;
+	const btnTwoTabletBorderWidthStyle = `${btnTwoTabBorder.top}${btnTwoBorderUnits.Tablet} ${btnTwoTabBorder.right}${btnTwoBorderUnits.Tablet} ${btnTwoTabBorder.bottom}${btnTwoBorderUnits.Tablet} ${btnTwoTabBorder.left}${btnTwoBorderUnits.Tablet}`;
+	const btnTwoMobileBorderWidthStyle = `${btnTwoMobileBorder.top}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.right}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.bottom}${btnTwoBorderUnits.Mobile} ${btnTwoMobileBorder.left}${btnTwoBorderUnits.Mobile}`;
+	/** End btnTwo Border */
 
-/** Start Button Two Border Radius */
-const btnTwoBorderRadiusUnitsChange = (event, position) => {
-    const value = event.target.value;
-    if (btnTwoBorderRadiusLink) {
-        switch (deviceType) {
-            case 'Desktop':
-                setAttributes({
-                    btnTwoDesktopBorderRadius: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Tablet':
-                setAttributes({
-                    btnTwoTabBorderRadius: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            case 'Mobile':
-                setAttributes({
-                    btnTwoMobileBorderRadius: {
-                        top: value,
-                        right: value,
-                        bottom: value,
-                        left: value
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    } else {
-        switch (deviceType) {
-            case 'Desktop':
-                setAttributes({ btnTwoDesktopBorderRadius: { ...btnTwoDesktopBorderRadius, [position]: value } });
-                break;
-            case 'Tablet':
-                setAttributes({ btnTwoTabBorderRadius: { ...btnTwoTabBorderRadius, [position]: value } });
-                break;
-            case 'Mobile':
-                setAttributes({ btnTwoMobileBorderRadius: { ...btnTwoMobileBorderRadius, [position]: value } });
-                break;
-            default:
-                break;
-        }
-    }
-};
+	/** Start Button Two Border Radius */
+	const btnTwoBorderRadiusUnitsChange = (event, position) => {
+		const value = event.target.value;
+		if (btnTwoBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						btnTwoDesktopBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						btnTwoTabBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						btnTwoMobileBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						btnTwoDesktopBorderRadius: {
+							...btnTwoDesktopBorderRadius,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						btnTwoTabBorderRadius: {
+							...btnTwoTabBorderRadius,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						btnTwoMobileBorderRadius: {
+							...btnTwoMobileBorderRadius,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
-const btnTwoBorderRadiusLinkBtn = () => {
-    setAttributes({
-        btnTwoBorderRadiusLink: !btnTwoBorderRadiusLink
-    });
-};
+	const btnTwoBorderRadiusLinkBtn = () => {
+		setAttributes({
+			btnTwoBorderRadiusLink: !btnTwoBorderRadiusLink,
+		});
+	};
 
-const btnTwoBorderRadiusUnitsHandler = (unit) => {
-    setAttributes({
-        btnTwoBorderRadiusUnits: {
-            ...btnTwoBorderRadiusUnits,
-            [deviceType]: unit
-        }
-    });
-};
+	const btnTwoBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			btnTwoBorderRadiusUnits: {
+				...btnTwoBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
 
-/** Default border radius for btnTwo */
-const btnTwoDesktopBorderRadiusWidthStyle = `${btnTwoDesktopBorderRadius.top}${btnTwoBorderRadiusUnits.Desktop} ${btnTwoDesktopBorderRadius.right}${btnTwoBorderRadiusUnits.Desktop} ${btnTwoDesktopBorderRadius.bottom}${btnTwoBorderRadiusUnits.Desktop} ${btnTwoDesktopBorderRadius.left}${btnTwoBorderRadiusUnits.Desktop}`;
-const btnTwoTabletBorderRadiusWidthStyle = `${btnTwoTabBorderRadius.top}${btnTwoBorderRadiusUnits.Tablet} ${btnTwoTabBorderRadius.right}${btnTwoBorderRadiusUnits.Tablet} ${btnTwoTabBorderRadius.bottom}${btnTwoBorderRadiusUnits.Tablet} ${btnTwoTabBorderRadius.left}${btnTwoBorderRadiusUnits.Tablet}`;
-const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btnTwoBorderRadiusUnits.Mobile} ${btnTwoMobileBorderRadius.right}${btnTwoBorderRadiusUnits.Mobile} ${btnTwoMobileBorderRadius.bottom}${btnTwoBorderRadiusUnits.Mobile} ${btnTwoMobileBorderRadius.left}${btnTwoBorderRadiusUnits.Mobile}`;
-/** End btnTwo Border Radius */
+	/** Default border radius for btnTwo */
+	const btnTwoDesktopBorderRadiusWidthStyle = `${btnTwoDesktopBorderRadius.top}${btnTwoBorderRadiusUnits.Desktop} ${btnTwoDesktopBorderRadius.right}${btnTwoBorderRadiusUnits.Desktop} ${btnTwoDesktopBorderRadius.bottom}${btnTwoBorderRadiusUnits.Desktop} ${btnTwoDesktopBorderRadius.left}${btnTwoBorderRadiusUnits.Desktop}`;
+	const btnTwoTabletBorderRadiusWidthStyle = `${btnTwoTabBorderRadius.top}${btnTwoBorderRadiusUnits.Tablet} ${btnTwoTabBorderRadius.right}${btnTwoBorderRadiusUnits.Tablet} ${btnTwoTabBorderRadius.bottom}${btnTwoBorderRadiusUnits.Tablet} ${btnTwoTabBorderRadius.left}${btnTwoBorderRadiusUnits.Tablet}`;
+	const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btnTwoBorderRadiusUnits.Mobile} ${btnTwoMobileBorderRadius.right}${btnTwoBorderRadiusUnits.Mobile} ${btnTwoMobileBorderRadius.bottom}${btnTwoBorderRadiusUnits.Mobile} ${btnTwoMobileBorderRadius.left}${btnTwoBorderRadiusUnits.Mobile}`;
+	/** End btnTwo Border Radius */
 
 	/** Global Typography */
 	/** Start Global padding */
@@ -2713,17 +2815,48 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 							? `box-shadow: ${boxGlobalBoxShadowCssValue};`
 							: ""
 					}
-					${testBackgroundType === 'gradient' ? `
-                        background: ${testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor};
-                    ` : testBackgroundImageUrl && testBackgroundImageUrl !== 'null' ? `
-                        ${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : ''}
-                        ${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : ''}
-                        ${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : ''}
-                        ${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : ''}
-                        ${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : ''}
-                    ` : `
+					${
+						testBackgroundType === "gradient"
+							? `
+                        background: ${
+													testCustomGradientSwitcher &&
+													testCustomGradientInputValue
+														? testCustomGradientInputValue
+														: testGradientColor
+												};
+                    `
+							: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
+							? `
+                        ${
+													testBackgroundImageUrl
+														? `background-image: url(${testBackgroundImageUrl});`
+														: ""
+												}
+                        ${
+													testBackgroundImagePosition
+														? `background-position: ${testBackgroundImagePosition};`
+														: ""
+												}
+                        ${
+													testBackgroundImageAttachment
+														? `background-attachment: ${testBackgroundImageAttachment};`
+														: ""
+												}
+                        ${
+													testBackgroundImageRepeat
+														? `background-repeat: ${testBackgroundImageRepeat};`
+														: ""
+												}
+                        ${
+													testBackgroundImageSize
+														? `background-size: ${testBackgroundImageSize};`
+														: ""
+												}
+                    `
+							: `
                         background: ${testClassicColor};
-                    `}
+                    `
+					}
                     transition: all .3s ease-in-out;
                 }
                 .fb-cta-content-wrapper.${blockID}:hover {
@@ -2737,17 +2870,49 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												? `border-color: ${globalBorderHoverColor};`
 												: ""
 										};
-										${testBackgroundType === 'gradient' ? `
-                        background: ${testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor};
-                    ` : testBackgroundImageUrl && testBackgroundImageUrl !== 'null' ? `
-                        ${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : ''}
-                        ${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : ''}
-                        ${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : ''}
-                        ${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : ''}
-                        ${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : ''}
-                    ` : `
+										${
+											testBackgroundType === "gradient"
+												? `
+                        background: ${
+													testCustomGradientSwitcher &&
+													testCustomGradientInputValue
+														? testCustomGradientInputValue
+														: testGradientColor
+												};
+                    `
+												: testBackgroundImageUrl &&
+												  testBackgroundImageUrl !== "null"
+												? `
+                        ${
+													testBackgroundImageUrl
+														? `background-image: url(${testBackgroundImageUrl});`
+														: ""
+												}
+                        ${
+													testBackgroundImagePosition
+														? `background-position: ${testBackgroundImagePosition};`
+														: ""
+												}
+                        ${
+													testBackgroundImageAttachment
+														? `background-attachment: ${testBackgroundImageAttachment};`
+														: ""
+												}
+                        ${
+													testBackgroundImageRepeat
+														? `background-repeat: ${testBackgroundImageRepeat};`
+														: ""
+												}
+                        ${
+													testBackgroundImageSize
+														? `background-size: ${testBackgroundImageSize};`
+														: ""
+												}
+                    `
+												: `
                         background: ${testClassicColor};
-                    `}
+                    `
+										}
                 }
 
                 @media only screen and (max-width: 1024px){
@@ -3063,7 +3228,7 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
                     padding: ${buttonPadding};
                     margin: ${buttonMargin};
                     border: ${infoButtonBorder};
-					${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ''}
+					${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ""}
                     border-width: ${buttonBorderWidth};
                     border-radius: ${buttonBorderRadiusWidth};
                 }
@@ -3180,17 +3345,31 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 											: buttonTwoFontFamily
 									};
                     
-					${buttonTwoFontSize.Desktop && buttonTwoFontSizeUnits.Desktop ? `font-size: ${buttonTwoFontSize.Desktop}${buttonTwoFontSizeUnits.Desktop};` : ''}
+					${
+						buttonTwoFontSize.Desktop && buttonTwoFontSizeUnits.Desktop
+							? `font-size: ${buttonTwoFontSize.Desktop}${buttonTwoFontSizeUnits.Desktop};`
+							: ""
+					}
                     font-weight: ${buttonTwoFontWeight};
                     font-style: ${buttonTwoFontStyle};
                     text-transform: ${buttonTwoTextTransform};
                     text-decoration: ${buttonTwoTextDecoration};
-					${buttonTwoLetterSpacing.Desktop && buttonTwoLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonTwoLetterSpacing.Desktop}${buttonTwoLetterSpacingUnits.Desktop};` : ''}
-                    ${buttonTwoLineHeight.Desktop && buttonTwoLineHeightUnits.Desktop ? `line-height: ${buttonTwoLineHeight.Desktop}${buttonTwoLineHeightUnits.Desktop};` : ''}
-                    padding: ${btnTwoDesktopPaddingWidth};
+					${
+						buttonTwoLetterSpacing.Desktop &&
+						buttonTwoLetterSpacingUnits.Desktop
+							? `letter-spacing: ${buttonTwoLetterSpacing.Desktop}${buttonTwoLetterSpacingUnits.Desktop};`
+							: ""
+					}
+                    ${
+											buttonTwoLineHeight.Desktop &&
+											buttonTwoLineHeightUnits.Desktop
+												? `line-height: ${buttonTwoLineHeight.Desktop}${buttonTwoLineHeightUnits.Desktop};`
+												: ""
+										}
+                    padding: ${buttonTwoDesktopPadding};
                     margin: ${btnTwoDesktopMarginWidth};
                     border: ${btnTwoBorder};
-					${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ''}
+					${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ""}
                     border-width: ${btnTwoDesktopBorderWidthStyle};
                     border-radius: ${btnTwoDesktopBorderRadiusWidthStyle};
                 }
@@ -3210,7 +3389,7 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 
                 @media only screen and (max-width: 1024px) {
                     .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                        padding: ${btnTwoTabletPaddingWidth} !important;
+                        padding: ${buttonTwoTabletPadding} !important;
                         margin: ${btnTwoTabletMarginWidth} !important;
                         border-width: ${btnTwoTabletBorderWidthStyle} !important;
                         border-radius: ${btnTwoTabletBorderRadiusWidthStyle} !important;
@@ -3219,84 +3398,11 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 
                 @media only screen and (max-width: 767px) {
                     .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                        padding: ${btnTwoMobilePaddingWidth} !important;
+                        padding: ${buttonTwoMobilePadding} !important;
                         margin: ${btnTwoMobileMarginWidth} !important;
                         border-width: ${btnTwoMobileBorderWidthStyle} !important;
                         border-radius: ${btnTwoMobileBorderRadiusWidthStyle} !important;
                     }
-                }
-
-                .fb-cta-content-wrapper.${blockID} .fb-cta-media-wrapper{
-                	width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};
-                	height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};
-					${
-						mediaBgTypeImage
-							? `background-image: url(${mediaBgTypeImage});`
-							: `background-color: ${mediaBgColor || ""};`
-					}
-					padding: ${mediaDesktopPadding};
-                    margin: ${mediaDesktopMargin};
-                    border: ${mediaBorder};
-                    border-width: ${mediaBorderDesktopWidth};
-                    border-radius: ${mediaBorderRadiusDesktopWidth};
-					background-repeat: none;
-					background-size: cover;
-                }
-				.fb-cta-content-wrapper.${blockID}:hover .fb-cta-media-wrapper{
-					${
-						mediaBgHoverColor !== undefined
-							? `background-color: ${mediaBgHoverColor};`
-							: "#ffffff"
-					}
-				}
-				@media only screen and (max-width: 1024px) {
-                .fb-cta-content-wrapper.${blockID} .fb-cta-media-wrapper{
-                	width: ${mediaBgWidth.Tablet}${mediaBgWidthUnits.Tablet};
-                	height: ${mediaBgHeight.Tablet}${mediaBgHeightUnits.Tablet};
-					padding: ${mediaTabletPadding};
-                    margin: ${mediaTabletMargin};
-                    border-width: ${mediaBorderTabletWidth};
-                    border-radius: ${mediaBorderRadiusTabletWidth};
-                }
-                }
-                @media only screen and (max-width: 767px) {
-                .fb-cta-content-wrapper.${blockID} .fb-cta-media-wrapper{
-                	width: ${mediaBgWidth.Mobile}${mediaBgWidthUnits.Mobile};
-                	height: ${mediaBgHeight.Mobile}${mediaBgHeightUnits.Mobile};
-					padding: ${mediaMobilePadding};
-                    margin: ${mediaMobileMargin};
-                    border-width: ${mediaBorderMobileWidth};
-                    border-radius: ${mediaBorderRadiusMobileWidth};
-                }
-                }
-
-				.fb-cta-content-wrapper.${blockID} .fb-icon-wrapper svg,
-                .fb-cta-content-wrapper.${blockID} .fb-cta-media-wrapper img{
-                	width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
-					${mediaIconColor !== undefined ? `fill: ${mediaIconColor};` : "#ffffff"}
-				}
-				.fb-cta-content-wrapper.${blockID}:hover .fb-icon-wrapper svg{
-					${
-						mediaIconHoverColor !== undefined
-							? `fill: ${mediaIconHoverColor};`
-							: "#ffffff"
-					}
-				}
-                .fb-cta-content-wrapper.${blockID}:hover .fb-cta-media-wrapper{
-					${mediaBgHoverColor !== undefined ? `fill: ${mediaBgHoverColor};` : "#ffffff"}
-				}
-
-                @media only screen and (max-width: 1024px) {
-                .fb-cta-content-wrapper.${blockID} .fb-icon-wrapper svg,
-                .fb-cta-content-wrapper.${blockID} .fb-cta-media-wrapper img{
-                	width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
-                }
-                }
-                @media only screen and (max-width: 767px) {
-                .fb-cta-content-wrapper.${blockID} .fb-icon-wrapper svg,
-                .fb-cta-content-wrapper.${blockID} .fb-cta-media-wrapper img{
-                	width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
-                }
                 }
 
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
@@ -3322,7 +3428,11 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 					${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : "#ffffff"}
                 }
 				.fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
-					${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff"}
+					${
+						btnTwoIconHoverColor !== undefined
+							? `fill: ${btnTwoIconHoverColor};`
+							: "#ffffff"
+					}
                 }
                 @media only screen and (max-width: 1024px) {
                 .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
@@ -7194,17 +7304,22 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 													setAttributes({ btnTwoIconHoverColor: value })
 												}
 											/>
+
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={btnTwoPaddingUnitsHandler}
+												spacingUnitsHandler={handleButtonTwoPaddingUnitsHandler}
 												spacingUnits={btnTwoPaddingUnits}
 												spacingDesktop={btnTwoDesktopPadding}
 												spacingTablet={btnTwoTabPadding}
 												spacingMobile={btnTwoMobilePadding}
-												handleSpacingUnitHandler={btnTwoPaddingUnitsChange}
+												handleSpacingUnitHandler={
+													handleButtonTwoPaddingUnitChange
+												}
 												spacingCombineBtn={btnTwoPaddingLink}
-												spacingCombineBtnHandler={btnTwoPaddingLinkBtn}
+												spacingCombineBtnHandler={
+													handleButtonTwoPaddingCombineBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<FB_Spacing
@@ -7264,9 +7379,7 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												spacingDesktop={btnTwoDesktopBorderRadius}
 												spacingTablet={btnTwoTabBorderRadius}
 												spacingMobile={btnTwoMobileBorderRadius}
-												handleSpacingUnitHandler={
-													btnTwoBorderRadiusUnitsChange
-												}
+												handleSpacingUnitHandler={btnTwoBorderRadiusUnitsChange}
 												spacingCombineBtn={btnTwoBorderRadiusLink}
 												spacingCombineBtnHandler={btnTwoBorderRadiusLinkBtn}
 												setAttributes={setAttributes}
@@ -7340,61 +7453,148 @@ const btnTwoMobileBorderRadiusWidthStyle = `${btnTwoMobileBorderRadius.top}${btn
 												</PanelBody>
 
 												<PanelBody title="Background" initialOpen={false}>
-													
 													<FB_BackgroundColorControl
-													bgColorSwitcher={testBgColorSwitcher}
-													setBgColorSwitcher={(value) => setAttributes({ testBgColorSwitcher: value })}
-													
-													normalBackgroundType={testBackgroundType}
-													setNormalBackgroundType={(value) => setAttributes({ testBackgroundType: value })}
-													normalClassicColor={testClassicColor}
-													setNormalClassicColor={(value) => setAttributes({ testClassicColor: value })}
-													normalGradientColor={testGradientColor}
-													setNormalGradientColor={(value) => setAttributes({ testGradientColor: value })}
-													normalCustomGradientSwitcher={testCustomGradientSwitcher}
-													setNormalCustomGradientSwitcher={(value) => setAttributes({ testCustomGradientSwitcher: value })}
-													normalCustomGradientInputValue={testCustomGradientInputValue}
-													setNormalCustomGradientInputValue={(value) => setAttributes({ testCustomGradientInputValue: value })}
-													normalBackgroundImageUrl={testBackgroundImageUrl}
-													setNormalBackgroundImageUrl={(value) => setAttributes({ testBackgroundImageUrl: value })}
-													normalBackgroundImageAlt={testBackgroundImageAlt}
-													setNormalBackgroundImageAlt={(value) => setAttributes({ testBackgroundImageAlt: value })}
-													normalBackgroundImageID={testBackgroundImageID}
-													setNormalBackgroundImageID={(value) => setAttributes({ testBackgroundImageID: value })}
-													normalBackgroundImagePosition={testBackgroundImagePosition}
-													setNormalBackgroundImagePosition={(value) => setAttributes({ testBackgroundImagePosition: value })}
-													normalBackgroundImageAttachment={testBackgroundImageAttachment}
-													setNormalBackgroundImageAttachment={(value) => setAttributes({ testBackgroundImageAttachment: value })}
-													normalBackgroundImageRepeat={testBackgroundImageRepeat}
-													setNormalBackgroundImageRepeat={(value) => setAttributes({ testBackgroundImageRepeat: value })}
-													normalBackgroundImageSize={testBackgroundImageSize}
-													setNormalBackgroundImageSize={(value) => setAttributes({ testBackgroundImageSize: value })}
-													
-													hoverBackgroundType={hoverBackgroundType}
-													setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value })}
-													hoverClassicColor={hoverClassicColor}
-													setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value })}
-													hoverGradientColor={hoverGradientColor} 
-													setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value })}
-													hoverCustomGradientSwitcher={hoverCustomGradientSwitcher}
-													setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value })}
-													hoverCustomGradientInputValue={hoverCustomGradientInputValue}
-													setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value })}
-													hoverBackgroundImageUrl={hoverBackgroundImageUrl}
-													setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value })}
-													hoverBackgroundImageAlt={hoverBackgroundImageAlt}
-													setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value })}
-													hoverBackgroundImageID={hoverBackgroundImageID}
-													setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value })}
-													hoverBackgroundImagePosition={hoverBackgroundImagePosition}
-													setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value })}
-													hoverBackgroundImageAttachment={hoverBackgroundImageAttachment}
-													setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value })}
-													hoverBackgroundImageRepeat={hoverBackgroundImageRepeat}
-													setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value })}
-													hoverBackgroundImageSize={hoverBackgroundImageSize}
-													setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value })}
-												/>
+														bgColorSwitcher={testBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ testBgColorSwitcher: value })
+														}
+														normalBackgroundType={testBackgroundType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ testBackgroundType: value })
+														}
+														normalClassicColor={testClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ testClassicColor: value })
+														}
+														normalGradientColor={testGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ testGradientColor: value })
+														}
+														normalCustomGradientSwitcher={
+															testCustomGradientSwitcher
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																testCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={
+															testCustomGradientInputValue
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																testCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={testBackgroundImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ testBackgroundImageUrl: value })
+														}
+														normalBackgroundImageAlt={testBackgroundImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ testBackgroundImageAlt: value })
+														}
+														normalBackgroundImageID={testBackgroundImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ testBackgroundImageID: value })
+														}
+														normalBackgroundImagePosition={
+															testBackgroundImagePosition
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																testBackgroundImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={
+															testBackgroundImageAttachment
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																testBackgroundImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={
+															testBackgroundImageRepeat
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																testBackgroundImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={testBackgroundImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ testBackgroundImageSize: value })
+														}
+														hoverBackgroundType={hoverBackgroundType}
+														setHoverBackgroundType={(value) =>
+															setAttributes({ hoverBackgroundType: value })
+														}
+														hoverClassicColor={hoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ hoverClassicColor: value })
+														}
+														hoverGradientColor={hoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ hoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={
+															hoverCustomGradientSwitcher
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																hoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={
+															hoverCustomGradientInputValue
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																hoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={hoverBackgroundImageUrl}
+														setHoverBackgroundImageUrl={(value) =>
+															setAttributes({ hoverBackgroundImageUrl: value })
+														}
+														hoverBackgroundImageAlt={hoverBackgroundImageAlt}
+														setHoverBackgroundImageAlt={(value) =>
+															setAttributes({ hoverBackgroundImageAlt: value })
+														}
+														hoverBackgroundImageID={hoverBackgroundImageID}
+														setHoverBackgroundImageID={(value) =>
+															setAttributes({ hoverBackgroundImageID: value })
+														}
+														hoverBackgroundImagePosition={
+															hoverBackgroundImagePosition
+														}
+														setHoverBackgroundImagePosition={(value) =>
+															setAttributes({
+																hoverBackgroundImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={
+															hoverBackgroundImageAttachment
+														}
+														setHoverBackgroundImageAttachment={(value) =>
+															setAttributes({
+																hoverBackgroundImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={
+															hoverBackgroundImageRepeat
+														}
+														setHoverBackgroundImageRepeat={(value) =>
+															setAttributes({
+																hoverBackgroundImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={hoverBackgroundImageSize}
+														setHoverBackgroundImageSize={(value) =>
+															setAttributes({ hoverBackgroundImageSize: value })
+														}
+													/>
 												</PanelBody>
 												<PanelBody
 													title={__("Border and Shadow", "frontis-blocks")}
