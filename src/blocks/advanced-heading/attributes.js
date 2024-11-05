@@ -655,17 +655,17 @@ const attributes = {
     separatorWidth: {
         type: 'object',
         default: {
-            Desktop: '12',
-            Tablet: '12',
-            Mobile: '12'
+            Desktop: '100',
+            Tablet: '100',
+            Mobile: '100'
         }
     },
     separatorWidthUnits: {
 		type: 'object',
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%'
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
 		}
 	},
     separatorHeight: {
