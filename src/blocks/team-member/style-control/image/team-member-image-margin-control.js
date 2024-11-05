@@ -3,7 +3,7 @@ import FB_Spacing from '@Components/spacing';
 export default function TeamMemberImageMarginControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		teamMemberImageMarginUnits,
 		teamMemberImageMarginDesktop,
 		teamMemberImageMarginTab,
@@ -15,7 +15,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberImageMarginLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberImageMarginDesktop: {
@@ -50,7 +50,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberImageMarginDesktop: {...teamMemberImageMarginDesktop, [position]: value}} );
 					break;
@@ -74,7 +74,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 		setAttributes( {
 			teamMemberImageMarginUnits: {
 				...teamMemberImageMarginUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -83,7 +83,7 @@ export default function TeamMemberImageMarginControl ({ attributes, setAttribute
 		<>
 			<FB_Spacing
 				label={ 'Margin' }
-				DeviceType={DeviceType}
+				deviceType={deviceType}
 				spacingUnitsHandler={teamMemberImageMarginUnitsHandler}
 				spacingUnits={teamMemberImageMarginUnits}
 				spacingDesktop={teamMemberImageMarginDesktop}
