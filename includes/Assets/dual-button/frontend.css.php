@@ -1,22 +1,23 @@
 <?php
+
 use FrontisBlocks\Assets\EnqueueBlocksCss;
 // $block
 // Extract the block attributes
 $block_attributes = $block['attrs'];
 
-$block_id = isset( $block_attributes['blockID'] ) ? sanitize_text_field( $block_attributes['blockID'] ) : '';
+$block_id = isset($block_attributes['blockID']) ? sanitize_text_field($block_attributes['blockID']) : '';
 // Start Button Border Radius
-$button_bg_color = isset( $block_attributes['ButtonBgColor'] ) ? sanitize_text_field( $block_attributes['ButtonBgColor'] ) : '';
-$button_font_family = isset( $block_attributes['ButtonFontFamily'] ) ? sanitize_text_field( $block_attributes['ButtonFontFamily'] ) : 'default';
-$button_font_size = isset( $block_attributes['ButtonFontSize'] ) ? sanitize_text_field( $block_attributes['ButtonFontSize'] ) : '16';
-$button_font_size_units = isset( $block_attributes['ButtonFontSizeUnits'] ) ? sanitize_text_field( $block_attributes['ButtonFontSizeUnits'] ) : 'px';
-$button_font_weight = isset( $block_attributes['ButtonFontWeight'] ) ? sanitize_text_field( $block_attributes['ButtonFontWeight'] ) : 'normal';
-$button_font_style = isset( $block_attributes['ButtonFontStyle'] ) ? sanitize_text_field( $block_attributes['ButtonFontStyle'] ) : 'normal';
-$button_padding = isset( $block_attributes['ButtonPadding'] ) ? sanitize_text_field( $block_attributes['ButtonPadding'] ) : '10px';
-$button_margin = isset( $block_attributes['ButtonMargin'] ) ? sanitize_text_field( $block_attributes['ButtonMargin'] ) : '0';
-$button_border = isset( $block_attributes['ButtonBorder'] ) ? sanitize_text_field( $block_attributes['ButtonBorder'] ) : 'none';
-$button_border_color = isset( $block_attributes['ButtonBorderColor'] ) ? sanitize_text_field( $block_attributes['ButtonBorderColor'] ) : '';
-$button_border_radius = isset( $block_attributes['ButtonBorderRadius'] ) ? sanitize_text_field( $block_attributes['ButtonBorderRadius'] ) : '4px';
+$button_bg_color = isset($block_attributes['ButtonBgColor']) ? sanitize_text_field($block_attributes['ButtonBgColor']) : '';
+$button_font_family = isset($block_attributes['ButtonFontFamily']) ? sanitize_text_field($block_attributes['ButtonFontFamily']) : 'default';
+$button_font_size = isset($block_attributes['ButtonFontSize']) ? sanitize_text_field($block_attributes['ButtonFontSize']) : '16';
+$button_font_size_units = isset($block_attributes['ButtonFontSizeUnits']) ? sanitize_text_field($block_attributes['ButtonFontSizeUnits']) : 'px';
+$button_font_weight = isset($block_attributes['ButtonFontWeight']) ? sanitize_text_field($block_attributes['ButtonFontWeight']) : 'normal';
+$button_font_style = isset($block_attributes['ButtonFontStyle']) ? sanitize_text_field($block_attributes['ButtonFontStyle']) : 'normal';
+$button_padding = isset($block_attributes['ButtonPadding']) ? sanitize_text_field($block_attributes['ButtonPadding']) : '10px';
+$button_margin = isset($block_attributes['ButtonMargin']) ? sanitize_text_field($block_attributes['ButtonMargin']) : '0';
+$button_border = isset($block_attributes['ButtonBorder']) ? sanitize_text_field($block_attributes['ButtonBorder']) : 'none';
+$button_border_color = isset($block_attributes['ButtonBorderColor']) ? sanitize_text_field($block_attributes['ButtonBorderColor']) : '';
+$button_border_radius = isset($block_attributes['ButtonBorderRadius']) ? sanitize_text_field($block_attributes['ButtonBorderRadius']) : '4px';
 
 $button_two_border_radius_units = isset($block_attributes['ButtonTwoBorderRadiusUnits']) ? $block_attributes['ButtonTwoBorderRadiusUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $button_two_desktop_border_radius_width = isset($block_attributes['ButtonTwoDesktopBorderRadiusWidth']) ? $block_attributes['ButtonTwoDesktopBorderRadiusWidth'] : array('top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0');
@@ -61,31 +62,68 @@ $button_desktop_padding = $button_two_desktop_padding['top'] . $button_two_paddi
 $button_tab_padding = $button_two_tab_padding['top'] . $button_two_padding_units['Tablet'] . ' ' . $button_two_tab_padding['right'] . $button_two_padding_units['Tablet'] . ' ' . $button_two_tab_padding['bottom'] . $button_two_padding_units['Tablet'] . ' ' . $button_two_tab_padding['left'] . $button_two_padding_units['Tablet'];
 $button_mobile_padding = $button_two_mobile_padding['top'] . $button_two_padding_units['Mobile'] . ' ' . $button_two_mobile_padding['right'] . $button_two_padding_units['Mobile'] . ' ' . $button_two_mobile_padding['bottom'] . $button_two_padding_units['Mobile'] . ' ' . $button_two_mobile_padding['left'] . $button_two_padding_units['Mobile'];
 
+//Button gap
+$buttons_gap = isset($block_attributes['buttonsGap']) ? $block_attributes['buttonsGap'] : array('Desktop' => 0, 'Tablet' => 0, 'Mobile' => 0);
+$buttons_gap_units = isset($block_attributes['buttonsGapUnits']) ? $block_attributes['buttonsGapUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 
+// Button one seperate style
+$button_bg_color = isset($block_attributes['ButtonBgColor']) ? $block_attributes['ButtonBgColor'] : '';
+$button_border = isset($block_attributes['ButtonBorder']) ? $block_attributes['ButtonBorder'] : 'none';
+$button_border_color = isset($block_attributes['ButtonBorderColor']) ? $block_attributes['ButtonBorderColor'] : '';
+
+$button_desktop_border_width = isset($block_attributes['ButtonDesktopBorderWidth']) ? $block_attributes['ButtonDesktopBorderWidth'] : ['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0];
+$button_border_units = isset($block_attributes['ButtonBorderUnits']) ? $block_attributes['ButtonBorderUnits'] : 'px';
+
+$border_width = "{$button_desktop_border_width['top']}{$button_border_units} "
+              . "{$button_desktop_border_width['right']}{$button_border_units} "
+              . "{$button_desktop_border_width['bottom']}{$button_border_units} "
+              . "{$button_desktop_border_width['left']}{$button_border_units}";
+
+$button_desktop_border_radius_width = isset($block_attributes['ButtonDesktopBorderRadiusWidth']) ? $block_attributes['ButtonDesktopBorderRadiusWidth'] : ['top' => 34, 'right' => 0, 'bottom' => 34, 'left' => 0];
+$button_border_radius_units = isset($block_attributes['ButtonBorderRadiusUnits']) ? $block_attributes['ButtonBorderRadiusUnits'] : 'px';
+
+$border_radius_width = "{$button_desktop_border_radius_width['top']}{$button_border_radius_units} "
+                                   . "{$button_desktop_border_radius_width['right']}{$button_border_radius_units} "
+                                   . "{$button_desktop_border_radius_width['bottom']}{$button_border_radius_units} "
+                                   . "{$button_desktop_border_radius_width['left']}{$button_border_radius_units}";
+
+//Button two seperate style
+
+              
+           
+   
 // Generate CSS content
 $css_content = "
 .$block_id.fb-dual-button-container .fb-advanced-button {
-    " . ( ! empty( $button_bg_color ) ? "background-color: $button_bg_color;" : '' ) . "
-    font-family: " . ( $button_font_family !== 'default' ? $button_font_family : 'inherit' ) . ";
-    font-size: " . ( ! empty( $button_font_size ) ? "{$button_font_size}{$button_font_size_units}" : 'inherit' ) . ";
-    font-weight: " . ( ! empty( $button_font_weight ) ? $button_font_weight : 'normal' ) . ";
-    font-style: " . ( ! empty( $button_font_style ) ? $button_font_style : 'normal' ) . ";
-    padding: " . ( ! empty( $button_padding ) ? $button_padding : '10px' ) . ";
-    margin: " . ( ! empty( $button_margin ) ? $button_margin : '0' ) . ";
+    " . (! empty($button_bg_color) ? "background-color: $button_bg_color;" : '') . "
+    font-family: " . ($button_font_family !== 'default' ? $button_font_family : 'inherit') . ";
+    font-size: " . (! empty($button_font_size) ? "{$button_font_size}{$button_font_size_units}" : 'inherit') . ";
+    font-weight: " . (! empty($button_font_weight) ? $button_font_weight : 'normal') . ";
+    font-style: " . (! empty($button_font_style) ? $button_font_style : 'normal') . ";
+    padding: " . (! empty($button_padding) ? $button_padding : '10px') . ";
+    margin: " . (! empty($button_margin) ? $button_margin : '0') . ";
 }
 .$block_id.fb-dual-button-container .fb-advanced-button {
-    " . ( ! empty( $button_bg_color ) ? "background-color: $button_bg_color;" : '' ) . "
-    font-family: " . ( $button_font_family !== 'default' ? $button_font_family : 'inherit' ) . ";
-    font-size: " . ( ! empty( $button_font_size ) ? "{$button_font_size}{$button_font_size_units}" : 'inherit' ) . ";
-    font-weight: " . ( ! empty( $button_font_weight ) ? $button_font_weight : 'normal' ) . ";
-    font-style: " . ( ! empty( $button_font_style ) ? $button_font_style : 'normal' ) . ";
-    padding: " . ( ! empty( $button_padding ) ? $button_padding : '10px' ) . ";
-    margin: " . ( ! empty( $button_margin ) ? $button_margin : '0' ) . ";
+    " . (! empty($button_bg_color) ? "background-color: $button_bg_color;" : '') . "
+    font-family: " . ($button_font_family !== 'default' ? $button_font_family : 'inherit') . ";
+    font-size: " . (! empty($button_font_size) ? "{$button_font_size}{$button_font_size_units}" : 'inherit') . ";
+    font-weight: " . (! empty($button_font_weight) ? $button_font_weight : 'normal') . ";
+    font-style: " . (! empty($button_font_style) ? $button_font_style : 'normal') . ";
+    padding: " . (! empty($button_padding) ? $button_padding : '10px') . ";
+    margin: " . (! empty($button_margin) ? $button_margin : '0') . ";
 }
 .fb-dual-button-container.$block_id .fb-dual-button-wrapper{
-	gap: ;
+	gap: {$buttons_gap['Desktop']}{$buttons_gap_units['Desktop']};
 }
+.fb-dual-button-container.$block_id .fb-dual-button-one-wrapper .fb-advanced-button{
+	" . ($button_bg_color !== '' ? "background-color: {$button_bg_color};" : "") . "
+    border: {$button_border};
+    " . ($button_border_color !== '' ? "border-color: {$button_border_color};" : "") . "
+    border: {$border_width};
+    border-radius: {$border_radius_width};
+}
+
 ";
 
 // Enqueue style for frontend
-EnqueueBlocksCss::enqueue_block_asset( $css_content, $single_block['slug'], $block_id);
+EnqueueBlocksCss::enqueue_block_asset($css_content, $single_block['slug'], $block_id);
