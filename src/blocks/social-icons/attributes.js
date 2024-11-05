@@ -236,7 +236,7 @@ const attributes = {
 		default: {
 			Desktop: 20,
 			Tablet: 20,
-			Mobile: 20
+			Mobile: 15
 		}
 	},
 	socialIconSizeUnits: {
@@ -383,19 +383,19 @@ const attributes = {
     socialIconPaddingTablet: {
         type: "object", 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     socialIconPaddingMobile: {
         type: "object", 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
         },
     },
     /*End Icon Styles */
@@ -640,9 +640,9 @@ const attributes = {
     socialGapSize: {
         type: 'object',
         default: {
-            Desktop: 20,
-            Tablet: 15,
-            Mobile: 15
+            Desktop: 10,
+            Tablet: 10,
+            Mobile: 10
         }
     },
     socialGapUnits: {
