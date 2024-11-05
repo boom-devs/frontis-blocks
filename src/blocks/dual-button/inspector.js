@@ -874,12 +874,96 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     border-width: ${borderWidth};
                     border-radius: ${borderRadiusWidth};
                 }
+				.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button:hover{
+					${
+						ButtonBgHoverColor !== undefined ? `background-color: ${ButtonBgHoverColor};` : ""
+						}
+						${
+							ButtonBorderHoverColor !== undefined ? `border-color: ${ButtonBorderHoverColor};` : ""
+						}
+				}
+				@media only screen and (max-width: 1024px) {
+                    .fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
+                        padding: ${buttonTabPadding};
+                        margin: ${buttonTabMargin};
+                        border-width: ${
+													ButtonTabBorderWidth.top
+												}${ButtonBorderUnits} ${
+													ButtonTabBorderWidth.right
+												}${ButtonBorderUnits} ${
+													ButtonTabBorderWidth.bottom
+												}${ButtonBorderUnits} ${
+													ButtonTabBorderWidth.left
+												}${ButtonBorderUnits} !important;
+                        border-radius: ${
+													ButtonTabBorderRadiusWidth.top
+												}${ButtonBorderRadiusUnits} ${
+													ButtonTabBorderRadiusWidth.right
+												}${ButtonBorderRadiusUnits} ${
+													ButtonTabBorderRadiusWidth.bottom
+												}${ButtonBorderRadiusUnits} ${
+													ButtonTabBorderRadiusWidth.left
+												}${ButtonBorderRadiusUnits} !important;
+                    }
+                }
+
+                @media only screen and (max-width: 767px) {
+                    .fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
+                        padding: ${buttonMobilePadding};
+                        margin: ${buttonMobileMargin};
+                        border-width: ${
+													ButtonMobileBorderWidth.top
+												}${ButtonBorderUnits} ${
+													ButtonMobileBorderWidth.right
+												}${ButtonBorderUnits} ${
+													ButtonMobileBorderWidth.bottom
+												}${ButtonBorderUnits} ${
+													ButtonMobileBorderWidth.left
+												}${ButtonBorderUnits} !important;
+                        border-radius: ${
+													ButtonMobileBorderRadiusWidth.top
+												}${ButtonBorderRadiusUnits} ${
+													ButtonMobileBorderRadiusWidth.right
+												}${ButtonBorderRadiusUnits} ${
+													ButtonMobileBorderRadiusWidth.bottom
+												}${ButtonBorderRadiusUnits} ${
+													ButtonMobileBorderRadiusWidth.left
+												}${ButtonBorderRadiusUnits} !important;
+                    }
+                }
+
 				.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
                     ${
-											ButtonTwoBgColor !== undefined
-												? `background-color: ${ButtonTwoBgColor} !important;`
-												: ""
-										}
+					ButtonTwoBgColor !== undefined ? `background-color: ${ButtonTwoBgColor} !important;` : ""
+					}
+					border: ${ButtonTwoBorder};
+					border-width: ${buttonBorderDesktopWidth};
+					border-radius: ${buttonBorderRadiusDesktopWidth};
+					${
+					ButtonTwoBorderColor !== undefined ? `border-color: ${ButtonTwoBorderColor};` : ""
+					}
+                }
+				.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button:hover{
+					${
+						ButtonTwoBgHoverColor !== undefined ? `background-color: ${ButtonTwoBgHoverColor} !important;` : ""
+					}
+					${
+						ButtonTwoBorderHoverColor !== undefined ? `border-color: ${ButtonTwoBorderHoverColor};` : ""
+					}
+				}
+                @media only screen and  (max-width:1024px){
+                .fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
+                    border: ${ButtonTwoBorder};
+                    border-width: ${buttonBorderTabletWidth};
+                    border-radius: ${buttonBorderRadiusTabletWidth};
+                }
+                }
+                @media only screen and  (max-width:727px){
+                .fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
+                    border: ${ButtonTwoBorder};
+                    border-width: ${buttonBorderMobileWidth};
+                    border-radius: ${buttonBorderRadiusMobileWidth};
+                }
                 }
                 .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-one .fb-advanced-button-text {
                     ${ButtonColor !== undefined ? `color: ${ButtonColor};` : ""}
@@ -906,55 +990,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												: ""
 										}
                 }
-                @media only screen and (max-width: 1024px) {
-                    .fb-dual-button-container.${blockID} .fb-advanced-button {
-                        padding: ${buttonTabPadding};
-                        margin: ${buttonTabMargin};
-                        border-width: ${
-													ButtonTabBorderWidth.top
-												}${ButtonBorderUnits} ${
-													ButtonTabBorderWidth.right
-												}${ButtonBorderUnits} ${
-													ButtonTabBorderWidth.bottom
-												}${ButtonBorderUnits} ${
-													ButtonTabBorderWidth.left
-												}${ButtonBorderUnits} !important;
-                        border-radius: ${
-													ButtonTabBorderRadiusWidth.top
-												}${ButtonBorderRadiusUnits} ${
-													ButtonTabBorderRadiusWidth.right
-												}${ButtonBorderRadiusUnits} ${
-													ButtonTabBorderRadiusWidth.bottom
-												}${ButtonBorderRadiusUnits} ${
-													ButtonTabBorderRadiusWidth.left
-												}${ButtonBorderRadiusUnits} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-dual-button-container.${blockID} .fb-advanced-button {
-                        padding: ${buttonMobilePadding};
-                        margin: ${buttonMobileMargin};
-                        border-width: ${
-													ButtonMobileBorderWidth.top
-												}${ButtonBorderUnits} ${
-													ButtonMobileBorderWidth.right
-												}${ButtonBorderUnits} ${
-													ButtonMobileBorderWidth.bottom
-												}${ButtonBorderUnits} ${
-													ButtonMobileBorderWidth.left
-												}${ButtonBorderUnits} !important;
-                        border-radius: ${
-													ButtonMobileBorderRadiusWidth.top
-												}${ButtonBorderRadiusUnits} ${
-													ButtonMobileBorderRadiusWidth.right
-												}${ButtonBorderRadiusUnits} ${
-													ButtonMobileBorderRadiusWidth.bottom
-												}${ButtonBorderRadiusUnits} ${
-													ButtonMobileBorderRadiusWidth.left
-												}${ButtonBorderRadiusUnits} !important;
-                    }
-                }
+                
 
                 .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
                     ${
@@ -1038,33 +1074,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
                 }
 
-                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two {
-                    ${
-											ButtonBgColor !== undefined
-												? `background-color: ${ButtonBgColor};`
-												: ""
-										}
-                    border: ${ButtonTwoBorder};
-                    border-width: ${buttonBorderDesktopWidth};
-                    border-radius: ${buttonBorderRadiusDesktopWidth};
-                    ${
-					ButtonTwoBorderColor !== undefined ? `border-color: ${ButtonTwoBorderColor};` : ""
-					}
-                }
-                @media only screen and  (max-width:1024px){
-                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two {
-                    border: ${ButtonTwoBorder};
-                    border-width: ${buttonBorderTabletWidth};
-                    border-radius: ${buttonBorderRadiusTabletWidth};
-                }
-                }
-                @media only screen and  (max-width:727px){
-                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two {
-                    border: ${ButtonTwoBorder};
-                    border-width: ${buttonBorderMobileWidth};
-                    border-radius: ${buttonBorderRadiusMobileWidth};
-                }
-                }
+                
             `}
 			</style>
 
