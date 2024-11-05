@@ -5,14 +5,10 @@ const attributes = {
 	},
 	deviceType: {
 		type: "string",
-		default: "desktop"
+		default: "Desktop"
 	},
 	imageId: {
 		"type": "number"
-	},
-	DeviceType: {
-		type: "string",
-		default: "Desktop"
 	},
 	imageAlt: {
 		"type": "string",
@@ -449,6 +445,344 @@ const attributes = {
 	normalBorderRadiusLink : {
 		type : "boolean",
 		default: true
-	}
+	},
+	boxGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    boxGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+	testBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    testBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    testClassicColor: {
+        type: "string",
+    },
+    testGradientColor: {
+        type: "string",
+    },
+    testCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    testCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    testBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    hoverClassicColor: {
+        type: "string",
+    },
+    hoverGradientColor: {
+        type: "string",
+    },
+    hoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    hoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    hoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    globalBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    // Attributes added as per file context
+    globalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    globalCustomGradientInputValue: {
+        type: "string",
+    },
+    globalGradientColor: {
+        type: "string",
+    },
+    globalColor: {
+        type: "string",
+    },
+    globalSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+	globalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalPaddingDesktop: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingTablet: {
+        type: "object",
+        default: {
+            top: 80,
+            bottom: 80,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingMobile: {
+        type: "object",
+        default: {
+            top: 60,
+            bottom: 60,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    globalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalMarginDesktop: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginTablet: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginMobile: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalMarginLink : {
+        type : "boolean",
+        default: true
+    },
+	globalBorder: {
+        type: 'string',
+        default: "none",
+    },
+    globalBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    globalBorderColor: {
+        type: 'string',
+    },
+    globalBorderHoverColor: {
+        type: 'string',
+    },
+    globalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalBorderDesktop: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderTablet: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderMobile: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    globalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    globalBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    globalBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+	globalZIndex : {
+        type: "number",
+    },
 }
 export default attributes;

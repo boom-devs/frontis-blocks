@@ -108,7 +108,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								tagName="span"
 								value={connectorText}
 								onChange={(value) => setAttributes({connectorText: value})}
-								placeholder={__('Enter connector text...', 'frontis-blocks')}
+								placeholder={__('Or', 'frontis-blocks')}
 								className="fb-dual-button-connector-text"
 							/>
 						</div>
