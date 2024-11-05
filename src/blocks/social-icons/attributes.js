@@ -7,10 +7,6 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
-    socialTitleSwitcher: {
-        type: "boolean",
-        default: false,
-    },
     socialItems: {
         type: "array",
         default: [
@@ -423,6 +419,92 @@ const attributes = {
     },
     /*End Icon Styles */
 
+    /** Title Styles */
+    socialTitleSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    socialTitleFontFamily: {
+        type: "string",
+        default: "inherit",
+    },
+    socialTitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialTitleFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    socialTitleFontWeight : {
+        type: "string",
+        default: "400"
+    },
+    socialTitleFontStyle : {
+        type: "string",
+        default: ""
+    },
+    socialTitleTextTransform : {
+        type: "string",
+        default: ""
+    },
+    socialTitleTextDecoration : {
+        type: "string",
+        default: ""
+    },
+    socialTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialTitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    socialTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    socialTitleColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialTitleColor : {
+        type: "string"
+    },
+    socialTitleHoverColor: {
+        type: 'string',
+    },
+
+    /*End Title Styles */
 
     /** Background Styles */
     socialBgColorSwitcher : {

@@ -31,6 +31,7 @@ import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
 import FB_Color from '@Components/color';
+import FB_TypographyControl from '@Components/typography-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import './editor.scss';
 
@@ -40,7 +41,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         deviceType,
         socialAlignment,
         socialItems,
-        socialTitleSwitcher,
 
         /** Icon Styles */
         socialIconSize,
@@ -75,6 +75,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialIconPaddingTablet,
         socialIconPaddingMobile,
         socialIconPaddingLink,
+		/** End Icon Padding */
+
+		/** Title Styles */
+		socialTitleSwitcher,
+        socialTitleFontFamily,
+        socialTitleFontSize,
+        socialTitleFontSizeUnits,
+        socialTitleFontWeight,
+        socialTitleFontStyle,
+        socialTitleTextTransform,
+        socialTitleTextDecoration,
+        socialTitleLetterSpacing,
+        socialTitleLetterSpacingUnits,
+        socialTitleLineHeight,
+        socialTitleLineHeightUnits,
+		socialTitleColorSwitcher,
+        socialTitleColor,
+        socialTitleHoverColor,
+		
+		/** End Title Styles */
 
         /** Social Padding */
 
@@ -1362,6 +1382,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	};
 	/** End Preset Style */
+
+
+	    /* set default values for the style attributes */
+		useEffect(() => {
+			if (socialTitleFontFamily) { 
+				const fontUrl = `https://fonts.googleapis.com/css?family=${socialTitleFontFamily.replace(' ', '+')}`;
+				const linkElement = document.createElement('link');
+				linkElement.rel = 'stylesheet';
+				linkElement.href = fontUrl;
+				document.head.appendChild(linkElement);
+			}
+		}, [socialTitleFontFamily]);
     
 
     return (
@@ -1430,6 +1462,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     fill: ${socialIconGlobalHoverColor};
                 }
 
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
+                    ${socialTitleFontFamily ? `font-family: ${socialTitleFontFamily};` : ''}
+                    ${socialTitleFontSize.Desktop && socialTitleFontSizeUnits.Desktop ? `font-size: ${socialTitleFontSize.Desktop}${socialTitleFontSizeUnits.Desktop};` : ''}
+                    ${socialTitleFontWeight ? `font-weight: ${socialTitleFontWeight};` : ''}
+                    ${socialTitleFontStyle ? `font-style: ${socialTitleFontStyle};` : ''}
+                    ${socialTitleTextTransform ? `text-transform: ${socialTitleTextTransform};` : ''}
+                    ${socialTitleTextDecoration ? `text-decoration: ${socialTitleTextDecoration};` : ''}
+                    ${socialTitleLetterSpacing.Desktop && socialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${socialTitleLetterSpacing.Desktop}${socialTitleLetterSpacingUnits.Desktop};` : ''}
+                    ${socialTitleLineHeight.Desktop && socialTitleLineHeightUnits.Desktop ? `line-height: ${socialTitleLineHeight.Desktop}${socialTitleLineHeightUnits.Desktop};` : ''}
+                    ${socialTitleColor ? `color: ${socialTitleColor};` : ''} 
+				}
+				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title:hover {
+					color: ${socialTitleHoverColor};
+				}
+
                 @media only screen and (max-width: 1024px) {
 
                     .${blockID}.fb-social-wrapper {
@@ -1446,6 +1493,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${IconBorderTabletWidth ? `border-width: ${IconBorderTabletWidth};` : ''}
                         ${IconBorderRadiusTabletWidth ? `border-radius: ${IconBorderRadiusTabletWidth};` : ''}
                     }
+					.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
+						${socialTitleFontSize.Tablet && socialTitleFontSizeUnits.Tablet ? `font-size: ${socialTitleFontSize.Tablet}${socialTitleFontSizeUnits.Tablet};` : ''}
+						${socialTitleLineHeight.Tablet && socialTitleLineHeightUnits.Tablet ? `line-height: ${socialTitleLineHeight.Tablet}${socialTitleLineHeightUnits.Tablet};` : ''}
+						${socialTitleLetterSpacing.Tablet && socialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${socialTitleLetterSpacing.Tablet}${socialTitleLetterSpacingUnits.Tablet};` : ''}
+					}	
                 }
 
                 @media only screen and (max-width: 767px) {
@@ -1463,6 +1515,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ${IconBorderMobileWidth ? `border-width: ${IconBorderMobileWidth};` : ''}
                         ${IconBorderRadiusMobileWidth ? `border-radius: ${IconBorderRadiusMobileWidth};` : ''}
                     }
+					.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
+						${socialTitleFontSize.Mobile && socialTitleFontSizeUnits.Mobile ? `font-size: ${socialTitleFontSize.Mobile}${socialTitleFontSizeUnits.Mobile};` : ''}
+						${socialTitleLineHeight.Mobile && socialTitleLineHeightUnits.Mobile ? `line-height: ${socialTitleLineHeight.Mobile}${socialTitleLineHeightUnits.Mobile};` : ''}
+						${socialTitleLetterSpacing.Mobile && socialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${socialTitleLetterSpacing.Mobile}${socialTitleLetterSpacingUnits.Mobile};` : ''}
+					}
                 }
 
             `}
@@ -1650,6 +1707,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 checked={socialTitleSwitcher}
                                                 onChange={(value) => setAttributes({ socialTitleSwitcher: value })}
                                             />
+
+											{socialTitleSwitcher && (
+												<>
+													<FB_TypographyControl
+														fontFamily={socialTitleFontFamily}
+														onChangeFontFamily={(value) => setAttributes({ socialTitleFontFamily: value })}
+
+														fontSize={socialTitleFontSize}
+														onChangeFontSize={(value) => setAttributes({ socialTitleFontSize: value })}
+
+														fontSizeUnits={socialTitleFontSizeUnits}
+														onChangeFontSizeUnit={(value) => setAttributes({ socialTitleFontSizeUnits: value })}
+
+														fontWeight={socialTitleFontWeight}
+														onChangeFontWeight={(value) => setAttributes({ socialTitleFontWeight: value })}
+
+														fontStyle={socialTitleFontStyle}
+														onChangeFontStyle={(value) => setAttributes({ socialTitleFontStyle: value })}
+
+														textTransform={socialTitleTextTransform}
+														onChangeTextTransform={(value) => setAttributes({ socialTitleTextTransform: value })}
+
+														textDecoration={socialTitleTextDecoration}
+														onChangeTextDecoration={(value) => setAttributes({ socialTitleTextDecoration: value })}
+
+														letterSpacing={socialTitleLetterSpacing}
+														onChangeLetterSpacing={(value) => setAttributes({ socialTitleLetterSpacing: value })}
+
+														letterSpacingUnits={socialTitleLetterSpacingUnits}
+														onChangeLetterSpacingUnit={(value) => setAttributes({ socialTitleLetterSpacingUnits: value })}
+
+														lineHeight={socialTitleLineHeight}
+														onChangeLineHeight={(value) => setAttributes({ socialTitleLineHeight: value })}
+
+														lineHeightUnits={socialTitleLineHeightUnits}
+														onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+													/>
+													<FB_Color
+														label={__("Title Color", "frontis-blocks")}
+														globalColorSwitcher={socialTitleColorSwitcher}
+														globalColor={socialTitleColor}
+														globalHoverColor={socialTitleHoverColor}
+														handleColorSwitcherChange={(value) => setAttributes({ socialTitleColorSwitcher: value })} 
+														handleGlobalColorChange={(value) => setAttributes({ socialTitleColor: value })}
+														handleGlobalHoverColorChange={(value) => setAttributes({ socialTitleHoverColor: value })}
+													/>
+												</>
+											)}
+
                                         </PanelBody>
 
                                         <PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
