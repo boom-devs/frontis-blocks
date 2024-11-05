@@ -93,6 +93,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		socialTitleColorSwitcher,
         socialTitleColor,
         socialTitleHoverColor,
+
+		socialTitlePaddingUnits,
+		socialTitlePaddingDesktop,
+		socialTitlePaddingTablet,
+		socialTitlePaddingMobile,
+		socialTitlePaddingLink,
 		
 		/** End Title Styles */
 
@@ -468,6 +474,81 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const IconPaddingTablet = `${socialIconPaddingTablet.top}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.right}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.bottom}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.left}${socialIconPaddingUnits.Tablet}`;
     const IconPaddingMobile = `${socialIconPaddingMobile.top}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.right}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.bottom}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.left}${socialIconPaddingUnits.Mobile}`;
     /** End Padding */
+
+
+
+	/** Start Title Padding */
+	const handleSocialTitlePaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( socialTitlePaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						socialTitlePaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						socialTitlePaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						socialTitlePaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {socialTitlePaddingDesktop: {...socialTitlePaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {socialTitlePaddingTablet: {...socialTitlePaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {socialTitlePaddingMobile: {...socialTitlePaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleSocialTitlePaddingCombineBtn = () => {
+		setAttributes( {socialTitlePaddingLink: !socialTitlePaddingLink} );
+	}
+
+	const socialTitlePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			socialTitlePaddingUnits: {
+				...socialTitlePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const SocialTitlePaddingDesktopWidth = `${socialTitlePaddingDesktop.top}${socialTitlePaddingUnits.Desktop} ${socialTitlePaddingDesktop.right}${socialTitlePaddingUnits.Desktop} ${socialTitlePaddingDesktop.bottom}${socialTitlePaddingUnits.Desktop} ${socialTitlePaddingDesktop.left}${socialTitlePaddingUnits.Desktop}`;
+	const SocialTitlePaddingTabletWidth = `${socialTitlePaddingTablet.top}${socialTitlePaddingUnits.Tablet} ${socialTitlePaddingTablet.right}${socialTitlePaddingUnits.Tablet} ${socialTitlePaddingTablet.bottom}${socialTitlePaddingUnits.Tablet} ${socialTitlePaddingTablet.left}${socialTitlePaddingUnits.Tablet}`;
+	const SocialTitlePaddingMobileWidth = `${socialTitlePaddingMobile.top}${socialTitlePaddingUnits.Mobile} ${socialTitlePaddingMobile.right}${socialTitlePaddingUnits.Mobile} ${socialTitlePaddingMobile.bottom}${socialTitlePaddingUnits.Mobile} ${socialTitlePaddingMobile.left}${socialTitlePaddingUnits.Mobile}`;
+	/** End Title Padding */
 
 
 
@@ -1097,6 +1178,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 style += hoverBgColorStyle;
             }
 
+			/** Start Border only for preset-4 Color */
+			if (socialIconsPresetStyle === 'preset-4' && item.socialIconBgColor) {
+                const borderColorStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
+                    border-color: ${item.socialIconBgColor};
+                }`;
+                style += borderColorStyle;
+            }
+			/** End Border only for preset-4 Color */
+
+
 			const normalItemBackgroundType = item.normalItemBackgroundType;
 			if (normalItemBackgroundType === 'gradient') {
 				const gradientStyle = `.${blockID} .fb-social-list-item.single-item-${item.id} .fb-social-icon-link {
@@ -1158,8 +1249,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						case 2:
 							return {
 								...item,
-								socialIconColor: "#FF0000",
-								socialIconHoverColor: "#FF0000",
+								socialIconColor: "#E53935",
+								socialIconHoverColor: "#E53935",
 								socialIconBgColor: "#ffffff",
 								socialIconHoverBgColor: "#ffffff",
 								normalItemClassicColor: "",
@@ -1240,6 +1331,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 50
 				},
 				socialTitleSwitcher: false,
+				socialBorder: "none	",
+				socialBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
 				socialBorderRadiusDesktop: {
 					top: 0,
 					bottom: 0,
@@ -1288,6 +1386,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: "25",
 					Mobile: "25"
 				},
+				socialTitlePaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
 			},
 			"preset-2": {
 				socialItems: socialItems.map((item, index) => {
@@ -1315,8 +1431,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								...item,
 								socialIconColor: "#ffffff",
 								socialIconHoverColor: "#ffffff",
-								socialIconBgColor: "#FF0000",
-								socialIconHoverBgColor: "#FF0000",
+								socialIconBgColor: "#E53935",
+								socialIconHoverBgColor: "#E53935",
 								normalItemClassicColor: "",
 							};
 						case 3:
@@ -1394,6 +1510,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 50
 				},
 				socialTitleSwitcher: false,
+				socialBorder: "none	",
+				socialBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
 				socialBorderRadiusDesktop: {
 					top: 0,
 					bottom: 0,
@@ -1441,6 +1564,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Desktop: "25",
 					Tablet: "25",
 					Mobile: "25"
+				},
+				socialTitlePaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
 				},
 			},
 			"preset-3": {
@@ -1548,6 +1689,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 0
 				},
 				socialTitleSwitcher: true,
+				socialBorder: "none	",
+				socialBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
 				socialBorderRadiusDesktop: {
 					top: 4,
 					bottom: 4,
@@ -1596,6 +1744,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: "25",
 					Mobile: "25"
 				},
+				socialTitlePaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
 			},
 			"preset-4": {
 				socialItems: socialItems.map((item, index) => {
@@ -1603,38 +1769,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						case 0:
 							return {
 								...item,
-								socialIconColor: "#1877F2",
-								socialIconHoverColor: "#1877F2",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
-								normalItemClassicColor: "#ffffff",
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#1877F2",
+								socialIconHoverBgColor: "#1877F2",
+								normalItemClassicColor: "",
 							};
 						case 1:
 							return {
 								...item,
-								socialIconColor: "#1DA1F2",
-								socialIconHoverColor: "#1DA1F2",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
-								normalItemClassicColor: "#ffffff",
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#1DA1F2",
+								socialIconHoverBgColor: "#1DA1F2",
+								normalItemClassicColor: "",
 							};
 						case 2:
 							return {
 								...item,
-								socialIconColor: "#FF0000",
-								socialIconHoverColor: "#FF0000",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
-								normalItemClassicColor: "#ffffff",
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#E53935",
+								socialIconHoverBgColor: "#E53935",
+								normalItemClassicColor: "",
 							};
 						case 3:
 							return {
 								...item,
-								socialIconColor: "#1769FF",
-								socialIconHoverColor: "#1769FF",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
-								normalItemClassicColor: "#ffffff",
+								socialIconColor: "#FFFFFF",
+								socialIconHoverColor: "#FFFFFF",
+								socialIconBgColor: "#1769FF",
+								socialIconHoverBgColor: "#1769FF",
+								normalItemClassicColor: "",
 							};
 						default:
 							return item;
@@ -1648,22 +1814,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: 20
 				},
 				socialIconPaddingDesktop: {
-					top: 0,
-					bottom: 0,
-					left: 0,
-					right: 0
+					top: 15,
+					bottom: 15,
+					left: 15,
+					right: 15
 				},
 				socialIconPaddingTablet: {
-					top: 0,
-					bottom: 0,
-					left: 0,
-					right: 0
+					top: 15,
+					bottom: 15,
+					left: 15,
+					right: 15
 				},
 				socialIconPaddingMobile: {
-					top: 0,
-					bottom: 0,
-					left: 0,
-					right: 0
+					top: 15,
+					bottom: 15,
+					left: 15,
+					right: 15
 				},
 				socialIconBorderDesktop: {
 					top: 0,
@@ -1702,6 +1868,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 0
 				},
 				socialTitleSwitcher: true,
+				socialBorder: "solid",
+				socialBorderDesktop: {
+					top: 1,
+					bottom: 1,
+					left: 1,
+					right: 1,
+				},
 				socialBorderRadiusDesktop: {
 					top: 4,
 					bottom: 4,
@@ -1721,22 +1894,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 4
 				},
 				socialPaddingDesktop: {
-					top: 12,
-					bottom: 12,
-					left: 14,
-					right: 14
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
 				},
 				socialPaddingTablet: {
-					top: 12,
-					bottom: 12,
-					left: 14,
-					right: 14
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
 				},
 				socialPaddingMobile: {
-					top: 12,
-					bottom: 12,
-					left: 14,
-					right: 14
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
 				},
 				socialTitleColor : "#15171C",
 				socialTitleFontWeight : "500",
@@ -1750,6 +1923,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: "25",
 					Mobile: "25"
 				},
+				socialTitlePaddingDesktop: {
+					top: 12,
+					bottom: 12,
+					left: 8,
+					right: 15
+				},
+				socialTitlePaddingTablet: {
+					top: 12,
+					bottom: 12,
+					left: 8,
+					right: 15
+				},
+				socialTitlePaddingMobile: {
+					top: 12,
+					bottom: 12,
+					left: 8,
+					right: 15
+				},
 			},
 			"preset-5": {
 				socialItems: socialItems.map((item, index) => {
@@ -1759,8 +1950,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								...item,
 								socialIconColor: "#1877F2",
 								socialIconHoverColor: "#1877F2",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
 								normalItemClassicColor: "",
 							};
 						case 1:
@@ -1768,17 +1959,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								...item,
 								socialIconColor: "#1DA1F2",
 								socialIconHoverColor: "#1DA1F2",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
 								normalItemClassicColor: "",
 							};
 						case 2:
 							return {
 								...item,
-								socialIconColor: "#FF0000",
-								socialIconHoverColor: "#FF0000",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
+								socialIconColor: "#E53935",
+								socialIconHoverColor: "#E53935",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
 								normalItemClassicColor: "",
 							};
 						case 3:
@@ -1786,8 +1977,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								...item,
 								socialIconColor: "#1769FF",
 								socialIconHoverColor: "#1769FF",
-								socialIconBgColor: "#ffffff",
-								socialIconHoverBgColor: "#ffffff",
+								socialIconBgColor: "",
+								socialIconHoverBgColor: "",
 								normalItemClassicColor: "",
 							};
 						default:
@@ -1856,6 +2047,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 0
 				},
 				socialTitleSwitcher: true,
+				socialBorder: "none	",
+				socialBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
 				socialBorderRadiusDesktop: {
 					top: 0,
 					bottom: 0,
@@ -1904,6 +2102,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Desktop: "25",
 					Tablet: "25",
 					Mobile: "25"
+				},
+				socialTitlePaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
 				},
 			},
 			"preset-6": {
@@ -2011,6 +2227,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: 5
 				},
 				socialTitleSwitcher: false,
+				socialBorder: "none	",
+				socialBorderDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0,
+				},
 				socialBorderRadiusDesktop: {
 					top: 0,
 					bottom: 0,
@@ -2059,6 +2282,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Desktop: "25",
 					Tablet: "25",
 					Mobile: "25"
+				},
+				socialTitlePaddingDesktop: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingTablet: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
+				},
+				socialTitlePaddingMobile: {
+					top: 0,
+					bottom: 0,
+					left: 0,
+					right: 0
 				},
 			},
 		};
@@ -2157,7 +2398,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${socialTitleTextDecoration ? `text-decoration: ${socialTitleTextDecoration};` : ''}
 				${socialTitleLetterSpacing.Desktop && socialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${socialTitleLetterSpacing.Desktop}${socialTitleLetterSpacingUnits.Desktop};` : ''}
 				${socialTitleLineHeight.Desktop && socialTitleLineHeightUnits.Desktop ? `line-height: ${socialTitleLineHeight.Desktop}${socialTitleLineHeightUnits.Desktop};` : ''}
-				${socialTitleColor ? `color: ${socialTitleColor};` : ''} 
+				${socialTitleColor ? `color: ${socialTitleColor};` : ''}
+				${SocialTitlePaddingDesktopWidth ? `padding: ${SocialTitlePaddingDesktopWidth};` : ''}
 			}
 			.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title:hover {
 				color: ${socialTitleHoverColor};
@@ -2172,6 +2414,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.${blockID} .fb-socials {
 					column-gap: ${socialGapSize.Tablet}${socialGapUnits.Tablet}; 
 				}
+
+				.${blockID} .fb-social-list-item .fb-social-icon-link{
+					${socialTabletPadding ? `padding: ${socialTabletPadding};` : ''}
+					${socialTabletMargin ? `margin: ${socialTabletMargin};` : ''}
+					${socialTabletBorderWidth ? `border-width: ${socialTabletBorderWidth};` : ''}
+					${socialTabletBorderRadiusWidth ? `border-radius: ${socialTabletBorderRadiusWidth};` : ''}
+				}
+
 				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
 					${IconPaddingTablet ? `padding: ${IconPaddingTablet};` : ''}
 					${IconBorderTabletWidth ? `border-width: ${IconBorderTabletWidth};` : ''}
@@ -2181,6 +2431,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${socialTitleFontSize.Tablet && socialTitleFontSizeUnits.Tablet ? `font-size: ${socialTitleFontSize.Tablet}${socialTitleFontSizeUnits.Tablet};` : ''}
 					${socialTitleLineHeight.Tablet && socialTitleLineHeightUnits.Tablet ? `line-height: ${socialTitleLineHeight.Tablet}${socialTitleLineHeightUnits.Tablet};` : ''}
 					${socialTitleLetterSpacing.Tablet && socialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${socialTitleLetterSpacing.Tablet}${socialTitleLetterSpacingUnits.Tablet};` : ''}
+					${SocialTitlePaddingTabletWidth ? `padding: ${SocialTitlePaddingTabletWidth};` : ''}
 				}	
 			}
 			@media only screen and (max-width: 767px) {
@@ -2193,6 +2444,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.${blockID} .fb-socials {
 					column-gap: ${socialGapSize.Mobile}${socialGapUnits.Mobile};
 				}
+				.${blockID} .fb-social-list-item .fb-social-icon-link{
+					${socialMobilePadding ? `padding: ${socialMobilePadding};` : ''}
+					${socialMobileMargin ? `margin: ${socialMobileMargin};` : ''}
+					${socialMobileBorderWidth ? `border-width: ${socialMobileBorderWidth};` : ''}
+					${socialMobileBorderRadiusWidth ? `border-radius: ${socialMobileBorderRadiusWidth};` : ''}
+				}
 				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon {
 					${IconPaddingMobile ? `padding: ${IconPaddingMobile};` : ''}
 					${IconBorderMobileWidth ? `border-width: ${IconBorderMobileWidth};` : ''}
@@ -2202,6 +2459,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${socialTitleFontSize.Mobile && socialTitleFontSizeUnits.Mobile ? `font-size: ${socialTitleFontSize.Mobile}${socialTitleFontSizeUnits.Mobile};` : ''}
 					${socialTitleLineHeight.Mobile && socialTitleLineHeightUnits.Mobile ? `line-height: ${socialTitleLineHeight.Mobile}${socialTitleLineHeightUnits.Mobile};` : ''}
 					${socialTitleLetterSpacing.Mobile && socialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${socialTitleLetterSpacing.Mobile}${socialTitleLetterSpacingUnits.Mobile};` : ''}
+					${SocialTitlePaddingMobileWidth ? `padding: ${SocialTitlePaddingMobileWidth};` : ''}
 				}
 			}
 		`, [
@@ -2222,7 +2480,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			socialAlignment,
 			socialBgColor,
 			socialDesktopPadding,
+			socialTabletPadding,
+			socialMobilePadding,
 			socialDesktopMargin,
+			socialTabletMargin,
+			socialMobileMargin,
 			socialBorder,
 			socialDesktopBorderWidth,
 			socialDesktopBorderRadiusWidth,
@@ -2267,7 +2529,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalMobileBorderRadiusWidth,
 			IconPaddingMobile,
 			IconBorderMobileWidth,
-			IconBorderRadiusMobileWidth
+			IconBorderRadiusMobileWidth,
+			SocialTitlePaddingDesktopWidth,
+			SocialTitlePaddingTabletWidth,
+			SocialTitlePaddingMobileWidth
 		]);
 
 		useEffect(() => {
@@ -2514,6 +2779,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														handleColorSwitcherChange={(value) => setAttributes({ socialTitleColorSwitcher: value })} 
 														handleGlobalColorChange={(value) => setAttributes({ socialTitleColor: value })}
 														handleGlobalHoverColorChange={(value) => setAttributes({ socialTitleHoverColor: value })}
+													/>
+													<FB_Spacing 
+														label={__("Padding", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={socialTitlePaddingUnitsHandler}
+														spacingUnits={socialTitlePaddingUnits}
+														spacingDesktop={socialTitlePaddingDesktop}
+														spacingTablet={socialTitlePaddingTablet}
+														spacingMobile={socialTitlePaddingMobile}
+														handleSpacingUnitHandler={handleSocialTitlePaddingUnitChange}
+														spacingCombineBtn={socialTitlePaddingLink}
+														spacingCombineBtnHandler={handleSocialTitlePaddingCombineBtn}
+														setAttributes={setAttributes}
 													/>
 												</>
 											)}
