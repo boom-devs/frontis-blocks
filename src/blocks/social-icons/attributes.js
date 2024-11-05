@@ -326,9 +326,9 @@ const attributes = {
     socialIconBorderRadiusUnits: {
 		type: 'object',
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%'
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
 		}
     },
     socialIconBorderRadiusDesktop: {
@@ -483,6 +483,46 @@ const attributes = {
     },
     socialTitleHoverColor: {
         type: 'string',
+    },
+
+    socialTitlePaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    socialTitlePaddingDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialTitlePaddingTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialTitlePaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialTitlePaddingLink : {
+        type : "boolean",
+        default: true
     },
 
     /*End Title Styles */
