@@ -1,166 +1,175 @@
-import { useBlockProps, InnerBlocks, useInnerBlocksProps, __experimentalUseInnerBlocksProps as useInnerBlocksPropsV2 } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
-import { Icon } from '@wordpress/components';
-import { plus } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+import {
+	useBlockProps,
+	InnerBlocks,
+	useInnerBlocksProps,
+	__experimentalUseInnerBlocksProps as useInnerBlocksPropsV2
+} from '@wordpress/block-editor';
+import {useSelect} from '@wordpress/data';
+import {useEffect, useMemo, useRef} from '@wordpress/element';
+import {Icon} from '@wordpress/components';
+import {plus} from '@wordpress/icons';
+import {__} from '@wordpress/i18n';
 import Inspector from './inspector';
-import { VariationPicker } from './variationPicker';
+import {VariationPicker} from './variationPicker';
 import './editor.scss';
-
-const ALLOWED_BLOCKS = null; // Allow all blocks
-
-const PlaceholderContent = () => (
-  <div className="fb-placeholder">
-    <Icon icon={plus} />
-    <p>{__('Add blocks here', 'frontis-blocks')}</p>
-  </div>
-);
+import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader";
+import Render from "@Blocks/container/render";
+import styling from "@Blocks/container/styling";
 
 const Edit = (props) => {
-  const { attributes, clientId, setAttributes } = props;
-  const { 
-    layout, 
-    placeholder, 
-    isChildBlock,
-    containerWidth,
-    contentBoxWidth,
-    minimumHeight,
-    equalHeight,
-    overflow,
-  } = attributes;
-    
-  const containerRef = useRef(null);
+	const {
+		isSelected,
+		attributes,
+		attributes: {
+			borderStyle,
+			borderWidth,
+			borderColor,
+			borderHoverColor,
+			borderRadius,
+			variationSelected,
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+			globalBlockStyleId,
+			backgroundType,
+			backgroundVideoOpacity,
+			isGridCssInParent,
+		},
+		clientId,
+		setAttributes,
+		name,
+		deviceType,
+		context,
+		hasDynamicContent
+	} = props;
+
+	const {
+		isParentOfSelectedBlock,
+		variations,
+		defaultVariation,
+		getBlockParents,
+		parentBlocks,
+		parentAttributes,
+	} = useSelect( ( select ) => {
+		const coreBlocks = select( 'core/blocks' );
+		const coreBlockEditor = select( 'core/block-editor' );
+		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
+
+		const parentClientId = coreBlockEditor.getBlockRootClientId( props.clientId );
+		return {
+			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
+			variations: coreBlocks?.getBlockVariations( name ),
+			isParentOfSelectedBlock: coreBlockEditor?.hasSelectedInnerBlock( clientId, true ),
+			getBlockParents : getBlockParentStore,
+			parentBlocks : coreBlockEditor?.getBlocksByClientId( getBlockParentStore ),
+			parentAttributes : coreBlockEditor.getBlockAttributes( parentClientId ),
+		};
+	} );
 
 
-  const getColumnClass = (layout, isChildBlock, index) => {
-    if (!isChildBlock) return '';
-  
-    let columnClass = 'fb-column';
-  
-    switch (layout) {
-      case 'two-columns':
-        columnClass += ' fb-column-50';
-        break;
-      case 'three-columns':
-        columnClass += ' fb-column-33';
-        break;
-      case 'four-columns':
-        columnClass += ' fb-column-25';
-        break;
-      case 'two-rows-two-columns':
-        columnClass += ' fb-column-50';
-        break;
-      case 'three-columns-wide-center':
-        if (index === 1) {
-          columnClass += ' fb-column-50';
-        } else {
-          columnClass += ' fb-column-25';
-        }
-        break;
-      case 'two-thirds-one-third':
-        if (index === 0) {
-          columnClass += ' fb-column-66';
-        } else {
-          columnClass += ' fb-column-33';
-        }
-        break;
-      case 'one-third-two-thirds':
-        if (index === 0) {
-          columnClass += ' fb-column-33';
-        } else {
-          columnClass += ' fb-column-66';
-        }
-        break;
-      case 'two-rows-three-columns':
-        columnClass += ' fb-column-33';
-        break;
-      default:
-        columnClass += ' fb-column-equal';
-    }
-  
-    return columnClass;
-  };
+	if ( isParentOfSelectedBlock ) {
+		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
+		if ( emptyBlockInserter ) {
+			emptyBlockInserter.style.display = 'none';
+		}
+	}
 
-  const containerStyle = {
-    ...(containerWidth === 'custom' && { maxWidth: `${contentBoxWidth}px` }),
-    ...(minimumHeight && { minHeight: `${minimumHeight}px` }),
-    ...(equalHeight && { height: '100%' }),
-    overflow,
-  };
+	useEffect( () => {
+		const gridCssInParent = 'grid' === parentAttributes?.layout;
+		// If the parent block is a grid block, then we need to set the grid item settings.
+		if ( gridCssInParent !== isGridCssInParent ) {
+			setAttributes( { isGridCssInParent: gridCssInParent } );
+		}
+	}, [ parentAttributes?.layout ] );
 
-//   const containerClasses = [
-//     'fb-container',
-//     isChildBlock ? getColumnClass(layout, isChildBlock, index) : `fb-container-${layout}`,
-//     containerWidth === 'boxed' ? 'fb-container-boxed' : '',
-//     equalHeight ? 'fb-container-equal-height' : '',
-//     placeholder ? 'fb-inner-blocks-placeholder' : '',
-    //   ].filter(Boolean).join(' ');
-    
-    const containerClasses = [
-        'fb-container',
-        isChildBlock ? 'fb-column' : `fb-container-${layout}`,
-        containerWidth === 'boxed' ? 'fb-container-boxed' : '',
-        equalHeight ? 'fb-container-equal-height' : '',
-        placeholder ? 'fb-inner-blocks-placeholder' : '',
-      ].filter(Boolean).join(' ');
+	useEffect( () => {
+		// Check if a parent of this container is one of these special blocks.
+		const attributesToUpdate = {};
 
-  const blockProps = useBlockProps({
-    className: containerClasses,
-    style: containerStyle,
-    ref: containerRef,
-  });
+		// Conditionally set the isBlockRootParent attribute
+		if ( ! parentBlocks || parentBlocks.length === 0 || ! parentBlocks.some( parent => parent.name === 'frontis-blocks/container' ) ) {
+			attributesToUpdate.isBlockRootParent = true;
+		}
 
-  const { hasInnerBlocks, isParentBlock } = useSelect(
-    (select) => {
-      const { getBlocks, getBlockRootClientId } = select('core/block-editor');
-      return {
-        hasInnerBlocks: getBlocks(clientId).length > 0,
-        isParentBlock: getBlockRootClientId(clientId) === '',
-      };
-    },
-    [clientId]
-  );
+		// If the legacy video overlay opacity for video background was set, migrate it.
+		if ( 'video' === backgroundType && backgroundVideoOpacity ) {
+			attributesToUpdate.overlayOpacity = backgroundVideoOpacity;
+			attributesToUpdate.backgroundVideoOpacity = 0;
+		}
 
-  const innerBlocksProps = useInnerBlocksProps(
-    {},
-    {
-      allowedBlocks: ALLOWED_BLOCKS,
-      renderAppender: hasInnerBlocks
-        ? undefined
-        : InnerBlocks.ButtonBlockAppender,
-      placeholder: placeholder ? PlaceholderContent : undefined,
-    }
-  );
+		// Compare with attribute and attributeToUpdate and update only if there is a change.
+		if ( attributesToUpdate.isBlockRootParent !== attributes.isBlockRootParent
+			|| attributesToUpdate.hasPopupParent !== attributes.hasPopupParent
+			|| attributesToUpdate.hasSliderParent !== attributes.hasSliderParent
+			|| attributesToUpdate.backgroundVideoOpacity !== attributes.backgroundVideoOpacity
+		) {
+			setAttributes( attributesToUpdate );
+		}
 
-  useEffect(() => {
-    if (isChildBlock === undefined) {
-      setAttributes({ isChildBlock: !isParentBlock });
-    }
-  }, [isChildBlock, isParentBlock, setAttributes]);
+		if( globalBlockStyleId ) {
+			return;
+		}
 
-  useEffect(() => {
-    if (containerRef.current && isParentBlock) {
-      const childBlocks = containerRef.current.querySelectorAll('.fb-container');
-      childBlocks.forEach((child, index) => {
-        const columnClass = getColumnClass(layout, true, index);
-        child.classList.add(...columnClass.split(' '));
-      });
-    }
-  }, [layout, isParentBlock]);
+		// border
+		if ( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ) {
+			migrateBorderAttributes(
+				'container',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
+			);
+		}
+	}, [] );
 
-  if (isParentBlock && !layout && !hasInnerBlocks) {
-    return <VariationPicker {...props} />;
-  }
+	useEffect( () => {
+		if ( hasDynamicContent && ! attributes?.context?.postId ) {
+			setAttributes( ( prevAttributes ) => ( {
+				...prevAttributes,
+				context,
+			} ) );
+		}
+	}, [ hasDynamicContent, context?.postId ] )
 
-  return (
-    <>
-      {isParentBlock && <Inspector {...props} />}
-      <div {...blockProps}>
-        <div {...innerBlocksProps} />
-      </div>
-    </>
-  );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, 'Desktop' ), [ attributes, 'Desktop' ] );
+
+	// useEffect( () => {
+	// 	scrollBlockToView();
+	// }, [ deviceType ] );
+	//
+	// useEffect( () => {
+	// 	responsiveConditionPreview( props );
+	// }, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
+	if ( ! variationSelected && 0 === getBlockParents?.length ) {
+		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
+	}
+
+	return (
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{isSelected && <h1>Okay</h1>}
+			<Render { ...props } />
+		</>
+	);
 };
 
 export default Edit;
