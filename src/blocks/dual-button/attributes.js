@@ -717,5 +717,9 @@ const attributes = {
         type: 'string',
 		default: 'vertical'
     },
+	blockStyle: {
+        type: "string",
+        default: "",
+    },
 }
 export default attributes;
