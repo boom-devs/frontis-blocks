@@ -219,8 +219,8 @@ $separatorPosition = isset($block_attributes['separatorPosition']) ? sanitize_te
 $separatorColorSwitcher = isset($block_attributes['separatorColorSwitcher']) ? sanitize_text_field($block_attributes['separatorColorSwitcher']) : 'normal';
 $separatorColor = isset($block_attributes['separatorColor']) ? sanitize_text_field($block_attributes['separatorColor']) : '#399CFF';
 $separatorHoverColor = isset($block_attributes['separatorHoverColor']) ? sanitize_text_field($block_attributes['separatorHoverColor']) : '#399CFF';
-$separatorWidth = isset($block_attributes['separatorWidth']) ? $block_attributes['separatorWidth'] : array('Desktop' => '12', 'Tablet' => '12', 'Mobile' => '12');
-$separatorWidthUnits = isset($block_attributes['separatorWidthUnits']) ? $block_attributes['separatorWidthUnits'] : array('Desktop' => '%', 'Tablet' => '%', 'Mobile' => '%');
+$separatorWidth = isset($block_attributes['separatorWidth']) ? $block_attributes['separatorWidth'] : array('Desktop' => '100', 'Tablet' => '100', 'Mobile' => '100');
+$separatorWidthUnits = isset($block_attributes['separatorWidthUnits']) ? $block_attributes['separatorWidthUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $separatorHeight = isset($block_attributes['separatorHeight']) ? $block_attributes['separatorHeight'] : array('Desktop' => '2', 'Tablet' => '2', 'Mobile' => '2');
 $separatorHeightUnits = isset($block_attributes['separatorHeightUnits']) ? $block_attributes['separatorHeightUnits'] : array('Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px');
 $separatorSpacing = isset($block_attributes['separatorSpacing']) ? $block_attributes['separatorSpacing'] : array('Desktop' => '', 'Tablet' => '', 'Mobile' => '');
