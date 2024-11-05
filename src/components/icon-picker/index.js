@@ -107,13 +107,19 @@ export default function FBIconPicker(props) {
 				setDefaultIcons(newDefaultIcons);
 				setFilteredDefaultIcons(newDefaultIcons);
 			}
+
+			mergedCategoryArray.sort((a, b) => {
+				if (a.title === "Others") return 1; // push "Others" to the end
+				if (b.title === "Others") return -1; // push "Others" to the end
+				return a.title.localeCompare(b.title); // normal alphabetical sorting
+			});
 			setCategories(mergedCategoryArray);
 		}
 	}
 
-	const fetchCustomIcons = async () => {
+	const fetchCustomIcons = () => {
 		try {
-			const response = await jQuery.ajax({
+			const response = jQuery.ajax({
 				url: ajaxUrl,
 				type: 'POST',
 				data: {
@@ -121,11 +127,18 @@ export default function FBIconPicker(props) {
 					security: nonce
 				}
 			});
-			if(response.data) {
-				updateCustomIcons(response.data);
-			}
+
+			response.done((resData) => {
+				if (resData) {
+					updateCustomIcons(resData.data);
+				}
+			});
+
+			response.fail((jqXHR, textStatus, errorThrown) => {
+				console.error('Error fetching custom icons:', textStatus, errorThrown);
+			});
 		} catch (error) {
-			console.error('Error fetching custom icons:', error);
+			console.error('Unexpected error:', error);
 		}
 	};
 
@@ -234,6 +247,8 @@ export default function FBIconPicker(props) {
 				currentIcon === insertIcon && 'selected',
 			] );
 
+			console.log(svgIcon)
+
 			const actualTitle = svgIcon[currentIcon] ?.label
 				? svgIcon[currentIcon].label
 				: '';
@@ -273,16 +288,15 @@ export default function FBIconPicker(props) {
 		);
 	}
 
-	useEffect( async () => {
-		await fetchCustomIcons();
+	useEffect(  () => {
+		fetchCustomIcons();
 		fetchSvgIcons().then(icons => {
 			if (icons) {
 				setSvgIcon(icons);
 			}
 		});
+	}, []);
 
-		console.log("Hello world")
-	}, [])
 	return (
 		<Fragment>
 			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>

@@ -450,7 +450,7 @@ class Settings extends AjaxBase {
 												 "elements" => $svgElements,
 											 ],
 										 ],
-										 "label" => "0",
+										 "label" => str_replace(' ', ' ', ucwords(str_replace('-', ' ', $icon_name))),
 										 "custom_categories" => $single_icon->post_name,
 										 "custom_icons" => true
                                     ];
@@ -468,6 +468,8 @@ class Settings extends AjaxBase {
 
 				unlink($tempZipFile);
 			}
+
+			var_dump($custom_icons);
 
 			update_option('fb_custom_icons', $custom_icons, true);
 			update_option('fb_custom_icons_name', $custom_icons_name, true);
