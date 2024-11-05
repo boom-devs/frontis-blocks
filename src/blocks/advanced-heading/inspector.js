@@ -1428,6 +1428,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, [headingFontFamily]);
 
+    useEffect(() => {
+        if (subHeadingFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${subHeadingFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [subHeadingFontFamily]);
+
     return (
         <>
 
@@ -2507,7 +2517,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     <>
                                                         <FB_Range
                                                             min={1}
-                                                            max={100}
+                                                            max={1500}
                                                             label={__("Width", "frontis-blocks")}
                                                             rangeValue={separatorWidth}
                                                             onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
@@ -2516,7 +2526,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             units={separatorWidthUnits}
                                                             setAttributes={setAttributes}
                                                             rangeStep={1}
-                                                            resetFallbackValue={""}
+                                                            resetFallbackValue={"100"}
                                                         />
                                                         <FB_Range
                                                             min={1}
