@@ -3,7 +3,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-    DeviceType: {
+    deviceType: {
         type: "string",
         default: "Desktop"
     },
@@ -14,63 +14,66 @@ const attributes = {
     GalleryItems: {
         type: "array",
         default: [
-            // You can define some default items if needed
-            { id: 'image-1', title: 'Image 1', desc: '', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
-            { id: 'image-2', title: 'Image 2', desc: '', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
-            { id: 'image-3', title: 'Image 3', desc: '', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
+            { id: 'image-1', title: 'Image 1', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
+            { id: 'image-2', title: 'Image 2', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
+            { id: 'image-3', title: 'Image 3', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
         ],
     },
 
-    
-    GalleryItemHeightDesktop: {
-        type: "number",
-        default: 200,
+    GalleryPresetStyle: {
+        type: "string",
+        default: "none",
     },
-    GalleryItemHeightTablet: {
-        type: "number",
-        default: 200,
-    },
-    GalleryItemHeightMobile: {
-        type: "number",
-        default: 200,
+
+    GalleryItemHeight: {
+        type: "object",
+        default: {
+			Desktop: 200,
+			Tablet: 200,
+			Mobile: 200
+		}
     },
     GalleryItemHeightUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
 
-    ImageWidthDesktop: {
-        type: "number",
-        default: 100,
-    },
-    ImageWidthTab: {
-        type: "number",
-        default: 100,
-    },
-    ImageWidthMobile: {
-        type: "number",
-        default: 100,
+    ImageWidth: {
+        type: "object",
+        default: {
+            Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+        },
     },
     ImageWidthUnits: {
-        type: "string",
-        default: "%",
+        type: "object",
+        default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
     },
 
-    ImageHeightDesktop: {
-        type: "number",
-        default: 100,
-    },
-    ImageHeightTab: {
-        type: "number",
-        default: 100,
-    },
-    ImageHeightMobile: {
-        type: "number",
-        default: 100,
+    ImageHeight: {
+        type: "object",
+        default: {
+            Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+        },
     },
     ImageHeightUnits: {
-        type: "string",
-        default: "%",
+        type: "object",
+        default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
     },
 
     ImageOverlayStyle: {
@@ -86,6 +89,195 @@ const attributes = {
         default: "rgba(0 0 0 / 0.7)",
     },
 
+    lightboxIconSwitcher: {
+        type: "boolean",
+        default: true,
+    },
+    lightboxIcon: {
+        type: "string",
+        default: "plus",
+    },
+
+    lightboxIconSize: {
+        type: "object",
+        default: {
+            Desktop: 24,
+			Tablet: 24,
+			Mobile: 24
+        },
+    },
+    lightboxIconSizeUnits: {
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+
+    lightboxColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    lightboxColor : {
+        type: "string",
+        default: "#000"
+    },
+    lightboxHoverColor: {
+        type: 'string',
+        default: "#000"
+    },
+    
+    lightboxBGColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    lightboxBGColor: {
+        type: "string",
+        default: "#fff"
+    },
+    lightboxBGHoverColor: {
+        type: 'string',
+        default: "#fff"
+    },
+    
+    lightboxBorder: {
+        type: 'string',
+        default: "none",
+    },
+    lightboxBorderColor: {
+        type: 'string',
+        default: "#000"
+    },
+    lightboxBorderHoverColor: {
+        type: 'string',
+        default: "#000"
+    },
+    lightboxBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    
+    
+    lightboxPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    lightboxDesktopPadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    lightboxTabPadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    lightboxMobilePadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    lightboxPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    lightboxBorderUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    lightboxDesktopBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    lightboxTabBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    lightboxMobileBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    lightboxBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    lightboxBorderRadiusUnits : {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%'
+        }
+    },
+    lightboxDesktopBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 50,
+            bottom: 50,
+            left: 50,
+            right: 50,
+        },
+    },
+    lightboxTabBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 50,
+            bottom: 50,
+            left: 50,
+            right: 50,
+        },
+    },
+    lightboxMobileBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 50,
+            bottom: 50,
+            left: 50,
+            right: 50,
+        },
+    },
+    lightboxBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
 
     GalleryColumnNumberDesktop: {
         type: "number",
@@ -100,21 +292,21 @@ const attributes = {
         default: 1
     },
 
-    GalleryImageGapDesktop: {
-        type: "number",
-        default: 20
-    },
-    GalleryImageGapTablet: {
-        type: "number",
-        default: 15
-    },
-    GalleryImageGapMobile: {
-        type: "number",
-        default: 10
+    GalleryImageGap: {
+        type: "object",
+        default: {
+			Desktop: 20,
+			Tablet: 15,
+			Mobile: 10
+		}
     },
     GalleryImageGapUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
 
     ImageAlignment: {
@@ -122,7 +314,7 @@ const attributes = {
         default: "left"
     },
     ImageFitCover: {
-        type: "boolan",
+        type: "boolean",
         default: true
     },
 
@@ -148,21 +340,21 @@ const attributes = {
         type: "string",
         default: "inherit",
     },
-    GalleryButtonFontSizeDesktop: {
-        type: "number",
-        default: 18
-    },
-    GalleryButtonFontSizeTablet: {
-        type: "number",
-        default: 18
-    },
-    GalleryButtonFontSizeMobile: {
-        type: "number",
-        default: 18
+    GalleryButtonFontSize: {
+        type: "object",
+        default: {
+			Desktop: 18,
+			Tablet: 18,
+			Mobile: 18
+		}
     },
     GalleryButtonFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     GalleryButtonFontWeight : {
         type: "string",
@@ -180,37 +372,37 @@ const attributes = {
         type: "string",
         default: "none"
     },
-    GalleryButtonLetterSpacingDesktop: {
-        type: "number",
-        default: 0
-    },
-    GalleryButtonLetterSpacingTablet: {
-        type: "number",
-        default: 0
-    },
-    GalleryButtonLetterSpacingMobile: {
-        type: "number",
-        default: 0
+    GalleryButtonLetterSpacing: {
+        type: "object",
+        default: {
+			Desktop: 0,
+			Tablet: 0,
+			Mobile: 0
+		}
     },
     GalleryButtonLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
-    GalleryButtonLineHeightDesktop: {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryButtonLineHeightTablet: {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryButtonLineHeightMobile: {
-        type: "number",
-        default: "inherit",
+    GalleryButtonLineHeight: {
+        type: "object",
+        default: {
+			Desktop: 'inherit',
+			Tablet: 'inherit',
+			Mobile: 'inherit'
+		}
     },
     GalleryButtonLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
 
     
@@ -417,255 +609,6 @@ const attributes = {
         default: true
     },
     
-
-    GalleryIconColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    GalleryIconColor : {
-        type: "string",
-        default: "#fff"
-    },
-    GalleryIconHoverColor: {
-        type: 'string',
-        default: "#fff"
-    },
-
-
-    GalleryIconBgColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    GalleryIconBgColor : {
-        type: "string",
-        default: "#000"
-    },
-    GalleryIconBgHoverColor: {
-        type: 'string',
-        default: "#000"
-    },
-
-
-    GalleryIconSizeDesktop: {
-        type: "number",
-        default: 25
-    },
-    GalleryIconSizeTablet: {
-        type: "number",
-        default: 25
-    },
-    GalleryIconSizeMobile: {
-        type: "number",
-        default: 25
-    },
-    GalleryIconSizeUnits: {
-        type: "string",
-        default: "px"
-    },
-
-    GalleryIconBgSizeDesktop: {
-        type: "number",
-        default: 60
-    },
-    GalleryIconBgSizeTablet: {
-        type: "number",
-        default: 60
-    },
-    GalleryIconBgSizeMobile: {
-        type: "number",
-        default: 60
-    },
-    GalleryIconBgSizeUnits: {
-        type: "string",
-        default: "px"
-    },
-
-
-    GalleryIconSpacingDesktop: {
-        type: "number",
-        default: 20
-    },
-    GalleryIconSpacingTablet: {
-        type: "number",
-        default: 20
-    },
-    GalleryIconSpacingMobile: {
-        type: "number",
-        default: 20
-    },
-    GalleryIconSpacingUnits: {
-        type: "string",
-        default: "px"
-    },
-
-
-
-
-
-    GalleryTitleFontFamily: {
-        type: "string",
-        default: "inherit",
-    },
-    GalleryTitleFontSizeDesktop: {
-        type: "number",
-        default: 18
-    },
-    GalleryTitleFontSizeTablet: {
-        type: "number",
-        default: 18
-    },
-    GalleryTitleFontSizeMobile: {
-        type: "number",
-        default: 18
-    },
-    GalleryTitleFontSizeUnits: {
-        type: "string",
-        default: "px"
-    },
-    GalleryTitleFontWeight : {
-        type: "string",
-        default: "600"
-    },
-    GalleryTitleFontStyle : {
-        type: "string",
-        default: "normal"
-    },
-    GalleryTitleTextTransform : {
-        type: "string",
-        default: "none"
-    },
-    GalleryTitleTextDecoration : {
-        type: "string",
-        default: "none"
-    },
-    GalleryTitleLetterSpacingDesktop: {
-        type: "number",
-        default: 0
-    },
-    GalleryTitleLetterSpacingTablet: {
-        type: "number",
-        default: 0
-    },
-    GalleryTitleLetterSpacingMobile: {
-        type: "number",
-        default: 0
-    },
-    GalleryTitleLetterSpacingUnits : {
-        type: "string",
-        default: "px"
-    },
-    GalleryTitleLineHeightDesktop: {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryTitleLineHeightTablet: {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryTitleLineHeightMobile: {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryTitleLineHeightUnits : {
-        type: "string",
-        default: "px"
-    },
-
-    GalleryTitleColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    GalleryTitleColor : {
-        type: "string",
-        default: "#000"
-    },
-    GalleryTitleHoverColor: {
-        type: 'string',
-        default: "#000"
-    },
-
-
-    GalleryDescFontFamily: {
-        type: "string",
-        default: "inherit",
-    },
-    GalleryDescFontSizeDesktop: {
-        type: "number",
-        default: 14
-    },
-    GalleryDescFontSizeTablet: {
-        type: "number",
-        default: 14
-    },
-    GalleryDescFontSizeMobile: {
-        type: "number",
-        default: 14
-    },
-    GalleryDescFontSizeUnits: {
-        type: "string",
-        default: "px"
-    },
-    GalleryDescFontWeight : {
-        type: "string",
-        default: "400"
-    },
-    GalleryDescFontStyle : {
-        type: "string",
-        default: "normal"
-    },
-    GalleryDescTextTransform : {
-        type: "string",
-        default: "none"
-    },
-    GalleryDescTextDecoration : {
-        type: "string",
-        default: "none"
-    },
-    GalleryDescLetterSpacingDesktop : {
-        type: "number",
-    },
-    GalleryDescLetterSpacingTablet : {
-        type: "number",
-    },
-    GalleryDescLetterSpacingMobile : {
-        type: "number",
-    },
-    GalleryDescLetterSpacingUnits : {
-        type: "string",
-        default: "px"
-    },
-    GalleryDescLineHeightDesktop : {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryDescLineHeightTablet : {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryDescLineHeightMobile : {
-        type: "number",
-        default: "inherit",
-    },
-    GalleryDescLineHeightUnits : {
-        type: "string",
-        default: "px"
-    },
-
-    GalleryDescColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    GalleryDescColor : {
-        type: "string",
-        default: "#000"
-    },
-    GalleryDescHoverColor: {
-        type: 'string',
-        default: "#000"
-    },
-
-
-
     GalleryZIndex : {
         type: "number",
     },
@@ -826,7 +769,7 @@ const attributes = {
 			Mobile: 'px'
 		}
     },
-    GalleryDesktopBorderRadiusWidth: {
+    GalleryBorderRadiusDesktop: {
         type: "object", 
         default: {
             top: 0,
@@ -835,7 +778,7 @@ const attributes = {
             right: 0,
         },
     },
-    GalleryTabBorderRadiusWidth: {
+    GalleryBorderRadiusTablet: {
         type: "object", 
         default: {
             top: 0,
@@ -844,7 +787,7 @@ const attributes = {
             right: 0,
         },
     },
-    GalleryMobileBorderRadiusWidth: {
+    GalleryBorderRadiusMobile: {
         type: "object", 
         default: {
             top: 0,
@@ -870,6 +813,100 @@ const attributes = {
         default: false,
     },
     
+    imageBorder: {
+        type: 'string',
+        default: "none",
+    },
+    imageBorderColor: {
+        type: 'string',
+    },
+    imageBorderHoverColor: {
+        type: 'string',
+    },
+    imageBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+
+    imageBorderUnits : {
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    imageDesktopBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    imageTabBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    imageMobileBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    imageBorderLink : {
+        type : "boolean",
+        default: true
+    },
+
+    imageBorderRadiusUnits : {
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    imageDesktopBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    imageTabBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    imageMobileBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    imageBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
 };
 
 export default attributes;

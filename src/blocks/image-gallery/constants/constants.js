@@ -13,6 +13,15 @@ export const separator_LINE_SIZE = "separatorLineSize";
 export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
+export const PRESETS = [
+	{ label: __("None", "frontis-blocks"), value: "none" },
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+    { label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+    { label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+];
+
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "%", value: "%" },

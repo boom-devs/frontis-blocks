@@ -1,0 +1,154 @@
+
+import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
+import './style.scss';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import {useState } from "@wordpress/element";
+
+const save = ({ attributes }) => {
+
+    const {
+        blockID,
+        clickable,
+        parentBlockID,
+
+        inheritedTagName,
+        inheritedDisplayIcon,
+        inheritedTabIcon,
+        inheritedExpandedIcon,
+
+        title,
+        titlePrefixType,
+        titlePrefixIcon,
+        titlePrefixImgUrl,
+        titlePrefixImgId,
+
+        titleSuffixType,
+        titleSuffixIcon,
+        titleSuffixImgUrl,
+        titleSuffixImgId,
+    } = attributes;
+
+
+    const blockProps = useBlockProps.save({
+        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
+    });
+
+
+    return (
+        <>
+            <div {...blockProps}>
+                <div className={`fb-accordion-item-wrapper`} data-id={parentBlockID}>
+                    <div className={`fb-accordion-item-title-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`}>
+                        <div className={`fb-accordion-title-inner`}>
+                            {titlePrefixType !== 'none' && (
+                                <div className="fb-accordion-title-prefix">
+                                    {titlePrefixType === 'icon' && titlePrefixIcon && (
+                                           renderSVG(titlePrefixIcon)
+                                    )}
+
+                                    {titlePrefixType === "image" ? (
+                                        <MediaUpload
+                                            onSelect={(media) =>
+                                                setAttributes({
+                                                    titlePrefixImgUrl: media.url,
+                                                    titlePrefixImgId: media.id,
+                                                    titlePrefixImgAlt: media.alt,
+                                                })
+                                            }
+                                            type="image"
+                                            value={titlePrefixImgId}
+                                            render={({ open }) => {
+                                                if (!titlePrefixImgUrl) {
+                                                    return (
+                                                        <Button
+                                                            label={__(
+                                                                "Upload Image",
+                                                                "frontis-blocks"
+                                                            )}
+                                                            icon="format-image"
+                                                            onClick={open}
+                                                        />
+                                                    );
+                                                } else {
+                                                    return (
+                                                        <img src={titlePrefixImgUrl} />
+                                                    );
+                                                }
+                                            }}
+                                        />
+                                    ) : null}
+                                </div>
+                            )}
+
+                            <RichText.Content
+                                value={title}
+                                tagName={inheritedTagName}
+                                className="fb-accordion-title"
+                            />
+
+                            {titleSuffixType !== 'none' && (
+                                <div className="fb-accordion-title-suffix">
+
+                                    {titleSuffixType === 'icon' && titleSuffixIcon && (
+                                        renderSVG(titleSuffixIcon)
+                                    )}
+
+                                    {titleSuffixType === "image" ? (
+                                        <MediaUpload
+                                            onSelect={(media) =>
+                                                setAttributes({
+                                                    titleSuffixImgUrl: media.url,
+                                                    titleSuffixImgId: media.id,
+                                                    titleSuffixImgAlt: media.alt,
+                                                })
+                                            }
+                                            type="image"
+                                            value={titleSuffixImgId}
+                                            render={({ open }) => {
+                                                if (!titleSuffixImgUrl) {
+                                                    return (
+                                                        <Button
+                                                            label={__(
+                                                                "Upload Image",
+                                                                "frontis-blocks"
+                                                            )}
+                                                            icon="format-image"
+                                                            onClick={open}
+                                                        />
+                                                    );
+                                                } else {
+                                                    return (
+                                                        <img src={titleSuffixImgUrl} />
+                                                    );
+                                                }
+                                            }}
+                                        />
+                                    ) : null}
+                                </div>
+                            )}
+                        </div>
+                        {inheritedDisplayIcon && 
+                            <div className="fb-accordion-tab-icon">
+                                {inheritedTabIcon && renderSVG(inheritedTabIcon)}
+                            </div>
+                        }
+                        {inheritedDisplayIcon && 
+                            <div className="fb-accordion-expanded-icon">
+                                {inheritedExpandedIcon && renderSVG(inheritedExpandedIcon)}
+                            </div>
+                        }
+                    </div>
+                    <div
+                        className={`fb-accordion-content-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`}
+                    >
+                        <div className="fb-accordion-content">
+                            <InnerBlocks.Content />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default save;

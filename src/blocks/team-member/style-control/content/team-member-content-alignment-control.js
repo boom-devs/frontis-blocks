@@ -11,7 +11,7 @@ export default function TeamMemberContentAlignmentControl({
 	setAttributes,
 }) {
 	const {
-		DeviceType,
+		deviceType,
 		teamMemberContentAlignment,
 	} = attributes;
 

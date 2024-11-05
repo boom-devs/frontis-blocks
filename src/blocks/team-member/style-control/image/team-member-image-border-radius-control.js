@@ -2,7 +2,7 @@ import FB_Spacing from "@Components/spacing";
 export default function TeamMemberImageBorderRadiusControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
+		deviceType,
 		teamMemberImageBorderRadiusUnits,
 		teamMemberImageBorderRadiusDesktop,
 		teamMemberImageBorderRadiusTab,
@@ -14,7 +14,7 @@ export default function TeamMemberImageBorderRadiusControl ({ attributes, setAtt
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( teamMemberImageBorderRadiusLink ) {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
 						teamMemberImageBorderRadiusDesktop: {
@@ -49,7 +49,7 @@ export default function TeamMemberImageBorderRadiusControl ({ attributes, setAtt
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {teamMemberImageBorderRadiusDesktop: {...teamMemberImageBorderRadiusDesktop, [position]: value}} );
 					break;
@@ -73,7 +73,7 @@ export default function TeamMemberImageBorderRadiusControl ({ attributes, setAtt
 		setAttributes( {
 			teamMemberImageBorderRadiusUnits: {
 				...teamMemberImageBorderRadiusUnits,
-				[DeviceType]: unit
+				[deviceType]: unit
 			}
 		})
 	}
@@ -83,7 +83,7 @@ export default function TeamMemberImageBorderRadiusControl ({ attributes, setAtt
 	<>
 		<FB_Spacing
 			label={ 'Border Radius' }
-			DeviceType={DeviceType}
+			deviceType={deviceType}
 			spacingUnitsHandler={teamMemberImageBorderRadiusUnitsHandler}
 			spacingUnits={teamMemberImageBorderRadiusUnits}
 			spacingDesktop={teamMemberImageBorderRadiusDesktop}

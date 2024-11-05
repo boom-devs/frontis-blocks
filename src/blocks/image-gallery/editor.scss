@@ -9,23 +9,6 @@ $white_color: #ffffff;
     }
 }
 
-.fb-image-gallery-wrapper {
-    .fb-image-gallery-items {
-        display: grid;
-    }
-
-    a.fb-image-gallery-item {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-}
-
-.fb-gallery-main-wrapper {
-    overflow: hidden;
-}
 
 .fb-gallery-wrapper {
     .dnd-items-wrapper {

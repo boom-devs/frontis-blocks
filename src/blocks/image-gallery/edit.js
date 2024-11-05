@@ -2,14 +2,13 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, MediaPlaceholder } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
-import { useEffect } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         GalleryItems,
-        DeviceType,
+        deviceType,
         GalleryType,
 
         ImageOverlayStyle,
@@ -17,6 +16,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         GalleryButtonSwitcher,
         GalleryButtonText,
         GalleryButtonLink,
+
+        lightboxIconSwitcher,
+        lightboxIcon,
 
      } = attributes;
 
@@ -31,17 +33,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setAttributes({ GalleryItems: updatedItems });
     };
 
-    // console.log(attributes);
-
-    // const gridSpan = GalleryType == 'mesonry' ? {
-    //     gridRow: DeviceType == 'Desktop' ? item.row?.desktop > 1 && `span-${item.row?.desktop}` : DeviceType == 'Tablet' ? item.row?.tablet > 1 && `span-${item.row?.tablet}` : item.row?.mobile > 1 && `span-${item.row?.mobile}`,
-    //     gridColumn: DeviceType == 'Desktop' ? item.column?.desktop > 1 && `span-${item.column?.desktop}` : DeviceType == 'Tablet' ? item.column?.tablet > 1 && `span-${item.column?.tablet}` : item.column?.mobile > 1 && `span-${item.column?.mobile}`,
-    // } : '';
 
     return (
         <>
-            
-
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
@@ -50,7 +44,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             
             <div {...blockProps}>
                 <div className="fb-image-gallery-wrapper">
-                    <div className={`fb-image-gallery-wrapper `}>
                         <div className="fb-image-gallery-items">
                             {GalleryItems.map(item => 
                                 item?.image?.url ? (
@@ -58,11 +51,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             className="fb-image-gallery-item" 
                                             style={{
                                                 ...(GalleryType === 'mesonry' && {
-                                                  gridRow: DeviceType === 'Desktop'
+                                                  gridRow: deviceType === 'Desktop'
                                                     ? item.row?.desktop > 1
                                                       ? `span ${item.row?.desktop}`
                                                       : 'unset'
-                                                    : DeviceType === 'Tablet'
+                                                    : deviceType === 'Tablet'
                                                     ? item.row?.tablet > 1
                                                       ? `span ${item.row?.tablet}`
                                                       : 'unset'
@@ -70,11 +63,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     ? `span ${item.row?.mobile}`
                                                     : 'unset',
                                               
-                                                  gridColumn: DeviceType === 'Desktop'
+                                                  gridColumn: deviceType === 'Desktop'
                                                     ? item.column?.desktop > 1
                                                       ? `span ${item.column?.desktop}`
                                                       : 'unset'
-                                                    : DeviceType === 'Tablet'
+                                                    : deviceType === 'Tablet'
                                                     ? item.column?.tablet > 1
                                                       ? `span ${item.column?.tablet}`
                                                       : 'unset'
@@ -87,6 +80,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         >
                                             <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt}></img>
                                             {ImageOverlayStyle === 'overlay' && <span className="fb-image-overlay"></span>}
+                                            { lightboxIconSwitcher === true && 
+                                                <div className="fb-lightbox-icon-wrapper">
+                                                    <div className="fb-lightbox-icon">{renderSVG(lightboxIcon)}</div>
+                                                </div>
+                                            }
                                         </a>
                                 ) : (
                                     <MediaPlaceholder
@@ -98,8 +96,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 )
                             )}
                         </div>
-                        {GalleryButtonSwitcher && <div className="fb-image-gallery-btn-wrapper"><a href={GalleryButtonLink} className="fb-image-gallery-btn">{GalleryButtonText}</a></div>}
-                    </div>
+                        {GalleryButtonSwitcher && <div className="fb-image-gallery-btn-wrapper"><a href={GalleryButtonLink} className="fb-image-gallery-btn">{GalleryButtonText}</a>
+                        </div>}
                 </div>
             </div>
         </>

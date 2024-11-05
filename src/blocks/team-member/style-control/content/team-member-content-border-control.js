@@ -2,44 +2,42 @@ import { __ } from '@wordpress/i18n';
 import {
 	BaseControl,
 	Button,
-	ButtonGroup,
-	HStack,
-	TextControl,
-	TextareaControl,
-	ResponsiveWrapper,
-	MediaUpload,
-	MediaUploadCheck,
-	PanelBody, SelectControl, Dropdown, Dashicon, ColorPicker, ColorPalette,
+	SelectControl, Dropdown, Dashicon, ColorPicker, ColorPalette,
 } from '@wordpress/components';
 import {BORDER_STYLES, UNIT_TYPES} from "../../constants/constants";
 
 import FB_Spacing from "@Components/spacing";
+import FB_Color from '../../../../components/color';
 
 
 export default function TeamMemberContentBorderControl ({ attributes, setAttributes}) {
 
 	const {
-		DeviceType,
-		teamMemberContentBorderTypeUnits,
-		teamMemberContentBorderTypeDesktop,
-		teamMemberContentBorderTypeTab,
-		teamMemberContentBorderTypeMobile,
-		teamMemberContentBorderTypeLink,
+		deviceType,
+		teamMemberContentBorderUnits,
+		teamMemberContentBorderDesktop,
+		teamMemberContentBorderTab,
+		teamMemberContentBorderMobile,
+		teamMemberContentBorderLink,
 
 		teamMemberContentBorder,
+		teamMemberContentBorderColorSwitcher,
 		teamMemberContentBorderColor,
-		teamMemberContentBackgroundColor
+		teamMemberContentBorderHoverColor,
 
+		teamMemberContentBGColorSwitcher,
+		teamMemberContentBGColor,
+		teamMemberContentBGHoverColor,
 
 	} = attributes;
 
 	const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
-		if ( teamMemberContentBorderTypeLink ) {
-			switch ( DeviceType ) {
+		if ( teamMemberContentBorderLink ) {
+			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
-						teamMemberContentBorderTypeDesktop: {
+						teamMemberContentBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -49,7 +47,7 @@ export default function TeamMemberContentBorderControl ({ attributes, setAttribu
 					break;
 				case 'Tablet':
 					setAttributes( {
-						teamMemberContentBorderTypeTab: {
+						teamMemberContentBorderTab: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -59,7 +57,7 @@ export default function TeamMemberContentBorderControl ({ attributes, setAttribu
 					break;
 				case 'Mobile':
 					setAttributes( {
-						teamMemberContentBorderTypeMobile: {
+						teamMemberContentBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -71,15 +69,15 @@ export default function TeamMemberContentBorderControl ({ attributes, setAttribu
 					break;
 			}
 		} else {
-			switch ( DeviceType ) {
+			switch ( deviceType ) {
 				case 'Desktop':
-					setAttributes( {teamMemberContentBorderTypeDesktop: {...teamMemberContentBorderTypeDesktop, [position]: value}} );
+					setAttributes( {teamMemberContentBorderDesktop: {...teamMemberContentBorderDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {teamMemberContentBorderTypeTab: {...teamMemberContentBorderTypeTab, [position]: value}} );
+					setAttributes( {teamMemberContentBorderTab: {...teamMemberContentBorderTab, [position]: value}} );
 					break;
 				case 'Mobile':
-					setAttributes( {teamMemberContentBorderTypeMobile: {...teamMemberContentBorderTypeMobile, [position]: value}} );
+					setAttributes( {teamMemberContentBorderMobile: {...teamMemberContentBorderMobile, [position]: value}} );
 					break;
 				default:
 					break;
@@ -88,17 +86,39 @@ export default function TeamMemberContentBorderControl ({ attributes, setAttribu
 
 	}
 	const spacingCombineBtnHandlerFn = () => {
-		setAttributes( {teamMemberContentBorderTypeLink: !teamMemberContentBorderTypeLink} );
+		setAttributes( {teamMemberContentBorderLink: !teamMemberContentBorderLink} );
 	}
 
-	const teamMemberContentBorderTypeUnitsHandler = (unit) => {
+	const teamMemberContentBorderUnitsHandler = (unit) => {
 		setAttributes( {
-			teamMemberContentBorderTypeUnits: {
-				...teamMemberContentBorderTypeUnits,
-				[DeviceType]: unit
+			teamMemberContentBorderUnits: {
+				...teamMemberContentBorderUnits,
+				[deviceType]: unit
 			}
 		})
 	}
+
+	/** Content border Color */
+    const handleTeamMemberContentBorderColorSwitcherChange = (value) => {
+        setAttributes({ teamMemberContentBorderColorSwitcher: value });
+    };
+    const handleTeamMemberContentBorderColorChange = (value) => {
+        setAttributes({ teamMemberContentBorderColor: value });
+    };
+    const handleTeamMemberContentBorderHoverColorChange = (value) => {
+        setAttributes({ teamMemberContentBorderHoverColor: value });
+    };
+
+	/** Content border Color */
+    const handleTeamMemberContentBGColorSwitcherChange = (value) => {
+        setAttributes({ teamMemberContentBGColorSwitcher: value });
+    };
+    const handleTeamMemberContentBGColorChange = (value) => {
+        setAttributes({ teamMemberContentBGColor: value });
+    };
+    const handleTeamMemberContentBGHoverColorChange = (value) => {
+        setAttributes({ teamMemberContentBGHoverColor: value });
+    };
 
 
 	return (
@@ -113,113 +133,36 @@ export default function TeamMemberContentBorderControl ({ attributes, setAttribu
 
 			<FB_Spacing
 				label={ 'Border' }
-				DeviceType={DeviceType}
-				spacingUnitsHandler={teamMemberContentBorderTypeUnitsHandler}
-				spacingUnits={teamMemberContentBorderTypeUnits}
-				spacingDesktop={teamMemberContentBorderTypeDesktop}
-				spacingTablet={teamMemberContentBorderTypeTab}
-				spacingMobile={teamMemberContentBorderTypeMobile}
+				deviceType={deviceType}
+				spacingUnitsHandler={teamMemberContentBorderUnitsHandler}
+				spacingUnits={teamMemberContentBorderUnits}
+				spacingDesktop={teamMemberContentBorderDesktop}
+				spacingTablet={teamMemberContentBorderTab}
+				spacingMobile={teamMemberContentBorderMobile}
 				handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
-				spacingCombineBtn={teamMemberContentBorderTypeLink}
+				spacingCombineBtn={teamMemberContentBorderLink}
 				spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
 			/>
 
+			<FB_Color
+                label={__("Border Color", "frontis-blocks")}
+                globalColorSwitcher={teamMemberContentBorderColorSwitcher}
+                globalColor={teamMemberContentBorderColor}
+                globalHoverColor={teamMemberContentBorderHoverColor}
+                handleColorSwitcherChange={handleTeamMemberContentBorderColorSwitcherChange}
+                handleGlobalColorChange={handleTeamMemberContentBorderColorChange}
+                handleGlobalHoverColorChange={handleTeamMemberContentBorderHoverColorChange}
+            />
 
-			<BaseControl
-				label={__("Border Color", "frontis-blocks")}
-				className="fb-setting-color-setting-wrapper"
-			>
-				<Dropdown
-					className="fb-setting-color-setting-icon-dropdown"
-					contentClassName="fb-setting-color-setting-icon-dropdown-content"
-					popoverProps={{ placement: 'bottom-start' }}
-					renderToggle={({ isOpen, onToggle }) => (
-						<Button
-							variant="primary"
-							onClick={onToggle}
-							aria-expanded={isOpen}
-							aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-							className="fb-setting-color-setting-icon-btn"
-						>
-							<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-						</Button>
-					)}
-					renderContent={() => (
-						<div className="fb-setting-color-setting-icon-popup">
-							<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-								<div className="fb-setting-normal-color">
-									<ColorPicker
-										color={teamMemberContentBorderColor}
-										onChange={(value) => setAttributes({ teamMemberContentBorderColor: value })}
-										enableAlpha={true}
-									/>
-									<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-									<ColorPalette
-										colors={[
-											{ color: '#F72585' },
-											{ color: '#7209B7' },
-											{ color: '#3A0CA3' },
-											{ color: '#4361EE' },
-											{ color: '#4CC9F0' },
-										]}
-										disableCustomColors={true}
-										value={teamMemberContentBorderColor}
-										onChange={(value) => setAttributes({ teamMemberContentBorderColor: value })}
-									/>
-								</div>
-							</BaseControl>
-						</div>
-					)}
-				/>
-			</BaseControl>
-
-			<BaseControl
-				label={__("Background Color", "frontis-blocks")}
-				className="fb-setting-color-setting-wrapper"
-			>
-				<Dropdown
-					className="fb-setting-color-setting-icon-dropdown"
-					contentClassName="fb-setting-color-setting-icon-dropdown-content"
-					popoverProps={{ placement: 'bottom-start' }}
-					renderToggle={({ isOpen, onToggle }) => (
-						<Button
-							variant="primary"
-							onClick={onToggle}
-							aria-expanded={isOpen}
-							aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-							className="fb-setting-color-setting-icon-btn"
-						>
-							<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-						</Button>
-					)}
-					renderContent={() => (
-						<div className="fb-setting-color-setting-icon-popup">
-							<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-								<div className="fb-setting-normal-color">
-									<ColorPicker
-										color={teamMemberContentBorderColor}
-										onChange={(value) => setAttributes({ teamMemberContentBackgroundColor: value })}
-										enableAlpha={true}
-									/>
-									<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-									<ColorPalette
-										colors={[
-											{ color: '#F72585' },
-											{ color: '#7209B7' },
-											{ color: '#3A0CA3' },
-											{ color: '#4361EE' },
-											{ color: '#4CC9F0' },
-										]}
-										disableCustomColors={true}
-										value={teamMemberContentBorderColor}
-										onChange={(value) => setAttributes({ teamMemberContentBackgroundColor: value })}
-									/>
-								</div>
-							</BaseControl>
-						</div>
-					)}
-				/>
-			</BaseControl>
+			<FB_Color
+                label={__("Background Color", "frontis-blocks")}
+                globalColorSwitcher={teamMemberContentBGColorSwitcher}
+                globalColor={teamMemberContentBGColor}
+                globalHoverColor={teamMemberContentBGHoverColor}
+                handleColorSwitcherChange={handleTeamMemberContentBGColorSwitcherChange}
+                handleGlobalColorChange={handleTeamMemberContentBGColorChange}
+                handleGlobalHoverColorChange={handleTeamMemberContentBGHoverColorChange}
+            />
 
 		</>
 	);
