@@ -1482,7 +1482,10 @@ const attributes = {
         type: "string",
         default: ""
     },    
-
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
 }
 //
 export default attributes;
