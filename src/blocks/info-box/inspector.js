@@ -149,6 +149,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		SubHeadingFontSizeUnits,
 		SubHeadingFontSize,
 		SubHeadingFontFamily,
+		SubHeadingLetterSpacing,
+		SubHeadingLetterSpacingUnits,
+		SubHeadingLineHeight,
+		SubHeadingLineHeightUnits,
 		SubHeadingColor,
 		SubHeadingColorSwitcher,
 		SubHeadingHoverColor,
@@ -358,7 +362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaHoverBackgroundImageAttachment,
 		mediaHoverBackgroundImageSize,
 		mediaHoverBackgroundImageRepeat,
-		blockStyle
+		blockStyle,
 	} = attributes;
 
 	useEffect(() => {
@@ -2849,91 +2853,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}
 			  }
 		  }
-		.fb-info-box-content-wrapper.${blockID} .fb-heading {
-        ${
-					Heading_Mobile_padding.top !== undefined
-						? `padding-top: ${Heading_Mobile_padding.top}${Heading_padding_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_padding.right !== undefined
-						? `padding-right: ${Heading_Mobile_padding.right}${Heading_padding_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_padding.bottom !== undefined
-						? `padding-bottom: ${Heading_Mobile_padding.bottom}${Heading_padding_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_padding.left !== undefined
-						? `padding-left: ${Heading_Mobile_padding.left}${Heading_padding_units} !important;`
-						: ""
-				}
-        
-        ${
-					Heading_Mobile_Margin.top !== undefined
-						? `margin-top: ${Heading_Mobile_Margin.top}${Heading_Margin_Units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Margin.right !== undefined
-						? `margin-right: ${Heading_Mobile_Margin.right}${Heading_Margin_Units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Margin.bottom !== undefined
-						? `margin-bottom: ${Heading_Mobile_Margin.bottom}${Heading_Margin_Units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Margin.left !== undefined
-						? `margin-left: ${Heading_Mobile_Margin.left}${Heading_Margin_Units} !important;`
-						: ""
-				}
-        
-        ${
-					Heading_Mobile_Border_Width.top !== undefined
-						? `border-top-width: ${Heading_Mobile_Border_Width.top}${Heading_Border_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Border_Width.right !== undefined
-						? `border-right-width: ${Heading_Mobile_Border_Width.right}${Heading_Border_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Border_Width.bottom !== undefined
-						? `border-bottom-width: ${Heading_Mobile_Border_Width.bottom}${Heading_Border_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Border_Width.left !== undefined
-						? `border-left-width: ${Heading_Mobile_Border_Width.left}${Heading_Border_units} !important;`
-						: ""
-				}
-        
-        ${
-					Heading_Mobile_Border_radius_Width.top !== undefined
-						? `border-top-left-radius: ${Heading_Mobile_Border_radius_Width.top}${Heading_Border_radius_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Border_radius_Width.right !== undefined
-						? `border-top-right-radius: ${Heading_Mobile_Border_radius_Width.right}${Heading_Border_radius_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Border_radius_Width.bottom !== undefined
-						? `border-bottom-left-radius: ${Heading_Mobile_Border_radius_Width.bottom}${Heading_Border_radius_units} !important;`
-						: ""
-				}
-        ${
-					Heading_Mobile_Border_radius_Width.left !== undefined
-						? `border-bottom-right-radius: ${Heading_Mobile_Border_radius_Width.left}${Heading_Border_radius_units} !important;`
-						: ""
-				}
-    }
+		
 
     .fb-info-box-content-wrapper.${blockID} .fb-description {
         ${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ""}
@@ -2965,6 +2885,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${
 					SubHeadingTextDecoration !== undefined
 						? `text-decoration: ${SubHeadingTextDecoration};`
+						: ""
+				}
+				${
+					SubHeadingLetterSpacing !== undefined
+						? `letter-spacing: ${SubHeadingLetterSpacing}${SubHeadingLetterSpacingUnits};`
+						: ""
+				}
+			  ${
+					SubHeadingLineHeight !== undefined
+						? `line-height: ${SubHeadingLineHeight}${SubHeadingLineHeightUnits};`
 						: ""
 				}
         ${descPadding !== undefined ? `padding: ${descPadding};` : ""}
@@ -3426,6 +3356,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			Heading_Border_radius_units,
 			SubHeadingColor,
 			SubHeadingFontFamily,
+			SubHeadingLetterSpacing,
+			SubHeadingLetterSpacingUnits,
+			SubHeadingLineHeight,
+			SubHeadingLineHeightUnits,
 			SubHeadingFontSize,
 			SubHeadingFontSizeUnits,
 			SubHeadingFontWeight,
@@ -5836,12 +5770,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																							key={key}
 																							onClick={() =>
 																								setAttributes({
-																									Heading_Letter_Spacing_units:
+																									SubHeadingLetterSpacingUnits:
 																										item.value,
 																								})
 																							}
 																							className={`fb-setting-letterspacing-units-switcher ${
-																								Heading_Letter_Spacing_units ===
+																								SubHeadingLetterSpacingUnits ===
 																								item.value
 																									? "active"
 																									: ""
@@ -5855,10 +5789,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		</div>
 																	</div>
 																	<RangeControl
-																		value={Heading_Letter_Spacing}
+																		value={SubHeadingLetterSpacing}
 																		onChange={(value) =>
 																			setAttributes({
-																				Heading_Letter_Spacing:
+																				SubHeadingLetterSpacing:
 																					value === 0 ? undefined : value,
 																			})
 																		}
@@ -5884,12 +5818,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																							key={key}
 																							onClick={() =>
 																								setAttributes({
-																									Heading_Line_Height_units:
+																									SubHeadingLineHeightUnits:
 																										item.value,
 																								})
 																							}
 																							className={`fb-setting-lineheight-units-switcher ${
-																								Heading_Line_Height_units ===
+																								SubHeadingLineHeightUnits ===
 																								item.value
 																									? "active"
 																									: ""
@@ -5903,10 +5837,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		</div>
 																	</div>
 																	<RangeControl
-																		value={Heading_Line_Height}
+																		value={SubHeadingLineHeight}
 																		onChange={(value) =>
 																			setAttributes({
-																				Heading_Line_Height:
+																				SubHeadingLineHeight:
 																					value === 1 ? undefined : value,
 																			})
 																		}

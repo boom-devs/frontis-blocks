@@ -117,7 +117,7 @@ const attributes = {
 	},
 	btnIcon: {
 		type: 'string',
-		default: 'angle-right',
+		default: 'arrow-up-right-from-square',
 	},
 	btnIconSize: {
 		type: 'object',
@@ -141,16 +141,16 @@ const attributes = {
 	},
     btnIconColor: {
 		type: 'string',
-        default: '#ffffff'
+        default: '#15171C'
 	},
     btnIconHoverColor: {
 		type: 'string',
-        default: '#ffffff'
+        default: ''
 	},
 	//Button two icon
 	btnTwoIcon: {
 		type: 'string',
-		default: 'angle-right',
+		default: 'arrow-up-right-from-square',
 	},
 	btnTwoIconSize: {
 		type: 'object',
@@ -178,7 +178,7 @@ const attributes = {
 	},
 	btnTwoIconHoverColor: {
 		type: 'string',
-		default: '#ffffff'
+		default: ''
 	},
     mediaIconColor: {
 		type: 'string',
@@ -665,10 +665,10 @@ const attributes = {
 	infoButtonDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 15,
+			bottom: 15,
+			left: 20,
+			right: 20,
 		},
 	},
 	infoButtonTabPadding: {
@@ -700,7 +700,7 @@ const attributes = {
 			top: 0,
 			bottom: 0,
 			left: 0,
-			right: 0,
+			right: 20,
 		},
 	},
 	infoButtonTabMargin: {
@@ -783,10 +783,10 @@ const attributes = {
 	infoBtnDesktopBorderradiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
 		},
 	},
 	infoBtnTabBorderradiusWidth: {
@@ -926,10 +926,10 @@ const attributes = {
 	btnTwoDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 12,
+			bottom: 12,
+			left: 20,
+			right: 20,
 		},
 	},
 	btnTwoTabPadding: {
@@ -1005,10 +1005,11 @@ const attributes = {
 	},
 	btnTwoBorder: {
 		type: 'string',
-		default: "none",
+		default: "solid",
 	},
 	btnTwoBorderColor: {
 		type: 'string',
+        default: '#404655'
 	},
 	btnTwoHoverBorderColor: {
 		type: 'string',
@@ -1024,10 +1025,10 @@ const attributes = {
 	btnTwoDesktopBorder: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2"
 		},
 	},
 	btnTwoTabBorder: {
@@ -1064,10 +1065,10 @@ const attributes = {
 	btnTwoDesktopBorderRadius: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
 		},
 	},
 	btnTwoTabBorderRadius: {
@@ -1292,7 +1293,7 @@ const attributes = {
 	},
 	buttonTextColor : {
 		type: "string",
-		default: '#ffffff'
+		default: '#15171C'
 	},
 	buttonTextHoverColor : {
 		type: "string"
@@ -1303,7 +1304,7 @@ const attributes = {
 	},
 	buttonBgColor : {
 		type: "string",
-		default: ''
+		default: '#ffffff'
 	},
 	buttonBgHoverColor : {
 		type: "string"
@@ -1684,6 +1685,7 @@ const attributes = {
     },
     testClassicColor: {
         type: "string",
+        default: "#15171C"
     },
     testGradientColor: {
         type: "string",
@@ -1841,5 +1843,4 @@ const attributes = {
         default: "",
     },
 }
-//
 export default attributes;

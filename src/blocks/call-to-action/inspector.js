@@ -64,7 +64,6 @@ import {
 } from "./constants/constants";
 
 import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
-
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_ResponsiveControl from "@Components/responsive-control";
@@ -2846,16 +2845,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  transition: all .3s ease-in-out;
 		  }
 		  .fb-cta-content-wrapper.${blockID}:hover {
-			  ${
-					globalBgHoverColor !== undefined
-						? `background-color: ${globalBgHoverColor};`
-						: ""
-				}
-			  ${
-					globalBorderHoverColor !== undefined
-						? `border-color: ${globalBorderHoverColor};`
-						: ""
-				}
+			  
 			  ${
 					testBackgroundType === "gradient"
 						? `background: ${
@@ -3808,7 +3798,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										{/*Heading Style*/}
 										<PanelBody
-											title={__("Heading", "frontis-block")}
+											title={__("Title", "frontis-block")}
 											initialOpen={false}
 										>
 											<BaseControl

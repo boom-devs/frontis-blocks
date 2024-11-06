@@ -151,11 +151,11 @@ const attributes = {
 	},
     mediaIconColor: {
 		type: 'string',
-        default: '#ffffff'
+        default: '#399CFF'
 	},
     mediaIconHoverColor: {
 		type: 'string',
-        default: "#399CFF"
+        default: "#ffffff"
 	},
 	mediaIconColorSwitcher : {
 		type: "string",
