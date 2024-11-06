@@ -3,24 +3,25 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import Inspector from "./inspector";
 import ReactPlayer from "react-player";
 import './editor.scss';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        deviceType,
-        videoZIndex,
         videoURL,
         autoPlaySwitcher,
         muteSwitcher,
         loopSwitcher,
         showControlsSwitcher,
-
+        previewImageUrl,
+        videoPlayIcon,
      } = attributes;
 
     const blockProps = useBlockProps({
         className: `fb-advanced-video-main-wrapper ${blockID}`,
     });
-    
+
+    console.log(videoPlayIcon);
 
     return (
         <>
@@ -41,6 +42,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     muted={muteSwitcher}
                                     loop={loopSwitcher}
                                     controls={showControlsSwitcher}
+                                    light={previewImageUrl}
+                                    playIcon={renderSVG(videoPlayIcon)}
+                                    onClickPreview={() => setAttributes({ autoPlaySwitcher: true })}
                                     width="100%"
                                     height="100%"
                                     className="fb-react-player"

@@ -1,49 +1,85 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import { useEffect, useMemo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
     TabPanel,
-    Button,
-    ButtonGroup,
-    Dropdown,
     RangeControl,
     SelectControl,
-    Dashicon,
-    ColorPicker,
-    ColorPalette,
-    TextControl,
     TextareaControl,
     ToggleControl,
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_ALIGN,
-    TEXT_ALIGN,
     BORDER_STYLES,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
 import FB_Color from '@Components/color';
-
+import FB_ImageControl from '@Components/image-control';
+import FBIconPicker from "../../components/icon-picker";
+import FB_BoxShadowControl from "@Components/box-shadow";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         deviceType,
+        blockStyle,
         videoGlobalZIndex,
         videoURL,
         autoPlaySwitcher,
         muteSwitcher,
         loopSwitcher,
         showControlsSwitcher,
+
+        imageOverlaySwitcher,
+        previewImageUrl,
+        previewImageAlt,
+        previewImageID,
+        previewImagePosition,
+        previewImageAttachment,
+        previewImageRepeat,
+        previewImageSize,
+
+        videoPlayIcon,
+        videoPlayIconSize,
+        videoPlayIconSizeUnits,
+
+        videoPlayIconColorSwitcher,
+        videoPlayIconColor,
+        videoPlayIconHoverColor,
+        videoPlayIconBgColorSwitcher,
+        videoPlayIconBgColor,
+        videoPlayIconBgHoverColor,
+
+        videoPlayIconBorder,
+        videoPlayIconBorderColorSwitcher,
+        videoPlayIconBorderColor,
+        videoPlayIconBorderHoverColor,
+
+        videoPlayIconBorderUnits,
+        videoPlayIconBorderDesktop,
+        videoPlayIconBorderTablet,
+        videoPlayIconBorderMobile,
+        videoPlayIconBorderLink,
+
+        videoPlayIconBorderRadiusUnits,
+        videoPlayIconBorderRadiusDesktop,
+        videoPlayIconBorderRadiusTablet,
+        videoPlayIconBorderRadiusMobile,
+        videoPlayIconBorderRadiusLink,
+
+        videoPlayIconPaddingUnits,
+        videoPlayIconPaddingDesktop,
+        videoPlayIconPaddingTablet,
+        videoPlayIconPaddingMobile,
+        videoPlayIconPaddingLink,
+
+        videoWidth,
+        videoWidthUnits,
 
         videoBorder,
         videoBorderColorSwitcher,
@@ -61,10 +97,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoBorderRadiusTablet,
         videoBorderRadiusMobile,
         videoBorderRadiusLink,
-
-
-
-
 
         videoGlobalPaddingUnits,
         videoGlobalPaddingDesktop,
@@ -99,6 +131,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBorderRadiusMobile,
         videoGlobalBorderRadiusLink,
 
+        videoGlobalBoxShadowValues,
+        videoGlobalBoxShadowCssValue,
+
     } = attributes;
 
     useEffect(() => {
@@ -108,10 +143,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
-
-
-
-
 
     /** Start border */
     const handleIframeBorderUnitChange = ( event, position ) => {
@@ -186,7 +217,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const IframeBorderTabletWidth = `${videoBorderTablet.top}${videoBorderUnits.Tablet} ${videoBorderTablet.right}${videoBorderUnits.Tablet} ${videoBorderTablet.bottom}${videoBorderUnits.Tablet} ${videoBorderTablet.left}${videoBorderUnits.Tablet}`;
     const IframeBorderMobileWidth = `${videoBorderMobile.top}${videoBorderUnits.Mobile} ${videoBorderMobile.right}${videoBorderUnits.Mobile} ${videoBorderMobile.bottom}${videoBorderUnits.Mobile} ${videoBorderMobile.left}${videoBorderUnits.Mobile}`;
     /** End Border */
-
 
     /** Start Global border radius*/
     const handleIframeBorderRadiusUnitChange = ( event, position ) => {
@@ -264,18 +294,228 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const IframeBorderRadiusMobileWidth = `${videoBorderRadiusMobile.top}${videoBorderRadiusUnits.Mobile} ${videoBorderRadiusMobile.right}${videoBorderRadiusUnits.Mobile} ${videoBorderRadiusMobile.bottom}${videoBorderRadiusUnits.Mobile} ${videoBorderRadiusMobile.left}${videoBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
 
+    /** Start Video Play Icon Border */
+    const handleVideoPlayIconBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( videoPlayIconBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        videoPlayIconBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        videoPlayIconBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        videoPlayIconBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {videoPlayIconBorderDesktop: {...videoPlayIconBorderDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {videoPlayIconBorderTablet: {...videoPlayIconBorderTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {videoPlayIconBorderMobile: {...videoPlayIconBorderMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
 
-    /** Start Global Border Color */
-    const handleBorderColorSwitcherChange = (value) => {
-        setAttributes({ videoBorderColorSwitcher: value });
-    };
-    const handleBorderColorChange = (value) => {
-        setAttributes({ videoBorderColor: value });
-    };
-    const handleBorderHoverColorChange = (value) => {
-        setAttributes({ videoBorderHoverColor: value });
-    };
-    /** End Global Border Color */
+    }
+
+    const handleVideoPlayIconBorderCombineBtn = () => {
+        setAttributes( {videoPlayIconBorderLink: !videoPlayIconBorderLink} );
+    }
+
+    const handleVideoPlayIconBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            videoPlayIconBorderUnits: {
+                ...videoPlayIconBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const videoPlayIconBorderDesktopWidth = `${videoPlayIconBorderDesktop.top}${videoPlayIconBorderUnits.Desktop} ${videoPlayIconBorderDesktop.right}${videoPlayIconBorderUnits.Desktop} ${videoPlayIconBorderDesktop.bottom}${videoPlayIconBorderUnits.Desktop} ${videoPlayIconBorderDesktop.left}${videoPlayIconBorderUnits.Desktop}`;
+    const videoPlayIconBorderTabletWidth = `${videoPlayIconBorderTablet.top}${videoPlayIconBorderUnits.Tablet} ${videoPlayIconBorderTablet.right}${videoPlayIconBorderUnits.Tablet} ${videoPlayIconBorderTablet.bottom}${videoPlayIconBorderUnits.Tablet} ${videoPlayIconBorderTablet.left}${videoPlayIconBorderUnits.Tablet}`;
+    const videoPlayIconBorderMobileWidth = `${videoPlayIconBorderMobile.top}${videoPlayIconBorderUnits.Mobile} ${videoPlayIconBorderMobile.right}${videoPlayIconBorderUnits.Mobile} ${videoPlayIconBorderMobile.bottom}${videoPlayIconBorderUnits.Mobile} ${videoPlayIconBorderMobile.left}${videoPlayIconBorderUnits.Mobile}`;
+    /** End Video Play Icon Border */   
+
+    /** Start Video Play Icon Border Radius*/   
+    const handleVideoPlayIconBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( videoPlayIconBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        videoPlayIconBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        videoPlayIconBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        videoPlayIconBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {videoPlayIconBorderRadiusDesktop: {...videoPlayIconBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {videoPlayIconBorderRadiusTablet: {...videoPlayIconBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {videoPlayIconBorderRadiusMobile: {...videoPlayIconBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleVideoPlayIconBorderRadiusCombineBtn = () => {
+        setAttributes( {videoPlayIconBorderRadiusLink: !videoPlayIconBorderRadiusLink} );
+    }
+
+    const handleVideoPlayIconBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            videoPlayIconBorderRadiusUnits: {
+                ...videoPlayIconBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const videoPlayIconBorderRadiusDesktopWidth = `${videoPlayIconBorderRadiusDesktop.top}${videoPlayIconBorderRadiusUnits.Desktop} ${videoPlayIconBorderRadiusDesktop.right}${videoPlayIconBorderRadiusUnits.Desktop} ${videoPlayIconBorderRadiusDesktop.bottom}${videoPlayIconBorderRadiusUnits.Desktop} ${videoPlayIconBorderRadiusDesktop.left}${videoPlayIconBorderRadiusUnits.Desktop}`;
+    const videoPlayIconBorderRadiusTabletWidth = `${videoPlayIconBorderRadiusTablet.top}${videoPlayIconBorderRadiusUnits.Tablet} ${videoPlayIconBorderRadiusTablet.right}${videoPlayIconBorderRadiusUnits.Tablet} ${videoPlayIconBorderRadiusTablet.bottom}${videoPlayIconBorderRadiusUnits.Tablet} ${videoPlayIconBorderRadiusTablet.left}${videoPlayIconBorderRadiusUnits.Tablet}`;
+    const videoPlayIconBorderRadiusMobileWidth = `${videoPlayIconBorderRadiusMobile.top}${videoPlayIconBorderRadiusUnits.Mobile} ${videoPlayIconBorderRadiusMobile.right}${videoPlayIconBorderRadiusUnits.Mobile} ${videoPlayIconBorderRadiusMobile.bottom}${videoPlayIconBorderRadiusUnits.Mobile} ${videoPlayIconBorderRadiusMobile.left}${videoPlayIconBorderRadiusUnits.Mobile}`;
+    /** End Video Play Icon Border Radius */
+
+
+    /** Start Video Play Icon Padding*/   
+    const handleVideoPlayIconPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( videoPlayIconPaddingLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        videoPlayIconPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        videoPlayIconPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        videoPlayIconPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {videoPlayIconPaddingDesktop: {...videoPlayIconPaddingDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {videoPlayIconPaddingTablet: {...videoPlayIconPaddingTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {videoPlayIconPaddingMobile: {...videoPlayIconPaddingMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleVideoPlayIconPaddingCombineBtn = () => {
+        setAttributes( {videoPlayIconPaddingLink: !videoPlayIconPaddingLink} );
+    }
+
+    const handleVideoPlayIconPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            videoPlayIconPaddingUnits: {
+                ...videoPlayIconPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const videoPlayIconPaddingDesktopWidth = `${videoPlayIconPaddingDesktop.top}${videoPlayIconPaddingUnits.Desktop} ${videoPlayIconPaddingDesktop.right}${videoPlayIconPaddingUnits.Desktop} ${videoPlayIconPaddingDesktop.bottom}${videoPlayIconPaddingUnits.Desktop} ${videoPlayIconPaddingDesktop.left}${videoPlayIconPaddingUnits.Desktop}`;
+    const videoPlayIconPaddingTabletWidth = `${videoPlayIconPaddingTablet.top}${videoPlayIconPaddingUnits.Tablet} ${videoPlayIconPaddingTablet.right}${videoPlayIconPaddingUnits.Tablet} ${videoPlayIconPaddingTablet.bottom}${videoPlayIconPaddingUnits.Tablet} ${videoPlayIconPaddingTablet.left}${videoPlayIconPaddingUnits.Tablet}`;
+    const videoPlayIconPaddingMobileWidth = `${videoPlayIconPaddingMobile.top}${videoPlayIconPaddingUnits.Mobile} ${videoPlayIconPaddingMobile.right}${videoPlayIconPaddingUnits.Mobile} ${videoPlayIconPaddingMobile.bottom}${videoPlayIconPaddingUnits.Mobile} ${videoPlayIconPaddingMobile.left}${videoPlayIconPaddingUnits.Mobile}`;
+    /** End Video Play Icon Padding */
 
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -347,13 +587,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** end Global padding */
 
-
     /** Default padding for desktop (using desktop_padding) */
     const DesktopPadding    = `${videoGlobalPaddingDesktop.top}${videoGlobalPaddingUnits.Desktop} ${videoGlobalPaddingDesktop.right}${videoGlobalPaddingUnits.Desktop} ${videoGlobalPaddingDesktop.bottom}${videoGlobalPaddingUnits.Desktop} ${videoGlobalPaddingDesktop.left}${videoGlobalPaddingUnits.Desktop}`;
     const TabletPadding     = `${videoGlobalPaddingTablet.top}${videoGlobalPaddingUnits.Tablet} ${videoGlobalPaddingTablet.right}${videoGlobalPaddingUnits.Tablet} ${videoGlobalPaddingTablet.bottom}${videoGlobalPaddingUnits.Tablet} ${videoGlobalPaddingTablet.left}${videoGlobalPaddingUnits.Tablet}`;
     const MobilePadding     = `${videoGlobalPaddingMobile.top}${videoGlobalPaddingUnits.Mobile} ${videoGlobalPaddingMobile.right}${videoGlobalPaddingUnits.Mobile} ${videoGlobalPaddingMobile.bottom}${videoGlobalPaddingUnits.Mobile} ${videoGlobalPaddingMobile.left}${videoGlobalPaddingUnits.Mobile}`;
     /** End Padding */
-    
 
     /** Start Global margin */
     const handleGlobalMarginUnitChange = ( event, position ) => {
@@ -584,92 +822,177 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 
-    /** Start Global Bg Color */
-    const handleGlobalBgColorSwitcherChange = (value) => {
-        setAttributes({ videoGlobalBgColorSwitcher: value });
-    };
-    const handleGlobalBgColorChange = (value) => {
-        setAttributes({ videoGlobalBgColor: value });
-    };
-    const handleGlobalBgHoverColorChange = (value) => {
-        setAttributes({ videoGlobalBgHoverColor: value });
-    };
-    /** End Global Bg Color */
+    const allBlockStyle = useMemo(() => `
+        .${blockID}.fb-advanced-video-main-wrapper {
+            z-index: ${videoGlobalZIndex !== undefined ? videoGlobalZIndex : ''};
+        }
+        .${blockID}.fb-advanced-video-wrapper {
+            ${videoGlobalBgColor !== undefined ? `background-color: ${videoGlobalBgColor};` : ''};
+            padding: ${DesktopPadding};
+            margin: ${DesktopMargin};
+            border: ${videoGlobalBorder};
+            border-width: ${BorderDesktopWidth};
+            border-radius: ${BorderRadiusDesktopWidth} !important;
+            ${videoGlobalBorderColor !== undefined ? `border-color: ${videoGlobalBorderColor};` : ''};
+            ${videoGlobalBoxShadowCssValue ? `box-shadow: ${videoGlobalBoxShadowCssValue};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockID}.fb-advanced-video-wrapper:hover {
+            ${videoGlobalBgHoverColor !== undefined ? `background-color: ${videoGlobalBgHoverColor};` : ''};
+            ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
+        }
 
+        .${blockID} .fb-player-wrapper {
+            width: ${videoWidth.Desktop ? videoWidth.Desktop + videoWidthUnits.Desktop : 'auto'};
+        }
+        .${blockID} .fb-player-wrapper .react-player__preview {
+            background-size: ${previewImageSize ? previewImageSize : 'cover'} !important;
+            background-position: ${previewImagePosition ? previewImagePosition : 'center center'} !important;
+            background-attachment: ${previewImageAttachment ? previewImageAttachment : 'scroll'} !important;
+            background-repeat: ${previewImageRepeat ? previewImageRepeat : 'no-repeat'} !important;
+        }
 
-    /** Start Global Border Color */
-    const handleGlobalBorderColorSwitcherChange = (value) => {
-        setAttributes({ videoGlobalBorderColorSwitcher: value });
-    };
-    const handleGlobalBorderColorChange = (value) => {
-        setAttributes({ videoGlobalBorderColor: value });
-    };
-    const handleGlobalBorderHoverColorChange = (value) => {
-        setAttributes({ videoGlobalBorderHoverColor: value });
-    };
-    /** End Global Border Color */
+        .${blockID} .fb-player-wrapper .react-player__preview svg {
+            width: ${videoPlayIconSize.Desktop ? videoPlayIconSize.Desktop + videoPlayIconSizeUnits.Desktop : '64px'} !important;
+            height: ${videoPlayIconSize.Desktop ? videoPlayIconSize.Desktop + videoPlayIconSizeUnits.Desktop : '64px'} !important;
+            padding: ${videoPlayIconPaddingDesktopWidth};
+            fill: ${videoPlayIconColor ? videoPlayIconColor : '#fff'};
+            background-color: ${videoPlayIconBgColor ? videoPlayIconBgColor : ''};
+            border: ${videoPlayIconBorder};
+            border-width: ${videoPlayIconBorderDesktopWidth};
+            border-radius: ${videoPlayIconBorderRadiusDesktopWidth} !important;
+            border-color: ${videoPlayIconBorderColor ? videoPlayIconBorderColor : ''};
+        }
+        .${blockID} .fb-player-wrapper .react-player__preview svg:hover {
+            fill: ${videoPlayIconHoverColor ? videoPlayIconHoverColor : '#fff'};
+            background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
+            border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
+        }
+
+        .${blockID} .fb-react-player iframe {
+            border: ${videoBorder};
+            border-width: ${IframeBorderDesktopWidth};
+            border-radius: ${IframeBorderRadiusDesktopWidth} !important;
+            ${videoBorderColor !== undefined ? `border-color: ${videoBorderColor};` : ''};
+            transition: all .3s ease-in-out;
+        }
+
+        @media only screen and (max-width: 1024px) {
+
+            .${blockID}.fb-advanced-video-wrapper {
+                padding: ${TabletPadding};
+                margin: ${TabletMargin};
+                border-width: ${BorderTabletWidth};
+                border-radius: ${BorderRadiusTabletWidth} !important;
+            }
+
+            .${blockID} .fb-player-wrapper {
+                width: ${videoWidth.Tablet ? videoWidth.Tablet + videoWidthUnits.Tablet : 'auto'};
+            }
+
+            .${blockID} .fb-player-wrapper .react-player__preview svg {
+                width: ${videoPlayIconSize.Tablet ? videoPlayIconSize.Tablet + videoPlayIconSizeUnits.Tablet : '64px'} !important;
+                height: ${videoPlayIconSize.Tablet ? videoPlayIconSize.Tablet + videoPlayIconSizeUnits.Tablet : '64px'} !important;
+                padding: ${videoPlayIconPaddingTabletWidth};
+                border-width: ${videoPlayIconBorderTabletWidth};
+                border-radius: ${videoPlayIconBorderRadiusTabletWidth} !important;
+            }
+
+            .${blockID} .fb-react-player iframe {
+                border-width: ${IframeBorderTabletWidth};
+                border-radius: ${IframeBorderRadiusTabletWidth} !important;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .${blockID}.fb-advanced-video-wrapper {
+                padding: ${MobilePadding};
+                margin: ${MobileMargin};
+                border-width: ${BorderMobileWidth};
+                border-radius: ${BorderRadiusMobileWidth} !important;
+            }
+
+            .${blockID} .fb-player-wrapper {
+                width: ${videoWidth.Mobile ? videoWidth.Mobile + videoWidthUnits.Mobile : 'auto'};
+            }
+
+            .${blockID} .fb-player-wrapper .react-player__preview svg {
+                width: ${videoPlayIconSize.Mobile ? videoPlayIconSize.Mobile + videoPlayIconSizeUnits.Mobile : '64px'} !important;
+                height: ${videoPlayIconSize.Mobile ? videoPlayIconSize.Mobile + videoPlayIconSizeUnits.Mobile : '64px'} !important;
+                padding: ${videoPlayIconPaddingMobileWidth};
+                border-width: ${videoPlayIconBorderMobileWidth};
+                border-radius: ${videoPlayIconBorderRadiusMobileWidth} !important;
+            }
+
+            .${blockID} .fb-react-player iframe {
+                border-width: ${IframeBorderMobileWidth};
+                border-radius: ${IframeBorderRadiusMobileWidth} !important;
+            }
+        }
+    `, [
+        blockID,
+        videoGlobalZIndex,
+        videoGlobalBgColor,
+        DesktopPadding,
+        DesktopMargin,
+        videoGlobalBorder,
+        BorderDesktopWidth,
+        BorderRadiusDesktopWidth,
+        videoGlobalBorderColor,
+        videoGlobalBoxShadowCssValue,
+        videoGlobalBgHoverColor,
+        videoGlobalBorderHoverColor,
+        videoWidth,
+        videoWidthUnits,
+        previewImageSize,
+        previewImagePosition,
+        previewImageAttachment,
+        previewImageRepeat,
+        videoPlayIconSize,
+        videoPlayIconSizeUnits,
+        videoPlayIconPaddingDesktopWidth,
+        videoPlayIconColor,
+        videoPlayIconBgColor,
+        videoPlayIconBorder,
+        videoPlayIconBorderDesktopWidth,
+        videoPlayIconBorderRadiusDesktopWidth,
+        videoPlayIconBorderColor,
+        videoPlayIconHoverColor,
+        videoPlayIconBgHoverColor,
+        videoPlayIconBorderHoverColor,
+        videoBorder,
+        IframeBorderDesktopWidth,
+        IframeBorderRadiusDesktopWidth,
+        videoBorderColor,
+        TabletPadding,
+        TabletMargin,
+        BorderTabletWidth,
+        BorderRadiusTabletWidth,
+        videoPlayIconPaddingTabletWidth,
+        videoPlayIconBorderTabletWidth,
+        videoPlayIconBorderRadiusTabletWidth,
+        IframeBorderTabletWidth,
+        IframeBorderRadiusTabletWidth,
+        MobilePadding,
+        MobileMargin,
+        BorderMobileWidth,
+        BorderRadiusMobileWidth,
+        videoPlayIconPaddingMobileWidth,
+        videoPlayIconBorderMobileWidth,
+        videoPlayIconBorderRadiusMobileWidth,
+        IframeBorderMobileWidth,
+        IframeBorderRadiusMobileWidth
+    ]);
+
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [ allBlockStyle]);
 
     return (
         <>
 
             <style>
-            {`
-                .${blockID}.fb-advanced-video-main-wrapper {
-                    z-index: ${videoGlobalZIndex !== undefined ? videoGlobalZIndex : ''};
-                }
-                .${blockID}.fb-advanced-video-wrapper {
-                    ${videoGlobalBgColor !== undefined ? `background-color: ${videoGlobalBgColor};` : ''};
-                    padding: ${DesktopPadding};
-                    margin: ${DesktopMargin};
-                    border: ${videoGlobalBorder};
-                    border-width: ${BorderDesktopWidth};
-                    border-radius: ${BorderRadiusDesktopWidth} !important;
-                    ${videoGlobalBorderColor !== undefined ? `border-color: ${videoGlobalBorderColor};` : ''};
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-advanced-video-wrapper:hover {
-                    ${videoGlobalBgHoverColor !== undefined ? `background-color: ${videoGlobalBgHoverColor};` : ''};
-                    ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
-                }
-
-                .${blockID} .fb-react-player iframe {
-                    border: ${videoBorder};
-                    border-width: ${IframeBorderDesktopWidth};
-                    border-radius: ${IframeBorderRadiusDesktopWidth} !important;
-                    ${videoBorderColor !== undefined ? `border-color: ${videoBorderColor};` : ''};
-                    transition: all .3s ease-in-out;
-                }
-
-                @media only screen and (max-width: 1024px) {
-
-                    .${blockID}.fb-advanced-video-wrapper {
-                        padding: ${TabletPadding};
-                        margin: ${TabletMargin};
-                        border-width: ${BorderTabletWidth};
-                        border-radius: ${BorderRadiusTabletWidth} !important;
-                    }
-
-                    .${blockID} .fb-react-player iframe {
-                        border-width: ${IframeBorderTabletWidth};
-                        border-radius: ${IframeBorderRadiusTabletWidth} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .${blockID}.fb-advanced-video-wrapper {
-                        padding: ${MobilePadding};
-                        margin: ${MobileMargin};
-                        border-width: ${BorderMobileWidth};
-                        border-radius: ${BorderRadiusMobileWidth} !important;
-                    }
-                        
-                    .${blockID} .fb-react-player iframe {
-                        border-width: ${IframeBorderMobileWidth};
-                        border-radius: ${IframeBorderRadiusMobileWidth} !important;
-                    }
-                }
-
-            `}
+                {blockStyle}
             </style>
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
@@ -734,6 +1057,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             </BaseControl>
 
+                                            <ToggleControl
+                                                label={__("Image Overlay", "frontis-blocks")}
+                                                checked={imageOverlaySwitcher}
+                                                onChange={(value) => setAttributes({ imageOverlaySwitcher: value })}
+                                            />
+
+                                            {imageOverlaySwitcher && (
+                                                <>
+                                                <FB_ImageControl 
+                                                    globalBackgroundImageUrl={previewImageUrl}
+                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ previewImageUrl: value })}
+                                                    globalBackgroundImageAlt={previewImageAlt}
+                                                    setGlobalBackgroundImageAlt={(value) => setAttributes({ previewImageAlt: value })}
+                                                    globalBackgroundImageID={previewImageID}
+                                                    setGlobalBackgroundImageID={(value) => setAttributes({ previewImageID: value })}
+                                                    globalBackgroundImagePosition={previewImagePosition}
+                                                    setGlobalBackgroundImagePosition={(value) => setAttributes({ previewImagePosition: value })}
+                                                    globalBackgroundImageAttachment={previewImageAttachment} 
+                                                    setGlobalBackgroundImageAttachment={(value) => setAttributes({ previewImageAttachment: value })}
+                                                    globalBackgroundImageRepeat={previewImageRepeat}
+                                                    setGlobalBackgroundImageRepeat={(value) => setAttributes({ previewImageRepeat: value })}
+                                                    globalBackgroundImageSize={previewImageSize}
+                                                    setGlobalBackgroundImageSize={(value) => setAttributes({ previewImageSize: value })}
+                                                />
+                                                {previewImageUrl && (
+                                                    <FBIconPicker value={videoPlayIcon} setIconHandler={(value) => setAttributes({ videoPlayIcon: value })} />
+                                                )}
+                                                </>
+                                            )}
+
                                         </PanelBody>
 
                                     </>
@@ -741,7 +1094,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "styles" && (
                                     <>
-                                        <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
+                                        <PanelBody title={__("Border", "frontis-blocks")} initialOpen={true}>
+
+                                            <FB_Range
+                                                min={0}
+                                                max={100}
+                                                label={__("Width", "frontis-blocks")}
+                                                rangeValue={videoWidth}
+                                                onChangeHandler={(value) => setAttributes({ videoWidth: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ videoWidthUnits: value })}
+                                                deviceType={deviceType}
+                                                units={videoWidthUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                            />
 
                                             <SelectControl
                                                     label={__("Border Style", "frontis-blocks")}
@@ -755,9 +1122,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={videoBorderColorSwitcher}
                                                 globalColor={videoBorderColor}
                                                 globalHoverColor={videoBorderHoverColor}
-                                                handleColorSwitcherChange={handleBorderColorSwitcherChange}
-                                                handleGlobalColorChange={handleBorderColorChange}
-                                                handleGlobalHoverColorChange={handleBorderHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ videoBorderColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ videoBorderColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoBorderHoverColor: value })}
                                             />
 
                                             <FB_Spacing 
@@ -775,7 +1142,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
                                             <FB_Spacing 
-                                                label={__("Radius Border", "frontis-blocks")}
+                                                label={__("Border Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleIframeBorderRadiusUnitsHandler}
                                                 spacingUnits={videoBorderRadiusUnits}
@@ -787,7 +1154,99 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={handleIframeBorderRadiusCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
-                                            </PanelBody>
+                                        </PanelBody>
+                                        <PanelBody title={__("Play Icon", "frontis-blocks")} initialOpen={false}>
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Icon Size", "frontis-blocks")}
+                                                rangeValue={videoPlayIconSize}
+                                                onChangeHandler={(value) => setAttributes({ videoPlayIconSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ videoPlayIconSizeUnits: value })}
+                                                deviceType={deviceType}
+                                                units={videoPlayIconSizeUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={64}
+                                            />
+
+                                            <FB_Color
+                                                label={__("Icon Color", "frontis-blocks")}
+                                                globalColorSwitcher={videoPlayIconColorSwitcher}
+                                                globalColor={videoPlayIconColor}
+                                                globalHoverColor={videoPlayIconHoverColor}
+                                                handleColorSwitcherChange={(value) => setAttributes({ videoPlayIconColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ videoPlayIconColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoPlayIconHoverColor: value })}
+                                            />
+
+                                            <FB_Color
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalColorSwitcher={videoPlayIconBgColorSwitcher}
+                                                globalColor={videoPlayIconBgColor}
+                                                globalHoverColor={videoPlayIconBgHoverColor}
+                                                handleColorSwitcherChange={(value) => setAttributes({ videoPlayIconBgColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ videoPlayIconBgColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoPlayIconBgHoverColor: value })}
+                                            />
+                                            <SelectControl
+                                                label={__("Border Style", "frontis-blocks")}
+                                                value={videoPlayIconBorder}
+                                                options={BORDER_STYLES}
+                                                onChange={(value) => setAttributes({ videoPlayIconBorder: value })}
+                                            />
+
+                                            <FB_Color
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalColorSwitcher={videoPlayIconBorderColorSwitcher}
+                                                globalColor={videoPlayIconBorderColor}
+                                                globalHoverColor={videoPlayIconBorderHoverColor}
+                                                handleColorSwitcherChange={(value) => setAttributes({ videoPlayIconBorderColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ videoPlayIconBorderColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoPlayIconBorderHoverColor: value })}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Border", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleVideoPlayIconBorderUnitsHandler}
+                                                spacingUnits={videoPlayIconBorderUnits}
+                                                spacingDesktop={videoPlayIconBorderDesktop}
+                                                spacingTablet={videoPlayIconBorderTablet}
+                                                spacingMobile={videoPlayIconBorderMobile}
+                                                handleSpacingUnitHandler={handleVideoPlayIconBorderUnitChange}
+                                                spacingCombineBtn={videoPlayIconBorderLink}
+                                                spacingCombineBtnHandler={handleVideoPlayIconBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+                                            <FB_Spacing 
+                                                label={__("Border Radius", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleVideoPlayIconBorderRadiusUnitsHandler}
+                                                spacingUnits={videoPlayIconBorderRadiusUnits}
+                                                spacingDesktop={videoPlayIconBorderRadiusDesktop}
+                                                spacingTablet={videoPlayIconBorderRadiusTablet}
+                                                spacingMobile={videoPlayIconBorderRadiusMobile}
+                                                handleSpacingUnitHandler={handleVideoPlayIconBorderRadiusUnitChange}
+                                                spacingCombineBtn={videoPlayIconBorderRadiusLink}
+                                                spacingCombineBtnHandler={handleVideoPlayIconBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+                                            <FB_Spacing 
+                                                label={__("Padding", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleVideoPlayIconPaddingUnitsHandler}
+                                                spacingUnits={videoPlayIconPaddingUnits}
+                                                spacingDesktop={videoPlayIconPaddingDesktop}
+                                                spacingTablet={videoPlayIconPaddingTablet}
+                                                spacingMobile={videoPlayIconPaddingMobile}
+                                                handleSpacingUnitHandler={handleVideoPlayIconPaddingUnitChange}
+                                                spacingCombineBtn={videoPlayIconPaddingLink}
+                                                spacingCombineBtnHandler={handleVideoPlayIconPaddingCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+                                            
+                                        </PanelBody>
                                     </>
                                 )}
 
@@ -845,12 +1304,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         globalColorSwitcher={videoGlobalBgColorSwitcher}
                                                         globalColor={videoGlobalBgColor}
                                                         globalHoverColor={videoGlobalBgHoverColor}
-                                                        handleColorSwitcherChange={handleGlobalBgColorSwitcherChange}
-                                                        handleGlobalColorChange={handleGlobalBgColorChange}
-                                                        handleGlobalHoverColorChange={handleGlobalBgHoverColorChange}
+                                                        handleColorSwitcherChange={(value) => setAttributes({ videoGlobalBgColorSwitcher: value })}
+                                                        handleGlobalColorChange={(value) => setAttributes({ videoGlobalBgColor: value })}
+                                                        handleGlobalHoverColorChange={(value) => setAttributes({ videoGlobalBgHoverColor: value })}
                                                     />
                                                 </PanelBody>
-                                                <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
+                                                <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
                                                     <SelectControl
                                                             label={__("Border Style", "frontis-blocks")}
@@ -864,9 +1323,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         globalColorSwitcher={videoGlobalBorderColorSwitcher}
                                                         globalColor={videoGlobalBorderColor}
                                                         globalHoverColor={videoGlobalBorderHoverColor}
-                                                        handleColorSwitcherChange={handleGlobalBorderColorSwitcherChange}
-                                                        handleGlobalColorChange={handleGlobalBorderColorChange}
-                                                        handleGlobalHoverColorChange={handleGlobalBorderHoverColorChange}
+                                                        handleColorSwitcherChange={(value) => setAttributes({ videoGlobalBorderColorSwitcher: value })}
+                                                        handleGlobalColorChange={(value) => setAttributes({ videoGlobalBorderColor: value })}
+                                                        handleGlobalHoverColorChange={(value) => setAttributes({ videoGlobalBorderHoverColor: value })}
                                                     />
 
                                                     <FB_Spacing 
@@ -884,7 +1343,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
 
                                                     <FB_Spacing 
-                                                        label={__("Radius Border", "frontis-blocks")}
+                                                        label={__("Border Radius", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
                                                         spacingUnits={videoGlobalBorderRadiusUnits}
@@ -895,6 +1354,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtn={videoGlobalBorderRadiusLink}
                                                         spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
+                                                    />
+                                                    <FB_BoxShadowControl
+                                                        onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowValues: value })}
+                                                        initialShadowValue={videoGlobalBoxShadowValues}
+                                                        onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowCssValue: value })}
                                                     />
                                                 </PanelBody>
                                             </div>
