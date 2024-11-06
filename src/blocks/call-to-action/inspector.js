@@ -63,7 +63,7 @@ import {
 	BG_TYPE,
 } from "./constants/constants";
 
-import { useState, createRef, useEffect } from "@wordpress/element";
+import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
 
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -410,18 +410,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		hoverBackgroundImageAttachment,
 		hoverBackgroundImageSize,
 		hoverBackgroundImageRepeat,
-		globalBackgroundImageUrl,
-		globalBackgroundImageAlt,
-		globalBackgroundImageID,
-		globalBackgroundImagePosition,
-		globalBackgroundImageAttachment,
-		globalBackgroundImageRepeat,
-		globalBackgroundImageSize,
-		globalCustomGradientSwitcher,
-		globalCustomGradientInputValue,
-		globalGradientColor,
-		globalColor,
-		globalSwitcher,
+		blockStyle,
 	} = attributes;
 
 	useEffect(() => {
@@ -2795,655 +2784,711 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     `;
 
+	const ctaContentStyle = useMemo(
+		() => `
+		  .fb-cta-content-wrapper.${blockID} {
+			  ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
+			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
+			  ${globalBorder ? `border: ${globalBorder};` : ""}
+			  ${BorderDesktopWidth ? `border-width: ${BorderDesktopWidth};` : ""}
+			  ${
+					BorderRadiusDesktopWidth
+						? `border-radius: ${BorderRadiusDesktopWidth} !important;`
+						: ""
+				}
+			  ${
+					globalBorderColor !== undefined
+						? `border-color: ${globalBorderColor};`
+						: ""
+				}
+			  ${
+					boxGlobalBoxShadowCssValue
+						? `box-shadow: ${boxGlobalBoxShadowCssValue};`
+						: ""
+				}
+			  ${
+					testBackgroundType === "gradient"
+						? `background: ${
+								testCustomGradientSwitcher && testCustomGradientInputValue
+									? testCustomGradientInputValue
+									: testGradientColor
+						  };`
+						: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
+						? `
+					  ${
+							testBackgroundImageUrl
+								? `background-image: url(${testBackgroundImageUrl});`
+								: ""
+						}
+					  ${
+							testBackgroundImagePosition
+								? `background-position: ${testBackgroundImagePosition};`
+								: ""
+						}
+					  ${
+							testBackgroundImageAttachment
+								? `background-attachment: ${testBackgroundImageAttachment};`
+								: ""
+						}
+					  ${
+							testBackgroundImageRepeat
+								? `background-repeat: ${testBackgroundImageRepeat};`
+								: ""
+						}
+					  ${
+							testBackgroundImageSize
+								? `background-size: ${testBackgroundImageSize};`
+								: ""
+						}
+					`
+						: `background: ${testClassicColor};`
+				}
+			  transition: all .3s ease-in-out;
+		  }
+		  .fb-cta-content-wrapper.${blockID}:hover {
+			  ${
+					globalBgHoverColor !== undefined
+						? `background-color: ${globalBgHoverColor};`
+						: ""
+				}
+			  ${
+					globalBorderHoverColor !== undefined
+						? `border-color: ${globalBorderHoverColor};`
+						: ""
+				}
+			  ${
+					testBackgroundType === "gradient"
+						? `background: ${
+								testCustomGradientSwitcher && testCustomGradientInputValue
+									? testCustomGradientInputValue
+									: testGradientColor
+						  };`
+						: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
+						? `
+					  ${
+							testBackgroundImageUrl
+								? `background-image: url(${testBackgroundImageUrl});`
+								: ""
+						}
+					  ${
+							testBackgroundImagePosition
+								? `background-position: ${testBackgroundImagePosition};`
+								: ""
+						}
+					  ${
+							testBackgroundImageAttachment
+								? `background-attachment: ${testBackgroundImageAttachment};`
+								: ""
+						}
+					  ${
+							testBackgroundImageRepeat
+								? `background-repeat: ${testBackgroundImageRepeat};`
+								: ""
+						}
+					  ${
+							testBackgroundImageSize
+								? `background-size: ${testBackgroundImageSize};`
+								: ""
+						}
+					`
+						: `background: ${testClassicColor};`
+				}
+		  }
+		  @media only screen and (max-width: 1024px) {
+			.fb-cta-content-wrapper-inner.${blockID} {
+			  padding: ${infoBoxTabPadding.top}${infoBoxPaddingUnits} ${
+					infoBoxTabPadding.right
+				}${infoBoxPaddingUnits} ${
+					infoBoxTabPadding.bottom
+				}${infoBoxPaddingUnits} ${
+					infoBoxTabPadding.left
+				}${infoBoxPaddingUnits} !important;
+			  margin: ${infoBoxTabMargin.top}${infoBoxMarginUnits} ${
+					infoBoxTabMargin.right
+				}${infoBoxMarginUnits} ${
+					infoBoxTabMargin.bottom
+				}${infoBoxMarginUnits} ${
+					infoBoxTabMargin.left
+				}${infoBoxMarginUnits} !important;
+			  border-width: ${infoBoxTabBorderWidth.top}${infoBoxBorderUnits} ${
+					infoBoxTabBorderWidth.right
+				}${infoBoxBorderUnits} ${
+					infoBoxTabBorderWidth.bottom
+				}${infoBoxBorderUnits} ${
+					infoBoxTabBorderWidth.left
+				}${infoBoxBorderUnits} !important;
+			  border-radius: ${
+					infoBoxTabBorderRadiusWidth.top
+				}${infoBoxBorderRadiusUnits} ${
+					infoBoxTabBorderRadiusWidth.right
+				}${infoBoxBorderRadiusUnits} ${
+					infoBoxTabBorderRadiusWidth.bottom
+				}${infoBoxBorderRadiusUnits} ${
+					infoBoxTabBorderRadiusWidth.left
+				}${infoBoxBorderRadiusUnits} !important;
+			}
+		  }
+		  @media only screen and (max-width: 767px) {
+			.fb-cta-content-wrapper-inner.${blockID} {
+			  padding: ${infoBoxMobilePadding.top}${infoBoxPaddingUnits} ${
+					infoBoxMobilePadding.right
+				}${infoBoxPaddingUnits} ${
+					infoBoxMobilePadding.bottom
+				}${infoBoxPaddingUnits} ${
+					infoBoxMobilePadding.left
+				}${infoBoxPaddingUnits} !important;
+			  margin: ${infoBoxMobileMargin.top}${infoBoxMarginUnits} ${
+					infoBoxMobileMargin.right
+				}${infoBoxMarginUnits} ${
+					infoBoxMobileMargin.bottom
+				}${infoBoxMarginUnits} ${
+					infoBoxMobileMargin.left
+				}${infoBoxMarginUnits} !important;
+			  border-width: ${infoBoxMobileBorderWidth.top}${infoBoxBorderUnits} ${
+					infoBoxMobileBorderWidth.right
+				}${infoBoxBorderUnits} ${
+					infoBoxMobileBorderWidth.bottom
+				}${infoBoxBorderUnits} ${
+					infoBoxMobileBorderWidth.left
+				}${infoBoxBorderUnits} !important;
+			  border-radius: ${
+					infoBoxMobileBorderRadiusWidth.top
+				}${infoBoxBorderRadiusUnits} ${
+					infoBoxMobileBorderRadiusWidth.right
+				}${infoBoxBorderRadiusUnits} ${
+					infoBoxMobileBorderRadiusWidth.bottom
+				}${infoBoxBorderRadiusUnits} ${
+					infoBoxMobileBorderRadiusWidth.left
+				}${infoBoxBorderRadiusUnits} !important;
+			}
+		  }
+		.fb-cta-content-wrapper.${blockID} .fb-heading {
+        ${Heading_Color ? `color: ${Heading_Color};` : ""}
+        ${
+					Heading_Background_Color
+						? `background-color: ${Heading_Background_Color};`
+						: ""
+				}
+        font-family: ${
+					Heading_Font_Family !== "default" ? Heading_Font_Family : "inherit"
+				};
+        font-size: ${
+					Heading_Font_Size
+						? `${Heading_Font_Size}${Heading_Font_size_units}`
+						: "inherit"
+				};
+        font-weight: ${Heading_Font_Weight || "normal"};
+        font-style: ${Heading_Font_Style || "normal"};
+        text-transform: ${Heading_Text_Transform || "none"};
+        text-decoration: ${Heading_Text_Decoration || "none"};
+        ${
+					Heading_Letter_Spacing
+						? `letter-spacing: ${Heading_Letter_Spacing}${Heading_Letter_Spacing_units};`
+						: ""
+				}
+        ${
+					Heading_Line_Height
+						? `line-height: ${Heading_Line_Height}${Heading_Line_Height_units};`
+						: ""
+				}
+        transition: all .3s ease-in-out;
+        padding: ${padding || "0"};
+        margin: ${margin || "0"};
+        border: ${Heading_Border || "none"};
+        ${Heading_Border_Color ? `border-color: ${Heading_Border_Color};` : ""}
+        ${borderWidth ? `border-width: ${borderWidth};` : ""}
+        ${borderRadiusWidth ? `border-radius: ${borderRadiusWidth};` : ""}
+    }
+    .fb-cta-content-wrapper.${blockID}:hover .fb-heading {
+        ${Heading_Hover_Color ? `color: ${Heading_Hover_Color};` : ""}
+        ${
+					Heading_Border_Hover_Color
+						? `border-color: ${Heading_Border_Hover_Color};`
+						: ""
+				}
+    }
+
+    /* Tablet Styles */
+    @media only screen and (max-width: 1024px) {
+        .fb-cta-content-wrapper.${blockID} .fb-heading {
+            padding: ${
+							Heading_Tab_padding
+								? `${Heading_Tab_padding.top}${Heading_padding_units} ${Heading_Tab_padding.right}${Heading_padding_units} ${Heading_Tab_padding.bottom}${Heading_padding_units} ${Heading_Tab_padding.left}${Heading_padding_units}`
+								: "inherit"
+						} !important;
+            margin: ${
+							Heading_Tab_Margin
+								? `${Heading_Tab_Margin.top}${Heading_Margin_Units} ${Heading_Tab_Margin.right}${Heading_Margin_Units} ${Heading_Tab_Margin.bottom}${Heading_Margin_Units} ${Heading_Tab_Margin.left}${Heading_Margin_Units}`
+								: "inherit"
+						} !important;
+            ${
+							Heading_Tab_Border_Width
+								? `border-width: ${Heading_Tab_Border_Width.top}${Heading_Border_units} ${Heading_Tab_Border_Width.right}${Heading_Border_units} ${Heading_Tab_Border_Width.bottom}${Heading_Border_units} ${Heading_Tab_Border_Width.left}${Heading_Border_units};`
+								: ""
+						}
+            ${
+							Heading_Tab_Border_radius_Width
+								? `border-radius: ${Heading_Tab_Border_radius_Width.top}${Heading_Border_radius_units} ${Heading_Tab_Border_radius_Width.right}${Heading_Border_radius_units} ${Heading_Tab_Border_radius_Width.bottom}${Heading_Border_radius_units} ${Heading_Tab_Border_radius_Width.left}${Heading_Border_radius_units};`
+								: ""
+						}
+        }
+    }
+
+    /* Mobile Styles */
+    @media only screen and (max-width: 767px) {
+        .fb-cta-content-wrapper.${blockID} .fb-heading {
+            padding: ${
+							Heading_Mobile_padding
+								? `${Heading_Mobile_padding.top}${Heading_padding_units} ${Heading_Mobile_padding.right}${Heading_padding_units} ${Heading_Mobile_padding.bottom}${Heading_padding_units} ${Heading_Mobile_padding.left}${Heading_padding_units}`
+								: "inherit"
+						} !important;
+            margin: ${
+							Heading_Mobile_Margin
+								? `${Heading_Mobile_Margin.top}${Heading_Margin_Units} ${Heading_Mobile_Margin.right}${Heading_Margin_Units} ${Heading_Mobile_Margin.bottom}${Heading_Margin_Units} ${Heading_Mobile_Margin.left}${Heading_Margin_Units}`
+								: "inherit"
+						} !important;
+            ${
+							Heading_Mobile_Border_Width
+								? `border-width: ${Heading_Mobile_Border_Width.top}${Heading_Border_units} ${Heading_Mobile_Border_Width.right}${Heading_Border_units} ${Heading_Mobile_Border_Width.bottom}${Heading_Border_units} ${Heading_Mobile_Border_Width.left}${Heading_Border_units};`
+								: ""
+						}
+            ${
+							Heading_Mobile_Border_radius_Width
+								? `border-radius: ${Heading_Mobile_Border_radius_Width.top}${Heading_Border_radius_units} ${Heading_Mobile_Border_radius_Width.right}${Heading_Border_radius_units} ${Heading_Mobile_Border_radius_Width.bottom}${Heading_Border_radius_units} ${Heading_Mobile_Border_radius_Width.left}${Heading_Border_radius_units};`
+								: ""
+						}
+        }
+    }
+		.fb-cta-content-wrapper.${blockID} .fb-description {
+        ${SubHeadingColor ? `color: ${SubHeadingColor};` : ""}
+        font-family: ${
+					SubHeadingFontFamily !== "default" ? SubHeadingFontFamily : "inherit"
+				};
+        font-size: ${
+					SubHeadingFontSize
+						? `${SubHeadingFontSize}${SubHeadingFontSizeUnits}`
+						: "inherit"
+				};
+        font-weight: ${SubHeadingFontWeight || "normal"};
+        font-style: ${SubHeadingFontStyle || "normal"};
+        text-transform: ${SubHeadingTextTransform || "none"};
+        text-decoration: ${SubHeadingTextDecoration || "none"};
+        padding: ${descPadding || "0"};
+        margin: ${descMargin || "0"};
+    }
+    .fb-cta-content-wrapper.${blockID}:hover .fb-description {
+        ${SubHeadingHoverColor ? `color: ${SubHeadingHoverColor};` : ""}
+    }
+
+    /* Tablet Styles */
+    @media only screen and (max-width: 1024px) {
+        .fb-cta-content-wrapper.${blockID} .fb-description {
+            padding: ${
+							SubHeadingTabPadding
+								? `${SubHeadingTabPadding.top}${SubHeadingPaddingUnits} ${SubHeadingTabPadding.right}${SubHeadingPaddingUnits} ${SubHeadingTabPadding.bottom}${SubHeadingPaddingUnits} ${SubHeadingTabPadding.left}${SubHeadingPaddingUnits}`
+								: "inherit"
+						} !important;
+            margin: ${
+							descTabMargin
+								? `${descTabMargin.top}${descMarginUnits} ${descTabMargin.right}${descMarginUnits} ${descTabMargin.bottom}${descMarginUnits} ${descTabMargin.left}${descMarginUnits}`
+								: "inherit"
+						} !important;
+        }
+    }
+
+    /* Mobile Styles */
+    @media only screen and (max-width: 757px) {
+        .fb-cta-content-wrapper.${blockID} .fb-description {
+            padding: ${
+							SubHeadingMobilePadding
+								? `${SubHeadingMobilePadding.top}${SubHeadingPaddingUnits} ${SubHeadingMobilePadding.right}${SubHeadingPaddingUnits} ${SubHeadingMobilePadding.bottom}${SubHeadingPaddingUnits} ${SubHeadingMobilePadding.left}${SubHeadingPaddingUnits}`
+								: "inherit"
+						} !important;
+            margin: ${
+							descMobileMargin
+								? `${descMobileMargin.top}${descMarginUnits} ${descMobileMargin.right}${descMarginUnits} ${descMobileMargin.bottom}${descMarginUnits} ${descMobileMargin.left}${descMarginUnits}`
+								: "inherit"
+						} !important;
+        }
+    }
+		.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
+      ${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ""}
+      ${
+				buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : ""
+			}
+      font-family: ${
+				buttonFontFamily !== "default" ? buttonFontFamily : "inherit"
+			};
+      font-size: ${
+				buttonFontSize !== undefined
+					? `${buttonFontSize}${buttonFontSizeUnits}`
+					: ""
+			};
+      font-weight: ${buttonFontWeight};
+      font-style: ${buttonFontStyle};
+      text-transform: ${buttonTextTransform};
+      text-decoration: ${buttonTextDecoration};
+      ${buttonPadding ? `padding: ${buttonPadding};` : ""}
+      ${buttonMargin ? `margin: ${buttonMargin};` : ""}
+      ${infoButtonBorder ? `border: ${infoButtonBorder};` : ""}
+      ${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ""}
+      ${buttonBorderWidth ? `border-width: ${buttonBorderWidth};` : ""}
+      ${
+				buttonBorderRadiusWidth
+					? `border-radius: ${buttonBorderRadiusWidth};`
+					: ""
+			}
+    }
+
+    .fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
+      ${
+				buttonTextHoverColor !== undefined
+					? `color: ${buttonTextHoverColor};`
+					: ""
+			}
+      ${
+				buttonBgHoverColor !== undefined
+					? `background-color: ${buttonBgHoverColor};`
+					: ""
+			}
+    }
+
+    @media only screen and (max-width: 1024px) {
+      .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
+        ${
+					infoButtonTabPadding
+						? `padding: ${infoButtonTabPadding.top}${infoButtonPaddingUnits} ${infoButtonTabPadding.right}${infoButtonPaddingUnits} ${infoButtonTabPadding.bottom}${infoButtonPaddingUnits} ${infoButtonTabPadding.left}${infoButtonPaddingUnits} !important;`
+						: ""
+				}
+        ${
+					infoButtonTabMargin
+						? `margin: ${infoButtonTabMargin.top}${infoButtonMarginUnits} ${infoButtonTabMargin.right}${infoButtonMarginUnits} ${infoButtonTabMargin.bottom}${infoButtonMarginUnits} ${infoButtonTabMargin.left}${infoButtonMarginUnits} !important;`
+						: ""
+				}
+        ${
+					infoButtonTabBorderWidth
+						? `border-width: ${infoButtonTabBorderWidth.top}${infoButtonBorderUnits} ${infoButtonTabBorderWidth.right}${infoButtonBorderUnits} ${infoButtonTabBorderWidth.bottom}${infoButtonBorderUnits} ${infoButtonTabBorderWidth.left}${infoButtonBorderUnits} !important;`
+						: ""
+				}
+        ${
+					infoBtnTabBorderradiusWidth
+						? `border-radius: ${infoBtnTabBorderradiusWidth.top}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.right}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.bottom}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.left}${infoBtnBorderradiusUnits} !important;`
+						: ""
+				}
+      }
+    }
+
+    @media only screen and (max-width: 767px) {
+      .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
+        ${
+					infoButtonMobilePadding
+						? `padding: ${infoButtonMobilePadding.top}${infoButtonPaddingUnits} ${infoButtonMobilePadding.right}${infoButtonPaddingUnits} ${infoButtonMobilePadding.bottom}${infoButtonPaddingUnits} ${infoButtonMobilePadding.left}${infoButtonPaddingUnits} !important;`
+						: ""
+				}
+        ${
+					infoButtonMobileMargin
+						? `margin: ${infoButtonMobileMargin.top}${infoButtonMarginUnits} ${infoButtonMobileMargin.right}${infoButtonMarginUnits} ${infoButtonMobileMargin.bottom}${infoButtonMarginUnits} ${infoButtonMobileMargin.left}${infoButtonMarginUnits} !important;`
+						: ""
+				}
+        ${
+					infoButtonMobileBorderWidth
+						? `border-width: ${infoButtonMobileBorderWidth.top}${infoButtonBorderUnits} ${infoButtonMobileBorderWidth.right}${infoButtonBorderUnits} ${infoButtonMobileBorderWidth.bottom}${infoButtonBorderUnits} ${infoButtonMobileBorderWidth.left}${infoButtonBorderUnits} !important;`
+						: ""
+				}
+        ${
+					infoBtnTabBorderradiusWidth
+						? `border-radius: ${infoBtnTabBorderradiusWidth.top}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.right}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.bottom}${infoBtnBorderradiusUnits} ${infoBtnTabBorderradiusWidth.left}${infoBtnBorderradiusUnits} !important;`
+						: ""
+				}
+      }
+    }
+	  .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+            ${
+							buttonTwoTextColor !== undefined
+								? `color: ${buttonTwoTextColor};`
+								: ""
+						}
+            ${
+							buttonTwoBgColor !== undefined
+								? `background-color: ${buttonTwoBgColor};`
+								: ""
+						}
+            font-family: ${
+							buttonTwoFontFamily !== "default"
+								? buttonTwoFontFamily
+								: buttonTwoFontFamily
+						};
+            ${
+							buttonTwoFontSize.Desktop && buttonTwoFontSizeUnits.Desktop
+								? `font-size: ${buttonTwoFontSize.Desktop}${buttonTwoFontSizeUnits.Desktop};`
+								: ""
+						}
+            font-weight: ${buttonTwoFontWeight};
+            font-style: ${buttonTwoFontStyle};
+            text-transform: ${buttonTwoTextTransform};
+            text-decoration: ${buttonTwoTextDecoration};
+            ${
+							buttonTwoLetterSpacing.Desktop &&
+							buttonTwoLetterSpacingUnits.Desktop
+								? `letter-spacing: ${buttonTwoLetterSpacing.Desktop}${buttonTwoLetterSpacingUnits.Desktop};`
+								: ""
+						}
+            ${
+							buttonTwoLineHeight.Desktop && buttonTwoLineHeightUnits.Desktop
+								? `line-height: ${buttonTwoLineHeight.Desktop}${buttonTwoLineHeightUnits.Desktop};`
+								: ""
+						}
+            padding: ${buttonTwoDesktopPadding};
+            margin: ${btnTwoDesktopMarginWidth};
+            border: ${btnTwoBorder};
+            ${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ""}
+            border-width: ${btnTwoDesktopBorderWidthStyle};
+            border-radius: ${btnTwoDesktopBorderRadiusWidthStyle};
+        }
+        
+        .fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+            ${
+							buttonTwoTextHoverColor !== undefined
+								? `color: ${buttonTwoTextHoverColor};`
+								: ""
+						}
+            ${
+							buttonTwoBgHoverColor !== undefined
+								? `background-color: ${buttonTwoBgHoverColor};`
+								: ""
+						}
+        }
+        
+        @media only screen and (max-width: 1024px) {
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+                padding: ${buttonTwoTabletPadding} !important;
+                margin: ${btnTwoTabletMarginWidth} !important;
+                border-width: ${btnTwoTabletBorderWidthStyle} !important;
+                border-radius: ${btnTwoTabletBorderRadiusWidthStyle} !important;
+            }
+        }
+        
+        @media only screen and (max-width: 767px) {
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+                padding: ${buttonTwoMobilePadding} !important;
+                margin: ${btnTwoMobileMarginWidth} !important;
+                border-width: ${btnTwoMobileBorderWidthStyle} !important;
+                border-radius: ${btnTwoMobileBorderRadiusWidthStyle} !important;
+            }
+        }
+			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
+            width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
+            ${
+							btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff"
+						};
+        }
+        .fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
+            ${
+							btnIconHoverColor !== undefined
+								? `fill: ${btnIconHoverColor};`
+								: "#ffffff"
+						};
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
+                width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
+                width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
+            }
+        }
+
+        .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
+            width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
+            ${
+							btnTwoIconColor !== undefined
+								? `fill: ${btnTwoIconColor};`
+								: "#ffffff"
+						};
+        }
+        .fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
+            ${
+							btnTwoIconHoverColor !== undefined
+								? `fill: ${btnTwoIconHoverColor};`
+								: "#ffffff"
+						};
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
+                width: ${btnTwoIconSize.Tablet}${btnTwoIconSizeUnits.Tablet};
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
+                width: ${btnTwoIconSize.Mobile}${btnTwoIconSizeUnits.Mobile};
+            }
+        }
+		`,
+		[
+			blockID,
+			DesktopPadding,
+			DesktopMargin,
+			globalBorder,
+			BorderDesktopWidth,
+			BorderRadiusDesktopWidth,
+			globalBorderColor,
+			boxGlobalBoxShadowCssValue,
+			testBackgroundType,
+			testCustomGradientSwitcher,
+			testCustomGradientInputValue,
+			testGradientColor,
+			testBackgroundImageUrl,
+			testBackgroundImagePosition,
+			testBackgroundImageAttachment,
+			testBackgroundImageRepeat,
+			testBackgroundImageSize,
+			testClassicColor,
+			globalBgHoverColor,
+			globalBorderHoverColor,
+			infoBoxTabPadding,
+			infoBoxTabMargin,
+			infoBoxTabBorderWidth,
+			infoBoxTabBorderRadiusWidth,
+			infoBoxMobilePadding,
+			infoBoxMobileMargin,
+			infoBoxMobileBorderWidth,
+			infoBoxMobileBorderRadiusWidth,
+			Heading_Color,
+			Heading_Background_Color,
+			Heading_Font_Family,
+			Heading_Font_Size,
+			Heading_Font_size_units,
+			Heading_Font_Weight,
+			Heading_Font_Style,
+			Heading_Text_Transform,
+			Heading_Text_Decoration,
+			Heading_Letter_Spacing,
+			Heading_Letter_Spacing_units,
+			Heading_Line_Height,
+			Heading_Line_Height_units,
+			padding,
+			margin,
+			Heading_Border,
+			Heading_Border_Color,
+			borderWidth,
+			borderRadiusWidth,
+			Heading_Hover_Color,
+			Heading_Border_Hover_Color,
+			Heading_Tab_padding,
+			Heading_padding_units,
+			Heading_Tab_Margin,
+			Heading_Margin_Units,
+			Heading_Tab_Border_Width,
+			Heading_Border_units,
+			Heading_Tab_Border_radius_Width,
+			Heading_Border_radius_units,
+			Heading_Mobile_padding,
+			Heading_Mobile_Margin,
+			Heading_Mobile_Border_Width,
+			Heading_Mobile_Border_radius_Width,
+			SubHeadingColor,
+			SubHeadingFontFamily,
+			SubHeadingFontSize,
+			SubHeadingFontSizeUnits,
+			SubHeadingFontWeight,
+			SubHeadingFontStyle,
+			SubHeadingTextTransform,
+			SubHeadingTextDecoration,
+			descPadding,
+			descMargin,
+			SubHeadingHoverColor,
+			SubHeadingTabPadding,
+			SubHeadingPaddingUnits,
+			descTabMargin,
+			descMarginUnits,
+			SubHeadingMobilePadding,
+			descMobileMargin,
+			buttonTextColor,
+			buttonBgColor,
+			buttonFontFamily,
+			buttonFontSize,
+			buttonFontSizeUnits,
+			buttonFontWeight,
+			buttonFontStyle,
+			buttonTextTransform,
+			buttonTextDecoration,
+			buttonPadding,
+			buttonMargin,
+			infoButtonBorder,
+			infoButtonBorderColor,
+			buttonBorderWidth,
+			buttonBorderRadiusWidth,
+			buttonTextHoverColor,
+			buttonBgHoverColor,
+			infoButtonTabPadding,
+			infoButtonPaddingUnits,
+			infoButtonTabMargin,
+			infoButtonMarginUnits,
+			infoButtonTabBorderWidth,
+			infoButtonBorderUnits,
+			infoBtnTabBorderradiusWidth,
+			infoBtnBorderradiusUnits,
+			infoButtonMobilePadding,
+			infoButtonMobileMargin,
+			infoButtonMobileBorderWidth,
+			buttonTwoTextColor,
+			buttonTwoBgColor,
+			buttonTwoFontFamily,
+			buttonTwoFontSize,
+			buttonTwoFontSizeUnits,
+			buttonTwoFontWeight,
+			buttonTwoFontStyle,
+			buttonTwoTextTransform,
+			buttonTwoTextDecoration,
+			buttonTwoLetterSpacing,
+			buttonTwoLetterSpacingUnits,
+			buttonTwoLineHeight,
+			buttonTwoLineHeightUnits,
+			buttonTwoDesktopPadding,
+			btnTwoDesktopMarginWidth,
+			btnTwoBorder,
+			btnTwoBorderColor,
+			btnTwoDesktopBorderWidthStyle,
+			btnTwoDesktopBorderRadiusWidthStyle,
+			buttonTwoTextHoverColor,
+			buttonTwoBgHoverColor,
+			buttonTwoTabletPadding,
+			btnTwoTabletMarginWidth,
+			btnTwoTabletBorderWidthStyle,
+			btnTwoTabletBorderRadiusWidthStyle,
+			buttonTwoMobilePadding,
+			btnTwoMobileMarginWidth,
+			btnTwoMobileBorderWidthStyle,
+			btnTwoMobileBorderRadiusWidthStyle,
+			btnIconSize,
+			btnIconSizeUnits,
+			btnIconColor,
+			btnIconHoverColor,
+			btnTwoIconSize,
+			btnTwoIconSizeUnits,
+			btnTwoIconColor,
+			btnTwoIconHoverColor,
+		],
+	);
+
+	useEffect(() => {
+		setAttributes({
+			blockStyle: `${ctaContentStyle}`.replace(/\s+/g, " ").trim(),
+		});
+	}, [ctaContentStyle]);
+
 	return (
 		<>
 			<style>
 				{`
-				.fb-cta-content-wrapper.${blockID} {
-                    padding: ${DesktopPadding};
-                    margin: ${DesktopMargin};
-                    border: ${globalBorder};
-                    border-width: ${BorderDesktopWidth};
-                    border-radius: ${BorderRadiusDesktopWidth} !important;
-                    ${
-											globalBorderColor !== undefined
-												? `border-color: ${globalBorderColor};`
-												: ""
-										};
-					${
-						boxGlobalBoxShadowCssValue
-							? `box-shadow: ${boxGlobalBoxShadowCssValue};`
-							: ""
-					}
-					${
-						testBackgroundType === "gradient"
-							? `
-                        background: ${
-													testCustomGradientSwitcher &&
-													testCustomGradientInputValue
-														? testCustomGradientInputValue
-														: testGradientColor
-												};
-                    `
-							: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
-							? `
-                        ${
-													testBackgroundImageUrl
-														? `background-image: url(${testBackgroundImageUrl});`
-														: ""
-												}
-                        ${
-													testBackgroundImagePosition
-														? `background-position: ${testBackgroundImagePosition};`
-														: ""
-												}
-                        ${
-													testBackgroundImageAttachment
-														? `background-attachment: ${testBackgroundImageAttachment};`
-														: ""
-												}
-                        ${
-													testBackgroundImageRepeat
-														? `background-repeat: ${testBackgroundImageRepeat};`
-														: ""
-												}
-                        ${
-													testBackgroundImageSize
-														? `background-size: ${testBackgroundImageSize};`
-														: ""
-												}
-                    `
-							: `
-                        background: ${testClassicColor};
-                    `
-					}
-                    transition: all .3s ease-in-out;
-                }
-                .fb-cta-content-wrapper.${blockID}:hover {
-                    ${
-											globalBgHoverColor !== undefined
-												? `background-color: ${globalBgHoverColor};`
-												: ""
-										};
-                    ${
-											globalBorderHoverColor !== undefined
-												? `border-color: ${globalBorderHoverColor};`
-												: ""
-										};
-										${
-											testBackgroundType === "gradient"
-												? `
-                        background: ${
-													testCustomGradientSwitcher &&
-													testCustomGradientInputValue
-														? testCustomGradientInputValue
-														: testGradientColor
-												};
-                    `
-												: testBackgroundImageUrl &&
-												  testBackgroundImageUrl !== "null"
-												? `
-                        ${
-													testBackgroundImageUrl
-														? `background-image: url(${testBackgroundImageUrl});`
-														: ""
-												}
-                        ${
-													testBackgroundImagePosition
-														? `background-position: ${testBackgroundImagePosition};`
-														: ""
-												}
-                        ${
-													testBackgroundImageAttachment
-														? `background-attachment: ${testBackgroundImageAttachment};`
-														: ""
-												}
-                        ${
-													testBackgroundImageRepeat
-														? `background-repeat: ${testBackgroundImageRepeat};`
-														: ""
-												}
-                        ${
-													testBackgroundImageSize
-														? `background-size: ${testBackgroundImageSize};`
-														: ""
-												}
-                    `
-												: `
-                        background: ${testClassicColor};
-                    `
-										}
-                }
-
-                @media only screen and (max-width: 1024px){
-                .fb-cta-content-wrapper-inner.${blockID}{
-                padding: ${infoBoxTabPadding.top}${infoBoxPaddingUnits} ${
-									infoBoxTabPadding.right
-								}${infoBoxPaddingUnits} ${
-									infoBoxTabPadding.bottom
-								}${infoBoxPaddingUnits} ${
-									infoBoxTabPadding.left
-								}${infoBoxPaddingUnits} !important;
-                margin: ${infoBoxTabMargin.top}${infoBoxMarginUnits} ${
-									infoBoxTabMargin.right
-								}${infoBoxMarginUnits} ${
-									infoBoxTabMargin.bottom
-								}${infoBoxMarginUnits} ${
-									infoBoxTabMargin.left
-								}${infoBoxMarginUnits} !important;
-                border-width: ${
-									infoBoxTabBorderWidth.top
-								}${infoBoxBorderUnits} ${
-									infoBoxTabBorderWidth.right
-								}${infoBoxBorderUnits} ${
-									infoBoxTabBorderWidth.bottom
-								}${infoBoxBorderUnits} ${
-									infoBoxTabBorderWidth.left
-								}${infoBoxBorderUnits} !important;
-                border-radius: ${
-									infoBoxTabBorderRadiusWidth.top
-								}${infoBoxBorderRadiusUnits} ${
-									infoBoxTabBorderRadiusWidth.right
-								}${infoBoxBorderRadiusUnits} ${
-									infoBoxTabBorderRadiusWidth.bottom
-								}${infoBoxBorderRadiusUnits} ${
-									infoBoxTabBorderRadiusWidth.left
-								}${infoBoxBorderRadiusUnits} !important;
-                }
-                }
-                @media only screen and (max-width: 767px){
-                .fb-cta-content-wrapper-inner.${blockID}{
-                padding: ${infoBoxMobilePadding.top}${infoBoxPaddingUnits} ${
-									infoBoxMobilePadding.right
-								}${infoBoxPaddingUnits} ${
-									infoBoxMobilePadding.bottom
-								}${infoBoxPaddingUnits} ${
-									infoBoxMobilePadding.left
-								}${infoBoxPaddingUnits} !important;
-                margin: ${infoBoxMobileMargin.top}${infoBoxMarginUnits} ${
-									infoBoxMobileMargin.right
-								}${infoBoxMarginUnits} ${
-									infoBoxMobileMargin.bottom
-								}${infoBoxMarginUnits} ${
-									infoBoxMobileMargin.left
-								}${infoBoxMarginUnits} !important;
-                border-width: ${
-									infoBoxMobileBorderWidth.top
-								}${infoBoxBorderUnits} ${
-									infoBoxMobileBorderWidth.right
-								}${infoBoxBorderUnits} ${
-									infoBoxMobileBorderWidth.bottom
-								}${infoBoxBorderUnits} ${
-									infoBoxMobileBorderWidth.left
-								}${infoBoxBorderUnits} !important;
-                border-radius: ${
-									infoBoxMobileBorderRadiusWidth.top
-								}${infoBoxBorderRadiusUnits} ${
-									infoBoxMobileBorderRadiusWidth.right
-								}${infoBoxBorderRadiusUnits} ${
-									infoBoxMobileBorderRadiusWidth.bottom
-								}${infoBoxBorderRadiusUnits} ${
-									infoBoxMobileBorderRadiusWidth.left
-								}${infoBoxBorderRadiusUnits} !important;
-                }
-                }
-                .fb-cta-content-wrapper.${blockID} .fb-heading {
-                    ${
-											Heading_Color !== undefined
-												? `color: ${Heading_Color};`
-												: ""
-										}
-                    ${
-											Heading_Background_Color !== undefined
-												? `background-color: ${Heading_Background_Color};`
-												: ""
-										}
-                    font-family: ${
-											Heading_Font_Family !== "default"
-												? Heading_Font_Family
-												: Heading_Font_Family
-										};
-                    font-size: ${
-											Heading_Font_Size !== undefined
-												? `${Heading_Font_Size}${Heading_Font_size_units}`
-												: ""
-										};
-                    font-weight: ${Heading_Font_Weight};
-                    font-style: ${Heading_Font_Style};
-                    text-transform: ${Heading_Text_Transform};
-                    text-decoration: ${Heading_Text_Decoration};
-                    ${
-											Heading_Letter_Spacing !== undefined
-												? `letter-spacing: ${Heading_Letter_Spacing}${Heading_Letter_Spacing_units};`
-												: ""
-										}
-                    ${
-											Heading_Line_Height !== undefined
-												? `line-height: ${Heading_Line_Height}${Heading_Line_Height_units};`
-												: ""
-										}
-                    transition: all .3s ease-in-out;
-                    padding: ${padding};
-                    margin: ${margin};
-                    border: ${Heading_Border};
-                    border-width: ${borderWidth};
-                    border-radius: ${borderRadiusWidth};
-                    ${
-											Heading_Border_Color !== undefined
-												? `border-color: ${Heading_Border_Color};`
-												: ""
-										}
-                }
-                .fb-cta-content-wrapper.${blockID}:hover .fb-heading {
-                    ${
-											Heading_Hover_Color !== undefined
-												? `color: ${Heading_Hover_Color};`
-												: ""
-										}
-                    ${
-											Heading_Border_Hover_Color !== undefined
-												? `border-color: ${Heading_Border_Hover_Color};`
-												: ""
-										}
-                }
-
-                @media only screen and (max-width: 1024px) {
-                    .fb-cta-content-wrapper.${blockID} .fb-heading {
-                        padding: ${
-													Heading_Tab_padding.top
-												}${Heading_padding_units} ${
-													Heading_Tab_padding.right
-												}${Heading_padding_units} ${
-													Heading_Tab_padding.bottom
-												}${Heading_padding_units} ${
-													Heading_Tab_padding.left
-												}${Heading_padding_units} !important;
-                        margin: ${
-													Heading_Tab_Margin.top
-												}${Heading_Margin_Units} ${
-													Heading_Tab_Margin.right
-												}${Heading_Margin_Units} ${
-													Heading_Tab_Margin.bottom
-												}${Heading_Margin_Units} ${
-													Heading_Tab_Margin.left
-												}${Heading_Margin_Units} !important;
-                        border-width: ${
-													Heading_Tab_Border_Width.top
-												}${Heading_Border_units} ${
-													Heading_Tab_Border_Width.right
-												}${Heading_Border_units} ${
-													Heading_Tab_Border_Width.bottom
-												}${Heading_Border_units} ${
-													Heading_Tab_Border_Width.left
-												}${Heading_Border_units} !important;
-                        border-radius: ${
-													Heading_Tab_Border_radius_Width.top
-												}${Heading_Border_radius_units} ${
-													Heading_Tab_Border_radius_Width.right
-												}${Heading_Border_radius_units} ${
-													Heading_Tab_Border_radius_Width.bottom
-												}${Heading_Border_radius_units} ${
-													Heading_Tab_Border_radius_Width.left
-												}${Heading_Border_radius_units} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-cta-content-wrapper.${blockID} .fb-heading {
-                        padding: ${
-													Heading_Mobile_padding.top
-												}${Heading_padding_units} ${
-													Heading_Mobile_padding.right
-												}${Heading_padding_units} ${
-													Heading_Mobile_padding.bottom
-												}${Heading_padding_units} ${
-													Heading_Mobile_padding.left
-												}${Heading_padding_units} !important;
-                        margin: ${
-													Heading_Mobile_Margin.top
-												}${Heading_Margin_Units} ${
-													Heading_Mobile_Margin.right
-												}${Heading_Margin_Units} ${
-													Heading_Mobile_Margin.bottom
-												}${Heading_Margin_Units} ${
-													Heading_Mobile_Margin.left
-												}${Heading_Margin_Units} !important;
-                        border-width: ${
-													Heading_Mobile_Border_Width.top
-												}${Heading_Border_units} ${
-													Heading_Mobile_Border_Width.right
-												}${Heading_Border_units} ${
-													Heading_Mobile_Border_Width.bottom
-												}${Heading_Border_units} ${
-													Heading_Mobile_Border_Width.left
-												}${Heading_Border_units} !important;
-                        border-radius: ${
-													Heading_Mobile_Border_radius_Width.top
-												}${Heading_Border_radius_units} ${
-													Heading_Mobile_Border_radius_Width.right
-												}${Heading_Border_radius_units} ${
-													Heading_Mobile_Border_radius_Width.bottom
-												}${Heading_Border_radius_units} ${
-													Heading_Mobile_Border_radius_Width.left
-												}${Heading_Border_radius_units} !important;
-                    }
-                }
-
-                .fb-cta-content-wrapper.${blockID} .fb-description {
-                	${
-										SubHeadingColor !== undefined
-											? `color: ${SubHeadingColor};`
-											: ""
-									}
-                	font-family: ${
-										SubHeadingFontFamily !== "default"
-											? SubHeadingFontFamily
-											: SubHeadingFontFamily
-									};
-                    font-size: ${
-											SubHeadingFontSize !== undefined
-												? `${SubHeadingFontSize}${SubHeadingFontSizeUnits}`
-												: ""
-										};
-                    font-weight: ${SubHeadingFontWeight};
-                    font-style: ${SubHeadingFontStyle};
-                    text-transform: ${SubHeadingTextTransform};
-                    text-decoration: ${SubHeadingTextDecoration};
-                    padding: ${descPadding};
-                    margin: ${descMargin};
-                }
-                .fb-cta-content-wrapper.${blockID}:hover .fb-description {
-                    ${
-											SubHeadingHoverColor !== undefined
-												? `color: ${SubHeadingHoverColor};`
-												: ""
-										}
-                }
-				@media only screen and (max-width: 1024px){
-				.fb-cta-content-wrapper.${blockID} .fb-description {
-                        padding: ${
-													SubHeadingTabPadding.top
-												}${SubHeadingPaddingUnits} ${
-													SubHeadingTabPadding.right
-												}${SubHeadingPaddingUnits} ${
-													SubHeadingTabPadding.bottom
-												}${SubHeadingPaddingUnits} ${
-													SubHeadingTabPadding.left
-												}${SubHeadingPaddingUnits} !important;
-                        margin: ${descTabMargin.top}${descMarginUnits} ${
-													descTabMargin.right
-												}${descMarginUnits} ${
-													descTabMargin.bottom
-												}${descMarginUnits} ${
-													descTabMargin.left
-												}${descMarginUnits} !important;
-
-                    }
-				}
-				@media only screen and (max-width: 757px){
-				.fb-cta-content-wrapper.${blockID} .fb-description {
-                        padding: ${
-													SubHeadingMobilePadding.top
-												}${SubHeadingPaddingUnits} ${
-													SubHeadingMobilePadding.right
-												}${SubHeadingPaddingUnits} ${
-													SubHeadingMobilePadding.bottom
-												}${SubHeadingPaddingUnits} ${
-													SubHeadingMobilePadding.left
-												}${SubHeadingPaddingUnits} !important;
-                        margin: ${descMobileMargin.top}${descMarginUnits} ${
-													descMobileMargin.right
-												}${descMarginUnits} ${
-													descMobileMargin.bottom
-												}${descMarginUnits} ${
-													descMobileMargin.left
-												}${descMarginUnits} !important;
-                    }
-				}
-                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper{
-                	${
-										buttonTextColor !== undefined
-											? `color: ${buttonTextColor};`
-											: ""
-									}
-                	${
-										buttonBgColor !== undefined
-											? `background-color: ${buttonBgColor};`
-											: ""
-									}
-                	font-family: ${
-										buttonFontFamily !== "default"
-											? buttonFontFamily
-											: buttonFontFamily
-									};
-                    font-size: ${
-											buttonFontSize !== undefined
-												? `${buttonFontSize}${buttonFontSizeUnits}`
-												: ""
-										};
-                    font-weight: ${buttonFontWeight};
-                    font-style: ${buttonFontStyle};
-                    text-transform: ${buttonTextTransform};
-                    text-decoration: ${buttonTextDecoration};
-                    padding: ${buttonPadding};
-                    margin: ${buttonMargin};
-                    border: ${infoButtonBorder};
-					${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ""}
-                    border-width: ${buttonBorderWidth};
-                    border-radius: ${buttonBorderRadiusWidth};
-                }
-
-                .fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
-                	${
-										buttonTextHoverColor !== undefined
-											? `color: ${buttonTextHoverColor};`
-											: ""
-									}
-                	${
-										buttonBgHoverColor !== undefined
-											? `background-color: ${buttonBgHoverColor};`
-											: ""
-									}
-                }
-
-                @media only screen and (max-width: 1024px) {
-                    .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
-                        padding: ${
-													infoButtonTabPadding.top
-												}${infoButtonPaddingUnits} ${
-													infoButtonTabPadding.right
-												}${infoButtonPaddingUnits} ${
-													infoButtonTabPadding.bottom
-												}${infoButtonPaddingUnits} ${
-													infoButtonTabPadding.left
-												}${infoButtonPaddingUnits} !important;
-                        margin: ${
-													infoButtonTabMargin.top
-												}${infoButtonMarginUnits} ${
-													infoButtonTabMargin.right
-												}${infoButtonMarginUnits} ${
-													infoButtonTabMargin.bottom
-												}${infoButtonMarginUnits} ${
-													infoButtonTabMargin.left
-												}${infoButtonMarginUnits} !important;
-                        border-width: ${
-													infoButtonTabBorderWidth.top
-												}${infoButtonBorderUnits} ${
-													infoButtonTabBorderWidth.right
-												}${infoButtonBorderUnits} ${
-													infoButtonTabBorderWidth.bottom
-												}${infoButtonBorderUnits} ${
-													infoButtonTabBorderWidth.left
-												}${infoButtonBorderUnits} !important;
-                        border-radius: ${
-													infoBtnTabBorderradiusWidth.top
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.right
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.bottom
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.left
-												}${infoBtnBorderradiusUnits} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
-                        padding: ${
-													infoButtonMobilePadding.top
-												}${infoButtonPaddingUnits} ${
-													infoButtonMobilePadding.right
-												}${infoButtonPaddingUnits} ${
-													infoButtonMobilePadding.bottom
-												}${infoButtonPaddingUnits} ${
-													infoButtonMobilePadding.left
-												}${infoButtonPaddingUnits} !important;
-                        margin: ${
-													infoButtonMobileMargin.top
-												}${infoButtonMarginUnits} ${
-													infoButtonMobileMargin.right
-												}${infoButtonMarginUnits} ${
-													infoButtonMobileMargin.bottom
-												}${infoButtonMarginUnits} ${
-													infoButtonMobileMargin.left
-												}${infoButtonMarginUnits} !important;
-                        border-width: ${
-													infoButtonMobileBorderWidth.top
-												}${infoButtonBorderUnits} ${
-													infoButtonMobileBorderWidth.right
-												}${infoButtonBorderUnits} ${
-													infoButtonMobileBorderWidth.bottom
-												}${infoButtonBorderUnits} ${
-													infoButtonMobileBorderWidth.left
-												}${infoButtonBorderUnits} !important;
-                        border-radius: ${
-													infoBtnTabBorderradiusWidth.top
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.right
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.bottom
-												}${infoBtnBorderradiusUnits} ${
-													infoBtnTabBorderradiusWidth.left
-												}${infoBtnBorderradiusUnits} !important;
-                    }
-                }
-
-				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper{
-                	${
-										buttonTwoTextColor !== undefined
-											? `color: ${buttonTwoTextColor};`
-											: ""
-									}
-                	${
-										buttonTwoBgColor !== undefined
-											? `background-color: ${buttonTwoBgColor};`
-											: ""
-									}
-                	font-family: ${
-										buttonTwoFontFamily !== "default"
-											? buttonTwoFontFamily
-											: buttonTwoFontFamily
-									};
-                    
-					${
-						buttonTwoFontSize.Desktop && buttonTwoFontSizeUnits.Desktop
-							? `font-size: ${buttonTwoFontSize.Desktop}${buttonTwoFontSizeUnits.Desktop};`
-							: ""
-					}
-                    font-weight: ${buttonTwoFontWeight};
-                    font-style: ${buttonTwoFontStyle};
-                    text-transform: ${buttonTwoTextTransform};
-                    text-decoration: ${buttonTwoTextDecoration};
-					${
-						buttonTwoLetterSpacing.Desktop &&
-						buttonTwoLetterSpacingUnits.Desktop
-							? `letter-spacing: ${buttonTwoLetterSpacing.Desktop}${buttonTwoLetterSpacingUnits.Desktop};`
-							: ""
-					}
-                    ${
-											buttonTwoLineHeight.Desktop &&
-											buttonTwoLineHeightUnits.Desktop
-												? `line-height: ${buttonTwoLineHeight.Desktop}${buttonTwoLineHeightUnits.Desktop};`
-												: ""
-										}
-                    padding: ${buttonTwoDesktopPadding};
-                    margin: ${btnTwoDesktopMarginWidth};
-                    border: ${btnTwoBorder};
-					${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ""}
-                    border-width: ${btnTwoDesktopBorderWidthStyle};
-                    border-radius: ${btnTwoDesktopBorderRadiusWidthStyle};
-                }
-
-                .fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                	${
-										buttonTwoTextHoverColor !== undefined
-											? `color: ${buttonTwoTextHoverColor};`
-											: ""
-									}
-                	${
-										buttonTwoBgHoverColor !== undefined
-											? `background-color: ${buttonTwoBgHoverColor};`
-											: ""
-									}
-                }
-
-                @media only screen and (max-width: 1024px) {
-                    .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                        padding: ${buttonTwoTabletPadding} !important;
-                        margin: ${btnTwoTabletMarginWidth} !important;
-                        border-width: ${btnTwoTabletBorderWidthStyle} !important;
-                        border-radius: ${btnTwoTabletBorderRadiusWidthStyle} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                        padding: ${buttonTwoMobilePadding} !important;
-                        margin: ${btnTwoMobileMarginWidth} !important;
-                        border-width: ${btnTwoMobileBorderWidthStyle} !important;
-                        border-radius: ${btnTwoMobileBorderRadiusWidthStyle} !important;
-                    }
-                }
-
-				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
-                	width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
-					${btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff"}
-                }
-				.fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
-					${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : "#ffffff"}
-                }
-                @media only screen and (max-width: 1024px) {
-                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
-                	width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
-                }
-                }
-                @media only screen and (max-width: 767px) {
-                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg{
-                	width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
-                }
-                }
-
-				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
-                	width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
-					${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : "#ffffff"}
-                }
-				.fb-cta-content-wrapper.${blockID}:hover .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
-					${
-						btnTwoIconHoverColor !== undefined
-							? `fill: ${btnTwoIconHoverColor};`
-							: "#ffffff"
-					}
-                }
-                @media only screen and (max-width: 1024px) {
-                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
-                	width: ${btnTwoIconSize.Tablet}${btnTwoIconSizeUnits.Tablet};
-                }
-                }
-                @media only screen and (max-width: 767px) {
-                .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg{
-                	width: ${btnTwoIconSize.Mobile}${btnTwoIconSizeUnits.Mobile};
-                }
-                }
+				
+				${blockStyle}
             `}
 			</style>
 

@@ -1835,7 +1835,11 @@ const attributes = {
     globalSwitcher: {
         type: "string",
         default: "normal"
-    }
+    },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
 }
 //
 export default attributes;

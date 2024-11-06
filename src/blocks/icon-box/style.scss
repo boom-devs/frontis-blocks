@@ -1,7 +1,23 @@
-.fb-info-box-content-wrapper{
-	.fb-info-btn-wrapper{
-		.fb-info-button{
-			display: inline-block;
+.fb-icon-box-content-wrapper-inner{
+	gap: 20px;
+	.fb-icon-wrapper{
+		line-height: 0;
+	}
+	.fb-icon-btn-wrapper{
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		.fb-btn-icon-wrapper{
+			line-height: 0;
 		}
+	}
+	.fb-icon-media-container{
+		display: flex;
+		align-items: center;
+	}
+	.fb-icon-media-wrapper{
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }
