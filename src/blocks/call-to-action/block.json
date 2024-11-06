@@ -13,8 +13,8 @@
 		"spacing": {
 			"margin": true,
 			"padding": true
-		},
-		"align": ["wide", "full"]
+		}
+	
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",

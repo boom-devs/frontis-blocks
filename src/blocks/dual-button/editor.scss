@@ -6,6 +6,9 @@ $white_color: #ffffff;
 .fb-dual-button-container{
 	.fb-dual-button-wrapper {
 		display: flex;
+        .fb-advanced-button{
+            height: 100%;
+        }
 	}
 	.fb-dual-button-connector{
 		position: relative;
