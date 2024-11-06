@@ -8,7 +8,7 @@ import backgroundCss from './backgroundCss';
 
 const Render = ( props ) => {
 
-	const { attributes, clientId, deviceType, hasSliderParent, hasPopupParent } = props;
+	const { attributes, clientId, hasSliderParent, hasPopupParent } = props;
 
 	const {
 		block_id,
@@ -28,10 +28,10 @@ const Render = ( props ) => {
 		innerContentWidth,
 	} = attributes;
 
-	const direction = attributes[ 'directionDesktop' ];
+	const direction = attributes[ 'direction'+attributes.deviceType ];
 
 	const moverDirection = 'row' === direction ? 'horizontal' : 'vertical';
-	const getContainerBGStyle = backgroundCss( attributes, 'Desktop', clientId, { hasPseudo: true, forStyleSheet: false } );
+	const getContainerBGStyle = backgroundCss( attributes, attributes.deviceType, clientId, { hasPseudo: true, forStyleSheet: false } );
 
 	const topDividerHtml = 'none' !== topType && (
 		<div
@@ -75,7 +75,7 @@ const Render = ( props ) => {
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
 	const isRootContainerClass = isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : '';
 	const blockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ block_id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-desktop ${ isRootContainerClass }`,
+		className: `frontis-blocks-block-${ block_id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ attributes.deviceType } ${ isRootContainerClass }`,
 		style: getContainerBGStyle,
 	} );
 
@@ -90,16 +90,6 @@ const Render = ( props ) => {
 		const parentBlocks = getBlockTypes().filter( ( item ) => ( ! item.parent ) );
 
 		let ALLOWED_BLOCKS = parentBlocks.map( ( block ) => block.name );
-
-		// Check if a parent of this container is a Slider block. If so, disallow the Slider block in this container.
-		if ( hasSliderParent ) {
-			ALLOWED_BLOCKS = ALLOWED_BLOCKS.filter( ( blockName ) => [ 'uagb/slider' ].indexOf( blockName ) === -1 );
-		}
-
-		// Check if a parent of this container is a Popup block. If so, disallow the Modal block in this container.
-		if ( hasPopupParent ) {
-			ALLOWED_BLOCKS = ALLOWED_BLOCKS.filter( ( blockName ) => [ 'uagb/modal' ].indexOf( blockName ) === -1 );
-		}
 
 		// Add the Updated Block List to the Inner Block Params.
 		innerBlocksParams.allowedBlocks = ALLOWED_BLOCKS;

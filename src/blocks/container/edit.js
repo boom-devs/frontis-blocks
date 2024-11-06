@@ -24,6 +24,7 @@ const Edit = (props) => {
 			borderStyle,
 			borderWidth,
 			borderColor,
+			deviceType,
 			borderHoverColor,
 			borderRadius,
 			variationSelected,
@@ -38,7 +39,6 @@ const Edit = (props) => {
 		clientId,
 		setAttributes,
 		name,
-		deviceType,
 		context,
 		hasDynamicContent
 	} = props;
@@ -149,15 +149,7 @@ const Edit = (props) => {
 		}
 	}, [ hasDynamicContent, context?.postId ] )
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, 'Desktop' ), [ attributes, 'Desktop' ] );
-
-	// useEffect( () => {
-	// 	scrollBlockToView();
-	// }, [ deviceType ] );
-	//
-	// useEffect( () => {
-	// 	responsiveConditionPreview( props );
-	// }, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.DeviceType ), [ attributes, attributes.DeviceType ] );
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
@@ -166,7 +158,7 @@ const Edit = (props) => {
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{isSelected && <h1>Okay</h1>}
+			{isSelected && <Inspector attributes={attributes} setAttributes={setAttributes} /> }
 			<Render { ...props } />
 		</>
 	);
