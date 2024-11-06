@@ -119,7 +119,7 @@ const FB_TypographyControl = ({
                             />
 							<FB_Range
 								min={1}
-								max={100}
+								max={200}
 								label={__("Font Size", "frontis-blocks")}
 								rangeValue={fontSize}
 								onChangeHandler={handleFontSizeChange}
@@ -169,7 +169,7 @@ const FB_TypographyControl = ({
                             />
                             <FB_Range
                                 min={1}
-                                max={100}
+                                max={200}
                                 label={__("Line Height", "frontis-blocks")}
                                 rangeValue={lineHeight}
                                 onChangeHandler={handleLineHeightChange}
