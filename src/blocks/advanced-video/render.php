@@ -5,14 +5,14 @@
 
 // Get block attributes
 $blockID = isset( $attributes['blockID'] ) ? sanitize_text_field( $attributes['blockID'] ) : '';
-$deviceType = isset( $attributes['deviceType'] ) ? sanitize_text_field( $attributes['deviceType'] ) : 'Desktop';
 
-$videoGlobalZIndex = isset( $attributes['videoGlobalZIndex'] ) ? intval( $attributes['videoGlobalZIndex'] ) : '';
 $videoURL = isset( $attributes['videoURL'] ) ? esc_url( $attributes['videoURL'] ) : 'https://www.youtube.com/watch?v=WZdCL4Y5EBY';
 $autoPlaySwitcher = isset( $attributes['autoPlaySwitcher'] ) ? boolval( $attributes['autoPlaySwitcher'] ) : false;
 $muteSwitcher = isset( $attributes['muteSwitcher'] ) ? boolval( $attributes['muteSwitcher'] ) : false;
 $loopSwitcher = isset( $attributes['loopSwitcher'] ) ? boolval( $attributes['loopSwitcher'] ) : false;
 $showControlsSwitcher = isset( $attributes['showControlsSwitcher'] ) ? boolval( $attributes['showControlsSwitcher'] ) : false;
+$previewImageUrl = isset( $attributes['previewImageUrl'] ) ? esc_url( $attributes['previewImageUrl'] ) : '';
+$videoPlayIcon = isset( $attributes['videoPlayIcon'] ) ? sanitize_text_field( $attributes['videoPlayIcon'] ) : 'play';
 
 ?>
 
@@ -31,30 +31,10 @@ $showControlsSwitcher = isset( $attributes['showControlsSwitcher'] ) ? boolval( 
 					data-muted="<?php echo esc_attr( $muteSwitcher ? 'true' : 'false' ); ?>"
 					data-loop="<?php echo esc_attr( $loopSwitcher ? 'true' : 'false' ); ?>"
 					data-controls="<?php echo esc_attr( $showControlsSwitcher ? 'true' : 'false' ); ?>"
+					data-preview-image="<?php echo esc_attr( $previewImageUrl ); ?>"
+					data-play-icon="<?php echo esc_attr( $videoPlayIcon ); ?>"
 				></div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<script>
-
-	const container = document.getElementById('fb-player-option')
-	const url = container.getAttribute('data-url');
-	const autoPlay = container.getAttribute('data-autoplay') === 'true';
-	const muted = container.getAttribute('data-muted') === 'true';
-	const loop = container.getAttribute('data-loop') === 'true';
-	const controls = container.getAttribute('data-controls') === 'true';
-
-	renderReactPlayer(container, { 
-		url: url,
-		playing: autoPlay,
-		muted: muted,
-		loop: loop,
-		controls: controls,
-		width: '100%',
-		height: '100%',
-		className: 'fb-react-player'
-	})
-
-</script>
