@@ -7,7 +7,7 @@ import {
 import './editor.lazy.scss';
 
 const FB_ImageControl = ({
-    label,
+    label = '',
     globalBackgroundImageUrl,
     setGlobalBackgroundImageUrl,
     globalBackgroundImageAlt,
