@@ -152,7 +152,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		SubHeadingColor,
 		SubHeadingColorSwitcher,
 		SubHeadingHoverColor,
-
+		SubHeadingLineHeight,
+		SubHeadingLineHeightUnits,
+		SubHeadingLetterSpacing,
+		SubHeadingLetterSpacingUnits,
 		descMarginUnits,
 		descDesktopMargin,
 		descTabMargin,
@@ -359,6 +362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaHoverBackgroundImageSize,
 		mediaHoverBackgroundImageRepeat,
 		blockStyle,
+
 	} = attributes;
 
 	useEffect(() => {
@@ -2764,6 +2768,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         font-style: ${SubHeadingFontStyle};
         text-transform: ${SubHeadingTextTransform};
         text-decoration: ${SubHeadingTextDecoration};
+		${
+			SubHeadingLetterSpacing !== undefined
+				? `letter-spacing: ${SubHeadingLetterSpacing}${SubHeadingLetterSpacingUnits};`
+				: ""
+		}
+		${
+			SubHeadingLineHeight !== undefined
+				? `line-height: ${SubHeadingLineHeight}${SubHeadingLineHeightUnits};`
+				: ""
+		}
         padding: ${descPadding};
         margin: ${descMargin};
     }
@@ -2943,6 +2957,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			SubHeadingFontStyle,
 			SubHeadingTextTransform,
 			SubHeadingTextDecoration,
+			SubHeadingLetterSpacing,
+			SubHeadingLetterSpacingUnits,
+			SubHeadingLineHeight,
+			SubHeadingLineHeightUnits,
 			descPadding,
 			descMargin,
 			SubHeadingHoverColor,
@@ -5220,12 +5238,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																							key={key}
 																							onClick={() =>
 																								setAttributes({
-																									Heading_Letter_Spacing_units:
+																									SubHeadingLetterSpacingUnits:
 																										item.value,
 																								})
 																							}
 																							className={`fb-setting-letterspacing-units-switcher ${
-																								Heading_Letter_Spacing_units ===
+																								SubHeadingLetterSpacingUnits ===
 																								item.value
 																									? "active"
 																									: ""
@@ -5239,10 +5257,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		</div>
 																	</div>
 																	<RangeControl
-																		value={Heading_Letter_Spacing}
+																		value={SubHeadingLetterSpacing}
 																		onChange={(value) =>
 																			setAttributes({
-																				Heading_Letter_Spacing:
+																				SubHeadingLetterSpacing:
 																					value === 0 ? undefined : value,
 																			})
 																		}
@@ -5268,12 +5286,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																							key={key}
 																							onClick={() =>
 																								setAttributes({
-																									Heading_Line_Height_units:
+																									SubHeadingLineHeightUnits:
 																										item.value,
 																								})
 																							}
 																							className={`fb-setting-lineheight-units-switcher ${
-																								Heading_Line_Height_units ===
+																								SubHeadingLineHeightUnits ===
 																								item.value
 																									? "active"
 																									: ""
@@ -5287,10 +5305,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		</div>
 																	</div>
 																	<RangeControl
-																		value={Heading_Line_Height}
+																		value={SubHeadingLineHeight}
 																		onChange={(value) =>
 																			setAttributes({
-																				Heading_Line_Height:
+																				SubHeadingLineHeight:
 																					value === 1 ? undefined : value,
 																			})
 																		}
