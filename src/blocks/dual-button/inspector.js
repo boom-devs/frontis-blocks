@@ -30,10 +30,10 @@ import {
 	FONT_FAMILYS,
 	BORDER_STYLES,
 	ICON_POSITION,
-	BUTTONS_DIRECTION
+	BUTTONS_DIRECTION,
 } from "./constants/constants";
 
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useMemo } from "@wordpress/element";
 import FB_ResponsiveControl from "@Components/responsive-control";
 import FB_Color from "@Components/color";
 import FBIconPicker from "../../components/icon-picker";
@@ -156,7 +156,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoIconPosition,
 		buttonsGap,
 		buttonsGapUnits,
-		buttonsDirection
+		buttonsDirection,
+		blockStyle,
 	} = attributes;
 
 	useEffect(() => {
@@ -357,7 +358,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const buttonBorderDesktopWidth = `${ButtonTwoDesktopBorderWidth.top}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoDesktopBorderWidth.right}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoDesktopBorderWidth.bottom}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoDesktopBorderWidth.left}${ButtonTwoBorderUnits[deviceType]}`;
 	const buttonBorderTabletWidth = `${ButtonTwoTabBorderWidth.top}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoTabBorderWidth.right}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoTabBorderWidth.bottom}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoTabBorderWidth.left}${ButtonTwoBorderUnits[deviceType]}`;
 	const buttonBorderMobileWidth = `${ButtonTwoMobileBorderWidth.top}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoMobileBorderWidth.right}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoMobileBorderWidth.bottom}${ButtonTwoBorderUnits[deviceType]} ${ButtonTwoMobileBorderWidth.left}${ButtonTwoBorderUnits[deviceType]}`;
-	
+
 	const handleButtonBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (ButtonTwoBorderRadiusLink) {
@@ -823,258 +824,289 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ ButtonTwoIcon: IconName });
 	};
 
+	const dualButtonStyle = useMemo(
+		() => `
+		.fb-dual-button-container.${blockID} .fb-advanced-button {
+			font-family: ${
+				ButtonFontFamily !== "default" ? ButtonFontFamily : ButtonFontFamily
+			};
+			font-size: ${
+				ButtonFontSize !== undefined
+					? `${ButtonFontSize}${ButtonFontSizeUnits}`
+					: ""
+			};
+			font-weight: ${ButtonFontWeight};
+			font-style: ${ButtonFontStyle};
+			text-transform: ${ButtonTextTransform};
+			text-decoration: ${ButtonTextDecoration};
+			${
+				ButtonLetterSpacing !== undefined
+					? `letter-spacing: ${ButtonLetterSpacing}${ButtonLetterSpacingUnits};`
+					: ""
+			}
+			${
+				ButtonLineHeight !== undefined
+					? `line-height: ${ButtonLineHeight}${ButtonLineHeightUnits};`
+					: ""
+			}
+			padding: ${buttonDesktopPadding};
+			margin: ${buttonDesktopMargin};
+			z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ""};
+			width: ${ButtonWidth !== undefined ? `${ButtonWidth}%` : ""};
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-wrapper {
+			gap: ${buttonsGap.Desktop}${buttonsGapUnits.Desktop};
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
+			${ButtonBgColor !== undefined ? `background-color: ${ButtonBgColor};` : ""}
+			border: ${ButtonBorder};
+			${ButtonBorderColor !== undefined ? `border-color: ${ButtonBorderColor};` : ""}
+			border-width: ${borderWidth};
+			border-radius: ${borderRadiusWidth};
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button:hover {
+			${
+				ButtonBgHoverColor !== undefined
+					? `background-color: ${ButtonBgHoverColor};`
+					: ""
+			}
+			${
+				ButtonBorderHoverColor !== undefined
+					? `border-color: ${ButtonBorderHoverColor};`
+					: ""
+			}
+		}
+		@media only screen and (max-width: 1024px) {
+			.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
+				padding: ${buttonTabPadding};
+				margin: ${buttonTabMargin};
+				border-width: ${ButtonTabBorderWidth.top}${ButtonBorderUnits} ${
+					ButtonTabBorderWidth.right
+				}${ButtonBorderUnits} ${
+					ButtonTabBorderWidth.bottom
+				}${ButtonBorderUnits} ${
+					ButtonTabBorderWidth.left
+				}${ButtonBorderUnits} !important;
+				border-radius: ${ButtonTabBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${
+					ButtonTabBorderRadiusWidth.right
+				}${ButtonBorderRadiusUnits} ${
+					ButtonTabBorderRadiusWidth.bottom
+				}${ButtonBorderRadiusUnits} ${
+					ButtonTabBorderRadiusWidth.left
+				}${ButtonBorderRadiusUnits} !important;
+			}
+		}
+		@media only screen and (max-width: 767px) {
+			.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
+				padding: ${buttonMobilePadding};
+				margin: ${buttonMobileMargin};
+				border-width: ${ButtonMobileBorderWidth.top}${ButtonBorderUnits} ${
+					ButtonMobileBorderWidth.right
+				}${ButtonBorderUnits} ${
+					ButtonMobileBorderWidth.bottom
+				}${ButtonBorderUnits} ${
+					ButtonMobileBorderWidth.left
+				}${ButtonBorderUnits} !important;
+				border-radius: ${ButtonMobileBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${
+					ButtonMobileBorderRadiusWidth.right
+				}${ButtonBorderRadiusUnits} ${
+					ButtonMobileBorderRadiusWidth.bottom
+				}${ButtonBorderRadiusUnits} ${
+					ButtonMobileBorderRadiusWidth.left
+				}${ButtonBorderRadiusUnits} !important;
+			}
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
+			${
+				ButtonTwoBgColor !== undefined
+					? `background-color: ${ButtonTwoBgColor} !important;`
+					: ""
+			}
+			border: ${ButtonTwoBorder};
+			border-width: ${buttonBorderDesktopWidth};
+			border-radius: ${buttonBorderRadiusDesktopWidth};
+			${
+				ButtonTwoBorderColor !== undefined
+					? `border-color: ${ButtonTwoBorderColor};`
+					: ""
+			}
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button:hover {
+			${
+				ButtonTwoBgHoverColor !== undefined
+					? `background-color: ${ButtonTwoBgHoverColor} !important;`
+					: ""
+			}
+			${
+				ButtonTwoBorderHoverColor !== undefined
+					? `border-color: ${ButtonTwoBorderHoverColor};`
+					: ""
+			}
+		}
+			@media only screen and (max-width: 1024px) {
+        .fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
+            border: ${ButtonTwoBorder};
+            border-width: ${buttonBorderTabletWidth};
+            border-radius: ${buttonBorderRadiusTabletWidth};
+        }
+    }
+    @media only screen and (max-width: 727px) {
+        .fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
+            border: ${ButtonTwoBorder};
+            border-width: ${buttonBorderMobileWidth};
+            border-radius: ${buttonBorderRadiusMobileWidth};
+        }
+    }
+    .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-one .fb-advanced-button-text {
+        ${ButtonColor !== undefined ? `color: ${ButtonColor};` : ""}
+    }
+    .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two .fb-advanced-button-text {
+        ${ButtonTwoColor !== undefined ? `color: ${ButtonTwoColor};` : ""}
+    }
+    .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-one:hover .fb-advanced-button-text {
+        ${ButtonHoverColor !== undefined ? `color: ${ButtonHoverColor};` : ""}
+    }
+    .fb-dual-button-container.${blockID} .fb-advanced-button:hover {
+        ${
+					ButtonBgHoverColor !== undefined
+						? `background-color: ${ButtonBgHoverColor};`
+						: ""
+				}
+    }
+    .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
+        ${
+					connectorBgColor !== undefined
+						? `background-color: ${connectorBgColor};`
+						: ""
+				}
+        font-family: ${
+					connectorFontFamily !== "default"
+						? connectorFontFamily
+						: connectorFontFamily
+				};
+        font-size: ${
+					connectorFontSize !== undefined
+						? `${connectorFontSize}${connectorFontSizeUnits}`
+						: ""
+				}
+        font-weight: ${connectorFontWeight};
+        font-style: ${connectorFontStyle};
+        text-transform: ${connectorTextTransform};
+        text-decoration: ${connectorTextDecoration};
+        ${
+					connectorLetterSpacing !== undefined
+						? `letter-spacing: ${connectorLetterSpacing}${connectorLetterSpacingUnits};`
+						: ""
+				}
+        ${
+					connectorLineHeight !== undefined
+						? `line-height: ${connectorLineHeight}${connectorLineHeightUnits};`
+						: ""
+				}
+        width: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
+        height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
+    }
+    @media only screen and (max-width: 1024px) {
+        .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
+            width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
+            height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
+            width: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
+            height: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
+        }
+    }
+    .fb-dual-button-container.${blockID} .fb-advanced-button-icon-wrapper svg {
+        ${btnIconColor !== undefined ? `fill: ${btnIconColor};` : ""}
+        width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
+    }
+    .fb-dual-button-container.${blockID} .fb-advanced-button {
+        gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
+    }
+    .fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg,
+    .fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
+        ${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : ""}
+    }
+    @media only screen and (max-width: 1024px) {
+        .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
+            width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
+            width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
+        }
+    }
+	`,
+		[
+			blockID,
+			ButtonFontFamily,
+			ButtonFontSize,
+			ButtonFontSizeUnits,
+			ButtonFontWeight,
+			ButtonFontStyle,
+			ButtonTextTransform,
+			ButtonTextDecoration,
+			ButtonLetterSpacing,
+			ButtonLetterSpacingUnits,
+			ButtonLineHeight,
+			ButtonLineHeightUnits,
+			buttonDesktopPadding,
+			buttonDesktopMargin,
+			ButtonZIndex,
+			ButtonWidth,
+			ButtonBgColor,
+			ButtonBorder,
+			ButtonBorderColor,
+			borderWidth,
+			borderRadiusWidth,
+			ButtonBgHoverColor,
+			ButtonTwoBgColor,
+			ButtonTwoBorder,
+			buttonBorderDesktopWidth,
+			buttonBorderRadiusDesktopWidth,
+			ButtonTwoBorderColor,
+			ButtonTwoBgHoverColor,
+			buttonBorderTabletWidth,
+			buttonBorderMobileWidth,
+			ButtonMobileBorderWidth,
+			ButtonMobileBorderRadiusWidth,
+			ButtonTwoColor,
+			ButtonHoverColor,
+			connectorBgColor,
+			connectorFontFamily,
+			connectorFontSize,
+			connectorFontSizeUnits,
+			connectorFontWeight,
+			connectorFontStyle,
+			connectorTextTransform,
+			connectorTextDecoration,
+			connectorLetterSpacing,
+			connectorLetterSpacingUnits,
+			connectorLineHeight,
+			connectorLineHeightUnits,
+			connectorSize,
+			btnIconColor,
+			btnIconSize,
+			btnIconSizeUnits,
+			btnIconHoverColor,
+			btnIconSpacing,
+		],
+	);
+
+	useEffect(() => {
+		setAttributes({
+			blockStyle: `${dualButtonStyle}`.replace(/\s+/g, " ").trim(),
+		});
+	}, [dualButtonStyle]);
+
 	return (
 		<>
 			<style>
 				{`
-                .fb-dual-button-container.${blockID} .fb-advanced-button {
-                    font-family: ${
-											ButtonFontFamily !== "default"
-												? ButtonFontFamily
-												: ButtonFontFamily
-										};
-                    font-size: ${
-											ButtonFontSize !== undefined
-												? `${ButtonFontSize}${ButtonFontSizeUnits}`
-												: ""
-										};
-                    font-weight: ${ButtonFontWeight};
-                    font-style: ${ButtonFontStyle};
-                    text-transform: ${ButtonTextTransform};
-                    text-decoration: ${ButtonTextDecoration};
-                    ${
-											ButtonLetterSpacing !== undefined
-												? `letter-spacing: ${ButtonLetterSpacing}${ButtonLetterSpacingUnits};`
-												: ""
-										}
-                    ${
-											ButtonLineHeight !== undefined
-												? `line-height: ${ButtonLineHeight}${ButtonLineHeightUnits};`
-												: ""
-										}
-                    padding: ${buttonDesktopPadding};
-                    margin: ${buttonDesktopMargin};
-                    z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ""};
-                    width: ${
-											ButtonWidth !== undefined ? `${ButtonWidth}%` : ""
-										};
-                }
-				.fb-dual-button-container.${blockID} .fb-dual-button-wrapper
-                {
-					gap: ${buttonsGap.Desktop}${buttonsGapUnits.Desktop};
-                }
-				.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button{
-                    ${
-					ButtonBgColor !== undefined ? `background-color: ${ButtonBgColor};` : ""
-					}
-					border: ${ButtonBorder};
-					${
-						ButtonBorderColor !== undefined ? `border-color: ${ButtonBorderColor};` : ""
-					}
-                    border-width: ${borderWidth};
-                    border-radius: ${borderRadiusWidth};
-                }
-				.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button:hover{
-					${
-						ButtonBgHoverColor !== undefined ? `background-color: ${ButtonBgHoverColor};` : ""
-						}
-						${
-							ButtonBorderHoverColor !== undefined ? `border-color: ${ButtonBorderHoverColor};` : ""
-						}
-				}
-				@media only screen and (max-width: 1024px) {
-                    .fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
-                        padding: ${buttonTabPadding};
-                        margin: ${buttonTabMargin};
-                        border-width: ${
-													ButtonTabBorderWidth.top
-												}${ButtonBorderUnits} ${
-													ButtonTabBorderWidth.right
-												}${ButtonBorderUnits} ${
-													ButtonTabBorderWidth.bottom
-												}${ButtonBorderUnits} ${
-													ButtonTabBorderWidth.left
-												}${ButtonBorderUnits} !important;
-                        border-radius: ${
-													ButtonTabBorderRadiusWidth.top
-												}${ButtonBorderRadiusUnits} ${
-													ButtonTabBorderRadiusWidth.right
-												}${ButtonBorderRadiusUnits} ${
-													ButtonTabBorderRadiusWidth.bottom
-												}${ButtonBorderRadiusUnits} ${
-													ButtonTabBorderRadiusWidth.left
-												}${ButtonBorderRadiusUnits} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
-                        padding: ${buttonMobilePadding};
-                        margin: ${buttonMobileMargin};
-                        border-width: ${
-													ButtonMobileBorderWidth.top
-												}${ButtonBorderUnits} ${
-													ButtonMobileBorderWidth.right
-												}${ButtonBorderUnits} ${
-													ButtonMobileBorderWidth.bottom
-												}${ButtonBorderUnits} ${
-													ButtonMobileBorderWidth.left
-												}${ButtonBorderUnits} !important;
-                        border-radius: ${
-													ButtonMobileBorderRadiusWidth.top
-												}${ButtonBorderRadiusUnits} ${
-													ButtonMobileBorderRadiusWidth.right
-												}${ButtonBorderRadiusUnits} ${
-													ButtonMobileBorderRadiusWidth.bottom
-												}${ButtonBorderRadiusUnits} ${
-													ButtonMobileBorderRadiusWidth.left
-												}${ButtonBorderRadiusUnits} !important;
-                    }
-                }
-
-				.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
-                    ${
-					ButtonTwoBgColor !== undefined ? `background-color: ${ButtonTwoBgColor} !important;` : ""
-					}
-					border: ${ButtonTwoBorder};
-					border-width: ${buttonBorderDesktopWidth};
-					border-radius: ${buttonBorderRadiusDesktopWidth};
-					${
-					ButtonTwoBorderColor !== undefined ? `border-color: ${ButtonTwoBorderColor};` : ""
-					}
-                }
-				.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button:hover{
-					${
-						ButtonTwoBgHoverColor !== undefined ? `background-color: ${ButtonTwoBgHoverColor} !important;` : ""
-					}
-					${
-						ButtonTwoBorderHoverColor !== undefined ? `border-color: ${ButtonTwoBorderHoverColor};` : ""
-					}
-				}
-                @media only screen and  (max-width:1024px){
-                .fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
-                    border: ${ButtonTwoBorder};
-                    border-width: ${buttonBorderTabletWidth};
-                    border-radius: ${buttonBorderRadiusTabletWidth};
-                }
-                }
-                @media only screen and  (max-width:727px){
-                .fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
-                    border: ${ButtonTwoBorder};
-                    border-width: ${buttonBorderMobileWidth};
-                    border-radius: ${buttonBorderRadiusMobileWidth};
-                }
-                }
-                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-one .fb-advanced-button-text {
-                    ${ButtonColor !== undefined ? `color: ${ButtonColor};` : ""}
-                }
-                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-two .fb-advanced-button-text {
-                    ${
-											ButtonTwoColor !== undefined
-												? `color: ${ButtonTwoColor};`
-												: ""
-										}
-                }
-                .fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-one:hover .fb-advanced-button-text {
-                    ${
-											ButtonHoverColor !== undefined
-												? `color: ${ButtonHoverColor};`
-												: ""
-										}
-                }
-
-                .fb-dual-button-container.${blockID} .fb-advanced-button:hover {
-                    ${
-											ButtonBgHoverColor !== undefined
-												? `background-color: ${ButtonBgHoverColor};`
-												: ""
-										}
-                }
-                
-
-                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-                    ${
-											connectorBgColor !== undefined
-												? `background-color: ${connectorBgColor};`
-												: ""
-										}
-                    font-family: ${
-											connectorFontFamily !== "default"
-												? connectorFontFamily
-												: connectorFontFamily
-										};
-                    font-size: ${
-											connectorFontSize !== undefined
-												? `${connectorFontSize}${connectorFontSizeUnits}`
-												: ""
-										};
-                    font-weight: ${connectorFontWeight};
-                    font-style: ${connectorFontStyle};
-                    text-transform: ${connectorTextTransform};
-                    text-decoration: ${connectorTextDecoration};
-                    ${
-											ButtonLetterSpacing !== undefined
-												? `letter-spacing: ${connectorLetterSpacing}${connectorLetterSpacingUnits};`
-												: ""
-										}
-                    ${
-											connectorLineHeight !== undefined
-												? `line-height: ${connectorLineHeight}${connectorLineHeightUnits};`
-												: ""
-										}
-                    width: ${connectorSize.Desktop}${
-											connectorSizeUnits.Desktop
-										};
-                    height: ${connectorSize.Desktop}${
-											connectorSizeUnits.Desktop
-										};
-                }
-                @media only screen and (max-width: 1024px) {
-                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
-                width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
-                height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
-                }
-                }
-                @media only screen and (max-width: 767px) {
-                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
-                width: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
-                height: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
-                }
-                }
-
-				.fb-dual-button-container.${blockID} .fb-advanced-button-icon-wrapper svg {
-                    ${
-											btnIconColor !== undefined
-												? `fill: ${btnIconColor};`
-												: ""
-										}
-                    
-                    width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
-                }
-				.fb-dual-button-container.${blockID} .fb-advanced-button
-                {
-					gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
-                }
-				.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg,
-				.fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
-                ${
-									btnIconHoverColor !== undefined
-										? `fill: ${btnIconHoverColor};`
-										: ""
-								}
-                }
-                @media only screen and (max-width: 1024px) {
-                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
-                width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
-                }
-                }
-                @media only screen and (max-width: 767px) {
-                .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text{
-                width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
-                }
-                }
-
-                
+                ${blockStyle}
             `}
 			</style>
 
@@ -1210,13 +1242,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														</BaseControl>
 													</div>
 													<SelectControl
-																		label={__("Icon Position", "frontis-blocks")}
-																		options={ICON_POSITION}
-																		value={btnIconPosition}
-																		onChange={(value) =>
-																			setAttributes({ btnIconPosition: value })
-																		}
-																	/>
+														label={__("Icon Position", "frontis-blocks")}
+														options={ICON_POSITION}
+														value={btnIconPosition}
+														onChange={(value) =>
+															setAttributes({ btnIconPosition: value })
+														}
+													/>
 												</PanelBody>
 											</div>
 											{/* Connector */}
@@ -1348,13 +1380,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														</BaseControl>
 													</div>
 													<SelectControl
-																		label={__("Icon Position", "frontis-blocks")}
-																		options={ICON_POSITION}
-																		value={btnTwoIconPosition}
-																		onChange={(value) =>
-																			setAttributes({ btnTwoIconPosition: value })
-																		}
-																	/>
+														label={__("Icon Position", "frontis-blocks")}
+														options={ICON_POSITION}
+														value={btnTwoIconPosition}
+														onChange={(value) =>
+															setAttributes({ btnTwoIconPosition: value })
+														}
+													/>
 												</PanelBody>
 											</div>
 										</div>
@@ -1386,13 +1418,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 											</BaseControl>
 											<SelectControl
-																		label={__("Direction", "frontis-blocks")}
-																		options={BUTTONS_DIRECTION}
-																		value={buttonsDirection}
-																		onChange={(value) =>
-																			setAttributes({ buttonsDirection: value })
-																		}
-																	/>
+												label={__("Direction", "frontis-blocks")}
+												options={BUTTONS_DIRECTION}
+												value={buttonsDirection}
+												onChange={(value) =>
+													setAttributes({ buttonsDirection: value })
+												}
+											/>
 											<BaseControl
 												label={__("Typography", "frontis-blocks")}
 												className="fb-setting-typography"
@@ -1765,18 +1797,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 											<FB_Range
-                                                        min={1}
-                                                        max={300}
-                                                        label={__("Gap", "frontis-blocks")}
-                                                        rangeValue={buttonsGap}
-                                                        onChangeHandler={(value) => setAttributes({ buttonsGap: value })}
-                                                        rangeUnitHandler={(value) => setAttributes({ buttonsGapUnits: value })}
-                                                        deviceType={deviceType}
-                                                        units={buttonsGapUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
-                                                    />
+												min={1}
+												max={300}
+												label={__("Gap", "frontis-blocks")}
+												rangeValue={buttonsGap}
+												onChangeHandler={(value) =>
+													setAttributes({ buttonsGap: value })
+												}
+												rangeUnitHandler={(value) =>
+													setAttributes({ buttonsGapUnits: value })
+												}
+												deviceType={deviceType}
+												units={buttonsGapUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
 										</PanelBody>
 										<PanelBody
 											title={__("Button One", "frontis-blocks")}
@@ -2262,9 +2298,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={ButtonDesktopBorderWidth}
 												spacingTablet={ButtonTabBorderWidth}
 												spacingMobile={ButtonMobileBorderWidth}
-												handleSpacingUnitHandler={handleButtonOneBorderUnitChange}
+												handleSpacingUnitHandler={
+													handleButtonOneBorderUnitChange
+												}
 												spacingCombineBtn={ButtonTwoBorderLink}
-												spacingCombineBtnHandler={handleButtonOneBorderCombineBtn}
+												spacingCombineBtnHandler={
+													handleButtonOneBorderCombineBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<div className="fb-setting-spacing-container">

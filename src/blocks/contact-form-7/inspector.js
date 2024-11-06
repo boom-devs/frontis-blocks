@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import {useEffect, useState} from '@wordpress/element';
+import { __ } from "@wordpress/i18n";
+import { InspectorControls } from "@wordpress/block-editor";
+import { useEffect, useState, useMemo } from "@wordpress/element";
 import {
 	PanelBody,
 	BaseControl,
@@ -16,7 +16,7 @@ import {
 	TextControl,
 	TextareaControl,
 	ToggleControl,
-} from '@wordpress/components';
+} from "@wordpress/components";
 
 import {
 	FORM_LISTS,
@@ -29,11 +29,11 @@ import {
 	WIDTH_STYLES,
 } from "./constants/constants";
 
-import FB_Spacing from '@Components/spacing';
-import FB_Range from '@Components/range';
-import FB_Color from '@Components/color';
+import FB_Spacing from "@Components/spacing";
+import FB_Range from "@Components/range";
+import FB_Color from "@Components/color";
 
-import './editor.scss';
+import "./editor.scss";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -334,257 +334,299 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		fluentFormGlobalBorderRadiusTablet,
 		fluentFormGlobalBorderRadiusMobile,
 		fluentFormGlobalBorderRadiusLink,
-
-
+		blockStyle,
 	} = attributes;
-	const [wpCf7Form, setWpCf7Forms] = useState(FrontisBlocksData.contact_form7_html);
+	const [wpCf7Form, setWpCf7Forms] = useState(
+		FrontisBlocksData.contact_form7_html,
+	);
 	const [selectedForm, setSelectedForm] = useState();
 
 	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
+		if (clientId && typeof clientId === "string") {
 			setAttributes({
 				blockID: "fb-contact-form-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId]);
 
-	const modifiedFormLists = FrontisBlocksData.contact_form7_lists.map((obj, i) => {
-		return {
-			label: obj.label,
-			value: obj.value,
-		};
-	});
+	const modifiedFormLists = FrontisBlocksData.contact_form7_lists.map(
+		(obj, i) => {
+			return {
+				label: obj.label,
+				value: obj.value,
+			};
+		},
+	);
 
 	const selectWcf7Form = (wpcf7Id) => {
-		setAttributes({formId: wpcf7Id});
+		setAttributes({ formId: wpcf7Id });
 		setSelectedForm(wpCf7Form[formId]);
-	}
+	};
 
-	useEffect( ( ) => {
+	useEffect(() => {
 		setSelectedForm(wpCf7Form[formId]);
-	}, [formId] )
+	}, [formId]);
 
 	/** Start  padding */
-	const handlePaddingUnitChange = ( event, position ) => {
+	const handlePaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormPaddingDesktop: {...fluentFormPaddingDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormPaddingDesktop: {
+							...fluentFormPaddingDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormPaddingTablet: {...fluentFormPaddingTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormPaddingTablet: {
+							...fluentFormPaddingTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormPaddingMobile: {...fluentFormPaddingMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormPaddingMobile: {
+							...fluentFormPaddingMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const handlePaddingCombineBtn = () => {
-		setAttributes( {fluentFormPaddingLink: !fluentFormPaddingLink} );
-	}
+		setAttributes({ fluentFormPaddingLink: !fluentFormPaddingLink });
+	};
 
 	const handlePaddingUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormPaddingUnits: {
 				...fluentFormPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** end  padding */
 
-
 	/** Default padding for desktop (using desktop_padding) */
-	const fluentFormDesktopPadding    = `${fluentFormPaddingDesktop.top}${fluentFormPaddingUnits.Desktop} ${fluentFormPaddingDesktop.right}${fluentFormPaddingUnits.Desktop} ${fluentFormPaddingDesktop.bottom}${fluentFormPaddingUnits.Desktop} ${fluentFormPaddingDesktop.left}${fluentFormPaddingUnits.Desktop}`;
-	const fluentFormTabletPadding     = `${fluentFormPaddingTablet.top}${fluentFormPaddingUnits.Tablet} ${fluentFormPaddingTablet.right}${fluentFormPaddingUnits.Tablet} ${fluentFormPaddingTablet.bottom}${fluentFormPaddingUnits.Tablet} ${fluentFormPaddingTablet.left}${fluentFormPaddingUnits.Tablet}`;
-	const fluentFormMobilePadding     = `${fluentFormPaddingMobile.top}${fluentFormPaddingUnits.Mobile} ${fluentFormPaddingMobile.right}${fluentFormPaddingUnits.Mobile} ${fluentFormPaddingMobile.bottom}${fluentFormPaddingUnits.Mobile} ${fluentFormPaddingMobile.left}${fluentFormPaddingUnits.Mobile}`;
+	const fluentFormDesktopPadding = `${fluentFormPaddingDesktop.top}${fluentFormPaddingUnits.Desktop} ${fluentFormPaddingDesktop.right}${fluentFormPaddingUnits.Desktop} ${fluentFormPaddingDesktop.bottom}${fluentFormPaddingUnits.Desktop} ${fluentFormPaddingDesktop.left}${fluentFormPaddingUnits.Desktop}`;
+	const fluentFormTabletPadding = `${fluentFormPaddingTablet.top}${fluentFormPaddingUnits.Tablet} ${fluentFormPaddingTablet.right}${fluentFormPaddingUnits.Tablet} ${fluentFormPaddingTablet.bottom}${fluentFormPaddingUnits.Tablet} ${fluentFormPaddingTablet.left}${fluentFormPaddingUnits.Tablet}`;
+	const fluentFormMobilePadding = `${fluentFormPaddingMobile.top}${fluentFormPaddingUnits.Mobile} ${fluentFormPaddingMobile.right}${fluentFormPaddingUnits.Mobile} ${fluentFormPaddingMobile.bottom}${fluentFormPaddingUnits.Mobile} ${fluentFormPaddingMobile.left}${fluentFormPaddingUnits.Mobile}`;
 	/** End Padding */
 
-
 	/** Start  border */
-	const handleBorderUnitChange = ( event, position ) => {
+	const handleBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormBorderLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormBorderDesktop: {...fluentFormBorderDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormBorderDesktop: {
+							...fluentFormBorderDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormBorderTablet: {...fluentFormBorderTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormBorderTablet: {
+							...fluentFormBorderTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormBorderMobile: {...fluentFormBorderMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormBorderMobile: {
+							...fluentFormBorderMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const handleBorderCombineBtn = () => {
-		setAttributes( {fluentFormBorderLink: !fluentFormBorderLink} );
-	}
+		setAttributes({ fluentFormBorderLink: !fluentFormBorderLink });
+	};
 
 	const handleBorderUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormBorderUnits: {
 				...fluentFormBorderUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** End  border */
 	const fluentFormBorderDesktopWidth = `${fluentFormBorderDesktop.top}${fluentFormBorderUnits.Desktop} ${fluentFormBorderDesktop.right}${fluentFormBorderUnits.Desktop} ${fluentFormBorderDesktop.bottom}${fluentFormBorderUnits.Desktop} ${fluentFormBorderDesktop.left}${fluentFormBorderUnits.Desktop}`;
 	const fluentFormBorderTabletWidth = `${fluentFormBorderTablet.top}${fluentFormBorderUnits.Tablet} ${fluentFormBorderTablet.right}${fluentFormBorderUnits.Tablet} ${fluentFormBorderTablet.bottom}${fluentFormBorderUnits.Tablet} ${fluentFormBorderTablet.left}${fluentFormBorderUnits.Tablet}`;
 	const fluentFormBorderMobileWidth = `${fluentFormBorderMobile.top}${fluentFormBorderUnits.Mobile} ${fluentFormBorderMobile.right}${fluentFormBorderUnits.Mobile} ${fluentFormBorderMobile.bottom}${fluentFormBorderUnits.Mobile} ${fluentFormBorderMobile.left}${fluentFormBorderUnits.Mobile}`;
 	/** End Border */
 
-
 	/** Start  border radius*/
-	const handleBorderRadiusUnitChange = ( event, position ) => {
+	const handleBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormBorderRadiusDesktop: {...fluentFormBorderRadiusDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormBorderRadiusDesktop: {
+							...fluentFormBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormBorderRadiusTablet: {...fluentFormBorderRadiusTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormBorderRadiusTablet: {
+							...fluentFormBorderRadiusTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormBorderRadiusMobile: {...fluentFormBorderRadiusMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormBorderRadiusMobile: {
+							...fluentFormBorderRadiusMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const handleBorderRadiusCombineBtn = () => {
-		setAttributes( {fluentFormBorderRadiusLink: !fluentFormBorderRadiusLink} );
-	}
+		setAttributes({ fluentFormBorderRadiusLink: !fluentFormBorderRadiusLink });
+	};
 
 	const handleBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormBorderRadiusUnits: {
 				...fluentFormBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** end  border */
 
 	/** End  Border Radius */
@@ -594,73 +636,89 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Border Radius */
 
 	/** Start Radio border radius*/
-	const fluentFormRadioBorderRadiusUnitChange = ( event, position ) => {
+	const fluentFormRadioBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormRadioBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormRadioBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormRadioBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormRadioBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormRadioBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormRadioBorderRadiusDesktop: {...fluentFormRadioBorderRadiusDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormRadioBorderRadiusDesktop: {
+							...fluentFormRadioBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormRadioBorderRadiusTablet: {...fluentFormRadioBorderRadiusTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormRadioBorderRadiusTablet: {
+							...fluentFormRadioBorderRadiusTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormRadioBorderRadiusMobile: {...fluentFormRadioBorderRadiusMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormRadioBorderRadiusMobile: {
+							...fluentFormRadioBorderRadiusMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const fluentFormRadioBorderRadiusCombineBtn = () => {
-		setAttributes( {fluentFormRadioBorderRadiusLink: !fluentFormRadioBorderRadiusLink} );
-	}
+		setAttributes({
+			fluentFormRadioBorderRadiusLink: !fluentFormRadioBorderRadiusLink,
+		});
+	};
 
 	const fluentFormRadioBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormRadioBorderRadiusUnits: {
 				...fluentFormRadioBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** end Radio border */
 
 	/** End Radio Border Radius */
@@ -669,76 +727,90 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const fluentFormRadioBorderRadiusMobileWidth = `${fluentFormRadioBorderRadiusMobile.top}${fluentFormRadioBorderRadiusUnits.Mobile} ${fluentFormRadioBorderRadiusMobile.right}${fluentFormRadioBorderRadiusUnits.Mobile} ${fluentFormRadioBorderRadiusMobile.bottom}${fluentFormRadioBorderRadiusUnits.Mobile} ${fluentFormRadioBorderRadiusMobile.left}${fluentFormRadioBorderRadiusUnits.Mobile}`;
 	/** End Radio Border Radius */
 
-
-
 	/** Start Radio border radius*/
-	const fluentFormCheckBoxBorderRadiusUnitChange = ( event, position ) => {
+	const fluentFormCheckBoxBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormCheckBoxBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormCheckBoxBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormCheckBoxBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormCheckBoxBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormCheckBoxBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormCheckBoxBorderRadiusDesktop: {...fluentFormCheckBoxBorderRadiusDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormCheckBoxBorderRadiusDesktop: {
+							...fluentFormCheckBoxBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormCheckBoxBorderRadiusTablet: {...fluentFormCheckBoxBorderRadiusTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormCheckBoxBorderRadiusTablet: {
+							...fluentFormCheckBoxBorderRadiusTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormCheckBoxBorderRadiusMobile: {...fluentFormCheckBoxBorderRadiusMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormCheckBoxBorderRadiusMobile: {
+							...fluentFormCheckBoxBorderRadiusMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const fluentFormCheckBoxBorderRadiusCombineBtn = () => {
-		setAttributes( {fluentFormCheckBoxBorderRadiusLink: !fluentFormCheckBoxBorderRadiusLink} );
-	}
+		setAttributes({
+			fluentFormCheckBoxBorderRadiusLink: !fluentFormCheckBoxBorderRadiusLink,
+		});
+	};
 
 	const fluentFormCheckBoxBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormCheckBoxBorderRadiusUnits: {
 				...fluentFormCheckBoxBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** end Radio border */
 
 	/** End Radio Border Radius */
@@ -752,49 +824,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormSectionBreakTitlePaddingLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSectionBreakTitlePaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSectionBreakTitlePaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSectionBreakTitlePaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSectionBreakTitlePaddingDesktop: {...fluentFormSectionBreakTitlePaddingDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSectionBreakTitlePaddingDesktop: {
+							...fluentFormSectionBreakTitlePaddingDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSectionBreakTitlePaddingTablet: {...fluentFormSectionBreakTitlePaddingTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSectionBreakTitlePaddingTablet: {
+							...fluentFormSectionBreakTitlePaddingTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSectionBreakTitlePaddingMobile: {...fluentFormSectionBreakTitlePaddingMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSectionBreakTitlePaddingMobile: {
+							...fluentFormSectionBreakTitlePaddingMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -804,7 +891,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSectionBreakTitlePaddingLinkBtn = () => {
 		setAttributes({
-			fluentFormSectionBreakTitlePaddingLink: !fluentFormSectionBreakTitlePaddingLink
+			fluentFormSectionBreakTitlePaddingLink:
+				!fluentFormSectionBreakTitlePaddingLink,
 		});
 	};
 
@@ -812,8 +900,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSectionBreakTitlePaddingUnits: {
 				...fluentFormSectionBreakTitlePaddingUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -824,53 +912,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Section Break Title padding */
 
 	/** Start Section Break Title Margin */
-	const fluentFormSectionBreakTitleMarginUnitsChange = ( event, position ) => {
+	const fluentFormSectionBreakTitleMarginUnitsChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormSectionBreakTitleMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormSectionBreakTitleMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormSectionBreakTitleMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormSectionBreakTitleMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormSectionBreakTitleMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSectionBreakTitleMarginDesktop: {...fluentFormSectionBreakTitleMarginDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSectionBreakTitleMarginDesktop: {
+							...fluentFormSectionBreakTitleMarginDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSectionBreakTitleMarginTablet: {...fluentFormSectionBreakTitleMarginTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSectionBreakTitleMarginTablet: {
+							...fluentFormSectionBreakTitleMarginTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSectionBreakTitleMarginMobile: {...fluentFormSectionBreakTitleMarginMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSectionBreakTitleMarginMobile: {
+							...fluentFormSectionBreakTitleMarginMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -879,18 +982,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const fluentFormSectionBreakTitleMarginLinkBtn = () => {
-		setAttributes( {
-			fluentFormSectionBreakTitleMarginLink: !fluentFormSectionBreakTitleMarginLink
-		} );
+		setAttributes({
+			fluentFormSectionBreakTitleMarginLink:
+				!fluentFormSectionBreakTitleMarginLink,
+		});
 	};
 
 	const fluentFormSectionBreakTitleMarginUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormSectionBreakTitleMarginUnits: {
 				...fluentFormSectionBreakTitleMarginUnits,
-				[deviceType]: unit
-			}
-		} );
+				[deviceType]: unit,
+			},
+		});
 	};
 
 	const fluentFormSectionBreakTitleDesktopMargin = `${fluentFormSectionBreakTitleMarginDesktop.top}${fluentFormSectionBreakTitleMarginUnits.Desktop} ${fluentFormSectionBreakTitleMarginDesktop.right}${fluentFormSectionBreakTitleMarginUnits.Desktop} ${fluentFormSectionBreakTitleMarginDesktop.bottom}${fluentFormSectionBreakTitleMarginUnits.Desktop} ${fluentFormSectionBreakTitleMarginDesktop.left}${fluentFormSectionBreakTitleMarginUnits.Desktop}`;
@@ -903,49 +1007,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormSectionBreakDescPaddingLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSectionBreakDescPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSectionBreakDescPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSectionBreakDescPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSectionBreakDescPaddingDesktop: {...fluentFormSectionBreakDescPaddingDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSectionBreakDescPaddingDesktop: {
+							...fluentFormSectionBreakDescPaddingDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSectionBreakDescPaddingTablet: {...fluentFormSectionBreakDescPaddingTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSectionBreakDescPaddingTablet: {
+							...fluentFormSectionBreakDescPaddingTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSectionBreakDescPaddingMobile: {...fluentFormSectionBreakDescPaddingMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSectionBreakDescPaddingMobile: {
+							...fluentFormSectionBreakDescPaddingMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -955,7 +1074,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSectionBreakDescPaddingLinkBtn = () => {
 		setAttributes({
-			fluentFormSectionBreakDescPaddingLink: !fluentFormSectionBreakDescPaddingLink
+			fluentFormSectionBreakDescPaddingLink:
+				!fluentFormSectionBreakDescPaddingLink,
 		});
 	};
 
@@ -963,8 +1083,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSectionBreakDescPaddingUnits: {
 				...fluentFormSectionBreakDescPaddingUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -975,53 +1095,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Section Break Description padding */
 
 	/** Start Section Break Description Margin */
-	const fluentFormSectionBreakDescMarginUnitsChange = ( event, position ) => {
+	const fluentFormSectionBreakDescMarginUnitsChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormSectionBreakDescMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormSectionBreakDescMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormSectionBreakDescMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormSectionBreakDescMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormSectionBreakDescMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSectionBreakDescMarginDesktop: {...fluentFormSectionBreakDescMarginDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSectionBreakDescMarginDesktop: {
+							...fluentFormSectionBreakDescMarginDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSectionBreakDescMarginTablet: {...fluentFormSectionBreakDescMarginTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSectionBreakDescMarginTablet: {
+							...fluentFormSectionBreakDescMarginTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSectionBreakDescMarginMobile: {...fluentFormSectionBreakDescMarginMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSectionBreakDescMarginMobile: {
+							...fluentFormSectionBreakDescMarginMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1030,18 +1165,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const fluentFormSectionBreakDescMarginLinkBtn = () => {
-		setAttributes( {
-			fluentFormSectionBreakDescMarginLink: !fluentFormSectionBreakDescMarginLink
-		} );
+		setAttributes({
+			fluentFormSectionBreakDescMarginLink:
+				!fluentFormSectionBreakDescMarginLink,
+		});
 	};
 
 	const fluentFormSectionBreakDescMarginUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormSectionBreakDescMarginUnits: {
 				...fluentFormSectionBreakDescMarginUnits,
-				[deviceType]: unit
-			}
-		} );
+				[deviceType]: unit,
+			},
+		});
 	};
 
 	const fluentFormSectionBreakDescDesktopMargin = `${fluentFormSectionBreakDescMarginDesktop.top}${fluentFormSectionBreakDescMarginUnits.Desktop} ${fluentFormSectionBreakDescMarginDesktop.right}${fluentFormSectionBreakDescMarginUnits.Desktop} ${fluentFormSectionBreakDescMarginDesktop.bottom}${fluentFormSectionBreakDescMarginUnits.Desktop} ${fluentFormSectionBreakDescMarginDesktop.left}${fluentFormSectionBreakDescMarginUnits.Desktop}`;
@@ -1049,55 +1185,69 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const fluentFormSectionBreakDescMobileMargin = `${fluentFormSectionBreakDescMarginMobile.top}${fluentFormSectionBreakDescMarginUnits.Mobile} ${fluentFormSectionBreakDescMarginMobile.right}${fluentFormSectionBreakDescMarginUnits.Mobile} ${fluentFormSectionBreakDescMarginMobile.bottom}${fluentFormSectionBreakDescMarginUnits.Mobile} ${fluentFormSectionBreakDescMarginMobile.left}${fluentFormSectionBreakDescMarginUnits.Mobile}`;
 	/** End Section Break Description Margin */
 
-
 	/** Start HTML padding */
 	const fluentFormHtmlPaddingUnitsChange = (event, position) => {
 		const value = event.target.value;
 		if (fluentFormHtmlPaddingLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormHtmlPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormHtmlPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormHtmlPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormHtmlPaddingDesktop: {...fluentFormHtmlPaddingDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormHtmlPaddingDesktop: {
+							...fluentFormHtmlPaddingDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormHtmlPaddingTablet: {...fluentFormHtmlPaddingTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormHtmlPaddingTablet: {
+							...fluentFormHtmlPaddingTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormHtmlPaddingMobile: {...fluentFormHtmlPaddingMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormHtmlPaddingMobile: {
+							...fluentFormHtmlPaddingMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1107,7 +1257,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormHtmlPaddingLinkBtn = () => {
 		setAttributes({
-			fluentFormHtmlPaddingLink: !fluentFormHtmlPaddingLink
+			fluentFormHtmlPaddingLink: !fluentFormHtmlPaddingLink,
 		});
 	};
 
@@ -1115,8 +1265,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormHtmlPaddingUnits: {
 				...fluentFormHtmlPaddingUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1131,49 +1281,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormHtmlMarginLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormHtmlMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormHtmlMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormHtmlMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormHtmlMarginDesktop: {...fluentFormHtmlMarginDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormHtmlMarginDesktop: {
+							...fluentFormHtmlMarginDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormHtmlMarginTablet: {...fluentFormHtmlMarginTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormHtmlMarginTablet: {
+							...fluentFormHtmlMarginTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormHtmlMarginMobile: {...fluentFormHtmlMarginMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormHtmlMarginMobile: {
+							...fluentFormHtmlMarginMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1183,7 +1348,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormHtmlMarginLinkBtn = () => {
 		setAttributes({
-			fluentFormHtmlMarginLink: !fluentFormHtmlMarginLink
+			fluentFormHtmlMarginLink: !fluentFormHtmlMarginLink,
 		});
 	};
 
@@ -1191,8 +1356,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormHtmlMarginUnits: {
 				...fluentFormHtmlMarginUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1201,56 +1366,69 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const fluentFormHtmlMobileMargin = `${fluentFormHtmlMarginMobile.top}${fluentFormHtmlMarginUnits.Mobile} ${fluentFormHtmlMarginMobile.right}${fluentFormHtmlMarginUnits.Mobile} ${fluentFormHtmlMarginMobile.bottom}${fluentFormHtmlMarginUnits.Mobile} ${fluentFormHtmlMarginMobile.left}${fluentFormHtmlMarginUnits.Mobile}`;
 	/** End HTML Margin */
 
-
-
 	/** Start Submit Padding */
 	const fluentFormSubmitPaddingUnitsChange = (event, position) => {
 		const value = event.target.value;
 		if (fluentFormSubmitPaddingLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSubmitPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSubmitPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSubmitPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSubmitPaddingDesktop: {...fluentFormSubmitPaddingDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSubmitPaddingDesktop: {
+							...fluentFormSubmitPaddingDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSubmitPaddingTablet: {...fluentFormSubmitPaddingTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSubmitPaddingTablet: {
+							...fluentFormSubmitPaddingTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSubmitPaddingMobile: {...fluentFormSubmitPaddingMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSubmitPaddingMobile: {
+							...fluentFormSubmitPaddingMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1260,7 +1438,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSubmitPaddingLinkBtn = () => {
 		setAttributes({
-			fluentFormSubmitPaddingLink: !fluentFormSubmitPaddingLink
+			fluentFormSubmitPaddingLink: !fluentFormSubmitPaddingLink,
 		});
 	};
 
@@ -1268,8 +1446,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSubmitPaddingUnits: {
 				...fluentFormSubmitPaddingUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1284,49 +1462,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormSubmitMarginLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSubmitMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSubmitMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSubmitMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSubmitMarginDesktop: {...fluentFormSubmitMarginDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSubmitMarginDesktop: {
+							...fluentFormSubmitMarginDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSubmitMarginTablet: {...fluentFormSubmitMarginTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSubmitMarginTablet: {
+							...fluentFormSubmitMarginTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSubmitMarginMobile: {...fluentFormSubmitMarginMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSubmitMarginMobile: {
+							...fluentFormSubmitMarginMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1336,7 +1529,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSubmitMarginLinkBtn = () => {
 		setAttributes({
-			fluentFormSubmitMarginLink: !fluentFormSubmitMarginLink
+			fluentFormSubmitMarginLink: !fluentFormSubmitMarginLink,
 		});
 	};
 
@@ -1344,8 +1537,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSubmitMarginUnits: {
 				...fluentFormSubmitMarginUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1359,49 +1552,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormSubmitBorderLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSubmitBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSubmitBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSubmitBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSubmitBorderDesktop: {...fluentFormSubmitBorderDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSubmitBorderDesktop: {
+							...fluentFormSubmitBorderDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSubmitBorderTablet: {...fluentFormSubmitBorderTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSubmitBorderTablet: {
+							...fluentFormSubmitBorderTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSubmitBorderMobile: {...fluentFormSubmitBorderMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSubmitBorderMobile: {
+							...fluentFormSubmitBorderMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1411,7 +1619,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSubmitBorderLinkBtn = () => {
 		setAttributes({
-			fluentFormSubmitBorderLink: !fluentFormSubmitBorderLink
+			fluentFormSubmitBorderLink: !fluentFormSubmitBorderLink,
 		});
 	};
 
@@ -1419,8 +1627,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSubmitBorderUnits: {
 				...fluentFormSubmitBorderUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1435,34 +1643,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormSubmitBorderRadiusLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSubmitBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSubmitBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSubmitBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
@@ -1470,14 +1678,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		} else {
 			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ fluentFormSubmitBorderRadiusDesktop: { ...fluentFormSubmitBorderRadiusDesktop, [position]: value } });
+				case "Desktop":
+					setAttributes({
+						fluentFormSubmitBorderRadiusDesktop: {
+							...fluentFormSubmitBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes({ fluentFormSubmitBorderRadiusTablet: { ...fluentFormSubmitBorderRadiusTablet, [position]: value } });
+				case "Tablet":
+					setAttributes({
+						fluentFormSubmitBorderRadiusTablet: {
+							...fluentFormSubmitBorderRadiusTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes({ fluentFormSubmitBorderRadiusMobile: { ...fluentFormSubmitBorderRadiusMobile, [position]: value } });
+				case "Mobile":
+					setAttributes({
+						fluentFormSubmitBorderRadiusMobile: {
+							...fluentFormSubmitBorderRadiusMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1487,7 +1710,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSubmitBorderRadiusLinkBtn = () => {
 		setAttributes({
-			fluentFormSubmitBorderRadiusLink: !fluentFormSubmitBorderRadiusLink
+			fluentFormSubmitBorderRadiusLink: !fluentFormSubmitBorderRadiusLink,
 		});
 	};
 
@@ -1495,8 +1718,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSubmitBorderRadiusUnits: {
 				...fluentFormSubmitBorderRadiusUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1512,49 +1735,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormSuccessBorderLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSuccessBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSuccessBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSuccessBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormSuccessBorderDesktop: {...fluentFormSuccessBorderDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormSuccessBorderDesktop: {
+							...fluentFormSuccessBorderDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormSuccessBorderTablet: {...fluentFormSuccessBorderTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormSuccessBorderTablet: {
+							...fluentFormSuccessBorderTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormSuccessBorderMobile: {...fluentFormSuccessBorderMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormSuccessBorderMobile: {
+							...fluentFormSuccessBorderMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1564,7 +1802,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSuccessBorderLinkBtn = () => {
 		setAttributes({
-			fluentFormSuccessBorderLink: !fluentFormSuccessBorderLink
+			fluentFormSuccessBorderLink: !fluentFormSuccessBorderLink,
 		});
 	};
 
@@ -1572,8 +1810,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSuccessBorderUnits: {
 				...fluentFormSuccessBorderUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1588,34 +1826,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormSuccessBorderRadiusLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormSuccessBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormSuccessBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormSuccessBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
@@ -1623,14 +1861,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		} else {
 			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ fluentFormSuccessBorderRadiusDesktop: { ...fluentFormSuccessBorderRadiusDesktop, [position]: value } });
+				case "Desktop":
+					setAttributes({
+						fluentFormSuccessBorderRadiusDesktop: {
+							...fluentFormSuccessBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes({ fluentFormSuccessBorderRadiusTablet: { ...fluentFormSuccessBorderRadiusTablet, [position]: value } });
+				case "Tablet":
+					setAttributes({
+						fluentFormSuccessBorderRadiusTablet: {
+							...fluentFormSuccessBorderRadiusTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes({ fluentFormSuccessBorderRadiusMobile: { ...fluentFormSuccessBorderRadiusMobile, [position]: value } });
+				case "Mobile":
+					setAttributes({
+						fluentFormSuccessBorderRadiusMobile: {
+							...fluentFormSuccessBorderRadiusMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1640,7 +1893,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormSuccessBorderRadiusLinkBtn = () => {
 		setAttributes({
-			fluentFormSuccessBorderRadiusLink: !fluentFormSuccessBorderRadiusLink
+			fluentFormSuccessBorderRadiusLink: !fluentFormSuccessBorderRadiusLink,
 		});
 	};
 
@@ -1648,8 +1901,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormSuccessBorderRadiusUnits: {
 				...fluentFormSuccessBorderRadiusUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1664,34 +1917,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormErrorPaddingLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormErrorPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormErrorPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormErrorPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
@@ -1699,14 +1952,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		} else {
 			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ fluentFormErrorPaddingDesktop: { ...fluentFormErrorPaddingDesktop, [position]: value } });
+				case "Desktop":
+					setAttributes({
+						fluentFormErrorPaddingDesktop: {
+							...fluentFormErrorPaddingDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes({ fluentFormErrorPaddingTablet: { ...fluentFormErrorPaddingTablet, [position]: value } });
+				case "Tablet":
+					setAttributes({
+						fluentFormErrorPaddingTablet: {
+							...fluentFormErrorPaddingTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes({ fluentFormErrorPaddingMobile: { ...fluentFormErrorPaddingMobile, [position]: value } });
+				case "Mobile":
+					setAttributes({
+						fluentFormErrorPaddingMobile: {
+							...fluentFormErrorPaddingMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1716,7 +1984,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormErrorPaddingLinkBtn = () => {
 		setAttributes({
-			fluentFormErrorPaddingLink: !fluentFormErrorPaddingLink
+			fluentFormErrorPaddingLink: !fluentFormErrorPaddingLink,
 		});
 	};
 
@@ -1724,8 +1992,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormErrorPaddingUnits: {
 				...fluentFormErrorPaddingUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1740,34 +2008,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const value = event.target.value;
 		if (fluentFormErrorMarginLink) {
 			switch (deviceType) {
-				case 'Desktop':
+				case "Desktop":
 					setAttributes({
 						fluentFormErrorMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Tablet':
+				case "Tablet":
 					setAttributes({
 						fluentFormErrorMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
-				case 'Mobile':
+				case "Mobile":
 					setAttributes({
 						fluentFormErrorMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
+							left: value,
+						},
 					});
 					break;
 				default:
@@ -1775,14 +2043,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		} else {
 			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ fluentFormErrorMarginDesktop: { ...fluentFormErrorMarginDesktop, [position]: value } });
+				case "Desktop":
+					setAttributes({
+						fluentFormErrorMarginDesktop: {
+							...fluentFormErrorMarginDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes({ fluentFormErrorMarginTablet: { ...fluentFormErrorMarginTablet, [position]: value } });
+				case "Tablet":
+					setAttributes({
+						fluentFormErrorMarginTablet: {
+							...fluentFormErrorMarginTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes({ fluentFormErrorMarginMobile: { ...fluentFormErrorMarginMobile, [position]: value } });
+				case "Mobile":
+					setAttributes({
+						fluentFormErrorMarginMobile: {
+							...fluentFormErrorMarginMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
@@ -1792,7 +2075,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fluentFormErrorMarginLinkBtn = () => {
 		setAttributes({
-			fluentFormErrorMarginLink: !fluentFormErrorMarginLink
+			fluentFormErrorMarginLink: !fluentFormErrorMarginLink,
 		});
 	};
 
@@ -1800,8 +2083,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({
 			fluentFormErrorMarginUnits: {
 				...fluentFormErrorMarginUnits,
-				[deviceType]: unit
-			}
+				[deviceType]: unit,
+			},
 		});
 	};
 
@@ -1811,153 +2094,180 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const fluentFormErrorMobileMargin = `${fluentFormErrorMarginMobile.top}${fluentFormErrorMarginUnits.Mobile} ${fluentFormErrorMarginMobile.right}${fluentFormErrorMarginUnits.Mobile} ${fluentFormErrorMarginMobile.bottom}${fluentFormErrorMarginUnits.Mobile} ${fluentFormErrorMarginMobile.left}${fluentFormErrorMarginUnits.Mobile}`;
 	/** End Error Margin */
 
-
 	/** Start Global padding */
-	const handleGlobalPaddingUnitChange = ( event, position ) => {
+	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormGlobalPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormGlobalPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormGlobalPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormGlobalPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormGlobalPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormGlobalPaddingDesktop: {...fluentFormGlobalPaddingDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormGlobalPaddingDesktop: {
+							...fluentFormGlobalPaddingDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormGlobalPaddingTablet: {...fluentFormGlobalPaddingTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormGlobalPaddingTablet: {
+							...fluentFormGlobalPaddingTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormGlobalPaddingMobile: {...fluentFormGlobalPaddingMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormGlobalPaddingMobile: {
+							...fluentFormGlobalPaddingMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const handleGlobalPaddingCombineBtn = () => {
-		setAttributes( {fluentFormGlobalPaddingLink: !fluentFormGlobalPaddingLink} );
-	}
+		setAttributes({
+			fluentFormGlobalPaddingLink: !fluentFormGlobalPaddingLink,
+		});
+	};
 
 	const handleGlobalPaddingUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormGlobalPaddingUnits: {
 				...fluentFormGlobalPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** end Global padding */
 
-
 	/** Default padding for desktop (using desktop_padding) */
-	const DesktopPadding    = `${fluentFormGlobalPaddingDesktop.top}${fluentFormGlobalPaddingUnits.Desktop} ${fluentFormGlobalPaddingDesktop.right}${fluentFormGlobalPaddingUnits.Desktop} ${fluentFormGlobalPaddingDesktop.bottom}${fluentFormGlobalPaddingUnits.Desktop} ${fluentFormGlobalPaddingDesktop.left}${fluentFormGlobalPaddingUnits.Desktop}`;
-	const TabletPadding     = `${fluentFormGlobalPaddingTablet.top}${fluentFormGlobalPaddingUnits.Tablet} ${fluentFormGlobalPaddingTablet.right}${fluentFormGlobalPaddingUnits.Tablet} ${fluentFormGlobalPaddingTablet.bottom}${fluentFormGlobalPaddingUnits.Tablet} ${fluentFormGlobalPaddingTablet.left}${fluentFormGlobalPaddingUnits.Tablet}`;
-	const MobilePadding     = `${fluentFormGlobalPaddingMobile.top}${fluentFormGlobalPaddingUnits.Mobile} ${fluentFormGlobalPaddingMobile.right}${fluentFormGlobalPaddingUnits.Mobile} ${fluentFormGlobalPaddingMobile.bottom}${fluentFormGlobalPaddingUnits.Mobile} ${fluentFormGlobalPaddingMobile.left}${fluentFormGlobalPaddingUnits.Mobile}`;
+	const DesktopPadding = `${fluentFormGlobalPaddingDesktop.top}${fluentFormGlobalPaddingUnits.Desktop} ${fluentFormGlobalPaddingDesktop.right}${fluentFormGlobalPaddingUnits.Desktop} ${fluentFormGlobalPaddingDesktop.bottom}${fluentFormGlobalPaddingUnits.Desktop} ${fluentFormGlobalPaddingDesktop.left}${fluentFormGlobalPaddingUnits.Desktop}`;
+	const TabletPadding = `${fluentFormGlobalPaddingTablet.top}${fluentFormGlobalPaddingUnits.Tablet} ${fluentFormGlobalPaddingTablet.right}${fluentFormGlobalPaddingUnits.Tablet} ${fluentFormGlobalPaddingTablet.bottom}${fluentFormGlobalPaddingUnits.Tablet} ${fluentFormGlobalPaddingTablet.left}${fluentFormGlobalPaddingUnits.Tablet}`;
+	const MobilePadding = `${fluentFormGlobalPaddingMobile.top}${fluentFormGlobalPaddingUnits.Mobile} ${fluentFormGlobalPaddingMobile.right}${fluentFormGlobalPaddingUnits.Mobile} ${fluentFormGlobalPaddingMobile.bottom}${fluentFormGlobalPaddingUnits.Mobile} ${fluentFormGlobalPaddingMobile.left}${fluentFormGlobalPaddingUnits.Mobile}`;
 	/** End Padding */
 
-
 	/** Start Global margin */
-	const handleGlobalMarginUnitChange = ( event, position ) => {
+	const handleGlobalMarginUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormGlobalMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormGlobalMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormGlobalMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormGlobalMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormGlobalMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormGlobalMarginDesktop: {...fluentFormGlobalMarginDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormGlobalMarginDesktop: {
+							...fluentFormGlobalMarginDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormGlobalMarginTablet: {...fluentFormGlobalMarginTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormGlobalMarginTablet: {
+							...fluentFormGlobalMarginTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormGlobalMarginMobile: {...fluentFormGlobalMarginMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormGlobalMarginMobile: {
+							...fluentFormGlobalMarginMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const handleGlobalMarginCombineBtn = () => {
-		setAttributes( {fluentFormGlobalMarginLink: !fluentFormGlobalMarginLink} );
-	}
+		setAttributes({ fluentFormGlobalMarginLink: !fluentFormGlobalMarginLink });
+	};
 
 	const handleGlobalMarginUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormGlobalMarginUnits: {
 				...fluentFormGlobalMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** end Global margin */
 
 	const DesktopMargin = `${fluentFormGlobalMarginDesktop.top}${fluentFormGlobalMarginUnits.Desktop} ${fluentFormGlobalMarginDesktop.right}${fluentFormGlobalMarginUnits.Desktop} ${fluentFormGlobalMarginDesktop.bottom}${fluentFormGlobalMarginUnits.Desktop} ${fluentFormGlobalMarginDesktop.left}${fluentFormGlobalMarginUnits.Desktop}`;
@@ -1965,150 +2275,178 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const MobileMargin = `${fluentFormGlobalMarginMobile.top}${fluentFormGlobalMarginUnits.Mobile} ${fluentFormGlobalMarginMobile.right}${fluentFormGlobalMarginUnits.Mobile} ${fluentFormGlobalMarginMobile.bottom}${fluentFormGlobalMarginUnits.Mobile} ${fluentFormGlobalMarginMobile.left}${fluentFormGlobalMarginUnits.Mobile}`;
 	/** End Margin */
 
-
 	/** Start Global border */
-	const handleGlobalBorderUnitChange = ( event, position ) => {
+	const handleGlobalBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormGlobalBorderLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormGlobalBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormGlobalBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormGlobalBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormGlobalBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormGlobalBorderDesktop: {...fluentFormGlobalBorderDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormGlobalBorderDesktop: {
+							...fluentFormGlobalBorderDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormGlobalBorderTablet: {...fluentFormGlobalBorderTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormGlobalBorderTablet: {
+							...fluentFormGlobalBorderTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormGlobalBorderMobile: {...fluentFormGlobalBorderMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormGlobalBorderMobile: {
+							...fluentFormGlobalBorderMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const handleGlobalBorderCombineBtn = () => {
-		setAttributes( {fluentFormGlobalBorderLink: !fluentFormGlobalBorderLink} );
-	}
+		setAttributes({ fluentFormGlobalBorderLink: !fluentFormGlobalBorderLink });
+	};
 
 	const handleGlobalBorderUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormGlobalBorderUnits: {
 				...fluentFormGlobalBorderUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** End Global border */
 	const BorderDesktopWidth = `${fluentFormGlobalBorderDesktop.top}${fluentFormGlobalBorderUnits.Desktop} ${fluentFormGlobalBorderDesktop.right}${fluentFormGlobalBorderUnits.Desktop} ${fluentFormGlobalBorderDesktop.bottom}${fluentFormGlobalBorderUnits.Desktop} ${fluentFormGlobalBorderDesktop.left}${fluentFormGlobalBorderUnits.Desktop}`;
 	const BorderTabletWidth = `${fluentFormGlobalBorderTablet.top}${fluentFormGlobalBorderUnits.Tablet} ${fluentFormGlobalBorderTablet.right}${fluentFormGlobalBorderUnits.Tablet} ${fluentFormGlobalBorderTablet.bottom}${fluentFormGlobalBorderUnits.Tablet} ${fluentFormGlobalBorderTablet.left}${fluentFormGlobalBorderUnits.Tablet}`;
 	const BorderMobileWidth = `${fluentFormGlobalBorderMobile.top}${fluentFormGlobalBorderUnits.Mobile} ${fluentFormGlobalBorderMobile.right}${fluentFormGlobalBorderUnits.Mobile} ${fluentFormGlobalBorderMobile.bottom}${fluentFormGlobalBorderUnits.Mobile} ${fluentFormGlobalBorderMobile.left}${fluentFormGlobalBorderUnits.Mobile}`;
 	/** End Border */
 
-
 	/** Start Global border radius*/
-	const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
+	const handleGlobalBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( fluentFormGlobalBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
+		if (fluentFormGlobalBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
 						fluentFormGlobalBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {
+				case "Tablet":
+					setAttributes({
 						fluentFormGlobalBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {
+				case "Mobile":
+					setAttributes({
 						fluentFormGlobalBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
-							left: value
-						}
-					} );
+							left: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {fluentFormGlobalBorderRadiusDesktop: {...fluentFormGlobalBorderRadiusDesktop, [position]: value}} );
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						fluentFormGlobalBorderRadiusDesktop: {
+							...fluentFormGlobalBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Tablet':
-					setAttributes( {fluentFormGlobalBorderRadiusTablet: {...fluentFormGlobalBorderRadiusTablet, [position]: value}} );
+				case "Tablet":
+					setAttributes({
+						fluentFormGlobalBorderRadiusTablet: {
+							...fluentFormGlobalBorderRadiusTablet,
+							[position]: value,
+						},
+					});
 					break;
-				case 'Mobile':
-					setAttributes( {fluentFormGlobalBorderRadiusMobile: {...fluentFormGlobalBorderRadiusMobile, [position]: value}} );
+				case "Mobile":
+					setAttributes({
+						fluentFormGlobalBorderRadiusMobile: {
+							...fluentFormGlobalBorderRadiusMobile,
+							[position]: value,
+						},
+					});
 					break;
 				default:
 					break;
 			}
 		}
-
-	}
+	};
 
 	const handleGlobalBorderRadiusCombineBtn = () => {
-		setAttributes( {fluentFormGlobalBorderRadiusLink: !fluentFormGlobalBorderRadiusLink} );
-	}
+		setAttributes({
+			fluentFormGlobalBorderRadiusLink: !fluentFormGlobalBorderRadiusLink,
+		});
+	};
 
 	const handleGlobalBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			fluentFormGlobalBorderRadiusUnits: {
 				...fluentFormGlobalBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+				[deviceType]: unit,
+			},
+		});
+	};
 	/** end Global border */
 
 	/** End Global Border Radius */
@@ -2182,7 +2520,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 	/** End fluentFormTextareaWidthSize */
 
-
 	/** Start fluentFormTextareaHeightSize */
 	const fluentFormTextareaHeightSizeHandler = (value) => {
 		setAttributes({ fluentFormTextareaHeightSize: value });
@@ -2200,7 +2537,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ fluentFormSpacingUnits: value });
 	};
 	/** End fluentFormSpacingSize */
-
 
 	/** StartfluentFormBorderColor */
 	const handleBorderColorSwitcherChange = (value) => {
@@ -2237,7 +2573,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ fluentFormRadioCheckBoxItemSpacingUnits: value });
 	};
 	/** End fluentFormRadioCheckBoxItemSpacing */
-
 
 	/** Start Section Break Title Color */
 	const fluentFormSectionBreakTitleColorSwitcherChange = (value) => {
@@ -2384,16 +2719,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 	/** End Global Border Color */
 
-		// Helper function to load fonts
+	// Helper function to load fonts
 	const loadFont = (fontFamily) => {
-			if (fontFamily) {
-				const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
-				const linkElement = document.createElement('link');
-				linkElement.rel = 'stylesheet';
-				linkElement.href = fontUrl;
-				document.head.appendChild(linkElement);
-			}
-		};
+		if (fontFamily) {
+			const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(
+				" ",
+				"+",
+			)}`;
+			const linkElement = document.createElement("link");
+			linkElement.rel = "stylesheet";
+			linkElement.href = fontUrl;
+			document.head.appendChild(linkElement);
+		}
+	};
 
 	// Apply font family styles using useEffect
 	useEffect(() => {
@@ -2428,303 +2766,997 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		loadFont(fluentFormErrorFontFamily);
 	}, [fluentFormErrorFontFamily]);
 
+	const contactFormStyle = useMemo(
+		() => `
+    .${blockID}.fb-contact-form-wrapper {
+        ${
+					fluentFormGlobalZIndex !== undefined
+						? `z-index: ${fluentFormGlobalZIndex};`
+						: ""
+				}
+        ${
+					fluentFormGlobalBgColor !== undefined
+						? `background-color: ${fluentFormGlobalBgColor};`
+						: ""
+				}
+        ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
+        ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
+        ${fluentFormGlobalBorder ? `border: ${fluentFormGlobalBorder};` : ""}
+        ${BorderDesktopWidth ? `border-width: ${BorderDesktopWidth};` : ""}
+        ${
+					BorderRadiusDesktopWidth
+						? `border-radius: ${BorderRadiusDesktopWidth} !important;`
+						: ""
+				}
+        ${
+					fluentFormGlobalBorderColor !== undefined
+						? `border-color: ${fluentFormGlobalBorderColor};`
+						: ""
+				}
+        transition: all .3s ease-in-out;
+        position: relative;
+    }
+    .${blockID}.fb-contact-form-wrapper:hover {
+        ${
+					fluentFormGlobalBgHoverColor !== undefined
+						? `background-color: ${fluentFormGlobalBgHoverColor};`
+						: ""
+				}
+        ${
+					fluentFormGlobalBorderHoverColor !== undefined
+						? `border-color: ${fluentFormGlobalBorderHoverColor};`
+						: ""
+				}
+    }
+    .${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-label label {
+        display: none;
+    }
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input::-webkit-input-placeholder,
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea::-webkit-input-placeholder {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input::-moz-placeholder,
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea::-moz-placeholder {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input:-ms-input-placeholder,
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea:-ms-input-placeholder {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input:-moz-placeholder,
+    .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea:-moz-placeholder {
+        opacity: 0;
+        visibility: hidden;
+    }
+	.${blockID}.fb-contact-form-wrapper .ff-el-group {
+            ${
+							fluentFormSpacingSize
+								? `margin-bottom: ${fluentFormSpacingSize.Desktop}${fluentFormSpacingUnits.Desktop};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper label {
+            ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
+            ${
+							fluentFormLabelFontFamily
+								? `font-family: ${fluentFormLabelFontFamily};`
+								: ""
+						}
+            ${
+							fluentFormLabelFontSize
+								? `font-size: ${fluentFormLabelFontSize}${
+										fluentFormLabelFontSizeUnits || "px"
+								  };`
+								: ""
+						}
+            ${
+							fluentFormLabelFontWeight
+								? `font-weight: ${fluentFormLabelFontWeight};`
+								: ""
+						}
+            ${
+							fluentFormLabelFontStyle
+								? `font-style: ${fluentFormLabelFontStyle};`
+								: ""
+						}
+            ${
+							fluentFormLabelTextTransform
+								? `text-transform: ${fluentFormLabelTextTransform};`
+								: ""
+						}
+            ${
+							fluentFormLabelTextDecoration
+								? `text-decoration: ${fluentFormLabelTextDecoration};`
+								: ""
+						}
+            ${
+							fluentFormLabelLetterSpacing
+								? `letter-spacing: ${fluentFormLabelLetterSpacing}${
+										fluentFormLabelLetterSpacingUnits || "px"
+								  };`
+								: ""
+						}
+            ${
+							fluentFormLabelLineHeight
+								? `line-height: ${fluentFormLabelLineHeight}${
+										fluentFormLabelLineHeightUnits || "px"
+								  };`
+								: ""
+						}
+            transition: all .3s ease-in-out;
+        }
+        .${blockID}.fb-contact-form-wrapper label:hover {
+            ${
+							fluentFormLabelHoverColor
+								? `color: ${fluentFormLabelHoverColor};`
+								: ""
+						}
+        }
+
+        .${blockID}.fb-contact-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
+        .${blockID}.fb-contact-form-wrapper textarea,
+        .${blockID}.fb-contact-form-wrapper select {
+            ${
+							fluentFormInputBgColor
+								? `background-color: ${fluentFormInputBgColor};`
+								: ""
+						}
+            ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
+            ${
+							fluentFormInputFontFamily
+								? `font-family: ${fluentFormInputFontFamily};`
+								: ""
+						}
+            ${
+							fluentFormInputFontSize
+								? `font-size: ${fluentFormInputFontSize}${fluentFormInputFontSizeUnits};`
+								: ""
+						}
+            ${
+							fluentFormInputFontWeight
+								? `font-weight: ${fluentFormInputFontWeight};`
+								: ""
+						}
+            ${
+							fluentFormInputFontStyle
+								? `font-style: ${fluentFormInputFontStyle};`
+								: ""
+						}
+            ${
+							fluentFormInputTextTransform
+								? `text-transform: ${fluentFormInputTextTransform};`
+								: ""
+						}
+            ${
+							fluentFormInputTextDecoration
+								? `text-decoration: ${fluentFormInputTextDecoration};`
+								: ""
+						}
+            ${
+							fluentFormInputLetterSpacing
+								? `letter-spacing: ${fluentFormInputLetterSpacing}${fluentFormInputLetterSpacingUnits};`
+								: ""
+						}
+            ${
+							fluentFormInputLineHeight
+								? `line-height: ${fluentFormInputLineHeight}${fluentFormInputLineHeightUnits};`
+								: ""
+						}
+            ${
+							fluentFormTextIndentSize
+								? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};`
+								: ""
+						}
+            ${
+							fluentFormInputWidthSize
+								? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};`
+								: ""
+						}
+            ${
+							fluentFormInputHeightSize
+								? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};`
+								: ""
+						}
+            ${
+							fluentFormDesktopPadding
+								? `padding: ${fluentFormDesktopPadding};`
+								: ""
+						}
+            ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
+            ${
+							fluentFormBorderDesktopWidth
+								? `border-width: ${fluentFormBorderDesktopWidth};`
+								: ""
+						}
+            ${
+							fluentFormBorderColor
+								? `border-color: ${fluentFormBorderColor};`
+								: ""
+						}
+            ${
+							fluentFormBorderRadiusDesktopWidth
+								? `border-radius: ${fluentFormBorderRadiusDesktopWidth};`
+								: ""
+						}
+            transition: all .3s ease-in-out;
+        }
+			.${blockID}.fb-contact-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
+        .${blockID}.fb-contact-form-wrapper textarea:focus,
+        .${blockID}.fb-contact-form-wrapper select:focus {
+            ${
+							fluentFormInputFocusColor
+								? `border-color: ${fluentFormInputFocusColor};`
+								: ""
+						}
+            box-shadow: 0 0 0 1px ${fluentFormInputFocusColor || ""};
+        }
+        .${blockID}.fb-contact-form-wrapper textarea {
+            ${
+							fluentFormTextareaWidthSize
+								? `width: ${fluentFormTextareaWidthSize.Desktop}${fluentFormTextareaWidthSizeUnits.Desktop};`
+								: ""
+						}
+            ${
+							fluentFormTextareaHeightSize
+								? `height: ${fluentFormTextareaHeightSize.Desktop}${fluentFormTextareaHeightSizeUnits.Desktop};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper input::-webkit-input-placeholder,
+        .${blockID}.fb-contact-form-wrapper textarea::-webkit-input-placeholder {
+            ${
+							fluentFormPlaceholderColor
+								? `color: ${fluentFormPlaceholderColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper input::-moz-placeholder,
+        .${blockID}.fb-contact-form-wrapper textarea::-moz-placeholder {
+            ${
+							fluentFormPlaceholderColor
+								? `color: ${fluentFormPlaceholderColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper input:-ms-input-placeholder,
+        .${blockID}.fb-contact-form-wrapper textarea:-ms-input-placeholder {
+            ${
+							fluentFormPlaceholderColor
+								? `color: ${fluentFormPlaceholderColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper input:-moz-placeholder,
+        .${blockID}.fb-contact-form-wrapper textarea:-moz-placeholder {
+            ${
+							fluentFormPlaceholderColor
+								? `color: ${fluentFormPlaceholderColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper input[type="checkbox"] {
+            width: ${fluentFormRadioFontSize.Desktop}${
+							fluentFormRadioFontSizeUnits.Desktop
+						};
+            height: ${fluentFormRadioFontSize.Desktop}${
+							fluentFormRadioFontSizeUnits.Desktop
+						};
+            ${
+							fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""
+						}
+            ${
+							fluentFormRadioBorderColor
+								? `border-color: ${fluentFormRadioBorderColor};`
+								: ""
+						}
+            ${
+							fluentFormRadioBorderWidth
+								? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};`
+								: ""
+						}
+            ${
+							fluentFormCheckBoxBorderRadiusDesktopWidth
+								? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};`
+								: ""
+						}
+            position: relative;
+            appearance: none;
+            transition: all .3s ease-in-out;
+        }
+        .${blockID}.fb-contact-form-wrapper input[type="radio"] {
+            width: ${fluentFormRadioFontSize.Desktop}${
+							fluentFormRadioFontSizeUnits.Desktop
+						};
+            height: ${fluentFormRadioFontSize.Desktop}${
+							fluentFormRadioFontSizeUnits.Desktop
+						};
+            ${
+							fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""
+						}
+            ${
+							fluentFormRadioBorderColor
+								? `border-color: ${fluentFormRadioBorderColor};`
+								: ""
+						}
+            ${
+							fluentFormRadioBorderWidth
+								? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};`
+								: ""
+						}
+            ${
+							fluentFormRadioBorderRadiusDesktopWidth
+								? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};`
+								: ""
+						}
+            position: relative;
+            appearance: none;
+            transition: all .3s ease-in-out;
+        }
+        .${blockID}.fb-contact-form-wrapper input[type="checkbox"]:checked:before,
+        .${blockID}.fb-contact-form-wrapper input[type="radio"]:checked:before {
+            ${
+							fluentFormRadioCheckedColor
+								? `background: ${fluentFormRadioCheckedColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper .ff-el-form-check:not(:last-child) {
+            ${
+							fluentFormRadioCheckBoxItemSpacing
+								? `margin-bottom: ${fluentFormRadioCheckBoxItemSpacing.Desktop}${fluentFormRadioCheckBoxItemSpacingUnits.Desktop};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper .ff-el-section-break,
+        .${blockID}.fb-contact-form-wrapper .ff-el-section-break hr {
+            text-align: ${fluentFormSectionBreakAlignment};
+        }
+        .${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-el-section-title {
+            ${
+							fluentFormSectionBreakTitleColor
+								? `color: ${fluentFormSectionBreakTitleColor};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleFontFamily
+								? `font-family: ${fluentFormSectionBreakTitleFontFamily};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleFontSize
+								? `font-size: ${fluentFormSectionBreakTitleFontSize}${fluentFormSectionBreakTitleFontSizeUnits};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleFontWeight
+								? `font-weight: ${fluentFormSectionBreakTitleFontWeight};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleFontStyle
+								? `font-style: ${fluentFormSectionBreakTitleFontStyle};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleTextTransform
+								? `text-transform: ${fluentFormSectionBreakTitleTextTransform};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleTextDecoration
+								? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleLetterSpacing
+								? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing}${fluentFormSectionBreakTitleLetterSpacingUnits};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleLineHeight
+								? `line-height: ${fluentFormSectionBreakTitleLineHeight}${fluentFormSectionBreakTitleLineHeightUnits};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleDesktopPadding
+								? `padding: ${fluentFormSectionBreakTitleDesktopPadding};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakTitleDesktopMargin
+								? `margin: ${fluentFormSectionBreakTitleDesktopMargin};`
+								: ""
+						}
+        }
+			.${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
+            ${
+							fluentFormSectionBreakTitleHoverColor
+								? `color: ${fluentFormSectionBreakTitleHoverColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-section_break_desk {
+            ${
+							fluentFormSectionBreakDescColor
+								? `color: ${fluentFormSectionBreakDescColor};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescFontFamily
+								? `font-family: ${fluentFormSectionBreakDescFontFamily};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescFontSize
+								? `font-size: ${fluentFormSectionBreakDescFontSize}${fluentFormSectionBreakDescFontSizeUnits};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescFontWeight
+								? `font-weight: ${fluentFormSectionBreakDescFontWeight};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescFontStyle
+								? `font-style: ${fluentFormSectionBreakDescFontStyle};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescTextTransform
+								? `text-transform: ${fluentFormSectionBreakDescTextTransform};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescTextDecoration
+								? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescLetterSpacing
+								? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing}${fluentFormSectionBreakDescLetterSpacingUnits};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescLineHeight
+								? `line-height: ${fluentFormSectionBreakDescLineHeight}${fluentFormSectionBreakDescLineHeightUnits};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescDesktopPadding
+								? `padding: ${fluentFormSectionBreakDescDesktopPadding};`
+								: ""
+						}
+            ${
+							fluentFormSectionBreakDescDesktopMargin
+								? `margin: ${fluentFormSectionBreakDescDesktopMargin};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
+            ${
+							fluentFormSectionBreakDescHoverColor
+								? `color: ${fluentFormSectionBreakDescHoverColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper .ff-custom_html > * {
+            ${
+							fluentFormHtmlAlignment
+								? `text-align: ${fluentFormHtmlAlignment};`
+								: ""
+						}
+            ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
+            ${
+							fluentFormHtmlFontFamily
+								? `font-family: ${fluentFormHtmlFontFamily};`
+								: ""
+						}
+            ${
+							fluentFormHtmlFontSize
+								? `font-size: ${fluentFormHtmlFontSize}${fluentFormHtmlFontSizeUnits};`
+								: ""
+						}
+            ${
+							fluentFormHtmlFontWeight
+								? `font-weight: ${fluentFormHtmlFontWeight};`
+								: ""
+						}
+            ${
+							fluentFormHtmlFontStyle
+								? `font-style: ${fluentFormHtmlFontStyle};`
+								: ""
+						}
+            ${
+							fluentFormHtmlTextTransform
+								? `text-transform: ${fluentFormHtmlTextTransform};`
+								: ""
+						}
+            ${
+							fluentFormHtmlTextDecoration
+								? `text-decoration: ${fluentFormHtmlTextDecoration};`
+								: ""
+						}
+            ${
+							fluentFormHtmlLetterSpacing
+								? `letter-spacing: ${fluentFormHtmlLetterSpacing}${fluentFormHtmlLetterSpacingUnits};`
+								: ""
+						}
+            ${
+							fluentFormHtmlLineHeight
+								? `line-height: ${fluentFormHtmlLineHeight}${fluentFormHtmlLineHeightUnits};`
+								: ""
+						}
+            ${
+							fluentFormHtmlDesktopPadding
+								? `padding: ${fluentFormHtmlDesktopPadding};`
+								: ""
+						}
+            ${
+							fluentFormHtmlDesktopMargin
+								? `margin: ${fluentFormHtmlDesktopMargin};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper .ff-custom_html > *:hover {
+            ${
+							fluentFormHtmlHoverColor
+								? `color: ${fluentFormHtmlHoverColor};`
+								: ""
+						}
+        }
+        .${blockID}.fb-contact-form-wrapper input[type="submit"] {
+            ${
+							fluentFormSubmitAlignment
+								? `text-align: ${fluentFormSubmitAlignment};`
+								: ""
+						}
+            ${
+							fluentFormSubmitHeight.Desktop
+								? `height: ${fluentFormSubmitHeight.Desktop}${fluentFormSubmitHeightUnits.Desktop};`
+								: ""
+						}
+            ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
+            ${
+							fluentFormSubmitBgColor
+								? `background: ${fluentFormSubmitBgColor};`
+								: ""
+						}
+            ${
+							fluentFormSubmitFontFamily
+								? `font-family: ${fluentFormSubmitFontFamily};`
+								: ""
+						}
+            ${
+							fluentFormSubmitFontSize
+								? `font-size: ${fluentFormSubmitFontSize}${fluentFormSubmitFontSizeUnits};`
+								: ""
+						}
+            ${
+							fluentFormSubmitFontWeight
+								? `font-weight: ${fluentFormSubmitFontWeight};`
+								: ""
+						}
+            ${
+							fluentFormSubmitFontStyle
+								? `font-style: ${fluentFormSubmitFontStyle};`
+								: ""
+						}
+            ${
+							fluentFormSubmitTextTransform
+								? `text-transform: ${fluentFormSubmitTextTransform};`
+								: ""
+						}
+            ${
+							fluentFormSubmitTextDecoration
+								? `text-decoration: ${fluentFormSubmitTextDecoration};`
+								: ""
+						}
+            ${
+							fluentFormSubmitLetterSpacing
+								? `letter-spacing: ${fluentFormSubmitLetterSpacing}${fluentFormSubmitLetterSpacingUnits};`
+								: ""
+						}
+            ${
+							fluentFormSubmitLineHeight
+								? `line-height: ${fluentFormSubmitLineHeight}${fluentFormSubmitLineHeightUnits};`
+								: ""
+						}
+            ${
+							fluentFormSubmitDesktopPadding
+								? `padding: ${fluentFormSubmitDesktopPadding};`
+								: ""
+						}
+            ${
+							fluentFormSubmitDesktopMargin
+								? `margin: ${fluentFormSubmitDesktopMargin};`
+								: ""
+						}
+            ${
+							fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""
+						}
+            ${
+							fluentFormSubmitDesktopBorderWidth
+								? `border-width: ${fluentFormSubmitDesktopBorderWidth};`
+								: ""
+						}
+            ${
+							fluentFormSubmitBorderColor
+								? `border-color: ${fluentFormSubmitBorderColor};`
+								: ""
+						}
+            ${
+							fluentFormSubmitDesktopBorderRadiusWidth
+								? `border-radius: ${fluentFormSubmitDesktopBorderRadiusWidth};`
+								: ""
+						}
+        }
+			.${blockID}.fb-contact-form-wrapper input[type="submit"]:hover {
+      ${
+				fluentFormSubmitHoverColor
+					? `color: ${fluentFormSubmitHoverColor};`
+					: ""
+			}
+      ${
+				fluentFormSubmitBgHoverColor
+					? `background: ${fluentFormSubmitBgHoverColor};`
+					: ""
+			}
+      ${
+				fluentFormSubmitBorderHoverColor
+					? `border-color: ${fluentFormSubmitBorderHoverColor};`
+					: ""
+			}
+    }
+
+    .${blockID}.fb-contact-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+      ${fluentFormSubmitWidthSelect === "full-width" ? "width: 100%;" : ""}
+      ${
+				fluentFormSubmitWidthSelect === "custom" &&
+				fluentFormSubmitWidth.Desktop
+					? `width: ${fluentFormSubmitWidth.Desktop}${fluentFormSubmitWidthUnits.Desktop};`
+					: ""
+			}
+    }
+
+    .${blockID}.fb-contact-form-wrapper .ff-message-success {
+      ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
+      ${
+				fluentFormSuccessBgColor
+					? `background: ${fluentFormSuccessBgColor};`
+					: ""
+			}
+      ${
+				fluentFormSuccessFontFamily
+					? `font-family: ${fluentFormSuccessFontFamily};`
+					: ""
+			}
+      ${
+				fluentFormSuccessFontSize
+					? `font-size: ${fluentFormSuccessFontSize}${fluentFormSuccessFontSizeUnits};`
+					: ""
+			}
+      ${
+				fluentFormSuccessFontWeight
+					? `font-weight: ${fluentFormSuccessFontWeight};`
+					: ""
+			}
+      ${
+				fluentFormSuccessFontStyle
+					? `font-style: ${fluentFormSuccessFontStyle};`
+					: ""
+			}
+      ${
+				fluentFormSuccessTextTransform
+					? `text-transform: ${fluentFormSuccessTextTransform};`
+					: ""
+			}
+      ${
+				fluentFormSuccessTextDecoration
+					? `text-decoration: ${fluentFormSuccessTextDecoration};`
+					: ""
+			}
+      ${
+				fluentFormSuccessLetterSpacing
+					? `letter-spacing: ${fluentFormSuccessLetterSpacing}${fluentFormSuccessLetterSpacingUnits};`
+					: ""
+			}
+      ${
+				fluentFormSuccessLineHeight
+					? `line-height: ${fluentFormSuccessLineHeight}${fluentFormSuccessLineHeightUnits};`
+					: ""
+			}
+      ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
+      ${
+				fluentFormSuccessDesktopBorderWidth
+					? `border-width: ${fluentFormSuccessDesktopBorderWidth};`
+					: ""
+			}
+      ${
+				fluentFormSuccessBorderColor
+					? `border-color: ${fluentFormSuccessBorderColor};`
+					: ""
+			}
+      ${
+				fluentFormSuccessDesktopBorderRadiusWidth
+					? `border-radius: ${fluentFormSuccessDesktopBorderRadiusWidth};`
+					: ""
+			}
+    }
+
+    .${blockID}.fb-contact-form-wrapper .ff-message-success:hover {
+      ${
+				fluentFormSuccessBorderHoverColor
+					? `border-color: ${fluentFormSuccessBorderHoverColor};`
+					: ""
+			}
+    }
+
+    .${blockID}.fb-contact-form-wrapper .error.text-danger {
+      ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
+      ${
+				fluentFormErrorFontFamily
+					? `font-family: ${fluentFormErrorFontFamily};`
+					: ""
+			}
+      ${
+				fluentFormErrorFontSize
+					? `font-size: ${fluentFormErrorFontSize}${fluentFormErrorFontSizeUnits};`
+					: ""
+			}
+      ${
+				fluentFormErrorFontWeight
+					? `font-weight: ${fluentFormErrorFontWeight};`
+					: ""
+			}
+      ${
+				fluentFormErrorFontStyle
+					? `font-style: ${fluentFormErrorFontStyle};`
+					: ""
+			}
+      ${
+				fluentFormErrorTextTransform
+					? `text-transform: ${fluentFormErrorTextTransform};`
+					: ""
+			}
+      ${
+				fluentFormErrorTextDecoration
+					? `text-decoration: ${fluentFormErrorTextDecoration};`
+					: ""
+			}
+      ${
+				fluentFormErrorLetterSpacing
+					? `letter-spacing: ${fluentFormErrorLetterSpacing}${fluentFormErrorLetterSpacingUnits};`
+					: ""
+			}
+      ${
+				fluentFormErrorLineHeight
+					? `line-height: ${fluentFormErrorLineHeight}${fluentFormErrorLineHeightUnits};`
+					: ""
+			}
+      ${
+				fluentFormErrorDesktopPadding
+					? `padding: ${fluentFormErrorDesktopPadding};`
+					: ""
+			}
+      ${
+				fluentFormErrorDesktopMargin
+					? `margin: ${fluentFormErrorDesktopMargin};`
+					: ""
+			}
+    }
+
+    @media only screen and (max-width: 1024px) {
+      .${blockID}.fb-contact-form-wrapper {
+        ${TabletPadding ? `padding: ${TabletPadding};` : ""}
+        ${TabletMargin ? `margin: ${TabletMargin};` : ""}
+        ${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
+        ${
+					BorderRadiusTabletWidth
+						? `border-radius: ${BorderRadiusTabletWidth} !important;`
+						: ""
+				}
+      }
+    }
+
+    @media only screen and (max-width: 767px) {
+      .${blockID}.fb-contact-form-wrapper {
+        ${MobilePadding ? `padding: ${MobilePadding};` : ""}
+        ${MobileMargin ? `margin: ${MobileMargin};` : ""}
+        ${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
+        ${
+					BorderRadiusMobileWidth
+						? `border-radius: ${BorderRadiusMobileWidth} !important;`
+						: ""
+				}
+      }
+    }
+`,
+		[
+			blockID,
+			fluentFormGlobalZIndex,
+			fluentFormGlobalBgColor,
+			DesktopPadding,
+			DesktopMargin,
+			fluentFormGlobalBorder,
+			BorderDesktopWidth,
+			BorderRadiusDesktopWidth,
+			fluentFormGlobalBorderColor,
+			fluentFormSpacingSize,
+			fluentFormSpacingUnits,
+			fluentFormLabelColor,
+			fluentFormLabelFontFamily,
+			fluentFormLabelFontSize,
+			fluentFormLabelFontSizeUnits,
+			fluentFormLabelFontWeight,
+			fluentFormLabelFontStyle,
+			fluentFormLabelTextTransform,
+			fluentFormLabelTextDecoration,
+			fluentFormLabelLetterSpacing,
+			fluentFormLabelLetterSpacingUnits,
+			fluentFormLabelLineHeight,
+			fluentFormLabelLineHeightUnits,
+			fluentFormLabelHoverColor,
+			fluentFormInputBgColor,
+			fluentFormInputColor,
+			fluentFormInputFontFamily,
+			fluentFormInputFontSize,
+			fluentFormInputFontSizeUnits,
+			fluentFormInputFontWeight,
+			fluentFormInputFontStyle,
+			fluentFormInputTextTransform,
+			fluentFormInputTextDecoration,
+			fluentFormInputLetterSpacing,
+			fluentFormInputLetterSpacingUnits,
+			fluentFormInputLineHeight,
+			fluentFormInputLineHeightUnits,
+			fluentFormTextIndentSize,
+			fluentFormTextIndentSizeUnits,
+			fluentFormInputWidthSize,
+			fluentFormInputWidthSizeUnits,
+			fluentFormInputHeightSize,
+			fluentFormInputHeightSizeUnits,
+			fluentFormDesktopPadding,
+			fluentFormBorder,
+			fluentFormBorderDesktopWidth,
+			fluentFormBorderColor,
+			fluentFormBorderRadiusDesktopWidth,
+			fluentFormInputFocusColor,
+			fluentFormTextareaWidthSize,
+			fluentFormTextareaWidthSizeUnits,
+			fluentFormTextareaHeightSize,
+			fluentFormTextareaHeightSizeUnits,
+			fluentFormPlaceholderColor,
+			fluentFormRadioFontSize,
+			fluentFormRadioFontSizeUnits,
+			fluentFormRadioColor,
+			fluentFormRadioBorderColor,
+			fluentFormRadioBorderWidth,
+			fluentFormRadioBorderWidthUnits,
+			fluentFormCheckBoxBorderRadiusDesktopWidth,
+			fluentFormRadioCheckedColor,
+			fluentFormRadioCheckBoxItemSpacing,
+			fluentFormRadioCheckBoxItemSpacingUnits,
+			fluentFormSectionBreakAlignment,
+			fluentFormSectionBreakTitleColor,
+			fluentFormSectionBreakTitleFontFamily,
+			fluentFormSectionBreakTitleFontSize,
+			fluentFormSectionBreakTitleFontSizeUnits,
+			fluentFormSectionBreakTitleFontWeight,
+			fluentFormSectionBreakTitleFontStyle,
+			fluentFormSectionBreakTitleTextTransform,
+			fluentFormSectionBreakTitleTextDecoration,
+			fluentFormSectionBreakTitleLetterSpacing,
+			fluentFormSectionBreakTitleLetterSpacingUnits,
+			fluentFormSectionBreakTitleLineHeight,
+			fluentFormSectionBreakTitleLineHeightUnits,
+			fluentFormSectionBreakTitleDesktopPadding,
+			fluentFormSectionBreakTitleDesktopMargin,
+			fluentFormSectionBreakTitleHoverColor,
+			fluentFormSectionBreakDescColor,
+			fluentFormSectionBreakDescFontFamily,
+			fluentFormSectionBreakDescFontSize,
+			fluentFormSectionBreakDescFontWeight,
+			fluentFormSectionBreakDescFontStyle,
+			fluentFormSectionBreakDescTextTransform,
+			fluentFormSectionBreakDescTextDecoration,
+			fluentFormSectionBreakDescLetterSpacing,
+			fluentFormSectionBreakDescLineHeight,
+			fluentFormSectionBreakDescDesktopPadding,
+			fluentFormSectionBreakDescDesktopMargin,
+			fluentFormSectionBreakDescHoverColor,
+			fluentFormHtmlAlignment,
+			fluentFormHtmlColor,
+			fluentFormHtmlFontFamily,
+			fluentFormHtmlFontSize,
+			fluentFormHtmlFontWeight,
+			fluentFormHtmlFontStyle,
+			fluentFormHtmlTextTransform,
+			fluentFormHtmlTextDecoration,
+			fluentFormHtmlLetterSpacing,
+			fluentFormHtmlLineHeight,
+			fluentFormHtmlDesktopPadding,
+			fluentFormHtmlDesktopMargin,
+			fluentFormHtmlHoverColor,
+			fluentFormSubmitAlignment,
+			fluentFormSubmitHeight,
+			fluentFormSubmitColor,
+			fluentFormSubmitBgColor,
+			fluentFormSubmitFontFamily,
+			fluentFormSubmitFontSize,
+			fluentFormSubmitFontWeight,
+			fluentFormSubmitFontStyle,
+			fluentFormSubmitTextTransform,
+			fluentFormSubmitTextDecoration,
+			fluentFormSubmitLetterSpacing,
+			fluentFormSubmitLineHeight,
+			fluentFormSubmitDesktopPadding,
+			fluentFormSubmitDesktopMargin,
+			fluentFormSubmitBorder,
+			fluentFormSubmitDesktopBorderWidth,
+			fluentFormSubmitBorderColor,
+			fluentFormSubmitDesktopBorderRadiusWidth,
+			fluentFormSubmitHoverColor,
+			fluentFormSubmitBgHoverColor,
+			fluentFormSubmitBorderHoverColor,
+			fluentFormSubmitWidthSelect,
+			fluentFormSubmitWidth,
+			fluentFormSubmitWidthUnits,
+			fluentFormSuccessColor,
+			fluentFormSuccessBgColor,
+			fluentFormSuccessFontFamily,
+			fluentFormSuccessFontSize,
+			fluentFormSuccessFontSizeUnits,
+			fluentFormSuccessFontWeight,
+			fluentFormSuccessFontStyle,
+			fluentFormSuccessTextTransform,
+			fluentFormSuccessTextDecoration,
+			fluentFormSuccessLetterSpacing,
+			fluentFormSuccessLetterSpacingUnits,
+			fluentFormSuccessLineHeight,
+			fluentFormSuccessLineHeightUnits,
+			fluentFormSuccessBorder,
+			fluentFormSuccessDesktopBorderWidth,
+			fluentFormSuccessBorderColor,
+			fluentFormSuccessDesktopBorderRadiusWidth,
+			fluentFormSuccessBorderHoverColor,
+			fluentFormErrorColor,
+			fluentFormErrorFontFamily,
+			fluentFormErrorFontSize,
+			fluentFormErrorFontSizeUnits,
+			fluentFormErrorFontWeight,
+			fluentFormErrorFontStyle,
+			fluentFormErrorTextTransform,
+			fluentFormErrorTextDecoration,
+			fluentFormErrorLetterSpacing,
+			fluentFormErrorLetterSpacingUnits,
+			fluentFormErrorLineHeight,
+			fluentFormErrorLineHeightUnits,
+			fluentFormErrorDesktopPadding,
+			fluentFormErrorDesktopMargin,
+			TabletPadding,
+			TabletMargin,
+			BorderTabletWidth,
+			BorderRadiusTabletWidth,
+			MobilePadding,
+			MobileMargin,
+			BorderMobileWidth,
+			BorderRadiusMobileWidth,
+		],
+	);
+
+	useEffect(() => {
+		setAttributes({ blockStyle: contactFormStyle.replace(/\s+/g, " ").trim() });
+	}, [contactFormStyle]);
 
 	return (
 		<>
 			<style>
 				{`
-                .${blockID}.fb-contact-form-wrapper {
-                    z-index: ${fluentFormGlobalZIndex !== undefined ? fluentFormGlobalZIndex : ''};
-                }
-                .${blockID}.fb-contact-form-wrapper {
-                    ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
-                    padding: ${DesktopPadding};
-                    margin: ${DesktopMargin};
-                    border: ${fluentFormGlobalBorder};
-                    border-width: ${BorderDesktopWidth};
-                    border-radius: ${BorderRadiusDesktopWidth} !important;
-                    ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-contact-form-wrapper:hover {
-                    ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
-                    ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
-                }
-
-                .${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-label label{
-                    display: none;
-                }
-
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input::-webkit-input-placeholder,
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea::-webkit-input-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input::-moz-placeholder,
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea::-moz-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input:-ms-input-placeholder,
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea:-ms-input-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder input:-moz-placeholder,
-                .${blockID}.fb-contact-form-wrapper.fb-fluent-form-hide-placeholder textarea:-moz-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-contact-form-wrapper .ff-el-group {
-                    ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Desktop}${fluentFormSpacingUnits.Desktop};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper label {
-                    ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
-                    ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
-                    ${fluentFormLabelFontSize ? `font-size: ${fluentFormLabelFontSize}${fluentFormLabelFontSizeUnits || "px"};` : ""}
-                    ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
-                    ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
-                    ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
-                    ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
-                    ${fluentFormLabelLetterSpacing ? `letter-spacing: ${fluentFormLabelLetterSpacing}${fluentFormLabelLetterSpacingUnits || "px"};` : ""}
-                    ${fluentFormLabelLineHeight ? `line-height: ${fluentFormLabelLineHeight}${fluentFormLabelLineHeightUnits || "px"};` : ""}
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-contact-form-wrapper label:hover {
-                    ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
-                .${blockID}.fb-contact-form-wrapper textarea,
-                .${blockID}.fb-contact-form-wrapper select {
-                    ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
-                    ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
-                    ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
-                    ${fluentFormInputFontSize ? `font-size: ${fluentFormInputFontSize}${fluentFormInputFontSizeUnits};` : ""}
-                    ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
-                    ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
-                    ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
-                    ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
-                    ${fluentFormInputLetterSpacing ? `letter-spacing: ${fluentFormInputLetterSpacing}${fluentFormInputLetterSpacingUnits};` : ""}
-                    ${fluentFormInputLineHeight ? `line-height: ${fluentFormInputLineHeight}${fluentFormInputLineHeightUnits};` : ""}
-                    ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};` : ""}
-                    ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};` : ""}
-                    ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};` : ""}
-                    ${fluentFormDesktopPadding ? `padding: ${fluentFormDesktopPadding};` : ""}
-                    ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
-                    ${fluentFormBorderDesktopWidth ? `border-width: ${fluentFormBorderDesktopWidth};` : ""}
-                    ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
-                    ${fluentFormBorderRadiusDesktopWidth ? `border-radius: ${fluentFormBorderRadiusDesktopWidth};` : ""}
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-contact-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
-                .${blockID}.fb-contact-form-wrapper textarea:focus,
-                .${blockID}.fb-contact-form-wrapper  select:focus {
-                    ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
-                    box-shadow: 0 0 0 1px ${fluentFormInputFocusColor ? fluentFormInputFocusColor : ""};
-                }
-                .${blockID}.fb-contact-form-wrapper textarea {
-                    ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Desktop}${fluentFormTextareaWidthSizeUnits.Desktop};` : ""}
-                    ${fluentFormTextareaHeightSize ? `height: ${fluentFormTextareaHeightSize.Desktop}${fluentFormTextareaHeightSizeUnits.Desktop};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper input::-webkit-input-placeholder,
-                .${blockID}.fb-contact-form-wrapper textarea::-webkit-input-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper input::-moz-placeholder,
-                .${blockID}.fb-contact-form-wrapper textarea::-moz-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper input:-ms-input-placeholder,
-                .${blockID}.fb-contact-form-wrapper textarea:-ms-input-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper input:-moz-placeholder,
-                .${blockID}.fb-contact-form-wrapper textarea:-moz-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper input[type="checkbox"]{
-                    width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
-                    ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
-                    ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
-                    ${fluentFormCheckBoxBorderRadiusDesktopWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
-                    position: relative;
-                    appearance: none;
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-contact-form-wrapper input[type="radio"] {
-                    width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
-                    ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
-                    ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
-                    ${fluentFormRadioBorderRadiusDesktopWidth ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
-                    position: relative;
-                    appearance: none;
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-contact-form-wrapper input[type="checkbox"]:checked:before,
-                .${blockID}.fb-contact-form-wrapper input[type="radio"]:checked:before {
-                    ${fluentFormRadioCheckedColor ? `background: ${fluentFormRadioCheckedColor};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-el-form-check:not(:last-child) {
-                    ${fluentFormRadioCheckBoxItemSpacing ? `margin-bottom: ${fluentFormRadioCheckBoxItemSpacing.Desktop}${fluentFormRadioCheckBoxItemSpacingUnits.Desktop};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-el-section-break,
-                .${blockID}.fb-contact-form-wrapper .ff-el-section-break hr {
-                    text-align: ${fluentFormSectionBreakAlignment};
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-el-section-title {
-                    ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
-                    ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
-                    ${fluentFormSectionBreakTitleFontSize ? `font-size: ${fluentFormSectionBreakTitleFontSize}${fluentFormSectionBreakTitleFontSizeUnits};` : ""}
-                    ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
-                    ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
-                    ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
-                    ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
-                    ${fluentFormSectionBreakTitleLetterSpacing ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing}${fluentFormSectionBreakTitleLetterSpacingUnits};` : ""}
-                    ${fluentFormSectionBreakTitleLineHeight ? `line-height: ${fluentFormSectionBreakTitleLineHeight}${fluentFormSectionBreakTitleLineHeightUnits};` : ""}
-                    ${fluentFormSectionBreakTitleDesktopPadding ? `padding: ${fluentFormSectionBreakTitleDesktopPadding};` : ""}
-                    ${fluentFormSectionBreakTitleDesktopMargin ? `margin: ${fluentFormSectionBreakTitleDesktopMargin};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
-                    ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-section_break_desk {
-                    ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
-                    ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
-                    ${fluentFormSectionBreakDescFontSize ? `font-size: ${fluentFormSectionBreakDescFontSize}${fluentFormSectionBreakDescFontSizeUnits};` : ""}
-                    ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
-                    ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
-                    ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
-                    ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
-                    ${fluentFormSectionBreakDescLetterSpacing ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing}${fluentFormSectionBreakDescLetterSpacingUnits};` : ""}
-                    ${fluentFormSectionBreakDescLineHeight ? `line-height: ${fluentFormSectionBreakDescLineHeight}${fluentFormSectionBreakDescLineHeightUnits};` : ""}
-                    ${fluentFormSectionBreakDescDesktopPadding ? `padding: ${fluentFormSectionBreakDescDesktopPadding};` : ""}
-                    ${fluentFormSectionBreakDescDesktopMargin ? `margin: ${fluentFormSectionBreakDescDesktopMargin};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
-                    ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper .ff-custom_html > * {
-                    ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
-                    ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
-                    ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
-                    ${fluentFormHtmlFontSize ? `font-size: ${fluentFormHtmlFontSize}${fluentFormHtmlFontSizeUnits};` : ""}
-                    ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
-                    ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
-                    ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
-                    ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
-                    ${fluentFormHtmlLetterSpacing ? `letter-spacing: ${fluentFormHtmlLetterSpacing}${fluentFormHtmlLetterSpacingUnits};` : ""}
-                    ${fluentFormHtmlLineHeight ? `line-height: ${fluentFormHtmlLineHeight}${fluentFormHtmlLineHeightUnits};` : ""}
-                    ${fluentFormHtmlDesktopPadding ? `padding: ${fluentFormHtmlDesktopPadding};` : ""}
-                    ${fluentFormHtmlDesktopMargin ? `margin: ${fluentFormHtmlDesktopMargin};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-custom_html > *:hover {
-                    ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
-                }
-
-
-                .${blockID}.fb-contact-form-wrapper input[type="submit"] {
-                	${fluentFormSubmitAlignment ? `text-align: ${fluentFormSubmitAlignment};` : ""}
-                    ${fluentFormSubmitHeight.Desktop ? `height: ${fluentFormSubmitHeight.Desktop}${fluentFormSubmitHeightUnits.Desktop};` : ""}
-                    ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
-                    ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
-                    ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
-                    ${fluentFormSubmitFontSize ? `font-size: ${fluentFormSubmitFontSize}${fluentFormSubmitFontSizeUnits};` : ""}
-                    ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
-                    ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
-                    ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
-                    ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
-                    ${fluentFormSubmitLetterSpacing ? `letter-spacing: ${fluentFormSubmitLetterSpacing}${fluentFormSubmitLetterSpacingUnits};` : ""}
-                    ${fluentFormSubmitLineHeight ? `line-height: ${fluentFormSubmitLineHeight}${fluentFormSubmitLineHeightUnits};` : ""}
-                    ${fluentFormSubmitDesktopPadding ? `padding: ${fluentFormSubmitDesktopPadding};` : ""}
-                    ${fluentFormSubmitDesktopMargin ? `margin: ${fluentFormSubmitDesktopMargin};` : ""}
-
-                    ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
-                    ${fluentFormSubmitDesktopBorderWidth ? `border-width: ${fluentFormSubmitDesktopBorderWidth};` : ""}
-                    ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
-                    ${fluentFormSubmitDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSubmitDesktopBorderRadiusWidth};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper input[type="submit"]:hover {
-                    ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
-                    ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
-                    ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
-                    ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
-                    ${fluentFormSubmitWidthSelect === 'custom' && fluentFormSubmitWidth.Desktop
-					? `width: ${fluentFormSubmitWidth.Desktop}${fluentFormSubmitWidthUnits.Desktop};`
-					: ''}
-                }
-
-                .${blockID}.fb-contact-form-wrapper .ff-message-success {
-                    ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
-                    ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
-                    ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
-                    ${fluentFormSuccessFontSize ? `font-size: ${fluentFormSuccessFontSize}${fluentFormSuccessFontSizeUnits};` : ""}
-                    ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
-                    ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
-                    ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
-                    ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
-                    ${fluentFormSuccessLetterSpacing ? `letter-spacing: ${fluentFormSuccessLetterSpacing}${fluentFormSuccessLetterSpacingUnits};` : ""}
-                    ${fluentFormSuccessLineHeight ? `line-height: ${fluentFormSuccessLineHeight}${fluentFormSuccessLineHeightUnits};` : ""}
-                    ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
-                    ${fluentFormSuccessDesktopBorderWidth ? `border-width: ${fluentFormSuccessDesktopBorderWidth};` : ""}
-                    ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
-                    ${fluentFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSuccessDesktopBorderRadiusWidth};` : ""}
-                }
-                .${blockID}.fb-contact-form-wrapper .ff-message-success:hover {
-                    ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
-                }
-
-                .${blockID}.fb-contact-form-wrapper .error.text-danger {
-                    ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
-                    ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
-                    ${fluentFormErrorFontSize ? `font-size: ${fluentFormErrorFontSize}${fluentFormErrorFontSizeUnits};` : ""}
-                    ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
-                    ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
-                    ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
-                    ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
-                    ${fluentFormErrorLetterSpacing ? `letter-spacing: ${fluentFormErrorLetterSpacing}${fluentFormErrorLetterSpacingUnits};` : ""}
-                    ${fluentFormErrorLineHeight ? `line-height: ${fluentFormErrorLineHeight}${fluentFormErrorLineHeightUnits};` : ""}
-                    ${fluentFormErrorDesktopPadding ? `padding: ${fluentFormErrorDesktopPadding};` : ""}
-                    ${fluentFormErrorDesktopMargin ? `margin: ${fluentFormErrorDesktopMargin};` : ""}
-                }
-
-
-
-                @media only screen and (max-width: 1024px) {
-
-                    .${blockID}.fb-contact-form-wrapper {
-                        padding: ${TabletPadding};
-                        margin: ${TabletMargin};
-                        border-width: ${BorderTabletWidth};
-                        border-radius: ${BorderRadiusTabletWidth} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .${blockID}.fb-contact-form-wrapper {
-                        padding: ${MobilePadding};
-                        margin: ${MobileMargin};
-                        border-width: ${BorderMobileWidth};
-                        border-radius: ${BorderRadiusMobileWidth} !important;
-                    }
-                }
-
+				${blockStyle}
+                
             `}
 			</style>
 			<InspectorControls key="controls">
@@ -2752,16 +3784,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					>
 						{(tab) => (
 							<div className={"fb-tab-controls" + tab.name}>
-								{tab.name === 'general' && (
+								{tab.name === "general" && (
 									<>
-										<PanelBody title={__("Contact Form", "frontis-blocks")} initialOpen={true}>
-											<BaseControl className="fb-fluent-from" >
-
+										<PanelBody
+											title={__("Contact Form", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<BaseControl className="fb-fluent-from">
 												<SelectControl
 													label={__("Select Form", "frontis-blocks")}
 													value={formId}
 													options={modifiedFormLists}
-													onChange={(newSelectedForm) => selectWcf7Form(newSelectedForm)}
+													onChange={(newSelectedForm) =>
+														selectWcf7Form(newSelectedForm)
+													}
 												/>
 
 												<ToggleControl
@@ -2789,24 +3825,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														})
 													}
 												/>
-
 											</BaseControl>
 										</PanelBody>
-
 									</>
 								)}
 
 								{tab.name === "styles" && (
 									<>
-										<PanelBody title={__("Label", "frontis-blocks")} initialOpen={true}>
+										<PanelBody
+											title={__("Label", "frontis-blocks")}
+											initialOpen={true}
+										>
 											<FB_Color
 												label={__("Color", "frontis-blocks")}
 												globalColorSwitcher={fluentFormLabelColorSwitcher}
 												globalColor={fluentFormLabelColor}
 												globalHoverColor={fluentFormLabelHoverColor}
-												handleColorSwitcherChange={handleLabelColorSwitcherChange}
+												handleColorSwitcherChange={
+													handleLabelColorSwitcherChange
+												}
 												handleGlobalColorChange={handleLabelColorChange}
-												handleGlobalHoverColorChange={handleLabelHoverColorChange}
+												handleGlobalHoverColorChange={
+													handleLabelHoverColorChange
+												}
 											/>
 
 											<BaseControl
@@ -2816,41 +3857,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
 																		value={fluentFormLabelFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormLabelFontFamily: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormLabelFontFamily: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormLabelFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormLabelFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormLabelFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormLabelFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -2861,7 +3924,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
 																			value={fluentFormLabelFontSize}
-																			onChange={(value) => setAttributes({ fluentFormLabelFontSize: value })}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormLabelFontSize: value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -2873,74 +3940,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
 																		value={fluentFormLabelFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormLabelFontWeight: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormLabelFontWeight: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormLabelFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormLabelFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormLabelFontStyle: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
 																		value={fluentFormLabelTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormLabelTextTransform: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormLabelTextTransform: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
 																		value={fluentFormLabelTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormLabelTextDecoration: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormLabelTextDecoration: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormLabelLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormLabelLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormLabelLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormLabelLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -2950,7 +4138,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormLabelLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormLabelLetterSpacing: value === 0 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormLabelLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -2961,15 +4154,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormLabelLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormLabelLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormLabelLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormLabelLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -2979,7 +4184,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormLabelLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormLabelLineHeight: value === 1 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormLabelLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -2993,7 +4203,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 											</BaseControl>
 										</PanelBody>
-										<PanelBody title={__("Input & Textarea", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Input & Textarea", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<BaseControl
 												label={__("Background Color", "frontis-blocks")}
 												className="fb-setting-color-setting-wrapper"
@@ -3001,7 +4214,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -3009,7 +4222,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -3021,14 +4237,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		onChange={handleInputBgColorChange}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormInputBgColor}
@@ -3047,7 +4265,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -3055,7 +4273,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -3067,14 +4288,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		onChange={handleInputColorChange}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormInputColor}
@@ -3093,7 +4316,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -3101,7 +4324,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -3113,14 +4339,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		onChange={handleInputFocusColorChange}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormInputFocusColor}
@@ -3140,41 +4368,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
 																		value={fluentFormInputFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormInputFontFamily: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormInputFontFamily: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormInputFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormInputFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormInputFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormInputFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -3185,7 +4435,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
 																			value={fluentFormInputFontSize}
-																			onChange={(value) => setAttributes({ fluentFormInputFontSize: value })}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormInputFontSize: value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -3197,74 +4451,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
 																		value={fluentFormInputFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormInputFontWeight: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormInputFontWeight: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormInputFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormInputFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormInputFontStyle: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
 																		value={fluentFormInputTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormInputTextTransform: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormInputTextTransform: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
 																		value={fluentFormInputTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormInputTextDecoration: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormInputTextDecoration: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormInputLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormInputLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormInputLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormInputLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -3274,7 +4649,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormInputLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormInputLetterSpacing: value === 0 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormInputLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -3285,15 +4665,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormInputLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormInputLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormInputLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormInputLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -3303,7 +4695,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormInputLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormInputLineHeight: value === 1 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormInputLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -3361,7 +4758,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Textarea Width", "frontis-blocks")}
 												rangeValue={fluentFormTextareaWidthSize}
 												onChangeHandler={fluentFormTextareaWidthSizeHandler}
-												rangeUnitHandler={fluentFormTextareaWidthSizeUnitsHandler}
+												rangeUnitHandler={
+													fluentFormTextareaWidthSizeUnitsHandler
+												}
 												deviceType={deviceType}
 												units={fluentFormTextareaWidthSizeUnits}
 												setAttributes={setAttributes}
@@ -3374,7 +4773,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Textarea Height", "frontis-blocks")}
 												rangeValue={fluentFormTextareaHeightSize}
 												onChangeHandler={fluentFormTextareaHeightSizeHandler}
-												rangeUnitHandler={fluentFormTextareaHeightSizeUnitsHandler}
+												rangeUnitHandler={
+													fluentFormTextareaHeightSizeUnitsHandler
+												}
 												deviceType={deviceType}
 												units={fluentFormTextareaHeightSizeUnits}
 												setAttributes={setAttributes}
@@ -3413,7 +4814,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Border Style", "frontis-blocks")}
 												value={fluentFormBorder}
 												options={BORDER_STYLES}
-												onChange={(value) => setAttributes({ fluentFormBorder: value })}
+												onChange={(value) =>
+													setAttributes({ fluentFormBorder: value })
+												}
 											/>
 
 											<FB_Color
@@ -3421,9 +4824,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												globalColorSwitcher={fluentFormBorderColorSwitcher}
 												globalColor={fluentFormBorderColor}
 												globalHoverColor={fluentFormBorderHoverColor}
-												handleColorSwitcherChange={handleBorderColorSwitcherChange}
+												handleColorSwitcherChange={
+													handleBorderColorSwitcherChange
+												}
 												handleGlobalColorChange={handleBorderColorChange}
-												handleGlobalHoverColorChange={handleBorderHoverColorChange}
+												handleGlobalHoverColorChange={
+													handleBorderHoverColorChange
+												}
 											/>
 
 											<FB_Spacing
@@ -3453,9 +4860,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingCombineBtnHandler={handleBorderRadiusCombineBtn}
 												setAttributes={setAttributes}
 											/>
-
 										</PanelBody>
-										<PanelBody title={__("Placeholder", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Placeholder", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<BaseControl
 												label={__("Color", "frontis-blocks")}
 												className="fb-setting-color-setting-wrapper"
@@ -3463,7 +4872,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -3471,7 +4880,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -3483,14 +4895,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		onChange={fluentFormPlaceholderColorChange}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormPlaceholderColor}
@@ -3503,7 +4917,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 											</BaseControl>
 										</PanelBody>
-										<PanelBody title={__("Radio & Checkbox", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Radio & Checkbox", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<FB_Range
 												min={1}
 												max={100}
@@ -3515,7 +4932,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												units={fluentFormRadioFontSizeUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={''}
+												resetFallbackValue={""}
 											/>
 											<BaseControl
 												label={__("Normal Color", "frontis-blocks")}
@@ -3524,7 +4941,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -3532,7 +4949,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -3541,21 +4961,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-normal-color">
 																	<ColorPicker
 																		color={fluentFormRadioColor}
-																		onChange={(value) => setAttributes({ fluentFormRadioColor: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormRadioColor: value,
+																			})
+																		}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormRadioColor}
-																		onChange={(value) => setAttributes({ fluentFormRadioColor: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormRadioColor: value,
+																			})
+																		}
 																	/>
 																</div>
 															</BaseControl>
@@ -3570,7 +5000,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -3578,7 +5008,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -3587,21 +5020,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-normal-color">
 																	<ColorPicker
 																		color={fluentFormRadioCheckedColor}
-																		onChange={(value) => setAttributes({ fluentFormRadioCheckedColor: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormRadioCheckedColor: value,
+																			})
+																		}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormRadioCheckedColor}
-																		onChange={(value) => setAttributes({ fluentFormRadioCheckedColor: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormRadioCheckedColor: value,
+																			})
+																		}
 																	/>
 																</div>
 															</BaseControl>
@@ -3614,13 +5057,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												max={100}
 												label={__("Border Width", "frontis-blocks")}
 												rangeValue={fluentFormRadioBorderWidth}
-												onChangeHandler={(value) => setAttributes({ fluentFormRadioBorderWidth: value })}
-												rangeUnitHandler={(value) => setAttributes({ fluentFormRadioBorderWidthUnits: value })}
+												onChangeHandler={(value) =>
+													setAttributes({ fluentFormRadioBorderWidth: value })
+												}
+												rangeUnitHandler={(value) =>
+													setAttributes({
+														fluentFormRadioBorderWidthUnits: value,
+													})
+												}
 												deviceType={deviceType}
 												units={fluentFormRadioBorderWidthUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={''}
+												resetFallbackValue={""}
 											/>
 											<BaseControl
 												label={__("Border Color", "frontis-blocks")}
@@ -3629,7 +5078,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -3637,7 +5086,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -3646,21 +5098,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-normal-color">
 																	<ColorPicker
 																		color={fluentFormRadioBorderColor}
-																		onChange={(value) => setAttributes({ fluentFormRadioBorderColor: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormRadioBorderColor: value,
+																			})
+																		}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormRadioBorderColor}
-																		onChange={(value) => setAttributes({ fluentFormRadioBorderColor: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormRadioBorderColor: value,
+																			})
+																		}
 																	/>
 																</div>
 															</BaseControl>
@@ -3671,27 +5133,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<FB_Spacing
 												label={__("Radio Radius", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormRadioBorderRadiusUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormRadioBorderRadiusUnitsHandler
+												}
 												spacingUnits={fluentFormRadioBorderRadiusUnits}
 												spacingDesktop={fluentFormRadioBorderRadiusDesktop}
 												spacingTablet={fluentFormRadioBorderRadiusTablet}
 												spacingMobile={fluentFormRadioBorderRadiusMobile}
-												handleSpacingUnitHandler={fluentFormRadioBorderRadiusUnitChange}
+												handleSpacingUnitHandler={
+													fluentFormRadioBorderRadiusUnitChange
+												}
 												spacingCombineBtn={fluentFormGlobalBorderRadiusLink}
-												spacingCombineBtnHandler={fluentFormRadioBorderRadiusCombineBtn}
+												spacingCombineBtnHandler={
+													fluentFormRadioBorderRadiusCombineBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<FB_Spacing
 												label={__("Checkbox Radius", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormCheckBoxBorderRadiusUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormCheckBoxBorderRadiusUnitsHandler
+												}
 												spacingUnits={fluentFormCheckBoxBorderRadiusUnits}
 												spacingDesktop={fluentFormCheckBoxBorderRadiusDesktop}
 												spacingTablet={fluentFormCheckBoxBorderRadiusTablet}
 												spacingMobile={fluentFormCheckBoxBorderRadiusMobile}
-												handleSpacingUnitHandler={fluentFormCheckBoxBorderRadiusUnitChange}
+												handleSpacingUnitHandler={
+													fluentFormCheckBoxBorderRadiusUnitChange
+												}
 												spacingCombineBtn={fluentFormGlobalBorderRadiusLink}
-												spacingCombineBtnHandler={fluentFormCheckBoxBorderRadiusCombineBtn}
+												spacingCombineBtnHandler={
+													fluentFormCheckBoxBorderRadiusCombineBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<FB_Range
@@ -3699,29 +5173,42 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												max={100}
 												label={__("Item Spacing", "frontis-blocks")}
 												rangeValue={fluentFormRadioCheckBoxItemSpacing}
-												onChangeHandler={fluentFormRadioCheckBoxItemSpacingHandler}
-												rangeUnitHandler={fluentFormRadioCheckBoxItemSpacingUnitssHandler}
+												onChangeHandler={
+													fluentFormRadioCheckBoxItemSpacingHandler
+												}
+												rangeUnitHandler={
+													fluentFormRadioCheckBoxItemSpacingUnitssHandler
+												}
 												deviceType={deviceType}
 												units={fluentFormRadioCheckBoxItemSpacingUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={''}
+												resetFallbackValue={""}
 											/>
 										</PanelBody>
-										<PanelBody title={__("Section break", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Section break", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<BaseControl
 												label={__("Alignment", "frontis-blocks")}
 												id="fb-setting-text-alignment"
 												className="fb-setting-text-alignment"
 											>
-												<ButtonGroup
-													className="fb-setting-text-alignment-group-btn"
-												>
+												<ButtonGroup className="fb-setting-text-alignment-group-btn">
 													{TEXT_ALIGN.map((item, key) => (
 														<Button
 															key={key}
-															onClick={() => setAttributes({ fluentFormSectionBreakAlignment: item.value })}
-															className={`fb-setting-text-alignment-single-btn ${fluentFormSectionBreakAlignment === item.value ? 'active' : ''}`}
+															onClick={() =>
+																setAttributes({
+																	fluentFormSectionBreakAlignment: item.value,
+																})
+															}
+															className={`fb-setting-text-alignment-single-btn ${
+																fluentFormSectionBreakAlignment === item.value
+																	? "active"
+																	: ""
+															}`}
 														>
 															{item.label}
 														</Button>
@@ -3730,12 +5217,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											</BaseControl>
 											<FB_Color
 												label={__("Title", "frontis-blocks")}
-												globalColorSwitcher={fluentFormSectionBreakTitleColorSwitcher}
+												globalColorSwitcher={
+													fluentFormSectionBreakTitleColorSwitcher
+												}
 												globalColor={fluentFormSectionBreakTitleColor}
 												globalHoverColor={fluentFormSectionBreakTitleHoverColor}
-												handleColorSwitcherChange={fluentFormSectionBreakTitleColorSwitcherChange}
-												handleGlobalColorChange={fluentFormSectionBreakTitleColorChange}
-												handleGlobalHoverColorChange={fluentFormSectionBreakTitleHoverColorChange}
+												handleColorSwitcherChange={
+													fluentFormSectionBreakTitleColorSwitcherChange
+												}
+												handleGlobalColorChange={
+													fluentFormSectionBreakTitleColorChange
+												}
+												handleGlobalHoverColorChange={
+													fluentFormSectionBreakTitleHoverColorChange
+												}
 											/>
 											<BaseControl
 												label={__("Typography", "frontis-blocks")}
@@ -3744,41 +5239,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
-																		value={fluentFormSectionBreakTitleFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontFamily: value })}
+																		value={
+																			fluentFormSectionBreakTitleFontFamily
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakTitleFontFamily:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSectionBreakTitleFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormSectionBreakTitleFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSectionBreakTitleFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormSectionBreakTitleFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -3788,8 +5308,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
-																			value={fluentFormSectionBreakTitleFontSize}
-																			onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontSize: value })}
+																			value={
+																				fluentFormSectionBreakTitleFontSize
+																			}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormSectionBreakTitleFontSize:
+																						value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -3801,74 +5328,205 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
-																		value={fluentFormSectionBreakTitleFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontWeight: value })}
+																		value={
+																			fluentFormSectionBreakTitleFontWeight
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakTitleFontWeight:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormSectionBreakTitleFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakTitleFontStyle:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
-																		value={fluentFormSectionBreakTitleTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakTitleTextTransform: value })}
+																		value={
+																			fluentFormSectionBreakTitleTextTransform
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakTitleTextTransform:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
-																		value={fluentFormSectionBreakTitleTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakTitleTextDecoration: value })}
+																		value={
+																			fluentFormSectionBreakTitleTextDecoration
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakTitleTextDecoration:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSectionBreakTitleLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormSectionBreakTitleLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSectionBreakTitleLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormSectionBreakTitleLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -3877,8 +5535,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		</div>
 																	</div>
 																	<RangeControl
-																		value={fluentFormSectionBreakTitleLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakTitleLetterSpacing: value === 0 ? undefined : value })}
+																		value={
+																			fluentFormSectionBreakTitleLetterSpacing
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakTitleLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -3889,15 +5554,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSectionBreakTitleLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormSectionBreakTitleLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSectionBreakTitleLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormSectionBreakTitleLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -3906,8 +5583,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		</div>
 																	</div>
 																	<RangeControl
-																		value={fluentFormSectionBreakTitleLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakTitleLineHeight: value === 1 ? undefined : value })}
+																		value={
+																			fluentFormSectionBreakTitleLineHeight
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakTitleLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -3923,37 +5607,65 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSectionBreakTitlePaddingUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSectionBreakTitlePaddingUnitsHandler
+												}
 												spacingUnits={fluentFormSectionBreakTitlePaddingUnits}
-												spacingDesktop={fluentFormSectionBreakTitlePaddingDesktop}
+												spacingDesktop={
+													fluentFormSectionBreakTitlePaddingDesktop
+												}
 												spacingTablet={fluentFormSectionBreakTitlePaddingTablet}
 												spacingMobile={fluentFormSectionBreakTitlePaddingMobile}
-												handleSpacingUnitHandler={fluentFormSectionBreakTitlePaddingUnitsChange}
-												spacingCombineBtn={fluentFormSectionBreakTitlePaddingLink}
-												spacingCombineBtnHandler={fluentFormSectionBreakTitlePaddingLinkBtn}
+												handleSpacingUnitHandler={
+													fluentFormSectionBreakTitlePaddingUnitsChange
+												}
+												spacingCombineBtn={
+													fluentFormSectionBreakTitlePaddingLink
+												}
+												spacingCombineBtnHandler={
+													fluentFormSectionBreakTitlePaddingLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<FB_Spacing
 												label={__("Margin", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSectionBreakTitleMarginUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSectionBreakTitleMarginUnitsHandler
+												}
 												spacingUnits={fluentFormSectionBreakTitleMarginUnits}
-												spacingDesktop={fluentFormSectionBreakTitleMarginDesktop}
+												spacingDesktop={
+													fluentFormSectionBreakTitleMarginDesktop
+												}
 												spacingTablet={fluentFormSectionBreakTitleMarginTablet}
 												spacingMobile={fluentFormSectionBreakTitleMarginMobile}
-												handleSpacingUnitHandler={fluentFormSectionBreakTitleMarginUnitsChange}
-												spacingCombineBtn={fluentFormSectionBreakTitleMarginLink}
-												spacingCombineBtnHandler={fluentFormSectionBreakTitleMarginLinkBtn}
+												handleSpacingUnitHandler={
+													fluentFormSectionBreakTitleMarginUnitsChange
+												}
+												spacingCombineBtn={
+													fluentFormSectionBreakTitleMarginLink
+												}
+												spacingCombineBtnHandler={
+													fluentFormSectionBreakTitleMarginLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<FB_Color
 												label={__("Description", "frontis-blocks")}
-												globalColorSwitcher={fluentFormSectionBreakDescColorSwitcher}
+												globalColorSwitcher={
+													fluentFormSectionBreakDescColorSwitcher
+												}
 												globalColor={fluentFormSectionBreakDescColor}
 												globalHoverColor={fluentFormSectionBreakDescHoverColor}
-												handleColorSwitcherChange={fluentFormSectionBreakDescColorSwitcherChange}
-												handleGlobalColorChange={fluentFormSectionBreakDescColorChange}
-												handleGlobalHoverColorChange={fluentFormSectionBreakDescHoverColorChange}
+												handleColorSwitcherChange={
+													fluentFormSectionBreakDescColorSwitcherChange
+												}
+												handleGlobalColorChange={
+													fluentFormSectionBreakDescColorChange
+												}
+												handleGlobalHoverColorChange={
+													fluentFormSectionBreakDescHoverColorChange
+												}
 											/>
 											<BaseControl
 												label={__("Typography", "frontis-blocks")}
@@ -3962,41 +5674,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
 																		value={fluentFormSectionBreakDescFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontFamily: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakDescFontFamily:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSectionBreakDescFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormSectionBreakDescFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSectionBreakDescFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormSectionBreakDescFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4007,7 +5742,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
 																			value={fluentFormSectionBreakDescFontSize}
-																			onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontSize: value })}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormSectionBreakDescFontSize:
+																						value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -4019,74 +5759,203 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
 																		value={fluentFormSectionBreakDescFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontWeight: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakDescFontWeight:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormSectionBreakDescFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakDescFontStyle:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
-																		value={fluentFormSectionBreakDescTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakDescTextTransform: value })}
+																		value={
+																			fluentFormSectionBreakDescTextTransform
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakDescTextTransform:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
-																		value={fluentFormSectionBreakDescTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakDescTextDecoration: value })}
+																		value={
+																			fluentFormSectionBreakDescTextDecoration
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakDescTextDecoration:
+																					value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSectionBreakDescLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormSectionBreakDescLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSectionBreakDescLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormSectionBreakDescLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4095,8 +5964,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		</div>
 																	</div>
 																	<RangeControl
-																		value={fluentFormSectionBreakDescLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakDescLetterSpacing: value === 0 ? undefined : value })}
+																		value={
+																			fluentFormSectionBreakDescLetterSpacing
+																		}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakDescLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4107,15 +5983,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSectionBreakDescLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormSectionBreakDescLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSectionBreakDescLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormSectionBreakDescLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4125,7 +6013,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormSectionBreakDescLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormSectionBreakDescLineHeight: value === 1 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSectionBreakDescLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4141,47 +6034,70 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSectionBreakDescPaddingUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSectionBreakDescPaddingUnitsHandler
+												}
 												spacingUnits={fluentFormSectionBreakDescPaddingUnits}
-												spacingDesktop={fluentFormSectionBreakDescPaddingDesktop}
+												spacingDesktop={
+													fluentFormSectionBreakDescPaddingDesktop
+												}
 												spacingTablet={fluentFormSectionBreakDescPaddingTablet}
 												spacingMobile={fluentFormSectionBreakDescPaddingMobile}
-												handleSpacingUnitHandler={fluentFormSectionBreakDescPaddingUnitsChange}
-												spacingCombineBtn={fluentFormSectionBreakDescPaddingLink}
-												spacingCombineBtnHandler={fluentFormSectionBreakDescPaddingLinkBtn}
+												handleSpacingUnitHandler={
+													fluentFormSectionBreakDescPaddingUnitsChange
+												}
+												spacingCombineBtn={
+													fluentFormSectionBreakDescPaddingLink
+												}
+												spacingCombineBtnHandler={
+													fluentFormSectionBreakDescPaddingLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
 
 											<FB_Spacing
 												label={__("Margin", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSectionBreakDescMarginUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSectionBreakDescMarginUnitsHandler
+												}
 												spacingUnits={fluentFormSectionBreakDescMarginUnits}
 												spacingDesktop={fluentFormSectionBreakDescMarginDesktop}
 												spacingTablet={fluentFormSectionBreakDescMarginTablet}
 												spacingMobile={fluentFormSectionBreakDescMarginMobile}
-												handleSpacingUnitHandler={fluentFormSectionBreakDescMarginUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormSectionBreakDescMarginUnitsChange
+												}
 												spacingCombineBtn={fluentFormSectionBreakDescMarginLink}
-												spacingCombineBtnHandler={fluentFormSectionBreakDescMarginLinkBtn}
+												spacingCombineBtnHandler={
+													fluentFormSectionBreakDescMarginLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
-
-
 										</PanelBody>
-										<PanelBody title={__("Custom HTML", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Custom HTML", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<BaseControl
 												label={__("Alignment", "frontis-blocks")}
 												id="fb-setting-text-alignment"
 												className="fb-setting-text-alignment"
 											>
-												<ButtonGroup
-													className="fb-setting-text-alignment-group-btn"
-												>
+												<ButtonGroup className="fb-setting-text-alignment-group-btn">
 													{TEXT_ALIGN.map((item, key) => (
 														<Button
 															key={key}
-															onClick={() => setAttributes({ fluentFormHtmlAlignment: item.value })}
-															className={`fb-setting-text-alignment-single-btn ${fluentFormHtmlAlignment === item.value ? 'active' : ''}`}
+															onClick={() =>
+																setAttributes({
+																	fluentFormHtmlAlignment: item.value,
+																})
+															}
+															className={`fb-setting-text-alignment-single-btn ${
+																fluentFormHtmlAlignment === item.value
+																	? "active"
+																	: ""
+															}`}
 														>
 															{item.label}
 														</Button>
@@ -4193,9 +6109,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												globalColorSwitcher={fluentFormHtmlColorSwitcher}
 												globalColor={fluentFormHtmlColor}
 												globalHoverColor={fluentFormHtmlHoverColor}
-												handleColorSwitcherChange={fluentFormHtmlColorSwitcherChange}
+												handleColorSwitcherChange={
+													fluentFormHtmlColorSwitcherChange
+												}
 												handleGlobalColorChange={fluentFormHtmlColorChange}
-												handleGlobalHoverColorChange={fluentFormHtmlHoverColorChange}
+												handleGlobalHoverColorChange={
+													fluentFormHtmlHoverColorChange
+												}
 											/>
 											<BaseControl
 												label={__("Typography", "frontis-blocks")}
@@ -4204,41 +6124,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
 																		value={fluentFormHtmlFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormHtmlFontFamily: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormHtmlFontFamily: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormHtmlFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormHtmlFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormHtmlFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormHtmlFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4249,7 +6191,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
 																			value={fluentFormHtmlFontSize}
-																			onChange={(value) => setAttributes({ fluentFormHtmlFontSize: value })}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormHtmlFontSize: value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -4261,74 +6207,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
 																		value={fluentFormHtmlFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormHtmlFontWeight: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormHtmlFontWeight: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormHtmlFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormHtmlFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormHtmlFontStyle: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
 																		value={fluentFormHtmlTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormHtmlTextTransform: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormHtmlTextTransform: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
 																		value={fluentFormHtmlTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormHtmlTextDecoration: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormHtmlTextDecoration: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormHtmlLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormHtmlLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormHtmlLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormHtmlLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4338,7 +6405,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormHtmlLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormHtmlLetterSpacing: value === 0 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormHtmlLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4349,15 +6421,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormHtmlLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormHtmlLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormHtmlLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormHtmlLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4367,7 +6451,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormHtmlLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormHtmlLineHeight: value === 1 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormHtmlLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4388,7 +6477,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={fluentFormHtmlPaddingDesktop}
 												spacingTablet={fluentFormHtmlPaddingTablet}
 												spacingMobile={fluentFormHtmlPaddingMobile}
-												handleSpacingUnitHandler={fluentFormHtmlPaddingUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormHtmlPaddingUnitsChange
+												}
 												spacingCombineBtn={fluentFormHtmlPaddingLink}
 												spacingCombineBtnHandler={fluentFormHtmlPaddingLinkBtn}
 												setAttributes={setAttributes}
@@ -4402,27 +6493,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={fluentFormHtmlMarginDesktop}
 												spacingTablet={fluentFormHtmlMarginTablet}
 												spacingMobile={fluentFormHtmlMarginMobile}
-												handleSpacingUnitHandler={fluentFormHtmlMarginUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormHtmlMarginUnitsChange
+												}
 												spacingCombineBtn={fluentFormHtmlMarginLink}
 												spacingCombineBtnHandler={fluentFormHtmlMarginLinkBtn}
 												setAttributes={setAttributes}
 											/>
-
 										</PanelBody>
-										<PanelBody title={__("Submit", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Submit", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<BaseControl
 												label={__("Alignment", "frontis-blocks")}
 												id="fb-setting-text-alignment"
 												className="fb-setting-text-alignment"
 											>
-												<ButtonGroup
-													className="fb-setting-text-alignment-group-btn"
-												>
+												<ButtonGroup className="fb-setting-text-alignment-group-btn">
 													{TEXT_ALIGN.map((item, key) => (
 														<Button
 															key={key}
-															onClick={() => setAttributes({ fluentFormSubmitAlignment: item.value })}
-															className={`fb-setting-text-alignment-single-btn ${fluentFormSubmitAlignment === item.value ? 'active' : ''}`}
+															onClick={() =>
+																setAttributes({
+																	fluentFormSubmitAlignment: item.value,
+																})
+															}
+															className={`fb-setting-text-alignment-single-btn ${
+																fluentFormSubmitAlignment === item.value
+																	? "active"
+																	: ""
+															}`}
 														>
 															{item.label}
 														</Button>
@@ -4440,16 +6541,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												units={fluentFormSubmitHeightUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={''}
+												resetFallbackValue={""}
 											/>
 
 											<SelectControl
 												label={__("Width", "frontis-blocks")}
 												value={fluentFormSubmitWidthSelect}
 												options={WIDTH_STYLES}
-												onChange={(value) => setAttributes({ fluentFormSubmitWidthSelect: value })}
+												onChange={(value) =>
+													setAttributes({ fluentFormSubmitWidthSelect: value })
+												}
 											/>
-											{fluentFormSubmitWidthSelect === 'custom' && (
+											{fluentFormSubmitWidthSelect === "custom" && (
 												<FB_Range
 													min={1}
 													max={2000}
@@ -4461,7 +6564,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													units={fluentFormSubmitWidthUnits}
 													setAttributes={setAttributes}
 													rangeStep={1}
-													resetFallbackValue={''}
+													resetFallbackValue={""}
 												/>
 											)}
 											<BaseControl
@@ -4471,41 +6574,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
 																		value={fluentFormSubmitFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormSubmitFontFamily: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSubmitFontFamily: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSubmitFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormSubmitFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSubmitFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormSubmitFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4516,7 +6641,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
 																			value={fluentFormSubmitFontSize}
-																			onChange={(value) => setAttributes({ fluentFormSubmitFontSize: value })}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormSubmitFontSize: value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -4528,74 +6657,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
 																		value={fluentFormSubmitFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormSubmitFontWeight: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSubmitFontWeight: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormSubmitFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormSubmitFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSubmitFontStyle: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
 																		value={fluentFormSubmitTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormSubmitTextTransform: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSubmitTextTransform: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
 																		value={fluentFormSubmitTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormSubmitTextDecoration: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSubmitTextDecoration: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSubmitLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormSubmitLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSubmitLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormSubmitLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4605,7 +6855,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormSubmitLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormSubmitLetterSpacing: value === 0 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSubmitLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4616,15 +6871,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSubmitLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormSubmitLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSubmitLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormSubmitLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4634,7 +6901,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormSubmitLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormSubmitLineHeight: value === 1 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSubmitLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4652,30 +6924,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												globalColorSwitcher={fluentFormSubmitColorSwitcher}
 												globalColor={fluentFormSubmitColor}
 												globalHoverColor={fluentFormSubmitHoverColor}
-												handleColorSwitcherChange={fluentFormSubmitColorSwitcherChange}
+												handleColorSwitcherChange={
+													fluentFormSubmitColorSwitcherChange
+												}
 												handleGlobalColorChange={fluentFormSubmitColorChange}
-												handleGlobalHoverColorChange={fluentFormSubmitHoverColorChange}
+												handleGlobalHoverColorChange={
+													fluentFormSubmitHoverColorChange
+												}
 											/>
 											<FB_Color
 												label={__("Background Color", "frontis-blocks")}
 												globalColorSwitcher={fluentFormSubmitBgColorSwitcher}
 												globalColor={fluentFormSubmitBgColor}
 												globalHoverColor={fluentFormSubmitBgHoverColor}
-												handleColorSwitcherChange={fluentFormSubmitBgColorSwitcherChange}
+												handleColorSwitcherChange={
+													fluentFormSubmitBgColorSwitcherChange
+												}
 												handleGlobalColorChange={fluentFormSubmitBgColorChange}
-												handleGlobalHoverColorChange={fluentFormSubmitBgHoverColorChange}
+												handleGlobalHoverColorChange={
+													fluentFormSubmitBgHoverColorChange
+												}
 											/>
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSubmitPaddingUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSubmitPaddingUnitsHandler
+												}
 												spacingUnits={fluentFormSubmitPaddingUnits}
 												spacingDesktop={fluentFormSubmitPaddingDesktop}
 												spacingTablet={fluentFormSubmitPaddingTablet}
 												spacingMobile={fluentFormSubmitPaddingMobile}
-												handleSpacingUnitHandler={fluentFormSubmitPaddingUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormSubmitPaddingUnitsChange
+												}
 												spacingCombineBtn={fluentFormSubmitPaddingLink}
-												spacingCombineBtnHandler={fluentFormSubmitPaddingLinkBtn}
+												spacingCombineBtnHandler={
+													fluentFormSubmitPaddingLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<FB_Spacing
@@ -4686,7 +6972,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={fluentFormSubmitMarginDesktop}
 												spacingTablet={fluentFormSubmitMarginTablet}
 												spacingMobile={fluentFormSubmitMarginMobile}
-												handleSpacingUnitHandler={fluentFormSubmitMarginUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormSubmitMarginUnitsChange
+												}
 												spacingCombineBtn={fluentFormSubmitMarginLink}
 												spacingCombineBtnHandler={fluentFormSubmitMarginLinkBtn}
 												setAttributes={setAttributes}
@@ -4695,16 +6983,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Border Style", "frontis-blocks")}
 												value={fluentFormSubmitBorder}
 												options={BORDER_STYLES}
-												onChange={(value) => setAttributes({ fluentFormSubmitBorder: value })}
+												onChange={(value) =>
+													setAttributes({ fluentFormSubmitBorder: value })
+												}
 											/>
 											<FB_Color
 												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={fluentFormSubmitBorderColorSwitcher}
+												globalColorSwitcher={
+													fluentFormSubmitBorderColorSwitcher
+												}
 												globalColor={fluentFormSubmitBorderColor}
 												globalHoverColor={fluentFormSubmitBorderHoverColor}
-												handleColorSwitcherChange={fluentFormSubmitBorderColorSwitcherChange}
-												handleGlobalColorChange={fluentFormSubmitBorderColorChange}
-												handleGlobalHoverColorChange={fluentFormSubmitBorderHoverColorChange}
+												handleColorSwitcherChange={
+													fluentFormSubmitBorderColorSwitcherChange
+												}
+												handleGlobalColorChange={
+													fluentFormSubmitBorderColorChange
+												}
+												handleGlobalHoverColorChange={
+													fluentFormSubmitBorderHoverColorChange
+												}
 											/>
 											<FB_Spacing
 												label={__("Border", "frontis-blocks")}
@@ -4714,7 +7012,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={fluentFormSubmitBorderDesktop}
 												spacingTablet={fluentFormSubmitBorderTablet}
 												spacingMobile={fluentFormSubmitBorderMobile}
-												handleSpacingUnitHandler={fluentFormSubmitBorderUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormSubmitBorderUnitsChange
+												}
 												spacingCombineBtn={fluentFormSubmitBorderLink}
 												spacingCombineBtnHandler={fluentFormSubmitBorderLinkBtn}
 												setAttributes={setAttributes}
@@ -4722,20 +7022,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<FB_Spacing
 												label={__("Border Radius", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSubmitBorderRadiusUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSubmitBorderRadiusUnitsHandler
+												}
 												spacingUnits={fluentFormSubmitBorderRadiusUnits}
 												spacingDesktop={fluentFormSubmitBorderRadiusDesktop}
 												spacingTablet={fluentFormSubmitBorderRadiusTablet}
 												spacingMobile={fluentFormSubmitBorderRadiusMobile}
-												handleSpacingUnitHandler={fluentFormSubmitBorderRadiusUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormSubmitBorderRadiusUnitsChange
+												}
 												spacingCombineBtn={fluentFormSubmitBorderRadiusLink}
-												spacingCombineBtnHandler={fluentFormSubmitBorderRadiusLinkBtn}
+												spacingCombineBtnHandler={
+													fluentFormSubmitBorderRadiusLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
-
-
 										</PanelBody>
-										<PanelBody title={__("Success Message", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Success Message", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<BaseControl
 												label={__("Typography", "frontis-blocks")}
 												className="fb-setting-typography"
@@ -4743,41 +7050,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
 																		value={fluentFormSuccessFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormSuccessFontFamily: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSuccessFontFamily: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSuccessFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormSuccessFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSuccessFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormSuccessFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4788,7 +7117,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
 																			value={fluentFormSuccessFontSize}
-																			onChange={(value) => setAttributes({ fluentFormSuccessFontSize: value })}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormSuccessFontSize: value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -4800,74 +7133,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
 																		value={fluentFormSuccessFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormSuccessFontWeight: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSuccessFontWeight: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormSuccessFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormSuccessFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSuccessFontStyle: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
 																		value={fluentFormSuccessTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormSuccessTextTransform: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSuccessTextTransform: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
 																		value={fluentFormSuccessTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormSuccessTextDecoration: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSuccessTextDecoration: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSuccessLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormSuccessLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSuccessLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormSuccessLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4877,7 +7331,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormSuccessLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormSuccessLetterSpacing: value === 0 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSuccessLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4888,15 +7347,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormSuccessLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormSuccessLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormSuccessLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormSuccessLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -4906,7 +7377,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormSuccessLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormSuccessLineHeight: value === 1 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormSuccessLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -4926,7 +7402,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -4934,7 +7410,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -4946,14 +7425,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		onChange={fluentFormSuccessColorChange}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormSuccessColor}
@@ -4972,7 +7453,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -4980,7 +7461,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -4992,14 +7476,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		onChange={fluentFormSuccessBgColorChange}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormSuccessBgColor}
@@ -5015,45 +7501,70 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Border Style", "frontis-blocks")}
 												value={fluentFormSuccessBorder}
 												options={BORDER_STYLES}
-												onChange={(value) => setAttributes({ fluentFormSuccessBorder: value })}
+												onChange={(value) =>
+													setAttributes({ fluentFormSuccessBorder: value })
+												}
 											/>
 											<FB_Color
 												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={fluentFormSuccessBorderColorSwitcher}
+												globalColorSwitcher={
+													fluentFormSuccessBorderColorSwitcher
+												}
 												globalColor={fluentFormSuccessBorderColor}
 												globalHoverColor={fluentFormSuccessBorderHoverColor}
-												handleColorSwitcherChange={fluentFormSuccessBorderColorSwitcherChange}
-												handleGlobalColorChange={fluentFormSuccessBorderColorChange}
-												handleGlobalHoverColorChange={fluentFormSuccessBorderHoverColorChange}
+												handleColorSwitcherChange={
+													fluentFormSuccessBorderColorSwitcherChange
+												}
+												handleGlobalColorChange={
+													fluentFormSuccessBorderColorChange
+												}
+												handleGlobalHoverColorChange={
+													fluentFormSuccessBorderHoverColorChange
+												}
 											/>
 											<FB_Spacing
 												label={__("Border", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSuccessBorderUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSuccessBorderUnitsHandler
+												}
 												spacingUnits={fluentFormSuccessBorderUnits}
 												spacingDesktop={fluentFormSuccessBorderDesktop}
 												spacingTablet={fluentFormSuccessBorderTablet}
 												spacingMobile={fluentFormSuccessBorderMobile}
-												handleSpacingUnitHandler={fluentFormSuccessBorderUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormSuccessBorderUnitsChange
+												}
 												spacingCombineBtn={fluentFormSuccessBorderLink}
-												spacingCombineBtnHandler={fluentFormSuccessBorderLinkBtn}
+												spacingCombineBtnHandler={
+													fluentFormSuccessBorderLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
 											<FB_Spacing
 												label={__("Border Radius", "frontis-blocks")}
 												deviceType={deviceType}
-												spacingUnitsHandler={fluentFormSuccessBorderRadiusUnitsHandler}
+												spacingUnitsHandler={
+													fluentFormSuccessBorderRadiusUnitsHandler
+												}
 												spacingUnits={fluentFormSuccessBorderRadiusUnits}
 												spacingDesktop={fluentFormSuccessBorderRadiusDesktop}
 												spacingTablet={fluentFormSuccessBorderRadiusTablet}
 												spacingMobile={fluentFormSuccessBorderRadiusMobile}
-												handleSpacingUnitHandler={fluentFormSuccessBorderRadiusUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormSuccessBorderRadiusUnitsChange
+												}
 												spacingCombineBtn={fluentFormSuccessBorderRadiusLink}
-												spacingCombineBtnHandler={fluentFormSuccessBorderRadiusLinkBtn}
+												spacingCombineBtnHandler={
+													fluentFormSuccessBorderRadiusLinkBtn
+												}
 												setAttributes={setAttributes}
 											/>
 										</PanelBody>
-										<PanelBody title={__("Error Message", "frontis-blocks")} initialOpen={false}>
+										<PanelBody
+											title={__("Error Message", "frontis-blocks")}
+											initialOpen={false}
+										>
 											<BaseControl
 												label={__("Typography", "frontis-blocks")}
 												className="fb-setting-typography"
@@ -5061,41 +7572,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-dropdown-icon-wrapper"
 													contentClassName="fb-setting-dropdown-icon-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
 															onClick={onToggle}
 															aria-expanded={isOpen}
-															aria-label={__("Toggle Typography Settings", "frontis-blocks")}
+															aria-label={__(
+																"Toggle Typography Settings",
+																"frontis-blocks",
+															)}
 															className="fb-setting-dropdown-icon-btn"
 														>
-															<Dashicon icon="edit" className="fb-setting-dropdown-icon" />
+															<Dashicon
+																icon="edit"
+																className="fb-setting-dropdown-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
 														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner" >
+															<BaseControl className="fb-setting-typography-popup-inner">
 																<div className="fb-setting-fontfamily-wrapper">
 																	<SelectControl
 																		label={__("Font Family", "frontis-blocks")}
 																		options={FONT_FAMILYS}
 																		value={fluentFormErrorFontFamily}
-																		onChange={(value) => setAttributes({ fluentFormErrorFontFamily: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormErrorFontFamily: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontsize-wrapper">
 																	<div className="fb-setting-fontsize-header">
 																		<div className="fb-setting-fontsize-label">
-																			<span>{__("Font Size", "frontis-blocks")}</span>
+																			<span>
+																				{__("Font Size", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-fontsize-units">
 																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormErrorFontSizeUnits: item.value })}
-																						className={`fb-setting-fontsize-units-switcher ${ fluentFormErrorFontSizeUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormErrorFontSizeUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-fontsize-units-switcher ${
+																							fluentFormErrorFontSizeUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -5106,7 +7639,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<div className="fb-setting-fontsize-rangecontrol">
 																		<RangeControl
 																			value={fluentFormErrorFontSize}
-																			onChange={(value) => setAttributes({ fluentFormErrorFontSize: value })}
+																			onChange={(value) =>
+																				setAttributes({
+																					fluentFormErrorFontSize: value,
+																				})
+																			}
 																			min={1}
 																			max={200}
 																			allowReset
@@ -5118,74 +7655,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	<SelectControl
 																		label={__("Font Weight", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "400" },
-																			{ label: __("100", "frontis-blocks"), value: "100" },
-																			{ label: __("200", "frontis-blocks"), value: "200" },
-																			{ label: __("300", "frontis-blocks"), value: "300" },
-																			{ label: __("400", "frontis-blocks"), value: "400" },
-																			{ label: __("500", "frontis-blocks"), value: "500" },
-																			{ label: __("600", "frontis-blocks"), value: "600" },
-																			{ label: __("700", "frontis-blocks"), value: "700" },
-																			{ label: __("800", "frontis-blocks"), value: "800" },
-																			{ label: __("900", "frontis-blocks"), value: "900" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("100", "frontis-blocks"),
+																				value: "100",
+																			},
+																			{
+																				label: __("200", "frontis-blocks"),
+																				value: "200",
+																			},
+																			{
+																				label: __("300", "frontis-blocks"),
+																				value: "300",
+																			},
+																			{
+																				label: __("400", "frontis-blocks"),
+																				value: "400",
+																			},
+																			{
+																				label: __("500", "frontis-blocks"),
+																				value: "500",
+																			},
+																			{
+																				label: __("600", "frontis-blocks"),
+																				value: "600",
+																			},
+																			{
+																				label: __("700", "frontis-blocks"),
+																				value: "700",
+																			},
+																			{
+																				label: __("800", "frontis-blocks"),
+																				value: "800",
+																			},
+																			{
+																				label: __("900", "frontis-blocks"),
+																				value: "900",
+																			},
 																		]}
 																		value={fluentFormErrorFontWeight}
-																		onChange={(value) => setAttributes({ fluentFormErrorFontWeight: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormErrorFontWeight: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-fontstyle-wrapper">
 																	<SelectControl
 																		label={__("Font Style", "frontis-blocks")}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "normal" },
-																			{ label: __("Normal", "frontis-blocks"), value: "normal" },
-																			{ label: __("Italic", "frontis-blocks"), value: "italic" },
-																			{ label: __("Oblique", "frontis-blocks"), value: "oblique" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Normal", "frontis-blocks"),
+																				value: "normal",
+																			},
+																			{
+																				label: __("Italic", "frontis-blocks"),
+																				value: "italic",
+																			},
+																			{
+																				label: __("Oblique", "frontis-blocks"),
+																				value: "oblique",
+																			},
 																		]}
 																		value={fluentFormErrorFontStyle}
-																		onChange={(value) => setAttributes({ fluentFormErrorFontStyle: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormErrorFontStyle: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-texttransform-wrapper">
 																	<SelectControl
-																		label={__("Text Transform", "frontis-blocks")}
+																		label={__(
+																			"Text Transform",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-																			{ label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-																			{ label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Capitalize",
+																					"frontis-blocks",
+																				),
+																				value: "capitalize",
+																			},
+																			{
+																				label: __(
+																					"Uppercase",
+																					"frontis-blocks",
+																				),
+																				value: "uppercase",
+																			},
+																			{
+																				label: __(
+																					"Lowercase",
+																					"frontis-blocks",
+																				),
+																				value: "lowercase",
+																			},
 																		]}
 																		value={fluentFormErrorTextTransform}
-																		onChange={(value) => setAttributes({ fluentFormErrorTextTransform: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormErrorTextTransform: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-textdecoration-wrapper">
 																	<SelectControl
-																		label={__("Text Decoration", "frontis-blocks")}
+																		label={__(
+																			"Text Decoration",
+																			"frontis-blocks",
+																		)}
 																		options={[
-																			{ label: __("Default", "frontis-blocks"), value: "none" },
-																			{ label: __("None", "frontis-blocks"), value: "none" },
-																			{ label: __("Underline", "frontis-blocks"), value: "underline" },
-																			{ label: __("Overline", "frontis-blocks"), value: "overline" },
-																			{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+																			{
+																				label: __("Default", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __("None", "frontis-blocks"),
+																				value: "none",
+																			},
+																			{
+																				label: __(
+																					"Underline",
+																					"frontis-blocks",
+																				),
+																				value: "underline",
+																			},
+																			{
+																				label: __("Overline", "frontis-blocks"),
+																				value: "overline",
+																			},
+																			{
+																				label: __(
+																					"Line Through",
+																					"frontis-blocks",
+																				),
+																				value: "line-through",
+																			},
 																		]}
 																		value={fluentFormErrorTextDecoration}
-																		onChange={(value) => setAttributes({ fluentFormErrorTextDecoration: value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormErrorTextDecoration: value,
+																			})
+																		}
 																	/>
 																</div>
 																<div className="fb-setting-letterspacing-wrapper">
 																	<div className="fb-setting-letterspacing-header">
 																		<div className="fb-setting-letterspacing-label">
-																			<span>{__("Letter Spacing", "frontis-blocks")}</span>
+																			<span>
+																				{__("Letter Spacing", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-letterspacing-units">
 																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormErrorLetterSpacingUnits: item.value })}
-																						className={`fb-setting-letterspacing-units-switcher ${ fluentFormErrorLetterSpacingUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormErrorLetterSpacingUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-letterspacing-units-switcher ${
+																							fluentFormErrorLetterSpacingUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -5195,7 +7853,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormErrorLetterSpacing}
-																		onChange={(value) => setAttributes({ fluentFormErrorLetterSpacing: value === 0 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormErrorLetterSpacing:
+																					value === 0 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -5206,15 +7869,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<div className="fb-setting-lineheight-wrapper">
 																	<div className="fb-setting-lineheight-header">
 																		<div className="fb-setting-lineheight-label">
-																			<span>{__("Line Height", "frontis-blocks")}</span>
+																			<span>
+																				{__("Line Height", "frontis-blocks")}
+																			</span>
 																		</div>
 																		<div className="fb-setting-lineheight-units">
 																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
 																				{UNIT_TYPES.map((item, key) => (
 																					<Button
 																						key={key}
-																						onClick={() => setAttributes({ fluentFormErrorLineHeightUnits: item.value })}
-																						className={`fb-setting-lineheight-units-switcher ${ fluentFormErrorLineHeightUnits === item.value ? 'active' : ''}`}
+																						onClick={() =>
+																							setAttributes({
+																								fluentFormErrorLineHeightUnits:
+																									item.value,
+																							})
+																						}
+																						className={`fb-setting-lineheight-units-switcher ${
+																							fluentFormErrorLineHeightUnits ===
+																							item.value
+																								? "active"
+																								: ""
+																						}`}
 																					>
 																						{item.label}
 																					</Button>
@@ -5224,7 +7899,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</div>
 																	<RangeControl
 																		value={fluentFormErrorLineHeight}
-																		onChange={(value) => setAttributes({ fluentFormErrorLineHeight: value === 1 ? undefined : value })}
+																		onChange={(value) =>
+																			setAttributes({
+																				fluentFormErrorLineHeight:
+																					value === 1 ? undefined : value,
+																			})
+																		}
 																		min={1}
 																		max={100}
 																		step={1}
@@ -5244,7 +7924,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<Dropdown
 													className="fb-setting-color-setting-icon-dropdown"
 													contentClassName="fb-setting-color-setting-icon-dropdown-content"
-													popoverProps={{ placement: 'bottom-start' }}
+													popoverProps={{ placement: "bottom-start" }}
 													renderToggle={({ isOpen, onToggle }) => (
 														<Button
 															variant="primary"
@@ -5252,7 +7932,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															aria-expanded={isOpen}
 															className="fb-setting-color-setting-icon-btn"
 														>
-															<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+															<Dashicon
+																icon="color-picker"
+																className="fb-setting-color-setting-icon"
+															/>
 														</Button>
 													)}
 													renderContent={() => (
@@ -5264,14 +7947,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		onChange={fluentFormErrorColorChange}
 																		enableAlpha={true}
 																	/>
-																	<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
+																	<div className="fb-setting-color-label">
+																		{__("Default Colors", "frontis-blocks")}
+																	</div>
 																	<ColorPalette
 																		colors={[
-																			{ color: '#F72585' },
-																			{ color: '#7209B7' },
-																			{ color: '#3A0CA3' },
-																			{ color: '#4361EE' },
-																			{ color: '#4CC9F0' },
+																			{ color: "#F72585" },
+																			{ color: "#7209B7" },
+																			{ color: "#3A0CA3" },
+																			{ color: "#4361EE" },
+																			{ color: "#4CC9F0" },
 																		]}
 																		disableCustomColors={true}
 																		value={fluentFormErrorColor}
@@ -5291,7 +7976,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={fluentFormErrorPaddingDesktop}
 												spacingTablet={fluentFormErrorPaddingTablet}
 												spacingMobile={fluentFormErrorPaddingMobile}
-												handleSpacingUnitHandler={fluentFormErrorPaddingUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormErrorPaddingUnitsChange
+												}
 												spacingCombineBtn={fluentFormErrorPaddingLink}
 												spacingCombineBtnHandler={fluentFormErrorPaddingLinkBtn}
 												setAttributes={setAttributes}
@@ -5304,7 +7991,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={fluentFormErrorMarginDesktop}
 												spacingTablet={fluentFormErrorMarginTablet}
 												spacingMobile={fluentFormErrorMarginMobile}
-												handleSpacingUnitHandler={fluentFormErrorMarginUnitsChange}
+												handleSpacingUnitHandler={
+													fluentFormErrorMarginUnitsChange
+												}
 												spacingCombineBtn={fluentFormErrorMarginLink}
 												spacingCombineBtnHandler={fluentFormErrorMarginLinkBtn}
 												setAttributes={setAttributes}
@@ -5320,11 +8009,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<PanelBody
 													title={__("Z Index", "frontis-blocks")}
 													initialOpen={true}
-													className='fb-setting-z-index-header'
+													className="fb-setting-z-index-header"
 												>
 													<RangeControl
 														value={fluentFormGlobalZIndex}
-														onChange={(value) => setAttributes({ fluentFormGlobalZIndex: value === 0 ? undefined : value })}
+														onChange={(value) =>
+															setAttributes({
+																fluentFormGlobalZIndex:
+																	value === 0 ? undefined : value,
+															})
+														}
 														min={1}
 														max={10000}
 														step={1}
@@ -5333,18 +8027,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</PanelBody>
 
-												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+												<PanelBody
+													title={__("Padding and Margin", "frontis-blocks")}
+													initialOpen={false}
+												>
 													<FB_Spacing
 														label={__("Padding", "frontis-blocks")}
 														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+														spacingUnitsHandler={
+															handleGlobalPaddingUnitsHandler
+														}
 														spacingUnits={fluentFormGlobalPaddingUnits}
 														spacingDesktop={fluentFormGlobalPaddingDesktop}
 														spacingTablet={fluentFormGlobalPaddingTablet}
 														spacingMobile={fluentFormGlobalPaddingMobile}
-														handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+														handleSpacingUnitHandler={
+															handleGlobalPaddingUnitChange
+														}
 														spacingCombineBtn={fluentFormGlobalPaddingLink}
-														spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+														spacingCombineBtnHandler={
+															handleGlobalPaddingCombineBtn
+														}
 														setAttributes={setAttributes}
 													/>
 													<FB_Spacing
@@ -5355,41 +8058,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														spacingDesktop={fluentFormGlobalMarginDesktop}
 														spacingTablet={fluentFormGlobalMarginTablet}
 														spacingMobile={fluentFormGlobalMarginMobile}
-														handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+														handleSpacingUnitHandler={
+															handleGlobalMarginUnitChange
+														}
 														spacingCombineBtn={fluentFormGlobalMarginLink}
-														spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+														spacingCombineBtnHandler={
+															handleGlobalMarginCombineBtn
+														}
 														setAttributes={setAttributes}
 													/>
 												</PanelBody>
 
-												<PanelBody title="Background Color" initialOpen={false} >
+												<PanelBody title="Background Color" initialOpen={false}>
 													<FB_Color
 														label={__("Background Color", "frontis-blocks")}
-														globalColorSwitcher={fluentFormGlobalBgColorSwitcher}
+														globalColorSwitcher={
+															fluentFormGlobalBgColorSwitcher
+														}
 														globalColor={fluentFormGlobalBgColor}
 														globalHoverColor={fluentFormGlobalBgHoverColor}
-														handleColorSwitcherChange={handleGlobalBgColorSwitcherChange}
+														handleColorSwitcherChange={
+															handleGlobalBgColorSwitcherChange
+														}
 														handleGlobalColorChange={handleGlobalBgColorChange}
-														handleGlobalHoverColorChange={handleGlobalBgHoverColorChange}
+														handleGlobalHoverColorChange={
+															handleGlobalBgHoverColorChange
+														}
 													/>
 												</PanelBody>
-												<PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
-
+												<PanelBody
+													title={__("Border and Radius", "frontis-blocks")}
+													initialOpen={false}
+												>
 													<SelectControl
 														label={__("Border Style", "frontis-blocks")}
 														value={fluentFormGlobalBorder}
 														options={BORDER_STYLES}
-														onChange={(value) => setAttributes({ fluentFormGlobalBorder: value })}
+														onChange={(value) =>
+															setAttributes({ fluentFormGlobalBorder: value })
+														}
 													/>
 
 													<FB_Color
 														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={fluentFormGlobalBorderColorSwitcher}
+														globalColorSwitcher={
+															fluentFormGlobalBorderColorSwitcher
+														}
 														globalColor={fluentFormGlobalBorderColor}
 														globalHoverColor={fluentFormGlobalBorderHoverColor}
-														handleColorSwitcherChange={handleGlobalBorderColorSwitcherChange}
-														handleGlobalColorChange={handleGlobalBorderColorChange}
-														handleGlobalHoverColorChange={handleGlobalBorderHoverColorChange}
+														handleColorSwitcherChange={
+															handleGlobalBorderColorSwitcherChange
+														}
+														handleGlobalColorChange={
+															handleGlobalBorderColorChange
+														}
+														handleGlobalHoverColorChange={
+															handleGlobalBorderHoverColorChange
+														}
 													/>
 
 													<FB_Spacing
@@ -5400,28 +8125,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														spacingDesktop={fluentFormGlobalBorderDesktop}
 														spacingTablet={fluentFormGlobalBorderTablet}
 														spacingMobile={fluentFormGlobalBorderMobile}
-														handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+														handleSpacingUnitHandler={
+															handleGlobalBorderUnitChange
+														}
 														spacingCombineBtn={fluentFormGlobalBorderLink}
-														spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+														spacingCombineBtnHandler={
+															handleGlobalBorderCombineBtn
+														}
 														setAttributes={setAttributes}
 													/>
 
 													<FB_Spacing
 														label={__("Border Radius", "frontis-blocks")}
 														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+														spacingUnitsHandler={
+															handleGlobalBorderRadiusUnitsHandler
+														}
 														spacingUnits={fluentFormGlobalBorderRadiusUnits}
 														spacingDesktop={fluentFormGlobalBorderRadiusDesktop}
 														spacingTablet={fluentFormGlobalBorderRadiusTablet}
 														spacingMobile={fluentFormGlobalBorderRadiusMobile}
-														handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+														handleSpacingUnitHandler={
+															handleGlobalBorderRadiusUnitChange
+														}
 														spacingCombineBtn={fluentFormGlobalBorderRadiusLink}
-														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+														spacingCombineBtnHandler={
+															handleGlobalBorderRadiusCombineBtn
+														}
 														setAttributes={setAttributes}
 													/>
 												</PanelBody>
-
-
 											</div>
 										</div>
 									</>
