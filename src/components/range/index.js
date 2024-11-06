@@ -4,13 +4,17 @@ import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 
-const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, deviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
+const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, deviceType, units, setAttributes, rangeStep, resetFallbackValue, units_types_arr = null }) => {
 
-	const UNIT_TYPES = [
+	let UNIT_TYPES = [
 		{ label: 'px', value: 'px' },
 		{ label: '%', value: '%' },
 		{ label: 'em', value: 'em' },
 	];
+
+	if(units_types_arr) {
+		UNIT_TYPES = units_types_arr;
+	}
 
 	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {

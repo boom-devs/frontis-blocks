@@ -1,101 +1,119 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+/**
+ * BLOCK: Container - Save Block
+ */
 
-const Save = ({ attributes }) => {
-  const { 
-    layout, 
-    htmlTag: Tag = 'div',
-    placeholder, 
-    containerWidth,
-    contentBoxWidth,
-    minimumHeight,
-    equalHeight,
-    overflow,
-    isChildBlock,
-  } = attributes;
+import classnames from 'classnames';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import shapes from './shapes';
 
-  const getColumnClass = (layout, isChildBlock, index) => {
-    if (!isChildBlock) return '';
-  
-    let columnClass = 'fb-column';
-  
-    switch (layout) {
-      case 'two-columns':
-        columnClass += ' fb-column-50';
-        break;
-      case 'three-columns':
-        columnClass += ' fb-column-33';
-        break;
-      case 'four-columns':
-        columnClass += ' fb-column-25';
-        break;
-      case 'two-rows-two-columns':
-        columnClass += ' fb-column-50';
-        break;
-      case 'three-columns-wide-center':
-        if (index === 1) {
-          columnClass += ' fb-column-50';
-        } else {
-          columnClass += ' fb-column-25';
-        }
-        break;
-      case 'two-thirds-one-third':
-        if (index === 0) {
-          columnClass += ' fb-column-66';
-        } else {
-          columnClass += ' fb-column-33';
-        }
-        break;
-      case 'one-third-two-thirds':
-        if (index === 0) {
-          columnClass += ' fb-column-33';
-        } else {
-          columnClass += ' fb-column-66';
-        }
-        break;
-      case 'two-rows-three-columns':
-        columnClass += ' fb-column-33';
-        break;
-      default:
-        // For any unspecified layouts, default to equal width
-        columnClass += ' fb-column-equal';
-    }
-  
-    return columnClass;
-  };
+export default function save( props ) {
+	const {
+		block_id,
+		htmlTag,
+		htmlTagLink,
+		contentWidth,
+		innerContentWidth,
+		isBlockRootParent,
+		topType,
+		topFlip,
+		topContentAboveShape,
+		bottomType,
+		bottomFlip,
+		bottomContentAboveShape,
+		backgroundType,
+		backgroundVideo,
+		topInvert,
+		bottomInvert,
+		linkTarget,
+	} = props.attributes;
 
+	const topDividerHtml = 'none' !== topType && (
+		<div
+			className={ classnames(
+				'frontis-blocks-container__shape',
+				'frontis-blocks-container__shape-top',
+				{ 'frontis-blocks-container__shape-flip': topFlip === true },
+				{
+					'frontis-blocks-container__shape-above-content': topContentAboveShape === true,
+				},
+				{ 'frontis-blocks-container__invert': topInvert === true }
+			) }
+		>
+			{ shapes[ topType ] }
+		</div>
+	);
 
-  const containerStyle = {
-    ...(containerWidth === 'custom' && { maxWidth: `${contentBoxWidth}px` }),
-    ...(minimumHeight && { minHeight: `${minimumHeight}px` }),
-    ...(equalHeight && { height: '100%' }),
-    overflow,
-  };
+	const bottomDividerHtml = 'none' !== bottomType && (
+		<div
+			className={ classnames(
+				'frontis-blocks-container__shape',
+				'frontis-blocks-container__shape-bottom',
+				{ 'frontis-blocks-container__shape-flip': bottomFlip === true },
+				{
+					'frontis-blocks-container__shape-above-content': bottomContentAboveShape === true,
+				},
+				{ 'frontis-blocks-container__invert': bottomInvert === true }
+			) }
+			data-negative="false"
+		>
+			{ shapes[ bottomType ] }
+		</div>
+	);
 
-//   const containerClasses = [
-//     'fb-container',
-//     isChildBlock ? getColumnClass() : `fb-container-${layout}`,
-//     containerWidth === 'boxed' ? 'fb-container-boxed' : '',
-//     equalHeight ? 'fb-container-equal-height' : '',
-    //   ].filter(Boolean).join(' ');
-    
-    const containerClasses = [
-        'fb-container',
-        isChildBlock ? 'fb-column' : `fb-container-${layout}`,
-        containerWidth === 'boxed' ? 'fb-container-boxed' : '',
-        equalHeight ? 'fb-container-equal-height' : '',
-        placeholder ? 'fb-inner-blocks-placeholder' : '',
-      ].filter(Boolean).join(' ');
+	const CustomTag = 'a' === htmlTag ? 'div' : `${ htmlTag }`;
+	const customTagLinkAttributes = {};
+	if ( htmlTag === 'a' ) {
+		customTagLinkAttributes.rel = 'noopener';
+		if ( htmlTagLink?.url ) {
+			customTagLinkAttributes.href = htmlTagLink?.url;
+		}
+		if ( htmlTagLink?.opensInNewTab ) {
+			customTagLinkAttributes.target = '_blank';
+		}
+		if ( htmlTagLink?.noFollow ) {
+			customTagLinkAttributes.rel = 'nofollow noopener';
+		}
+	}
 
-  const blockProps = useBlockProps.save({
-    className: containerClasses,
-    style: containerStyle,
-  });
+	const blockProps = useBlockProps.save();
 
-  return (
-    <Tag {...blockProps}>
-      <InnerBlocks.Content />
-    </Tag>
-  );
-};
-
-export default Save;
+	return (
+		<>
+			<CustomTag
+				id={ blockProps.id }
+				className={ classnames(
+					blockProps.className,
+					`frontis-blocks-block-${ block_id }`,
+					isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : ''
+				) }
+			>
+				{/* Video Background is positioned absolutely. The place in the DOM is to render it underneath the shape dividers and content. */}
+				{ 'video' === backgroundType && (
+					<div className="frontis-blocks-container__video-wrap">
+						{ backgroundVideo && (
+							<video autoPlay loop muted playsinline>
+								<source src={ backgroundVideo.url } type="video/mp4" />
+							</video>
+						) }
+					</div>
+				) }
+				{/* Both the dividers are positioned absolutely. Their place in the DOM is just to determine their default Z-index. */}
+				{ topDividerHtml }
+				{ bottomDividerHtml }
+				{/* Render the content above the Video Background if any and above the Shape Dividers. */}
+				{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ? (
+					<div className="frontis-blocks-container-inner-blocks-wrap">
+						<InnerBlocks.Content />
+					</div>
+				) : (
+					<InnerBlocks.Content />
+				) }
+				{
+					htmlTag === 'a' && 'undefined' !== typeof customTagLinkAttributes.href && (
+						<a className='frontis-blocks-container-link-overlay' { ...customTagLinkAttributes } > </a>
+					)
+				}
+			</CustomTag>
+		</>
+	);
+}
