@@ -784,5 +784,9 @@ const attributes = {
 	globalZIndex : {
         type: "number",
     },
+	blockStyle: {
+        type: "string",
+        default: "",
+    },
 }
 export default attributes;
