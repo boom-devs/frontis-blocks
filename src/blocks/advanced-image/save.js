@@ -50,60 +50,7 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			<style>
-				{`
-				.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
-                    width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
-                    ${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop}`};
-                }
-                @media all and (max-width: 1024px){
-                .fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
-                    width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
-                    ${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}`};
-                }
-                }
-                @media all and (max-width: 767px){
-                .fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
-                    width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
-                    ${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}`};
-                }
-                }
-                .fb-advanced-image-wrapper.${blockID} .fb-advanced-image-caption figcaption {
-                    text-align: ${captionAlignment};
-                }
-                .fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title{
-                    ${HeadingColor !== undefined ? `color: ${HeadingColor};` : ''}
-                    ${HeadingBackgroundColor !== undefined ? `background-color: ${HeadingBackgroundColor};` : ''}
-                    font-family: ${HeadingFontFamily !== 'default' ? HeadingFontFamily : HeadingFontFamily};
-                    font-size: ${HeadingFontSize !== undefined ? `${HeadingFontSize}${HeadingFontSizeUnits}` : ''};
-                    font-weight: ${HeadingFontWeight};
-                    font-style: ${HeadingFontStyle};
-                    text-transform: ${HeadingTextTransform};
-                    text-decoration: ${HeadingTextDecoration};
-                    ${HeadingLetterSpacing !== undefined ? `letter-spacing: ${HeadingLetterSpacing}${HeadingLetterSpacingUnits};` : ''}
-                    ${HeadingLineHeight !== undefined ? `line-height: ${HeadingLineHeight}${HeadingLineHeightUnits};` : ''}
-                    transition: all .3s ease-in-out;
-                    padding: ${padding};
-                    margin: ${margin};
-                    border: ${HeadingBorder};
-                    border-width: ${borderWidth};
-                    border-radius: ${borderRadiusWidth};
-                    ${HeadingBorderColor !== undefined ? `border-color: ${HeadingBorderColor};` : ''}
-                }
-                @media all and (max-width: 1024px){
-                .fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title{
-                    width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
-                    ${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}`};
-                }
-                }
-                @media all and (max-width: 767px){
-                .fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title{
-                    width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
-                    ${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}`};
-                }
-                }
-            `}
-			</style>
+			
 			<div {...blockProps} id={blockID}>
 				<div className={`fb-advanced-image-wrapper ${blockID}`}>
 					<div
