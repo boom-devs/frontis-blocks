@@ -20,6 +20,7 @@ import FB_Range from '@Components/range';
 import FB_Color from '@Components/color';
 import FB_ImageControl from '@Components/image-control';
 import FBIconPicker from "../../components/icon-picker";
+import FB_BoxShadowControl from "@Components/box-shadow";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
