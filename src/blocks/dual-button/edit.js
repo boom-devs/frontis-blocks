@@ -88,6 +88,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 : "row-reverse",
 								}}
 							>
+							{buttonIconAlign !== 'icon-only' && (
 								<RichText
 									tagName="span"
 									value={ButtonText}
@@ -95,12 +96,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									placeholder={__('Enter button text...', 'frontis-blocks')}
 									className="fb-advanced-button-text"
 								/>
+							)}
 							{buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
                             </div>
-                        )}
-							</a>
+                        	)}
+							{buttonIconAlign === 'icon-only' && (
+                            <div className={`fb-advanced-button-icon-wrapper`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(ButtonIcon)}</div>
+                            </div>
+                        	)}
+						</a>
 						</div>
 						{connectorSwitcher && (
 						<div className="fb-dual-button-connector">
@@ -130,6 +137,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								
 								}}
 							>
+								{buttonTwoIconAlign !== 'icon-only' && (
 								<RichText
 									tagName="span"
 									value={ButtonTwoText}
@@ -137,11 +145,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									placeholder={__('Enter button text...', 'frontis-blocks')}
 									className="fb-advanced-button-text"
 								/>
+								)}
 							{buttonTwoIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(ButtonTwoIcon)}</div>
                             </div>
-                        )}
+                        	)}
+							{buttonTwoIconAlign === 'icon-only' && (
+                            <div className={`fb-advanced-button-icon-wrapper`}>
+                                <div className="fb-advanced-button-icon">{renderSVG(ButtonTwoIcon)}</div>
+                            </div>
+                        	)}
 							</a>
 						</div>
 					</div>

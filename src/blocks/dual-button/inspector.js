@@ -40,6 +40,7 @@ import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
+import FB_BoxShadowControl from "@Components/box-shadow";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -158,6 +159,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonsGapUnits,
 		buttonsDirection,
 		blockStyle,
+		connectorBorder,
+		connectorBorderColorSwitcher,
+		connectorBorderColor,
+		connectorBorderHoverColor,
+		connectorBorderUnits,
+		connectorBorderDesktop,
+		connectorBorderTablet,
+		connectorBorderMobile,
+		connectorBorderLink,
+		dualButtonGlobalZIndex,
+		dualButtonGlobalPaddingUnits,
+		dualButtonGlobalPaddingDesktop,
+		dualButtonGlobalPaddingTablet,
+		dualButtonGlobalPaddingMobile,
+		dualButtonGlobalPaddingLink,
+		dualButtonGlobalMarginUnits,
+		dualButtonGlobalMarginDesktop,
+		dualButtonGlobalMarginTablet,
+		dualButtonGlobalMarginMobile,
+		dualButtonGlobalMarginLink,
+		dualButtonGlobalBgColorSwitcher,
+		dualButtonGlobalBgColor,
+		dualButtonGlobalBgHoverColor,
+		dualButtonGlobalBorder,
+		dualButtonGlobalBorderColorSwitcher,
+		dualButtonGlobalBorderColor,
+		dualButtonGlobalBorderHoverColor,
+		dualButtonGlobalBorderUnits,
+		dualButtonGlobalBorderDesktop,
+		dualButtonGlobalBorderTablet,
+		dualButtonGlobalBorderMobile,
+		dualButtonGlobalBorderLink,
+		dualButtonGlobalBorderRadiusUnits,
+		dualButtonGlobalBorderRadiusDesktop,
+		dualButtonGlobalBorderRadiusTablet,
+		dualButtonGlobalBorderRadiusMobile,
+		dualButtonGlobalBorderRadiusLink,
+		dualButtonGlobalBoxShadowValues,
+		dualButtonGlobalBoxShadowCssValue,
 	} = attributes;
 
 	useEffect(() => {
@@ -182,14 +222,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const btnIconSizeUnitsHandler = (value) => {
 		setAttributes({ btnIconSizeUnits: value });
-	};
-
-	const btnIconSpacingHandler = (value) => {
-		setAttributes({ btnIconSpacing: value });
-	};
-
-	const btnIconSpacingUnitsHandler = (value) => {
-		setAttributes({ btnIconSpacingUnits: value });
 	};
 
 	//Button One
@@ -802,6 +834,448 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const borderRadiusWidth = `${ButtonDesktopBorderRadiusWidth.top}${ButtonBorderRadiusUnits} ${ButtonDesktopBorderRadiusWidth.right}${ButtonBorderRadiusUnits} ${ButtonDesktopBorderRadiusWidth.bottom}${ButtonBorderRadiusUnits} ${ButtonDesktopBorderRadiusWidth.left}${ButtonBorderRadiusUnits}`;
 	/** End Border Radius Width */
 
+	/** Start Global border */
+	const connectorBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (connectorBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						connectorBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						connectorBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						connectorBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						connectorBorderDesktop: {
+							...connectorBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						connectorBorderTablet: {
+							...connectorBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						connectorBorderMobile: {
+							...connectorBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const connectorBorderCombineBtn = () => {
+		setAttributes({ connectorBorderLink: !connectorBorderLink });
+	};
+
+	const connectorBorderUnitsHandler = (unit) => {
+		setAttributes({
+			connectorBorderUnits: {
+				...connectorBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	const connectorDesktopBorderWidth = `${connectorBorderDesktop.top}${connectorBorderUnits.Desktop} ${connectorBorderDesktop.right}${connectorBorderUnits.Desktop} ${connectorBorderDesktop.bottom}${connectorBorderUnits.Desktop} ${connectorBorderDesktop.left}${connectorBorderUnits.Desktop}`;
+	const connectorTabletBorderWidth = `${connectorBorderTablet.top}${connectorBorderUnits.Tablet} ${connectorBorderTablet.right}${connectorBorderUnits.Tablet} ${connectorBorderTablet.bottom}${connectorBorderUnits.Tablet} ${connectorBorderTablet.left}${connectorBorderUnits.Tablet}`;
+	const connectorMobileBorderWidth = `${connectorBorderMobile.top}${connectorBorderUnits.Mobile} ${connectorBorderMobile.right}${connectorBorderUnits.Mobile} ${connectorBorderMobile.bottom}${connectorBorderUnits.Mobile} ${connectorBorderMobile.left}${connectorBorderUnits.Mobile}`;
+
+	/** Start Global padding */
+	const handleGlobalPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (dualButtonGlobalPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalPaddingDesktop: {
+							...dualButtonGlobalPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalPaddingTablet: {
+							...dualButtonGlobalPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalPaddingMobile: {
+							...dualButtonGlobalPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleGlobalPaddingCombineBtn = () => {
+		setAttributes({
+			dualButtonGlobalPaddingLink: !dualButtonGlobalPaddingLink,
+		});
+	};
+
+	const handleGlobalPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			dualButtonGlobalPaddingUnits: {
+				...dualButtonGlobalPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const globalDesktopPadding = `${dualButtonGlobalPaddingDesktop.top}${dualButtonGlobalPaddingUnits.Desktop} ${dualButtonGlobalPaddingDesktop.right}${dualButtonGlobalPaddingUnits.Desktop} ${dualButtonGlobalPaddingDesktop.bottom}${dualButtonGlobalPaddingUnits.Desktop} ${dualButtonGlobalPaddingDesktop.left}${dualButtonGlobalPaddingUnits.Desktop}`;
+	const globalTabletPadding = `${dualButtonGlobalPaddingTablet.top}${dualButtonGlobalPaddingUnits.Tablet} ${dualButtonGlobalPaddingTablet.right}${dualButtonGlobalPaddingUnits.Tablet} ${dualButtonGlobalPaddingTablet.bottom}${dualButtonGlobalPaddingUnits.Tablet} ${dualButtonGlobalPaddingTablet.left}${dualButtonGlobalPaddingUnits.Tablet}`;
+	const globalMobilePadding = `${dualButtonGlobalPaddingMobile.top}${dualButtonGlobalPaddingUnits.Mobile} ${dualButtonGlobalPaddingMobile.right}${dualButtonGlobalPaddingUnits.Mobile} ${dualButtonGlobalPaddingMobile.bottom}${dualButtonGlobalPaddingUnits.Mobile} ${dualButtonGlobalPaddingMobile.left}${dualButtonGlobalPaddingUnits.Mobile}`;
+	/** End Global Padding */
+
+	/** Start Global Margin */
+	const handleGlobalMarginUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (dualButtonGlobalMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalMarginDesktop: {
+							...dualButtonGlobalMarginDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalMarginTablet: {
+							...dualButtonGlobalMarginTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalMarginMobile: {
+							...dualButtonGlobalMarginMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleGlobalMarginCombineBtn = () => {
+		setAttributes({ dualButtonGlobalMarginLink: !dualButtonGlobalMarginLink });
+	};
+
+	const handleGlobalMarginUnitsHandler = (unit) => {
+		setAttributes({
+			dualButtonGlobalMarginUnits: {
+				...dualButtonGlobalMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const globalDesktopMargin = `${dualButtonGlobalMarginDesktop.top}${dualButtonGlobalMarginUnits.Desktop} ${dualButtonGlobalMarginDesktop.right}${dualButtonGlobalMarginUnits.Desktop} ${dualButtonGlobalMarginDesktop.bottom}${dualButtonGlobalMarginUnits.Desktop} ${dualButtonGlobalMarginDesktop.left}${dualButtonGlobalMarginUnits.Desktop}`;
+	const globalTabletMargin = `${dualButtonGlobalMarginTablet.top}${dualButtonGlobalMarginUnits.Tablet} ${dualButtonGlobalMarginTablet.right}${dualButtonGlobalMarginUnits.Tablet} ${dualButtonGlobalMarginTablet.bottom}${dualButtonGlobalMarginUnits.Tablet} ${dualButtonGlobalMarginTablet.left}${dualButtonGlobalMarginUnits.Tablet}`;
+	const globalMobileMargin = `${dualButtonGlobalMarginMobile.top}${dualButtonGlobalMarginUnits.Mobile} ${dualButtonGlobalMarginMobile.right}${dualButtonGlobalMarginUnits.Mobile} ${dualButtonGlobalMarginMobile.bottom}${dualButtonGlobalMarginUnits.Mobile} ${dualButtonGlobalMarginMobile.left}${dualButtonGlobalMarginUnits.Mobile}`;
+	/** End Global Margin */
+
+	/** Start Global Border */
+	const handleGlobalBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (dualButtonGlobalBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalBorderDesktop: {
+							...dualButtonGlobalBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalBorderTablet: {
+							...dualButtonGlobalBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalBorderMobile: {
+							...dualButtonGlobalBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleGlobalBorderCombineBtn = () => {
+		setAttributes({ dualButtonGlobalBorderLink: !dualButtonGlobalBorderLink });
+	};
+
+	const handleGlobalBorderUnitsHandler = (unit) => {
+		setAttributes({
+			dualButtonGlobalBorderUnits: {
+				...dualButtonGlobalBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const globalDesktopBorderWidth = `${dualButtonGlobalBorderDesktop.top}${dualButtonGlobalBorderUnits.Desktop} ${dualButtonGlobalBorderDesktop.right}${dualButtonGlobalBorderUnits.Desktop} ${dualButtonGlobalBorderDesktop.bottom}${dualButtonGlobalBorderUnits.Desktop} ${dualButtonGlobalBorderDesktop.left}${dualButtonGlobalBorderUnits.Desktop}`;
+	const globalTabletBorderWidth = `${dualButtonGlobalBorderTablet.top}${dualButtonGlobalBorderUnits.Tablet} ${dualButtonGlobalBorderTablet.right}${dualButtonGlobalBorderUnits.Tablet} ${dualButtonGlobalBorderTablet.bottom}${dualButtonGlobalBorderUnits.Tablet} ${dualButtonGlobalBorderTablet.left}${dualButtonGlobalBorderUnits.Tablet}`;
+	const globalMobileBorderWidth = `${dualButtonGlobalBorderMobile.top}${dualButtonGlobalBorderUnits.Mobile} ${dualButtonGlobalBorderMobile.right}${dualButtonGlobalBorderUnits.Mobile} ${dualButtonGlobalBorderMobile.bottom}${dualButtonGlobalBorderUnits.Mobile} ${dualButtonGlobalBorderMobile.left}${dualButtonGlobalBorderUnits.Mobile}`;
+	/** End Border */
+
+	/** Start Global Border Radius */
+	const handleGlobalBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (dualButtonGlobalBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						dualButtonGlobalBorderRadiusDesktop: {
+							...dualButtonGlobalBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						dualButtonGlobalBorderRadiusTablet: {
+							...dualButtonGlobalBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						dualButtonGlobalBorderRadiusMobile: {
+							...dualButtonGlobalBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleGlobalBorderRadiusCombineBtn = () => {
+		setAttributes({
+			dualButtonGlobalBorderRadiusLink: !dualButtonGlobalBorderRadiusLink,
+		});
+	};
+
+	const handleGlobalBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			dualButtonGlobalBorderRadiusUnits: {
+				...dualButtonGlobalBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+
+	const globalDesktopBorderRadiusWidth = `${dualButtonGlobalBorderRadiusDesktop.top}${dualButtonGlobalBorderRadiusUnits.Desktop} ${dualButtonGlobalBorderRadiusDesktop.right}${dualButtonGlobalBorderRadiusUnits.Desktop} ${dualButtonGlobalBorderRadiusDesktop.bottom}${dualButtonGlobalBorderRadiusUnits.Desktop} ${dualButtonGlobalBorderRadiusDesktop.left}${dualButtonGlobalBorderRadiusUnits.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${dualButtonGlobalBorderRadiusTablet.top}${dualButtonGlobalBorderRadiusUnits.Tablet} ${dualButtonGlobalBorderRadiusTablet.right}${dualButtonGlobalBorderRadiusUnits.Tablet} ${dualButtonGlobalBorderRadiusTablet.bottom}${dualButtonGlobalBorderRadiusUnits.Tablet} ${dualButtonGlobalBorderRadiusTablet.left}${dualButtonGlobalBorderRadiusUnits.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${dualButtonGlobalBorderRadiusMobile.top}${dualButtonGlobalBorderRadiusUnits.Mobile} ${dualButtonGlobalBorderRadiusMobile.right}${dualButtonGlobalBorderRadiusUnits.Mobile} ${dualButtonGlobalBorderRadiusMobile.bottom}${dualButtonGlobalBorderRadiusUnits.Mobile} ${dualButtonGlobalBorderRadiusMobile.left}${dualButtonGlobalBorderRadiusUnits.Mobile}`;
+
 	/* set default values for the style attributes */
 	useEffect(() => {
 		if (ButtonFontFamily) {
@@ -826,6 +1300,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const dualButtonStyle = useMemo(
 		() => `
+		.fb-dual-button-container.${blockID} {
+            ${
+							dualButtonGlobalZIndex !== undefined
+								? `z-index: ${dualButtonGlobalZIndex};`
+								: ""
+						}
+            ${
+							dualButtonGlobalBgColor !== undefined
+								? `background-color: ${dualButtonGlobalBgColor};`
+								: ""
+						} 
+            ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
+            ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ""} 
+            ${
+							dualButtonGlobalBorder ? `border: ${dualButtonGlobalBorder};` : ""
+						} 
+            ${
+							globalDesktopBorderWidth
+								? `border-width: ${globalDesktopBorderWidth};`
+								: ""
+						}
+            ${
+							globalDesktopBorderRadiusWidth
+								? `border-radius: ${globalDesktopBorderRadiusWidth};`
+								: ""
+						}
+            ${
+							dualButtonGlobalBorderColor !== undefined
+								? `border-color: ${dualButtonGlobalBorderColor};`
+								: ""
+						}
+            ${
+							dualButtonGlobalBoxShadowCssValue
+								? `box-shadow: ${dualButtonGlobalBoxShadowCssValue};`
+								: ""
+						}
+            transition: all .3s ease-in-out;
+            position: relative;
+        }
+        .fb-dual-button-container.${blockID}:hover {
+            ${
+							dualButtonGlobalBgHoverColor !== undefined
+								? `background-color: ${dualButtonGlobalBgHoverColor};`
+								: ""
+						}
+            ${
+							dualButtonGlobalBorderHoverColor !== undefined
+								? `border-color: ${dualButtonGlobalBorderHoverColor};`
+								: ""
+						}
+        }
 		.fb-dual-button-container.${blockID} .fb-advanced-button {
 			font-family: ${
 				ButtonFontFamily !== "default" ? ButtonFontFamily : ButtonFontFamily
@@ -853,6 +1378,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			margin: ${buttonDesktopMargin};
 			z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ""};
 			width: ${ButtonWidth !== undefined ? `${ButtonWidth}%` : ""};
+			gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-wrapper {
 			gap: ${buttonsGap.Desktop}${buttonsGapUnits.Desktop};
@@ -930,6 +1456,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					? `border-color: ${ButtonTwoBorderColor};`
 					: ""
 			}
+			margin-left: 
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button:hover {
 			${
@@ -974,6 +1501,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
     }
     .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
+        ${connectorColor !== undefined ? `color: ${connectorColor};` : ""}
         ${
 					connectorBgColor !== undefined
 						? `background-color: ${connectorBgColor};`
@@ -986,7 +1514,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				};
         font-size: ${
 					connectorFontSize !== undefined
-						? `${connectorFontSize}${connectorFontSizeUnits}`
+						? `${connectorFontSize}${connectorFontSizeUnits};`
 						: ""
 				}
         font-weight: ${connectorFontWeight};
@@ -1003,9 +1531,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						? `line-height: ${connectorLineHeight}${connectorLineHeightUnits};`
 						: ""
 				}
+		border: ${connectorBorder};
+		border-color: ${connectorBorderColor};
+        border-width: ${connectorDesktopBorderWidth};
         width: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
         height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
     }
+	.fb-dual-button-container.${blockID} .fb-dual-button-connector:hover .fb-dual-button-connector-text {
+        ${
+					connectorHoverColor !== undefined
+						? `color: ${connectorHoverColor};`
+						: ""
+				}
+        ${
+					connectorBgHoverColor !== undefined
+						? `background-color: ${connectorBgHoverColor};`
+						: ""
+				}
+        ${
+					connectorBorderHoverColor !== undefined
+						? `border-color: ${connectorBorderHoverColor};`
+						: ""
+				}
+	}
     @media only screen and (max-width: 1024px) {
         .fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
             width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
@@ -1021,9 +1569,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     .fb-dual-button-container.${blockID} .fb-advanced-button-icon-wrapper svg {
         ${btnIconColor !== undefined ? `fill: ${btnIconColor};` : ""}
         width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
-    }
-    .fb-dual-button-container.${blockID} .fb-advanced-button {
-        gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
     }
     .fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg,
     .fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
@@ -1042,6 +1587,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	`,
 		[
 			blockID,
+			dualButtonGlobalZIndex,
+			dualButtonGlobalBgColor,
+			globalDesktopPadding,
+			globalDesktopMargin,
+			dualButtonGlobalBorder,
+			globalDesktopBorderWidth,
+			globalDesktopBorderRadiusWidth,
+			dualButtonGlobalBorderColor,
+			dualButtonGlobalBoxShadowCssValue,
+			dualButtonGlobalBgHoverColor,
+			dualButtonGlobalBorderHoverColor,
 			ButtonFontFamily,
 			ButtonFontSize,
 			ButtonFontSizeUnits,
@@ -1076,6 +1632,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			ButtonTwoColor,
 			ButtonHoverColor,
 			connectorBgColor,
+			connectorHoverColor,
 			connectorFontFamily,
 			connectorFontSize,
 			connectorFontSizeUnits,
@@ -1087,12 +1644,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			connectorLetterSpacingUnits,
 			connectorLineHeight,
 			connectorLineHeightUnits,
+			connectorBorder,
+			connectorBorderColor,
+			connectorDesktopBorderWidth,
+			connectorBorderHoverColor,
 			connectorSize,
 			btnIconColor,
 			btnIconSize,
 			btnIconSizeUnits,
 			btnIconHoverColor,
 			btnIconSpacing,
+			btnIconSpacingUnits,
+			buttonsGap,
+			buttonsGapUnits,
 		],
 	);
 
@@ -2950,7 +3514,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 										{/*Spacing*/}
 
-										{/*	Connector */}
+										{/*	Connector Style*/}
 										<PanelBody
 											title={__("Connector", "frontis-blocks")}
 											initialOpen={false}
@@ -3630,6 +4194,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</BaseControl>
 											)}
+
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={connectorBorder}
+												options={BORDER_STYLES}
+												onChange={(value) =>
+													setAttributes({ connectorBorder: value })
+												}
+											/>
+
+											<FB_Color
+												label={__("Border Color", "frontis-blocks")}
+												globalColorSwitcher={connectorBorderColorSwitcher}
+												globalColor={connectorBorderColor}
+												globalHoverColor={connectorBorderHoverColor}
+												handleColorSwitcherChange={(value) =>
+													setAttributes({
+														connectorBorderColorSwitcher: value,
+													})
+												}
+												handleGlobalColorChange={(value) =>
+													setAttributes({ connectorBorderColor: value })
+												}
+												handleGlobalHoverColorChange={(value) =>
+													setAttributes({
+														connectorBorderHoverColor: value,
+													})
+												}
+											/>
+
+											<FB_Spacing
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={connectorBorderUnitsHandler}
+												spacingUnits={connectorBorderUnits}
+												spacingDesktop={connectorBorderDesktop}
+												spacingTablet={connectorBorderTablet}
+												spacingMobile={connectorBorderMobile}
+												handleSpacingUnitHandler={connectorBorderUnitChange}
+												spacingCombineBtn={connectorBorderLink}
+												spacingCombineBtnHandler={connectorBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
 										</PanelBody>
 										{/*	Icon */}
 										<PanelBody
@@ -3649,18 +4256,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={50}
 											/>
+
 											<FB_Range
 												min={1}
-												max={300}
+												max={100}
 												label={__("Spacing", "frontis-blocks")}
 												rangeValue={btnIconSpacing}
-												onChangeHandler={btnIconSpacingHandler}
-												rangeUnitHandler={btnIconSpacingUnitsHandler}
+												onChangeHandler={(value) =>
+													setAttributes({ btnIconSpacing: value })
+												}
+												rangeUnitHandler={(value) =>
+													setAttributes({ btnIconSpacingUnits: value })
+												}
 												deviceType={deviceType}
 												units={btnIconSpacingUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={50}
+												resetFallbackValue={""}
 											/>
 											<FB_Color
 												label={__("Icon Color", "frontis-blocks")}
@@ -3690,17 +4302,172 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													className="fb-setting-z-index-header"
 												>
 													<RangeControl
-														value={ButtonZIndex}
+														value={dualButtonGlobalZIndex}
 														onChange={(value) =>
 															setAttributes({
-																ButtonZIndex: value === 0 ? undefined : value,
+																dualButtonGlobalZIndex:
+																	value === 0 ? undefined : value,
 															})
 														}
-														min={1}
-														max={100}
+														min={0}
+														max={10000000}
 														step={1}
 														allowReset
-														resetFallbackValue={undefined}
+														resetFallbackValue={""}
+													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Padding and Margin", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_Spacing
+														label={__("Padding", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={
+															handleGlobalPaddingUnitsHandler
+														}
+														spacingUnits={dualButtonGlobalPaddingUnits}
+														spacingDesktop={dualButtonGlobalPaddingDesktop}
+														spacingTablet={dualButtonGlobalPaddingTablet}
+														spacingMobile={dualButtonGlobalPaddingMobile}
+														handleSpacingUnitHandler={
+															handleGlobalPaddingUnitChange
+														}
+														spacingCombineBtn={dualButtonGlobalPaddingLink}
+														spacingCombineBtnHandler={
+															handleGlobalPaddingCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+													<FB_Spacing
+														label={__("Margin", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+														spacingUnits={dualButtonGlobalMarginUnits}
+														spacingDesktop={dualButtonGlobalMarginDesktop}
+														spacingTablet={dualButtonGlobalMarginTablet}
+														spacingMobile={dualButtonGlobalMarginMobile}
+														handleSpacingUnitHandler={
+															handleGlobalMarginUnitChange
+														}
+														spacingCombineBtn={dualButtonGlobalMarginLink}
+														spacingCombineBtnHandler={
+															handleGlobalMarginCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+												</PanelBody>
+
+												<PanelBody title="Background Color" initialOpen={false}>
+													<FB_Color
+														label={__("Background Color", "frontis-blocks")}
+														globalColorSwitcher={
+															dualButtonGlobalBgColorSwitcher
+														}
+														globalColor={dualButtonGlobalBgColor}
+														globalHoverColor={dualButtonGlobalBgHoverColor}
+														handleColorSwitcherChange={(value) =>
+															setAttributes({
+																dualButtonGlobalBgColorSwitcher: value,
+															})
+														}
+														handleGlobalColorChange={(value) =>
+															setAttributes({ dualButtonGlobalBgColor: value })
+														}
+														handleGlobalHoverColorChange={(value) =>
+															setAttributes({
+																dualButtonGlobalBgHoverColor: value,
+															})
+														}
+													/>
+												</PanelBody>
+												<PanelBody
+													title={__("Border and Shadow", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<SelectControl
+														label={__("Border Style", "frontis-blocks")}
+														value={dualButtonGlobalBorder}
+														options={BORDER_STYLES}
+														onChange={(value) =>
+															setAttributes({ dualButtonGlobalBorder: value })
+														}
+													/>
+
+													<FB_Color
+														label={__("Border Color", "frontis-blocks")}
+														globalColorSwitcher={
+															dualButtonGlobalBorderColorSwitcher
+														}
+														globalColor={dualButtonGlobalBorderColor}
+														globalHoverColor={dualButtonGlobalBorderHoverColor}
+														handleColorSwitcherChange={(value) =>
+															setAttributes({
+																dualButtonGlobalBorderColorSwitcher: value,
+															})
+														}
+														handleGlobalColorChange={(value) =>
+															setAttributes({
+																dualButtonGlobalBorderColor: value,
+															})
+														}
+														handleGlobalHoverColorChange={(value) =>
+															setAttributes({
+																dualButtonGlobalBorderHoverColor: value,
+															})
+														}
+													/>
+
+													<FB_Spacing
+														label={__("Border", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+														spacingUnits={dualButtonGlobalBorderUnits}
+														spacingDesktop={dualButtonGlobalBorderDesktop}
+														spacingTablet={dualButtonGlobalBorderTablet}
+														spacingMobile={dualButtonGlobalBorderMobile}
+														handleSpacingUnitHandler={
+															handleGlobalBorderUnitChange
+														}
+														spacingCombineBtn={dualButtonGlobalBorderLink}
+														spacingCombineBtnHandler={
+															handleGlobalBorderCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+
+													<FB_Spacing
+														label={__("Border Radius", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={
+															handleGlobalBorderRadiusUnitsHandler
+														}
+														spacingUnits={dualButtonGlobalBorderRadiusUnits}
+														spacingDesktop={dualButtonGlobalBorderRadiusDesktop}
+														spacingTablet={dualButtonGlobalBorderRadiusTablet}
+														spacingMobile={dualButtonGlobalBorderRadiusMobile}
+														handleSpacingUnitHandler={
+															handleGlobalBorderRadiusUnitChange
+														}
+														spacingCombineBtn={dualButtonGlobalBorderRadiusLink}
+														spacingCombineBtnHandler={
+															handleGlobalBorderRadiusCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+													<FB_BoxShadowControl
+														onBoxShadowChange={(value) =>
+															setAttributes({
+																dualButtonGlobalBoxShadowValues: value,
+															})
+														}
+														initialShadowValue={dualButtonGlobalBoxShadowValues}
+														onBoxShadowStyleChange={(value) =>
+															setAttributes({
+																dualButtonGlobalBoxShadowCssValue: value,
+															})
+														}
 													/>
 												</PanelBody>
 											</div>
