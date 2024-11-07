@@ -127,9 +127,6 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         isBackgroundImage={false}
                     />
 
-
-
-
                     <div className="fb-link-control-wrapper">
                         <BaseControl 
                             label={__("URL", "frontis-blocks")}
