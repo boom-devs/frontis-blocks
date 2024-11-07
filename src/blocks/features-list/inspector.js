@@ -10,6 +10,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_Spacing from '@Components/spacing';
 import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
 
 
@@ -123,9 +124,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureMobileMargin,
         FeatureMarginLink,
 
-        FeatureBgColorSwitcher,
-        FeatureBgColor,
-        FeatureBgHoverColor,
+        /** Start Global Background Color */
+        FeatureGlobalBgColorSwitcher,
+        FeatureGlobalNormalBackgroundType,
+        FeatureGlobalNormalClassicColor,
+        FeatureGlobalNormalGradientColor,
+        FeatureGlobalNormalCustomGradientSwitcher,
+        FeatureGlobalNormalCustomGradientInputValue,
+        FeatureGlobalHoverBackgroundType,
+        FeatureGlobalHoverClassicColor,
+        FeatureGlobalHoverGradientColor,
+        FeatureGlobalHoverCustomGradientSwitcher,
+        FeatureGlobalHoverCustomGradientInputValue,
+        /** End Global Background Color */
 
         FeatureBorder,
         FeatureBorderColor,
@@ -525,7 +536,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     position: relative;
                 }
                 .fb-feature-main-wrapper.${blockID} {
-                    ${FeatureBgColor !== undefined ? `background-color: ${FeatureBgColor};` : ''};
+
+                    ${FeatureGlobalNormalBackgroundType === 'gradient' ? `
+                        background: ${FeatureGlobalNormalCustomGradientSwitcher && FeatureGlobalNormalCustomGradientInputValue ? FeatureGlobalNormalCustomGradientInputValue : FeatureGlobalNormalGradientColor};
+                    ` : FeatureGlobalNormalBackgroundType === 'classic' ? `
+                        background: ${FeatureGlobalNormalClassicColor};
+                    ` : ''}
+
                     padding: ${DesktopPadding};
                     margin: ${DesktopMargin};
                     border: ${FeatureBorder};
@@ -536,7 +553,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     transition: all .3s ease-in-out;
                 }
                 .fb-feature-main-wrapper.${blockID}:hover {
-                    ${FeatureBgHoverColor !== undefined ? `background-color: ${FeatureBgHoverColor};` : ''};
+                    ${FeatureGlobalHoverBackgroundType === 'gradient' ? `
+                        background: ${FeatureGlobalHoverCustomGradientSwitcher && FeatureGlobalHoverCustomGradientInputValue ? FeatureGlobalHoverCustomGradientInputValue : FeatureGlobalHoverGradientColor};
+                    ` : FeatureGlobalHoverBackgroundType === 'classic' ? `
+                        background: ${FeatureGlobalHoverClassicColor};
+                    ` : ''}
+
                     ${FeatureBorderHoverColor !== undefined ? `border-color: ${FeatureBorderHoverColor};` : ''};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
@@ -1225,121 +1247,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </div>
                                                 </div>                                       
                                             </PanelBody>
-                                            <PanelBody title="Background Color" initialOpen={false} >
-                                                <BaseControl
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ FeatureBgColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${FeatureBgColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
 
-                                                {FeatureBgColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={FeatureBgColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={FeatureBgColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
+                                            <PanelBody
+                                                title={__("Background Color", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_BackgroundColorControl
+                                                    bgColorSwitcher={FeatureGlobalBgColorSwitcher}
+                                                    setBgColorSwitcher={(value) => setAttributes({ FeatureGlobalBgColorSwitcher: value })}
+                                                            
+                                                    normalBackgroundType={FeatureGlobalNormalBackgroundType}
+                                                    setNormalBackgroundType={(value) => setAttributes({ FeatureGlobalNormalBackgroundType: value })}
+                                                    normalClassicColor={FeatureGlobalNormalClassicColor}
+                                                    setNormalClassicColor={(value) => setAttributes({ FeatureGlobalNormalClassicColor: value })}
+                                                    normalGradientColor={FeatureGlobalNormalGradientColor}
+                                                    setNormalGradientColor={(value) => setAttributes({ FeatureGlobalNormalGradientColor: value })}
+                                                    normalCustomGradientSwitcher={FeatureGlobalNormalCustomGradientSwitcher}
+                                                    setNormalCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalNormalCustomGradientSwitcher: value })}
+                                                    normalCustomGradientInputValue={FeatureGlobalNormalCustomGradientInputValue}
+                                                    setNormalCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalNormalCustomGradientInputValue: value })}
+                                                            
+                                                    hoverBackgroundType={FeatureGlobalHoverBackgroundType}
+                                                    setHoverBackgroundType={(value) => setAttributes({ FeatureGlobalHoverBackgroundType: value })}
+                                                    hoverClassicColor={FeatureGlobalHoverClassicColor}
+                                                    setHoverClassicColor={(value) => setAttributes({ FeatureGlobalHoverClassicColor: value })}
+                                                    hoverGradientColor={FeatureGlobalHoverGradientColor} 
+                                                    setHoverGradientColor={(value) => setAttributes({ FeatureGlobalHoverGradientColor: value })}
+                                                    hoverCustomGradientSwitcher={FeatureGlobalHoverCustomGradientSwitcher}
+                                                    setHoverCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalHoverCustomGradientSwitcher: value })}
+                                                    hoverCustomGradientInputValue={FeatureGlobalHoverCustomGradientInputValue}
+                                                    setHoverCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalHoverCustomGradientInputValue: value })}
 
-                                                {FeatureBgColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={FeatureBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={FeatureBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-                                            </PanelBody>
+                                                    isBackgroundImage={false}
+                                                />
+                                            </PanelBody>    
 
                                             <PanelBody
                                                 title={__("Border & Border radius", "frontis-blocks")}
