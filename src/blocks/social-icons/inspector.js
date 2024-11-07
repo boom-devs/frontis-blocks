@@ -207,36 +207,116 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     };
 
-    const handleAddItem = () => {
-        const newItem = { 
-            id: `item-${socialItems.length + 1}`, 
-            socialIconTitle: `Title ${socialItems.length + 1}`,
-            socialIconUrl: '', 
-            socialIcon: 'facebook-f',
+	const getPresetColors = (preset) => {
+		switch (preset) {
+			case 'preset-1':
+				return {
+					socialIconColor: '#1877F2',
+					socialIconHoverColor: '#1877F2',
+					socialIconBgColor: "#ffffff",
+					socialIconHoverBgColor: "#ffffff",
+					normalItemClassicColor: "#ffffff",
+				};
+			case 'preset-2':
+				return {
+					socialIconColor: "#ffffff",
+					socialIconHoverColor: "#ffffff",
+					socialIconBgColor: "#1877F2",
+					socialIconHoverBgColor: "#1877F2",
+					normalItemClassicColor: "#1877F2",
+				};
+			case 'preset-3':
+				return {
+					socialIconColor: "#FFFFFF",
+					socialIconHoverColor: "#FFFFFF",
+					socialIconBgColor: "",
+					socialIconHoverBgColor: "",
+					normalItemClassicColor: "#1877F2",
+				};
+			case 'preset-4':
+				return {
+					socialIconColor: "#FFFFFF",
+					socialIconHoverColor: "#FFFFFF",
+					socialIconBgColor: "#1877F2",
+					socialIconHoverBgColor: "#1877F2",
+					normalItemClassicColor: "#1877F2",
+				};
+			case 'preset-5':
+				return {
+					socialIconColor: "#1877F2",
+					socialIconHoverColor: "#1877F2",
+					socialIconBgColor: "#FFFFFF",
+					socialIconHoverBgColor: "#FFFFFF",
+					normalItemClassicColor: "#ffffff",
+				};
+			case 'preset-6':
+				return {
+					socialIconColor: "#FFFFFF",
+					socialIconHoverColor: "#FFFFFF",
+					socialIconBgColor: "#15171C",
+					socialIconHoverBgColor: "#15171C",
+					normalItemClassicColor: "#15171C",
+				};
+			default:
+				console.warn(`Preset "${preset}" not found. Default colors will not be set.`);
+				return {};
+		}
+	};
 
-            socialIconTargetUrl: false,
+	const handleAddItem = () => {
+		const presetColors = getPresetColors(socialIconsPresetStyle);
+	
+		const newItem = {
+			id: `item-${socialItems.length + 1}`,
+			socialIconTitle: 'Facebook',
+			socialIconUrl: '',
+			socialIcon: 'facebook-f',
+	
+			socialIconTargetUrl: false,
 			socialIconColorSwitcher: 'normal',
-			socialIconColor: '',
-			socialIconHoverColor: '',
-			socialIconBgColor: '',
-			socialIconHoverBgColor: '',
+	
+			// Apply preset colors as default values
+			socialIconColor: presetColors.socialIconColor || '',
+			socialIconHoverColor: presetColors.socialIconHoverColor || '',
+			socialIconBgColor: presetColors.socialIconBgColor || '',
+			socialIconHoverBgColor: presetColors.socialIconHoverBgColor || '',
 
 			socialItemBgColorSwitcher: 'normal',
-
+	
 			normalItemBackgroundType: 'classic',
-			normalItemClassicColor: '',
+			normalItemClassicColor: presetColors.normalItemClassicColor || '',
 			normalItemGradientColor: '',
 			normalItemCustomGradientSwitcher: false,
 			normalItemCustomGradientInputValue: '',
-
+	
 			hoverItemBackgroundType: 'classic',
 			hoverItemClassicColor: '',
 			hoverItemGradientColor: '',
 			hoverItemCustomGradientSwitcher: false,
 			hoverItemCustomGradientInputValue: '',
-        };
-        setAttributes({ socialItems: [...socialItems, newItem] });
-    };
+		};
+	
+		setAttributes({ socialItems: [...socialItems, newItem] });
+	};
+
+	useEffect(() => {
+		if (socialItems.length > 4) {
+			const updatedItems = socialItems.map((item, index) => {
+				if (index >= 4) {
+					const presetColors = getPresetColors(socialIconsPresetStyle);
+					return {
+						...item,
+						socialIconColor: presetColors.socialIconColor || item.socialIconColor,
+						socialIconHoverColor: presetColors.socialIconHoverColor || item.socialIconHoverColor,
+						socialIconBgColor: presetColors.socialIconBgColor || item.socialIconBgColor,
+						socialIconHoverBgColor: presetColors.socialIconHoverBgColor || item.socialIconHoverBgColor,
+					};
+				}
+				return item;
+			});
+			setAttributes({ socialItems: updatedItems });
+		}
+	}, [socialIconsPresetStyle]);
 
     const handleChangeItem = (id, key, value) => {
         const updatedItems = socialItems.map(item => 
