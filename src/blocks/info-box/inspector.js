@@ -7865,20 +7865,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
 
+													
 													<FB_Color
 														label={__("Border Color", "frontis-blocks")}
 														globalColorSwitcher={globalBorderColorSwitcher}
 														globalColor={globalBorderColor}
 														globalHoverColor={globalBorderHoverColor}
-														handleColorSwitcherChange={
-															handleGlobalBorderColorSwitcherChange
-														}
-														handleGlobalColorChange={
-															handleGlobalBorderColorChange
-														}
-														handleGlobalHoverColorChange={
-															handleGlobalBorderHoverColorChange
-														}
+														handleColorSwitcherChange={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+														handleGlobalColorChange={(value) => setAttributes({ globalBorderColor: value })}
+														handleGlobalHoverColorChange={(value) => setAttributes({ globalBorderHoverColor: value })}
 													/>
 
 													<FB_Spacing
