@@ -96,11 +96,11 @@ const attributes = {
     },
     FeatureIconBgColor : {
         type: "string",
-        default: ""
+        default: "#399CFF"
     },
     FeatureIconBgHoverColor: {
         type: 'string',
-        default: ""
+        default: "#399CFF"
     },
 
 
@@ -399,18 +399,55 @@ const attributes = {
         default: true
     },
 
-    FeatureBgColorSwitcher : {
+
+
+    /** Start Background Color */
+    FeatureGlobalBgColorSwitcher: {
         type: "string",
-        default: "normal"
+        default: "normal",
     },
-    FeatureBgColor : {
-        type: "string"
+    FeatureGlobalNormalBackgroundType: {
+        type: "string",
+        default: "classic",
     },
-    FeatureBgHoverColor: {
-        type: 'string',
+    FeatureGlobalNormalClassicColor: {
+        type: "string",
+        default: "",
+    },
+    FeatureGlobalNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    FeatureGlobalNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    FeatureGlobalNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
     },
 
-
+    FeatureGlobalHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    FeatureGlobalHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    FeatureGlobalHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    FeatureGlobalHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    FeatureGlobalHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Background Color */
 
     FeatureBorder: {
         type: 'string',
