@@ -4,6 +4,14 @@ import { useState, useEffect } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_Range from '@Components/range';
+import FB_ColorControl from '@Components/color-control';
+import FB_Spacing from '@Components/spacing';
+import FB_Color from '@Components/color';
+import FB_TypographyControl from '@Components/typography-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+import FB_UrlControl from '@Components/url-control';
 
 
 import { 
@@ -32,7 +40,6 @@ import {
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
-// import ResponsiveControl from '../../components/responsivecontrol';
 import FB_ResponsiveControl from '@Components/responsive-control';
 
 import './editor.scss';
@@ -46,11 +53,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureAlignment,
         FeatureIconAlignment,
         FeatureIconShape,
-        FeatureListGapDesktop,
-        FeatureListGapTablet,
-        FeatureListGapMobile,
+
+        FeatureListGap,
         FeatureListGapUnits,
 
+        /** Icon Style */
         FeatureIconColorSwitcher,
         FeatureIconColor,
         FeatureIconHoverColor,
@@ -59,69 +66,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconBgColor,
         FeatureIconBgHoverColor,
 
-        FeatureIconSizeDesktop,
-        FeatureIconSizeTablet,
-        FeatureIconSizeMobile,
+        FeatureIconSize,
         FeatureIconSizeUnits,
-
-        FeatureIconBgSizeDesktop,
-        FeatureIconBgSizeTablet,
-        FeatureIconBgSizeMobile,
+        FeatureIconBgSize,
         FeatureIconBgSizeUnits,
-
-        FeatureIconSpacingDesktop,
-        FeatureIconSpacingTablet,
-        FeatureIconSpacingMobile,
+        FeatureIconSpacing,
         FeatureIconSpacingUnits,
+        /** End Icon Style */
 
-
+        /** Title Style */
 
         FeatureTitleFontFamily,
-        FeatureTitleFontSizeDesktop,
-        FeatureTitleFontSizeTablet,
-        FeatureTitleFontSizeMobile,
+        FeatureTitleFontSize,
         FeatureTitleFontSizeUnits,
         FeatureTitleFontWeight,
         FeatureTitleFontStyle,
         FeatureTitleTextTransform,
         FeatureTitleTextDecoration,
-        FeatureTitleLetterSpacingDesktop,
-        FeatureTitleLetterSpacingTablet,
-        FeatureTitleLetterSpacingMobile,
+        FeatureTitleLetterSpacing,
         FeatureTitleLetterSpacingUnits,
-        FeatureTitleLineHeightDesktop,
-        FeatureTitleLineHeightTablet,
-        FeatureTitleLineHeightMobile,
+        FeatureTitleLineHeight,
         FeatureTitleLineHeightUnits,
 
         FeatureTitleColorSwitcher,
         FeatureTitleColor,
         FeatureTitleHoverColor,
+        /** End Title Style */
 
-
+        /** Description Style */
         FeatureDescFontFamily,
-        FeatureDescFontSizeDesktop,
-        FeatureDescFontSizeTablet,
-        FeatureDescFontSizeMobile,
+        FeatureDescFontSize,
         FeatureDescFontSizeUnits,
         FeatureDescFontWeight,
         FeatureDescFontStyle,
         FeatureDescTextTransform,
         FeatureDescTextDecoration,
-        FeatureDescLetterSpacingDesktop,
-        FeatureDescLetterSpacingTablet,
-        FeatureDescLetterSpacingMobile,
+        FeatureDescLetterSpacing,
         FeatureDescLetterSpacingUnits,
-        FeatureDescLineHeightDesktop,
-        FeatureDescLineHeightTablet,
-        FeatureDescLineHeightMobile,
+        FeatureDescLineHeight,
         FeatureDescLineHeightUnits,
 
         FeatureDescColorSwitcher,
         FeatureDescColor,
         FeatureDescHoverColor,
+        /** End Description Style */
 
-
+        /** Global Style */
         FeatureZIndex,
         FeaturePaddingUnits,
         FeatureDesktopPadding,
@@ -134,9 +124,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureMobileMargin,
         FeatureMarginLink,
 
-        FeatureBgColorSwitcher,
-        FeatureBgColor,
-        FeatureBgHoverColor,
+        /** Start Global Background Color */
+        FeatureGlobalBgColorSwitcher,
+        FeatureGlobalNormalBackgroundType,
+        FeatureGlobalNormalClassicColor,
+        FeatureGlobalNormalGradientColor,
+        FeatureGlobalNormalCustomGradientSwitcher,
+        FeatureGlobalNormalCustomGradientInputValue,
+        FeatureGlobalHoverBackgroundType,
+        FeatureGlobalHoverClassicColor,
+        FeatureGlobalHoverGradientColor,
+        FeatureGlobalHoverCustomGradientSwitcher,
+        FeatureGlobalHoverCustomGradientInputValue,
+        /** End Global Background Color */
 
         FeatureBorder,
         FeatureBorderColor,
@@ -155,10 +155,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         FeatureboxShadowValues,
         FeatureboxShadowCssValue,
-
-        FeatureDesktopSwitcher,
-        FeatureTabletSwitcher,
-        FeatureMobileSwitcher,
+        /** End Global Style */
 
     } = attributes;
     
@@ -539,7 +536,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     position: relative;
                 }
                 .fb-feature-main-wrapper.${blockID} {
-                    ${FeatureBgColor !== undefined ? `background-color: ${FeatureBgColor};` : ''};
+
+                    ${FeatureGlobalNormalBackgroundType === 'gradient' ? `
+                        background: ${FeatureGlobalNormalCustomGradientSwitcher && FeatureGlobalNormalCustomGradientInputValue ? FeatureGlobalNormalCustomGradientInputValue : FeatureGlobalNormalGradientColor};
+                    ` : FeatureGlobalNormalBackgroundType === 'classic' ? `
+                        background: ${FeatureGlobalNormalClassicColor};
+                    ` : ''}
+
                     padding: ${DesktopPadding};
                     margin: ${DesktopMargin};
                     border: ${FeatureBorder};
@@ -550,25 +553,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     transition: all .3s ease-in-out;
                 }
                 .fb-feature-main-wrapper.${blockID}:hover {
-                    ${FeatureBgHoverColor !== undefined ? `background-color: ${FeatureBgHoverColor};` : ''};
+                    ${FeatureGlobalHoverBackgroundType === 'gradient' ? `
+                        background: ${FeatureGlobalHoverCustomGradientSwitcher && FeatureGlobalHoverCustomGradientInputValue ? FeatureGlobalHoverCustomGradientInputValue : FeatureGlobalHoverGradientColor};
+                    ` : FeatureGlobalHoverBackgroundType === 'classic' ? `
+                        background: ${FeatureGlobalHoverClassicColor};
+                    ` : ''}
+
                     ${FeatureBorderHoverColor !== undefined ? `border-color: ${FeatureBorderHoverColor};` : ''};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                    padding-bottom: calc(${FeatureListGapDesktop}${FeatureListGapUnits} / 2);
+                    padding-bottom: calc(${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop} / 2);
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                    padding-top: calc(${FeatureListGapDesktop}${FeatureListGapUnits} / 2);
+                    padding-top: calc(${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop} / 2);  
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
                     fill: ${FeatureIconColor};
-                    height: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
-                    width: ${FeatureIconSizeDesktop}${FeatureIconSizeUnits};
+                    height: ${FeatureIconSize.Desktop}${FeatureIconSizeUnits.Desktop};
+                    width: ${FeatureIconSize.Desktop}${FeatureIconSizeUnits.Desktop};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon:hover svg {
                     fill: ${FeatureIconHoverColor};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
-                    margin-right: ${FeatureIconSpacingDesktop}${FeatureIconSpacingUnits}!important;
+                    margin-right: ${FeatureIconSpacing.Desktop}${FeatureIconSpacingUnits.Desktop}!important; 
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner {
                     background-color: ${FeatureIconBgColor};
@@ -580,38 +588,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
 
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon {
-                    width: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
-                    height: ${FeatureIconBgSizeDesktop}${FeatureIconBgSizeUnits};
+                    width: ${FeatureIconBgSize.Desktop}${FeatureIconBgSizeUnits.Desktop};
+                    height: ${FeatureIconBgSize.Desktop}${FeatureIconBgSizeUnits.Desktop};
                 }
-
-                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
-                    font-family: ${FeatureTitleFontFamily};
-                    font-size: ${FeatureTitleFontSizeDesktop}${FeatureTitleFontSizeUnits};
-                    font-weight: ${FeatureTitleFontWeight};
-                    font-style: ${FeatureTitleFontStyle};
-                    text-transform: ${FeatureTitleTextTransform};
-                    text-decoration: ${FeatureTitleTextDecoration};
-                    letter-spacing: ${FeatureTitleLetterSpacingDesktop}${FeatureTitleLetterSpacingUnits};
-                    line-height: ${FeatureTitleLineHeightDesktop}${FeatureTitleLineHeightUnits};
-                    color: ${FeatureTitleColor};
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
+                    ${FeatureTitleFontFamily ? `font-family: ${FeatureTitleFontFamily};` : ''}
+                    ${FeatureTitleFontSize.Desktop && FeatureTitleFontSizeUnits.Desktop ? `font-size: ${FeatureTitleFontSize.Desktop}${FeatureTitleFontSizeUnits.Desktop};` : ''}
+                    ${FeatureTitleFontWeight ? `font-weight: ${FeatureTitleFontWeight};` : ''}
+                    ${FeatureTitleFontStyle ? `font-style: ${FeatureTitleFontStyle};` : ''}
+                    ${FeatureTitleTextTransform ? `text-transform: ${FeatureTitleTextTransform};` : ''}
+                    ${FeatureTitleTextDecoration ? `text-decoration: ${FeatureTitleTextDecoration};` : ''}
+                    ${FeatureTitleLetterSpacing.Desktop && FeatureTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${FeatureTitleLetterSpacing.Desktop}${FeatureTitleLetterSpacingUnits.Desktop};` : ''}
+                    ${FeatureTitleLineHeight.Desktop && FeatureTitleLineHeightUnits.Desktop ? `line-height: ${FeatureTitleLineHeight.Desktop}${FeatureTitleLineHeightUnits.Desktop};` : ''}
+                    ${FeatureTitleColor ? `color: ${FeatureTitleColor};` : ''}
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-title:hover {
-                    color: ${FeatureTitleHoverColor};
+                    ${FeatureTitleHoverColor ? `color: ${FeatureTitleHoverColor};` : ''}
                 }
 
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
-                    font-family: ${FeatureDescFontFamily};
-                    font-size: ${FeatureDescFontSizeDesktop}${FeatureDescFontSizeUnits};
-                    font-weight: ${FeatureDescFontWeight};
-                    font-style: ${FeatureDescFontStyle};
-                    text-transform: ${FeatureDescTextTransform};
-                    text-decoration: ${FeatureDescTextDecoration};
-                    letter-spacing: ${FeatureDescLetterSpacingDesktop}${FeatureDescLetterSpacingUnits};
-                    line-height: ${FeatureDescLineHeightDesktop}${FeatureDescLineHeightUnits};
-                    color: ${FeatureDescColor};
+                    ${FeatureDescFontFamily ? `font-family: ${FeatureDescFontFamily};` : ''}
+                    ${FeatureDescFontSize.Desktop && FeatureDescFontSizeUnits.Desktop ? `font-size: ${FeatureDescFontSize.Desktop}${FeatureDescFontSizeUnits.Desktop};` : ''}
+                    ${FeatureDescFontWeight ? `font-weight: ${FeatureDescFontWeight};` : ''}
+                    ${FeatureDescFontStyle ? `font-style: ${FeatureDescFontStyle};` : ''}
+                    ${FeatureDescTextTransform ? `text-transform: ${FeatureDescTextTransform};` : ''}
+                    ${FeatureDescTextDecoration ? `text-decoration: ${FeatureDescTextDecoration};` : ''}
+                    ${FeatureDescLetterSpacing.Desktop && FeatureDescLetterSpacingUnits.Desktop ? `letter-spacing: ${FeatureDescLetterSpacing.Desktop}${FeatureDescLetterSpacingUnits.Desktop};` : ''}
+                    ${FeatureDescLineHeight.Desktop && FeatureDescLineHeightUnits.Desktop ? `line-height: ${FeatureDescLineHeight.Desktop}${FeatureDescLineHeightUnits.Desktop};` : ''}
+                    ${FeatureDescColor ? `color: ${FeatureDescColor};` : ''}
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text:hover {
-                    color: ${FeatureDescHoverColor};
+                    ${FeatureDescHoverColor ? `color: ${FeatureDescHoverColor};` : ''}
                 }
 
                 @media only screen and (max-width: 1024px) {
@@ -624,33 +631,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     }
 
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                        padding-bottom: calc(${FeatureListGapTablet}${FeatureListGapUnits} / 2);
+                        padding-bottom: calc(${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet} / 2); 
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                        padding-top: calc(${FeatureListGapTablet}${FeatureListGapUnits} / 2);
+                        padding-top: calc(${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet} / 2);
                     }
 
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
-                        height: ${FeatureIconSizeTablet}${FeatureIconSizeUnits};
-                        width: ${FeatureIconSizeTablet}${FeatureIconSizeUnits};
+                        height: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
+                        width: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon {
-                        width: ${FeatureIconBgSizeTablet}${FeatureIconBgSizeUnits};
-                        height: ${FeatureIconBgSizeTablet}${FeatureIconBgSizeUnits};
+                        width: ${FeatureIconBgSize.Tablet}${FeatureIconBgSizeUnits.Tablet};
+                        height: ${FeatureIconBgSize.Tablet}${FeatureIconBgSizeUnits.Tablet};
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
-                        margin-right: ${FeatureIconSpacingTablet}${FeatureIconSpacingUnits}!important;
+                        margin-right: ${FeatureIconSpacing.Tablet}${FeatureIconSpacingUnits.Tablet}!important;
                     }
 
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
-                        font-size: ${FeatureTitleFontSizeTablet}${FeatureTitleFontSizeUnits};
-                        letter-spacing: ${FeatureTitleLetterSpacingTablet}${FeatureTitleLetterSpacingUnits};
-                        line-height: ${FeatureTitleLineHeightTablet}${FeatureTitleLineHeightUnits};
+                        ${FeatureTitleFontSize.Tablet && FeatureTitleFontSizeUnits.Tablet ? `font-size: ${FeatureTitleFontSize.Tablet}${FeatureTitleFontSizeUnits.Tablet};` : ''}
+                        ${FeatureTitleLetterSpacing.Tablet && FeatureTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${FeatureTitleLetterSpacing.Tablet}${FeatureTitleLetterSpacingUnits.Tablet};` : ''}
+                        ${FeatureTitleLineHeight.Tablet && FeatureTitleLineHeightUnits.Tablet ? `line-height: ${FeatureTitleLineHeight.Tablet}${FeatureTitleLineHeightUnits.Tablet};` : ''}
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
-                        font-size: ${FeatureDescFontSizeTablet}${FeatureDescFontSizeUnits};
-                        letter-spacing: ${FeatureDescLetterSpacingTablet}${FeatureDescLetterSpacingUnits};
-                        line-height: ${FeatureDescLineHeightTablet}${FeatureDescLineHeightUnits};
+                        ${FeatureDescFontSize.Tablet && FeatureDescFontSizeUnits.Tablet ? `font-size: ${FeatureDescFontSize.Tablet}${FeatureDescFontSizeUnits.Tablet};` : ''}
+                        ${FeatureDescLetterSpacing.Tablet && FeatureDescLetterSpacingUnits.Tablet ? `letter-spacing: ${FeatureDescLetterSpacing.Tablet}${FeatureDescLetterSpacingUnits.Tablet};` : ''}
+                        ${FeatureDescLineHeight.Tablet && FeatureDescLineHeightUnits.Tablet ? `line-height: ${FeatureDescLineHeight.Tablet}${FeatureDescLineHeightUnits.Tablet};` : ''}
                     }
                 }
 
@@ -662,31 +669,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         border-radius: ${MobileBorderRadiusWidth} !important;
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                        padding-bottom: calc(${FeatureListGapMobile}${FeatureListGapUnits} / 2);
+                        padding-bottom: calc(${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile} / 2); 
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                        padding-top: calc(${FeatureListGapMobile}${FeatureListGapUnits} / 2);
+                        padding-top: calc(${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile} / 2);
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
-                        height: ${FeatureIconSizeMobile}${FeatureIconSizeUnits};
-                        width: ${FeatureIconSizeMobile}${FeatureIconSizeUnits};
+                        height: ${FeatureIconSize.Mobile}${FeatureIconSizeUnits.Mobile}; 
+                        width: ${FeatureIconSize.Mobile}${FeatureIconSizeUnits.Mobile};
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon {
-                        width: ${FeatureIconBgSizeMobile}${FeatureIconBgSizeUnits};
-                        height: ${FeatureIconBgSizeMobile}${FeatureIconBgSizeUnits};
+                        width: ${FeatureIconBgSize.Mobile}${FeatureIconBgSizeUnits.Mobile};
+                        height: ${FeatureIconBgSize.Mobile}${FeatureIconBgSizeUnits.Mobile};
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
-                        margin-right: ${FeatureIconSpacingMobile}${FeatureIconSpacingUnits}!important;
+                        margin-right: ${FeatureIconSpacing.Mobile}${FeatureIconSpacingUnits.Mobile}!important;
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
-                        font-size: ${FeatureTitleFontSizeMobile}${FeatureTitleFontSizeUnits};
-                        letter-spacing: ${FeatureTitleLetterSpacingMobile}${FeatureTitleLetterSpacingUnits};
-                        line-height: ${FeatureTitleLineHeightMobile}${FeatureTitleLineHeightUnits};
+                        ${FeatureTitleFontSize.Mobile && FeatureTitleFontSizeUnits.Mobile ? `font-size: ${FeatureTitleFontSize.Mobile}${FeatureTitleFontSizeUnits.Mobile};` : ''}
+                        ${FeatureTitleLetterSpacing.Mobile && FeatureTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${FeatureTitleLetterSpacing.Mobile}${FeatureTitleLetterSpacingUnits.Mobile};` : ''}
+                        ${FeatureTitleLineHeight.Mobile && FeatureTitleLineHeightUnits.Mobile ? `line-height: ${FeatureTitleLineHeight.Mobile}${FeatureTitleLineHeightUnits.Mobile};` : ''}
                     }
                     .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
-                        font-size: ${FeatureDescFontSizeMobile}${FeatureDescFontSizeUnits};
-                        letter-spacing: ${FeatureDescLetterSpacingMobile}${FeatureDescLetterSpacingUnits};
-                        line-height: ${FeatureDescLineHeightMobile}${FeatureDescLineHeightUnits};
+                        ${FeatureDescFontSize.Mobile && FeatureDescFontSizeUnits.Mobile ? `font-size: ${FeatureDescFontSize.Mobile}${FeatureDescFontSizeUnits.Mobile};` : ''} 
+                        ${FeatureDescLetterSpacing.Mobile && FeatureDescLetterSpacingUnits.Mobile ? `letter-spacing: ${FeatureDescLetterSpacing.Mobile}${FeatureDescLetterSpacingUnits.Mobile};` : ''}
+                        ${FeatureDescLineHeight.Mobile && FeatureDescLineHeightUnits.Mobile ? `line-height: ${FeatureDescLineHeight.Mobile}${FeatureDescLineHeightUnits.Mobile};` : ''}
                     }
                 }
 
@@ -831,48 +838,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             initialOpen={true}
                                             className="fb-setting-feature-list-wrapper"
                                         >
-                                            <div className="fb-setting-fontsize-wrapper">
-                                                <div className="fb-setting-fontsize-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("List Gap", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-fontsize-units">
-                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ FeatureListGapUnits: item.value })}
-                                                                    className={`fb-setting-fontsize-units-switcher ${FeatureListGapUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-fontsize-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? FeatureListGapDesktop : deviceType === "Tablet" ? FeatureListGapTablet : FeatureListGapMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ FeatureListGapDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ FeatureListGapTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ FeatureListGapMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={100}
-                                                        allowReset
-                                                        resetFallbackValue={20}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+												min={1}
+												max={100}
+												label={__("List Gap", "frontis-blocks")}
+												rangeValue={FeatureListGap}
+												onChangeHandler={(value) => setAttributes({ FeatureListGap: value })}
+												rangeUnitHandler={(value) => setAttributes({ FeatureListGapUnits: value })}
+												deviceType={deviceType}
+												units={FeatureListGapUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={"20"}
+											/>
                                         </PanelBody>
-
 
                                         <PanelBody
                                             title={__("Icon", "frontis-blocks")}
@@ -880,360 +859,91 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             className="fb-setting-feature-icon-wrapper"
                                         >
 
-                                            <BaseControl
+                                            <FB_SwitcherControl
                                                 label={__("Icon Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ FeatureIconColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${FeatureIconColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalSwitcher={FeatureIconColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ FeatureIconColorSwitcher: value })}
+                                            />
 
                                             {FeatureIconColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureIconColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureIconColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                <FB_ColorControl
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColor={FeatureIconColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureIconColor: value })}
+                                                />
                                             )}
 
                                             {FeatureIconColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureIconHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureIconHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                    globalColor={FeatureIconHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureIconHoverColor: value })}
+                                                />
                                             )}
 
-                                            <div className="fb-setting-fontsize-wrapper">
-                                                <div className="fb-setting-fontsize-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Icon Size", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-fontsize-units">
-                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ FeatureIconSizeUnits: item.value })}
-                                                                    className={`fb-setting-fontsize-units-switcher ${FeatureIconSizeUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-fontsize-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? FeatureIconSizeDesktop : deviceType === "Tablet" ? FeatureIconSizeTablet : FeatureIconSizeMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ FeatureIconSizeDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ FeatureIconSizeTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ FeatureIconSizeMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={100}
-                                                        allowReset
-                                                        resetFallbackValue={20}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+												min={1}
+												max={150}
+												label={__("Icon Size", "frontis-blocks")}
+												rangeValue={FeatureIconSize}
+												onChangeHandler={(value) => setAttributes({ FeatureIconSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ FeatureIconSizeUnits: value })}
+												deviceType={deviceType}
+												units={FeatureIconSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={"25"}
+											/>
 
-
-
-                                            <BaseControl
+                                            <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ FeatureIconBgColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${FeatureIconBgColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalSwitcher={FeatureIconBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ FeatureIconBgColorSwitcher: value })}
+                                            />
 
                                             {FeatureIconBgColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureIconBgColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconBgColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureIconBgColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconBgColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                <FB_ColorControl
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColor={FeatureIconBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureIconBgColor: value })}
+                                                />
                                             )}
 
                                             {FeatureIconBgColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureIconBgHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconBgHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureIconBgHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureIconBgHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                    globalColor={FeatureIconBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureIconBgHoverColor: value })}
+                                                />
                                             )}
 
-                                            <div className="fb-setting-fontsize-wrapper">
-                                                <div className="fb-setting-fontsize-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Background Size", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-fontsize-units">
-                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ FeatureIconBgSizeUnits: item.value })}
-                                                                    className={`fb-setting-fontsize-units-switcher ${FeatureIconBgSizeUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-fontsize-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? FeatureIconBgSizeDesktop : deviceType === "Tablet" ? FeatureIconBgSizeTablet : FeatureIconBgSizeMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ FeatureIconBgSizeDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ FeatureIconBgSizeTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ FeatureIconBgSizeMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={200}
-                                                        allowReset
-                                                        resetFallbackValue={60}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+												min={1}
+												max={150}
+												label={__("Background Size", "frontis-blocks")}
+												rangeValue={FeatureIconBgSize}
+												onChangeHandler={(value) => setAttributes({ FeatureIconBgSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ FeatureIconBgSizeUnits: value })}
+												deviceType={deviceType}
+												units={FeatureIconBgSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={"60"}
+											/>
 
-                                            <div className="fb-setting-fontsize-wrapper">
-                                                <div className="fb-setting-fontsize-header">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Spacing", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                    <div className="fb-setting-fontsize-units">
-                                                        <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                            {UNIT_TYPES.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ FeatureIconSpacingUnits: item.value })}
-                                                                    className={`fb-setting-fontsize-units-switcher ${FeatureIconSpacingUnits === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="fb-setting-fontsize-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? FeatureIconSpacingDesktop : deviceType === "Tablet" ? FeatureIconSpacingTablet : FeatureIconSpacingMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ FeatureIconSpacingDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ FeatureIconSpacingTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ FeatureIconSpacingMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={100}
-                                                        allowReset
-                                                        resetFallbackValue={20}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+												min={1}
+												max={150}
+												label={__("Spacing", "frontis-blocks")}
+												rangeValue={FeatureIconSpacing}
+												onChangeHandler={(value) => setAttributes({ FeatureIconSpacing: value })}
+												rangeUnitHandler={(value) => setAttributes({ FeatureIconSpacingUnits: value })}
+												deviceType={deviceType}
+												units={FeatureIconSpacingUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={"20"}
+											/>
 
                                         </PanelBody>
                                         <PanelBody
@@ -1241,337 +951,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             initialOpen={false}
                                             className="fb-setting-feature-title-wrapper"
                                         >
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={FeatureTitleFontFamily}
-                                                                        onChange={(value) => setAttributes({ FeatureTitleFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ FeatureTitleFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${FeatureTitleFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={deviceType === "Desktop" ? FeatureTitleFontSizeDesktop : deviceType === "Tablet" ? FeatureTitleFontSizeTablet : FeatureTitleFontSizeMobile}
-                                                                            onChange={(value) => {
-                                                                                if (deviceType === "Desktop") {
-                                                                                    setAttributes({ FeatureTitleFontSizeDesktop: value });
-                                                                                } else if (deviceType === "Tablet") {
-                                                                                    setAttributes({ FeatureTitleFontSizeTablet: value });
-                                                                                } else if (deviceType === "Mobile") {
-                                                                                    setAttributes({ FeatureTitleFontSizeMobile: value });
-                                                                                }
-                                                                            }}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={18}
-                                                                        />
-                                                                    </div>
-                                                                </div>
+											<FB_TypographyControl
+												fontFamily={FeatureTitleFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ FeatureTitleFontFamily: value })}
 
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "700" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={FeatureTitleFontWeight}
-                                                                        onChange={(value) => setAttributes({ FeatureTitleFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={FeatureTitleFontStyle}
-                                                                        onChange={(value) => setAttributes({ FeatureTitleFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={FeatureTitleTextTransform}
-                                                                        onChange={(value) => setAttributes({ FeatureTitleTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={FeatureTitleTextDecoration}
-                                                                        onChange={(value) => setAttributes({ FeatureTitleTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ FeatureTitleLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${FeatureTitleLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? FeatureTitleLetterSpacingDesktop : deviceType === "Tablet" ? FeatureTitleLetterSpacingTablet : FeatureTitleLetterSpacingMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ FeatureTitleLetterSpacingDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ FeatureTitleLetterSpacingTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ FeatureTitleLetterSpacingMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={-10}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={0}
-                                                                    />
-                                                                </div>
+												fontSize={FeatureTitleFontSize}
+												onChangeFontSize={(value) => setAttributes({ FeatureTitleFontSize: value })}
 
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ FeatureTitleLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${FeatureTitleLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? FeatureTitleLineHeightDesktop : deviceType === "Tablet" ? FeatureTitleLineHeightTablet : FeatureTitleLineHeightMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ FeatureTitleLineHeightDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ FeatureTitleLineHeightTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ FeatureTitleLineHeightMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
+												fontSizeUnits={FeatureTitleFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ FeatureTitleFontSizeUnits: value })}
 
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl
+												fontWeight={FeatureTitleFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ FeatureTitleFontWeight: value })}
+
+												fontStyle={FeatureTitleFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ FeatureTitleFontStyle: value })}
+
+												textTransform={FeatureTitleTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ FeatureTitleTextTransform: value })}
+
+												textDecoration={FeatureTitleTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ FeatureTitleTextDecoration: value })}
+
+												letterSpacing={FeatureTitleLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ FeatureTitleLetterSpacing: value })}
+
+												letterSpacingUnits={FeatureTitleLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ FeatureTitleLetterSpacingUnits: value })}
+
+												lineHeight={FeatureTitleLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ FeatureTitleLineHeight: value })}
+
+												lineHeightUnits={FeatureTitleLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ FeatureTitleLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+                                            <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ FeatureTitleColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${FeatureTitleColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalSwitcher={FeatureTitleColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ FeatureTitleColorSwitcher: value })}
+                                            />
 
                                             {FeatureTitleColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureTitleColor}
-                                                                            onChange={(value) => setAttributes({ FeatureTitleColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureTitleColor}
-                                                                            onChange={(value) => setAttributes({ FeatureTitleColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                <FB_ColorControl
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColor={FeatureTitleColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureTitleColor: value })}
+                                                />
                                             )}
 
                                             {FeatureTitleColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureTitleHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureTitleHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureTitleHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureTitleHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                    globalColor={FeatureTitleHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureTitleHoverColor: value })}
+                                                />
                                             )}
                                         </PanelBody>
                                         <PanelBody
@@ -1580,338 +1017,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             className="fb-setting-feature-description-wrapper"
                                         >
 
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={FeatureDescFontFamily}
-                                                                        onChange={(value) => setAttributes({ FeatureDescFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Font Size", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ FeatureDescFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${FeatureDescFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={deviceType === "Desktop" ? FeatureDescFontSizeDesktop : deviceType === "Tablet" ? FeatureDescFontSizeTablet : FeatureDescFontSizeMobile}
-                                                                            onChange={(value) => {
-                                                                                if (deviceType === "Desktop") {
-                                                                                    setAttributes({ FeatureDescFontSizeDesktop: value });
-                                                                                } else if (deviceType === "Tablet") {
-                                                                                    setAttributes({ FeatureDescFontSizeTablet: value });
-                                                                                } else if (deviceType === "Mobile") {
-                                                                                    setAttributes({ FeatureDescFontSizeMobile: value });
-                                                                                }
-                                                                            }}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </div>
+                                            <FB_TypographyControl
+												fontFamily={FeatureDescFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ FeatureDescFontFamily: value })}
 
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "700" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={FeatureDescFontWeight}
-                                                                        onChange={(value) => setAttributes({ FeatureDescFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={FeatureDescFontStyle}
-                                                                        onChange={(value) => setAttributes({ FeatureDescFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={FeatureDescTextTransform}
-                                                                        onChange={(value) => setAttributes({ FeatureDescTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={FeatureDescTextDecoration}
-                                                                        onChange={(value) => setAttributes({ FeatureDescTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Letter Spacing", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ FeatureDescLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${FeatureDescLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? FeatureDescLetterSpacingDesktop : deviceType === "Tablet" ? FeatureDescLetterSpacingTablet : FeatureDescLetterSpacingMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ FeatureDescLetterSpacingDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ FeatureDescLetterSpacingTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ FeatureDescLetterSpacingMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={0}
-                                                                    />
-                                                                </div>
+												fontSize={FeatureDescFontSize}
+												onChangeFontSize={(value) => setAttributes({ FeatureDescFontSize: value })}
 
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <FB_ResponsiveControl
-                                                                            labelText={__("Line Height", "frontis-blocks")}
-                                                                            device={deviceType}
-                                                                            deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                                        />
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ FeatureDescLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${FeatureDescLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={deviceType === "Desktop" ? FeatureDescLineHeightDesktop : deviceType === "Tablet" ? FeatureDescLineHeightTablet : FeatureDescLineHeightMobile}
-                                                                        onChange={(value) => {
-                                                                            if (deviceType === "Desktop") {
-                                                                                setAttributes({ FeatureDescLineHeightDesktop: value });
-                                                                            } else if (deviceType === "Tablet") {
-                                                                                setAttributes({ FeatureDescLineHeightTablet: value });
-                                                                            } else if (deviceType === "Mobile") {
-                                                                                setAttributes({ FeatureDescLineHeightMobile: value });
-                                                                            }
-                                                                        }}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={1}
-                                                                    />
-                                                                </div>
+												fontSizeUnits={FeatureDescFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ FeatureDescFontSizeUnits: value })}
 
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl
+												fontWeight={FeatureDescFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ FeatureDescFontWeight: value })}
+
+												fontStyle={FeatureDescFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ FeatureDescFontStyle: value })}
+
+												textTransform={FeatureDescTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ FeatureDescTextTransform: value })}
+
+												textDecoration={FeatureDescTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ FeatureDescTextDecoration: value })}
+
+												letterSpacing={FeatureDescLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ FeatureDescLetterSpacing: value })}
+
+												letterSpacingUnits={FeatureDescLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ FeatureDescLetterSpacingUnits: value })}
+
+												lineHeight={FeatureDescLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ FeatureDescLineHeight: value })}
+
+												lineHeightUnits={FeatureDescLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ FeatureDescLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+                                            <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ FeatureDescColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${FeatureDescColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalSwitcher={FeatureDescColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ FeatureDescColorSwitcher: value })}
+                                            />
 
                                             {FeatureDescColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureDescColor}
-                                                                            onChange={(value) => setAttributes({ FeatureDescColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureDescColor}
-                                                                            onChange={(value) => setAttributes({ FeatureDescColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                <FB_ColorControl
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalColor={FeatureDescColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureDescColor: value })}
+                                                />
                                             )}
 
                                             {FeatureDescColorSwitcher === 'hover' && (
-                                                <BaseControl 
+                                                <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={FeatureDescHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureDescHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={FeatureDescHoverColor}
-                                                                            onChange={(value) => setAttributes({ FeatureDescHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
+                                                    globalColor={FeatureDescHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ FeatureDescHoverColor: value })}
+                                                />
                                             )}
+
                                         </PanelBody>
 
                                     </>
@@ -2082,121 +1247,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </div>
                                                 </div>                                       
                                             </PanelBody>
-                                            <PanelBody title="Background Color" initialOpen={false} >
-                                                <BaseControl
-                                                    className="fb-setting-color-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-color-panel-btn">
-                                                        {NORMAL_HOVER.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ FeatureBgColorSwitcher: item.value })}
-                                                                className={`fb-setting-color-panel-btn-switchr ${FeatureBgColorSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
 
-                                                {FeatureBgColorSwitcher === 'normal' && (
-                                                    <BaseControl 
-                                                        label={__("Nomal Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={FeatureBgColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={FeatureBgColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
+                                            <PanelBody
+                                                title={__("Background Color", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_BackgroundColorControl
+                                                    bgColorSwitcher={FeatureGlobalBgColorSwitcher}
+                                                    setBgColorSwitcher={(value) => setAttributes({ FeatureGlobalBgColorSwitcher: value })}
+                                                            
+                                                    normalBackgroundType={FeatureGlobalNormalBackgroundType}
+                                                    setNormalBackgroundType={(value) => setAttributes({ FeatureGlobalNormalBackgroundType: value })}
+                                                    normalClassicColor={FeatureGlobalNormalClassicColor}
+                                                    setNormalClassicColor={(value) => setAttributes({ FeatureGlobalNormalClassicColor: value })}
+                                                    normalGradientColor={FeatureGlobalNormalGradientColor}
+                                                    setNormalGradientColor={(value) => setAttributes({ FeatureGlobalNormalGradientColor: value })}
+                                                    normalCustomGradientSwitcher={FeatureGlobalNormalCustomGradientSwitcher}
+                                                    setNormalCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalNormalCustomGradientSwitcher: value })}
+                                                    normalCustomGradientInputValue={FeatureGlobalNormalCustomGradientInputValue}
+                                                    setNormalCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalNormalCustomGradientInputValue: value })}
+                                                            
+                                                    hoverBackgroundType={FeatureGlobalHoverBackgroundType}
+                                                    setHoverBackgroundType={(value) => setAttributes({ FeatureGlobalHoverBackgroundType: value })}
+                                                    hoverClassicColor={FeatureGlobalHoverClassicColor}
+                                                    setHoverClassicColor={(value) => setAttributes({ FeatureGlobalHoverClassicColor: value })}
+                                                    hoverGradientColor={FeatureGlobalHoverGradientColor} 
+                                                    setHoverGradientColor={(value) => setAttributes({ FeatureGlobalHoverGradientColor: value })}
+                                                    hoverCustomGradientSwitcher={FeatureGlobalHoverCustomGradientSwitcher}
+                                                    setHoverCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalHoverCustomGradientSwitcher: value })}
+                                                    hoverCustomGradientInputValue={FeatureGlobalHoverCustomGradientInputValue}
+                                                    setHoverCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalHoverCustomGradientInputValue: value })}
 
-                                                {FeatureBgColorSwitcher === 'hover' && (
-                                                    <BaseControl 
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-hover-color">
-                                                                            <ColorPicker
-                                                                                color={FeatureBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgHoverColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={FeatureBgHoverColor}
-                                                                                onChange={(value) => setAttributes({ FeatureBgHoverColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
-                                                )}
-                                            </PanelBody>
+                                                    isBackgroundImage={false}
+                                                />
+                                            </PanelBody>    
 
                                             <PanelBody
                                                 title={__("Border & Border radius", "frontis-blocks")}
@@ -2476,32 +1560,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onBoxShadowStyleChange={(value) => setAttributes({ FeatureboxShadowCssValue: value })}
                                                 />
                                             </PanelBody>
-
-                                            <PanelBody
-                                                title={__("Responsive Control", "frontis-blocks")}
-                                                initialOpen={false}
-                                                className="fb-setting-responsive-control-wrapper"
-                                            >
-                                                <ToggleControl
-                                                    label={__("Hide on Desktop", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={FeatureDesktopSwitcher}
-                                                    onChange={(value) => setAttributes({ FeatureDesktopSwitcher: value })}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Hide on Tablet", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={FeatureTabletSwitcher}
-                                                    onChange={(value) => setAttributes({ FeatureTabletSwitcher: value })}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Hide on Mobile", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={FeatureMobileSwitcher}
-                                                    onChange={(value) => setAttributes({ FeatureMobileSwitcher: value })}
-                                                />
-                                            </PanelBody>
-
                                         </div>
                                     </div>
                                 </>

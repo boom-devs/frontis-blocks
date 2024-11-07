@@ -10,11 +10,8 @@
 	"example": {},
 	"supports": {
 		"html": false,
-		"spacing": {
-			"margin": true,
-			"padding": true
-		},
-		"align": ["wide", "full"]
+		"align": ["wide", "full"],
+		"customClassName": false
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",

@@ -58,23 +58,22 @@ const attributes = {
         default: "left",
     },
 
-
-    FeatureListGapDesktop: {
-        type: "number",
-        default: 20
-    },
-    FeatureListGapTablet: {
-        type: "number",
-        default: 15
-    },
-    FeatureListGapMobile: {
-        type: "number",
-        default: 10
-    },
-    FeatureListGapUnits: {
-        type: "string",
-        default: "px"
-    },
+    FeatureListGap: {
+		type: 'object',
+		default: {
+			Desktop: '20',
+			Tablet: '15',
+			Mobile: '10'
+		}
+	},
+	FeatureListGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
     /** Start Icon */
     FeatureIconColorSwitcher : {
@@ -97,138 +96,134 @@ const attributes = {
     },
     FeatureIconBgColor : {
         type: "string",
-        default: "#000"
+        default: "#399CFF"
     },
     FeatureIconBgHoverColor: {
         type: 'string',
-        default: "#000"
+        default: "#399CFF"
     },
 
 
-    FeatureIconSizeDesktop: {
-        type: "number",
-        default: 25
-    },
-    FeatureIconSizeTablet: {
-        type: "number",
-        default: 25
-    },
-    FeatureIconSizeMobile: {
-        type: "number",
-        default: 25
-    },
-    FeatureIconSizeUnits: {
-        type: "string",
-        default: "px"
-    },
+    FeatureIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '25',
+			Tablet: '25',
+			Mobile: '25'
+		}
+	},
+	FeatureIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
-    FeatureIconBgSizeDesktop: {
-        type: "number",
-        default: 60
-    },
-    FeatureIconBgSizeTablet: {
-        type: "number",
-        default: 60
-    },
-    FeatureIconBgSizeMobile: {
-        type: "number",
-        default: 60
-    },
-    FeatureIconBgSizeUnits: {
-        type: "string",
-        default: "px"
-    },
+    FeatureIconBgSize: {
+		type: 'object',
+		default: {
+			Desktop: '60',
+			Tablet: '60',
+			Mobile: '60'
+		}
+	},
+	FeatureIconBgSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
+    FeatureIconSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '20',
+			Tablet: '20',
+			Mobile: '20'
+		}
+	},
+	FeatureIconSpacingUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
-    FeatureIconSpacingDesktop: {
-        type: "number",
-        default: 20
-    },
-    FeatureIconSpacingTablet: {
-        type: "number",
-        default: 20
-    },
-    FeatureIconSpacingMobile: {
-        type: "number",
-        default: 20
-    },
-    FeatureIconSpacingUnits: {
-        type: "string",
-        default: "px"
-    },
-    /** End Icon */
-
-
-
-
+    /** Start Title */
     FeatureTitleFontFamily: {
         type: "string",
         default: "inherit",
     },
-    FeatureTitleFontSizeDesktop: {
-        type: "number",
-        default: 18
-    },
-    FeatureTitleFontSizeTablet: {
-        type: "number",
-        default: 18
-    },
-    FeatureTitleFontSizeMobile: {
-        type: "number",
-        default: 18
-    },
-    FeatureTitleFontSizeUnits: {
-        type: "string",
-        default: "px"
-    },
-    FeatureTitleFontWeight : {
+    FeatureTitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '18',
+			Tablet: '18',
+			Mobile: '18'
+		}
+	},
+	FeatureTitleFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    FeatureTitleFontWeight: {
         type: "string",
         default: "600"
     },
-    FeatureTitleFontStyle : {
+    FeatureTitleFontStyle: {
         type: "string",
         default: "normal"
     },
-    FeatureTitleTextTransform : {
+    FeatureTitleTextTransform: {
         type: "string",
         default: "none"
     },
-    FeatureTitleTextDecoration : {
+    FeatureTitleTextDecoration: {
         type: "string",
         default: "none"
     },
-    FeatureTitleLetterSpacingDesktop: {
-        type: "number",
-        default: 0
-    },
-    FeatureTitleLetterSpacingTablet: {
-        type: "number",
-        default: 0
-    },
-    FeatureTitleLetterSpacingMobile: {
-        type: "number",
-        default: 0
-    },
-    FeatureTitleLetterSpacingUnits : {
-        type: "string",
-        default: "px"
-    },
-    FeatureTitleLineHeightDesktop: {
-        type: "number",
-        default: "inherit",
-    },
-    FeatureTitleLineHeightTablet: {
-        type: "number",
-        default: "inherit",
-    },
-    FeatureTitleLineHeightMobile: {
-        type: "number",
-        default: "inherit",
-    },
-    FeatureTitleLineHeightUnits : {
-        type: "string",
-        default: "px"
-    },
+    FeatureTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	FeatureTitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    FeatureTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	FeatureTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
     FeatureTitleColorSwitcher : {
         type: "string",
@@ -236,78 +231,82 @@ const attributes = {
     },
     FeatureTitleColor : {
         type: "string",
-        default: "#000"
+        default: ""
     },
     FeatureTitleHoverColor: {
         type: 'string',
-        default: "#000"
+        default: ""
     },
+    /** End Title */
 
-
+    /** Start Description */
     FeatureDescFontFamily: {
         type: "string",
         default: "inherit",
     },
-    FeatureDescFontSizeDesktop: {
-        type: "number",
-        default: 14
-    },
-    FeatureDescFontSizeTablet: {
-        type: "number",
-        default: 14
-    },
-    FeatureDescFontSizeMobile: {
-        type: "number",
-        default: 14
+    FeatureDescFontSize: {
+        type: 'object',
+        default: {
+            Desktop: 14,
+            Tablet: 14,
+            Mobile: 14
+        }
     },
     FeatureDescFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    FeatureDescFontWeight : {
+    FeatureDescFontWeight: {
         type: "string",
         default: "400"
     },
-    FeatureDescFontStyle : {
+    FeatureDescFontStyle: {
         type: "string",
         default: "normal"
     },
-    FeatureDescTextTransform : {
+    FeatureDescTextTransform: {
         type: "string",
         default: "none"
     },
-    FeatureDescTextDecoration : {
+    FeatureDescTextDecoration: {
         type: "string",
         default: "none"
     },
-    FeatureDescLetterSpacingDesktop : {
-        type: "number",
+    FeatureDescLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    FeatureDescLetterSpacingTablet : {
-        type: "number",
+    FeatureDescLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    FeatureDescLetterSpacingMobile : {
-        type: "number",
+    FeatureDescLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: 'inherit',
+            Tablet: 'inherit',
+            Mobile: 'inherit'
+        }
     },
-    FeatureDescLetterSpacingUnits : {
-        type: "string",
-        default: "px"
-    },
-    FeatureDescLineHeightDesktop : {
-        type: "number",
-        default: "inherit",
-    },
-    FeatureDescLineHeightTablet : {
-        type: "number",
-        default: "inherit",
-    },
-    FeatureDescLineHeightMobile : {
-        type: "number",
-        default: "inherit",
-    },
-    FeatureDescLineHeightUnits : {
-        type: "string",
-        default: "px"
+    FeatureDescLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
 
     FeatureDescColorSwitcher : {
@@ -316,13 +315,13 @@ const attributes = {
     },
     FeatureDescColor : {
         type: "string",
-        default: "#000"
+        default: ""
     },
     FeatureDescHoverColor: {
         type: 'string',
-        default: "#000"
+        default: ""
     },
-
+    /** End Description */
 
 
     FeatureZIndex : {
@@ -400,18 +399,55 @@ const attributes = {
         default: true
     },
 
-    FeatureBgColorSwitcher : {
+
+
+    /** Start Background Color */
+    FeatureGlobalBgColorSwitcher: {
         type: "string",
-        default: "normal"
+        default: "normal",
     },
-    FeatureBgColor : {
-        type: "string"
+    FeatureGlobalNormalBackgroundType: {
+        type: "string",
+        default: "classic",
     },
-    FeatureBgHoverColor: {
-        type: 'string',
+    FeatureGlobalNormalClassicColor: {
+        type: "string",
+        default: "",
+    },
+    FeatureGlobalNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    FeatureGlobalNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    FeatureGlobalNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
     },
 
-
+    FeatureGlobalHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    FeatureGlobalHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    FeatureGlobalHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    FeatureGlobalHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    FeatureGlobalHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Background Color */
 
     FeatureBorder: {
         type: 'string',
