@@ -27,7 +27,7 @@ export default function Save({ attributes }) {
                         <ul className="fb-feature-list-items">
                             {FeatureItems.map(item => (
                                   
-                                <li key={item.id} className="fb-feature-list-item">
+                                  <li key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
 
                                     { item.FeatureIconAlign !== 'none' && (
                                         <div className="fb-feature-list-icon-box">

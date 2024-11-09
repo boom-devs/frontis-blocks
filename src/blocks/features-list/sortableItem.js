@@ -5,6 +5,11 @@ import { CSS } from '@dnd-kit/utilities';
 import { TextControl, TextareaControl, Button, ButtonGroup, BaseControl } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
 
+import FB_ColorControl from '@Components/color-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+
+
 import {
     ICON_ALIGN,
 } from "./constants/constants";
@@ -89,6 +94,110 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             )}
                         </BaseControl>
                     </div>
+
+                    <FB_SwitcherControl
+                        label={__("Icon Color", "frontis-blocks")}
+                        globalSwitcher={item.FeatureSingleItemIconColorSwitcher}
+                        setGlobalSwitcher={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconColorSwitcher', value)}
+                    />  
+
+                    {item.FeatureSingleItemIconColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={item.FeatureSingleItemIconColor}
+                            setGlobalColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconColor', value)}
+                        />
+                    )}
+
+                    {item.FeatureSingleItemIconColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={item.FeatureSingleItemIconHoverColor}
+                            setGlobalColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconHoverColor', value)}
+                        />
+                    )}
+
+                    <FB_BackgroundColorControl
+                        label={__("Icon Background Color", "frontis-blocks")}
+                        bgColorSwitcher={item.FeatureSingleItemIconBgColorSwitcher}
+                        setBgColorSwitcher={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconBgColorSwitcher', value)}
+                                
+                        normalBackgroundType={item.FeatureSingleItemIconNormalBackgroundType}
+                        setNormalBackgroundType={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconNormalBackgroundType', value)}
+                        normalClassicColor={item.FeatureSingleItemIconNormalClassicColor}
+                        setNormalClassicColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconNormalClassicColor', value)}
+                        normalGradientColor={item.FeatureSingleItemIconNormalGradientColor}
+                        setNormalGradientColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconNormalGradientColor', value)}
+                        normalCustomGradientSwitcher={item.FeatureSingleItemIconNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconNormalCustomGradientSwitcher', value)}
+                        normalCustomGradientInputValue={item.FeatureSingleItemIconNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconNormalCustomGradientInputValue', value)}
+                                
+                        hoverBackgroundType={item.FeatureSingleItemIconHoverBackgroundType}
+                        setHoverBackgroundType={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconHoverBackgroundType', value)}
+                        hoverClassicColor={item.FeatureSingleItemIconHoverClassicColor}
+                        setHoverClassicColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconHoverClassicColor', value)}
+                        hoverGradientColor={item.FeatureSingleItemIconHoverGradientColor} 
+                        setHoverGradientColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconHoverGradientColor', value)}
+                        hoverCustomGradientSwitcher={item.FeatureSingleItemIconHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconHoverCustomGradientSwitcher', value)}
+                        hoverCustomGradientInputValue={item.FeatureSingleItemIconHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => handleChangeItem(item.id, 'FeatureSingleItemIconHoverCustomGradientInputValue', value)}
+
+                        isBackgroundImage={false}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Text Color", "frontis-blocks")}
+                        globalSwitcher={item.FeatureSingleItemTextColorSwitcher}
+                        setGlobalSwitcher={(value) => handleChangeItem(item.id, 'FeatureSingleItemTextColorSwitcher', value)}
+                    />  
+
+                    {item.FeatureSingleItemTextColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={item.FeatureSingleItemTextColor}
+                            setGlobalColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemTextColor', value)}
+                        />
+                    )}
+
+                    {item.FeatureSingleItemTextColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={item.FeatureSingleItemTextHoverColor}
+                            setGlobalColor={(value) => handleChangeItem(item.id, 'FeatureSingleItemTextHoverColor', value)}
+                        />
+                    )}
+
+                    <FB_BackgroundColorControl
+                        label={__("Item Background Color", "frontis-blocks")}
+                        bgColorSwitcher={item.FeatureItemBgColorSwitcher}
+                        setBgColorSwitcher={(value) => handleChangeItem(item.id, 'FeatureItemBgColorSwitcher', value)}
+                                
+                        normalBackgroundType={item.FeatureItemNormalBackgroundType}
+                        setNormalBackgroundType={(value) => handleChangeItem(item.id, 'FeatureItemNormalBackgroundType', value)}
+                        normalClassicColor={item.FeatureItemNormalClassicColor}
+                        setNormalClassicColor={(value) => handleChangeItem(item.id, 'FeatureItemNormalClassicColor', value)}
+                        normalGradientColor={item.FeatureItemNormalGradientColor}
+                        setNormalGradientColor={(value) => handleChangeItem(item.id, 'FeatureItemNormalGradientColor', value)}
+                        normalCustomGradientSwitcher={item.FeatureItemNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'FeatureItemNormalCustomGradientSwitcher', value)}
+                        normalCustomGradientInputValue={item.FeatureItemNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => handleChangeItem(item.id, 'FeatureItemNormalCustomGradientInputValue', value)}
+                                
+                        hoverBackgroundType={item.FeatureItemHoverBackgroundType}
+                        setHoverBackgroundType={(value) => handleChangeItem(item.id, 'FeatureItemHoverBackgroundType', value)}
+                        hoverClassicColor={item.FeatureItemHoverClassicColor}
+                        setHoverClassicColor={(value) => handleChangeItem(item.id, 'FeatureItemHoverClassicColor', value)}
+                        hoverGradientColor={item.FeatureItemHoverGradientColor} 
+                        setHoverGradientColor={(value) => handleChangeItem(item.id, 'FeatureItemHoverGradientColor', value)}
+                        hoverCustomGradientSwitcher={item.FeatureItemHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'FeatureItemHoverCustomGradientSwitcher', value)}
+                        hoverCustomGradientInputValue={item.FeatureItemHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => handleChangeItem(item.id, 'FeatureItemHoverCustomGradientInputValue', value)}
+
+                        isBackgroundImage={false}
+                    />
                 </div>
             )}
         </li>
