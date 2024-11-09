@@ -119,7 +119,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_padding,
 		Heading_Tab_padding,
 		Heading_Mobile_padding,
-		DeviceType,
 		deviceType,
 		paddingLink,
 
@@ -459,7 +458,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handlePaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_padding: {
@@ -486,7 +485,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllPadding(value, DeviceType);
+			updateAllPadding(value, deviceType);
 		}
 	};
 
@@ -506,7 +505,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handlePaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -558,7 +557,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleButtonPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoButtonDesktopPadding: {
@@ -585,7 +584,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateButtonPadding(value, DeviceType);
+			updateButtonPadding(value, deviceType);
 		}
 	};
 
@@ -605,7 +604,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handleButtonPaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -658,7 +657,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBoxPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoBoxDesktopPadding: {
@@ -682,7 +681,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllBoxPadding(value, DeviceType);
+			updateAllBoxPadding(value, deviceType);
 		}
 	};
 
@@ -702,7 +701,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handleBoxPaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -753,7 +752,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBoxMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoBoxDesktopMargin: { ...infoBoxDesktopMargin, [direction]: value },
@@ -774,7 +773,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (infoBoxMarginLink) {
-			updateBoxMargin(value, DeviceType);
+			updateBoxMargin(value, deviceType);
 		}
 	};
 
@@ -794,7 +793,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for margin */
 	const handleBoxMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
@@ -846,7 +845,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleDescPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					SubHeadingDesktopPadding: {
@@ -873,7 +872,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllDescPadding(value, DeviceType);
+			updateAllDescPadding(value, deviceType);
 		}
 	};
 
@@ -893,7 +892,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handleDescPaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -944,7 +943,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleDescMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					descDesktopMargin: { ...descDesktopMargin, [direction]: value },
@@ -965,7 +964,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (descMarginLink) {
-			updateDescMargin(value, DeviceType);
+			updateDescMargin(value, deviceType);
 		}
 	};
 
@@ -985,7 +984,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for margin */
 	const handleDescMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
@@ -1035,7 +1034,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_Margin: {
@@ -1062,7 +1061,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (Heading_Margin_Link) {
-			updateAllMargin(value, DeviceType);
+			updateAllMargin(value, deviceType);
 		}
 	};
 
@@ -1082,7 +1081,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for margin */
 	const handleMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 	/** Default margin for desktop (using desktop_margin) */
 	const margin = `${Heading_Desktop_Margin.top}${Heading_padding_units} ${Heading_Desktop_Margin.right}${Heading_padding_units} ${Heading_Desktop_Margin.bottom}${Heading_padding_units} ${Heading_Desktop_Margin.left}${Heading_padding_units}`;
@@ -1133,7 +1132,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleButtonMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoButtonDesktopMargin: {
@@ -1160,7 +1159,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (infoButtonMarginLink) {
-			updateButtonMargin(value, DeviceType);
+			updateButtonMargin(value, deviceType);
 		}
 	};
 
@@ -1232,7 +1231,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleButtonBorderWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoButtonDesktopBorderWidth: {
@@ -1262,7 +1261,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if borderLink is true */
 		if (borderLink) {
-			updateButtonBorderWidth(value, DeviceType);
+			updateButtonBorderWidth(value, deviceType);
 		}
 	};
 
@@ -1284,7 +1283,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for Border Width */
 	const handleButtonBorderWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1335,7 +1334,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleButtonBorderRadiusWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoBtnDesktopBorderradiusWidth: {
@@ -1365,7 +1364,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if borderRadiusLink is true */
 		if (borderRadiusLink) {
-			updateButtonBorderRadiusWidth(value, DeviceType);
+			updateButtonBorderRadiusWidth(value, deviceType);
 		}
 	};
 
@@ -1387,7 +1386,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for Border Width */
 	const handleButtonBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1439,7 +1438,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBorderWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_Border_Width: {
@@ -1469,7 +1468,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if borderLink is true */
 		if (borderLink) {
-			updateAllBorderWidth(value, DeviceType);
+			updateAllBorderWidth(value, deviceType);
 		}
 	};
 
@@ -1489,7 +1488,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for Border Width */
 	const handleBorderWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1541,7 +1540,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBorderRadiusWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_Border_radius_Width: {
@@ -1571,7 +1570,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if borderRadiusLink is true */
 		if (borderRadiusLink) {
-			updateAllBorderRadiusWidth(value, DeviceType);
+			updateAllBorderRadiusWidth(value, deviceType);
 		}
 	};
 
@@ -1593,218 +1592,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for Border Width */
 	const handleBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
 	const borderRadiusWidth = `${Heading_Desktop_Border_radius_Width.top}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.right}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.bottom}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.left}${Heading_Border_radius_units}`;
 	/** End Border Radius Width */
 
-	/** Start Box Border Width */
-	const [boxPreviousBorderWidth, setBoxPreviousBorderWidth] = useState(
-		infoBoxDesktopBorderWidth,
-	);
-	/** Function to update all Border Width values */
-	const updateBoxBorderWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxBorderWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (DeviceType) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderWidth: {
-						...infoBoxDesktopBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderWidth: {
-						...infoBoxTabBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderWidth: {
-						...infoBoxMobileBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderLink is true */
-		if (borderLink) {
-			updateBoxBorderWidth(value, DeviceType);
-		}
-	};
-
-	/** Function to handle borderLink toggle */
-	const handleBoxBorderWidthLinkToggle = () => {
-		if (!borderLink) {
-			setAttributes({ infoBoxDesktopBorderWidth: boxPreviousBorderWidth });
-		}
-		/** setborderLinkLink(!borderLink) */
-		setAttributes({ borderLink: !borderLink });
-	};
-
-	/** Update previousborderWidth state when Border Width changes */
-	useEffect(() => {
-		setBoxPreviousBorderWidth(infoBoxDesktopBorderWidth);
-	}, [infoBoxDesktopBorderWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleBoxBorderWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const boxBorderWidth = `${infoBoxDesktopBorderWidth.top}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.right}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.bottom}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.left}${infoBoxBorderUnits}`;
-	/** End Border Width */
-
-	/** Start Border Radius Width */
-	const [boxPreviousBorderRadiusWidth, setBoxPreviousBorderRadiusWidth] =
-		useState(infoBoxDesktopBorderRadiusWidth);
-	/** Function to update all Border Width values */
-	const updateBoxBorderRadiusWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxBorderRadiusWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (activeBorderRadiusDevice) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderRadiusWidth: {
-						...infoBoxDesktopBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderRadiusWidth: {
-						...infoBoxTabBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderRadiusWidth: {
-						...infoBoxMobileBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderRadiusLink is true */
-		if (borderRadiusLink) {
-			updateBoxBorderRadiusWidth(value, DeviceType);
-		}
-	};
-
-	/** Function to handle borderRadiusLink toggle */
-	const handleBoxBorderRadiusWidthLinkToggle = () => {
-		if (!borderRadiusLink) {
-			setAttributes({
-				infoBoxDesktopBorderRadiusWidth: boxPreviousBorderRadiusWidth,
-			});
-		}
-		/** setborderRadiusLinkLink(!borderRadiusLink) */
-		setAttributes({ borderRadiusLink: !borderRadiusLink });
-	};
-
-	/** Update previousBorderRadiusWidth state when Border Width changes */
-	useEffect(() => {
-		setBoxPreviousBorderRadiusWidth(infoBoxDesktopBorderRadiusWidth);
-	}, [infoBoxDesktopBorderRadiusWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleBoxBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const boxBorderRadiusWidth = `${infoBoxDesktopBorderRadiusWidth.top}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.right}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.bottom}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.left}${infoBoxBorderRadiusUnits}`;
-	/** End Border Radius Width */
+	
 
 	/** Global Typography */
 	/** Start Global padding */
@@ -2475,16 +2270,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 	/** End Global Bg Color */
 
-	/** Start Global Border Color */
-	const handleGlobalBorderColorSwitcherChange = (value) => {
-		setAttributes({ globalBorderColorSwitcher: value });
-	};
-	const handleGlobalBorderColorChange = (value) => {
-		setAttributes({ globalBorderColor: value });
-	};
-	const handleGlobalBorderHoverColorChange = (value) => {
-		setAttributes({ globalBorderHoverColor: value });
-	};
+	
 
 	/* set default values for the style attributes */
 	useEffect(() => {
@@ -4841,7 +4627,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Padding", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handlePaddingDeviceClick}
 														/>
 
@@ -4876,9 +4662,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_padding.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_padding.top
 																		: Heading_Mobile_padding.top
 																}
@@ -4895,9 +4681,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_padding.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_padding.right
 																		: Heading_Mobile_padding.right
 																}
@@ -4914,9 +4700,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_padding.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_padding.bottom
 																		: Heading_Mobile_padding.bottom
 																}
@@ -4933,9 +4719,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_padding.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_padding.left
 																		: Heading_Mobile_padding.left
 																}
@@ -4964,7 +4750,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Margin", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handleMarginDeviceClick}
 														/>
 
@@ -4999,9 +4785,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Margin.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Margin.top
 																		: Heading_Mobile_Margin.top
 																}
@@ -5018,9 +4804,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Margin.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Margin.right
 																		: Heading_Mobile_Margin.right
 																}
@@ -5037,9 +4823,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Margin.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Margin.bottom
 																		: Heading_Mobile_Margin.bottom
 																}
@@ -5056,9 +4842,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Margin.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Margin.left
 																		: Heading_Mobile_Margin.left
 																}
@@ -5255,7 +5041,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Border Width", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handleBorderWidthDeviceClick}
 														/>
 
@@ -5290,9 +5076,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_Width.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_Width.top
 																		: Heading_Mobile_Border_Width.top
 																}
@@ -5309,9 +5095,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_Width.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_Width.right
 																		: Heading_Mobile_Border_Width.right
 																}
@@ -5328,9 +5114,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_Width.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_Width.bottom
 																		: Heading_Mobile_Border_Width.bottom
 																}
@@ -5347,9 +5133,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_Width.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_Width.left
 																		: Heading_Mobile_Border_Width.left
 																}
@@ -5379,7 +5165,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Border Radius", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handleBorderRadiusWidthDeviceClick}
 														/>
 
@@ -5414,9 +5200,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_radius_Width.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_radius_Width.top
 																		: Heading_Mobile_Border_radius_Width.top
 																}
@@ -5433,9 +5219,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_radius_Width.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_radius_Width.right
 																		: Heading_Mobile_Border_radius_Width.right
 																}
@@ -5452,9 +5238,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_radius_Width.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_radius_Width.bottom
 																		: Heading_Mobile_Border_radius_Width.bottom
 																}
@@ -5474,9 +5260,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? Heading_Desktop_Border_radius_Width.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? Heading_Tab_Border_radius_Width.left
 																		: Heading_Mobile_Border_radius_Width.left
 																}
@@ -6021,7 +5807,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Padding", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handleDescPaddingDeviceClick}
 														/>
 
@@ -6056,9 +5842,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? SubHeadingDesktopPadding.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? SubHeadingTabPadding.top
 																		: SubHeadingMobilePadding.top
 																}
@@ -6075,9 +5861,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? SubHeadingDesktopPadding.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? SubHeadingTabPadding.right
 																		: SubHeadingMobilePadding.right
 																}
@@ -6094,9 +5880,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? SubHeadingDesktopPadding.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? SubHeadingTabPadding.bottom
 																		: SubHeadingMobilePadding.bottom
 																}
@@ -6113,9 +5899,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? SubHeadingDesktopPadding.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? SubHeadingTabPadding.left
 																		: SubHeadingMobilePadding.left
 																}
@@ -6144,7 +5930,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Margin", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handleDescMarginDeviceClick}
 														/>
 
@@ -6179,9 +5965,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? descDesktopMargin.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? descTabMargin.top
 																		: descMobileMargin.top
 																}
@@ -6198,9 +5984,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? descDesktopMargin.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? descTabMargin.right
 																		: descMobileMargin.right
 																}
@@ -6217,9 +6003,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? descDesktopMargin.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? descTabMargin.bottom
 																		: descMobileMargin.bottom
 																}
@@ -6236,9 +6022,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? descDesktopMargin.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? descTabMargin.left
 																		: descMobileMargin.left
 																}
@@ -7130,9 +6916,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopPadding.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabPadding.top
 																		: infoButtonMobilePadding.top
 																}
@@ -7149,9 +6935,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopPadding.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabPadding.right
 																		: infoButtonMobilePadding.right
 																}
@@ -7168,9 +6954,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopPadding.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabPadding.bottom
 																		: infoButtonMobilePadding.bottom
 																}
@@ -7187,9 +6973,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopPadding.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabPadding.left
 																		: infoButtonMobilePadding.left
 																}
@@ -7218,7 +7004,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Margin", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handleButtonMarginDeviceClick}
 														/>
 
@@ -7253,9 +7039,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopMargin.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabMargin.top
 																		: infoButtonMobileMargin.top
 																}
@@ -7272,9 +7058,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopMargin.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabMargin.right
 																		: infoButtonMobileMargin.right
 																}
@@ -7291,9 +7077,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopMargin.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabMargin.bottom
 																		: infoButtonMobileMargin.bottom
 																}
@@ -7310,9 +7096,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopMargin.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabMargin.left
 																		: infoButtonMobileMargin.left
 																}
@@ -7510,7 +7296,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Border", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={handleButtonBorderWidthDeviceClick}
 														/>
 
@@ -7545,9 +7331,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopBorderWidth.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabBorderWidth.top
 																		: infoButtonMobileBorderWidth.top
 																}
@@ -7564,9 +7350,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopBorderWidth.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabBorderWidth.right
 																		: infoButtonMobileBorderWidth.right
 																}
@@ -7583,9 +7369,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopBorderWidth.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabBorderWidth.bottom
 																		: infoButtonMobileBorderWidth.bottom
 																}
@@ -7605,9 +7391,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoButtonDesktopBorderWidth.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoButtonTabBorderWidth.left
 																		: infoButtonMobileBorderWidth.left
 																}
@@ -7636,7 +7422,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<div className="fb-setting-spacing-label-container">
 														<FB_ResponsiveControl
 															labelText={__("Border Radius", "frontis-block")}
-															device={DeviceType}
+															device={deviceType}
 															deviceHandler={
 																handleButtonBorderRadiusWidthDeviceClick
 															}
@@ -7673,9 +7459,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="top"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoBtnDesktopBorderradiusWidth.top
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoBtnTabBorderradiusWidth.top
 																		: infoBtnMobileBorderradiusWidth.top
 																}
@@ -7695,9 +7481,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="right"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoBtnDesktopBorderradiusWidth.right
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoBtnTabBorderradiusWidth.right
 																		: infoBtnMobileBorderradiusWidth.right
 																}
@@ -7717,9 +7503,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="bottom"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoBtnDesktopBorderradiusWidth.bottom
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoBtnTabBorderradiusWidth.bottom
 																		: infoBtnMobileBorderradiusWidth.bottom
 																}
@@ -7739,9 +7525,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																type="number"
 																name="left"
 																value={
-																	DeviceType === "Desktop"
+																	deviceType === "Desktop"
 																		? infoBtnDesktopBorderradiusWidth.left
-																		: DeviceType === "Tablet"
+																		: deviceType === "Tablet"
 																		? infoBtnTabBorderradiusWidth.left
 																		: infoBtnMobileBorderradiusWidth.left
 																}

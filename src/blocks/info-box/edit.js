@@ -74,11 +74,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 : "column-reverse",
                         
                     }}>
+						<div className="fb-info-media-container" style={{
+								justifyContent: wrapperAlignment,
+							}}>
 						<div
 							className="fb-info-media-wrapper"
-							style={{
-								textAlign: wrapperAlignment,
-							}}
+							
 						>
 							{mediaSwitcher === "image" && (
 								<img src={attributes.infoMediaUrl} />
@@ -86,6 +87,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							{mediaSwitcher === "icon" && (
 								<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
 							)}
+						</div>
 						</div>
 						<div className="fb-info-box-content-wrapper">
 							<RichText
