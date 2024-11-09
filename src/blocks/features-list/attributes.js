@@ -75,7 +75,7 @@ const attributes = {
 		}
 	},
 
-    /** Start Icon */
+    /** Start Icon Color */
     FeatureIconColorSwitcher : {
         type: "string",
         default: "normal"
@@ -88,21 +88,55 @@ const attributes = {
         type: 'string',
         default: "#fff"
     },
+    /** End Icon Color */
 
-
-    FeatureIconBgColorSwitcher : {
+    /** Start Icon Background Color */
+    FeatureIconBgColorSwitcher: {
         type: "string",
-        default: "normal"
+        default: "normal",
     },
-    FeatureIconBgColor : {
+    FeatureIconNormalBackgroundType: {
         type: "string",
-        default: "#399CFF"
+        default: "classic",
     },
-    FeatureIconBgHoverColor: {
-        type: 'string',
-        default: "#399CFF"
+    FeatureIconNormalClassicColor: {
+        type: "string",
+        default: "#399CFF",
     },
-
+    FeatureIconNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    FeatureIconNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    FeatureIconNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    
+    FeatureIconHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    FeatureIconHoverClassicColor: {
+        type: "string",
+        default: "#399CFF",
+    },
+    FeatureIconHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    FeatureIconHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    FeatureIconHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Icon Background Color */
 
     FeatureIconSize: {
 		type: 'object',
@@ -324,80 +358,95 @@ const attributes = {
     /** End Description */
 
 
-    FeatureZIndex : {
+
+
+    /** Start Global Setting */
+	FeatureGlobalZIndex : {
         type: "number",
     },
+	/** Start Padding */
+	FeatureGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	FeatureGlobalPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
 
-    FeaturePaddingUnits : {
-        type: "string",
-        default: "px"
-    },
-    FeatureDesktopPadding: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureTabPadding: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureMobilePadding: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeaturePaddingLink : {
-        type : "boolean",
-        default: true
-    },
-    FeatureMarginUnits : {
-        type: "string",
-        default: "px"
-    },
-    FeatureDesktopMargin: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureTabMargin: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureMobileMargin: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureMarginLink : {
-        type : "boolean",
-        default: true
-    },
+	/** Start Margin */
+	FeatureGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	FeatureGlobalMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
 
 
 
@@ -521,112 +570,117 @@ const attributes = {
     },
     /** End Background Color */
 
-    FeatureBorder: {
-        type: 'string',
-        default: "none",
-    },
-    FeatureBorderColor: {
-        type: 'string',
-    },
-    FeatureBorderHoverColor: {
-        type: 'string',
-    },
-    FeatureBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
 
-    FeatureBorderUnits : {
-        type: "string",
-        default: "px"
-    },
-    FeatureDesktopBorderWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureTabBorderWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureMobileBorderWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureBorderLink : {
-        type : "boolean",
-        default: true
-    },
 
-    FeatureBorderRadiusUnits : {
-        type: "string",
-        default: "px"
-    },
-    FeatureDesktopBorderRadiusWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureTabBorderRadiusWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureMobileBorderRadiusWidth: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    FeatureBorderRadiusLink : {
-        type : "boolean",
-        default: true
-    },
-    FeatureDesktopSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    FeatureTabletSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    FeatureMobileSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    FeatureboxShadowValues: {
+	/** Start Border */
+	FeatureGlobalBorder: {
+		type: 'string',
+		default: "none",
+	},
+	FeatureGlobalBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	FeatureGlobalBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	FeatureGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	FeatureGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	FeatureGlobalBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	FeatureGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	FeatureGlobalBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureGlobalBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	FeatureGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
-    FeatureboxShadowCssValue: {
+    FeatureGlobalBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
+    /** End Global Style */
     
 };
 
