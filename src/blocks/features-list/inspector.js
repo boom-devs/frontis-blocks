@@ -126,16 +126,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start Global Background Color */
         FeatureGlobalBgColorSwitcher,
+
         FeatureGlobalNormalBackgroundType,
         FeatureGlobalNormalClassicColor,
         FeatureGlobalNormalGradientColor,
         FeatureGlobalNormalCustomGradientSwitcher,
         FeatureGlobalNormalCustomGradientInputValue,
+
+        FeatureGlobalNormalBackgroundImageUrl,
+        FeatureGlobalNormalBackgroundImageAlt,
+        FeatureGlobalNormalBackgroundImageID,
+        FeatureGlobalNormalBackgroundImagePosition,
+        FeatureGlobalNormalBackgroundImageAttachment,
+        FeatureGlobalNormalBackgroundImageRepeat,
+        FeatureGlobalNormalBackgroundImageSize,
+
         FeatureGlobalHoverBackgroundType,
         FeatureGlobalHoverClassicColor,
         FeatureGlobalHoverGradientColor,
         FeatureGlobalHoverCustomGradientSwitcher,
         FeatureGlobalHoverCustomGradientInputValue,
+
+        FeatureGlobalHoverBackgroundImageUrl,
+        FeatureGlobalHoverBackgroundImageAlt,
+        FeatureGlobalHoverBackgroundImageID,
+        FeatureGlobalHoverBackgroundImagePosition,
+        FeatureGlobalHoverBackgroundImageAttachment,
+        FeatureGlobalHoverBackgroundImageRepeat,
+        FeatureGlobalHoverBackgroundImageSize,
         /** End Global Background Color */
 
         FeatureBorder,
@@ -539,9 +557,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     ${FeatureGlobalNormalBackgroundType === 'gradient' ? `
                         background: ${FeatureGlobalNormalCustomGradientSwitcher && FeatureGlobalNormalCustomGradientInputValue ? FeatureGlobalNormalCustomGradientInputValue : FeatureGlobalNormalGradientColor};
-                    ` : FeatureGlobalNormalBackgroundType === 'classic' ? `
+                    ` : FeatureGlobalNormalBackgroundImageUrl && FeatureGlobalNormalBackgroundImageUrl !== 'null' ? `
+                        ${FeatureGlobalNormalBackgroundImageUrl ? `background-image: url(${FeatureGlobalNormalBackgroundImageUrl});` : ''}
+                        ${FeatureGlobalNormalBackgroundImagePosition ? `background-position: ${FeatureGlobalNormalBackgroundImagePosition};` : ''}
+                        ${FeatureGlobalNormalBackgroundImageAttachment ? `background-attachment: ${FeatureGlobalNormalBackgroundImageAttachment};` : ''}
+                        ${FeatureGlobalNormalBackgroundImageRepeat ? `background-repeat: ${FeatureGlobalNormalBackgroundImageRepeat};` : ''}
+                        ${FeatureGlobalNormalBackgroundImageSize ? `background-size: ${FeatureGlobalNormalBackgroundImageSize};` : ''}
+                    ` : `
                         background: ${FeatureGlobalNormalClassicColor};
-                    ` : ''}
+                    `}
 
                     padding: ${DesktopPadding};
                     margin: ${DesktopMargin};
@@ -553,11 +577,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     transition: all .3s ease-in-out;
                 }
                 .fb-feature-main-wrapper.${blockID}:hover {
+                
                     ${FeatureGlobalHoverBackgroundType === 'gradient' ? `
                         background: ${FeatureGlobalHoverCustomGradientSwitcher && FeatureGlobalHoverCustomGradientInputValue ? FeatureGlobalHoverCustomGradientInputValue : FeatureGlobalHoverGradientColor};
-                    ` : FeatureGlobalHoverBackgroundType === 'classic' ? `
+                    ` : FeatureGlobalHoverBackgroundImageUrl && FeatureGlobalHoverBackgroundImageUrl !== 'null' ? `
+                        ${FeatureGlobalHoverBackgroundImageUrl ? `background-image: url(${FeatureGlobalHoverBackgroundImageUrl});` : ''}
+                        ${FeatureGlobalHoverBackgroundImagePosition ? `background-position: ${FeatureGlobalHoverBackgroundImagePosition};` : ''}
+                        ${FeatureGlobalHoverBackgroundImageAttachment ? `background-attachment: ${FeatureGlobalHoverBackgroundImageAttachment};` : ''}
+                        ${FeatureGlobalHoverBackgroundImageRepeat ? `background-repeat: ${FeatureGlobalHoverBackgroundImageRepeat};` : ''}
+                        ${FeatureGlobalHoverBackgroundImageSize ? `background-size: ${FeatureGlobalHoverBackgroundImageSize};` : ''}
+                    ` : `
                         background: ${FeatureGlobalHoverClassicColor};
-                    ` : ''}
+                    `}
 
                     ${FeatureBorderHoverColor !== undefined ? `border-color: ${FeatureBorderHoverColor};` : ''};
                 }
@@ -1255,7 +1286,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <FB_BackgroundColorControl
                                                     bgColorSwitcher={FeatureGlobalBgColorSwitcher}
                                                     setBgColorSwitcher={(value) => setAttributes({ FeatureGlobalBgColorSwitcher: value })}
-                                                            
+                                                    
                                                     normalBackgroundType={FeatureGlobalNormalBackgroundType}
                                                     setNormalBackgroundType={(value) => setAttributes({ FeatureGlobalNormalBackgroundType: value })}
                                                     normalClassicColor={FeatureGlobalNormalClassicColor}
@@ -1266,7 +1297,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     setNormalCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalNormalCustomGradientSwitcher: value })}
                                                     normalCustomGradientInputValue={FeatureGlobalNormalCustomGradientInputValue}
                                                     setNormalCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalNormalCustomGradientInputValue: value })}
-                                                            
+                                                    normalBackgroundImageUrl={FeatureGlobalNormalBackgroundImageUrl}
+                                                    setNormalBackgroundImageUrl={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageUrl: value })}
+                                                    normalBackgroundImageAlt={FeatureGlobalNormalBackgroundImageAlt}
+                                                    setNormalBackgroundImageAlt={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageAlt: value })}
+                                                    normalBackgroundImageID={FeatureGlobalNormalBackgroundImageID}
+                                                    setNormalBackgroundImageID={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageID: value })}
+                                                    normalBackgroundImagePosition={FeatureGlobalNormalBackgroundImagePosition}
+                                                    setNormalBackgroundImagePosition={(value) => setAttributes({ FeatureGlobalNormalBackgroundImagePosition: value })}
+                                                    normalBackgroundImageAttachment={FeatureGlobalNormalBackgroundImageAttachment}
+                                                    setNormalBackgroundImageAttachment={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageAttachment: value })}
+                                                    normalBackgroundImageRepeat={FeatureGlobalNormalBackgroundImageRepeat}
+                                                    setNormalBackgroundImageRepeat={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageRepeat: value })}
+                                                    normalBackgroundImageSize={FeatureGlobalNormalBackgroundImageSize}
+                                                    setNormalBackgroundImageSize={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageSize: value })}
+                                                    
                                                     hoverBackgroundType={FeatureGlobalHoverBackgroundType}
                                                     setHoverBackgroundType={(value) => setAttributes({ FeatureGlobalHoverBackgroundType: value })}
                                                     hoverClassicColor={FeatureGlobalHoverClassicColor}
@@ -1277,8 +1322,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     setHoverCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalHoverCustomGradientSwitcher: value })}
                                                     hoverCustomGradientInputValue={FeatureGlobalHoverCustomGradientInputValue}
                                                     setHoverCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalHoverCustomGradientInputValue: value })}
-
-                                                    isBackgroundImage={false}
+                                                    hoverBackgroundImageUrl={FeatureGlobalHoverBackgroundImageUrl}
+                                                    setHoverBackgroundImageUrl={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageUrl: value })}
+                                                    hoverBackgroundImageAlt={FeatureGlobalHoverBackgroundImageAlt}
+                                                    setHoverBackgroundImageAlt={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageAlt: value })}
+                                                    hoverBackgroundImageID={FeatureGlobalHoverBackgroundImageID}
+                                                    setHoverBackgroundImageID={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageID: value })}
+                                                    hoverBackgroundImagePosition={FeatureGlobalHoverBackgroundImagePosition}
+                                                    setHoverBackgroundImagePosition={(value) => setAttributes({ FeatureGlobalHoverBackgroundImagePosition: value })}
+                                                    hoverBackgroundImageAttachment={FeatureGlobalHoverBackgroundImageAttachment}
+                                                    setHoverBackgroundImageAttachment={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageAttachment: value })}
+                                                    hoverBackgroundImageRepeat={FeatureGlobalHoverBackgroundImageRepeat}
+                                                    setHoverBackgroundImageRepeat={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageRepeat: value })}
+                                                    hoverBackgroundImageSize={FeatureGlobalHoverBackgroundImageSize}
+                                                    setHoverBackgroundImageSize={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageSize: value })}
                                                 />
                                             </PanelBody>    
 

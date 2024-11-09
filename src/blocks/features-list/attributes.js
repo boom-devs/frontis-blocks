@@ -427,6 +427,43 @@ const attributes = {
         default: "",
     },
 
+
+    FeatureGlobalNormalBackgroundImageUrl: { 
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalNormalBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalNormalBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalNormalBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalNormalBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalNormalBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalNormalBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+
+
     FeatureGlobalHoverBackgroundType: {
         type: "string",
         default: "classic",
@@ -446,6 +483,41 @@ const attributes = {
     FeatureGlobalHoverCustomGradientInputValue: {
         type: "string",
         default: "",
+    },
+
+    FeatureGlobalHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    FeatureGlobalHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
     },
     /** End Background Color */
 
