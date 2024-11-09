@@ -179,8 +179,8 @@ export const variations = [
 				'frontis-blocks/container',
 				{ widthDesktop: 100, widthSetByUser: true, directionDesktop: 'row' },
 				[
-					[ 'frontis-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
-					[ 'frontis-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
+					[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+					[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
 				],
 			],
 			[ 'frontis-blocks/container', { widthDesktop: 100, widthMobile: 100, widthSetByUser: true } ],
