@@ -29,7 +29,7 @@ import {
 	ICON_POSITION,
 } from "./constants/constants";
 
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useMemo } from "@wordpress/element";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Color from '@Components/color';
@@ -167,6 +167,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonGlobalBoxShadowValues,
         buttonGlobalBoxShadowCssValue,
         /** End Global Setting */
+		blockStyle,
 
     } = attributes;    
     
@@ -977,10 +978,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 	}
 
-	return (
-		<>
-			<style>
-				{`
+
+
+	const allBlockStyle = useMemo(() => `
 				.${blockId}.fb-advanced-button-wrapper {
                     ${buttonGlobalZIndex ? `z-index: ${buttonGlobalZIndex};` : ''}
                     ${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
@@ -1110,7 +1110,85 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         ${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
                     }
                 }
-            `}
+	`, [
+		blockId,
+		buttonGlobalZIndex,
+		buttonGlobalBgColor,
+		globalDesktopPadding,
+		globalDesktopMargin,
+		buttonGlobalBorder,
+		globalDesktopBorderWidth,
+		globalDesktopBorderRadiusWidth,
+		buttonGlobalBorderColor,
+		buttonGlobalBoxShadowCssValue,
+		buttonGlobalBgHoverColor,
+		buttonGlobalBorderHoverColor,
+		buttonBgColor,
+		buttonFontFamily,
+		buttonFontSize,
+		buttonFontSizeUnits,
+		buttonFontWeight,
+		buttonFontStyle,
+		buttonTextTransform,
+		buttonTextDecoration,
+		buttonLetterSpacing,
+		buttonLetterSpacingUnits,
+		buttonLineHeight,
+		buttonLineHeightUnits,
+		buttonDesktopPaddingStr,
+		buttonDesktopMarginStr,
+		buttonBorder,
+		buttonDesktopBorderWidthStr,
+		buttonDesktopBorderRadiusStr,
+		buttonBorderColor,
+		buttonBoxShadowCssValue,
+		buttonWidth,
+		buttonWidthUnits,
+		buttonAlignment,
+		buttonHoverColor,
+		buttonIconPosition,
+		buttonIconGapSize,
+		buttonIconGapUnits,
+		buttonIconBgColor,
+		buttonIconBorder,
+		buttonIconBorderColor,
+		buttonIconBorderDesktopWidth,
+		buttonIconBorderRadiusDesktopWidth,
+		buttonIconBgHoverColor,
+		buttonIconBorderHoverColor,
+		buttonIconSize,
+		buttonIconSizeUnits,
+		buttonIconColor,
+		globalTabletPadding,
+		globalTabletMargin,
+		globalTabletBorderWidth,
+		globalTabletBorderRadiusWidth,
+		buttonTabletPaddingStr,
+		buttonTabletMarginStr,
+		buttonTabletBorderWidthStr,
+		buttonTabletBorderRadiusStr,
+		buttonIconBorderTabletWidth,
+		buttonIconBorderRadiusTabletWidth,
+		globalMobilePadding,
+		globalMobileMargin,
+		globalMobileBorderWidth,
+		globalMobileBorderRadiusWidth,
+		buttonMobilePaddingStr,
+		buttonMobileMarginStr,
+		buttonMobileBorderWidthStr,
+		buttonMobileBorderRadiusStr,
+		buttonIconBorderMobileWidth,
+		buttonIconBorderRadiusMobileWidth,
+	]);
+
+	useEffect(() => {
+		setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle]);
+
+	return (
+		<>
+			<style>
+				{blockStyle}
 			</style>
 
 			<InspectorControls key="controls">
