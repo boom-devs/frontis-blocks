@@ -234,8 +234,12 @@ const attributes = {
         default: "inherit",
     },
     Heading_Font_Size: {
-        type: "number",
-        default: 24
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     Heading_Font_size_units: {
         type: 'object',
@@ -262,7 +266,12 @@ const attributes = {
         default: "none"
     },
     Heading_Letter_Spacing : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     Heading_Letter_Spacing_units : {
         type: 'object',
@@ -273,7 +282,12 @@ const attributes = {
 		}
     },
     Heading_Line_Height : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     Heading_Line_Height_units : {
         type: 'object',
@@ -347,10 +361,6 @@ const attributes = {
             right: 0,
         },
     },
-    activeBorderDevice: {
-        type: "string",
-        default: "desktop"
-    },
     borderLink : {
         type : "boolean",
         default: true
@@ -389,10 +399,6 @@ const attributes = {
             left: 0,
             right: 0,
         },
-    },
-    activeBorderRadiusDevice: {
-        type: "string",
-        default: "desktop"
     },
     borderRadiusLink : {
         type : "boolean",
@@ -473,10 +479,6 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Active_Margin_Device: {
-        type: "string",
-        default: "desktop"
-    },
     Heading_Margin_Link : {
         type : "boolean",
         default: true
@@ -487,8 +489,12 @@ const attributes = {
         default: "inherit",
     },
     SubHeadingFontSize: {
-        type: "number",
-        default: 16
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingFontSizeUnits: {
         type: 'object',
@@ -515,7 +521,12 @@ const attributes = {
         default: "none"
     },
     SubHeadingLetterSpacing : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingLetterSpacingUnits : {
         type: 'object',
@@ -526,7 +537,12 @@ const attributes = {
 		}
     },
     SubHeadingLineHeight : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingLineHeightUnits : {
         type: 'object',
@@ -600,6 +616,10 @@ const attributes = {
             right: 0,
         },
     },
+    subHeadingPaddingLink : {
+		type : "boolean",
+		default: true
+	},
 	//Margin
 	descMarginUnits : {
 		type: 'object',
@@ -635,10 +655,6 @@ const attributes = {
 			left: 0,
 			right: 0,
 		},
-	},
-	descActiveMarginDevice: {
-		type: "string",
-		default: "desktop"
 	},
 	descMarginLink : {
 		type : "boolean",
