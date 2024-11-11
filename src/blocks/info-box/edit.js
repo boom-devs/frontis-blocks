@@ -39,11 +39,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        infoIconPosition
+        infoIconPosition,
+		infoButtonLink,
+		infobtnTargetUrl
 	} = attributes;
 
 	const blockProps = useBlockProps();
 
+	// Prevent link navigation in the editor and focus on text
+    const handleButtonClick = (event) => {
+        event.preventDefault();
+    };
 	return (
 		<>
 			<Inspector
@@ -112,6 +118,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								/>
 							)}
 							{info_Button_Switcher && (
+								<a className="fb-info-button"
+								href={infoButtonLink} 
+								target={infobtnTargetUrl ? '_blank' : undefined}
+								rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
+								onClick={handleButtonClick}
+								>
 								<div className="fb-info-btn-container"
 								style={{ textAlign: buttonAlignment }}
 								>
@@ -129,7 +141,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											setAttributes({ info_Button_Text: value })
 										}
 										placeholder={__("Info Button", "frontis-block")}
-										className="fb-info-button"
+										
 										
 									/>
 									{buttonIconSwitcher && (
@@ -139,7 +151,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									)}
 								</div>
 								</div>
-								
+								</a>
 							)}
 						</div>
 					</div>
