@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Post Grid",
 	"category": "frontis-blocks",
-	"icon": "grid-view",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
     "supports": {
