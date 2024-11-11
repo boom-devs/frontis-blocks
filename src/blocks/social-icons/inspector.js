@@ -2622,7 +2622,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			IconBorderRadiusMobileWidth,
 			SocialTitlePaddingDesktopWidth,
 			SocialTitlePaddingTabletWidth,
-			SocialTitlePaddingMobileWidth
+			SocialTitlePaddingMobileWidth,
+			socialIconsPresetStyle,
+			socialItems
 		]);
 
 		useEffect(() => {
