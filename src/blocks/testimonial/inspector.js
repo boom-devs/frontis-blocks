@@ -105,8 +105,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialQuoteIconMarginMobile,
         TestimonialQuoteIconMarginLink,
 
-
-
         TestimonialTitleTag,
         TestimonialTitleFontFamily,
         TestimonialTitleFontSize,
