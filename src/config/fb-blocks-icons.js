@@ -57,9 +57,8 @@ const FB_Block_Icons = {
 			viewBox: '0 0 100 100', 
 			style: { enableBackground: 'new 0 0 100 100' }, 
 			'xml:space': 'preserve',
-			className: 'uagb-editor-icons'
+			className: 'fb-editor-icons'
 		},
-		fb('style', { type: 'text/css' }, '.st0{fill:none;stroke:#399CFF;stroke-width:3;stroke-miterlimit:10;}.st1{fill:none;stroke:#399CFF;stroke-width:2;stroke-miterlimit:10;}'),
 		fb('g', null,
 			fb('path', { className: 'st0', d: 'M42,56.49H8c-1.66,0-3-1.34-3-3v-20c0-1.66,1.34-3,3-3h34c1.66,0,3,1.34,3,3v20C45,55.15,43.66,56.49,42,56.49z' }),
 			fb('path', { className: 'st0', d: 'M5,51.49l3.38-3.38c1.58-1.58,4.15-1.58,5.74,0l0,0c1.58,1.58,4.15,1.58,5.74,0l8.64-8.64c1.65-1.65,4.34-1.57,5.9,0.17L45,51.49' }),
