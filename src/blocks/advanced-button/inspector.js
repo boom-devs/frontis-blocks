@@ -1041,7 +1041,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					${buttonIconBorderDesktopWidth ? `border-width: ${buttonIconBorderDesktopWidth};` : ''}
 					${buttonIconBorderRadiusDesktopWidth ? `border-radius: ${buttonIconBorderRadiusDesktopWidth};` : ''}
 				}
-				.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper:hover {
+				.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
 					${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
 					${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
 				}
@@ -1049,6 +1049,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 					${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 					${buttonIconColor ? `fill: ${buttonIconColor};` : ''}
+				}
+				.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+					${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
 				}
 
                 @media only screen and (max-width: 1024px) {
@@ -1077,7 +1080,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     .${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
                         ${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
                     }
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper:hover {
+					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
                         ${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
                         ${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
                     }
@@ -1085,6 +1088,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
 						${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
 					}
+					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+                        ${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+                    }
 
                     .${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
                         ${buttonIconPosition === 'left' ? `margin-right: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
@@ -1112,7 +1118,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     .${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
                         ${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
                     }
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper:hover {
+					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
                         ${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
                         ${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
                     }
@@ -1120,6 +1126,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
 						${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
 					}
+					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+                        ${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+                    }
                     .${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
                         ${buttonMobilePaddingStr ? `padding: ${buttonMobilePaddingStr};` : ''}
                         ${buttonMobileMarginStr ? `margin: ${buttonMobileMarginStr};` : ''}
