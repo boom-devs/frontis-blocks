@@ -16,6 +16,9 @@ export default function save({ attributes }) {
 		mediaSwitcher,
 		Sub_Heading_Tag,
 		infoIconPosition,
+		headingUrlSwitcher,
+		headingLink,
+		headingTargetUrl
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -61,13 +64,32 @@ export default function save({ attributes }) {
 						</div>
 						</div>
 						<div className="fb-icon-box-content-wrapper">
+						{headingUrlSwitcher ? (
+							<a 
+							href={headingLink} 
+								target={headingTargetUrl ? '_blank' : undefined}
+								rel={headingTargetUrl ? 'noopener noreferrer' : undefined}
+							>
 							<RichText.Content
 								tagName={Heading_Tag}
 								value={Heading_Text}
+								onChange={(value) => setAttributes({ Heading_Text: value })}
+								placeholder={__("Icon Heading", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
 							/>
-
+							</a>
+							
+						) : (
+							<RichText.Content
+								tagName={Heading_Tag}
+								value={Heading_Text}
+								onChange={(value) => setAttributes({ Heading_Text: value })}
+								placeholder={__("Icon Heading", "frontis-block")}
+								className="fb-heading"
+								style={{ textAlign: Alignment }}
+							/>
+						)}
 							{Sub_Heading_Switcher && (
 								<RichText.Content
 									tagName={Sub_Heading_Tag}

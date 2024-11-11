@@ -39,6 +39,7 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_ResponsiveControl from "@Components/responsive-control";
 import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_UrlControl from "@Components/url-control";
 /**
  * Internal depencencies
  */
@@ -337,6 +338,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaHoverBackgroundImageRepeat,
 		blockStyle,
 		subHeadingPaddingLink,
+		headingTargetUrl,
+		headingLink,
+		headingUrlSwitcher
 	} = attributes;
 
 	useEffect(() => {
@@ -2550,7 +2554,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
     }
     
     @media only screen and (max-width: 1024px) {
-        .fb-icon-box-content-wrapper-inner.${blockID} {
+        .fb-icon-box-content-wrapper.${blockID} {
             padding: ${TabletPadding} !important;
             margin: ${TabletMargin} !important;
             border-width: ${BorderTabletWidth} !important;
@@ -2559,7 +2563,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
     }
 
     @media only screen and (max-width: 767px) {
-        .fb-icon-box-content-wrapper-inner.${blockID} {
+        .fb-icon-box-content-wrapper.${blockID} {
             padding: ${MobilePadding} !important;
             margin: ${MobileMargin} !important;
             border-width: ${BorderMobileWidth} !important;
@@ -2577,16 +2581,16 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
         font-family: ${
 					Heading_Font_Family !== "default" ? Heading_Font_Family : "inherit"
 				};
-       ${
-					Heading_Font_Size.Desktop && Heading_Font_size_units.Desktop
-						? `font-size: ${Heading_Font_Size.Desktop}${Heading_Font_size_units.Desktop};`
-						: ""
-				}
+       
         font-weight: ${Heading_Font_Weight};
         font-style: ${Heading_Font_Style};
         text-transform: ${Heading_Text_Transform};
         text-decoration: ${Heading_Text_Decoration};
-        
+        ${
+			Heading_Font_Size.Desktop && Heading_Font_size_units.Desktop
+							? `font-size: ${Heading_Font_Size.Desktop}${Heading_Font_size_units.Desktop};`
+							: ""
+			}
 		${
 			Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop
 				? `letter-spacing: ${Heading_Letter_Spacing.Desktop}${Heading_Letter_Spacing_units.Desktop};`
@@ -2625,6 +2629,21 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 
     @media only screen and (max-width: 1024px) {
         .fb-icon-box-content-wrapper.${blockID} .fb-heading {
+			${
+				Heading_Font_Size.Tablet && Heading_Font_size_units.Tablet
+								? `font-size: ${Heading_Font_Size.Tablet}${Heading_Font_size_units.Tablet};`
+								: ""
+				}
+			${
+				Heading_Letter_Spacing.Tablet && Heading_Letter_Spacing_units.Desktop
+					? `letter-spacing: ${Heading_Letter_Spacing.Tablet}${Heading_Letter_Spacing_units.Tablet};`
+					: ""
+			}
+			${
+				Heading_Line_Height.Tablet && Heading_Line_Height_units.Tablet
+					? `line-height: ${Heading_Line_Height.Tablet}${Heading_Line_Height_units.Tablet};`
+					: ""
+			}
             padding: ${Heading_Tab_paddingWidth} !important;
             margin: ${HeadingTabMarginValue} !important;
             border-width: ${HeadingTabBorderWidthValue} !important;
@@ -2634,6 +2653,21 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 
     @media only screen and (max-width: 767px) {
         .fb-icon-box-content-wrapper.${blockID} .fb-heading {
+			${
+				Heading_Font_Size.Mobile && Heading_Font_size_units.Mobile
+								? `font-size: ${Heading_Font_Size.Mobile}${Heading_Font_size_units.Mobile};`
+								: ""
+				}
+			${
+				Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop
+					? `letter-spacing: ${Heading_Letter_Spacing.Mobile}${Heading_Letter_Spacing_units.Mobile};`
+					: ""
+			}
+			${
+				Heading_Line_Height.Mobile && Heading_Line_Height_units.Mobile
+					? `line-height: ${Heading_Line_Height.Mobile}${Heading_Line_Height_units.Mobile};`
+					: ""
+			}
             padding: ${Heading_Mobile_paddingWidth} !important;
             margin: ${HeadingMobileMarginValue} !important;
             border-width: ${HeadingMobileBorderWidthValue} !important;
@@ -2647,19 +2681,19 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 						? SubHeadingFontFamily
 						: SubHeadingFontFamily
 				};
-		${
-			SubHeadingFontSize.Desktop && SubHeadingFontSizeUnits.Desktop
-				? `line-height: ${SubHeadingFontSize.Desktop}${SubHeadingFontSizeUnits.Desktop};`
-				: ""
-		}
+		
         font-weight: ${SubHeadingFontWeight};
         font-style: ${SubHeadingFontStyle};
         text-transform: ${SubHeadingTextTransform};
         text-decoration: ${SubHeadingTextDecoration};
-		
+		${
+			SubHeadingFontSize.Desktop && SubHeadingFontSizeUnits.Desktop
+				? `font-size: ${SubHeadingFontSize.Desktop}${SubHeadingFontSizeUnits.Desktop};`
+				: ""
+		}
 		${
 			SubHeadingLetterSpacing.Desktop && SubHeadingLetterSpacingUnits.Desktop
-				? `line-height: ${SubHeadingLetterSpacing.Desktop}${SubHeadingLetterSpacingUnits.Desktop};`
+				? `letter-spacing: ${SubHeadingLetterSpacing.Desktop}${SubHeadingLetterSpacingUnits.Desktop};`
 				: ""
 		}
 		${
@@ -2675,12 +2709,42 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
     }
     @media only screen and (max-width: 1024px) {
       .fb-icon-box-content-wrapper.${blockID} .fb-description {
+		${
+			SubHeadingFontSize.Tablet && SubHeadingFontSizeUnits.Tablet
+				? `font-size: ${SubHeadingFontSize.Tablet}${SubHeadingFontSizeUnits.Tablet};`
+				: ""
+		}
+		${
+			SubHeadingLetterSpacing.Tablet && SubHeadingLetterSpacingUnits.Tablet
+				? `letter-spacing: ${SubHeadingLetterSpacing.Tablet}${SubHeadingLetterSpacingUnits.Tablet};`
+				: ""
+		}
+		${
+			SubHeadingLineHeight.Tablet && SubHeadingLineHeightUnits.Tablet
+				? `line-height: ${SubHeadingLineHeight.Tablet}${SubHeadingLineHeightUnits.Tablet};`
+				: ""
+		}
         padding: ${SubHeadingTabPaddingValue} !important;
         margin: ${descTabMarginValue} !important;
       }
     }
     @media only screen and (max-width: 757px) {
       .fb-icon-box-content-wrapper.${blockID} .fb-description {
+		${
+			SubHeadingFontSize.Mobile && SubHeadingFontSizeUnits.Mobile
+				? `font-size: ${SubHeadingFontSize.Mobile}${SubHeadingFontSizeUnits.Mobile};`
+				: ""
+		}
+		${
+			SubHeadingLetterSpacing.Mobile && SubHeadingLetterSpacingUnits.Mobile
+				? `letter-spacing: ${SubHeadingLetterSpacing.Mobile}${SubHeadingLetterSpacingUnits.Mobile};`
+				: ""
+		}
+		${
+			SubHeadingLineHeight.Mobile && SubHeadingLineHeightUnits.Mobile
+				? `line-height: ${SubHeadingLineHeight.Mobile}${SubHeadingLineHeightUnits.Mobile};`
+				: ""
+		}
         padding: ${SubHeadingMobilePaddingValue} !important;
         margin: ${descMobileMarginValue} !important;
       }
@@ -2781,9 +2845,17 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 			globalBgColor,
 			DesktopPadding,
 			DesktopMargin,
+			TabletPadding,
+			TabletMargin,
+			MobileMargin,
+			MobilePadding,
 			globalBorder,
 			BorderDesktopWidth,
+			BorderTabletWidth,
+			BorderMobileWidth,
 			BorderRadiusDesktopWidth,
+			BorderRadiusTabletWidth,
+			BorderRadiusMobileWidth,
 			globalBorderColor,
 			boxGlobalBoxShadowCssValue,
 			globalBgHoverColor,
@@ -3211,6 +3283,24 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 													}
 													className="fb-setting-text"
 												/>
+												<ToggleControl
+                                                        label={__("Enable Link", "frontis-blocks")}
+                                                        checked={headingUrlSwitcher}
+                                                        onChange={(value) => setAttributes({ headingUrlSwitcher: value })}
+                                                />
+												{headingUrlSwitcher && (
+													<FB_UrlControl
+																url={headingLink}
+																onChangeUrl={(value) =>
+																	setAttributes({ headingLink: value })
+																}
+																openInNewTab={headingTargetUrl}
+																onChangeOpenInNewTab={(value) =>
+																	setAttributes({ headingTargetUrl: value })
+													}
+												/>
+												)}
+												
 											</PanelBody>
 										</div>
 										<div className="fb-advanced-wrapper">

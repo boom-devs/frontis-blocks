@@ -483,6 +483,17 @@ const attributes = {
         type : "boolean",
         default: true
     },
+    headingLink: {
+        type: "string",
+        default: ""
+    },
+    headingTargetUrl: {
+        type: "boolean",
+    },
+    headingUrlSwitcher: {
+        type: "boolean",
+        default: false
+    },
     //Sub Heading
     SubHeadingFontFamily: {
         type: "string",
