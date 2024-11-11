@@ -5,7 +5,6 @@
 	"name": "frontis-blocks/call-to-action",
 	"version": "1.0.0",
 	"category": "frontis-blocks",
-	"icon": "info",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {

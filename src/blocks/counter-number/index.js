@@ -17,6 +17,7 @@ import counterNumberTypographyAttributes from "./attributes/counter-number-typog
 import counterNumberMarginAttribute from "./attributes/counter-number-margin-attribute.js";
 import counterNumberTitleTypographyAttributes from "./attributes/counter-number-title-typography-attribute.js";
 import counterNumberTitleMarginAttribute from "./attributes/counter-number-title-margin-attribute.js";
+import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 // Merge attributes
 const combinedAttributes = {
@@ -35,4 +36,5 @@ registerBlockType( metadata.name, {
 	attributes: combinedAttributes,
 	edit: Edit,
 	save,
+	icon: FB_Block_Icons.counter,
 } );

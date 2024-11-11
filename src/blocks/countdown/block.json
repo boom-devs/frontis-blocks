@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Countdown",
 	"category": "frontis-blocks",
-	"icon": "clock",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
