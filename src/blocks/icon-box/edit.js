@@ -94,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<RichText
 								tagName={Heading_Tag}
 								value={Heading_Text}
-								onChange={(value) => setAttributes({ text: value })}
+								onChange={(value) => setAttributes({ Heading_Text: value })}
 								placeholder={__("Info Heading", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
