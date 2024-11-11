@@ -169,7 +169,7 @@ const attributes = {
             right: "",
         },
     },
-    headingTabBorder: {
+    headingTabletBorder: {
         type: "object", 
         default: {
             top: "",
@@ -1177,6 +1177,10 @@ const attributes = {
     activeLineBeforeColor: {
         type: "string",
         default: "#399CFF",
+    },
+    blockStyle: {
+        type: "string",
+        default: "",
     },
 }
 export default attributes;

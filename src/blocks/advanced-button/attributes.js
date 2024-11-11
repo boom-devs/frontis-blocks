@@ -685,5 +685,10 @@ const attributes = {
         default: '',
     },
     /** End Global Style */
+
+    blockStyle: {
+        type: 'string',
+        default: '',
+    },
 }
 export default attributes;
