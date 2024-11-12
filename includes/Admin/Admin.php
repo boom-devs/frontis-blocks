@@ -1,11 +1,10 @@
-<?php 
+<?php
 
 namespace FrontisBlocks\Admin;
-
-
 use FrontisBlocks\Admin\Settings;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Traits\Singleton;
+use FrontisBlocks\Utils\Helper;
 
 class Admin {
 
@@ -53,7 +52,7 @@ class Admin {
 
         wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index.css', array(), '1.0.0');
 
-        
+
     }
 
     public function enqueue_scripts($hook){
@@ -69,7 +68,7 @@ class Admin {
         $script_asset['dependencies'][] = 'jquery';
 
         // error_log(print_r($script_asset['dependencies'], true));
-        
+
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index.js', $script_asset['dependencies'], '1.0.0', true);
 
         // Get the blocks list
@@ -209,7 +208,212 @@ class Admin {
                 return current_user_can('manage_options');
             },
         ]);
+
+        register_rest_route('wp/v2/frontis-blocks', '/post', [
+			'methods' => 'POST',
+			'callback' => [$this, 'get_posts'],
+			'permission_callback' => function () {
+				return true;
+			},
+		]);
+
+        $post_type = Helper::get_post_types();
+
+		foreach ( $post_type as $key => $value ) {
+			register_rest_field(
+				$value['value'],
+				'fb_featured_image_src',
+				array(
+					'get_callback'    => array( $this, 'get_post_img_src' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
+
+// 			// Add author info.
+// 			register_rest_field(
+// 				$value['value'],
+// 				'fb_author_info',
+// 				array(
+// 					'get_callback'    => array( $this, 'get_post_author_info' ),
+// 					'update_callback' => null,
+// 					'schema'          => null,
+// 				)
+// 			);
+//
+// 			// Add comment info.
+// 			register_rest_field(
+// 				$value['value'],
+// 				'fb_comment_info',
+// 				array(
+// 					'get_callback'    => array( $this, 'get_post_comment_info' ),
+// 					'update_callback' => null,
+// 					'schema'          => null,
+// 				)
+// 			);
+//
+			// Add excerpt info.
+			register_rest_field(
+				$value['value'],
+				'fb_post_excerpt',
+				array(
+					'get_callback'    => array( $this, 'get_post_excerpt' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
+		}
     }
+
+	/**
+	 * Get excerpt for the rest field
+	 *
+	 * @param object $object Post Object.
+	 * @param string $field_name Field name.
+	 * @param object $request Request Object.
+	 * @since 0.0.1
+	 */
+	public function get_post_excerpt( $object, $field_name, $request ) {
+		$excerpt = wp_trim_words( get_the_excerpt( $object['id'] ) );
+		if ( ! $excerpt ) {
+			$excerpt = null;
+		}
+		return $excerpt;
+	}
+
+	/**
+	 * Get featured image source for the rest field as per size
+	 *
+	 * @param object $object Post Object.
+	 * @param string $field_name Field name.
+	 * @param object $request Request Object.
+	 * @since 0.0.1
+	 */
+	public function get_post_img_src( $object, $field_name, $request ) {
+		$image_sizes = Helper::get_image_sizes();
+
+		$featured_images = array();
+
+		if ( ! isset( $object['featured_media'] ) ) {
+			return $featured_images;
+		}
+
+		foreach ( $image_sizes as $key => $value ) {
+			$size = $value['value'];
+
+			$featured_images[ $size ] = wp_get_attachment_image_src(
+				$object['featured_media'],
+				$size,
+				false
+			);
+		}
+
+		return $featured_images;
+	}
+
+	public function get_posts() {
+    	global $wpdb;
+
+    	// Get parameters from AJAX request
+    	$post_type = isset($_POST['post_type']) ? $_POST['post_type'] : 'post';
+    	$offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+    	$limit = isset($_POST['limit']) ? intval($_POST['limit']) : 12;
+    	$category = isset($_POST['category']) ? intval($_POST['category']) : 0;
+    	$current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
+
+    	ob_start();
+
+    	// Initial query to select posts based on type and status
+    	$query = $wpdb->prepare("
+    		SELECT *
+    		FROM {$wpdb->posts}
+    		WHERE post_type = %s
+    		AND post_status = 'publish'
+    	", $post_type);
+
+    	if ($category !== 0) {
+            $query .= " AND ID IN (
+                SELECT object_id
+                FROM {$wpdb->term_relationships} AS tr
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tt.taxonomy = 'category' AND tt.term_id = $category
+            )";
+        }
+
+    	// Adding limit and offset to the query
+    	$temp_query = "
+    		SELECT * FROM (
+    			$query
+    		) AS SubQuery
+    		WHERE 1=1
+    		LIMIT %d OFFSET %d
+    	";
+
+    	// Prepare the final query
+    	$final_query = $wpdb->prepare($temp_query, $limit, $offset);
+
+    	// Execute the query to get results
+    	$results = $wpdb->get_results($final_query);
+
+    	// Count total number of records
+    	$count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
+    	$total_records = $wpdb->get_var($count_query);
+
+    	// Calculate total number of pages
+    	$total_pages = ceil($total_records / $limit);
+
+    	if ($results) {
+    		foreach($results as $key => $single_post): ?>
+    			<div class="fb_post_grid_wrapper">
+    				<a href="<?php echo get_permalink( $single_post->ID ); ?>">
+    					<div class="fb_post_grid_image">
+    						<?php if (has_post_thumbnail( $single_post->ID )): ?>
+    							<?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), 'medium'); ?>
+    							<img src="<?php echo $image[0]; ?>" alt=""/>
+    						<?php endif; ?>
+    					</div>
+    					<div class="fb_post_grid_content">
+    						<h3><?php echo $single_post->post_title; ?></h3>
+    						<?php if($single_post->post_excerpt !== ''): ?>
+    							<p><?php echo $single_post->post_excerpt; ?></p>
+    						<?php else: ?>
+    							<?php if(!empty($single_post->post_content)): ?>
+    								<p><?php echo wp_trim_words($single_post->post_content, 20, '...'); ?></p>
+    							<?php endif; ?>
+    						<?php endif; ?>
+    					</div>
+    				</a>
+    			</div>
+    		<?php endforeach;
+
+    		if ($total_pages > 1) { ?>
+    			<div class="fb_load_more" data-current_page="<?php echo $current_page; ?>">
+    				Load more
+    				<span>
+    					<svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    						<g opacity="0.5">
+    							<path d="M8.25 4.5L15.75 12L8.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
+    						</g>
+    						<path d="M18.25 4.5L25.75 12L18.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
+    					</svg>
+    				</span>
+    			</div>
+    		<?php }
+    	} else { ?>
+    		<div class="empty-post">Nothing found.</div>
+    	<?php }
+
+    	$content = ob_get_contents();
+    	ob_end_clean();
+
+    	// Send response with content and total pages
+    	wp_send_json_success(array(
+    		'content' => $content,
+    		'total_pages' => $total_pages,
+    		'current_page' => $current_page
+    	));
+    }
+
 
     /**
      * Handle the save option REST API endpoint
