@@ -8,6 +8,7 @@ use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Forms\FluentForms;
 use FrontisBlocks\Forms\ContactForms7;
 use FrontisBlocks\Assets\GenerateFrontendCss;
+use FrontisBlocks\Assets\EnqueueBlocksCss;
 
 defined('ABSPATH') || exit;
 
@@ -22,6 +23,7 @@ class Blocks
         add_action('init', [$this, 'register_blocks']);
         add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
         add_filter('render_block', [$this, 'render_block'], 10, 3);
+        add_action( 'enqueue_block_assets', [$this, 'combined_frontis_blocks_assets'] );
     }
 
     public function register_blocks()
@@ -141,6 +143,10 @@ class Blocks
                 FB_PLUGIN_PATH . 'languages'
             );
         }
+    }
+
+    public function combined_frontis_blocks_assets() {
+        EnqueueBlocksCss::combined_css_files();
     }
 
     public function register_block_categories( $categories ) {
