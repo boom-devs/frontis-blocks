@@ -1,5 +1,5 @@
 .fb-pricing-wrapper {
-	text-align: center;
+	// text-align: center;
 	overflow: hidden;
 	transition: ease-in-out all 0.3s;
 
@@ -39,22 +39,20 @@
 }
   
 
-.fb-pricing-header {
-	.fb-pricing-icon-wrapper {
+.fb-pricing-icon-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.fb-pricing-icon {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-
-		.fb-pricing-icon {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			transition: background-color 0.3s ease, border-color 0.3s ease;
-		}
+		transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
-	.fb-pricing-price-wrapper {
-		display: flex;
-		align-items: center;
+}
+.fb-pricing-price-wrapper {
+	.fb-pricing-price-inner-wrapper {
 		.fb-pricing-normal-price {
 			&.line-through {
 				text-decoration: line-through;
@@ -62,29 +60,29 @@
 			}
 		}
 	}
-	.fb-pricing-title-wrapper {
-		display: block;
-		&.fb-pricing-title-left {
-			text-align: left;
-		}
-		&.fb-pricing-title-center {
-			text-align: center;
-		}
-		&.fb-pricing-title-right {
-			text-align: right;
-		}
-		.fb-pricing-title {
-			margin: 0;
-		}
-		.fb-pricing-subtitle {
-			margin: 0;
-		}
+}
+
+.fb-pricing-title-wrapper {
+	display: block;
+	&.fb-pricing-title-left {
+		text-align: left;
+	}
+	&.fb-pricing-title-center {
+		text-align: center;
+	}
+	&.fb-pricing-title-right {
+		text-align: right;
+	}
+	.fb-pricing-title {
+		margin: 0;
+	}
+	.fb-pricing-subtitle {
+		margin: 0;
 	}
 }
 
 .fb-pricing-content {
 	.fb-pricing-features-wrapper {
-	  	padding: 30px;
 	  
 	  .fb-pricing-features-list {
 		list-style: none;
