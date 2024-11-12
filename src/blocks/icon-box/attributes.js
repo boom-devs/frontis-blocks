@@ -45,10 +45,6 @@ const attributes = {
 		type: "number",
 		default: 20
 	},
-	mediaSizeUnitsSave: {
-		type: "string",
-		default: "px"
-	},
 	mediaSizeUnits: {
 		type: 'object',
 		default: {
@@ -81,10 +77,7 @@ const attributes = {
 		type: "number",
 		default: 20
 	},
-	mediaBgWidthUnitsSave: {
-		type: "string",
-		default: "px"
-	},
+	
 	mediaBgWidthUnits: {
 		type: 'object',
 		default: {
@@ -241,12 +234,20 @@ const attributes = {
         default: "inherit",
     },
     Heading_Font_Size: {
-        type: "number",
-        default: 24
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     Heading_Font_size_units: {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Font_Weight : {
         type: "string",
@@ -265,18 +266,36 @@ const attributes = {
         default: "none"
     },
     Heading_Letter_Spacing : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     Heading_Letter_Spacing_units : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Line_Height : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     Heading_Line_Height_units : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Color_Switcher : {
         type: "string",
@@ -308,8 +327,12 @@ const attributes = {
         default: "normal"
     },
     Heading_Border_units : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Desktop_Border_Width: {
         type: "object",
@@ -338,17 +361,17 @@ const attributes = {
             right: 0,
         },
     },
-    activeBorderDevice: {
-        type: "string",
-        default: "desktop"
-    },
     borderLink : {
         type : "boolean",
         default: true
     },
     Heading_Border_radius_units : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Desktop_Border_radius_Width: {
         type: "object",
@@ -377,17 +400,17 @@ const attributes = {
             right: 0,
         },
     },
-    activeBorderRadiusDevice: {
-        type: "string",
-        default: "desktop"
-    },
     borderRadiusLink : {
         type : "boolean",
         default: true
     },
     Heading_padding_units : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Desktop_padding: {
         type: "object",
@@ -416,18 +439,18 @@ const attributes = {
             right: 0,
         },
     },
-    activePaddingDevice: {
-        type: "string",
-        default: "desktop"
-    },
     paddingLink : {
         type : "boolean",
         default: true
     },
 	//Margin
     Heading_Margin_Units : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Desktop_Margin: {
         type: "object",
@@ -456,13 +479,20 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Active_Margin_Device: {
-        type: "string",
-        default: "desktop"
-    },
     Heading_Margin_Link : {
         type : "boolean",
         default: true
+    },
+    headingLink: {
+        type: "string",
+        default: ""
+    },
+    headingTargetUrl: {
+        type: "boolean",
+    },
+    headingUrlSwitcher: {
+        type: "boolean",
+        default: false
     },
     //Sub Heading
     SubHeadingFontFamily: {
@@ -470,12 +500,20 @@ const attributes = {
         default: "inherit",
     },
     SubHeadingFontSize: {
-        type: "number",
-        default: 16
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     SubHeadingFontWeight : {
         type: "string",
@@ -494,18 +532,36 @@ const attributes = {
         default: "none"
     },
     SubHeadingLetterSpacing : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     SubHeadingLineHeight : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     SubHeadingColorSwitcher : {
         type: "string",
@@ -537,8 +593,12 @@ const attributes = {
         default: "bottom",
     },
     SubHeadingPaddingUnits : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     SubHeadingDesktopPadding: {
         type: "object",
@@ -567,10 +627,18 @@ const attributes = {
             right: 0,
         },
     },
+    subHeadingPaddingLink : {
+		type : "boolean",
+		default: true
+	},
 	//Margin
 	descMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	descDesktopMargin: {
 		type: "object",
@@ -599,10 +667,6 @@ const attributes = {
 			right: 0,
 		},
 	},
-	descActiveMarginDevice: {
-		type: "string",
-		default: "desktop"
-	},
 	descMarginLink : {
 		type : "boolean",
 		default: true
@@ -625,8 +689,12 @@ const attributes = {
         default: ""
     },
 	infoButtonPaddingUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoButtonDesktopPadding: {
 		type: "object",
@@ -657,8 +725,12 @@ const attributes = {
 	},
 	//Button Margin
 	infoButtonMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoButtonDesktopMargin: {
 		type: "object",
@@ -711,8 +783,12 @@ const attributes = {
 		type: 'string',
 	},
 	infoButtonBorderUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoButtonDesktopBorderWidth: {
 		type: "object",
@@ -743,8 +819,12 @@ const attributes = {
 	},
 	//Button Border Radius
 	infoBtnBorderradiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoBtnDesktopBorderradiusWidth: {
 		type: "object",
@@ -775,8 +855,12 @@ const attributes = {
 	},
 	//Info box padding
 	infoBoxPaddingUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoBoxDesktopPadding: {
 		type: "object",
@@ -807,8 +891,12 @@ const attributes = {
 	},
 	// Info box margin
 	infoBoxMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoBoxDesktopMargin: {
 		type: "object",
@@ -861,8 +949,12 @@ const attributes = {
 		default: "normal"
 	},
 	infoBoxBorderUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoBoxDesktopBorderWidth: {
 		type: "object",
@@ -893,8 +985,12 @@ const attributes = {
 	},
 	// 	Info Box Border Radius
 	infoBoxBorderRadiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoBoxDesktopBorderRadiusWidth: {
 		type: "object",
@@ -933,8 +1029,12 @@ const attributes = {
 		default: 14
 	},
 	buttonFontSizeUnits: {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	buttonFontWeight : {
 		type: "string",
@@ -956,15 +1056,23 @@ const attributes = {
 		type: "number",
 	},
 	buttonLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	buttonLineHeight : {
 		type: "number",
 	},
 	buttonLineHeightUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	// Button Color
 	buttonColorSwitcher : {
