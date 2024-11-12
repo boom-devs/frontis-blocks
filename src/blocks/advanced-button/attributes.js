@@ -350,7 +350,7 @@ const attributes = {
     },
     buttonIconHoverColor: {
         type: 'string',
-        default: "#fff"
+        default: ""
     },
 
     buttonIconBgColorSwitcher : {

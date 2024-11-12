@@ -17,6 +17,7 @@ import countDownItemBgColorControl from "./attributes/countdown-item-bg-color-at
 import countDownSeparatorAttributes from "./attributes/separator.js";
 import digitAttributes from "./attributes/digit.js";
 import labelAttributes from "./attributes/label.js";
+import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 // Merge attributes and digitAttributes
 const combinedAttributes = {
@@ -36,4 +37,5 @@ registerBlockType( metadata.name, {
 	attributes: combinedAttributes,
 	edit: Edit,
 	save,
+	icon: FB_Block_Icons.countdown,
 } );

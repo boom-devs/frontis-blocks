@@ -34,6 +34,12 @@ import {
 import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
+import FB_TypographyControl from "@Components/typography-control";
+import FBIconPicker from "../../components/icon-picker";
+import FB_ResponsiveControl from "@Components/responsive-control";
+import FB_Range from "@Components/range";
+import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_UrlControl from "@Components/url-control";
 /**
  * Internal depencencies
  */
@@ -70,10 +76,6 @@ import {
 import { useState, useEffect, useMemo } from "@wordpress/element";
 
 import "./editor.scss";
-import FBIconPicker from "../../components/icon-picker";
-import FB_ResponsiveControl from "@Components/responsive-control";
-import FB_Range from "@Components/range";
-import FB_BoxShadowControl from "@Components/box-shadow";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -119,7 +121,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_padding,
 		Heading_Tab_padding,
 		Heading_Mobile_padding,
-		DeviceType,
 		deviceType,
 		paddingLink,
 
@@ -177,34 +178,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoBoxMobileBorderWidth,
 
 		infoBoxBorderRadiusUnits,
-		infoBoxDesktopBorderRadiusWidth,
 		infoBoxTabBorderRadiusWidth,
 		infoBoxMobileBorderRadiusWidth,
-
-		buttonFontFamily,
-		buttonFontSize,
-		buttonFontSizeUnits,
-		buttonFontWeight,
-		buttonFontStyle,
-		buttonTextTransform,
-		buttonTextDecoration,
-		buttonLetterSpacing,
-		buttonLetterSpacingUnits,
-		buttonLineHeight,
-		buttonLineHeightUnits,
-		buttonColorSwitcher,
-		buttonTextColor,
-		buttonTextHoverColor,
-		buttonBgColorSwitcher,
-		buttonBgColor,
-		buttonBgHoverColor,
-
-		infoButtonMarginLink,
-		infoButtonMarginUnits,
-		infoButtonDesktopMargin,
-		infoButtonTabMargin,
-		infoButtonMobileMargin,
-		infoButtonActiveMarginDevice,
 
 		infoButtonPaddingUnits,
 		infoButtonDesktopPadding,
@@ -362,7 +337,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaHoverBackgroundImageSize,
 		mediaHoverBackgroundImageRepeat,
 		blockStyle,
-
+		subHeadingPaddingLink,
+		headingTargetUrl,
+		headingLink,
+		headingUrlSwitcher
 	} = attributes;
 
 	useEffect(() => {
@@ -459,7 +437,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handlePaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_padding: {
@@ -486,7 +464,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllPadding(value, DeviceType);
+			updateAllPadding(value, deviceType);
 		}
 	};
 
@@ -506,7 +484,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handlePaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -558,7 +536,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleButtonPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoButtonDesktopPadding: {
@@ -585,7 +563,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateButtonPadding(value, DeviceType);
+			updateButtonPadding(value, deviceType);
 		}
 	};
 
@@ -605,7 +583,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handleButtonPaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -658,7 +636,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBoxPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoBoxDesktopPadding: {
@@ -682,7 +660,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllBoxPadding(value, DeviceType);
+			updateAllBoxPadding(value, deviceType);
 		}
 	};
 
@@ -702,7 +680,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handleBoxPaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -753,7 +731,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBoxMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					infoBoxDesktopMargin: { ...infoBoxDesktopMargin, [direction]: value },
@@ -774,7 +752,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (infoBoxMarginLink) {
-			updateBoxMargin(value, DeviceType);
+			updateBoxMargin(value, deviceType);
 		}
 	};
 
@@ -794,7 +772,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for margin */
 	const handleBoxMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
@@ -846,7 +824,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleDescPaddingInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					SubHeadingDesktopPadding: {
@@ -873,7 +851,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if paddingLink is true */
 		if (paddingLink) {
-			updateAllDescPadding(value, DeviceType);
+			updateAllDescPadding(value, deviceType);
 		}
 	};
 
@@ -893,7 +871,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for padding */
 	const handleDescPaddingDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
@@ -944,7 +922,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleDescMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					descDesktopMargin: { ...descDesktopMargin, [direction]: value },
@@ -965,7 +943,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (descMarginLink) {
-			updateDescMargin(value, DeviceType);
+			updateDescMargin(value, deviceType);
 		}
 	};
 
@@ -985,7 +963,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for margin */
 	const handleDescMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default margin for desktop (using desktop_margin) */
@@ -1035,7 +1013,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleMarginInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_Margin: {
@@ -1062,7 +1040,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all margin values if marginLink is true */
 		if (Heading_Margin_Link) {
-			updateAllMargin(value, DeviceType);
+			updateAllMargin(value, deviceType);
 		}
 	};
 
@@ -1082,317 +1060,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for margin */
 	const handleMarginDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 	/** Default margin for desktop (using desktop_margin) */
 	const margin = `${Heading_Desktop_Margin.top}${Heading_padding_units} ${Heading_Desktop_Margin.right}${Heading_padding_units} ${Heading_Desktop_Margin.bottom}${Heading_padding_units} ${Heading_Desktop_Margin.left}${Heading_padding_units}`;
 	/** End Margin */
-
-	/** Start Margin */
-	const [buttonPreviousMargin, setButtonPreviousMargin] = useState(
-		infoButtonDesktopMargin,
-	);
-	/** Function to update all margin values */
-	const updateButtonMargin = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoButtonDesktopMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoButtonTabMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoButtonMobileMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleButtonMarginInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (DeviceType) {
-			case "Desktop":
-				setAttributes({
-					infoButtonDesktopMargin: {
-						...infoButtonDesktopMargin,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoButtonTabMargin: { ...infoButtonTabMargin, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoButtonMobileMargin: {
-						...infoButtonMobileMargin,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all margin values if marginLink is true */
-		if (infoButtonMarginLink) {
-			updateButtonMargin(value, DeviceType);
-		}
-	};
-
-	/** Function to handle marginLink toggle */
-	const handleButtonMarginLinkToggle = () => {
-		if (!infoButtonMarginLink) {
-			setAttributes({ infoButtonDesktopMargin: buttonPreviousMargin });
-		}
-		/** setmarginLink(!marginLink) */
-		setAttributes({ infoButtonMarginLink: !infoButtonMarginLink });
-	};
-
-	/** Update previousMargin state when margin changes */
-	useEffect(() => {
-		setButtonPreviousMargin(infoButtonDesktopMargin);
-	}, [infoButtonDesktopMargin]);
-
-	/** Function to handle device click for margin */
-	const handleButtonMarginDeviceClick = (device) => {
-		setAttributes({ infoButtonActiveMarginDevice: device });
-	};
-
-	/** Default margin for desktop (using desktop_margin) */
-	const buttonMargin = `${infoButtonDesktopMargin.top}${infoButtonMarginUnits} ${infoButtonDesktopMargin.right}${infoButtonMarginUnits} ${infoButtonDesktopMargin.bottom}${infoButtonMarginUnits} ${infoButtonDesktopMargin.left}${infoButtonMarginUnits}`;
-	/** End Margin */
-
-	/** Start Button Border Width */
-	const [buttonPreviousBorderWidth, setButtonPreviousBorderWidth] = useState(
-		infoButtonDesktopBorderWidth,
-	);
-	/** Function to update all Border Width values */
-	const updateButtonBorderWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoButtonDesktopBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoButtonTabBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoButtonMobileBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleButtonBorderWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (DeviceType) {
-			case "Desktop":
-				setAttributes({
-					infoButtonDesktopBorderWidth: {
-						...infoButtonDesktopBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoButtonTabBorderWidth: {
-						...infoButtonTabBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoButtonMobileBorderWidth: {
-						...infoButtonMobileBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderLink is true */
-		if (borderLink) {
-			updateButtonBorderWidth(value, DeviceType);
-		}
-	};
-
-	/** Function to handle borderLink toggle */
-	const handleButtonBorderWidthLinkToggle = () => {
-		if (!borderLink) {
-			setAttributes({
-				infoButtonDesktopBorderWidth: buttonPreviousBorderWidth,
-			});
-		}
-		/** setborderLinkLink(!borderLink) */
-		setAttributes({ borderLink: !borderLink });
-	};
-
-	/** Update previousborderWidth state when Border Width changes */
-	useEffect(() => {
-		setButtonPreviousBorderWidth(infoButtonDesktopBorderWidth);
-	}, [infoButtonDesktopBorderWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleButtonBorderWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const buttonBorderWidth = `${infoButtonDesktopBorderWidth.top}${infoButtonBorderUnits} ${infoButtonDesktopBorderWidth.right}${infoButtonBorderUnits} ${infoButtonDesktopBorderWidth.bottom}${infoButtonBorderUnits} ${infoButtonDesktopBorderWidth.left}${infoButtonBorderUnits}`;
-	/** End Border Width */
-
-	/** Start Border Radius Width */
-	const [buttonPreviousBorderRadiusWidth, setButtonPreviousBorderRadiusWidth] =
-		useState(infoBtnDesktopBorderradiusWidth);
-	/** Function to update all Border Width values */
-	const updateButtonBorderRadiusWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBtnDesktopBorderradiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBtnTabBorderradiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBtnMobileBorderradiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleButtonBorderRadiusWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (DeviceType) {
-			case "Desktop":
-				setAttributes({
-					infoBtnDesktopBorderradiusWidth: {
-						...infoBtnDesktopBorderradiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBtnTabBorderradiusWidth: {
-						...infoBtnTabBorderradiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBtnMobileBorderradiusWidth: {
-						...infoBtnMobileBorderradiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderRadiusLink is true */
-		if (borderRadiusLink) {
-			updateButtonBorderRadiusWidth(value, DeviceType);
-		}
-	};
-
-	/** Function to handle borderRadiusLink toggle */
-	const handleButtonBorderRadiusWidthLinkToggle = () => {
-		if (!borderRadiusLink) {
-			setAttributes({
-				infoBtnDesktopBorderradiusWidth: buttonPreviousBorderRadiusWidth,
-			});
-		}
-		/** setborderRadiusLinkLink(!borderRadiusLink) */
-		setAttributes({ borderRadiusLink: !borderRadiusLink });
-	};
-
-	/** Update previousBorderRadiusWidth state when Border Width changes */
-	useEffect(() => {
-		setButtonPreviousBorderRadiusWidth(infoBtnDesktopBorderradiusWidth);
-	}, [infoBtnDesktopBorderradiusWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleButtonBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const buttonBorderRadiusWidth = `${infoBtnDesktopBorderradiusWidth.top}${infoBtnBorderradiusUnits} ${infoBtnDesktopBorderradiusWidth.right}${infoBtnBorderradiusUnits} ${infoBtnDesktopBorderradiusWidth.bottom}${infoBtnBorderradiusUnits} ${infoBtnDesktopBorderradiusWidth.left}${infoBtnBorderradiusUnits}`;
-	/** End Border Radius Width */
 
 	/** Start Border Width */
 	const [previousBorderWidth, setPreviousBorderWidth] = useState(
@@ -1439,7 +1111,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBorderWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_Border_Width: {
@@ -1469,7 +1141,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if borderLink is true */
 		if (borderLink) {
-			updateAllBorderWidth(value, DeviceType);
+			updateAllBorderWidth(value, deviceType);
 		}
 	};
 
@@ -1489,7 +1161,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for Border Width */
 	const handleBorderWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
@@ -1541,7 +1213,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Function to handle input change */
 	const handleBorderRadiusWidthInputChange = (e, direction) => {
 		const value = e.target.value;
-		switch (DeviceType) {
+		switch (deviceType) {
 			case "Desktop":
 				setAttributes({
 					Heading_Desktop_Border_radius_Width: {
@@ -1571,7 +1243,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		/** Update all padding values if borderRadiusLink is true */
 		if (borderRadiusLink) {
-			updateAllBorderRadiusWidth(value, DeviceType);
+			updateAllBorderRadiusWidth(value, deviceType);
 		}
 	};
 
@@ -1593,217 +1265,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/** Function to handle device click for Border Width */
 	const handleBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
+		setAttributes({ deviceType: device });
 	};
 
 	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
 	const borderRadiusWidth = `${Heading_Desktop_Border_radius_Width.top}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.right}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.bottom}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.left}${Heading_Border_radius_units}`;
-	/** End Border Radius Width */
-
-	/** Start Box Border Width */
-	const [boxPreviousBorderWidth, setBoxPreviousBorderWidth] = useState(
-		infoBoxDesktopBorderWidth,
-	);
-	/** Function to update all Border Width values */
-	const updateBoxBorderWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxBorderWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (DeviceType) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderWidth: {
-						...infoBoxDesktopBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderWidth: {
-						...infoBoxTabBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderWidth: {
-						...infoBoxMobileBorderWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderLink is true */
-		if (borderLink) {
-			updateBoxBorderWidth(value, DeviceType);
-		}
-	};
-
-	/** Function to handle borderLink toggle */
-	const handleBoxBorderWidthLinkToggle = () => {
-		if (!borderLink) {
-			setAttributes({ infoBoxDesktopBorderWidth: boxPreviousBorderWidth });
-		}
-		/** setborderLinkLink(!borderLink) */
-		setAttributes({ borderLink: !borderLink });
-	};
-
-	/** Update previousborderWidth state when Border Width changes */
-	useEffect(() => {
-		setBoxPreviousBorderWidth(infoBoxDesktopBorderWidth);
-	}, [infoBoxDesktopBorderWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleBoxBorderWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const boxBorderWidth = `${infoBoxDesktopBorderWidth.top}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.right}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.bottom}${infoBoxBorderUnits} ${infoBoxDesktopBorderWidth.left}${infoBoxBorderUnits}`;
-	/** End Border Width */
-
-	/** Start Border Radius Width */
-	const [boxPreviousBorderRadiusWidth, setBoxPreviousBorderRadiusWidth] =
-		useState(infoBoxDesktopBorderRadiusWidth);
-	/** Function to update all Border Width values */
-	const updateBoxBorderRadiusWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderRadiusWidth: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxBorderRadiusWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (activeBorderRadiusDevice) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopBorderRadiusWidth: {
-						...infoBoxDesktopBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabBorderRadiusWidth: {
-						...infoBoxTabBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileBorderRadiusWidth: {
-						...infoBoxMobileBorderRadiusWidth,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderRadiusLink is true */
-		if (borderRadiusLink) {
-			updateBoxBorderRadiusWidth(value, DeviceType);
-		}
-	};
-
-	/** Function to handle borderRadiusLink toggle */
-	const handleBoxBorderRadiusWidthLinkToggle = () => {
-		if (!borderRadiusLink) {
-			setAttributes({
-				infoBoxDesktopBorderRadiusWidth: boxPreviousBorderRadiusWidth,
-			});
-		}
-		/** setborderRadiusLinkLink(!borderRadiusLink) */
-		setAttributes({ borderRadiusLink: !borderRadiusLink });
-	};
-
-	/** Update previousBorderRadiusWidth state when Border Width changes */
-	useEffect(() => {
-		setBoxPreviousBorderRadiusWidth(infoBoxDesktopBorderRadiusWidth);
-	}, [infoBoxDesktopBorderRadiusWidth]);
-
-	/** Function to handle device click for Border Width */
-	const handleBoxBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ DeviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const boxBorderRadiusWidth = `${infoBoxDesktopBorderRadiusWidth.top}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.right}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.bottom}${infoBoxBorderRadiusUnits} ${infoBoxDesktopBorderRadiusWidth.left}${infoBoxBorderRadiusUnits}`;
 	/** End Border Radius Width */
 
 	/** Global Typography */
@@ -2463,6 +1929,541 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const mediaBorderRadiusTabletWidth = `${mediaBorderRadiusTablet.top}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.right}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.bottom}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.left}${mediaBorderRadiusUnits.Tablet}`;
 	const mediaBorderRadiusMobileWidth = `${mediaBorderRadiusMobile.top}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.right}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.bottom}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.left}${mediaBorderRadiusUnits.Mobile}`;
 
+	/** Heading Spacing */
+	/** Start Heading padding */
+	const handleHeadingPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (paddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_padding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_padding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_padding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_padding: {
+							...Heading_Desktop_padding,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_padding: {
+							...Heading_Tab_padding,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_padding: {
+							...Heading_Mobile_padding,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleHeadingPaddingCombineBtn = () => {
+		setAttributes({ paddingLink: !paddingLink });
+	};
+
+	const handleHeadingPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			Heading_padding_units: {
+				...Heading_padding_units,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End Heading padding */
+
+	/** End Global Padding */
+	const Heading_Desktop_paddingWidth = `${Heading_Desktop_padding.top}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.right}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.bottom}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.left}${Heading_padding_units.Desktop}`;
+	const Heading_Tab_paddingWidth = `${Heading_Tab_padding.top}${Heading_padding_units.Tablet} ${Heading_Tab_padding.right}${Heading_padding_units.Tablet} ${Heading_Tab_padding.bottom}${Heading_padding_units.Tablet} ${Heading_Tab_padding.left}${Heading_padding_units.Tablet}`;
+	const Heading_Mobile_paddingWidth = `${Heading_Mobile_padding.top}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.right}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.bottom}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.left}${Heading_padding_units.Mobile}`;
+
+	/** Start Heading Margin */
+	const handleHeadingMarginUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (Heading_Margin_Link) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_Margin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_Margin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_Margin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_Margin: {
+							...Heading_Desktop_Margin,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_Margin: {
+							...Heading_Tab_Margin,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_Margin: {
+							...Heading_Mobile_Margin,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleHeadingMarginCombineBtn = () => {
+		setAttributes({ Heading_Margin_Link: !Heading_Margin_Link });
+	};
+
+	const handleHeadingMarginUnitsHandler = (unit) => {
+		setAttributes({
+			Heading_Margin_Units: {
+				...Heading_Margin_Units,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End Heading Margin */
+
+	/** End Global Margin */
+	const HeadingDesktopMarginValue = `${Heading_Desktop_Margin.top}${Heading_Margin_Units.Desktop} ${Heading_Desktop_Margin.right}${Heading_Margin_Units.Desktop} ${Heading_Desktop_Margin.bottom}${Heading_Margin_Units.Desktop} ${Heading_Desktop_Margin.left}${Heading_Margin_Units.Desktop}`;
+	const HeadingTabMarginValue = `${Heading_Tab_Margin.top}${Heading_Margin_Units.Tablet} ${Heading_Tab_Margin.right}${Heading_Margin_Units.Tablet} ${Heading_Tab_Margin.bottom}${Heading_Margin_Units.Tablet} ${Heading_Tab_Margin.left}${Heading_Margin_Units.Tablet}`;
+	const HeadingMobileMarginValue = `${Heading_Mobile_Margin.top}${Heading_Margin_Units.Mobile} ${Heading_Mobile_Margin.right}${Heading_Margin_Units.Mobile} ${Heading_Mobile_Margin.bottom}${Heading_Margin_Units.Mobile} ${Heading_Mobile_Margin.left}${Heading_Margin_Units.Mobile}`;
+
+	/** Start Heading Border */
+	const handleHeadingBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (borderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_Border_Width: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_Border_Width: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_Border_Width: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_Border_Width: {
+							...Heading_Desktop_Border_Width,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_Border_Width: {
+							...Heading_Tab_Border_Width,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_Border_Width: {
+							...Heading_Mobile_Border_Width,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleHeadingBorderCombineBtn = () => {
+		setAttributes({ borderLink: !borderLink });
+	};
+
+	const handleHeadingBorderUnitsHandler = (unit) => {
+		setAttributes({
+			Heading_Border_units: {
+				...Heading_Border_units,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End Heading Border */
+
+	/** End Global Border */
+	const HeadingDesktopBorderWidthValue = `${Heading_Desktop_Border_Width.top}${Heading_Border_units.Desktop} ${Heading_Desktop_Border_Width.right}${Heading_Border_units.Desktop} ${Heading_Desktop_Border_Width.bottom}${Heading_Border_units.Desktop} ${Heading_Desktop_Border_Width.left}${Heading_Border_units.Desktop}`;
+	const HeadingTabBorderWidthValue = `${Heading_Tab_Border_Width.top}${Heading_Border_units.Tablet} ${Heading_Tab_Border_Width.right}${Heading_Border_units.Tablet} ${Heading_Tab_Border_Width.bottom}${Heading_Border_units.Tablet} ${Heading_Tab_Border_Width.left}${Heading_Border_units.Tablet}`;
+	const HeadingMobileBorderWidthValue = `${Heading_Mobile_Border_Width.top}${Heading_Border_units.Mobile} ${Heading_Mobile_Border_Width.right}${Heading_Border_units.Mobile} ${Heading_Mobile_Border_Width.bottom}${Heading_Border_units.Mobile} ${Heading_Mobile_Border_Width.left}${Heading_Border_units.Mobile}`;
+
+	/** Start Heading Border Radius Width */
+	const handleHeadingBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (borderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_Border_radius_Width: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_Border_radius_Width: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_Border_radius_Width: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						Heading_Desktop_Border_radius_Width: {
+							...Heading_Desktop_Border_radius_Width,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						Heading_Tab_Border_radius_Width: {
+							...Heading_Tab_Border_radius_Width,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						Heading_Mobile_Border_radius_Width: {
+							...Heading_Mobile_Border_radius_Width,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleHeadingBorderRadiusCombineBtn = () => {
+		setAttributes({ borderRadiusLink: !borderRadiusLink });
+	};
+
+	const handleHeadingBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			Heading_Border_radius_units: {
+				...Heading_Border_radius_units,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End Heading Border Radius Width */
+
+	/** End Global Border Radius Width */
+	const HeadingDesktopBorderradiusWidthValue = `${Heading_Desktop_Border_radius_Width.top}${Heading_Border_radius_units.Desktop} ${Heading_Desktop_Border_radius_Width.right}${Heading_Border_radius_units.Desktop} ${Heading_Desktop_Border_radius_Width.bottom}${Heading_Border_radius_units.Desktop} ${Heading_Desktop_Border_radius_Width.left}${Heading_Border_radius_units.Desktop}`;
+	const HeadingTabBorderradiusWidthValue = `${Heading_Tab_Border_radius_Width.top}${Heading_Border_radius_units.Tablet} ${Heading_Tab_Border_radius_Width.right}${Heading_Border_radius_units.Tablet} ${Heading_Tab_Border_radius_Width.bottom}${Heading_Border_radius_units.Tablet} ${Heading_Tab_Border_radius_Width.left}${Heading_Border_radius_units.Tablet}`;
+	const HeadingMobileBorderradiusWidthValue = `${Heading_Mobile_Border_radius_Width.top}${Heading_Border_radius_units.Mobile} ${Heading_Mobile_Border_radius_Width.right}${Heading_Border_radius_units.Mobile} ${Heading_Mobile_Border_radius_Width.bottom}${Heading_Border_radius_units.Mobile} ${Heading_Mobile_Border_radius_Width.left}${Heading_Border_radius_units.Mobile}`;
+
+	/** Start SubHeading Padding */
+	const handleSubHeadingPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (subHeadingPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						SubHeadingDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						SubHeadingTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						SubHeadingMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						SubHeadingDesktopPadding: {
+							...SubHeadingDesktopPadding,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						SubHeadingTabPadding: {
+							...SubHeadingTabPadding,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						SubHeadingMobilePadding: {
+							...SubHeadingMobilePadding,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleSubHeadingPaddingCombineBtn = () => {
+		setAttributes({ subHeadingPaddingLink: !subHeadingPaddingLink });
+	};
+
+	const handleSubHeadingPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			SubHeadingPaddingUnits: {
+				...SubHeadingPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End SubHeading Padding */
+
+	/** End Global SubHeading Padding */
+	const SubHeadingDesktopPaddingValue = `${SubHeadingDesktopPadding.top}${SubHeadingPaddingUnits.Desktop} ${SubHeadingDesktopPadding.right}${SubHeadingPaddingUnits.Desktop} ${SubHeadingDesktopPadding.bottom}${SubHeadingPaddingUnits.Desktop} ${SubHeadingDesktopPadding.left}${SubHeadingPaddingUnits.Desktop}`;
+	const SubHeadingTabPaddingValue = `${SubHeadingTabPadding.top}${SubHeadingPaddingUnits.Tablet} ${SubHeadingTabPadding.right}${SubHeadingPaddingUnits.Tablet} ${SubHeadingTabPadding.bottom}${SubHeadingPaddingUnits.Tablet} ${SubHeadingTabPadding.left}${SubHeadingPaddingUnits.Tablet}`;
+	const SubHeadingMobilePaddingValue = `${SubHeadingMobilePadding.top}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.right}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.bottom}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.left}${SubHeadingPaddingUnits.Mobile}`;
+
+	/** Start Desc Margin */
+const handleDescMarginUnitChange = (event, position) => {
+	const value = event.target.value;
+	if (descMarginLink) {
+		switch (deviceType) {
+			case "Desktop":
+				setAttributes({
+					descDesktopMargin: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value,
+					},
+				});
+				break;
+			case "Tablet":
+				setAttributes({
+					descTabMargin: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value,
+					},
+				});
+				break;
+			case "Mobile":
+				setAttributes({
+					descMobileMargin: {
+						top: value,
+						right: value,
+						bottom: value,
+						left: value,
+					},
+				});
+				break;
+			default:
+				break;
+		}
+	} else {
+		switch (deviceType) {
+			case "Desktop":
+				setAttributes({
+					descDesktopMargin: {
+						...descDesktopMargin,
+						[position]: value,
+					},
+				});
+				break;
+			case "Tablet":
+				setAttributes({
+					descTabMargin: {
+						...descTabMargin,
+						[position]: value,
+					},
+				});
+				break;
+			case "Mobile":
+				setAttributes({
+					descMobileMargin: {
+						...descMobileMargin,
+						[position]: value,
+					},
+				});
+				break;
+			default:
+				break;
+		}
+	}
+};
+
+const handleDescMarginCombineBtn = () => {
+	setAttributes({ descMarginLink: !descMarginLink });
+};
+
+const handleDescMarginUnitsHandler = (unit) => {
+	setAttributes({
+		descMarginUnits: {
+			...descMarginUnits,
+			[deviceType]: unit,
+		},
+	});
+};
+/** End Desc Margin */
+
+/** End Global Desc Margin */
+const descDesktopMarginValue = `${descDesktopMargin.top}${descMarginUnits.Desktop} ${descDesktopMargin.right}${descMarginUnits.Desktop} ${descDesktopMargin.bottom}${descMarginUnits.Desktop} ${descDesktopMargin.left}${descMarginUnits.Desktop}`;
+const descTabMarginValue = `${descTabMargin.top}${descMarginUnits.Tablet} ${descTabMargin.right}${descMarginUnits.Tablet} ${descTabMargin.bottom}${descMarginUnits.Tablet} ${descTabMargin.left}${descMarginUnits.Tablet}`;
+const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} ${descMobileMargin.right}${descMarginUnits.Mobile} ${descMobileMargin.bottom}${descMarginUnits.Mobile} ${descMobileMargin.left}${descMarginUnits.Mobile}`;
+
 	/** Start Global Bg Color */
 	const handleGlobalBgColorSwitcherChange = (value) => {
 		setAttributes({ globalBgColorSwitcher: value });
@@ -2553,74 +2554,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     
     @media only screen and (max-width: 1024px) {
-        .fb-icon-box-content-wrapper-inner.${blockID} {
-            padding: ${infoBoxTabPadding.top}${infoBoxPaddingUnits} ${
-							infoBoxTabPadding.right
-						}${infoBoxPaddingUnits} ${
-							infoBoxTabPadding.bottom
-						}${infoBoxPaddingUnits} ${
-							infoBoxTabPadding.left
-						}${infoBoxPaddingUnits} !important;
-            margin: ${infoBoxTabMargin.top}${infoBoxMarginUnits} ${
-							infoBoxTabMargin.right
-						}${infoBoxMarginUnits} ${
-							infoBoxTabMargin.bottom
-						}${infoBoxMarginUnits} ${
-							infoBoxTabMargin.left
-						}${infoBoxMarginUnits} !important;
-            border-width: ${infoBoxTabBorderWidth.top}${infoBoxBorderUnits} ${
-							infoBoxTabBorderWidth.right
-						}${infoBoxBorderUnits} ${
-							infoBoxTabBorderWidth.bottom
-						}${infoBoxBorderUnits} ${
-							infoBoxTabBorderWidth.left
-						}${infoBoxBorderUnits} !important;
-            border-radius: ${
-							infoBoxTabBorderRadiusWidth.top
-						}${infoBoxBorderRadiusUnits} ${
-							infoBoxTabBorderRadiusWidth.right
-						}${infoBoxBorderRadiusUnits} ${
-							infoBoxTabBorderRadiusWidth.bottom
-						}${infoBoxBorderRadiusUnits} ${
-							infoBoxTabBorderRadiusWidth.left
-						}${infoBoxBorderRadiusUnits} !important;
+        .fb-icon-box-content-wrapper.${blockID} {
+            padding: ${TabletPadding} !important;
+            margin: ${TabletMargin} !important;
+            border-width: ${BorderTabletWidth} !important;
+            border-radius: ${BorderRadiusTabletWidth} !important;
         }
     }
 
     @media only screen and (max-width: 767px) {
-        .fb-icon-box-content-wrapper-inner.${blockID} {
-            padding: ${infoBoxMobilePadding.top}${infoBoxPaddingUnits} ${
-							infoBoxMobilePadding.right
-						}${infoBoxPaddingUnits} ${
-							infoBoxMobilePadding.bottom
-						}${infoBoxPaddingUnits} ${
-							infoBoxMobilePadding.left
-						}${infoBoxPaddingUnits} !important;
-            margin: ${infoBoxMobileMargin.top}${infoBoxMarginUnits} ${
-							infoBoxMobileMargin.right
-						}${infoBoxMarginUnits} ${
-							infoBoxMobileMargin.bottom
-						}${infoBoxMarginUnits} ${
-							infoBoxMobileMargin.left
-						}${infoBoxMarginUnits} !important;
-            border-width: ${
-							infoBoxMobileBorderWidth.top
-						}${infoBoxBorderUnits} ${
-							infoBoxMobileBorderWidth.right
-						}${infoBoxBorderUnits} ${
-							infoBoxMobileBorderWidth.bottom
-						}${infoBoxBorderUnits} ${
-							infoBoxMobileBorderWidth.left
-						}${infoBoxBorderUnits} !important;
-            border-radius: ${
-							infoBoxMobileBorderRadiusWidth.top
-						}${infoBoxBorderRadiusUnits} ${
-							infoBoxMobileBorderRadiusWidth.right
-						}${infoBoxBorderRadiusUnits} ${
-							infoBoxMobileBorderRadiusWidth.bottom
-						}${infoBoxBorderRadiusUnits} ${
-							infoBoxMobileBorderRadiusWidth.left
-						}${infoBoxBorderRadiusUnits} !important;
+        .fb-icon-box-content-wrapper.${blockID} {
+            padding: ${MobilePadding} !important;
+            margin: ${MobileMargin} !important;
+            border-width: ${BorderMobileWidth} !important;
+            border-radius: ${BorderRadiusMobileWidth} !important;
         }
     }
 
@@ -2634,31 +2581,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         font-family: ${
 					Heading_Font_Family !== "default" ? Heading_Font_Family : "inherit"
 				};
-        font-size: ${
-					Heading_Font_Size !== undefined
-						? `${Heading_Font_Size}${Heading_Font_size_units}`
-						: ""
-				};
+       
         font-weight: ${Heading_Font_Weight};
         font-style: ${Heading_Font_Style};
         text-transform: ${Heading_Text_Transform};
         text-decoration: ${Heading_Text_Decoration};
         ${
-					Heading_Letter_Spacing !== undefined
-						? `letter-spacing: ${Heading_Letter_Spacing}${Heading_Letter_Spacing_units};`
-						: ""
-				}
-        ${
-					Heading_Line_Height !== undefined
-						? `line-height: ${Heading_Line_Height}${Heading_Line_Height_units};`
-						: ""
-				}
+			Heading_Font_Size.Desktop && Heading_Font_size_units.Desktop
+							? `font-size: ${Heading_Font_Size.Desktop}${Heading_Font_size_units.Desktop};`
+							: ""
+			}
+		${
+			Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop
+				? `letter-spacing: ${Heading_Letter_Spacing.Desktop}${Heading_Letter_Spacing_units.Desktop};`
+				: ""
+		}
+		${
+			Heading_Line_Height.Desktop && Heading_Line_Height_units.Desktop
+				? `line-height: ${Heading_Line_Height.Desktop}${Heading_Line_Height_units.Desktop};`
+				: ""
+		}
         transition: all .3s ease-in-out;
-        padding: ${padding};
-        margin: ${margin};
+        padding: ${Heading_Desktop_paddingWidth};
+        margin: ${HeadingDesktopMarginValue};
         border: ${Heading_Border};
-        border-width: ${borderWidth};
-        border-radius: ${borderRadiusWidth};
+        border-width: ${HeadingDesktopBorderWidthValue};
+        border-radius: ${HeadingDesktopBorderradiusWidthValue};
         ${
 					Heading_Border_Color !== undefined
 						? `border-color: ${Heading_Border_Color};`
@@ -2681,75 +2629,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     @media only screen and (max-width: 1024px) {
         .fb-icon-box-content-wrapper.${blockID} .fb-heading {
-            padding: ${Heading_Tab_padding.top}${Heading_padding_units} ${
-							Heading_Tab_padding.right
-						}${Heading_padding_units} ${
-							Heading_Tab_padding.bottom
-						}${Heading_padding_units} ${
-							Heading_Tab_padding.left
-						}${Heading_padding_units} !important;
-            margin: ${Heading_Tab_Margin.top}${Heading_Margin_Units} ${
-							Heading_Tab_Margin.right
-						}${Heading_Margin_Units} ${
-							Heading_Tab_Margin.bottom
-						}${Heading_Margin_Units} ${
-							Heading_Tab_Margin.left
-						}${Heading_Margin_Units} !important;
-            border-width: ${
-							Heading_Tab_Border_Width.top
-						}${Heading_Border_units} ${
-							Heading_Tab_Border_Width.right
-						}${Heading_Border_units} ${
-							Heading_Tab_Border_Width.bottom
-						}${Heading_Border_units} ${
-							Heading_Tab_Border_Width.left
-						}${Heading_Border_units} !important;
-            border-radius: ${
-							Heading_Tab_Border_radius_Width.top
-						}${Heading_Border_radius_units} ${
-							Heading_Tab_Border_radius_Width.right
-						}${Heading_Border_radius_units} ${
-							Heading_Tab_Border_radius_Width.bottom
-						}${Heading_Border_radius_units} ${
-							Heading_Tab_Border_radius_Width.left
-						}${Heading_Border_radius_units} !important;
+			${
+				Heading_Font_Size.Tablet && Heading_Font_size_units.Tablet
+								? `font-size: ${Heading_Font_Size.Tablet}${Heading_Font_size_units.Tablet};`
+								: ""
+				}
+			${
+				Heading_Letter_Spacing.Tablet && Heading_Letter_Spacing_units.Desktop
+					? `letter-spacing: ${Heading_Letter_Spacing.Tablet}${Heading_Letter_Spacing_units.Tablet};`
+					: ""
+			}
+			${
+				Heading_Line_Height.Tablet && Heading_Line_Height_units.Tablet
+					? `line-height: ${Heading_Line_Height.Tablet}${Heading_Line_Height_units.Tablet};`
+					: ""
+			}
+            padding: ${Heading_Tab_paddingWidth} !important;
+            margin: ${HeadingTabMarginValue} !important;
+            border-width: ${HeadingTabBorderWidthValue} !important;
+            border-radius: ${HeadingTabBorderradiusWidthValue} !important;
         }
     }
 
     @media only screen and (max-width: 767px) {
         .fb-icon-box-content-wrapper.${blockID} .fb-heading {
-            padding: ${Heading_Mobile_padding.top}${Heading_padding_units} ${
-							Heading_Mobile_padding.right
-						}${Heading_padding_units} ${
-							Heading_Mobile_padding.bottom
-						}${Heading_padding_units} ${
-							Heading_Mobile_padding.left
-						}${Heading_padding_units} !important;
-            margin: ${Heading_Mobile_Margin.top}${Heading_Margin_Units} ${
-							Heading_Mobile_Margin.right
-						}${Heading_Margin_Units} ${
-							Heading_Mobile_Margin.bottom
-						}${Heading_Margin_Units} ${
-							Heading_Mobile_Margin.left
-						}${Heading_Margin_Units} !important;
-            border-width: ${
-							Heading_Mobile_Border_Width.top
-						}${Heading_Border_units} ${
-							Heading_Mobile_Border_Width.right
-						}${Heading_Border_units} ${
-							Heading_Mobile_Border_Width.bottom
-						}${Heading_Border_units} ${
-							Heading_Mobile_Border_Width.left
-						}${Heading_Border_units} !important;
-            border-radius: ${
-							Heading_Mobile_Border_radius_Width.top
-						}${Heading_Border_radius_units} ${
-							Heading_Mobile_Border_radius_Width.right
-						}${Heading_Border_radius_units} ${
-							Heading_Mobile_Border_radius_Width.bottom
-						}${Heading_Border_radius_units} ${
-							Heading_Mobile_Border_radius_Width.left
-						}${Heading_Border_radius_units} !important;
+			${
+				Heading_Font_Size.Mobile && Heading_Font_size_units.Mobile
+								? `font-size: ${Heading_Font_Size.Mobile}${Heading_Font_size_units.Mobile};`
+								: ""
+				}
+			${
+				Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop
+					? `letter-spacing: ${Heading_Letter_Spacing.Mobile}${Heading_Letter_Spacing_units.Mobile};`
+					: ""
+			}
+			${
+				Heading_Line_Height.Mobile && Heading_Line_Height_units.Mobile
+					? `line-height: ${Heading_Line_Height.Mobile}${Heading_Line_Height_units.Mobile};`
+					: ""
+			}
+            padding: ${Heading_Mobile_paddingWidth} !important;
+            margin: ${HeadingMobileMarginValue} !important;
+            border-width: ${HeadingMobileBorderWidthValue} !important;
+            border-radius: ${HeadingMobileBorderradiusWidthValue} !important;
         }
     }
 	.fb-icon-box-content-wrapper.${blockID} .fb-description {
@@ -2759,61 +2681,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						? SubHeadingFontFamily
 						: SubHeadingFontFamily
 				};
-        ${
-					SubHeadingFontSize
-						? `font-size: ${SubHeadingFontSize}${SubHeadingFontSizeUnits};`
-						: ""
-				}
+		
         font-weight: ${SubHeadingFontWeight};
         font-style: ${SubHeadingFontStyle};
         text-transform: ${SubHeadingTextTransform};
         text-decoration: ${SubHeadingTextDecoration};
 		${
-			SubHeadingLetterSpacing !== undefined
-				? `letter-spacing: ${SubHeadingLetterSpacing}${SubHeadingLetterSpacingUnits};`
+			SubHeadingFontSize.Desktop && SubHeadingFontSizeUnits.Desktop
+				? `font-size: ${SubHeadingFontSize.Desktop}${SubHeadingFontSizeUnits.Desktop};`
 				: ""
 		}
 		${
-			SubHeadingLineHeight !== undefined
-				? `line-height: ${SubHeadingLineHeight}${SubHeadingLineHeightUnits};`
+			SubHeadingLetterSpacing.Desktop && SubHeadingLetterSpacingUnits.Desktop
+				? `letter-spacing: ${SubHeadingLetterSpacing.Desktop}${SubHeadingLetterSpacingUnits.Desktop};`
 				: ""
 		}
-        padding: ${descPadding};
-        margin: ${descMargin};
+		${
+			SubHeadingLineHeight.Desktop && SubHeadingLineHeightUnits.Desktop
+				? `line-height: ${SubHeadingLineHeight.Desktop}${SubHeadingLineHeightUnits.Desktop};`
+				: ""
+		}
+        padding: ${SubHeadingDesktopPaddingValue};
+        margin: ${descDesktopMarginValue};
     }
     .fb-icon-box-content-wrapper.${blockID}:hover .fb-description {
         ${SubHeadingHoverColor ? `color: ${SubHeadingHoverColor};` : ""}
     }
     @media only screen and (max-width: 1024px) {
       .fb-icon-box-content-wrapper.${blockID} .fb-description {
-        padding: ${SubHeadingTabPadding.top}${SubHeadingPaddingUnits} ${
-					SubHeadingTabPadding.right
-				}${SubHeadingPaddingUnits} ${
-					SubHeadingTabPadding.bottom
-				}${SubHeadingPaddingUnits} ${
-					SubHeadingTabPadding.left
-				}${SubHeadingPaddingUnits} !important;
-        margin: ${descTabMargin.top}${descMarginUnits} ${
-					descTabMargin.right
-				}${descMarginUnits} ${descTabMargin.bottom}${descMarginUnits} ${
-					descTabMargin.left
-				}${descMarginUnits} !important;
+		${
+			SubHeadingFontSize.Tablet && SubHeadingFontSizeUnits.Tablet
+				? `font-size: ${SubHeadingFontSize.Tablet}${SubHeadingFontSizeUnits.Tablet};`
+				: ""
+		}
+		${
+			SubHeadingLetterSpacing.Tablet && SubHeadingLetterSpacingUnits.Tablet
+				? `letter-spacing: ${SubHeadingLetterSpacing.Tablet}${SubHeadingLetterSpacingUnits.Tablet};`
+				: ""
+		}
+		${
+			SubHeadingLineHeight.Tablet && SubHeadingLineHeightUnits.Tablet
+				? `line-height: ${SubHeadingLineHeight.Tablet}${SubHeadingLineHeightUnits.Tablet};`
+				: ""
+		}
+        padding: ${SubHeadingTabPaddingValue} !important;
+        margin: ${descTabMarginValue} !important;
       }
     }
     @media only screen and (max-width: 757px) {
       .fb-icon-box-content-wrapper.${blockID} .fb-description {
-        padding: ${SubHeadingMobilePadding.top}${SubHeadingPaddingUnits} ${
-					SubHeadingMobilePadding.right
-				}${SubHeadingPaddingUnits} ${
-					SubHeadingMobilePadding.bottom
-				}${SubHeadingPaddingUnits} ${
-					SubHeadingMobilePadding.left
-				}${SubHeadingPaddingUnits} !important;
-        margin: ${descMobileMargin.top}${descMarginUnits} ${
-					descMobileMargin.right
-				}${descMarginUnits} ${descMobileMargin.bottom}${descMarginUnits} ${
-					descMobileMargin.left
-				}${descMarginUnits} !important;
+		${
+			SubHeadingFontSize.Mobile && SubHeadingFontSizeUnits.Mobile
+				? `font-size: ${SubHeadingFontSize.Mobile}${SubHeadingFontSizeUnits.Mobile};`
+				: ""
+		}
+		${
+			SubHeadingLetterSpacing.Mobile && SubHeadingLetterSpacingUnits.Mobile
+				? `letter-spacing: ${SubHeadingLetterSpacing.Mobile}${SubHeadingLetterSpacingUnits.Mobile};`
+				: ""
+		}
+		${
+			SubHeadingLineHeight.Mobile && SubHeadingLineHeightUnits.Mobile
+				? `line-height: ${SubHeadingLineHeight.Mobile}${SubHeadingLineHeightUnits.Mobile};`
+				: ""
+		}
+        padding: ${SubHeadingMobilePaddingValue} !important;
+        margin: ${descMobileMarginValue} !important;
       }
     }
     .fb-icon-box-content-wrapper.${blockID} .fb-icon-media-wrapper {
@@ -2912,9 +2845,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalBgColor,
 			DesktopPadding,
 			DesktopMargin,
+			TabletPadding,
+			TabletMargin,
+			MobileMargin,
+			MobilePadding,
 			globalBorder,
 			BorderDesktopWidth,
+			BorderTabletWidth,
+			BorderMobileWidth,
 			BorderRadiusDesktopWidth,
+			BorderRadiusTabletWidth,
+			BorderRadiusMobileWidth,
 			globalBorderColor,
 			boxGlobalBoxShadowCssValue,
 			globalBgHoverColor,
@@ -2929,6 +2870,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			Heading_Text_Decoration,
 			Heading_Letter_Spacing,
 			Heading_Line_Height,
+			Heading_Font_Size,
+			Heading_Font_size_units,
+			Heading_Letter_Spacing_units,
+			Heading_Line_Height_units,
 			padding,
 			margin,
 			Heading_Border,
@@ -3338,6 +3283,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													}
 													className="fb-setting-text"
 												/>
+												<ToggleControl
+                                                        label={__("Enable Link", "frontis-blocks")}
+                                                        checked={headingUrlSwitcher}
+                                                        onChange={(value) => setAttributes({ headingUrlSwitcher: value })}
+                                                />
+												{headingUrlSwitcher && (
+													<FB_UrlControl
+																url={headingLink}
+																onChangeUrl={(value) =>
+																	setAttributes({ headingLink: value })
+																}
+																openInNewTab={headingTargetUrl}
+																onChangeOpenInNewTab={(value) =>
+																	setAttributes({ headingTargetUrl: value })
+													}
+												/>
+												)}
+												
 											</PanelBody>
 										</div>
 										<div className="fb-advanced-wrapper">
@@ -3553,187 +3516,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}
 											/>
-
-											<FB_Range
-												min={1}
-												max={300}
-												label={__("Background Width", "frontis-blocks")}
-												rangeValue={mediaBgWidth}
-												onChangeHandler={mediaBgWidthHandler}
-												rangeUnitHandler={mediaBgWidthUnitsHandler}
-												deviceType={deviceType}
-												units={mediaBgWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={50}
-											/>
-											<FB_Range
-												min={1}
-												max={300}
-												label={__("Background Height", "frontis-blocks")}
-												rangeValue={mediaBgHeight}
-												onChangeHandler={mediaBgHeightHandler}
-												rangeUnitHandler={mediaBgHeightUnitsHandler}
-												deviceType={deviceType}
-												units={mediaBgHeightUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={50}
-											/>
-
 											{/*Background*/}
-											<BaseControl
-												label={__("Icon Color", "frontis-block")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() =>
-																setAttributes({
-																	mediaIconColorSwitcher: item.value,
-																})
-															}
-															className={`fb-setting-color-panel-btn-switchr ${
-																mediaIconColorSwitcher === item.value
-																	? "active"
-																	: ""
-															}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
+											<FB_Color
+												label={__("Icon Color", "frontis-blocks")}
+												globalColorSwitcher={mediaIconColorSwitcher}
+												globalColor={mediaIconColor}
+												globalHoverColor={mediaIconHoverColor}
+												handleColorSwitcherChange={(value) =>
+													setAttributes({
+														mediaIconColorSwitcher: value,
+													})
+												}
+												handleGlobalColorChange={(value) =>
+													setAttributes({ mediaIconColor: value })
+												}
+												handleGlobalHoverColorChange={(value) =>
+													setAttributes({
+														mediaIconHoverColor: value,
+													})
+												}
+											/>
 
-											{mediaIconColorSwitcher === "normal" && (
-												<BaseControl
-													label={__("Nomal Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={mediaIconColor}
-																			onChange={(value) =>
-																				setAttributes({ mediaIconColor: value })
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={mediaIconColor}
-																			onChange={(value) =>
-																				setAttributes({ mediaIconColor: value })
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											{mediaIconColorSwitcher === "hover" && (
-												<BaseControl
-													label={__("Hover Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={mediaIconHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					mediaIconHoverColor: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={mediaIconHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					mediaIconHoverColor: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
@@ -3799,756 +3602,108 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Heading", "frontis-block")}
 											initialOpen={false}
 										>
-											<BaseControl
-												label={__("Typography", "frontis-block")}
-												className="fb-setting-typography"
-											>
-												<Dropdown
-													className="fb-setting-typography-icon-dropdown"
-													contentClassName="fb-setting-typography-dropdown-content"
-													popoverProps={{ placement: "bottom-start" }}
-													renderToggle={({ isOpen, onToggle }) => (
-														<Button
-															variant="primary"
-															onClick={onToggle}
-															aria-expanded={isOpen}
-															aria-label={__(
-																"Toggle Typography Settings",
-																"frontis-block",
-															)}
-															className="fb-setting-typography-icon-btn"
-														>
-															<Dashicon
-																icon="edit"
-																className="fb-setting-typography-icon"
-															/>
-														</Button>
-													)}
-													renderContent={() => (
-														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner">
-																<div className="fb-setting-fontfamily-wrapper">
-																	<SelectControl
-																		label={__("Font Family", "frontis-block")}
-																		options={FONT_FAMILYS}
-																		value={Heading_Font_Family}
-																		onChange={(value) =>
-																			setAttributes({
-																				Heading_Font_Family: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-fontsize-wrapper">
-																	<div className="fb-setting-fontsize-header">
-																		<div className="fb-setting-fontsize-label">
-																			<span>
-																				{__("Font Size", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-fontsize-units">
-																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
-																				{separator_UNIT_TYPES.map(
-																					(item, key) => (
-																						<Button
-																							key={key}
-																							onClick={() =>
-																								setAttributes({
-																									Heading_Font_size_units:
-																										item.value,
-																								})
-																							}
-																							className={`fb-setting-fontsize-units-switcher ${
-																								Heading_Font_size_units ===
-																								item.value
-																									? "active"
-																									: ""
-																							}`}
-																						>
-																							{item.label}
-																						</Button>
-																					),
-																				)}
-																			</ButtonGroup>
-																		</div>
-																	</div>
-																	<div className="fb-setting-fontsize-rangecontrol">
-																		<RangeControl
-																			value={Heading_Font_Size}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Font_Size: value,
-																				})
-																			}
-																			min={1}
-																			max={200}
-																			allowReset
-																			resetFallbackValue={undefined}
-																		/>
-																	</div>
-																</div>
-																<div className="fb-setting-fontweight-wrapper">
-																	<SelectControl
-																		label={__("Font Weight", "frontis-block")}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "700",
-																			},
-																			{
-																				label: __("100", "frontis-block"),
-																				value: "100",
-																			},
-																			{
-																				label: __("200", "frontis-block"),
-																				value: "200",
-																			},
-																			{
-																				label: __("300", "frontis-block"),
-																				value: "300",
-																			},
-																			{
-																				label: __("400", "frontis-block"),
-																				value: "400",
-																			},
-																			{
-																				label: __("500", "frontis-block"),
-																				value: "500",
-																			},
-																			{
-																				label: __("600", "frontis-block"),
-																				value: "600",
-																			},
-																			{
-																				label: __("700", "frontis-block"),
-																				value: "700",
-																			},
-																			{
-																				label: __("800", "frontis-block"),
-																				value: "800",
-																			},
-																			{
-																				label: __("900", "frontis-block"),
-																				value: "900",
-																			},
-																		]}
-																		value={Heading_Font_Weight}
-																		onChange={(value) =>
-																			setAttributes({
-																				Heading_Font_Weight: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-fontstyle-wrapper">
-																	<SelectControl
-																		label={__("Font Style", "frontis-block")}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "normal",
-																			},
-																			{
-																				label: __("Normal", "frontis-block"),
-																				value: "normal",
-																			},
-																			{
-																				label: __("Italic", "frontis-block"),
-																				value: "italic",
-																			},
-																			{
-																				label: __("Oblique", "frontis-block"),
-																				value: "oblique",
-																			},
-																		]}
-																		value={Heading_Font_Style}
-																		onChange={(value) =>
-																			setAttributes({
-																				Heading_Font_Style: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-texttransform-wrapper">
-																	<SelectControl
-																		label={__(
-																			"Text Transform",
-																			"frontis-block",
-																		)}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("None", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __(
-																					"Capitalize",
-																					"frontis-block",
-																				),
-																				value: "capitalize",
-																			},
-																			{
-																				label: __("Uppercase", "frontis-block"),
-																				value: "uppercase",
-																			},
-																			{
-																				label: __("Lowercase", "frontis-block"),
-																				value: "lowercase",
-																			},
-																		]}
-																		value={Heading_Text_Transform}
-																		onChange={(value) =>
-																			setAttributes({
-																				Heading_Text_Transform: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-textdecoration-wrapper">
-																	<SelectControl
-																		label={__(
-																			"Text Decoration",
-																			"frontis-block",
-																		)}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("None", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("Underline", "frontis-block"),
-																				value: "underline",
-																			},
-																			{
-																				label: __("Overline", "frontis-block"),
-																				value: "overline",
-																			},
-																			{
-																				label: __(
-																					"Line Through",
-																					"frontis-block",
-																				),
-																				value: "line-through",
-																			},
-																		]}
-																		value={Heading_Text_Decoration}
-																		onChange={(value) =>
-																			setAttributes({
-																				Heading_Text_Decoration: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-letterspacing-wrapper">
-																	<div className="fb-setting-letterspacing-header">
-																		<div className="fb-setting-letterspacing-label">
-																			<span>
-																				{__("Letter Spacing", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-letterspacing-units">
-																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
-																				{separator_UNIT_TYPES.map(
-																					(item, key) => (
-																						<Button
-																							key={key}
-																							onClick={() =>
-																								setAttributes({
-																									Heading_Letter_Spacing_units:
-																										item.value,
-																								})
-																							}
-																							className={`fb-setting-letterspacing-units-switcher ${
-																								Heading_Letter_Spacing_units ===
-																								item.value
-																									? "active"
-																									: ""
-																							}`}
-																						>
-																							{item.label}
-																						</Button>
-																					),
-																				)}
-																			</ButtonGroup>
-																		</div>
-																	</div>
-																	<RangeControl
-																		value={Heading_Letter_Spacing}
-																		onChange={(value) =>
-																			setAttributes({
-																				Heading_Letter_Spacing:
-																					value === 0 ? undefined : value,
-																			})
-																		}
-																		min={1}
-																		max={100}
-																		step={1}
-																		allowReset
-																		resetFallbackValue={undefined}
-																	/>
-																</div>
-																<div className="fb-setting-lineheight-wrapper">
-																	<div className="fb-setting-lineheight-header">
-																		<div className="fb-setting-lineheight-label">
-																			<span>
-																				{__("Line Height", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-lineheight-units">
-																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
-																				{separator_UNIT_TYPES.map(
-																					(item, key) => (
-																						<Button
-																							key={key}
-																							onClick={() =>
-																								setAttributes({
-																									Heading_Line_Height_units:
-																										item.value,
-																								})
-																							}
-																							className={`fb-setting-lineheight-units-switcher ${
-																								Heading_Line_Height_units ===
-																								item.value
-																									? "active"
-																									: ""
-																							}`}
-																						>
-																							{item.label}
-																						</Button>
-																					),
-																				)}
-																			</ButtonGroup>
-																		</div>
-																	</div>
-																	<RangeControl
-																		value={Heading_Line_Height}
-																		onChange={(value) =>
-																			setAttributes({
-																				Heading_Line_Height:
-																					value === 1 ? undefined : value,
-																			})
-																		}
-																		min={1}
-																		max={100}
-																		step={1}
-																		allowReset
-																		resetFallbackValue={undefined}
-																	/>
-																</div>
-															</BaseControl>
-														</div>
-													)}
-												/>
-											</BaseControl>
-											<BaseControl
-												label={__("Text Color", "frontis-block")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() =>
-																setAttributes({
-																	Heading_Color_Switcher: item.value,
-																})
-															}
-															className={`fb-setting-color-panel-btn-switchr ${
-																Heading_Color_Switcher === item.value
-																	? "active"
-																	: ""
-															}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
+											<FB_TypographyControl
+												fontFamily={Heading_Font_Family}
+												onChangeFontFamily={(value) =>
+													setAttributes({ Heading_Font_Family: value })
+												}
+												fontSize={Heading_Font_Size}
+												onChangeFontSize={(value) =>
+													setAttributes({ Heading_Font_Size: value })
+												}
+												fontSizeUnits={Heading_Font_size_units}
+												onChangeFontSizeUnit={(value) =>
+													setAttributes({ Heading_Font_size_units: value })
+												}
+												fontWeight={Heading_Font_Weight}
+												onChangeFontWeight={(value) =>
+													setAttributes({ Heading_Font_Weight: value })
+												}
+												fontStyle={Heading_Font_Style}
+												onChangeFontStyle={(value) =>
+													setAttributes({ Heading_Font_Style: value })
+												}
+												textTransform={Heading_Text_Transform}
+												onChangeTextTransform={(value) =>
+													setAttributes({ Heading_Text_Transform: value })
+												}
+												textDecoration={Heading_Text_Decoration}
+												onChangeTextDecoration={(value) =>
+													setAttributes({ Heading_Text_Decoration: value })
+												}
+												letterSpacing={Heading_Letter_Spacing}
+												onChangeLetterSpacing={(value) =>
+													setAttributes({ Heading_Letter_Spacing: value })
+												}
+												letterSpacingUnits={Heading_Letter_Spacing_units}
+												onChangeLetterSpacingUnit={(value) =>
+													setAttributes({ Heading_Letter_Spacing_units: value })
+												}
+												lineHeight={Heading_Line_Height}
+												onChangeLineHeight={(value) =>
+													setAttributes({ Heading_Line_Height: value })
+												}
+												lineHeightUnits={Heading_Line_Height_units}
+												onChangeLineHeightUnit={(value) =>
+													setAttributes({ Heading_Line_Height_units: value })
+												}
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
 
-											{Heading_Color_Switcher === "normal" && (
-												<BaseControl
-													label={__("Nomal Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={Heading_Color}
-																			onChange={(value) =>
-																				setAttributes({ Heading_Color: value })
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={Heading_Color}
-																			onChange={(value) =>
-																				setAttributes({ Heading_Color: value })
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											{Heading_Color_Switcher === "hover" && (
-												<BaseControl
-													label={__("Hover Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={Heading_Hover_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Hover_Color: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={Heading_Hover_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Hover_Color: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
+											<FB_Color
+												label={__("Text Color", "frontis-blocks")}
+												globalColorSwitcher={Heading_Color_Switcher}
+												globalColor={Heading_Color}
+												globalHoverColor={Heading_Hover_Color}
+												handleColorSwitcherChange={(value) =>
+													setAttributes({
+														Heading_Color_Switcher: value,
+													})
+												}
+												handleGlobalColorChange={(value) =>
+													setAttributes({ Heading_Color: value })
+												}
+												handleGlobalHoverColorChange={(value) =>
+													setAttributes({
+														Heading_Hover_Color: value,
+													})
+												}
+											/>
 
 											{/*Spacing*/}
 											<Heading>Spacing</Heading>
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Padding */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Padding", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handlePaddingDeviceClick}
-														/>
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
+												spacingUnits={Heading_padding_units}
+												spacingDesktop={Heading_Desktop_padding}
+												spacingTablet={Heading_Tab_padding}
+												spacingMobile={Heading_Mobile_padding}
+												handleSpacingUnitHandler={
+													handleHeadingPaddingUnitChange
+												}
+												spacingCombineBtn={paddingLink}
+												spacingCombineBtnHandler={
+													handleHeadingPaddingCombineBtn
+												}
+												setAttributes={setAttributes}
+											/>
+											<FB_Spacing
+												label={__("Margin", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleHeadingMarginUnitsHandler}
+												spacingUnits={Heading_Margin_Units}
+												spacingDesktop={Heading_Desktop_Margin}
+												spacingTablet={Heading_Tab_Margin}
+												spacingMobile={Heading_Mobile_Margin}
+												handleSpacingUnitHandler={handleHeadingMarginUnitChange}
+												spacingCombineBtn={Heading_Margin_Link}
+												spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
 
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				Heading_padding_units: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			Heading_padding_units === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_padding.top
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_padding.top
-																		: Heading_Mobile_padding.top
-																}
-																onChange={(e) =>
-																	handlePaddingInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_padding.right
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_padding.right
-																		: Heading_Mobile_padding.right
-																}
-																onChange={(e) =>
-																	handlePaddingInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_padding.bottom
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_padding.bottom
-																		: Heading_Mobile_padding.bottom
-																}
-																onChange={(e) =>
-																	handlePaddingInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_padding.left
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_padding.left
-																		: Heading_Mobile_padding.left
-																}
-																onChange={(e) =>
-																	handlePaddingInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	paddingLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${paddingLink ? "is-checked" : ""}`}
-																onClick={handlePaddingLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Margin */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Margin", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleMarginDeviceClick}
-														/>
-
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				Heading_Margin_Units: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			Heading_Margin_Units === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Margin.top
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Margin.top
-																		: Heading_Mobile_Margin.top
-																}
-																onChange={(e) =>
-																	handleMarginInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Margin.right
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Margin.right
-																		: Heading_Mobile_Margin.right
-																}
-																onChange={(e) =>
-																	handleMarginInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Margin.bottom
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Margin.bottom
-																		: Heading_Mobile_Margin.bottom
-																}
-																onChange={(e) =>
-																	handleMarginInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Margin.left
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Margin.left
-																		: Heading_Mobile_Margin.left
-																}
-																onChange={(e) =>
-																	handleMarginInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	Heading_Margin_Link
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${Heading_Margin_Link ? "is-checked" : ""}`}
-																onClick={handleMarginLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
 											{/*Border*/}
 											<Heading>Border</Heading>
 											<SelectControl
@@ -4559,414 +3714,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setAttributes({ Heading_Border: value })
 												}
 											/>
+											<FB_Color
+												label={__("Text Color", "frontis-blocks")}
+												globalColorSwitcher={Heading_Border_Color_Switcher}
+												globalColor={Heading_Border_Color}
+												globalHoverColor={Heading_Border_Hover_Color}
+												handleColorSwitcherChange={(value) =>
+													setAttributes({
+														Heading_Border_Color_Switcher: value,
+													})
+												}
+												handleGlobalColorChange={(value) =>
+													setAttributes({ Heading_Border_Color: value })
+												}
+												handleGlobalHoverColorChange={(value) =>
+													setAttributes({
+														Heading_Border_Hover_Color: value,
+													})
+												}
+											/>
 
-											<BaseControl
-												label={__("Border Color", "frontis-block")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() =>
-																setAttributes({
-																	Heading_Border_Color_Switcher: item.value,
-																})
-															}
-															className={`fb-setting-color-panel-btn-switchr ${
-																Heading_Border_Color_Switcher === item.value
-																	? "active"
-																	: ""
-															}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
-
-											{Heading_Border_Color_Switcher === "normal" && (
-												<BaseControl
-													label={__("Nomal Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={Heading_Border_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Border_Color: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={Heading_Border_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Border_Color: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											{Heading_Border_Color_Switcher === "hover" && (
-												<BaseControl
-													label={__("Hover Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={Heading_Border_Hover_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Border_Hover_Color: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={Heading_Border_Hover_Color}
-																			onChange={(value) =>
-																				setAttributes({
-																					Heading_Border_Hover_Color: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Border Width */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Border Width", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleBorderWidthDeviceClick}
-														/>
-
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				Heading_Border_units: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			Heading_Border_units === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_Width.top
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_Width.top
-																		: Heading_Mobile_Border_Width.top
-																}
-																onChange={(e) =>
-																	handleBorderWidthInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_Width.right
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_Width.right
-																		: Heading_Mobile_Border_Width.right
-																}
-																onChange={(e) =>
-																	handleBorderWidthInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_Width.bottom
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_Width.bottom
-																		: Heading_Mobile_Border_Width.bottom
-																}
-																onChange={(e) =>
-																	handleBorderWidthInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_Width.left
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_Width.left
-																		: Heading_Mobile_Border_Width.left
-																}
-																onChange={(e) =>
-																	handleBorderWidthInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	borderLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${borderLink ? "is-checked" : ""}`}
-																onClick={handleBorderWidthLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													{/* Border radius Width */}
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Border Radius", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleBorderRadiusWidthDeviceClick}
-														/>
-
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				Heading_Border_radius_units: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			Heading_Border_radius_units === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_radius_Width.top
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_radius_Width.top
-																		: Heading_Mobile_Border_radius_Width.top
-																}
-																onChange={(e) =>
-																	handleBorderRadiusWidthInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_radius_Width.right
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_radius_Width.right
-																		: Heading_Mobile_Border_radius_Width.right
-																}
-																onChange={(e) =>
-																	handleBorderRadiusWidthInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_radius_Width.bottom
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_radius_Width.bottom
-																		: Heading_Mobile_Border_radius_Width.bottom
-																}
-																onChange={(e) =>
-																	handleBorderRadiusWidthInputChange(
-																		e,
-																		"bottom",
-																	)
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? Heading_Desktop_Border_radius_Width.left
-																		: DeviceType === "Tablet"
-																		? Heading_Tab_Border_radius_Width.left
-																		: Heading_Mobile_Border_radius_Width.left
-																}
-																onChange={(e) =>
-																	handleBorderRadiusWidthInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	borderRadiusLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${borderRadiusLink ? "is-checked" : ""}`}
-																onClick={handleBorderRadiusWidthLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
+											<FB_Spacing
+												label={__("Border Width", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleHeadingBorderUnitsHandler}
+												spacingUnits={Heading_Border_units}
+												spacingDesktop={Heading_Desktop_Border_Width}
+												spacingTablet={Heading_Tab_Border_Width}
+												spacingMobile={Heading_Mobile_Border_Width}
+												handleSpacingUnitHandler={handleHeadingBorderUnitChange}
+												spacingCombineBtn={borderLink}
+												spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={
+													handleHeadingBorderRadiusUnitsHandler
+												}
+												spacingUnits={Heading_Border_radius_units}
+												spacingDesktop={Heading_Desktop_Border_radius_Width}
+												spacingTablet={Heading_Tab_Border_radius_Width}
+												spacingMobile={Heading_Mobile_Border_radius_Width}
+												handleSpacingUnitHandler={
+													handleHeadingBorderRadiusUnitChange
+												}
+												spacingCombineBtn={borderRadiusLink}
+												spacingCombineBtnHandler={
+													handleHeadingBorderRadiusCombineBtn
+												}
+												setAttributes={setAttributes}
+											/>
 										</PanelBody>
 										{/*Description Style*/}
 										<PanelBody
@@ -4975,760 +3774,119 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											className="fb-icon-box-desc-setting-wrapper"
 										>
 											{/*Typography*/}
-											<BaseControl
-												label={__("Typography", "frontis-block")}
-												className="fb-setting-typography"
-											>
-												<Dropdown
-													className="fb-setting-typography-icon-dropdown"
-													contentClassName="fb-setting-typography-dropdown-content"
-													popoverProps={{ placement: "bottom-start" }}
-													renderToggle={({ isOpen, onToggle }) => (
-														<Button
-															variant="primary"
-															onClick={onToggle}
-															aria-expanded={isOpen}
-															aria-label={__(
-																"Toggle Typography Settings",
-																"frontis-block",
-															)}
-															className="fb-setting-typography-icon-btn"
-														>
-															<Dashicon
-																icon="edit"
-																className="fb-setting-typography-icon"
-															/>
-														</Button>
-													)}
-													renderContent={() => (
-														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner">
-																<div className="fb-setting-fontfamily-wrapper">
-																	<SelectControl
-																		label={__("Font Family", "frontis-block")}
-																		options={FONT_FAMILYS}
-																		value={SubHeadingFontFamily}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingFontFamily: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-fontsize-wrapper">
-																	<div className="fb-setting-fontsize-header">
-																		<div className="fb-setting-fontsize-label">
-																			<span>
-																				{__("Font Size", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-fontsize-units">
-																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
-																				{separator_UNIT_TYPES.map(
-																					(item, key) => (
-																						<Button
-																							key={key}
-																							onClick={() =>
-																								setAttributes({
-																									SubHeadingFontSizeUnits:
-																										item.value,
-																								})
-																							}
-																							className={`fb-setting-fontsize-units-switcher ${
-																								SubHeadingFontSizeUnits ===
-																								item.value
-																									? "active"
-																									: ""
-																							}`}
-																						>
-																							{item.label}
-																						</Button>
-																					),
-																				)}
-																			</ButtonGroup>
-																		</div>
-																	</div>
-																	<div className="fb-setting-fontsize-rangecontrol">
-																		<RangeControl
-																			value={SubHeadingFontSize}
-																			onChange={(value) =>
-																				setAttributes({
-																					SubHeadingFontSize: value,
-																				})
-																			}
-																			min={1}
-																			max={200}
-																			allowReset
-																			resetFallbackValue={undefined}
-																		/>
-																	</div>
-																</div>
-																<div className="fb-setting-fontweight-wrapper">
-																	<SelectControl
-																		label={__("Font Weight", "frontis-block")}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "700",
-																			},
-																			{
-																				label: __("100", "frontis-block"),
-																				value: "100",
-																			},
-																			{
-																				label: __("200", "frontis-block"),
-																				value: "200",
-																			},
-																			{
-																				label: __("300", "frontis-block"),
-																				value: "300",
-																			},
-																			{
-																				label: __("400", "frontis-block"),
-																				value: "400",
-																			},
-																			{
-																				label: __("500", "frontis-block"),
-																				value: "500",
-																			},
-																			{
-																				label: __("600", "frontis-block"),
-																				value: "600",
-																			},
-																			{
-																				label: __("700", "frontis-block"),
-																				value: "700",
-																			},
-																			{
-																				label: __("800", "frontis-block"),
-																				value: "800",
-																			},
-																			{
-																				label: __("900", "frontis-block"),
-																				value: "900",
-																			},
-																		]}
-																		value={SubHeadingFontWeight}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingFontWeight: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-fontstyle-wrapper">
-																	<SelectControl
-																		label={__("Font Style", "frontis-block")}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "normal",
-																			},
-																			{
-																				label: __("Normal", "frontis-block"),
-																				value: "normal",
-																			},
-																			{
-																				label: __("Italic", "frontis-block"),
-																				value: "italic",
-																			},
-																			{
-																				label: __("Oblique", "frontis-block"),
-																				value: "oblique",
-																			},
-																		]}
-																		value={SubHeadingFontStyle}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingFontStyle: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-texttransform-wrapper">
-																	<SelectControl
-																		label={__(
-																			"Text Transform",
-																			"frontis-block",
-																		)}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("None", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __(
-																					"Capitalize",
-																					"frontis-block",
-																				),
-																				value: "capitalize",
-																			},
-																			{
-																				label: __("Uppercase", "frontis-block"),
-																				value: "uppercase",
-																			},
-																			{
-																				label: __("Lowercase", "frontis-block"),
-																				value: "lowercase",
-																			},
-																		]}
-																		value={SubHeadingTextTransform}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingTextTransform: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-textdecoration-wrapper">
-																	<SelectControl
-																		label={__(
-																			"Text Decoration",
-																			"frontis-block",
-																		)}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("None", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("Underline", "frontis-block"),
-																				value: "underline",
-																			},
-																			{
-																				label: __("Overline", "frontis-block"),
-																				value: "overline",
-																			},
-																			{
-																				label: __(
-																					"Line Through",
-																					"frontis-block",
-																				),
-																				value: "line-through",
-																			},
-																		]}
-																		value={SubHeadingTextDecoration}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingTextDecoration: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-letterspacing-wrapper">
-																	<div className="fb-setting-letterspacing-header">
-																		<div className="fb-setting-letterspacing-label">
-																			<span>
-																				{__("Letter Spacing", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-letterspacing-units">
-																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
-																				{separator_UNIT_TYPES.map(
-																					(item, key) => (
-																						<Button
-																							key={key}
-																							onClick={() =>
-																								setAttributes({
-																									SubHeadingLetterSpacingUnits:
-																										item.value,
-																								})
-																							}
-																							className={`fb-setting-letterspacing-units-switcher ${
-																								SubHeadingLetterSpacingUnits ===
-																								item.value
-																									? "active"
-																									: ""
-																							}`}
-																						>
-																							{item.label}
-																						</Button>
-																					),
-																				)}
-																			</ButtonGroup>
-																		</div>
-																	</div>
-																	<RangeControl
-																		value={SubHeadingLetterSpacing}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingLetterSpacing:
-																					value === 0 ? undefined : value,
-																			})
-																		}
-																		min={1}
-																		max={100}
-																		step={1}
-																		allowReset
-																		resetFallbackValue={undefined}
-																	/>
-																</div>
-																<div className="fb-setting-lineheight-wrapper">
-																	<div className="fb-setting-lineheight-header">
-																		<div className="fb-setting-lineheight-label">
-																			<span>
-																				{__("Line Height", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-lineheight-units">
-																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
-																				{separator_UNIT_TYPES.map(
-																					(item, key) => (
-																						<Button
-																							key={key}
-																							onClick={() =>
-																								setAttributes({
-																									SubHeadingLineHeightUnits:
-																										item.value,
-																								})
-																							}
-																							className={`fb-setting-lineheight-units-switcher ${
-																								SubHeadingLineHeightUnits ===
-																								item.value
-																									? "active"
-																									: ""
-																							}`}
-																						>
-																							{item.label}
-																						</Button>
-																					),
-																				)}
-																			</ButtonGroup>
-																		</div>
-																	</div>
-																	<RangeControl
-																		value={SubHeadingLineHeight}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingLineHeight:
-																					value === 1 ? undefined : value,
-																			})
-																		}
-																		min={1}
-																		max={100}
-																		step={1}
-																		allowReset
-																		resetFallbackValue={undefined}
-																	/>
-																</div>
-															</BaseControl>
-														</div>
-													)}
-												/>
-											</BaseControl>
+
+											<FB_TypographyControl
+												fontFamily={SubHeadingFontFamily}
+												onChangeFontFamily={(value) =>
+													setAttributes({ SubHeadingFontFamily: value })
+												}
+												fontSize={SubHeadingFontSize}
+												onChangeFontSize={(value) =>
+													setAttributes({ SubHeadingFontSize: value })
+												}
+												fontSizeUnits={SubHeadingFontSizeUnits}
+												onChangeFontSizeUnit={(value) =>
+													setAttributes({ SubHeadingFontSizeUnits: value })
+												}
+												fontWeight={SubHeadingFontWeight}
+												onChangeFontWeight={(value) =>
+													setAttributes({ SubHeadingFontWeight: value })
+												}
+												fontStyle={SubHeadingFontStyle}
+												onChangeFontStyle={(value) =>
+													setAttributes({ SubHeadingFontStyle: value })
+												}
+												textTransform={SubHeadingTextTransform}
+												onChangeTextTransform={(value) =>
+													setAttributes({ SubHeadingTextTransform: value })
+												}
+												textDecoration={SubHeadingTextDecoration}
+												onChangeTextDecoration={(value) =>
+													setAttributes({ SubHeadingTextDecoration: value })
+												}
+												letterSpacing={SubHeadingLetterSpacing}
+												onChangeLetterSpacing={(value) =>
+													setAttributes({ SubHeadingLetterSpacing: value })
+												}
+												letterSpacingUnits={SubHeadingLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) =>
+													setAttributes({ SubHeadingLetterSpacingUnits: value })
+												}
+												lineHeight={SubHeadingLineHeight}
+												onChangeLineHeight={(value) =>
+													setAttributes({ SubHeadingLineHeight: value })
+												}
+												lineHeightUnits={SubHeadingLineHeightUnits}
+												onChangeLineHeightUnit={(value) =>
+													setAttributes({ SubHeadingLineHeightUnits: value })
+												}
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
 											{/*Color*/}
-											<BaseControl
-												label={__("Text Color", "frontis-block")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() =>
-																setAttributes({
-																	SubHeadingColorSwitcher: item.value,
-																})
-															}
-															className={`fb-setting-color-panel-btn-switchr ${
-																SubHeadingColorSwitcher === item.value
-																	? "active"
-																	: ""
-															}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
 
-											{SubHeadingColorSwitcher === "normal" && (
-												<BaseControl
-													label={__("Nomal Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={SubHeadingColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					SubHeadingColor: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={SubHeadingColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					SubHeadingColor: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											{SubHeadingColorSwitcher === "hover" && (
-												<BaseControl
-													label={__("Hover Color", "frontis-block")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: "bottom-start" }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																aria-label={__(
-																	"Toggle Typography Settings",
-																	"frontis-block",
-																)}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon
-																	icon="color-picker"
-																	className="fb-setting-color-setting-icon"
-																/>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={SubHeadingHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					SubHeadingHoverColor: value,
-																				})
-																			}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">
-																			{__("Default Colors", "frontis-block")}
-																		</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: "#F72585" },
-																				{ color: "#7209B7" },
-																				{ color: "#3A0CA3" },
-																				{ color: "#4361EE" },
-																				{ color: "#4CC9F0" },
-																			]}
-																			disableCustomColors={true}
-																			value={SubHeadingHoverColor}
-																			onChange={(value) =>
-																				setAttributes({
-																					SubHeadingHoverColor: value,
-																				})
-																			}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
+											<FB_Color
+												label={__("Text Color", "frontis-blocks")}
+												globalColorSwitcher={SubHeadingColorSwitcher}
+												globalColor={SubHeadingColor}
+												globalHoverColor={SubHeadingHoverColor}
+												handleColorSwitcherChange={(value) =>
+													setAttributes({
+														SubHeadingColorSwitcher: value,
+													})
+												}
+												handleGlobalColorChange={(value) =>
+													setAttributes({ SubHeadingColor: value })
+												}
+												handleGlobalHoverColorChange={(value) =>
+													setAttributes({
+														SubHeadingHoverColor: value,
+													})
+												}
+											/>
 											{/*Spacing*/}
 											<Heading>Spacing</Heading>
 											{/* Padding */}
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Padding", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleDescPaddingDeviceClick}
-														/>
-
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				SubHeadingPaddingUnits: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			SubHeadingPaddingUnits === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? SubHeadingDesktopPadding.top
-																		: DeviceType === "Tablet"
-																		? SubHeadingTabPadding.top
-																		: SubHeadingMobilePadding.top
-																}
-																onChange={(e) =>
-																	handleDescPaddingInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? SubHeadingDesktopPadding.right
-																		: DeviceType === "Tablet"
-																		? SubHeadingTabPadding.right
-																		: SubHeadingMobilePadding.right
-																}
-																onChange={(e) =>
-																	handleDescPaddingInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? SubHeadingDesktopPadding.bottom
-																		: DeviceType === "Tablet"
-																		? SubHeadingTabPadding.bottom
-																		: SubHeadingMobilePadding.bottom
-																}
-																onChange={(e) =>
-																	handleDescPaddingInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? SubHeadingDesktopPadding.left
-																		: DeviceType === "Tablet"
-																		? SubHeadingTabPadding.left
-																		: SubHeadingMobilePadding.left
-																}
-																onChange={(e) =>
-																	handleDescPaddingInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	paddingLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${paddingLink ? "is-checked" : ""}`}
-																onClick={handleDescPaddingLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={
+													handleSubHeadingPaddingUnitsHandler
+												}
+												spacingUnits={SubHeadingPaddingUnits}
+												spacingDesktop={SubHeadingDesktopPadding}
+												spacingTablet={SubHeadingTabPadding}
+												spacingMobile={SubHeadingMobilePadding}
+												handleSpacingUnitHandler={
+													handleSubHeadingPaddingUnitChange
+												}
+												spacingCombineBtn={subHeadingPaddingLink}
+												spacingCombineBtnHandler={
+													handleSubHeadingPaddingCombineBtn
+												}
+												setAttributes={setAttributes}
+											/>
+										
 											{/* Margin */}
-											<div className="fb-setting-spacing-container">
-												<div className="fb-setting-spacing-inner-container">
-													<div className="fb-setting-spacing-label-container">
-														<FB_ResponsiveControl
-															labelText={__("Margin", "frontis-block")}
-															device={DeviceType}
-															deviceHandler={handleDescMarginDeviceClick}
-														/>
-
-														<div className="fb-setting-units-type">
-															<ButtonGroup className="fb-setting-units-type-wrap">
-																{separator_UNIT_TYPES.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				descMarginUnits: item.value,
-																			})
-																		}
-																		className={`fb-setting-units-type-switcher ${
-																			descMarginUnits === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</div>
-													</div>
-													<div className="fb-setting-spacing-input-container">
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Top", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="top"
-																value={
-																	DeviceType === "Desktop"
-																		? descDesktopMargin.top
-																		: DeviceType === "Tablet"
-																		? descTabMargin.top
-																		: descMobileMargin.top
-																}
-																onChange={(e) =>
-																	handleDescMarginInputChange(e, "top")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Right", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="right"
-																value={
-																	DeviceType === "Desktop"
-																		? descDesktopMargin.right
-																		: DeviceType === "Tablet"
-																		? descTabMargin.right
-																		: descMobileMargin.right
-																}
-																onChange={(e) =>
-																	handleDescMarginInputChange(e, "right")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Bottom", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="bottom"
-																value={
-																	DeviceType === "Desktop"
-																		? descDesktopMargin.bottom
-																		: DeviceType === "Tablet"
-																		? descTabMargin.bottom
-																		: descMobileMargin.bottom
-																}
-																onChange={(e) =>
-																	handleDescMarginInputChange(e, "bottom")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label">
-																{__("Left", "frontis-block")}
-															</label>
-															<input
-																type="number"
-																name="left"
-																value={
-																	DeviceType === "Desktop"
-																		? descDesktopMargin.left
-																		: DeviceType === "Tablet"
-																		? descTabMargin.left
-																		: descMobileMargin.left
-																}
-																onChange={(e) =>
-																	handleDescMarginInputChange(e, "left")
-																}
-															/>
-														</div>
-														<div className="fb-setting-spacing-input-wrapper">
-															<label className="fb-setting-spacing-input-label"></label>
-															<span
-																className={`dashicons ${
-																	descMarginLink
-																		? "dashicons-admin-links"
-																		: "dashicons-editor-unlink"
-																} ${descMarginLink ? "is-checked" : ""}`}
-																onClick={handleDescMarginLinkToggle}
-															></span>
-														</div>
-													</div>
-												</div>
-											</div>
+											<FB_Spacing
+														label={__("Margin", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleDescMarginUnitsHandler}
+														spacingUnits={descMarginUnits}
+														spacingDesktop={descDesktopMargin}
+														spacingTablet={descTabMargin}
+														spacingMobile={descMobileMargin}
+														handleSpacingUnitHandler={
+															handleDescMarginUnitChange
+														}
+														spacingCombineBtn={descMarginLink}
+														spacingCombineBtnHandler={
+															handleDescMarginCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+											
 										</PanelBody>
 									</>
 								)}

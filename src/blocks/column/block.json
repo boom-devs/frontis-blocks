@@ -5,7 +5,6 @@
     "version": "0.1.0",
     "title": "Frontis Column",
     "category": "frontis-blocks",
-    "icon": "columns",
     "description": "A flexible column block for creating custom layouts.",
     "supports": {
         "html": false,

@@ -39,11 +39,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        infoIconPosition
+        infoIconPosition,
+		headingUrlSwitcher,
+		headingLink,
+		headingTargetUrl
 	} = attributes;
 
 	const blockProps = useBlockProps();
 
+	const handleHeadingClick = (event) => {
+        event.preventDefault();
+    };
 	return (
 		<>
 			<Inspector
@@ -91,14 +97,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						</div>
 						
 						<div className="fb-icon-box-content-wrapper">
+
+							
+						{headingUrlSwitcher ? (
+							<a 
+							href={headingLink} 
+								target={headingTargetUrl ? '_blank' : undefined}
+								rel={headingTargetUrl ? 'noopener noreferrer' : undefined}
+								onClick={handleHeadingClick}
+							>
 							<RichText
 								tagName={Heading_Tag}
 								value={Heading_Text}
-								onChange={(value) => setAttributes({ text: value })}
-								placeholder={__("Info Heading", "frontis-block")}
+								onChange={(value) => setAttributes({ Heading_Text: value })}
+								placeholder={__("Icon Heading", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
 							/>
+							</a>
+							
+						) : (
+							<RichText
+								tagName={Heading_Tag}
+								value={Heading_Text}
+								onChange={(value) => setAttributes({ Heading_Text: value })}
+								placeholder={__("Icon Heading", "frontis-block")}
+								className="fb-heading"
+								style={{ textAlign: Alignment }}
+							/>
+						)}
 
 							{Sub_Heading_Switcher && (
 								<RichText
