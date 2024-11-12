@@ -122,7 +122,7 @@ const attributes = {
 	},
     priceButtonText: {
         type: "string",
-        default: "Choose Plan",
+        default: "Select Plan",
     },
     priceButtonUrl: {
         type: "string",
