@@ -7,23 +7,35 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
+	blockStyle: {
+		type: "string",
+		default: ""
+	},
 	/** Start General Settings */
 	/** Start Header */
-	pricingTitle: {
-		type: "string",
-		default: "Startup"
-	},
-	pricingSubTitleSwitcher: {
+	pricingSectionTopSwitcher: {
 		type: "boolean",
 		default: false
 	},
+	pricingSectionTopText: {
+		type: "string",
+		default: "Best Deal"
+	},
+	pricingTitle: {
+		type: "string",
+		default: "Basic Plan"
+	},
+	pricingSubTitleSwitcher: {
+		type: "boolean",
+		default: true
+	},
 	pricingSubTitle: {
 		type: "string",
-		default: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+		default: "Best for Business Owners."
 	},
 	pricingIconAlign: {
         type: "string",
-        default: "icon",
+        default: "none",
     },
     pricingIcon: {
 		type: 'string',
@@ -34,7 +46,7 @@ const attributes = {
 	/** Start Pricing */
 	normalPrice :{
 		type: "string",
-		default: "99"
+		default: "49.00"
 	},
 	salePriceSwitcher :{
 		type: "boolean",
@@ -42,7 +54,7 @@ const attributes = {
 	},
 	salePrice :{
 		type: "string",
-		default: "90"
+		default: "45.00"
 	},
 	priceCurrency :{
 		type: "string",
@@ -160,7 +172,6 @@ const attributes = {
 	},
 	pricingHeaderBgColor: {
 		type: "string",
-		default: "#399CFF"
 	},
 	pricingHeaderBgHoverColor: {
 		type: 'string',
@@ -177,28 +188,28 @@ const attributes = {
 	pricingHeaderDesktopPadding: {
 		type: "object", 
 		default: {
-			top: '30',
-			bottom: '30',
-			left: '30',
-			right: '30',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricingHeaderTabletPadding: {
 		type: "object", 
 		default: {
-			top: '30',
-			bottom: '30',
-			left: '30',
-			right: '30',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricingHeaderMobilePadding: {
 		type: "object", 
 		default: {
-			top: '20',
-			bottom: '20',
-			left: '20',
-			right: '20',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricingHeaderPaddingLink: {
@@ -307,7 +318,7 @@ const attributes = {
 	/** Start Icon */
 	pricingIconAlignment: {
 		type: "string",
-		default: "center",
+		default: "left",
 	},
 	priceIconColorSwitcher : {
 		type: "string",
@@ -469,7 +480,7 @@ const attributes = {
 	/** Start Pricing Style */
 	pricingAlignment: {
 		type: "string",
-		default: "center"
+		default: "left"
 	},
 	normalPricingFontFamily: {
         type: "string",
@@ -545,7 +556,7 @@ const attributes = {
 	},
 	normalPricingColor: {
 		type: 'string',
-		default: '#fff'
+		default: '#399CFF'
 	},
 	normalPricingHoverColor: {
 		type: 'string',
@@ -559,8 +570,8 @@ const attributes = {
 	salePricingFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '40',
-			Tablet: '40',
+			Desktop: '42',
+			Tablet: '42',
 			Mobile: '20'
 		}
 	},
@@ -626,7 +637,7 @@ const attributes = {
 	},
 	salePricingColor: {
 		type: 'string',
-		default: '#000'
+		default: '#15171C'
 	},
 	salePricingHoverColor: {
 		type: 'string',
@@ -788,7 +799,7 @@ const attributes = {
 	},
 	pricePeriodColor: {
 		type: 'string',
-		default: '#fff'
+		default: '#6A758E'
 	},
 	pricePeriodHoverColor: {
 		type: 'string',
@@ -815,7 +826,7 @@ const attributes = {
 	/**Start Title and Subtitle Style */
 	pricingTitleAlignment: {
 		type: "string",
-		default: "center"
+		default: "left"
 	},
 	pricingTitleColorSwitcher: {
 		type: "string",
@@ -823,7 +834,7 @@ const attributes = {
 	},
 	pricingTitleColor: {
 		type: 'string',
-		default: '#fff'
+		default: '#15171C'
 	},
 	pricingTitleHoverColor: {
 		type: 'string',
@@ -836,8 +847,8 @@ const attributes = {
 	pricingTitleFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '30',
-			Tablet: '30',
+			Desktop: '24',
+			Tablet: '24',
 			Mobile: '20'
 		}
 	},
@@ -851,7 +862,7 @@ const attributes = {
 	},
 	pricingTitleFontWeight: {
 		type: "string",
-		default: "700"
+		default: "600"
 	},
 	pricingTitleFontStyle: {
 		type: "string",
@@ -904,7 +915,7 @@ const attributes = {
 	},
 	pricingSubtitleColor: {
 		type: 'string',
-		default: '#fff'
+		default: '#6A758E'
 	},
 	pricingSubtitleHoverColor: {
 		type: 'string',
@@ -932,7 +943,7 @@ const attributes = {
 	},
 	pricingSubtitleFontWeight: {
 		type: "string",
-		default: "400"
+		default: "500"
 	},
 	pricingSubtitleFontStyle: {
 		type: "string",
@@ -983,7 +994,7 @@ const attributes = {
 	/** Start Feature Icon */
 	priceFeatureAlignment: {
 		type: "string",
-		default: "center"
+		default: "left"
 	},
 	priceFeatureIconColorSwitcher: {
 		type: "string",
@@ -1022,7 +1033,7 @@ const attributes = {
 	},
 	pricingfeatureTitleColor: {
 		type: "string",
-		default: "#333"
+		default: "#6A758E"
 	},
 	pricingfeatureTitleHoverColor: {
 		type: "string",
@@ -1205,11 +1216,10 @@ const attributes = {
 	},
 	priceButtonBgColor: {
 		type: "string",
-		default: "#0073e6",
+		default: "#15171C",
 	},
 	priceButtonBgHoverColor: {
 		type: 'string',
-		default: "#005bb5",
 	},
 	priceButtonPaddingUnits: {
 		type: 'object',
@@ -1261,8 +1271,8 @@ const attributes = {
 	priceButtonDesktopMargin: {
 		type: "object", 
 		default: {
-			top: "20",
-			bottom: "20",
+			top: "40",
+			bottom: "0",
 			left: "0",
 			right: "0",
 		},
@@ -1270,8 +1280,8 @@ const attributes = {
 	priceButtonTabMargin: {
 		type: "object", 
 		default: {
-			top: "20",
-			bottom: "20",
+			top: "40",
+			bottom: "0",
 			left: "0",
 			right: "0",
 		},
@@ -1279,8 +1289,8 @@ const attributes = {
 	priceButtonMobileMargin: {
 		type: "object", 
 		default: {
-			top: "20",
-			bottom: "20",
+			top: "30",
+			bottom: "0",
 			left: "0",
 			right: "0",
 		},
@@ -1554,28 +1564,28 @@ const attributes = {
 	priceGlobalPaddingDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
 		},
 	},
 	priceGlobalPaddingTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
 		},
 	},
 	priceGlobalPaddingMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
 		},
 	},
 	priceGlobalPaddingLink : {
@@ -1633,6 +1643,7 @@ const attributes = {
 	},
 	priceGlobalBgColor : {
 		type: "string",
+		default: "#EBF5FF"
 	},
 	priceGlobalBgHoverColor: {
 		type: 'string',
@@ -1666,28 +1677,28 @@ const attributes = {
 	priceGlobalBorderDesktop: {
 		type: "object", 
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceGlobalBorderTablet: {
 		type: "object", 
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceGlobalBorderMobile: {
 		type: "object", 
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceGlobalBorderLink : {
@@ -1708,28 +1719,28 @@ const attributes = {
 	priceGlobalBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '24',
+			bottom: '24',
+			left: '24',
+			right: '24',
 		},
 	},
 	priceGlobalBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '24',
+			bottom: '24',
+			left: '24',
+			right: '24',
 		},
 	},
 	priceGlobalBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '24',
+			bottom: '24',
+			left: '24',
+			right: '24',
 		},
 	},
 	priceGlobalBorderRadiusLink : {
@@ -1749,6 +1760,29 @@ const attributes = {
     },
 	/** End Box Shadow */
 	/** End Global Setting */
+
+
+	/** Start Price After Text */
+	priceAfterTextSwitcher: {
+		type: "boolean",
+		default: true
+	},
+	priceAfterText: {
+		type: "string",
+		default: "What Value Add For Your Business"
+	},
+	/** End Price After Text */
+
+	/** Start Price Feature After Text */
+	priceFeatureAfterTextSwitcher: {
+		type: "boolean",
+		default: true
+	},
+	priceFeatureAfterText: { 
+		type: "string",
+		default: "Billed every year Popular amongst entrepeneurs $497 per year"
+	},
+	/** End Price Feature After Text */
 }
 
 export default attributes;

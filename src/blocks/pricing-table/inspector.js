@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, URLInput } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -47,7 +47,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
 		deviceType,
+		blockStyle,
 		/** Start Header */
+		pricingSectionTopSwitcher,
+		pricingSectionTopText,
 		pricingTitle,
 		pricingSubTitleSwitcher,
 		pricingSubTitle,
@@ -63,7 +66,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceCurrencyPosition,
 		pricePeriod,
 		pricePeriodSeparator,
-		/** End Pricing */
 
 		/** Start Feature */
 		priceHideFeaturesSwitcher,
@@ -396,6 +398,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceGlobalBoxShadowValues,
 		priceGlobalBoxShadowCssValue,
 		/** End Global Settings */
+
+
+		priceAfterTextSwitcher,
+		priceAfterText,	
+
+		priceFeatureAfterTextSwitcher,
+		priceFeatureAfterText,	
 
     } = attributes;
 
@@ -1409,343 +1418,719 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${priceGlobalBorderRadiusMobile.top}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.right}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.bottom}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.left}${priceGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
+
+
+	const allBlockStyle = useMemo(() => ` 
+		.${blockId} .fb-pricing-main-wrapper {
+			${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
+			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
+			${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
+			${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+			${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+			${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
+			${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-main-wrapper:hover {
+			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
+			${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
+			${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-header {
+			${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
+			${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
+			${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
+			${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
+			${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
+			${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-header:hover {
+			${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
+			${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-icon-wrapper {
+			justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+		.${blockId} .fb-pricing-icon {
+			width: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
+			height: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
+			${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
+			${priceIconBorder ? `border: ${priceIconBorder};` : ''}
+			${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
+			${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
+			${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-icon:hover {
+			background-color: ${priceIconBgHoverColor};
+			${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-icon svg {
+			width: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+			height: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+			fill: ${priceIconColor};
+			transition: fill 0.3s ease;
+		}
+		.${blockId} .fb-pricing-icon:hover svg {
+			fill: ${priceIconHoverColor};
+		}
+
+		.${blockId}	.fb-pricing-price-wrapper {
+			justify-content: ${pricingAlignment === 'left' ? 'flex-start' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+
+		.${blockId} .fb-pricing-price-wrapper {
+			margin: ${priceingPriceGap.Desktop ? `${priceingPriceGap.Desktop}${priceingPriceGapUnits.Desktop}` : '0'} 0;
+		}
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price {
+			${normalPricingColor ? `color: ${normalPricingColor};` : ''}
+			${normalPricingFontFamily ? `font-family: ${normalPricingFontFamily};` : ""}
+			${normalPricingFontSize.Desktop ? `font-size: ${normalPricingFontSize.Desktop}${normalPricingFontSizeUnits.Desktop};` : ""}
+			${normalPricingFontWeight ? `font-weight: ${normalPricingFontWeight};` : ""}
+			${normalPricingFontStyle ? `font-style: ${normalPricingFontStyle};` : ""}
+			${normalPricingTextTransform ? `text-transform: ${normalPricingTextTransform};` : ""}
+			${normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
+			${normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
+			${normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
+			${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price {
+			${salePricingColor ? `color: ${salePricingColor};` : ''}
+			${salePricingFontFamily ? `font-family: ${salePricingFontFamily};` : ""}
+			${salePricingFontSize.Desktop ? `font-size: ${salePricingFontSize.Desktop}${salePricingFontSizeUnits.Desktop};` : ""}
+			${salePricingFontWeight ? `font-weight: ${salePricingFontWeight};` : ""}
+			${salePricingFontStyle ? `font-style: ${salePricingFontStyle};` : ""}
+			${salePricingTextTransform ? `text-transform: ${salePricingTextTransform};` : ""}
+			${salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
+			${salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
+			${salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
+			${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-price-wrapper .price-currency {
+			${priceCurrencyColor ? `color: ${priceCurrencyColor};` : ''}
+			${priceCurrencyFontFamily ? `font-family: ${priceCurrencyFontFamily};` : ""}
+			${priceCurrencyFontSize.Desktop ? `font-size: ${priceCurrencyFontSize.Desktop}${priceCurrencyFontSizeUnits.Desktop};` : ""}
+			${priceCurrencyFontWeight ? `font-weight: ${priceCurrencyFontWeight};` : ""}
+			${priceCurrencyFontStyle ? `font-style: ${priceCurrencyFontStyle};` : ""}
+			${priceCurrencyTextTransform ? `text-transform: ${priceCurrencyTextTransform};` : ""}
+			${priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
+			${priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
+			${priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
+			${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-price-wrapper .price-period {
+			${pricePeriodColor ? `color: ${pricePeriodColor};` : ''}
+			${pricePeriodFontFamily ? `font-family: ${pricePeriodFontFamily};` : ""}
+			${pricePeriodFontSize.Desktop ? `font-size: ${pricePeriodFontSize.Desktop}${pricePeriodFontSizeUnits.Desktop};` : ""}
+			${pricePeriodFontWeight ? `font-weight: ${pricePeriodFontWeight};` : ""}
+			${pricePeriodFontStyle ? `font-style: ${pricePeriodFontStyle};` : ""}
+			${pricePeriodTextTransform ? `text-transform: ${pricePeriodTextTransform};` : ""}
+			${pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
+			${pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
+			${pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .price-period:hover {
+			${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-title {
+			${pricingTitleColor ? `color: ${pricingTitleColor};` : ''}
+			${pricingTitleFontFamily ? `font-family: ${pricingTitleFontFamily};` : ''}
+			${pricingTitleFontSize.Desktop ? `font-size: ${pricingTitleFontSize.Desktop}${pricingTitleFontSizeUnits.Desktop};` : ''}
+			${pricingTitleFontWeight ? `font-weight: ${pricingTitleFontWeight};` : ''}
+			${pricingTitleFontStyle ? `font-style: ${pricingTitleFontStyle};` : ''}
+			${pricingTitleTextTransform ? `text-transform: ${pricingTitleTextTransform};` : ''}
+			${pricingTitleTextDecoration ? `text-decoration: ${pricingTitleTextDecoration};` : ''}
+			${pricingTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingTitleLetterSpacing.Desktop}${pricingTitleLetterSpacingUnits.Desktop};` : ''}
+			${pricingTitleLineHeight.Desktop ? `line-height: ${pricingTitleLineHeight.Desktop}${pricingTitleLineHeightUnits.Desktop};` : ''}
+		}
+		.${blockId} .fb-pricing-title:hover {
+			${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-subtitle {
+			${pricingSubtitleColor ? `color: ${pricingSubtitleColor};` : ''}
+			${pricingSubtitleFontFamily ? `font-family: ${pricingSubtitleFontFamily};` : ''}
+			${pricingSubtitleFontSize.Desktop ? `font-size: ${pricingSubtitleFontSize.Desktop}${pricingSubtitleFontSizeUnits.Desktop};` : ''}
+			${pricingSubtitleFontWeight ? `font-weight: ${pricingSubtitleFontWeight};` : ''}
+			${pricingSubtitleFontStyle ? `font-style: ${pricingSubtitleFontStyle};` : ''}
+			${pricingSubtitleTextTransform ? `text-transform: ${pricingSubtitleTextTransform};` : ''}
+			${pricingSubtitleTextDecoration ? `text-decoration: ${pricingSubtitleTextDecoration};` : ''}
+			${pricingSubtitleLetterSpacing.Desktop ? `letter-spacing: ${pricingSubtitleLetterSpacing.Desktop}${pricingSubtitleLetterSpacingUnits.Desktop};` : ''}
+			${pricingSubtitleLineHeight.Desktop ? `line-height: ${pricingSubtitleLineHeight.Desktop}${pricingSubtitleLineHeightUnits.Desktop};` : ''}
+		}
+		.${blockId} .fb-pricing-subtitle:hover {
+			${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-feature-item {
+			justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+
+		.${blockId} .fb-pricing-feature-icon-inner svg {
+			width: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+			height: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+			fill: ${priceFeatureIconColor};
+			transition: fill 0.3s ease;
+		}
+		.${blockId} .fb-pricing-feature-icon-inner:hover svg {
+			fill: ${priceFeatureIconHoverColor};
+		}
+
+		.${blockId} .fb-pricing-feature-text {
+			${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
+			${pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
+			${pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
+			${pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
+			${pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
+			${pricingfeatureTitleTextTransform ? `text-transform: ${pricingfeatureTitleTextTransform};` : ''}
+			${pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
+			${pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
+			${pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
+		}
+		.${blockId} .fb-pricing-feature-text:hover {
+			${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
+		}
+
+
+		.${blockId} .fb-pricing-footer-wrapper {
+			justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+
+		.${blockId} .fb-pricing-button {
+			width: ${priceButtonWidth.Desktop ? `${priceButtonWidth.Desktop}${priceButtonWidthUnits.Desktop}` : 'auto'};
+			${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
+			${priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
+			${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
+			${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
+			${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
+			${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
+			${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
+			${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
+			${priceButtonColor ? `color: ${priceButtonColor};` : ''}
+			${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
+			${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
+			${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
+			${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
+			${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
+			${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
+			${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
+			transition: color 0.3s ease, background-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-button:hover {
+			${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
+			${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
+			${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-button-icon svg {
+			width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+			height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+			fill: ${priceButtonIconColor};
+			transition: fill 0.3s ease;
+		}
+		.${blockId} .fb-pricing-button-icon:hover svg {
+			fill: ${priceButtonIconHoverColor};
+		}
+		.${blockId} .fb-pricing-ribbon {
+			${priceRibbonBgColor ? `background-color: ${priceRibbonBgColor};` : ''}
+			${priceRibbonColor ? `color: ${priceRibbonColor};` : ''}
+			font-size: ${priceRibbonFontSize.Desktop ? `${priceRibbonFontSize.Desktop}${priceRibbonFontSizeUnits.Desktop}` : ''};
+			top: ${priceRibbonTop.Desktop ? `${priceRibbonTop.Desktop}${priceRibbonTopUnits.Desktop}` : ''};
+			width: ${priceRibbonWidth.Desktop ? `${priceRibbonWidth.Desktop}${priceRibbonWidthUnits.Desktop}` : ''};
+			padding: ${priceRibbonpadding.Desktop ? `${priceRibbonpadding.Desktop}${priceRibbonpaddingUnits.Desktop}` : ''};
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-ribbon:hover {
+			${priceRibbonBgHoverColor ? `background-color: ${priceRibbonBgHoverColor};` : ''}
+			${priceRibbonHoverColor ? `color: ${priceRibbonHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-ribbon-left {
+			left: ${priceRibbonLeft.Desktop ? `${priceRibbonLeft.Desktop}${priceRibbonLeftUnits.Desktop}` : ''};
+		}
+		.${blockId} .fb-pricing-ribbon-right {
+			right: ${priceRibbonRight.Desktop ? `${priceRibbonRight.Desktop}${priceRibbonRightUnits.Desktop}` : ''};
+		}
+
+		@media only screen and (max-width: 1024px) {
+			.${blockId} .fb-pricing-main-wrapper {
+				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+				${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-header {
+				${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
+				${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
+				${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-icon {
+				width: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+				height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+				${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
+				${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-icon svg {
+				width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+				height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+			}
+			.${blockId} .fb-pricing-button {
+				${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
+				${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
+				${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
+				${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-button-icon svg {
+				width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+				height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+			}
+			.${blockId} .fb-pricing-ribbon {
+				font-size: ${priceRibbonFontSize.Tablet ? `${priceRibbonFontSize.Tablet}${priceRibbonFontSizeUnits.Tablet}` : ''};
+				top: ${priceRibbonTop.Tablet ? `${priceRibbonTop.Tablet}${priceRibbonTopUnits.Tablet}` : ''};
+				width: ${priceRibbonWidth.Tablet ? `${priceRibbonWidth.Tablet}${priceRibbonWidthUnits.Tablet}` : ''};
+				padding: ${priceRibbonpadding.Tablet ? `${priceRibbonpadding.Tablet}${priceRibbonpaddingUnits.Tablet}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-left {
+				left: ${priceRibbonLeft.Tablet ? `${priceRibbonLeft.Tablet}${priceRibbonLeftUnits.Tablet}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-right {
+				right: ${priceRibbonRight.Tablet ? `${priceRibbonRight.Tablet}${priceRibbonRightUnits.Tablet}` : ''};
+			}
+		}
+
+		@media only screen and (max-width: 767px) {
+			.${blockId} .fb-pricing-main-wrapper {
+				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+				${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-header {
+				${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
+				${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
+				${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-icon {
+				width: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+				height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+				${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
+				${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-icon svg {
+				width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+				height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+			}
+			.${blockId} .fb-pricing-button {
+				${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
+				${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
+				${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
+				${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-button-icon svg {
+				width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+				height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+			}
+			.${blockId} .fb-pricing-ribbon {
+				font-size: ${priceRibbonFontSize.Mobile ? `${priceRibbonFontSize.Mobile}${priceRibbonFontSizeUnits.Mobile}` : ''};
+				top: ${priceRibbonTop.Mobile ? `${priceRibbonTop.Mobile}${priceRibbonTopUnits.Mobile}` : ''};
+				width: ${priceRibbonWidth.Mobile ? `${priceRibbonWidth.Mobile}${priceRibbonWidthUnits.Mobile}` : ''};
+				padding: ${priceRibbonpadding.Mobile ? `${priceRibbonpadding.Mobile}${priceRibbonpaddingUnits.Mobile}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-left {
+				left: ${priceRibbonLeft.Mobile ? `${priceRibbonLeft.Mobile}${priceRibbonLeftUnits.Mobile}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-right {
+				right: ${priceRibbonRight.Mobile ? `${priceRibbonRight.Mobile}${priceRibbonRightUnits.Mobile}` : ''};
+			}
+		}
+	`, [
+		blockId,
+		pricingSectionTopSwitcher,
+		pricingSectionTopText,
+		pricingTitle,
+		pricingSubTitleSwitcher,
+		pricingSubTitle,
+		pricingIconAlign,
+		pricingIcon,
+		
+		normalPrice,
+		salePriceSwitcher,
+		salePrice,
+		priceCurrency,
+		priceCurrencyPosition,
+		pricePeriod,
+		pricePeriodSeparator,
+		priceHideFeaturesSwitcher,
+		priceFeatureIconSwitcher,
+		priceFeatureItems,
+
+		priceButtonSwitcher,
+		priceButtonText,
+		priceButtonUrl,
+		priceButtonTargetUrl,
+		priceButtonIconAlign,
+		priceButtonIcon,
+		priceButtonIconPosition,
+		priceButtonIconSpacing,	
+
+		priceRibbonSwitcher,
+		priceRibbonText,
+		priceRibbonPosition,
+
+
+		pricingHeaderBgColorSwitcher,
+		pricingHeaderBgColor,
+		pricingHeaderBgHoverColor,
+
+		pricingHeaderPaddingUnits,
+		pricingHeaderDesktopPadding,
+		pricingHeaderTabletPadding,
+		pricingHeaderMobilePadding,
+		pricingHeaderPaddingLink,
+
+
+		pricingHeaderBorder,
+		pricingHeaderBorderColorSwitcher,
+		pricingHeaderBorderColor,
+		pricingHeaderBorderHoverColor,
+		pricingHeaderBorderUnits,
+		pricingHeaderBorderDesktop,
+		pricingHeaderBorderTablet,
+		pricingHeaderBorderMobile,
+		pricingHeaderBorderLink,
+
+		pricingHeaderBorderRadiusUnits,
+		pricingHeaderBorderRadiusDesktop,
+		pricingHeaderBorderRadiusTablet,
+		pricingHeaderBorderRadiusMobile,
+		pricingHeaderBorderRadiusLink,
+		/**End Header */
+
+		pricingIconAlignment,
+		priceIconColorSwitcher,
+		priceIconColor,
+		priceIconHoverColor,
+		priceIconBgColorSwitcher,
+		priceIconBgColor,
+		priceIconBgHoverColor,
+		priceIconSize,
+		priceIconSizeUnits,
+		priceIconBgSize,
+		priceIconBgSizeUnits,
+
+		priceIconBorder,
+		priceIconBorderColorSwitcher,
+		priceIconBorderColor,
+		priceIconBorderHoverColor,
+		priceIconBorderUnits,
+		priceIconBorderDesktop,
+		priceIconBorderTablet,
+		priceIconBorderMobile,
+		priceIconBorderLink,
+
+		priceIconBorderRadiusUnits,
+		priceIconBorderRadiusDesktop,
+		priceIconBorderRadiusTablet,
+		priceIconBorderRadiusMobile,
+		priceIconBorderRadiusLink,
+
+		pricingAlignment,
+		normalPricingFontFamily,
+		normalPricingFontSize,
+		normalPricingFontSizeUnits,
+		normalPricingFontWeight,
+		normalPricingFontStyle,
+		normalPricingTextTransform,
+		normalPricingTextDecoration,
+		normalPricingLetterSpacing,
+		normalPricingLetterSpacingUnits,
+		normalPricingLineHeight,
+		normalPricingLineHeightUnits,
+		normalPricingColorSwitcher,
+		normalPricingColor,
+		normalPricingHoverColor,
+
+		salePricingFontFamily,
+		salePricingFontSize,
+		salePricingFontSizeUnits,
+		salePricingFontWeight,
+		salePricingFontStyle,
+		salePricingTextTransform,
+		salePricingTextDecoration,
+		salePricingLetterSpacing,
+		salePricingLetterSpacingUnits,
+		salePricingLineHeight,
+		salePricingLineHeightUnits,
+		salePricingColorSwitcher,
+		salePricingColor,
+		salePricingHoverColor,
+
+		priceCurrencyFontFamily,
+		priceCurrencyFontSize,
+		priceCurrencyFontSizeUnits,
+		priceCurrencyFontWeight,
+		priceCurrencyFontStyle,
+		priceCurrencyTextTransform,
+		priceCurrencyTextDecoration,
+		priceCurrencyLetterSpacing,
+		priceCurrencyLetterSpacingUnits,
+		priceCurrencyLineHeight,
+		priceCurrencyLineHeightUnits,
+		priceCurrencyColorSwitcher,
+		priceCurrencyColor,
+		priceCurrencyHoverColor,
+
+		pricePeriodFontFamily,
+		pricePeriodFontSize,
+		pricePeriodFontSizeUnits,
+		pricePeriodFontWeight,
+		pricePeriodFontStyle,
+		pricePeriodTextTransform,
+		pricePeriodTextDecoration,
+		pricePeriodLetterSpacing,
+		pricePeriodLetterSpacingUnits,
+		pricePeriodLineHeight,
+		pricePeriodLineHeightUnits,
+		pricePeriodColorSwitcher,
+		pricePeriodColor,
+		pricePeriodHoverColor,
+
+		priceingPriceGap,
+		priceingPriceGapUnits,
+
+		pricingTitleAlignment,
+		pricingTitleColorSwitcher,
+		pricingTitleColor,
+		pricingTitleHoverColor,
+		pricingTitleFontFamily,
+		pricingTitleFontSize,
+		pricingTitleFontSizeUnits,
+		pricingTitleFontWeight,
+		pricingTitleFontStyle,
+		pricingTitleTextTransform,
+		pricingTitleTextDecoration,
+		pricingTitleLetterSpacing,
+		pricingTitleLetterSpacingUnits,
+		pricingTitleLineHeight,
+		pricingTitleLineHeightUnits,
+
+		pricingSubtitleColorSwitcher,
+		pricingSubtitleColor,
+		pricingSubtitleHoverColor,
+		pricingSubtitleFontFamily,
+		pricingSubtitleFontSize,
+		pricingSubtitleFontSizeUnits,
+		pricingSubtitleFontWeight,
+		pricingSubtitleFontStyle,
+		pricingSubtitleTextTransform,
+		pricingSubtitleTextDecoration,
+		pricingSubtitleLetterSpacing,
+		pricingSubtitleLetterSpacingUnits,
+		pricingSubtitleLineHeight,
+		pricingSubtitleLineHeightUnits,
+
+		priceFeatureAlignment,
+		priceFeatureIconColorSwitcher,
+		priceFeatureIconColor,
+		priceFeatureIconHoverColor,
+		priceFeatureIconSize,
+		priceFeatureIconSizeUnits,
+
+		pricingfeatureTitleColorSwitcher,
+		pricingfeatureTitleColor,
+		pricingfeatureTitleHoverColor,
+		pricingfeatureTitleFontFamily,
+		pricingfeatureTitleFontSize,
+		pricingfeatureTitleFontSizeUnits,
+		pricingfeatureTitleFontWeight,
+		pricingfeatureTitleFontStyle,
+		pricingfeatureTitleTextTransform,
+		pricingfeatureTitleTextDecoration,
+		pricingfeatureTitleLetterSpacing,
+		pricingfeatureTitleLetterSpacingUnits,
+		pricingfeatureTitleLineHeight,
+		pricingfeatureTitleLineHeightUnits,
+
+		priceButtonAlignment,
+		priceButtonWidth,
+		priceButtonWidthUnits,
+
+		priceButtonFontFamily,
+		priceButtonFontSize,
+		priceButtonFontSizeUnits,
+		priceButtonFontWeight,
+		priceButtonFontStyle,
+		priceButtonTextTransform,
+		priceButtonTextDecoration,
+		priceButtonLetterSpacing,
+		priceButtonLetterSpacingUnits,
+		priceButtonLineHeight,
+		priceButtonLineHeightUnits,
+
+		priceButtonColorSwitcher,
+		priceButtonColor,
+		priceButtonHoverColor,
+		priceButtonBgColorSwitcher,
+		priceButtonBgColor,
+		priceButtonBgHoverColor,
+
+		priceButtonPaddingUnits,
+		priceButtonDesktopPadding,
+		priceButtonTabPadding,
+		priceButtonMobilePadding,
+		priceButtonPaddingLink,
+
+		priceButtonMarginUnits,
+		priceButtonDesktopMargin,
+		priceButtonTabMargin,
+		priceButtonMobileMargin,
+		priceButtonMarginLink,
+
+		priceButtonBorder,
+		priceButtonBorderColorSwitcher,
+		priceButtonBorderColor,
+		priceButtonBorderHoverColor,
+
+		priceButtonBorderUnits,
+		priceButtonDesktopBorderWidth,
+		priceButtonTabBorderWidth,
+		priceButtonMobileBorderWidth,
+		priceButtonBorderLink,
+
+		priceButtonBorderRadiusUnits,
+		priceButtonDesktopBorderRadiusWidth,
+		priceButtonTabBorderRadiusWidth,
+		priceButtonMobileBorderRadiusWidth,
+		priceButtonBorderRadiusLink,
+
+		priceButtonIconColorSwitcher,
+		priceButtonIconColor,
+		priceButtonIconHoverColor,
+		priceButtonIconSize,
+		priceButtonIconSizeUnits,
+
+		priceRibbonColorSwitcher,
+		priceRibbonColor,
+		priceRibbonHoverColor,
+		priceRibbonBgColorSwitcher,
+		priceRibbonBgColor,
+		priceRibbonBgHoverColor,
+
+		priceRibbonTop,
+		priceRibbonTopUnits,
+		priceRibbonLeft,
+		priceRibbonLeftUnits,
+		priceRibbonRight,
+		priceRibbonRightUnits,
+		priceRibbonWidth,
+		priceRibbonWidthUnits,
+		priceRibbonFontSize,
+		priceRibbonFontSizeUnits,
+		priceRibbonpadding,
+		priceRibbonpaddingUnits,
+
+		priceGlobalZIndex,
+		priceGlobalPaddingUnits,
+		priceGlobalPaddingDesktop,
+		priceGlobalPaddingTablet,
+		priceGlobalPaddingMobile,
+		priceGlobalPaddingLink,
+		priceGlobalMarginUnits,
+		priceGlobalMarginDesktop,
+		priceGlobalMarginTablet,
+		priceGlobalMarginMobile,
+		priceGlobalMarginLink,
+		priceGlobalBgColorSwitcher,
+		priceGlobalBgColor,
+		priceGlobalBgHoverColor,
+		priceGlobalBorder,
+		priceGlobalBorderColorSwitcher,
+		priceGlobalBorderColor,
+		priceGlobalBorderHoverColor,
+		priceGlobalBorderUnits,
+		priceGlobalBorderDesktop,
+		priceGlobalBorderTablet,
+		priceGlobalBorderMobile,
+		priceGlobalBorderLink,
+		priceGlobalBorderRadiusUnits,
+		priceGlobalBorderRadiusDesktop,
+		priceGlobalBorderRadiusTablet,
+		priceGlobalBorderRadiusMobile,
+		priceGlobalBorderRadiusLink,
+		priceGlobalBoxShadowValues,
+		priceGlobalBoxShadowCssValue,
+
+		headerDesktopPadding,
+		headerTabletPadding,
+		headerMobilePadding,
+
+		headerDesktopBorderWidth,
+		headerTabletBorderWidth,
+		headerMobileBorderWidth,
+
+		headerDesktopBorderRadiusWidth,
+		headerTabletBorderRadiusWidth,
+		headerMobileBorderRadiusWidth,
+
+		priceIconDesktopBorderWidthValue,
+		priceIconTabletBorderWidthValue,
+		priceIconMobileBorderWidthValue,
+
+		priceIconDesktopBorderRadiusWidthValue,
+		priceIconTabletBorderRadiusWidthValue,
+		priceIconMobileBorderRadiusWidthValue,
+
+		priceButtonDesktopPaddingValue,
+		priceButtonTabletPaddingValue,
+		priceButtonMobilePaddingValue,
+
+		priceButtonDesktopMarginValue,
+		priceButtonTabletMarginValue,
+		priceButtonMobileMarginValue,
+
+		priceButtonDesktopBorderWidthValue,
+		priceButtonTabletBorderWidthValue,
+		priceButtonMobileBorderWidthValue,
+
+		priceButtonDesktopBorderRadiusWidthValue,
+		priceButtonTabletBorderRadiusWidthValue,
+		priceButtonMobileBorderRadiusWidthValue,
+
+		globalDesktopPadding,
+		globalTabletPadding,
+		globalMobilePadding,
+
+		globalDesktopMargin,
+		globalTabletMargin,
+		globalMobileMargin,
+
+		globalDesktopBorderWidth,
+		globalTabletBorderWidth,
+		globalMobileBorderWidth,
+
+		globalDesktopBorderRadiusWidth,
+		globalTabletBorderRadiusWidth,
+		globalMobileBorderRadiusWidth,
+	]);
+
+	useEffect(() => {
+		setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle]);
+
     return (
         <>
 
 			<style>
-			{`
-				.fb-pricing-wrapper.${blockId} {
-					${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
-					${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-					${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
-					${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
-					${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-					${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-					${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-					${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
-					transition: background-color 0.3s ease, border-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId}:hover {
-					${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
-					${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
-					${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-					${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
-					${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
-					${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
-					${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
-					${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
-					${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
-					transition: background-color 0.3s ease, border-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-header:hover {
-					${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
-					${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon-wrapper {
-					justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-					width: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
-					height: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
-					${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
-					${priceIconBorder ? `border: ${priceIconBorder};` : ''}
-					${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
-					${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
-					${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
-					transition: background-color 0.3s ease, border-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover {
-					background-color: ${priceIconBgHoverColor};
-					${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-					width: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
-					height: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
-					fill: ${priceIconColor};
-					transition: fill 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover svg {
-					fill: ${priceIconHoverColor};
-				}
-
-				.fb-pricing-wrapper.${blockId}	.fb-pricing-price-wrapper {
-					justify-content: ${pricingAlignment === 'left' ? 'flex-start' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper {
-					margin: ${priceingPriceGap.Desktop ? `${priceingPriceGap.Desktop}${priceingPriceGapUnits.Desktop}` : '0'} 0;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price {
-					${normalPricingColor ? `color: ${normalPricingColor};` : ''}
-					${normalPricingFontFamily ? `font-family: ${normalPricingFontFamily};` : ""}
-					${normalPricingFontSize.Desktop ? `font-size: ${normalPricingFontSize.Desktop}${normalPricingFontSizeUnits.Desktop};` : ""}
-					${normalPricingFontWeight ? `font-weight: ${normalPricingFontWeight};` : ""}
-					${normalPricingFontStyle ? `font-style: ${normalPricingFontStyle};` : ""}
-					${normalPricingTextTransform ? `text-transform: ${normalPricingTextTransform};` : ""}
-					${normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
-					${normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
-					${normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
-					${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price {
-					${salePricingColor ? `color: ${salePricingColor};` : ''}
-					${salePricingFontFamily ? `font-family: ${salePricingFontFamily};` : ""}
-					${salePricingFontSize.Desktop ? `font-size: ${salePricingFontSize.Desktop}${salePricingFontSizeUnits.Desktop};` : ""}
-					${salePricingFontWeight ? `font-weight: ${salePricingFontWeight};` : ""}
-					${salePricingFontStyle ? `font-style: ${salePricingFontStyle};` : ""}
-					${salePricingTextTransform ? `text-transform: ${salePricingTextTransform};` : ""}
-					${salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
-					${salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
-					${salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
-					${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency {
-					${priceCurrencyColor ? `color: ${priceCurrencyColor};` : ''}
-					${priceCurrencyFontFamily ? `font-family: ${priceCurrencyFontFamily};` : ""}
-					${priceCurrencyFontSize.Desktop ? `font-size: ${priceCurrencyFontSize.Desktop}${priceCurrencyFontSizeUnits.Desktop};` : ""}
-					${priceCurrencyFontWeight ? `font-weight: ${priceCurrencyFontWeight};` : ""}
-					${priceCurrencyFontStyle ? `font-style: ${priceCurrencyFontStyle};` : ""}
-					${priceCurrencyTextTransform ? `text-transform: ${priceCurrencyTextTransform};` : ""}
-					${priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
-					${priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
-					${priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
-					${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period {
-					${pricePeriodColor ? `color: ${pricePeriodColor};` : ''}
-					${pricePeriodFontFamily ? `font-family: ${pricePeriodFontFamily};` : ""}
-					${pricePeriodFontSize.Desktop ? `font-size: ${pricePeriodFontSize.Desktop}${pricePeriodFontSizeUnits.Desktop};` : ""}
-					${pricePeriodFontWeight ? `font-weight: ${pricePeriodFontWeight};` : ""}
-					${pricePeriodFontStyle ? `font-style: ${pricePeriodFontStyle};` : ""}
-					${pricePeriodTextTransform ? `text-transform: ${pricePeriodTextTransform};` : ""}
-					${pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
-					${pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
-					${pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period:hover {
-					${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-title {
-					${pricingTitleColor ? `color: ${pricingTitleColor};` : ''}
-					${pricingTitleFontFamily ? `font-family: ${pricingTitleFontFamily};` : ''}
-					${pricingTitleFontSize.Desktop ? `font-size: ${pricingTitleFontSize.Desktop}${pricingTitleFontSizeUnits.Desktop};` : ''}
-					${pricingTitleFontWeight ? `font-weight: ${pricingTitleFontWeight};` : ''}
-					${pricingTitleFontStyle ? `font-style: ${pricingTitleFontStyle};` : ''}
-					${pricingTitleTextTransform ? `text-transform: ${pricingTitleTextTransform};` : ''}
-					${pricingTitleTextDecoration ? `text-decoration: ${pricingTitleTextDecoration};` : ''}
-					${pricingTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingTitleLetterSpacing.Desktop}${pricingTitleLetterSpacingUnits.Desktop};` : ''}
-					${pricingTitleLineHeight.Desktop ? `line-height: ${pricingTitleLineHeight.Desktop}${pricingTitleLineHeightUnits.Desktop};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-title:hover {
-					${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle {
-					${pricingSubtitleColor ? `color: ${pricingSubtitleColor};` : ''}
-					${pricingSubtitleFontFamily ? `font-family: ${pricingSubtitleFontFamily};` : ''}
-					${pricingSubtitleFontSize.Desktop ? `font-size: ${pricingSubtitleFontSize.Desktop}${pricingSubtitleFontSizeUnits.Desktop};` : ''}
-					${pricingSubtitleFontWeight ? `font-weight: ${pricingSubtitleFontWeight};` : ''}
-					${pricingSubtitleFontStyle ? `font-style: ${pricingSubtitleFontStyle};` : ''}
-					${pricingSubtitleTextTransform ? `text-transform: ${pricingSubtitleTextTransform};` : ''}
-					${pricingSubtitleTextDecoration ? `text-decoration: ${pricingSubtitleTextDecoration};` : ''}
-					${pricingSubtitleLetterSpacing.Desktop ? `letter-spacing: ${pricingSubtitleLetterSpacing.Desktop}${pricingSubtitleLetterSpacingUnits.Desktop};` : ''}
-					${pricingSubtitleLineHeight.Desktop ? `line-height: ${pricingSubtitleLineHeight.Desktop}${pricingSubtitleLineHeightUnits.Desktop};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle:hover {
-					${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-item {
-					justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner svg {
-					width: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
-					height: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
-					fill: ${priceFeatureIconColor};
-					transition: fill 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner:hover svg {
-					fill: ${priceFeatureIconHoverColor};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text {
-					${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
-					${pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
-					${pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
-					${pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
-					${pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
-					${pricingfeatureTitleTextTransform ? `text-transform: ${pricingfeatureTitleTextTransform};` : ''}
-					${pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
-					${pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
-					${pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text:hover {
-					${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
-				}
-
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-footer-wrapper {
-					justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-					width: ${priceButtonWidth.Desktop ? `${priceButtonWidth.Desktop}${priceButtonWidthUnits.Desktop}` : 'auto'};
-					${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
-					${priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
-					${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
-					${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
-					${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
-					${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
-					${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
-					${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
-					${priceButtonColor ? `color: ${priceButtonColor};` : ''}
-					${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
-					${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
-					${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
-					${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
-					${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
-					${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
-					${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
-					transition: color 0.3s ease, background-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button:hover {
-					${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
-					${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
-					${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-					width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
-					height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
-					fill: ${priceButtonIconColor};
-					transition: fill 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon:hover svg {
-					fill: ${priceButtonIconHoverColor};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-					${priceRibbonBgColor ? `background-color: ${priceRibbonBgColor};` : ''}
-					${priceRibbonColor ? `color: ${priceRibbonColor};` : ''}
-					font-size: ${priceRibbonFontSize.Desktop ? `${priceRibbonFontSize.Desktop}${priceRibbonFontSizeUnits.Desktop}` : ''};
-					top: ${priceRibbonTop.Desktop ? `${priceRibbonTop.Desktop}${priceRibbonTopUnits.Desktop}` : ''};
-					width: ${priceRibbonWidth.Desktop ? `${priceRibbonWidth.Desktop}${priceRibbonWidthUnits.Desktop}` : ''};
-					padding: ${priceRibbonpadding.Desktop ? `${priceRibbonpadding.Desktop}${priceRibbonpaddingUnits.Desktop}` : ''};
-					transition: background-color 0.3s ease, color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon:hover {
-					${priceRibbonBgHoverColor ? `background-color: ${priceRibbonBgHoverColor};` : ''}
-					${priceRibbonHoverColor ? `color: ${priceRibbonHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-					left: ${priceRibbonLeft.Desktop ? `${priceRibbonLeft.Desktop}${priceRibbonLeftUnits.Desktop}` : ''};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-					right: ${priceRibbonRight.Desktop ? `${priceRibbonRight.Desktop}${priceRibbonRightUnits.Desktop}` : ''};
-				}
-
-				@media only screen and (max-width: 1024px) {
-					.fb-pricing-wrapper.${blockId} {
-						${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-						${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
-						${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-						${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-						${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
-						${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
-						${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-						width: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
-						height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
-						${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
-						${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-						width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
-						height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-						${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
-						${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
-						${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
-						${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-						width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
-						height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-						font-size: ${priceRibbonFontSize.Tablet ? `${priceRibbonFontSize.Tablet}${priceRibbonFontSizeUnits.Tablet}` : ''};
-						top: ${priceRibbonTop.Tablet ? `${priceRibbonTop.Tablet}${priceRibbonTopUnits.Tablet}` : ''};
-						width: ${priceRibbonWidth.Tablet ? `${priceRibbonWidth.Tablet}${priceRibbonWidthUnits.Tablet}` : ''};
-						padding: ${priceRibbonpadding.Tablet ? `${priceRibbonpadding.Tablet}${priceRibbonpaddingUnits.Tablet}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-						left: ${priceRibbonLeft.Tablet ? `${priceRibbonLeft.Tablet}${priceRibbonLeftUnits.Tablet}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-						right: ${priceRibbonRight.Tablet ? `${priceRibbonRight.Tablet}${priceRibbonRightUnits.Tablet}` : ''};
-					}
-				}
-
-				@media only screen and (max-width: 767px) {
-					.fb-pricing-wrapper.${blockId} {
-						${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-						${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
-						${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-						${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-						${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
-						${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
-						${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-						width: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
-						height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
-						${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
-						${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-						width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
-						height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-						${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
-						${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
-						${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
-						${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-						width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
-						height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-						font-size: ${priceRibbonFontSize.Mobile ? `${priceRibbonFontSize.Mobile}${priceRibbonFontSizeUnits.Mobile}` : ''};
-						top: ${priceRibbonTop.Mobile ? `${priceRibbonTop.Mobile}${priceRibbonTopUnits.Mobile}` : ''};
-						width: ${priceRibbonWidth.Mobile ? `${priceRibbonWidth.Mobile}${priceRibbonWidthUnits.Mobile}` : ''};
-						padding: ${priceRibbonpadding.Mobile ? `${priceRibbonpadding.Mobile}${priceRibbonpaddingUnits.Mobile}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-						left: ${priceRibbonLeft.Mobile ? `${priceRibbonLeft.Mobile}${priceRibbonLeftUnits.Mobile}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-						right: ${priceRibbonRight.Mobile ? `${priceRibbonRight.Mobile}${priceRibbonRightUnits.Mobile}` : ''};
-					}
-				}
-			`}
+				{blockStyle}
 			</style>
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
@@ -1777,6 +2162,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										{/** Start Header */}
 										<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+
+											<ToggleControl
+												label={__("Display Top Section", "frontis-blocks")}
+												checked={pricingSectionTopSwitcher}	
+												onChange={(value) => setAttributes({pricingSectionTopSwitcher: value})}
+											/>
+											{pricingSectionTopSwitcher && ( 
+												<TextControl
+													label={__("Top Text", "frontis-blocks")}
+													value={pricingSectionTopText}
+													onChange={(value) => setAttributes({ pricingSectionTopText: value })}
+													placeholder={__('Best Deal', 'frontis-block')}
+												/>
+											)}
+
 											<TextControl
 												label={__("Title", "frontis-blocks")}
 												value={pricingTitle}
@@ -1860,7 +2260,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Period", "frontis-blocks")}
 												value={pricePeriod}
 												onChange={(value) => setAttributes({ pricePeriod: value })}
-											/>			
+											/>	
+
+											<ToggleControl
+												label={__("Text Switcher", "frontis-blocks")}
+												checked={priceAfterTextSwitcher}
+												onChange={(value) => setAttributes({priceAfterTextSwitcher: value})}
+											/>
+											{priceAfterTextSwitcher && (
+												<TextControl
+													label={__("Text", "frontis-blocks")}
+													value={priceAfterText}
+													onChange={(value) => setAttributes({ priceAfterText: value })}
+												/>
+											)}
 										</PanelBody>
 										{/** End Price */}
 
@@ -1899,6 +2312,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </Button>
                                                 </DndContext>
 											</div>
+
+											<ToggleControl
+												label={__("Text Switcher", "frontis-blocks")}
+												checked={priceFeatureAfterTextSwitcher}
+												onChange={(value) => setAttributes({priceFeatureAfterTextSwitcher: value})}
+											/>
+											{priceFeatureAfterTextSwitcher && (
+												<TextControl
+													label={__("Text", "frontis-blocks")}
+													value={priceFeatureAfterText}
+													onChange={(value) => setAttributes({ priceFeatureAfterText: value })}
+												/>
+											)}
 										</PanelBody>
 										{/** End Feature */}
 
@@ -2068,12 +2494,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 										</PanelBody>
-
 										<PanelBody
-											title={__("Icon", "frontis-blocks")}
+											title={__("Title and Subtitle", "frontis-blocks")}
 											initialOpen={false}
 										>
-
 											<BaseControl
 												label={__("Alignment", "frontis-blocks")}
 												id="fb-setting-text-alignment"
@@ -2085,8 +2509,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														{TEXT_ALIGN.map((item, key) => (
 															<Button
 																key={key}
-																onClick={() => setAttributes({ pricingIconAlignment: item.value })}
-																className={`fb-setting-text-alignment-single-btn ${pricingIconAlignment === item.value ? 'active' : ''}`}
+																onClick={() => setAttributes({ pricingTitleAlignment: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${pricingTitleAlignment === item.value ? 'active' : ''}`}
 															>
 																{item.label}
 															</Button>
@@ -2094,100 +2518,226 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													</ButtonGroup>
 											</BaseControl>
 
-											<FB_Range
-												min={1}
-                                                max={200}
-												label={__("Icon Size", "frontis-blocks")}
-                                                rangeValue={priceIconSize}
-                                                onChangeHandler={(value) => setAttributes({ priceIconSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ priceIconSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={priceIconSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={"100"}
+											<FB_Color
+												label={__("Title Color", "frontis-blocks")}
+												globalColorSwitcher={pricingTitleColorSwitcher}
+												globalColor={pricingTitleColor}
+												globalHoverColor={pricingTitleHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricingTitleColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricingTitleColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricingTitleHoverColor: value })}
 											/>
 
-											<FB_Range
-												min={0}
-												max={200}
-												label={__("Background Size", "frontis-blocks")}
-												rangeValue={priceIconBgSize}
-												onChangeHandler={(value) => setAttributes({ priceIconBgSize: value })}
-												rangeUnitHandler={(value) => setAttributes({ priceIconBgSizeUnits: value })}
+											<FB_TypographyControl
+												fontFamily={pricingTitleFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ pricingTitleFontFamily: value })}
+
+												fontSize={pricingTitleFontSize}
+												onChangeFontSize={(value) => setAttributes({ pricingTitleFontSize: value })}
+
+												fontSizeUnits={pricingTitleFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ pricingTitleFontSizeUnits: value })}
+
+												fontWeight={pricingTitleFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ pricingTitleFontWeight: value })}
+
+												fontStyle={pricingTitleFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ pricingTitleFontStyle: value })}
+
+												textTransform={pricingTitleTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ pricingTitleTextTransform: value })}
+
+												textDecoration={pricingTitleTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricingTitleTextDecoration: value })}
+
+												letterSpacing={pricingTitleLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ pricingTitleLetterSpacing: value })}
+
+												letterSpacingUnits={pricingTitleLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ pricingTitleLetterSpacingUnits: value })}
+
+												lineHeight={pricingTitleLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ pricingTitleLineHeight: value })}
+
+												lineHeightUnits={pricingTitleLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ pricingTitleLineHeightUnits: value })}
+
 												deviceType={deviceType}
-												units={priceIconBgSizeUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											<FB_Color
-												label={__("Color", "frontis-blocks")}
-												globalColorSwitcher={priceIconColorSwitcher}
-												globalColor={priceIconColor}
-												globalHoverColor={priceIconHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceIconColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceIconColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconHoverColor: value })}
-											/>
-
-											<FB_Color
-												label={__("Background Color", "frontis-blocks")}
-												globalColorSwitcher={priceIconBgColorSwitcher}
-												globalColor={priceIconBgColor}
-												globalHoverColor={priceIconBgHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceIconBgColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceIconBgColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBgHoverColor: value })}
-											/>
-
-											<SelectControl
-													label={__("Border Style", "frontis-blocks")}
-													value={priceIconBorder}
-													options={BORDER_STYLES}
-													onChange={(value) => setAttributes({ priceIconBorder: value })}
-											/>
-
-											<FB_Color
-												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={priceIconBorderColorSwitcher}
-												globalColor={priceIconBorderColor}
-												globalHoverColor={priceIconBorderHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceIconBorderColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBorderHoverColor: value })}
-											/>
-
-											<FB_Spacing 
-												label={__("Border", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handlePriceIconBorderUnitsHandler}
-												spacingUnits={priceIconBorderUnits}
-												spacingDesktop={priceIconBorderDesktop}
-												spacingTablet={priceIconBorderTablet}
-												spacingMobile={priceIconBorderMobile}
-												handleSpacingUnitHandler={handlePriceIconBorderUnitChange}
-												spacingCombineBtn={priceIconBorderLink}
-												spacingCombineBtnHandler={handlePriceIconBorderCombineBtn}
 												setAttributes={setAttributes}
 											/>
 
-											<FB_Spacing 
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handlePriceIconBorderRadiusUnitsHandler}
-												spacingUnits={priceIconBorderRadiusUnits}
-												spacingDesktop={priceIconBorderRadiusDesktop}
-												spacingTablet={priceIconBorderRadiusTablet}
-												spacingMobile={priceIconBorderRadiusMobile}
-												handleSpacingUnitHandler={handlePriceIconBorderRadiusUnitChange}
-												spacingCombineBtn={priceIconBorderRadiusLink}
-												spacingCombineBtnHandler={handlePriceIconBorderRadiusCombineBtn}
-												setAttributes={setAttributes}
+											<FB_Color
+												label={__("Subtitle Color", "frontis-blocks")}
+												globalColorSwitcher={pricingSubtitleColorSwitcher}
+												globalColor={pricingSubtitleColor}
+												globalHoverColor={pricingSubtitleHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ pricingSubtitleColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ pricingSubtitleColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ pricingSubtitleHoverColor: value })}
 											/>
 
+											<FB_TypographyControl
+												fontFamily={pricingSubtitleFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ pricingSubtitleFontFamily: value })}
+
+												fontSize={pricingSubtitleFontSize}
+												onChangeFontSize={(value) => setAttributes({ pricingSubtitleFontSize: value })}
+
+												fontSizeUnits={pricingSubtitleFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ pricingSubtitleFontSizeUnits: value })}
+
+												fontWeight={pricingSubtitleFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ pricingSubtitleFontWeight: value })}
+
+												fontStyle={pricingSubtitleFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ pricingSubtitleFontStyle: value })}
+
+												textTransform={pricingSubtitleTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ pricingSubtitleTextTransform: value })}
+
+												textDecoration={pricingSubtitleTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricingSubtitleTextDecoration: value })}
+
+												letterSpacing={pricingSubtitleLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ pricingSubtitleLetterSpacing: value })}
+
+												letterSpacingUnits={pricingSubtitleLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ pricingSubtitleLetterSpacingUnits: value })}
+
+												lineHeight={pricingSubtitleLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ pricingSubtitleLineHeight: value })}
+
+												lineHeightUnits={pricingSubtitleLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ pricingSubtitleLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
 										</PanelBody>
+
+
+										{pricingIconAlign !== 'none' && (
+											<PanelBody
+												title={__("Icon", "frontis-blocks")}
+												initialOpen={false}
+											>
+
+												<BaseControl
+													label={__("Alignment", "frontis-blocks")}
+													id="fb-setting-text-alignment"
+													className="fb-setting-text-alignment"
+												>
+														<ButtonGroup
+															className="fb-setting-text-alignment-group-btn"
+														>
+															{TEXT_ALIGN.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() => setAttributes({ pricingIconAlignment: item.value })}
+																	className={`fb-setting-text-alignment-single-btn ${pricingIconAlignment === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+												</BaseControl>
+
+												<FB_Range
+													min={1}
+													max={200}
+													label={__("Icon Size", "frontis-blocks")}
+													rangeValue={priceIconSize}
+													onChangeHandler={(value) => setAttributes({ priceIconSize: value })}
+													rangeUnitHandler={(value) => setAttributes({ priceIconSizeUnits: value })}
+													deviceType={deviceType}
+													units={priceIconSizeUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={"100"}
+												/>
+
+												<FB_Range
+													min={0}
+													max={200}
+													label={__("Background Size", "frontis-blocks")}
+													rangeValue={priceIconBgSize}
+													onChangeHandler={(value) => setAttributes({ priceIconBgSize: value })}
+													rangeUnitHandler={(value) => setAttributes({ priceIconBgSizeUnits: value })}
+													deviceType={deviceType}
+													units={priceIconBgSizeUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={""}
+												/>
+
+												<FB_Color
+													label={__("Color", "frontis-blocks")}
+													globalColorSwitcher={priceIconColorSwitcher}
+													globalColor={priceIconColor}
+													globalHoverColor={priceIconHoverColor}
+													handleColorSwitcherChange={(value) => setAttributes({ priceIconColorSwitcher: value })}
+													handleGlobalColorChange={(value) => setAttributes({ priceIconColor: value })}
+													handleGlobalHoverColorChange={(value) => setAttributes({ priceIconHoverColor: value })}
+												/>
+
+												<FB_Color
+													label={__("Background Color", "frontis-blocks")}
+													globalColorSwitcher={priceIconBgColorSwitcher}
+													globalColor={priceIconBgColor}
+													globalHoverColor={priceIconBgHoverColor}
+													handleColorSwitcherChange={(value) => setAttributes({ priceIconBgColorSwitcher: value })}
+													handleGlobalColorChange={(value) => setAttributes({ priceIconBgColor: value })}
+													handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBgHoverColor: value })}
+												/>
+
+												<SelectControl
+														label={__("Border Style", "frontis-blocks")}
+														value={priceIconBorder}
+														options={BORDER_STYLES}
+														onChange={(value) => setAttributes({ priceIconBorder: value })}
+												/>
+
+												<FB_Color
+													label={__("Border Color", "frontis-blocks")}
+													globalColorSwitcher={priceIconBorderColorSwitcher}
+													globalColor={priceIconBorderColor}
+													globalHoverColor={priceIconBorderHoverColor}
+													handleColorSwitcherChange={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
+													handleGlobalColorChange={(value) => setAttributes({ priceIconBorderColor: value })}
+													handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+												/>
+
+												<FB_Spacing 
+													label={__("Border", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handlePriceIconBorderUnitsHandler}
+													spacingUnits={priceIconBorderUnits}
+													spacingDesktop={priceIconBorderDesktop}
+													spacingTablet={priceIconBorderTablet}
+													spacingMobile={priceIconBorderMobile}
+													handleSpacingUnitHandler={handlePriceIconBorderUnitChange}
+													spacingCombineBtn={priceIconBorderLink}
+													spacingCombineBtnHandler={handlePriceIconBorderCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+												<FB_Spacing 
+													label={__("Border Radius", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handlePriceIconBorderRadiusUnitsHandler}
+													spacingUnits={priceIconBorderRadiusUnits}
+													spacingDesktop={priceIconBorderRadiusDesktop}
+													spacingTablet={priceIconBorderRadiusTablet}
+													spacingMobile={priceIconBorderRadiusMobile}
+													handleSpacingUnitHandler={handlePriceIconBorderRadiusUnitChange}
+													spacingCombineBtn={priceIconBorderRadiusLink}
+													spacingCombineBtnHandler={handlePriceIconBorderRadiusCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+											</PanelBody>
+										)}
+
 										<PanelBody
 											title={__("Price", "frontis-blocks")}
 											initialOpen={false}
@@ -2415,126 +2965,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												rangeStep={1}
 												resetFallbackValue={"20"}
-											/>
-										</PanelBody>
-										<PanelBody
-											title={__("Title and Subtitle", "frontis-blocks")}
-											initialOpen={false}
-										>
-											<BaseControl
-												label={__("Alignment", "frontis-blocks")}
-												id="fb-setting-text-alignment"
-												className="fb-setting-text-alignment"
-											>
-													<ButtonGroup
-														className="fb-setting-text-alignment-group-btn"
-													>
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() => setAttributes({ pricingTitleAlignment: item.value })}
-																className={`fb-setting-text-alignment-single-btn ${pricingTitleAlignment === item.value ? 'active' : ''}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-											</BaseControl>
-
-											<FB_Color
-												label={__("Title Color", "frontis-blocks")}
-												globalColorSwitcher={pricingTitleColorSwitcher}
-												globalColor={pricingTitleColor}
-												globalHoverColor={pricingTitleHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricingTitleColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricingTitleColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricingTitleHoverColor: value })}
-											/>
-
-											<FB_TypographyControl
-												fontFamily={pricingTitleFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ pricingTitleFontFamily: value })}
-
-												fontSize={pricingTitleFontSize}
-												onChangeFontSize={(value) => setAttributes({ pricingTitleFontSize: value })}
-
-												fontSizeUnits={pricingTitleFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ pricingTitleFontSizeUnits: value })}
-
-												fontWeight={pricingTitleFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ pricingTitleFontWeight: value })}
-
-												fontStyle={pricingTitleFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ pricingTitleFontStyle: value })}
-
-												textTransform={pricingTitleTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ pricingTitleTextTransform: value })}
-
-												textDecoration={pricingTitleTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ pricingTitleTextDecoration: value })}
-
-												letterSpacing={pricingTitleLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ pricingTitleLetterSpacing: value })}
-
-												letterSpacingUnits={pricingTitleLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ pricingTitleLetterSpacingUnits: value })}
-
-												lineHeight={pricingTitleLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ pricingTitleLineHeight: value })}
-
-												lineHeightUnits={pricingTitleLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ pricingTitleLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Color
-												label={__("Subtitle Color", "frontis-blocks")}
-												globalColorSwitcher={pricingSubtitleColorSwitcher}
-												globalColor={pricingSubtitleColor}
-												globalHoverColor={pricingSubtitleHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricingSubtitleColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricingSubtitleColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricingSubtitleHoverColor: value })}
-											/>
-
-											<FB_TypographyControl
-												fontFamily={pricingSubtitleFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ pricingSubtitleFontFamily: value })}
-
-												fontSize={pricingSubtitleFontSize}
-												onChangeFontSize={(value) => setAttributes({ pricingSubtitleFontSize: value })}
-
-												fontSizeUnits={pricingSubtitleFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ pricingSubtitleFontSizeUnits: value })}
-
-												fontWeight={pricingSubtitleFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ pricingSubtitleFontWeight: value })}
-
-												fontStyle={pricingSubtitleFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ pricingSubtitleFontStyle: value })}
-
-												textTransform={pricingSubtitleTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ pricingSubtitleTextTransform: value })}
-
-												textDecoration={pricingSubtitleTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ pricingSubtitleTextDecoration: value })}
-
-												letterSpacing={pricingSubtitleLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ pricingSubtitleLetterSpacing: value })}
-
-												letterSpacingUnits={pricingSubtitleLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ pricingSubtitleLetterSpacingUnits: value })}
-
-												lineHeight={pricingSubtitleLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ pricingSubtitleLineHeight: value })}
-
-												lineHeightUnits={pricingSubtitleLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ pricingSubtitleLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
 											/>
 										</PanelBody>
 										<PanelBody
