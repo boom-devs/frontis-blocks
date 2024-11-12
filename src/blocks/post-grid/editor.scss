@@ -1,0 +1,9 @@
+.fb_post_grid_container{
+    display: flex;
+    gap: 20px;
+	flex-wrap: wrap;
+
+	.fb_post_grid_wrapper {
+		width: calc( 33.33% - 15px );
+	}
+}
