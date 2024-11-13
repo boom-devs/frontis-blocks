@@ -1,12 +1,19 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const { blockId, postType, postPerPage, selectedCat } = attributes;
+	const { blockId, postType, postPerPage, selectedCat, placeholders } = attributes;
 	const blockProps = useBlockProps.save();
-	const placeholders = Array.from({ length: 9 }, (_, index) => index + 1);
+
 	return (
 		<>
-			<div {...blockProps} id={blockId} data-post-type={postType} data-block-id={blockId} data-perpage={postPerPage} data-cat={selectedCat}>
+			<div
+				{...blockProps}
+				id={blockId}
+				data-post-type={postType}
+				data-block-id={blockId}
+				data-perpage={postPerPage}
+				data-cat={selectedCat || ''} // Ensure data-cat is always present
+			>
 				<div className="post-list"></div>
 				<div className="loading post">
 					{placeholders.map((item) => (
