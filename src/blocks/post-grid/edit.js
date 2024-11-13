@@ -113,7 +113,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "styles" && (
                                     <>
-
+										<div></div>
                                     </>
                                 )}
                             {tab.name === "advanced" && (
