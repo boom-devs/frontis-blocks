@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 	let currentPage = 1;
-	const limit = 12;
+	let limit = 12;
 
 	let filterPost = {
 		offset: limit * (currentPage - 1),
@@ -21,11 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				const perpage = parentElement.getAttribute("data-perpage");
 
 				// Increase current page and update offset for the next batch of posts
-				currentPage++;
 				filterPost.currentPage = currentPage;
-				filterPost.offset = limit * (currentPage - 1);
+
+				console.log(filterPost.limit * (currentPage - 1))
+
+				filterPost.offset = filterPost.limit * (currentPage - 1);
 				filterPost.category = cat;
-				filterPost.limit = perpage;
 
 				// Call function to load more posts
 				loadMorePosts(postType, blockId, cat, perpage);
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, loadMoreButton) {
+	function loadMorePosts(postType, blockId, cat, perpage) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat;
@@ -80,11 +81,19 @@ document.addEventListener('DOMContentLoaded', function() {
 					loadingElement.style.display = 'none';
 				}
 
+				console.log("After")
+				currentPage = currentPage + 1;
+				console.log("current page");
+				console.log(currentPage);
+				console.log(filterPost.limit * (currentPage - 1))
+
 				// Re-attach the Load More button if more pages are available
-				if (currentPage < posts.data.total_pages) {
-					loadMoreButton.style.display = 'block';
-					postListElement.appendChild(loadMoreButton); // Append the Load More button after new content
-				}
+				// if (currentPage < posts.data.total_pages) {
+				// 	let loadMoreButton = document.createElement('div');
+				// 	loadMoreButton.className = 'fb_load_more';
+				// 	loadMoreButton.textContent = 'Load more';
+				// 	postListElement.appendChild(loadMoreButton);
+				// }
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
@@ -94,6 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'),null);
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'));
 	});
 });
