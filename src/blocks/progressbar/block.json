@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Progressbar",
 	"category": "frontis-blocks",
-	"icon": "editor-justify",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
     "supports": {

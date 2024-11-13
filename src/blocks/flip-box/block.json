@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Flip Box",
 	"category": "frontis-blocks",
-	"icon": "",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
