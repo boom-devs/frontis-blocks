@@ -9,7 +9,9 @@ export default function save({ attributes }) {
 		pricingSectionTopSwitcher,
 		pricingSectionTopText,
 		pricingTitle,
+		pricingTitleTag,
 		pricingSubTitleSwitcher,
+		pricingSubTitleTag,
 		pricingSubTitle,
 		pricingIconAlign,
 		pricingIcon,
@@ -84,13 +86,13 @@ export default function save({ attributes }) {
                     <div className="fb-pricing-header">
                         <div className="fb-pricing-title-wrapper">
                             <RichText.Content
-                                tagName="h2"
+                                tagName={pricingTitleTag}
                                 className="fb-pricing-title"
                                 value={pricingTitle}
                             />
                             {pricingSubTitleSwitcher && (
                                 <RichText.Content
-                                    tagName="span"
+                                    tagName={pricingSubTitleTag}
                                     className="fb-pricing-subtitle"
                                     value={pricingSubTitle}
                                 />
@@ -130,7 +132,7 @@ export default function save({ attributes }) {
                     </div>
                     <div className="fb-pricing-content">
                         <div className="fb-pricing-features-wrapper">
-                            {!priceHideFeaturesSwitcher && (
+                            {priceHideFeaturesSwitcher && (
                                 <ul className="fb-pricing-features-list">
                                     {priceFeatureItems.map((item, key) => (
                                         <li className="fb-pricing-feature-item" key={key}>
