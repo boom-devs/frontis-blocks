@@ -21,6 +21,10 @@ const attributes = {
 		type: "string",
 		default: "Best Deal"
 	},
+	pricingTitleTag: {
+		type: "string",
+		default: "h2"
+	},
 	pricingTitle: {
 		type: "string",
 		default: "Basic Plan"
@@ -28,6 +32,10 @@ const attributes = {
 	pricingSubTitleSwitcher: {
 		type: "boolean",
 		default: true
+	},
+	pricingSubTitleTag: { 
+		type: "string",
+		default: "span"
 	},
 	pricingSubTitle: {
 		type: "string",
@@ -77,7 +85,7 @@ const attributes = {
 	/** Start Price list Features */
 	priceHideFeaturesSwitcher: {
 		type: "boolean",
-		default: false
+		default: true
 	},
 	priceFeatureIconSwitcher: {
 		type: "boolean",
@@ -805,15 +813,9 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
-	priceingPriceGap: {
-		type: 'object',
-		default: {
-			Desktop: '10',
-			Tablet: '10',
-			Mobile: '10'
-		}
-	},
-	priceingPriceGapUnits: {
+
+
+	pricePaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -821,6 +823,39 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	priceDesktopPadding: {
+		type: "object", 
+		default: {
+			top: 32,
+			bottom: 42,
+			left: 0,
+			right: 0,
+		},
+	},
+	priceTabletPadding: {
+		type: "object", 
+		default: {
+			top: 32,
+			bottom: 42,
+			left: 0,
+			right: 0,
+		},
+	},
+	priceMobilePadding: {
+		type: "object", 
+		default: {
+			top: 32,
+			bottom: 42,
+			left: 0,
+			right: 0,
+		},
+	},
+	pricePaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+
 	/** End Pricing Style */
 
 	/**Start Title and Subtitle Style */
@@ -1118,9 +1153,9 @@ const attributes = {
 	priceButtonWidth: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	priceButtonWidthUnits: {
@@ -1232,28 +1267,28 @@ const attributes = {
 	priceButtonDesktopPadding: {
 		type: "object", 
 		default: {
-			top: 12,
-			bottom: 12,
-			left: 24,
-			right: 24,
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
 		},
 	},
 	priceButtonTabPadding: {
 		type: "object", 
 		default: {
-			top: 12,
-			bottom: 12,
-			left: 24,
-			right: 24,
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
 		},
 	},
 	priceButtonMobilePadding: {
 		type: "object", 
 		default: {
-			top: 12,
-			bottom: 12,
-			left: 24,
-			right: 24,
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
 		},
 	},
 	priceButtonPaddingLink: {
@@ -1363,10 +1398,10 @@ const attributes = {
 	priceButtonDesktopBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: "4",
-			bottom: "4",
-			left: "4",
-			right: "4",
+			top: "5",
+			bottom: "5",
+			left: "5",
+			right: "5",
 		},
 	},
 	priceButtonTabBorderRadiusWidth: {
@@ -1771,6 +1806,172 @@ const attributes = {
 		type: "string",
 		default: "What Value Add For Your Business"
 	},
+	priceAfterTextColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceAfterTextColor: {
+		type: "string",
+		default: "#6A758E"
+	},
+	priceAfterTextHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	priceAfterTextBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceAfterTextBgColor: {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	priceAfterTextBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	/** Start Padding */
+	priceAfterTextPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceAfterTextPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceAfterTextPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceAfterTextPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceAfterTextPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Border */
+	priceAfterTextBorder: {
+		type: 'string',
+		default: "none",
+	},
+	priceAfterTextBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	priceAfterTextBorderColor: { 
+		type: 'string',
+		default: ""
+	},
+	priceAfterTextBorderHoverColor: {
+		type: 'string',
+	},
+	priceAfterTextBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceAfterTextBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceAfterTextBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceAfterTextBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceAfterTextBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	priceAfterTextBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceAfterTextBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	priceAfterTextBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	priceAfterTextBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	priceAfterTextBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
 	/** End Price After Text */
 
 	/** Start Price Feature After Text */
@@ -1781,6 +1982,32 @@ const attributes = {
 	priceFeatureAfterText: { 
 		type: "string",
 		default: "Billed every year Popular amongst entrepeneurs $497 per year"
+	},
+
+	priceFeatureAfterTextColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceFeatureAfterTextColor: {
+		type: "string",
+		default: ""
+	},
+	priceFeatureAfterTextHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	priceFeatureAfterTextBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceFeatureAfterTextBgColor: {
+		type: "string",
+		default: ""
+	},
+	priceFeatureAfterTextBgHoverColor: {
+		type: 'string',
+		default: ""
 	},
 	/** End Price Feature After Text */
 }

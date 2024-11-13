@@ -41,8 +41,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		/** Start Header */
 		pricingSectionTopSwitcher,
 		pricingSectionTopText,
+		pricingTitleTag,
 		pricingTitle,
 		pricingSubTitleSwitcher,
+		pricingSubTitleTag,
 		pricingSubTitle,
 		pricingIconAlign,
 		pricingIcon,
@@ -123,7 +125,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<div className="fb-pricing-header">
 								<div className={`fb-pricing-title-wrapper fb-pricing-title-${pricingTitleAlignment}`}>
 									<RichText
-										tagName="h2"
+										tagName={pricingTitleTag}
 										className="fb-pricing-title"
 										value={pricingTitle}
 										onChange={(value) => setAttributes({ pricingTitle: value })}
@@ -131,7 +133,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									/>
 									{pricingSubTitleSwitcher && (
 										<RichText
-											tagName="span"
+											tagName={pricingSubTitleTag}
 											className="fb-pricing-subtitle"
 											value={pricingSubTitle}
 											onChange={(value) => setAttributes({ pricingSubTitle: value })}
@@ -166,14 +168,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									</div>
 									{priceAfterTextSwitcher && (
 										<div className="fb-pricing-after-text-wrapper">
-											<div className="fb-pricing-after-text">{priceAfterText}</div>
+											<span className="fb-pricing-after-text">{priceAfterText}</span>
 										</div>
 									)}
 								</div>
 							</div>
 							<div className ='fb-pricing-content'>
 								<div className="fb-pricing-features-wrapper">
-									{ !priceHideFeaturesSwitcher && (
+									{ priceHideFeaturesSwitcher && (
 										<ul className="fb-pricing-features-list">
 											{priceFeatureItems.map(item => (
 												<li className="fb-pricing-feature-item" key={item.id}>
@@ -202,8 +204,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									)}
 								</div>
 								{priceFeatureAfterTextSwitcher && (
-									<div className="fb-pricing-after-text-wrapper">
-										<div className="fb-pricing-after-text">{priceFeatureAfterText}</div>
+									<div className="fb-pricing-feature-after-text-wrapper">
+										<span className="fb-pricing-feature-after-text">{priceFeatureAfterText}</span>
 									</div>
 								)}
 							</div>

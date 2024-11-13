@@ -19,6 +19,7 @@ import FB_Range from '@Components/range';
 import './editor.lazy.scss';
 
 const FB_TypographyControl = ({
+    label = __("Typography", "frontis-blocks"),
     fontFamily,
 	onChangeFontFamily,
 	fontSize,
@@ -90,7 +91,7 @@ const FB_TypographyControl = ({
 
     return (
         <BaseControl
-            label={__("Typography", "frontis-blocks")}
+            label={label}
             className="fb-setting-typography"
         >
             <Dropdown

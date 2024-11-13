@@ -113,14 +113,19 @@
 		}
 	  }
 	}
+	.fb-pricing-feature-after-text-wrapper {
+		.fb-pricing-feature-after-text {
+			display: flex;
+			align-items: center;
+		}
+	}
 }
 
 .fb-pricing-footer-wrapper {
-	display: flex;
-	align-items: center;
 	
 	.fb-pricing-button-wrapper {
-		width: 100%;
+		display: flex;
+		align-items: center;
 	  .fb-pricing-button {
 		display: inline-flex;
 		align-items: center;
