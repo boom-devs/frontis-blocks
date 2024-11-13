@@ -17,6 +17,7 @@ import flipBoxFrontContentAttributes from './attributes/flip-box-front-content-a
 import flipBoxBackButtonAttributes from './attributes/flip-box-back-button-attribute.js';
 import flipBoxBackTitleAttributes from './attributes/flip-box-back-title-attribute.js';
 import flipBoxBackContentAttributes from './attributes/flip-box-back-content-attribute.js';
+import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 // Merge attributes
 const combinedAttributes = {
@@ -35,4 +36,5 @@ registerBlockType( metadata.name, {
 	attributes: combinedAttributes,
 	edit: Edit,
 	save,
+	icon: FB_Block_Icons.flip_box,
 } );

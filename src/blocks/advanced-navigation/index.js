@@ -4,13 +4,13 @@ import Edit from './edit';
 import save from './save';
 import attributes from './attributes';
 import metadata from './block.json';
-import AdvancedNavigationIcon from './icon';
+import FB_Block_Icons from "@Config/fb-blocks-icons";
 import './style.scss';
 
 
 registerBlockType(metadata.name, {
     ...metadata,
-    icon: AdvancedNavigationIcon,
+    icon: FB_Block_Icons.advanced_navigation,
     attributes,
     edit: Edit,
     save,
