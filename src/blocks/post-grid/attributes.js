@@ -13,7 +13,7 @@ const attributes = {
 		default: "post"
 	},
 	postPerPage: {
-		type: "number",
+		type: "string",
 		default: 6
 	},
 	selectedCat: {

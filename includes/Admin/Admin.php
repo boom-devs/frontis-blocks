@@ -314,24 +314,24 @@ class Admin {
 	public function get_posts() {
     	global $wpdb;
 
-    	// Get parameters from AJAX request
-    	$post_type = isset($_POST['post_type']) ? $_POST['post_type'] : 'post';
-    	$offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
-    	$limit = isset($_POST['limit']) ? intval($_POST['limit']) : 12;
-    	$category = isset($_POST['category']) ? intval($_POST['category']) : 0;
-    	$current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
+        // Get parameters from AJAX request
+        $post_type = isset($_POST['post_type']) ? $_POST['post_type'] : 'post';
+        $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+        $limit = isset($_POST['limit']) ? intval($_POST['limit']) : 12;
+        $category = isset($_POST['category']) ? intval($_POST['category']) : 0;
+        $current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
 
-    	ob_start();
+        ob_start();
 
-    	// Initial query to select posts based on type and status
-    	$query = $wpdb->prepare("
-    		SELECT *
-    		FROM {$wpdb->posts}
-    		WHERE post_type = %s
-    		AND post_status = 'publish'
-    	", $post_type);
+        // Initial query to select posts based on type and status
+        $query = $wpdb->prepare("
+            SELECT *
+            FROM {$wpdb->posts}
+            WHERE post_type = %s
+            AND post_status = 'publish'
+        ", $post_type);
 
-    	if ($category !== 0) {
+        if ($category !== 0) {
             $query .= " AND ID IN (
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
@@ -340,78 +340,80 @@ class Admin {
             )";
         }
 
-    	// Adding limit and offset to the query
-    	$temp_query = "
-    		SELECT * FROM (
-    			$query
-    		) AS SubQuery
-    		WHERE 1=1
-    		LIMIT %d OFFSET %d
-    	";
+        // Count total number of records
+        $count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
+        $total_records = $wpdb->get_var($count_query);
 
-    	// Prepare the final query
-    	$final_query = $wpdb->prepare($temp_query, $limit, $offset);
+        // Calculate total number of pages
+        $total_pages = ceil($total_records / $limit);
 
-    	// Execute the query to get results
-    	$results = $wpdb->get_results($final_query);
+        // Adjust offset if it exceeds total records to avoid empty results
+//         $offset = min($offset, max(0, $total_records - $limit));
 
-    	// Count total number of records
-    	$count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
-    	$total_records = $wpdb->get_var($count_query);
+        // Adding limit and offset to the query
+        $temp_query = "
+            SELECT * FROM (
+                $query
+            ) AS SubQuery
+            LIMIT %d OFFSET %d
+        ";
 
-    	// Calculate total number of pages
-    	$total_pages = ceil($total_records / $limit);
+        // Prepare the final query
+        $final_query = $wpdb->prepare($temp_query, $limit, $offset);
 
-    	if ($results) {
-    		foreach($results as $key => $single_post): ?>
-    			<div class="fb_post_grid_wrapper">
-    				<a href="<?php echo get_permalink( $single_post->ID ); ?>">
-    					<div class="fb_post_grid_image">
-    						<?php if (has_post_thumbnail( $single_post->ID )): ?>
-    							<?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), 'medium'); ?>
-    							<img src="<?php echo $image[0]; ?>" alt=""/>
-    						<?php endif; ?>
-    					</div>
-    					<div class="fb_post_grid_content">
-    						<h3><?php echo $single_post->post_title; ?></h3>
-    						<?php if($single_post->post_excerpt !== ''): ?>
-    							<p><?php echo $single_post->post_excerpt; ?></p>
-    						<?php else: ?>
-    							<?php if(!empty($single_post->post_content)): ?>
-    								<p><?php echo wp_trim_words($single_post->post_content, 20, '...'); ?></p>
-    							<?php endif; ?>
-    						<?php endif; ?>
-    					</div>
-    				</a>
-    			</div>
-    		<?php endforeach;
+        // Execute the query to get results
+        $results = $wpdb->get_results($final_query);
 
-    		if ($total_pages > 1) { ?>
-    			<div class="fb_load_more" data-current_page="<?php echo $current_page; ?>">
-    				Load more
-    				<span>
-    					<svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    						<g opacity="0.5">
-    							<path d="M8.25 4.5L15.75 12L8.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
-    						</g>
-    						<path d="M18.25 4.5L25.75 12L18.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
-    					</svg>
-    				</span>
-    			</div>
-    		<?php }
-    	} else { ?>
-    		<div class="empty-post">Nothing found.</div>
-    	<?php }
+        if ($results) {
+            foreach($results as $key => $single_post): ?>
+                <div class="fb_post_grid_wrapper">
+                    <a href="<?php echo get_permalink( $single_post->ID ); ?>">
+                        <div class="fb_post_grid_image">
+                            <?php if (has_post_thumbnail( $single_post->ID )): ?>
+                                <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), 'medium'); ?>
+                                <img src="<?php echo $image[0]; ?>" alt=""/>
+                            <?php endif; ?>
+                        </div>
+                        <div class="fb_post_grid_content">
+                            <h3><?php echo $single_post->post_title; ?></h3>
+                            <?php if($single_post->post_excerpt !== ''): ?>
+                                <p><?php echo $single_post->post_excerpt; ?></p>
+                            <?php else: ?>
+                                <?php if(!empty($single_post->post_content)): ?>
+                                    <p><?php echo wp_trim_words($single_post->post_content, 20, '...'); ?></p>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach;
 
-    	$content = ob_get_contents();
-    	ob_end_clean();
+            if ($total_pages > $current_page) { ?>
+                <div class="fb_load_more" data-current_page="<?php echo $current_page; ?>">
+                    Load more
+                    <span>
+                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g opacity="0.5">
+                                <path d="M8.25 4.5L15.75 12L8.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
+                            </g>
+                            <path d="M18.25 4.5L25.75 12L18.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </div>
+            <?php }
+        } else { ?>
+            <div class="empty-post">Nothing found.</div>
+        <?php }
 
-    	// Send response with content and total pages
-    	wp_send_json_success(array(
-    		'content' => $content,
-    		'total_pages' => $total_pages,
-    		'current_page' => $current_page
-    	));
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        // Send response with content and total pages
+        wp_send_json_success(array(
+            'content' => $content,
+            'total_pages' => $total_pages,
+            'current_page' => $current_page
+        ));
     }
 
 
