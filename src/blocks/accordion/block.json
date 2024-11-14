@@ -6,7 +6,6 @@
 	"title": "Accordion",
 	"category": "frontis-blocks",
 	"textdomain": "frontis-blocks",
-	"icon": "facebook-alt",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
     "supports": {
