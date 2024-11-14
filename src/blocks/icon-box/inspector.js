@@ -340,7 +340,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		subHeadingPaddingLink,
 		headingTargetUrl,
 		headingLink,
-		headingUrlSwitcher
+		headingUrlSwitcher,
+		wrapperLink,
+		wrapperTargetUrl,
+		wrapperUrlSwitcher
 	} = attributes;
 
 	useEffect(() => {
@@ -2675,7 +2678,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
         }
     }
 	.fb-icon-box-content-wrapper.${blockID} .fb-description {
-        ${SubHeadingColor ? `color: ${SubHeadingColor};` : ""}
+        ${SubHeadingColor ? `color: ${SubHeadingColor} !important;` : ""}
         font-family: ${
 					SubHeadingFontFamily !== "default"
 						? SubHeadingFontFamily
@@ -4047,6 +4050,28 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 															})
 														}
 													/>
+												</PanelBody>
+												<PanelBody
+													title={__("Wrapper Link", "frontis-blocks")}
+													initialOpen={false}
+												>
+												<ToggleControl
+                                                        label={__("Enable Link", "frontis-blocks")}
+                                                        checked={wrapperUrlSwitcher}
+                                                        onChange={(value) => setAttributes({ wrapperUrlSwitcher: value })}
+                                                />
+												{wrapperUrlSwitcher && (
+													<FB_UrlControl
+																url={wrapperLink}
+																onChangeUrl={(value) =>
+																	setAttributes({ wrapperLink: value })
+																}
+																openInNewTab={wrapperTargetUrl}
+																onChangeOpenInNewTab={(value) =>
+																	setAttributes({ wrapperTargetUrl: value })
+													}
+												/>
+												)}
 												</PanelBody>
 											</div>
 										</div>
