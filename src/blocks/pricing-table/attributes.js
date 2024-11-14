@@ -1143,6 +1143,86 @@ const attributes = {
 		}
 	},
 
+	priceFeatureItemPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureItemDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemTabPadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemMobilePadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	priceFeaturePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '42',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureTabPadding: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '42',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureMobilePadding: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '30',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeaturePaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
 	/** End feature Title */
 
 	/** Start price Button */
