@@ -45,6 +45,7 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_AlignmentControl from '@Components/alignment-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 
 import './editor.scss';
 
@@ -413,12 +414,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		priceAfterTextSwitcher,
 		priceAfterText,
+		priceAfterTextFontFamily,
+		priceAfterTextFontSize,
+		priceAfterTextFontSizeUnits,
+		priceAfterTextFontWeight,
+		priceAfterTextFontStyle,
+		priceAfterTextTextTransform,
+		priceAfterTextTextDecoration,
+		priceAfterTextLetterSpacing,
+		priceAfterTextLetterSpacingUnits,
+		priceAfterTextLineHeight,
+		priceAfterTextLineHeightUnits,
 		priceAfterTextColorSwitcher,
 		priceAfterTextColor,
 		priceAfterTextHoverColor,
+		
 		priceAfterTextBgColorSwitcher,
-		priceAfterTextBgColor,
-		priceAfterTextBgHoverColor,
+		priceAfterTextNormalBackgroundType,
+		priceAfterTextNormalClassicColor,
+		priceAfterTextNormalGradientColor,
+		priceAfterTextNormalCustomGradientSwitcher,
+		priceAfterTextNormalCustomGradientInputValue,
+		priceAfterTextHoverBackgroundType,
+		priceAfterTextHoverClassicColor,
+		priceAfterTextHoverGradientColor,
+		priceAfterTextHoverCustomGradientSwitcher,
+		priceAfterTextHoverCustomGradientInputValue,
 
 		priceAfterTextPaddingUnits,
 		priceAfterTextPaddingDesktop,
@@ -445,12 +466,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		priceFeatureAfterTextSwitcher,
 		priceFeatureAfterText,
+		priceFeatureAfterTextFontFamily,
+		priceFeatureAfterTextFontSize,
+		priceFeatureAfterTextFontSizeUnits,
+		priceFeatureAfterTextFontWeight,
+		priceFeatureAfterTextFontStyle,
+		priceFeatureAfterTextTextTransform,
+		priceFeatureAfterTextTextDecoration,
+		priceFeatureAfterTextLetterSpacing,
+		priceFeatureAfterTextLetterSpacingUnits,
+		priceFeatureAfterTextLineHeight,
+		priceFeatureAfterTextLineHeightUnits,
 		priceFeatureAfterTextColorSwitcher,
 		priceFeatureAfterTextColor,
 		priceFeatureAfterTextHoverColor,
-		priceFeatureAfterTextBgColorSwitcher,
-		priceFeatureAfterTextBgColor,
-		priceFeatureAfterTextBgHoverColor,
 
 
 
@@ -476,6 +505,86 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             document.head.appendChild(linkElement);
         }
     }, [normalPricingFontFamily]);
+
+	useEffect(() => {
+        if (salePricingFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${salePricingFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [salePricingFontFamily]);
+
+	useEffect(() => {
+        if (priceCurrencyFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${priceCurrencyFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [priceCurrencyFontFamily]);
+
+	useEffect(() => {
+        if (pricePeriodFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricePeriodFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricePeriodFontFamily]);
+
+	useEffect(() => {
+        if (pricingTitleFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingTitleFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricingTitleFontFamily]);
+
+	useEffect(() => {
+        if (pricingSubtitleFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingSubtitleFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricingSubtitleFontFamily]);
+
+	useEffect(() => {
+        if (pricingfeatureTitleFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingfeatureTitleFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricingfeatureTitleFontFamily]);
+
+	useEffect(() => {
+        if (priceButtonFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${priceButtonFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [priceButtonFontFamily]);
+
+	useEffect(() => {
+        if (priceAfterTextFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${priceAfterTextFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [priceAfterTextFontFamily]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -1914,8 +2023,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		.${blockId} .fb-pricing-after-text {
+
+			${priceAfterTextFontFamily ? `font-family: ${priceAfterTextFontFamily};` : ''}
+			${priceAfterTextFontSize.Desktop && priceAfterTextFontSizeUnits.Desktop ? `font-size: ${priceAfterTextFontSize.Desktop}${priceAfterTextFontSizeUnits.Desktop};` : ''}
+			${priceAfterTextFontWeight ? `font-weight: ${priceAfterTextFontWeight};` : ''}
+			${priceAfterTextFontStyle ? `font-style: ${priceAfterTextFontStyle};` : ''}
+			${priceAfterTextTextTransform ? `text-transform: ${priceAfterTextTextTransform};` : ''}
+			${priceAfterTextTextDecoration ? `text-decoration: ${priceAfterTextTextDecoration};` : ''}
+			${priceAfterTextLetterSpacing.Desktop && priceAfterTextLetterSpacingUnits.Desktop ? `letter-spacing: ${priceAfterTextLetterSpacing.Desktop}${priceAfterTextLetterSpacingUnits.Desktop};` : ''}
+			${priceAfterTextLineHeight.Desktop && priceAfterTextLineHeightUnits.Desktop ? `line-height: ${priceAfterTextLineHeight.Desktop}${priceAfterTextLineHeightUnits.Desktop};` : ''}
+
 			${priceAfterTextColor ? `color: ${priceAfterTextColor};` : ''} 
-			${priceAfterTextBgColor ? `background-color: ${priceAfterTextBgColor};` : ''}
+
+			${priceAfterTextNormalBackgroundType === 'gradient' ? `  
+				background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
+			`: `
+				background: ${priceAfterTextNormalClassicColor};
+			`}
+
 			${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
 			${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
 			${priceAfterTextBorderDesktopWidth ? `border-width: ${priceAfterTextBorderDesktopWidth};` : ''}
@@ -1925,12 +2050,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockId} .fb-pricing-after-text:hover {
 			${priceAfterTextHoverColor ? `color: ${priceAfterTextHoverColor};` : ''}
-			${priceAfterTextBgHoverColor ? `background-color: ${priceAfterTextBgHoverColor};` : ''}
+
+			${priceAfterTextHoverBackgroundType === 'gradient' ? `  
+				background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
+			`: `
+				background: ${priceAfterTextHoverClassicColor};
+			`}
+
 			${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
 		}
 
 		.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
 			justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+
+		.${blockId} .fb-pricing-feature-after-text { 
+			${priceFeatureAfterTextColor ? `color: ${priceFeatureAfterTextColor};` : ''}
+			${priceFeatureAfterTextFontFamily ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
+			${priceFeatureAfterTextFontSize.Desktop ? `font-size: ${priceFeatureAfterTextFontSize.Desktop}${priceFeatureAfterTextFontSizeUnits.Desktop};` : ''}
+			${priceFeatureAfterTextFontWeight ? `font-weight: ${priceFeatureAfterTextFontWeight};` : ''}
+			${priceFeatureAfterTextFontStyle ? `font-style: ${priceFeatureAfterTextFontStyle};` : ''}
+			${priceFeatureAfterTextTextTransform ? `text-transform: ${priceFeatureAfterTextTextTransform};` : ''}
+			${priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
+			${priceFeatureAfterTextLetterSpacing.Desktop ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Desktop}${priceFeatureAfterTextLetterSpacingUnits.Desktop};` : ''}
+			${priceFeatureAfterTextLineHeight.Desktop ? `line-height: ${priceFeatureAfterTextLineHeight.Desktop}${priceFeatureAfterTextLineHeightUnits.Desktop};` : ''}	
+		}
+
+		.${blockId} .fb-pricing-feature-after-text:hover {
+			${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
 		}
 
 		.${blockId} .fb-pricing-feature-icon-inner svg {
@@ -2031,8 +2178,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockId} .fb-pricing-after-text {
+				${priceAfterTextFontFamily ? `font-family: ${priceAfterTextFontFamily};` : ''}
+				${priceAfterTextFontSize.Tablet && priceAfterTextFontSizeUnits.Tablet ? `font-size: ${priceAfterTextFontSize.Tablet}${priceAfterTextFontSizeUnits.Tablet};` : ''}
+				${priceAfterTextFontWeight ? `font-weight: ${priceAfterTextFontWeight};` : ''}
+				${priceAfterTextFontStyle ? `font-style: ${priceAfterTextFontStyle};` : ''}
+				${priceAfterTextTextTransform ? `text-transform: ${priceAfterTextTextTransform};` : ''}
+				${priceAfterTextTextDecoration ? `text-decoration: ${priceAfterTextTextDecoration};` : ''}
+				${priceAfterTextLetterSpacing.Tablet && priceAfterTextLetterSpacingUnits.Tablet ? `letter-spacing: ${priceAfterTextLetterSpacing.Tablet}${priceAfterTextLetterSpacingUnits.Tablet};` : ''}
+				${priceAfterTextLineHeight.Tablet && priceAfterTextLineHeightUnits.Tablet ? `line-height: ${priceAfterTextLineHeight.Tablet}${priceAfterTextLineHeightUnits.Tablet};` : ''}
 				${priceAfterTextColor ? `color: ${priceAfterTextColor};` : ''} 
-				${priceAfterTextBgColor ? `background-color: ${priceAfterTextBgColor};` : ''}
+				${priceAfterTextNormalBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
+				`: `
+					background: ${priceAfterTextNormalClassicColor};
+				`}
 				${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
 				${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
 				${priceAfterTextBorderTabletWidth ? `border-width: ${priceAfterTextBorderTabletWidth};` : ''}
@@ -2041,8 +2200,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			.${blockId} .fb-pricing-after-text:hover {
 				${priceAfterTextHoverColor ? `color: ${priceAfterTextHoverColor};` : ''}
-				${priceAfterTextBgHoverColor ? `background-color: ${priceAfterTextBgHoverColor};` : ''}
+				${priceAfterTextHoverBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
+				`: `
+					background: ${priceAfterTextHoverClassicColor};
+				`}
+
 				${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
+			}
+
+
+			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
+				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+			}
+
+			.${blockId} .fb-pricing-feature-after-text { 
+				${priceFeatureAfterTextColor ? `color: ${priceFeatureAfterTextColor};` : ''}
+				${priceFeatureAfterTextFontFamily ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
+				${priceFeatureAfterTextFontSize.Tablet && priceFeatureAfterTextFontSizeUnits.Tablet ? `font-size: ${priceFeatureAfterTextFontSize.Tablet}${priceFeatureAfterTextFontSizeUnits.Tablet};` : ''}
+				${priceFeatureAfterTextFontWeight ? `font-weight: ${priceFeatureAfterTextFontWeight};` : ''}
+				${priceFeatureAfterTextFontStyle ? `font-style: ${priceFeatureAfterTextFontStyle};` : ''}
+				${priceFeatureAfterTextTextTransform ? `text-transform: ${priceFeatureAfterTextTextTransform};` : ''}
+				${priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
+				${priceFeatureAfterTextLetterSpacing.Tablet && priceFeatureAfterTextLetterSpacingUnits.Tablet ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Tablet}${priceFeatureAfterTextLetterSpacingUnits.Tablet};` : ''}
+				${priceFeatureAfterTextLineHeight.Tablet && priceFeatureAfterTextLineHeightUnits.Tablet ? `line-height: ${priceFeatureAfterTextLineHeight.Tablet}${priceFeatureAfterTextLineHeightUnits.Tablet};` : ''}	
+			}
+
+			.${blockId} .fb-pricing-feature-after-text:hover {
+				${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
 			}
 
 			.${blockId} .fb-pricing-header {
@@ -2101,9 +2286,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
 			}
 
+
+
+			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
+				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+			}
+
+			.${blockId} .fb-pricing-feature-after-text { 
+				${priceFeatureAfterTextColor ? `color: ${priceFeatureAfterTextColor};` : ''}
+				${priceFeatureAfterTextFontFamily ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
+				${priceFeatureAfterTextFontSize.Mobile && priceFeatureAfterTextFontSizeUnits.Mobile ? `font-size: ${priceFeatureAfterTextFontSize.Mobile}${priceFeatureAfterTextFontSizeUnits.Mobile};` : ''}
+				${priceFeatureAfterTextFontWeight ? `font-weight: ${priceFeatureAfterTextFontWeight};` : ''}
+				${priceFeatureAfterTextFontStyle ? `font-style: ${priceFeatureAfterTextFontStyle};` : ''}
+				${priceFeatureAfterTextTextTransform ? `text-transform: ${priceFeatureAfterTextTextTransform};` : ''}
+				${priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
+				${priceFeatureAfterTextLetterSpacing.Mobile && priceFeatureAfterTextLetterSpacingUnits.Mobile ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Mobile}${priceFeatureAfterTextLetterSpacingUnits.Mobile};` : ''}
+				${priceFeatureAfterTextLineHeight.Mobile && priceFeatureAfterTextLineHeightUnits.Mobile ? `line-height: ${priceFeatureAfterTextLineHeight.Mobile}${priceFeatureAfterTextLineHeightUnits.Mobile};` : ''}	
+			}
+
+			.${blockId} .fb-pricing-feature-after-text:hover {
+				${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
+			}
+
 			.${blockId} .fb-pricing-after-text {
+				${priceAfterTextFontFamily ? `font-family: ${priceAfterTextFontFamily};` : ''}
+				${priceAfterTextFontSize.Mobile && priceAfterTextFontSizeUnits.Mobile ? `font-size: ${priceAfterTextFontSize.Mobile}${priceAfterTextFontSizeUnits.Mobile};` : ''}
+				${priceAfterTextFontWeight ? `font-weight: ${priceAfterTextFontWeight};` : ''}
+				${priceAfterTextFontStyle ? `font-style: ${priceAfterTextFontStyle};` : ''}
+				${priceAfterTextTextTransform ? `text-transform: ${priceAfterTextTextTransform};` : ''}
+				${priceAfterTextTextDecoration ? `text-decoration: ${priceAfterTextTextDecoration};` : ''}
+				${priceAfterTextLetterSpacing.Mobile && priceAfterTextLetterSpacingUnits.Mobile ? `letter-spacing: ${priceAfterTextLetterSpacing.Mobile}${priceAfterTextLetterSpacingUnits.Mobile};` : ''}
+				${priceAfterTextLineHeight.Mobile && priceAfterTextLineHeightUnits.Mobile ? `line-height: ${priceAfterTextLineHeight.Mobile}${priceAfterTextLineHeightUnits.Mobile};` : ''}
+
 				${priceAfterTextColor ? `color: ${priceAfterTextColor};` : ''} 
-				${priceAfterTextBgColor ? `background-color: ${priceAfterTextBgColor};` : ''}
+				${priceAfterTextNormalBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
+				`: `
+					background: ${priceAfterTextNormalClassicColor};
+				`}
 				${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
 				${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
 				${priceAfterTextBorderMobileWidth ? `border-width: ${priceAfterTextBorderMobileWidth};` : ''}
@@ -2112,7 +2332,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			.${blockId} .fb-pricing-after-text:hover {
 				${priceAfterTextHoverColor ? `color: ${priceAfterTextHoverColor};` : ''}
-				${priceAfterTextBgHoverColor ? `background-color: ${priceAfterTextBgHoverColor};` : ''}
+
+				${priceAfterTextHoverBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
+				`: `
+					background: ${priceAfterTextHoverClassicColor};
+				`}
+
 				${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
 			}
 			.${blockId} .fb-pricing-icon {
@@ -2531,12 +2757,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		priceAfterTextSwitcher,
 		priceAfterText,
+
+		priceAfterTextFontFamily,
+		priceAfterTextFontSize,
+		priceAfterTextFontSizeUnits,
+		priceAfterTextFontWeight,
+		priceAfterTextFontStyle,
+		priceAfterTextTextTransform,
+		priceAfterTextTextDecoration,
+		priceAfterTextLetterSpacing,
+		priceAfterTextLetterSpacingUnits,
+		priceAfterTextLineHeight,
+		priceAfterTextLineHeightUnits,
+
 		priceAfterTextColorSwitcher,
 		priceAfterTextColor,
 		priceAfterTextHoverColor,
+
 		priceAfterTextBgColorSwitcher,
-		priceAfterTextBgColor,
-		priceAfterTextBgHoverColor,
+		priceAfterTextNormalBackgroundType,
+		priceAfterTextNormalClassicColor,
+		priceAfterTextNormalGradientColor,
+		priceAfterTextNormalCustomGradientSwitcher,
+		priceAfterTextNormalCustomGradientInputValue,
+		priceAfterTextHoverBackgroundType,
+		priceAfterTextHoverClassicColor,
+		priceAfterTextHoverGradientColor,
+		priceAfterTextHoverCustomGradientSwitcher,
+		priceAfterTextHoverCustomGradientInputValue,
 
 		priceAfterTextPaddingUnits,
 		priceAfterTextPaddingDesktop,
@@ -2570,6 +2818,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceAfterTextBorderRadiusDesktopWidth,
 		priceAfterTextBorderRadiusTabletWidth,
 		priceAfterTextBorderRadiusMobileWidth,
+
+
+		priceFeatureAfterTextSwitcher,
+		priceFeatureAfterText,
+		priceFeatureAfterTextFontFamily,
+		priceFeatureAfterTextFontSize,
+		priceFeatureAfterTextFontSizeUnits,
+		priceFeatureAfterTextFontWeight,
+		priceFeatureAfterTextFontStyle,
+		priceFeatureAfterTextTextTransform,
+		priceFeatureAfterTextTextDecoration,
+		priceFeatureAfterTextLetterSpacing,
+		priceFeatureAfterTextLetterSpacingUnits,
+		priceFeatureAfterTextLineHeight,
+		priceFeatureAfterTextLineHeightUnits,
+		priceFeatureAfterTextColorSwitcher,
+		priceFeatureAfterTextColor,
+		priceFeatureAfterTextHoverColor,
 
 	]);
 
@@ -3557,6 +3823,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 										>
 
+											<FB_TypographyControl
+												fontFamily={priceAfterTextFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ priceAfterTextFontFamily: value })}
+
+												fontSize={priceAfterTextFontSize}
+												onChangeFontSize={(value) => setAttributes({ priceAfterTextFontSize: value })}
+
+												fontSizeUnits={priceAfterTextFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ priceAfterTextFontSizeUnits: value })}
+
+												fontWeight={priceAfterTextFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ priceAfterTextFontWeight: value })}
+
+												fontStyle={priceAfterTextFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ priceAfterTextFontStyle: value })}
+
+												textTransform={priceAfterTextTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ priceAfterTextTextTransform: value })}
+
+												textDecoration={priceAfterTextTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricingTitleTextDecoration: value })}
+
+												letterSpacing={priceAfterTextLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ priceAfterTextLetterSpacing: value })}
+
+												letterSpacingUnits={priceAfterTextLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ priceAfterTextLetterSpacingUnits: value })}
+
+												lineHeight={priceAfterTextLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ priceAfterTextLineHeight: value })}
+
+												lineHeightUnits={priceAfterTextLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ priceAfterTextLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
 											<FB_SwitcherControl
 												label={__("Text Color", "frontis-blocks")}
 												globalSwitcher={priceAfterTextColorSwitcher}
@@ -3580,27 +3884,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											)}
 
 
-											<FB_SwitcherControl
-												label={__("Background Color", "frontis-blocks")}
-												globalSwitcher={priceAfterTextBgColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ priceAfterTextBgColorSwitcher: value })}
-											/>
+											<FB_BackgroundColorControl
+                                                label={__("BackgroundColor", "frontis-blocks")}
+                                                bgColorSwitcher={priceAfterTextBgColorSwitcher}
+                                                setBgColorSwitcher={(value) => setAttributes({ priceAfterTextBgColorSwitcher: value })}
+                                                
+                                                normalBackgroundType={priceAfterTextNormalBackgroundType}
+                                                setNormalBackgroundType={(value) => setAttributes({ priceAfterTextNormalBackgroundType: value })}
+                                                normalClassicColor={priceAfterTextNormalClassicColor}
+                                                setNormalClassicColor={(value) => setAttributes({ priceAfterTextNormalClassicColor: value })}
+                                                normalGradientColor={priceAfterTextNormalGradientColor}
+                                                setNormalGradientColor={(value) => setAttributes({ priceAfterTextNormalGradientColor: value })}
+                                                normalCustomGradientSwitcher={priceAfterTextNormalCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ priceAfterTextNormalCustomGradientSwitcher: value })}
+                                                normalCustomGradientInputValue={priceAfterTextNormalCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => setAttributes({ priceAfterTextNormalCustomGradientInputValue: value })}
+                                                
+                                                hoverBackgroundType={priceAfterTextHoverBackgroundType}
+                                                setHoverBackgroundType={(value) => setAttributes({ priceAfterTextHoverBackgroundType: value })}
+                                                hoverClassicColor={priceAfterTextHoverClassicColor}
+                                                setHoverClassicColor={(value) => setAttributes({ priceAfterTextHoverClassicColor: value })}
+                                                hoverGradientColor={priceAfterTextHoverGradientColor} 
+                                                setHoverGradientColor={(value) => setAttributes({ priceAfterTextHoverGradientColor: value })}
+                                                hoverCustomGradientSwitcher={priceAfterTextHoverCustomGradientSwitcher}
+                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ priceAfterTextHoverCustomGradientSwitcher: value })}
+                                                hoverCustomGradientInputValue={priceAfterTextHoverCustomGradientInputValue}
+                                                setHoverCustomGradientInputValue={(value) => setAttributes({ priceAfterTextHoverCustomGradientInputValue: value })}
+                                                isBackgroundImage={false}
 
-											{priceAfterTextBgColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Nomal Color", "frontis-blocks")}
-													globalColor={priceAfterTextBgColor}
-													setGlobalColor={(value) => setAttributes({ priceAfterTextBgColor: value })}
-												/>
-											)}
+                                            />
 
-											{priceAfterTextBgColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={priceAfterTextBgHoverColor}
-													setGlobalColor={(value) => setAttributes({ priceAfterTextBgHoverColor: value })}
-												/>
-											)}
 											<FB_Spacing 
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
@@ -3790,6 +4103,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													label={__("Hover Color", "frontis-blocks")}
 													globalColor={pricingfeatureTitleHoverColor}
 													setGlobalColor={(value) => setAttributes({ pricingfeatureTitleHoverColor: value })}
+												/>
+											)}
+
+										</PanelBody>
+
+										<PanelBody
+											title={__("Feature After Text", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<FB_TypographyControl
+												fontFamily={priceFeatureAfterTextFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ priceFeatureAfterTextFontFamily: value })}
+
+												fontSize={priceFeatureAfterTextFontSize}
+												onChangeFontSize={(value) => setAttributes({ priceFeatureAfterTextFontSize: value })}
+
+												fontSizeUnits={priceFeatureAfterTextFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ priceFeatureAfterTextFontSizeUnits: value })}
+
+												fontWeight={priceFeatureAfterTextFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ priceFeatureAfterTextFontWeight: value })}
+
+												fontStyle={priceFeatureAfterTextFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ priceFeatureAfterTextFontStyle: value })}
+
+												textTransform={priceFeatureAfterTextTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ priceFeatureAfterTextTextTransform: value })}
+
+												textDecoration={priceFeatureAfterTextTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ priceFeatureAfterTextTextDecoration: value })}
+
+												letterSpacing={priceFeatureAfterTextLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ priceFeatureAfterTextLetterSpacing: value })}
+
+												letterSpacingUnits={priceFeatureAfterTextLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ priceFeatureAfterTextLetterSpacingUnits: value })}
+
+												lineHeight={priceFeatureAfterTextLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ priceFeatureAfterTextLineHeight: value })}
+
+												lineHeightUnits={priceFeatureAfterTextLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ priceFeatureAfterTextLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Text Color", "frontis-blocks")} 
+												globalSwitcher={priceFeatureAfterTextColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceFeatureAfterTextColorSwitcher: value })}
+											/>
+
+											{priceFeatureAfterTextColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceFeatureAfterTextColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextColor: value })}
+												/>
+											)}
+
+											{priceFeatureAfterTextColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceFeatureAfterTextHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextHoverColor: value })}
 												/>
 											)}
 
