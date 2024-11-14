@@ -1594,6 +1594,17 @@ const attributes = {
         type: "string",
         default: "",
     },
+    wrapperLink: {
+        type: "string",
+        default: ""
+    },
+    wrapperTargetUrl: {
+        type: "boolean",
+    },
+    wrapperUrlSwitcher: {
+        type: "boolean",
+        default: false
+    },
 
 }
 //
