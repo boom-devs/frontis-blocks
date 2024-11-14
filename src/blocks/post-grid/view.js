@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.body.addEventListener('click', function(event) {
 		if (event.target.closest('.fb_load_more')) {
 			const parentElement = event.target.closest(".wp-block-frontis-blocks-post-grid");
+			document.querySelector('.post-list .fb_load_more_outter_wrap').style.display = 'block';
+			document.querySelector('.post-list .fb_load_more .load_more_button_icon_wrap svg').style.display = 'none';
 
 			if (parentElement) {
 				const postType = parentElement.getAttribute("data-post-type");
@@ -66,6 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(posts => {
 				const postGridElement = document.getElementById(blockId);
 				const postListElement = postGridElement.querySelector('.post-list');
+				// const loadMoreLoader = postGridElement.querySelector('.fb_load_more_loader');
+				// loadMoreLoader.classList.remove('active');
 
 				// Remove any existing Load More button to avoid duplication
 				const existingLoadMore = postListElement.querySelector('.fb_load_more_wrapper');
@@ -94,9 +98,13 @@ document.addEventListener('DOMContentLoaded', function() {
 				// 	loadMoreButton.textContent = 'Load more';
 				// 	postListElement.appendChild(loadMoreButton);
 				// }
+				document.querySelector('.post-list .fb_load_more .load_more_button_icon_wrap svg').style.display = 'block';
+				document.querySelector('.post-list .fb_load_more_outter_wrap').style.display = 'none';
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
+				document.querySelector('.post-list .fb_load_more .load_more_button_icon_wrap svg').style.display = 'block';
+				document.querySelector('.post-list .fb_load_more_outter_wrap').style.display = 'none';
 			});
 	}
 
@@ -105,4 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	postGridBlocks.forEach(block => {
 		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'));
 	});
+
+
 });

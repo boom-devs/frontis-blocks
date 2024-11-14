@@ -37,7 +37,6 @@ export default function save({ attributes }) {
 						target={wrapperTargetUrl ? "_blank" : undefined}
 						rel={wrapperTargetUrl ? "noopener noreferrer" : undefined}
 					>
-						<div className={`fb-icon-box-content-wrapper ${blockID}`}>
 							<div
 								className={`fb-icon-box-content-wrapper-inner ${blockID}`}
 								style={{
@@ -115,11 +114,9 @@ export default function save({ attributes }) {
 									)}
 								</div>
 							</div>
-						</div>
 					
 					</a>
 				) : (
-					<div className={`fb-icon-box-content-wrapper ${blockID}`}>
 						<div className={`fb-icon-box-content-wrapper ${blockID}`}>
 							<div
 								className={`fb-icon-box-content-wrapper-inner ${blockID}`}
@@ -199,7 +196,6 @@ export default function save({ attributes }) {
 								</div>
 							</div>
 						</div>
-					</div>
 				)}
 			</div>
 		</>
