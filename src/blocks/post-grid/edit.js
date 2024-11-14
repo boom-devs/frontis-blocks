@@ -37,7 +37,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const postLists = useSelect( ( select ) => {
 		return select('core').getEntityRecords('postType', postType, {
 			per_page: postPerPage,
-			categories: [selectedCat], // Replace `categoryID` with the actual ID of the category
+			categories: [selectedCat], 
 		});
     } );
 
