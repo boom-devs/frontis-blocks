@@ -73,6 +73,10 @@
 
 	.fb_load_more_wrapper{
 		flex-basis: 100%;
+		display: flex;
+		align-items: center;
+		gap: 30px;
+		margin-top: 32px;
 		
 		.fb_load_more{
 			display: inline-flex;
@@ -86,11 +90,11 @@
 			font-weight: 600;
 			font-style: normal;
 			line-height: 33px;
-			margin-top: 32px;
 
 			span {
-				width: 24px;
-				height: 24px;
+				width: 20px;
+				height: 20px;
+				position: relative;
 
 				svg {
 					width: 100%;
@@ -98,6 +102,20 @@
 				}
 			}
 		}
+		.fb_load_more_loader {
+			border: 3px solid #FFF;
+			border-bottom-color: #000000;
+			border-radius: 50%;
+			display: inline-block;
+			box-sizing: border-box;
+			animation: loader 1s linear infinite;
+		}
+	}
+
+	.fb_load_more_outter_wrap {
+		display: none;
+		position: absolute;
+		top: 0;
 	}
 	.empty-post{
 		flex-basis: 100%;
@@ -234,3 +252,12 @@
 		background-position: 800px 0;
 	}
 }
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+} 
