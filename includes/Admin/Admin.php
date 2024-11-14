@@ -392,13 +392,16 @@ class Admin {
                 <div class="fb_load_more_wrapper">
                     <div class="fb_load_more" data-current_page="<?php echo $current_page; ?>">
                         Load more
-                        <span>
+                        <span class="load_more_button_icon_wrap">
                             <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.5">
                                     <path d="M8.25 4.5L15.75 12L8.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
                                 </g>
                                 <path d="M18.25 4.5L25.75 12L18.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
                             </svg>
+                            <div class="fb_load_more_outter_wrap">
+                                <span class="fb_load_more_loader"></span>
+                            </div>
                         </span>
                     </div>
                 </div>
