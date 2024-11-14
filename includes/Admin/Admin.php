@@ -367,7 +367,7 @@ class Admin {
         if ($results) {
             foreach($results as $key => $single_post): ?>
                 <div class="fb_post_grid_wrapper">
-                    <a href="<?php echo get_permalink( $single_post->ID ); ?>">
+                    <a class="fb_post_grid" href="<?php echo get_permalink( $single_post->ID ); ?>">
                         <div class="fb_post_grid_image">
                             <?php if (has_post_thumbnail( $single_post->ID )): ?>
                                 <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), 'medium'); ?>
@@ -375,12 +375,12 @@ class Admin {
                             <?php endif; ?>
                         </div>
                         <div class="fb_post_grid_content">
-                            <h3><?php echo $single_post->post_title; ?></h3>
+                            <h3 class="fb_post_title"><?php echo $single_post->post_title; ?></h3>
                             <?php if($single_post->post_excerpt !== ''): ?>
-                                <p><?php echo $single_post->post_excerpt; ?></p>
+                                <p class="fb_post_desc"><?php echo $single_post->post_excerpt; ?></p>
                             <?php else: ?>
                                 <?php if(!empty($single_post->post_content)): ?>
-                                    <p><?php echo wp_trim_words($single_post->post_content, 20, '...'); ?></p>
+                                    <p class="fb_post_desc"><?php echo wp_trim_words($single_post->post_content, 20, '...'); ?></p>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </div>
@@ -389,16 +389,18 @@ class Admin {
             <?php endforeach;
 
             if ($total_pages > $current_page) { ?>
-                <div class="fb_load_more" data-current_page="<?php echo $current_page; ?>">
-                    Load more
-                    <span>
-                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g opacity="0.5">
-                                <path d="M8.25 4.5L15.75 12L8.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
-                            </g>
-                            <path d="M18.25 4.5L25.75 12L18.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
+                <div class="fb_load_more_wrapper">
+                    <div class="fb_load_more" data-current_page="<?php echo $current_page; ?>">
+                        Load more
+                        <span>
+                            <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g opacity="0.5">
+                                    <path d="M8.25 4.5L15.75 12L8.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                </g>
+                                <path d="M18.25 4.5L25.75 12L18.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
                 </div>
             <?php }
         } else { ?>

@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postListElement = postGridElement.querySelector('.post-list');
 
 				// Remove any existing Load More button to avoid duplication
-				const existingLoadMore = postListElement.querySelector('.fb_load_more');
+				const existingLoadMore = postListElement.querySelector('.fb_load_more_wrapper');
 				if (existingLoadMore) {
 					existingLoadMore.remove();
 				}

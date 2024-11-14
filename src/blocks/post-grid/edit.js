@@ -35,10 +35,23 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}
 
     const postLists = useSelect( ( select ) => {
+
 		return select('core').getEntityRecords('postType', postType, {
 			per_page: postPerPage,
 			categories: [selectedCat], 
 		});
+
+        if(selectedCat !== "") {
+            return select('core').getEntityRecords('postType', postType, {
+                per_page: postPerPage,
+                categories: [selectedCat], // Replace `categoryID` with the actual ID of the category
+            });
+        } else {
+            return select('core').getEntityRecords('postType', postType, {
+                per_page: postPerPage,
+                // categories: [selectedCat], // Replace `categoryID` with the actual ID of the category
+            });
+        }
     } );
 
     const selectPostType = (postType) => {
@@ -49,6 +62,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes({blockId: clientId})
 	}, [])
 
+    
     return (
         <>
             <InspectorControls key="controls">

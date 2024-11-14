@@ -116,7 +116,7 @@ export default function save({ attributes }) {
 								</div>
 							</div>
 						</div>
-					</div>
+					
 					</a>
 				) : (
 					<div className={`fb-icon-box-content-wrapper ${blockID}`}>
