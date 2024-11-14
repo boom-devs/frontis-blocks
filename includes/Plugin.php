@@ -86,9 +86,17 @@ final class Plugin {
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
     }
 
+    
 	public function enqueue_scripts(){
-		wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js',  array('jquery'), '1.0.0', true);
-		wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/public/counter.js',  array('jquery'), '1.0.0', true);
+		// Check if the current post has the 'countdown' block
+		if (has_block('frontis-blocks/countdown')) {
+			wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js',  array('jquery'), '1.0.0', true);
+		}
+
+		// Check if the current post has the 'counter' block
+		if (has_block('frontis-blocks/counter-number')) {
+			wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/public/counter.js',  array('jquery'), '1.0.0', true);
+		}
 	}
 
 
