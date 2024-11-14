@@ -294,6 +294,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingfeatureTitleLineHeightUnits,
 		/** End Feature Title */
 
+		/** Start Feature Item Padding */
+		priceFeatureItemPaddingUnits,
+		priceFeatureItemDesktopPadding,
+		priceFeatureItemTabPadding,
+		priceFeatureItemMobilePadding,
+		priceFeatureItemPaddingLink,
+		/** End Feature Item Padding */
+
+		/** Start Feature Padding */
+		priceFeaturePaddingUnits,
+		priceFeatureDesktopPadding,
+		priceFeatureTabPadding,
+		priceFeatureMobilePadding,
+		priceFeaturePaddingLink,
+		/** End Feature Padding */
+
+
+
+
 
 		/** Start price Button */
 		priceButtonAlignment,
@@ -692,6 +711,151 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const priceAfterTextTabletPaddingWidth = `${priceAfterTextPaddingTablet.top}${priceAfterTextPaddingUnits.Tablet} ${priceAfterTextPaddingTablet.right}${priceAfterTextPaddingUnits.Tablet} ${priceAfterTextPaddingTablet.bottom}${priceAfterTextPaddingUnits.Tablet} ${priceAfterTextPaddingTablet.left}${priceAfterTextPaddingUnits.Tablet}`;
 	const priceAfterTextMobilePaddingWidth = `${priceAfterTextPaddingMobile.top}${priceAfterTextPaddingUnits.Mobile} ${priceAfterTextPaddingMobile.right}${priceAfterTextPaddingUnits.Mobile} ${priceAfterTextPaddingMobile.bottom}${priceAfterTextPaddingUnits.Mobile} ${priceAfterTextPaddingMobile.left}${priceAfterTextPaddingUnits.Mobile}`;
 	/** End After Text Padding */
+
+
+	/** Start Feature Item Padding */ 
+	const handleFeatureItemPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceFeatureItemPaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceFeatureItemDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceFeatureItemTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceFeatureItemMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceFeatureItemDesktopPadding: {...priceFeatureItemDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceFeatureItemTabPadding: {...priceFeatureItemTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceFeatureItemMobilePadding: {...priceFeatureItemMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeatureItemPaddingCombineBtn = () => {
+		setAttributes( {priceFeatureItemPaddingLink: !priceFeatureItemPaddingLink} );
+	}
+
+	const handleFeatureItemPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			priceFeatureItemPaddingUnits: {
+				...priceFeatureItemPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceFeatureItemDesktopPaddingWidth 	= `${priceFeatureItemDesktopPadding.top}${priceFeatureItemPaddingUnits.Desktop} ${priceFeatureItemDesktopPadding.right}${priceFeatureItemPaddingUnits.Desktop} ${priceFeatureItemDesktopPadding.bottom}${priceFeatureItemPaddingUnits.Desktop} ${priceFeatureItemDesktopPadding.left}${priceFeatureItemPaddingUnits.Desktop}`;
+	const priceFeatureItemTabPaddingWidth 		= `${priceFeatureItemTabPadding.top}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.right}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.bottom}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.left}${priceFeatureItemPaddingUnits.Tablet}`;
+	const priceFeatureItemMobilePaddingWidth 	= `${priceFeatureItemMobilePadding.top}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.right}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.bottom}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.left}${priceFeatureItemPaddingUnits.Mobile}`;
+	/** End Feature Item Padding */
+	
+	/** Start Feature Padding */ 
+	const handleFeaturePaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceFeaturePaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceFeatureDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceFeatureTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceFeatureMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceFeatureDesktopPadding: {...priceFeatureDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceFeatureTabPadding: {...priceFeatureTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceFeatureMobilePadding: {...priceFeatureMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeaturePaddingCombineBtn = () => {
+		setAttributes( {priceFeaturePaddingLink: !priceFeaturePaddingLink} );
+	}
+
+	const handleFeaturePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			priceFeaturePaddingUnits: {
+				...priceFeaturePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceFeatureDesktopPaddingWidth 	= `${priceFeatureDesktopPadding.top}${priceFeaturePaddingUnits.Desktop} ${priceFeatureDesktopPadding.right}${priceFeaturePaddingUnits.Desktop} ${priceFeatureDesktopPadding.bottom}${priceFeaturePaddingUnits.Desktop} ${priceFeatureDesktopPadding.left}${priceFeaturePaddingUnits.Desktop}`;
+	const priceFeatureTabPaddingWidth 		= `${priceFeatureTabPadding.top}${priceFeaturePaddingUnits.Tablet} ${priceFeatureTabPadding.right}${priceFeaturePaddingUnits.Tablet} ${priceFeatureTabPadding.bottom}${priceFeaturePaddingUnits.Tablet} ${priceFeatureTabPadding.left}${priceFeaturePaddingUnits.Tablet}`;
+	const priceFeatureMobilePaddingWidth 	= `${priceFeatureMobilePadding.top}${priceFeaturePaddingUnits.Mobile} ${priceFeatureMobilePadding.right}${priceFeaturePaddingUnits.Mobile} ${priceFeatureMobilePadding.bottom}${priceFeaturePaddingUnits.Mobile} ${priceFeatureMobilePadding.left}${priceFeaturePaddingUnits.Mobile}`;
+	/** End Feature Padding */
 
 
 	/** Start After Text Border */ 
@@ -2060,6 +2224,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
 		}
 
+		.${blockId} .fb-pricing-features-wrapper {
+			${priceFeatureDesktopPaddingWidth ? `padding: ${priceFeatureDesktopPaddingWidth};` : ''}
+		}
+
+		.${blockId} .fb-pricing-feature-item {
+			${priceFeatureItemDesktopPaddingWidth ? `padding: ${priceFeatureItemDesktopPaddingWidth};` : ''}
+		}
+
 		.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
 			justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
 		}
@@ -2209,6 +2381,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
 			}
 
+			.${blockId} .fb-pricing-features-wrapper {
+				${priceFeatureTabPaddingWidth ? `padding: ${priceFeatureTabPaddingWidth};` : ''} 
+			}
+
+			.${blockId} .fb-pricing-feature-item {
+				${priceFeatureItemTabPaddingWidth ? `padding: ${priceFeatureItemTabPaddingWidth};` : ''}
+			}
 
 			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
 				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
@@ -2286,7 +2465,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
 			}
 
+			.${blockId} .fb-pricing-features-wrapper {
+				${priceFeatureMobilePaddingWidth ? `padding: ${priceFeatureMobilePaddingWidth};` : ''} 
+			}
 
+			.${blockId} .fb-pricing-feature-item {
+				${priceFeatureItemMobilePaddingWidth ? `padding: ${priceFeatureItemMobilePaddingWidth};` : ''}
+			}
 
 			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
 				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
@@ -2582,6 +2767,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingfeatureTitleLetterSpacingUnits,
 		pricingfeatureTitleLineHeight,
 		pricingfeatureTitleLineHeightUnits,
+
+		priceFeatureItemPaddingUnits,
+		priceFeatureItemDesktopPadding,
+		priceFeatureItemTabPadding,
+		priceFeatureItemMobilePadding,
+		priceFeatureItemPaddingLink,
+		priceFeatureItemDesktopPaddingWidth,
+		priceFeatureItemTabPaddingWidth,
+		priceFeatureItemMobilePaddingWidth,
+
+		priceFeaturePaddingUnits, 
+		priceFeatureDesktopPadding,
+		priceFeatureTabPadding,
+		priceFeatureMobilePadding,
+		priceFeaturePaddingLink,
+		priceFeatureDesktopPaddingWidth,
+		priceFeatureTabPaddingWidth,
+		priceFeatureMobilePaddingWidth,
 
 		priceButtonAlignment,
 		priceButtonWidth,
@@ -4105,6 +4308,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setGlobalColor={(value) => setAttributes({ pricingfeatureTitleHoverColor: value })}
 												/>
 											)}
+
+											<FB_Spacing 
+												label={__("Item Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleFeatureItemPaddingUnitsHandler}
+												spacingUnits={priceFeatureItemPaddingUnits}
+												spacingDesktop={priceFeatureItemDesktopPadding}
+												spacingTablet={priceFeatureItemTabPadding}
+												spacingMobile={priceFeatureItemMobilePadding}
+												handleSpacingUnitHandler={handleFeatureItemPaddingUnitChange}
+												spacingCombineBtn={priceFeatureItemPaddingLink}
+												spacingCombineBtnHandler={handleFeatureItemPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+
+											<FB_Spacing 
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleFeaturePaddingUnitsHandler}
+												spacingUnits={priceFeaturePaddingUnits}
+												spacingDesktop={priceFeatureDesktopPadding}
+												spacingTablet={priceFeatureTabPadding}
+												spacingMobile={priceFeatureMobilePadding}
+												handleSpacingUnitHandler={handleFeaturePaddingUnitChange}
+												spacingCombineBtn={priceFeaturePaddingLink}
+												spacingCombineBtnHandler={handleFeaturePaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
 
 										</PanelBody>
 
