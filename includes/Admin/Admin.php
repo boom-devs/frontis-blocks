@@ -49,7 +49,8 @@ class Admin {
         if('toplevel_page_frontis-blocks' != $hook){
             return;
         }
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
 
         wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.css', array(), '1.0.0');
 
@@ -60,7 +61,7 @@ class Admin {
         if('toplevel_page_frontis-blocks' != $hook){
             return;
         }
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
         
         wp_enqueue_script('jquery');
         $script_path = FB_PLUGIN_PATH . 'assets/admin/index' . $suffix . '.js';
@@ -524,7 +525,7 @@ class Admin {
     }
 
     public function enqueue_editor_assets() {
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
 
         $script_path = FB_PLUGIN_PATH . 'assets/admin/sidebar' . $suffix . '.js';
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.asset.php';
