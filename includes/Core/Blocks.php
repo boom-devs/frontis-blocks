@@ -58,7 +58,7 @@ class Blocks
                 $plugin_slug = 'frontis-blocks';
 
                 if (!file_exists($blocks_dir)) {
-                    error_log($blocks_dir);
+                    // error_log($blocks_dir);
                     continue;
                 }
 

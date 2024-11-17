@@ -62,49 +62,124 @@ const attributes = {
         type: "string",
         default: "none",
     },
-    borderWidth: {
-        type: "number",
-        default: 1,
+    columnBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
     },
-    borderColor: {
-        type: "string",
+    columnDesktopBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
     },
-    borderRadius: {
-        type: "number",
+    columnTabBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    columnMobileBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    columnBorderLink: {
+        type: "boolean",
+        default: true,
     },
     // Padding
-    paddingTop: {
-        type: "number",
-        default: 0,
+    paddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
-    paddingRight: {
-        type: "number",
-        default: 0,
+    columnDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
     },
-    paddingBottom: {
-        type: "number",
-        default: 0,
+    columnTabPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
     },
-    paddingLeft: {
-        type: "number",
-        default: 0,
+    columnMobilePadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    columnPaddingLink : {
+        type : "boolean",
+        default: true
     },
     // Margin
-    marginTop: {
-        type: "number",
-        default: 0,
+    marginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
-    marginRight: {
-        type: "number",
-        default: 0,
+    columnDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
     },
-    marginBottom: {
-        type: "number",
-        default: 0,
+    columnTabMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
     },
-    marginLeft: {
-        type: "number",
-        default: 0,
+    columnMobileMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    columnMarginLink : {
+        type : "boolean",
+        default: true
     },
 };
 

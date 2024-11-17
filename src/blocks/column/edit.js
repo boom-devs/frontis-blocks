@@ -5,8 +5,6 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import { useEffect, useRef, useState } from "@wordpress/element";
 import { select, useSelect, dispatch } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
-import { Placeholder, Button } from "@wordpress/components";
-import { columns as columnsIcon } from "@wordpress/icons";
 
 /**
  * Internal dependencies
@@ -202,6 +200,165 @@ export default function Edit(props) {
         }
     }, []);
 
+    useEffect(() => {
+        const elColWrap = colWrap.current;
+        const elDragger = draggerRef.current;
+        if (elDragger && elColWrap) {
+            let colWidthInPx = 0;
+            let pcent_px_ratio = 0;
+
+            elDragger.addEventListener("mousedown", handleMouseDown);
+
+            function handleMouseDown(e) {
+                const nearestRow = select("core/block-editor").getBlock(
+                    select("core/block-editor").getBlockParents(clientId).slice(-1)[0]
+                );
+
+                const allSiblingsCol = nearestRow.innerBlocks;
+
+                const totalWidth = allSiblingsCol.reduce(
+                    (total, curr) => {
+                        return {
+                            attributes: {
+                                cw_Range: total.attributes.cw_Range + curr.attributes.cw_Range,
+                            },
+                        };
+                    },
+                    { attributes: { cw_Range: 0 } }
+                ).attributes.cw_Range;
+
+                let nextColumnDesktopWidth = nextBlockClientId
+                    ? select("core/block-editor").getBlockAttributes(nextBlockClientId)
+                        .cw_Range
+                    : 0;
+
+                let desktopColW = desktopRange;
+                let widestColClientId = "";
+
+                if (totalWidth !== 100) {
+                    const widestCol = {
+                        ...allSiblingsCol.reduce(
+                            (total, curr) => {
+                                if (total.attributes.cw_Range < curr.attributes.cw_Range) {
+                                    return curr;
+                                } else {
+                                    return total;
+                                }
+                            },
+                            { attributes: { cw_Range: 0 } }
+                        ),
+                    };
+
+                    widestColClientId = widestCol.clientId;
+
+                    const updatedWidth = widestCol.attributes.cw_Range + 100 - totalWidth;
+
+                    if (widestColClientId === clientId) {
+                        setAttributes({ cw_Range: updatedWidth });
+                        setInitColWidth(updatedWidth);
+                        desktopColW = updatedWidth;
+                    } else {
+                        dispatch("core/block-editor").updateBlockAttributes(
+                            widestColClientId,
+                            {
+                                cw_Range: updatedWidth,
+                            }
+                        );
+                        if (widestColClientId === nextBlockClientId) {
+                            nextColumnDesktopWidth = updatedWidth;
+                            setInitNextColWidth(updatedWidth);
+                        } else if (widestColClientId === prevBlockClientId) {
+                            setInitPrevColWidth(updatedWidth);
+                        }
+                    }
+                }
+
+                setShowWidthTooltip(true);
+
+                if (select("core/block-editor").getSelectedBlockCount() > 1)
+                    return false;
+
+                setNextColWDhByUseState(nextColumnDesktopWidth);
+
+                const allDimensions = elColWrap.parentElement.getBoundingClientRect();
+                colWidthInPx = allDimensions.width;
+                pcent_px_ratio = desktopRange / colWidthInPx;
+
+                window.addEventListener("mousemove", handleMouseMove);
+                window.addEventListener("mouseup", handleMouseUp);
+
+                let prevX = e.clientX;
+                let newX = 0;
+                let finalThisBlockWidth = 0;
+                let finalNextBlockWidth = 0;
+
+                function handleMouseUp(e) {
+                    setShowWidthTooltip(false);
+                    window.removeEventListener("mousemove", handleMouseMove);
+                    window.removeEventListener("mouseup", handleMouseUp);
+                }
+
+                function handleMouseMove(e) {
+                    newX = prevX - e.clientX;
+
+                    const roundedX100ThisWitdh = Math.round(
+                        (desktopColW - newX * pcent_px_ratio) * 100
+                    );
+                    const roundedX100NextWitdh = Math.round(
+                        (nextColumnDesktopWidth + newX * pcent_px_ratio) * 100
+                    );
+
+                    let thisBlockWidth = roundedX100ThisWitdh / 100;
+                    let diffForRounding = 0;
+
+                    if (roundedX100ThisWitdh % 500 > 460) {
+                        const newWidth = Math.ceil(thisBlockWidth);
+                        diffForRounding = newWidth - thisBlockWidth;
+                        thisBlockWidth = newWidth;
+                    } else if (roundedX100ThisWitdh % 500 < 70) {
+                        const newWidth = Math.floor(thisBlockWidth);
+                        diffForRounding = newWidth - thisBlockWidth;
+                        thisBlockWidth = newWidth;
+                    }
+
+                    const nextBlockWidth =
+                        (roundedX100NextWitdh - Math.round(diffForRounding * 100)) / 100;
+
+                    if (nextBlockWidth < 4 || thisBlockWidth < 4) {
+                        return false;
+                    }
+
+                    finalThisBlockWidth = thisBlockWidth;
+                    finalNextBlockWidth = nextBlockWidth;
+
+                    dispatch("core/block-editor").updateBlockAttributes(
+                        nextBlockClientId,
+                        {
+                            cw_Range: finalNextBlockWidth,
+                        }
+                    );
+
+                    setNextColWDhByUseState(finalNextBlockWidth);
+
+                    setAttributes({
+                        cw_Range: finalThisBlockWidth,
+                    });
+                }
+            }
+
+            return () => {
+                elDragger.removeEventListener("mousedown", handleMouseDown);
+            };
+        }
+    }, [
+        draggerRef,
+        desktopRange,
+        colWrap,
+        nextBlockClientId,
+        prevBlockClientId,
+        showWidthTooltip,
+    ]);
+
     const selectVariation = (variation) => {
         const { innerBlocks } = variation;
         const newBlocks = innerBlocks.map(([name, attributes]) => 
@@ -239,7 +396,6 @@ export default function Edit(props) {
             )}
 
             <div {...blockProps}>
-
                 {nextBlockClientId && (
                     <div className="width-dragger-change" ref={draggerRef}>
                         <div className="dragger-inner">
@@ -256,9 +412,9 @@ export default function Edit(props) {
                     </div>
                 )}
 
-                <div className={`frontis-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
-                    <div className={`frontis-column-wrapper ${blockId}`} ref={colWrap}>
-                        <div className="frontis-column-inner">
+                <div className={`fb-column-parent-wrapper fb-column-parent-${blockId} ${classHook}`}>
+                    <div className={`fb-column-wrapper ${blockId}`} ref={colWrap}>
+                        <div className={`fb-column-inner-${blockId}`}>
                             <InnerBlocks
                                 orientation="vertical"
                                 templateLock={false}

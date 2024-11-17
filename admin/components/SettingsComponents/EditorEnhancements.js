@@ -121,7 +121,7 @@ const EditorEnhancements = () => {
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Enable Quick Action Bar', 'frontis-blocks')}</label>
+          <h3>{__('Enable Quick Action Bar', 'frontis-blocks')}</h3>
           <p>{__('Adds a quick action bar to the editor', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
@@ -134,7 +134,7 @@ const EditorEnhancements = () => {
       
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Collapse Panel', 'frontis-blocks')}</label>
+          <h3>{__('Collapse Panel', 'frontis-blocks')}</h3>
           <p>{__('Allows collapsing of the editor panel', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
@@ -147,7 +147,7 @@ const EditorEnhancements = () => {
       
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Enable Templates Button', 'frontis-blocks')}</label>
+          <h3>{__('Enable Templates Button', 'frontis-blocks')}</h3>
           <p>{__('Adds a templates button to the editor', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
