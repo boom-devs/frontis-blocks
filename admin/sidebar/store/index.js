@@ -4,20 +4,18 @@
 import {
     createReduxStore,
     register,
-    select,
-    subscribe,
-    dispatch
+    subscribe
 } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
 import * as actions from "./actions";
-import * as selectors from "./selectors";
+import { DEFAULT_STATE, STORE_KEY } from './constant';
 import * as controls from "./controls";
-import * as resolvers from "./resolvers";
 import reducer from "./reducer";
-import { STORE_KEY, DEFAULT_STATE } from './constant';
+import * as resolvers from "./resolvers";
+import * as selectors from "./selectors";
 
 /**
  * Create WP Redux Store
@@ -40,55 +38,64 @@ register(store);
 /**
  * Save Global Values on Save Page/Post
  */
+let isHandlingSave = false; // Flag to prevent recursive calls
+
 subscribe(() => {
-    const isSavingPost = select('core/editor').isSavingPost();
-    const isAutosavingPost = select('core/editor').isAutosavingPost();
-    const isLoading = select(STORE_KEY).getIsLoading();
+    // const isSavingPost = select('core/editor').isSavingPost();
+    // const isAutosavingPost = select('core/editor').isAutosavingPost();
+    // const isLoading = select(STORE_KEY).getIsLoading();
 
-    if (isLoading || isAutosavingPost || !isSavingPost) {
-        return;
-    }
+    // // Skip if already handling, autosaving, not saving, or loading
+    // if (isLoading || isAutosavingPost || !isSavingPost || isHandlingSave) {
+    //     return;
+    // }
 
-    const storeDispatch = dispatch(STORE_KEY);
-    const storeSelect = select(STORE_KEY);
+    // isHandlingSave = true; // Set the flag to prevent re-entrant calls
 
-    try {
-        // Set loading state
-        storeDispatch.setLoading(true);
+    // const storeDispatch = dispatch(STORE_KEY);
+    // const storeSelect = select(STORE_KEY);
 
-        // Save all colors
-        const globalColors = storeSelect.getGlobalColors();
-        if (globalColors?.length) {
-            storeDispatch.saveGlobalColors(globalColors);
-        }
+    // try {
+    //     // Set loading state
+    //     storeDispatch.setLoading(true);
 
-        const customColors = storeSelect.getCustomColors();
-        if (customColors?.length) {
-            storeDispatch.saveCustomColors(customColors);
-        }
+    //     // Save all colors
+    //     const globalColors = storeSelect.getGlobalColors();
+    //     if (globalColors?.length) {
+    //         storeDispatch.saveGlobalColors(globalColors);
+    //     }
 
-        const gradientColors = storeSelect.getGradientColors();
-        if (gradientColors?.length) {
-            storeDispatch.saveGradientColors(gradientColors);
-        }
+    //     const customColors = storeSelect.getCustomColors();
+    //     if (customColors?.length) {
+    //         storeDispatch.saveCustomColors(customColors);
+    //     }
 
-        const customGradientColors = storeSelect.getCustomGradientColors();
-        if (customGradientColors?.length) {
-            storeDispatch.saveCustomGradientColors(customGradientColors);
-        }
+    //     const gradientColors = storeSelect.getGradientColors();
+    //     if (gradientColors?.length) {
+    //         storeDispatch.saveGradientColors(gradientColors);
+    //     }
 
-        // Save typography
-        const typography = storeSelect.getTypography();
-        if (Object.keys(typography).length) {
-            storeDispatch.setTypography(typography);
-        }
+    //     const customGradientColors = storeSelect.getCustomGradientColors();
+    //     if (customGradientColors?.length) {
+    //         storeDispatch.saveCustomGradientColors(customGradientColors);
+    //     }
 
-    } catch (error) {
-        console.error('Error saving settings:', error);
-        storeDispatch.setError(error.message);
-    } finally {
-        storeDispatch.setLoading(false);
-    }
+    //     // Save typography
+    //     const typography = storeSelect.getTypography();
+    //     console.log("typography color")
+    //     console.log(typography)
+    //     if (Object.keys(typography).length) {
+    //         storeDispatch.setTypography(typography);
+    //     }
+
+    // } catch (error) {
+    //     console.error('Error saving settings:', error);
+    //     storeDispatch.setError(error.message);
+    // } finally {
+    //     // Reset the flag and loading state
+    //     isHandlingSave = false;
+    //     storeDispatch.setLoading(false);
+    // }
 });
 
 export default store;

@@ -2,13 +2,13 @@
  * Returns Dynamic Generated CSS
  */
 
+import generateBackgroundCSS from '@Config/generateBackgroundCSS';
+import generateBorderCSS from '@Config/generateBorderCSS';
 import generateCSS from '@Config/generateCSS';
 import generateCSSUnit from '@Config/generateCSSUnit';
-import generateBackgroundCSS from '@Config/generateBackgroundCSS';
-import backgroundCss from './backgroundCss';
 import { getFallbackNumber } from '@Config/getAttributeFallback';
-import generateBorderCSS from '@Config/generateBorderCSS';
 import gridCssObject from '@Config/gridCssCreator';
+import backgroundCss from './backgroundCss';
 
 function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'frotins-blocks/', '' );

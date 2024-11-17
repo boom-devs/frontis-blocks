@@ -57,28 +57,32 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function get_global_colors() {
-        return get_option('fb_global_colors', []);
+        $global_colors = get_option('fb_global_colors');
+        wp_send_json_success($global_colors);
     }
 
     public function get_gradient_colors() {
-        return get_option('fb_gradient_colors', []);
+        $global_gradient_colors = get_option('fb_gradient_colors');
+        wp_send_json_success($global_gradient_colors);
     }
 
     public function get_custom_colors() {
-        return get_option('fb_custom_colors', []);
+        $custom_colors = get_option('fb_custom_colors');
+        wp_send_json_success($custom_colors);
     }
 
     public function get_custom_gradient_colors() {
-        return get_option('fb_custom_gradient_colors', []);
+        $custom_gradient_colors = get_option('fb_custom_gradient_colors');
+        wp_send_json_success($custom_gradient_colors);
     }
 
     public function get_typography() {
-        $typography = get_option('fb_typography', []);
+        $typography = get_option('fb_typography');
         wp_send_json_success($typography);
     }
 
     public function get_custom_css() {
-        return get_option('fb_custom_css', false);
+        return get_option('fb_custom_css');
     }
 
 
