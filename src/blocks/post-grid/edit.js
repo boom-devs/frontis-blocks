@@ -35,12 +35,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}
 
     const postLists = useSelect( ( select ) => {
-
-		return select('core').getEntityRecords('postType', postType, {
-			per_page: postPerPage,
-			categories: [selectedCat], 
-		});
-
         if(selectedCat !== "") {
             return select('core').getEntityRecords('postType', postType, {
                 per_page: postPerPage,
