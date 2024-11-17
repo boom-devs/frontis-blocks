@@ -125,6 +125,7 @@ final class Plugin {
         define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
         define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
         define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
+        // define('SCRIPT_DEBUG', true);
         define('FB_PLUGIN_BASENAME', plugin_basename(FB_PLUGIN_FILE));
         define('FB_UPGRADE_PRO_URL', 'https://frontis.co/frontis-blocks-pro');
         define('FB_IS_PRO_ACTIVE', class_exists( 'FrontisBlocks\Pro\Plugin' ) ? true : false );
