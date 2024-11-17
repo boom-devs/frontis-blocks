@@ -120,6 +120,21 @@ export const variations = [
 		scope: [ 'block' ],
 	},
 	{
+		name: 'three-columns-wider-center-large',
+		icon: rowIcons[ '25-50-25' ],
+		attributes: {
+			variationSelected: true,
+			directionDesktop: 'row',
+			wrapMobile: 'wrap',
+		},
+		innerBlocks: [
+			[ 'frontis-blocks/container', { widthDesktop: 16.5, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 66, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 16.5, widthMobile: 100, widthSetByUser: true } ],
+		],
+		scope: [ 'block' ],
+	},
+	{
 		name: 'three-columns-wider-center',
 		icon: rowIcons[ '25-50-25' ],
 		attributes: {
@@ -145,6 +160,36 @@ export const variations = [
 		innerBlocks: [
 			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
 			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'three-columns-one-half-one-quarter-one-quarter',
+		icon: rowIcons[ '50-25-25' ],
+		attributes: {
+			variationSelected: true,
+			directionDesktop: 'row',
+			wrapMobile: 'wrap',
+		},
+		innerBlocks: [
+			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'three-columns-one-quarter-one-quarter-one-half',
+		icon: rowIcons[ '50-25-25' ],
+		attributes: {
+			variationSelected: true,
+			directionDesktop: 'row',
+			wrapMobile: 'wrap',
+		},
+		innerBlocks: [
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
 		],
 		scope: [ 'block' ],
 	},
