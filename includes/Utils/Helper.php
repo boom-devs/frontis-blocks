@@ -285,4 +285,8 @@ class Helper
 
         return false;
     }
+
+    public static function get_option($option_name, $default = null) {
+        return get_option($option_name, $default);
+    }
 }

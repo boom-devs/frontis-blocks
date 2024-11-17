@@ -2,6 +2,11 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+/**
+ * AjaxBase
+ *
+ * @package FrontisBlocks
+ */
 abstract class AjaxBase {
     /**
      * Ajax events prefix.
@@ -48,6 +53,6 @@ abstract class AjaxBase {
      * @return string
      */
     protected function get_error_msg($key) {
-        return isset($this->errors[$key]) ? $this->errors[$key] : 'An unknown error occurred.';
+        return isset($this->errors[$key]) ? $this->errors[$key] : __('An unknown error occurred.', 'frontis-blocks');
     }
 }

@@ -12,5 +12,8 @@ class AssetGeneration
 
     }
 
+    public function generate_assets() {
+    }
+
     
 }

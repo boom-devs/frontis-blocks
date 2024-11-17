@@ -117,29 +117,63 @@
   &-category-filter {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-unit;
+    gap: $spacing-unit * 1.5;
     margin-bottom: $spacing-unit * 2.5;
+    padding: $spacing-unit $spacing-unit * 2;
+    border: 1px solid $neutral-color-50;
+    border-radius: $border-radius * 4;
   }
 
   &-category-button {
-    padding: $spacing-unit ($spacing-unit * 1.5);
-    background-color: $light-gray;
-    border: 1px solid $border-color;
-    border-radius: $border-radius;
+    padding: ($spacing-unit * 1.5) ($spacing-unit * 2);
+    background-color: transparent;
+    border: none;
+    border-radius: $border-radius * 2.5;
     cursor: pointer;
     transition: background-color $transition-duration;
+    font-family: $body-font-family;
+    font-size: $medium-font-size;
+    font-weight: 500;
+    line-height: $body-line-height;
+    color: $neutral-color-600;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    gap: $spacing-unit;
+
+    &-icon {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &-count {
+      font-size: $base-font-size * 0.86;
+      color: $neutral-color;
+      background-color: $primary-color-50;
+      padding: $spacing-unit / 2 $spacing-unit;
+      border-radius: 50%;
+    }
 
     &:hover {
-      background-color: darken($light-gray, 5%);
+      background-color: $primary-color-50;
+      color: $primary-color;
     }
 
     &--active {
-      background-color: $primary-color;
-      color: $tab-active-background;
-      border-color: $primary-color;
+      background-color: $primary-color-50;
+      color: $primary-color;
+
+      &-count {
+        background-color: $white-color;
+        color: $primary-color;
+      }
 
       &:hover {
-        background-color: darken($primary-color, 5%);
+        background-color: darken($primary-color-50, 5%);
       }
     }
   }
@@ -208,8 +242,8 @@
   align-items: center;
   padding: $spacing-unit * 2.5 $spacing-unit * 2;
   border: 1px solid $border-color;
-  border-radius: $border-radius * 3;
-  background-color: $light-gray;
+  border-radius: $border-radius * 2.5;
+  background-color: $neutral-color-50;
   transition: box-shadow $transition-duration;
 
   &:hover {
@@ -231,9 +265,12 @@
   }
 
   &-title {
+    font-family: $body-font-family;
+    line-height: $body-line-height;
+    font-size: $x-large-font-size;
+    color: $neutral-color-900;
     margin: 0 0 $spacing-unit / 2;
-    font-size: $base-font-size * 1.14;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   &-links {
@@ -242,9 +279,12 @@
   }
 
   &-link {
-    font-size: $base-font-size * 0.86;
+    font-size: $medium-font-size;
     color: $text-color;
     text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    transition: color $transition-duration;
 
     svg {
       height: $spacing-unit * 2;

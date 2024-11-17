@@ -14,5 +14,9 @@ module.exports = {
             '@Store': path.resolve(__dirname, 'src/store/'),
             '@Attributes': path.resolve(__dirname, 'blocks-config/blocks-attributes/'),
 		},
-	},
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js'
+    }
 };
