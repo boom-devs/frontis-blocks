@@ -1,40 +1,38 @@
-import { __ } from "@wordpress/i18n";
 import { InspectorControls } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
 
 import {
-	SelectControl,
-	PanelBody,
-	TabPanel,
 	BaseControl,
 	Button,
 	ButtonGroup,
-	ToggleControl,
-	TextareaControl,
-	Dropdown,
-	Dashicon,
-	RangeControl,
-	ColorPicker,
 	ColorPalette,
+	ColorPicker,
+	Dashicon,
+	Dropdown,
+	PanelBody,
+	RangeControl,
+	SelectControl,
+	TabPanel,
 	TextControl,
+	ToggleControl
 } from "@wordpress/components";
 
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import FB_BackgroundColorControl from "@Components/background-color-control";
+import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_Color from "@Components/color";
+import FB_Range from "@Components/range";
 import FB_ResponsiveControl from "@Components/responsive-control";
-import "./editor.scss";
+import FB_Spacing from "@Components/spacing";
+import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
 	BORDER_STYLES,
-	NORMAL_HOVER,
-	UNIT_TYPES,
 	FONT_FAMILYS,
 	HEADING,
+	NORMAL_HOVER,
 	TEXT_ALIGN,
+	UNIT_TYPES,
 } from "../advanced-image/constants/constants";
-import FB_Range from "@Components/range";
-import FBIconPicker from "../../components/icon-picker";
-import FB_BoxShadowControl from "@Components/box-shadow";
-import FB_Spacing from "@Components/spacing";
-import FB_Color from "@Components/color";
-import FB_BackgroundColorControl from "@Components/background-color-control";
+import "./editor.scss";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
