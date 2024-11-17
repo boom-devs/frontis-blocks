@@ -1,12 +1,12 @@
 /**
  * Internal dependencies
  */
-import rowIcons from './icons';
-import { __experimentalBlockVariationPicker as BlockVariationPicker, useBlockProps } from '@wordpress/block-editor';
 import FB_Block_Icons from '@Config/fb-blocks-icons';
-import { __ } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
+import { __experimentalBlockVariationPicker as BlockVariationPicker, useBlockProps } from '@wordpress/block-editor';
 import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
+import { useDispatch } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+import rowIcons from './icons';
 
 /**
  * Template option choices for predefined form layouts.
@@ -110,12 +110,12 @@ export const variations = [
 			wrapMobile: 'wrap',
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -158,10 +158,10 @@ export const variations = [
 			wrapMobile: 'wrap',
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -197,10 +197,10 @@ export const variations = [
 			wrapMobile: 'wrap',
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
 		],
 		scope: [ 'block' ],
 	},

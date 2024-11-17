@@ -1,133 +1,1039 @@
+const gridCssArray = [
+	{
+		default: 'custom', // This value will be either custom or minmax and in minmax value we will create css by combining min and max values.
+		min:{
+			unit: 'px',
+			value: 10,
+		},
+		max:{
+			unit: 'fr',
+			value: 1,
+		},
+		custom:{
+			unit: 'fr',
+			value: 1,
+		}
+	}
+];
+
 const attributes = {
 	block_id: {
-		type: "string",
+		type: 'string',
 	},
+	DeviceType: {
+		type: 'string',
+		default: 'Desktop'
+	},
+	containerType: {
+		type: 'string',
+		default: 'boxed'
+	},
+	containerTypeFull: {
+		type: 'string',
+		default: 'boxed'
+	},
+	// Container wrapper tag name and link are not required in PHP as it is only used in render and save.
 	htmlTag: {
-		type: "string",
-		default: "div",
+		type: 'string',
+		default: 'div',
 	},
-	layout: {
-		type: "string",
-		default: "",
+	htmlTagLink: {
+		type: 'object',
 	},
-	containerWidth: {
-		type: "string",
-		default: "full-width",
-	},
-	contentBoxWidth: {
-		type: "number",
-		default: 1140,
-	},
-	minimumHeight: {
-		type: "number",
-		default: 0,
-	},
-	equalHeight: {
-		type: "boolean",
+	linkTarget: {
+		type: 'boolean',
 		default: false,
 	},
-	overflow: {
-		type: "string",
-		default: "visible",
+	contentWidth: {
+		type: 'string',
+		default: 'alignfull',
 	},
-	layoutType: {
-		type: "string",
-		default: "flex",
-    },
-    isChildBlock: {
-        type: 'boolean',
-        default: false,
-      },
-      placeholder: {
-        type: 'boolean',
-        default: false,
-      },
-	// Flex attributes
-	flexDirection: {
-		type: "string",
-		default: "row",
+	innerContentWidth: {
+		type: 'string',
+		default: 'alignwide',
 	},
-	flexWrap: {
-		type: "string",
-		default: "nowrap",
+	widthDesktop: {
+		type: 'number',
+		default: 100,
 	},
-	justifyContent: {
-		type: "string",
-		default: "flex-start",
+	widthTablet: {
+		type: 'number',
 	},
-	alignItems: {
-		type: "string",
-		default: "stretch",
+	widthMobile: {
+		type: 'number',
+		default: 100,
 	},
-	alignContent: {
-		type: "string",
-		default: "stretch",
+	widthType: {
+		type: 'string',
+		default: '%',
 	},
-	// Grid attributes
-	gridTemplateColumns: {
-		type: "string",
-		default: "repeat(3, 1fr)",
+
+	// Content boxed width
+	fullWidthContentBoxedWidth: {
+		type: 'object',
+		default: {
+			Desktop: 1200,
+			Tablet: 1024,
+			Mobile: 767
+		}
 	},
-	gridTemplateRows: {
-		type: "string",
-		default: "auto",
+	fullWidthContentBoxedWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
-	gridGap: {
-		type: "string",
-		default: "10px",
+	// End content boxed width
+	innerContentCustomWidthDesktop: {
+		type: 'number',
+		default: 1200,
 	},
-	placeholder: {
-		type: "boolean",
-		default: false,
+	innerContentCustomWidthTablet: {
+		type: 'number',
+		default: 1024,
 	},
-	columns: {
-		type: "number",
-		default: 1,
+	innerContentCustomWidthMobile: {
+		type: 'number',
+		default: 767,
 	},
-	rows: {
-		type: "number",
-		default: 1,
+	innerContentCustomWidthType: {
+		type: 'string',
+		default: 'px',
+	},
+	minHeightDesktop: {
+		type: 'number',
+		isGBSStyle: true,
+	},
+	minHeightTablet: {
+		type: 'number',
+	},
+	minHeightMobile: {
+		type: 'number',
+	},
+	minHeightType: {
+		type: 'string',
+		default: 'px',
+	},
+	directionDesktop: {
+		type: 'string',
+		default: 'column',
+	},
+	directionTablet: {
+		type: 'string',
+	},
+	directionMobile: {
+		type: 'string',
+	},
+	alignItemsDesktop: {
+		type: 'string',
+		default: 'center',
+		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'container-align-items-desktop',
+		},
+	},
+	alignItemsTablet: {
+		type: 'string',
+	},
+	alignItemsMobile: {
+		type: 'string',
+	},
+	justifyContentDesktop: {
+		type: 'string',
+		default: 'center',
+	},
+	justifyContentTablet: {
+		type: 'string',
+		isGBSStyle: true,
+	},
+	justifyContentMobile: {
+		type: 'string',
+	},
+	wrapDesktop: {
+		type: 'string',
+		default: 'nowrap',
+	},
+	wrapTablet: {
+		type: 'string',
+	},
+	wrapMobile: {
+		type: 'string',
+		default: 'wrap',
+	},
+	alignContentDesktop: {
+		type: 'string',
+		default: '',
+	},
+	alignContentTablet: {
+		type: 'string',
+		isGBSStyle: true,
+	},
+	alignContentMobile: {
+		type: 'string',
+	},
+	backgroundType: {
+		type: 'string',
+		default: 'none',
+	},
+	backgroundImageDesktop: {
+		type: 'object',
+	},
+	backgroundImageTablet: {
+		type: 'object',
+	},
+	backgroundImageMobile: {
+		type: 'object',
+	},
+	backgroundPositionDesktop: {
+		type: 'object',
+		default: {
+			x: 0.5,
+			y: 0.5,
+		}
+	},
+	backgroundPositionTablet: {
+		type: 'object',
+	},
+	backgroundPositionMobile: {
+		type: 'object',
+	},
+	backgroundSizeDesktop: {
+		type: 'string',
+		default: 'cover',
+	},
+	backgroundSizeTablet: {
+		type: 'string',
+	},
+	backgroundSizeMobile: {
+		type: 'string',
+	},
+	backgroundRepeatDesktop: {
+		type: 'string',
+		default: 'no-repeat',
+	},
+	backgroundRepeatTablet: {
+		type: 'string',
+	},
+	backgroundRepeatMobile: {
+		type: 'string',
+	},
+	backgroundAttachmentDesktop: {
+		type: 'string',
+		default: 'scroll',
+	},
+	backgroundAttachmentTablet: {
+		type: 'string',
+	},
+	backgroundAttachmentMobile: {
+		type: 'string',
 	},
 	backgroundColor: {
-		type: "string",
+		type: 'string',
 	},
-	backgroundGradient: {
-		type: "string",
-		default: "",
+	backgroundOpacity: {
+		type: 'number',
+	},
+	backgroundImageColor: {
+		type: 'string',
+		default: '#FFFFFF75',
+	},
+	gradientValue: {
+		type: 'string',
+		default: 'linear-gradient(90deg, rgba(6, 147, 227, 0.5) 0%, rgba(155, 81, 224, 0.5) 100%)',
+	},
+	borderStyle: {
+		type: 'string',
+	},
+	borderWidth: {
+		type: 'number',
+	},
+	borderRadius: {
+		type: 'number',
+	},
+	borderColor: {
+		type: 'string',
+	},
+	borderHoverColor: {
+		type: 'string',
+	},
+	boxShadowColor: {
+		type: 'string',
+		default: '#00000070',
+	},
+	boxShadowHOffset: {
+		type: 'number',
+		default: 0,
+	},
+	boxShadowVOffset: {
+		type: 'number',
+		default: 0,
+	},
+	boxShadowBlur: {
+		type: 'number',
+	},
+	boxShadowSpread: {
+		type: 'number',
+	},
+	boxShadowPosition: {
+		type: 'string',
+		default: 'outset',
+	},
+	boxShadowColorHover: {
+		type: 'string',
+	},
+	boxShadowHOffsetHover: {
+		type: 'number',
+		default: 0,
+	},
+	boxShadowVOffsetHover: {
+		type: 'number',
+		default: 0,
+	},
+	boxShadowBlurHover: {
+		type: 'number',
+	},
+	boxShadowSpreadHover: {
+		type: 'number',
+	},
+	boxShadowPositionHover: {
+		type: 'string',
+		default: 'outset',
+	},
+
+	topPaddingDesktop: {
+		type: 'number',
+		default: 10,
+	},
+	bottomPaddingDesktop: {
+		type: 'number',
+		default: 10,
+	},
+	leftPaddingDesktop: {
+		type: 'number',
+		default: 10,
+	},
+	rightPaddingDesktop: {
+		type: 'number',
+		default: 10,
+	},
+	topPaddingTablet: {
+		type: 'number',
+	},
+	bottomPaddingTablet: {
+		type: 'number',
+	},
+	leftPaddingTablet: {
+		type: 'number',
+	},
+	rightPaddingTablet: {
+		type: 'number',
+	},
+	topPaddingMobile: {
+		type: 'number',
+	},
+	bottomPaddingMobile: {
+		type: 'number',
+	},
+	leftPaddingMobile: {
+		type: 'number',
+	},
+	rightPaddingMobile: {
+		type: 'number',
+	},
+	paddingType: {
+		type: 'string',
+		default: 'px',
+	},
+	paddingTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	paddingTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	paddingLink: {
+		type: 'boolean',
+		default: true,
+	},
+
+	topMarginDesktop: {
+		type: 'number',
+	},
+	bottomMarginDesktop: {
+		type: 'number',
+	},
+	leftMarginDesktop: {
+		type: 'number',
+	},
+	rightMarginDesktop: {
+		type: 'number',
+	},
+	topMarginTablet: {
+		type: 'number',
+	},
+	bottomMarginTablet: {
+		type: 'number',
+	},
+	leftMarginTablet: {
+		type: 'number',
+	},
+	rightMarginTablet: {
+		type: 'number',
+	},
+	topMarginMobile: {
+		type: 'number',
+	},
+	bottomMarginMobile: {
+		type: 'number',
+	},
+	leftMarginMobile: {
+		type: 'number',
+	},
+	rightMarginMobile: {
+		type: 'number',
+	},
+	marginType: {
+		type: 'string',
+		default: 'px',
+	},
+	marginTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	marginTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	marginLink: {
+		type: 'boolean',
+		default: true,
+	},
+	variationSelected: {
+		type: 'boolean',
+		default: false,
+	},
+	rowGapDesktop: {
+		type: 'number',
+		default: 0,
+	},
+	rowGapTablet: {
+		type: 'number',
+	},
+	rowGapMobile: {
+		type: 'number',
+	},
+	rowGapType: {
+		type: 'string',
+		default: 'px',
+	},
+	rowGapTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	rowGapTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	columnGapDesktop: {
+		type: 'number',
+		default: 0,
+	},
+	columnGapTablet: {
+		type: 'number',
+	},
+	columnGapMobile: {
+		type: 'number',
+	},
+	columnGapType: {
+		type: 'string',
+		default: 'px',
+	},
+	columnGapTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	columnGapTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	isPreview: {
+		type: 'boolean',
+		default: false,
+	},
+	isBlockRootParent: {
+		type: 'boolean',
+		default: false,
+	},
+	bottomType: {
+		type: 'string',
+		default: 'none',
+	},
+	bottomColor: {
+		type: 'string',
+		default: '#333',
+	},
+	bottomHeight: {
+		type: 'number',
+	},
+	bottomHeightTablet: {
+		type: 'number',
+	},
+	bottomHeightMobile: {
+		type: 'number',
+	},
+	bottomWidth: {
+		type: 'number',
+		default: 100,
+	},
+	topType: {
+		type: 'string',
+		default: 'none',
+	},
+	topColor: {
+		type: 'string',
+		default: '#333',
+	},
+	topHeight: {
+		type: 'number',
+	},
+	topHeightTablet: {
+		type: 'number',
+	},
+	topHeightMobile: {
+		type: 'number',
+	},
+	topWidth: {
+		type: 'number',
+		default: 100,
+	},
+	topFlip: {
+		type: 'boolean',
+		default: false,
+	},
+	bottomFlip: {
+		type: 'boolean',
+		default: false,
+	},
+	topInvert: {
+		type: 'boolean',
+		default: false,
+	},
+	bottomInvert: {
+		type: 'boolean',
+		default: true,
+	},
+	topContentAboveShape: {
+		type: 'boolean',
+		default: false,
+	},
+	bottomContentAboveShape: {
+		type: 'boolean',
+		default: false,
+	},
+	widthSetByUser: {
+		type: 'boolean',
+		default: false,
+	},
+	backgroundCustomSizeDesktop: {
+		type: 'number',
+		default: 100,
+	},
+	backgroundCustomSizeTablet: {
+		type: 'number',
+	},
+	backgroundCustomSizeMobile: {
+		type: 'number',
+	},
+	backgroundCustomSizeType: {
+		type: 'string',
+		default: '%',
+	},
+	overlayType: {
+		type: 'string',
+		default: 'none',
+		isGBSStyle: true,
+	},
+	overlayOpacity: {
+		type: 'number',
+		default: 1,
+	},
+	overlayBlendMode: {
+		type: 'string',
+		default: 'normal',
+	},
+	overlayBlendModeTablet: {
+		type: 'string',
+		default: '',
+	},
+	overlayBlendModeMobile: {
+		type: 'string',
+		default: '',
+	},
+	// Background image position.
+	centralizedPosition: {
+		type: 'boolean',
+		default: false,
+	},
+	customPosition: {
+		type: 'string',
+		default: 'default',
+	},
+	xPositionDesktop: {
+		type: 'number',
+		default: '',
+	},
+	xPositionTablet: {
+		type: 'number',
+	},
+	xPositionMobile: {
+		type: 'number',
+	},
+	xPositionType: {
+		type: 'string',
+		default: 'px',
+	},
+	xPositionTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	xPositionTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+
+	yPositionDesktop: {
+		type: 'number',
+		default: '',
+	},
+	yPositionTablet: {
+		type: 'number',
+	},
+	yPositionMobile: {
+		type: 'number',
+	},
+	yPositionType: {
+		type: 'string',
+		default: 'px',
+	},
+	yPositionTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	yPositionTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+
+	// Background image position.
+	backgroundVideoColor: {
+		type: 'string',
+		default: '#FFFFFF75',
+	},
+	backgroundVideo: {
+		type: 'object',
+	},
+	backgroundVideoOpacity: {
+		type: 'number',
+		default: 0.5,
 	},
 	textColor: {
-		type: "string",
+		type: 'string',
 	},
-	paddingTop: {
-		type: "number",
+	linkColor: {
+		type: 'string',
+	},
+	linkHoverColor: {
+		type: 'string',
+	},
+	// responsive code
+	innerContentCustomWidthTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	innerContentCustomWidthTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+
+	widthTypeTablet: {
+		type: 'string',
+		default: '%',
+	},
+	widthTypeMobile: {
+		type: 'string',
+		default: '%',
+	},
+	minHeightTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	minHeightTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	// correct formating
+	topHeightType: {
+		type: 'string',
+		default: 'px',
+	},
+	topHeightTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	topHeightTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	bottomHeightType: {
+		type: 'string',
+		default: 'px',
+	},
+	bottomHeightTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	bottomHeightTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	overflow: {
+		type: 'string',
+		default: 'visible',
+	},
+	topDividerWidthType: {
+		type: 'string',
+		default: '%',
+	},
+	bottomDividerWidthType: {
+		type: 'string',
+		default: '%',
+	},
+	topDividerHeightType: {
+		type: 'string',
+		default: 'px',
+	},
+	bottomDividerHeightType: {
+		type: 'string',
+		default: 'px',
+	},
+	equalHeight: {
+		type: 'boolean',
+		default: false,
+	},
+	gradientColor1: {
+		type: 'string',
+		default: '#06558a',
+	},
+	gradientColor2: {
+		type: 'string',
+		default: '#0063A1',
+	},
+	gradientType: {
+		type: 'string',
+		default: 'linear',
+	},
+	selectGradient: {
+		type: 'string',
+		default: 'basic',
+	},
+	gradientLocation1: {
+		type: 'number',
 		default: 0,
 	},
-	paddingRight: {
-		type: "number",
+	gradientLocation2: {
+		type: 'number',
+		default: 100,
+	},
+	gradientAngle: {
+		type: 'number',
 		default: 0,
 	},
-	paddingBottom: {
-		type: "number",
+	gradientOverlayAngle: {
+		type: 'number',
 		default: 0,
 	},
-	paddingLeft: {
-		type: "number",
+	backgroundOverlayType: {
+		type: 'string',
+		default: 'none',
+	},
+	backgroundOverlayImageDesktop: {
+		type: 'object',
+	},
+	backgroundOverlayImageTablet: {
+		type: 'object',
+	},
+	backgroundOverlayImageMobile: {
+		type: 'object',
+	},
+	backgroundPositionOverlayDesktop: {
+		type: 'object',
+		default: {
+			x: 0.5,
+			y: 0.5,
+		},
+	},
+	backgroundPositionOverlayTablet: {
+		type: 'object',
+	},
+	backgroundPositionOverlayMobile: {
+		type: 'object',
+	},
+	backgroundSizeOverlayDesktop: {
+		type: 'string',
+		default: 'cover',
+	},
+	backgroundSizeOverlayTablet: {
+		type: 'string',
+	},
+	backgroundSizeOverlayMobile: {
+		type: 'string',
+	},
+	backgroundRepeatOverlayDesktop: {
+		type: 'string',
+		default: 'no-repeat',
+	},
+	backgroundRepeatOverlayTablet: {
+		type: 'string',
+	},
+	backgroundRepeatOverlayMobile: {
+		type: 'string',
+	},
+	backgroundAttachmentOverlayDesktop: {
+		type: 'string',
+		default: 'scroll',
+	},
+	backgroundAttachmentOverlayTablet: {
+		type: 'string',
+	},
+	backgroundAttachmentOverlayMobile: {
+		type: 'string',
+	},
+	backgroundOverlayColor: {
+		type: 'string',
+	},
+	backgroundImageOverlayColor: {
+		type: 'string',
+		default: '#FFFFFF75',
+	},
+	backgroundOverlayImageColor: {
+		type: 'string',
+		default: '#FFFFFF75',
+	},
+	backgroundCustomSizeOverlayDesktop: {
+		type: 'number',
+		default: 100,
+	},
+	backgroundCustomSizeOverlayTablet: {
+		type: 'number',
+	},
+	backgroundCustomSizeOverlayMobile: {
+		type: 'number',
+	},
+	backgroundCustomOverlaySizeType: {
+		type: 'string',
+		default: '%',
+	},
+	customOverlayPosition: {
+		type: 'string',
+		default: 'default',
+	},
+	xPositionOverlayDesktop: {
+		type: 'number',
+		default: '',
+	},
+	xPositionOverlayTablet: {
+		type: 'number',
+	},
+	xPositionOverlayMobile: {
+		type: 'number',
+	},
+	xPositionOverlayType: {
+		type: 'string',
+		default: 'px',
+	},
+	xPositionOverlayTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	xPositionOverlayTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+
+	yPositionOverlayDesktop: {
+		type: 'number',
+		default: '',
+	},
+	yPositionOverlayTablet: {
+		type: 'number',
+	},
+	yPositionOverlayMobile: {
+		type: 'number',
+	},
+	yPositionOverlayType: {
+		type: 'string',
+		default: 'px',
+	},
+	yPositionOverlayTypeTablet: {
+		type: 'string',
+		default: 'px',
+	},
+	yPositionOverlayTypeMobile: {
+		type: 'string',
+		default: 'px',
+	},
+	gradientOverlayColor1: {
+		type: 'string',
+		default: '#06558a',
+	},
+	gradientOverlayColor2: {
+		type: 'string',
+		default: '#0063A1',
+	},
+	gradientOverlayType: {
+		type: 'string',
+		default: 'linear',
+	},
+	selectOverlayGradient: {
+		type: 'string',
+		default: 'basic',
+	},
+	gradientOverlayLocation1: {
+		type: 'number',
 		default: 0,
 	},
-	marginTop: {
-		type: "number",
-		default: 0,
+	gradientOverlayLocation2: {
+		type: 'number',
+		default: 100,
 	},
-	marginRight: {
-		type: "number",
-		default: 0,
+	childrenWidthDesktop: {
+		type: 'string',
 	},
-	marginBottom: {
-		type: "number",
-		default: 0,
+	childrenWidthTablet: {
+		type: 'string',
 	},
-	marginLeft: {
-		type: "number",
-		default: 0,
+	childrenWidthMobile: {
+		type: 'string',
+	},
+
+	// Special Animations Extension Attributes.
+	// At the moment, these are only required for Container and hence these have only been declared here.
+	UAGAnimationDelayInterval: {
+		type: 'number',
+		default: 200,
+	},
+	UAGAnimationDoNotApplyToContainer: {
+		type: 'boolean',
+		default: false,
+	},
+	UAGAnimationShowContainerAdvancedSettings: {
+		type: 'boolean',
+		default: false,
+	},
+	backgroundVideoFallbackImage: {
+		type: 'object',
+	},
+	// --------------------------------------------------------------
+	layout: { // Layout will be either grid or flex and by default it will be flex if not set.
+		type: 'string',
+		default: '',
+	},
+	gridColumnDesktop: {
+		type:'array',
+		default: [ ...gridCssArray ],
+	},
+	gridColumnTablet: {
+		type:'array',
+		default: [ ...gridCssArray ],
+	},
+	gridColumnMobile: {
+		type:'array',
+		default: [ ...gridCssArray ],
+	},
+	gridRowDesktop:{
+		type: 'array',
+		default: [ ...gridCssArray ],
+	},
+	gridRowTablet:{
+		type: 'array',
+		default: [ ...gridCssArray ],
+	},
+	gridRowMobile:{
+		type: 'array',
+		default: [ ...gridCssArray ],
+	},
+	gridAlignItemsDesktop: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridAlignItemsTablet: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridAlignItemsMobile: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridJustifyItemsDesktop: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridJustifyItemsTablet: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridJustifyItemsMobile: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridAlignContentDesktop: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridAlignContentTablet: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridAlignContentMobile: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridJustifyContentDesktop: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridJustifyContentTablet: {
+		type:'string',
+		default: 'stretch',
+	},
+	gridJustifyContentMobile: {
+		type:'string',
+		default: 'stretch',
+	},
+	orderDesktop: {
+		type: 'string',
+		default: 'initial',
+	},
+	orderTablet: {
+		type: 'string',
+		default: 'initial',
+	},
+	orderMobile: {
+		type: 'string',
+		default: 'initial',
+	},
+	customOrderDesktop: {
+		type: 'number',
+	},
+	customOrderTablet: {
+		type: 'number',
+	},
+	customOrderMobile: {
+		type: 'number',
 	},
 };
+
+export default attributes;
