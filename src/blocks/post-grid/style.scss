@@ -132,13 +132,9 @@
 	flex-direction: column;
 	height: 400px;
 	box-shadow: 0 3.17px 19.04px 0 rgba(189, 189, 189, 0.23);
-	width: calc(33.33% - 56px) !important;
+	width: calc(50% - 56px) !important;
 
 	@media only screen and (max-width: 767px) {
-		width: calc(50% - (24px * 2 / 3)) !important;
-	}
-
-	@media only screen and (max-width: 575px) {
 		width: 100% !important;
 	}
 
@@ -168,12 +164,6 @@
 		width: 100%;
 		height: 60px;
 		margin-bottom: 16px;
-	}
-
-	.skeleton-item-button {
-		height: 32px;
-		width: 150px;
-		margin-top: auto;
 	}
 }
 

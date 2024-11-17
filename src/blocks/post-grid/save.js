@@ -21,7 +21,6 @@ export default function save({ attributes }) {
 							<div className="skeleton-item-title loading"></div>
 							<div className="skeleton-item-location loading"></div>
 							<div className="skeleton-item-sport loading"></div>
-							<div className="skeleton-item-button loading"></div>
 						</div>
 					))}
 				</div>
