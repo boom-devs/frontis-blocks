@@ -10,6 +10,7 @@ import {
 import './editor.scss';
 
 export default function FBIconPicker(props) {
+	const { ajaxUrl, nonce } = window.FrontisBlocksData;
 	const { value, setIconHandler } = props;
 	const [showIconPicker, setIconPickerModal] = useState(false);
 	const closeModal = () => setIconPickerModal( false );
@@ -18,18 +19,7 @@ export default function FBIconPicker(props) {
 	const [filteredDefaultIcons, setFilteredDefaultIcons] = useState(defaultSvgIcon);
 	const [selectedCat, setSelectedCat] = useState('all-icons');
 	const [svgIcon, setSvgIcon] = useState([]);
-
-	const iconPickerModal = () => {
-		setIconPickerModal(true);
-	}
-
-	// Insert icon
-	const fbInsertIcon = () => {
-		setIconHandler(insertIcon);
-		setIconPickerModal(false);
-	}
-
-	const categories = [
+	const [categories, setCategories] = useState([
 		{
 			slug: 'all-icons',
 			title: __('All Icons', 'ultimate-addons-for-gutenberg')
@@ -78,7 +68,79 @@ export default function FBIconPicker(props) {
 			slug: 'others',
 			title: __('Others', 'ultimate-addons-for-gutenberg')
 		}
-	];
+	]);
+
+	const iconPickerModal = () => {
+		setIconPickerModal(true);
+	}
+
+	// Insert icon
+	const fbInsertIcon = () => {
+		setIconHandler(insertIcon);
+		setIconPickerModal(false);
+	}
+
+	const updateCustomIcons = (categoriesData) => {
+		if(categoriesData) {
+			// Merge arrays without duplicates in slug or title
+			const mergedCategoryArray = [...categories];
+
+			categoriesData.categories.forEach((newItem) => {
+				const isDuplicate = mergedCategoryArray.some(
+					(item) => item.slug === newItem.slug || item.title === newItem.title
+				);
+
+				if (!isDuplicate) {
+					mergedCategoryArray.push(newItem);
+				}
+			});
+
+			if(categoriesData.names.length > 0) {
+				const chunkSize = 8; // Maximum items per sub-array
+				const customNamesArray = [];
+
+				for (let i = 0; i < categoriesData.names.length; i += chunkSize) {
+					customNamesArray.push(categoriesData.names.slice(i, i + chunkSize));
+				}
+
+				const newDefaultIcons = defaultIcons.concat(customNamesArray);
+				setDefaultIcons(newDefaultIcons);
+				setFilteredDefaultIcons(newDefaultIcons);
+			}
+
+			mergedCategoryArray.sort((a, b) => {
+				if (a.title === "Others") return 1; // push "Others" to the end
+				if (b.title === "Others") return -1; // push "Others" to the end
+				return a.title.localeCompare(b.title); // normal alphabetical sorting
+			});
+			setCategories(mergedCategoryArray);
+		}
+	}
+
+	const fetchCustomIcons = () => {
+		try {
+			const response = jQuery.ajax({
+				url: ajaxUrl,
+				type: 'POST',
+				data: {
+					action: 'fb_get_custom_icons_category',
+					security: nonce
+				}
+			});
+
+			response.done((resData) => {
+				if (resData) {
+					updateCustomIcons(resData.data);
+				}
+			});
+
+			response.fail((jqXHR, textStatus, errorThrown) => {
+				console.error('Error fetching custom icons:', textStatus, errorThrown);
+			});
+		} catch (error) {
+			console.error('Unexpected error:', error);
+		}
+	};
 
 	// Filter icon list
 	const filterIconList = (cat) => {
@@ -185,6 +247,8 @@ export default function FBIconPicker(props) {
 				currentIcon === insertIcon && 'selected',
 			] );
 
+			console.log(svgIcon)
+
 			const actualTitle = svgIcon[currentIcon] ?.label
 				? svgIcon[currentIcon].label
 				: '';
@@ -224,13 +288,15 @@ export default function FBIconPicker(props) {
 		);
 	}
 
-	useEffect( () => {
+	useEffect(  () => {
+		fetchCustomIcons();
 		fetchSvgIcons().then(icons => {
 			if (icons) {
 				setSvgIcon(icons);
 			}
 		});
-	}, [])
+	}, []);
+
 	return (
 		<Fragment>
 			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>
