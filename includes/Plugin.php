@@ -3,12 +3,14 @@
 namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
-use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Core\Blocks;
-use FrontisBlocks\Core\InitialActivatedBlocks;
-use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Utils\Enqueue;
+use FrontisBlocks\Core\UsedBlocks;
 use FrontisBlocks\Config\BlockList;
+use FrontisBlocks\Admin\Ajax\Settings;
+use FrontisBlocks\Admin\Ajax\GlobalSettings;
+use FrontisBlocks\Assets\GenerateFrontendCss;
+use FrontisBlocks\Core\InitialActivatedBlocks;
 
 final class Plugin {
     /**
@@ -123,6 +125,7 @@ final class Plugin {
         define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
         define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
         define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
+        // define('SCRIPT_DEBUG', true);
         define('FB_PLUGIN_BASENAME', plugin_basename(FB_PLUGIN_FILE));
         define('FB_UPGRADE_PRO_URL', 'https://frontis.co/frontis-blocks-pro');
         define('FB_IS_PRO_ACTIVE', class_exists( 'FrontisBlocks\Pro\Plugin' ) ? true : false );
@@ -141,7 +144,7 @@ final class Plugin {
      * Initialize classes
      */
     private function init_classes() {
-       	$this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
+       	$this->asset = Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
 
 
        //load blocks
@@ -173,5 +176,10 @@ final class Plugin {
         Settings::get_instance()->register_ajax_events();
 
         InitialActivatedBlocks::blocks();
+
+        GlobalSettings::get_instance()->register_global_settings_events();
+
+        // UsedBlocks::get_instance()->get_used_frontis_blocks();
+        
     }
 }

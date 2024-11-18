@@ -7,6 +7,7 @@ import {
     TextControl,
     ToggleControl,
     TabPanel,
+    GradientPicker,
 } from '@wordpress/components';
 import {
     COLUMN_HEIGHTS,
@@ -14,11 +15,13 @@ import {
     COLUMN_HORIZONTAL_ALIGNMENTS,
     COLUMN_OVERFLOW,
 } from './constants';
+import FB_Spacing from '@Components/spacing';
 
 const Inspector = (props) => {
     const {
         attributes,
         setAttributes,
+        deviceType,
         colWrap,
         nextBlockClientId,
         prevBlockClientId,
@@ -36,19 +39,39 @@ const Inspector = (props) => {
         borderWidth,
         borderColor,
         borderRadius,
-        paddingTop,
-        paddingRight,
-        paddingBottom,
-        paddingLeft,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
+        paddingUnits,
+        desktopPadding,
+        tabletPadding,
+        mobilePadding,
+        paddingLink,
+        marginUnits,
+        desktopMargin,
+        tabletMargin,
+        mobileMargin,
+        marginLink,
+        columnBorderUnits,
+        columnDesktopBorder,
+        columnTabBorder,
+        columnMobileBorder,
+        columnBorderLink,
     } = attributes;
 
     const onChangeColumnWidth = (newWidth) => {
         setAttributes({ cw_Range: newWidth });
     };
+
+    const paddingUnitsHandler = (value) => setAttributes({ paddingUnits: value });
+    const marginUnitsHandler = (value) => setAttributes({ marginUnits: value });
+
+    const paddingUnitsChange = (value) => setAttributes({ paddingUnits: value });
+    const marginUnitsChange = (value) => setAttributes({ marginUnits: value });
+
+    const paddingLinkBtn = (value) => setAttributes({ paddingLink: value });
+    const marginLinkBtn = (value) => setAttributes({ marginLink: value });
+
+
+    const columnBorderUnitsHandler = (value) => setAttributes({ columnBorderUnits: { ...columnBorderUnits, [deviceType]: value } });
+    const columnBorderLinkBtn = (value) => setAttributes({ columnBorderLink: value });
 
     return (
         <InspectorControls>
@@ -126,10 +149,9 @@ const Inspector = (props) => {
                                         />
                                     )}
                                     {backgroundType === 'gradient' && (
-                                        <TextControl
-                                            label={__('Gradient', 'frontis-blocks')}
+                                        <GradientPicker
                                             value={backgroundGradient}
-                                            onChange={(value) => setAttributes({ backgroundGradient: value })}
+                                            onChange={(newGradient) => setAttributes({ backgroundGradient: newGradient })}
                                         />
                                     )}
                                 </PanelBody>
@@ -147,12 +169,18 @@ const Inspector = (props) => {
                                     />
                                     {borderStyle !== 'none' && (
                                         <>
-                                            <RangeControl
-                                                label={__('Border Width', 'frontis-blocks')}
-                                                value={borderWidth}
-                                                onChange={(value) => setAttributes({ borderWidth: value })}
-                                                min={1}
-                                                max={10}
+                                            <FB_Spacing
+                                                label={__("Border Width", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={columnBorderUnitsHandler}
+                                                spacingUnits={columnBorderUnits[deviceType]}
+                                                spacingDesktop={columnDesktopBorder}
+                                                spacingTablet={columnTabBorder}
+                                                spacingMobile={columnMobileBorder}
+                                                handleSpacingUnitHandler={columnBorderUnitsHandler}
+                                                spacingCombineBtn={columnBorderLink}
+                                                spacingCombineBtnHandler={columnBorderLinkBtn}
+                                                setAttributes={setAttributes}
                                             />
                                             <PanelColorSettings
                                                 title={__('Border Color', 'frontis-blocks')}
@@ -175,61 +203,31 @@ const Inspector = (props) => {
                                     />
                                 </PanelBody>
                                 <PanelBody title={__('Spacing', 'frontis-blocks')}>
-                                    <RangeControl
-                                        label={__('Padding Top', 'frontis-blocks')}
-                                        value={paddingTop}
-                                        onChange={(value) => setAttributes({ paddingTop: value })}
-                                        min={0}
-                                        max={100}
+                                    <FB_Spacing
+                                        label={__("Padding", "frontis-blocks")}
+                                        deviceType={deviceType}
+                                        spacingUnitsHandler={paddingUnitsHandler}
+                                        spacingUnits={paddingUnits}
+                                        spacingDesktop={desktopPadding}
+                                        spacingTablet={tabletPadding}
+                                        spacingMobile={mobilePadding}
+                                        handleSpacingUnitHandler={paddingUnitsChange}
+                                        spacingCombineBtn={paddingLink}
+                                        spacingCombineBtnHandler={paddingLinkBtn}
+                                        setAttributes={setAttributes}
                                     />
-                                    <RangeControl
-                                        label={__('Padding Right', 'frontis-blocks')}
-                                        value={paddingRight}
-                                        onChange={(value) => setAttributes({ paddingRight: value })}
-                                        min={0}
-                                        max={100}
-                                    />
-                                    <RangeControl
-                                        label={__('Padding Bottom', 'frontis-blocks')}
-                                        value={paddingBottom}
-                                        onChange={(value) => setAttributes({ paddingBottom: value })}
-                                        min={0}
-                                        max={100}
-                                    />
-                                    <RangeControl
-                                        label={__('Padding Left', 'frontis-blocks')}
-                                        value={paddingLeft}
-                                        onChange={(value) => setAttributes({ paddingLeft: value })}
-                                        min={0}
-                                        max={100}
-                                    />
-                                    <RangeControl
-                                        label={__('Margin Top', 'frontis-blocks')}
-                                        value={marginTop}
-                                        onChange={(value) => setAttributes({ marginTop: value })}
-                                        min={0}
-                                        max={100}
-                                    />
-                                    <RangeControl
-                                        label={__('Margin Right', 'frontis-blocks')}
-                                        value={marginRight}
-                                        onChange={(value) => setAttributes({ marginRight: value })}
-                                        min={0}
-                                        max={100}
-                                    />
-                                    <RangeControl
-                                        label={__('Margin Bottom', 'frontis-blocks')}
-                                        value={marginBottom}
-                                        onChange={(value) => setAttributes({ marginBottom: value })}
-                                        min={0}
-                                        max={100}
-                                    />
-                                    <RangeControl
-                                        label={__('Margin Left', 'frontis-blocks')}
-                                        value={marginLeft}
-                                        onChange={(value) => setAttributes({ marginLeft: value })}
-                                        min={0}
-                                        max={100}
+                                    <FB_Spacing
+                                        label={__("Margin", "frontis-blocks")}
+                                        deviceType={deviceType}
+                                        spacingUnitsHandler={marginUnitsHandler}
+                                        spacingUnits={marginUnits}
+                                        spacingDesktop={desktopMargin}
+                                        spacingTablet={tabletMargin}
+                                        spacingMobile={mobileMargin}
+                                        handleSpacingUnitHandler={marginUnitsChange}
+                                        spacingCombineBtn={marginLink}
+                                        spacingCombineBtnHandler={marginLinkBtn}
+                                        setAttributes={setAttributes}
                                     />
                                 </PanelBody>
                             </>

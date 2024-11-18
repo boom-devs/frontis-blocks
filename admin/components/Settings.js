@@ -22,7 +22,8 @@ const Settings = () => {
               className={`fb-blocks-settings-tab ${activeTab === tab.id ? 'active' : ''}`}
               onClick={() => handleTabClick(tab.id)}
             >
-              {tab.label}
+              <span className="fb-blocks-settings-tab-icon">{tab.icon}</span>
+              <span className="fb-blocks-settings-tab-label">{tab.label}</span>
             </button>
           ))}
         </div>
