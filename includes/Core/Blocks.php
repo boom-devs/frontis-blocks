@@ -79,25 +79,25 @@ class Blocks
                 $editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
                 wp_enqueue_script($editor_script_handle, FB_PLUGIN_URL . "build/blocks/{$slug}/editor.js", ['wp-blocks', 'wp-element', 'wp-editor'], FB_VERSION, true);
 
-				if ( is_admin() ) {
-
-					$admin_localize_array = [
-						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),
-						'fluent_plugin_active' => FluentForms::check_enable(),
-						'fluent_form_lists'   => json_encode( FluentForms::form_list() ),
-						'contact_form_active' => ContactForms7::check_enable(),
-						'contact_form7_lists'  => ContactForms7::form_list(),
-						'contact_form7_html'  => ContactForms7::wf7_form_html(),
-                        'post_types' => Helper::get_post_types(),
-                        'all_cats' => Helper::get_related_taxonomy()
-					];
-
-					$localize_array = array_merge( $localize_array, $admin_localize_array );
-				}
-
-                $localize_array['pluginUrl'] = FB_PLUGIN_URL;
-                $localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
-                wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
+// 				if ( is_admin() ) {
+//
+// 					$admin_localize_array = [
+// 						'admin_nonce'         => wp_create_nonce( 'admin-nonce' ),
+// 						'fluent_plugin_active' => FluentForms::check_enable(),
+// 						'fluent_form_lists'   => json_encode( FluentForms::form_list() ),
+// 						'contact_form_active' => ContactForms7::check_enable(),
+// 						'contact_form7_lists'  => ContactForms7::form_list(),
+// 						'contact_form7_html'  => ContactForms7::wf7_form_html(),
+//                         'post_types' => Helper::get_post_types(),
+//                         'all_cats' => Helper::get_related_taxonomy()
+// 					];
+//
+// 					$localize_array = array_merge( $localize_array, $admin_localize_array );
+// 				}
+//
+//                 $localize_array['pluginUrl'] = FB_PLUGIN_URL;
+//                 $localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
+//                 wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
             }
         }
     }
