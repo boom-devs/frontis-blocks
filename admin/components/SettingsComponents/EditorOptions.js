@@ -149,7 +149,7 @@ const EditorOptions = () => {
       
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Default Content Width', 'frontis-blocks')}</label>
+          <h3>{__('Default Content Width', 'frontis-blocks')}</h3>
           <p>{__('Set the default width for content in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
@@ -163,7 +163,7 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Button - Inherit From Theme', 'frontis-blocks')}</label>
+          <h3>{__('Button - Inherit From Theme', 'frontis-blocks')}</h3>
           <p>{__('Use button styles from the current theme', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
@@ -176,7 +176,7 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Container Padding', 'frontis-blocks')}</label>
+          <h3>{__('Container Padding', 'frontis-blocks')}</h3>
           <p>{__('Set the default padding for containers in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
@@ -190,7 +190,7 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Container Elements Gap', 'frontis-blocks')}</label>
+          <h3>{__('Container Elements Gap', 'frontis-blocks')}</h3>
           <p>{__('Set the default gap between container elements in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
@@ -204,7 +204,7 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Custom CSS', 'frontis-blocks')}</label>
+          <h3>{__('Custom CSS', 'frontis-blocks')}</h3>
           <p>{__('Enable custom CSS for blocks', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
@@ -217,7 +217,7 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Copy Paste Style', 'frontis-blocks')}</label>
+          <h3>{__('Copy Paste Style', 'frontis-blocks')}</h3>
           <p>{__('Enable copy and paste style functionality', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">

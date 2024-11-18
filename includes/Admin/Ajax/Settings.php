@@ -4,11 +4,22 @@ namespace FrontisBlocks\Admin\Ajax;
 
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
+use FrontisBlocks\Core\FbDatabase;
 
+/**
+ * Settings
+ *
+ * @package FrontisBlocks
+ */
 class Settings extends AjaxBase {
 
     use Singleton;
 
+    /**
+     * register_ajax_events
+     *
+     * @return void
+     */
     public function register_ajax_events() {
         $ajax_events = [
             'get_options',
@@ -36,7 +47,8 @@ class Settings extends AjaxBase {
             'maintenance_mode',
             'coming_soon_page_id',
             'maintenance_page_id',
-            'upload_custom_icons'
+            'upload_custom_icons',
+            'get_custom_icons_category'
         ];
 
         $this->init_ajax_events($ajax_events);
@@ -112,6 +124,13 @@ class Settings extends AjaxBase {
         $this->handle_option_update('enable_templates_button', 'boolean');
     }
 
+    /**
+     * handle_option_update
+     *
+     * @param string $option_name
+     * @param string $type
+     * @return void
+     */
     private function handle_option_update($option_name, $type) {
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
@@ -156,6 +175,13 @@ class Settings extends AjaxBase {
         }
     }
 
+    /**
+     * sanitize_option_value
+     *
+     * @param mixed $value
+     * @param string $type
+     * @return mixed
+     */
     private function sanitize_option_value($value, $type) {
         switch ($type) {
             case 'number':
@@ -172,13 +198,11 @@ class Settings extends AjaxBase {
     // New method to save blocks
     public function save_blocks() {
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
-            error_log('Invalid nonce in save_blocks');
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
 
         if (!current_user_can('manage_options')) {
-            error_log('Insufficient permissions in save_blocks');
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
             return;
         }
@@ -187,7 +211,6 @@ class Settings extends AjaxBase {
         $activeBlocks = get_option('fb_active_blocks');
 
         if (!is_array($blocks)) {
-            error_log('Invalid blocks data in save_blocks: ' . print_r($blocks, true));
             wp_send_json_error(['message' => 'Invalid blocks data'], 400);
             return;
         }
@@ -207,10 +230,8 @@ class Settings extends AjaxBase {
         $updated = update_option('fb_active_blocks', $blocks, true);
 
         if ($updated) {
-            error_log('Blocks updated successfully');
             wp_send_json_success(['message' => 'Blocks updated successfully']);
         } else {
-            error_log('Failed to update blocks');
             wp_send_json_error(['message' => 'Failed to update blocks']);
         }
     }
@@ -280,33 +301,47 @@ class Settings extends AjaxBase {
         $this->handle_option_update('maintenance_page_id', 'text');
     }
 
-    public function generate_custom_icons() {
-    	// Path to the SVG file
-		$filePath = "$extractPath/$filename.svg";
-
-		if (file_exists($filePath)) {
-			// Load the SVG file content
-			$svgContent = file_get_contents($filePath);
-
-			// Extract width, height, and path data using regex
-			preg_match('/width="(\d+)"/', $svgContent, $widthMatches);
-			preg_match('/height="(\d+)"/', $svgContent, $heightMatches);
-			preg_match('/<path[^>]*d="([^"]*)"/', $svgContent, $pathMatches);
-
-			// Structure the SVG data in the desired format
-			$svgData[$filename] = [
-				"svg" => [
-					"solid" => [
-						"width" => (int)($widthMatches[1] ?? 0),
-						"height" => (int)($heightMatches[1] ?? 0),
-						"path" => $pathMatches[1] ?? '',
-					],
-				],
-				"label" => $filename,
-				"custom_categories" => [$post_title],
-			];
+    public function get_custom_icons_category() {
+		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
 		}
 
+		global $wpdb;
+		$meta_key = 'fb_custom_icon';
+
+		// Prepare the SQL query
+		$query = $wpdb->prepare(
+			"SELECT p.ID, p.post_title, p.post_name, pm.meta_value AS fb_custom_icon
+			 FROM {$wpdb->prefix}posts p
+			 JOIN {$wpdb->prefix}postmeta pm ON p.ID = pm.post_id
+			 WHERE p.post_status = %s
+			   AND p.post_type = %s
+			   AND pm.meta_key = %s",
+			'publish',   // Post status
+			'post',      // Post type
+			$meta_key    // Meta key
+		);
+
+		// Execute the query and get results
+		$results = $wpdb->get_results($query);
+		$categories = [];
+		if($results) {
+			foreach( $results as $key => $single_result) {
+				$categories[] = array(
+					'slug' => $single_result->post_name,
+					'title' => $single_result->post_title
+				);
+			}
+		}
+
+		if($categories) {
+			$icons_name = get_option('fb_custom_icons_name');
+			$icons = get_option('fb_custom_icons');
+			wp_send_json_success(['categories' => $categories, 'names' => $icons_name, 'icons' => $icons]);
+		}else {
+		 	wp_send_json_error(['message' => 'Categories not found']);
+	 	}
     }
 
     public function upload_custom_icons() {
@@ -340,6 +375,7 @@ class Settings extends AjaxBase {
 
 		if($results) {
 			$custom_icons = [];
+			$custom_icons_name = [];
 			foreach($results as $key => $single_icon) {
 				$icon_url = $single_icon->fb_custom_icon;
 				$fileName = pathinfo(basename($icon_url), PATHINFO_FILENAME);
@@ -388,30 +424,59 @@ class Settings extends AjaxBase {
 								if ($svgContent === false) {
 									error_log("Failed to read file: $file");
 								} else {
-									// Extract width and height from SVG tag
+
+									// Extract width, height, and viewBox from SVG tag
                                     preg_match('/width="([0-9]+)px"/', $svgContent, $widthMatch);
                                     preg_match('/height="([0-9]+)px"/', $svgContent, $heightMatch);
+                                    preg_match('/viewBox="([^"]+)"/', $svgContent, $viewBoxMatch);
 
                                     $width = isset($widthMatch[1]) ? (int)$widthMatch[1] : 320;  // Default width if not found
                                     $height = isset($heightMatch[1]) ? (int)$heightMatch[1] : 512; // Default height if not found
+                                    $viewBox = isset($viewBoxMatch[1]) ? $viewBoxMatch[1] : '0 0 24 24'; // Default viewBox if not found
 
                                     // Remove XML declaration and <svg> tag attributes, keeping only inner SVG elements
-                                    $svgContent = preg_replace('/<\?xml.*\?>/', '', $svgContent); // Remove XML declaration
-                                    $svgContent = preg_replace('/<svg[^>]*>|<\/svg>/', '', $svgContent); // Remove <svg> tags and attributes
+                                    $svgInnerContent = preg_replace('/<svg[^>]*>|<\/svg>/', '', $svgContent);
+
+                                    // Extract individual SVG elements and their attributes dynamically
+                                    $svgElements = [];
+                                    preg_match_all('/<(\w+)([^>]*)>/', $svgInnerContent, $matches, PREG_SET_ORDER);
+
+                                    foreach ($matches as $match) {
+                                        $tag = $match[1];
+                                        $attributes = [];
+
+                                        // Match each attribute within the element
+                                        preg_match_all('/(\w+)="([^"]*)"/', $match[2], $attrMatches, PREG_SET_ORDER);
+                                        foreach ($attrMatches as $attrMatch) {
+                                            $attributes[$attrMatch[1]] = $attrMatch[2];
+                                        }
+
+                                        $svgElements[] = [
+                                            'type' => $tag,
+                                            'attributes' => $attributes,
+                                        ];
+                                    }
+
+                                    $icon_name = str_replace(' ', '-', $icon_name);
 
                                     // Prepare the formatted array
                                     $custom_icons[$icon_name] = [
-                                            "svg" => [
-                                                "solid" => [
-                                                    "width" => $width,
-                                                    "height" => $height,
-                                                    "path" => trim($svgContent),
-                                                ],
-                                            ],
-                                            "label" => "0",
-                                            "custom_categories" => [$single_icon->post_name],
-                                            "custom_icon" => true
+                                         "svg" => [
+											 "solid" => [
+												 "width" => $width,
+												 "height" => $height,
+												 "viewBox" => $viewBox,
+												 "elements" => $svgElements,
+											 ],
+										 ],
+										 "label" => str_replace(' ', ' ', ucwords(str_replace('-', ' ', $icon_name))),
+										 "custom_categories" => $single_icon->post_name,
+										 "custom_icons" => true
                                     ];
+
+									if(!in_array($icon_name, $custom_icons_name)) {
+										$custom_icons_name[] = $icon_name;
+									}
 								}
 							} else {
 								error_log("File does not exist or is not a file: $file");
@@ -423,7 +488,10 @@ class Settings extends AjaxBase {
 				unlink($tempZipFile);
 			}
 
+			var_dump($custom_icons);
+
 			update_option('fb_custom_icons', $custom_icons, true);
+			update_option('fb_custom_icons_name', $custom_icons_name, true);
 		}
     }
 }

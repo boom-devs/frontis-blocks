@@ -21,8 +21,8 @@ class EnqueueBlocksCss {
 		file_put_contents( $css_file, $minified_css );
 
 		// // Enqueue the generated CSS file
-		// $css_url = trailingslashit( $upload_dir['baseurl'] ) . 'frontis-blocks/' . $css_file_name;
-		// wp_enqueue_style( $block_id, $css_url );
+		$css_url = trailingslashit( $upload_dir['baseurl'] ) . 'frontis-blocks/' . $css_file_name;
+		wp_enqueue_style( $block_id, $css_url );
 	}
 
 	// Function to minify CSS
@@ -80,11 +80,11 @@ class EnqueueBlocksCss {
 			file_put_contents($combined_css_file_path, $minified_css);
 
 			// Delete the original CSS files except for frontis-blocks.min.css
-			foreach ($css_files as $file) {
-				if (basename($file) !== $combined_css_file_name) {
-					unlink($file);
-				}
-			}
+			// foreach ($css_files as $file) {
+			// 	if (basename($file) !== $combined_css_file_name) {
+			// 		unlink($file);
+			// 	}
+			// }
 
 			// Enqueue the combined CSS file
 			$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $combined_css_file_name;

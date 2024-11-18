@@ -175,7 +175,7 @@ const AssetsGeneration = () => {
       
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('File Generation', 'frontis-blocks')}</label>
+          <h3>{__('File Generation', 'frontis-blocks')}</h3>
           <p>{__('Enable automatic file generation', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
@@ -188,7 +188,7 @@ const AssetsGeneration = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <label>{__('Asset Generation', 'frontis-blocks')}</label>
+          <h3>{__('Asset Generation', 'frontis-blocks')}</h3>
           <p>{__('Generate assets for your blocks', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">

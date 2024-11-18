@@ -1,99 +1,59 @@
-# Frontis Blocks
+# === Frontis Blocks ===
 
-Frontis Blocks is a WordPress plugin that adds custom blocks to the Gutenberg editor.
+Contributors: wpmessiah
+Tags: blocks, gutenberg, page builder
+Requires at least: 6.0
+Tested up to: 6.4
+Stable tag: 1.0.0
+Requires PHP: 7.4
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Enhance your WordPress Gutenberg editor with powerful and flexible custom blocks.
+
+## Description
+
+Frontis Blocks is a collection of custom Gutenberg blocks designed to extend the functionality of the WordPress block editor. Our blocks provide you with more design options and flexibility, allowing you to create stunning pages and posts with ease.
+
+### Key Features
+
+- **Multiple Custom Blocks**: A variety of blocks for different purposes, from layout to content presentation.
+- **Easy to Use**: Intuitive controls that integrate seamlessly with the Gutenberg editor.
+- **Responsive Design**: All blocks are fully responsive and look great on any device.
+- **Performance Optimized**: Lightweight and fast-loading blocks that won't slow down your website.
+- **Regular Updates**: We're constantly improving and adding new features based on user feedback.
 
 ## Installation
 
-### Prerequisites
+1. Upload the plugin files to the `/wp-content/plugins/frontis-blocks` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. Use the new blocks in the Gutenberg editor by searching for 'Frontis' in the block inserter.
 
-- WordPress 6.0 or higher
-- PHP 8 or higher
-- Composer
-- Node.js (16.x or higher) and npm
+## Frequently Asked Questions
 
-### Steps
+### Is Frontis Blocks compatible with my theme?
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/boom-devs/frontis-blocks
-   ```
+Yes, Frontis Blocks is designed to work with any WordPress theme that supports Gutenberg.
 
-2. Navigate to the plugin directory:
-   ```
-   cd frontis-blocks
-   ```
+### Do I need coding knowledge to use Frontis Blocks?
 
-3. Install PHP dependencies using Composer:
-   ```
-   composer install
-   ```
+No, our blocks are designed to be user-friendly and don't require any coding knowledge.
 
-4. Install JavaScript dependencies using npm:
-   ```
-   npm install
-   ```
+## Screenshots
 
-5. Build the assets:
-   ```
-   npm run build
-   ```
+1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
+2. This is the second screen shot
 
-6. Activate the plugin in your WordPress admin panel.
+## Changelog
 
-## Development
+### 1.0.0
+* Initial release
 
-### Available Scripts
+## Upgrade Notice
 
-In the project directory, you can run:
+### 1.0.0
+This is the first version of Frontis Blocks. Enjoy!
 
-- `npm start`: Starts the build for development and watches for changes.
-- `npm run build`: Builds the app for production.
-- `npm run format`: Formats files using WordPress coding standards.
-- `npm run lint:css`: Lints CSS files.
-- `npm run lint:js`: Lints JavaScript files.
-- `npm run packages-update`: Updates WordPress packages to the latest version.
-- `npm run plugin-zip`: Creates a zip file of the plugin.
+## Additional Information
 
-### Development Workflow
-
-1. Start the development server:
-   ```
-   npm start
-   ```
-
-2. Make your changes to the blocks or plugin files.
-
-3. The development server will automatically rebuild the assets as you make changes.
-
-4. When you're ready to create a production build, run:
-   ```
-   npm run build
-   ```
-
-## Creating a Plugin ZIP
-
-To create a ZIP file of your plugin for distribution:
-
-1. Ensure you've built the latest version of your assets:
-   ```
-   npm run build
-   ```
-
-2. Run the plugin-zip script:
-   ```
-   npm run plugin-zip
-   ```
-
-3. The ZIP file will be created in the project root directory.
-
-## Support
-
-For support, please open an issue in the GitHub repository.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the GPL-2.0-or-later License.
+For more information, please visit [Wpmessiah](https://wpmessiah.com).

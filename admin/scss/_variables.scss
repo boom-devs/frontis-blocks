@@ -62,13 +62,28 @@ $base-font-size: 14px;
 $base-line-height: 1.5;
 $heading-font-family: "Plus Jakarta Sans", sans-serif;
 $body-font-family: "Work Sans", sans-serif;
+$body-line-height: 1.4;
+$heading-line-height: 1.3;
+
+// Font sizes
+$small-font-size: 12px;
+$medium-font-size: 14px;
+$large-font-size: 16px;
+$x-large-font-size: 18px;
+
+$h1-font-size: 62px;
+$h2-font-size: 42px;
+$h3-font-size: 32px;
+$h4-font-size: 24px;
+$h5-font-size: 20px;
+$h6-font-size: 18px;
 
 // Spacing
 $spacing-unit: 8px;
 $gutter: $spacing-unit * 3;
 
 // Layout
-$sidebar-width: 280px;
+$sidebar-width: 362px;
 $content-width: 800px;
 
 // Borders

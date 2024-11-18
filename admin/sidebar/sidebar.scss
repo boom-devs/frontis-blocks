@@ -71,3 +71,268 @@
 .components-custom-gradient-picker {
   margin-top: 16px;
 }
+
+.fb-global-controls {
+
+    .fb-color-panel {
+		border-top: 0 !important;
+	}
+
+	.fb-add-btn {
+		text-align: center;
+		margin-top: 15px;
+
+		.fb-add-btn__button {
+			text-decoration: none !important;
+			border: 1px solid #037cba;
+			color: #037cba;
+
+			.dashicon {
+				margin-left: 5px;
+			}
+		}
+	}
+
+	.fb-custom-panel {
+
+		.fb-global-typography-element-content {
+			.font_preview_box {
+				width: 100%;
+				height: 70px;
+				text-align: center;
+				background-color: #e2e2e2;
+				align-items: center;
+				justify-content: center;
+				display: flex;
+				margin-bottom: 10px;
+			}
+		}
+
+		.components-tools-panel-item,
+		.fb-custom-element {
+			position: relative;
+			display: flex;
+			gap: 10px;
+			align-items: center;
+			border: 1px solid #ddd;
+			border-bottom: 0px;
+			padding: 5px 15px;
+
+			&:first-child {
+				border-top-left-radius: 4px;
+				border-top-right-radius: 4px;
+			}
+
+			&:last-child {
+				border-bottom: 1px solid #ddd;
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
+			}
+
+			.fb-custom-element__edit-input {
+				margin: 0 !important;
+
+				&>div {
+					margin: 0 !important;
+				}
+
+				input {
+					background-color: transparent;
+					border: 0 !important;
+					outline: 0;
+
+				}
+			}
+
+			.components-navigator-button {
+				padding: 0;
+				width: 100%;
+
+				.font_preview {
+					margin-right: 10px;
+					padding: 4px;
+					background-color: #e2e2e2;
+				}
+
+				.edit_indecator {
+					border: 3px solid #037cba;
+					border-radius: 50%;
+					position: absolute;
+					right: 0;
+					top: 50%;
+					margin-top: -2px;
+				}
+			}
+
+			.fb-delete-item {
+				position: absolute;
+				right: 0;
+				top: 50%;
+				transform: translate(0px, -50%);
+				border: 0px;
+				background-color: #f54242;
+				color: #fff;
+				padding: 0;
+				border-radius: 50%;
+				width: 22px;
+				height: 22px;
+				text-align: center;
+				visibility: hidden;
+				opacity: 0;
+				transition: all .3s;
+
+				&:hover {
+					cursor: pointer;
+				}
+
+				.dashicons {
+					font-size: 16px;
+					line-height: 1em;
+					padding-top: 2px;
+				}
+			}
+
+			&:hover {
+				.fb-delete-item {
+					visibility: visible;
+					opacity: 1;
+					transform: translate(-10px, -50%);
+				}
+			}
+		}
+	}
+    .fb-custom-color-panel {
+		.components-tools-panel-item {
+			position: relative;
+
+			.fb-delete-custom-color {
+				position: absolute;
+				right: 0;
+				top: 50%;
+				transform: translate(0px, -50%);
+				border: 0px;
+				background-color: #f54242;
+				color: #fff;
+				padding: 0;
+				border-radius: 50%;
+				width: 22px;
+				height: 22px;
+				text-align: center;
+				visibility: hidden;
+				opacity: 0;
+				transition: all .3s;
+
+				&:hover {
+					cursor: pointer;
+				}
+
+				.dashicons {
+					font-size: 16px;
+					line-height: 1em;
+					padding-top: 2px;
+				}
+			}
+
+			&:hover {
+				.fb-delete-custom-color {
+					visibility: visible;
+					opacity: 1;
+					transform: translate(-10px, -50%);
+				}
+			}
+		}
+	}
+
+	.fb-global-color-tab-panel {
+		.components-tab-panel__tabs {
+			margin-bottom: 20px;
+			border-bottom: 1px solid #ddd;
+
+			.components-tab-panel__tabs-item {
+				padding: 0;
+				margin-right: 15px;
+				min-width: 50px;
+				border-bottom: 2px solid transparent;
+
+				&.active-tab {
+					border-bottom: 2px solid #000;
+				}
+			}
+		}
+
+		.fb-color-panel {
+			padding: 0;
+		}
+
+		.fb-custom-gradient-color-panel .item-content {
+			padding: 0px !important;
+		}
+
+		.fb-gradient-color-label {
+			color: #1e1e1e !important;
+			font-size: 13px !important;
+			margin-bottom: 15px !important;
+		}
+
+		.fb-gradient-color-list {
+			display: flex;
+			flex-flow: column;
+
+			.fb-custom-color-item {
+
+				&:hover {
+					cursor: pointer;
+
+					.actions {
+						transform: translate(0px, 0px);
+						opacity: 1;
+						visibility: visible;
+					}
+				}
+
+				.item-content {
+					padding: 10px 0px;
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					gap: 10px;
+				}
+
+				.actions {
+					margin-left: auto;
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					gap: 5px;
+					transform: translate(0px, -15px);
+					opacity: 0;
+					visibility: hidden;
+					width: 0;
+
+					.dashicon {
+						font-size: 14px;
+					}
+
+					.fb-delete {
+						background-color: #f54242;
+						color: #fff;
+						padding: 0;
+						border-radius: 50%;
+						width: 22px;
+						height: 22px;
+						padding-top: 3px;
+						text-align: center;
+						margin-top: -5px;
+					}
+
+				}
+			}
+
+		}
+	}
+}
+
+#fb-global-panel-icon {
+  width: 24px !important;
+  height: 24px !important;
+}

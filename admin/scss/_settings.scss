@@ -32,18 +32,29 @@
     border: none;
     cursor: pointer;
     transition: background-color $transition-duration;
-    font-size: $base-font-size;
-    color: $dark-gray;
+    font-family: $body-font-family;
+    font-size: $x-large-font-size;
+    font-weight: 500;
+    color: $neutral-color-600;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &-icon {
+      margin-right: $spacing-unit;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
 
     &:hover {
-      background-color: $light-gray;
+      background-color: $primary-color-50;
     }
 
     &.active {
-      font-weight: 600;
-      background-color: $tab-active-background;
-      color: $text-color;
-      box-shadow: inset 3px 0 0 $primary-color;
+      background-color: $primary-color-50;
+      color: $primary-color;
     }
   }
 
@@ -77,19 +88,21 @@
         flex: 1;
         padding-right: 30px;
 
-        label {
+        h3 {
+          font-family: $heading-font-family;
           font-weight: 600;
           margin-bottom: 8px;
           display: block;
-          font-size: 14px;
-          color: #23282d;
+          font-size: $h5-font-size;
+          color: $neutral-color-900;
+          line-height: $heading-line-height;
         }
 
         p {
           margin: 0;
-          font-size: 13px;
-          color: #666;
-          line-height: 1.5;
+          font-size: $medium-font-size;
+          color: $neutral-color-600;
+          line-height: 1.3;
         }
       }
 

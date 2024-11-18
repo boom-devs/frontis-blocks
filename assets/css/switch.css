@@ -41,12 +41,12 @@
   -webkit-animation-name: rcSwitchOff;
           animation-name: rcSwitchOff;
 }
-.rc-switch:hover:after {
+/* .rc-switch:hover:after {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
   -webkit-animation-name: rcSwitchOn;
           animation-name: rcSwitchOn;
-}
+} */
 .rc-switch:focus {
   box-shadow: 0 0 0 2px #d5f1fd;
   outline: none;
@@ -72,12 +72,12 @@
           animation-name: none;
   cursor: no-drop;
 }
-.rc-switch-disabled:hover:after {
+/* .rc-switch-disabled:hover:after {
   -webkit-transform: scale(1);
           transform: scale(1);
   -webkit-animation-name: none;
           animation-name: none;
-}
+} */
 .rc-switch-label {
   display: inline-block;
   line-height: 20px;

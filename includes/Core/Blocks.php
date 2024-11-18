@@ -58,11 +58,15 @@ class Blocks
                 $plugin_slug = 'frontis-blocks';
 
                 if (!file_exists($blocks_dir)) {
-                    error_log($blocks_dir);
+                    // error_log($blocks_dir);
                     continue;
                 }
 
-                $localize_array = [];
+                $localize_array = [
+					'nonce' => wp_create_nonce('fb_settings_nonce'),
+					'ajaxUrl' => admin_url('admin-ajax.php'),
+					'restUrl' => get_rest_url(),
+                ];
 
                 // Register the block
                 $rb = register_block_type($blocks_dir);

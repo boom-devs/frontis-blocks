@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Container",
 	"category": "frontis-blocks",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "Container block",
 	"example": {},
     "supports": {
         "anchor": true,

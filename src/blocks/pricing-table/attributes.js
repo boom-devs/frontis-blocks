@@ -1143,6 +1143,86 @@ const attributes = {
 		}
 	},
 
+	priceFeatureItemPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureItemDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemTabPadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemMobilePadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	priceFeaturePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '42',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureTabPadding: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '42',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureMobilePadding: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '30',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeaturePaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
 	/** End feature Title */
 
 	/** Start price Button */
@@ -1806,6 +1886,74 @@ const attributes = {
 		type: "string",
 		default: "What Value Add For Your Business"
 	},
+	priceAfterTextFontFamily: {
+		type: "string",
+		default: "",
+	},
+	priceAfterTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '14',
+			Tablet: '14',
+			Mobile: '14'
+		}
+	},
+	priceAfterTextFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceAfterTextFontWeight: {
+		type: "string",
+		default: ""
+	},
+	priceAfterTextFontStyle: {
+		type: "string",
+		default: ""
+	},
+	priceAfterTextTextTransform: {
+		type: "string",
+		default: ""
+	},
+	priceAfterTextTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	priceAfterTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceAfterTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceAfterTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceAfterTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	priceAfterTextColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -1831,6 +1979,51 @@ const attributes = {
 		type: 'string',
 		default: ""
 	},
+	priceAfterTextBgColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    priceAfterTextNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    priceAfterTextNormalClassicColor: {
+        type: "string",
+        default: "#FFFFFF",
+    },
+    priceAfterTextNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    priceAfterTextNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    priceAfterTextNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    
+    priceAfterTextHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    priceAfterTextHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    priceAfterTextHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    priceAfterTextHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    priceAfterTextHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
 
 	/** Start Padding */
 	priceAfterTextPaddingUnits: {
@@ -1984,28 +2177,85 @@ const attributes = {
 		default: "Billed every year Popular amongst entrepeneurs $497 per year"
 	},
 
+
+	priceFeatureAfterTextFontFamily: {
+		type: "string",
+		default: "",
+	},
+	priceFeatureAfterTextFontSize: { 
+		type: 'object',
+		default: {
+			Desktop: '18',
+			Tablet: '18',
+			Mobile: '18'
+		}
+	},
+	priceFeatureAfterTextFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceFeatureAfterTextFontWeight: {
+		type: "string",
+		default: "400"
+	},
+	priceFeatureAfterTextFontStyle: {
+		type: "string",
+		default: ""
+	},
+	priceFeatureAfterTextTextTransform: {
+		type: "string",
+		default: ""
+	},
+	priceFeatureAfterTextTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	priceFeatureAfterTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceFeatureAfterTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceFeatureAfterTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceFeatureAfterTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
 	priceFeatureAfterTextColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
 	priceFeatureAfterTextColor: {
 		type: "string",
-		default: ""
+		default: "#15171C"
 	},
 	priceFeatureAfterTextHoverColor: {
-		type: 'string',
-		default: ""
-	},
-
-	priceFeatureAfterTextBgColorSwitcher: {
-		type: "string",
-		default: "normal"
-	},
-	priceFeatureAfterTextBgColor: {
-		type: "string",
-		default: ""
-	},
-	priceFeatureAfterTextBgHoverColor: {
 		type: 'string',
 		default: ""
 	},
