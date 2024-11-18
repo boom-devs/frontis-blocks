@@ -16,8 +16,7 @@
 		"align": ["wide", "full"]
 	},
 	"textdomain": "frontis-blocks",
-	"editorScript": "fb_combined_index",
-	"editorStyle": "fb_combined_index",
-	"style": "fb_combined_style",
-	"viewScript": "fb_combined_view"
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
 }

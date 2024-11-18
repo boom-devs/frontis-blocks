@@ -49,7 +49,7 @@ class Admin {
         if('toplevel_page_frontis-blocks' != $hook){
             return;
         }
-        
+
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
 
         wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.css', array(), '1.0.0');
@@ -62,7 +62,7 @@ class Admin {
             return;
         }
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
-        
+
         wp_enqueue_script('jquery');
         $script_path = FB_PLUGIN_PATH . 'assets/admin/index' . $suffix . '.js';
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
@@ -70,7 +70,7 @@ class Admin {
 
         //push jquery in $script_asset['dependencies']
         $script_asset['dependencies'][] = 'jquery';
-        
+
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
         // Get the blocks list
         $blocks = BlockList::get_instance()->get_blocks();
@@ -531,11 +531,7 @@ class Admin {
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.asset.php';
         $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
 
-        
-
-
         wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
-
         wp_localize_script('frontis-blocks-admin-sidebar', 'frontisBlocksAdminSidebar', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('fb_sidebar_nonce'),
