@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "wp-scripts build --webpack-copy-php",
+    "build": "wp-scripts build --config webpack.config.js",
     "format": "wp-scripts format",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",
@@ -12,7 +12,6 @@
     "plugin-zip": "grunt build",
     "start": "wp-scripts start --webpack-copy-php",
     "admin": "wp-scripts start --webpack-src-dir=admin --output-path=assets/admin --config webpack.config.admin.js",
-    "combine": "wp-scripts start --config webpack.minify.js",
     "admin:build": "wp-scripts build --webpack-src-dir=admin --output-path=assets/admin --config webpack.config.admin.js",
     "blocks": "wp-scripts build --config webpack.blocks.config.js",
     "blocks:start": "wp-scripts start --config webpack.blocks.config.js"
