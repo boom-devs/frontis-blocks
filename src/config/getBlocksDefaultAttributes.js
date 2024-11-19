@@ -5,7 +5,6 @@ import testimonialAttribute from '@Blocks/testimonial/attributes';
 import teamAttribute from '@Blocks/team-member/attributes';
 import socialAttribute from '@Blocks/social-icons/attributes';
 import callToActionAttribute from '@Blocks/call-to-action/attributes';
-import columnAttribute from '@Blocks/column/attributes';
 import containerAttribute from '@Blocks/container/attributes';
 import imageGalleryAttribute from '@Blocks/image-gallery/attributes';
 import countdownAttribute from '@Blocks/countdown/attributes';
@@ -18,7 +17,6 @@ export const blocksAttributes = {
 	'team': teamAttribute,
 	'social-share': socialAttribute,
 	'call-to-action': callToActionAttribute,
-	'column': columnAttribute,
 	'container': containerAttribute,
 	'image-gallery': imageGalleryAttribute,
 	'countdown': countdownAttribute,

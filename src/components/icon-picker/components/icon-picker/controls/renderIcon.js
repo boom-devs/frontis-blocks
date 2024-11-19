@@ -14,10 +14,7 @@ const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0'
 const getDataFromLocalStorage = () => {
 	let data = localStorage.getItem('iconData');
 	data = data ? JSON.parse(data) : null;
-
-	let customIconData = localStorage.getItem('iconCustomData');
-	customIconData = customIconData ? JSON.parse(customIconData) : null;
-	return { ...data, ...customIconData };
+	return data;
 };
 
 // Fetch SVG icons from the API
@@ -112,18 +109,16 @@ function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 
 	let data = getDataFromLocalStorage();
 	if (!data) {
-		let customIconData = '';
-		fetchCustomIcons()
-			.then((icons) => {
-				if (icons) {
-					customIconData = icons;
-				}
-			});
+		// let customIconData = '';
+		// fetchCustomIcons()
+		// 	.then((icons) => {
+		// 		if (icons) {
+		// 			customIconData = icons;
+		// 		}
+		// 	});
 		fetchFromApi().then(fetchedData => {
 			data = fetchedData;
 		});
-
-		data = {...data, ...customIconData};
 	}
 
 	const svgIcon = data;

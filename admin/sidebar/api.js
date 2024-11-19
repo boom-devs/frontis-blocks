@@ -1,4 +1,5 @@
 export const updateSettings = async (settingType, data) => {
+	console.log(settingType)
     try {
         const response = await jQuery.ajax({
             url: window.frontisBlocksAdminSidebar.ajaxUrl,
@@ -43,4 +44,4 @@ export const getSettings = async (settingType) => {
         console.error('Ajax error:', error);
         throw error;
     }
-}; 
+};

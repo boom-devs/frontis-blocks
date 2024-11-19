@@ -111,7 +111,7 @@ function FrontisBlocksSidebar(props) {
     const [gradientColors, setGradientColors] = useState([]);
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
-    
+
 
 	const [heading, setHeading] = useState({
 		fontFamily: '',
@@ -165,8 +165,6 @@ function FrontisBlocksSidebar(props) {
 		setDeviceType(newDeviceType);
 	};
 
-	
-
 	const colorPanelArray = (colors, setColor, defaults = []) => {
 		if (typeof colors !== "object") {
 			return [];
@@ -183,7 +181,7 @@ function FrontisBlocksSidebar(props) {
 		);
 		return colorArr;
     };
-    
+
 	//Update Global Colors
     const setGlobalColor = (index, color) => {
         const colors = [...globalColors];
@@ -191,6 +189,7 @@ function FrontisBlocksSidebar(props) {
         setGlobalColors([...colors]);
         updateGlobalColors(colors);
     };
+
     //Update Gradient Colors
     const setGradientColor = (index, color) => {
         const colors = [...gradientColors];
@@ -204,11 +203,11 @@ function FrontisBlocksSidebar(props) {
         setCustomColors([...colors]);
     };
 
-	const { 
-        saveGlobalColors, 
+	const {
+        saveGlobalColors,
         saveGradientColors,
         saveCustomColors,
-        saveTypography 
+        saveTypography
     } = useDispatch('frontis-blocks');
 
 	const updateGlobalColors = (colors) => {
@@ -272,7 +271,7 @@ function FrontisBlocksSidebar(props) {
 											disableAlpha={true}
 											disableCustomGradients={false}
                                             colorSettings={ colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
-                                            />
+										/>
                                             {customColors && customColors.length > 0 && (
                                                 <ColorPalletWrapper
                                                     colorPanelArray={colorPanelArray}
@@ -295,12 +294,12 @@ function FrontisBlocksSidebar(props) {
                                                     ])}
                                                 >Add Custom Color <Dashicon icon={"plus"} /></Button>
                                             </div>
-                                        
+
 									</>
 								)}
                                 { tab.name === "gradient" && (
                                     <>
-                                    								
+
                                     {/* Gradient Color Pallet */ }
                                     <GradientColorPallet
                                         title={"Gradient Colors"}
@@ -310,7 +309,7 @@ function FrontisBlocksSidebar(props) {
                                         wrapperClass={"fb-gradient-color-panel"}
                                         resetAction={true}
                                         />
-                                    </>	
+                                    </>
 								)}
 							</div>
 						)}

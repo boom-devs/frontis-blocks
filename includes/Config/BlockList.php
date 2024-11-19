@@ -61,17 +61,6 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/docs/container',
                 'demo'      => 'https://wpmessiah.com/demo/container',
             ],
-            'column' => [
-                'slug'      => 'column',
-                'title'     => 'Column',
-                'package'   => 'free',
-                'category'  => 'layout',
-                'badge'     => 'free',
-                'status'    => 'true',
-                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
-                'doc'       => 'https://wpmessiah.com/docs/column',
-                'demo'      => 'https://wpmessiah.com/demo/column',
-            ],
             'advanced-image' => [
                 'slug'      => 'advanced-image',
                 'title'     => 'Advanced Image',
