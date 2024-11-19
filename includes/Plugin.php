@@ -101,7 +101,7 @@ final class Plugin {
 		}
 
 		if (has_block('frontis-blocks/advanced-video')) {
-			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/public/ReactPlayer-standalone.js');
+			wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
 		}
 	}
 

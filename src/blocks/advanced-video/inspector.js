@@ -868,6 +868,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
             border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
         }
+        .${blockID} .fb-player-wrapper .fb-play-icon svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: ${videoPlayIconSize.Desktop ? videoPlayIconSize.Desktop + videoPlayIconSizeUnits.Desktop : '64px'} !important;
+            height: ${videoPlayIconSize.Desktop ? videoPlayIconSize.Desktop + videoPlayIconSizeUnits.Desktop : '64px'} !important;
+            padding: ${videoPlayIconPaddingDesktopWidth};
+            fill: ${videoPlayIconColor ? videoPlayIconColor : '#fff'};
+            background-color: ${videoPlayIconBgColor ? videoPlayIconBgColor : ''};
+            border: ${videoPlayIconBorder};
+            border-width: ${videoPlayIconBorderDesktopWidth};
+            border-radius: ${videoPlayIconBorderRadiusDesktopWidth} !important;
+            border-color: ${videoPlayIconBorderColor ? videoPlayIconBorderColor : ''};
+            cursor: pointer;
+            z-index: 999999;
+        }
+
+        .${blockID} .fb-player-wrapper .fb-play-icon svg:hover {
+            fill: ${videoPlayIconHoverColor ? videoPlayIconHoverColor : '#fff'};
+            background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
+            border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
+        }
 
         .${blockID} .fb-react-player iframe {
             border: ${videoBorder};
