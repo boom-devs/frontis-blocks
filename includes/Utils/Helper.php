@@ -155,6 +155,13 @@ class Helper
 		return apply_filters( 'uagb_post_loop_taxonomies', $return_array );
 	}
 
+    public static function get_page_name() {
+        global $wp_query;
+        if($wp_query->queried_object) {
+        	return $wp_query->queried_object->post_name;
+        }
+    }
+
     public static function get_post_types() {
         $post_types = get_post_types(
             array(
@@ -284,9 +291,5 @@ class Helper
         }
 
         return false;
-    }
-
-    public static function get_option($option_name, $default = null) {
-        return get_option($option_name, $default);
     }
 }
