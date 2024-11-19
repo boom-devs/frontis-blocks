@@ -58,15 +58,11 @@ class Blocks
                 $plugin_slug = 'frontis-blocks';
 
                 if (!file_exists($blocks_dir)) {
-                    // error_log($blocks_dir);
+                    error_log($blocks_dir);
                     continue;
                 }
 
-                $localize_array = [
-					'nonce' => wp_create_nonce('fb_settings_nonce'),
-					'ajaxUrl' => admin_url('admin-ajax.php'),
-					'restUrl' => get_rest_url(),
-                ];
+                $localize_array = [];
 
                 // Register the block
                 $rb = register_block_type($blocks_dir);
@@ -150,7 +146,8 @@ class Blocks
     }
 
     public function combined_frontis_blocks_assets() {
-        EnqueueBlocksCss::combined_css_files();
+        $page_name = Helper::get_page_name();
+        EnqueueBlocksCss::combined_css_files($page_name);
     }
 
     public function register_block_categories( $categories ) {
