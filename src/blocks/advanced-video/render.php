@@ -17,7 +17,7 @@ $videoPlayIcon = isset( $attributes['videoPlayIcon'] ) ? sanitize_text_field( $a
 
 ?>
 
-<script src='https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js'></script>
+<!-- <script src='https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js'></script> -->
 
 <div <?php echo get_block_wrapper_attributes(); ?>>
 
