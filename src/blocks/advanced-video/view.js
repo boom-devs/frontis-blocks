@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const controls = container.getAttribute('data-controls') === 'true';
         const previewImage = container.getAttribute('data-preview-image');
         const playIcon = container.getAttribute('data-play-icon');
-        console.log(playIcon);
-        console.log(previewImage);
+        
         renderReactPlayer(container, { 
             url: url,
             playing: autoPlay,

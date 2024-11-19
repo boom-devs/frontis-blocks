@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 
 import { 
     SelectControl,
@@ -234,6 +234,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialGlobalBoxShadowValues,
         TestimonialGlobalBoxShadowCssValue,
 
+        blockStyle,
+
     } = attributes;
 
     useEffect(() => {
@@ -243,6 +245,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
+
+
+    useEffect(() => {
+		if (TestimonialTitleFontFamily) {
+			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialTitleFontFamily.replace(' ', '+')}`;
+			const linkElement = document.createElement('link');
+			linkElement.rel = 'stylesheet';
+			linkElement.href = fontUrl;
+			document.head.appendChild(linkElement);
+		}
+	}, [TestimonialTitleFontFamily]);
+
+    useEffect(() => {
+		if (TestimonialDescFontFamily) { 
+			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialDescFontFamily.replace(' ', '+')}`;
+			const linkElement = document.createElement('link');
+			linkElement.rel = 'stylesheet';
+			linkElement.href = fontUrl;
+			document.head.appendChild(linkElement);
+		}
+	}, [TestimonialDescFontFamily]);
+
+    useEffect(() => {
+		if (TestimonialAuthorFontFamily) { 
+			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialAuthorFontFamily.replace(' ', '+')}`;
+			const linkElement = document.createElement('link');
+			linkElement.rel = 'stylesheet';
+			linkElement.href = fontUrl;
+			document.head.appendChild(linkElement);
+		}
+	}, [TestimonialAuthorFontFamily]);
+
+
+    useEffect(() => {
+		if (TestimonialDesignationFontFamily) { 
+			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialDesignationFontFamily.replace(' ', '+')}`;
+			const linkElement = document.createElement('link');
+			linkElement.rel = 'stylesheet';
+			linkElement.href = fontUrl;
+			document.head.appendChild(linkElement);
+		}
+	}, [TestimonialDesignationFontFamily]);
+
+
 
     const quoteIconHandler = (IconName) => {
 		setAttributes({TestimonialQuoteIcon: IconName})
@@ -1542,6 +1588,482 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet.top}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.right}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.bottom}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.left}${TestimonialGlobalBorderRadiusUnits.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile.top}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.right}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.bottom}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.left}${TestimonialGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
+
+
+
+
+    // const allBlockStyle = useMemo(() => `
+    //     .fb-testimonial-main-wrapper.${blockID} {
+    //         z-index: ${TestimonialGlobalZIndex !== undefined ? TestimonialGlobalZIndex : ''} !important;
+    //         position: relative;
+    //     }
+    //     .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
+    //         ${TestimonialGlobalBgColor ? `background-color: ${TestimonialGlobalBgColor};` : ''} 
+    //         ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+    //         ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
+    //         ${TestimonialGlobalBorder ? `border: ${TestimonialGlobalBorder};` : ''} 
+    //         ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+    //         ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+    //         ${TestimonialGlobalBorderColor ? `border-color: ${TestimonialGlobalBorderColor};` : ''}
+    //         ${TestimonialGlobalBoxShadowCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowCssValue};` : ''}
+    //         transition: all .3s ease-in-out;
+    //         position: relative;
+    //     }
+    //     .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section:hover {
+    //         ${TestimonialGlobalBgHoverColor ? `background-color: ${TestimonialGlobalBgHoverColor};` : ''} 
+    //         ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
+    //     }
+
+    //     .${blockID} .fb-testimonial-image img {
+    //         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
+    //         ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
+    //         border-radius: ${testimonialImageDesktopBorderRadiusWidth};
+    //         ${testimonialImageDesktopMargin ? `margin: ${testimonialImageDesktopMargin};` : ''}
+    //         ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
+    //         ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Desktop && TestimonialImageTopPositionUnits.Desktop ? `${TestimonialImageTopPosition.Desktop}${TestimonialImageTopPositionUnits.Desktop}` : '0'};` : ''}
+    //         ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Desktop && TestimonialImageLeftPositionUnits.Desktop ? `${TestimonialImageLeftPosition.Desktop}${TestimonialImageLeftPositionUnits.Desktop}` : '0'};` : ''}
+    //     }
+    //     .${blockID} .fb-testimonial-quote-icon {
+    //         ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
+    //         ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Desktop && TestimonialQuoteIconTopPositionUnits.Desktop ? `${TestimonialQuoteIconTopPosition.Desktop}${TestimonialQuoteIconTopPositionUnits.Desktop}` : '0'};` : ''}
+    //         ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Desktop && TestimonialQuoteIconLeftPositionUnits.Desktop ? `${TestimonialQuoteIconLeftPosition.Desktop}${TestimonialQuoteIconLeftPositionUnits.Desktop}` : '0'};` : ''}
+    //         ${testimonialQuoteIconDesktopMargin ? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
+    //     }
+    //     .${blockID} .fb-testimonial-quote-icon svg {
+    //         ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
+    //         ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `height: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
+    //         fill: ${TestimonialQuoteIconColor};
+    //     }
+    //     .${blockID} .fb-testimonial-quote-icon:hover svg {
+    //         fill: ${TestimonialQuoteIconHoverColor};
+    //     }
+    //     .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+    //         ${TestimonialTitleFontFamily ? `font-family: ${TestimonialTitleFontFamily};` : ''}
+    //         ${TestimonialTitleFontSize.Desktop && TestimonialTitleFontSizeUnits.Desktop ? `font-size: ${TestimonialTitleFontSize.Desktop}${TestimonialTitleFontSizeUnits.Desktop};` : '24px'}
+    //         ${TestimonialTitleFontWeight ? `font-weight: ${TestimonialTitleFontWeight};` : ''}
+    //         ${TestimonialTitleFontStyle ? `font-style: ${TestimonialTitleFontStyle};` : ''}
+    //         ${TestimonialTitleTextTransform ? `text-transform: ${TestimonialTitleTextTransform};` : ''}
+    //         ${TestimonialTitleTextDecoration ? `text-decoration: ${TestimonialTitleTextDecoration};` : ''}
+    //         ${TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
+    //         ${TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
+    //         ${TestimonialTitleColor ? `color: ${TestimonialTitleColor};` : ''}
+    //         ${testimonialTitleDesktopMargin ? `margin: ${testimonialTitleDesktopMargin};` : ''}
+            
+    //     }
+    //     .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
+    //         ${TestimonialTitleHoverColor ? `color: ${TestimonialTitleHoverColor};` : ''}
+    //     }
+    //     .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+    //         ${TestimonialDescFontFamily ? `font-family: ${TestimonialDescFontFamily};` : ''}
+    //         ${TestimonialDescFontSize.Desktop && TestimonialDescFontSizeUnits.Desktop ? `font-size: ${TestimonialDescFontSize.Desktop}${TestimonialDescFontSizeUnits.Desktop};` : ''}
+    //         ${TestimonialDescFontWeight ? `font-weight: ${TestimonialDescFontWeight};` : ''}
+    //         ${TestimonialDescFontStyle ? `font-style: ${TestimonialDescFontStyle};` : ''}
+    //         ${TestimonialDescTextTransform ? `text-transform: ${TestimonialDescTextTransform};` : ''}
+    //         ${TestimonialDescTextDecoration ? `text-decoration: ${TestimonialDescTextDecoration};` : ''}
+    //         ${TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
+    //         ${TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
+    //         ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
+    //         ${testimonialDescDesktopMargin ? `margin: ${testimonialDescDesktopMargin};` : ''}
+    //     }
+    //     .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
+    //         ${TestimonialDescHoverColor ? `color: ${TestimonialDescHoverColor};` : ''}
+    //     }
+
+    //     .${blockID} .fb-testimonial-userinfo-container .fb-user {
+    //         font-family: ${TestimonialAuthorFontFamily};
+    //         font-size: ${TestimonialAuthorFontSize.Desktop}${TestimonialAuthorFontSizeUnits.Desktop};
+    //         font-weight: ${TestimonialAuthorFontWeight};
+    //         font-style: ${TestimonialAuthorFontStyle};
+    //         text-transform: ${TestimonialAuthorTextTransform};
+    //         text-decoration: ${TestimonialAuthorTextDecoration};
+    //         letter-spacing: ${TestimonialAuthorLetterSpacing.Desktop}${TestimonialAuthorLetterSpacingUnits.Desktop};
+    //         line-height: ${TestimonialAuthorLineHeight.Desktop}${TestimonialAuthorLineHeightUnits.Desktop};
+    //         color: ${TestimonialAuthorColor};
+    //         ${testimonialAuthorDesktopMargin ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
+    //     }
+    //     .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
+    //         ${TestimonialAuthorHoverColor ? `color: ${TestimonialAuthorHoverColor};` : ''}
+    //     }
+
+    //     .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+    //         font-family: ${TestimonialDesignationFontFamily};
+    //         font-size: ${TestimonialDesignationFontSize.Desktop}${TestimonialDesignationFontSizeUnits.Desktop};
+    //         font-weight: ${TestimonialDesignationFontWeight};
+    //         font-style: ${TestimonialDesignationFontStyle};
+    //         text-transform: ${TestimonialDesignationTextTransform};
+    //         text-decoration: ${TestimonialDesignationTextDecoration};
+    //         letter-spacing: ${TestimonialDesignationLetterSpacing.Desktop}${TestimonialDesignationLetterSpacingUnits.Desktop};
+    //         line-height: ${TestimonialDesignationLineHeight.Desktop}${TestimonialDesignationLineHeightUnits.Desktop};
+    //         color: ${TestimonialDesignationColor};
+    //         ${testimonialDesignationDesktopMargin ? `margin: ${testimonialDesignationDesktopMargin};` : ''}
+    //     }
+    //     .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
+    //         ${TestimonialDesignationHoverColor ? `color: ${TestimonialDesignationHoverColor};` : ''}
+    //     }
+
+    //     .${blockID} .fb-testimonial-rating {
+    //         ${testimonialRatingIconDesktopMargin ? `margin: ${testimonialRatingIconDesktopMargin};` : ''}
+            
+    //     }
+
+    //     .${blockID} .fb-testimonial-rating-icon svg {
+    //         width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
+    //         height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
+    //         fill: ${TestimonialRatingIconColor};
+    //     }
+    //     .${blockID} .fb-testimonial-rating-icon:hover svg {
+    //         fill: ${TestimonialRatingIconHoverColor};
+    //     }
+
+    //     .${blockID} .fb-testimonial-author-container {
+    //         ${TestimonialPresetStyle === "preset-5" ? 
+    //             `
+    //             display: flex;
+    //             align-items: center;
+    //             justify-content: space-between;
+    //             ` : ''}
+    //     }
+    //     .${blockID} .fb-user-desc {
+    //             ${TestimonialPresetStyle === "preset-5" ? 
+    //             `
+    //             padding-top: 24px;
+    //             ` : ''}
+    //     }
+
+    //     @media only screen and (max-width: 1024px) {
+    //         .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
+    //             ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+    //             ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+    //             ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+    //             ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-quote-icon {
+    //             ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
+    //             ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Tablet && TestimonialQuoteIconTopPositionUnits.Tablet ? `${TestimonialQuoteIconTopPosition.Tablet}${TestimonialQuoteIconTopPositionUnits.Tablet}` : '0'};` : ''}
+    //             ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
+    //             ${testimonialQuoteIconTabletMargin ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
+    //         }
+
+    //         .${blockID} .fb-testimonial-rating {
+    //             ${testimonialRatingIconTabletMargin ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-image img {
+    //             ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `width: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
+    //             ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `height: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
+    //             border-radius: ${testimonialImageTabletBorderRadiusWidth};
+    //             ${testimonialImageTabletMargin ? `margin: ${testimonialImageTabletMargin};` : ''}
+    //             ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
+    //             ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Tablet && TestimonialImageTopPositionUnits.Tablet ? `${TestimonialImageTopPosition.Tablet}${TestimonialImageTopPositionUnits.Tablet}` : '0'};` : ''}
+    //             ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Tablet && TestimonialImageLeftPositionUnits.Tablet ? `${TestimonialImageLeftPosition.Tablet}${TestimonialImageLeftPositionUnits.Tablet}` : '0'};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+    //             ${TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
+    //             ${TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
+    //             ${TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
+    //             ${testimonialTitleTabletMargin ? `margin: ${testimonialTitleTabletMargin};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+    //             ${TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
+    //             ${TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
+    //             ${TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
+    //             ${testimonialDescTabletMargin ? `margin: ${testimonialDescTabletMargin};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-userinfo-container .fb-user {
+    //             font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};
+    //             letter-spacing: ${TestimonialAuthorLetterSpacing.Tablet}${TestimonialAuthorLetterSpacingUnits.Tablet};
+    //             line-height: ${TestimonialAuthorLineHeight.Tablet}${TestimonialAuthorLineHeightUnits.Tablet};
+    //             ${testimonialAuthorTabletMargin ? `margin: ${testimonialAuthorTabletMargin};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+    //             font-size: ${TestimonialDesignationFontSize.Tablet}${TestimonialDesignationFontSizeUnits.Tablet};
+    //             letter-spacing: ${TestimonialDesignationLetterSpacing.Tablet}${TestimonialDesignationLetterSpacingUnits.Tablet};
+    //             line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};
+    //             ${testimonialDesignationTabletMargin ? `margin: ${testimonialDesignationTabletMargin};` : ''}
+    //         }
+    //     }
+    //     @media only screen and (max-width: 767px) {
+    //         .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
+    //             ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+    //             ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+    //             ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+    //             ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-rating {
+    //             ${testimonialRatingIconMobileMargin ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-quote-icon {
+    //             ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
+    //             ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Mobile && TestimonialQuoteIconTopPositionUnits.Mobile ? `${TestimonialQuoteIconTopPosition.Mobile}${TestimonialQuoteIconTopPositionUnits.Mobile}` : '0'};` : ''}
+    //             ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Mobile && TestimonialQuoteIconLeftPositionUnits.Mobile ? `${TestimonialQuoteIconLeftPosition.Mobile}${TestimonialQuoteIconLeftPositionUnits.Mobile}` : '0'};` : ''}
+    //             ${testimonialQuoteIconMobileMargin ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
+    //         }
+
+    //         .${blockID} .fb-testimonial-image img {
+    //             ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `width: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
+    //             ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `height: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
+    //             border-radius: ${testimonialImageMobileBorderRadiusWidth};
+    //             ${testimonialImageMobileMargin ? `margin: ${testimonialImageMobileMargin};` : ''}
+    //             ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
+    //             ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Mobile && TestimonialImageTopPositionUnits.Mobile ? `${TestimonialImageTopPosition.Mobile}${TestimonialImageTopPositionUnits.Mobile}` : '0'};` : ''}
+    //             ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Mobile && TestimonialImageLeftPositionUnits.Mobile ? `${TestimonialImageLeftPosition.Mobile}${TestimonialImageLeftPositionUnits.Mobile}` : '0'};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+    //             ${TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
+    //             ${TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
+    //             ${TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
+    //             ${testimonialTitleMobileMargin ? `margin: ${testimonialTitleMobileMargin};` : ''}
+
+    //         }
+    //         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+    //             ${TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
+    //             ${TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
+    //             ${TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
+    //             ${testimonialDescMobileMargin ? `margin: ${testimonialDescMobileMargin};` : ''}
+    //         }
+    //         .${blockID} .fb-testimonial-userinfo-container .fb-user {
+    //             font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};
+    //             letter-spacing: ${TestimonialAuthorLetterSpacing.Mobile}${TestimonialAuthorLetterSpacingUnits.Mobile};
+    //             line-height: ${TestimonialAuthorLineHeight.Mobile}${TestimonialAuthorLineHeightUnits.Mobile};
+    //             ${testimonialAuthorMobileMargin ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
+    //         }
+    //         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+    //             font-size: ${TestimonialDesignationFontSize.Mobile}${TestimonialDesignationFontSizeUnits.Mobile};
+    //             letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};
+    //             line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};
+    //             ${testimonialDesignationMobileMargin ? `margin: ${testimonialDesignationMobileMargin};` : ''}
+    //         }  
+    //     }
+
+
+    // `, [
+    //     blockID,
+    //     deviceType,
+    //     TestimonialPresetStyle,
+    //     TestimonialAlignment,
+
+    //     TestimonialImageSwitcher,
+    //     TestimonialImageUrl,
+    //     TestimonialImageAlt,
+    //     TestimonialImageID,
+
+    //     TitleSwitcher,
+    //     TestimonialTitle,
+    //     DescSwitcher,
+    //     TestimonialDesc,
+    //     AuthorSwitcher,
+    //     TestimonialAuthor,
+    //     DesignationSwitcher,
+    //     TestimonialDesignation,
+    //     RatingSwitcher,
+    //     TestimonialRatingNumber,
+    //     TestimonialRatingicon,
+    //     TestimonialRatinIconAlign,
+    //     QuoteIconSwitcher,
+    //     TestimonialQuoteIcon,
+    //     TestimonialQuoteIconAlign,
+
+    //     TestimonialImageWidth,
+    //     TestimonialImageWidthUnits,
+
+    //     TestimonialImageRadiusUnits,
+    //     TestimonialImageDesktopRadiusWidth,
+    //     TestimonialImageTabRadiusWidth,
+    //     TestimonialImageMobileRadiusWidth,
+    //     TestimonialImageRadiusLink,
+
+    //     TestimonialImageMarginUnits,
+    //     TestimonialImageMarginDesktop,
+    //     TestimonialImageMarginTablet,
+    //     TestimonialImageMarginMobile,
+    //     TestimonialImageMarginLink,
+
+    //     TestimonialImagePositionSwitcher,
+    //     TestimonialImageTopPosition,
+    //     TestimonialImageTopPositionUnits,
+    //     TestimonialImageLeftPosition,
+    //     TestimonialImageLeftPositionUnits,
+
+    //     TestimonialQuoteIconSize,
+    //     TestimonialQuoteIconSizeUnits,
+    //     TestimonialQuoteIconColorSwitcher,
+    //     TestimonialQuoteIconColor,
+    //     TestimonialQuoteIconHoverColor,
+    //     TestimonialQuoteIconPositionSwitcher,
+    //     TestimonialQuoteIconTopPosition,
+    //     TestimonialQuoteIconTopPositionUnits,
+    //     TestimonialQuoteIconLeftPosition,
+    //     TestimonialQuoteIconLeftPositionUnits,
+    //     TestimonialQuoteIconMarginUnits,
+    //     TestimonialQuoteIconMarginDesktop,
+    //     TestimonialQuoteIconMarginTablet,
+    //     TestimonialQuoteIconMarginMobile,
+    //     TestimonialQuoteIconMarginLink,
+
+    //     TestimonialTitleTag,
+    //     TestimonialTitleFontFamily,
+    //     TestimonialTitleFontSize,
+    //     TestimonialTitleFontSizeUnits,
+    //     TestimonialTitleFontWeight,
+    //     TestimonialTitleFontStyle,
+    //     TestimonialTitleTextTransform,
+    //     TestimonialTitleTextDecoration,
+    //     TestimonialTitleLetterSpacing,
+    //     TestimonialTitleLetterSpacingUnits,
+    //     TestimonialTitleLineHeight,
+    //     TestimonialTitleLineHeightUnits,
+    //     TestimonialTitleColorSwitcher,
+    //     TestimonialTitleColor,
+    //     TestimonialTitleHoverColor,
+    //     TestimonialTitleMarginUnits,
+    //     TestimonialTitleMarginDesktop,
+    //     TestimonialTitleMarginTablet,
+    //     TestimonialTitleMarginMobile,
+    //     TestimonialTitleMarginLink,
+
+    //     TestimonialDescFontFamily,
+    //     TestimonialDescFontSize,
+    //     TestimonialDescFontSizeUnits,
+    //     TestimonialDescFontWeight,
+    //     TestimonialDescFontStyle,
+    //     TestimonialDescTextTransform,
+    //     TestimonialDescTextDecoration,
+    //     TestimonialDescLetterSpacing,
+    //     TestimonialDescLetterSpacingUnits,
+    //     TestimonialDescLineHeight,
+    //     TestimonialDescLineHeightUnits,
+    //     TestimonialDescColorSwitcher,
+    //     TestimonialDescColor,
+    //     TestimonialDescHoverColor,
+    //     TestimonialDescMarginUnits,
+    //     TestimonialDescMarginDesktop,
+    //     TestimonialDescMarginTablet,
+    //     TestimonialDescMarginMobile,
+    //     TestimonialDescMarginLink,
+
+    //     TestimonialAuthorFontFamily,
+    //     TestimonialAuthorFontSize,
+    //     TestimonialAuthorFontSizeUnits,
+    //     TestimonialAuthorFontWeight,
+    //     TestimonialAuthorFontStyle,
+    //     TestimonialAuthorTextTransform,
+    //     TestimonialAuthorTextDecoration,
+    //     TestimonialAuthorLetterSpacing,
+    //     TestimonialAuthorLetterSpacingUnits,
+    //     TestimonialAuthorLineHeight,
+    //     TestimonialAuthorLineHeightUnits,
+    //     TestimonialAuthorColorSwitcher,
+    //     TestimonialAuthorColor,
+    //     TestimonialAuthorHoverColor,
+
+    //     TestimonialAuthorMarginUnits,
+    //     TestimonialAuthorMarginDesktop,
+    //     TestimonialAuthorMarginTablet,
+    //     TestimonialAuthorMarginMobile,
+    //     TestimonialAuthorMarginLink,
+
+    //     TestimonialDesignationFontFamily,
+    //     TestimonialDesignationFontSize,
+    //     TestimonialDesignationFontSizeUnits,
+    //     TestimonialDesignationFontWeight,
+    //     TestimonialDesignationFontStyle,
+    //     TestimonialDesignationTextTransform,
+    //     TestimonialDesignationTextDecoration,
+    //     TestimonialDesignationLetterSpacing,
+    //     TestimonialDesignationLetterSpacingUnits,
+    //     TestimonialDesignationLineHeight,
+    //     TestimonialDesignationLineHeightUnits,
+    //     TestimonialDesignationColorSwitcher,
+    //     TestimonialDesignationColor,
+    //     TestimonialDesignationHoverColor,
+    //     TestimonialDesignationMarginUnits,
+    //     TestimonialDesignationMarginDesktop,
+    //     TestimonialDesignationMarginTablet,
+    //     TestimonialDesignationMarginMobile,
+    //     TestimonialDesignationMarginLink,
+
+    //     TestimonialRatingIconSize,
+    //     TestimonialRatingIconSizeUnits,
+    //     TestimonialRatingIconColorSwitcher,
+    //     TestimonialRatingIconColor,
+    //     TestimonialRatingIconHoverColor,
+    //     TestimonialRatingIconMarginUnits,
+    //     TestimonialRatingIconMarginDesktop,
+    //     TestimonialRatingIconMarginTablet,
+    //     TestimonialRatingIconMarginMobile,
+    //     TestimonialRatingIconMarginLink,
+
+    //     TestimonialGlobalZIndex,
+    //     TestimonialGlobalPaddingUnits,
+    //     TestimonialGlobalPaddingDesktop,
+    //     TestimonialGlobalPaddingTablet,
+    //     TestimonialGlobalPaddingMobile,
+    //     TestimonialGlobalPaddingLink,
+    //     TestimonialGlobalMarginUnits,
+    //     TestimonialGlobalMarginDesktop,
+    //     TestimonialGlobalMarginTablet,
+    //     TestimonialGlobalMarginMobile,
+    //     TestimonialGlobalMarginLink,
+
+    //     TestimonialGlobalBgColorSwitcher,
+    //     TestimonialGlobalBgColor,
+    //     TestimonialGlobalBgHoverColor,
+
+    //     TestimonialGlobalBorder,
+    //     TestimonialGlobalBorderColor,
+    //     TestimonialGlobalBorderHoverColor,
+    //     TestimonialGlobalBorderColorSwitcher,
+
+    //     TestimonialGlobalBorderUnits,
+    //     TestimonialGlobalBorderDesktop,
+    //     TestimonialGlobalBorderTablet,
+    //     TestimonialGlobalBorderMobile,
+    //     TestimonialGlobalBorderLink,
+
+    //     TestimonialGlobalBorderRadiusUnits,
+    //     TestimonialGlobalBorderRadiusDesktop,
+    //     TestimonialGlobalBorderRadiusTablet,
+    //     TestimonialGlobalBorderRadiusMobile,
+    //     TestimonialGlobalBorderRadiusLink,
+
+    //     TestimonialGlobalBoxShadowValues,
+    //     TestimonialGlobalBoxShadowCssValue,
+
+    //     testimonialRatingIconDesktopMargin,
+    //     testimonialRatingIconTabletMargin,
+    //     testimonialRatingIconMobileMargin,
+
+    //     testimonialTitleDesktopMargin,
+    //     testimonialTitleTabletMargin,
+    //     testimonialTitleMobileMargin,
+
+    //     testimonialDescDesktopMargin,
+    //     testimonialDescTabletMargin,
+    //     testimonialDescMobileMargin,
+
+    //     testimonialImageDesktopMargin,
+    //     testimonialImageTabletMargin,
+    //     testimonialImageMobileMargin,
+
+    //     testimonialAuthorDesktopMargin,
+    //     testimonialAuthorTabletMargin,
+    //     testimonialAuthorMobileMargin,
+
+    //     testimonialDesignationDesktopMargin,
+    //     testimonialDesignationTabletMargin,
+    //     testimonialDesignationMobileMargin,
+
+    //     testimonialImageDesktopBorderRadiusWidth,
+    //     testimonialImageTabletBorderRadiusWidth,
+    //     testimonialImageMobileBorderRadiusWidth,
+
+    // ]);
+
+    // useEffect(() => {
+    // setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+    // }, [allBlockStyle]);
+
+
+    // const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
 
     return (
         <>
