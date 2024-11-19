@@ -1839,11 +1839,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle]);
 
+
+    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+
     return (
         <>
 
             <style>
-                {blockStyle}
+                {editorStyle}
             </style>
 
             <InspectorControls key="controls">
@@ -2122,7 +2125,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 label={__("Text Stroke", "frontis-blocks")}
                                                 value={headingTextStroke}
                                                 onChange={(value) => setAttributes({ headingTextStroke: value })}
-                                                min={1}
+                                                min={0}
                                                 max={10}
                                                 step={1}
                                                 allowReset={true}
