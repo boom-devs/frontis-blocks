@@ -1070,11 +1070,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
     }, [ allBlockStyle]);
 
+    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+
     return (
         <>
 
             <style>
-                {blockStyle}
+                {editorStyle}
             </style>
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">

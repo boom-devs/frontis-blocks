@@ -2630,6 +2630,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		useEffect(() => {
 			setAttributes({blockStyle: `${socialItemColorStyle}${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
 		}, [socialItemColorStyle, allBlockStyle]);
+
+		const editorStyle = socialItemColorStyle + allBlockStyle.replace(/\s+/g, ' ').trim();
     
 
     return (
@@ -2637,7 +2639,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             <style>
             {`
-				${blockStyle}
+				${editorStyle}
             `}
             </style>
             <InspectorControls key="controls">
