@@ -415,8 +415,9 @@ var updateSettings = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
+          console.log(settingType);
+          _context.prev = 1;
+          _context.next = 4;
           return jQuery.ajax({
             url: window.frontisBlocksAdminSidebar.ajaxUrl,
             type: 'POST',
@@ -426,25 +427,25 @@ var updateSettings = /*#__PURE__*/function () {
               data: JSON.stringify(data)
             }
           });
-        case 3:
+        case 4:
           response = _context.sent;
           if (response.success) {
-            _context.next = 6;
+            _context.next = 7;
             break;
           }
           throw new Error(response.data || 'Update failed');
-        case 6:
+        case 7:
           return _context.abrupt("return", response.data);
-        case 9:
-          _context.prev = 9;
-          _context.t0 = _context["catch"](0);
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](1);
           console.error('Ajax error:', _context.t0);
           throw _context.t0;
-        case 13:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[1, 10]]);
   }));
   return function updateSettings(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -921,6 +922,7 @@ function FrontisBlocksSidebar(props) {
     setGlobalColors(_toConsumableArray(colors));
     updateGlobalColors(colors);
   };
+
   //Update Gradient Colors
   var setGradientColor = function setGradientColor(index, color) {
     var colors = _toConsumableArray(gradientColors);
