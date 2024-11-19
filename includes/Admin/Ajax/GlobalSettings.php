@@ -12,7 +12,7 @@ use FrontisBlocks\Traits\Singleton;
 class GlobalSettings extends AjaxBase {
 
     use Singleton;
-        
+
     /**
      * register_global_settings_events
      *
@@ -37,6 +37,7 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function update_global_colors() {
+		var_dump($_POST);
         $this->handle_option_update('global_colors', 'array');
     }
 
@@ -129,6 +130,8 @@ class GlobalSettings extends AjaxBase {
      * @return void
      */
     private function update_option($option_name, $type) {
+		echo "Hello world";
+		var_dump($_POST[$option_name]);
         $value = $this->sanitize_option_value($_POST[$option_name], $type);
         update_option("fb_$option_name", $value);
     }
