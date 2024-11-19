@@ -468,7 +468,6 @@ var getSettings = /*#__PURE__*/function () {
           });
         case 3:
           response = _context2.sent;
-          console.log(response);
           if (response.success) {
             _context2.next = 7;
             break;
@@ -479,7 +478,6 @@ var getSettings = /*#__PURE__*/function () {
         case 10:
           _context2.prev = 10;
           _context2.t0 = _context2["catch"](0);
-          console.error('Ajax error:', _context2.t0);
           throw _context2.t0;
         case 14:
         case "end":
@@ -1842,7 +1840,6 @@ function FETCH_GLOBAL_COLORS() {
       case 7:
         _context.prev = 7;
         _context.t0 = _context["catch"](0);
-        console.error('Error fetching global colors:', _context.t0);
         return _context.abrupt("return", false);
       case 11:
       case "end":
