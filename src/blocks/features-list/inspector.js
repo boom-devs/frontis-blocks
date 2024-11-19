@@ -1728,10 +1728,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({blockStyle: `${featureSingleItemStyle}${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
     }, [featureSingleItemStyle, allBlockStyle]);
 
+
+
+    const editorStyle = featureSingleItemStyle + allBlockStyle.replace(/\s+/g, ' ').trim();
+
     return (
         <>
             <style>
-                {blockStyle}
+                {editorStyle}
             </style>
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">

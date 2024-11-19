@@ -14,6 +14,10 @@ class EnqueueBlocksCss {
 		$css_file_name = $block_id . '.css';
 		$css_file = $css_dir . $css_file_name;
 		file_put_contents( $css_file, $css_content );
+
+		// // Enqueue the generated CSS file
+		// $css_url = trailingslashit( $upload_dir['baseurl'] ) . 'frontis-blocks/' . $css_file_name;
+		// wp_enqueue_style( $block_id, $css_url );
 	}
 
 	// Function to minify CSS
