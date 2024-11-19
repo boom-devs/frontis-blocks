@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const controls = container.getAttribute('data-controls') === 'true';
         const previewImage = container.getAttribute('data-preview-image');
         const playIcon = container.getAttribute('data-play-icon');
-        
+
+        // console.log(renderSVG(playIcon));
+
         renderReactPlayer(container, { 
             url: url,
             playing: autoPlay,
@@ -18,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loop: loop,
             controls: controls,
             light: previewImage,
-            playIcon: renderSVG(playIcon),
+            // playIcon: previewImage ? renderSVG(playIcon) : null,
             onClickPreview: () => {
                 container.setAttribute('data-autoplay', 'true');
                 renderReactPlayer(container, { 
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     loop: loop,
                     controls: controls,
                     light: previewImage,
-                    playIcon: renderSVG(playIcon),
+                    // playIcon: previewImage ? renderSVG(playIcon) : null,
                     width: '100%',
                     height: '100%',
                     className: 'fb-react-player'

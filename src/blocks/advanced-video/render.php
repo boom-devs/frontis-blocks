@@ -11,6 +11,7 @@ $autoPlaySwitcher = isset( $attributes['autoPlaySwitcher'] ) ? boolval( $attribu
 $muteSwitcher = isset( $attributes['muteSwitcher'] ) ? boolval( $attributes['muteSwitcher'] ) : false;
 $loopSwitcher = isset( $attributes['loopSwitcher'] ) ? boolval( $attributes['loopSwitcher'] ) : false;
 $showControlsSwitcher = isset( $attributes['showControlsSwitcher'] ) ? boolval( $attributes['showControlsSwitcher'] ) : false;
+$imageOverlaySwitcher = isset( $attributes['imageOverlaySwitcher'] ) ? boolval( $attributes['imageOverlaySwitcher'] ) : false;
 $previewImageUrl = isset( $attributes['previewImageUrl'] ) ? esc_url( $attributes['previewImageUrl'] ) : '';
 $videoPlayIcon = isset( $attributes['videoPlayIcon'] ) ? sanitize_text_field( $attributes['videoPlayIcon'] ) : 'play';
 
@@ -31,7 +32,7 @@ $videoPlayIcon = isset( $attributes['videoPlayIcon'] ) ? sanitize_text_field( $a
 					data-muted="<?php echo esc_attr( $muteSwitcher ? 'true' : 'false' ); ?>"
 					data-loop="<?php echo esc_attr( $loopSwitcher ? 'true' : 'false' ); ?>"
 					data-controls="<?php echo esc_attr( $showControlsSwitcher ? 'true' : 'false' ); ?>"
-					data-preview-image="<?php echo esc_attr( $previewImageUrl ); ?>"
+					data-preview-image="<?php echo esc_attr( $imageOverlaySwitcher ? $previewImageUrl : null ); ?>"
 					data-play-icon="<?php echo esc_attr( $videoPlayIcon ); ?>"
 				></div>
 			</div>
