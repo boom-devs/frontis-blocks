@@ -1,5 +1,4 @@
 export const updateSettings = async (settingType, data) => {
-	console.log(settingType)
     try {
         const response = await jQuery.ajax({
             url: window.frontisBlocksAdminSidebar.ajaxUrl,
@@ -7,9 +6,11 @@ export const updateSettings = async (settingType, data) => {
             data: {
                 action: `fb_update_${settingType}`,
                 nonce: window.frontisBlocksAdminSidebar.nonce,
-                data: JSON.stringify(data)
+                data: data
             }
         });
+
+		console.log(response)
 
         if (!response.success) {
             throw new Error(response.data || 'Update failed');
@@ -32,8 +33,6 @@ export const getSettings = async (settingType) => {
                 nonce: window.frontisBlocksAdminSidebar.nonce
             }
         });
-
-        console.log(response)
 
         if (!response.success) {
             throw new Error(response.data || 'Fetch failed');

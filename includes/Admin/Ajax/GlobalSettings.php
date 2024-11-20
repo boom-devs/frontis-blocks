@@ -37,7 +37,6 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function update_global_colors() {
-		var_dump($_POST);
         $this->handle_option_update('global_colors', 'array');
     }
 
@@ -130,10 +129,15 @@ class GlobalSettings extends AjaxBase {
      * @return void
      */
     private function update_option($option_name, $type) {
-		echo "Hello world";
-		var_dump($_POST[$option_name]);
-        $value = $this->sanitize_option_value($_POST[$option_name], $type);
-        update_option("fb_$option_name", $value);
+        $value = $this->sanitize_option_value($_POST['data'], $type);
+        $updated = update_option("$option_name", $value);
+
+		if($updated) {
+			$global_colors = get_option("$option_name");
+			wp_send_json_success($global_colors);
+		}
+
+		wp_send_json_error('Global colors not found.');
     }
     /**
      * sanitize_option_value
