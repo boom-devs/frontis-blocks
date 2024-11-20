@@ -173,5 +173,10 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
 };
 export default attributes;
