@@ -469,6 +469,7 @@ var getSettings = /*#__PURE__*/function () {
           });
         case 3:
           response = _context2.sent;
+          console.log(response);
           if (response.success) {
             _context2.next = 7;
             break;
@@ -479,6 +480,7 @@ var getSettings = /*#__PURE__*/function () {
         case 10:
           _context2.prev = 10;
           _context2.t0 = _context2["catch"](0);
+          console.error('Ajax error:', _context2.t0);
           throw _context2.t0;
         case 14:
         case "end":
@@ -1791,7 +1793,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 
 /**
  * Helper function to validate JSON string
- * @param {string} str 
+ * @param {string} str
  * @returns {boolean}
  */
 var isValidJson = function isValidJson(str) {
@@ -1805,8 +1807,8 @@ var isValidJson = function isValidJson(str) {
 
 /**
  * Helper function to safely parse response data
- * @param {Object} response 
- * @param {string} key 
+ * @param {Object} response
+ * @param {string} key
  * @returns {Object|false}
  */
 var parseResponse = function parseResponse(response, key) {
@@ -1842,6 +1844,7 @@ function FETCH_GLOBAL_COLORS() {
       case 7:
         _context.prev = 7;
         _context.t0 = _context["catch"](0);
+        console.error('Error fetching global colors:', _context.t0);
         return _context.abrupt("return", false);
       case 11:
       case "end":
@@ -6160,7 +6163,7 @@ module.exports = window["wp"]["plugins"];
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -6174,14 +6177,14 @@ module.exports = window["wp"]["plugins"];
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -6194,7 +6197,7 @@ module.exports = window["wp"]["plugins"];
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -6206,12 +6209,12 @@ module.exports = window["wp"]["plugins"];
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -6222,7 +6225,7 @@ module.exports = window["wp"]["plugins"];
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
