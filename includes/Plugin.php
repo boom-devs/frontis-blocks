@@ -103,6 +103,10 @@ final class Plugin
 		if (has_block('frontis-blocks/counter-number')) {
 			wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/public/counter.js', array('jquery'), '1.0.0', true);
 		}
+
+		if (has_block('frontis-blocks/advanced-video')) {
+			wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+		}
 	}
 
 

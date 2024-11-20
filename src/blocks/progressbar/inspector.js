@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -64,6 +64,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressLetterSpacingUnits,
         progressLineHeight,
         progressLineHeightUnits,
+
+        blockStyle,
 
 	} = attributes;
     
@@ -167,154 +169,173 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const progressMobileBorderRadiusWidth = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
     /** End Progress Border Radius */
 
-    /** Start progressColorSwitcher */
-    const progressColorSwitcherChange = (value) => {
-        setAttributes({ progressColorSwitcher: value });
-    };
-    const progressColorChange = (value) => {
-        setAttributes({ progressColor: value });
-    };
-    const progressHoverColorChange = (value) => {
-        setAttributes({ progressHoverColor: value });
-    };
-    /** End progressColorSwitcher */
 
-    /** Start progressTextColorSwitcher */
-    const progressTextColorSwitcherChange = (value) => {
-        setAttributes({ progressTextColorSwitcher: value });
-    };
-    const progressTextColorChange = (value) => {
-        setAttributes({ progressTextColor: value });
-    };
-    const progressTextHoverColorChange = (value) => {
-        setAttributes({ progressTextHoverColor: value });
-    };
-    /** End progressTextColorSwitcher */
+    const allBlockStyle = useMemo(() => `
 
-    /** Start progressBgHoverColor */
-    const progressBgColorSwitcherChange = (value) => {
-        setAttributes({ progressBgColorSwitcher: value });
-    };
-    const progressBgColorChange = (value) => {
-        setAttributes({ progressBgColor: value });
-    };
-    const progressBgHoverColorChange = (value) => {
-        setAttributes({ progressBgHoverColor: value });
-    };
-    /** End progressBgHoverColor */
+        .${blockID} .progress-bar-wrapper {
+            position: relative;
+            z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+            ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
+            ${progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
+            ${progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
+            ${progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
+            ${progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
+            ${progressTextTransform ? `text-transform: ${progressTextTransform};` : ''}
+            ${progressTextDecoration ? `text-decoration: ${progressTextDecoration};` : ''}
+            ${progressLetterSpacing.Desktop && progressLetterSpacingUnits.Desktop ? `letter-spacing: ${progressLetterSpacing.Desktop}${progressLetterSpacingUnits.Desktop};` : ''}
+            ${progressLineHeight.Desktop && progressLineHeightUnits.Desktop ? `line-height: ${progressLineHeight.Desktop}${progressLineHeightUnits.Desktop};` : ''}
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
+            color: ${progressTextHoverColor} !important;
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
+            background-color: ${progressBgColor};
+            border-radius: ${progressDesktopBorderRadiusWidth};
+            position: relative;
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line:hover {
+            background-color: ${progressBgHoverColor};
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
+            height: ${progressBarHeight ? `${progressBarHeight}px` : '2px'};
+            background-color: ${progressColor};
+            border-radius: ${progressDesktopBorderRadiusWidth};
+            transition: width 0.5s ease-in-out;
+            width: ${progressNumber}%;
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar:hover {
+            background-color: ${progressHoverColor};
+            transition: ease-in-out .5s;
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number {
+            position: absolute;
+            top: -30px;
+            transform: translateX(-100%);
+            transition: left 0.5s ease-in-out;
+            color: ${progressTextColor};
+        }
+        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number:hover {
+            color: ${progressTextHoverColor};
+        }
+
+        .${blockID} .progress-bar-text-inSide-wrapper {
+            background-color: ${progressBgColor};
+            border-radius: ${progressDesktopBorderRadiusWidth};
+            height: ${progressBarHeight ? `${progressBarHeight}px` : '30px'};
+            overflow: hidden;
+        }
+        .${blockID} .progress-bar-text-inSide-wrapper:hover {
+            background-color: ${progressBgHoverColor};
+        }
+        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
+            background-color: ${progressColor};
+            border-radius: ${progressDesktopBorderRadiusWidth};
+            transition: width 0.5s ease-in-out;
+            width: ${progressNumber}%;
+        }
+        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label:hover {
+            background-color: ${progressHoverColor};
+            transition: ease-in-out .5s;
+        }
+        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
+            border-radius: ${progressDesktopBorderRadiusWidth};
+            color: ${progressTextColor};
+            font-size: 14px;
+        }
+        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info:hover {
+            color: ${progressTextHoverColor};
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
+            .${blockID} .progress-bar-text-inSide-wrapper,
+            .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
+                border-radius: ${progressTabletBorderRadiusWidth} !important;                     
+            }
+
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+                ${progressFontSize.Tablet && progressFontSizeUnits.Tablet ? `font-size: ${progressFontSize.Tablet}${progressFontSizeUnits.Tablet};` : ''}
+                ${progressLetterSpacing.Tablet && progressLetterSpacingUnits.Tablet ? `letter-spacing: ${progressLetterSpacing.Tablet}${progressLetterSpacingUnits.Tablet};` : ''}
+                ${progressLineHeight.Tablet && progressLineHeightUnits.Tablet ? `line-height: ${progressLineHeight.Tablet}${progressLineHeightUnits.Tablet};` : ''}   
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
+            .${blockID} .progress-bar-text-inSide-wrapper,
+            .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
+                border-radius: ${progressMobileBorderRadiusWidth} !important;                      
+            }
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
+                ${progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}
+                ${progressLetterSpacing.Mobile && progressLetterSpacingUnits.Mobile ? `letter-spacing: ${progressLetterSpacing.Mobile}${progressLetterSpacingUnits.Mobile};` : ''}
+                ${progressLineHeight.Mobile && progressLineHeightUnits.Mobile ? `line-height: ${progressLineHeight.Mobile}${progressLineHeightUnits.Mobile};` : ''}  
+            }
+        }
+
+    `, [
+		blockID,
+		deviceType,
+        progressGlobalZIndex,
+		progressTextPosition,
+		progressNumber,
+
+        progressColorSwitcher,
+		progressColor,
+        progressHoverColor,
+
+        progressTextColorSwitcher,
+		progressTextColor,
+        progressTextHoverColor,
+
+        progressBgColorSwitcher,
+		progressBgColor,
+        progressBgHoverColor,
+
+		progressTitle,
+		progressHeadingTag,
+		progressBarHeight,
+
+		progressBorderRadiusUnits,
+		progressBorderRadiusDesktop,
+		progressBorderRadiusTablet,
+		progressBorderRadiusMobile,
+		progressBorderRadiusLink,
+
+        progressFontFamily,
+        progressFontSize,
+        progressFontSizeUnits,
+        progressFontWeight,
+        progressFontStyle,
+        progressTextTransform,
+        progressTextDecoration,
+        progressLetterSpacing,
+        progressLetterSpacingUnits,
+        progressLineHeight,
+        progressLineHeightUnits,
+
+        progressDesktopBorderRadiusWidth,
+        progressTabletBorderRadiusWidth,
+        progressMobileBorderRadiusWidth,
+
+    ]);
+
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle]);
+
+    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
 
 
     return (
         <>
 
             <style>
-            {`  
-                .${blockID} .progress-bar-wrapper {
-                    position: relative;
-                    z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
-                }
-                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
-                    ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
-                    ${progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
-                    ${progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
-                    ${progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
-                    ${progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
-                    ${progressTextTransform ? `text-transform: ${progressTextTransform};` : ''}
-                    ${progressTextDecoration ? `text-decoration: ${progressTextDecoration};` : ''}
-                    ${progressLetterSpacing.Desktop && progressLetterSpacingUnits.Desktop ? `letter-spacing: ${progressLetterSpacing.Desktop}${progressLetterSpacingUnits.Desktop};` : ''}
-                    ${progressLineHeight.Desktop && progressLineHeightUnits.Desktop ? `line-height: ${progressLineHeight.Desktop}${progressLineHeightUnits.Desktop};` : ''}
-                }
-                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
-					color: ${progressTextHoverColor} !important;
-                }
-                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
-                    background-color: ${progressBgColor};
-                    border-radius: ${progressDesktopBorderRadiusWidth};
-					position: relative;
-                }
-                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line:hover {
-                    background-color: ${progressBgHoverColor};
-                }
-                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
-					height: ${progressBarHeight ? `${progressBarHeight}px` : '2px'};
-                    background-color: ${progressColor};
-                    border-radius: ${progressDesktopBorderRadiusWidth};
-                    transition: width 0.5s ease-in-out;
-                    width: ${progressNumber}%;
-                }
-                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar:hover {
-                    background-color: ${progressHoverColor};
-                    transition: ease-in-out .5s;
-                }
-				.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number {
-					position: absolute;
-					top: -30px;
-					transform: translateX(-100%);
-					transition: left 0.5s ease-in-out;
-					color: ${progressTextColor};
-				}
-                .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number:hover {
-					color: ${progressTextHoverColor};
-				}
-
-				.${blockID} .progress-bar-text-inSide-wrapper {
-                    background-color: ${progressBgColor};
-                    border-radius: ${progressDesktopBorderRadiusWidth};
-					height: ${progressBarHeight ? `${progressBarHeight}px` : '30px'};
-					overflow: hidden;
-                }
-                .${blockID} .progress-bar-text-inSide-wrapper:hover {
-                    background-color: ${progressBgHoverColor};
-                }
-				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                    background-color: ${progressColor};
-                    border-radius: ${progressDesktopBorderRadiusWidth};
-					transition: width 0.5s ease-in-out;
-					width: ${progressNumber}%;
-                }
-                .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label:hover {
-                    background-color: ${progressHoverColor};
-                    transition: ease-in-out .5s;
-                }
-				.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
-                	border-radius: ${progressDesktopBorderRadiusWidth};
-					color: ${progressTextColor};
-					font-size: 14px;
-                }
-                .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info:hover {
-					color: ${progressTextHoverColor};
-                }
-
-                @media only screen and (max-width: 1024px) {
-                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
-					.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
-					.${blockID} .progress-bar-text-inSide-wrapper,
-					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                        border-radius: ${progressTabletBorderRadiusWidth} !important;                     
-                    }
-
-                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
-                        ${progressFontSize.Tablet && progressFontSizeUnits.Tablet ? `font-size: ${progressFontSize.Tablet}${progressFontSizeUnits.Tablet};` : ''}
-                        ${progressLetterSpacing.Tablet && progressLetterSpacingUnits.Tablet ? `letter-spacing: ${progressLetterSpacing.Tablet}${progressLetterSpacingUnits.Tablet};` : ''}
-                        ${progressLineHeight.Tablet && progressLineHeightUnits.Tablet ? `line-height: ${progressLineHeight.Tablet}${progressLineHeightUnits.Tablet};` : ''}   
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
-					.${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
-					.${blockID} .progress-bar-text-inSide-wrapper,
-					.${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                        border-radius: ${progressMobileBorderRadiusWidth} !important;                      
-                    }
-                    .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
-                        ${progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}
-                        ${progressLetterSpacing.Mobile && progressLetterSpacingUnits.Mobile ? `letter-spacing: ${progressLetterSpacing.Mobile}${progressLetterSpacingUnits.Mobile};` : ''}
-                        ${progressLineHeight.Mobile && progressLineHeightUnits.Mobile ? `line-height: ${progressLineHeight.Mobile}${progressLineHeightUnits.Mobile};` : ''}  
-                    }
-                }
-				
-            `}
+                {editorStyle}
             </style>
 
             <InspectorControls key="controls">
@@ -459,27 +480,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={progressColorSwitcher}
                                                 globalColor={progressColor}
                                                 globalHoverColor={progressHoverColor}
-                                                handleColorSwitcherChange={progressColorSwitcherChange}
-                                                handleGlobalColorChange={progressColorChange}
-                                                handleGlobalHoverColorChange={progressHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ progressColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ progressColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressHoverColor: value })}
                                             />
                                             <FB_Color
                                                 label={__("Label Color", "frontis-blocks")}
                                                 globalColorSwitcher={progressTextColorSwitcher}
                                                 globalColor={progressTextColor}
                                                 globalHoverColor={progressTextHoverColor}
-                                                handleColorSwitcherChange={progressTextColorSwitcherChange}
-                                                handleGlobalColorChange={progressTextColorChange}
-                                                handleGlobalHoverColorChange={progressTextHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ progressTextColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ progressTextColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressTextHoverColor: value })}
                                             />
                                             <FB_Color
                                                 label={__("Base Color", "frontis-blocks")}
                                                 globalColorSwitcher={progressBgColorSwitcher}
                                                 globalColor={progressBgColor}
                                                 globalHoverColor={progressBgHoverColor}
-                                                handleColorSwitcherChange={progressBgColorSwitcherChange}
-                                                handleGlobalColorChange={progressBgColorChange}
-                                                handleGlobalHoverColorChange={progressBgHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ progressBgColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ progressBgColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressBgHoverColor: value })}
                                             />
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
