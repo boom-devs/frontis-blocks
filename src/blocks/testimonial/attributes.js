@@ -358,9 +358,9 @@ const attributes = {
     TestimonialTitleFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '24',
+            Tablet: '24',
+            Mobile: '18'
         }
     },
     TestimonialTitleFontSizeUnits: {
@@ -481,9 +481,9 @@ const attributes = {
     TestimonialDescFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '18',
+            Mobile: '16'
         }
     },
     TestimonialDescFontSizeUnits: {
@@ -604,9 +604,9 @@ const attributes = {
     TestimonialAuthorFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '18',
+            Mobile: '16'
         }
     },
     TestimonialAuthorFontSizeUnits: {
@@ -728,9 +728,9 @@ const attributes = {
     TestimonialDesignationFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '14'
         }
     },
     TestimonialDesignationFontSizeUnits: {

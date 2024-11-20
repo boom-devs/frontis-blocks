@@ -868,6 +868,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
             border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
         }
+        .${blockID} .fb-player-wrapper .fb-play-icon svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: ${videoPlayIconSize.Desktop ? videoPlayIconSize.Desktop + videoPlayIconSizeUnits.Desktop : '64px'} !important;
+            height: ${videoPlayIconSize.Desktop ? videoPlayIconSize.Desktop + videoPlayIconSizeUnits.Desktop : '64px'} !important;
+            padding: ${videoPlayIconPaddingDesktopWidth};
+            fill: ${videoPlayIconColor ? videoPlayIconColor : '#fff'};
+            background-color: ${videoPlayIconBgColor ? videoPlayIconBgColor : ''};
+            border: ${videoPlayIconBorder};
+            border-width: ${videoPlayIconBorderDesktopWidth};
+            border-radius: ${videoPlayIconBorderRadiusDesktopWidth} !important;
+            border-color: ${videoPlayIconBorderColor ? videoPlayIconBorderColor : ''};
+            cursor: pointer;
+            z-index: 999999;
+        }
+
+        .${blockID} .fb-player-wrapper .fb-play-icon svg:hover {
+            fill: ${videoPlayIconHoverColor ? videoPlayIconHoverColor : '#fff'};
+            background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
+            border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
+        }
 
         .${blockID} .fb-react-player iframe {
             border: ${videoBorder};
@@ -898,6 +921,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-radius: ${videoPlayIconBorderRadiusTabletWidth} !important;
             }
 
+            .${blockID} .fb-player-wrapper .react-player__preview svg:hover {
+                fill: ${videoPlayIconHoverColor ? videoPlayIconHoverColor : '#fff'};
+                background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
+                border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
+            }
+
+            .${blockID} .fb-player-wrapper .fb-play-icon svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: ${videoPlayIconSize.Tablet ? videoPlayIconSize.Tablet + videoPlayIconSizeUnits.Tablet : '64px'} !important;
+                height: ${videoPlayIconSize.Tablet ? videoPlayIconSize.Tablet + videoPlayIconSizeUnits.Tablet : '64px'} !important;
+                padding: ${videoPlayIconPaddingTabletWidth};
+                fill: ${videoPlayIconColor ? videoPlayIconColor : '#fff'};
+                background-color: ${videoPlayIconBgColor ? videoPlayIconBgColor : ''};
+                border: ${videoPlayIconBorder};
+                border-width: ${videoPlayIconBorderTabletWidth};
+                border-radius: ${videoPlayIconBorderRadiusTabletWidth} !important;
+                border-color: ${videoPlayIconBorderColor ? videoPlayIconBorderColor : ''};
+                cursor: pointer;
+                z-index: 999999;
+            }
+
+            .${blockID} .fb-player-wrapper .fb-play-icon svg:hover {
+                fill: ${videoPlayIconHoverColor ? videoPlayIconHoverColor : '#fff'};
+                background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
+                border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
+            }
+
             .${blockID} .fb-react-player iframe {
                 border-width: ${IframeBorderTabletWidth};
                 border-radius: ${IframeBorderRadiusTabletWidth} !important;
@@ -922,6 +975,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 padding: ${videoPlayIconPaddingMobileWidth};
                 border-width: ${videoPlayIconBorderMobileWidth};
                 border-radius: ${videoPlayIconBorderRadiusMobileWidth} !important;
+            }
+
+            .${blockID} .fb-player-wrapper .react-player__preview svg:hover {
+                fill: ${videoPlayIconHoverColor ? videoPlayIconHoverColor : '#fff'};
+                background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
+                border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
+            }
+
+            
+            .${blockID} .fb-player-wrapper .fb-play-icon svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: ${videoPlayIconSize.Mobile ? videoPlayIconSize.Mobile + videoPlayIconSizeUnits.Mobile : '64px'} !important;
+                height: ${videoPlayIconSize.Mobile ? videoPlayIconSize.Mobile + videoPlayIconSizeUnits.Mobile : '64px'} !important;
+                padding: ${videoPlayIconPaddingMobileWidth};
+                fill: ${videoPlayIconColor ? videoPlayIconColor : '#fff'};
+                background-color: ${videoPlayIconBgColor ? videoPlayIconBgColor : ''};
+                border: ${videoPlayIconBorder};
+                border-width: ${videoPlayIconBorderMobileWidth};
+                border-radius: ${videoPlayIconBorderRadiusMobileWidth} !important;
+                border-color: ${videoPlayIconBorderColor ? videoPlayIconBorderColor : ''};
+                cursor: pointer;
+                z-index: 999999;
+            }
+
+            .${blockID} .fb-player-wrapper .fb-play-icon svg:hover {
+                fill: ${videoPlayIconHoverColor ? videoPlayIconHoverColor : '#fff'};
+                background-color: ${videoPlayIconBgHoverColor ? videoPlayIconBgHoverColor : ''};
+                border-color: ${videoPlayIconBorderHoverColor ? videoPlayIconBorderHoverColor : ''};  
             }
 
             .${blockID} .fb-react-player iframe {

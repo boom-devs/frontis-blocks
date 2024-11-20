@@ -13,6 +13,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         muteSwitcher,
         loopSwitcher,
         showControlsSwitcher,
+        imageOverlaySwitcher,
         previewImageUrl,
         videoPlayIcon,
      } = attributes;
@@ -20,8 +21,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const blockProps = useBlockProps({
         className: `fb-advanced-video-main-wrapper ${blockID}`,
     });
-
-    console.log(videoPlayIcon);
 
     return (
         <>
@@ -42,7 +41,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     muted={muteSwitcher}
                                     loop={loopSwitcher}
                                     controls={showControlsSwitcher}
-                                    light={previewImageUrl}
+                                    light={imageOverlaySwitcher ? previewImageUrl : null}
                                     playIcon={renderSVG(videoPlayIcon)}
                                     onClickPreview={() => setAttributes({ autoPlaySwitcher: true })}
                                     width="100%"
