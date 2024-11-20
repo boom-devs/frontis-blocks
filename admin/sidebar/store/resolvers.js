@@ -1,70 +1,60 @@
 import { getSettings } from '../api';
-import { ActionTypes, OptionKeys } from './constant';
+import { OptionKeys } from './constant';
 import {
-    setGlobalColors,
-    setCustomColors,
-    setGradientColors,
-    setCustomGradientColors,
-    setTypography,
-    setError
+	setGlobalColors,
+	setCustomColors,
+	setGradientColors,
+	setCustomGradientColors,
+	setTypography,
+	setError
 } from './actions';
+
+/**
+ * Helper function to resolve settings and dispatch the appropriate action
+ * @param {string} optionKey - The settings key to fetch
+ * @param {Function} successAction - The action creator for success
+ * @returns {Generator}
+ */
+function* resolveSettings(optionKey, successAction) {
+	try {
+		const data = yield getSettings(optionKey);
+		return successAction(data);
+	} catch (error) {
+		return setError(error.message);
+	}
+}
 
 /**
  * Get Global Colors Resolver
  */
 export function* getGlobalColors() {
-    try {
-        const colors = yield getSettings(OptionKeys.GLOBAL_COLORS);
-        return setGlobalColors(colors);
-    } catch (error) {
-        return setError(error.message);
-    }
+	return yield* resolveSettings(OptionKeys.GLOBAL_COLORS, setGlobalColors);
 }
 
 /**
  * Get Custom Colors Resolver
  */
 export function* getCustomColors() {
-    try {
-        const colors = yield getSettings(OptionKeys.CUSTOM_COLORS);
-        return setCustomColors(colors);
-    } catch (error) {
-        return setError(error.message);
-    }
+	return yield* resolveSettings(OptionKeys.CUSTOM_COLORS, setCustomColors);
 }
 
 /**
  * Get Gradient Colors Resolver
  */
 export function* getGradientColors() {
-    try {
-        const colors = yield getSettings(OptionKeys.GRADIENT_COLORS);
-        return setGradientColors(colors);
-    } catch (error) {
-        return setError(error.message);
-    }
+	return yield* resolveSettings(OptionKeys.GRADIENT_COLORS, setGradientColors);
 }
 
 /**
  * Get Custom Gradient Colors Resolver
  */
 export function* getCustomGradientColors() {
-    try {
-        const colors = yield getSettings(OptionKeys.CUSTOM_GRADIENT_COLORS);
-        return setCustomGradientColors(colors);
-    } catch (error) {
-        return setError(error.message);
-    }
+	return yield* resolveSettings(OptionKeys.CUSTOM_GRADIENT_COLORS, setCustomGradientColors);
 }
 
 /**
  * Get Typography Resolver
  */
 export function* getTypography() {
-    try {
-        const typography = yield getSettings(OptionKeys.TYPOGRAPHY);
-        return setTypography(typography);
-    } catch (error) {
-        return setError(error.message);
-    }
+	return yield* resolveSettings(OptionKeys.TYPOGRAPHY, setTypography);
 }
