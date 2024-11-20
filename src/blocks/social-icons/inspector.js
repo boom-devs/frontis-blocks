@@ -2638,9 +2638,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         <>
 
             <style>
-            {`
-				${editorStyle}
-            `}
+            	{editorStyle}
             </style>
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
