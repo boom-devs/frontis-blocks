@@ -15,7 +15,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import GradientColorPallet from './components/GradientColorPallet';
 import ColorPalletWrapper from './components/ColorPalletWrapper';
 import { useState, useEffect } from "@wordpress/element";
-import { useSelect, useDispatch, compose } from "@wordpress/data";
+import { useSelect, useDispatch, compose, dispatch } from "@wordpress/data";
 import { withSelect } from '@wordpress/data';
 import "./sidebar.scss";
 
@@ -109,6 +109,7 @@ function FrontisBlocksSidebar(props) {
 	const [customColors, setCustomColors] = useState([]);
 	const [activeTab, setActiveTab] = useState("solid");
     const [gradientColors, setGradientColors] = useState([]);
+	const [customGradientColors, setCustomGradientColors] = useState([]);
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
 
@@ -289,7 +290,7 @@ function FrontisBlocksSidebar(props) {
                                                             color: '#000000',
                                                             name: `Custom Color ${customColors.length + 1}`,
                                                             slug: `custom-color-${customColors.length + 1}`,
-                                                            var: `--eb-custom-color-${customColors.length + 1}`
+                                                            var: `--fb-custom-color-${customColors.length + 1}`
                                                         }
                                                     ])}
                                                 >Add Custom Color <Dashicon icon={"plus"} /></Button>
@@ -298,43 +299,57 @@ function FrontisBlocksSidebar(props) {
 									</>
 								)}
                                 { tab.name === "gradient" && (
-                                    <>
+									<>
+										{/* Gradient Color Pallet */}
+										<GradientColorPallet
+											title={"Gradient Colors"}
+											colors={gradientColors}
+											setColor={setGradientColor}
+											setColors={setGradientColors}
+											wrapperClass={"fb-gradient-color-panel"}
+											resetAction={true}
+										/>
 
-                                    {/* Gradient Color Pallet */ }
-                                    <GradientColorPallet
-                                        title={"Gradient Colors"}
-                                        colors={gradientColors}
-                                        setColor={setGradientColor}
-                                        setColors={setGradientColors}
-                                        wrapperClass={"fb-gradient-color-panel"}
-                                        resetAction={true}
-                                        />
-                                    </>
+										<div className="add-custom-color">
+											<Button
+												className="add-custom-color-btn"
+												onClick={() => setCustomGradientColors([
+													...customGradientColors,
+													{
+														color: '#000000',
+														name: `Custom Gradient Color ${customGradientColors.length + 1}`,
+														slug: `custom-color-${customGradientColors.length + 1}`,
+														var: `--fb-custom-gradient-color-${customGradientColors.length + 1}`
+													}
+												])}
+											>Add Custom Gradient Color <Dashicon icon={"plus"}/></Button>
+										</div>
+									</>
 								)}
 							</div>
 						)}
 					</TabPanel>
-				</PanelBody>
-				<PanelBody
-					title={__("Global Typography", "frontis-blocks")}
-                    >
-                        <>
-					<h3>{__("Heading Typography", "frontis-blocks")}</h3>
-					<FB_TypographyControl
-						fontFamily={heading.fontFamily}
-						onChangeFontFamily={(value) => setHeading({...heading, fontFamily: value})}
-						fontSize={heading.fontSize}
-						onChangeFontSize={(value) => setHeading({...heading, fontSize: value})}
-						fontSizeUnits={heading.fontSizeUnits}
-						onChangeFontSizeUnit={(value) => setHeading({...heading, fontSizeUnits: value})}
-						fontWeight={heading.fontWeight}
-						onChangeFontWeight={(value) => setHeading({...heading, fontWeight: value})}
-						fontStyle={heading.fontStyle}
-						onChangeFontStyle={(value) => setHeading({...heading, fontStyle: value})}
-						textTransform={heading.textTransform}
-						onChangeTextTransform={(value) => setHeading({...heading, textTransform: value})}
-						textDecoration={heading.textDecoration}
-						onChangeTextDecoration={(value) => setHeading({...heading, textDecoration: value})}
+					</PanelBody>
+					<PanelBody
+						title={__("Global Typography", "frontis-blocks")}
+					>
+						<>
+							<h3>{__("Heading Typography", "frontis-blocks")}</h3>
+							<FB_TypographyControl
+								fontFamily={heading.fontFamily}
+								onChangeFontFamily={(value) => setHeading({...heading, fontFamily: value})}
+								fontSize={heading.fontSize}
+								onChangeFontSize={(value) => setHeading({...heading, fontSize: value})}
+								fontSizeUnits={heading.fontSizeUnits}
+								onChangeFontSizeUnit={(value) => setHeading({...heading, fontSizeUnits: value})}
+								fontWeight={heading.fontWeight}
+								onChangeFontWeight={(value) => setHeading({...heading, fontWeight: value})}
+								fontStyle={heading.fontStyle}
+								onChangeFontStyle={(value) => setHeading({...heading, fontStyle: value})}
+								textTransform={heading.textTransform}
+								onChangeTextTransform={(value) => setHeading({...heading, textTransform: value})}
+								textDecoration={heading.textDecoration}
+								onChangeTextDecoration={(value) => setHeading({...heading, textDecoration: value})}
 						letterSpacing={heading.letterSpacing}
 						onChangeLetterSpacing={(value) => setHeading({...heading, letterSpacing: value})}
 						letterSpacingUnits={heading.letterSpacingUnits}
