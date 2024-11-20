@@ -2100,272 +2100,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const BorderRadiusMobileWidth = `${fluentFormGlobalBorderRadiusMobile.top}${fluentFormGlobalBorderRadiusUnits.Mobile} ${fluentFormGlobalBorderRadiusMobile.right}${fluentFormGlobalBorderRadiusUnits.Mobile} ${fluentFormGlobalBorderRadiusMobile.bottom}${fluentFormGlobalBorderRadiusUnits.Mobile} ${fluentFormGlobalBorderRadiusMobile.left}${fluentFormGlobalBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
 
-    /** Start Label Color */
-    const handleLabelColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormLabelColorSwitcher: value });
-    };
-    const handleLabelColorChange = (value) => {
-        setAttributes({ fluentFormLabelColor: value });
-    };
-    const handleLabelHoverColorChange = (value) => {
-        setAttributes({ fluentFormLabelHoverColor: value });
-    };
-    /** End Label Color */
-
-    /** Start Input & Textarea BgColor */
-    const handleInputBgColorChange = (value) => {
-        setAttributes({ fluentFormInputBgColor: value });
-    };
-    /** End Input & Textarea BgColor */
-
-    /** Start Input & Textarea Color */
-    const handleInputColorChange = (value) => {
-        setAttributes({ fluentFormInputColor: value });
-    };
-    /** End Input & Textarea Focus Color */
-    /** Start Input & Textarea Color */
-    const handleInputFocusColorChange = (value) => {
-        setAttributes({ fluentFormInputFocusColor: value });
-    };
-    /** End Input & Textarea Focus Color */
-
-    /** Start fluentFormTextIndentSize */
-    const fluentFormTextIndentSizeHandler = (value) => {
-        setAttributes({ fluentFormTextIndentSize: value });
-    };
-    const fluentFormTextIndentSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormTextIndentSizeUnits: value });
-    };
-    /** End fluentFormTextIndentSize */
-
-    /** Start fluentFormInputWidthSize */
-    const fluentFormInputWidthSizeHandler = (value) => {
-        setAttributes({ fluentFormInputWidthSize: value });
-    };
-    const fluentFormInputWidthSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormInputWidthSizeUnits: value });
-    };
-    /** End fluentFormInputWidthSize */
-
-    /** Start fluentFormInputHeightSize */
-    const fluentFormInputHeightSizeHandler = (value) => {
-        setAttributes({ fluentFormInputHeightSize: value });
-    };
-    const fluentFormInputHeightSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormInputHeightSizeUnits: value });
-    };
-    /** End fluentFormInputHeightSize */
-
-    /** Start fluentFormTextareaWidthSize */
-    const fluentFormTextareaWidthSizeHandler = (value) => {
-        setAttributes({ fluentFormTextareaWidthSize: value });
-    };
-    const fluentFormTextareaWidthSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormTextareaWidthSizeUnits: value });
-    };
-    /** End fluentFormTextareaWidthSize */
-
-
-    /** Start fluentFormTextareaHeightSize */
-    const fluentFormTextareaHeightSizeHandler = (value) => {
-        setAttributes({ fluentFormTextareaHeightSize: value });
-    };
-    const fluentFormTextareaHeightSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormTextareaHeightSizeUnits: value });
-    };
-    /** End fluentFormTextareaHeightSize */
-
-    /** Start fluentFormSpacingSize */
-    const fluentFormSpacingSizeHandler = (value) => {
-        setAttributes({ fluentFormSpacingSize: value });
-    };
-    const fluentFormSpacingUnitsHandler = (value) => {
-        setAttributes({ fluentFormSpacingUnits: value });
-    };
-    /** End fluentFormSpacingSize */ 
-
-
-    /** StartfluentFormBorderColor */
-    const handleBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormBorderColorSwitcher: value });
-    };
-    const handleBorderColorChange = (value) => {
-        setAttributes({ fluentFormBorderColor: value });
-    };
-    const handleBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormBorderHoverColor: value });
-    };
-    /** End fluentFormBorderColor */
-
-    /** Start fluentFormPlaceholderColor */
-    const fluentFormPlaceholderColorChange = (value) => {
-        setAttributes({ fluentFormPlaceholderColor: value });
-    };
-    /** End fluentFormPlaceholderColor */
-
-    /** Start fluentFormRadioFontSize */
-    const fluentFormRadioFontSizeHandler = (value) => {
-        setAttributes({ fluentFormRadioFontSize: value });
-    };
-    const fluentFormRadioFontSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormRadioFontSizeUnits: value });
-    };
-    /** End fluentFormRadioFontSize */ 
-
-    /** Start fluentFormRadioCheckBoxItemSpacing */
-    const fluentFormRadioCheckBoxItemSpacingHandler = (value) => {
-        setAttributes({ fluentFormRadioCheckBoxItemSpacing: value });
-    };
-    const fluentFormRadioCheckBoxItemSpacingUnitssHandler = (value) => {
-        setAttributes({ fluentFormRadioCheckBoxItemSpacingUnits: value });
-    };
-    /** End fluentFormRadioCheckBoxItemSpacing */ 
-
-
-    /** Start Section Break Title Color */
-    const fluentFormSectionBreakTitleColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSectionBreakTitleColorSwitcher: value });
-    };
-    const fluentFormSectionBreakTitleColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakTitleColor: value });
-    };
-    const fluentFormSectionBreakTitleHoverColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakTitleHoverColor: value });
-    };
-    /** End Section Break Title Color */
-
-    /** Start Section Break Description Color */
-    const fluentFormSectionBreakDescColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSectionBreakDescColorSwitcher: value });
-    };
-    const fluentFormSectionBreakDescColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakDescColor: value });
-    };
-    const fluentFormSectionBreakDescHoverColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakDescHoverColor: value });
-    };
-    /** End Section Break Description Color */
-
-    /** Start HTML Color */
-    const fluentFormHtmlColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormHtmlColorSwitcher: value });
-    };
-    const fluentFormHtmlColorChange = (value) => {
-        setAttributes({ fluentFormHtmlColor: value });
-    };
-    const fluentFormHtmlHoverColorChange = (value) => {
-        setAttributes({ fluentFormHtmlHoverColor: value });
-    };
-    /** End HTML Color */
-
-    /** Start fluentFormSubmitHeight */
-    const fluentFormSubmitHeightHandler = (value) => {
-        setAttributes({ fluentFormSubmitHeight: value });
-    };
-    const fluentFormSubmitHeightUnitsHandler = (value) => {
-        setAttributes({ fluentFormSubmitHeightUnits: value });
-    };
-    /** End fluentFormSubmitHeight */
-
-    /** Start fluentFormSubmitWidth */
-    const fluentFormSubmitWidthHandler = (value) => {
-        setAttributes({ fluentFormSubmitWidth: value });
-    };
-    const fluentFormSubmitWidthUnitsHandler = (value) => {
-        setAttributes({ fluentFormSubmitWidthUnits: value });
-    };
-    /** End fluentFormSubmitWidth */
-
-    /** Start fluentFormSubmitColorSwitcher */
-    const fluentFormSubmitColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSubmitColorSwitcher: value });
-    };
-    const fluentFormSubmitColorChange = (value) => {
-        setAttributes({ fluentFormSubmitColor: value });
-    };
-    const fluentFormSubmitHoverColorChange = (value) => {
-        setAttributes({ fluentFormSubmitHoverColor: value });
-    };
-    /** End fluentFormSubmitColorSwitcher */
-
-    /** Start fluentFormSubmitBgColorSwitcher */
-    const fluentFormSubmitBgColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSubmitBgColorSwitcher: value });
-    };
-    const fluentFormSubmitBgColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBgColor: value });
-    };
-    const fluentFormSubmitBgHoverColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBgHoverColor: value });
-    };
-    /** End fluentFormSubmitBgColorSwitcher */
-
-    /** Start Submit Border Color */
-    const fluentFormSubmitBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSubmitBorderColorSwitcher: value });
-    };
-    const fluentFormSubmitBorderColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBorderColor: value });
-    };
-    const fluentFormSubmitBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBorderHoverColor: value });
-    };
-    /** End Submit Border Color */
-    
-    /** Start fluentFormSuccessColor */
-
-    const fluentFormSuccessColorChange = (value) => {
-        setAttributes({ fluentFormSuccessColor: value });
-    };
-    /** End fluentFormSuccessColor */
-
-    /** Start fluentFormSuccessBgColor */
-    const fluentFormSuccessBgColorChange = (value) => {
-        setAttributes({ fluentFormSuccessBgColor: value });
-    };
-    /** End fluentFormSuccessBgColor */
-
-    /** Start Success Border Color */
-    const fluentFormSuccessBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSuccessBorderColorSwitcher: value });
-    };
-    const fluentFormSuccessBorderColorChange = (value) => {
-        setAttributes({ fluentFormSuccessBorderColor: value });
-    };
-    const fluentFormSuccessBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormSuccessBorderHoverColor: value });
-    };
-    /** End Success Border Color */
-
-    /** Start Error Color */
-    const fluentFormErrorColorChange = (value) => {
-        setAttributes({ fluentFormErrorColor: value });
-    };
-    /** End Error Color */
-
-    /** Start Global Bg Color */
-    const handleGlobalBgColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormGlobalBgColorSwitcher: value });
-    };
-    const handleGlobalBgColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBgColor: value });
-    };
-    const handleGlobalBgHoverColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBgHoverColor: value });
-    };
-    /** End Global Bg Color */
-
-    /** Start Global Border Color */
-    const handleGlobalBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormGlobalBorderColorSwitcher: value });
-    };
-    const handleGlobalBorderColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBorderColor: value });
-    };
-    const handleGlobalBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBorderHoverColor: value });
-    };
-    /** End Global Border Color */
 
     // Helper function to load fonts
     const loadFont = (fontFamily) => {
@@ -2792,9 +2526,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={fluentFormLabelColorSwitcher}
                                                 globalColor={fluentFormLabelColor}
                                                 globalHoverColor={fluentFormLabelHoverColor}
-                                                handleColorSwitcherChange={handleLabelColorSwitcherChange}
-                                                handleGlobalColorChange={handleLabelColorChange}
-                                                handleGlobalHoverColorChange={handleLabelHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ fluentFormLabelColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ fluentFormLabelColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormLabelHoverColor: value })}
                                             />
 
                                             <BaseControl 
@@ -3006,7 +2740,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <div className="fb-setting-normal-color">
                                                                     <ColorPicker
                                                                         color={fluentFormInputBgColor}
-                                                                        onChange={handleInputBgColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormInputBgColor: value })}
                                                                         enableAlpha={true}
                                                                     />
                                                                     <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -3020,7 +2754,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         ]}
                                                                         disableCustomColors={true}
                                                                         value={fluentFormInputBgColor}
-                                                                        onChange={handleInputBgColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormInputBgColor: value })}
                                                                     />
                                                                 </div>
                                                             </BaseControl>
@@ -3052,7 +2786,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <div className="fb-setting-normal-color">
                                                                     <ColorPicker
                                                                         color={fluentFormInputColor}
-                                                                        onChange={handleInputColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormInputColor: value })}
                                                                         enableAlpha={true}
                                                                     />
                                                                     <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -3066,7 +2800,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         ]}
                                                                         disableCustomColors={true}
                                                                         value={fluentFormInputColor}
-                                                                        onChange={handleInputColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormInputColor: value })}
                                                                     />
                                                                 </div>
                                                             </BaseControl>
@@ -3098,7 +2832,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <div className="fb-setting-normal-color">
                                                                     <ColorPicker
                                                                         color={fluentFormInputFocusColor}
-                                                                        onChange={handleInputFocusColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormInputFocusColor: value })}
                                                                         enableAlpha={true}
                                                                     />
                                                                     <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -3112,7 +2846,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         ]}
                                                                         disableCustomColors={true}
                                                                         value={fluentFormInputFocusColor}
-                                                                        onChange={handleInputFocusColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormInputFocusColor: value })}
                                                                     />
                                                                 </div>
                                                             </BaseControl>
@@ -3309,8 +3043,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={100}
                                                 label={__("Text Indent", "frontis-blocks")}
                                                 rangeValue={fluentFormTextIndentSize}
-                                                onChangeHandler={fluentFormTextIndentSizeHandler}
-                                                rangeUnitHandler={fluentFormTextIndentSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormTextIndentSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormTextIndentSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormTextIndentSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3322,8 +3056,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Input Width", "frontis-blocks")}
                                                 rangeValue={fluentFormInputWidthSize}
-                                                onChangeHandler={fluentFormInputWidthSizeHandler}
-                                                rangeUnitHandler={fluentFormInputWidthSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormInputWidthSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormInputWidthSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormInputWidthSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3335,8 +3069,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Input Height", "frontis-blocks")}
                                                 rangeValue={fluentFormInputHeightSize}
-                                                onChangeHandler={fluentFormInputHeightSizeHandler}
-                                                rangeUnitHandler={fluentFormInputHeightSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormInputHeightSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormInputHeightSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormInputHeightSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3348,8 +3082,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Textarea Width", "frontis-blocks")}
                                                 rangeValue={fluentFormTextareaWidthSize}
-                                                onChangeHandler={fluentFormTextareaWidthSizeHandler}
-                                                rangeUnitHandler={fluentFormTextareaWidthSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormTextareaWidthSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormTextareaWidthSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormTextareaWidthSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3361,8 +3095,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Textarea Height", "frontis-blocks")}
                                                 rangeValue={fluentFormTextareaHeightSize}
-                                                onChangeHandler={fluentFormTextareaHeightSizeHandler}
-                                                rangeUnitHandler={fluentFormTextareaHeightSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormTextareaHeightSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormTextareaHeightSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormTextareaHeightSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3374,8 +3108,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={1000}
                                                 label={__("Spacing", "frontis-blocks")}
                                                 rangeValue={fluentFormSpacingSize}
-                                                onChangeHandler={fluentFormSpacingSizeHandler}
-                                                rangeUnitHandler={fluentFormSpacingUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormSpacingSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormSpacingUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormSpacingUnits}
                                                 setAttributes={setAttributes}
@@ -3409,9 +3143,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={fluentFormBorderColorSwitcher}
                                                 globalColor={fluentFormBorderColor}
                                                 globalHoverColor={fluentFormBorderHoverColor}
-                                                handleColorSwitcherChange={handleBorderColorSwitcherChange}
-                                                handleGlobalColorChange={handleBorderColorChange}
-                                                handleGlobalHoverColorChange={handleBorderHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ fluentFormBorderColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ fluentFormBorderColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormBorderHoverColor: value })}
                                             />
 
                                             <FB_Spacing 
@@ -3468,7 +3202,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <div className="fb-setting-normal-color">
                                                                     <ColorPicker
                                                                         color={fluentFormPlaceholderColor}
-                                                                        onChange={fluentFormPlaceholderColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormPlaceholderColor: value })}
                                                                         enableAlpha={true}
                                                                     />
                                                                     <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -3482,7 +3216,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         ]}
                                                                         disableCustomColors={true}
                                                                         value={fluentFormPlaceholderColor}
-                                                                        onChange={fluentFormPlaceholderColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormPlaceholderColor: value })}
                                                                     />
                                                                 </div>
                                                             </BaseControl>
@@ -3497,8 +3231,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={100}
                                                 label={__("Size", "frontis-blocks")}
                                                 rangeValue={fluentFormRadioFontSize}
-                                                onChangeHandler={fluentFormRadioFontSizeHandler}
-                                                rangeUnitHandler={fluentFormRadioFontSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormRadioFontSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormRadioFontSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormRadioFontSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3687,8 +3421,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={100}
                                                 label={__("Item Spacing", "frontis-blocks")}
                                                 rangeValue={fluentFormRadioCheckBoxItemSpacing}
-                                                onChangeHandler={fluentFormRadioCheckBoxItemSpacingHandler}
-                                                rangeUnitHandler={fluentFormRadioCheckBoxItemSpacingUnitssHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormRadioCheckBoxItemSpacing: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormRadioCheckBoxItemSpacingUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormRadioCheckBoxItemSpacingUnits}
                                                 setAttributes={setAttributes}
@@ -3721,9 +3455,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalColorSwitcher={fluentFormSectionBreakTitleColorSwitcher}
                                                     globalColor={fluentFormSectionBreakTitleColor}
                                                     globalHoverColor={fluentFormSectionBreakTitleHoverColor}
-                                                    handleColorSwitcherChange={fluentFormSectionBreakTitleColorSwitcherChange}
-                                                    handleGlobalColorChange={fluentFormSectionBreakTitleColorChange}
-                                                    handleGlobalHoverColorChange={fluentFormSectionBreakTitleHoverColorChange}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ fluentFormSectionBreakTitleColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ fluentFormSectionBreakTitleColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormSectionBreakTitleHoverColor: value })}
                                                 />
                                                 <BaseControl 
                                                     label={__("Typography", "frontis-blocks")}
@@ -3939,9 +3673,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalColorSwitcher={fluentFormSectionBreakDescColorSwitcher}
                                                     globalColor={fluentFormSectionBreakDescColor}
                                                     globalHoverColor={fluentFormSectionBreakDescHoverColor}
-                                                    handleColorSwitcherChange={fluentFormSectionBreakDescColorSwitcherChange}
-                                                    handleGlobalColorChange={fluentFormSectionBreakDescColorChange}
-                                                    handleGlobalHoverColorChange={fluentFormSectionBreakDescHoverColorChange}
+                                                    handleColorSwitcherChange={(value) => setAttributes({ fluentFormSectionBreakDescColorSwitcher: value })}
+                                                    handleGlobalColorChange={(value) => setAttributes({ fluentFormSectionBreakDescColor: value })}
+                                                    handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormSectionBreakDescHoverColor: value })}
                                                 />
                                                 <BaseControl 
                                                     label={__("Typography", "frontis-blocks")}
@@ -4181,9 +3915,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={fluentFormHtmlColorSwitcher}
                                                 globalColor={fluentFormHtmlColor}
                                                 globalHoverColor={fluentFormHtmlHoverColor}
-                                                handleColorSwitcherChange={fluentFormHtmlColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormHtmlColorChange}
-                                                handleGlobalHoverColorChange={fluentFormHtmlHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ fluentFormHtmlColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ fluentFormHtmlColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormHtmlHoverColor: value })}
                                             />
                                             <BaseControl 
                                                 label={__("Typography", "frontis-blocks")}
@@ -4422,8 +4156,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Height", "frontis-blocks")}
                                                 rangeValue={fluentFormSubmitHeight}
-                                                onChangeHandler={fluentFormSubmitHeightHandler}
-                                                rangeUnitHandler={fluentFormSubmitHeightUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormSubmitHeight: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormSubmitHeightUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormSubmitHeightUnits}
                                                 setAttributes={setAttributes}
@@ -4443,8 +4177,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     max={2000}
                                                     label={__("Width", "frontis-blocks")}
                                                     rangeValue={fluentFormSubmitWidth}
-                                                    onChangeHandler={fluentFormSubmitWidthHandler}
-                                                    rangeUnitHandler={fluentFormSubmitWidthUnitsHandler}
+                                                    onChangeHandler={(value) => setAttributes({ fluentFormSubmitWidth: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ fluentFormSubmitWidthUnits: value })}
                                                     deviceType={deviceType}
                                                     units={fluentFormSubmitWidthUnits}
                                                     setAttributes={setAttributes}
@@ -4640,18 +4374,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={fluentFormSubmitColorSwitcher}
                                                 globalColor={fluentFormSubmitColor}
                                                 globalHoverColor={fluentFormSubmitHoverColor}
-                                                handleColorSwitcherChange={fluentFormSubmitColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSubmitColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSubmitHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ fluentFormSubmitColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ fluentFormSubmitColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormSubmitHoverColor: value })}
                                             />
                                             <FB_Color
                                                 label={__("Background Color", "frontis-blocks")}
                                                 globalColorSwitcher={fluentFormSubmitBgColorSwitcher}
                                                 globalColor={fluentFormSubmitBgColor}
                                                 globalHoverColor={fluentFormSubmitBgHoverColor}
-                                                handleColorSwitcherChange={fluentFormSubmitBgColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSubmitBgColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSubmitBgHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ fluentFormSubmitBgColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ fluentFormSubmitBgColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormSubmitBgHoverColor: value })}
                                             />
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
@@ -4690,9 +4424,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={fluentFormSubmitBorderColorSwitcher}
                                                 globalColor={fluentFormSubmitBorderColor}
                                                 globalHoverColor={fluentFormSubmitBorderHoverColor}
-                                                handleColorSwitcherChange={fluentFormSubmitBorderColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSubmitBorderColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSubmitBorderHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ fluentFormSubmitBorderColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ fluentFormSubmitBorderColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormSubmitBorderHoverColor: value })}
                                             />
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
@@ -4931,7 +4665,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <div className="fb-setting-normal-color">
                                                                     <ColorPicker
                                                                         color={fluentFormSuccessColor}
-                                                                        onChange={fluentFormSuccessColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormSuccessColor: value })}
                                                                         enableAlpha={true}
                                                                     />
                                                                     <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -4945,7 +4679,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         ]}
                                                                         disableCustomColors={true}
                                                                         value={fluentFormSuccessColor}
-                                                                        onChange={fluentFormSuccessColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormSuccessColor: value })} 
                                                                     />
                                                                 </div>
                                                             </BaseControl>
@@ -4977,7 +4711,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <div className="fb-setting-normal-color">
                                                                     <ColorPicker
                                                                         color={fluentFormSuccessBgColor}
-                                                                        onChange={fluentFormSuccessBgColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormSuccessBgColor: value })}
                                                                         enableAlpha={true}
                                                                     />
                                                                     <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -4991,7 +4725,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         ]}
                                                                         disableCustomColors={true}
                                                                         value={fluentFormSuccessBgColor}
-                                                                        onChange={fluentFormSuccessBgColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormSuccessBgColor: value })}
                                                                     />
                                                                 </div>
                                                             </BaseControl>
@@ -5010,9 +4744,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColorSwitcher={fluentFormSuccessBorderColorSwitcher}
                                                 globalColor={fluentFormSuccessBorderColor}
                                                 globalHoverColor={fluentFormSuccessBorderHoverColor}
-                                                handleColorSwitcherChange={fluentFormSuccessBorderColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSuccessBorderColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSuccessBorderHoverColorChange}
+                                                handleColorSwitcherChange={(value) => setAttributes({ fluentFormSuccessBorderColorSwitcher: value })}
+                                                handleGlobalColorChange={(value) => setAttributes({ fluentFormSuccessBorderColor: value })}
+                                                handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormSuccessBorderHoverColor: value })}
                                             />
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
@@ -5249,7 +4983,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 <div className="fb-setting-normal-color">
                                                                     <ColorPicker
                                                                         color={fluentFormErrorColor}
-                                                                        onChange={fluentFormErrorColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormErrorColor: value })}
                                                                         enableAlpha={true}
                                                                     />
                                                                     <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -5263,7 +4997,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         ]}
                                                                         disableCustomColors={true}
                                                                         value={fluentFormErrorColor}
-                                                                        onChange={fluentFormErrorColorChange}
+                                                                        onChange={(value) => setAttributes({ fluentFormErrorColor: value })}
                                                                     />
                                                                 </div>
                                                             </BaseControl>
@@ -5356,9 +5090,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         globalColorSwitcher={fluentFormGlobalBgColorSwitcher}
                                                         globalColor={fluentFormGlobalBgColor}
                                                         globalHoverColor={fluentFormGlobalBgHoverColor}
-                                                        handleColorSwitcherChange={handleGlobalBgColorSwitcherChange}
-                                                        handleGlobalColorChange={handleGlobalBgColorChange}
-                                                        handleGlobalHoverColorChange={handleGlobalBgHoverColorChange}
+                                                        handleColorSwitcherChange={(value) => setAttributes({ fluentFormGlobalBgColorSwitcher: value })}
+                                                        handleGlobalColorChange={(value) => setAttributes({ fluentFormGlobalBgColor: value })}
+                                                        handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormGlobalBgHoverColor: value })}
                                                     />
                                                 </PanelBody>
                                                 <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
@@ -5375,9 +5109,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         globalColorSwitcher={fluentFormGlobalBorderColorSwitcher}
                                                         globalColor={fluentFormGlobalBorderColor}
                                                         globalHoverColor={fluentFormGlobalBorderHoverColor}
-                                                        handleColorSwitcherChange={handleGlobalBorderColorSwitcherChange}
-                                                        handleGlobalColorChange={handleGlobalBorderColorChange}
-                                                        handleGlobalHoverColorChange={handleGlobalBorderHoverColorChange}
+                                                        handleColorSwitcherChange={(value) => setAttributes({ fluentFormGlobalBorderColorSwitcher: value })}
+                                                        handleGlobalColorChange={(value) => setAttributes({ fluentFormGlobalBorderColor: value })}
+                                                        handleGlobalHoverColorChange={(value) => setAttributes({ fluentFormGlobalBorderHoverColor: value })}
                                                     />
 
                                                     <FB_Spacing 
