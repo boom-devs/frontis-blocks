@@ -426,6 +426,91 @@ const attributes = {
         type : "boolean",
         default: true
     },
+
+
+
+    fluentFormFocusBorder: {
+        type: 'string',
+        default: "solid",
+    },
+    fluentFormFocusBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    fluentFormFocusBorderDesktop: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    fluentFormFocusBorderTablet: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    fluentFormFocusBorderMobile: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    fluentFormFocusBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    fluentFormFocusBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    fluentFormFocusBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    fluentFormFocusBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    fluentFormFocusBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    fluentFormFocusBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
     /** End Style Setting */
 
     /** Start Placeholder Setting */
