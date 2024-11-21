@@ -1190,6 +1190,7 @@ const attributes = {
     },
     fluentFormSubmitColor: {
         type: 'string',
+        default: "#FFFFFF"
     },
     fluentFormSubmitHoverColor: {
         type: 'string',
@@ -1200,6 +1201,7 @@ const attributes = {
     },
     fluentFormSubmitBgColor: {
         type: 'string',
+        default: "#399CFF"
     },
     fluentFormSubmitBgHoverColor: {
         type: 'string',
@@ -1622,9 +1624,9 @@ const attributes = {
     fluentFormErrorFontSize: {
         type: "object",
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: "13",
+            Tablet: "13",
+            Mobile: "13",
         }
     },
     fluentFormErrorFontSizeUnits: {

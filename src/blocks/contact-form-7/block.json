@@ -5,12 +5,13 @@
 	"version": "0.1.0",
 	"title": "Contact Form 7",
 	"category": "frontis-blocks",
-	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
-	"supports": {
-		"html": false
-	},
+    "supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+    },
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

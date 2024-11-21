@@ -13,7 +13,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		formId,
 		blockID,
-		showLabels,
 		showPlaceholder,
 		showErrorMessage
 	} = attributes;
@@ -22,7 +21,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: [
 			'fb-contact-form-wrapper',
 			blockID,
-			!showLabels && 'fb-contact-form-hide-label',
 			!showPlaceholder && 'fb-contact-form-hide-placeholder',
 			!showErrorMessage && 'fb-contact-form-hide-error-message'
 		].filter(Boolean).join(' ')

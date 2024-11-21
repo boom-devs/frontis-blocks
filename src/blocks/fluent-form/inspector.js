@@ -2326,7 +2326,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-fluent-form-wrapper {
-            ${fluentFormGlobalZIndex !== undefined ? `z-index: ${fluentFormGlobalZIndex};` : ''}
+            ${fluentFormGlobalZIndex ? `z-index: ${fluentFormGlobalZIndex};` : ''}
             position: relative;
         }
         .${blockID}.fb-fluent-form-wrapper {
@@ -2345,8 +2345,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group label:not(.ff-el-form-check-label),
-        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group .ff-el-input--label,
-        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-error-message .fb-fluent-form-rendered .ff-el-group .error.text-danger {
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group .ff-el-input--label{
+            display: none;
+        }
+
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-error-message .error.text-danger {
             display: none;
         }
 
