@@ -26,12 +26,8 @@ export const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
-	fluentFormGlobalZIndex : {
+	contactFormGlobalZIndex : {
 		type: "number",
-	},
-	showLabels: {
-		type: "boolean",
-		default: true,
 	},
 	showPlaceholder: {
 		type: "boolean",
@@ -42,114 +38,170 @@ export const attributes = {
 		default: true,
 	},
 	/** Start Label */
-	fluentFormLabelColorSwitcher : {
+	contactFormLabelColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormLabelColor: {
+	contactFormLabelColor: {
 		type: 'string',
 	},
-	fluentFormLabelHoverColor: {
+	contactFormLabelHoverColor: {
 		type: 'string',
 	},
-	fluentFormLabelFontFamily: {
+	contactFormLabelFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	fluentFormLabelFontSize: {
-		type: "number",
+	contactFormLabelFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '18',
+			Tablet: '18',
+			Mobile: '16'
+		}
 	},
-	fluentFormLabelFontSizeUnits: {
+	contactFormLabelFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	contactFormLabelFontWeight : {
 		type: "string",
-		default: "px"
+		default: "500"
 	},
-	fluentFormLabelFontWeight : {
-		type: "string",
-	},
-	fluentFormLabelFontStyle : {
+	contactFormLabelFontStyle : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormLabelTextTransform : {
+	contactFormLabelTextTransform : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormLabelTextDecoration : {
+	contactFormLabelTextDecoration : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormLabelLetterSpacing : {
-		type: "number",
+	contactFormLabelLetterSpacing : {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	fluentFormLabelLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	contactFormLabelLetterSpacingUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormLabelLineHeight : {
-		type: "number",
+	contactFormLabelLineHeight : {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	fluentFormLabelLineHeightUnits : {
-		type: "string",
-		default: "px"
+	contactFormLabelLineHeightUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
 	/** End Label */
 
 	/** Start Input & Textarea */
-	fluentFormInputBgColor: {
+	contactFormInputBgColor: {
 		type: 'string',
 	},
-	fluentFormInputColor: {
+	contactFormInputColor: {
 		type: 'string',
 	},
-	fluentFormInputFocusColor: {
+	contactFormInputFocusColor: {
 		type: 'string',
-		default: "#1a7efb",
+		default: "#399CFF",
 
 	},
-	fluentFormInputFontFamily: {
+	contactFormInputFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	fluentFormInputFontSize: {
-		type: "number",
+	contactFormInputFontSize: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormInputFontSizeUnits: {
+	contactFormInputFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	contactFormInputFontWeight : {
 		type: "string",
-		default: "px"
+		default: "300"
 	},
-	fluentFormInputFontWeight : {
-		type: "string",
-	},
-	fluentFormInputFontStyle : {
+	contactFormInputFontStyle : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormInputTextTransform : {
+	contactFormInputTextTransform : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormInputTextDecoration : {
+	contactFormInputTextDecoration : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormInputLetterSpacing : {
-		type: "number",
+	contactFormInputLetterSpacing : {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	fluentFormInputLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	contactFormInputLetterSpacingUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormInputLineHeight : {
-		type: "number",
+	contactFormInputLineHeight : {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	fluentFormInputLineHeightUnits : {
-		type: "string",
-		default: "px"
+	contactFormInputLineHeightUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
 	/** End Input & Textarea */
 
 	/** Start Text Indent */
-	fluentFormTextIndentSize: {
+	contactFormTextIndentSize: {
 		type: 'object',
 		default: {
 			Desktop: "",
@@ -157,7 +209,7 @@ export const attributes = {
 			Mobile: "",
 		}
 	},
-	fluentFormTextIndentSizeUnits: {
+	contactFormTextIndentSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -168,7 +220,7 @@ export const attributes = {
 	/** End Text Indent */
 
 	/** Start Input Width */
-	fluentFormInputWidthSize: {
+	contactFormInputWidthSize: {
 		type: 'object',
 		default: {
 			Desktop: "100",
@@ -176,7 +228,7 @@ export const attributes = {
 			Mobile: "100"
 		}
 	},
-	fluentFormInputWidthSizeUnits: {
+	contactFormInputWidthSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: '%',
@@ -187,7 +239,7 @@ export const attributes = {
 	/** End Input Width */
 
 	/** Start Input Height */
-	fluentFormInputHeightSize: {
+	contactFormInputHeightSize: {
 		type: 'object',
 		default: {
 			Desktop: "",
@@ -195,7 +247,7 @@ export const attributes = {
 			Mobile: ""
 		}
 	},
-	fluentFormInputHeightSizeUnits: {
+	contactFormInputHeightSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -206,7 +258,7 @@ export const attributes = {
 	/** End Input Height */
 
 	/** Start Textarea Width */
-	fluentFormTextareaWidthSize: {
+	contactFormTextareaWidthSize: {
 		type: 'object',
 		default: {
 			Desktop: "",
@@ -214,7 +266,7 @@ export const attributes = {
 			Mobile: ""
 		}
 	},
-	fluentFormTextareaWidthSizeUnits: {
+	contactFormTextareaWidthSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -225,7 +277,7 @@ export const attributes = {
 	/** End Textarea Width */
 
 	/** Start Textarea Height */
-	fluentFormTextareaHeightSize: {
+	contactFormTextareaHeightSize: {
 		type: 'object',
 		default: {
 			Desktop: "",
@@ -233,7 +285,7 @@ export const attributes = {
 			Mobile: ""
 		}
 	},
-	fluentFormTextareaHeightSizeUnits: {
+	contactFormTextareaHeightSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -244,7 +296,7 @@ export const attributes = {
 	/** End Textarea Height */
 
 	/** Start Spacing Height */
-	fluentFormSpacingSize: {
+	contactFormSpacingSize: {
 		type: 'object',
 		default: {
 			Desktop: "",
@@ -252,7 +304,7 @@ export const attributes = {
 			Mobile: ""
 		}
 	},
-	fluentFormSpacingUnits: {
+	contactFormSpacingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -263,7 +315,7 @@ export const attributes = {
 	/** End Spacing Height */
 
 	/** Start Style Setting */
-	fluentFormPaddingUnits: {
+	contactFormPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -271,53 +323,53 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormPaddingDesktop: {
+	contactFormPaddingDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "11",
+			bottom: "11",
+			left: "15",
+			right: "15",
 		},
 	},
-	fluentFormPaddingTablet: {
+	contactFormPaddingTablet: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "11",
+			bottom: "11",
+			left: "15",
+			right: "15",
 		},
 	},
-	fluentFormPaddingMobile: {
+	contactFormPaddingMobile: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "11",
+			bottom: "11",
+			left: "15",
+			right: "15",
 		},
 	},
-	fluentFormPaddingLink : {
+	contactFormPaddingLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormBorder: {
+	contactFormBorder: {
 		type: 'string',
 		default: "solid",
 	},
-	fluentFormBorderColorSwitcher : {
+	contactFormBorderColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormBorderColor: {
+	contactFormBorderColor: {
 		type: 'string',
 		default: "#dadbdd",
 	},
-	fluentFormBorderHoverColor: {
+	contactFormBorderHoverColor: {
 		type: 'string',
 	},
-	fluentFormBorderUnits: {
+	contactFormBorderUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -325,7 +377,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormBorderDesktop: {
+	contactFormBorderDesktop: {
 		type: "object",
 		default: {
 			top: "1",
@@ -334,7 +386,7 @@ export const attributes = {
 			right: "1",
 		},
 	},
-	fluentFormBorderTablet: {
+	contactFormBorderTablet: {
 		type: "object",
 		default: {
 			top: "1",
@@ -343,7 +395,7 @@ export const attributes = {
 			right: "1",
 		},
 	},
-	fluentFormBorderMobile: {
+	contactFormBorderMobile: {
 		type: "object",
 		default: {
 			top: "1",
@@ -352,11 +404,11 @@ export const attributes = {
 			right: "1",
 		},
 	},
-	fluentFormBorderLink : {
+	contactFormBorderLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormBorderRadiusUnits: {
+	contactFormBorderRadiusUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -364,594 +416,137 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormBorderRadiusDesktop: {
+	contactFormBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "7",
+			bottom: "7",
+			left: "7",
+			right: "7",
 		},
 	},
-	fluentFormBorderRadiusTablet: {
+	contactFormBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "7",
+			bottom: "7",
+			left: "7",
+			right: "7",
 		},
 	},
-	fluentFormBorderRadiusMobile: {
+	contactFormBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "7",
+			bottom: "7",
+			left: "7",
+			right: "7",
 		},
 	},
-	fluentFormBorderRadiusLink : {
+	contactFormBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
+
+
+	contactFormFocusBorder: {
+        type: 'string',
+        default: "solid",
+    },
+    contactFormFocusBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    contactFormFocusBorderDesktop: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    contactFormFocusBorderTablet: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    contactFormFocusBorderMobile: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    contactFormFocusBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    contactFormFocusBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    contactFormFocusBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: "7",
+            bottom: "7",
+            left: "7",
+            right: "7",
+        },
+    },
+    contactFormFocusBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: "7",
+            bottom: "7",
+            left: "7",
+            right: "7",
+        },
+    },
+    contactFormFocusBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: "7",
+            bottom: "7",
+            left: "7",
+            right: "7",
+        },
+    },
+    contactFormFocusBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
 	/** End Style Setting */
 
 	/** Start Placeholder Setting */
-	fluentFormPlaceholderColor: {
+	contactFormPlaceholderColor: {
 		type: 'string',
+		default: "#606266"
 	},
 	/** End Placeholder Setting */
 
 
-	/** Start Radio & Checkbox Setting */
-	fluentFormRadioFontSize: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	fluentFormRadioFontSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-	fluentFormRadioColor: {
-		type: 'string',
-	},
-	fluentFormRadioCheckedColor: {
-		type: 'string',
-	},
-	fluentFormRadioBorderWidth: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	fluentFormRadioBorderWidthUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-	fluentFormRadioBorderColor: {
-		type: 'string',
-	},
-	fluentFormRadioBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormRadioBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormRadioBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormRadioBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormRadioBorderRadiusLink : {
-		type : "boolean",
-		default: true
-	},
-
-
-	fluentFormCheckBoxBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormCheckBoxBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormCheckBoxBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormCheckBoxBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormCheckBoxBorderRadiusLink : {
-		type : "boolean",
-		default: true
-	},
-	fluentFormRadioCheckBoxItemSpacing: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	fluentFormRadioCheckBoxItemSpacingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-	/** End Radio & Checkbox Setting */
-
-	/** Start Section Break Title Setting */
-	fluentFormSectionBreakAlignment: {
-		type: "string",
-		default: "left",
-	},
-	fluentFormSectionBreakTitleColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	fluentFormSectionBreakTitleColor: {
-		type: 'string',
-	},
-	fluentFormSectionBreakTitleHoverColor: {
-		type: 'string',
-	},
-	fluentFormSectionBreakTitleFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	fluentFormSectionBreakTitleFontSize: {
-		type: "number",
-	},
-	fluentFormSectionBreakTitleFontSizeUnits: {
-		type: "string",
-		default: "px"
-	},
-	fluentFormSectionBreakTitleFontWeight : {
-		type: "string",
-	},
-	fluentFormSectionBreakTitleFontStyle : {
-		type: "string",
-		default: "normal"
-	},
-	fluentFormSectionBreakTitleTextTransform : {
-		type: "string",
-		default: "none"
-	},
-	fluentFormSectionBreakTitleTextDecoration : {
-		type: "string",
-		default: "none"
-	},
-	fluentFormSectionBreakTitleLetterSpacing : {
-		type: "number",
-	},
-	fluentFormSectionBreakTitleLetterSpacingUnits : {
-		type: "string",
-		default: "px"
-	},
-	fluentFormSectionBreakTitleLineHeight : {
-		type: "number",
-	},
-	fluentFormSectionBreakTitleLineHeightUnits : {
-		type: "string",
-		default: "px"
-	},
-	fluentFormSectionBreakTitlePaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormSectionBreakTitlePaddingDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakTitlePaddingTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakTitlePaddingMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakTitlePaddingLink : {
-		type : "boolean",
-		default: true
-	},
-	fluentFormSectionBreakTitleMarginUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormSectionBreakTitleMarginDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakTitleMarginTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakTitleMarginMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakTitleMarginLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Section Break Title Setting */
-
-
-	/** Start Section Break Description Setting */
-	fluentFormSectionBreakDescColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	fluentFormSectionBreakDescColor: {
-		type: 'string',
-	},
-	fluentFormSectionBreakDescHoverColor: {
-		type: 'string',
-	},
-	fluentFormSectionBreakDescFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	fluentFormSectionBreakDescFontSize: {
-		type: "number",
-	},
-	fluentFormSectionBreakDescFontSizeUnits: {
-		type: "string",
-		default: "px"
-	},
-	fluentFormSectionBreakDescFontWeight : {
-		type: "string",
-	},
-	fluentFormSectionBreakDescFontStyle : {
-		type: "string",
-		default: "normal"
-	},
-	fluentFormSectionBreakDescTextTransform : {
-		type: "string",
-		default: "none"
-	},
-	fluentFormSectionBreakDescTextDecoration : {
-		type: "string",
-		default: "none"
-	},
-	fluentFormSectionBreakDescLetterSpacing : {
-		type: "number",
-	},
-	fluentFormSectionBreakDescLetterSpacingUnits : {
-		type: "string",
-		default: "px"
-	},
-	fluentFormSectionBreakDescLineHeight : {
-		type: "number",
-	},
-	fluentFormSectionBreakDescLineHeightUnits : {
-		type: "string",
-		default: "px"
-	},
-	fluentFormSectionBreakDescPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormSectionBreakDescPaddingDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakDescPaddingTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakDescPaddingMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakDescPaddingLink : {
-		type : "boolean",
-		default: true
-	},
-	fluentFormSectionBreakDescMarginUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormSectionBreakDescMarginDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakDescMarginTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakDescMarginMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	fluentFormSectionBreakDescMarginLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Section Break Description Setting */
-
-	/** Start HTML Setting */
-	fluentFormHtmlAlignment: {
-		type: "string",
-		default: "left",
-	},
-	fluentFormHtmlColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	fluentFormHtmlColor: {
-		type: 'string',
-	},
-	fluentFormHtmlHoverColor: {
-		type: 'string',
-	},
-	fluentFormHtmlFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	fluentFormHtmlFontSize: {
-		type: "number",
-	},
-	fluentFormHtmlFontSizeUnits: {
-		type: "string",
-		default: "px"
-	},
-	fluentFormHtmlFontWeight : {
-		type: "string",
-	},
-	fluentFormHtmlFontStyle : {
-		type: "string",
-		default: "normal"
-	},
-	fluentFormHtmlTextTransform : {
-		type: "string",
-		default: "none"
-	},
-	fluentFormHtmlTextDecoration : {
-		type: "string",
-		default: "none"
-	},
-	fluentFormHtmlLetterSpacing : {
-		type: "number",
-	},
-	fluentFormHtmlLetterSpacingUnits : {
-		type: "string",
-		default: "px"
-	},
-	fluentFormHtmlLineHeight : {
-		type: "number",
-	},
-	fluentFormHtmlLineHeightUnits : {
-		type: "string",
-		default: "px"
-	},
-	fluentFormHtmlPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormHtmlPaddingDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormHtmlPaddingTablet: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormHtmlPaddingMobile: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormHtmlPaddingLink : {
-		type : "boolean",
-		default: true
-	},
-	fluentFormHtmlMarginUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	fluentFormHtmlMarginDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormHtmlMarginTablet: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormHtmlMarginMobile: {
-		type: "object",
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	fluentFormHtmlMarginLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End HTML Setting */
-
 	/** Start Submit Setting */
-	fluentFormSubmitAlignment: {
+	contactFormSubmitAlignment: {
 		type: "string",
 		default: "left",
 	},
-	fluentFormSubmitHeight: {
+	contactFormSubmitHeight: {
 		type: 'object',
 		default: {
 			Desktop: '',
@@ -959,7 +554,7 @@ export const attributes = {
 			Mobile: ''
 		}
 	},
-	fluentFormSubmitHeightUnits: {
+	contactFormSubmitHeightUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -967,11 +562,11 @@ export const attributes = {
 			Mobile: 'px',
 		}
 	},
-	fluentFormSubmitWidthSelect: {
+	contactFormSubmitWidthSelect: {
 		type: 'string',
 		default: 'custom',
 	},
-	fluentFormSubmitWidth: {
+	contactFormSubmitWidth: {
 		type: 'object',
 		default: {
 			Desktop: '',
@@ -979,7 +574,7 @@ export const attributes = {
 			Mobile: ''
 		}
 	},
-	fluentFormSubmitWidthUnits: {
+	contactFormSubmitWidthUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -987,67 +582,97 @@ export const attributes = {
 			Mobile: 'px',
 		}
 	},
-	fluentFormSubmitColorSwitcher : {
+	contactFormSubmitColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormSubmitColor: {
+	contactFormSubmitColor: {
+		type: 'string',
+		default: "#FFFFFF",
+	},
+	contactFormSubmitHoverColor: {
 		type: 'string',
 	},
-	fluentFormSubmitHoverColor: {
-		type: 'string',
-	},
-	fluentFormSubmitBgColorSwitcher : {
+	contactFormSubmitBgColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormSubmitBgColor: {
+	contactFormSubmitBgColor: {
+		type: 'string',
+		default: "#399CFF",
+	},
+	contactFormSubmitBgHoverColor: {
 		type: 'string',
 	},
-	fluentFormSubmitBgHoverColor: {
-		type: 'string',
-	},
-	fluentFormSubmitFontFamily: {
+	contactFormSubmitFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	fluentFormSubmitFontSize: {
-		type: "number",
+	contactFormSubmitFontSize: {
+		type: "object",
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
 	},
-	fluentFormSubmitFontSizeUnits: {
+	contactFormSubmitFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
+	contactFormSubmitFontWeight : {
 		type: "string",
-		default: "px"
+		default: "500"
 	},
-	fluentFormSubmitFontWeight : {
-		type: "string",
-	},
-	fluentFormSubmitFontStyle : {
+	contactFormSubmitFontStyle : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormSubmitTextTransform : {
+	contactFormSubmitTextTransform : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormSubmitTextDecoration : {
+	contactFormSubmitTextDecoration : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormSubmitLetterSpacing : {
-		type: "number",
+	contactFormSubmitLetterSpacing : {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormSubmitLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	contactFormSubmitLetterSpacingUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormSubmitLineHeight : {
-		type: "number",
+	contactFormSubmitLineHeight : {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormSubmitLineHeightUnits : {
-		type: "string",
-		default: "px"
+	contactFormSubmitLineHeightUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormSubmitPaddingUnits: {
+	contactFormSubmitPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1055,38 +680,38 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormSubmitPaddingDesktop: {
+	contactFormSubmitPaddingDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '8',
+			bottom: '8',
+			left: '20',
+			right: '20',
 		},
 	},
-	fluentFormSubmitPaddingTablet: {
+	contactFormSubmitPaddingTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '8',
+			bottom: '8',
+			left: '20',
+			right: '20',
 		},
 	},
-	fluentFormSubmitPaddingMobile: {
+	contactFormSubmitPaddingMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '8',
+			bottom: '8',
+			left: '20',
+			right: '20',
 		},
 	},
-	fluentFormSubmitPaddingLink : {
+	contactFormSubmitPaddingLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormSubmitMarginUnits: {
+	contactFormSubmitMarginUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1094,7 +719,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormSubmitMarginDesktop: {
+	contactFormSubmitMarginDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1103,7 +728,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSubmitMarginTablet: {
+	contactFormSubmitMarginTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1112,7 +737,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSubmitMarginMobile: {
+	contactFormSubmitMarginMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1121,25 +746,25 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSubmitMarginLink : {
+	contactFormSubmitMarginLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormSubmitBorder: {
+	contactFormSubmitBorder: {
 		type: 'string',
 		default: "none",
 	},
-	fluentFormSubmitBorderColorSwitcher : {
+	contactFormSubmitBorderColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormSubmitBorderColor: {
+	contactFormSubmitBorderColor: {
 		type: 'string',
 	},
-	fluentFormSubmitBorderHoverColor: {
+	contactFormSubmitBorderHoverColor: {
 		type: 'string',
 	},
-	fluentFormSubmitBorderUnits: {
+	contactFormSubmitBorderUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1147,7 +772,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormSubmitBorderDesktop: {
+	contactFormSubmitBorderDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1156,7 +781,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSubmitBorderTablet: {
+	contactFormSubmitBorderTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1165,7 +790,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSubmitBorderMobile: {
+	contactFormSubmitBorderMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1174,11 +799,11 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSubmitBorderLink : {
+	contactFormSubmitBorderLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormSubmitBorderRadiusUnits: {
+	contactFormSubmitBorderRadiusUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1186,101 +811,128 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormSubmitBorderRadiusDesktop: {
+	contactFormSubmitBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '7',
+			bottom: '7',
+			left: '7',
+			right: '7',
 		},
 	},
-	fluentFormSubmitBorderRadiusTablet: {
+	contactFormSubmitBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '7',
+			bottom: '7',
+			left: '7',
+			right: '7',
 		},
 	},
-	fluentFormSubmitBorderRadiusMobile: {
+	contactFormSubmitBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '7',
+			bottom: '7',
+			left: '7',
+			right: '7',
 		},
 	},
-	fluentFormSubmitBorderRadiusLink : {
+	contactFormSubmitBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Submit Setting */
 
 	/** Start Success Message Setting */
-	fluentFormSuccessColor: {
+	contactFormSuccessColor: {
 		type: 'string',
 	},
-	fluentFormSuccessBgColor: {
+	contactFormSuccessBgColor: {
 		type: 'string',
 	},
-	fluentFormSuccessFontFamily: {
+	contactFormSuccessFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	fluentFormSuccessFontSize: {
-		type: "number",
+	contactFormSuccessFontSize: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormSuccessFontSizeUnits: {
+	contactFormSuccessFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
+	contactFormSuccessFontWeight : {
 		type: "string",
-		default: "px"
 	},
-	fluentFormSuccessFontWeight : {
-		type: "string",
-	},
-	fluentFormSuccessFontStyle : {
+	contactFormSuccessFontStyle : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormSuccessTextTransform : {
+	contactFormSuccessTextTransform : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormSuccessTextDecoration : {
+	contactFormSuccessTextDecoration : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormSuccessLetterSpacing : {
-		type: "number",
+	contactFormSuccessLetterSpacing : {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormSuccessLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	contactFormSuccessLetterSpacingUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormSuccessLineHeight : {
-		type: "number",
+	contactFormSuccessLineHeight : {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormSuccessLineHeightUnits : {
-		type: "string",
-		default: "px"
+	contactFormSuccessLineHeightUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormSuccessBorder: {
+	contactFormSuccessBorder: {
 		type: 'string',
 		default: "none",
 	},
-	fluentFormSuccessBorderColorSwitcher : {
+	contactFormSuccessBorderColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormSuccessBorderColor: {
+	contactFormSuccessBorderColor: {
 		type: 'string',
 	},
-	fluentFormSuccessBorderHoverColor: {
+	contactFormSuccessBorderHoverColor: {
 		type: 'string',
 	},
-	fluentFormSuccessBorderUnits: {
+	contactFormSuccessBorderUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1288,7 +940,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormSuccessBorderDesktop: {
+	contactFormSuccessBorderDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1297,7 +949,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSuccessBorderTablet: {
+	contactFormSuccessBorderTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1306,7 +958,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSuccessBorderMobile: {
+	contactFormSuccessBorderMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1315,11 +967,11 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSuccessBorderLink : {
+	contactFormSuccessBorderLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormSuccessBorderRadiusUnits: {
+	contactFormSuccessBorderRadiusUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1327,7 +979,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormSuccessBorderRadiusDesktop: {
+	contactFormSuccessBorderRadiusDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1336,7 +988,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSuccessBorderRadiusTablet: {
+	contactFormSuccessBorderRadiusTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1345,7 +997,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSuccessBorderRadiusMobile: {
+	contactFormSuccessBorderRadiusMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1354,57 +1006,85 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormSuccessBorderRadiusLink : {
+	contactFormSuccessBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Success Message Setting */
 
 	/** Start Error message Setting */
-	fluentFormErrorColor: {
+	contactFormErrorColor: {
 		type: 'string',
+		default: "#f56c6c" 
 	},
-	fluentFormErrorFontFamily: {
+	contactFormErrorFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	fluentFormErrorFontSize: {
-		type: "number",
+	contactFormErrorFontSize: {
+		type: "object",
+		default: {
+			Desktop: '13',
+			Tablet: '13',
+			Mobile: '13'
+		}
 	},
-	fluentFormErrorFontSizeUnits: {
+	contactFormErrorFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
+	contactFormErrorFontWeight : {
 		type: "string",
-		default: "px"
 	},
-	fluentFormErrorFontWeight : {
-		type: "string",
-	},
-	fluentFormErrorFontStyle : {
+	contactFormErrorFontStyle : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormErrorTextTransform : {
+	contactFormErrorTextTransform : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormErrorTextDecoration : {
+	contactFormErrorTextDecoration : {
 		type: "string",
 		default: "none"
 	},
-	fluentFormErrorLetterSpacing : {
-		type: "number",
+	contactFormErrorLetterSpacing : {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormErrorLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+	contactFormErrorLetterSpacingUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormErrorLineHeight : {
-		type: "number",
+	contactFormErrorLineHeight : {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	fluentFormErrorLineHeightUnits : {
-		type: "string",
-		default: "px"
+	contactFormErrorLineHeightUnits : {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
 	},
-	fluentFormErrorPaddingUnits: {
+	contactFormErrorPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1412,7 +1092,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormErrorPaddingDesktop: {
+	contactFormErrorPaddingDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1421,7 +1101,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormErrorPaddingTablet: {
+	contactFormErrorPaddingTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1430,7 +1110,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormErrorPaddingMobile: {
+	contactFormErrorPaddingMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1439,11 +1119,11 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormErrorPaddingLink : {
+	contactFormErrorPaddingLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormErrorMarginUnits: {
+	contactFormErrorMarginUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1451,7 +1131,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormErrorMarginDesktop: {
+	contactFormErrorMarginDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1460,7 +1140,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormErrorMarginTablet: {
+	contactFormErrorMarginTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1469,7 +1149,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormErrorMarginMobile: {
+	contactFormErrorMarginMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1478,7 +1158,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormErrorMarginLink : {
+	contactFormErrorMarginLink : {
 		type : "boolean",
 		default: true
 	},
@@ -1487,7 +1167,7 @@ export const attributes = {
 
 
 	/** Start Global Setting */
-	fluentFormGlobalPaddingUnits: {
+	contactFormGlobalPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1495,7 +1175,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormGlobalPaddingDesktop: {
+	contactFormGlobalPaddingDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1504,7 +1184,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalPaddingTablet: {
+	contactFormGlobalPaddingTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1513,7 +1193,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalPaddingMobile: {
+	contactFormGlobalPaddingMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1522,11 +1202,11 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalPaddingLink : {
+	contactFormGlobalPaddingLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormGlobalMarginUnits: {
+	contactFormGlobalMarginUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1534,7 +1214,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormGlobalMarginDesktop: {
+	contactFormGlobalMarginDesktop: {
 		type: "object",
 		default: {
 			top: 30,
@@ -1543,7 +1223,7 @@ export const attributes = {
 			right: 0,
 		},
 	},
-	fluentFormGlobalMarginTablet: {
+	contactFormGlobalMarginTablet: {
 		type: "object",
 		default: {
 			top: 20,
@@ -1552,7 +1232,7 @@ export const attributes = {
 			right: 0,
 		},
 	},
-	fluentFormGlobalMarginMobile: {
+	contactFormGlobalMarginMobile: {
 		type: "object",
 		default: {
 			top: 20,
@@ -1561,36 +1241,36 @@ export const attributes = {
 			right: 0,
 		},
 	},
-	fluentFormGlobalMarginLink : {
+	contactFormGlobalMarginLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormGlobalBgColorSwitcher : {
+	contactFormGlobalBgColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormGlobalBgColor : {
+	contactFormGlobalBgColor : {
 		type: "string",
 	},
-	fluentFormGlobalBgHoverColor: {
+	contactFormGlobalBgHoverColor: {
 		type: 'string',
 	},
 
-	fluentFormGlobalBorder: {
+	contactFormGlobalBorder: {
 		type: 'string',
 		default: "none",
 	},
-	fluentFormGlobalBorderColorSwitcher : {
+	contactFormGlobalBorderColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	fluentFormGlobalBorderColor: {
+	contactFormGlobalBorderColor: {
 		type: 'string',
 	},
-	fluentFormGlobalBorderHoverColor: {
+	contactFormGlobalBorderHoverColor: {
 		type: 'string',
 	},
-	fluentFormGlobalBorderUnits: {
+	contactFormGlobalBorderUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1598,7 +1278,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormGlobalBorderDesktop: {
+	contactFormGlobalBorderDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1607,7 +1287,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalBorderTablet: {
+	contactFormGlobalBorderTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1616,7 +1296,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalBorderMobile: {
+	contactFormGlobalBorderMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1625,11 +1305,11 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalBorderLink : {
+	contactFormGlobalBorderLink : {
 		type : "boolean",
 		default: true
 	},
-	fluentFormGlobalBorderRadiusUnits: {
+	contactFormGlobalBorderRadiusUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1637,7 +1317,7 @@ export const attributes = {
 			Mobile: 'px'
 		}
 	},
-	fluentFormGlobalBorderRadiusDesktop: {
+	contactFormGlobalBorderRadiusDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1646,7 +1326,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalBorderRadiusTablet: {
+	contactFormGlobalBorderRadiusTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1655,7 +1335,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalBorderRadiusMobile: {
+	contactFormGlobalBorderRadiusMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1664,7 +1344,7 @@ export const attributes = {
 			right: '',
 		},
 	},
-	fluentFormGlobalBorderRadiusLink : {
+	contactFormGlobalBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
