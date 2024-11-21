@@ -113,6 +113,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormBorderRadiusMobile,
         fluentFormBorderRadiusLink,
 
+        fluentFormFocusBorder,
+        fluentFormFocusBorderUnits,
+        fluentFormFocusBorderDesktop,
+        fluentFormFocusBorderTablet,
+        fluentFormFocusBorderMobile,
+        fluentFormFocusBorderLink,
+        fluentFormFocusBorderRadiusUnits,
+        fluentFormFocusBorderRadiusDesktop,
+        fluentFormFocusBorderRadiusTablet,
+        fluentFormFocusBorderRadiusMobile,
+        fluentFormFocusBorderRadiusLink,
+
+
         fluentFormPlaceholderColor,
 
         fluentFormRadioFontSize,
@@ -580,6 +593,161 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormBorderRadiusTabletWidth = `${fluentFormBorderRadiusTablet.top}${fluentFormBorderRadiusUnits.Tablet} ${fluentFormBorderRadiusTablet.right}${fluentFormBorderRadiusUnits.Tablet} ${fluentFormBorderRadiusTablet.bottom}${fluentFormBorderRadiusUnits.Tablet} ${fluentFormBorderRadiusTablet.left}${fluentFormBorderRadiusUnits.Tablet}`;
     const fluentFormBorderRadiusMobileWidth = `${fluentFormBorderRadiusMobile.top}${fluentFormBorderRadiusUnits.Mobile} ${fluentFormBorderRadiusMobile.right}${fluentFormBorderRadiusUnits.Mobile} ${fluentFormBorderRadiusMobile.bottom}${fluentFormBorderRadiusUnits.Mobile} ${fluentFormBorderRadiusMobile.left}${fluentFormBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
+
+
+    /** Start  Focus Border */
+    const handleFocusBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( fluentFormFocusBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        fluentFormFocusBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        fluentFormFocusBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        fluentFormFocusBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {fluentFormFocusBorderDesktop: {...fluentFormFocusBorderDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {fluentFormFocusBorderTablet: {...fluentFormFocusBorderTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {fluentFormFocusBorderMobile: {...fluentFormFocusBorderMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleFocusBorderCombineBtn = () => {
+        setAttributes( {fluentFormFocusBorderLink: !fluentFormFocusBorderLink} );
+    }
+
+    const handleFocusBorderUnitsHandler = (unit) => { 
+        setAttributes( {
+            fluentFormFocusBorderUnits: {
+                ...fluentFormFocusBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End  border */
+    const fluentFormFocusBorderDesktopWidth = `${fluentFormFocusBorderDesktop.top}${fluentFormFocusBorderUnits.Desktop} ${fluentFormFocusBorderDesktop.right}${fluentFormFocusBorderUnits.Desktop} ${fluentFormFocusBorderDesktop.bottom}${fluentFormFocusBorderUnits.Desktop} ${fluentFormFocusBorderDesktop.left}${fluentFormFocusBorderUnits.Desktop}`;
+    const fluentFormFocusBorderTabletWidth = `${fluentFormFocusBorderTablet.top}${fluentFormFocusBorderUnits.Tablet} ${fluentFormFocusBorderTablet.right}${fluentFormFocusBorderUnits.Tablet} ${fluentFormFocusBorderTablet.bottom}${fluentFormFocusBorderUnits.Tablet} ${fluentFormFocusBorderTablet.left}${fluentFormFocusBorderUnits.Tablet}`;
+    const fluentFormFocusBorderMobileWidth = `${fluentFormFocusBorderMobile.top}${fluentFormFocusBorderUnits.Mobile} ${fluentFormFocusBorderMobile.right}${fluentFormFocusBorderUnits.Mobile} ${fluentFormFocusBorderMobile.bottom}${fluentFormFocusBorderUnits.Mobile} ${fluentFormFocusBorderMobile.left}${fluentFormFocusBorderUnits.Mobile}`;
+    /** End Border */
+
+
+    /** Start  border radius*/
+    const handleFocusBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( fluentFormFocusBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        fluentFormFocusBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        fluentFormFocusBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        fluentFormFocusBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {fluentFormFocusBorderRadiusDesktop: {...fluentFormFocusBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {fluentFormFocusBorderRadiusTablet: {...fluentFormFocusBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {fluentFormFocusBorderRadiusMobile: {...fluentFormFocusBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleFocusBorderRadiusCombineBtn = () => {
+        setAttributes( {fluentFormFocusBorderRadiusLink: !fluentFormFocusBorderRadiusLink} );
+    }
+
+    const handleFocusBorderRadiusUnitsHandler = (unit) => { 
+        setAttributes( {
+            fluentFormFocusBorderRadiusUnits: {
+                ...fluentFormFocusBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end Focus Border */
+
+    /** End Focus Border Radius */
+    const fluentFormFocusBorderRadiusDesktopWidth = `${fluentFormFocusBorderRadiusDesktop.top}${fluentFormFocusBorderRadiusUnits.Desktop} ${fluentFormFocusBorderRadiusDesktop.right}${fluentFormFocusBorderRadiusUnits.Desktop} ${fluentFormFocusBorderRadiusDesktop.bottom}${fluentFormFocusBorderRadiusUnits.Desktop} ${fluentFormFocusBorderRadiusDesktop.left}${fluentFormFocusBorderRadiusUnits.Desktop}`;
+    const fluentFormFocusBorderRadiusTabletWidth = `${fluentFormFocusBorderRadiusTablet.top}${fluentFormFocusBorderRadiusUnits.Tablet} ${fluentFormFocusBorderRadiusTablet.right}${fluentFormFocusBorderRadiusUnits.Tablet} ${fluentFormFocusBorderRadiusTablet.bottom}${fluentFormFocusBorderRadiusUnits.Tablet} ${fluentFormFocusBorderRadiusTablet.left}${fluentFormFocusBorderRadiusUnits.Tablet}`;
+    const fluentFormFocusBorderRadiusMobileWidth = `${fluentFormFocusBorderRadiusMobile.top}${fluentFormFocusBorderRadiusUnits.Mobile} ${fluentFormFocusBorderRadiusMobile.right}${fluentFormFocusBorderRadiusUnits.Mobile} ${fluentFormFocusBorderRadiusMobile.bottom}${fluentFormFocusBorderRadiusUnits.Mobile} ${fluentFormFocusBorderRadiusMobile.left}${fluentFormFocusBorderRadiusUnits.Mobile}`;
+    /** End Focus Border Radius */
+
+
+
 
     /** Start Radio border radius*/
     const fluentFormRadioBorderRadiusUnitChange = ( event, position ) => {
@@ -2251,8 +2419,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
         .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
         .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
+            ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
+            ${fluentFormFocusBorderDesktopWidth ? `border-width: ${fluentFormFocusBorderDesktopWidth};` : ""}
+            ${fluentFormFocusBorderRadiusDesktopWidth ? `border-radius: ${fluentFormFocusBorderRadiusDesktopWidth};` : ""}
             ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
-            box-shadow: 0 0 0 1px ${fluentFormInputFocusColor ? fluentFormInputFocusColor : ""};
+            box-shadow: none;
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
             ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Desktop}${fluentFormTextareaWidthSizeUnits.Desktop};` : ""}
@@ -2494,8 +2665,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
+                ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
+                ${fluentFormFocusBorderTabletWidth ? `border-width: ${fluentFormFocusBorderTabletWidth};` : ""}
+                ${fluentFormFocusBorderRadiusTabletWidth ? `border-radius: ${fluentFormFocusBorderRadiusTabletWidth};` : ""}
                 ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
-                box-shadow: 0 0 0 1px ${fluentFormInputFocusColor ? fluentFormInputFocusColor : ""};
+                box-shadow: none;
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
                 ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Tablet}${fluentFormTextareaWidthSizeUnits.Tablet};` : ""}
@@ -2738,8 +2912,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
+                ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
+                ${fluentFormFocusBorderMobileWidth ? `border-width: ${fluentFormFocusBorderMobileWidth};` : ""}
                 ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
-                box-shadow: 0 0 0 1px ${fluentFormInputFocusColor ? fluentFormInputFocusColor : ""};
+                ${fluentFormFocusBorderRadiusMobileWidth ? `border-radius: ${fluentFormFocusBorderRadiusMobileWidth};` : ""}
+                box-shadow: none;
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
                 ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Mobile}${fluentFormTextareaWidthSizeUnits.Mobile};` : ""}
@@ -2991,6 +3168,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormBorderRadiusTablet,
         fluentFormBorderRadiusMobile,
         fluentFormBorderRadiusLink,
+
+        fluentFormFocusBorder,
+        fluentFormFocusBorderUnits,
+        fluentFormFocusBorderDesktop,
+        fluentFormFocusBorderTablet,
+        fluentFormFocusBorderMobile,
+        fluentFormFocusBorderLink,
+        fluentFormFocusBorderDesktopWidth,
+        fluentFormFocusBorderTabletWidth,
+        fluentFormFocusBorderMobileWidth,
+
+        fluentFormFocusBorderRadiusUnits,
+        fluentFormFocusBorderRadiusDesktop,
+        fluentFormFocusBorderRadiusTablet,
+        fluentFormFocusBorderRadiusMobile,
+        fluentFormFocusBorderRadiusLink,
+        fluentFormFocusBorderRadiusDesktopWidth,
+        fluentFormFocusBorderRadiusTabletWidth,
+        fluentFormFocusBorderRadiusMobileWidth,
+
+        
 
         fluentFormPlaceholderColor,
 
@@ -3477,11 +3675,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 globalColor={fluentFormInputColor}
                                                 setGlobalColor={(value) => setAttributes({ fluentFormInputColor: value })}
                                             />
-                                            <FB_ColorControl
-                                                label={__("Focus Color", "frontis-blocks")}
-                                                globalColor={fluentFormInputFocusColor}
-                                                setGlobalColor={(value) => setAttributes({ fluentFormInputFocusColor: value })}
-                                            />
 
 
                                             <FB_TypographyControl
@@ -3654,6 +3847,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={handleBorderRadiusCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
+
+                                            <SelectControl
+                                                    label={__("Focus Border Style", "frontis-blocks")}
+                                                    value={fluentFormFocusBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ fluentFormFocusBorder: value })}
+                                            />
+
+                                            <FB_ColorControl
+                                                label={__("Focus Color", "frontis-blocks")}
+                                                globalColor={fluentFormInputFocusColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormInputFocusColor: value })}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Focus Border", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleFocusBorderUnitsHandler}
+                                                spacingUnits={fluentFormFocusBorderUnits}
+                                                spacingDesktop={fluentFormFocusBorderDesktop}
+                                                spacingTablet={fluentFormFocusBorderTablet}
+                                                spacingMobile={fluentFormFocusBorderMobile}
+                                                handleSpacingUnitHandler={handleFocusBorderUnitChange}
+                                                spacingCombineBtn={fluentFormFocusBorderLink}
+                                                spacingCombineBtnHandler={handleFocusBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Focus Radius Border", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleFocusBorderRadiusUnitsHandler}
+                                                spacingUnits={fluentFormFocusBorderRadiusUnits}
+                                                spacingDesktop={fluentFormFocusBorderRadiusDesktop}
+                                                spacingTablet={fluentFormFocusBorderRadiusTablet}
+                                                spacingMobile={fluentFormFocusBorderRadiusMobile}
+                                                handleSpacingUnitHandler={handleFocusBorderRadiusUnitChange}
+                                                spacingCombineBtn={fluentFormFocusBorderRadiusLink}
+                                                spacingCombineBtnHandler={handleFocusBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
 
                                         </PanelBody>
                                         <PanelBody title={__("Placeholder", "frontis-blocks")} initialOpen={false}>
