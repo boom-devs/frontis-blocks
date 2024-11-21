@@ -405,47 +405,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getSettings: () => (/* binding */ getSettings),
 /* harmony export */   updateSettings: () => (/* binding */ updateSettings)
 /* harmony export */ });
+/* harmony import */ var _store_constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/constant */ "./admin/store/constant.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+
 var updateSettings = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(settingType, data) {
     var response;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          console.log(settingType);
-          _context.prev = 1;
-          _context.next = 4;
+          _context.prev = 0;
+          _context.next = 3;
           return jQuery.ajax({
             url: window.frontisBlocksAdminSidebar.ajaxUrl,
             type: 'POST',
             data: {
               action: "fb_update_".concat(settingType),
               nonce: window.frontisBlocksAdminSidebar.nonce,
-              data: JSON.stringify(data)
+              data: data
             }
           });
-        case 4:
+        case 3:
           response = _context.sent;
           if (response.success) {
-            _context.next = 7;
+            _context.next = 6;
             break;
           }
           throw new Error(response.data || 'Update failed');
-        case 7:
+        case 6:
           return _context.abrupt("return", response.data);
-        case 10:
-          _context.prev = 10;
-          _context.t0 = _context["catch"](1);
+        case 9:
+          _context.prev = 9;
+          _context.t0 = _context["catch"](0);
           console.error('Ajax error:', _context.t0);
           throw _context.t0;
-        case 14:
+        case 13:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 10]]);
+    }, _callee, null, [[0, 9]]);
   }));
   return function updateSettings(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -469,24 +470,25 @@ var getSettings = /*#__PURE__*/function () {
           });
         case 3:
           response = _context2.sent;
-          console.log(response);
           if (response.success) {
-            _context2.next = 7;
+            _context2.next = 6;
             break;
           }
           throw new Error(response.data || 'Fetch failed');
-        case 7:
+        case 6:
+          console.log("Global getSettings");
+          console.log(response.data);
           return _context2.abrupt("return", response.data);
-        case 10:
-          _context2.prev = 10;
+        case 11:
+          _context2.prev = 11;
           _context2.t0 = _context2["catch"](0);
           console.error('Ajax error:', _context2.t0);
           throw _context2.t0;
-        case 14:
+        case 15:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 10]]);
+    }, _callee2, null, [[0, 11]]);
   }));
   return function getSettings(_x3) {
     return _ref2.apply(this, arguments);
@@ -562,6 +564,148 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPalletWrapper);
+
+/***/ }),
+
+/***/ "./admin/sidebar/components/CustomGradientPallet.js":
+/*!**********************************************************!*\
+  !*** ./admin/sidebar/components/CustomGradientPallet.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
+  var _props$title = props.title,
+    title = _props$title === void 0 ? "" : _props$title,
+    colors = props.colors,
+    setColor = props.setColor,
+    setColors = props.setColors,
+    wrapperClass = props.wrapperClass,
+    resetAction = props.resetAction,
+    deleteAction = props.deleteAction,
+    _props$enableEditName = props.enableEditName,
+    enableEditName = _props$enableEditName === void 0 ? false : _props$enableEditName,
+    onDelete = props.onDelete;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    clickedGradient = _useState2[0],
+    setClickedGradient = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+    _useState4 = _slicedToArray(_useState3, 2),
+    gradientPopoverAnchor = _useState4[0],
+    setGradientPopoverAnchor = _useState4[1];
+  var editColorName = function editColorName(index, value) {
+    var cloneColors = _toConsumableArray(colors);
+    cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
+      name: value
+    });
+    setColors(_toConsumableArray(cloneColors));
+  };
+  var deleteItem = function deleteItem(index) {
+    var colors = _toConsumableArray(customColors);
+    colors.splice(index, 1);
+    setCustomColors(_toConsumableArray(colors));
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "fb-color-panel ".concat(wrapperClass)
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+    className: "fb-gradient-color-label"
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "fb-custom-panel fb-gradient-color-list"
+  }, colors.map(function (color, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      ref: setGradientPopoverAnchor,
+      id: "fb-gradient-color-".concat(index),
+      className: "fb-custom-element fb-custom-color-item"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "item-content",
+      onClick: function onClick() {
+        return !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
+      }
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
+      onClick: function onClick() {
+        return setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
+      },
+      colorValue: color === null || color === void 0 ? void 0 : color.color
+    }), enableEditName && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      className: 'fb-custom-element__edit-input',
+      value: color.name || '',
+      onChange: function onChange(text) {
+        return editColorName(index, text);
+      }
+    }), !enableEditName && (color === null || color === void 0 ? void 0 : color.name)), /*#__PURE__*/React.createElement("div", {
+      className: "actions"
+    }, resetAction && /*#__PURE__*/React.createElement("span", {
+      className: 'fb-reset',
+      title: "Reset",
+      onClick: function onClick() {
+        return setColor(index, 'linear-gradient(135deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%)');
+      }
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+      icon: 'image-rotate'
+    })), deleteAction && /*#__PURE__*/React.createElement("span", {
+      className: 'fb-delete',
+      title: "Delete",
+      onClick: function onClick() {
+        return onDelete(index);
+      }
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+      icon: 'trash'
+    }))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
+      anchor: gradientPopoverAnchor,
+      className: "fb-gradient-color-popup",
+      placement: "right",
+      onClose: function onClose() {
+        return setClickedGradient('');
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-gradient-color-popup-content"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
+      __nextHasNoMargin: true,
+      value: color === null || color === void 0 ? void 0 : color.color,
+      onChange: function onChange(color) {
+        return setColor(index, color);
+      },
+      asButtons: true,
+      clearable: true,
+      gradients: [{
+        name: color === null || color === void 0 ? void 0 : color.name,
+        gradient: color === null || color === void 0 ? void 0 : color.color,
+        slug: color === null || color === void 0 ? void 0 : color.slug
+      }]
+    }))));
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomGradientColorPallet);
 
 /***/ }),
 
@@ -702,6 +846,28 @@ var GradientColorPallet = function GradientColorPallet(props) {
 
 /***/ }),
 
+/***/ "./admin/sidebar/helper.js":
+/*!*********************************!*\
+  !*** ./admin/sidebar/helper.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getGlobalSettings: () => (/* binding */ getGlobalSettings)
+/* harmony export */ });
+var getGlobalSettings = function getGlobalSettings(select) {
+  return {
+    getGlobalColors: select('frontis-blocks').getGlobalColors()
+    // getCustomColors: select('frontis-blocks').getCustomColors(),
+    // getGradientColors: select('frontis-blocks').getGradientColors(),
+    // getCustomGradientColors: select('frontis-blocks').getCustomGradientColors(),
+    // getGlobalTypography: select('frontis-blocks').getGlobalTypography()
+  };
+};
+
+/***/ }),
+
 /***/ "./admin/sidebar/sidebar.js":
 /*!**********************************!*\
   !*** ./admin/sidebar/sidebar.js ***!
@@ -725,14 +891,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/sidebar/components/ColorPalletWrapper.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
+/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/sidebar/components/CustomGradientPallet.js");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -752,7 +912,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-
+// import {useSelect, useDispatch, withSelect, dispatch, select} from "@wordpress/data";
 
 
 var defaultsColors = [{
@@ -818,9 +978,6 @@ var gradientDefaults = [{
   "var": "--fb-gradient-background-color"
 }];
 function FrontisBlocksSidebar(props) {
-  var themeColors = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.useSelect)(function (select) {
-    return select("core/editor").getEditorSettings().colors;
-  }, []);
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     customColors = _useState2[0],
@@ -835,28 +992,16 @@ function FrontisBlocksSidebar(props) {
     setGradientColors = _useState6[1];
   var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
-    globalColors = _useState8[0],
-    setGlobalColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    customGradientColors = _useState8[0],
+    setCustomGradientColors = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState10 = _slicedToArray(_useState9, 2),
-    customCSS = _useState10[0],
-    setCustomCSS = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
-      fontFamily: '',
-      fontSize: '',
-      fontSizeUnits: 'px',
-      fontWeight: '',
-      fontStyle: '',
-      textTransform: '',
-      textDecoration: '',
-      letterSpacing: '',
-      letterSpacingUnits: 'px',
-      lineHeight: '',
-      lineHeightUnits: ''
-    }),
+    globalColors = _useState10[0],
+    setGlobalColors = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
     _useState12 = _slicedToArray(_useState11, 2),
-    heading = _useState12[0],
-    setHeading = _useState12[1];
+    customCSS = _useState12[0],
+    setCustomCSS = _useState12[1];
   var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
       fontFamily: '',
       fontSize: '',
@@ -871,19 +1016,28 @@ function FrontisBlocksSidebar(props) {
       lineHeightUnits: ''
     }),
     _useState14 = _slicedToArray(_useState13, 2),
-    body = _useState14[0],
-    setBody = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('Desktop'),
+    heading = _useState14[0],
+    setHeading = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
+      fontFamily: '',
+      fontSize: '',
+      fontSizeUnits: 'px',
+      fontWeight: '',
+      fontStyle: '',
+      textTransform: '',
+      textDecoration: '',
+      letterSpacing: '',
+      letterSpacingUnits: 'px',
+      lineHeight: '',
+      lineHeightUnits: ''
+    }),
     _useState16 = _slicedToArray(_useState15, 2),
-    deviceType = _useState16[0],
-    setDeviceType = _useState16[1];
-  // const currentDeviceType = useDeviceType();
-
-  // useEffect(() => {
-  // 	setDeviceType(currentDeviceType);
-  // }, [currentDeviceType]);
-
-  //Initial UseEffect, Set Defualt color if Store is empty
+    body = _useState16[0],
+    setBody = _useState16[1];
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)('Desktop'),
+    _useState18 = _slicedToArray(_useState17, 2),
+    deviceType = _useState18[0],
+    setDeviceType = _useState18[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     //Set Global Colors
     if (globalColors.length === 0) {
@@ -895,6 +1049,17 @@ function FrontisBlocksSidebar(props) {
       setGradientColors(gradientDefaults);
     }
   }, []);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    if (globalColors.length > 0) {
+      // dispatch("frontis-blocks").setGlobalColors(globalColors);
+      // let dispatched = dispatch('frontis-blocks').setLoading(true);
+      //
+      // const isLoading = select('frontis-blocks').getIsLoading();
+      //
+      // console.log("Is loading test")
+      // console.log(dispatched)
+    }
+  }, [globalColors]);
   var handleDeviceTypeChange = function handleDeviceTypeChange(newDeviceType) {
     setDeviceType(newDeviceType);
   };
@@ -932,29 +1097,45 @@ function FrontisBlocksSidebar(props) {
     setGradientColors(_toConsumableArray(colors));
     updateGradientColors(colors);
   };
+
+  //Update Gradient Colors
+  var setCustomGradientColor = function setCustomGradientColor(index, color) {
+    var colors = _toConsumableArray(customGradientColors);
+    colors[index].color = color;
+    setCustomGradientColors(_toConsumableArray(colors));
+    // updateGradientColors(colors);
+  };
   var setCustomColor = function setCustomColor(index, color) {
     var colors = _toConsumableArray(customColors);
     colors[index].color = color;
     setCustomColors(_toConsumableArray(colors));
   };
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.useDispatch)('frontis-blocks'),
-    saveGlobalColors = _useDispatch.saveGlobalColors,
-    saveGradientColors = _useDispatch.saveGradientColors,
-    saveCustomColors = _useDispatch.saveCustomColors,
-    saveTypography = _useDispatch.saveTypography;
+
+  // const {
+  //     saveGlobalColors,
+  //     saveGradientColors,
+  //     saveCustomColors,
+  //     saveTypography
+  // } = useDispatch('frontis-blocks');
+
   var updateGlobalColors = function updateGlobalColors(colors) {
-    saveGlobalColors(colors);
+    console.log(colors);
+    // saveGlobalColors(colors);
   };
   var updateGradientColors = function updateGradientColors(colors) {
-    saveGradientColors(colors);
+    console.log(colors);
+    // saveGradientColors(colors);
   };
   var updateCustomColors = function updateCustomColors(colors) {
-    saveCustomColors(colors);
+    console.log(colors);
+    // saveCustomColors(colors);
   };
   var updateTypography = function updateTypography(type, values) {
-    saveTypography(_objectSpread({
-      type: type
-    }, values));
+    console.log(values);
+    // saveTypography({
+    // 	type,
+    // 	...values
+    // });
   };
   var handleHeadingChange = function handleHeadingChange(values) {
     setHeading(values);
@@ -965,15 +1146,17 @@ function FrontisBlocksSidebar(props) {
     updateTypography('body', values);
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
-    target: "frontis-blocks-sidebar"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebar, {
+    target: "fb_plugin_sidebar"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
+    className: 'fb_plugin_sidebar'
+  }, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebar, {
     name: "frontis-blocks-sidebar",
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks"),
     className: "fb-global-controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color Settings", "frontis-blocks")
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Color", "frontis-blocks")
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -1009,193 +1192,100 @@ function FrontisBlocksSidebar(props) {
           color: '#000000',
           name: "Custom Color ".concat(customColors.length + 1),
           slug: "custom-color-".concat(customColors.length + 1),
-          "var": "--eb-custom-color-".concat(customColors.length + 1)
+          "var": "--fb-custom-color-".concat(customColors.length + 1)
         }]));
       }
-    }, "Add Custom Color ", /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-      icon: "plus"
-    })))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, "Add Custom Color ", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+      width: "15",
+      height: "14",
+      viewBox: "0 0 15 14",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
+      stroke: "white",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__["default"], {
       title: "Gradient Colors",
       colors: gradientColors,
       setColor: setGradientColor,
       setColors: setGradientColors,
       wrapperClass: "fb-gradient-color-panel",
       resetAction: true
-    })));
+    }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      title: "Custom Gradient Colors",
+      colors: customGradientColors,
+      setColor: setCustomGradientColor,
+      setColors: setCustomGradientColors,
+      wrapperClass: "fb-gradient-color-panel",
+      resetAction: true,
+      deleteAction: true
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "add-custom-color"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      className: "add-custom-color-btn",
+      onClick: function onClick() {
+        return setCustomGradientColors([].concat(_toConsumableArray(customGradientColors), [{
+          color: '#000000',
+          name: "Gradient Color ".concat(customGradientColors.length + 1),
+          slug: "custom-gradient-color-".concat(customGradientColors.length + 1),
+          "var": "--fb-custom-gradient-color-".concat(customGradientColors.length + 1)
+        }]));
+      }
+    }, "Add Gradient Color ", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+      width: "15",
+      height: "14",
+      viewBox: "0 0 15 14",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
+      stroke: "white",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    })))))));
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Typography", "frontis-blocks")
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Heading Typography", "frontis-blocks")), /*#__PURE__*/React.createElement(_Components_typography_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    fontFamily: heading.fontFamily,
-    onChangeFontFamily: function onChangeFontFamily(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        fontFamily: value
-      }));
-    },
-    fontSize: heading.fontSize,
-    onChangeFontSize: function onChangeFontSize(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        fontSize: value
-      }));
-    },
-    fontSizeUnits: heading.fontSizeUnits,
-    onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        fontSizeUnits: value
-      }));
-    },
-    fontWeight: heading.fontWeight,
-    onChangeFontWeight: function onChangeFontWeight(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        fontWeight: value
-      }));
-    },
-    fontStyle: heading.fontStyle,
-    onChangeFontStyle: function onChangeFontStyle(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        fontStyle: value
-      }));
-    },
-    textTransform: heading.textTransform,
-    onChangeTextTransform: function onChangeTextTransform(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        textTransform: value
-      }));
-    },
-    textDecoration: heading.textDecoration,
-    onChangeTextDecoration: function onChangeTextDecoration(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        textDecoration: value
-      }));
-    },
-    letterSpacing: heading.letterSpacing,
-    onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        letterSpacing: value
-      }));
-    },
-    letterSpacingUnits: heading.letterSpacingUnits,
-    onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        letterSpacingUnits: value
-      }));
-    },
-    lineHeight: heading.lineHeight,
-    onChangeLineHeight: function onChangeLineHeight(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        lineHeight: value
-      }));
-    },
-    lineHeightUnits: heading.lineHeightUnits,
-    onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-      return setHeading(_objectSpread(_objectSpread({}, heading), {}, {
-        lineHeightUnits: value
-      }));
-    },
-    deviceType: deviceType
-  }), /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Body Typography", "frontis-blocks")), /*#__PURE__*/React.createElement(_Components_typography_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    fontFamily: body.fontFamily,
-    onChangeFontFamily: function onChangeFontFamily(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        fontFamily: value
-      }));
-    },
-    fontSize: body.fontSize,
-    onChangeFontSize: function onChangeFontSize(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        fontSize: value
-      }));
-    },
-    fontSizeUnits: body.fontSizeUnits,
-    onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        fontSizeUnits: value
-      }));
-    },
-    fontWeight: body.fontWeight,
-    onChangeFontWeight: function onChangeFontWeight(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        fontWeight: value
-      }));
-    },
-    fontStyle: body.fontStyle,
-    onChangeFontStyle: function onChangeFontStyle(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        fontStyle: value
-      }));
-    },
-    textTransform: body.textTransform,
-    onChangeTextTransform: function onChangeTextTransform(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        textTransform: value
-      }));
-    },
-    textDecoration: body.textDecoration,
-    onChangeTextDecoration: function onChangeTextDecoration(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        textDecoration: value
-      }));
-    },
-    letterSpacing: body.letterSpacing,
-    onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        letterSpacing: value
-      }));
-    },
-    letterSpacingUnits: body.letterSpacingUnits,
-    onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        letterSpacingUnits: value
-      }));
-    },
-    lineHeight: body.lineHeight,
-    onChangeLineHeight: function onChangeLineHeight(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        lineHeight: value
-      }));
-    },
-    lineHeightUnits: body.lineHeightUnits,
-    onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-      return setBody(_objectSpread(_objectSpread({}, body), {}, {
-        lineHeightUnits: value
-      }));
-    },
-    deviceType: deviceType
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom CSS", "frontis-blocks")
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
     value: customCSS,
     onChange: function onChange(value) {
       return setCustomCSS(value);
     }
-  })))));
+  }))))));
 }
 ;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.withSelect)(function (select) {
-  return {
-    globalColors: select("frontis-blocks").getGlobalColors(),
-    customColors: select("frontis-blocks").getCustomColors(),
-    gradientColors: select("frontis-blocks").getGradientColors(),
-    customGradientColors: select("frontis-blocks").getCustomGradientColors(),
-    typography: select("frontis-blocks").getTypography(),
-    isLoading: select("frontis-blocks").getIsLoading(),
-    error: select("frontis-blocks").getError()
-  };
-})(FrontisBlocksSidebar));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FrontisBlocksSidebar);
+
+//
+// export default withSelect((select) => {
+// 	return {
+// 		globalColors: select("frontis-blocks").getGlobalColors(),
+// 		customColors: select("frontis-blocks").getCustomColors(),
+// 		gradientColors: select("frontis-blocks").getGradientColors(),
+// 		customGradientColors: select("frontis-blocks").getCustomGradientColors(),
+// 		typography: select("frontis-blocks").getTypography(),
+// 		isLoading: select("frontis-blocks").getIsLoading(),
+// 		error: select("frontis-blocks").getError()
+// 	};
+// })(FrontisBlocksSidebar);
 
 /***/ }),
 
-/***/ "./admin/sidebar/store/actions.js":
-/*!****************************************!*\
-  !*** ./admin/sidebar/store/actions.js ***!
-  \****************************************/
+/***/ "./admin/store/actions.js":
+/*!********************************!*\
+  !*** ./admin/store/actions.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   fetchCustomColor: () => (/* binding */ fetchCustomColor),
-/* harmony export */   fetchCustomGradientColor: () => (/* binding */ fetchCustomGradientColor),
-/* harmony export */   fetchGlobalColor: () => (/* binding */ fetchGlobalColor),
-/* harmony export */   fetchGradientColor: () => (/* binding */ fetchGradientColor),
+/* harmony export */   fetchCustomColors: () => (/* binding */ fetchCustomColors),
+/* harmony export */   fetchCustomGradientColors: () => (/* binding */ fetchCustomGradientColors),
+/* harmony export */   fetchGlobalColors: () => (/* binding */ fetchGlobalColors),
+/* harmony export */   fetchGradientColors: () => (/* binding */ fetchGradientColors),
 /* harmony export */   saveCustomColors: () => (/* binding */ saveCustomColors),
 /* harmony export */   saveCustomGradientColors: () => (/* binding */ saveCustomGradientColors),
 /* harmony export */   saveGlobalColors: () => (/* binding */ saveGlobalColors),
@@ -1208,8 +1298,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   setLoading: () => (/* binding */ setLoading),
 /* harmony export */   setTypography: () => (/* binding */ setTypography)
 /* harmony export */ });
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./admin/sidebar/api.js");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constant */ "./admin/sidebar/store/constant.js");
+/* harmony import */ var _sidebar_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sidebar/api */ "./admin/sidebar/api.js");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constant */ "./admin/store/constant.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -1219,399 +1311,25 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
  */
 
 
-/**
- * Action: Set Global Colors
- */
-var setGlobalColors = function setGlobalColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
-            dispatch(setLoading(true));
-            _context.next = 4;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GLOBAL_COLORS, value);
-          case 4:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_GLOBAL_COLORS,
-              value: value
-            });
-            _context.next = 10;
-            break;
-          case 7:
-            _context.prev = 7;
-            _context.t0 = _context["catch"](0);
-            dispatch(setError(_context.t0.message));
-          case 10:
-            _context.prev = 10;
-            dispatch(setLoading(false));
-            return _context.finish(10);
-          case 13:
-          case "end":
-            return _context.stop();
-        }
-      }, _callee, null, [[0, 7, 10, 13]]);
-    }));
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
+
 
 /**
- * Action: Save Global Color to Database
+ * Action: Fetch Is Saving
+ * @returns
  */
-var saveGlobalColors = function saveGlobalColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.prev = 0;
-            if (!(Object.keys(value).length > 0)) {
-              _context2.next = 4;
-              break;
-            }
-            _context2.next = 4;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GLOBAL_COLORS, value);
-          case 4:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_GLOBAL_COLORS,
-              value: value
-            });
-            _context2.next = 10;
-            break;
-          case 7:
-            _context2.prev = 7;
-            _context2.t0 = _context2["catch"](0);
-            dispatch(setError(_context2.t0.message));
-          case 10:
-          case "end":
-            return _context2.stop();
-        }
-      }, _callee2, null, [[0, 7]]);
-    }));
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Fetch Global Color from Database
- */
-var fetchGlobalColor = function fetchGlobalColor() {
-  return {
-    type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_GLOBAL_COLORS
-  };
-};
-
-/**
- * Action: Set Custom Colors
- */
-var setCustomColors = function setCustomColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-        while (1) switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.prev = 0;
-            dispatch(setLoading(true));
-            _context3.next = 4;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_COLORS, value);
-          case 4:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_CUSTOM_COLORS,
-              value: value
-            });
-            _context3.next = 10;
-            break;
-          case 7:
-            _context3.prev = 7;
-            _context3.t0 = _context3["catch"](0);
-            dispatch(setError(_context3.t0.message));
-          case 10:
-            _context3.prev = 10;
-            dispatch(setLoading(false));
-            return _context3.finish(10);
-          case 13:
-          case "end":
-            return _context3.stop();
-        }
-      }, _callee3, null, [[0, 7, 10, 13]]);
-    }));
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Save Custom Color to Database
- */
-var saveCustomColors = function saveCustomColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-        while (1) switch (_context4.prev = _context4.next) {
-          case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_COLORS, value);
-          case 3:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_CUSTOM_COLORS,
-              value: value
-            });
-            _context4.next = 9;
-            break;
-          case 6:
-            _context4.prev = 6;
-            _context4.t0 = _context4["catch"](0);
-            dispatch(setError(_context4.t0.message));
-          case 9:
-          case "end":
-            return _context4.stop();
-        }
-      }, _callee4, null, [[0, 6]]);
-    }));
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Fetch Custom Color from Database
- */
-var fetchCustomColor = function fetchCustomColor() {
-  return {
-    type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_CUSTOM_COLORS
-  };
-};
-
-/**
- * Action: Set Gradient Colors
- */
-var setGradientColors = function setGradientColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-        while (1) switch (_context5.prev = _context5.next) {
-          case 0:
-            _context5.prev = 0;
-            dispatch(setLoading(true));
-            _context5.next = 4;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GRADIENT_COLORS, value);
-          case 4:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_GRADIENT_COLORS,
-              value: value
-            });
-            _context5.next = 10;
-            break;
-          case 7:
-            _context5.prev = 7;
-            _context5.t0 = _context5["catch"](0);
-            dispatch(setError(_context5.t0.message));
-          case 10:
-            _context5.prev = 10;
-            dispatch(setLoading(false));
-            return _context5.finish(10);
-          case 13:
-          case "end":
-            return _context5.stop();
-        }
-      }, _callee5, null, [[0, 7, 10, 13]]);
-    }));
-    return function (_x5) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Save Gradient Color to Database
- */
-var saveGradientColors = function saveGradientColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-        while (1) switch (_context6.prev = _context6.next) {
-          case 0:
-            _context6.prev = 0;
-            if (!(Object.keys(value).length > 0)) {
-              _context6.next = 4;
-              break;
-            }
-            _context6.next = 4;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GRADIENT_COLORS, value);
-          case 4:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_GRADIENT_COLORS,
-              value: value
-            });
-            _context6.next = 10;
-            break;
-          case 7:
-            _context6.prev = 7;
-            _context6.t0 = _context6["catch"](0);
-            dispatch(setError(_context6.t0.message));
-          case 10:
-          case "end":
-            return _context6.stop();
-        }
-      }, _callee6, null, [[0, 7]]);
-    }));
-    return function (_x6) {
-      return _ref6.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Fetch Gradient Color from Database
- */
-var fetchGradientColor = function fetchGradientColor() {
-  return {
-    type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_GRADIENT_COLORS
-  };
-};
-
-/**
- * Action: Set Custom Gradient Colors
- */
-var setCustomGradientColors = function setCustomGradientColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-        while (1) switch (_context7.prev = _context7.next) {
-          case 0:
-            _context7.prev = 0;
-            dispatch(setLoading(true));
-            _context7.next = 4;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_GRADIENT_COLORS, value);
-          case 4:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_CUSTOM_GRADIENT_COLORS,
-              value: value
-            });
-            _context7.next = 10;
-            break;
-          case 7:
-            _context7.prev = 7;
-            _context7.t0 = _context7["catch"](0);
-            dispatch(setError(_context7.t0.message));
-          case 10:
-            _context7.prev = 10;
-            dispatch(setLoading(false));
-            return _context7.finish(10);
-          case 13:
-          case "end":
-            return _context7.stop();
-        }
-      }, _callee7, null, [[0, 7, 10, 13]]);
-    }));
-    return function (_x7) {
-      return _ref7.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Save Custom Gradient Color to Database
- */
-var saveCustomGradientColors = function saveCustomGradientColors(value) {
-  return /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-        while (1) switch (_context8.prev = _context8.next) {
-          case 0:
-            _context8.prev = 0;
-            _context8.next = 3;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_GRADIENT_COLORS, value);
-          case 3:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_CUSTOM_GRADIENT_COLORS,
-              value: value
-            });
-            _context8.next = 9;
-            break;
-          case 6:
-            _context8.prev = 6;
-            _context8.t0 = _context8["catch"](0);
-            dispatch(setError(_context8.t0.message));
-          case 9:
-          case "end":
-            return _context8.stop();
-        }
-      }, _callee8, null, [[0, 6]]);
-    }));
-    return function (_x8) {
-      return _ref8.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Fetch Custom Gradient Color from Database
- */
-var fetchCustomGradientColor = function fetchCustomGradientColor() {
-  return {
-    type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_CUSTOM_GRADIENT_COLORS
-  };
-};
-
-/**
- * Action: Set Typography
- */
-var setTypography = function setTypography(value) {
-  return /*#__PURE__*/function () {
-    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(dispatch) {
-      return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-        while (1) switch (_context9.prev = _context9.next) {
-          case 0:
-            _context9.prev = 0;
-            dispatch(setLoading(true));
-            _context9.next = 4;
-            return (0,_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.TYPOGRAPHY, value);
-          case 4:
-            dispatch({
-              type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_TYPOGRAPHY,
-              value: value
-            });
-            _context9.next = 10;
-            break;
-          case 7:
-            _context9.prev = 7;
-            _context9.t0 = _context9["catch"](0);
-            dispatch(setError(_context9.t0.message));
-          case 10:
-            _context9.prev = 10;
-            dispatch(setLoading(false));
-            return _context9.finish(10);
-          case 13:
-          case "end":
-            return _context9.stop();
-        }
-      }, _callee9, null, [[0, 7, 10, 13]]);
-    }));
-    return function (_x9) {
-      return _ref9.apply(this, arguments);
-    };
-  }();
-};
-
-/**
- * Action: Set Loading State
- */
-var setLoading = function setLoading(value) {
+function setLoading(value) {
+  if (value) {
+    (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/editor').editPost({
+      meta: {
+        _fb_meta_data: 1
+      }
+    });
+  }
   return {
     type: _constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_LOADING,
-    value: value
+    payload: value
   };
-};
+}
 
 /**
  * Action: Set Error State
@@ -1623,12 +1341,113 @@ var setError = function setError(error) {
   };
 };
 
+/**
+ * Helper Function for Setting and Saving Colors or Typography
+ * @param {string} type - Action type to dispatch
+ * @param {string} optionKey - Option key for the setting
+ * @param shouldSave
+ * @returns {Function}
+ */
+var createAsyncAction = function createAsyncAction(type, optionKey) {
+  var shouldSave = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  return function (value) {
+    return /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(_ref) {
+        var dispatch;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              dispatch = _ref.dispatch;
+              _context.prev = 1;
+              dispatch(setLoading(true));
+              if (!(shouldSave || value.length > 0)) {
+                _context.next = 6;
+                break;
+              }
+              _context.next = 6;
+              return (0,_sidebar_api__WEBPACK_IMPORTED_MODULE_0__.updateSettings)(optionKey, value);
+            case 6:
+              dispatch({
+                type: type,
+                payload: value
+              });
+
+              // console.log(dispatched)
+              _context.next = 12;
+              break;
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
+              dispatch(setError(_context.t0.message));
+            case 12:
+              _context.prev = 12;
+              dispatch(setLoading(false));
+              return _context.finish(12);
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[1, 9, 12, 15]]);
+      }));
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+  };
+};
+
+/**
+ * Create Fetch Actions
+ * @param {string} type - Action type
+ * @returns {Function}
+ */
+var createFetchAction = function createFetchAction(type) {
+  return function () {
+    return {
+      type: type
+    };
+  };
+};
+
+/**
+ * Actions for Global Colors
+ */
+var setGlobalColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_GLOBAL_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GLOBAL_COLORS);
+var saveGlobalColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_GLOBAL_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GLOBAL_COLORS, true);
+var fetchGlobalColors = createFetchAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_GLOBAL_COLORS);
+
+/**
+ * Actions for Custom Colors
+ */
+var setCustomColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_CUSTOM_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_COLORS);
+var saveCustomColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_CUSTOM_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_COLORS, true);
+var fetchCustomColors = createFetchAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_CUSTOM_COLORS);
+
+/**
+ * Actions for Gradient Colors
+ */
+var setGradientColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_GRADIENT_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GRADIENT_COLORS);
+var saveGradientColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_GRADIENT_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GRADIENT_COLORS, true);
+var fetchGradientColors = createFetchAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_GRADIENT_COLORS);
+
+/**
+ * Actions for Custom Gradient Colors
+ */
+var setCustomGradientColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_CUSTOM_GRADIENT_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_GRADIENT_COLORS);
+var saveCustomGradientColors = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SAVE_CUSTOM_GRADIENT_COLORS, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_GRADIENT_COLORS, true);
+var fetchCustomGradientColors = createFetchAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.FETCH_CUSTOM_GRADIENT_COLORS);
+
+/**
+ * Actions for Typography
+ */
+var setTypography = createAsyncAction(_constant__WEBPACK_IMPORTED_MODULE_1__.ActionTypes.SET_TYPOGRAPHY, _constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.TYPOGRAPHY);
+
 /***/ }),
 
-/***/ "./admin/sidebar/store/constant.js":
-/*!*****************************************!*\
-  !*** ./admin/sidebar/store/constant.js ***!
-  \*****************************************/
+/***/ "./admin/store/constant.js":
+/*!*********************************!*\
+  !*** ./admin/store/constant.js ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1758,10 +1577,10 @@ var CSSVars = {
 
 /***/ }),
 
-/***/ "./admin/sidebar/store/controls.js":
-/*!*****************************************!*\
-  !*** ./admin/sidebar/store/controls.js ***!
-  \*****************************************/
+/***/ "./admin/store/controls.js":
+/*!*********************************!*\
+  !*** ./admin/store/controls.js ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1772,14 +1591,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   FETCH_GRADIENT_COLORS: () => (/* binding */ FETCH_GRADIENT_COLORS),
 /* harmony export */   FETCH_TYPOGRAPHY: () => (/* binding */ FETCH_TYPOGRAPHY)
 /* harmony export */ });
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constant */ "./admin/sidebar/store/constant.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./admin/sidebar/api.js");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constant */ "./admin/store/constant.js");
+/* harmony import */ var _sidebar_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidebar/api */ "./admin/sidebar/api.js");
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
-var _marked = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_GLOBAL_COLORS),
-  _marked2 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_CUSTOM_COLORS),
-  _marked3 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_GRADIENT_COLORS),
-  _marked4 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_CUSTOM_GRADIENT_COLORS),
-  _marked5 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_TYPOGRAPHY);
+var _marked = /*#__PURE__*/_regeneratorRuntime().mark(fetchSettings),
+  _marked2 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_GLOBAL_COLORS),
+  _marked3 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_CUSTOM_COLORS),
+  _marked4 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_GRADIENT_COLORS),
+  _marked5 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_CUSTOM_GRADIENT_COLORS),
+  _marked6 = /*#__PURE__*/_regeneratorRuntime().mark(FETCH_TYPOGRAPHY);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 /**
  * Import Constants
@@ -1800,7 +1620,7 @@ var isValidJson = function isValidJson(str) {
   try {
     JSON.parse(str);
     return true;
-  } catch (e) {
+  } catch (_unused) {
     return false;
   }
 };
@@ -1812,39 +1632,38 @@ var isValidJson = function isValidJson(str) {
  * @returns {Object|false}
  */
 var parseResponse = function parseResponse(response, key) {
-  if (!response || _typeof(response) !== 'object') {
-    return false;
-  }
-  if (!response[key]) {
-    return false;
-  }
-  if (_typeof(response[key]) === 'object') {
-    return response[key];
-  }
-  if (typeof response[key] === 'string' && isValidJson(response[key])) {
-    return JSON.parse(response[key]);
+  if (response && _typeof(response) === 'object' && response[key]) {
+    var value = response[key];
+    if (_typeof(value) === 'object') {
+      return value;
+    }
+    if (typeof value === 'string' && isValidJson(value)) {
+      return JSON.parse(value);
+    }
   }
   return false;
 };
 
 /**
- * Fetch Global Colors from Database using AJAX
+ * Generic function to fetch settings from the database
+ * @param {string} key
+ * @returns {Object|false}
  */
-function FETCH_GLOBAL_COLORS() {
+function fetchSettings(key) {
   var response;
-  return _regeneratorRuntime().wrap(function FETCH_GLOBAL_COLORS$(_context) {
+  return _regeneratorRuntime().wrap(function fetchSettings$(_context) {
     while (1) switch (_context.prev = _context.next) {
       case 0:
         _context.prev = 0;
         _context.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.GLOBAL_COLORS);
+        return (0,_sidebar_api__WEBPACK_IMPORTED_MODULE_1__.getSettings)(key);
       case 3:
         response = _context.sent;
-        return _context.abrupt("return", parseResponse(response, _constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.GLOBAL_COLORS));
+        return _context.abrupt("return", parseResponse(response, key));
       case 7:
         _context.prev = 7;
         _context.t0 = _context["catch"](0);
-        console.error('Error fetching global colors:', _context.t0);
+        console.error("Error fetching settings for key \"".concat(key, "\":"), _context.t0);
         return _context.abrupt("return", false);
       case 11:
       case "end":
@@ -1854,138 +1673,116 @@ function FETCH_GLOBAL_COLORS() {
 }
 
 /**
- * Fetch Custom Colors from Database using AJAX
+ * Fetch Global Colors from Database using AJAX
  */
-function FETCH_CUSTOM_COLORS() {
-  var response;
-  return _regeneratorRuntime().wrap(function FETCH_CUSTOM_COLORS$(_context2) {
+function FETCH_GLOBAL_COLORS() {
+  return _regeneratorRuntime().wrap(function FETCH_GLOBAL_COLORS$(_context2) {
     while (1) switch (_context2.prev = _context2.next) {
       case 0:
-        _context2.prev = 0;
-        _context2.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.CUSTOM_COLORS);
-      case 3:
-        response = _context2.sent;
-        return _context2.abrupt("return", parseResponse(response, _constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.CUSTOM_COLORS));
-      case 7:
-        _context2.prev = 7;
-        _context2.t0 = _context2["catch"](0);
-        console.error('Error fetching custom colors:', _context2.t0);
-        return _context2.abrupt("return", false);
-      case 11:
+        return _context2.delegateYield(fetchSettings(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.GLOBAL_COLORS), "t0", 1);
+      case 1:
+        return _context2.abrupt("return", _context2.t0);
+      case 2:
       case "end":
         return _context2.stop();
     }
-  }, _marked2, null, [[0, 7]]);
+  }, _marked2);
+}
+
+/**
+ * Fetch Custom Colors from Database using AJAX
+ */
+function FETCH_CUSTOM_COLORS() {
+  return _regeneratorRuntime().wrap(function FETCH_CUSTOM_COLORS$(_context3) {
+    while (1) switch (_context3.prev = _context3.next) {
+      case 0:
+        return _context3.delegateYield(fetchSettings(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.CUSTOM_COLORS), "t0", 1);
+      case 1:
+        return _context3.abrupt("return", _context3.t0);
+      case 2:
+      case "end":
+        return _context3.stop();
+    }
+  }, _marked3);
 }
 
 /**
  * Fetch Gradient Colors from Database using AJAX
  */
 function FETCH_GRADIENT_COLORS() {
-  var response;
-  return _regeneratorRuntime().wrap(function FETCH_GRADIENT_COLORS$(_context3) {
-    while (1) switch (_context3.prev = _context3.next) {
+  return _regeneratorRuntime().wrap(function FETCH_GRADIENT_COLORS$(_context4) {
+    while (1) switch (_context4.prev = _context4.next) {
       case 0:
-        _context3.prev = 0;
-        _context3.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.GRADIENT_COLORS);
-      case 3:
-        response = _context3.sent;
-        return _context3.abrupt("return", parseResponse(response, _constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.GRADIENT_COLORS));
-      case 7:
-        _context3.prev = 7;
-        _context3.t0 = _context3["catch"](0);
-        console.error('Error fetching gradient colors:', _context3.t0);
-        return _context3.abrupt("return", false);
-      case 11:
+        return _context4.delegateYield(fetchSettings(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.GRADIENT_COLORS), "t0", 1);
+      case 1:
+        return _context4.abrupt("return", _context4.t0);
+      case 2:
       case "end":
-        return _context3.stop();
+        return _context4.stop();
     }
-  }, _marked3, null, [[0, 7]]);
+  }, _marked4);
 }
 
 /**
  * Fetch Custom Gradient Colors from Database using AJAX
  */
 function FETCH_CUSTOM_GRADIENT_COLORS() {
-  var response;
-  return _regeneratorRuntime().wrap(function FETCH_CUSTOM_GRADIENT_COLORS$(_context4) {
-    while (1) switch (_context4.prev = _context4.next) {
+  return _regeneratorRuntime().wrap(function FETCH_CUSTOM_GRADIENT_COLORS$(_context5) {
+    while (1) switch (_context5.prev = _context5.next) {
       case 0:
-        _context4.prev = 0;
-        _context4.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.CUSTOM_GRADIENT_COLORS);
-      case 3:
-        response = _context4.sent;
-        return _context4.abrupt("return", parseResponse(response, _constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.CUSTOM_GRADIENT_COLORS));
-      case 7:
-        _context4.prev = 7;
-        _context4.t0 = _context4["catch"](0);
-        console.error('Error fetching custom gradient colors:', _context4.t0);
-        return _context4.abrupt("return", false);
-      case 11:
+        return _context5.delegateYield(fetchSettings(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.CUSTOM_GRADIENT_COLORS), "t0", 1);
+      case 1:
+        return _context5.abrupt("return", _context5.t0);
+      case 2:
       case "end":
-        return _context4.stop();
+        return _context5.stop();
     }
-  }, _marked4, null, [[0, 7]]);
+  }, _marked5);
 }
 
 /**
  * Fetch Typography Settings from Database using AJAX
  */
 function FETCH_TYPOGRAPHY() {
-  var response;
-  return _regeneratorRuntime().wrap(function FETCH_TYPOGRAPHY$(_context5) {
-    while (1) switch (_context5.prev = _context5.next) {
+  return _regeneratorRuntime().wrap(function FETCH_TYPOGRAPHY$(_context6) {
+    while (1) switch (_context6.prev = _context6.next) {
       case 0:
-        _context5.prev = 0;
-        _context5.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.TYPOGRAPHY);
-      case 3:
-        response = _context5.sent;
-        return _context5.abrupt("return", parseResponse(response, _constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.TYPOGRAPHY));
-      case 7:
-        _context5.prev = 7;
-        _context5.t0 = _context5["catch"](0);
-        console.error('Error fetching typography:', _context5.t0);
-        return _context5.abrupt("return", false);
-      case 11:
+        return _context6.delegateYield(fetchSettings(_constant__WEBPACK_IMPORTED_MODULE_0__.OptionKeys.TYPOGRAPHY), "t0", 1);
+      case 1:
+        return _context6.abrupt("return", _context6.t0);
+      case 2:
       case "end":
-        return _context5.stop();
+        return _context6.stop();
     }
-  }, _marked5, null, [[0, 7]]);
+  }, _marked6);
 }
 
 /***/ }),
 
-/***/ "./admin/sidebar/store/index.js":
-/*!**************************************!*\
-  !*** ./admin/sidebar/store/index.js ***!
-  \**************************************/
+/***/ "./admin/store/index.js":
+/*!******************************!*\
+  !*** ./admin/store/index.js ***!
+  \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   store: () => (/* binding */ store)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./admin/sidebar/store/actions.js");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constant */ "./admin/sidebar/store/constant.js");
-/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controls */ "./admin/sidebar/store/controls.js");
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducer */ "./admin/sidebar/store/reducer.js");
-/* harmony import */ var _resolvers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./resolvers */ "./admin/sidebar/store/resolvers.js");
-/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./selectors */ "./admin/sidebar/store/selectors.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./admin/store/actions.js");
+/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./selectors */ "./admin/store/selectors.js");
+/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controls */ "./admin/store/controls.js");
+/* harmony import */ var _resolvers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resolvers */ "./admin/store/resolvers.js");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constant */ "./admin/store/constant.js");
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./reducer */ "./admin/store/reducer.js");
+/* harmony import */ var _sidebar_helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../sidebar/helper */ "./admin/sidebar/helper.js");
 /**
- * WordPress dependencies
+ * Store Setup
  */
 
 
-/**
- * Internal dependencies
- */
 
 
 
@@ -1996,98 +1793,29 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Create WP Redux Store
  */
-var storeConfig = {
-  reducer: _reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
+var store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.createReduxStore)('frontis-blocks', {
+  reducer: _reducer__WEBPACK_IMPORTED_MODULE_6__["default"],
   actions: _actions__WEBPACK_IMPORTED_MODULE_1__,
-  selectors: _selectors__WEBPACK_IMPORTED_MODULE_6__,
+  selectors: _selectors__WEBPACK_IMPORTED_MODULE_2__,
   controls: _controls__WEBPACK_IMPORTED_MODULE_3__,
-  resolvers: _resolvers__WEBPACK_IMPORTED_MODULE_5__,
-  initialState: _constant__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_STATE
-};
-
-/**
- * Register the store
- */
-var store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.createReduxStore)(_constant__WEBPACK_IMPORTED_MODULE_2__.STORE_KEY, storeConfig);
-(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(store);
-
-/**
- * Save Global Values on Save Page/Post
- */
-var isHandlingSave = false; // Flag to prevent recursive calls
-
-(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.subscribe)(function () {
-  // const isSavingPost = select('core/editor').isSavingPost();
-  // const isAutosavingPost = select('core/editor').isAutosavingPost();
-  // const isLoading = select(STORE_KEY).getIsLoading();
-
-  // // Skip if already handling, autosaving, not saving, or loading
-  // if (isLoading || isAutosavingPost || !isSavingPost || isHandlingSave) {
-  //     return;
-  // }
-
-  // isHandlingSave = true; // Set the flag to prevent re-entrant calls
-
-  // const storeDispatch = dispatch(STORE_KEY);
-  // const storeSelect = select(STORE_KEY);
-
-  // try {
-  //     // Set loading state
-  //     storeDispatch.setLoading(true);
-
-  //     // Save all colors
-  //     const globalColors = storeSelect.getGlobalColors();
-  //     if (globalColors?.length) {
-  //         storeDispatch.saveGlobalColors(globalColors);
-  //     }
-
-  //     const customColors = storeSelect.getCustomColors();
-  //     if (customColors?.length) {
-  //         storeDispatch.saveCustomColors(customColors);
-  //     }
-
-  //     const gradientColors = storeSelect.getGradientColors();
-  //     if (gradientColors?.length) {
-  //         storeDispatch.saveGradientColors(gradientColors);
-  //     }
-
-  //     const customGradientColors = storeSelect.getCustomGradientColors();
-  //     if (customGradientColors?.length) {
-  //         storeDispatch.saveCustomGradientColors(customGradientColors);
-  //     }
-
-  //     // Save typography
-  //     const typography = storeSelect.getTypography();
-  //     console.log("typography color")
-  //     console.log(typography)
-  //     if (Object.keys(typography).length) {
-  //         storeDispatch.setTypography(typography);
-  //     }
-
-  // } catch (error) {
-  //     console.error('Error saving settings:', error);
-  //     storeDispatch.setError(error.message);
-  // } finally {
-  //     // Reset the flag and loading state
-  //     isHandlingSave = false;
-  //     storeDispatch.setLoading(false);
-  // }
+  resolvers: _resolvers__WEBPACK_IMPORTED_MODULE_4__
 });
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(store);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 /***/ }),
 
-/***/ "./admin/sidebar/store/reducer.js":
-/*!****************************************!*\
-  !*** ./admin/sidebar/store/reducer.js ***!
-  \****************************************/
+/***/ "./admin/store/reducer.js":
+/*!********************************!*\
+  !*** ./admin/store/reducer.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ reducer)
 /* harmony export */ });
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constant */ "./admin/sidebar/store/constant.js");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constant */ "./admin/store/constant.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2102,23 +1830,30 @@ function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" 
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 function reducer() {
+  var _action$value;
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _constant__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_STATE;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   switch (action.type) {
     // Global Colors
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SET_GLOBAL_COLORS:
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SAVE_GLOBAL_COLORS:
+      console.log("Save global colors");
+      console.log(action);
+      // console.log(action.value)
+      console.log(state.globalColors);
       return _objectSpread(_objectSpread({}, state), {}, {
-        globalColors: _toConsumableArray(action.value)
+        globalColors: Array.isArray(action.payload) ? _toConsumableArray(action.payload) : state.globalColors
       });
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.FETCH_GLOBAL_COLORS:
+      console.log("From reducer");
+      console.log(state);
       return state;
 
     // Custom Colors
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SET_CUSTOM_COLORS:
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SAVE_CUSTOM_COLORS:
       return _objectSpread(_objectSpread({}, state), {}, {
-        customColors: _toConsumableArray(action.value)
+        customColors: Array.isArray(action.value) ? _toConsumableArray(action.value) : state.customColors
       });
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.FETCH_CUSTOM_COLORS:
       return state;
@@ -2127,7 +1862,7 @@ function reducer() {
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SET_GRADIENT_COLORS:
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SAVE_GRADIENT_COLORS:
       return _objectSpread(_objectSpread({}, state), {}, {
-        gradientColors: _toConsumableArray(action.value)
+        gradientColors: Array.isArray(action.value) ? _toConsumableArray(action.value) : state.gradientColors
       });
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.FETCH_GRADIENT_COLORS:
       return state;
@@ -2136,7 +1871,7 @@ function reducer() {
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SET_CUSTOM_GRADIENT_COLORS:
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SAVE_CUSTOM_GRADIENT_COLORS:
       return _objectSpread(_objectSpread({}, state), {}, {
-        customGradientColors: _toConsumableArray(action.value)
+        customGradientColors: Array.isArray(action.value) ? _toConsumableArray(action.value) : state.customGradientColors
       });
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.FETCH_CUSTOM_GRADIENT_COLORS:
       return state;
@@ -2144,19 +1879,19 @@ function reducer() {
     // Typography
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SET_TYPOGRAPHY:
       return _objectSpread(_objectSpread({}, state), {}, {
-        globalTypography: _objectSpread(_objectSpread({}, state.globalTypography), {}, _defineProperty({}, action.value.type, action.value))
+        globalTypography: _objectSpread(_objectSpread({}, state.globalTypography), {}, _defineProperty({}, (_action$value = action.value) === null || _action$value === void 0 ? void 0 : _action$value.type, action.value || {}))
       });
 
     // Loading State
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SET_LOADING:
       return _objectSpread(_objectSpread({}, state), {}, {
-        isLoading: action.value
+        isLoading: Boolean(action.value)
       });
 
     // Error State
     case _constant__WEBPACK_IMPORTED_MODULE_0__.ActionTypes.SET_ERROR:
       return _objectSpread(_objectSpread({}, state), {}, {
-        error: action.payload
+        error: action.payload || null
       });
     default:
       return state;
@@ -2165,10 +1900,10 @@ function reducer() {
 
 /***/ }),
 
-/***/ "./admin/sidebar/store/resolvers.js":
-/*!******************************************!*\
-  !*** ./admin/sidebar/store/resolvers.js ***!
-  \******************************************/
+/***/ "./admin/store/resolvers.js":
+/*!**********************************!*\
+  !*** ./admin/store/resolvers.js ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2179,9 +1914,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getGradientColors: () => (/* binding */ getGradientColors),
 /* harmony export */   getTypography: () => (/* binding */ getTypography)
 /* harmony export */ });
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./admin/sidebar/api.js");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constant */ "./admin/sidebar/store/constant.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./admin/sidebar/store/actions.js");
+/* harmony import */ var _sidebar_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sidebar/api */ "./admin/sidebar/api.js");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constant */ "./admin/store/constant.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./admin/store/actions.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 var _marked = /*#__PURE__*/_regeneratorRuntime().mark(getGlobalColors),
@@ -2203,7 +1938,7 @@ function getGlobalColors() {
       case 0:
         _context.prev = 0;
         _context.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GLOBAL_COLORS);
+        return (0,_sidebar_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GLOBAL_COLORS);
       case 3:
         colors = _context.sent;
         return _context.abrupt("return", (0,_actions__WEBPACK_IMPORTED_MODULE_2__.setGlobalColors)(colors));
@@ -2228,7 +1963,7 @@ function getCustomColors() {
       case 0:
         _context2.prev = 0;
         _context2.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_COLORS);
+        return (0,_sidebar_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_COLORS);
       case 3:
         colors = _context2.sent;
         return _context2.abrupt("return", (0,_actions__WEBPACK_IMPORTED_MODULE_2__.setCustomColors)(colors));
@@ -2253,7 +1988,7 @@ function getGradientColors() {
       case 0:
         _context3.prev = 0;
         _context3.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GRADIENT_COLORS);
+        return (0,_sidebar_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.GRADIENT_COLORS);
       case 3:
         colors = _context3.sent;
         return _context3.abrupt("return", (0,_actions__WEBPACK_IMPORTED_MODULE_2__.setGradientColors)(colors));
@@ -2278,7 +2013,7 @@ function getCustomGradientColors() {
       case 0:
         _context4.prev = 0;
         _context4.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_GRADIENT_COLORS);
+        return (0,_sidebar_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.CUSTOM_GRADIENT_COLORS);
       case 3:
         colors = _context4.sent;
         return _context4.abrupt("return", (0,_actions__WEBPACK_IMPORTED_MODULE_2__.setCustomGradientColors)(colors));
@@ -2303,7 +2038,7 @@ function getTypography() {
       case 0:
         _context5.prev = 0;
         _context5.next = 3;
-        return (0,_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.TYPOGRAPHY);
+        return (0,_sidebar_api__WEBPACK_IMPORTED_MODULE_0__.getSettings)(_constant__WEBPACK_IMPORTED_MODULE_1__.OptionKeys.TYPOGRAPHY);
       case 3:
         typography = _context5.sent;
         return _context5.abrupt("return", (0,_actions__WEBPACK_IMPORTED_MODULE_2__.setTypography)(typography));
@@ -2320,10 +2055,10 @@ function getTypography() {
 
 /***/ }),
 
-/***/ "./admin/sidebar/store/selectors.js":
-/*!******************************************!*\
-  !*** ./admin/sidebar/store/selectors.js ***!
-  \******************************************/
+/***/ "./admin/store/selectors.js":
+/*!**********************************!*\
+  !*** ./admin/store/selectors.js ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -6163,7 +5898,7 @@ module.exports = window["wp"]["plugins"];
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -6177,14 +5912,14 @@ module.exports = window["wp"]["plugins"];
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -6197,7 +5932,7 @@ module.exports = window["wp"]["plugins"];
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -6209,12 +5944,12 @@ module.exports = window["wp"]["plugins"];
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -6225,7 +5960,7 @@ module.exports = window["wp"]["plugins"];
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
@@ -6238,7 +5973,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_plugins__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons */ "./admin/icons/index.js");
 /* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidebar */ "./admin/sidebar/sidebar.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./admin/sidebar/store/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store */ "./admin/store/index.js");
 
 
 

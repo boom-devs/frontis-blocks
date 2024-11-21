@@ -6,7 +6,7 @@ import { OptionKeys } from "./constant";
 /**
  * Import Fetch Functions
  */
-import { getSettings } from '../api';
+import { getSettings } from '../sidebar/api';
 
 /**
  * Helper function to validate JSON string

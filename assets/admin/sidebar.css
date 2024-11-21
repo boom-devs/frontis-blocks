@@ -5,285 +5,202 @@
 /*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/sidebar/sidebar.scss ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************/
-.frontis-blocks-sidebar .components-panel__body {
-  border-top: 1px solid #e0e0e0;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header {
+  min-height: 58px;
+  background: #E1E3E8;
+  padding: 14px 16px;
 }
-.frontis-blocks-sidebar .components-tools-panel {
-  border: none;
-  box-shadow: none;
-}
-.frontis-blocks-sidebar .components-tools-panel__item {
-  margin-bottom: 8px;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  overflow: hidden;
-}
-.frontis-blocks-sidebar .frontis-blocks-color-dropdown__toggle {
-  width: 100%;
-  justify-content: flex-start;
-  padding: 12px;
-  border: none;
-  background: white;
-}
-.frontis-blocks-sidebar .frontis-blocks-color-dropdown__toggle:hover {
-  background: #f0f0f0;
-}
-.frontis-blocks-sidebar .frontis-blocks-color-dropdown__toggle .components-color-indicator {
-  margin-right: 12px;
-}
-.frontis-blocks-sidebar .components-button.is-secondary {
-  display: block;
-  width: 100%;
-  justify-content: center;
-  margin-top: 16px;
-  background-color: #007cba;
-  color: white;
-  border: none;
-}
-.frontis-blocks-sidebar .components-button.is-secondary:hover {
-  background-color: #006ba1;
-}
-.frontis-blocks-sidebar .components-tab-panel__tabs {
-  margin-bottom: 16px;
-}
-.frontis-blocks-sidebar .components-tab-panel__tab-content {
-  padding: 0 16px;
-}
-.frontis-blocks-sidebar .components-tools-panel__header {
-  padding: 0;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #e0e0e0;
-}
-.frontis-blocks-sidebar .components-tools-panel__header h2 {
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header .interface-complementary-area-header__title {
+  color: #0B0C0E;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
-  margin: 0;
-  padding: 8px 0;
+  letter-spacing: 0px;
+  line-height: 19.2px;
 }
-
-.components-custom-gradient-picker {
-  margin-top: 16px;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs {
+  border-bottom: 1px solid #E1E3E8;
+  padding: 0 12px;
 }
-
-.fb-global-controls .fb-color-panel {
-  border-top: 0 !important;
-}
-.fb-global-controls .fb-add-btn {
-  text-align: center;
-  margin-top: 15px;
-}
-.fb-global-controls .fb-add-btn .fb-add-btn__button {
-  text-decoration: none !important;
-  border: 1px solid #037cba;
-  color: #037cba;
-}
-.fb-global-controls .fb-add-btn .fb-add-btn__button .dashicon {
-  margin-left: 5px;
-}
-.fb-global-controls .fb-custom-panel .fb-global-typography-element-content .font_preview_box {
-  width: 100%;
-  height: 70px;
-  text-align: center;
-  background-color: #e2e2e2;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  margin-bottom: 10px;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item,
-.fb-global-controls .fb-custom-panel .fb-custom-element {
-  position: relative;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-bottom: 0px;
-  padding: 5px 15px;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item:first-child,
-.fb-global-controls .fb-custom-panel .fb-custom-element:first-child {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item:last-child,
-.fb-global-controls .fb-custom-panel .fb-custom-element:last-child {
-  border-bottom: 1px solid #ddd;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .fb-custom-element__edit-input,
-.fb-global-controls .fb-custom-panel .fb-custom-element .fb-custom-element__edit-input {
-  margin: 0 !important;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .fb-custom-element__edit-input > div,
-.fb-global-controls .fb-custom-panel .fb-custom-element .fb-custom-element__edit-input > div {
-  margin: 0 !important;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .fb-custom-element__edit-input input,
-.fb-global-controls .fb-custom-panel .fb-custom-element .fb-custom-element__edit-input input {
-  background-color: transparent;
-  border: 0 !important;
-  outline: 0;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .components-navigator-button,
-.fb-global-controls .fb-custom-panel .fb-custom-element .components-navigator-button {
-  padding: 0;
-  width: 100%;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .components-navigator-button .font_preview,
-.fb-global-controls .fb-custom-panel .fb-custom-element .components-navigator-button .font_preview {
-  margin-right: 10px;
-  padding: 4px;
-  background-color: #e2e2e2;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .components-navigator-button .edit_indecator,
-.fb-global-controls .fb-custom-panel .fb-custom-element .components-navigator-button .edit_indecator {
-  border: 3px solid #037cba;
-  border-radius: 50%;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  margin-top: -2px;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .fb-delete-item,
-.fb-global-controls .fb-custom-panel .fb-custom-element .fb-delete-item {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(0px, -50%);
-  border: 0px;
-  background-color: #f54242;
-  color: #fff;
-  padding: 0;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  text-align: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .fb-delete-item:hover,
-.fb-global-controls .fb-custom-panel .fb-custom-element .fb-delete-item:hover {
-  cursor: pointer;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item .fb-delete-item .dashicons,
-.fb-global-controls .fb-custom-panel .fb-custom-element .fb-delete-item .dashicons {
-  font-size: 16px;
-  line-height: 1em;
-  padding-top: 2px;
-}
-.fb-global-controls .fb-custom-panel .components-tools-panel-item:hover .fb-delete-item,
-.fb-global-controls .fb-custom-panel .fb-custom-element:hover .fb-delete-item {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-10px, -50%);
-}
-.fb-global-controls .fb-custom-color-panel .components-tools-panel-item {
-  position: relative;
-}
-.fb-global-controls .fb-custom-color-panel .components-tools-panel-item .fb-delete-custom-color {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(0px, -50%);
-  border: 0px;
-  background-color: #f54242;
-  color: #fff;
-  padding: 0;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  text-align: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s;
-}
-.fb-global-controls .fb-custom-color-panel .components-tools-panel-item .fb-delete-custom-color:hover {
-  cursor: pointer;
-}
-.fb-global-controls .fb-custom-color-panel .components-tools-panel-item .fb-delete-custom-color .dashicons {
-  font-size: 16px;
-  line-height: 1em;
-  padding-top: 2px;
-}
-.fb-global-controls .fb-custom-color-panel .components-tools-panel-item:hover .fb-delete-custom-color {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-10px, -50%);
-}
-.fb-global-controls .fb-global-color-tab-panel .components-tab-panel__tabs {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #ddd;
-}
-.fb-global-controls .fb-global-color-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item {
-  padding: 0;
-  margin-right: 15px;
-  min-width: 50px;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button {
   border-bottom: 2px solid transparent;
 }
-.fb-global-controls .fb-global-color-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab {
-  border-bottom: 2px solid #000;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button.active-tab {
+  border-bottom: 2px solid #C3C8D2;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-color-panel {
-  padding: 0;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button:first-child {
+  padding-left: 0;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-custom-gradient-color-panel .item-content {
-  padding: 0px !important;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-flex.components-h-stack {
+  padding-top: 24px;
+  padding-left: 12px;
+  padding-right: 3px;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-label {
-  color: #1e1e1e !important;
-  font-size: 13px !important;
-  margin-bottom: 15px !important;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-flex.components-h-stack button svg {
+  fill: #555E72;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-list {
-  display: flex;
-  flex-flow: column;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item {
+  border-left: 0;
+  border-right: 0;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-list .fb-custom-color-item:hover {
-  cursor: pointer;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button {
+  border-right: 0;
+  border-left: 0;
+  padding: 0 12px;
+  height: 48px;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-list .fb-custom-color-item:hover .actions {
-  transform: translate(0px, 0px);
-  opacity: 1;
-  visibility: visible;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button .components-flex-item {
+  color: #404655;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-list .fb-custom-color-item .item-content {
-  padding: 10px 0px;
-  display: flex;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-flex.components-h-stack {
+  padding-top: 0;
+  padding-left: 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-custom-color {
+  text-align: center;
+  padding: 14px 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-custom-color .add-custom-color-btn {
+  padding: 12px 14px;
+  background: #4B9DEF;
+  height: 44px;
+  border-radius: 6px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 16px;
   align-items: center;
-  justify-content: flex-end;
   gap: 10px;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-list .fb-custom-color-item .actions {
-  margin-left: auto;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-custom-color .add-custom-color-btn span {
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 5px;
-  transform: translate(0px, -15px);
-  opacity: 0;
-  visibility: hidden;
-  width: 0;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-list .fb-custom-color-item .actions .dashicon {
-  font-size: 14px;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel {
+  border-top: 0;
 }
-.fb-global-controls .fb-global-color-tab-panel .fb-gradient-color-list .fb-custom-color-item .actions .fb-delete {
-  background-color: #f54242;
-  color: #fff;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control {
+  padding: 0px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body {
+  border: none;
+  margin-bottom: 10px;
+  padding: 0 16px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .components-panel__body-title {
+  margin-bottom: 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .components-panel__body-title .components-panel__body-toggle.components-button {
+  padding: 16px 12px;
+  background: #E1E3E8;
+  border-radius: 6px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .components-panel__body-title .components-panel__body-toggle.components-button .components-panel__arrow {
+  right: 5px;
+  color: #555E72;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body.is-opened {
+  padding: 0 32px;
+  padding-top: 16px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body.is-opened .components-panel__body-toggle.components-button {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body.is-opened .fb-blocks-color-tabs {
+  border: 1px solid #E1E3E8;
+  border-top: 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body:first-child {
+  padding-top: 16px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body:first-child.is-opened {
+  padding-top: 32px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body:last-child {
+  margin-bottom: 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .fb-blocks-color-tabs {
+  border-top: 0;
+  width: calc(100% + 32px);
+  margin-left: calc(0% - 16px);
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .fb-blocks-color-tabs .fb-global-color-panel {
   padding: 0;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  padding-top: 3px;
-  text-align: center;
-  margin-top: -5px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .components-base-control {
+  width: calc(100% + 32px);
+  margin-left: calc(0% - 16px);
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .components-base-control .components-textarea-control__input {
+  margin-top: 0;
+  border: 1px solid #e1e3e8;
 }
 
-#fb-global-panel-icon {
-  width: 24px !important;
-  height: 24px !important;
+.block-editor-tools-panel-color-gradient-settings__dropdown > button.is-open {
+  background: transparent;
+}
+
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
+  padding: 0;
+}
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel .block-editor-tools-panel-color-gradient-settings__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 12px;
+}
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel .block-editor-tools-panel-color-gradient-settings__item .fb-delete-custom-color {
+  display: none;
+  border: none;
+  background: transparent;
+  color: #E43242;
+  cursor: pointer;
+}
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel .block-editor-tools-panel-color-gradient-settings__item .fb-delete-custom-color:first-of-type {
+  display: block; /* Shudhu first button visible korbe */
+}
+
+div#tab-panel-0-gradient-view .fb-color-panel.fb-gradient-color-panel .components-panel__row.fb-gradient-color-label {
+  color: #0B0C0E;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  line-height: 19.2px;
+  padding: 14px 12px;
+  border-bottom: 1px solid #E1E3E8;
+}
+div#tab-panel-0-gradient-view .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 12px;
+  border-bottom: 1px solid #E1E3E8;
+}
+div#tab-panel-0-gradient-view .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .item-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #404655;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+div#tab-panel-0-gradient-view .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .actions .fb-reset .dashicons-image-rotate {
+  cursor: pointer;
+}
+div#tab-panel-0-gradient-view .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .actions .fb-reset .dashicons-image-rotate:before {
+  color: #404655;
+  font-size: 17px;
 }
 
 /*# sourceMappingURL=sidebar.css.map*/

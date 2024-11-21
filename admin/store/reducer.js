@@ -5,11 +5,17 @@ export default function reducer(state = DEFAULT_STATE, action) {
 		// Global Colors
 		case ActionTypes.SET_GLOBAL_COLORS:
 		case ActionTypes.SAVE_GLOBAL_COLORS:
+			console.log("Save global colors")
+			console.log(action)
+			// console.log(action.value)
+			console.log(state.globalColors)
 			return {
 				...state,
-				globalColors: Array.isArray(action.value) ? [...action.value] : state.globalColors,
+				globalColors: Array.isArray(action.payload) ? [...action.payload] : state.globalColors,
 			};
 		case ActionTypes.FETCH_GLOBAL_COLORS:
+			console.log("From reducer")
+			console.log(state)
 			return state;
 
 		// Custom Colors
