@@ -1,16 +1,25 @@
 /**
  * Import Constants
  */
-import { updateSettings } from '../api';
+import { updateSettings } from '../sidebar/api';
 import { ActionTypes, OptionKeys } from './constant';
+import {
+	dispatch
+} from '@wordpress/data';
 
 /**
- * Action: Set Loading State
+ * Action: Fetch Is Saving
+ * @returns
  */
-export const setLoading = (value) => ({
-	type: ActionTypes.SET_LOADING,
-	payload: value,
-});
+export function setLoading(value) {
+	if (value) {
+		dispatch('core/editor').editPost({ meta: { _fb_meta_data: 1 } })
+	}
+	return {
+		type: ActionTypes.SET_LOADING,
+		payload: value,
+	}
+}
 
 /**
  * Action: Set Error State
@@ -24,19 +33,23 @@ export const setError = (error) => ({
  * Helper Function for Setting and Saving Colors or Typography
  * @param {string} type - Action type to dispatch
  * @param {string} optionKey - Option key for the setting
- * @param {any} value - The value to set/save
+ * @param shouldSave
  * @returns {Function}
  */
-const createAsyncAction = (type, optionKey, shouldSave = false) => (value) => async (dispatch) => {
+const createAsyncAction = (type, optionKey, shouldSave = false) => (value) => async ({dispatch}) => {
 	try {
 		dispatch(setLoading(true));
-		if (shouldSave || Object.keys(value).length > 0) {
+
+		if (shouldSave || value.length > 0) {
 			await updateSettings(optionKey, value);
 		}
+
 		dispatch({
 			type,
 			payload: value,
 		});
+
+		// console.log(dispatched)
 	} catch (error) {
 		dispatch(setError(error.message));
 	} finally {
