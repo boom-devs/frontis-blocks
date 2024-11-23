@@ -60,7 +60,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
                 .${blockId} .fb_post_grid_container { 
-                    display: grid;
                     gap: 20px;
                     grid-template-columns: repeat(${columnsPerSection}, 1fr) !important;
                 }
