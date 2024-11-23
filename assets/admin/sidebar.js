@@ -469,7 +469,6 @@ var getSettings = /*#__PURE__*/function () {
           });
         case 3:
           response = _context2.sent;
-          console.log(response);
           if (response.success) {
             _context2.next = 7;
             break;

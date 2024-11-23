@@ -575,7 +575,6 @@ var CustomIcons = function CustomIcons() {
         keys: keys
       },
       success: function success(response) {
-        console.log(response);
         if (response.success) {
           // setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
         } else {

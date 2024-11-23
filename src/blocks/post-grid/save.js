@@ -1,7 +1,14 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const { blockId, postType, postPerPage, selectedCat, placeholders } = attributes;
+	const { 
+		blockId,
+		postType,
+		postPerPage,
+		selectedCat,
+		placeholders
+	} = attributes;
+
 	const blockProps = useBlockProps.save();
 
 	return (
@@ -12,7 +19,7 @@ export default function save({ attributes }) {
 				data-post-type={postType}
 				data-block-id={blockId}
 				data-perpage={postPerPage}
-				data-cat={selectedCat || ''} // Ensure data-cat is always present
+				data-cat={selectedCat || ''}
 			>
 				<div className="post-list"></div>
 				<div className="loading post">
