@@ -1,1 +1,10 @@
 
+.fb-inspector-control {
+    .fb-select2-control {
+        input {
+            &:focus {
+               box-shadow: none;
+            }
+        }
+    }
+}

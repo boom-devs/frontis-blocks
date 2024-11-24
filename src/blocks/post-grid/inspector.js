@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
     PanelBody,
@@ -14,24 +14,33 @@ import {
     TextControl,
 } from '@wordpress/components';
 
+/**
+ * External Dependencies
+ */
+import Select2 from "react-select";
+
 import FB_Spacing from '@Components/spacing';
 import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
+import FB_Range from '@Components/range';
 
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
         blockId,
+		deviceType,
 		blockStyle,
 		postType,
 		postPerPage,
 		selectedCat,
 		orderBy,
 		sortOrder,
-		columnsPerSection
+		columnsPerSection,
+		gapUnits,
+		rowGap,
+		columnGap
 	} = attributes;
-
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -53,16 +62,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}));
 	}
 
+    const [selectedOption, setSelectedOption] = useState(selectedCat);
 
-
-
-
+    const handleCategoryChange = (selectedOption) => {
+        setSelectedOption(selectedOption);
+        setAttributes({ selectedCat: selectedOption.map(option => option.value) });
+    };
 
     const allBlockStyle = useMemo(() => `
-                .${blockId} .fb_post_grid_container { 
-                    gap: 20px;
-                    grid-template-columns: repeat(${columnsPerSection}, 1fr) !important;
-                }
+        .${blockId} .fb_post_grid_container { 
+            grid-template-columns: repeat(${columnsPerSection.Desktop}, 1fr) !important;
+            row-gap: ${rowGap.Desktop}${gapUnits.Desktop}; 
+            column-gap: ${columnGap.Desktop}${gapUnits.Desktop}; 
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .${blockId} .fb_post_grid_container { 
+                grid-template-columns: repeat(${columnsPerSection.Tablet}, 1fr) !important;
+                row-gap: ${rowGap.Tablet}${gapUnits.Tablet};
+                column-gap: ${columnGap.Tablet}${gapUnits.Tablet};
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .${blockId} .fb_post_grid_container { 
+                grid-template-columns: repeat(${columnsPerSection.Mobile}, 1fr) !important;
+                row-gap: ${rowGap.Mobile}${gapUnits.Mobile};
+                column-gap: ${columnGap.Mobile}${gapUnits.Mobile};
+            }
+        }
 
     `, [
         blockId,
@@ -71,8 +99,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         selectedCat,
         orderBy,
         sortOrder,
-        columnsPerSection
-
+        columnsPerSection,
+        gapUnits,
+        rowGap,
+        columnGap
     ]);
 
     useEffect(() => {
@@ -80,7 +110,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [allBlockStyle]);
 
     const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
-
 
     return (
         <>
@@ -128,14 +157,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChange={(value) => setAttributes({postType: value})}
                                                 />
 
-												{postType &&
+
+                                                {/* {postType &&
 													<SelectControl
 														label={__("Category", "frontis-blocks")}
 														value={selectedCat}
 														options={taxOptions}
 														onChange={(value) => setAttributes({selectedCat: value})}
 													/>
-												}
+												} */}
+
+                                                {postType &&
+                                                    <Select2 
+                                                        label={__("Category", "frontis-blocks")}
+                                                        options={taxOptions} 
+                                                        value={selectedOption}
+                                                        onChange={handleCategoryChange}
+                                                        isMulti
+                                                        className="fb-select2-control"
+                                                    />
+                                                }
 
                                                 <SelectControl
                                                     label={__("Order By", "frontis-blocks")}
@@ -159,20 +200,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChange={(value) => setAttributes({sortOrder: value})}
                                                 />
 
-                                                <SelectControl
-                                                    label={__("Columns", "frontis-blocks")}
-                                                    value={columnsPerSection}
-                                                    options={[
-                                                        {value: "1", label: "1"},
-                                                        {value: "2", label: "2"},
-                                                        {value: "3", label: "3"},
-                                                        {value: "4", label: "4"},
-                                                        {value: "5", label: "5"},
-                                                        {value: "6", label: "6"}
-                                                    ]}
-                                                    onChange={(value) => setAttributes({columnsPerSection: value})}
-                                                />
-
 												<NumberControl
 													label={__('Post per page', 'frontis-blocks')}
 													isShiftStepEnabled={ true }
@@ -180,6 +207,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													shiftStep={ 1 }
 													value={ postPerPage }
 												/>
+                                            </PanelBody>
+
+                                            <PanelBody
+                                                title={__("Grid", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+
+                                                <FB_Range
+                                                    min={1}
+                                                    max={6}
+                                                    label={__("Columns", "frontis-blocks")}
+                                                    rangeValue={columnsPerSection}
+                                                    onChangeHandler={(value) => setAttributes({ columnsPerSection: value })}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={"3"}
+                                                    isRangeUnit={false}
+                                                />
+
+                                                <FB_Range
+                                                    min={1}
+                                                    max={200}
+                                                    label={__("Row Gap", "frontis-blocks")}
+                                                    rangeValue={rowGap}
+                                                    onChangeHandler={(value) => setAttributes({ rowGap: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ gapUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={gapUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={"30"}
+                                                />
+
+                                                <FB_Range
+                                                    min={1}
+                                                    max={200}
+                                                    label={__("Column Gap", "frontis-blocks")}
+                                                    rangeValue={columnGap}
+                                                    onChangeHandler={(value) => setAttributes({ columnGap: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ gapUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={gapUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={"30"}
+                                                />
+
                                             </PanelBody>
                                         </div>
                                     </>

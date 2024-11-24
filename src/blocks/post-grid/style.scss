@@ -1,5 +1,12 @@
 .fb_post_grid_container{ 
     display: grid;
+	.fb_post_grid_wrapper{
+		width: 100%;
+		overflow: hidden;
+		img{
+			width: 100%;
+		}
+	}
 }
 
 

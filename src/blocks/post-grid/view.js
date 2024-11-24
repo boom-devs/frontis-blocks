@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				console.log(filterPost.limit * (currentPage - 1))
 
 				filterPost.offset = filterPost.limit * (currentPage - 1);
-				filterPost.category = cat;
+				filterPost.category = cat ? cat.split(',') : [];
 
 				// Call function to load more posts
 				loadMorePosts(postType, blockId, cat, perpage);
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	function loadMorePosts(postType, blockId, cat, perpage) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
-		filterPost.category = cat;
+		filterPost.category = cat ? cat.split(',') : [];
 		filterPost.limit = perpage;
 		let formData = convertToAjaxParams(filterPost);
 
