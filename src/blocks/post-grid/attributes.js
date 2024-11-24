@@ -21,8 +21,8 @@ const attributes = {
 		default: 6
 	},
 	selectedCat: {
-		type: "string",
-		default: ""
+		type: "array",
+		default: []
 	},
 	placeholders: {
 		type: "array",
@@ -37,9 +37,38 @@ const attributes = {
 		default: "desc"
 	},
 	columnsPerSection: {
-		type: "string",
-		default: "3"
+		type: "object",
+		default: {
+			Desktop: 3,
+			Tablet: 2,
+			Mobile: 1
+		}
+	},
+	gapUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	rowGap: {
+		type: "object",
+		default: {
+			Desktop: 30,
+			Tablet: 30,
+			Mobile: 30
+		}
+	},
+	columnGap: {
+		type: "object",
+		default: {
+			Desktop: 30,
+			Tablet: 30,
+			Mobile: 30
+		}
 	}
+
 };
 
 export default attributes;

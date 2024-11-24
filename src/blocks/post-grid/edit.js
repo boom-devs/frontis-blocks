@@ -26,22 +26,38 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `${blockId}`,
     });
 
+    console.log(selectedCat);
+
     const { useSelect } = wp.data;
+    // const postLists = useSelect( ( select ) => {
+    //     if(selectedCat !== "") {
+    //         return select('core').getEntityRecords('postType', postType, {
+    //             orderby: orderBy,
+    //             order: sortOrder,
+    //             per_page: postPerPage,
+    //             categories: [selectedCat],
+    //         });
+    //     } else {
+    //         return select('core').getEntityRecords('postType', postType, {
+    //             orderby: orderBy,
+    //             order: sortOrder,
+    //             per_page: postPerPage,
+    //         });
+    //     }
+    // } );
+
+
     const postLists = useSelect( ( select ) => {
-        if(selectedCat !== "") {
-            return select('core').getEntityRecords('postType', postType, {
-                orderby: orderBy,
-                order: sortOrder,
-                per_page: postPerPage,
-                categories: [selectedCat],
-            });
-        } else {
-            return select('core').getEntityRecords('postType', postType, {
-                orderby: orderBy,
-                order: sortOrder,
-                per_page: postPerPage,
-            });
+        const categories = Array.isArray(selectedCat) ? selectedCat : [selectedCat];
+        const query = {
+            orderby: orderBy,
+            order: sortOrder,
+            per_page: postPerPage,
+        };
+        if (selectedCat !== "") {
+            query.categories = categories;
         }
+        return select('core').getEntityRecords('postType', postType, query);
     } );
 
     return (
