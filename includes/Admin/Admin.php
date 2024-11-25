@@ -318,8 +318,10 @@ class Admin {
         $post_type = isset($_POST['post_type']) ? $_POST['post_type'] : 'post';
         $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
         $limit = isset($_POST['limit']) ? intval($_POST['limit']) : 12;
-        $category = isset($_POST['category']) ? intval($_POST['category']) : 0;
+        $category = isset($_POST['category']) ? $_POST['category'] : '';
+        $decategory = isset($_POST['decategory']) ? $_POST['decategory'] : '';
         $current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
+
 
         ob_start();
 
@@ -331,14 +333,29 @@ class Admin {
             AND post_status = 'publish'
         ", $post_type);
 
-        if ($category !== 0) {
-            $query .= " AND ID IN (
+        if (!empty($category)) {
+            $category_ids = explode(',', $category); // Assuming category input as comma-separated values
+            $placeholders = implode(',', array_fill(0, count($category_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID IN (
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'category' AND tt.term_id = $category
-            )";
+                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+            )", $category_ids);
         }
+
+        // Apply decategory filter if provided (exclude posts in specified categories)
+        // if (!empty($decategory)) {
+        //     // You mentioned specific term IDs: 3, 13, 10, 5, 4
+        //     $decategory_ids = [3, 13, 10, 5, 4];
+        //     $deplaceholders = implode(',', array_fill(0, count($decategory_ids), '%d'));
+        //     $query .= " AND ID NOT IN (
+        //         SELECT object_id
+        //         FROM {$wpdb->term_relationships} AS tr
+        //         INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+        //         WHERE tt.taxonomy = 'category' AND tt.term_id IN ($deplaceholders)
+        //     )";
+        // }
 
         // Count total number of records
         $count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
@@ -348,7 +365,7 @@ class Admin {
         $total_pages = ceil($total_records / $limit);
 
         // Adjust offset if it exceeds total records to avoid empty results
-//         $offset = min($offset, max(0, $total_records - $limit));
+        // $offset = min($offset, max(0, $total_records - $limit));
 
         // Adding limit and offset to the query
         $temp_query = "
