@@ -27,7 +27,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		selectedAuthor,
 		deSelectedAuthor,
 		orderBy,
-		sortOrder
+		sortOrder,
     } = attributes;
 
     const blockProps = useBlockProps({

@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		limit: limit,
 		post_type: 'post',
 		currentPage: currentPage,
-		category: null
+		category: null,
+		decat: null
 	};
 
 	document.body.addEventListener('click', function(event) {
@@ -20,7 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postType = parentElement.getAttribute("data-post-type");
 				const blockId = parentElement.getAttribute("data-block-id");
 				const cat = parentElement.getAttribute("data-cat");
+				const decat = parentElement.getAttribute("data-decat");
 				const perpage = parentElement.getAttribute("data-perpage");
+				const orderby = parentElement.getAttribute("data-orderby");
+				const sortorder = parentElement.getAttribute("data-sortorder");
 
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
@@ -29,9 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				filterPost.offset = filterPost.limit * (currentPage - 1);
 				filterPost.category = cat ? cat.split(',') : [];
+				filterPost.decat = decat ? decat.split(',') : [];
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage);
+				loadMorePosts(postType, blockId, cat, decat, perpage, orderby, sortorder);
 			}
 		}
 	});
@@ -48,11 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage) {
+	function loadMorePosts(postType, blockId, cat, decat, perpage, orderby, sortorder) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
+		filterPost.decat = decat ? decat.split(',') : [];
 		filterPost.limit = perpage;
+		filterPost.orderby = orderby;
+		filterPost.sortorder = sortorder;
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
 
@@ -119,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'));
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-decat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'));
 	});
 
 

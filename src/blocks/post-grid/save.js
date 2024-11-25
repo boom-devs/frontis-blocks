@@ -6,8 +6,20 @@ export default function save({ attributes }) {
 		postType,
 		postPerPage,
 		selectedCat,
-		placeholders
+		placeholders,
+		selectedCatSwitcher,
+		deSelectedCat,
+		selectedTagSwitcher,
+		selectedTag,
+		deSelectedTag,
+		selectedAuthorSwitcher,
+		selectedAuthor,
+		deSelectedAuthor,
+		orderBy,
+		sortOrder,
 	} = attributes;
+
+	console.log(selectedCat);
 
 	const blockProps = useBlockProps.save();
 
@@ -19,7 +31,10 @@ export default function save({ attributes }) {
 				data-post-type={postType}
 				data-block-id={blockId}
 				data-perpage={postPerPage}
-				data-cat={selectedCat || ''}
+				data-cat={selectedCat ? selectedCat.join(',') : ''}
+				data-decat={deSelectedCat ? deSelectedCat.join(',') : ''}
+				data-orderby={orderBy}
+				data-sortorder={sortOrder}
 			>
 				<div className="post-list"></div>
 				<div className="loading post">
