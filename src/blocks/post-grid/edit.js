@@ -17,7 +17,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         blockId,
 		postType,
 		postPerPage,
+		selectedCatSwitcher,
 		selectedCat,
+		deSelectedCat,
+		selectedTagSwitcher,
+		selectedTag,
+		deSelectedTag,
+		selectedAuthorSwitcher,
+		selectedAuthor,
+		deSelectedAuthor,
 		orderBy,
 		sortOrder
     } = attributes;
@@ -26,37 +34,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `${blockId}`,
     });
 
-    console.log(selectedCat);
-
     const { useSelect } = wp.data;
-    // const postLists = useSelect( ( select ) => {
-    //     if(selectedCat !== "") {
-    //         return select('core').getEntityRecords('postType', postType, {
-    //             orderby: orderBy,
-    //             order: sortOrder,
-    //             per_page: postPerPage,
-    //             categories: [selectedCat],
-    //         });
-    //     } else {
-    //         return select('core').getEntityRecords('postType', postType, {
-    //             orderby: orderBy,
-    //             order: sortOrder,
-    //             per_page: postPerPage,
-    //         });
-    //     }
-    // } );
-
 
     const postLists = useSelect( ( select ) => {
-        const categories = Array.isArray(selectedCat) ? selectedCat : [selectedCat];
         const query = {
             orderby: orderBy,
             order: sortOrder,
             per_page: postPerPage,
         };
-        if (selectedCat !== "") {
-            query.categories = categories;
+
+        if (selectedCatSwitcher === 'include' && Array.isArray(selectedCat) && selectedCat.length > 0) {
+            query.categories = selectedCat;
+        } else if (selectedCatSwitcher === 'exclude' && Array.isArray(deSelectedCat) && deSelectedCat.length > 0) {
+            query.categories_exclude = deSelectedCat;
         }
+
+        if (selectedAuthorSwitcher === 'include' && Array.isArray(selectedAuthor) && selectedAuthor.length > 0) {
+            query.author = selectedAuthor;
+        } else if (selectedAuthorSwitcher === 'exclude' && Array.isArray(deSelectedAuthor) && deSelectedAuthor.length > 0) {
+            query.author_exclude = deSelectedAuthor;
+        }
+
         return select('core').getEntityRecords('postType', postType, query);
     } );
 
