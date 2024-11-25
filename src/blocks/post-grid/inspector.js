@@ -23,6 +23,7 @@ import FB_Spacing from '@Components/spacing';
 import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_Range from '@Components/range';
+import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
 
 import './editor.scss';
 
@@ -33,7 +34,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 		postType,
 		postPerPage,
+		selectedCatSwitcher,
 		selectedCat,
+		deSelectedCat,
+		selectedTagSwitcher,
+		selectedTag,
+		deSelectedTag,
+		selectedAuthorSwitcher,
+		selectedAuthor,
+		deSelectedAuthor,
 		orderBy,
 		sortOrder,
 		columnsPerSection,
@@ -50,24 +59,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
+    /** Start category */
     const postTypes = FrontisBlocksData.post_types;
 	const allTaxs = FrontisBlocksData.all_cats;
 	const allTaxonomies = allTaxs[postType];
 
-	let taxOptions = [];
-	if(allTaxonomies?.terms?.category){
-		taxOptions = allTaxonomies.terms.category.map(item => ({
-			value: item.id,
-			label: item.name
-		}));
-	}
+	const taxOptions = allTaxonomies?.terms?.category?.map(item => ({
+		value: item.id,
+		label: item.name
+	})) || [];
 
-    const [selectedOption, setSelectedOption] = useState(selectedCat);
+    const createOptionFromCategory = (categoryIds) => categoryIds.map(catId => ({
+        value: catId,
+        label: taxOptions.find(option => option.value === catId)?.label || ''
+    }));
 
-    const handleCategoryChange = (selectedOption) => {
-        setSelectedOption(selectedOption);
-        setAttributes({ selectedCat: selectedOption.map(option => option.value) });
+    const [selectedOption, setSelectedOption] = useState(createOptionFromCategory(selectedCat));
+    const [deSelectedOption, setDeSelectedOption] = useState(createOptionFromCategory(deSelectedCat));
+
+    const updateCategorySelection = (optionSetter, attributeKey) => (options) => {
+        optionSetter(options);
+        setAttributes({ [attributeKey]: options.map(option => option.value) });
     };
+
+    const handleCategoryChange = updateCategorySelection(setSelectedOption, 'selectedCat');
+    const handleDeSelectedCategoryChange = updateCategorySelection(setDeSelectedOption, 'deSelectedCat');
+    /** End category */
+
+    /** Start author */
+    const allAuthors = FrontisBlocksData.all_authors;
+    const authorOptions = Object.values(allAuthors).map(author => ({
+        value: author.ID,
+        label: author.data.display_name,
+    }));
+
+    const mapAuthorsToOptions = (authorIDs) => authorIDs.map(authorID => ({
+        value: authorID,
+        label: authorOptions.find(option => option.value === authorID)?.label || '',
+    }));
+
+    const [selectedAuthorOption, setSelectedAuthorOption] = useState(mapAuthorsToOptions(selectedAuthor));
+    const [deSelectedAuthorOption, setDeSelectedAuthorOption] = useState(mapAuthorsToOptions(deSelectedAuthor));
+    
+    const handleAuthorSelectedChange = (selectedAuthorOption) => {
+        setSelectedAuthorOption(selectedAuthorOption);
+        setAttributes({ selectedAuthor: selectedAuthorOption.map(option => option.value) });
+    };
+    
+    const handleDeSelectedAuthorChange = (deSelectedAuthorOption) => {
+        setDeSelectedAuthorOption(deSelectedAuthorOption);
+        setAttributes({ deSelectedAuthor: deSelectedAuthorOption.map(option => option.value) });
+    };
+    /** End author */
 
     const allBlockStyle = useMemo(() => `
         .${blockId} .fb_post_grid_container { 
@@ -96,7 +139,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
         postType,
         postPerPage,
+        selectedCatSwitcher,
         selectedCat,
+        selectedTag,
         orderBy,
         sortOrder,
         columnsPerSection,
@@ -158,6 +203,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
 
 
+                                                <FB_IncludeExcludeSwitcherControl
+                                                    label={__("Author", "frontis-blocks")}
+                                                    globalSwitcher={selectedAuthorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({selectedAuthorSwitcher: value})}
+                                                />
+
+
+
+                                                {postType && selectedAuthorSwitcher === 'include' &&
+                                                    <BaseControl
+                                                        label={__("Include Authors", "frontis-blocks")}
+                                                        id="fb-setting-author"
+                                                        className="fb-setting-author"
+                                                    >
+                                                        <Select2 
+                                                            options={authorOptions} 
+                                                            value={selectedAuthorOption}
+                                                            onChange={handleAuthorSelectedChange}
+                                                            isMulti
+                                                            className="fb-select2-control"
+                                                        />
+                                                    </BaseControl>
+                                                }
+
+
+                                                {postType && selectedAuthorSwitcher === 'exclude' &&
+                                                    <BaseControl
+                                                        label={__("Exclude Authors", "frontis-blocks")}
+                                                        id="fb-setting-author"
+                                                        className="fb-setting-author"
+                                                    >
+                                                        <Select2 
+                                                            options={authorOptions} 
+                                                            value={deSelectedAuthorOption}
+                                                            onChange={handleDeSelectedAuthorChange}
+                                                            isMulti
+                                                            className="fb-select2-control"
+                                                        />
+                                                    </BaseControl>
+                                                }
+
+                                                <FB_IncludeExcludeSwitcherControl
+                                                    label={__("Category", "frontis-blocks")}
+                                                    globalSwitcher={selectedCatSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({selectedCatSwitcher: value})}
+                                                />
                                                 {/* {postType &&
 													<SelectControl
 														label={__("Category", "frontis-blocks")}
@@ -166,17 +257,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({selectedCat: value})}
 													/>
 												} */}
-
-                                                {postType &&
-                                                    <Select2 
-                                                        label={__("Category", "frontis-blocks")}
-                                                        options={taxOptions} 
-                                                        value={selectedOption}
-                                                        onChange={handleCategoryChange}
-                                                        isMulti
-                                                        className="fb-select2-control"
-                                                    />
+                                    
+                                                {postType && selectedCatSwitcher === 'include' &&
+                                                    <BaseControl
+                                                        label={__("Include Categories", "frontis-blocks")}
+                                                        id="fb-setting-category"
+                                                        className="fb-setting-category"
+                                                    >
+                                                        <Select2 
+                                                            options={taxOptions} 
+                                                            value={selectedOption}
+                                                            onChange={handleCategoryChange}
+                                                            isMulti
+                                                            className="fb-select2-control"
+                                                        />
+                                                    </BaseControl>
                                                 }
+
+
+                                                {postType && selectedCatSwitcher === 'exclude' &&
+                                                    <BaseControl
+                                                        label={__("Exclude Categories", "frontis-blocks")}
+                                                        id="fb-setting-category"
+                                                        className="fb-setting-category"
+                                                    >
+                                                        <Select2 
+                                                            options={taxOptions} 
+                                                            value={deSelectedOption}
+                                                            onChange={handleDeSelectedCategoryChange}
+                                                            isMulti
+                                                            className="fb-select2-control"
+                                                        />
+                                                    </BaseControl>
+                                                }
+                                                
+                                                
 
                                                 <SelectControl
                                                     label={__("Order By", "frontis-blocks")}

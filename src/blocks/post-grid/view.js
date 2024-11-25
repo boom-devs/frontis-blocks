@@ -54,8 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.category = cat ? cat.split(',') : [];
 		filterPost.limit = perpage;
 		let formData = convertToAjaxParams(filterPost);
+		let siteUrl = FrontisBlocksData.site_url;
 
-		fetch('/wp-json/wp/v2/frontis-blocks/post', {
+		fetch(`${siteUrl}/wp-json/wp/v2/frontis-blocks/post`, {
 			method: 'POST',
 			body: formData
 		})
@@ -98,13 +99,20 @@ document.addEventListener('DOMContentLoaded', function() {
 				// 	loadMoreButton.textContent = 'Load more';
 				// 	postListElement.appendChild(loadMoreButton);
 				// }
-				document.querySelector('.post-list .fb_load_more .load_more_button_icon_wrap svg').style.display = 'block';
-				document.querySelector('.post-list .fb_load_more_outter_wrap').style.display = 'none';
+
+				const loadMore = document.querySelector('.post-list .fb_load_more');
+				if (loadMore) {
+					loadMore.querySelector('.load_more_button_icon_wrap svg').style.display = 'block';
+					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
+				}
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
-				document.querySelector('.post-list .fb_load_more .load_more_button_icon_wrap svg').style.display = 'block';
-				document.querySelector('.post-list .fb_load_more_outter_wrap').style.display = 'none';
+				const loadMore = document.querySelector('.post-list .fb_load_more');
+				if (loadMore) {
+					loadMore.querySelector('.load_more_button_icon_wrap svg').style.display = 'block';
+					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
+				}
 			});
 	}
 
