@@ -49,6 +49,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             query.categories_exclude = deSelectedCat;
         }
 
+        if (selectedTagSwitcher === 'include' && Array.isArray(selectedTag) && selectedTag.length > 0) {
+            query.tags = selectedTag;
+        } else if (selectedTagSwitcher === 'exclude' && Array.isArray(deSelectedTag) && deSelectedTag.length > 0) {
+            query.tags_exclude = deSelectedTag;
+        }
+
         if (selectedAuthorSwitcher === 'include' && Array.isArray(selectedAuthor) && selectedAuthor.length > 0) {
             query.author = selectedAuthor;
         } else if (selectedAuthorSwitcher === 'exclude' && Array.isArray(deSelectedAuthor) && deSelectedAuthor.length > 0) {
