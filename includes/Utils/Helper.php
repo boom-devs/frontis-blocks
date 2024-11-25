@@ -152,7 +152,7 @@ class Helper
 
 		}
 
-		return apply_filters( 'uagb_post_loop_taxonomies', $return_array );
+		return apply_filters( 'fb_post_loop_taxonomies', $return_array );
 	}
 
     public static function get_all_authors_with_posts() {

@@ -59,8 +59,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
-    /** Start category */
+
+    /** Start post type */
     const postTypes = FrontisBlocksData.post_types;
+    const postTypeOptions = postTypes.map(item => ({
+        value: item.value,
+        label: item.label
+    }));
+
+    const [selectedPostType, setSelectedPostType] = useState({ value: 'post', label: 'Posts' }); 
+
+    const handlePostTypeChange = (option) => {
+        setSelectedPostType(option);
+        setAttributes({ postType: option.value });
+    };
+    /** End post type */
+
+    /** Start category */
 	const allTaxs = FrontisBlocksData.all_cats;
 	const allTaxonomies = allTaxs[postType];
 
@@ -85,6 +100,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleCategoryChange = updateCategorySelection(setSelectedOption, 'selectedCat');
     const handleDeSelectedCategoryChange = updateCategorySelection(setDeSelectedOption, 'deSelectedCat');
     /** End category */
+
+    /** Start tag */
+    const tagOptions = allTaxonomies?.terms?.post_tag?.map(item => ({
+        value: item.id,
+        label: item.name
+    })) || [];
+
+    const createOptionFromTag = (tagIds) => tagIds.map(tagId => ({
+        value: tagId,
+        label: tagOptions.find(option => option.value === tagId)?.label || ''
+    }));
+
+    const [selectedTagOption, setSelectedTagOption] = useState(createOptionFromTag(selectedTag));
+    const [deSelectedTagOption, setDeSelectedTagOption] = useState(createOptionFromTag(deSelectedTag));
+
+    const updateTagSelection = (optionSetter, attributeKey) => (options) => {
+        optionSetter(options);
+        setAttributes({ [attributeKey]: options.map(option => option.value) });
+    };
+
+    const handleTagChange = updateTagSelection(setSelectedTagOption, 'selectedTag');
+    const handleDeSelectedTagChange = updateTagSelection(setDeSelectedTagOption, 'deSelectedTag');
+    /** End tag */
 
     /** Start author */
     const allAuthors = FrontisBlocksData.all_authors;
@@ -111,6 +149,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ deSelectedAuthor: deSelectedAuthorOption.map(option => option.value) });
     };
     /** End author */
+
+    /** Start sort order */
+    const [selectedSortOrder, setSelectedSortOrder] = useState({ value: 'desc', label: 'DESC' });
+    /** End sort order */
+
+    const handleSortOrderChange = (option) => {
+        setSelectedSortOrder(option);
+        setAttributes({ sortOrder: option.value });
+    };
+
+    /** Start order by */
+    const [selectedOrderBy, setSelectedOrderBy] = useState({ value: 'date', label: 'Date' });
+
+    const handleOrderByChange = (option) => {
+        setSelectedOrderBy(option);
+        setAttributes({ orderBy: option.value });
+    };
+    /** End order by */
+
+
 
     const allBlockStyle = useMemo(() => `
         .${blockId} .fb_post_grid_container { 
@@ -141,7 +199,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postPerPage,
         selectedCatSwitcher,
         selectedCat,
+        deSelectedCat,
+        selectedTagSwitcher,
         selectedTag,
+        deSelectedTag,
+        selectedAuthorSwitcher,
+        selectedAuthor,
+        deSelectedAuthor,
         orderBy,
         sortOrder,
         columnsPerSection,
@@ -195,12 +259,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 title={__("Query", "frontis-blocks")}
                                                 initialOpen={true}
                                             >
-                                                <SelectControl
+                                                <BaseControl
+                                                    label={__("Post type", "frontis-blocks")} 
+                                                    id="fb-setting-post-type"
+                                                    className="fb-setting-post-type"
+                                                >
+                                                    <Select2 
+                                                        options={postTypeOptions}
+                                                        value={selectedPostType}
+                                                        onChange={handlePostTypeChange}
+                                                        className="fb-select2-control"
+                                                    />
+                                                </BaseControl>
+
+                                                {/* <SelectControl
                                                     label={__("Post types", "frontis-blocks")}
                                                     value={postType}
                                                     options={postTypes}
                                                     onChange={(value) => setAttributes({postType: value})}
-                                                />
+                                                /> */}
 
 
                                                 <FB_IncludeExcludeSwitcherControl
@@ -249,14 +326,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalSwitcher={selectedCatSwitcher}
                                                     setGlobalSwitcher={(value) => setAttributes({selectedCatSwitcher: value})}
                                                 />
-                                                {/* {postType &&
-													<SelectControl
-														label={__("Category", "frontis-blocks")}
-														value={selectedCat}
-														options={taxOptions}
-														onChange={(value) => setAttributes({selectedCat: value})}
-													/>
-												} */}
                                     
                                                 {postType && selectedCatSwitcher === 'include' &&
                                                     <BaseControl
@@ -290,30 +359,78 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     </BaseControl>
                                                 }
-                                                
-                                                
 
-                                                <SelectControl
+                                                <FB_IncludeExcludeSwitcherControl
+                                                    label={__("Tag", "frontis-blocks")}
+                                                    globalSwitcher={selectedTagSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({selectedTagSwitcher: value})}
+                                                />
+
+                                                {postType && selectedTagSwitcher === 'include' &&
+                                                    <BaseControl
+                                                        label={__("Include Tags", "frontis-blocks")}
+                                                        id="fb-setting-category"
+                                                        className="fb-setting-category"
+                                                    >
+                                                        <Select2 
+                                                            options={tagOptions} 
+                                                            value={selectedTagOption}
+                                                            onChange={handleTagChange}
+                                                            isMulti
+                                                            className="fb-select2-control"
+                                                        />
+                                                    </BaseControl>
+                                                }
+
+                                                {postType && selectedTagSwitcher === 'exclude' &&
+                                                    <BaseControl
+                                                        label={__("Exclude Tags", "frontis-blocks")}
+                                                        id="fb-setting-category"
+                                                        className="fb-setting-category"
+                                                    >
+                                                        <Select2 
+                                                            options={tagOptions} 
+                                                            value={deSelectedTagOption}
+                                                            onChange={handleDeSelectedTagChange}
+                                                            isMulti
+                                                            className="fb-select2-control"
+                                                        />
+                                                    </BaseControl>
+                                                }
+                                                
+                                                <BaseControl
                                                     label={__("Order By", "frontis-blocks")}
-                                                    value={orderBy}
-                                                    options={[
-                                                        {value: "date", label: "Date"},
-                                                        {value: "author", label: "Author"},
-                                                        {value: "title", label: "Title"},
-                                                        {value: "modified", label: "Last Modified"}
-                                                    ]}
-                                                    onChange={(value) => setAttributes({orderBy: value})}
-                                                />
-
-                                                <SelectControl
+                                                    id="fb-setting-order-by"
+                                                    className="fb-setting-order-by"
+                                                >
+                                                    <Select2 
+                                                        options={[
+                                                           {value: "date", label: "Date"},
+                                                            {value: "author", label: "Author"},
+                                                            {value: "title", label: "Title"},
+                                                            {value: "modified", label: "Last Modified"}
+                                                        ]}
+                                                        value={selectedOrderBy}
+                                                        onChange={handleOrderByChange}
+                                                        className="fb-select2-control"
+                                                    />
+                                                </BaseControl>
+                                                
+                                                <BaseControl
                                                     label={__("Sort Order", "frontis-blocks")}
-                                                    value={sortOrder}
-                                                    options={[
-                                                        {value: "asc", label: "ASC"},
-                                                        {value: "desc", label: "DESC"}
-                                                    ]}
-                                                    onChange={(value) => setAttributes({sortOrder: value})}
-                                                />
+                                                    id="fb-setting-sort-order"
+                                                    className="fb-setting-sort-order"
+                                                >
+                                                    <Select2 
+                                                        options={[
+                                                           {value: "asc", label: "ASC"},
+                                                            {value: "desc", label: "DESC"}
+                                                        ]}
+                                                        value={selectedSortOrder}
+                                                        onChange={handleSortOrderChange}
+                                                        className="fb-select2-control"
+                                                    />
+                                                </BaseControl>
 
 												<NumberControl
 													label={__('Post per page', 'frontis-blocks')}
