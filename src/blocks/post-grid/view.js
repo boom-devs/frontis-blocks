@@ -8,20 +8,32 @@ document.addEventListener('DOMContentLoaded', function() {
 		post_type: 'post',
 		currentPage: currentPage,
 		category: null,
-		decat: null
+		post_tag: null,
+		post_author: null,
+		sortorder: null,
+		orderby: null,
+		deauthor: null,
+		detag: null,
+		decategory: null
+		
 	};
 
 	document.body.addEventListener('click', function(event) {
 		if (event.target.closest('.fb_load_more')) {
 			const parentElement = event.target.closest(".wp-block-frontis-blocks-post-grid");
-			document.querySelector('.post-list .fb_load_more_outter_wrap').style.display = 'block';
-			document.querySelector('.post-list .fb_load_more .load_more_button_icon_wrap svg').style.display = 'none';
+			document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
+			document.querySelector('.fb_post_grid_container .fb_load_more .load_more_button_icon_wrap svg').style.display = 'none';
 
 			if (parentElement) {
 				const postType = parentElement.getAttribute("data-post-type");
 				const blockId = parentElement.getAttribute("data-block-id");
 				const cat = parentElement.getAttribute("data-cat");
-				const decat = parentElement.getAttribute("data-decat");
+				const tag = parentElement.getAttribute("data-tag");
+				const author = parentElement.getAttribute("data-author");
+				const deauthor = parentElement.getAttribute("data-deauthor");
+				const detag = parentElement.getAttribute("data-detag");
+				const decategory = parentElement.getAttribute("data-decat");
+
 				const perpage = parentElement.getAttribute("data-perpage");
 				const orderby = parentElement.getAttribute("data-orderby");
 				const sortorder = parentElement.getAttribute("data-sortorder");
@@ -33,10 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				filterPost.offset = filterPost.limit * (currentPage - 1);
 				filterPost.category = cat ? cat.split(',') : [];
-				filterPost.decat = decat ? decat.split(',') : [];
+				filterPost.post_tag = tag ? tag.split(',') : [];
+				filterPost.post_author = author ? author.split(',') : [];
+				filterPost.orderby = orderby ? orderby.split(',') : [];
+				filterPost.sortorder = sortorder ? sortorder.split(',') : [];
+				filterPost.deauthor = deauthor ? deauthor.split(',') : [];
+				filterPost.detag = detag ? detag.split(',') : [];
+				filterPost.decategory = decategory ? decategory.split(',') : [];
+
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, decat, perpage, orderby, sortorder);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory);
 			}
 		}
 	});
@@ -53,14 +72,18 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, decat, perpage, orderby, sortorder) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
-		filterPost.decat = decat ? decat.split(',') : [];
+		filterPost.post_tag = tag ? tag.split(',') : [];
+		filterPost.post_author = author ? author.split(',') : [];
+		filterPost.deauthor = deauthor ? deauthor.split(',') : [];
+		filterPost.detag = detag ? detag.split(',') : [];
+		filterPost.decategory = decategory ? decategory.split(',') : [];
 		filterPost.limit = perpage;
-		filterPost.orderby = orderby;
-		filterPost.sortorder = sortorder;
+		filterPost.orderby = orderby ? orderby.split(',') : [];
+		filterPost.sortorder = sortorder ? sortorder.split(',') : [];
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
 
@@ -76,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			})
 			.then(posts => {
 				const postGridElement = document.getElementById(blockId);
-				const postListElement = postGridElement.querySelector('.post-list');
+				const postListElement = postGridElement.querySelector('.fb_post_grid_container'); 
 				// const loadMoreLoader = postGridElement.querySelector('.fb_load_more_loader');
 				// loadMoreLoader.classList.remove('active');
 
@@ -108,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				// 	postListElement.appendChild(loadMoreButton);
 				// }
 
-				const loadMore = document.querySelector('.post-list .fb_load_more');
+				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
 				if (loadMore) {
 					loadMore.querySelector('.load_more_button_icon_wrap svg').style.display = 'block';
 					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
@@ -116,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
-				const loadMore = document.querySelector('.post-list .fb_load_more');
+				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
 				if (loadMore) {
 					loadMore.querySelector('.load_more_button_icon_wrap svg').style.display = 'block';
 					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
@@ -127,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-decat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'));
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'));
 	});
 
 

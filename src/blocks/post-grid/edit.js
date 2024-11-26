@@ -75,7 +75,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             {postLists ? (
                 <div {...blockProps} id={blockId}>
                     {postLists.length > 0 ? (
-                        <div className='fb_post_grid_container'>
+                        <div className={`fb_post_grid_container ${blockId}`}> 
                             {postLists.map((item, index) => {
                                 return <LayoutGrid data={item} index={index} />
                             })}
