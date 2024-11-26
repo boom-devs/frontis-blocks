@@ -7,24 +7,29 @@ export default function save({ attributes }) {
 		postPerPage,
 		selectedCat,
 		placeholders,
-		selectedCatSwitcher,
 		deSelectedCat,
-		selectedTagSwitcher,
 		selectedTag,
 		deSelectedTag,
-		selectedAuthorSwitcher,
 		selectedAuthor,
 		deSelectedAuthor,
 		orderBy,
 		sortOrder,
+		blockStyle,
+		deviceType,
+		selectedCatSwitcher,
+		selectedTagSwitcher,
+		selectedAuthorSwitcher,
+		columnsPerSection,
+		gapUnits,
+		rowGap,
+		columnGap
 	} = attributes;
-
-	console.log(selectedCat);
 
 	const blockProps = useBlockProps.save();
 
 	return (
 		<>
+
 			<div
 				{...blockProps}
 				id={blockId}
@@ -33,10 +38,14 @@ export default function save({ attributes }) {
 				data-perpage={postPerPage}
 				data-cat={selectedCat ? selectedCat.join(',') : ''}
 				data-decat={deSelectedCat ? deSelectedCat.join(',') : ''}
-				data-orderby={orderBy}
+				data-tag={selectedTag ? selectedTag.join(',') : ''}
+				data-detag={deSelectedTag ? deSelectedTag.join(',') : ''}
+				data-author={selectedAuthor ? selectedAuthor.join(',') : ''}
+				data-deauthor={deSelectedAuthor ? deSelectedAuthor.join(',') : ''}
+				data-orderby={orderBy} 
 				data-sortorder={sortOrder}
 			>
-				<div className="post-list"></div>
+				<div className={`fb_post_grid_container ${blockId}`}></div>
 				<div className="loading post">
 					{placeholders.map((item) => (
 						<div key={item} className="post-card skeleton skeleton-item">

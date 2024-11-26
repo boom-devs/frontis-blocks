@@ -319,9 +319,14 @@ class Admin {
         $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
         $limit = isset($_POST['limit']) ? intval($_POST['limit']) : 12;
         $category = isset($_POST['category']) ? $_POST['category'] : '';
-        $decategory = isset($_POST['decategory']) ? $_POST['decategory'] : '';
+        $post_tag = isset($_POST['post_tag']) ? $_POST['post_tag'] : '';
+        $post_author = isset($_POST['post_author']) ? $_POST['post_author'] : '';
+        $deselected_post_author = isset($_POST['deauthor']) ? $_POST['deauthor'] : '';
+        $deselected_post_tag = isset($_POST['detag']) ? $_POST['detag'] : '';
+        $deselected_post_category = isset($_POST['decategory']) ? $_POST['decategory'] : '';
         $current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
-
+        $orderby = isset($_POST['orderby']) ? $_POST['orderby'] : 'date';
+        $sortorder = isset($_POST['sortorder']) ? $_POST['sortorder'] : 'desc';
 
         ob_start();
 
@@ -333,8 +338,9 @@ class Admin {
             AND post_status = 'publish'
         ", $post_type);
 
+        /** Start Selected post category */
         if (!empty($category)) {
-            $category_ids = explode(',', $category); // Assuming category input as comma-separated values
+            $category_ids = explode(',', $category);
             $placeholders = implode(',', array_fill(0, count($category_ids), '%d'));
             $query .= $wpdb->prepare(" AND ID IN (
                 SELECT object_id
@@ -343,42 +349,108 @@ class Admin {
                 WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
             )", $category_ids);
         }
+        /** End Selected post category */
 
-        // Apply decategory filter if provided (exclude posts in specified categories)
-        // if (!empty($decategory)) {
-        //     // You mentioned specific term IDs: 3, 13, 10, 5, 4
-        //     $decategory_ids = [3, 13, 10, 5, 4];
-        //     $deplaceholders = implode(',', array_fill(0, count($decategory_ids), '%d'));
-        //     $query .= " AND ID NOT IN (
-        //         SELECT object_id
-        //         FROM {$wpdb->term_relationships} AS tr
-        //         INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-        //         WHERE tt.taxonomy = 'category' AND tt.term_id IN ($deplaceholders)
-        //     )";
-        // }
+        /** Start Deselected post category */
+        if (!empty($deselected_post_category)) {
+            $deselected_post_category_ids = explode(',', $deselected_post_category);
+            $placeholders = implode(',', array_fill(0, count($deselected_post_category_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID NOT IN (
+                SELECT object_id
+                FROM {$wpdb->term_relationships} AS tr
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+            )", $deselected_post_category_ids);
+        }
+        /** End Deselected post category */
 
-        // Count total number of records
+        /** Start Selected post tag */
+        if (!empty($post_tag)) {
+            $post_tag_ids = explode(',', $post_tag);
+            $placeholders = implode(',', array_fill(0, count($post_tag_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID IN (
+                SELECT object_id
+                FROM {$wpdb->term_relationships} AS tr
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+            )", $post_tag_ids);
+        }
+        /** End Selected post tag */
+
+        /** Start Deselected post tag */
+        if (!empty($deselected_post_tag)) {
+            $deselected_post_tag_ids = explode(',', $deselected_post_tag);
+            $placeholders = implode(',', array_fill(0, count($deselected_post_tag_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID NOT IN (
+                SELECT object_id
+                FROM {$wpdb->term_relationships} AS tr
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+            )", $deselected_post_tag_ids);
+        }
+        /** End Deselected post tag */
+
+        /** Start Selected post author */
+        if (!empty($post_author)) {
+            $post_author_ids = explode(',', $post_author);
+            $placeholders = implode(',', array_fill(0, count($post_author_ids), '%d'));
+            $query .= $wpdb->prepare(" AND post_author IN ($placeholders)", $post_author_ids);
+        }
+        /** End Selected post author */
+
+        /** Start Deselected post author */
+        if (!empty($deselected_post_author)) {
+            $deselected_post_author_ids = explode(',', $deselected_post_author);
+            $placeholders = implode(',', array_fill(0, count($deselected_post_author_ids), '%d'));
+            $query .= $wpdb->prepare(" AND post_author NOT IN ($placeholders)", $deselected_post_author_ids);
+        }
+        /** End Deselected post author */
+
+        /** Start Orderby and Sortorder */
+        $valid_orderby_values = ['date', 'author', 'title', 'modified'];
+        if (!in_array($orderby, $valid_orderby_values)) {
+            $orderby = 'date'; // Default to 'date' if invalid value provided
+        }
+
+        $valid_sortorder_values = ['asc', 'desc'];
+        if (!in_array(strtolower($sortorder), $valid_sortorder_values)) {
+            $sortorder = 'desc'; // Default to 'desc' if invalid value provided
+        }
+
+        $sortorder = strtoupper($sortorder);
+        
+        $orderby = sanitize_key($orderby);
+
+        switch ($orderby) {
+            case 'author':
+                $query .= " ORDER BY post_author $sortorder";
+                break;
+            case 'title':
+                $query .= " ORDER BY post_title COLLATE utf8mb4_unicode_ci $sortorder";
+                break;
+            case 'modified':
+                $query .= " ORDER BY post_modified $sortorder";
+                break;
+            case 'date':
+            default:
+                $query .= " ORDER BY post_date $sortorder";
+                break;
+        }
+        /** End Orderby and Sortorder */
+
+        /** Start Count total number of records */
         $count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
         $total_records = $wpdb->get_var($count_query);
 
-        // Calculate total number of pages
+        /** Start Calculate total number of pages */
         $total_pages = ceil($total_records / $limit);
 
-        // Adjust offset if it exceeds total records to avoid empty results
-        // $offset = min($offset, max(0, $total_records - $limit));
+        $query_with_limit = $query . " LIMIT %d OFFSET %d";
 
-        // Adding limit and offset to the query
-        $temp_query = "
-            SELECT * FROM (
-                $query
-            ) AS SubQuery
-            LIMIT %d OFFSET %d
-        ";
+        /** Start Prepare the final query */
+        $final_query = $wpdb->prepare($query_with_limit, $limit, $offset);
 
-        // Prepare the final query
-        $final_query = $wpdb->prepare($temp_query, $limit, $offset);
-
-        // Execute the query to get results
+        /** Start Execute the query to get results */
         $results = $wpdb->get_results($final_query);
 
         if ($results) {
@@ -430,12 +502,13 @@ class Admin {
         $content = ob_get_contents();
         ob_end_clean();
 
-        // Send response with content and total pages
+        /** Start Send response with content and total pages */
         wp_send_json_success(array(
             'content' => $content,
             'total_pages' => $total_pages,
             'current_page' => $current_page
         ));
+        /** End Send response with content and total pages */
     }
 
 

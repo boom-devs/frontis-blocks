@@ -1,5 +1,6 @@
 export default function LayoutGrid({data, index}) {
 	const src = data.fb_featured_image_src.medium[0];
+    let title = data.title.rendered;
 	let excerpt = data.fb_post_excerpt;
 	return (
         <>
@@ -12,8 +13,8 @@ export default function LayoutGrid({data, index}) {
                     )}
                 </div>
                 <div className="fb_post_grid_content">
-                    <h3>{data.title.rendered}</h3>
-                    {/*<p dangerouslySetInnerHTML={{ __html: excerpt }} />*/}
+                    <h3 className="fb_post_title">{title}</h3>
+                    <p className="fb_post_desc">{excerpt}</p>
                 </div>
             </div>
         </>
