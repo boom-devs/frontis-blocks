@@ -328,6 +328,10 @@ class Admin {
         $orderby = isset($_POST['orderby']) ? $_POST['orderby'] : 'date';
         $sortorder = isset($_POST['sortorder']) ? $_POST['sortorder'] : 'desc';
 
+        $post_title_tag = isset($_POST['postTitleTag']) ? $_POST['postTitleTag'] : 'h3';
+        $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
+        $post_description_excerpt_length = isset($_POST['postDescriptionExcerptLength']) ? intval($_POST['postDescriptionExcerptLength']) : 10;
+
         ob_start();
 
         // Initial query to select posts based on type and status
@@ -464,12 +468,12 @@ class Admin {
                             <?php endif; ?>
                         </div>
                         <div class="fb_post_grid_content">
-                            <h3 class="fb_post_title"><?php echo $single_post->post_title; ?></h3>
+                            <<?php echo $post_title_tag; ?> class="fb_post_title"><?php echo $single_post->post_title; ?></<?php echo $post_title_tag; ?>>
                             <?php if($single_post->post_excerpt !== ''): ?>
-                                <p class="fb_post_desc"><?php echo $single_post->post_excerpt; ?></p>
+                                <<?php echo $post_description_tag; ?> class="fb_post_desc"><?php echo wp_trim_words($single_post->post_excerpt, $post_description_excerpt_length, '...'); ?></<?php echo $post_description_tag; ?>>
                             <?php else: ?>
                                 <?php if(!empty($single_post->post_content)): ?>
-                                    <p class="fb_post_desc"><?php echo wp_trim_words($single_post->post_content, 20, '...'); ?></p>
+                                    <<?php echo $post_description_tag; ?> class="fb_post_desc"><?php echo wp_trim_words($single_post->post_content, $post_description_excerpt_length, '...'); ?></<?php echo $post_description_tag; ?>>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </div>

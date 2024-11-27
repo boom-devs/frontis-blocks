@@ -742,6 +742,10 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+	postDescriptionExcerptLength: {
+		type: "number",
+		default: 10
+	},
 	/** End Description */
 
 };

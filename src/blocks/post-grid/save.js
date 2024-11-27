@@ -22,7 +22,10 @@ export default function save({ attributes }) {
 		columnsPerSection,
 		gapUnits,
 		rowGap,
-		columnGap
+		columnGap,
+		postTitleTag,
+		postDescriptionTag,
+		postDescriptionExcerptLength,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -44,6 +47,9 @@ export default function save({ attributes }) {
 				data-deauthor={deSelectedAuthor ? deSelectedAuthor.join(',') : ''}
 				data-orderby={orderBy} 
 				data-sortorder={sortOrder}
+				data-post-title-tag={postTitleTag}
+				data-post-description-tag={postDescriptionTag}
+				data-post-description-excerpt-length={postDescriptionExcerptLength}
 			>
 				<div className={`fb_post_grid_container ${blockId}`}></div>
 				<div className="loading post">
