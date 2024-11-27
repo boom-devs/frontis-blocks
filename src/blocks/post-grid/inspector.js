@@ -1420,13 +1420,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                 </BaseControl>
 
-												<NumberControl
-													label={__('Post per page', 'frontis-blocks')}
-													isShiftStepEnabled={ true }
-													onChange={ (value) => setAttributes({postPerPage: value}) }
-													shiftStep={ 1 }
-													value={ postPerPage }
-												/>
+                                                <RangeControl
+                                                    label={__("Post per page", "frontis-blocks")}
+                                                    value={postPerPage}
+                                                    onChange={(value) => setAttributes({ postPerPage: value === 0 ? undefined : value })}
+                                                    min={1}
+                                                    max={100}
+                                                    step={1}
+                                                    resetFallbackValue={6}
+                                                />
                                             </PanelBody>
 
                                             <PanelBody
@@ -1864,13 +1866,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 
-                                                <NumberControl
-                                                    label={__('Excerpt Length', 'frontis-blocks')}
-                                                    isShiftStepEnabled={ true }
-                                                    onChange={ (value) => setAttributes({postDescriptionExcerptLength: value}) }
-                                                    shiftStep={ 1 }
-                                                    value={ postDescriptionExcerptLength }
-                                                />
+                                            <RangeControl
+                                                label={__("Excerpt Length", "frontis-blocks")}
+                                                value={postDescriptionExcerptLength}
+                                                onChange={(value) => setAttributes({ postDescriptionExcerptLength: value === 0 ? undefined : value })}
+                                                min={1}
+                                                max={200}
+                                                step={1}
+                                                resetFallbackValue={10}
+                                            />
 
                                         </PanelBody>
                                     </>
