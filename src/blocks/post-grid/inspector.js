@@ -168,6 +168,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDescriptionMarginTablet,
         postDescriptionMarginMobile,
         postDescriptionMarginLink,
+        postDescriptionExcerptLength,
         /** End description */
 
 	} = attributes;
@@ -1210,6 +1211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDescriptionMarginDesktopWidth,
         postDescriptionMarginTabletWidth,
         postDescriptionMarginMobileWidth,
+        postDescriptionExcerptLength,
     ]);
 
     useEffect(() => {
@@ -1861,6 +1863,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={handlePostDescriptionMarginCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
+
+                                                <NumberControl
+                                                    label={__('Excerpt Length', 'frontis-blocks')}
+                                                    isShiftStepEnabled={ true }
+                                                    onChange={ (value) => setAttributes({postDescriptionExcerptLength: value}) }
+                                                    shiftStep={ 1 }
+                                                    value={ postDescriptionExcerptLength }
+                                                />
 
                                         </PanelBody>
                                     </>

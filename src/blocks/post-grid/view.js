@@ -38,6 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				const orderby = parentElement.getAttribute("data-orderby");
 				const sortorder = parentElement.getAttribute("data-sortorder");
 
+				const postTitleTag = parentElement.getAttribute("data-post-title-tag");
+				const postDescriptionTag = parentElement.getAttribute("data-post-description-tag");
+				const postDescriptionExcerptLength = parentElement.getAttribute("data-post-description-excerpt-length");
+
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
 
@@ -53,9 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.detag = detag ? detag.split(',') : [];
 				filterPost.decategory = decategory ? decategory.split(',') : [];
 
+				filterPost.postTitleTag = postTitleTag ? postTitleTag : 'h3';
+				filterPost.postDescriptionTag = postDescriptionTag ? postDescriptionTag : 'p';
+				filterPost.postDescriptionExcerptLength = postDescriptionExcerptLength ? postDescriptionExcerptLength : 10;
+
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength);
 			}
 		}
 	});
@@ -72,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
@@ -84,6 +92,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.limit = perpage;
 		filterPost.orderby = orderby ? orderby.split(',') : [];
 		filterPost.sortorder = sortorder ? sortorder.split(',') : [];
+
+		filterPost.postTitleTag = postTitleTag ? postTitleTag : 'h3';
+		filterPost.postDescriptionTag = postDescriptionTag ? postDescriptionTag : 'p';
+		filterPost.postDescriptionExcerptLength = postDescriptionExcerptLength ? postDescriptionExcerptLength : 10;
+
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
 
@@ -150,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'));
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'));
 	});
 
 
