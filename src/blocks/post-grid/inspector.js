@@ -641,6 +641,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const postImageMobileBorderWidth = `${postImageMobileBorder.top}${postImageBorderUnits.Mobile} ${postImageMobileBorder.right}${postImageBorderUnits.Mobile} ${postImageMobileBorder.bottom}${postImageBorderUnits.Mobile} ${postImageMobileBorder.left}${postImageBorderUnits.Mobile}`;
     /** End Image Border */
 
+    console.log(postImageDesktopBorderWidth);
+
 
     /** Start Image Border Radius */
     const handlePostImageBorderRadiusUnitChange = ( event, position ) => {
@@ -890,14 +892,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image {
+        .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
             ${postImageBorder ? `border: ${postImageBorder};` : ''}
             ${postImageDesktopBorderWidth ? `border-width: ${postImageDesktopBorderWidth};` : ''}
             ${postImageBorderColor ? `border-color: ${postImageBorderColor};` : ''}
             ${postImageDesktopBorderRadiusWidth ? `border-radius: ${postImageDesktopBorderRadiusWidth};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover {
+        .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover img {
             ${postImageBorderHoverColor ? `border-color: ${postImageBorderHoverColor};` : ''}
         }
 

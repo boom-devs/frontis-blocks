@@ -2,8 +2,11 @@
 	.fb_post_grid_wrapper{
 		width: 100%;
 		overflow: hidden;
+		box-sizing: border-box;
 		img{
 			width: 100%;
+			box-sizing: border-box;
+			display: block;
 		}
 	}
 }
