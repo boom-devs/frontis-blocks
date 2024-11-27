@@ -28,6 +28,7 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_Range from '@Components/range';
 import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
 
 import './editor.scss';
 
@@ -92,6 +93,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End grid */ 
 
         /** Start Image */
+        postImageWidth,
+        postImageWidthUnits,
+        postImageHeight,
+        postImageHeightUnits,
         postImageBorder,
         postImageBorderColorSwitcher,
         postImageBorderColor,
@@ -106,9 +111,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postImageTabletBorderRadius,
         postImageMobileBorderRadius,
         postImageBorderRadiusLink,
+
+        postImageMarginUnits,
+        postImageMarginDesktop,
+        postImageMarginTablet,
+        postImageMarginMobile,
+        postImageMarginLink,
         /** End Image */
 
         /** Start title     */
+        postTitleTag,
         postTitleFontFamily,
         postTitleFontSize,
         postTitleFontSizeUnits,
@@ -134,6 +146,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         /** Start description     */
+        postDescriptionTag,
         postDescriptionFontFamily,
         postDescriptionFontSize,
         postDescriptionFontSizeUnits,
@@ -641,8 +654,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const postImageMobileBorderWidth = `${postImageMobileBorder.top}${postImageBorderUnits.Mobile} ${postImageMobileBorder.right}${postImageBorderUnits.Mobile} ${postImageMobileBorder.bottom}${postImageBorderUnits.Mobile} ${postImageMobileBorder.left}${postImageBorderUnits.Mobile}`;
     /** End Image Border */
 
-    console.log(postImageDesktopBorderWidth);
-
 
     /** Start Image Border Radius */
     const handlePostImageBorderRadiusUnitChange = ( event, position ) => {
@@ -716,6 +727,79 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const postImageTabletBorderRadiusWidth = `${postImageTabletBorderRadius.top}${postImageBorderRadiusUnits.Tablet} ${postImageTabletBorderRadius.right}${postImageBorderRadiusUnits.Tablet} ${postImageTabletBorderRadius.bottom}${postImageBorderRadiusUnits.Tablet} ${postImageTabletBorderRadius.left}${postImageBorderRadiusUnits.Tablet}`;
     const postImageMobileBorderRadiusWidth = `${postImageMobileBorderRadius.top}${postImageBorderRadiusUnits.Mobile} ${postImageMobileBorderRadius.right}${postImageBorderRadiusUnits.Mobile} ${postImageMobileBorderRadius.bottom}${postImageBorderRadiusUnits.Mobile} ${postImageMobileBorderRadius.left}${postImageBorderRadiusUnits.Mobile}`;
     /** End Image Border Radius */
+
+    /** Start Post Image Margin */
+    const handlePostImageMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postGridMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postImageMarginDesktop: { 
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postImageMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postImageMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postImageMarginDesktop: {...postImageMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postImageMarginTablet: {...postImageMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {postImageMarginMobile: {...postImageMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostImageMarginCombineBtn = () => {
+        setAttributes( {postImageMarginLink: !postImageMarginLink} );
+    }
+
+    const handlePostImageMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            postImageMarginUnits: {
+                ...postImageMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postImageMarginDesktopWidth = `${postImageMarginDesktop.top}${postImageMarginUnits.Desktop} ${postImageMarginDesktop.right}${postImageMarginUnits.Desktop} ${postImageMarginDesktop.bottom}${postImageMarginUnits.Desktop} ${postImageMarginDesktop.left}${postImageMarginUnits.Desktop}`;
+    const postImageMarginTabletWidth = `${postImageMarginTablet.top}${postImageMarginUnits.Tablet} ${postImageMarginTablet.right}${postImageMarginUnits.Tablet} ${postImageMarginTablet.bottom}${postImageMarginUnits.Tablet} ${postImageMarginTablet.left}${postImageMarginUnits.Tablet}`;
+    const postImageMarginMobileWidth = `${postImageMarginMobile.top}${postImageMarginUnits.Mobile} ${postImageMarginMobile.right}${postImageMarginUnits.Mobile} ${postImageMarginMobile.bottom}${postImageMarginUnits.Mobile} ${postImageMarginMobile.left}${postImageMarginUnits.Mobile}`;
+    /** End Post Image Margin */
 
 
     /** Start Title Margin */
@@ -875,6 +959,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             column-gap: ${columnGap.Desktop}${gapUnits.Desktop}; 
         }
 
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper {
+            grid-column: span ${columnsPerSection.Desktop};
+        }
+        .skeleton-item {
+            display: grid;
+            grid-template-columns: repeat(${columnsPerSection.Desktop}, 1fr);
+            row-gap: ${rowGap.Desktop}${gapUnits.Desktop};
+            column-gap: ${columnGap.Desktop}${gapUnits.Desktop};
+            width: 100%;
+            height: auto;
+        }
+
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper {
             ${postGridBgColor ? `background-color: ${postGridBgColor};` : ''}
 			${postGridPaddingDesktopWidth ? `padding: ${postGridPaddingDesktopWidth};` : ''}
@@ -892,11 +988,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
         }
 
+        .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image {
+            ${postImageWidth.Desktop ? `width: ${postImageWidth.Desktop}${postImageWidthUnits.Desktop};` : ''}
+            ${postImageHeight.Desktop ? `height: ${postImageHeight.Desktop}${postImageHeightUnits.Desktop};` : ''}
+        }
+
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
             ${postImageBorder ? `border: ${postImageBorder};` : ''}
             ${postImageDesktopBorderWidth ? `border-width: ${postImageDesktopBorderWidth};` : ''}
             ${postImageBorderColor ? `border-color: ${postImageBorderColor};` : ''}
             ${postImageDesktopBorderRadiusWidth ? `border-radius: ${postImageDesktopBorderRadiusWidth};` : ''}
+            ${postImageMarginDesktopWidth ? `margin: ${postImageMarginDesktopWidth};` : ''}
         }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover img {
@@ -1022,7 +1124,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridBoxShadowValues,
         postGridBoxShadowCssValue,
 
-
+        postImageWidth,
+        postImageWidthUnits,
+        postImageHeight,
+        postImageHeightUnits,
         postImageBorder,
         postImageBorderColorSwitcher,
         postImageBorderColor,
@@ -1045,7 +1150,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postImageTabletBorderRadiusWidth,
         postImageMobileBorderRadiusWidth,
 
+        postImageMarginUnits,
+        postImageMarginDesktop,
+        postImageMarginTablet,
+        postImageMarginMobile,
+        postImageMarginLink,
+        postImageMarginDesktopWidth,
+        postImageMarginTabletWidth,
+        postImageMarginMobileWidth,
 
+        postTitleTag,
         postTitleFontFamily,
         postTitleFontSize,
         postTitleFontSizeUnits,
@@ -1071,6 +1185,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postTitleMarginTabletWidth,
         postTitleMarginMobileWidth,
 
+        postDescriptionTag,
         postDescriptionFontFamily,
         postDescriptionFontSize,
         postDescriptionFontSizeUnits,
@@ -1155,21 +1270,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                 </BaseControl>
 
-                                                {/* <SelectControl
-                                                    label={__("Post types", "frontis-blocks")}
-                                                    value={postType}
-                                                    options={postTypes}
-                                                    onChange={(value) => setAttributes({postType: value})}
-                                                /> */}
-
-
                                                 <FB_IncludeExcludeSwitcherControl
                                                     label={__("Author", "frontis-blocks")}
                                                     globalSwitcher={selectedAuthorSwitcher}
                                                     setGlobalSwitcher={(value) => setAttributes({selectedAuthorSwitcher: value})}
                                                 />
-
-
 
                                                 {postType && selectedAuthorSwitcher === 'include' &&
                                                     <BaseControl
@@ -1186,7 +1291,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     </BaseControl>
                                                 }
-
 
                                                 {postType && selectedAuthorSwitcher === 'exclude' &&
                                                     <BaseControl
@@ -1225,7 +1329,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     </BaseControl>
                                                 }
-
 
                                                 {postType && selectedCatSwitcher === 'exclude' &&
                                                     <BaseControl
@@ -1492,7 +1595,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         <PanelBody title={__("Thumbnail", "frontis-blocks")} initialOpen={false}>
 
-
+                                            <FB_Range
+                                                min={1}
+                                                max={2000}
+                                                label={__("Width", "frontis-blocks")}
+                                                rangeValue={postImageWidth}
+                                                onChangeHandler={(value) => setAttributes({ postImageWidth: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ postImageWidthUnits: value })}
+                                                deviceType={deviceType}
+                                                units={postImageWidthUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={"100"}
+                                            />
+                                            <FB_Range
+                                                min={1}
+                                                max={2000}
+                                                label={__("Height", "frontis-blocks")}
+                                                rangeValue={postImageHeight}
+                                                onChangeHandler={(value) => setAttributes({ postImageHeight: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ postImageHeightUnits: value })}
+                                                deviceType={deviceType}
+                                                units={postImageHeightUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={"100"}
+                                            />
                                             <SelectControl
                                                 label={__("Border Style", "frontis-blocks")}
                                                 value={postImageBorder}
@@ -1551,8 +1679,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 
+                                            <FB_Spacing 
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostImageMarginUnitsHandler}
+                                                spacingUnits={postImageMarginUnits}
+                                                spacingDesktop={postImageMarginDesktop}
+                                                spacingTablet={postImageMarginTablet}
+                                                spacingMobile={postImageMarginMobile}
+                                                handleSpacingUnitHandler={handlePostImageMarginUnitChange}
+                                                spacingCombineBtn={postImageMarginLink}
+                                                spacingCombineBtnHandler={handlePostImageMarginCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
                                         </PanelBody>
                                         <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
+
+                                            <FB_HtmlTagControl
+                                                label={__("Title Tag", "frontis-blocks")}
+                                                globalHtmlTag={postTitleTag}
+                                                setGlobalHtmlTag={(value) => setAttributes({ postTitleTag: value })}
+                                            />
 
                                             <FB_TypographyControl
                                                 fontFamily={postTitleFontFamily}
@@ -1632,6 +1780,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         </PanelBody>
 
                                         <PanelBody title={__("Description", "frontis-blocks")} initialOpen={false}>
+
+                                            <FB_HtmlTagControl
+                                                label={__("Description Tag", "frontis-blocks")}
+                                                globalHtmlTag={postDescriptionTag}
+                                                setGlobalHtmlTag={(value) => setAttributes({ postDescriptionTag: value })}
+                                            />
 
                                             <FB_TypographyControl
                                                 fontFamily={postDescriptionFontFamily}
