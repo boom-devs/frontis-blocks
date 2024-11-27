@@ -345,25 +345,28 @@ const attributes = {
 	postImageDesktopBorder: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageTabletBorder: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageMobileBorder: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageBorderLink: {
@@ -382,25 +385,28 @@ const attributes = {
 	postImageDesktopBorderRadius: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageTabletBorderRadius: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageMobileBorderRadius: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageBorderRadiusLink: {
