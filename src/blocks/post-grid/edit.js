@@ -30,6 +30,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		sortOrder,
 		postTitleTag,
 		postDescriptionTag,
+        postDescriptionExcerptLength,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -79,7 +80,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     {postLists.length > 0 ? (
                         <div className={`fb_post_grid_container ${blockId}`}> 
                             {postLists.map((item, index) => {
-                                return <LayoutGrid data={item} index={index} postTitleTag={postTitleTag} postDescriptionTag={postDescriptionTag} />
+                                return <LayoutGrid data={item} index={index} postTitleTag={postTitleTag} postDescriptionTag={postDescriptionTag} postDescriptionExcerptLength={postDescriptionExcerptLength} />
                             })}
                         </div>
                     ) : (
