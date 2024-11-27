@@ -1208,6 +1208,447 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const postCategoryMarginMobileWidth = `${postCategoryMarginMobile.top}${postCategoryMarginUnits.Mobile} ${postCategoryMarginMobile.right}${postCategoryMarginUnits.Mobile} ${postCategoryMarginMobile.bottom}${postCategoryMarginUnits.Mobile} ${postCategoryMarginMobile.left}${postCategoryMarginUnits.Mobile}`;
     /** End Category Margin */
 
+    /** Start Category Border */
+    const handlePostCategoryBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postCategoryBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postCategoryDesktopBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postCategoryTabletBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postCategoryMobileBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postCategoryDesktopBorder: {...postCategoryDesktopBorder, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postCategoryTabletBorder: {...postCategoryTabletBorder, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postCategoryMobileBorder: {...postCategoryMobileBorder, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostCategoryBorderCombineBtn = () => {
+        setAttributes( {postCategoryBorderLink: !postCategoryBorderLink} );
+    }
+
+    const handlePostCategoryBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            postCategoryBorderUnits: {
+                ...postCategoryBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postCategoryBorderDesktopWidth = `${postCategoryDesktopBorder.top}${postCategoryBorderUnits.Desktop} ${postCategoryDesktopBorder.right}${postCategoryBorderUnits.Desktop} ${postCategoryDesktopBorder.bottom}${postCategoryBorderUnits.Desktop} ${postCategoryDesktopBorder.left}${postCategoryBorderUnits.Desktop}`; 
+    const postCategoryBorderTabletWidth = `${postCategoryTabletBorder.top}${postCategoryBorderUnits.Tablet} ${postCategoryTabletBorder.right}${postCategoryBorderUnits.Tablet} ${postCategoryTabletBorder.bottom}${postCategoryBorderUnits.Tablet} ${postCategoryTabletBorder.left}${postCategoryBorderUnits.Tablet}`; 
+    const postCategoryBorderMobileWidth = `${postCategoryMobileBorder.top}${postCategoryBorderUnits.Mobile} ${postCategoryMobileBorder.right}${postCategoryBorderUnits.Mobile} ${postCategoryMobileBorder.bottom}${postCategoryBorderUnits.Mobile} ${postCategoryMobileBorder.left}${postCategoryBorderUnits.Mobile}`; 
+    /** End Category Border */
+
+
+    
+    /** Start Category Border Radius */
+    const handlePostCategoryBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postCategoryBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postCategoryDesktopBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postCategoryTabletBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postCategoryMobileBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postCategoryDesktopBorderRadius: {...postCategoryDesktopBorderRadius, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postCategoryTabletBorderRadius: {...postCategoryTabletBorderRadius, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postCategoryMobileBorderRadius: {...postCategoryMobileBorderRadius, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostCategoryBorderRadiusCombineBtn = () => {
+        setAttributes( {postCategoryBorderRadiusLink: !postCategoryBorderRadiusLink} );
+    }
+
+    const handlePostCategoryBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            postCategoryBorderRadiusUnits: {
+                ...postCategoryBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postCategoryBorderRadiusDesktopWidth = `${postCategoryDesktopBorderRadius.top}${postCategoryBorderRadiusUnits.Desktop} ${postCategoryDesktopBorderRadius.right}${postCategoryBorderRadiusUnits.Desktop} ${postCategoryDesktopBorderRadius.bottom}${postCategoryBorderRadiusUnits.Desktop} ${postCategoryDesktopBorderRadius.left}${postCategoryBorderRadiusUnits.Desktop}`; 
+    const postCategoryBorderRadiusTabletWidth = `${postCategoryTabletBorderRadius.top}${postCategoryBorderRadiusUnits.Tablet} ${postCategoryTabletBorderRadius.right}${postCategoryBorderRadiusUnits.Tablet} ${postCategoryTabletBorderRadius.bottom}${postCategoryBorderRadiusUnits.Tablet} ${postCategoryTabletBorderRadius.left}${postCategoryBorderRadiusUnits.Tablet}`; 
+    const postCategoryBorderRadiusMobileWidth = `${postCategoryMobileBorderRadius.top}${postCategoryBorderRadiusUnits.Mobile} ${postCategoryMobileBorderRadius.right}${postCategoryBorderRadiusUnits.Mobile} ${postCategoryMobileBorderRadius.bottom}${postCategoryBorderRadiusUnits.Mobile} ${postCategoryMobileBorderRadius.left}${postCategoryBorderRadiusUnits.Mobile}`; 
+    /** End Category Border Radius */
+
+    /** Start Tag Padding */
+    const handlePostTagPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postTagPaddingLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postTagPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postTagPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postTagPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postTagPaddingDesktop: {...postTagPaddingDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postTagPaddingTablet: {...postTagPaddingTablet, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postTagPaddingMobile: {...postTagPaddingMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostTagPaddingCombineBtn = () => {
+        setAttributes( {postTagPaddingLink: !postTagPaddingLink} );
+    }
+
+    const handlePostTagPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            postTagPaddingUnits: {
+                ...postTagPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postTagPaddingDesktopWidth = `${postTagPaddingDesktop.top}${postTagPaddingUnits.Desktop} ${postTagPaddingDesktop.right}${postTagPaddingUnits.Desktop} ${postTagPaddingDesktop.bottom}${postTagPaddingUnits.Desktop} ${postTagPaddingDesktop.left}${postTagPaddingUnits.Desktop}`;
+    const postTagPaddingTabletWidth = `${postTagPaddingTablet.top}${postTagPaddingUnits.Tablet} ${postTagPaddingTablet.right}${postTagPaddingUnits.Tablet} ${postTagPaddingTablet.bottom}${postTagPaddingUnits.Tablet} ${postTagPaddingTablet.left}${postTagPaddingUnits.Tablet}`;
+    const postTagPaddingMobileWidth = `${postTagPaddingMobile.top}${postTagPaddingUnits.Mobile} ${postTagPaddingMobile.right}${postTagPaddingUnits.Mobile} ${postTagPaddingMobile.bottom}${postTagPaddingUnits.Mobile} ${postTagPaddingMobile.left}${postTagPaddingUnits.Mobile}`;
+    /** End Tag Padding */
+
+    /** Start Tag Margin */
+    const handlePostTagMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postTagMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postTagMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postTagMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postTagMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postTagMarginDesktop: {...postTagMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postTagMarginTablet: {...postTagMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postTagMarginMobile: {...postTagMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostTagMarginCombineBtn = () => {
+        setAttributes( {postTagMarginLink: !postTagMarginLink} );
+    }
+
+    const handlePostTagMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            postTagMarginUnits: {
+                ...postTagMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postTagMarginDesktopWidth = `${postTagMarginDesktop.top}${postTagMarginUnits.Desktop} ${postTagMarginDesktop.right}${postTagMarginUnits.Desktop} ${postTagMarginDesktop.bottom}${postTagMarginUnits.Desktop} ${postTagMarginDesktop.left}${postTagMarginUnits.Desktop}`;
+    const postTagMarginTabletWidth = `${postTagMarginTablet.top}${postTagMarginUnits.Tablet} ${postTagMarginTablet.right}${postTagMarginUnits.Tablet} ${postTagMarginTablet.bottom}${postTagMarginUnits.Tablet} ${postTagMarginTablet.left}${postTagMarginUnits.Tablet}`;
+    const postTagMarginMobileWidth = `${postTagMarginMobile.top}${postTagMarginUnits.Mobile} ${postTagMarginMobile.right}${postTagMarginUnits.Mobile} ${postTagMarginMobile.bottom}${postTagMarginUnits.Mobile} ${postTagMarginMobile.left}${postTagMarginUnits.Mobile}`;
+    /** End Tag Margin */
+
+    /** Start Tag Border */ 
+    const handlePostTagBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postTagBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postTagDesktopBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postTagTabletBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postTagMobileBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postTagDesktopBorder: {...postTagDesktopBorder, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postTagTabletBorder: {...postTagTabletBorder, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postTagMobileBorder: {...postTagMobileBorder, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostTagBorderCombineBtn = () => {
+        setAttributes( {postTagBorderLink: !postTagBorderLink} );
+    }
+
+    const handlePostTagBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            postTagBorderUnits: {
+                ...postTagBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postTagBorderDesktopWidth = `${postTagDesktopBorder.top}${postTagBorderUnits.Desktop} ${postTagDesktopBorder.right}${postTagBorderUnits.Desktop} ${postTagDesktopBorder.bottom}${postTagBorderUnits.Desktop} ${postTagDesktopBorder.left}${postTagBorderUnits.Desktop}`; 
+    const postTagBorderTabletWidth = `${postTagTabletBorder.top}${postTagBorderUnits.Tablet} ${postTagTabletBorder.right}${postTagBorderUnits.Tablet} ${postTagTabletBorder.bottom}${postTagBorderUnits.Tablet} ${postTagTabletBorder.left}${postTagBorderUnits.Tablet}`; 
+    const postTagBorderMobileWidth = `${postTagMobileBorder.top}${postTagBorderUnits.Mobile} ${postTagMobileBorder.right}${postTagBorderUnits.Mobile} ${postTagMobileBorder.bottom}${postTagBorderUnits.Mobile} ${postTagMobileBorder.left}${postTagBorderUnits.Mobile}`; 
+    /** End Tag Border */
+    
+    /** Start Tag Border Radius */
+    const handlePostTagBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postTagBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postTagDesktopBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postTagTabletBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postTagMobileBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postTagDesktopBorderRadius: {...postTagDesktopBorderRadius, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postTagTabletBorderRadius: {...postTagTabletBorderRadius, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postTagMobileBorderRadius: {...postTagMobileBorderRadius, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostTagBorderRadiusCombineBtn = () => {
+        setAttributes( {postTagBorderRadiusLink: !postTagBorderRadiusLink} );
+    }
+
+    const handlePostTagBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            postTagBorderRadiusUnits: {
+                ...postTagBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postTagBorderRadiusDesktopWidth = `${postTagDesktopBorderRadius.top}${postTagBorderRadiusUnits.Desktop} ${postTagDesktopBorderRadius.right}${postTagBorderRadiusUnits.Desktop} ${postTagDesktopBorderRadius.bottom}${postTagBorderRadiusUnits.Desktop} ${postTagDesktopBorderRadius.left}${postTagBorderRadiusUnits.Desktop}`; 
+    const postTagBorderRadiusTabletWidth = `${postTagTabletBorderRadius.top}${postTagBorderRadiusUnits.Tablet} ${postTagTabletBorderRadius.right}${postTagBorderRadiusUnits.Tablet} ${postTagTabletBorderRadius.bottom}${postTagBorderRadiusUnits.Tablet} ${postTagTabletBorderRadius.left}${postTagBorderRadiusUnits.Tablet}`; 
+    const postTagBorderRadiusMobileWidth = `${postTagMobileBorderRadius.top}${postTagBorderRadiusUnits.Mobile} ${postTagMobileBorderRadius.right}${postTagBorderRadiusUnits.Mobile} ${postTagMobileBorderRadius.bottom}${postTagBorderRadiusUnits.Mobile} ${postTagMobileBorderRadius.left}${postTagBorderRadiusUnits.Mobile}`; 
+    /** End Tag Border Radius */
+
+
     const allBlockStyle = useMemo(() => `
         .${blockId}.fb_post_grid_container {
             display: grid; 
@@ -1292,6 +1733,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_desc:hover {
             ${postDescriptionHoverColor ? `color: ${postDescriptionHoverColor};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_post_grid_categories a {
+            ${postCategoryColor ? `color: ${postCategoryColor};` : ''}
+            ${postCategoryBgColor ? `background-color: ${postCategoryBgColor};` : ''}
+            ${postCategoryFontFamily ? `font-family: ${postCategoryFontFamily};` : ''}
+            ${postCategoryFontSize.Desktop ? `font-size: ${postCategoryFontSize.Desktop}${postCategoryFontSizeUnits.Desktop};` : ''}
+            ${postCategoryFontWeight ? `font-weight: ${postCategoryFontWeight};` : ''}
+            ${postCategoryFontStyle ? `font-style: ${postCategoryFontStyle};` : ''}
+            ${postCategoryTextTransform ? `text-transform: ${postCategoryTextTransform};` : ''}
+            ${postCategoryTextDecoration ? `text-decoration: ${postCategoryTextDecoration};` : ''}
+            ${postCategoryLetterSpacing.Desktop ? `letter-spacing: ${postCategoryLetterSpacing.Desktop}${postCategoryLetterSpacingUnits.Desktop};` : ''}
+            ${postCategoryLineHeight.Desktop ? `line-height: ${postCategoryLineHeight.Desktop}${postCategoryLineHeightUnits.Desktop};` : ''}
+            ${postCategoryMarginDesktopWidth ? `margin: ${postCategoryMarginDesktopWidth};` : ''}
+            ${postCategoryPaddingDesktopWidth ? `padding: ${postCategoryPaddingDesktopWidth};` : ''}
+            ${postCategoryBorder ? `border: ${postCategoryBorder};` : ''}
+            ${postCategoryBorderColor ? `border-color: ${postCategoryBorderColor};` : ''}
+            ${postCategoryBorderDesktopWidth ? `border-width: ${postCategoryBorderDesktopWidth};` : ''}
+            ${postCategoryBorderRadiusDesktopWidth ? `border-radius: ${postCategoryBorderRadiusDesktopWidth};` : ''}
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .${blockId}.fb_post_grid_container .fb_post_grid_categories a:hover  {
+            ${postCategoryHoverColor ? `color: ${postCategoryHoverColor};` : ''}
+            ${postCategoryBgHoverColor ? `background-color: ${postCategoryBgHoverColor};` : ''}
+            ${postCategoryBorderHoverColor ? `border-color: ${postCategoryBorderHoverColor};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
@@ -1655,24 +2122,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postCategoryTabletBorder,
         postCategoryMobileBorder,
         postCategoryBorderLink,
+        postCategoryBorderDesktopWidth,
+        postCategoryBorderTabletWidth,
+        postCategoryBorderMobileWidth,
 
         postCategoryBorderRadiusUnits,
         postCategoryDesktopBorderRadius,
         postCategoryTabletBorderRadius,
         postCategoryMobileBorderRadius,
         postCategoryBorderRadiusLink,
+        postCategoryBorderRadiusDesktopWidth,
+        postCategoryBorderRadiusTabletWidth,
+        postCategoryBorderRadiusMobileWidth,
 
         postCategoryPaddingUnits,
         postCategoryPaddingDesktop,
         postCategoryPaddingTablet,
         postCategoryPaddingMobile,
         postCategoryPaddingLink,
+        postCategoryPaddingDesktopWidth,
+        postCategoryPaddingTabletWidth,
+        postCategoryPaddingMobileWidth,
 
         postCategoryMarginUnits,
         postCategoryMarginDesktop,
         postCategoryMarginTablet,
         postCategoryMarginMobile,
         postCategoryMarginLink,
+        postCategoryMarginDesktopWidth,
+        postCategoryMarginTabletWidth,
+        postCategoryMarginMobileWidth,
         postCategoryGap,
         postCategoryGapUnits,
 
@@ -1706,24 +2185,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postTagTabletBorder,
         postTagMobileBorder,
         postTagBorderLink,
+        postTagBorderDesktopWidth,
+        postTagBorderTabletWidth,
+        postTagBorderMobileWidth,
 
         postTagBorderRadiusUnits,
         postTagDesktopBorderRadius,
         postTagTabletBorderRadius,
         postTagMobileBorderRadius,
         postTagBorderRadiusLink,
+        postTagBorderRadiusDesktopWidth,
+        postTagBorderRadiusTabletWidth,
+        postTagBorderRadiusMobileWidth,
 
         postTagPaddingUnits,
         postTagPaddingDesktop,
         postTagPaddingTablet,
         postTagPaddingMobile,
         postTagPaddingLink,
+        postTagPaddingDesktopWidth,
+        postTagPaddingTabletWidth,
+        postTagPaddingMobileWidth,
 
         postTagMarginUnits,
         postTagMarginDesktop,
         postTagMarginTablet,
         postTagMarginMobile,
         postTagMarginLink,
+        postTagMarginDesktopWidth,
+        postTagMarginTabletWidth,
+        postTagMarginMobileWidth,
+
         postTagGap,
         postTagGapUnits,
 

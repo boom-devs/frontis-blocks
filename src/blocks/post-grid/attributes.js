@@ -829,11 +829,11 @@ const attributes = {
 	},
 	postCategoryColor : {
 		type: "string",
-		default: ""
+		default: "#15171C"
 	},
 	postCategoryHoverColor: {
 		type: 'string',
-		default: ""
+		default: "#15171C"
 	},
 
 	postCategoryBgColorSwitcher : {
@@ -842,11 +842,11 @@ const attributes = {
 	},
 	postCategoryBgColor : {
 		type: "string",
-		default: ""
+		default: "#F7F7F7"
 	},
 	postCategoryBgHoverColor: {
 		type: 'string',
-		default: ""
+		default: "#F7F7F7"
 	},
 
 	postCategoryBorder: {
@@ -954,28 +954,28 @@ const attributes = {
 	postCategoryPaddingDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '6',
+			bottom: '6',
+			left: '14',
+			right: '14',
 		},
 	},
 	postCategoryPaddingTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '6',
+			bottom: '6',
+			left: '14',
+			right: '14',
 		},
 	},
 	postCategoryPaddingMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '6',
+			bottom: '6',
+			left: '14',
+			right: '14',
 		},
 	},
 	postCategoryPaddingLink : {
@@ -994,28 +994,28 @@ const attributes = {
 	postCategoryMarginDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	postCategoryMarginTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	postCategoryMarginMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	postCategoryMarginLink : {
