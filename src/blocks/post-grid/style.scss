@@ -7,6 +7,8 @@
 			width: 100%;
 			box-sizing: border-box;
 			display: block;
+			object-fit: cover;
+			height: 100%;
 		}
 	}
 }
@@ -86,12 +88,6 @@
 	// }
 
 	.fb_load_more_wrapper{
-		flex-basis: 100%;
-		display: flex;
-		align-items: center;
-		gap: 30px;
-		margin-top: 32px;
-		
 		.fb_load_more{
 			cursor: pointer;
 			display: inline-flex;
@@ -142,19 +138,19 @@
 
 .skeleton-item {
 	position: relative;
-	display: flex;
-	flex-direction: column;
-	height: auto;
-	width: calc(50% - 15px) !important;
+	// display: flex;
+	// flex-direction: column;
+	// height: auto;
+	// width: calc(50% - 15px) !important;
 
-	@media only screen and (max-width: 767px) {
-		width: 100% !important;
-	}
+	// @media only screen and (max-width: 767px) {
+	// 	width: 100% !important;
+	// }
 
 	.skeleton-item-title {
 		width: 100%;
 		height: 280px;
-		margin-bottom: 32px;
+		// margin-bottom: 32px;
 	}
 
 	.loading {
@@ -163,12 +159,24 @@
 
 	.skeleton-item-location {
 		width: 100%;
-		height: 43px;
-		margin-bottom: 16px;
+		height: 280px;
+		// margin-bottom: 16px;
 	}
 	.skeleton-item-sport {
-		width: 80%;
-		height: 24px;
+		width: 100%;
+		height: 280px;
+	}
+	.skeleton-item-date {
+		width: 100%;
+		height: 280px;
+	}
+	.skeleton-item-readmore {
+		width: 100%;
+		height: 280px;
+	}
+	.skeleton-item-author {
+		width: 100%;
+		height: 280px;
 	}
 }
 

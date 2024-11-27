@@ -1,4 +1,4 @@
-export default function LayoutGrid({data, index}) {
+export default function LayoutGrid({data, index, postTitleTag, postDescriptionTag}) {
 	const src = data.fb_featured_image_src.medium[0];
     let title = data.title.rendered;
 	let excerpt = data.fb_post_excerpt;
@@ -13,8 +13,8 @@ export default function LayoutGrid({data, index}) {
                     )}
                 </div>
                 <div className="fb_post_grid_content">
-                    <h3 className="fb_post_title">{title}</h3>
-                    <p className="fb_post_desc">{excerpt}</p>
+                    {React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}
+                    {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
                 </div>
             </div>
         </>

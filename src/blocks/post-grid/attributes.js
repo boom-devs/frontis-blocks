@@ -320,6 +320,38 @@ const attributes = {
 	/** End Post Grid */
 
 	/** Start Image */
+	postImageWidth: {
+		type: "object",
+		default: {
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
+		}
+	},
+	postImageWidthUnits: {
+		type: "object",
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
+	},
+	postImageHeight: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	postImageHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
+	},
 	postImageBorder: {
 		type: 'string',
 		default: "none",
@@ -385,37 +417,81 @@ const attributes = {
 	postImageDesktopBorderRadius: {
 		type: 'object',
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: '',
+			top: '16',
+			right: '16',
+			bottom: '16',
+			left: '16',
 		}
 	},
 	postImageTabletBorderRadius: {
 		type: 'object',
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: '',
+			top: '16',
+			right: '16',
+			bottom: '16',
+			left: '16',
 		}
 	},
 	postImageMobileBorderRadius: {
 		type: 'object',
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: '',
+			top: '16',
+			right: '16',
+			bottom: '16',
+			left: '16',
 		}
 	},
 	postImageBorderRadiusLink: {
 		type: "boolean",
 		default: true
 	},
+
+	postImageMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postImageMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postImageMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postImageMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postImageMarginLink : {
+		type : "boolean",
+		default: true
+	},
 	/** End Image */
 
 	/** Start Title */
+	postTitleTag: {
+		type: "string",
+		default: "h3"
+	},
 	postTitleFontFamily: {
 		type: "string",
 		default: "inherit",
@@ -471,9 +547,9 @@ const attributes = {
 	postTitleLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '30'
 		}
 	},
 	postTitleLineHeightUnits: {
@@ -509,8 +585,8 @@ const attributes = {
 	postTitleMarginDesktop: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
+			top: '24',
+			bottom: '16',
 			left: '0',
 			right: '0',
 		},
@@ -518,8 +594,8 @@ const attributes = {
 	postTitleMarginTablet: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
+			top: '24',
+			bottom: '16',
 			left: '0',
 			right: '0',
 		},
@@ -527,8 +603,8 @@ const attributes = {
 	postTitleMarginMobile: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
+			top: '24',
+			bottom: '16',
 			left: '0',
 			right: '0',
 		},
@@ -541,6 +617,10 @@ const attributes = {
 
 
 	/** Start Description */
+	postDescriptionTag: {
+		type: "string",
+		default: "p"
+	},
 	postDescriptionFontFamily: {
 		type: "string",
 		default: "inherit",
@@ -548,9 +628,9 @@ const attributes = {
 	postDescriptionFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Desktop: '18',
+			Tablet: '18',
+			Mobile: '18'
 		}
 	},
 	postDescriptionFontSizeUnits: { 
@@ -596,9 +676,9 @@ const attributes = {
 	postDescriptionLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '25',
+			Tablet: '25',
+			Mobile: '25'
 		}
 	},
 	postDescriptionLineHeightUnits: {

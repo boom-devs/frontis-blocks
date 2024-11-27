@@ -48,10 +48,19 @@ export default function save({ attributes }) {
 				<div className={`fb_post_grid_container ${blockId}`}></div>
 				<div className="loading post">
 					{placeholders.map((item) => (
-						<div key={item} className="post-card skeleton skeleton-item">
+						<div key={item} className={`post-card skeleton skeleton-item ${blockId}`}>
 							<div className="skeleton-item-title loading"></div>
 							<div className="skeleton-item-location loading"></div>
 							<div className="skeleton-item-sport loading"></div>
+							<div className="skeleton-item-date loading"></div>
+							<div className="skeleton-item-readmore loading"></div>
+							<div className="skeleton-item-author loading"></div>
+							<div className="skeleton-item-readmore loading"></div>
+							<div className="skeleton-item-author loading"></div>
+							<div className="skeleton-item-readmore loading"></div>
+							<div className="skeleton-item-author loading"></div>
+							<div className="skeleton-item-readmore loading"></div>
+							<div className="skeleton-item-author loading"></div>
 						</div>
 					))}
 				</div>
