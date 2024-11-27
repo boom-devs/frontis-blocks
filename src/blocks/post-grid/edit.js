@@ -31,6 +31,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		postTitleTag,
 		postDescriptionTag,
         postDescriptionExcerptLength,
+        showAuthorSwitcher,
+        showCategorySwitcher,
+        showTagSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -80,7 +83,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     {postLists.length > 0 ? (
                         <div className={`fb_post_grid_container ${blockId}`}> 
                             {postLists.map((item, index) => {
-                                return <LayoutGrid data={item} index={index} postTitleTag={postTitleTag} postDescriptionTag={postDescriptionTag} postDescriptionExcerptLength={postDescriptionExcerptLength} />
+                                return <LayoutGrid 
+                                    data={item}
+                                    index={index}
+                                    postTitleTag={postTitleTag}
+                                    postDescriptionTag={postDescriptionTag}
+                                    postDescriptionExcerptLength={postDescriptionExcerptLength}
+                                    showAuthorSwitcher={showAuthorSwitcher}
+                                    showCategorySwitcher={showCategorySwitcher}
+                                    showTagSwitcher={showTagSwitcher}
+                                />
                             })}
                         </div>
                     ) : (

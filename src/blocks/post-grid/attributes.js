@@ -748,6 +748,596 @@ const attributes = {
 	},
 	/** End Description */
 
+
+	/** Start Category */
+	showCategorySwitcher: {
+		type: "boolean",
+		default: false
+	},
+	postCategoryFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	postCategoryFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	postCategoryFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postCategoryFontWeight: {
+		type: "string",
+		default: "400"
+	},
+	postCategoryFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	postCategoryTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	postCategoryTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	postCategoryLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	postCategoryLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postCategoryLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '22',
+			Tablet: '22',
+			Mobile: '22'
+		}
+	},
+	postCategoryLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	postCategoryColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postCategoryColor : {
+		type: "string",
+		default: ""
+	},
+	postCategoryHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	postCategoryBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postCategoryBgColor : {
+		type: "string",
+		default: ""
+	},
+	postCategoryBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	postCategoryBorder: {
+		type: 'string',
+		default: "none",
+	},
+	postCategoryBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	postCategoryBorderColor: {
+		type: 'string',
+	},
+	postCategoryBorderHoverColor: {
+		type: 'string',
+	},
+	postCategoryBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postCategoryDesktopBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postCategoryTabletBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postCategoryMobileBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postCategoryBorderLink: {
+		type: "boolean",
+		default: true
+	},
+
+	postCategoryBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postCategoryDesktopBorderRadius: {
+		type: 'object',
+		default: {
+			top: '6',
+			right: '6',
+			bottom: '6',
+			left: '6',
+		}
+	},
+	postCategoryTabletBorderRadius: {
+		type: 'object',
+		default: {
+			top: '6',
+			right: '6',
+			bottom: '6',
+			left: '6',
+		}
+	},
+	postCategoryMobileBorderRadius: {
+		type: 'object',
+		default: {
+			top: '6',
+			right: '6',
+			bottom: '6',
+			left: '6',
+		}
+	},
+	postCategoryBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	postCategoryPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postCategoryPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postCategoryPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postCategoryPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postCategoryPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+
+	postCategoryMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postCategoryMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postCategoryMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postCategoryMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postCategoryMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	postCategoryGap: {
+		type: "object",
+		default: {
+			Desktop: 10,
+			Tablet: 10,
+			Mobile: 10
+		}
+	},
+	postCategoryGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Category */
+
+	/** Start Tag */
+	showTagSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	postTagFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	postTagFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	postTagFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postTagFontWeight: {
+		type: "string",
+		default: "400"
+	},
+	postTagFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	postTagTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	postTagTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	postTagLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	postTagLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postTagLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '22',
+			Tablet: '22',
+			Mobile: '22'
+		}
+	},
+	postTagLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	postTagColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postTagColor : {
+		type: "string",
+		default: ""
+	},
+	postTagHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	postTagBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postTagBgColor : {
+		type: "string",
+		default: ""
+	},
+	postTagBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	postTagBorder: {
+		type: 'string',
+		default: "none",
+	},
+	postTagBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	postTagBorderColor: {
+		type: 'string',
+	},
+	postTagBorderHoverColor: {
+		type: 'string',
+	},
+	postTagBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postTagDesktopBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postTagTabletBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postTagMobileBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postTagBorderLink: {
+		type: "boolean",
+		default: true
+	},
+
+	postTagBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postTagDesktopBorderRadius: {
+		type: 'object',
+		default: {
+			top: '6',
+			right: '6',
+			bottom: '6',
+			left: '6',
+		}
+	},
+	postTagTabletBorderRadius: {
+		type: 'object',
+		default: {
+			top: '6',
+			right: '6',
+			bottom: '6',
+			left: '6',
+		}
+	},
+	postTagMobileBorderRadius: {
+		type: 'object',
+		default: {
+			top: '6',
+			right: '6',
+			bottom: '6',
+			left: '6',
+		}
+	},
+	postTagBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	postTagPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postTagPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postTagPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postTagPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postTagPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+
+	postTagMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postTagMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postTagMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postTagMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postTagMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	postTagGap: {
+		type: "object",
+		default: {
+			Desktop: 10,
+			Tablet: 10,
+			Mobile: 10
+		}
+	},
+	postTagGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Tag */
+
+	/** Start Author */
+	showAuthorSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	/** End Author */
+
 };
 
 export default attributes;

@@ -14,6 +14,60 @@
 }
 
 
+
+.fb_post_grid_author {
+	display: flex;
+    align-items: center;
+    gap: 10px;
+	font-size: 16px;
+
+    & .fb_post_grid_author_avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%; 
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    & .fb_post_grid_author_info {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		.fb_post_grid_author_info_name {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 16px;
+		}
+    }
+}
+
+.fb_post_grid_categories {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	.fb_post_grid_category {
+		font-size: 16px;
+	}
+}
+
+.fb_post_grid_tags {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	.fb_post_grid_tag {
+		font-size: 16px;
+	}
+}
+
+
+
 .fb_post_grid_container{
 	// display: flex;
 	// gap: 30px;
@@ -138,19 +192,12 @@
 
 .skeleton-item {
 	position: relative;
-	// display: flex;
-	// flex-direction: column;
-	// height: auto;
-	// width: calc(50% - 15px) !important;
-
-	// @media only screen and (max-width: 767px) {
-	// 	width: 100% !important;
-	// }
+	display: flex;
+	flex-direction: column;
 
 	.skeleton-item-title {
 		width: 100%;
-		height: 280px;
-		// margin-bottom: 32px;
+		height: 260px;
 	}
 
 	.loading {
@@ -159,36 +206,67 @@
 
 	.skeleton-item-location {
 		width: 100%;
-		height: 280px;
-		// margin-bottom: 16px;
+		height: 43px;
+		margin: 32px 0 16px;
 	}
 	.skeleton-item-sport {
-		width: 100%;
-		height: 280px;
-	}
-	.skeleton-item-date {
-		width: 100%;
-		height: 280px;
-	}
-	.skeleton-item-readmore {
-		width: 100%;
-		height: 280px;
-	}
-	.skeleton-item-author {
-		width: 100%;
-		height: 280px;
+		width: 80%;
+		height: 24px;
 	}
 }
 
-.loading.post {
-	display: flex;
-	gap: 24px;
-	flex-wrap: wrap;
 
-	p {
-		flex-basis: 100%;
-	}
-}
+// .skeleton-item {
+// 	position: relative;
+// 	display: flex;
+// 	flex-direction: column;
+
+// 	@media only screen and (max-width: 767px) {
+// 		width: 100% !important;
+// 	}
+
+// 	.skeleton-item-title {
+// 		width: 100%;
+// 		height: 280px;
+// 		// margin-bottom: 32px;
+// 	}
+
+// 	.loading {
+// 		position: relative;
+// 	}
+
+// 	.skeleton-item-location {
+// 		width: 100%;
+// 		height: 280px;
+// 		// margin-bottom: 16px;
+// 	}
+// 	.skeleton-item-sport {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-date {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-readmore {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-author {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// }
+
+// .loading.post {
+// 	display: flex;
+// 	gap: 24px;
+// 	flex-wrap: wrap;
+
+// 	p {
+// 		flex-basis: 100%;
+// 	}
+// }
 
 .post-card.skeleton .loading:before {
 	content: "";

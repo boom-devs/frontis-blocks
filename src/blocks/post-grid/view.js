@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		orderby: null,
 		deauthor: null,
 		detag: null,
-		decategory: null
-		
+		decategory: null,
 	};
 
 	document.body.addEventListener('click', function(event) {
@@ -42,6 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postDescriptionTag = parentElement.getAttribute("data-post-description-tag");
 				const postDescriptionExcerptLength = parentElement.getAttribute("data-post-description-excerpt-length");
 
+				const showAuthorSwitcher = parentElement.getAttribute("data-show-author-switcher");
+				const showCategorySwitcher = parentElement.getAttribute("data-show-category-switcher");
+				const showTagSwitcher = parentElement.getAttribute("data-show-tag-switcher");
+
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
 
@@ -61,9 +64,13 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.postDescriptionTag = postDescriptionTag ? postDescriptionTag : 'p';
 				filterPost.postDescriptionExcerptLength = postDescriptionExcerptLength ? postDescriptionExcerptLength : 10;
 
+				filterPost.showAuthorSwitcher = showAuthorSwitcher ? showAuthorSwitcher : false;
+				filterPost.showCategorySwitcher = showCategorySwitcher ? showCategorySwitcher : false;
+				filterPost.showTagSwitcher = showTagSwitcher ? showTagSwitcher : false;
+
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher);
 			}
 		}
 	});
@@ -80,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
@@ -92,6 +99,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.limit = perpage;
 		filterPost.orderby = orderby ? orderby.split(',') : [];
 		filterPost.sortorder = sortorder ? sortorder.split(',') : [];
+
+		filterPost.showAuthorSwitcher = showAuthorSwitcher ? showAuthorSwitcher : false;
+		filterPost.showCategorySwitcher = showCategorySwitcher ? showCategorySwitcher : false;
+		filterPost.showTagSwitcher = showTagSwitcher ? showTagSwitcher : false;
 
 		filterPost.postTitleTag = postTitleTag ? postTitleTag : 'h3';
 		filterPost.postDescriptionTag = postDescriptionTag ? postDescriptionTag : 'p';
@@ -163,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'));
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'));
 	});
 
 
