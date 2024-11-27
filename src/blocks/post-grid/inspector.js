@@ -11,6 +11,7 @@ import {
     ButtonGroup,
     RangeControl,
     SelectControl,
+    ToggleControl,
     TextControl,
 } from '@wordpress/components';
 
@@ -170,6 +171,117 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDescriptionMarginLink,
         postDescriptionExcerptLength,
         /** End description */
+
+        /** Start category */
+        showCategorySwitcher,
+        postCategoryFontFamily,
+        postCategoryFontSize,
+        postCategoryFontSizeUnits,
+        postCategoryFontWeight,
+        postCategoryFontStyle,
+        postCategoryTextTransform,
+        postCategoryTextDecoration,
+        postCategoryLetterSpacing,
+        postCategoryLetterSpacingUnits,
+        postCategoryLineHeight,
+        postCategoryLineHeightUnits,
+
+        postCategoryColorSwitcher,
+        postCategoryColor,
+        postCategoryHoverColor,
+
+        postCategoryBgColorSwitcher,
+        postCategoryBgColor,
+        postCategoryBgHoverColor,
+
+        postCategoryBorder,
+        postCategoryBorderColorSwitcher,
+        postCategoryBorderColor,
+        postCategoryBorderHoverColor,
+        postCategoryBorderUnits,
+        postCategoryDesktopBorder,
+        postCategoryTabletBorder,
+        postCategoryMobileBorder,
+        postCategoryBorderLink,
+
+        postCategoryBorderRadiusUnits,
+        postCategoryDesktopBorderRadius,
+        postCategoryTabletBorderRadius,
+        postCategoryMobileBorderRadius,
+        postCategoryBorderRadiusLink,
+
+        postCategoryPaddingUnits,
+        postCategoryPaddingDesktop,
+        postCategoryPaddingTablet,
+        postCategoryPaddingMobile,
+        postCategoryPaddingLink,
+
+        postCategoryMarginUnits,
+        postCategoryMarginDesktop,
+        postCategoryMarginTablet,
+        postCategoryMarginMobile,
+        postCategoryMarginLink,
+        postCategoryGap,
+        postCategoryGapUnits,
+        /** End category */
+
+        /** Start tag */
+        showTagSwitcher,
+        postTagFontFamily,
+        postTagFontSize,
+        postTagFontSizeUnits,
+        postTagFontWeight,
+        postTagFontStyle,
+        postTagTextTransform,
+        postTagTextDecoration,
+        postTagLetterSpacing,
+        postTagLetterSpacingUnits,
+        postTagLineHeight,
+        postTagLineHeightUnits,
+
+        postTagColorSwitcher,
+        postTagColor,
+        postTagHoverColor,
+
+        postTagBgColorSwitcher,
+        postTagBgColor,
+        postTagBgHoverColor,
+
+        postTagBorder,
+        postTagBorderColorSwitcher,
+        postTagBorderColor,
+        postTagBorderHoverColor,
+        postTagBorderUnits,
+        postTagDesktopBorder,
+        postTagTabletBorder,
+        postTagMobileBorder,
+        postTagBorderLink,
+
+        postTagBorderRadiusUnits,
+        postTagDesktopBorderRadius,
+        postTagTabletBorderRadius,
+        postTagMobileBorderRadius,
+        postTagBorderRadiusLink,
+
+        postTagPaddingUnits,
+        postTagPaddingDesktop,
+        postTagPaddingTablet,
+        postTagPaddingMobile,
+        postTagPaddingLink,
+
+        postTagMarginUnits,
+        postTagMarginDesktop,
+        postTagMarginTablet,
+        postTagMarginMobile,
+        postTagMarginLink,
+
+        postTagGap,
+        postTagGapUnits,
+        /** End tag */
+
+        /** Start author */
+        showAuthorSwitcher,
+        /** End author */   
 
 	} = attributes;
 
@@ -950,7 +1062,151 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const postDescriptionMarginMobileWidth = `${postDescriptionMarginMobile.top}${postDescriptionMarginUnits.Mobile} ${postDescriptionMarginMobile.right}${postDescriptionMarginUnits.Mobile} ${postDescriptionMarginMobile.bottom}${postDescriptionMarginUnits.Mobile} ${postDescriptionMarginMobile.left}${postDescriptionMarginUnits.Mobile}`;
     /** End Description Margin */
 
+    /** Start Category Padding */
+    const handlePostCategoryPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postCategoryPaddingLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postCategoryPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postCategoryPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postCategoryPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postCategoryPaddingDesktop: {...postCategoryPaddingDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postCategoryPaddingTablet: {...postCategoryPaddingTablet, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postCategoryPaddingMobile: {...postCategoryPaddingMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
 
+    }
+
+    const handlePostCategoryPaddingCombineBtn = () => {
+        setAttributes( {postCategoryPaddingLink: !postCategoryPaddingLink} );
+    }
+
+    const handlePostCategoryPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            postCategoryPaddingUnits: {
+                ...postCategoryPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postCategoryPaddingDesktopWidth = `${postCategoryPaddingDesktop.top}${postCategoryPaddingUnits.Desktop} ${postCategoryPaddingDesktop.right}${postCategoryPaddingUnits.Desktop} ${postCategoryPaddingDesktop.bottom}${postCategoryPaddingUnits.Desktop} ${postCategoryPaddingDesktop.left}${postCategoryPaddingUnits.Desktop}`;
+    const postCategoryPaddingTabletWidth = `${postCategoryPaddingTablet.top}${postCategoryPaddingUnits.Tablet} ${postCategoryPaddingTablet.right}${postCategoryPaddingUnits.Tablet} ${postCategoryPaddingTablet.bottom}${postCategoryPaddingUnits.Tablet} ${postCategoryPaddingTablet.left}${postCategoryPaddingUnits.Tablet}`;
+    const postCategoryPaddingMobileWidth = `${postCategoryPaddingMobile.top}${postCategoryPaddingUnits.Mobile} ${postCategoryPaddingMobile.right}${postCategoryPaddingUnits.Mobile} ${postCategoryPaddingMobile.bottom}${postCategoryPaddingUnits.Mobile} ${postCategoryPaddingMobile.left}${postCategoryPaddingUnits.Mobile}`;
+    /** End Category Padding */
+
+    /** Start Category Margin */
+    const handlePostCategoryMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( postCategoryMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        postCategoryMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        postCategoryMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        postCategoryMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {postCategoryMarginDesktop: {...postCategoryMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {postCategoryMarginTablet: {...postCategoryMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':  
+                    setAttributes( {postCategoryMarginMobile: {...postCategoryMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePostCategoryMarginCombineBtn = () => {
+        setAttributes( {postCategoryMarginLink: !postCategoryMarginLink} );
+    }
+
+    const handlePostCategoryMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            postCategoryMarginUnits: {
+                ...postCategoryMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const postCategoryMarginDesktopWidth = `${postCategoryMarginDesktop.top}${postCategoryMarginUnits.Desktop} ${postCategoryMarginDesktop.right}${postCategoryMarginUnits.Desktop} ${postCategoryMarginDesktop.bottom}${postCategoryMarginUnits.Desktop} ${postCategoryMarginDesktop.left}${postCategoryMarginUnits.Desktop}`;
+    const postCategoryMarginTabletWidth = `${postCategoryMarginTablet.top}${postCategoryMarginUnits.Tablet} ${postCategoryMarginTablet.right}${postCategoryMarginUnits.Tablet} ${postCategoryMarginTablet.bottom}${postCategoryMarginUnits.Tablet} ${postCategoryMarginTablet.left}${postCategoryMarginUnits.Tablet}`;
+    const postCategoryMarginMobileWidth = `${postCategoryMarginMobile.top}${postCategoryMarginUnits.Mobile} ${postCategoryMarginMobile.right}${postCategoryMarginUnits.Mobile} ${postCategoryMarginMobile.bottom}${postCategoryMarginUnits.Mobile} ${postCategoryMarginMobile.left}${postCategoryMarginUnits.Mobile}`;
+    /** End Category Margin */
 
     const allBlockStyle = useMemo(() => `
         .${blockId}.fb_post_grid_container {
@@ -963,7 +1219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId}.fb_post_grid_container .fb_load_more_wrapper {
             grid-column: span ${columnsPerSection.Desktop};
         }
-        .skeleton-item {
+        .loading.post {
             display: grid;
             grid-template-columns: repeat(${columnsPerSection.Desktop}, 1fr);
             row-gap: ${rowGap.Desktop}${gapUnits.Desktop};
@@ -1039,20 +1295,176 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 1024px) {
-            .${blockId}.fb_post_grid_container { 
-                display: grid;
+            .${blockId}.fb_post_grid_container {
+                display: grid; 
                 grid-template-columns: repeat(${columnsPerSection.Tablet}, 1fr) !important;
+                row-gap: ${rowGap.Tablet}${gapUnits.Tablet}; 
+                column-gap: ${columnGap.Tablet}${gapUnits.Tablet}; 
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper {
+                grid-column: span ${columnsPerSection.Tablet};
+            }
+            .loading.post {
+                display: grid;
+                grid-template-columns: repeat(${columnsPerSection.Tablet}, 1fr);
                 row-gap: ${rowGap.Tablet}${gapUnits.Tablet};
                 column-gap: ${columnGap.Tablet}${gapUnits.Tablet};
+                width: 100%;
+                height: auto;
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper {
+                ${postGridBgColor ? `background-color: ${postGridBgColor};` : ''}
+                ${postGridPaddingTabletWidth ? `padding: ${postGridPaddingTabletWidth};` : ''}
+                ${postGridMarginTabletWidth ? `margin: ${postGridMarginTabletWidth};` : ''}
+                ${postGridBorder ? `border: ${postGridBorder};` : ''}
+                ${postGridBorderTabletWidth ? `border-width: ${postGridBorderTabletWidth};` : ''}
+                ${postGridBorderRadiusTabletWidth ? `border-radius: ${postGridBorderRadiusTabletWidth};` : ''}
+                ${postGridBorderColor ? `border-color: ${postGridBorderColor};` : ''}
+                ${postGridBoxShadowCssValue ? `box-shadow: ${postGridBoxShadowCssValue};` : ''}
+                transition: background-color 0.3s ease, border-color 0.3s ease;
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper:hover {
+                ${postGridBgHoverColor ? `background-color: ${postGridBgHoverColor};` : ''}
+                ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image {
+                ${postImageWidth.Tablet ? `width: ${postImageWidth.Tablet}${postImageWidthUnits.Tablet};` : ''}
+                ${postImageHeight.Tablet ? `height: ${postImageHeight.Tablet}${postImageHeightUnits.Tablet};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
+                ${postImageBorder ? `border: ${postImageBorder};` : ''}
+                ${postImageTabletBorderWidth ? `border-width: ${postImageTabletBorderWidth};` : ''}
+                ${postImageBorderColor ? `border-color: ${postImageBorderColor};` : ''}
+                ${postImageTabletBorderRadiusWidth ? `border-radius: ${postImageTabletBorderRadiusWidth};` : ''}
+                ${postImageMarginTabletWidth ? `margin: ${postImageMarginTabletWidth};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover img {
+                ${postImageBorderHoverColor ? `border-color: ${postImageBorderHoverColor};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title {
+                ${postTitleColor ? `color: ${postTitleColor};` : ''}
+                ${postTitleFontFamily ? `font-family: ${postTitleFontFamily};` : ''}
+                ${postTitleFontSize.Tablet ? `font-size: ${postTitleFontSize.Tablet}${postTitleFontSizeUnits.Tablet};` : ''}
+                ${postTitleFontWeight ? `font-weight: ${postTitleFontWeight};` : ''}
+                ${postTitleFontStyle ? `font-style: ${postTitleFontStyle};` : ''}
+                ${postTitleTextTransform ? `text-transform: ${postTitleTextTransform};` : ''}
+                ${postTitleTextDecoration ? `text-decoration: ${postTitleTextDecoration};` : ''}
+                ${postTitleLetterSpacing.Tablet ? `letter-spacing: ${postTitleLetterSpacing.Tablet}${postTitleLetterSpacingUnits.Tablet};` : ''}
+                ${postTitleLineHeight.Tablet ? `line-height: ${postTitleLineHeight.Tablet}${postTitleLineHeightUnits.Tablet};` : ''}
+                ${postTitleMarginTabletWidth ? `margin: ${postTitleMarginTabletWidth};` : ''}
+            }
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title:hover {
+                ${postTitleHoverColor ? `color: ${postTitleHoverColor};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_desc {
+                ${postDescriptionColor ? `color: ${postDescriptionColor};` : ''}
+                ${postDescriptionFontFamily ? `font-family: ${postDescriptionFontFamily};` : ''}
+                ${postDescriptionFontSize.Tablet ? `font-size: ${postDescriptionFontSize.Tablet}${postDescriptionFontSizeUnits.Tablet};` : ''}
+                ${postDescriptionFontWeight ? `font-weight: ${postDescriptionFontWeight};` : ''}
+                ${postDescriptionFontStyle ? `font-style: ${postDescriptionFontStyle};` : ''}
+                ${postDescriptionTextTransform ? `text-transform: ${postDescriptionTextTransform};` : ''}
+                ${postDescriptionTextDecoration ? `text-decoration: ${postDescriptionTextDecoration};` : ''}
+                ${postDescriptionLetterSpacing.Tablet ? `letter-spacing: ${postDescriptionLetterSpacing.Tablet}${postDescriptionLetterSpacingUnits.Tablet};` : ''}
+                ${postDescriptionLineHeight.Tablet ? `line-height: ${postDescriptionLineHeight.Tablet}${postDescriptionLineHeightUnits.Tablet};` : ''}
+                ${postDescriptionMarginTabletWidth ? `margin: ${postDescriptionMarginTabletWidth};` : ''}
+            }
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_desc:hover {
+                ${postDescriptionHoverColor ? `color: ${postDescriptionHoverColor};` : ''}
             }
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId}.fb_post_grid_container { 
-                display: grid;
+            .${blockId}.fb_post_grid_container {
+                display: grid; 
                 grid-template-columns: repeat(${columnsPerSection.Mobile}, 1fr) !important;
+                row-gap: ${rowGap.Mobile}${gapUnits.Mobile}; 
+                column-gap: ${columnGap.Mobile}${gapUnits.Mobile}; 
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper {
+                grid-column: span ${columnsPerSection.Mobile};
+            }
+            .loading.post {
+                display: grid;
+                grid-template-columns: repeat(${columnsPerSection.Mobile}, 1fr);
                 row-gap: ${rowGap.Mobile}${gapUnits.Mobile};
                 column-gap: ${columnGap.Mobile}${gapUnits.Mobile};
+                width: 100%;
+                height: auto;
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper {
+                ${postGridBgColor ? `background-color: ${postGridBgColor};` : ''}
+                ${postGridPaddingMobileWidth ? `padding: ${postGridPaddingMobileWidth};` : ''}
+                ${postGridMarginMobileWidth ? `margin: ${postGridMarginMobileWidth};` : ''}
+                ${postGridBorder ? `border: ${postGridBorder};` : ''}
+                ${postGridBorderMobileWidth ? `border-width: ${postGridBorderMobileWidth};` : ''}
+                ${postGridBorderRadiusMobileWidth ? `border-radius: ${postGridBorderRadiusMobileWidth};` : ''}
+                ${postGridBorderColor ? `border-color: ${postGridBorderColor};` : ''}
+                ${postGridBoxShadowCssValue ? `box-shadow: ${postGridBoxShadowCssValue};` : ''}
+                transition: background-color 0.3s ease, border-color 0.3s ease;
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper:hover {
+                ${postGridBgHoverColor ? `background-color: ${postGridBgHoverColor};` : ''}
+                ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image {
+                ${postImageWidth.Mobile ? `width: ${postImageWidth.Mobile}${postImageWidthUnits.Mobile};` : ''}
+                ${postImageHeight.Mobile ? `height: ${postImageHeight.Mobile}${postImageHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
+                ${postImageBorder ? `border: ${postImageBorder};` : ''}
+                ${postImageMobileBorderWidth ? `border-width: ${postImageMobileBorderWidth};` : ''}
+                ${postImageBorderColor ? `border-color: ${postImageBorderColor};` : ''}
+                ${postImageMobileBorderRadiusWidth ? `border-radius: ${postImageMobileBorderRadiusWidth};` : ''}
+                ${postImageMarginMobileWidth ? `margin: ${postImageMarginMobileWidth};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover img {
+                ${postImageBorderHoverColor ? `border-color: ${postImageBorderHoverColor};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title {
+                ${postTitleColor ? `color: ${postTitleColor};` : ''}
+                ${postTitleFontFamily ? `font-family: ${postTitleFontFamily};` : ''}
+                ${postTitleFontSize.Mobile ? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};` : ''}
+                ${postTitleFontWeight ? `font-weight: ${postTitleFontWeight};` : ''}
+                ${postTitleFontStyle ? `font-style: ${postTitleFontStyle};` : ''}
+                ${postTitleTextTransform ? `text-transform: ${postTitleTextTransform};` : ''}
+                ${postTitleTextDecoration ? `text-decoration: ${postTitleTextDecoration};` : ''}
+                ${postTitleLetterSpacing.Mobile ? `letter-spacing: ${postTitleLetterSpacing.Mobile}${postTitleLetterSpacingUnits.Mobile};` : ''}
+                ${postTitleLineHeight.Mobile ? `line-height: ${postTitleLineHeight.Mobile}${postTitleLineHeightUnits.Mobile};` : ''}
+                ${postTitleMarginMobileWidth ? `margin: ${postTitleMarginMobileWidth};` : ''}
+            }
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title:hover {
+                ${postTitleHoverColor ? `color: ${postTitleHoverColor};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_desc {
+                ${postDescriptionColor ? `color: ${postDescriptionColor};` : ''}
+                ${postDescriptionFontFamily ? `font-family: ${postDescriptionFontFamily};` : ''}
+                ${postDescriptionFontSize.Mobile ? `font-size: ${postDescriptionFontSize.Mobile}${postDescriptionFontSizeUnits.Mobile};` : ''}
+                ${postDescriptionFontWeight ? `font-weight: ${postDescriptionFontWeight};` : ''}
+                ${postDescriptionFontStyle ? `font-style: ${postDescriptionFontStyle};` : ''}
+                ${postDescriptionTextTransform ? `text-transform: ${postDescriptionTextTransform};` : ''}
+                ${postDescriptionTextDecoration ? `text-decoration: ${postDescriptionTextDecoration};` : ''}
+                ${postDescriptionLetterSpacing.Mobile ? `letter-spacing: ${postDescriptionLetterSpacing.Mobile}${postDescriptionLetterSpacingUnits.Mobile};` : ''}
+                ${postDescriptionLineHeight.Mobile ? `line-height: ${postDescriptionLineHeight.Mobile}${postDescriptionLineHeightUnits.Mobile};` : ''}
+                ${postDescriptionMarginMobileWidth ? `margin: ${postDescriptionMarginMobileWidth};` : ''}
+            }
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_desc:hover {
+                ${postDescriptionHoverColor ? `color: ${postDescriptionHoverColor};` : ''}
             }
         }
 
@@ -1212,6 +1624,110 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDescriptionMarginTabletWidth,
         postDescriptionMarginMobileWidth,
         postDescriptionExcerptLength,
+
+        showCategorySwitcher,
+        postCategoryFontFamily,
+        postCategoryFontSize,
+        postCategoryFontSizeUnits,
+        postCategoryFontWeight,
+        postCategoryFontStyle,
+        postCategoryTextTransform,
+        postCategoryTextDecoration,
+        postCategoryLetterSpacing,
+        postCategoryLetterSpacingUnits,
+        postCategoryLineHeight,
+        postCategoryLineHeightUnits,
+
+        postCategoryColorSwitcher,
+        postCategoryColor,
+        postCategoryHoverColor,
+
+        postCategoryBgColorSwitcher,
+        postCategoryBgColor,
+        postCategoryBgHoverColor,
+
+        postCategoryBorder,
+        postCategoryBorderColorSwitcher,
+        postCategoryBorderColor,
+        postCategoryBorderHoverColor,
+        postCategoryBorderUnits,
+        postCategoryDesktopBorder,
+        postCategoryTabletBorder,
+        postCategoryMobileBorder,
+        postCategoryBorderLink,
+
+        postCategoryBorderRadiusUnits,
+        postCategoryDesktopBorderRadius,
+        postCategoryTabletBorderRadius,
+        postCategoryMobileBorderRadius,
+        postCategoryBorderRadiusLink,
+
+        postCategoryPaddingUnits,
+        postCategoryPaddingDesktop,
+        postCategoryPaddingTablet,
+        postCategoryPaddingMobile,
+        postCategoryPaddingLink,
+
+        postCategoryMarginUnits,
+        postCategoryMarginDesktop,
+        postCategoryMarginTablet,
+        postCategoryMarginMobile,
+        postCategoryMarginLink,
+        postCategoryGap,
+        postCategoryGapUnits,
+
+        showTagSwitcher,
+        postTagFontFamily,
+        postTagFontSize,
+        postTagFontSizeUnits,
+        postTagFontWeight,
+        postTagFontStyle,
+        postTagTextTransform,
+        postTagTextDecoration,
+        postTagLetterSpacing,
+        postTagLetterSpacingUnits,
+        postTagLineHeight,
+        postTagLineHeightUnits,
+
+        postTagColorSwitcher,
+        postTagColor,
+        postTagHoverColor,
+
+        postTagBgColorSwitcher,
+        postTagBgColor,
+        postTagBgHoverColor,
+
+        postTagBorder,
+        postTagBorderColorSwitcher,
+        postTagBorderColor,
+        postTagBorderHoverColor,
+        postTagBorderUnits,
+        postTagDesktopBorder,
+        postTagTabletBorder,
+        postTagMobileBorder,
+        postTagBorderLink,
+
+        postTagBorderRadiusUnits,
+        postTagDesktopBorderRadius,
+        postTagTabletBorderRadius,
+        postTagMobileBorderRadius,
+        postTagBorderRadiusLink,
+
+        postTagPaddingUnits,
+        postTagPaddingDesktop,
+        postTagPaddingTablet,
+        postTagPaddingMobile,
+        postTagPaddingLink,
+
+        postTagMarginUnits,
+        postTagMarginDesktop,
+        postTagMarginTablet,
+        postTagMarginMobile,
+        postTagMarginLink,
+        postTagGap,
+        postTagGapUnits,
+
+        showAuthorSwitcher,
     ]);
 
     useEffect(() => {
@@ -1255,6 +1771,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === 'general' && (
                                     <>
                                         <div className="fb-advanced-wrapper">
+
+                                            <PanelBody
+                                                title={__("General", "frontis-blocks")}
+                                                initialOpen={true}
+                                            >
+
+                                                <BaseControl
+                                                    label={__("Element Visibility", "frontis-blocks")}
+                                                    className="fb-setting-show-hide-elements"
+                                                >
+                                                    <ToggleControl
+                                                        label={__("Show Author", "frontis-blocks")}
+                                                        checked={showAuthorSwitcher}
+                                                        onChange={(value) => setAttributes({ showAuthorSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Category", "frontis-blocks")}
+                                                        checked={showCategorySwitcher}
+                                                        onChange={(value) => setAttributes({ showCategorySwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Tag", "frontis-blocks")}
+                                                        checked={showTagSwitcher}
+                                                        onChange={(value) => setAttributes({ showTagSwitcher: value })}
+                                                    />
+                                                </BaseControl>
+                                                
+                                            </PanelBody> 
                                             <PanelBody
                                                 title={__("Query", "frontis-blocks")}
                                                 initialOpen={true}
@@ -1874,6 +2418,380 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={200}
                                                 step={1}
                                                 resetFallbackValue={10}
+                                            />
+
+                                        </PanelBody>
+
+
+                                        <PanelBody title={__("Category", "frontis-blocks")} initialOpen={false}>
+
+                                            <FB_TypographyControl
+                                                fontFamily={postCategoryFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ postCategoryFontFamily: value })}
+
+                                                fontSize={postCategoryFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ postCategoryFontSize: value })}
+
+                                                fontSizeUnits={postCategoryFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ postCategoryFontSizeUnits: value })}
+
+                                                fontWeight={postCategoryFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ postCategoryFontWeight: value })}
+
+                                                fontStyle={postCategoryFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ postCategoryFontStyle: value })}
+
+                                                textTransform={postCategoryTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ postCategoryTextTransform: value })}
+
+                                                textDecoration={postCategoryTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ postCategoryTextDecoration: value })}
+
+                                                letterSpacing={postCategoryLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ postCategoryLetterSpacing: value })}
+
+                                                letterSpacingUnits={postCategoryLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ postCategoryLetterSpacingUnits: value })}
+
+                                                lineHeight={postCategoryLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ postCategoryLineHeight: value })}
+
+                                                lineHeightUnits={postCategoryLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ postCategoryLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={postCategoryColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ postCategoryColorSwitcher: value })}
+                                            />
+
+                                            {postCategoryColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={postCategoryColor}
+                                                    setGlobalColor={(value) => setAttributes({ postCategoryColor: value })}
+                                                />
+                                            )}
+
+                                            {postCategoryColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={postCategoryHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ postCategoryHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <FB_SwitcherControl
+                                                label={__("Background", "frontis-blocks")}
+                                                globalSwitcher={postCategoryBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ postCategoryBgColorSwitcher: value })}
+                                            />
+
+                                            {postCategoryBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={postCategoryBgColor} 
+                                                    setGlobalColor={(value) => setAttributes({ postCategoryBgColor: value })}
+                                                />
+                                            )}
+
+                                            {postCategoryBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={postCategoryBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ postCategoryBgHoverColor: value })}
+                                                />
+                                            )}
+
+
+
+                                            <FB_Spacing 
+                                                label={__("Padding", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostCategoryPaddingUnitsHandler}
+                                                spacingUnits={postCategoryPaddingUnits}
+                                                spacingDesktop={postCategoryPaddingDesktop}
+                                                spacingTablet={postCategoryPaddingTablet}
+                                                spacingMobile={postCategoryPaddingMobile}
+                                                handleSpacingUnitHandler={handlePostCategoryPaddingUnitChange}
+                                                spacingCombineBtn={postCategoryPaddingLink}
+                                                spacingCombineBtnHandler={handlePostCategoryPaddingCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostCategoryMarginUnitsHandler}
+                                                spacingUnits={postCategoryMarginUnits}
+                                                spacingDesktop={postCategoryMarginDesktop}
+                                                spacingTablet={postCategoryMarginTablet}
+                                                spacingMobile={postCategoryMarginMobile}
+                                                handleSpacingUnitHandler={handlePostCategoryMarginUnitChange}
+                                                spacingCombineBtn={postCategoryMarginLink}
+                                                spacingCombineBtnHandler={handlePostCategoryMarginCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <SelectControl
+                                                label={__("Border Style", "frontis-blocks")}
+                                                value={postCategoryBorder}
+                                                options={BORDER_STYLES}
+                                                onChange={(value) => setAttributes({ postCategoryBorder: value })}
+                                            />
+
+                                            <FB_SwitcherControl
+                                                label={__("Border", "frontis-blocks")}
+                                                globalSwitcher={postCategoryBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ postCategoryBorderColorSwitcher: value })}
+                                            />
+
+                                            {postCategoryBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={postCategoryBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ postCategoryBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {postCategoryBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={postCategoryBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ postCategoryBorderHoverColor: value })}
+                                                />
+                                            )}
+
+
+                                            <FB_Spacing 
+                                                label={__("Border", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostCategoryBorderUnitsHandler}
+                                                spacingUnits={postCategoryBorderUnits}
+                                                spacingDesktop={postCategoryDesktopBorder}
+                                                spacingTablet={postCategoryTabletBorder}
+                                                spacingMobile={postCategoryMobileBorder}
+                                                handleSpacingUnitHandler={handlePostCategoryBorderUnitChange}
+                                                spacingCombineBtn={postCategoryBorderLink}
+                                                spacingCombineBtnHandler={handlePostCategoryBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Border Radius", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostCategoryBorderRadiusUnitsHandler}
+                                                spacingUnits={postCategoryBorderRadiusUnits}
+                                                spacingDesktop={postCategoryDesktopBorderRadius}
+                                                spacingTablet={postCategoryTabletBorderRadius}
+                                                spacingMobile={postCategoryMobileBorderRadius}
+                                                handleSpacingUnitHandler={handlePostCategoryBorderRadiusUnitChange}
+                                                spacingCombineBtn={postCategoryBorderRadiusLink}
+                                                spacingCombineBtnHandler={handlePostCategoryBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Gap", "frontis-blocks")}
+                                                rangeValue={postCategoryGap}
+                                                onChangeHandler={(value) => setAttributes({ postCategoryGap: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ postCategoryGapUnits: value })}
+                                                deviceType={deviceType}
+                                                units={postCategoryGapUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={"10"}
+                                            />
+
+                                        </PanelBody>
+
+                                        <PanelBody title={__("Tags", "frontis-blocks")} initialOpen={false}>
+
+                                            <FB_TypographyControl
+                                                fontFamily={postTagFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ postTagFontFamily: value })}
+
+                                                fontSize={postTagFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ postTagFontSize: value })}
+
+                                                fontSizeUnits={postTagFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ postTagFontSizeUnits: value })}
+
+                                                fontWeight={postTagFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ postTagFontWeight: value })}
+
+                                                fontStyle={postTagFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ postTagFontStyle: value })}
+
+                                                textTransform={postTagTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ postTagTextTransform: value })}
+
+                                                textDecoration={postTagTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ postTagTextDecoration: value })}
+
+                                                letterSpacing={postTagLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ postTagLetterSpacing: value })}
+
+                                                letterSpacingUnits={postTagLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ postTagLetterSpacingUnits: value })}
+
+                                                lineHeight={postTagLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ postTagLineHeight: value })}
+
+                                                lineHeightUnits={postTagLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ postTagLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={postTagColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ postTagColorSwitcher: value })}
+                                            />
+
+                                            {postTagColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={postTagColor}
+                                                    setGlobalColor={(value) => setAttributes({ postTagColor: value })}
+                                                />
+                                            )}
+
+                                            {postTagColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={postTagHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ postTagHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <FB_SwitcherControl
+                                                label={__("Background", "frontis-blocks")}
+                                                globalSwitcher={postTagBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ postTagBgColorSwitcher: value })}
+                                            />
+
+                                            {postTagBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={postTagBgColor} 
+                                                    setGlobalColor={(value) => setAttributes({ postTagBgColor: value })}
+                                                />
+                                            )}
+
+                                            {postTagBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={postTagBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ postTagBgHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <FB_Spacing 
+                                                label={__("Padding", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostTagPaddingUnitsHandler}
+                                                spacingUnits={postTagPaddingUnits}
+                                                spacingDesktop={postTagPaddingDesktop}
+                                                spacingTablet={postTagPaddingTablet}
+                                                spacingMobile={postTagPaddingMobile}
+                                                handleSpacingUnitHandler={handlePostTagPaddingUnitChange}
+                                                spacingCombineBtn={postTagPaddingLink}
+                                                spacingCombineBtnHandler={handlePostTagPaddingCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostTagMarginUnitsHandler}
+                                                spacingUnits={postTagMarginUnits}
+                                                spacingDesktop={postTagMarginDesktop}
+                                                spacingTablet={postTagMarginTablet}
+                                                spacingMobile={postTagMarginMobile}
+                                                handleSpacingUnitHandler={handlePostTagMarginUnitChange}
+                                                spacingCombineBtn={postTagMarginLink}
+                                                spacingCombineBtnHandler={handlePostTagMarginCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <SelectControl
+                                                label={__("Border Style", "frontis-blocks")}
+                                                value={postTagBorder}
+                                                options={BORDER_STYLES}
+                                                onChange={(value) => setAttributes({ postTagBorder: value })}
+                                            />
+
+                                            <FB_SwitcherControl
+                                                label={__("Border", "frontis-blocks")}
+                                                globalSwitcher={postTagBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ postTagBorderColorSwitcher: value })}
+                                            />
+
+                                            {postTagBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={postTagBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ postTagBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {postTagBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={postTagBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ postTagBorderHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <FB_Spacing 
+                                                label={__("Border", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostTagBorderUnitsHandler}
+                                                spacingUnits={postTagBorderUnits}
+                                                spacingDesktop={postTagDesktopBorder}
+                                                spacingTablet={postTagTabletBorder}
+                                                spacingMobile={postTagMobileBorder}
+                                                handleSpacingUnitHandler={handlePostTagBorderUnitChange}
+                                                spacingCombineBtn={postTagBorderLink}
+                                                spacingCombineBtnHandler={handlePostTagBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Border Radius", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handlePostTagBorderRadiusUnitsHandler}
+                                                spacingUnits={postTagBorderRadiusUnits}
+                                                spacingDesktop={postTagDesktopBorderRadius}
+                                                spacingTablet={postTagTabletBorderRadius}
+                                                spacingMobile={postTagMobileBorderRadius}
+                                                handleSpacingUnitHandler={handlePostTagBorderRadiusUnitChange}
+                                                spacingCombineBtn={postTagBorderRadiusLink}
+                                                spacingCombineBtnHandler={handlePostTagBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Gap", "frontis-blocks")}
+                                                rangeValue={postTagGap}
+                                                onChangeHandler={(value) => setAttributes({ postTagGap: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ postTagGapUnits: value })}
+                                                deviceType={deviceType}
+                                                units={postTagGapUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={"10"}
                                             />
 
                                         </PanelBody>

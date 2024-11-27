@@ -230,16 +230,38 @@ class Admin {
 				)
 			);
 
-// 			// Add author info.
-// 			register_rest_field(
-// 				$value['value'],
-// 				'fb_author_info',
-// 				array(
-// 					'get_callback'    => array( $this, 'get_post_author_info' ),
-// 					'update_callback' => null,
-// 					'schema'          => null,
-// 				)
-// 			);
+			// Add author info.
+			register_rest_field(
+				$value['value'],
+				'fb_author_info',
+				array(
+					'get_callback'    => array( $this, 'get_post_author_info' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
+
+			// Add category info.
+			register_rest_field(
+				$value['value'],
+				'fb_category_info',
+				array(
+					'get_callback'    => array( $this, 'get_post_category_info' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
+
+			// Add post_tag info.
+			register_rest_field(
+				$value['value'],
+				'fb_post_tag_info',
+				array(
+					'get_callback'    => array( $this, 'get_post_post_tag_info' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
 //
 // 			// Add comment info.
 // 			register_rest_field(
@@ -264,6 +286,97 @@ class Admin {
 			);
 		}
     }
+
+    public function get_post_author_info($object, $field_name, $request) {
+        $author_id = $object['author'];
+        
+        // Check if the author has published posts
+        $author_has_posts = count_user_posts($author_id, 'post', true) > 0;
+    
+        // If the author has no published posts, return null
+        if (!$author_has_posts) {
+            return null;
+        }
+        
+        // Get the latest published post of the author
+        $latest_post = get_posts(array(
+            'author' => $author_id,
+            'post_type' => 'post',
+            'posts_per_page' => 1,
+            'post_status' => 'publish',
+            'orderby' => 'date',
+            'order' => 'DESC'
+        ));
+    
+        // Get the publish date of the latest post
+        $latest_post_date = $latest_post ? get_the_date('j M Y', $latest_post[0]) : null;
+        
+        // Get author's display name
+        $author_name = get_the_author_meta('display_name', $author_id);
+        
+        // Get author's avatar URL
+        $author_avatar = get_avatar_url($author_id);
+        
+        // Get author's bio
+        $author_bio = get_the_author_meta('description', $author_id);
+        
+        // Get author's URL (if set)
+        $author_archive_url = get_author_posts_url($author_id);        
+        // Get author's email
+        $author_email = get_the_author_meta('email', $author_id);
+
+        // Return all information in an associative array
+        return array(
+            'name'        => $author_name,
+            'avatar'      => $author_avatar,
+            'bio'         => $author_bio,
+            'archive_url' => $author_archive_url,
+            'email'       => $author_email,
+            'latest_post_date' => $latest_post_date,
+        );
+    }
+
+    public function get_post_category_info($object, $field_name, $request) {
+        $categories = get_the_category($object['id']);
+    
+        if (empty($categories)) {
+            return [];
+        }
+    
+        // Map the categories to include detailed information
+        return array_map(function ($category) {
+            return array(
+                'id'   => $category->term_id,
+                'name' => $category->name,
+                'slug' => $category->slug,
+                'url' => get_category_link($category->term_id),
+            );
+        }, $categories);
+    }
+
+
+    public function get_post_post_tag_info($object, $field_name, $request) {
+        // Get the tags associated with the post
+        $tags = get_the_tags($object['id']);
+    
+        // Prepare a formatted array of tag information
+        if (!empty($tags) && is_array($tags)) {
+            $tag_info = array_map(function($tag) {
+                return array(
+                    'id'    => $tag->term_id,
+                    'name'  => $tag->name,
+                    'slug'  => $tag->slug,
+                    'url'   => get_tag_link($tag->term_id),
+                );
+            }, $tags);
+        } else {
+            $tag_info = array();
+        }
+    
+        return $tag_info;
+    }    
+    
+    
 
 	/**
 	 * Get excerpt for the rest field
@@ -311,6 +424,7 @@ class Admin {
 		return $featured_images;
 	}
 
+
 	public function get_posts() {
     	global $wpdb;
 
@@ -331,6 +445,10 @@ class Admin {
         $post_title_tag = isset($_POST['postTitleTag']) ? $_POST['postTitleTag'] : 'h3';
         $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
         $post_description_excerpt_length = isset($_POST['postDescriptionExcerptLength']) ? intval($_POST['postDescriptionExcerptLength']) : 10;
+
+        $show_author_switcher = isset($_POST['showAuthorSwitcher']) ? $_POST['showAuthorSwitcher'] : false;
+        $show_category_switcher = isset($_POST['showCategorySwitcher']) ? $_POST['showCategorySwitcher'] : false;
+        $show_tag_switcher = isset($_POST['showTagSwitcher']) ? $_POST['showTagSwitcher'] : false;
 
         ob_start();
 
@@ -467,8 +585,53 @@ class Admin {
                                 <img src="<?php echo $image[0]; ?>" alt=""/>
                             <?php endif; ?>
                         </div>
+
+                        <?php if($show_author_switcher == 'true'): ?>
+                            <div class="fb_post_grid_author">
+                                <div class="fb_post_grid_author_avatar">
+                                    <a class="fb_post_grid_author_avatar_url" href="<?php echo get_author_posts_url($single_post->post_author); ?>">
+                                        <img src="<?php echo get_avatar_url($single_post->post_author); ?>" alt="<?php echo get_the_author_meta('display_name', $single_post->post_author); ?>" />
+                                    </a>
+                                </div>
+                                <div class="fb_post_grid_author_info">
+                                    <div class="fb_post_grid_author_info_name">
+                                        <span class="fb_post_grid_author_posted_by">Posted By</span>
+                                        <div class="fb_post_grid_author_name">
+                                            <a class="fb_post_grid_author_name_url" href="<?php echo get_author_posts_url($single_post->post_author); ?>"><?php echo get_the_author_meta('display_name', $single_post->post_author); ?></a>
+                                        </div>
+                                    </div>
+                                    <div class="fb_post_grid_author_meta"><?php echo get_the_date('j M Y', get_posts(array('author' => $single_post->post_author, 'posts_per_page' => 1))[0]); ?></div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if($show_category_switcher == 'true'): ?>
+                            <div class="fb_post_grid_categories">
+                                <?php foreach(get_the_category($single_post->ID) as $category): ?>
+                                    <div class="fb_post_grid_category" key="<?php echo $category->term_id; ?>">
+                                        <a class="fb_post_grid_category_url" href="<?php echo get_category_link($category->term_id); ?>"><?php echo $category->name; ?></a>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if($show_tag_switcher == 'true'): ?>
+                            <div class="fb_post_grid_tags">
+                                <?php 
+                                    $tags = get_the_tags($single_post->ID);
+                                    if (!empty($tags)) {
+                                        foreach($tags as $tag): ?>
+                                            <div class="fb_post_grid_tag" key="<?php echo $tag->term_id; ?>">
+                                                <a class="fb_post_grid_tag_url" href="<?php echo get_tag_link($tag->term_id); ?>"><?php echo $tag->name; ?></a>
+                                            </div>
+                                    <?php endforeach; 
+                                    }
+                                ?>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="fb_post_grid_content">
-                            <<?php echo $post_title_tag; ?> class="fb_post_title"><?php echo $single_post->post_title; ?></<?php echo $post_title_tag; ?>>
+                            <<?php echo $post_title_tag; ?> class="fb_post_title"><a href="<?php echo get_permalink($single_post->ID); ?>"><?php echo $single_post->post_title; ?></a></<?php echo $post_title_tag; ?>>
                             <?php if($single_post->post_excerpt !== ''): ?>
                                 <<?php echo $post_description_tag; ?> class="fb_post_desc"><?php echo wp_trim_words($single_post->post_excerpt, $post_description_excerpt_length, '...'); ?></<?php echo $post_description_tag; ?>>
                             <?php else: ?>

@@ -26,6 +26,9 @@ export default function save({ attributes }) {
 		postTitleTag,
 		postDescriptionTag,
 		postDescriptionExcerptLength,
+		showAuthorSwitcher,
+		showCategorySwitcher,
+		showTagSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -50,6 +53,9 @@ export default function save({ attributes }) {
 				data-post-title-tag={postTitleTag}
 				data-post-description-tag={postDescriptionTag}
 				data-post-description-excerpt-length={postDescriptionExcerptLength}
+				data-show-author-switcher={showAuthorSwitcher}
+				data-show-category-switcher={showCategorySwitcher}
+				data-show-tag-switcher={showTagSwitcher}
 			>
 				<div className={`fb_post_grid_container ${blockId}`}></div>
 				<div className="loading post">
@@ -58,15 +64,6 @@ export default function save({ attributes }) {
 							<div className="skeleton-item-title loading"></div>
 							<div className="skeleton-item-location loading"></div>
 							<div className="skeleton-item-sport loading"></div>
-							<div className="skeleton-item-date loading"></div>
-							<div className="skeleton-item-readmore loading"></div>
-							<div className="skeleton-item-author loading"></div>
-							<div className="skeleton-item-readmore loading"></div>
-							<div className="skeleton-item-author loading"></div>
-							<div className="skeleton-item-readmore loading"></div>
-							<div className="skeleton-item-author loading"></div>
-							<div className="skeleton-item-readmore loading"></div>
-							<div className="skeleton-item-author loading"></div>
 						</div>
 					))}
 				</div>
