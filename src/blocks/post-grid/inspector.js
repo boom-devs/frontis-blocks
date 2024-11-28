@@ -30,6 +30,7 @@ import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_Range from '@Components/range';
 import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 
 import './editor.scss';
 
@@ -70,8 +71,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridMarginLink,
 
         postGridBgColorSwitcher,
-        postGridBgColor,
-        postGridBgHoverColor,
+        postGridNormalBackgroundType,
+        postGridNormalClassicColor,
+        postGridNormalGradientColor,
+        postGridNormalCustomGradientSwitcher,
+        postGridNormalCustomGradientInputValue,
+        postGridHoverBackgroundType,
+        postGridHoverClassicColor,
+        postGridHoverGradientColor,
+        postGridHoverCustomGradientSwitcher,
+        postGridHoverCustomGradientInputValue,
 
         postGridBorder,
         postGridBorderColorSwitcher,
@@ -365,8 +374,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGlobalMarginLink,
 
         postGlobalBgColorSwitcher,
-        postGlobalBgColor,
-        postGlobalBgHoverColor,
+        postGlobalNormalBackgroundType,
+        postGlobalNormalClassicColor,
+        postGlobalNormalGradientColor,
+        postGlobalNormalCustomGradientSwitcher,
+        postGlobalNormalCustomGradientInputValue,
+
+        postGlobalHoverBackgroundType,
+        postGlobalHoverClassicColor,
+        postGlobalHoverGradientColor,
+        postGlobalHoverCustomGradientSwitcher,
+        postGlobalHoverCustomGradientInputValue,
+        
         postGlobalBorder,
         postGlobalBorderColorSwitcher,
         postGlobalBorderColor,
@@ -2311,7 +2330,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb_post_grid_container {
             ${postGlobalZIndex ? `z-index: ${postGlobalZIndex};` : ''}
-            ${postGlobalBgColor ? `background-color: ${postGlobalBgColor};` : ''} 
             ${postGlobalDesktopPaddingWidth ? `padding: ${postGlobalDesktopPaddingWidth};` : ''}
             ${postGlobalDesktopMarginWidth ? `margin: ${postGlobalDesktopMarginWidth};` : ''} 
             ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -2319,11 +2337,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postGlobalDesktopBorderRadiusWidth ? `border-radius: ${postGlobalDesktopBorderRadiusWidth};` : ''}
             ${postGlobalBorderColor ? `border-color: ${postGlobalBorderColor};` : ''}
             ${postGlobalBoxShadowCssValue ? `box-shadow: ${postGlobalBoxShadowCssValue};` : ''}
+            ${postGlobalNormalBackgroundType === 'gradient' ? `  
+                background: ${postGlobalNormalCustomGradientSwitcher && postGlobalNormalCustomGradientInputValue ? postGlobalNormalCustomGradientInputValue : postGlobalNormalGradientColor};
+            `: `
+                background: ${postGlobalNormalClassicColor};
+            `}
             transition: all .3s ease-in-out;
             position: relative;
         }
         .${blockId}.fb_post_grid_container:hover {
-            ${postGlobalBgHoverColor ? `background-color: ${postGlobalBgHoverColor};` : ''}
+            ${postGlobalHoverBackgroundType === 'gradient' ? `  
+                    background: ${postGlobalHoverCustomGradientSwitcher && postGlobalHoverCustomGradientInputValue ? postGlobalHoverCustomGradientInputValue : postGlobalHoverGradientColor};
+                `: `
+                    background: ${postGlobalHoverClassicColor};
+                `}
             ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
         }
         .${blockId}.fb_post_grid_container {
@@ -2346,7 +2373,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper {
-            ${postGridBgColor ? `background-color: ${postGridBgColor};` : ''}
+            ${postGridNormalBackgroundType === 'gradient' ? `  
+                background: ${postGridNormalCustomGradientSwitcher && postGridNormalCustomGradientInputValue ? postGridNormalCustomGradientInputValue : postGridNormalGradientColor};
+            `: `
+                background: ${postGridNormalClassicColor};
+            `}
 			${postGridPaddingDesktopWidth ? `padding: ${postGridPaddingDesktopWidth};` : ''}
 			${postGridMarginDesktopWidth ? `margin: ${postGridMarginDesktopWidth};` : ''}
 			${postGridBorder ? `border: ${postGridBorder};` : ''}
@@ -2358,7 +2389,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper:hover {
-            ${postGridBgHoverColor ? `background-color: ${postGridBgHoverColor};` : ''}
+            ${postGridHoverBackgroundType === 'gradient' ? `  
+                background: ${postGridHoverCustomGradientSwitcher && postGridHoverCustomGradientInputValue ? postGridHoverCustomGradientInputValue : postGridHoverGradientColor};
+            `: `
+                background: ${postGridHoverClassicColor};
+            `}
             ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
         }
 
@@ -2540,7 +2575,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.fb_post_grid_container {
                 ${postGlobalZIndex ? `z-index: ${postGlobalZIndex};` : ''}
-                ${postGlobalBgColor ? `background-color: ${postGlobalBgColor};` : ''} 
                 ${postGlobalTabletPaddingWidth ? `padding: ${postGlobalTabletPaddingWidth};` : ''} 
                 ${postGlobalTabletMarginWidth ? `margin: ${postGlobalTabletMarginWidth};` : ''}  
                 ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -2548,11 +2582,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postGlobalTabletBorderRadiusWidth ? `border-radius: ${postGlobalTabletBorderRadiusWidth};` : ''}
                 ${postGlobalBorderColor ? `border-color: ${postGlobalBorderColor};` : ''}
                 ${postGlobalBoxShadowCssValue ? `box-shadow: ${postGlobalBoxShadowCssValue};` : ''}
+                ${postGlobalNormalBackgroundType === 'gradient' ? `  
+                    background: ${postGlobalNormalCustomGradientSwitcher && postGlobalNormalCustomGradientInputValue ? postGlobalNormalCustomGradientInputValue : postGlobalNormalGradientColor};
+                `: `
+                    background: ${postGlobalNormalClassicColor};
+                `}
                 transition: all .3s ease-in-out;
                 position: relative;
             }
             .${blockId}.fb_post_grid_container:hover {
-                ${postGlobalBgHoverColor ? `background-color: ${postGlobalBgHoverColor};` : ''}
+                ${postGlobalHoverBackgroundType === 'gradient' ? `  
+                    background: ${postGlobalHoverCustomGradientSwitcher && postGlobalHoverCustomGradientInputValue ? postGlobalHoverCustomGradientInputValue : postGlobalHoverGradientColor};
+                `: `
+                    background: ${postGlobalHoverClassicColor};
+                `}
                 ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
             }
             .${blockId}.fb_post_grid_container {
@@ -2575,7 +2618,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper {
-                ${postGridBgColor ? `background-color: ${postGridBgColor};` : ''}
+                ${postGridNormalBackgroundType === 'gradient' ? `  
+                    background: ${postGridNormalCustomGradientSwitcher && postGridNormalCustomGradientInputValue ? postGridNormalCustomGradientInputValue : postGridNormalGradientColor};
+                `: `
+                    background: ${postGridNormalClassicColor};
+                `}
                 ${postGridPaddingTabletWidth ? `padding: ${postGridPaddingTabletWidth};` : ''}
                 ${postGridMarginTabletWidth ? `margin: ${postGridMarginTabletWidth};` : ''}
                 ${postGridBorder ? `border: ${postGridBorder};` : ''}
@@ -2587,7 +2634,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper:hover {
-                ${postGridBgHoverColor ? `background-color: ${postGridBgHoverColor};` : ''}
+                ${postGridHoverBackgroundType === 'gradient' ? `  
+                    background: ${postGridHoverCustomGradientSwitcher && postGridHoverCustomGradientInputValue ? postGridHoverCustomGradientInputValue : postGridHoverGradientColor};
+                `: `
+                    background: ${postGridHoverClassicColor};
+                `}
                 ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
             }
 
@@ -2772,7 +2823,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.fb_post_grid_container {
                 ${postGlobalZIndex ? `z-index: ${postGlobalZIndex};` : ''}
-                ${postGlobalBgColor ? `background-color: ${postGlobalBgColor};` : ''} 
                 ${postGlobalMobilePaddingWidth ? `padding: ${postGlobalMobilePaddingWidth};` : ''} 
                 ${postGlobalMobileMarginWidth ? `margin: ${postGlobalMobileMarginWidth};` : ''}  
                 ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -2780,11 +2830,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postGlobalMobileBorderRadiusWidth ? `border-radius: ${postGlobalMobileBorderRadiusWidth};` : ''}
                 ${postGlobalBorderColor ? `border-color: ${postGlobalBorderColor};` : ''}
                 ${postGlobalBoxShadowCssValue ? `box-shadow: ${postGlobalBoxShadowCssValue};` : ''}
+                ${postGlobalNormalBackgroundType === 'gradient' ? `  
+                    background: ${postGlobalNormalCustomGradientSwitcher && postGlobalNormalCustomGradientInputValue ? postGlobalNormalCustomGradientInputValue : postGlobalNormalGradientColor};
+                `: `
+                    background: ${postGlobalNormalClassicColor};
+                `}
                 transition: all .3s ease-in-out;
                 position: relative;
             }
             .${blockId}.fb_post_grid_container:hover {
-                ${postGlobalBgHoverColor ? `background-color: ${postGlobalBgHoverColor};` : ''}
+                ${postGlobalHoverBackgroundType === 'gradient' ? `  
+                    background: ${postGlobalHoverCustomGradientSwitcher && postGlobalHoverCustomGradientInputValue ? postGlobalHoverCustomGradientInputValue : postGlobalHoverGradientColor};
+                `: `
+                    background: ${postGlobalHoverClassicColor};
+                `}
                 ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
             }
             .${blockId}.fb_post_grid_container {
@@ -2807,7 +2866,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper {
-                ${postGridBgColor ? `background-color: ${postGridBgColor};` : ''}
+                ${postGridNormalBackgroundType === 'gradient' ? `  
+                    background: ${postGridNormalCustomGradientSwitcher && postGridNormalCustomGradientInputValue ? postGridNormalCustomGradientInputValue : postGridNormalGradientColor};
+                `: `
+                    background: ${postGridNormalClassicColor};
+                `}
                 ${postGridPaddingMobileWidth ? `padding: ${postGridPaddingMobileWidth};` : ''}
                 ${postGridMarginMobileWidth ? `margin: ${postGridMarginMobileWidth};` : ''}
                 ${postGridBorder ? `border: ${postGridBorder};` : ''}
@@ -2819,7 +2882,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper:hover {
-                ${postGridBgHoverColor ? `background-color: ${postGridBgHoverColor};` : ''}
+                ${postGridHoverBackgroundType === 'gradient' ? `  
+                    background: ${postGridHoverCustomGradientSwitcher && postGridHoverCustomGradientInputValue ? postGridHoverCustomGradientInputValue : postGridHoverGradientColor};
+                `: `
+                    background: ${postGridHoverClassicColor};
+                `}
                 ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
             }
 
@@ -3038,8 +3105,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridMarginMobileWidth,
 
         postGridBgColorSwitcher,
-        postGridBgColor,
-        postGridBgHoverColor,
+        postGridNormalBackgroundType,
+        postGridNormalClassicColor,
+        postGridNormalGradientColor,
+        postGridNormalCustomGradientSwitcher,
+        postGridNormalCustomGradientInputValue,
+        postGridHoverBackgroundType,
+        postGridHoverClassicColor,
+        postGridHoverGradientColor,
+        postGridHoverCustomGradientSwitcher,
+        postGridHoverCustomGradientInputValue,
 
         postGridBorder,
         postGridBorderColorSwitcher,
@@ -3378,8 +3453,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGlobalMobileMarginWidth,
 
         postGlobalBgColorSwitcher,
-        postGlobalBgColor,
-        postGlobalBgHoverColor,
+        postGlobalNormalBackgroundType,
+        postGlobalNormalClassicColor,
+        postGlobalNormalGradientColor,
+        postGlobalNormalCustomGradientSwitcher,
+        postGlobalNormalCustomGradientInputValue,
+
+        postGlobalHoverBackgroundType,
+        postGlobalHoverClassicColor,
+        postGlobalHoverGradientColor,
+        postGlobalHoverCustomGradientSwitcher,
+        postGlobalHoverCustomGradientInputValue,
+
         postGlobalBorder,
         postGlobalBorderColorSwitcher,
         postGlobalBorderColor,
@@ -3712,27 +3797,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     <>
                                         <PanelBody title={__("Post Grid Item", "frontis-blocks")} initialOpen={false}>
 
-                                            <FB_SwitcherControl
-                                                label={__("Background", "frontis-blocks")}
-                                                globalSwitcher={postGridBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ postGridBgColorSwitcher: value })}
+                                            <FB_BackgroundColorControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                bgColorSwitcher={postGridBgColorSwitcher}  
+                                                setBgColorSwitcher={(value) => setAttributes({ postGridBgColorSwitcher: value })}
+                                                
+                                                normalBackgroundType={postGridNormalBackgroundType}
+                                                setNormalBackgroundType={(value) => setAttributes({ postGridNormalBackgroundType: value })}
+                                                normalClassicColor={postGridNormalClassicColor}
+                                                setNormalClassicColor={(value) => setAttributes({ postGridNormalClassicColor: value })}
+                                                normalGradientColor={postGridNormalGradientColor}
+                                                setNormalGradientColor={(value) => setAttributes({ postGridNormalGradientColor: value })}
+                                                normalCustomGradientSwitcher={postGridNormalCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ postGridNormalCustomGradientSwitcher: value })}
+                                                normalCustomGradientInputValue={postGridNormalCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => setAttributes({ postGridNormalCustomGradientInputValue: value })}
+                                                
+                                                hoverBackgroundType={postGridHoverBackgroundType} 
+                                                setHoverBackgroundType={(value) => setAttributes({ postGridHoverBackgroundType: value })}
+                                                hoverClassicColor={postGridHoverClassicColor}
+                                                setHoverClassicColor={(value) => setAttributes({ postGridHoverClassicColor: value })}
+                                                hoverGradientColor={postGridHoverGradientColor} 
+                                                setHoverGradientColor={(value) => setAttributes({ postGridHoverGradientColor: value })}
+                                                hoverCustomGradientSwitcher={postGridHoverCustomGradientSwitcher}
+                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ postGridHoverCustomGradientSwitcher: value })}
+                                                hoverCustomGradientInputValue={postGridHoverCustomGradientInputValue}
+                                                setHoverCustomGradientInputValue={(value) => setAttributes({ postGridHoverCustomGradientInputValue: value })}
+
+                                                isBackgroundImage={false}
+
                                             />
-
-                                            {postGridBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={postGridBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ postGridBgColor: value })}
-                                                />
-                                            )}
-
-                                            {postGridBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={postGridBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ postGridBgHoverColor: value })}
-                                                />
-                                            )}
 
                                             <FB_Spacing
                                                 label={__("Padding", "frontis-blocks")}
@@ -4797,27 +4891,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												<PanelBody title="Background Color" initialOpen={false} >
 
-                                                    <FB_SwitcherControl
+                                                    <FB_BackgroundColorControl
                                                         label={__("Background Color", "frontis-blocks")}
-                                                        globalSwitcher={postGlobalBgColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ postGlobalBgColorSwitcher: value })}
+                                                        bgColorSwitcher={postGlobalBgColorSwitcher} 
+                                                        setBgColorSwitcher={(value) => setAttributes({ postGlobalBgColorSwitcher: value })}
+                                                        
+                                                        normalBackgroundType={postGlobalNormalBackgroundType}
+                                                        setNormalBackgroundType={(value) => setAttributes({ postGlobalNormalBackgroundType: value })}
+                                                        normalClassicColor={postGlobalNormalClassicColor}
+                                                        setNormalClassicColor={(value) => setAttributes({ postGlobalNormalClassicColor: value })}
+                                                        normalGradientColor={postGlobalNormalGradientColor}
+                                                        setNormalGradientColor={(value) => setAttributes({ postGlobalNormalGradientColor: value })}
+                                                        normalCustomGradientSwitcher={postGlobalNormalCustomGradientSwitcher}
+                                                        setNormalCustomGradientSwitcher={(value) => setAttributes({ postGlobalNormalCustomGradientSwitcher: value })}
+                                                        normalCustomGradientInputValue={postGlobalNormalCustomGradientInputValue}
+                                                        setNormalCustomGradientInputValue={(value) => setAttributes({ postGlobalNormalCustomGradientInputValue: value })}
+                                                        
+                                                        hoverBackgroundType={postGlobalHoverBackgroundType}
+                                                        setHoverBackgroundType={(value) => setAttributes({ postGlobalHoverBackgroundType: value })}
+                                                        hoverClassicColor={postGlobalHoverClassicColor}
+                                                        setHoverClassicColor={(value) => setAttributes({ postGlobalHoverClassicColor: value })}
+                                                        hoverGradientColor={postGlobalHoverGradientColor} 
+                                                        setHoverGradientColor={(value) => setAttributes({ postGlobalHoverGradientColor: value })}
+                                                        hoverCustomGradientSwitcher={postGlobalHoverCustomGradientSwitcher}
+                                                        setHoverCustomGradientSwitcher={(value) => setAttributes({ postGlobalHoverCustomGradientSwitcher: value })}
+                                                        hoverCustomGradientInputValue={postGlobalHoverCustomGradientInputValue}
+                                                        setHoverCustomGradientInputValue={(value) => setAttributes({ postGlobalHoverCustomGradientInputValue: value })}
+
+                                                        isBackgroundImage={false}
+
                                                     />
-
-                                                    {postGlobalBgColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={postGlobalBgColor}
-                                                            setGlobalColor={(value) => setAttributes({ postGlobalBgColor: value })}
-                                                        />
-                                                    )}
-
-                                                    {postGlobalBgColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={postGlobalBgHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ postGlobalBgHoverColor: value })}
-                                                        />
-                                                    )}
 												</PanelBody>
 												<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 

@@ -200,11 +200,46 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
-	postGridBgColor : {
+	postGridNormalBackgroundType: {  
 		type: "string",
+		default: "classic",
 	},
-	postGridBgHoverColor: {
-		type: 'string',
+	postGridNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	postGridNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	postGridNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	postGridNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	postGridHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	postGridHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	postGridHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	postGridHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	postGridHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
 	/** End Background */
 
@@ -1793,11 +1828,46 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
-	postGlobalBgColor : {
+	postGlobalNormalBackgroundType: { 
 		type: "string",
+		default: "classic",
 	},
-	postGlobalBgHoverColor: {
-		type: 'string',
+	postGlobalNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	postGlobalNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	postGlobalNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	postGlobalNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	postGlobalHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	postGlobalHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	postGlobalHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	postGlobalHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	postGlobalHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
 	/** End Background */
 
