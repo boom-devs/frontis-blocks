@@ -842,11 +842,11 @@ const attributes = {
 	},
 	postCategoryBgColor : {
 		type: "string",
-		default: "#F7F7F7"
+		default: "#dddddd9e"
 	},
 	postCategoryBgHoverColor: {
 		type: 'string',
-		default: "#F7F7F7"
+		default: "#dddddd9e"
 	},
 
 	postCategoryBorder: {
@@ -1120,11 +1120,11 @@ const attributes = {
 	},
 	postTagColor : {
 		type: "string",
-		default: ""
+		default: "#15171C"
 	},
 	postTagHoverColor: {
 		type: 'string',
-		default: ""
+		default: "#15171C"
 	},
 
 	postTagBgColorSwitcher : {
@@ -1133,11 +1133,11 @@ const attributes = {
 	},
 	postTagBgColor : {
 		type: "string",
-		default: ""
+		default: "#dddddd9e" 
 	},
 	postTagBgHoverColor: {
 		type: 'string',
-		default: ""
+		default: "#dddddd9e"
 	},
 
 	postTagBorder: {
@@ -1245,28 +1245,28 @@ const attributes = {
 	postTagPaddingDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '6',
+			bottom: '6',
+			left: '14',
+			right: '14',
 		},
 	},
 	postTagPaddingTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '6',
+			bottom: '6',
+			left: '14',
+			right: '14',
 		},
 	},
 	postTagPaddingMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '6',
+			bottom: '6',
+			left: '14',
+			right: '14',
 		},
 	},
 	postTagPaddingLink : {
@@ -1285,28 +1285,28 @@ const attributes = {
 	postTagMarginDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	postTagMarginTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	postTagMarginMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	postTagMarginLink : {
@@ -1336,7 +1336,579 @@ const attributes = {
 		type: "boolean",
 		default: false
 	},
+
+	postAuthorGap: {
+		type: "object",
+		default: {
+			Desktop: 10,
+			Tablet: 10,
+			Mobile: 10
+		}
+	},
+	postAuthorGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	postAuthorAvatarWidth: {
+		type: "object",
+		default: {
+			Desktop: 40,
+			Tablet: 40,
+			Mobile: 40
+		}
+	},
+	postAuthorAvatarWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	postAuthorAvatarBorder: {
+		type: 'string',
+		default: "none",
+	},
+	postAuthorAvatarBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	postAuthorAvatarBorderColor: {
+		type: 'string',
+	},
+	postAuthorAvatarBorderHoverColor: {
+		type: 'string',
+	},
+	postAuthorAvatarBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postAuthorAvatarDesktopBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postAuthorAvatarTabletBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postAuthorAvatarMobileBorder: {
+		type: 'object',
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
+		}
+	},
+	postAuthorAvatarBorderLink: {
+		type: "boolean",
+		default: true
+	},
+
+	postAuthorAvatarBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	postAuthorAvatarDesktopBorderRadius: {
+		type: 'object',
+		default: {
+			top: '50',
+			right: '50',
+			bottom: '50',
+			left: '50',
+		}
+	},
+	postAuthorAvatarTabletBorderRadius: {
+		type: 'object',
+		default: {
+			top: '50',
+			right: '50',
+			bottom: '50',
+			left: '50',
+		}
+	},
+	postAuthorAvatarMobileBorderRadius: {
+		type: 'object',
+		default: {
+			top: '50',
+			right: '50',
+			bottom: '50',
+			left: '50',
+		}
+	},
+	postAuthorAvatarBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+
+	postAuthorMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postAuthorMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '32',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	postAuthorMarginTablet: {
+		type: "object", 
+		default: {
+			top: '32',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	postAuthorMarginMobile: {
+		type: "object", 
+		default: {
+			top: '32',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	postAuthorMarginLink : {
+		type : "boolean",
+		default: true
+	},
+
+	postAuthorFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	postAuthorFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	postAuthorFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postAuthorFontWeight: {
+		type: "string",
+		default: "400"
+	},
+	postAuthorFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	postAuthorTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	postAuthorTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	postAuthorLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	postAuthorLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postAuthorLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '22',
+			Tablet: '22',
+			Mobile: '22'
+		}
+	},
+	postAuthorLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	postAuthorColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postAuthorColor : {
+		type: "string",
+		default: "#15171C"
+	},
+	postAuthorHoverColor: {
+		type: 'string',
+		default: "#15171C"
+	},
+	postAuthorPrefixSwitcher: {
+		type: "boolean",
+		default: true
+	},
+	postAuthorPrefix: {
+		type: "string",
+		default: "Posted by"
+	},
+	
+	postAuthorPrefixColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postAuthorPrefixColor : {
+		type: "string",
+		default: "#15171C"
+	},
+	postAuthorPrefixHoverColor: {
+		type: 'string',
+		default: "#15171C"
+	},
 	/** End Author */
+
+	/** Start Date */
+	showDateSwitcher: {
+		type: "boolean",
+		default: true
+	},
+
+	postDateFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	postDateFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	postDateFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postDateFontWeight: {
+		type: "string",
+		default: "400"
+	},
+	postDateFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	postDateTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	postDateTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	postDateLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	postDateLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	postDateLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '22',
+			Tablet: '22',
+			Mobile: '22'
+		}
+	},
+	postDateLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	postDateColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postDateColor : {
+		type: "string",
+		default: "#15171C"
+	},
+	postDateHoverColor: {
+		type: 'string',
+		default: "#15171C"
+	},
+	/** End Date */
+
+
+	/** Start Global Setting */
+	postGlobalZIndex : {
+		type: "number",
+	},
+	/** Start Padding */
+	postGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postGlobalPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Margin */
+	postGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postGlobalMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
+
+	/** Start Background */
+	postGlobalBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postGlobalBgColor : {
+		type: "string",
+	},
+	postGlobalBgHoverColor: {
+		type: 'string',
+	},
+	/** End Background */
+
+	/** Start Border */
+	postGlobalBorder: {
+		type: 'string',
+		default: "none",
+	},
+	postGlobalBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	postGlobalBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	postGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	postGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postGlobalBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	postGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	postGlobalBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	postGlobalBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	postGlobalBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	postGlobalBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
 
 };
 

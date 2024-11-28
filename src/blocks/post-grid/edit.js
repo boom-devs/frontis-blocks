@@ -34,6 +34,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showAuthorSwitcher,
         showCategorySwitcher,
         showTagSwitcher,
+
+        postAuthorPrefixSwitcher,
+        postAuthorPrefix,
+        showDateSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -92,6 +96,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     showAuthorSwitcher={showAuthorSwitcher}
                                     showCategorySwitcher={showCategorySwitcher}
                                     showTagSwitcher={showTagSwitcher}
+                                    postAuthorPrefixSwitcher={postAuthorPrefixSwitcher}
+                                    postAuthorPrefix={postAuthorPrefix}
+                                    showDateSwitcher={showDateSwitcher}
                                 />
                             })}
                         </div>
