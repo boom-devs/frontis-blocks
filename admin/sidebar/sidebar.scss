@@ -218,8 +218,16 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	}
 }
 
+.fb-custom-color-item .actions {
+	cursor: pointer;
+
+	.dashicons-trash:before {
+		color: $error-color;
+	}
+}
+
 // Gradient color
-div#tab-panel-0-gradient-view .fb-color-panel.fb-gradient-color-panel {
+.fb-color-panel.fb-gradient-color-panel {
 	.components-panel__row.fb-gradient-color-label {
 		color: $neutral-color-950;
 		font-family: $heading-font-family;

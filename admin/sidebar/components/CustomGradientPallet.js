@@ -34,12 +34,6 @@ const CustomGradientColorPallet = (props) => {
 		setColors([...cloneColors])
 	}
 
-	const deleteItem = (index) => {
-		const colors = [...customColors]
-		colors.splice(index, 1);
-		setCustomColors([...colors])
-	}
-
 	return (
 		<>
 			{colors && colors.length > 0 && (

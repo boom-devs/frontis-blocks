@@ -6,12 +6,16 @@ import {
 } from "@wordpress/block-editor";
 
 const ColorPalletWrapper = (props) => {
-    const { colorPanelArray, customColors, setCustomColor, setCustomColors } = props
+    const { colorPanelArray, customColors, setCustomColor, setCustomColors, setCurrentState } = props;
+	const [afterDeletedCustomColors, setAfterDeletedColors] = useState(customColors);
 
     const deleteItem = (index) => {
-        const colors = [...customColors]
-        colors.splice(index, 1);
-        setCustomColors([...colors])
+        const colors = [...afterDeletedCustomColors]
+		afterDeletedCustomColors.splice(index, 1);
+		setAfterDeletedColors([...afterDeletedCustomColors]);
+		setCurrentState('fb_update_custom_colors');
+		setCustomColors(afterDeletedCustomColors);
+		console.log("testing")
     }
 
     useEffect(() => {
@@ -38,20 +42,22 @@ const ColorPalletWrapper = (props) => {
                 }
             }, 100)
         }
-    }, [customColors])
+    }, [customColors]);
 
     return (
         <>
-            <PanelColorSettings
-                title={__(
-                    "Custom Colors",
-                    "frontis-blocks"
-                )}
-                className={"fb-color-panel fb-custom-color-panel"}
-                initialOpen={true}
-                disableAlpha={true}
-                colorSettings={colorPanelArray(customColors, setCustomColor)}
-            />
+			{customColors.length > 0 &&
+				<PanelColorSettings
+					title={__(
+						"Custom Colors",
+						"frontis-blocks"
+					)}
+					className={"fb-color-panel fb-custom-color-panel"}
+					initialOpen={true}
+					disableAlpha={true}
+					colorSettings={colorPanelArray(customColors, setCustomColor)}
+				/>
+			}
         </>
     )
 }
