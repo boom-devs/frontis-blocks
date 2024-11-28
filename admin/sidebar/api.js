@@ -1,5 +1,3 @@
-import {OptionKeys} from "../store/constant";
-
 export const updateSettings = async (settingType, data) => {
     try {
         const response = await jQuery.ajax({

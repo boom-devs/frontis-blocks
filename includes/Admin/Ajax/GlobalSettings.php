@@ -105,7 +105,7 @@ class GlobalSettings extends AjaxBase {
      * @return void
      */
     private function validate_nonce() {
-        if (!check_ajax_referer('fb_sidebar_nonce', 'nonce', false)) {
+        if (!wp_verify_nonce( $_POST['nonce'], 'fb_sidebar_nonce' )) {
             wp_send_json_error('Invalid nonce');
         }
     }
@@ -129,12 +129,15 @@ class GlobalSettings extends AjaxBase {
      * @return void
      */
     private function update_option($option_name, $type) {
-        $value = $this->sanitize_option_value($_POST['data'], $type);
-        $updated = update_option("$option_name", $value);
+        $updated = update_option($option_name, $_POST['data'], true);
 
 		if($updated) {
-			$global_colors = get_option("$option_name");
-			wp_send_json_success($global_colors);
+			$global_colors = get_option($option_name);
+			$data = array(
+				'option_name' => $option_name,
+				'data' => $global_colors
+			);
+			wp_send_json_success($data);
 		}
 
 		wp_send_json_error('Global colors not found.');

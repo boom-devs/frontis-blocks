@@ -18,6 +18,9 @@ import {useState, useEffect} from "@wordpress/element";
 // import {useSelect, useDispatch, withSelect, dispatch, select} from "@wordpress/data";
 import "./sidebar.scss";
 import CustomGradientColorPallet from "./components/CustomGradientPallet";
+import {getFbLocalStorage, setFbLocalStorage, useAfterSave} from "./helper";
+import {updateSettings} from "./api";
+import {updateGlobalStyle} from "./fetch";
 
 const defaultsColors = [
 	{
@@ -107,6 +110,7 @@ function FrontisBlocksSidebar(props) {
 	const [customGradientColors, setCustomGradientColors] = useState([]);
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
+	const [currentState, setCurrentState] = useState('');
 
 	const [heading, setHeading] = useState({
 		fontFamily: '',
@@ -138,38 +142,61 @@ function FrontisBlocksSidebar(props) {
 
 	const [deviceType, setDeviceType] = useState('Desktop');
 	useEffect(() => {
-		//Set Global Colors
-		if (globalColors.length === 0) {
-			setGlobalColors(defaultsColors);
-		}
 
-		//Set Gradient Colors
-		if (gradientColors.length === 0) {
-			setGradientColors(gradientDefaults);
-		}
+		const localStorageKeys = [
+			'fb_update_global_colors',
+			'fb_update_custom_colors',
+			'fb_update_gradient_colors',
+			'fb_update_custom_gradient_colors'
+		];
+
+		localStorageKeys.forEach((key) => {
+			const localStorageData = getFbLocalStorage(key);
+
+			switch (key) {
+				case 'fb_update_global_colors':
+					if (localStorageData.length > 0) {
+						setGlobalColors(localStorageData);
+					} else {
+						setGlobalColors(defaultsColors); // Assuming `defaultsColors` is defined elsewhere
+					}
+					break;
+
+				case 'fb_update_custom_colors':
+					if (localStorageData.length > 0) {
+						setCustomColors(localStorageData);
+					} else {
+						setCustomColors([]); // Default empty array
+					}
+					break;
+
+				case 'fb_update_gradient_colors':
+					if (localStorageData.length > 0) {
+						setGradientColors(localStorageData);
+					} else {
+						setGradientColors(gradientDefaults); // Assuming `gradientDefaults` is defined elsewhere
+					}
+					break;
+
+				case 'fb_update_custom_gradient_colors':
+					if (localStorageData.length > 0) {
+						setCustomGradientColors(localStorageData);
+					} else {
+						setCustomGradientColors([]); // Default empty array
+					}
+					break;
+
+				default:
+					console.warn(`Unhandled key: ${key}`);
+			}
+		});
 	}, []);
-
-
-	useEffect(() => {
-		if (globalColors.length > 0) {
-			// dispatch("frontis-blocks").setGlobalColors(globalColors);
-			// let dispatched = dispatch('frontis-blocks').setLoading(true);
-			//
-			// const isLoading = select('frontis-blocks').getIsLoading();
-			//
-			// console.log("Is loading test")
-			// console.log(dispatched)
-		}
-	}, [globalColors]);
-
-	const handleDeviceTypeChange = (newDeviceType) => {
-		setDeviceType(newDeviceType);
-	};
 
 	const colorPanelArray = (colors, setColor, defaults = []) => {
 		if (typeof colors !== "object") {
 			return [];
 		}
+
 		const colorArr = [];
 		colors.map((colorObj, index) =>
 			colorArr.push({
@@ -188,7 +215,7 @@ function FrontisBlocksSidebar(props) {
 		const colors = [...globalColors];
 		colors[index].color = color;
 		setGlobalColors([...colors]);
-		updateGlobalColors(colors);
+		setCurrentState('fb_update_global_colors');
 	};
 
 	//Update Gradient Colors
@@ -196,7 +223,7 @@ function FrontisBlocksSidebar(props) {
 		const colors = [...gradientColors];
 		colors[index].color = color;
 		setGradientColors([...colors]);
-		updateGradientColors(colors);
+		setCurrentState('fb_update_gradient_colors');
 	};
 
 	//Update Gradient Colors
@@ -204,53 +231,101 @@ function FrontisBlocksSidebar(props) {
 		const colors = [...customGradientColors];
 		colors[index].color = color;
 		setCustomGradientColors([...colors]);
-		// updateGradientColors(colors);
+		setCurrentState('fb_update_custom_gradient_colors');
 	};
+
 	const setCustomColor = (index, color) => {
 		const colors = [...customColors];
 		colors[index].color = color;
 		setCustomColors([...colors]);
+		setCurrentState('fb_update_custom_colors');
 	};
 
-	// const {
-	//     saveGlobalColors,
-	//     saveGradientColors,
-	//     saveCustomColors,
-	//     saveTypography
-	// } = useDispatch('frontis-blocks');
+	// New custom color function
+	const setNewCustomColorFn = () => {
+		setCustomColors((prevColors) => {
+			// Determine a unique index
+			let index = prevColors.length + 1;
+			while (
+				prevColors.some(
+					(color) =>
+						color.name === `Custom Color ${index}` ||
+						color.slug === `custom-color-${index}` ||
+						color.var === `--fb-custom-color-${index}`
+				)
+				) {
+				index++;
+			}
 
-	const updateGlobalColors = (colors) => {
+			// Add the new color
+			return [
+				...prevColors,
+				{
+					color: '#000000',
+					name: `Custom Color ${index}`,
+					slug: `custom-color-${index}`,
+					var: `--fb-custom-color-${index}`
+				}
+			];
+		});
+
+		setCurrentState('fb_update_custom_colors');
+	}
+
+	// Delete custom gradient color
+	const deleteCustomGradientColor = (index, color) => {
+		const colors = [...customGradientColors];
 		console.log(colors)
-		// saveGlobalColors(colors);
-	};
+
+		colors.splice(index, 1);
+		setCustomGradientColors([...colors]);
+		setCurrentState('fb_update_custom_gradient_colors');
+	}
 
 	const updateGradientColors = (colors) => {
-		console.log(colors)
-		// saveGradientColors(colors);
+		// console.log(colors)
 	};
 
-	const updateCustomColors = (colors) => {
-		console.log(colors)
-		// saveCustomColors(colors);
-	};
+	// Save colors after post save
+	const isAfterSave = useAfterSave();
 
-	const updateTypography = (type, values) => {
-		console.log(values)
-		// saveTypography({
-		// 	type,
-		// 	...values
-		// });
-	};
+	useEffect( () => {
+		const handleUpdateSettings = async () => {
+			if (isAfterSave) {
+				try {
+					let updatedColors = [];
+					if (currentState === 'fb_update_global_colors') {
+						updatedColors = globalColors;
+					} else if (currentState === 'fb_update_custom_colors') {
+						updatedColors = customColors;
+					} else if (currentState === 'fb_update_gradient_colors') {
+						updatedColors = gradientColors;
+					} else if (currentState === 'fb_update_custom_gradient_colors') {
+						updatedColors = customGradientColors;
+					}
 
-	const handleHeadingChange = (values) => {
-		setHeading(values);
-		updateTypography('heading', values);
-	};
+					// Update global styles
+					const response = await updateGlobalStyle(updatedColors, currentState);
 
-	const handleBodyChange = (values) => {
-		setBody(values);
-		updateTypography('body', values);
-	};
+					if (currentState === 'fb_update_global_colors') {
+						setGlobalColors(response.data.data);
+					} else if (currentState === 'fb_update_custom_colors') {
+						setCustomColors(response.data.data);
+					} else if (currentState === 'fb_update_gradient_colors') {
+						setGradientColors(response.data.data);
+					} else if (currentState === 'fb_update_custom_gradient_colors') {
+						setCustomGradientColors(response.data.data);
+					}
+
+					localStorage.setItem(currentState, JSON.stringify(response.data.data));
+				} catch (error) {
+					console.error('Error updating settings:', error);
+				}
+			}
+		};
+
+		handleUpdateSettings();
+	}, [ isAfterSave ] );
 
 	return (
 		<>
@@ -292,20 +367,13 @@ function FrontisBlocksSidebar(props) {
 														customColors={customColors}
 														setCustomColor={setCustomColor}
 														setCustomColors={setCustomColors}
+														setCurrentState={setCurrentState}
 													/>
 												)}
 												<div className="add-custom-color">
 													<Button
 														className="add-custom-color-btn"
-														onClick={() => setCustomColors([
-															...customColors,
-															{
-																color: '#000000',
-																name: `Custom Color ${customColors.length + 1}`,
-																slug: `custom-color-${customColors.length + 1}`,
-																var: `--fb-custom-color-${customColors.length + 1}`
-															}
-														])}
+														onClick={() =>setNewCustomColorFn()}
 													>Add Custom Color <span><svg width="15" height="14"
 																				 viewBox="0 0 15 14" fill="none"
 																				 xmlns="http://www.w3.org/2000/svg">
@@ -335,8 +403,9 @@ function FrontisBlocksSidebar(props) {
 														setColor={setCustomGradientColor}
 														setColors={setCustomGradientColors}
 														wrapperClass={"fb-gradient-color-panel"}
-														resetAction={true}
+														resetAction={false}
 														deleteAction={true}
+														onDelete={deleteCustomGradientColor}
 													/>
 
 												}
@@ -367,65 +436,15 @@ function FrontisBlocksSidebar(props) {
 								)}
 							</TabPanel>
 						</PanelBody>
-						{/*<PanelBody*/}
-						{/*	title={__("Global Typography", "frontis-blocks")}*/}
-						{/*>*/}
-						{/*	<>*/}
-						{/*		<h3>{__("Heading Typography", "frontis-blocks")}</h3>*/}
-						{/*		<FB_TypographyControl*/}
-						{/*			fontFamily={heading.fontFamily}*/}
-						{/*			onChangeFontFamily={(value) => setHeading({...heading, fontFamily: value})}*/}
-						{/*			fontSize={heading.fontSize}*/}
-						{/*			onChangeFontSize={(value) => setHeading({...heading, fontSize: value})}*/}
-						{/*			fontSizeUnits={heading.fontSizeUnits}*/}
-						{/*			onChangeFontSizeUnit={(value) => setHeading({...heading, fontSizeUnits: value})}*/}
-						{/*			fontWeight={heading.fontWeight}*/}
-						{/*			onChangeFontWeight={(value) => setHeading({...heading, fontWeight: value})}*/}
-						{/*			fontStyle={heading.fontStyle}*/}
-						{/*			onChangeFontStyle={(value) => setHeading({...heading, fontStyle: value})}*/}
-						{/*			textTransform={heading.textTransform}*/}
-						{/*			onChangeTextTransform={(value) => setHeading({...heading, textTransform: value})}*/}
-						{/*			textDecoration={heading.textDecoration}*/}
-						{/*			onChangeTextDecoration={(value) => setHeading({...heading, textDecoration: value})}*/}
-						{/*	letterSpacing={heading.letterSpacing}*/}
-						{/*	onChangeLetterSpacing={(value) => setHeading({...heading, letterSpacing: value})}*/}
-						{/*	letterSpacingUnits={heading.letterSpacingUnits}*/}
-						{/*	onChangeLetterSpacingUnit={(value) => setHeading({...heading, letterSpacingUnits: value})}*/}
-						{/*	lineHeight={heading.lineHeight}*/}
-						{/*	onChangeLineHeight={(value) => setHeading({...heading, lineHeight: value})}*/}
-						{/*	lineHeightUnits={heading.lineHeightUnits}*/}
-						{/*	onChangeLineHeightUnit={(value) => setHeading({...heading, lineHeightUnits: value})}*/}
-						{/*	deviceType={deviceType}*/}
-						{/*/>*/}
+						<PanelBody
+							title={__("Global Typography", "frontis-blocks")}
+						>
+							<>
+								<h3>{__("Heading Typography", "frontis-blocks")}</h3>
+								<h3>{__("Body Typography", "frontis-blocks")}</h3>
+							</>
 
-						{/*<h3>{__("Body Typography", "frontis-blocks")}</h3>*/}
-						{/*<FB_TypographyControl*/}
-						{/*	fontFamily={body.fontFamily}*/}
-						{/*	onChangeFontFamily={(value) => setBody({...body, fontFamily: value})}*/}
-						{/*	fontSize={body.fontSize}*/}
-						{/*	onChangeFontSize={(value) => setBody({...body, fontSize: value})}*/}
-						{/*	fontSizeUnits={body.fontSizeUnits}*/}
-						{/*	onChangeFontSizeUnit={(value) => setBody({...body, fontSizeUnits: value})}*/}
-						{/*	fontWeight={body.fontWeight}*/}
-						{/*	onChangeFontWeight={(value) => setBody({...body, fontWeight: value})}*/}
-						{/*	fontStyle={body.fontStyle}*/}
-						{/*	onChangeFontStyle={(value) => setBody({...body, fontStyle: value})}*/}
-						{/*	textTransform={body.textTransform}*/}
-						{/*	onChangeTextTransform={(value) => setBody({...body, textTransform: value})}*/}
-						{/*	textDecoration={body.textDecoration}*/}
-						{/*	onChangeTextDecoration={(value) => setBody({...body, textDecoration: value})}*/}
-						{/*	letterSpacing={body.letterSpacing}*/}
-						{/*	onChangeLetterSpacing={(value) => setBody({...body, letterSpacing: value})}*/}
-						{/*	letterSpacingUnits={body.letterSpacingUnits}*/}
-						{/*	onChangeLetterSpacingUnit={(value) => setBody({...body, letterSpacingUnits: value})}*/}
-						{/*	lineHeight={body.lineHeight}*/}
-						{/*	onChangeLineHeight={(value) => setBody({...body, lineHeight: value})}*/}
-						{/*	lineHeightUnits={body.lineHeightUnits}*/}
-						{/*	onChangeLineHeightUnit={(value) => setBody({...body, lineHeightUnits: value})}*/}
-						{/*	deviceType={deviceType}*/}
-						{/*        />*/}
-						{/*    </>*/}
-						{/*</PanelBody>*/}
+						</PanelBody>
 						<PanelBody title={__("Custom CSS", "frontis-blocks")}>
 							<TextareaControl
 								value={customCSS}
