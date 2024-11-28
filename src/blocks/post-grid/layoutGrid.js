@@ -1,12 +1,14 @@
 import React from 'react';
 
-export default function LayoutGrid({ data, index, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher }) {
+export default function LayoutGrid({ data, index, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher }) {
     const src = data.fb_featured_image_src.medium[0];
     const author = data.fb_author_info;
     const title = data.title.rendered;
     const categories = data.fb_category_info;
     const tags = data.fb_post_tag_info;
     const excerpt = trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10);
+
+    console.log(data.title);
     
     return (
         <div className="fb_post_grid_wrapper">
@@ -27,12 +29,16 @@ export default function LayoutGrid({ data, index, postTitleTag, postDescriptionT
                     </div>
                     <div className="fb_post_grid_author_info">
                         <div className="fb_post_grid_author_info_name">
-                            <span className="fb_post_grid_author_posted_by">Posted By</span>
+                            {postAuthorPrefixSwitcher && (
+                                <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
+                            )}
                             <div className="fb_post_grid_author_name">
                                 <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
                             </div>
                         </div>
-                        <div className="fb_post_grid_author_meta">{author.latest_post_date}</div>
+                        {showDateSwitcher && (
+                            <div className="fb_post_grid_date">{author.latest_post_date}</div>
+                        )}
                     </div>
                 </div>
             )}
@@ -58,7 +64,7 @@ export default function LayoutGrid({ data, index, postTitleTag, postDescriptionT
             )}
 
             <div className="fb_post_grid_content">
-                {React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}
+                <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
                 {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
             </div>
         </div>

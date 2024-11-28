@@ -29,6 +29,9 @@ export default function save({ attributes }) {
 		showAuthorSwitcher,
 		showCategorySwitcher,
 		showTagSwitcher,
+		postAuthorPrefixSwitcher,
+		postAuthorPrefix,
+		showDateSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -56,6 +59,9 @@ export default function save({ attributes }) {
 				data-show-author-switcher={showAuthorSwitcher}
 				data-show-category-switcher={showCategorySwitcher}
 				data-show-tag-switcher={showTagSwitcher}
+				data-post-author-prefix-switcher={postAuthorPrefixSwitcher}
+				data-post-author-prefix={postAuthorPrefix}
+				data-show-date-switcher={showDateSwitcher}
 			>
 				<div className={`fb_post_grid_container ${blockId}`}></div>
 				<div className="loading post">
