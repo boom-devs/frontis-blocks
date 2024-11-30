@@ -822,6 +822,7 @@ export const FONT_FAMILYS = [
     { label: __("Playball", "frontis-blocks"), value: "Playball" },
     { label: __("Playfair Display", "frontis-blocks"), value: "Playfair Display" },
     { label: __("Playfair Display SC", "frontis-blocks"), value: "Playfair Display SC" },
+    { label: __("Plus Jakarta Sans", "frontis-blocks"), value: "Plus Jakarta Sans" },
     { label: __("Podkova", "frontis-blocks"), value: "Podkova" },
     { label: __("podkovavfbeta", "frontis-blocks"), value: "podkovavfbeta" },
     { label: __("Poetsen One", "frontis-blocks"), value: "Poetsen One" },

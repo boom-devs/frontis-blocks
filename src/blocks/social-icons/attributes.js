@@ -7,9 +7,6 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
-    socialIconZIndex : {
-        type: "number",
-    },
     socialItems: {
         type: "array",
         default: [
@@ -17,25 +14,105 @@ const attributes = {
                 id: 'item-1',
                 socialIcon: 'facebook-f',
                 socialIconUrl: '#',
+                socialIconTitle: 'Facebook',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
+                socialIconColor: '#1877F2',
+                socialIconHoverColor: '#1877F2',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
             {
                 id: 'item-2',
                 socialIcon: 'x-twitter',
                 socialIconUrl: '#',
+                socialIconTitle: 'Twitter',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
+                socialIconColor: '#1DA1F2',
+                socialIconHoverColor: '#1DA1F2',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
             {
                 id: 'item-3',
                 socialIcon: 'youtube',
                 socialIconUrl: '#',
+                socialIconTitle: 'Youtube',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
+                socialIconColor: '#FF0000',
+                socialIconHoverColor: '#FF0000',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
             {
                 id: 'item-4',
                 socialIcon: 'behance',
                 socialIconUrl: '#',
+                socialIconTitle: 'Behance',
                 socialIconTargetUrl: false,
+                socialIconColorSwitcher: 'normal',
+                socialIconColor: '#1769FF',
+                socialIconHoverColor: '#1769FF',
+                socialIconBgColor: '#ffffff',
+                socialIconHoverBgColor: '#ffffff',
+
+                socialItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: '',
             },
         ],
         items: {
@@ -45,9 +122,9 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
-                Title: {
+                socialIconTitle: {
                     type: "string",
-                    default: ""
+                    default: "Title"
                 },
                 socialIcon: {
                     type: 'string',
@@ -60,19 +137,106 @@ const attributes = {
                 socialIconTargetUrl: {
                     type: "boolean",
                 },
+
+                socialIconColorSwitcher: {
+                    type: "string",
+                    default: "normal",
+                },
+                socialIconColor: {
+                    type: "string",
+                    default: "",
+                },
+                socialIconHoverColor: {
+                    type: "string",
+                    default: "",
+                },
+                socialIconBgColor: {
+                    type: "string",
+                    default: "",
+                },
+                socialIconHoverBgColor: {
+                    type: "string",
+                    default: "",
+                },
+
+                socialItemBgColorSwitcher: {
+                    type: "string",
+                    default: "normal",
+                },
+
+                normalItemBackgroundType: {
+                    type: "string",
+                    default: "classic",
+                },
+                normalItemClassicColor: {
+                    type: "string",
+                    default: "",
+                },
+                normalItemGradientColor: {
+                    type: "string",
+                    default: null,
+                },
+                normalItemCustomGradientSwitcher: {
+                    type: "boolean",
+                    default: false,
+                },
+                normalItemCustomGradientInputValue: {
+                    type: "string",
+                    default: "",
+                },
+
+                hoverItemBackgroundType: {
+                    type: "string",
+                    default: "classic",
+                },
+                hoverItemClassicColor: {
+                    type: "string",
+                    default: "",
+                },
+                hoverItemGradientColor: {
+                    type: "string",
+                    default: null,
+                },
+                hoverItemCustomGradientSwitcher: {
+                    type: "boolean",
+                    default: false,
+                },
+                hoverItemCustomGradientInputValue: {
+                    type: "string",
+                    default: "",
+                },
             }
         }
     },
+
+    /** Start repetar item style pass to this attribute */
+    singleItemColorStyle: {
+        type: "string",
+        default: "",
+    },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
+    /** End repetar item style pass to this attribute */
+
+
+    socialIconsPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
+    
     socialAlignment: {
         type: "string",
         default: "left",
     },
+    /** Icon Styles */
     socialIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: 20,
+			Tablet: 20,
+			Mobile: 15
 		}
 	},
 	socialIconSizeUnits: {
@@ -83,34 +247,31 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    socialIconColorSwitcher: {
+    socialIconGlobalColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    socialIconColor: {
+    socialIconGlobalColor: {
         type: "string",
-        default: "#fff"
+        default: "#399CFF"
     },
-    socialIconHoverColor: {
+    socialIconGlobalHoverColor: {
         type: 'string',
-        default: "#fff"
+        default: "#399CFF"
     },
-
-    socialBgColorSwitcher : {
+    socialIconBgGlobalColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    socialBgColor : {
+    socialIconBgGlobalColor : {
         type: "string",
-        default: "#399CFF"
     },
-    socialBgHoverColor: {
+    socialIconBgGlobalHoverColor: {
         type: 'string',
-        default: "#399CFF"
     },
     socialIconBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     socialIconBorderColorSwitcher : {
         type: "string",
@@ -118,6 +279,7 @@ const attributes = {
     },
     socialIconBorderColor: {
         type: 'string',
+        default: "#E1E3E8"
     },
     socialIconBorderHoverColor: {
         type: 'string',
@@ -133,28 +295,28 @@ const attributes = {
     socialIconBorderDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderTablet: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     socialIconBorderLink : {
@@ -172,50 +334,35 @@ const attributes = {
     socialIconBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50', 
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     socialIconBorderRadiusLink : {
         type : "boolean",
         default: true
     },
-    socialIconGapSize: {
-		type: 'object',
-		default: {
-			Desktop: 20,
-			Tablet: 15,
-			Mobile: 15
-		}
-	},
-	socialIconGapUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+
     socialIconPaddingUnits: {
 		type: 'object',
 		default: {
@@ -227,122 +374,174 @@ const attributes = {
     socialIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     socialIconPaddingTablet: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     socialIconPaddingMobile: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
         },
     },
-    socialIconPaddingLink : {
-        type : "boolean",
-        default: true
+    /*End Icon Styles */
+
+    /** Title Styles */
+    socialTitleSwitcher: {
+        type: "boolean",
+        default: false,
     },
-    socialPaddingUnits: {
+
+    socialTitleFontFamily: {
+        type: "string",
+        default: "inherit",
+    },
+    socialTitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialTitleFontSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px'
+			Mobile: 'px',
 		}
+	},
+    socialTitleFontWeight : {
+        type: "string",
+        default: "400"
     },
-    socialPaddingDesktop: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
+    socialTitleFontStyle : {
+        type: "string",
+        default: ""
     },
-    socialPaddingTablet: {
-        type: "object", 
-        default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
-        },
+    socialTitleTextTransform : {
+        type: "string",
+        default: ""
     },
-    socialPaddingMobile: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
+    socialTitleTextDecoration : {
+        type: "string",
+        default: ""
     },
-    socialPaddingLink : {
-        type : "boolean",
-        default: true
-    },
-    socialMarginUnits: {
+    socialTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialTitleLetterSpacingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px'
+			Mobile: 'px',
 		}
-    },
-    socialMarginDesktop: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    socialMarginTablet: {
-        type: "object", 
-        default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    socialMarginMobile: {
-        type: "object", 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    socialMarginLink : {
-        type : "boolean",
-        default: true
-    },
-    socialGlobalBgColorSwitcher : {
+	},
+    socialTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    socialTitleColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    socialGlobalBgColor : {
-        type: "string",
+    socialTitleColor : {
+        type: "string"
     },
-    socialGlobalBgHoverColor: {
+    socialTitleHoverColor: {
         type: 'string',
     },
+
+    socialTitlePaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    socialTitlePaddingDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialTitlePaddingTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialTitlePaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialTitlePaddingLink : {
+        type : "boolean",
+        default: true
+    },
+
+    /*End Title Styles */
+
+    /** Background Styles */
+    socialBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialBgColor : {
+        type: "string",
+    },
+    socialBgHoverColor: {
+        type: 'string',
+    },
+    
+    /*End Background Styles */
+
+    /** Border Styles */
     socialBorder: {
         type: 'string',
         default: "none",
@@ -358,12 +557,12 @@ const attributes = {
         type: 'string',
     },
     socialBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     socialBorderDesktop: {
         type: "object", 
@@ -397,12 +596,12 @@ const attributes = {
         default: true
     },
     socialBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     socialBorderRadiusDesktop: {
         type: "object", 
@@ -435,6 +634,307 @@ const attributes = {
         type : "boolean",
         default: true
     },
+
+
+    /** Gap Styles */
+    socialGapSize: {
+        type: 'object',
+        default: {
+            Desktop: 10,
+            Tablet: 10,
+            Mobile: 10
+        }
+    },
+    socialGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Gap Styles */
+
+    /** Padding Styles */
+    socialPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    socialPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialPaddingTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialPaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Padding Styles */
+
+    /** Margin Styles */
+    socialMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    socialMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Margin Styles */
+
+
+    /*Global Styles */
+    socialGlobalZIndex : {
+        type: "number",
+    },
+    socialGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialGlobalPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalPaddingTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalPaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    socialGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialGlobalMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalMarginTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    socialGlobalBgColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialGlobalBgColor : {
+        type: "string",
+    },
+    socialGlobalBgHoverColor: {
+        type: 'string',
+    },
+    socialGlobalBorder: { 
+        type: 'string',
+        default: "none",
+    },
+    socialGlobalBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    socialGlobalBorderColor: {
+        type: 'string',
+    },
+    socialGlobalBorderHoverColor: {
+        type: 'string',
+    },
+    socialGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialGlobalBorderDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalBorderTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalBorderMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    socialGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    socialGlobalBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    socialGlobalBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+    	/** Start Box Shadow */
+	socialGlobalBoxShadowValues: { 
+        type: 'array',
+        default: [],
+    },
+    socialGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    /*End Global Styles */
 
 };
 

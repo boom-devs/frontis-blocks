@@ -7,6 +7,14 @@ export const UNIT_TYPES = [
 	{ label: "em", value: "em" },
 ];
 
+export const PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+    { label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+    { label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+];
+
 export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
 	{ label: "Hover", value: "hover" },

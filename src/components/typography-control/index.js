@@ -19,6 +19,7 @@ import FB_Range from '@Components/range';
 import './editor.lazy.scss';
 
 const FB_TypographyControl = ({
+    label = __("Typography", "frontis-blocks"),
     fontFamily,
 	onChangeFontFamily,
 	fontSize,
@@ -90,7 +91,7 @@ const FB_TypographyControl = ({
 
     return (
         <BaseControl
-            label={__("Typography", "frontis-blocks")}
+            label={label}
             className="fb-setting-typography"
         >
             <Dropdown
@@ -119,7 +120,7 @@ const FB_TypographyControl = ({
                             />
 							<FB_Range
 								min={1}
-								max={100}
+								max={200}
 								label={__("Font Size", "frontis-blocks")}
 								rangeValue={fontSize}
 								onChangeHandler={handleFontSizeChange}
@@ -169,7 +170,7 @@ const FB_TypographyControl = ({
                             />
                             <FB_Range
                                 min={1}
-                                max={100}
+                                max={200}
                                 label={__("Line Height", "frontis-blocks")}
                                 rangeValue={lineHeight}
                                 onChangeHandler={handleLineHeightChange}

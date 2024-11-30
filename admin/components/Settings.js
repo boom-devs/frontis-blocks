@@ -1,42 +1,36 @@
 import { __ } from '@wordpress/i18n';
-import { Card, CardHeader, CardBody, TextControl, SelectControl, Button } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useState } from '@wordpress/element';
+import SettingsTabs from './SettingsTabs';
 
 const Settings = () => {
-//   const settings = useSelect((select) => select('frontis-blocks').getSettings());
-//   const { updateSettings } = useDispatch('frontis-blocks');
+  const [activeTab, setActiveTab] = useState(SettingsTabs[0].id);
 
-  const handleSave = () => {
-    // Implement save functionality
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
   };
 
+  const ActiveComponent = SettingsTabs.find(tab => tab.id === activeTab).component;
+
   return (
-    <div className="frontis-blocks-settings">
+    <div className="fb-blocks-settings">
       <h2>{__('Settings', 'frontis-blocks')}</h2>
-      <Card>
-        <CardHeader>
-          <h3>{__('Global Settings', 'frontis-blocks')}</h3>
-        </CardHeader>
-        <CardBody>
-          {/* <TextControl
-            label={__('API Key', 'frontis-blocks')}
-            value={settings.apiKey}
-            onChange={(value) => updateSettings({ apiKey: value })}
-          />
-          <SelectControl
-            label={__('Default Style', 'frontis-blocks')}
-            value={settings.defaultStyle}
-            options={[
-              { label: __('Modern', 'frontis-blocks'), value: 'modern' },
-              { label: __('Classic', 'frontis-blocks'), value: 'classic' },
-            ]}
-            onChange={(value) => updateSettings({ defaultStyle: value })}
-          />
-          <Button isPrimary onClick={handleSave}>
-            {__('Save Settings', 'frontis-blocks')}
-          </Button> */}
-        </CardBody>
-      </Card>
+      <div className="fb-blocks-settings-container">
+        <div className="fb-blocks-settings-tabs">
+          {SettingsTabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`fb-blocks-settings-tab ${activeTab === tab.id ? 'active' : ''}`}
+              onClick={() => handleTabClick(tab.id)}
+            >
+              <span className="fb-blocks-settings-tab-icon">{tab.icon}</span>
+              <span className="fb-blocks-settings-tab-label">{tab.label}</span>
+            </button>
+          ))}
+        </div>
+        <div className="fb-blocks-settings-content">
+          <ActiveComponent />
+        </div>
+      </div>
     </div>
   );
 };

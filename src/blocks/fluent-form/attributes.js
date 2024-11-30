@@ -41,11 +41,20 @@ const attributes = {
         default: "inherit",
     },
     fluentFormLabelFontSize: {
-        type: "number",
+        type: 'object',
+        default: {
+            Desktop: '18',
+            Tablet: '18',
+            Mobile: '16'
+        }
     },
     fluentFormLabelFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     fluentFormLabelFontWeight : {
         type: "string",
@@ -63,18 +72,36 @@ const attributes = {
         default: "none"
     },
     fluentFormLabelLetterSpacing : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     fluentFormLabelLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
     },
     fluentFormLabelLineHeight : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     fluentFormLabelLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
     },
     /** End Label */
 
@@ -95,11 +122,20 @@ const attributes = {
         default: "inherit",
     },
     fluentFormInputFontSize: {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     fluentFormInputFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
     },
     fluentFormInputFontWeight : {
         type: "string",
@@ -117,18 +153,36 @@ const attributes = {
         default: "none"
     },
     fluentFormInputLetterSpacing : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     fluentFormInputLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
     },
     fluentFormInputLineHeight : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     fluentFormInputLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
     },
     /** End Input & Textarea */
 
@@ -290,16 +344,9 @@ const attributes = {
         type: 'string',
         default: "solid",
     },
-    fluentFormBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
     fluentFormBorderColor: {
         type: 'string',
         default: "#dadbdd",
-    },
-    fluentFormBorderHoverColor: {
-        type: 'string',
     },
     fluentFormBorderUnits: {
 		type: 'object',
@@ -376,6 +423,91 @@ const attributes = {
         },
     },
     fluentFormBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+
+
+    fluentFormFocusBorder: {
+        type: 'string',
+        default: "solid",
+    },
+    fluentFormFocusBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    fluentFormFocusBorderDesktop: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    fluentFormFocusBorderTablet: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    fluentFormFocusBorderMobile: {
+        type: "object", 
+        default: {
+            top: "1",
+            bottom: "1",
+            left: "1",
+            right: "1",
+        },
+    },
+    fluentFormFocusBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    fluentFormFocusBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    fluentFormFocusBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    fluentFormFocusBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    fluentFormFocusBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    fluentFormFocusBorderRadiusLink : {
         type : "boolean",
         default: true
     },
@@ -548,11 +680,20 @@ const attributes = {
         default: "inherit",
     },
     fluentFormSectionBreakTitleFontSize: {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSectionBreakTitleFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSectionBreakTitleFontWeight : {
         type: "string",
@@ -570,18 +711,36 @@ const attributes = {
         default: "none"
     },
     fluentFormSectionBreakTitleLetterSpacing : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSectionBreakTitleLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSectionBreakTitleLineHeight : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSectionBreakTitleLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSectionBreakTitlePaddingUnits: {
 		type: 'object',
@@ -680,11 +839,20 @@ const attributes = {
         default: "inherit",
     },
     fluentFormSectionBreakDescFontSize: {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSectionBreakDescFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSectionBreakDescFontWeight : {
         type: "string",
@@ -702,18 +870,36 @@ const attributes = {
         default: "none"
     },
     fluentFormSectionBreakDescLetterSpacing : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSectionBreakDescLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSectionBreakDescLineHeight : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSectionBreakDescLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSectionBreakDescPaddingUnits: {
 		type: 'object',
@@ -815,11 +1001,20 @@ const attributes = {
         default: "inherit",
     },
     fluentFormHtmlFontSize: {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormHtmlFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormHtmlFontWeight : {
         type: "string",
@@ -837,18 +1032,36 @@ const attributes = {
         default: "none"
     },
     fluentFormHtmlLetterSpacing : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormHtmlLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormHtmlLineHeight : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormHtmlLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormHtmlPaddingUnits: {
 		type: 'object',
@@ -977,6 +1190,7 @@ const attributes = {
     },
     fluentFormSubmitColor: {
         type: 'string',
+        default: "#FFFFFF"
     },
     fluentFormSubmitHoverColor: {
         type: 'string',
@@ -987,6 +1201,7 @@ const attributes = {
     },
     fluentFormSubmitBgColor: {
         type: 'string',
+        default: "#399CFF"
     },
     fluentFormSubmitBgHoverColor: {
         type: 'string',
@@ -996,11 +1211,20 @@ const attributes = {
         default: "inherit",
     },
     fluentFormSubmitFontSize: {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSubmitFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSubmitFontWeight : {
         type: "string",
@@ -1018,18 +1242,36 @@ const attributes = {
         default: "none"
     },
     fluentFormSubmitLetterSpacing : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSubmitLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSubmitLineHeight : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSubmitLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSubmitPaddingUnits: {
 		type: 'object',
@@ -1214,12 +1456,21 @@ const attributes = {
         type: "string",
         default: "inherit",
     },
-    fluentFormSuccessFontSize: {
-        type: "number",
+    fluentFormSuccessFontSize: { 
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSuccessFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSuccessFontWeight : {
         type: "string",
@@ -1236,19 +1487,37 @@ const attributes = {
         type: "string",
         default: "none"
     },
-    fluentFormSuccessLetterSpacing : {
-        type: "number",
+    fluentFormSuccessLetterSpacing : { 
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSuccessLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
-    fluentFormSuccessLineHeight : {
-        type: "number",
+    fluentFormSuccessLineHeight : { 
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormSuccessLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormSuccessBorder: {
         type: 'string',
@@ -1353,11 +1622,20 @@ const attributes = {
         default: "inherit",
     },
     fluentFormErrorFontSize: {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "13",
+            Tablet: "13",
+            Mobile: "13",
+        }
     },
     fluentFormErrorFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormErrorFontWeight : {
         type: "string",
@@ -1374,19 +1652,37 @@ const attributes = {
         type: "string",
         default: "none"
     },
-    fluentFormErrorLetterSpacing : {
-        type: "number",
+    fluentFormErrorLetterSpacing : { 
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
-    fluentFormErrorLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+    fluentFormErrorLetterSpacingUnits : { 
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormErrorLineHeight : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     fluentFormErrorLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
     },
     fluentFormErrorPaddingUnits: {
 		type: 'object',
@@ -1653,5 +1949,10 @@ const attributes = {
         default: true
     },
     /** End Global Setting */
+
+    blockStyle: {
+        type: "string",
+        default: ""
+    }
 }
 export default attributes;

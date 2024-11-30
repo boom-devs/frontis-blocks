@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -31,7 +31,13 @@ import {
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_Color from '@Components/color';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import FB_TypographyControl from '@Components/typography-control';
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+import FB_BoxShadowControl from '@Components/box-shadow';
+
 
 import './editor.scss';
 
@@ -95,9 +101,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormPaddingLink,
 
         fluentFormBorder,
-        fluentFormBorderColorSwitcher,
         fluentFormBorderColor,
-        fluentFormBorderHoverColor,
         fluentFormBorderUnits,
         fluentFormBorderDesktop,
         fluentFormBorderTablet,
@@ -108,6 +112,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormBorderRadiusTablet,
         fluentFormBorderRadiusMobile,
         fluentFormBorderRadiusLink,
+
+        fluentFormFocusBorder,
+        fluentFormFocusBorderUnits,
+        fluentFormFocusBorderDesktop,
+        fluentFormFocusBorderTablet,
+        fluentFormFocusBorderMobile,
+        fluentFormFocusBorderLink,
+        fluentFormFocusBorderRadiusUnits,
+        fluentFormFocusBorderRadiusDesktop,
+        fluentFormFocusBorderRadiusTablet,
+        fluentFormFocusBorderRadiusMobile,
+        fluentFormFocusBorderRadiusLink,
+
 
         fluentFormPlaceholderColor,
 
@@ -335,6 +352,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormGlobalBorderRadiusMobile,
         fluentFormGlobalBorderRadiusLink,
 
+        blockStyle,
 
     } = attributes;
 
@@ -575,6 +593,161 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fluentFormBorderRadiusTabletWidth = `${fluentFormBorderRadiusTablet.top}${fluentFormBorderRadiusUnits.Tablet} ${fluentFormBorderRadiusTablet.right}${fluentFormBorderRadiusUnits.Tablet} ${fluentFormBorderRadiusTablet.bottom}${fluentFormBorderRadiusUnits.Tablet} ${fluentFormBorderRadiusTablet.left}${fluentFormBorderRadiusUnits.Tablet}`;
     const fluentFormBorderRadiusMobileWidth = `${fluentFormBorderRadiusMobile.top}${fluentFormBorderRadiusUnits.Mobile} ${fluentFormBorderRadiusMobile.right}${fluentFormBorderRadiusUnits.Mobile} ${fluentFormBorderRadiusMobile.bottom}${fluentFormBorderRadiusUnits.Mobile} ${fluentFormBorderRadiusMobile.left}${fluentFormBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
+
+
+    /** Start  Focus Border */
+    const handleFocusBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( fluentFormFocusBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        fluentFormFocusBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        fluentFormFocusBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        fluentFormFocusBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {fluentFormFocusBorderDesktop: {...fluentFormFocusBorderDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {fluentFormFocusBorderTablet: {...fluentFormFocusBorderTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {fluentFormFocusBorderMobile: {...fluentFormFocusBorderMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleFocusBorderCombineBtn = () => {
+        setAttributes( {fluentFormFocusBorderLink: !fluentFormFocusBorderLink} );
+    }
+
+    const handleFocusBorderUnitsHandler = (unit) => { 
+        setAttributes( {
+            fluentFormFocusBorderUnits: {
+                ...fluentFormFocusBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End  border */
+    const fluentFormFocusBorderDesktopWidth = `${fluentFormFocusBorderDesktop.top}${fluentFormFocusBorderUnits.Desktop} ${fluentFormFocusBorderDesktop.right}${fluentFormFocusBorderUnits.Desktop} ${fluentFormFocusBorderDesktop.bottom}${fluentFormFocusBorderUnits.Desktop} ${fluentFormFocusBorderDesktop.left}${fluentFormFocusBorderUnits.Desktop}`;
+    const fluentFormFocusBorderTabletWidth = `${fluentFormFocusBorderTablet.top}${fluentFormFocusBorderUnits.Tablet} ${fluentFormFocusBorderTablet.right}${fluentFormFocusBorderUnits.Tablet} ${fluentFormFocusBorderTablet.bottom}${fluentFormFocusBorderUnits.Tablet} ${fluentFormFocusBorderTablet.left}${fluentFormFocusBorderUnits.Tablet}`;
+    const fluentFormFocusBorderMobileWidth = `${fluentFormFocusBorderMobile.top}${fluentFormFocusBorderUnits.Mobile} ${fluentFormFocusBorderMobile.right}${fluentFormFocusBorderUnits.Mobile} ${fluentFormFocusBorderMobile.bottom}${fluentFormFocusBorderUnits.Mobile} ${fluentFormFocusBorderMobile.left}${fluentFormFocusBorderUnits.Mobile}`;
+    /** End Border */
+
+
+    /** Start  border radius*/
+    const handleFocusBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( fluentFormFocusBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        fluentFormFocusBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        fluentFormFocusBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        fluentFormFocusBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {fluentFormFocusBorderRadiusDesktop: {...fluentFormFocusBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {fluentFormFocusBorderRadiusTablet: {...fluentFormFocusBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {fluentFormFocusBorderRadiusMobile: {...fluentFormFocusBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleFocusBorderRadiusCombineBtn = () => {
+        setAttributes( {fluentFormFocusBorderRadiusLink: !fluentFormFocusBorderRadiusLink} );
+    }
+
+    const handleFocusBorderRadiusUnitsHandler = (unit) => { 
+        setAttributes( {
+            fluentFormFocusBorderRadiusUnits: {
+                ...fluentFormFocusBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end Focus Border */
+
+    /** End Focus Border Radius */
+    const fluentFormFocusBorderRadiusDesktopWidth = `${fluentFormFocusBorderRadiusDesktop.top}${fluentFormFocusBorderRadiusUnits.Desktop} ${fluentFormFocusBorderRadiusDesktop.right}${fluentFormFocusBorderRadiusUnits.Desktop} ${fluentFormFocusBorderRadiusDesktop.bottom}${fluentFormFocusBorderRadiusUnits.Desktop} ${fluentFormFocusBorderRadiusDesktop.left}${fluentFormFocusBorderRadiusUnits.Desktop}`;
+    const fluentFormFocusBorderRadiusTabletWidth = `${fluentFormFocusBorderRadiusTablet.top}${fluentFormFocusBorderRadiusUnits.Tablet} ${fluentFormFocusBorderRadiusTablet.right}${fluentFormFocusBorderRadiusUnits.Tablet} ${fluentFormFocusBorderRadiusTablet.bottom}${fluentFormFocusBorderRadiusUnits.Tablet} ${fluentFormFocusBorderRadiusTablet.left}${fluentFormFocusBorderRadiusUnits.Tablet}`;
+    const fluentFormFocusBorderRadiusMobileWidth = `${fluentFormFocusBorderRadiusMobile.top}${fluentFormFocusBorderRadiusUnits.Mobile} ${fluentFormFocusBorderRadiusMobile.right}${fluentFormFocusBorderRadiusUnits.Mobile} ${fluentFormFocusBorderRadiusMobile.bottom}${fluentFormFocusBorderRadiusUnits.Mobile} ${fluentFormFocusBorderRadiusMobile.left}${fluentFormFocusBorderRadiusUnits.Mobile}`;
+    /** End Focus Border Radius */
+
+
+
 
     /** Start Radio border radius*/
     const fluentFormRadioBorderRadiusUnitChange = ( event, position ) => {
@@ -2100,272 +2273,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const BorderRadiusMobileWidth = `${fluentFormGlobalBorderRadiusMobile.top}${fluentFormGlobalBorderRadiusUnits.Mobile} ${fluentFormGlobalBorderRadiusMobile.right}${fluentFormGlobalBorderRadiusUnits.Mobile} ${fluentFormGlobalBorderRadiusMobile.bottom}${fluentFormGlobalBorderRadiusUnits.Mobile} ${fluentFormGlobalBorderRadiusMobile.left}${fluentFormGlobalBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
 
-    /** Start Label Color */
-    const handleLabelColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormLabelColorSwitcher: value });
-    };
-    const handleLabelColorChange = (value) => {
-        setAttributes({ fluentFormLabelColor: value });
-    };
-    const handleLabelHoverColorChange = (value) => {
-        setAttributes({ fluentFormLabelHoverColor: value });
-    };
-    /** End Label Color */
-
-    /** Start Input & Textarea BgColor */
-    const handleInputBgColorChange = (value) => {
-        setAttributes({ fluentFormInputBgColor: value });
-    };
-    /** End Input & Textarea BgColor */
-
-    /** Start Input & Textarea Color */
-    const handleInputColorChange = (value) => {
-        setAttributes({ fluentFormInputColor: value });
-    };
-    /** End Input & Textarea Focus Color */
-    /** Start Input & Textarea Color */
-    const handleInputFocusColorChange = (value) => {
-        setAttributes({ fluentFormInputFocusColor: value });
-    };
-    /** End Input & Textarea Focus Color */
-
-    /** Start fluentFormTextIndentSize */
-    const fluentFormTextIndentSizeHandler = (value) => {
-        setAttributes({ fluentFormTextIndentSize: value });
-    };
-    const fluentFormTextIndentSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormTextIndentSizeUnits: value });
-    };
-    /** End fluentFormTextIndentSize */
-
-    /** Start fluentFormInputWidthSize */
-    const fluentFormInputWidthSizeHandler = (value) => {
-        setAttributes({ fluentFormInputWidthSize: value });
-    };
-    const fluentFormInputWidthSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormInputWidthSizeUnits: value });
-    };
-    /** End fluentFormInputWidthSize */
-
-    /** Start fluentFormInputHeightSize */
-    const fluentFormInputHeightSizeHandler = (value) => {
-        setAttributes({ fluentFormInputHeightSize: value });
-    };
-    const fluentFormInputHeightSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormInputHeightSizeUnits: value });
-    };
-    /** End fluentFormInputHeightSize */
-
-    /** Start fluentFormTextareaWidthSize */
-    const fluentFormTextareaWidthSizeHandler = (value) => {
-        setAttributes({ fluentFormTextareaWidthSize: value });
-    };
-    const fluentFormTextareaWidthSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormTextareaWidthSizeUnits: value });
-    };
-    /** End fluentFormTextareaWidthSize */
-
-
-    /** Start fluentFormTextareaHeightSize */
-    const fluentFormTextareaHeightSizeHandler = (value) => {
-        setAttributes({ fluentFormTextareaHeightSize: value });
-    };
-    const fluentFormTextareaHeightSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormTextareaHeightSizeUnits: value });
-    };
-    /** End fluentFormTextareaHeightSize */
-
-    /** Start fluentFormSpacingSize */
-    const fluentFormSpacingSizeHandler = (value) => {
-        setAttributes({ fluentFormSpacingSize: value });
-    };
-    const fluentFormSpacingUnitsHandler = (value) => {
-        setAttributes({ fluentFormSpacingUnits: value });
-    };
-    /** End fluentFormSpacingSize */ 
-
-
-    /** StartfluentFormBorderColor */
-    const handleBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormBorderColorSwitcher: value });
-    };
-    const handleBorderColorChange = (value) => {
-        setAttributes({ fluentFormBorderColor: value });
-    };
-    const handleBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormBorderHoverColor: value });
-    };
-    /** End fluentFormBorderColor */
-
-    /** Start fluentFormPlaceholderColor */
-    const fluentFormPlaceholderColorChange = (value) => {
-        setAttributes({ fluentFormPlaceholderColor: value });
-    };
-    /** End fluentFormPlaceholderColor */
-
-    /** Start fluentFormRadioFontSize */
-    const fluentFormRadioFontSizeHandler = (value) => {
-        setAttributes({ fluentFormRadioFontSize: value });
-    };
-    const fluentFormRadioFontSizeUnitsHandler = (value) => {
-        setAttributes({ fluentFormRadioFontSizeUnits: value });
-    };
-    /** End fluentFormRadioFontSize */ 
-
-    /** Start fluentFormRadioCheckBoxItemSpacing */
-    const fluentFormRadioCheckBoxItemSpacingHandler = (value) => {
-        setAttributes({ fluentFormRadioCheckBoxItemSpacing: value });
-    };
-    const fluentFormRadioCheckBoxItemSpacingUnitssHandler = (value) => {
-        setAttributes({ fluentFormRadioCheckBoxItemSpacingUnits: value });
-    };
-    /** End fluentFormRadioCheckBoxItemSpacing */ 
-
-
-    /** Start Section Break Title Color */
-    const fluentFormSectionBreakTitleColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSectionBreakTitleColorSwitcher: value });
-    };
-    const fluentFormSectionBreakTitleColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakTitleColor: value });
-    };
-    const fluentFormSectionBreakTitleHoverColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakTitleHoverColor: value });
-    };
-    /** End Section Break Title Color */
-
-    /** Start Section Break Description Color */
-    const fluentFormSectionBreakDescColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSectionBreakDescColorSwitcher: value });
-    };
-    const fluentFormSectionBreakDescColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakDescColor: value });
-    };
-    const fluentFormSectionBreakDescHoverColorChange = (value) => {
-        setAttributes({ fluentFormSectionBreakDescHoverColor: value });
-    };
-    /** End Section Break Description Color */
-
-    /** Start HTML Color */
-    const fluentFormHtmlColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormHtmlColorSwitcher: value });
-    };
-    const fluentFormHtmlColorChange = (value) => {
-        setAttributes({ fluentFormHtmlColor: value });
-    };
-    const fluentFormHtmlHoverColorChange = (value) => {
-        setAttributes({ fluentFormHtmlHoverColor: value });
-    };
-    /** End HTML Color */
-
-    /** Start fluentFormSubmitHeight */
-    const fluentFormSubmitHeightHandler = (value) => {
-        setAttributes({ fluentFormSubmitHeight: value });
-    };
-    const fluentFormSubmitHeightUnitsHandler = (value) => {
-        setAttributes({ fluentFormSubmitHeightUnits: value });
-    };
-    /** End fluentFormSubmitHeight */
-
-    /** Start fluentFormSubmitWidth */
-    const fluentFormSubmitWidthHandler = (value) => {
-        setAttributes({ fluentFormSubmitWidth: value });
-    };
-    const fluentFormSubmitWidthUnitsHandler = (value) => {
-        setAttributes({ fluentFormSubmitWidthUnits: value });
-    };
-    /** End fluentFormSubmitWidth */
-
-    /** Start fluentFormSubmitColorSwitcher */
-    const fluentFormSubmitColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSubmitColorSwitcher: value });
-    };
-    const fluentFormSubmitColorChange = (value) => {
-        setAttributes({ fluentFormSubmitColor: value });
-    };
-    const fluentFormSubmitHoverColorChange = (value) => {
-        setAttributes({ fluentFormSubmitHoverColor: value });
-    };
-    /** End fluentFormSubmitColorSwitcher */
-
-    /** Start fluentFormSubmitBgColorSwitcher */
-    const fluentFormSubmitBgColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSubmitBgColorSwitcher: value });
-    };
-    const fluentFormSubmitBgColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBgColor: value });
-    };
-    const fluentFormSubmitBgHoverColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBgHoverColor: value });
-    };
-    /** End fluentFormSubmitBgColorSwitcher */
-
-    /** Start Submit Border Color */
-    const fluentFormSubmitBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSubmitBorderColorSwitcher: value });
-    };
-    const fluentFormSubmitBorderColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBorderColor: value });
-    };
-    const fluentFormSubmitBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormSubmitBorderHoverColor: value });
-    };
-    /** End Submit Border Color */
-    
-    /** Start fluentFormSuccessColor */
-
-    const fluentFormSuccessColorChange = (value) => {
-        setAttributes({ fluentFormSuccessColor: value });
-    };
-    /** End fluentFormSuccessColor */
-
-    /** Start fluentFormSuccessBgColor */
-    const fluentFormSuccessBgColorChange = (value) => {
-        setAttributes({ fluentFormSuccessBgColor: value });
-    };
-    /** End fluentFormSuccessBgColor */
-
-    /** Start Success Border Color */
-    const fluentFormSuccessBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormSuccessBorderColorSwitcher: value });
-    };
-    const fluentFormSuccessBorderColorChange = (value) => {
-        setAttributes({ fluentFormSuccessBorderColor: value });
-    };
-    const fluentFormSuccessBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormSuccessBorderHoverColor: value });
-    };
-    /** End Success Border Color */
-
-    /** Start Error Color */
-    const fluentFormErrorColorChange = (value) => {
-        setAttributes({ fluentFormErrorColor: value });
-    };
-    /** End Error Color */
-
-    /** Start Global Bg Color */
-    const handleGlobalBgColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormGlobalBgColorSwitcher: value });
-    };
-    const handleGlobalBgColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBgColor: value });
-    };
-    const handleGlobalBgHoverColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBgHoverColor: value });
-    };
-    /** End Global Bg Color */
-
-    /** Start Global Border Color */
-    const handleGlobalBorderColorSwitcherChange = (value) => {
-        setAttributes({ fluentFormGlobalBorderColorSwitcher: value });
-    };
-    const handleGlobalBorderColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBorderColor: value });
-    };
-    const handleGlobalBorderHoverColorChange = (value) => {
-        setAttributes({ fluentFormGlobalBorderHoverColor: value });
-    };
-    /** End Global Border Color */
 
     // Helper function to load fonts
     const loadFont = (fontFamily) => {
@@ -2410,309 +2317,1217 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     useEffect(() => {
         loadFont(fluentFormErrorFontFamily);
     }, [fluentFormErrorFontFamily]);
+
+
+
+
+
+
+    const allBlockStyle = useMemo(() => `
+
+        .${blockID}.fb-fluent-form-wrapper {
+            ${fluentFormGlobalZIndex ? `z-index: ${fluentFormGlobalZIndex};` : ''}
+            position: relative;
+        }
+        .${blockID}.fb-fluent-form-wrapper {
+            ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
+            padding: ${DesktopPadding};
+            margin: ${DesktopMargin};
+            border: ${fluentFormGlobalBorder};
+            border-width: ${BorderDesktopWidth};
+            border-radius: ${BorderRadiusDesktopWidth} !important;
+            ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+            transition: all .3s ease-in-out;
+        }
+        .${blockID}.fb-fluent-form-wrapper:hover {
+            ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
+            ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+        }
+
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group label:not(.ff-el-form-check-label),
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group .ff-el-input--label{
+            display: none;
+        }
+
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-error-message .error.text-danger {
+            display: none;
+        }
+
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input::-webkit-input-placeholder,
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea::-webkit-input-placeholder {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input::-moz-placeholder,
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea::-moz-placeholder {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input:-ms-input-placeholder,
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea:-ms-input-placeholder {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input:-moz-placeholder,
+        .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea:-moz-placeholder {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group {
+            ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Desktop}${fluentFormSpacingUnits.Desktop};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
+            ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
+            ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
+            ${fluentFormLabelFontSize.Desktop && fluentFormLabelFontSizeUnits.Desktop ? `font-size: ${fluentFormLabelFontSize.Desktop}${fluentFormLabelFontSizeUnits.Desktop};` : ''}
+            ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
+            ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
+            ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
+            ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
+            ${fluentFormLabelLetterSpacing.Desktop && fluentFormLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormLabelLetterSpacing.Desktop}${fluentFormLabelLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormLabelLineHeight.Desktop && fluentFormLabelLineHeightUnits.Desktop ? `line-height: ${fluentFormLabelLineHeight.Desktop}${fluentFormLabelLineHeightUnits.Desktop};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
+            ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea, 
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
+            ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
+            ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
+            ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
+            ${fluentFormInputFontSize.Desktop && fluentFormInputFontSizeUnits.Desktop ? `font-size: ${fluentFormInputFontSize.Desktop}${fluentFormInputFontSizeUnits.Desktop};` : ''}
+            ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
+            ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
+            ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
+            ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
+            ${fluentFormInputLetterSpacing.Desktop && fluentFormInputLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormInputLetterSpacing.Desktop}${fluentFormInputLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormInputLineHeight.Desktop && fluentFormInputLineHeightUnits.Desktop ? `line-height: ${fluentFormInputLineHeight.Desktop}${fluentFormInputLineHeightUnits.Desktop};` : ''}
+            ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};` : ""}
+            ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};` : ""}
+            ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};` : ""}
+            ${fluentFormDesktopPadding ? `padding: ${fluentFormDesktopPadding};` : ""}
+            ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
+            ${fluentFormBorderDesktopWidth ? `border-width: ${fluentFormBorderDesktopWidth};` : ""}
+            ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
+            ${fluentFormBorderRadiusDesktopWidth ? `border-radius: ${fluentFormBorderRadiusDesktopWidth};` : ""}
+            transition: all .3s ease-in-out;
+        }
+        .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
+            ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
+            ${fluentFormFocusBorderDesktopWidth ? `border-width: ${fluentFormFocusBorderDesktopWidth};` : ""}
+            ${fluentFormFocusBorderRadiusDesktopWidth ? `border-radius: ${fluentFormFocusBorderRadiusDesktopWidth};` : ""}
+            ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
+            box-shadow: none;
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
+            ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Desktop}${fluentFormTextareaWidthSizeUnits.Desktop};` : ""}
+            ${fluentFormTextareaHeightSize ? `height: ${fluentFormTextareaHeightSize.Desktop}${fluentFormTextareaHeightSizeUnits.Desktop};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper input::-webkit-input-placeholder,
+        .${blockID}.fb-fluent-form-wrapper textarea::-webkit-input-placeholder {
+            ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper input::-moz-placeholder,
+        .${blockID}.fb-fluent-form-wrapper textarea::-moz-placeholder {
+            ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper input:-ms-input-placeholder,
+        .${blockID}.fb-fluent-form-wrapper textarea:-ms-input-placeholder {
+            ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper input:-moz-placeholder,
+        .${blockID}.fb-fluent-form-wrapper textarea:-moz-placeholder {
+            ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"]{
+            width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+            height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+            ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+            ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+            ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
+            ${fluentFormCheckBoxBorderRadiusDesktopWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
+            position: relative;
+            appearance: none;
+            transition: all .3s ease-in-out;   
+        } 
+        .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
+            width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+            height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+            ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+            ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+            ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
+            ${fluentFormRadioBorderRadiusDesktopWidth ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
+            position: relative;
+            appearance: none;
+            transition: all .3s ease-in-out;   
+        }
+        .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
+        .${blockID}.fb-fluent-form-wrapper input[type="radio"]:checked:before {
+            ${fluentFormRadioCheckedColor ? `background: ${fluentFormRadioCheckedColor};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {
+            ${fluentFormRadioCheckBoxItemSpacing ? `margin-bottom: ${fluentFormRadioCheckBoxItemSpacing.Desktop}${fluentFormRadioCheckBoxItemSpacingUnits.Desktop};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-section-break,
+        .${blockID}.fb-fluent-form-wrapper .ff-el-section-break hr {
+            text-align: ${fluentFormSectionBreakAlignment};
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
+            ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
+            ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
+            ${fluentFormSectionBreakTitleFontSize.Desktop && fluentFormSectionBreakTitleFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakTitleFontSize.Desktop}${fluentFormSectionBreakTitleFontSizeUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
+            ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
+            ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
+            ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
+            ${fluentFormSectionBreakTitleLetterSpacing.Desktop && fluentFormSectionBreakTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Desktop}${fluentFormSectionBreakTitleLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakTitleLineHeight.Desktop && fluentFormSectionBreakTitleLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Desktop}${fluentFormSectionBreakTitleLineHeightUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakTitleDesktopPadding ? `padding: ${fluentFormSectionBreakTitleDesktopPadding};` : ""}
+            ${fluentFormSectionBreakTitleDesktopMargin ? `margin: ${fluentFormSectionBreakTitleDesktopMargin};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
+            ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
+            ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
+            ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
+            ${fluentFormSectionBreakDescFontSize.Desktop && fluentFormSectionBreakDescFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakDescFontSize.Desktop}${fluentFormSectionBreakDescFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
+            ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
+            ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
+            ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
+            ${fluentFormSectionBreakDescLetterSpacing.Desktop && fluentFormSectionBreakDescLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Desktop}${fluentFormSectionBreakDescLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakDescLineHeight.Desktop && fluentFormSectionBreakDescLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakDescLineHeight.Desktop}${fluentFormSectionBreakDescLineHeightUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakDescDesktopPadding ? `padding: ${fluentFormSectionBreakDescDesktopPadding};` : ""}
+            ${fluentFormSectionBreakDescDesktopMargin ? `margin: ${fluentFormSectionBreakDescDesktopMargin};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
+            ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
+            ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
+            ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
+            ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
+            ${fluentFormHtmlFontSize.Desktop && fluentFormHtmlFontSizeUnits.Desktop ? `font-size: ${fluentFormHtmlFontSize.Desktop}${fluentFormHtmlFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
+            ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
+            ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
+            ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
+            ${fluentFormHtmlLetterSpacing.Desktop && fluentFormHtmlLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Desktop}${fluentFormHtmlLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormHtmlLineHeight.Desktop && fluentFormHtmlLineHeightUnits.Desktop ? `line-height: ${fluentFormHtmlLineHeight.Desktop}${fluentFormHtmlLineHeightUnits.Desktop};` : ''} 
+            ${fluentFormHtmlDesktopPadding ? `padding: ${fluentFormHtmlDesktopPadding};` : ""}
+            ${fluentFormHtmlDesktopMargin ? `margin: ${fluentFormHtmlDesktopMargin};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
+            ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
+        }
+        
+        .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
+            ${fluentFormSubmitAlignment ? `text-align: ${fluentFormSubmitAlignment};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+            ${fluentFormSubmitHeight.Desktop ? `height: ${fluentFormSubmitHeight.Desktop}${fluentFormSubmitHeightUnits.Desktop};` : ""}
+            ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
+            ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
+            ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
+            ${fluentFormSubmitFontSize.Desktop && fluentFormSubmitFontSizeUnits.Desktop ? `font-size: ${fluentFormSubmitFontSize.Desktop}${fluentFormSubmitFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
+            ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
+            ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
+            ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
+            ${fluentFormSubmitLetterSpacing.Desktop && fluentFormSubmitLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Desktop}${fluentFormSubmitLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSubmitLineHeight.Desktop && fluentFormSubmitLineHeightUnits.Desktop ? `line-height: ${fluentFormSubmitLineHeight.Desktop}${fluentFormSubmitLineHeightUnits.Desktop};` : ''} 
+            ${fluentFormSubmitDesktopPadding ? `padding: ${fluentFormSubmitDesktopPadding};` : ""}
+            ${fluentFormSubmitDesktopMargin ? `margin: ${fluentFormSubmitDesktopMargin};` : ""}
+
+            ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
+            ${fluentFormSubmitDesktopBorderWidth ? `border-width: ${fluentFormSubmitDesktopBorderWidth};` : ""}
+            ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
+            ${fluentFormSubmitDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSubmitDesktopBorderRadiusWidth};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
+            ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
+            ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
+            ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+            ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
+            ${fluentFormSubmitWidthSelect === 'custom' && fluentFormSubmitWidth.Desktop 
+            ? `width: ${fluentFormSubmitWidth.Desktop}${fluentFormSubmitWidthUnits.Desktop};` 
+            : ''}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper .ff-message-success {
+            ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
+            ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
+            ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
+            ${fluentFormSuccessFontSize.Desktop && fluentFormSuccessFontSizeUnits.Desktop ? `font-size: ${fluentFormSuccessFontSize.Desktop}${fluentFormSuccessFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
+            ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
+            ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
+            ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
+            ${fluentFormSuccessLetterSpacing.Desktop && fluentFormSuccessLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Desktop}${fluentFormSuccessLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSuccessLineHeight.Desktop && fluentFormSuccessLineHeightUnits.Desktop ? `line-height: ${fluentFormSuccessLineHeight.Desktop}${fluentFormSuccessLineHeightUnits.Desktop};` : ''}
+            ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
+            ${fluentFormSuccessDesktopBorderWidth ? `border-width: ${fluentFormSuccessDesktopBorderWidth};` : ""}
+            ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
+            ${fluentFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSuccessDesktopBorderRadiusWidth};` : ""}
+        }
+        .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
+            ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
+        }
+
+        .${blockID}.fb-fluent-form-wrapper .error.text-danger {
+            ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
+            ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
+            ${fluentFormErrorFontSize.Desktop && fluentFormErrorFontSizeUnits.Desktop ? `font-size: ${fluentFormErrorFontSize.Desktop}${fluentFormErrorFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
+            ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
+            ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
+            ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
+            ${fluentFormErrorLetterSpacing.Desktop && fluentFormErrorLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormErrorLetterSpacing.Desktop}${fluentFormErrorLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormErrorLineHeight.Desktop && fluentFormErrorLineHeightUnits.Desktop ? `line-height: ${fluentFormErrorLineHeight.Desktop}${fluentFormErrorLineHeightUnits.Desktop};` : ''} 
+            ${fluentFormErrorDesktopPadding ? `padding: ${fluentFormErrorDesktopPadding};` : ""}
+            ${fluentFormErrorDesktopMargin ? `margin: ${fluentFormErrorDesktopMargin};` : ""} 
+        }     
+
+        @media only screen and (max-width: 1024px) {
+
+            .${blockID}.fb-fluent-form-wrapper {
+                ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
+                padding: ${TabletPadding}; 
+                margin: ${TabletMargin};
+                border: ${fluentFormGlobalBorder};
+                border-width: ${BorderTabletWidth};
+                border-radius: ${BorderRadiusTabletWidth} !important;
+                ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                transition: all .3s ease-in-out;
+            }
+            .${blockID}.fb-fluent-form-wrapper:hover {
+                ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
+                ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group {
+                ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Tablet}${fluentFormSpacingUnits.Tablet};` : ""} 
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
+                ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
+                ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
+                ${fluentFormLabelFontSize.Tablet && fluentFormLabelFontSizeUnits.Tablet ? `font-size: ${fluentFormLabelFontSize.Tablet}${fluentFormLabelFontSizeUnits.Tablet};` : ''}
+                ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
+                ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
+                ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
+                ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
+                ${fluentFormLabelLetterSpacing.Tablet && fluentFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormLabelLetterSpacing.Tablet}${fluentFormLabelLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormLabelLineHeight.Tablet && fluentFormLabelLineHeightUnits.Tablet ? `line-height: ${fluentFormLabelLineHeight.Tablet}${fluentFormLabelLineHeightUnits.Tablet};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
+                ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea, 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
+                ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
+                ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
+                ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
+                ${fluentFormInputFontSize.Tablet && fluentFormInputFontSizeUnits.Tablet ? `font-size: ${fluentFormInputFontSize.Tablet}${fluentFormInputFontSizeUnits.Tablet};` : ''}
+                ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
+                ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
+                ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
+                ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
+                ${fluentFormInputLetterSpacing.Tablet && fluentFormInputLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormInputLetterSpacing.Tablet}${fluentFormInputLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormInputLineHeight.Tablet && fluentFormInputLineHeightUnits.Tablet ? `line-height: ${fluentFormInputLineHeight.Tablet}${fluentFormInputLineHeightUnits.Tablet};` : ''}
+                ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Tablet}${fluentFormTextIndentSizeUnits.Tablet};` : ""}
+                ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Tablet}${fluentFormInputWidthSizeUnits.Tablet};` : ""}
+                ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Tablet}${fluentFormInputHeightSizeUnits.Tablet};` : ""}
+                ${fluentFormTabletPadding ? `padding: ${fluentFormTabletPadding};` : ""}
+                ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
+                ${fluentFormBorderTabletWidth ? `border-width: ${fluentFormBorderTabletWidth};` : ""}
+                ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
+                ${fluentFormBorderRadiusTabletWidth ? `border-radius: ${fluentFormBorderRadiusTabletWidth};` : ""}
+                transition: all .3s ease-in-out;
+            }
+            .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
+                ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
+                ${fluentFormFocusBorderTabletWidth ? `border-width: ${fluentFormFocusBorderTabletWidth};` : ""}
+                ${fluentFormFocusBorderRadiusTabletWidth ? `border-radius: ${fluentFormFocusBorderRadiusTabletWidth};` : ""}
+                ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
+                box-shadow: none;
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
+                ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Tablet}${fluentFormTextareaWidthSizeUnits.Tablet};` : ""}
+                ${fluentFormTextareaHeightSize ? `height: ${fluentFormTextareaHeightSize.Tablet}${fluentFormTextareaHeightSizeUnits.Tablet};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input::-webkit-input-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea::-webkit-input-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input::-moz-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea::-moz-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input:-ms-input-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea:-ms-input-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input:-moz-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea:-moz-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"]{
+                width: ${fluentFormRadioFontSize.Tablet}${fluentFormRadioFontSizeUnits.Tablet}; 
+                height: ${fluentFormRadioFontSize.Tablet}${fluentFormRadioFontSizeUnits.Tablet};
+                ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+                ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+                ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
+                ${fluentFormCheckBoxBorderRadiusTabletWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusTabletWidth};` : ""}
+                position: relative;
+                appearance: none;
+                transition: all .3s ease-in-out;   
+            } 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
+                width: ${fluentFormRadioFontSize.Tablet}${fluentFormRadioFontSizeUnits.Tablet};
+                height: ${fluentFormRadioFontSize.Tablet}${fluentFormRadioFontSizeUnits.Tablet};
+                ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+                ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+                ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
+                ${fluentFormRadioBorderRadiusTabletWidth ? `border-radius: ${fluentFormRadioBorderRadiusTabletWidth};` : ""}
+                position: relative;
+                appearance: none;
+                transition: all .3s ease-in-out;   
+            }
+            .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
+            .${blockID}.fb-fluent-form-wrapper input[type="radio"]:checked:before {
+                ${fluentFormRadioCheckedColor ? `background: ${fluentFormRadioCheckedColor};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {
+                ${fluentFormRadioCheckBoxItemSpacing ? `margin-bottom: ${fluentFormRadioCheckBoxItemSpacing.Tablet}${fluentFormRadioCheckBoxItemSpacingUnits.Tablet};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break,
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break hr {
+                text-align: ${fluentFormSectionBreakAlignment};
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
+                ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
+                ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
+                ${fluentFormSectionBreakTitleFontSize.Tablet && fluentFormSectionBreakTitleFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakTitleFontSize.Tablet}${fluentFormSectionBreakTitleFontSizeUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
+                ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
+                ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
+                ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
+                ${fluentFormSectionBreakTitleLetterSpacing.Tablet && fluentFormSectionBreakTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Tablet}${fluentFormSectionBreakTitleLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakTitleLineHeight.Tablet && fluentFormSectionBreakTitleLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Tablet}${fluentFormSectionBreakTitleLineHeightUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakTitleTabletPadding ? `padding: ${fluentFormSectionBreakTitleTabletPadding};` : ""}
+                ${fluentFormSectionBreakTitleTabletMargin ? `margin: ${fluentFormSectionBreakTitleTabletMargin};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
+                ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
+                ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
+                ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
+                ${fluentFormSectionBreakDescFontSize.Tablet && fluentFormSectionBreakDescFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakDescFontSize.Tablet}${fluentFormSectionBreakDescFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
+                ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
+                ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
+                ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
+                ${fluentFormSectionBreakDescLetterSpacing.Tablet && fluentFormSectionBreakDescLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Tablet}${fluentFormSectionBreakDescLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakDescLineHeight.Tablet && fluentFormSectionBreakDescLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakDescLineHeight.Tablet}${fluentFormSectionBreakDescLineHeightUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakDescTabletPadding ? `padding: ${fluentFormSectionBreakDescTabletPadding};` : ""}
+                ${fluentFormSectionBreakDescTabletMargin ? `margin: ${fluentFormSectionBreakDescTabletMargin};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
+                ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
+                ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
+                ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
+                ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
+                ${fluentFormHtmlFontSize.Tablet && fluentFormHtmlFontSizeUnits.Tablet ? `font-size: ${fluentFormHtmlFontSize.Tablet}${fluentFormHtmlFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
+                ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
+                ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
+                ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
+                ${fluentFormHtmlLetterSpacing.Tablet && fluentFormHtmlLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Tablet}${fluentFormHtmlLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormHtmlLineHeight.Tablet && fluentFormHtmlLineHeightUnits.Tablet ? `line-height: ${fluentFormHtmlLineHeight.Tablet}${fluentFormHtmlLineHeightUnits.Tablet};` : ''} 
+                ${fluentFormHtmlTabletPadding ? `padding: ${fluentFormHtmlTabletPadding};` : ""}
+                ${fluentFormHtmlTabletMargin ? `margin: ${fluentFormHtmlTabletMargin};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
+                ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
+            }
+            
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
+                ${fluentFormSubmitAlignment ? `text-align: ${fluentFormSubmitAlignment};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+                ${fluentFormSubmitHeight.Tablet ? `height: ${fluentFormSubmitHeight.Tablet}${fluentFormSubmitHeightUnits.Tablet};` : ""}
+                ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
+                ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
+                ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
+                ${fluentFormSubmitFontSize.Tablet && fluentFormSubmitFontSizeUnits.Tablet ? `font-size: ${fluentFormSubmitFontSize.Tablet}${fluentFormSubmitFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
+                ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
+                ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
+                ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
+                ${fluentFormSubmitLetterSpacing.Tablet && fluentFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Tablet}${fluentFormSubmitLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSubmitLineHeight.Tablet && fluentFormSubmitLineHeightUnits.Tablet ? `line-height: ${fluentFormSubmitLineHeight.Tablet}${fluentFormSubmitLineHeightUnits.Tablet};` : ''} 
+                ${fluentFormSubmitTabletPadding ? `padding: ${fluentFormSubmitTabletPadding};` : ""}
+                ${fluentFormSubmitTabletMargin ? `margin: ${fluentFormSubmitTabletMargin};` : ""}
+
+                ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
+                ${fluentFormSubmitTabletBorderWidth ? `border-width: ${fluentFormSubmitTabletBorderWidth};` : ""}
+                ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
+                ${fluentFormSubmitTabletBorderRadiusWidth ? `border-radius: ${fluentFormSubmitTabletBorderRadiusWidth};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
+                ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
+                ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
+                ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+                ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
+                ${fluentFormSubmitWidthSelect === 'custom' && fluentFormSubmitWidth.Tablet 
+                ? `width: ${fluentFormSubmitWidth.Tablet}${fluentFormSubmitWidthUnits.Tablet};` 
+                : ''}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-message-success {
+                ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
+                ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
+                ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
+                ${fluentFormSuccessFontSize.Tablet && fluentFormSuccessFontSizeUnits.Tablet ? `font-size: ${fluentFormSuccessFontSize.Tablet}${fluentFormSuccessFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
+                ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
+                ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
+                ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
+                ${fluentFormSuccessLetterSpacing.Tablet && fluentFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Tablet}${fluentFormSuccessLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSuccessLineHeight.Tablet && fluentFormSuccessLineHeightUnits.Tablet ? `line-height: ${fluentFormSuccessLineHeight.Tablet}${fluentFormSuccessLineHeightUnits.Tablet};` : ''}
+                ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
+                ${fluentFormSuccessTabletBorderWidth ? `border-width: ${fluentFormSuccessTabletBorderWidth};` : ""}
+                ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
+                ${fluentFormSuccessTabletBorderRadiusWidth ? `border-radius: ${fluentFormSuccessTabletBorderRadiusWidth};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
+                ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .error.text-danger {
+                ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
+                ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
+                ${fluentFormErrorFontSize.Tablet && fluentFormErrorFontSizeUnits.Tablet ? `font-size: ${fluentFormErrorFontSize.Tablet}${fluentFormErrorFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
+                ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
+                ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
+                ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
+                ${fluentFormErrorLetterSpacing.Tablet && fluentFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormErrorLetterSpacing.Tablet}${fluentFormErrorLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormErrorLineHeight.Tablet && fluentFormErrorLineHeightUnits.Tablet ? `line-height: ${fluentFormErrorLineHeight.Tablet}${fluentFormErrorLineHeightUnits.Tablet};` : ''} 
+                ${fluentFormErrorTabletPadding ? `padding: ${fluentFormErrorTabletPadding};` : ""}
+                ${fluentFormErrorTabletMargin ? `margin: ${fluentFormErrorTabletMargin};` : ""} 
+            }  
+        }
+            
+        @media only screen and (max-width: 767px) {
+
+            .${blockID}.fb-fluent-form-wrapper {
+                ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
+                padding: ${MobilePadding};  
+                margin: ${MobileMargin};
+                border: ${fluentFormGlobalBorder};
+                border-width: ${BorderMobileWidth};
+                border-radius: ${BorderRadiusMobileWidth} !important;
+                ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                transition: all .3s ease-in-out;
+            }
+            .${blockID}.fb-fluent-form-wrapper:hover {
+                ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
+                ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group {
+                ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Mobile}${fluentFormSpacingUnits.Mobile};` : ""}  
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
+                ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
+                ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
+                ${fluentFormLabelFontSize.Mobile && fluentFormLabelFontSizeUnits.Mobile ? `font-size: ${fluentFormLabelFontSize.Mobile}${fluentFormLabelFontSizeUnits.Mobile};` : ''}
+                ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
+                ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
+                ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
+                ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
+                ${fluentFormLabelLetterSpacing.Mobile && fluentFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormLabelLetterSpacing.Mobile}${fluentFormLabelLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormLabelLineHeight.Mobile && fluentFormLabelLineHeightUnits.Mobile ? `line-height: ${fluentFormLabelLineHeight.Mobile}${fluentFormLabelLineHeightUnits.Mobile};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
+                ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea, 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
+                ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
+                ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
+                ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
+                ${fluentFormInputFontSize.Mobile && fluentFormInputFontSizeUnits.Mobile ? `font-size: ${fluentFormInputFontSize.Mobile}${fluentFormInputFontSizeUnits.Mobile};` : ''}
+                ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
+                ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
+                ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
+                ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
+                ${fluentFormInputLetterSpacing.Mobile && fluentFormInputLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormInputLetterSpacing.Mobile}${fluentFormInputLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormInputLineHeight.Mobile && fluentFormInputLineHeightUnits.Mobile ? `line-height: ${fluentFormInputLineHeight.Mobile}${fluentFormInputLineHeightUnits.Mobile};` : ''}
+                ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Mobile}${fluentFormTextIndentSizeUnits.Mobile};` : ""}
+                ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Mobile}${fluentFormInputWidthSizeUnits.Mobile};` : ""}
+                ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Mobile}${fluentFormInputHeightSizeUnits.Mobile};` : ""}
+                ${fluentFormMobilePadding ? `padding: ${fluentFormMobilePadding};` : ""} 
+                ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
+                ${fluentFormBorderMobileWidth ? `border-width: ${fluentFormBorderMobileWidth};` : ""}
+                ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
+                ${fluentFormBorderRadiusMobileWidth ? `border-radius: ${fluentFormBorderRadiusMobileWidth};` : ""}
+                transition: all .3s ease-in-out;
+            }
+            .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
+                ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
+                ${fluentFormFocusBorderMobileWidth ? `border-width: ${fluentFormFocusBorderMobileWidth};` : ""}
+                ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
+                ${fluentFormFocusBorderRadiusMobileWidth ? `border-radius: ${fluentFormFocusBorderRadiusMobileWidth};` : ""}
+                box-shadow: none;
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
+                ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Mobile}${fluentFormTextareaWidthSizeUnits.Mobile};` : ""}
+                ${fluentFormTextareaHeightSize ? `height: ${fluentFormTextareaHeightSize.Mobile}${fluentFormTextareaHeightSizeUnits.Mobile};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input::-webkit-input-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea::-webkit-input-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input::-moz-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea::-moz-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input:-ms-input-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea:-ms-input-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper input:-moz-placeholder,
+            .${blockID}.fb-fluent-form-wrapper textarea:-moz-placeholder {
+                ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"]{
+                width: ${fluentFormRadioFontSize.Mobile}${fluentFormRadioFontSizeUnits.Mobile}; 
+                height: ${fluentFormRadioFontSize.Mobile}${fluentFormRadioFontSizeUnits.Mobile};
+                ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+                ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+                ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
+                ${fluentFormCheckBoxBorderRadiusMobileWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusMobileWidth};` : ""}
+                position: relative;
+                appearance: none;
+                transition: all .3s ease-in-out;   
+            } 
+            .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
+                width: ${fluentFormRadioFontSize.Mobile}${fluentFormRadioFontSizeUnits.Mobile};
+                height: ${fluentFormRadioFontSize.Mobile}${fluentFormRadioFontSizeUnits.Mobile};
+                ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
+                ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
+                ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
+                ${fluentFormRadioBorderRadiusMobileWidth ? `border-radius: ${fluentFormRadioBorderRadiusMobileWidth};` : ""}
+                position: relative;
+                appearance: none;
+                transition: all .3s ease-in-out;   
+            }
+            .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
+            .${blockID}.fb-fluent-form-wrapper input[type="radio"]:checked:before {
+                ${fluentFormRadioCheckedColor ? `background: ${fluentFormRadioCheckedColor};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {
+                ${fluentFormRadioCheckBoxItemSpacing ? `margin-bottom: ${fluentFormRadioCheckBoxItemSpacing.Mobile}${fluentFormRadioCheckBoxItemSpacingUnits.Mobile};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break,
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break hr {
+                text-align: ${fluentFormSectionBreakAlignment};
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
+                ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
+                ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
+                ${fluentFormSectionBreakTitleFontSize.Mobile && fluentFormSectionBreakTitleFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakTitleFontSize.Mobile}${fluentFormSectionBreakTitleFontSizeUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
+                ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
+                ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
+                ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
+                ${fluentFormSectionBreakTitleLetterSpacing.Mobile && fluentFormSectionBreakTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Mobile}${fluentFormSectionBreakTitleLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakTitleLineHeight.Mobile && fluentFormSectionBreakTitleLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Mobile}${fluentFormSectionBreakTitleLineHeightUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakTitleMobilePadding ? `padding: ${fluentFormSectionBreakTitleMobilePadding};` : ""}
+                ${fluentFormSectionBreakTitleMobileMargin ? `margin: ${fluentFormSectionBreakTitleMobileMargin};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
+                ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
+                ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
+                ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
+                ${fluentFormSectionBreakDescFontSize.Mobile && fluentFormSectionBreakDescFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakDescFontSize.Mobile}${fluentFormSectionBreakDescFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
+                ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
+                ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
+                ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
+                ${fluentFormSectionBreakDescLetterSpacing.Mobile && fluentFormSectionBreakDescLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Mobile}${fluentFormSectionBreakDescLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakDescLineHeight.Mobile && fluentFormSectionBreakDescLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakDescLineHeight.Mobile}${fluentFormSectionBreakDescLineHeightUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakDescMobilePadding ? `padding: ${fluentFormSectionBreakDescMobilePadding};` : ""}
+                ${fluentFormSectionBreakDescMobileMargin ? `margin: ${fluentFormSectionBreakDescMobileMargin};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
+                ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
+                ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
+                ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
+                ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
+                ${fluentFormHtmlFontSize.Mobile && fluentFormHtmlFontSizeUnits.Mobile ? `font-size: ${fluentFormHtmlFontSize.Mobile}${fluentFormHtmlFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
+                ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
+                ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
+                ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
+                ${fluentFormHtmlLetterSpacing.Mobile && fluentFormHtmlLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Mobile}${fluentFormHtmlLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormHtmlLineHeight.Mobile && fluentFormHtmlLineHeightUnits.Mobile ? `line-height: ${fluentFormHtmlLineHeight.Mobile}${fluentFormHtmlLineHeightUnits.Mobile};` : ''} 
+                ${fluentFormHtmlMobilePadding ? `padding: ${fluentFormHtmlMobilePadding};` : ""}
+                ${fluentFormHtmlMobileMargin ? `margin: ${fluentFormHtmlMobileMargin};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
+                ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
+            }
+            
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
+                ${fluentFormSubmitAlignment ? `text-align: ${fluentFormSubmitAlignment};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+                ${fluentFormSubmitHeight.Mobile ? `height: ${fluentFormSubmitHeight.Mobile}${fluentFormSubmitHeightUnits.Mobile};` : ""} 
+                ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
+                ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
+                ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
+                ${fluentFormSubmitFontSize.Mobile && fluentFormSubmitFontSizeUnits.Mobile ? `font-size: ${fluentFormSubmitFontSize.Mobile}${fluentFormSubmitFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
+                ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
+                ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
+                ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
+                ${fluentFormSubmitLetterSpacing.Mobile && fluentFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Mobile}${fluentFormSubmitLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSubmitLineHeight.Mobile && fluentFormSubmitLineHeightUnits.Mobile ? `line-height: ${fluentFormSubmitLineHeight.Mobile}${fluentFormSubmitLineHeightUnits.Mobile};` : ''} 
+                ${fluentFormSubmitMobilePadding ? `padding: ${fluentFormSubmitMobilePadding};` : ""}
+                ${fluentFormSubmitMobileMargin ? `margin: ${fluentFormSubmitMobileMargin};` : ""}
+
+                ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
+                ${fluentFormSubmitMobileBorderWidth ? `border-width: ${fluentFormSubmitMobileBorderWidth};` : ""}
+                ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
+                ${fluentFormSubmitMobileBorderRadiusWidth ? `border-radius: ${fluentFormSubmitMobileBorderRadiusWidth};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
+                ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
+                ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
+                ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
+                ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
+                ${fluentFormSubmitWidthSelect === 'custom' && fluentFormSubmitWidth.Mobile 
+                ? `width: ${fluentFormSubmitWidth.Mobile}${fluentFormSubmitWidthUnits.Mobile};` 
+                : ''}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .ff-message-success {
+                ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
+                ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
+                ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
+                ${fluentFormSuccessFontSize.Mobile && fluentFormSuccessFontSizeUnits.Mobile ? `font-size: ${fluentFormSuccessFontSize.Mobile}${fluentFormSuccessFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
+                ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
+                ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
+                ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
+                ${fluentFormSuccessLetterSpacing.Mobile && fluentFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Mobile}${fluentFormSuccessLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSuccessLineHeight.Mobile && fluentFormSuccessLineHeightUnits.Mobile ? `line-height: ${fluentFormSuccessLineHeight.Mobile}${fluentFormSuccessLineHeightUnits.Mobile};` : ''}
+                ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
+                ${fluentFormSuccessMobileBorderWidth ? `border-width: ${fluentFormSuccessMobileBorderWidth};` : ""}
+                ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
+                ${fluentFormSuccessMobileBorderRadiusWidth ? `border-radius: ${fluentFormSuccessMobileBorderRadiusWidth};` : ""}
+            }
+            .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
+                ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
+            }
+
+            .${blockID}.fb-fluent-form-wrapper .error.text-danger {
+                ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
+                ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
+                ${fluentFormErrorFontSize.Mobile && fluentFormErrorFontSizeUnits.Mobile ? `font-size: ${fluentFormErrorFontSize.Mobile}${fluentFormErrorFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
+                ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
+                ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
+                ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
+                ${fluentFormErrorLetterSpacing.Mobile && fluentFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormErrorLetterSpacing.Mobile}${fluentFormErrorLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormErrorLineHeight.Mobile && fluentFormErrorLineHeightUnits.Mobile ? `line-height: ${fluentFormErrorLineHeight.Mobile}${fluentFormErrorLineHeightUnits.Mobile};` : ''} 
+                ${fluentFormErrorMobilePadding ? `padding: ${fluentFormErrorMobilePadding};` : ""}
+                ${fluentFormErrorMobileMargin ? `margin: ${fluentFormErrorMobileMargin};` : ""} 
+            } 
+        }
+
+
+    `, [
+        blockID,
+        deviceType,
+        fluentFormGlobalZIndex,
+        formId,
+        showLabels,
+        showPlaceholder,
+        showErrorMessage,
+
+        fluentFormLabelColorSwitcher,
+        fluentFormLabelColor,
+        fluentFormLabelHoverColor,
+        fluentFormLabelFontFamily,
+        fluentFormLabelFontSize,
+        fluentFormLabelFontSizeUnits,
+        fluentFormLabelFontWeight,
+        fluentFormLabelFontStyle,
+        fluentFormLabelTextTransform,
+        fluentFormLabelTextDecoration,
+        fluentFormLabelLetterSpacing,
+        fluentFormLabelLineHeight,
+        fluentFormLabelLetterSpacingUnits,
+        fluentFormLabelLineHeightUnits,
+
+        fluentFormInputBgColor,
+        fluentFormInputColor,
+        fluentFormInputFocusColor,
+        fluentFormInputFontFamily,
+        fluentFormInputFontSize,
+        fluentFormInputFontSizeUnits,
+        fluentFormInputFontWeight,
+        fluentFormInputFontStyle,
+        fluentFormInputTextTransform,
+        fluentFormInputTextDecoration,
+        fluentFormInputLetterSpacing,
+        fluentFormInputLineHeight,
+        fluentFormInputLetterSpacingUnits,
+        fluentFormInputLineHeightUnits,
+
+        fluentFormTextIndentSize,
+        fluentFormTextIndentSizeUnits,
+        fluentFormInputWidthSize,
+        fluentFormInputWidthSizeUnits,
+        fluentFormInputHeightSize,
+        fluentFormInputHeightSizeUnits,
+        fluentFormTextareaWidthSize,
+        fluentFormTextareaWidthSizeUnits,
+        fluentFormTextareaHeightSize,
+        fluentFormTextareaHeightSizeUnits,
+        fluentFormSpacingSize,
+        fluentFormSpacingUnits,
+
+        fluentFormPaddingUnits,
+        fluentFormPaddingDesktop,
+        fluentFormPaddingTablet,
+        fluentFormPaddingMobile,
+        fluentFormPaddingLink,
+
+        fluentFormBorder,
+        fluentFormBorderColor,
+        fluentFormBorderUnits,
+        fluentFormBorderDesktop,
+        fluentFormBorderTablet,
+        fluentFormBorderMobile,
+        fluentFormBorderLink,
+        fluentFormBorderRadiusUnits,
+        fluentFormBorderRadiusDesktop,
+        fluentFormBorderRadiusTablet,
+        fluentFormBorderRadiusMobile,
+        fluentFormBorderRadiusLink,
+
+        fluentFormFocusBorder,
+        fluentFormFocusBorderUnits,
+        fluentFormFocusBorderDesktop,
+        fluentFormFocusBorderTablet,
+        fluentFormFocusBorderMobile,
+        fluentFormFocusBorderLink,
+        fluentFormFocusBorderDesktopWidth,
+        fluentFormFocusBorderTabletWidth,
+        fluentFormFocusBorderMobileWidth,
+
+        fluentFormFocusBorderRadiusUnits,
+        fluentFormFocusBorderRadiusDesktop,
+        fluentFormFocusBorderRadiusTablet,
+        fluentFormFocusBorderRadiusMobile,
+        fluentFormFocusBorderRadiusLink,
+        fluentFormFocusBorderRadiusDesktopWidth,
+        fluentFormFocusBorderRadiusTabletWidth,
+        fluentFormFocusBorderRadiusMobileWidth,
+
+        
+
+        fluentFormPlaceholderColor,
+
+        fluentFormRadioFontSize,
+        fluentFormRadioFontSizeUnits,
+        fluentFormRadioColor,
+        fluentFormRadioCheckedColor,
+        fluentFormRadioBorderWidth,
+        fluentFormRadioBorderWidthUnits,
+        fluentFormRadioBorderColor,
+        fluentFormRadioBorderRadiusUnits,
+        fluentFormRadioBorderRadiusDesktop,
+        fluentFormRadioBorderRadiusTablet,
+        fluentFormRadioBorderRadiusMobile,
+        fluentFormRadioBorderRadiusLink,
+        fluentFormCheckBoxBorderRadiusUnits,
+        fluentFormCheckBoxBorderRadiusDesktop,
+        fluentFormCheckBoxBorderRadiusTablet,
+        fluentFormCheckBoxBorderRadiusMobile,
+        fluentFormCheckBoxBorderRadiusLink,
+        fluentFormRadioCheckBoxItemSpacing,
+        fluentFormRadioCheckBoxItemSpacingUnits,
+
+        fluentFormSectionBreakAlignment,
+        fluentFormSectionBreakTitleColorSwitcher,
+        fluentFormSectionBreakTitleColor,
+        fluentFormSectionBreakTitleHoverColor,
+        fluentFormSectionBreakTitleFontFamily,
+        fluentFormSectionBreakTitleFontSize,
+        fluentFormSectionBreakTitleFontSizeUnits,
+        fluentFormSectionBreakTitleFontWeight,
+        fluentFormSectionBreakTitleFontStyle,
+        fluentFormSectionBreakTitleTextTransform,
+        fluentFormSectionBreakTitleTextDecoration,
+        fluentFormSectionBreakTitleLetterSpacing,
+        fluentFormSectionBreakTitleLetterSpacingUnits,
+        fluentFormSectionBreakTitleLineHeight,
+        fluentFormSectionBreakTitleLineHeightUnits,
+        fluentFormSectionBreakTitlePaddingUnits,
+        fluentFormSectionBreakTitlePaddingDesktop,
+        fluentFormSectionBreakTitlePaddingTablet,
+        fluentFormSectionBreakTitlePaddingMobile,
+        fluentFormSectionBreakTitlePaddingLink,
+        fluentFormSectionBreakTitleMarginUnits,
+        fluentFormSectionBreakTitleMarginDesktop,
+        fluentFormSectionBreakTitleMarginTablet,
+        fluentFormSectionBreakTitleMarginMobile,
+        fluentFormSectionBreakTitleMarginLink,
+
+        fluentFormSectionBreakDescColorSwitcher,
+        fluentFormSectionBreakDescColor,
+        fluentFormSectionBreakDescHoverColor,
+        fluentFormSectionBreakDescFontFamily,
+        fluentFormSectionBreakDescFontSize,
+        fluentFormSectionBreakDescFontSizeUnits,
+        fluentFormSectionBreakDescFontWeight,
+        fluentFormSectionBreakDescFontStyle,
+        fluentFormSectionBreakDescTextTransform,
+        fluentFormSectionBreakDescTextDecoration,
+        fluentFormSectionBreakDescLetterSpacing,
+        fluentFormSectionBreakDescLetterSpacingUnits,
+        fluentFormSectionBreakDescLineHeight,
+        fluentFormSectionBreakDescLineHeightUnits,
+        fluentFormSectionBreakDescPaddingUnits,
+        fluentFormSectionBreakDescPaddingDesktop,
+        fluentFormSectionBreakDescPaddingTablet,
+        fluentFormSectionBreakDescPaddingMobile,
+        fluentFormSectionBreakDescPaddingLink,
+        fluentFormSectionBreakDescMarginUnits,
+        fluentFormSectionBreakDescMarginDesktop,
+        fluentFormSectionBreakDescMarginTablet,
+        fluentFormSectionBreakDescMarginMobile,
+        fluentFormSectionBreakDescMarginLink,
+
+        fluentFormHtmlAlignment,
+        fluentFormHtmlColorSwitcher,
+        fluentFormHtmlColor,
+        fluentFormHtmlHoverColor,
+        fluentFormHtmlFontFamily,
+        fluentFormHtmlFontSize,
+        fluentFormHtmlFontSizeUnits,
+        fluentFormHtmlFontWeight,
+        fluentFormHtmlFontStyle,
+        fluentFormHtmlTextTransform,
+        fluentFormHtmlTextDecoration,
+        fluentFormHtmlLetterSpacing,
+        fluentFormHtmlLetterSpacingUnits,
+        fluentFormHtmlLineHeight,
+        fluentFormHtmlLineHeightUnits,
+        fluentFormHtmlPaddingUnits,
+        fluentFormHtmlPaddingDesktop,
+        fluentFormHtmlPaddingTablet,
+        fluentFormHtmlPaddingMobile,
+        fluentFormHtmlPaddingLink,
+        fluentFormHtmlMarginUnits,
+        fluentFormHtmlMarginDesktop,
+        fluentFormHtmlMarginTablet,
+        fluentFormHtmlMarginMobile,
+        fluentFormHtmlMarginLink,
+
+        fluentFormSubmitAlignment,
+        fluentFormSubmitHeight,
+        fluentFormSubmitHeightUnits,
+        fluentFormSubmitWidthSelect,
+        fluentFormSubmitWidth,
+        fluentFormSubmitWidthUnits,
+        fluentFormSubmitColorSwitcher,
+        fluentFormSubmitColor,
+        fluentFormSubmitHoverColor,
+        fluentFormSubmitBgColorSwitcher,
+        fluentFormSubmitBgColor,
+        fluentFormSubmitBgHoverColor,
+        fluentFormSubmitFontFamily,
+        fluentFormSubmitFontSize,
+        fluentFormSubmitFontSizeUnits,
+        fluentFormSubmitFontWeight,
+        fluentFormSubmitFontStyle,
+        fluentFormSubmitTextTransform,
+        fluentFormSubmitTextDecoration,
+        fluentFormSubmitLetterSpacing,
+        fluentFormSubmitLetterSpacingUnits,
+        fluentFormSubmitLineHeight,
+        fluentFormSubmitLineHeightUnits,
+        fluentFormSubmitPaddingUnits,
+        fluentFormSubmitPaddingDesktop,
+        fluentFormSubmitPaddingTablet,
+        fluentFormSubmitPaddingMobile,
+        fluentFormSubmitPaddingLink,
+        fluentFormSubmitMarginUnits,
+        fluentFormSubmitMarginDesktop,
+        fluentFormSubmitMarginTablet,
+        fluentFormSubmitMarginMobile,
+        fluentFormSubmitMarginLink,
+        fluentFormSubmitBorder,
+        fluentFormSubmitBorderColorSwitcher,
+        fluentFormSubmitBorderColor,
+        fluentFormSubmitBorderHoverColor,
+        fluentFormSubmitBorderUnits,
+        fluentFormSubmitBorderDesktop,
+        fluentFormSubmitBorderTablet,
+        fluentFormSubmitBorderMobile,
+        fluentFormSubmitBorderLink,
+        fluentFormSubmitBorderRadiusUnits,
+        fluentFormSubmitBorderRadiusDesktop,
+        fluentFormSubmitBorderRadiusTablet,
+        fluentFormSubmitBorderRadiusMobile,
+        fluentFormSubmitBorderRadiusLink,
+
+        fluentFormSuccessColor,
+        fluentFormSuccessBgColor,
+        fluentFormSuccessFontFamily,
+        fluentFormSuccessFontSize,
+        fluentFormSuccessFontSizeUnits,
+        fluentFormSuccessFontWeight,
+        fluentFormSuccessFontStyle,
+        fluentFormSuccessTextTransform,
+        fluentFormSuccessTextDecoration,
+        fluentFormSuccessLetterSpacing,
+        fluentFormSuccessLetterSpacingUnits,
+        fluentFormSuccessLineHeight,
+        fluentFormSuccessLineHeightUnits,
+        fluentFormSuccessBorder,
+        fluentFormSuccessBorderColorSwitcher,
+        fluentFormSuccessBorderColor,
+        fluentFormSuccessBorderHoverColor,
+        fluentFormSuccessBorderUnits,
+        fluentFormSuccessBorderDesktop,
+        fluentFormSuccessBorderTablet,
+        fluentFormSuccessBorderMobile,
+        fluentFormSuccessBorderLink,
+        fluentFormSuccessBorderRadiusUnits,
+        fluentFormSuccessBorderRadiusDesktop,
+        fluentFormSuccessBorderRadiusTablet,
+        fluentFormSuccessBorderRadiusMobile,
+        fluentFormSuccessBorderRadiusLink,
+
+        fluentFormErrorColor,
+        fluentFormErrorFontFamily,
+        fluentFormErrorFontSize,
+        fluentFormErrorFontSizeUnits,
+        fluentFormErrorFontWeight,
+        fluentFormErrorFontStyle,
+        fluentFormErrorTextTransform,
+        fluentFormErrorTextDecoration,
+        fluentFormErrorLetterSpacing,
+        fluentFormErrorLetterSpacingUnits,
+        fluentFormErrorLineHeight,
+        fluentFormErrorLineHeightUnits,
+        fluentFormErrorPaddingUnits,
+        fluentFormErrorPaddingDesktop,
+        fluentFormErrorPaddingTablet,
+        fluentFormErrorPaddingMobile,
+        fluentFormErrorPaddingLink,
+        fluentFormErrorMarginUnits,
+        fluentFormErrorMarginDesktop,
+        fluentFormErrorMarginTablet,
+        fluentFormErrorMarginMobile,
+        fluentFormErrorMarginLink,
+
+        fluentFormGlobalPaddingUnits,
+        fluentFormGlobalPaddingDesktop,
+        fluentFormGlobalPaddingTablet,
+        fluentFormGlobalPaddingMobile,
+        fluentFormGlobalPaddingLink,
+        fluentFormGlobalMarginUnits,
+        fluentFormGlobalMarginDesktop,
+        fluentFormGlobalMarginTablet,
+        fluentFormGlobalMarginMobile,
+        fluentFormGlobalMarginLink,
+        fluentFormGlobalBgColorSwitcher,
+        fluentFormGlobalBgColor,
+        fluentFormGlobalBgHoverColor,
+        fluentFormGlobalBorder,
+        fluentFormGlobalBorderColorSwitcher,
+        fluentFormGlobalBorderColor,
+        fluentFormGlobalBorderHoverColor,
+        fluentFormGlobalBorderUnits,
+        fluentFormGlobalBorderDesktop,
+        fluentFormGlobalBorderTablet,
+        fluentFormGlobalBorderMobile,
+        fluentFormGlobalBorderLink,
+        fluentFormGlobalBorderRadiusUnits,
+        fluentFormGlobalBorderRadiusDesktop,
+        fluentFormGlobalBorderRadiusTablet,
+        fluentFormGlobalBorderRadiusMobile,
+        fluentFormGlobalBorderRadiusLink,
+
+        fluentFormDesktopPadding,
+        fluentFormTabletPadding,
+        fluentFormMobilePadding,
+
+        fluentFormBorderDesktopWidth,
+        fluentFormBorderTabletWidth,
+        fluentFormBorderMobileWidth,
+
+        fluentFormBorderRadiusDesktopWidth,
+        fluentFormBorderRadiusTabletWidth,
+        fluentFormBorderRadiusMobileWidth,
+
+        fluentFormRadioBorderRadiusDesktopWidth,
+        fluentFormRadioBorderRadiusTabletWidth,
+        fluentFormRadioBorderRadiusMobileWidth,
+
+        fluentFormCheckBoxBorderRadiusDesktopWidth,
+        fluentFormCheckBoxBorderRadiusTabletWidth,
+        fluentFormCheckBoxBorderRadiusMobileWidth,
+
+        fluentFormSectionBreakTitleDesktopPadding,
+        fluentFormSectionBreakTitleTabletPadding,
+        fluentFormSectionBreakTitleMobilePadding,
+
+        fluentFormSectionBreakTitleDesktopMargin,
+        fluentFormSectionBreakTitleTabletMargin,
+        fluentFormSectionBreakTitleMobileMargin,
+
+        fluentFormSectionBreakDescDesktopPadding,
+        fluentFormSectionBreakDescTabletPadding,
+        fluentFormSectionBreakDescMobilePadding,
+
+        fluentFormSectionBreakDescDesktopMargin,
+        fluentFormSectionBreakDescTabletMargin,
+        fluentFormSectionBreakDescMobileMargin,
+
+        fluentFormHtmlDesktopPadding,
+        fluentFormHtmlTabletPadding,
+        fluentFormHtmlMobilePadding,
+
+        fluentFormHtmlDesktopMargin,
+        fluentFormHtmlTabletMargin,
+        fluentFormHtmlMobileMargin,
+
+        fluentFormSubmitDesktopPadding,
+        fluentFormSubmitTabletPadding,
+        fluentFormSubmitMobilePadding,
+
+        fluentFormSubmitDesktopMargin,
+        fluentFormSubmitTabletMargin,
+        fluentFormSubmitMobileMargin,
+
+        fluentFormSubmitDesktopBorderWidth,
+        fluentFormSubmitTabletBorderWidth,
+        fluentFormSubmitMobileBorderWidth,
+
+        fluentFormSubmitDesktopBorderRadiusWidth,
+        fluentFormSubmitTabletBorderRadiusWidth,
+        fluentFormSubmitMobileBorderRadiusWidth,
+
+        fluentFormSuccessDesktopBorderWidth,
+        fluentFormSuccessTabletBorderWidth,
+        fluentFormSuccessMobileBorderWidth,
+
+        fluentFormSuccessDesktopBorderRadiusWidth,
+        fluentFormSuccessTabletBorderRadiusWidth,
+        fluentFormSuccessMobileBorderRadiusWidth,
+
+        fluentFormErrorDesktopPadding,
+        fluentFormErrorTabletPadding,
+        fluentFormErrorMobilePadding,
+
+        fluentFormErrorDesktopMargin,
+        fluentFormErrorTabletMargin,
+        fluentFormErrorMobileMargin,
+
+        DesktopPadding,
+        TabletPadding,
+        MobilePadding,
+
+        DesktopMargin,
+        TabletMargin,
+        MobileMargin,
+
+        BorderDesktopWidth,
+        BorderTabletWidth,
+        BorderMobileWidth,
+
+        BorderRadiusDesktopWidth,
+        BorderRadiusTabletWidth,
+        BorderRadiusMobileWidth,
+
+
+
+
+    ]);
+
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle]);
+
+
+    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
  
 
     return (
         <>
             <style>
-            {`
-                .${blockID}.fb-fluent-form-wrapper {
-                    ${fluentFormGlobalZIndex !== undefined ? `z-index: ${fluentFormGlobalZIndex};` : ''}
-                    position: relative;
-                }
-                .${blockID}.fb-fluent-form-wrapper {
-                    ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
-                    padding: ${DesktopPadding};
-                    margin: ${DesktopMargin};
-                    border: ${fluentFormGlobalBorder};
-                    border-width: ${BorderDesktopWidth};
-                    border-radius: ${BorderRadiusDesktopWidth} !important;
-                    ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-fluent-form-wrapper:hover {
-                    ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
-                    ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
-                }
-
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group label:not(.ff-el-form-check-label),
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group .ff-el-input--label,
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-error-message .fb-fluent-form-rendered .ff-el-group .error.text-danger {
-                    display: none;
-                }
-
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input::-webkit-input-placeholder,
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea::-webkit-input-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input::-moz-placeholder,
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea::-moz-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input:-ms-input-placeholder,
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea:-ms-input-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder input:-moz-placeholder,
-                .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-placeholder textarea:-moz-placeholder {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group {
-                    ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Desktop}${fluentFormSpacingUnits.Desktop};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
-                    ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
-                    ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
-                    ${fluentFormLabelFontSize ? `font-size: ${fluentFormLabelFontSize}${fluentFormLabelFontSizeUnits || "px"};` : ""}
-                    ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
-                    ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
-                    ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
-                    ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
-                    ${fluentFormLabelLetterSpacing ? `letter-spacing: ${fluentFormLabelLetterSpacing}${fluentFormLabelLetterSpacingUnits || "px"};` : ""}
-                    ${fluentFormLabelLineHeight ? `line-height: ${fluentFormLabelLineHeight}${fluentFormLabelLineHeightUnits || "px"};` : ""}
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
-                    ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea, 
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
-                    ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
-                    ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
-                    ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
-                    ${fluentFormInputFontSize ? `font-size: ${fluentFormInputFontSize}${fluentFormInputFontSizeUnits};` : ""}
-                    ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
-                    ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
-                    ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
-                    ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
-                    ${fluentFormInputLetterSpacing ? `letter-spacing: ${fluentFormInputLetterSpacing}${fluentFormInputLetterSpacingUnits};` : ""}
-                    ${fluentFormInputLineHeight ? `line-height: ${fluentFormInputLineHeight}${fluentFormInputLineHeightUnits};` : ""}
-                    ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};` : ""}
-                    ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};` : ""}
-                    ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};` : ""}
-                    ${fluentFormDesktopPadding ? `padding: ${fluentFormDesktopPadding};` : ""}
-                    ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
-                    ${fluentFormBorderDesktopWidth ? `border-width: ${fluentFormBorderDesktopWidth};` : ""}
-                    ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
-                    ${fluentFormBorderRadiusDesktopWidth ? `border-radius: ${fluentFormBorderRadiusDesktopWidth};` : ""}
-                    transition: all .3s ease-in-out;
-                }
-                .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
-                    ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
-                    box-shadow: 0 0 0 1px ${fluentFormInputFocusColor ? fluentFormInputFocusColor : ""};
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
-                    ${fluentFormTextareaWidthSize ? `width: ${fluentFormTextareaWidthSize.Desktop}${fluentFormTextareaWidthSizeUnits.Desktop};` : ""}
-                    ${fluentFormTextareaHeightSize ? `height: ${fluentFormTextareaHeightSize.Desktop}${fluentFormTextareaHeightSizeUnits.Desktop};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper input::-webkit-input-placeholder,
-                .${blockID}.fb-fluent-form-wrapper textarea::-webkit-input-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper input::-moz-placeholder,
-                .${blockID}.fb-fluent-form-wrapper textarea::-moz-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper input:-ms-input-placeholder,
-                .${blockID}.fb-fluent-form-wrapper textarea:-ms-input-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper input:-moz-placeholder,
-                .${blockID}.fb-fluent-form-wrapper textarea:-moz-placeholder {
-                    ${fluentFormPlaceholderColor ? `color: ${fluentFormPlaceholderColor};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"]{
-                    width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
-                    ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
-                    ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
-                    ${fluentFormCheckBoxBorderRadiusDesktopWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
-                    position: relative;
-                    appearance: none;
-                    transition: all .3s ease-in-out;   
-                } 
-                .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
-                    width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-                    ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
-                    ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
-                    ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
-                    ${fluentFormRadioBorderRadiusDesktopWidth ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
-                    position: relative;
-                    appearance: none;
-                    transition: all .3s ease-in-out;   
-                }
-                .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
-                .${blockID}.fb-fluent-form-wrapper input[type="radio"]:checked:before {
-                    ${fluentFormRadioCheckedColor ? `background: ${fluentFormRadioCheckedColor};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-form-check:not(:last-child) {
-                    ${fluentFormRadioCheckBoxItemSpacing ? `margin-bottom: ${fluentFormRadioCheckBoxItemSpacing.Desktop}${fluentFormRadioCheckBoxItemSpacingUnits.Desktop};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break,
-                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break hr {
-                    text-align: ${fluentFormSectionBreakAlignment};
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
-                    ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
-                    ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
-                    ${fluentFormSectionBreakTitleFontSize ? `font-size: ${fluentFormSectionBreakTitleFontSize}${fluentFormSectionBreakTitleFontSizeUnits};` : ""}
-                    ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
-                    ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
-                    ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
-                    ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
-                    ${fluentFormSectionBreakTitleLetterSpacing ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing}${fluentFormSectionBreakTitleLetterSpacingUnits};` : ""}
-                    ${fluentFormSectionBreakTitleLineHeight ? `line-height: ${fluentFormSectionBreakTitleLineHeight}${fluentFormSectionBreakTitleLineHeightUnits};` : ""}
-                    ${fluentFormSectionBreakTitleDesktopPadding ? `padding: ${fluentFormSectionBreakTitleDesktopPadding};` : ""}
-                    ${fluentFormSectionBreakTitleDesktopMargin ? `margin: ${fluentFormSectionBreakTitleDesktopMargin};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
-                    ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
-                    ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
-                    ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
-                    ${fluentFormSectionBreakDescFontSize ? `font-size: ${fluentFormSectionBreakDescFontSize}${fluentFormSectionBreakDescFontSizeUnits};` : ""}
-                    ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
-                    ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
-                    ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
-                    ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
-                    ${fluentFormSectionBreakDescLetterSpacing ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing}${fluentFormSectionBreakDescLetterSpacingUnits};` : ""}
-                    ${fluentFormSectionBreakDescLineHeight ? `line-height: ${fluentFormSectionBreakDescLineHeight}${fluentFormSectionBreakDescLineHeightUnits};` : ""}
-                    ${fluentFormSectionBreakDescDesktopPadding ? `padding: ${fluentFormSectionBreakDescDesktopPadding};` : ""}
-                    ${fluentFormSectionBreakDescDesktopMargin ? `margin: ${fluentFormSectionBreakDescDesktopMargin};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
-                    ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
-                    ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
-                    ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
-                    ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
-                    ${fluentFormHtmlFontSize ? `font-size: ${fluentFormHtmlFontSize}${fluentFormHtmlFontSizeUnits};` : ""}
-                    ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
-                    ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
-                    ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
-                    ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
-                    ${fluentFormHtmlLetterSpacing ? `letter-spacing: ${fluentFormHtmlLetterSpacing}${fluentFormHtmlLetterSpacingUnits};` : ""}
-                    ${fluentFormHtmlLineHeight ? `line-height: ${fluentFormHtmlLineHeight}${fluentFormHtmlLineHeightUnits};` : ""}
-                    ${fluentFormHtmlDesktopPadding ? `padding: ${fluentFormHtmlDesktopPadding};` : ""}
-                    ${fluentFormHtmlDesktopMargin ? `margin: ${fluentFormHtmlDesktopMargin};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
-                    ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
-                }
-                
-                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
-                    ${fluentFormSubmitAlignment ? `text-align: ${fluentFormSubmitAlignment};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
-                    ${fluentFormSubmitHeight.Desktop ? `height: ${fluentFormSubmitHeight.Desktop}${fluentFormSubmitHeightUnits.Desktop};` : ""}
-                    ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
-                    ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
-                    ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
-                    ${fluentFormSubmitFontSize ? `font-size: ${fluentFormSubmitFontSize}${fluentFormSubmitFontSizeUnits};` : ""}
-                    ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
-                    ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
-                    ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
-                    ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
-                    ${fluentFormSubmitLetterSpacing ? `letter-spacing: ${fluentFormSubmitLetterSpacing}${fluentFormSubmitLetterSpacingUnits};` : ""}
-                    ${fluentFormSubmitLineHeight ? `line-height: ${fluentFormSubmitLineHeight}${fluentFormSubmitLineHeightUnits};` : ""}
-                    ${fluentFormSubmitDesktopPadding ? `padding: ${fluentFormSubmitDesktopPadding};` : ""}
-                    ${fluentFormSubmitDesktopMargin ? `margin: ${fluentFormSubmitDesktopMargin};` : ""}
-
-                    ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
-                    ${fluentFormSubmitDesktopBorderWidth ? `border-width: ${fluentFormSubmitDesktopBorderWidth};` : ""}
-                    ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
-                    ${fluentFormSubmitDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSubmitDesktopBorderRadiusWidth};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
-                    ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
-                    ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
-                    ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
-                    ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
-                    ${fluentFormSubmitWidthSelect === 'custom' && fluentFormSubmitWidth.Desktop 
-                    ? `width: ${fluentFormSubmitWidth.Desktop}${fluentFormSubmitWidthUnits.Desktop};` 
-                    : ''}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper .ff-message-success {
-                    ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
-                    ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
-                    ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
-                    ${fluentFormSuccessFontSize ? `font-size: ${fluentFormSuccessFontSize}${fluentFormSuccessFontSizeUnits};` : ""}
-                    ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
-                    ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
-                    ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
-                    ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
-                    ${fluentFormSuccessLetterSpacing ? `letter-spacing: ${fluentFormSuccessLetterSpacing}${fluentFormSuccessLetterSpacingUnits};` : ""}
-                    ${fluentFormSuccessLineHeight ? `line-height: ${fluentFormSuccessLineHeight}${fluentFormSuccessLineHeightUnits};` : ""}
-                    ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
-                    ${fluentFormSuccessDesktopBorderWidth ? `border-width: ${fluentFormSuccessDesktopBorderWidth};` : ""}
-                    ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
-                    ${fluentFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSuccessDesktopBorderRadiusWidth};` : ""}
-                }
-                .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
-                    ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
-                }
-
-                .${blockID}.fb-fluent-form-wrapper .error.text-danger {
-                    ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
-                    ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
-                    ${fluentFormErrorFontSize ? `font-size: ${fluentFormErrorFontSize}${fluentFormErrorFontSizeUnits};` : ""}
-                    ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
-                    ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
-                    ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
-                    ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
-                    ${fluentFormErrorLetterSpacing ? `letter-spacing: ${fluentFormErrorLetterSpacing}${fluentFormErrorLetterSpacingUnits};` : ""}
-                    ${fluentFormErrorLineHeight ? `line-height: ${fluentFormErrorLineHeight}${fluentFormErrorLineHeightUnits};` : ""} 
-                    ${fluentFormErrorDesktopPadding ? `padding: ${fluentFormErrorDesktopPadding};` : ""}
-                    ${fluentFormErrorDesktopMargin ? `margin: ${fluentFormErrorDesktopMargin};` : ""} 
-                }
-
-                           
-
-                @media only screen and (max-width: 1024px) {
-
-                    .${blockID}.fb-fluent-form-wrapper {
-                        padding: ${TabletPadding};
-                        margin: ${TabletMargin};
-                        border-width: ${BorderTabletWidth};
-                        border-radius: ${BorderRadiusTabletWidth} !important;
-                    }
-                }
-                    
-                @media only screen and (max-width: 767px) {
-                    .${blockID}.fb-fluent-form-wrapper {
-                        padding: ${MobilePadding};
-                        margin: ${MobileMargin};
-                        border-width: ${BorderMobileWidth};
-                        border-radius: ${BorderRadiusMobileWidth} !important;
-                    }
-                }
-
-            `}
+                {editorStyle}
             </style>
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
@@ -2787,530 +3602,128 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Label", "frontis-blocks")} initialOpen={true}>
-                                            <FB_Color
+
+
+                                            <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormLabelColorSwitcher}
-                                                globalColor={fluentFormLabelColor}
-                                                globalHoverColor={fluentFormLabelHoverColor}
-                                                handleColorSwitcherChange={handleLabelColorSwitcherChange}
-                                                handleGlobalColorChange={handleLabelColorChange}
-                                                handleGlobalHoverColorChange={handleLabelHoverColorChange}
+                                                globalSwitcher={fluentFormLabelColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ fluentFormLabelColorSwitcher: value })}
                                             />
 
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={fluentFormLabelFontFamily}
-                                                                        onChange={(value) => setAttributes({ fluentFormLabelFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <div className="fb-setting-fontsize-label">
-                                                                            <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormLabelFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${ fluentFormLabelFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={fluentFormLabelFontSize}
-                                                                            onChange={(value) => setAttributes({ fluentFormLabelFontSize: value })}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={fluentFormLabelFontWeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormLabelFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={fluentFormLabelFontStyle}
-                                                                        onChange={(value) => setAttributes({ fluentFormLabelFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={fluentFormLabelTextTransform}
-                                                                        onChange={(value) => setAttributes({ fluentFormLabelTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={fluentFormLabelTextDecoration}
-                                                                        onChange={(value) => setAttributes({ fluentFormLabelTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <div className="fb-setting-letterspacing-label">
-                                                                            <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormLabelLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${ fluentFormLabelLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormLabelLetterSpacing}
-                                                                        onChange={(value) => setAttributes({ fluentFormLabelLetterSpacing: value === 0 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <div className="fb-setting-lineheight-label">
-                                                                            <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormLabelLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${ fluentFormLabelLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormLabelLineHeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormLabelLineHeight: value === 1 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
+                                            {fluentFormLabelColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={fluentFormLabelColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormLabelColor: value })}
                                                 />
-                                            </BaseControl>
+                                            )}
+
+                                            {fluentFormLabelColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={fluentFormLabelHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormLabelHoverColor: value })}
+                                                />
+                                            )}
+
+
+                                            <FB_TypographyControl
+                                                fontFamily={fluentFormLabelFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormLabelFontFamily: value })}
+
+                                                fontSize={fluentFormLabelFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormLabelFontSize: value })}
+
+                                                fontSizeUnits={fluentFormLabelFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormLabelFontSizeUnits: value })}
+
+                                                fontWeight={fluentFormLabelFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormLabelFontWeight: value })}
+
+                                                fontStyle={fluentFormLabelFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormLabelFontStyle: value })}
+
+                                                textTransform={fluentFormLabelTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormLabelTextTransform: value })}
+
+                                                textDecoration={fluentFormLabelTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormLabelTextDecoration: value })}
+
+                                                letterSpacing={fluentFormLabelLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormLabelLetterSpacing: value })}
+
+                                                letterSpacingUnits={fluentFormLabelLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormLabelLetterSpacingUnits: value })}
+
+                                                lineHeight={fluentFormLabelLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormLabelLineHeight: value })}
+
+                                                lineHeightUnits={fluentFormLabelLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormLabelLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
                                         </PanelBody>
                                         <PanelBody title={__("Input & Textarea", "frontis-blocks")} initialOpen={false}>
-                                            <BaseControl 
-                                                label={__("Background Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormInputBgColor}
-                                                                        onChange={handleInputBgColorChange}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormInputBgColor}
-                                                                        onChange={handleInputBgColorChange}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl 
-                                                label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormInputColor}
-                                                                        onChange={handleInputColorChange}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormInputColor}
-                                                                        onChange={handleInputColorChange}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl 
-                                                label={__("Focus Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormInputFocusColor}
-                                                                        onChange={handleInputFocusColorChange}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormInputFocusColor}
-                                                                        onChange={handleInputFocusColorChange}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
 
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={fluentFormInputFontFamily}
-                                                                        onChange={(value) => setAttributes({ fluentFormInputFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <div className="fb-setting-fontsize-label">
-                                                                            <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormInputFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${ fluentFormInputFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={fluentFormInputFontSize}
-                                                                            onChange={(value) => setAttributes({ fluentFormInputFontSize: value })}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={fluentFormInputFontWeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormInputFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={fluentFormInputFontStyle}
-                                                                        onChange={(value) => setAttributes({ fluentFormInputFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={fluentFormInputTextTransform}
-                                                                        onChange={(value) => setAttributes({ fluentFormInputTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={fluentFormInputTextDecoration}
-                                                                        onChange={(value) => setAttributes({ fluentFormInputTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <div className="fb-setting-letterspacing-label">
-                                                                            <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormInputLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${ fluentFormInputLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormInputLetterSpacing}
-                                                                        onChange={(value) => setAttributes({ fluentFormInputLetterSpacing: value === 0 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <div className="fb-setting-lineheight-label">
-                                                                            <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormInputLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${ fluentFormInputLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormInputLineHeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormInputLineHeight: value === 1 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
+                                            <FB_ColorControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalColor={fluentFormInputBgColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormInputBgColor: value })}
+                                            />
+
+                                            <FB_ColorControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalColor={fluentFormInputColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormInputColor: value })}
+                                            />
+
+
+                                            <FB_TypographyControl
+                                                fontFamily={fluentFormInputFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormInputFontFamily: value })}
+
+                                                fontSize={fluentFormInputFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormInputFontSize: value })}
+
+                                                fontSizeUnits={fluentFormInputFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormInputFontSizeUnits: value })}
+
+                                                fontWeight={fluentFormInputFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormInputFontWeight: value })}
+
+                                                fontStyle={fluentFormInputFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormInputFontStyle: value })}
+
+                                                textTransform={fluentFormInputTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormInputTextTransform: value })}
+
+                                                textDecoration={fluentFormInputTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormInputTextDecoration: value })}
+
+                                                letterSpacing={fluentFormInputLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormInputLetterSpacing: value })}
+
+                                                letterSpacingUnits={fluentFormInputLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormInputLetterSpacingUnits: value })}
+
+                                                lineHeight={fluentFormInputLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormInputLineHeight: value })}
+
+                                                lineHeightUnits={fluentFormInputLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormInputLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
                                             <FB_Range
                                                 min={1}
                                                 max={100}
                                                 label={__("Text Indent", "frontis-blocks")}
                                                 rangeValue={fluentFormTextIndentSize}
-                                                onChangeHandler={fluentFormTextIndentSizeHandler}
-                                                rangeUnitHandler={fluentFormTextIndentSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormTextIndentSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormTextIndentSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormTextIndentSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3322,8 +3735,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Input Width", "frontis-blocks")}
                                                 rangeValue={fluentFormInputWidthSize}
-                                                onChangeHandler={fluentFormInputWidthSizeHandler}
-                                                rangeUnitHandler={fluentFormInputWidthSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormInputWidthSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormInputWidthSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormInputWidthSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3335,8 +3748,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Input Height", "frontis-blocks")}
                                                 rangeValue={fluentFormInputHeightSize}
-                                                onChangeHandler={fluentFormInputHeightSizeHandler}
-                                                rangeUnitHandler={fluentFormInputHeightSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormInputHeightSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormInputHeightSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormInputHeightSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3348,8 +3761,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Textarea Width", "frontis-blocks")}
                                                 rangeValue={fluentFormTextareaWidthSize}
-                                                onChangeHandler={fluentFormTextareaWidthSizeHandler}
-                                                rangeUnitHandler={fluentFormTextareaWidthSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormTextareaWidthSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormTextareaWidthSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormTextareaWidthSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3361,8 +3774,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={2000}
                                                 label={__("Textarea Height", "frontis-blocks")}
                                                 rangeValue={fluentFormTextareaHeightSize}
-                                                onChangeHandler={fluentFormTextareaHeightSizeHandler}
-                                                rangeUnitHandler={fluentFormTextareaHeightSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormTextareaHeightSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormTextareaHeightSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormTextareaHeightSizeUnits}
                                                 setAttributes={setAttributes}
@@ -3374,8 +3787,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={1000}
                                                 label={__("Spacing", "frontis-blocks")}
                                                 rangeValue={fluentFormSpacingSize}
-                                                onChangeHandler={fluentFormSpacingSizeHandler}
-                                                rangeUnitHandler={fluentFormSpacingUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormSpacingSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormSpacingUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormSpacingUnits}
                                                 setAttributes={setAttributes}
@@ -3404,14 +3817,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChange={(value) => setAttributes({ fluentFormBorder: value })}
                                             />
 
-                                            <FB_Color
+                                            <FB_ColorControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormBorderColorSwitcher}
                                                 globalColor={fluentFormBorderColor}
-                                                globalHoverColor={fluentFormBorderHoverColor}
-                                                handleColorSwitcherChange={handleBorderColorSwitcherChange}
-                                                handleGlobalColorChange={handleBorderColorChange}
-                                                handleGlobalHoverColorChange={handleBorderHoverColorChange}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormBorderColor: value })}
                                             />
 
                                             <FB_Spacing 
@@ -3442,54 +3851,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 
+                                            <SelectControl
+                                                    label={__("Focus Border Style", "frontis-blocks")}
+                                                    value={fluentFormFocusBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ fluentFormFocusBorder: value })}
+                                            />
+
+                                            <FB_ColorControl
+                                                label={__("Focus Color", "frontis-blocks")}
+                                                globalColor={fluentFormInputFocusColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormInputFocusColor: value })}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Focus Border", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleFocusBorderUnitsHandler}
+                                                spacingUnits={fluentFormFocusBorderUnits}
+                                                spacingDesktop={fluentFormFocusBorderDesktop}
+                                                spacingTablet={fluentFormFocusBorderTablet}
+                                                spacingMobile={fluentFormFocusBorderMobile}
+                                                handleSpacingUnitHandler={handleFocusBorderUnitChange}
+                                                spacingCombineBtn={fluentFormFocusBorderLink}
+                                                spacingCombineBtnHandler={handleFocusBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Focus Radius Border", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleFocusBorderRadiusUnitsHandler}
+                                                spacingUnits={fluentFormFocusBorderRadiusUnits}
+                                                spacingDesktop={fluentFormFocusBorderRadiusDesktop}
+                                                spacingTablet={fluentFormFocusBorderRadiusTablet}
+                                                spacingMobile={fluentFormFocusBorderRadiusMobile}
+                                                handleSpacingUnitHandler={handleFocusBorderRadiusUnitChange}
+                                                spacingCombineBtn={fluentFormFocusBorderRadiusLink}
+                                                spacingCombineBtnHandler={handleFocusBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+
                                         </PanelBody>
                                         <PanelBody title={__("Placeholder", "frontis-blocks")} initialOpen={false}>
-                                            <BaseControl 
+                                            <FB_ColorControl
                                                 label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormPlaceholderColor}
-                                                                        onChange={fluentFormPlaceholderColorChange}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormPlaceholderColor}
-                                                                        onChange={fluentFormPlaceholderColorChange}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
+                                                globalColor={fluentFormPlaceholderColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormPlaceholderColor: value })}
+                                            />
                                         </PanelBody>
                                         <PanelBody title={__("Radio & Checkbox", "frontis-blocks")} initialOpen={false}>
                                             <FB_Range
@@ -3497,106 +3907,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={100}
                                                 label={__("Size", "frontis-blocks")}
                                                 rangeValue={fluentFormRadioFontSize}
-                                                onChangeHandler={fluentFormRadioFontSizeHandler}
-                                                rangeUnitHandler={fluentFormRadioFontSizeUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormRadioFontSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormRadioFontSizeUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormRadioFontSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
                                                 resetFallbackValue={''}
                                             />
-                                            <BaseControl 
+
+                                            <FB_ColorControl
                                                 label={__("Normal Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormRadioColor}
-                                                                        onChange={(value) => setAttributes({ fluentFormRadioColor: value })}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormRadioColor}
-                                                                        onChange={(value) => setAttributes({ fluentFormRadioColor: value })}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl 
+                                                globalColor={fluentFormRadioColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormRadioColor: value })}
+                                            />
+
+                                            <FB_ColorControl
                                                 label={__("Checked Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormRadioCheckedColor}
-                                                                        onChange={(value) => setAttributes({ fluentFormRadioCheckedColor: value })}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormRadioCheckedColor}
-                                                                        onChange={(value) => setAttributes({ fluentFormRadioCheckedColor: value })}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
+                                                globalColor={fluentFormRadioCheckedColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormRadioCheckedColor: value })}
+                                            />
+
                                             <FB_Range
                                                 min={1}
                                                 max={100}
@@ -3610,52 +3941,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 rangeStep={1}
                                                 resetFallbackValue={''}
                                             />
-                                            <BaseControl 
+
+                                            <FB_ColorControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormRadioBorderColor}
-                                                                        onChange={(value) => setAttributes({ fluentFormRadioBorderColor: value })}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormRadioBorderColor}
-                                                                        onChange={(value) => setAttributes({ fluentFormRadioBorderColor: value })}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
+                                                globalColor={fluentFormRadioBorderColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormRadioBorderColor: value })}
+                                            />
+
                                             <FB_Spacing 
                                                 label={__("Radio Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -3687,8 +3979,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={100}
                                                 label={__("Item Spacing", "frontis-blocks")}
                                                 rangeValue={fluentFormRadioCheckBoxItemSpacing}
-                                                onChangeHandler={fluentFormRadioCheckBoxItemSpacingHandler}
-                                                rangeUnitHandler={fluentFormRadioCheckBoxItemSpacingUnitssHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormRadioCheckBoxItemSpacing: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormRadioCheckBoxItemSpacingUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormRadioCheckBoxItemSpacingUnits}
                                                 setAttributes={setAttributes}
@@ -3697,217 +3989,73 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                         </PanelBody>
                                         <PanelBody title={__("Section break", "frontis-blocks")} initialOpen={false}>
-                                                <BaseControl
+
+                                                <FB_AlignmentControl
                                                     label={__("Alignment", "frontis-blocks")}
-                                                    id="fb-setting-text-alignment"
-                                                    className="fb-setting-text-alignment"
-                                                >
-                                                    <ButtonGroup
-                                                        className="fb-setting-text-alignment-group-btn"
-                                                    >
-                                                        {TEXT_ALIGN.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ fluentFormSectionBreakAlignment: item.value })}
-                                                                className={`fb-setting-text-alignment-single-btn ${fluentFormSectionBreakAlignment === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-                                                <FB_Color
-                                                    label={__("Title", "frontis-blocks")}
-                                                    globalColorSwitcher={fluentFormSectionBreakTitleColorSwitcher}
-                                                    globalColor={fluentFormSectionBreakTitleColor}
-                                                    globalHoverColor={fluentFormSectionBreakTitleHoverColor}
-                                                    handleColorSwitcherChange={fluentFormSectionBreakTitleColorSwitcherChange}
-                                                    handleGlobalColorChange={fluentFormSectionBreakTitleColorChange}
-                                                    handleGlobalHoverColorChange={fluentFormSectionBreakTitleHoverColorChange}
+                                                    globalAlignment={fluentFormSectionBreakAlignment}
+                                                    setGlobalAlignment={(value) => setAttributes({ fluentFormSectionBreakAlignment: value })}
                                                 />
-                                                <BaseControl 
-                                                    label={__("Typography", "frontis-blocks")}
-                                                    className="fb-setting-typography"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-dropdown-icon-wrapper"
-                                                        contentClassName="fb-setting-dropdown-icon-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-dropdown-icon-btn"
-                                                            >
-                                                                <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-typography-popup">
-                                                                <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                    <div className="fb-setting-fontfamily-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Family", "frontis-blocks")}
-                                                                            options={FONT_FAMILYS}
-                                                                            value={fluentFormSectionBreakTitleFontFamily}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontFamily: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-wrapper">
-                                                                        <div className="fb-setting-fontsize-header">
-                                                                            <div className="fb-setting-fontsize-label">
-                                                                                <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                            </div>
-                                                                            <div className="fb-setting-fontsize-units">
-                                                                                <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ fluentFormSectionBreakTitleFontSizeUnits: item.value })}
-                                                                                            className={`fb-setting-fontsize-units-switcher ${ fluentFormSectionBreakTitleFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-rangecontrol">
-                                                                            <RangeControl
-                                                                                value={fluentFormSectionBreakTitleFontSize}
-                                                                                onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontSize: value })}
-                                                                                min={1}
-                                                                                max={200}
-                                                                                allowReset
-                                                                                resetFallbackValue={undefined}
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontweight-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Weight", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                                { label: __("100", "frontis-blocks"), value: "100" },
-                                                                                { label: __("200", "frontis-blocks"), value: "200" },
-                                                                                { label: __("300", "frontis-blocks"), value: "300" },
-                                                                                { label: __("400", "frontis-blocks"), value: "400" },
-                                                                                { label: __("500", "frontis-blocks"), value: "500" },
-                                                                                { label: __("600", "frontis-blocks"), value: "600" },
-                                                                                { label: __("700", "frontis-blocks"), value: "700" },
-                                                                                { label: __("800", "frontis-blocks"), value: "800" },
-                                                                                { label: __("900", "frontis-blocks"), value: "900" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakTitleFontWeight}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontWeight: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-fontstyle-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Style", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                                { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                                { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                                { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakTitleFontStyle}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakTitleFontStyle: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-texttransform-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Text Transform", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                                { label: __("None", "frontis-blocks"), value: "none" },
-                                                                                { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                                { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                                { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakTitleTextTransform}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakTitleTextTransform: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-textdecoration-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Text Decoration", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                                { label: __("None", "frontis-blocks"), value: "none" },
-                                                                                { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                                { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                                { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakTitleTextDecoration}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakTitleTextDecoration: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-letterspacing-wrapper">
-                                                                        <div className="fb-setting-letterspacing-header">
-                                                                            <div className="fb-setting-letterspacing-label">
-                                                                                <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                            </div>
-                                                                            <div className="fb-setting-letterspacing-units">
-                                                                                <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ fluentFormSectionBreakTitleLetterSpacingUnits: item.value })}
-                                                                                            className={`fb-setting-letterspacing-units-switcher ${ fluentFormSectionBreakTitleLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <RangeControl
-                                                                            value={fluentFormSectionBreakTitleLetterSpacing}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakTitleLetterSpacing: value === 0 ? undefined : value })}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            step={1}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-lineheight-wrapper">
-                                                                        <div className="fb-setting-lineheight-header">
-                                                                            <div className="fb-setting-lineheight-label">
-                                                                                <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                            </div>
-                                                                            <div className="fb-setting-lineheight-units">
-                                                                                <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ fluentFormSectionBreakTitleLineHeightUnits: item.value })}
-                                                                                            className={`fb-setting-lineheight-units-switcher ${ fluentFormSectionBreakTitleLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <RangeControl
-                                                                            value={fluentFormSectionBreakTitleLineHeight}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakTitleLineHeight: value === 1 ? undefined : value })}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            step={1}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
+
+                                                <FB_SwitcherControl
+                                                    label={__("Title Color", "frontis-blocks")}
+                                                    globalSwitcher={fluentFormSectionBreakTitleColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ fluentFormSectionBreakTitleColorSwitcher: value })}
+                                                />
+
+                                                {fluentFormSectionBreakTitleColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={fluentFormSectionBreakTitleColor}
+                                                        setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakTitleColor: value })}
                                                     />
-                                                </BaseControl>
+                                                )}
+
+                                                {fluentFormSectionBreakTitleColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={fluentFormSectionBreakTitleHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakTitleHoverColor: value })}
+                                                    />
+                                                )}
+
+                                                <FB_TypographyControl
+                                                    fontFamily={fluentFormSectionBreakTitleFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakTitleFontFamily: value })}
+
+                                                    fontSize={fluentFormSectionBreakTitleFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ fluentFormSectionBreakTitleFontSize: value })}
+
+                                                    fontSizeUnits={fluentFormSectionBreakTitleFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSectionBreakTitleFontSizeUnits: value })}
+
+                                                    fontWeight={fluentFormSectionBreakTitleFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ fluentFormSectionBreakTitleFontWeight: value })}
+
+                                                    fontStyle={fluentFormSectionBreakTitleFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ fluentFormSectionBreakTitleFontStyle: value })}
+
+                                                    textTransform={fluentFormSectionBreakTitleTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ fluentFormSectionBreakTitleTextTransform: value })}
+
+                                                    textDecoration={fluentFormSectionBreakTitleTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ fluentFormSectionBreakTitleTextDecoration: value })}
+
+                                                    letterSpacing={fluentFormSectionBreakTitleLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ fluentFormSectionBreakTitleLetterSpacing: value })}
+
+                                                    letterSpacingUnits={fluentFormSectionBreakTitleLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSectionBreakTitleLetterSpacingUnits: value })}
+
+                                                    lineHeight={fluentFormSectionBreakTitleLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ fluentFormSectionBreakTitleLineHeight: value })}
+
+                                                    lineHeightUnits={fluentFormSectionBreakTitleLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSectionBreakTitleLineHeightUnits: value })}
+
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                />
+
                                                 <FB_Spacing 
                                                     label={__("Padding", "frontis-blocks")}
                                                     deviceType={deviceType}
@@ -3934,198 +4082,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     spacingCombineBtnHandler={fluentFormSectionBreakTitleMarginLinkBtn}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_Color
-                                                    label={__("Description", "frontis-blocks")}
-                                                    globalColorSwitcher={fluentFormSectionBreakDescColorSwitcher}
-                                                    globalColor={fluentFormSectionBreakDescColor}
-                                                    globalHoverColor={fluentFormSectionBreakDescHoverColor}
-                                                    handleColorSwitcherChange={fluentFormSectionBreakDescColorSwitcherChange}
-                                                    handleGlobalColorChange={fluentFormSectionBreakDescColorChange}
-                                                    handleGlobalHoverColorChange={fluentFormSectionBreakDescHoverColorChange}
+
+                                                <FB_SwitcherControl
+                                                    label={__("Description Color", "frontis-blocks")}
+                                                    globalSwitcher={fluentFormSectionBreakDescColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ fluentFormSectionBreakDescColorSwitcher: value })}
                                                 />
-                                                <BaseControl 
-                                                    label={__("Typography", "frontis-blocks")}
-                                                    className="fb-setting-typography"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-dropdown-icon-wrapper"
-                                                        contentClassName="fb-setting-dropdown-icon-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                                className="fb-setting-dropdown-icon-btn"
-                                                            >
-                                                                <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-typography-popup">
-                                                                <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                    <div className="fb-setting-fontfamily-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Family", "frontis-blocks")}
-                                                                            options={FONT_FAMILYS}
-                                                                            value={fluentFormSectionBreakDescFontFamily}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontFamily: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-wrapper">
-                                                                        <div className="fb-setting-fontsize-header">
-                                                                            <div className="fb-setting-fontsize-label">
-                                                                                <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                            </div>
-                                                                            <div className="fb-setting-fontsize-units">
-                                                                                <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ fluentFormSectionBreakDescFontSizeUnits: item.value })}
-                                                                                            className={`fb-setting-fontsize-units-switcher ${ fluentFormSectionBreakDescFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-rangecontrol">
-                                                                            <RangeControl
-                                                                                value={fluentFormSectionBreakDescFontSize}
-                                                                                onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontSize: value })}
-                                                                                min={1}
-                                                                                max={200}
-                                                                                allowReset
-                                                                                resetFallbackValue={undefined}
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontweight-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Weight", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                                { label: __("100", "frontis-blocks"), value: "100" },
-                                                                                { label: __("200", "frontis-blocks"), value: "200" },
-                                                                                { label: __("300", "frontis-blocks"), value: "300" },
-                                                                                { label: __("400", "frontis-blocks"), value: "400" },
-                                                                                { label: __("500", "frontis-blocks"), value: "500" },
-                                                                                { label: __("600", "frontis-blocks"), value: "600" },
-                                                                                { label: __("700", "frontis-blocks"), value: "700" },
-                                                                                { label: __("800", "frontis-blocks"), value: "800" },
-                                                                                { label: __("900", "frontis-blocks"), value: "900" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakDescFontWeight}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontWeight: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-fontstyle-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Font Style", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                                { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                                { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                                { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakDescFontStyle}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakDescFontStyle: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-texttransform-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Text Transform", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                                { label: __("None", "frontis-blocks"), value: "none" },
-                                                                                { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                                { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                                { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakDescTextTransform}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakDescTextTransform: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-textdecoration-wrapper">
-                                                                        <SelectControl
-                                                                            label={__("Text Decoration", "frontis-blocks")}
-                                                                            options={[
-                                                                                { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                                { label: __("None", "frontis-blocks"), value: "none" },
-                                                                                { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                                { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                                { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                            ]}
-                                                                            value={fluentFormSectionBreakDescTextDecoration}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakDescTextDecoration: value })}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-letterspacing-wrapper">
-                                                                        <div className="fb-setting-letterspacing-header">
-                                                                            <div className="fb-setting-letterspacing-label">
-                                                                                <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                            </div>
-                                                                            <div className="fb-setting-letterspacing-units">
-                                                                                <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ fluentFormSectionBreakDescLetterSpacingUnits: item.value })}
-                                                                                            className={`fb-setting-letterspacing-units-switcher ${ fluentFormSectionBreakDescLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <RangeControl
-                                                                            value={fluentFormSectionBreakDescLetterSpacing}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakDescLetterSpacing: value === 0 ? undefined : value })}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            step={1}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="fb-setting-lineheight-wrapper">
-                                                                        <div className="fb-setting-lineheight-header">
-                                                                            <div className="fb-setting-lineheight-label">
-                                                                                <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                            </div>
-                                                                            <div className="fb-setting-lineheight-units">
-                                                                                <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                    {UNIT_TYPES.map((item, key) => (
-                                                                                        <Button
-                                                                                            key={key}
-                                                                                            onClick={() => setAttributes({ fluentFormSectionBreakDescLineHeightUnits: item.value })}
-                                                                                            className={`fb-setting-lineheight-units-switcher ${ fluentFormSectionBreakDescLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                        >
-                                                                                            {item.label}
-                                                                                        </Button>
-                                                                                    ))}
-                                                                                </ButtonGroup>
-                                                                            </div>
-                                                                        </div>
-                                                                        <RangeControl
-                                                                            value={fluentFormSectionBreakDescLineHeight}
-                                                                            onChange={(value) => setAttributes({ fluentFormSectionBreakDescLineHeight: value === 1 ? undefined : value })}
-                                                                            min={1}
-                                                                            max={100}
-                                                                            step={1}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
+
+                                                {fluentFormSectionBreakDescColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={fluentFormSectionBreakDescColor}
+                                                        setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakDescColor: value })}
                                                     />
-                                                </BaseControl>
+                                                )}
+
+                                                {fluentFormSectionBreakDescColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={fluentFormSectionBreakDescHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakDescHoverColor: value })}
+                                                    />
+                                                )}
+
+
+                                                <FB_TypographyControl
+                                                    fontFamily={fluentFormSectionBreakDescFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakDescFontFamily: value })}
+
+                                                    fontSize={fluentFormSectionBreakDescFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ fluentFormSectionBreakDescFontSize: value })}
+
+                                                    fontSizeUnits={fluentFormSectionBreakDescFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSectionBreakDescFontSizeUnits: value })}
+
+                                                    fontWeight={fluentFormSectionBreakDescFontWeight} 
+                                                    onChangeFontWeight={(value) => setAttributes({ fluentFormSectionBreakDescFontWeight: value })}
+
+                                                    fontStyle={fluentFormSectionBreakDescFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ fluentFormSectionBreakDescFontStyle: value })}
+
+                                                    textTransform={fluentFormSectionBreakDescTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ fluentFormSectionBreakDescTextTransform: value })}
+
+                                                    textDecoration={fluentFormSectionBreakDescTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ fluentFormSectionBreakDescTextDecoration: value })}
+
+                                                    letterSpacing={fluentFormSectionBreakDescLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ fluentFormSectionBreakDescLetterSpacing: value })}
+
+                                                    letterSpacingUnits={fluentFormSectionBreakDescLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSectionBreakDescLetterSpacingUnits: value })}
+
+                                                    lineHeight={fluentFormSectionBreakDescLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ fluentFormSectionBreakDescLineHeight: value })}
+
+                                                    lineHeightUnits={fluentFormSectionBreakDescLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSectionBreakDescLineHeightUnits: value })}
+
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                />
+
                                                 <FB_Spacing 
                                                     label={__("Padding", "frontis-blocks")}
                                                     deviceType={deviceType}
@@ -4157,217 +4175,73 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         </PanelBody>
                                         <PanelBody title={__("Custom HTML", "frontis-blocks")} initialOpen={false}>
-                                            <BaseControl
+
+                                            <FB_AlignmentControl
                                                 label={__("Alignment", "frontis-blocks")}
-                                                id="fb-setting-text-alignment"
-                                                className="fb-setting-text-alignment"
-                                            >
-                                                <ButtonGroup
-                                                    className="fb-setting-text-alignment-group-btn"
-                                                >
-                                                    {TEXT_ALIGN.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ fluentFormHtmlAlignment: item.value })}
-                                                            className={`fb-setting-text-alignment-single-btn ${fluentFormHtmlAlignment === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
-                                            <FB_Color
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormHtmlColorSwitcher}
-                                                globalColor={fluentFormHtmlColor}
-                                                globalHoverColor={fluentFormHtmlHoverColor}
-                                                handleColorSwitcherChange={fluentFormHtmlColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormHtmlColorChange}
-                                                handleGlobalHoverColorChange={fluentFormHtmlHoverColorChange}
+                                                globalAlignment={fluentFormHtmlAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ fluentFormHtmlAlignment: value })}
                                             />
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={fluentFormHtmlFontFamily}
-                                                                        onChange={(value) => setAttributes({ fluentFormHtmlFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <div className="fb-setting-fontsize-label">
-                                                                            <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormHtmlFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${ fluentFormHtmlFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={fluentFormHtmlFontSize}
-                                                                            onChange={(value) => setAttributes({ fluentFormHtmlFontSize: value })}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={fluentFormHtmlFontWeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormHtmlFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={fluentFormHtmlFontStyle}
-                                                                        onChange={(value) => setAttributes({ fluentFormHtmlFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={fluentFormHtmlTextTransform}
-                                                                        onChange={(value) => setAttributes({ fluentFormHtmlTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={fluentFormHtmlTextDecoration}
-                                                                        onChange={(value) => setAttributes({ fluentFormHtmlTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <div className="fb-setting-letterspacing-label">
-                                                                            <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormHtmlLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${ fluentFormHtmlLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormHtmlLetterSpacing}
-                                                                        onChange={(value) => setAttributes({ fluentFormHtmlLetterSpacing: value === 0 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <div className="fb-setting-lineheight-label">
-                                                                            <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormHtmlLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${ fluentFormHtmlLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormHtmlLineHeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormHtmlLineHeight: value === 1 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
+
+                                            <FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={fluentFormHtmlColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ fluentFormHtmlColorSwitcher: value })}
+                                            />
+
+                                            {fluentFormHtmlColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={fluentFormHtmlColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormHtmlColor: value })}
                                                 />
-                                            </BaseControl>
+                                            )}
+
+                                            {fluentFormHtmlColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={fluentFormHtmlHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormHtmlHoverColor: value })}
+                                                />
+                                            )}
+
+
+                                            <FB_TypographyControl
+                                                fontFamily={fluentFormHtmlFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormHtmlFontFamily: value })}
+
+                                                fontSize={fluentFormHtmlFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormHtmlFontSize: value })}
+
+                                                fontSizeUnits={fluentFormHtmlFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormHtmlFontSizeUnits: value })}
+
+                                                fontWeight={fluentFormHtmlFontWeight} 
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormHtmlFontWeight: value })}
+
+                                                fontStyle={fluentFormHtmlFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormHtmlFontStyle: value })}
+
+                                                textTransform={fluentFormHtmlTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormHtmlTextTransform: value })}
+
+                                                textDecoration={fluentFormHtmlTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormHtmlTextDecoration: value })}
+
+                                                letterSpacing={fluentFormHtmlLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormHtmlLetterSpacing: value })}
+
+                                                letterSpacingUnits={fluentFormHtmlLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormHtmlLetterSpacingUnits: value })}
+
+                                                lineHeight={fluentFormHtmlLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormHtmlLineHeight: value })}
+
+                                                lineHeightUnits={fluentFormHtmlLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormHtmlLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -4398,32 +4272,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         </PanelBody>
                                         <PanelBody title={__("Submit", "frontis-blocks")} initialOpen={false}>
-                                            <BaseControl
+
+                                            <FB_AlignmentControl
                                                 label={__("Alignment", "frontis-blocks")}
-                                                id="fb-setting-text-alignment"
-                                                className="fb-setting-text-alignment"
-                                            >
-                                                <ButtonGroup
-                                                    className="fb-setting-text-alignment-group-btn"
-                                                >
-                                                    {TEXT_ALIGN.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ fluentFormSubmitAlignment: item.value })}
-                                                            className={`fb-setting-text-alignment-single-btn ${fluentFormSubmitAlignment === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalAlignment={fluentFormSubmitAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ fluentFormSubmitAlignment: value })}
+                                            />
+
                                             <FB_Range
                                                 min={1}
                                                 max={2000}
                                                 label={__("Height", "frontis-blocks")}
                                                 rangeValue={fluentFormSubmitHeight}
-                                                onChangeHandler={fluentFormSubmitHeightHandler}
-                                                rangeUnitHandler={fluentFormSubmitHeightUnitsHandler}
+                                                onChangeHandler={(value) => setAttributes({ fluentFormSubmitHeight: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ fluentFormSubmitHeightUnits: value })}
                                                 deviceType={deviceType}
                                                 units={fluentFormSubmitHeightUnits}
                                                 setAttributes={setAttributes}
@@ -4443,8 +4305,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     max={2000}
                                                     label={__("Width", "frontis-blocks")}
                                                     rangeValue={fluentFormSubmitWidth}
-                                                    onChangeHandler={fluentFormSubmitWidthHandler}
-                                                    rangeUnitHandler={fluentFormSubmitWidthUnitsHandler}
+                                                    onChangeHandler={(value) => setAttributes({ fluentFormSubmitWidth: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ fluentFormSubmitWidthUnits: value })}
                                                     deviceType={deviceType}
                                                     units={fluentFormSubmitWidthUnits}
                                                     setAttributes={setAttributes}
@@ -4452,207 +4314,90 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={''}
                                                 />
                                             )}
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={fluentFormSubmitFontFamily}
-                                                                        onChange={(value) => setAttributes({ fluentFormSubmitFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <div className="fb-setting-fontsize-label">
-                                                                            <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormSubmitFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${ fluentFormSubmitFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={fluentFormSubmitFontSize}
-                                                                            onChange={(value) => setAttributes({ fluentFormSubmitFontSize: value })}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={fluentFormSubmitFontWeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormSubmitFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={fluentFormSubmitFontStyle}
-                                                                        onChange={(value) => setAttributes({ fluentFormSubmitFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={fluentFormSubmitTextTransform}
-                                                                        onChange={(value) => setAttributes({ fluentFormSubmitTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={fluentFormSubmitTextDecoration}
-                                                                        onChange={(value) => setAttributes({ fluentFormSubmitTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <div className="fb-setting-letterspacing-label">
-                                                                            <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormSubmitLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${ fluentFormSubmitLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormSubmitLetterSpacing}
-                                                                        onChange={(value) => setAttributes({ fluentFormSubmitLetterSpacing: value === 0 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <div className="fb-setting-lineheight-label">
-                                                                            <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormSubmitLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${ fluentFormSubmitLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormSubmitLineHeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormSubmitLineHeight: value === 1 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <FB_Color
+
+
+                                            <FB_TypographyControl
+                                                fontFamily={fluentFormSubmitFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormSubmitFontFamily: value })}
+
+                                                fontSize={fluentFormSubmitFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormSubmitFontSize: value })}
+
+                                                fontSizeUnits={fluentFormSubmitFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSubmitFontSizeUnits: value })}
+
+                                                fontWeight={fluentFormSubmitFontWeight} 
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormSubmitFontWeight: value })}
+
+                                                fontStyle={fluentFormSubmitFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormSubmitFontStyle: value })}
+
+                                                textTransform={fluentFormSubmitTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormSubmitTextTransform: value })}
+
+                                                textDecoration={fluentFormSubmitTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormSubmitTextDecoration: value })}
+
+                                                letterSpacing={fluentFormSubmitLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormSubmitLetterSpacing: value })}
+
+                                                letterSpacingUnits={fluentFormSubmitLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSubmitLetterSpacingUnits: value })}
+
+                                                lineHeight={fluentFormSubmitLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormSubmitLineHeight: value })}
+
+                                                lineHeightUnits={fluentFormSubmitLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSubmitLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+                                            
+                                            <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormSubmitColorSwitcher}
-                                                globalColor={fluentFormSubmitColor}
-                                                globalHoverColor={fluentFormSubmitHoverColor}
-                                                handleColorSwitcherChange={fluentFormSubmitColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSubmitColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSubmitHoverColorChange}
+                                                globalSwitcher={fluentFormSubmitColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ fluentFormSubmitColorSwitcher: value })}
                                             />
-                                            <FB_Color
+
+                                            {fluentFormSubmitColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSubmitColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSubmitColor: value })}
+                                                />
+                                            )}
+
+                                            {fluentFormSubmitColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSubmitHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSubmitHoverColor: value })}
+                                                />
+                                            )}
+
+
+                                            <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormSubmitBgColorSwitcher}
-                                                globalColor={fluentFormSubmitBgColor}
-                                                globalHoverColor={fluentFormSubmitBgHoverColor}
-                                                handleColorSwitcherChange={fluentFormSubmitBgColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSubmitBgColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSubmitBgHoverColorChange}
+                                                globalSwitcher={fluentFormSubmitBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ fluentFormSubmitBgColorSwitcher: value })}
                                             />
+
+                                            {fluentFormSubmitBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSubmitBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSubmitBgColor: value })}
+                                                />
+                                            )}
+
+                                            {fluentFormSubmitBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSubmitBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSubmitBgHoverColor: value })}
+                                                />
+                                            )}
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -4685,15 +4430,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 options={BORDER_STYLES}
                                                 onChange={(value) => setAttributes({ fluentFormSubmitBorder: value })}
                                             />
-                                            <FB_Color
+
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormSubmitBorderColorSwitcher}
-                                                globalColor={fluentFormSubmitBorderColor}
-                                                globalHoverColor={fluentFormSubmitBorderHoverColor}
-                                                handleColorSwitcherChange={fluentFormSubmitBorderColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSubmitBorderColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSubmitBorderHoverColorChange}
+                                                globalSwitcher={fluentFormSubmitBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ fluentFormSubmitBorderColorSwitcher: value })}
                                             />
+
+                                            {fluentFormSubmitBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSubmitBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSubmitBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {fluentFormSubmitBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSubmitBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSubmitBorderHoverColor: value })}
+                                                />
+                                            )}
+
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -4724,296 +4483,87 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         </PanelBody>
                                         <PanelBody title={__("Success Message", "frontis-blocks")} initialOpen={false}>
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={fluentFormSuccessFontFamily}
-                                                                        onChange={(value) => setAttributes({ fluentFormSuccessFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <div className="fb-setting-fontsize-label">
-                                                                            <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormSuccessFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${ fluentFormSuccessFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={fluentFormSuccessFontSize}
-                                                                            onChange={(value) => setAttributes({ fluentFormSuccessFontSize: value })}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={fluentFormSuccessFontWeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormSuccessFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={fluentFormSuccessFontStyle}
-                                                                        onChange={(value) => setAttributes({ fluentFormSuccessFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={fluentFormSuccessTextTransform}
-                                                                        onChange={(value) => setAttributes({ fluentFormSuccessTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={fluentFormSuccessTextDecoration}
-                                                                        onChange={(value) => setAttributes({ fluentFormSuccessTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <div className="fb-setting-letterspacing-label">
-                                                                            <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormSuccessLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${ fluentFormSuccessLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormSuccessLetterSpacing}
-                                                                        onChange={(value) => setAttributes({ fluentFormSuccessLetterSpacing: value === 0 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <div className="fb-setting-lineheight-label">
-                                                                            <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormSuccessLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${ fluentFormSuccessLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormSuccessLineHeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormSuccessLineHeight: value === 1 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl 
+
+
+                                            <FB_TypographyControl
+                                                fontFamily={fluentFormSuccessFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormSuccessFontFamily: value })}
+
+                                                fontSize={fluentFormSuccessFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormSuccessFontSize: value })}
+
+                                                fontSizeUnits={fluentFormSuccessFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSuccessFontSizeUnits: value })}
+
+                                                fontWeight={fluentFormSuccessFontWeight} 
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormSuccessFontWeight: value })}
+
+                                                fontStyle={fluentFormSuccessFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormSuccessFontStyle: value })}
+
+                                                textTransform={fluentFormSuccessTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormSuccessTextTransform: value })}
+
+                                                textDecoration={fluentFormSuccessTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormSuccessTextDecoration: value })}
+
+                                                letterSpacing={fluentFormSuccessLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormSuccessLetterSpacing: value })}
+
+                                                letterSpacingUnits={fluentFormSuccessLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSuccessLetterSpacingUnits: value })}
+
+                                                lineHeight={fluentFormSuccessLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormSuccessLineHeight: value })}
+
+                                                lineHeightUnits={fluentFormSuccessLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSuccessLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_ColorControl
                                                 label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormSuccessColor}
-                                                                        onChange={fluentFormSuccessColorChange}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormSuccessColor}
-                                                                        onChange={fluentFormSuccessColorChange}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl 
+                                                globalColor={fluentFormSuccessColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormSuccessColor: value })}
+                                            />
+
+                                            <FB_ColorControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormSuccessBgColor}
-                                                                        onChange={fluentFormSuccessBgColorChange}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormSuccessBgColor}
-                                                                        onChange={fluentFormSuccessBgColorChange}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
+                                                globalColor={fluentFormSuccessBgColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormSuccessBgColor: value })}
+                                            />
+
                                             <SelectControl
                                                 label={__("Border Style", "frontis-blocks")}
                                                 value={fluentFormSuccessBorder}
                                                 options={BORDER_STYLES}
                                                 onChange={(value) => setAttributes({ fluentFormSuccessBorder: value })}
                                             />
-                                            <FB_Color
+
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={fluentFormSuccessBorderColorSwitcher}
-                                                globalColor={fluentFormSuccessBorderColor}
-                                                globalHoverColor={fluentFormSuccessBorderHoverColor}
-                                                handleColorSwitcherChange={fluentFormSuccessBorderColorSwitcherChange}
-                                                handleGlobalColorChange={fluentFormSuccessBorderColorChange}
-                                                handleGlobalHoverColorChange={fluentFormSuccessBorderHoverColorChange}
+                                                globalSwitcher={fluentFormSuccessBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ fluentFormSuccessBorderColorSwitcher: value })}
                                             />
+
+                                            {fluentFormSuccessBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSuccessBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSuccessBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {fluentFormSuccessBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={fluentFormSuccessBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ fluentFormSuccessBorderHoverColor: value })}
+                                                />
+                                            )}
+
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -5042,235 +4592,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                         </PanelBody>
                                         <PanelBody title={__("Error Message", "frontis-blocks")} initialOpen={false}>
-                                            <BaseControl 
-                                                label={__("Typography", "frontis-blocks")}
-                                                className="fb-setting-typography"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-dropdown-icon-wrapper"
-                                                    contentClassName="fb-setting-dropdown-icon-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            aria-label={__("Toggle Typography Settings", "frontis-blocks")}
-                                                            className="fb-setting-dropdown-icon-btn"
-                                                        >
-                                                            <Dashicon icon="edit" className="fb-setting-dropdown-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-typography-popup">
-                                                            <BaseControl className="fb-setting-typography-popup-inner" >
-                                                                <div className="fb-setting-fontfamily-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Family", "frontis-blocks")}
-                                                                        options={FONT_FAMILYS}
-                                                                        value={fluentFormErrorFontFamily}
-                                                                        onChange={(value) => setAttributes({ fluentFormErrorFontFamily: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontsize-wrapper">
-                                                                    <div className="fb-setting-fontsize-header">
-                                                                        <div className="fb-setting-fontsize-label">
-                                                                            <span>{__("Font Size", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-fontsize-units">
-                                                                            <ButtonGroup className="fb-setting-fontsize-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormErrorFontSizeUnits: item.value })}
-                                                                                        className={`fb-setting-fontsize-units-switcher ${ fluentFormErrorFontSizeUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="fb-setting-fontsize-rangecontrol">
-                                                                        <RangeControl
-                                                                            value={fluentFormErrorFontSize}
-                                                                            onChange={(value) => setAttributes({ fluentFormErrorFontSize: value })}
-                                                                            min={1}
-                                                                            max={200}
-                                                                            allowReset
-                                                                            resetFallbackValue={undefined}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="fb-setting-fontweight-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Weight", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "400" },
-                                                                            { label: __("100", "frontis-blocks"), value: "100" },
-                                                                            { label: __("200", "frontis-blocks"), value: "200" },
-                                                                            { label: __("300", "frontis-blocks"), value: "300" },
-                                                                            { label: __("400", "frontis-blocks"), value: "400" },
-                                                                            { label: __("500", "frontis-blocks"), value: "500" },
-                                                                            { label: __("600", "frontis-blocks"), value: "600" },
-                                                                            { label: __("700", "frontis-blocks"), value: "700" },
-                                                                            { label: __("800", "frontis-blocks"), value: "800" },
-                                                                            { label: __("900", "frontis-blocks"), value: "900" },
-                                                                        ]}
-                                                                        value={fluentFormErrorFontWeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormErrorFontWeight: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-fontstyle-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Font Style", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Normal", "frontis-blocks"), value: "normal" },
-                                                                            { label: __("Italic", "frontis-blocks"), value: "italic" },
-                                                                            { label: __("Oblique", "frontis-blocks"), value: "oblique" },
-                                                                        ]}
-                                                                        value={fluentFormErrorFontStyle}
-                                                                        onChange={(value) => setAttributes({ fluentFormErrorFontStyle: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-texttransform-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Transform", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Capitalize", "frontis-blocks"), value: "capitalize" },
-                                                                            { label: __("Uppercase", "frontis-blocks"), value: "uppercase" },
-                                                                            { label: __("Lowercase", "frontis-blocks"), value: "lowercase" },
-                                                                        ]}
-                                                                        value={fluentFormErrorTextTransform}
-                                                                        onChange={(value) => setAttributes({ fluentFormErrorTextTransform: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-textdecoration-wrapper">
-                                                                    <SelectControl
-                                                                        label={__("Text Decoration", "frontis-blocks")}
-                                                                        options={[
-                                                                            { label: __("Default", "frontis-blocks"), value: "none" },
-                                                                            { label: __("None", "frontis-blocks"), value: "none" },
-                                                                            { label: __("Underline", "frontis-blocks"), value: "underline" },
-                                                                            { label: __("Overline", "frontis-blocks"), value: "overline" },
-                                                                            { label: __("Line Through", "frontis-blocks"), value: "line-through" },
-                                                                        ]}
-                                                                        value={fluentFormErrorTextDecoration}
-                                                                        onChange={(value) => setAttributes({ fluentFormErrorTextDecoration: value })}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-letterspacing-wrapper">
-                                                                    <div className="fb-setting-letterspacing-header">
-                                                                        <div className="fb-setting-letterspacing-label">
-                                                                            <span>{__("Letter Spacing", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-letterspacing-units">
-                                                                            <ButtonGroup className="fb-setting-letterspacing-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormErrorLetterSpacingUnits: item.value })}
-                                                                                        className={`fb-setting-letterspacing-units-switcher ${ fluentFormErrorLetterSpacingUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormErrorLetterSpacing}
-                                                                        onChange={(value) => setAttributes({ fluentFormErrorLetterSpacing: value === 0 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                                <div className="fb-setting-lineheight-wrapper">
-                                                                    <div className="fb-setting-lineheight-header">
-                                                                        <div className="fb-setting-lineheight-label">
-                                                                            <span>{__("Line Height", "frontis-blocks")}</span>
-                                                                        </div>
-                                                                        <div className="fb-setting-lineheight-units">
-                                                                            <ButtonGroup className="fb-setting-lineheight-units-wrap">
-                                                                                {UNIT_TYPES.map((item, key) => (
-                                                                                    <Button
-                                                                                        key={key}
-                                                                                        onClick={() => setAttributes({ fluentFormErrorLineHeightUnits: item.value })}
-                                                                                        className={`fb-setting-lineheight-units-switcher ${ fluentFormErrorLineHeightUnits === item.value ? 'active' : ''}`}
-                                                                                    >
-                                                                                        {item.label}
-                                                                                    </Button>
-                                                                                ))}
-                                                                            </ButtonGroup>
-                                                                        </div>
-                                                                    </div>
-                                                                    <RangeControl
-                                                                        value={fluentFormErrorLineHeight}
-                                                                        onChange={(value) => setAttributes({ fluentFormErrorLineHeight: value === 1 ? undefined : value })}
-                                                                        min={1}
-                                                                        max={100}
-                                                                        step={1}
-                                                                        allowReset
-                                                                        resetFallbackValue={undefined}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
-                                            <BaseControl 
+
+
+                                            <FB_TypographyControl
+                                                fontFamily={fluentFormErrorFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormErrorFontFamily: value })}
+
+                                                fontSize={fluentFormErrorFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormErrorFontSize: value })}
+
+                                                fontSizeUnits={fluentFormErrorFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormErrorFontSizeUnits: value })}
+
+                                                fontWeight={fluentFormErrorFontWeight} 
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormErrorFontWeight: value })}
+
+                                                fontStyle={fluentFormErrorFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormErrorFontStyle: value })}
+
+                                                textTransform={fluentFormErrorTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormErrorTextTransform: value })}
+
+                                                textDecoration={fluentFormErrorTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormErrorTextDecoration: value })}
+
+                                                letterSpacing={fluentFormErrorLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormErrorLetterSpacing: value })}
+
+                                                letterSpacingUnits={fluentFormErrorLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormErrorLetterSpacingUnits: value })}
+
+                                                lineHeight={fluentFormErrorLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormErrorLineHeight: value })}
+
+                                                lineHeightUnits={fluentFormErrorLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormErrorLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_ColorControl
                                                 label={__("Color", "frontis-blocks")}
-                                                className="fb-setting-color-setting-wrapper"
-                                            >
-                                                <Dropdown
-                                                    className="fb-setting-color-setting-icon-dropdown"
-                                                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                    popoverProps={{ placement: 'bottom-start' }}
-                                                    renderToggle={({ isOpen, onToggle }) => (
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={onToggle}
-                                                            aria-expanded={isOpen}
-                                                            className="fb-setting-color-setting-icon-btn"
-                                                        >
-                                                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                        </Button>
-                                                    )}
-                                                    renderContent={() => (
-                                                        <div className="fb-setting-color-setting-icon-popup">
-                                                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                <div className="fb-setting-normal-color">
-                                                                    <ColorPicker
-                                                                        color={fluentFormErrorColor}
-                                                                        onChange={fluentFormErrorColorChange}
-                                                                        enableAlpha={true}
-                                                                    />
-                                                                    <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                    <ColorPalette
-                                                                        colors={[
-                                                                            { color: '#F72585' },
-                                                                            { color: '#7209B7' },
-                                                                            { color: '#3A0CA3' },
-                                                                            { color: '#4361EE' },
-                                                                            { color: '#4CC9F0' },
-                                                                        ]}
-                                                                        disableCustomColors={true}
-                                                                        value={fluentFormErrorColor}
-                                                                        onChange={fluentFormErrorColorChange}
-                                                                    />
-                                                                </div>
-                                                            </BaseControl>
-                                                        </div>
-                                                    )}
-                                                />
-                                            </BaseControl>
+                                                globalColor={fluentFormErrorColor}
+                                                setGlobalColor={(value) => setAttributes({ fluentFormErrorColor: value })}
+                                            />
+
                                             <FB_Spacing 
                                                 label={__("Padding", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -5351,15 +4718,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
 
                                                 <PanelBody title="Background Color" initialOpen={false} >
-                                                    <FB_Color
+                                                    <FB_SwitcherControl
                                                         label={__("Background Color", "frontis-blocks")}
-                                                        globalColorSwitcher={fluentFormGlobalBgColorSwitcher}
-                                                        globalColor={fluentFormGlobalBgColor}
-                                                        globalHoverColor={fluentFormGlobalBgHoverColor}
-                                                        handleColorSwitcherChange={handleGlobalBgColorSwitcherChange}
-                                                        handleGlobalColorChange={handleGlobalBgColorChange}
-                                                        handleGlobalHoverColorChange={handleGlobalBgHoverColorChange}
+                                                        globalSwitcher={fluentFormGlobalBgColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ fluentFormGlobalBgColorSwitcher: value })}
                                                     />
+
+                                                    {fluentFormGlobalBgColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={fluentFormGlobalBgColor}
+                                                            setGlobalColor={(value) => setAttributes({ fluentFormGlobalBgColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {fluentFormGlobalBgColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={fluentFormGlobalBgHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ fluentFormGlobalBgHoverColor: value })}
+                                                        />
+                                                    )}
                                                 </PanelBody>
                                                 <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
 
@@ -5370,15 +4749,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onChange={(value) => setAttributes({ fluentFormGlobalBorder: value })}
                                                     />
 
-                                                    <FB_Color
+
+                                                    <FB_SwitcherControl
                                                         label={__("Border Color", "frontis-blocks")}
-                                                        globalColorSwitcher={fluentFormGlobalBorderColorSwitcher}
-                                                        globalColor={fluentFormGlobalBorderColor}
-                                                        globalHoverColor={fluentFormGlobalBorderHoverColor}
-                                                        handleColorSwitcherChange={handleGlobalBorderColorSwitcherChange}
-                                                        handleGlobalColorChange={handleGlobalBorderColorChange}
-                                                        handleGlobalHoverColorChange={handleGlobalBorderHoverColorChange}
+                                                        globalSwitcher={fluentFormGlobalBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ fluentFormGlobalBorderColorSwitcher: value })}
                                                     />
+
+                                                    {fluentFormGlobalBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={fluentFormGlobalBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ fluentFormGlobalBorderColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {fluentFormGlobalBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={fluentFormGlobalBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ fluentFormGlobalBorderHoverColor: value })}
+                                                        />
+                                                    )}
 
                                                     <FB_Spacing 
                                                         label={__("Border", "frontis-blocks")}

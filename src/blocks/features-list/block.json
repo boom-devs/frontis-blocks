@@ -5,14 +5,13 @@
 	"version": "1.0.0",
 	"title": "Features list",
 	"category": "frontis-blocks",
-	"icon": "editor-ul",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
-    "supports": {
-        "anchor": false,
+	"supports": {
+		"html": false,
 		"align": ["wide", "full"],
-        "customClassName": false
-    },
+		"customClassName": false
+	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

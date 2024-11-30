@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Testimonial",
 	"category": "frontis-blocks",
-	"icon": "admin-users",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
     "supports": {

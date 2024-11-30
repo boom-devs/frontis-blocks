@@ -8,6 +8,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         socialItems,
+        socialTitleSwitcher,
         socialIconUrl,
         socialIconTargetUrl,
 
@@ -35,15 +36,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <div className="fb-social-links-wrapper">
                         <ul className="fb-socials">
                             {socialItems.map(item => (
-                                <li key={item.id} className="fb-social-list-item">
+                                <li key={item.id} className={`fb-social-list-item single-item-${item.id}`}>
                                     <a
-                                        className="fb-advanced-button" 
-                                        href={socialIconUrl} 
-                                        target={socialIconTargetUrl ? '_blank' : undefined}
-                                        rel={socialIconTargetUrl ? 'noopener noreferrer' : undefined}
+                                        className="fb-social-icon-link" 
+                                        href={item.socialIconUrl} 
+                                        target={item.socialIconTargetUrl ? '_blank' : undefined}
+                                        rel={item.socialIconTargetUrl ? 'noopener noreferrer' : undefined}
                                         onClick={handleSocialClick}
                                     >
-                                        {item.socialIcon ? renderSVG(item.socialIcon) : ''}
+                                        <div className="fb-social-icon-wrapper">
+                                            <div className="fb-social-icon">
+                                                {item.socialIcon ? renderSVG(item.socialIcon) : ''}
+                                            </div>
+                                            {socialTitleSwitcher && (
+                                                <span className="fb-social-icon-title">{item.socialIconTitle}</span>
+                                            )}
+                                        </div>
                                     </a>
                                 </li>
                             ))}

@@ -4,13 +4,31 @@ import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 
-const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, deviceType, units, setAttributes, rangeStep, resetFallbackValue }) => {
+const FB_Range = ({ 
+	min,
+	max,
+	label,
+	rangeValue,
+	onChangeHandler,
+	rangeUnitHandler,
+	deviceType,
+	units,
+	setAttributes,
+	rangeStep,
+	resetFallbackValue,	
+	units_types_arr = null,
+	isRangeUnit=true,
+}) => {
 
-	const UNIT_TYPES = [
+	let UNIT_TYPES = [
 		{ label: 'px', value: 'px' },
 		{ label: '%', value: '%' },
 		{ label: 'em', value: 'em' },
 	];
+
+	if(units_types_arr) {
+		UNIT_TYPES = units_types_arr;
+	}
 
 	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {
@@ -39,8 +57,9 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 						device={ deviceType }
 						deviceHandler={( newDevice ) => setAttributes({ deviceType: newDevice })}
 					/>
-					<div className="fb-setting-units-type">
-						<ButtonGroup className="fb-setting-units-type-wrap">
+					{isRangeUnit && (
+						<div className="fb-setting-units-type">
+							<ButtonGroup className="fb-setting-units-type-wrap">
 							{UNIT_TYPES.map((item, key) => (
 								<Button
 									key={key}
@@ -49,9 +68,10 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 								>
 									{item.label}
 								</Button>
-							))}
-						</ButtonGroup>
-					</div>
+								))}
+							</ButtonGroup>
+						</div>
+					)}
 				</div>
 				<RangeControl
 					__nextHasNoMarginBottom
