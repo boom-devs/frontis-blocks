@@ -2416,6 +2416,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title {
         	${postTitleMarginDesktopWidth ? `margin: ${postTitleMarginDesktopWidth};` : ''}
+            ${postTitleColor ? `color: ${postTitleColor};` : ''}
+			${postTitleFontFamily ? `font-family: ${postTitleFontFamily};` : ''}
+			${postTitleFontSize.Desktop ? `font-size: ${postTitleFontSize.Desktop}${postTitleFontSizeUnits.Desktop};` : ''}
+			${postTitleFontWeight ? `font-weight: ${postTitleFontWeight};` : ''}
+			${postTitleFontStyle ? `font-style: ${postTitleFontStyle};` : ''}
+			${postTitleTextTransform ? `text-transform: ${postTitleTextTransform};` : ''}
+			${postTitleTextDecoration ? `text-decoration: ${postTitleTextDecoration};` : ''}
+			${postTitleLetterSpacing.Desktop ? `letter-spacing: ${postTitleLetterSpacing.Desktop}${postTitleLetterSpacingUnits.Desktop};` : ''}
+			${postTitleLineHeight.Desktop ? `line-height: ${postTitleLineHeight.Desktop}${postTitleLineHeightUnits.Desktop};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title:hover {
+            ${postTitleHoverColor ? `color: ${postTitleHoverColor};` : ''}
         }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content a {
@@ -2661,6 +2674,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title {
                 ${postTitleMarginTabletWidth ? `margin: ${postTitleMarginTabletWidth};` : ''}
+                ${postTitleColor ? `color: ${postTitleColor};` : ''}
+                ${postTitleFontFamily ? `font-family: ${postTitleFontFamily};` : ''}
+                ${postTitleFontSize.Tablet ? `font-size: ${postTitleFontSize.Tablet}${postTitleFontSizeUnits.Tablet};` : ''}
+                ${postTitleFontWeight ? `font-weight: ${postTitleFontWeight};` : ''}
+                ${postTitleFontStyle ? `font-style: ${postTitleFontStyle};` : ''}
+                ${postTitleTextTransform ? `text-transform: ${postTitleTextTransform};` : ''}
+                ${postTitleTextDecoration ? `text-decoration: ${postTitleTextDecoration};` : ''}
+                ${postTitleLetterSpacing.Tablet ? `letter-spacing: ${postTitleLetterSpacing.Tablet}${postTitleLetterSpacingUnits.Tablet};` : ''}
+                ${postTitleLineHeight.Tablet ? `line-height: ${postTitleLineHeight.Tablet}${postTitleLineHeightUnits.Tablet};` : ''}
+                ${postTitleMarginTabletWidth ? `margin: ${postTitleMarginTabletWidth};` : ''}
+            }
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title:hover {
+                ${postTitleHoverColor ? `color: ${postTitleHoverColor};` : ''}
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content a {
@@ -2909,6 +2935,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title {
                 ${postTitleMarginMobileWidth ? `margin: ${postTitleMarginMobileWidth};` : ''}
+                ${postTitleColor ? `color: ${postTitleColor};` : ''}
+                ${postTitleFontFamily ? `font-family: ${postTitleFontFamily};` : ''}
+                ${postTitleFontSize.Mobile ? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};` : ''}
+                ${postTitleFontWeight ? `font-weight: ${postTitleFontWeight};` : ''}
+                ${postTitleFontStyle ? `font-style: ${postTitleFontStyle};` : ''}
+                ${postTitleTextTransform ? `text-transform: ${postTitleTextTransform};` : ''}
+                ${postTitleTextDecoration ? `text-decoration: ${postTitleTextDecoration};` : ''}
+                ${postTitleLetterSpacing.Mobile ? `letter-spacing: ${postTitleLetterSpacing.Mobile}${postTitleLetterSpacingUnits.Mobile};` : ''}
+                ${postTitleLineHeight.Mobile ? `line-height: ${postTitleLineHeight.Mobile}${postTitleLineHeightUnits.Mobile};` : ''}
+                ${postTitleMarginMobileWidth ? `margin: ${postTitleMarginMobileWidth};` : ''}
+            }
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content .fb_post_title:hover {
+                ${postTitleHoverColor ? `color: ${postTitleHoverColor};` : ''}
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_content a {
