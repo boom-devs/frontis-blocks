@@ -10,36 +10,37 @@ const {nonce, ajaxUrl} = window.frontisBlocksAdminSidebar;
 /**
  * Function for Update Global Settings
  * @param {*} value
+ * @param key
  * @returns {object}
  */
-export const updateGlobalStyle = (value, key = 'fb_update_global_colors') => {
-    let data = new FormData();
-    data.append("action", updateGlobalStyleAction);
-    data.append("fb_sidebar_nonce", nonce);
-    data.append("fb_global_style_key", key);
-    data.append("fb_global_style_value", JSON.stringify(value));
 
-    return fetch(ajaxUrl, {
-        method: 'POST',
-        body: data,
-    }) // wrapped
-        .then(res => res.text())
-        .then(data => {
-            const response = JSON.parse(data);
-            if (response.success) {
-                return response.data
-            }
-            else {
-                console.log("Update failed! ", response.data)
-            }
-        })
-        .catch(err => console.log(err));
-}
+export const updateGlobalStyle = async (value, key = 'fb_update_global_colors') => {
+	try {
+		const response = await jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: key,
+				nonce: nonce,
+				data: value
+			}
+		});
 
-export const getGlobalSettings = () => {
+		if (!response.success) {
+			throw new Error(response.data || 'Update failed');
+		}
+
+		return response;
+	} catch (error) {
+		console.error('Ajax error:', error);
+		throw error;
+	}
+};
+
+export const getGlobalColors = () => {
     let data = new FormData();
     data.append("action", getGlobalStyleAction);
-    data.append("fb_sidebar_nonce", nonce);
+    data.append("nonce", nonce);
 
     return fetch(ajaxUrl, {
         method: 'POST',
