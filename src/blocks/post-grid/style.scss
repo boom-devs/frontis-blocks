@@ -1,12 +1,311 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
-
-.wp-block-frontis-blocks-post-grid {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+.fb_post_grid_container{ 
+	.fb_post_grid_wrapper{
+		width: 100%;
+		overflow: hidden;
+		box-sizing: border-box;
+		img{
+			width: 100%;
+			box-sizing: border-box;
+			display: block;
+			object-fit: cover;
+			height: 100%;
+		}
+	}
+	.fb_post_grid_categories {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		a {
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
+	.fb_post_grid_tags {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		a {
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
+	.fb_post_grid_content {
+		.fb_post_title {
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+		a {
+			text-decoration: none;
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
 }
+
+
+
+.fb_post_grid_author {
+	display: flex;
+    align-items: center;
+
+	a {
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+	}
+
+    .fb_post_grid_author_avatar {
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+
+    .fb_post_grid_author_info {
+		display: flex;
+		align-items: center;
+		.fb_post_grid_author_info_name {
+			display: flex;
+			align-items: center;
+		}
+    }
+}
+
+
+
+.fb_post_grid_container{
+	.fb_load_more_wrapper{
+		.fb_load_more{
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			padding: 16px 24px;
+			background-color: #FFE58C;
+			border: 1px solid #FFE58C;
+			color: #000000;
+			font-family: Josefin Sans;
+			font-size: 24px;
+			font-weight: 600;
+			font-style: normal;
+			line-height: 33px;
+			transition: all 0.3s ease-in-out;
+
+			&:hover .fb_load_more_loader {
+				border-top: 2px solid #ffffff;
+				border-right: 2px solid #cccccc;
+				border-bottom: 2px solid #999999;
+				border-left: 2px solid #666666;
+			}
+			&:hover {
+				background-color: #000000;
+				color: #FFFFFF;
+				transition: all 0.3s ease-in-out;
+
+				span {
+					fill: #FFFFFF;
+					transition: all 0.3s ease-in-out;
+				}
+			}
+
+			span {
+				width: 20px;
+				height: 20px;
+				position: relative;
+				fill: #000000;
+				transition: all 0.3s ease-in-out;
+
+				svg {
+					width: 100%;
+					height: 100%;
+
+				}
+			}
+		}
+		.fb_load_more_loader {
+			border-top: 2px solid #000000;
+			border-right: 2px solid #00000099;
+			border-bottom: 2px solid #0000004d;
+			border-left: 2px solid #0000001a;
+			border-radius: 50%;
+			display: inline-block;
+			box-sizing: border-box;
+			animation: loader 1s linear infinite;
+		}
+	}
+
+	.fb_load_more_outter_wrap {
+		display: none;
+		position: absolute;
+		top: 0;
+	}
+	.empty-post{
+		flex-basis: 100%;
+	}
+}
+
+
+.skeleton-item {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+
+	.skeleton-item-title {
+		width: 100%;
+		height: 260px;
+	}
+
+	.loading {
+		position: relative;
+	}
+
+	.skeleton-item-location {
+		width: 100%;
+		height: 43px;
+		margin: 32px 0 16px;
+	}
+	.skeleton-item-sport {
+		width: 80%;
+		height: 24px;
+	}
+}
+
+
+// .skeleton-item {
+// 	position: relative;
+// 	display: flex;
+// 	flex-direction: column;
+
+// 	@media only screen and (max-width: 767px) {
+// 		width: 100% !important;
+// 	}
+
+// 	.skeleton-item-title {
+// 		width: 100%;
+// 		height: 280px;
+// 		// margin-bottom: 32px;
+// 	}
+
+// 	.loading {
+// 		position: relative;
+// 	}
+
+// 	.skeleton-item-location {
+// 		width: 100%;
+// 		height: 280px;
+// 		// margin-bottom: 16px;
+// 	}
+// 	.skeleton-item-sport {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-date {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-readmore {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-author {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// }
+
+// .loading.post {
+// 	display: flex;
+// 	gap: 24px;
+// 	flex-wrap: wrap;
+
+// 	p {
+// 		flex-basis: 100%;
+// 	}
+// }
+
+.post-card.skeleton .loading:before {
+	content: "";
+	opacity: 0.7;
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-name: loading;
+	animation-name: loading;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+	background: -webkit-gradient(linear, left top, right top, color-stop(8%, #212121), color-stop(30%, #2b2b2b), color-stop(51%, #212121));
+	background: -o-linear-gradient(to right, #212121 8%, #2b2b2b 30%, #212121 51%);
+	background: linear-gradient(to right, #212121 8%, #2b2b2b 30%, #212121 51%);
+	background-size: 800px 104px;
+	position: absolute;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.post-card.skeleton .post-card-content {
+	width: 100%;
+}
+
+.post-card.skeleton .post-card-content .post-card-excerpt {
+	width: 100%;
+	margin-top: 2rem;
+}
+
+.post-card.skeleton .post-card-content .post-card-excerpt h5 {
+	min-height: 1.75rem;
+	width: 100%;
+}
+
+.post-card.skeleton .post-card-content .post-card-excerpt p {
+	margin-top: 1rem;
+	min-height: 3.5rem;
+	width: 100%;
+}
+
+.post-card.skeleton .post-card-content .post-card-excerpt div {
+	width: 50%;
+	min-height: 3.25rem;
+}
+
+
+@-webkit-keyframes loading {
+	0% {
+		background-position: -800px 0;
+	}
+	100% {
+		background-position: 800px 0;
+	}
+}
+
+@keyframes loading {
+	0% {
+		background-position: -800px 0;
+	}
+	100% {
+		background-position: 800px 0;
+	}
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+} 

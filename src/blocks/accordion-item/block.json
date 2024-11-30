@@ -1,0 +1,30 @@
+  {
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/accordion-item",
+    "version": "1.0.0",
+    "title": "Accordion Item",
+    "category": "frontis-blocks",
+    "textdomain": "frontis-blocks",
+    "icon": "facebook-alt",
+    "description": "Example block scaffolded with Create Block tool.",
+    "example": {},
+      "supports": {
+          "anchor": false,
+      "align": ["wide", "full"],
+          "customClassName": false
+      },
+	  "editorScript": "fb_combined_index",
+	  "editorStyle": "fb_combined_index",
+	  "style": "fb_combined_style",
+    "parent": ["frontis-blocks/accordion"],
+    "usesContext": [
+      "fb/accordionparentBlockID",
+      "fb/accordionInheritedAccordionType",
+      "fb/accordionInheritedDisplayIcon",
+      "fb/accordionInheritedTabIcon",
+      "fb/accordionInheritedExpandedIcon",
+      "fb/accordionInheritedTagName",
+      "fb/accordionFaqSchema"
+    ]
+  }

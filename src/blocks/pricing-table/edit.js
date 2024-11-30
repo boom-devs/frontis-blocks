@@ -39,8 +39,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
         blockId,
 		/** Start Header */
+		pricingSectionTopSwitcher,
+		pricingSectionTopText,
+		pricingTitleTag,
 		pricingTitle,
 		pricingSubTitleSwitcher,
+		pricingSubTitleTag,
 		pricingSubTitle,
 		pricingIconAlign,
 		pricingIcon,
@@ -82,6 +86,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		/** End Ribbon */
 
 		pricingTitleAlignment,
+
+		priceAfterTextSwitcher,
+		priceAfterText,
+
+		priceFeatureAfterTextSwitcher,
+		priceFeatureAfterText,
+
 	} = attributes;
 
     const blockProps = useBlockProps({
@@ -97,120 +108,140 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
 			<div {...blockProps} id={blockId}>
 				<div className={`fb-pricing-wrapper ${blockId}`}>
-					<div className="fb-pricing-ribbon-wrapper">
-						{priceRibbonSwitcher && (
-							<div className={`fb-pricing-ribbon fb-pricing-ribbon-${priceRibbonPosition}`}>
-								<span>{priceRibbonText}</span>
+					<div className="fb-pricing-inner-wrapper">
+						{pricingSectionTopSwitcher && (
+							<div className="fb-pricing-top-wrapper">
+								<span className="fb-pricing-top-text">{pricingSectionTopText}</span>
 							</div>
 						)}
-					</div>
-					<div className="fb-pricing-header">
-						<div className="fb-pricing-icon-wrapper">
-							{pricingIconAlign === 'icon' && (
-								<span className="fb-pricing-icon">{renderSVG(pricingIcon)}</span>
-							)}
-						</div>
-						<div className="fb-pricing-price-wrapper">
-							<span className={`fb-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
-								<span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
-								{normalPrice}
-								<span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
-								
-								{!salePriceSwitcher && (
-									<span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
+						<div className="fb-pricing-main-wrapper">
+							<div className="fb-pricing-ribbon-wrapper">
+								{priceRibbonSwitcher && (
+									<div className={`fb-pricing-ribbon fb-pricing-ribbon-${priceRibbonPosition}`}>
+										<span>{priceRibbonText}</span>
+									</div>
 								)}
-							</span>
-							{salePriceSwitcher && (
-								<span className="fb-pricing-sale-price">
-									<span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
-									{salePrice}
-									<span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
-									<span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
-								</span>
-							)}
-						</div>
-						<div className={`fb-pricing-title-wrapper fb-pricing-title-${pricingTitleAlignment}`}>
-							<RichText
-								tagName="h2"
-								className="fb-pricing-title"
-								value={pricingTitle}
-								onChange={(value) => setAttributes({ pricingTitle: value })}
-								placeholder={__('Enter title', 'frontis-blocks')}
-							/>
-							{pricingSubTitleSwitcher && (
-								<RichText
-									tagName="span"
-									className="fb-pricing-subtitle"
-									value={pricingSubTitle}
-									onChange={(value) => setAttributes({ pricingSubTitle: value })}
-									placeholder={__('Enter subtitle', 'frontis-blocks')}
-								/>
-							)}
-						</div>
-					</div>
-					<div className ='fb-pricing-content'>
-						<div className="fb-pricing-features-wrapper">
-							{ !priceHideFeaturesSwitcher && (
-								<ul className="fb-pricing-features-list">
-									{priceFeatureItems.map(item => (
-										<li className="fb-pricing-feature-item" key={item.id}>
-											{priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
-												<div className="fb-pricing-feature-icon">
-													<span className="fb-pricing-feature-icon-inner">
-														{item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-													</span>
-												</div>
+							</div>
+							<div className="fb-pricing-header">
+								<div className={`fb-pricing-title-wrapper fb-pricing-title-${pricingTitleAlignment}`}>
+									<RichText
+										tagName={pricingTitleTag}
+										className="fb-pricing-title"
+										value={pricingTitle}
+										onChange={(value) => setAttributes({ pricingTitle: value })}
+										placeholder={__('Enter title', 'frontis-blocks')}
+									/>
+									{pricingSubTitleSwitcher && (
+										<RichText
+											tagName={pricingSubTitleTag}
+											className="fb-pricing-subtitle"
+											value={pricingSubTitle}
+											onChange={(value) => setAttributes({ pricingSubTitle: value })}
+											placeholder={__('Enter subtitle', 'frontis-blocks')}
+										/>
+									)}
+								</div>
+								<div className="fb-pricing-icon-wrapper">
+									{pricingIconAlign === 'icon' && (
+										<span className="fb-pricing-icon">{renderSVG(pricingIcon)}</span>
+									)}
+								</div>
+								<div className="fb-pricing-price-wrapper">
+									<div className='fb-pricing-price-inner-wrapper'>
+										<span className={`fb-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
+											<span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
+											{normalPrice}
+											<span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
+											
+											{!salePriceSwitcher && (
+												<span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
 											)}
-											<RichText
-												tagName="span"
-												className="fb-pricing-feature-text"
-												value={item.Title}
-												onChange={(value) => {
-													const updatedItems = priceFeatureItems.map(i =>
-														i.id === item.id ? { ...i, Title: value } : i
-													);
-													setAttributes({ priceFeatureItems: updatedItems });
-												}}
-												placeholder={__('Feature Title', 'frontis-blocks')}
-											/>
-										</li>
-									))}
-								</ul>
-							)}
+										</span>
+										{salePriceSwitcher && (
+											<span className="fb-pricing-sale-price">
+												<span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
+												{salePrice}
+												<span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
+												<span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
+											</span>
+										)}
+									</div>
+									{priceAfterTextSwitcher && (
+										<div className="fb-pricing-after-text-wrapper">
+											<span className="fb-pricing-after-text">{priceAfterText}</span>
+										</div>
+									)}
+								</div>
+							</div>
+							<div className ='fb-pricing-content'>
+								<div className="fb-pricing-features-wrapper">
+									{ priceHideFeaturesSwitcher && (
+										<ul className="fb-pricing-features-list">
+											{priceFeatureItems.map(item => (
+												<li className="fb-pricing-feature-item" key={item.id}>
+													{priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
+														<div className="fb-pricing-feature-icon">
+															<span className="fb-pricing-feature-icon-inner">
+																{item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+															</span>
+														</div>
+													)}
+													<RichText
+														tagName="span"
+														className="fb-pricing-feature-text"
+														value={item.Title}
+														onChange={(value) => {
+															const updatedItems = priceFeatureItems.map(i =>
+																i.id === item.id ? { ...i, Title: value } : i
+															);
+															setAttributes({ priceFeatureItems: updatedItems });
+														}}
+														placeholder={__('Feature Title', 'frontis-blocks')}
+													/>
+												</li>
+											))}
+										</ul>
+									)}
+								</div>
+								{priceFeatureAfterTextSwitcher && (
+									<div className="fb-pricing-feature-after-text-wrapper">
+										<span className="fb-pricing-feature-after-text">{priceFeatureAfterText}</span>
+									</div>
+								)}
+							</div>
+							<div className="fb-pricing-footer-wrapper">
+								<div className="fb-pricing-button-wrapper">
+									{priceButtonSwitcher && (
+									<a
+										className={`fb-pricing-button fb-button-icon-${priceButtonIconPosition}`}
+										href={priceButtonUrl}
+										target={priceButtonTargetUrl ? "_blank" : undefined}
+										rel={priceButtonTargetUrl ? "noopener noreferrer" : undefined}
+										onClick={(event) => event.preventDefault()}
+									>
+										{priceButtonIconPosition === 'left' && priceButtonIconAlign === 'icon' && (
+										<div className="fb-pricing-button-icon">
+											{renderSVG(priceButtonIcon)}
+										</div>
+										)}
+										<RichText
+										tagName="span"
+										value={priceButtonText}
+										onChange={(value) => setAttributes({ priceButtonText: value })}
+										placeholder={__('Enter button text...', 'frontis-blocks')}
+										className="fb-button-text"
+										/>
+										{priceButtonIconPosition === 'right' && priceButtonIconAlign === 'icon' && (
+										<div className="fb-pricing-button-icon">
+											{renderSVG(priceButtonIcon)}
+										</div>
+										)}
+									</a>
+									)}
+								</div>
+							</div>
 						</div>
 					</div>
-					<div className="fb-pricing-footer-wrapper">
-						<div className="fb-pricing-button-wrapper">
-							{priceButtonSwitcher && (
-							<a
-								className={`fb-pricing-button fb-button-icon-${priceButtonIconPosition}`}
-								href={priceButtonUrl}
-								target={priceButtonTargetUrl ? "_blank" : undefined}
-								rel={priceButtonTargetUrl ? "noopener noreferrer" : undefined}
-								onClick={(event) => event.preventDefault()}
-							>
-								{priceButtonIconPosition === 'left' && priceButtonIconAlign === 'icon' && (
-								<div className="fb-pricing-button-icon">
-									{renderSVG(priceButtonIcon)}
-								</div>
-								)}
-								<RichText
-								tagName="span"
-								value={priceButtonText}
-								onChange={(value) => setAttributes({ priceButtonText: value })}
-								placeholder={__('Enter button text...', 'frontis-blocks')}
-								className="fb-button-text"
-								/>
-								{priceButtonIconPosition === 'right' && priceButtonIconAlign === 'icon' && (
-								<div className="fb-pricing-button-icon">
-									{renderSVG(priceButtonIcon)}
-								</div>
-								)}
-							</a>
-							)}
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</>

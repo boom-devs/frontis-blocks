@@ -1,64 +1,69 @@
-.fb-testimonial-main-wrapper {
-    
-    .fb-testimonial-section {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        display: block;
-        transition: ease-in-out 0.5s;
-        &.fb-testimonia-section-left {
-            text-align: left;
+.fb-testimonial-section {
+    display: block;
+    transition: ease-in-out 0.5s;
+
+    &.fb-testimonial-section-left {
+        text-align: left;
+    }
+
+    &.fb-testimonial-section-center {
+        text-align: center;
+    }
+    &.fb-testimonial-section-right {
+        text-align: right;
+    }
+
+    .fb-testimonial-wrapper {
+        width: 100%;
+    }
+
+    .fb-testimonial-rating {
+        .fb-testimonial-rating-icon {
+            display: inline-block;
         }
-        &.fb-testimonia-section-center {
-            text-align: center;
+        svg {
+            transition: ease-in-out 0.5s;
         }
-        &.fb-testimonia-section-right {
-            text-align: right;
+    }
+
+    .fb-testimonial-author-container {
+        display: flex;
+        align-items: center;
+        &.left {
+           justify-content: flex-start;
         }
-        
-        .fb-testimonial-wrapper {
-            .fb-testimonial-inner-wrapper {
-                width: 100%;
-
-                .fb-testimonial-container {
-
-                    .fb-testimonial-image-wrapper {
-                        .fb-testimonial-image-inner-wrapper {
-                            .fb-testimonial-image {
-                                img {
-                                    max-width: 100%;
-                                }
-                            }
-                        }
-                    }
-
-                    .fb-testimonial-description-container {
-                        
-                        .fb-testimonial-quote-icon {
-                            svg {
-                                transition: ease-in-out 0.5s;
-                            }
-                        }
-
-                        .fb-testimonial-userdesc-container {
-                            margin-bottom: 10px;
-                        }
-
-                        .fb-testimonial-userinfo-container {
-                            
-                            .fb-testimonial-rating {
-                                margin-top: 10px;
-
-                                .fb-testimonial-rating-icon {
-                                    display: inline-block;
-                                }
-                                svg {
-                                    transition: ease-in-out 0.5s;
-                                }
-                            }
-                        }
+        &.center {
+            justify-content: center;
+        }
+        &.right {
+            justify-content: flex-end;
+        }
+        .fb-testimonial-author-inner-container {
+            display: flex;
+            align-items: center;
+            .fb-testimonial-author-image-container {
+                .fb-testimonial-image {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        max-width: 100%;
                     }
                 }
             }
+    
+            .fb-testimonial-userinfo-container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    }
+
+    .fb-testimonial-quote-icon {
+        display: inline-block;
+        svg {
+            transition: ease-in-out 0.5s;
         }
     }
 }

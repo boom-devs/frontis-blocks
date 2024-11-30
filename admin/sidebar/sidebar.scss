@@ -1,0 +1,287 @@
+@import "../scss/variables";
+
+
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
+	.components-panel__header {
+		&.interface-complementary-area-header {
+			min-height: 58px;
+			background: $neutral-color-100;
+			padding: 14px 16px;
+
+			.interface-complementary-area-header__title {
+				color: $neutral-color-950;
+				font-family: $heading-font-family;
+				font-size: 14px;
+				font-weight: 600;
+				letter-spacing: 0.00px;
+				line-height: 19.2px;
+			}
+		}
+	}
+
+	.fb-blocks-color-tabs {
+		.components-tab-panel__tabs {
+			border-bottom: 1px solid $neutral-color-100;
+			padding: 0 12px;
+
+			button {
+				border-bottom: 2px solid transparent;
+
+				&.active-tab {
+					border-bottom: 2px solid $neutral-color-200;
+				}
+
+				&:first-child {
+					padding-left: 0;
+				}
+			}
+		}
+
+		.components-tab-panel__tab-content {
+			.components-tools-panel {
+				.components-flex {
+					&.components-h-stack {
+						padding-top: 24px;
+						padding-left: 12px;
+						padding-right: 3px;
+
+						button {
+							svg {
+								fill: $neutral-color-600;
+							}
+						}
+					}
+				}
+
+				.components-tools-panel-item {
+					border-left: 0;
+					border-right: 0;
+
+					.components-button {
+						border-right: 0;
+						border-left: 0;
+						//padding: 14px 12px;
+						padding: 0 12px;
+						height: 48px;
+
+						.components-flex-item {
+							color: $neutral-color-700;
+							font-family: $body-font-family;
+							font-weight: 500;
+							font-size: 14px;
+							line-height: 16px;
+						}
+					}
+
+					.components-flex {
+						&.components-h-stack {
+							padding-top: 0;
+							padding-left: 0;
+						}
+					}
+				}
+			}
+		}
+
+		.add-custom-color {
+			text-align: center;
+			padding: 14px 0;
+
+			.add-custom-color-btn {
+				padding: 12px 14px;
+				background: $primary-color;
+				height: 44px;
+				border-radius: 6px;
+				font-family: $body-font-family;
+				font-weight: 500;
+				color: $white-color;
+				font-size: 14px;
+				line-height: 16px;
+				align-items: center;
+				gap: 10px;
+
+				span {
+					height: 100%;
+					display: flex;
+					align-items: center;
+				}
+			}
+		}
+	}
+
+	.fb-global-controls {
+		&.components-panel {
+			border-top: 0;
+
+			.fb-panel-control {
+				padding: 0px;
+			}
+			.components-panel__body {
+				border: none;
+				margin-bottom: 10px;
+				padding: 0 16px;
+
+				.components-panel__body-title{
+					margin-bottom: 0;
+
+					.components-panel__body-toggle{
+						&.components-button {
+							padding: 16px 12px;
+							background: $neutral-color-100;
+							border-radius: 6px;
+
+							.components-panel__arrow {
+								right: 5px;
+								color: $neutral-color-600;
+							}
+						}
+					}
+				}
+
+				&.is-opened {
+					padding: 0 32px;
+					padding-top: 16px;
+
+					.components-panel__body-toggle{
+						&.components-button {
+							border-bottom-right-radius: 0;
+							border-bottom-left-radius: 0;
+						}
+					}
+
+					.fb-blocks-color-tabs {
+						border: 1px solid $neutral-color-100;
+						border-top: 0;
+					}
+				}
+
+				&:first-child {
+					padding-top: 16px;
+
+					&.is-opened {
+						padding-top: 32px;
+					}
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				.fb-blocks-color-tabs {
+					border-top: 0;
+					width: calc(100% + 32px);
+					margin-left: calc(0% - 16px);
+
+					.fb-global-color-panel {
+						padding: 0;
+					}
+				}
+
+				.components-base-control {
+					width: calc( 100% + 32px );
+					margin-left: calc( 0% - 16px );
+
+					.components-textarea-control__input {
+						margin-top: 0;
+						//width: calc(100% + 32px);
+						//margin-left: calc(0% - 16px);
+						border: 1px solid #e1e3e8;
+					}
+				}
+			}
+		}
+	}
+}
+.block-editor-tools-panel-color-gradient-settings__dropdown>button.is-open {
+	background: transparent;
+}
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
+	padding: 0;
+
+	.block-editor-tools-panel-color-gradient-settings__item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-right: 12px;
+
+		.fb-delete-custom-color {
+			display: none;
+			border: none;
+			background: transparent;
+			color: $error-color;
+			cursor: pointer;
+
+			&:first-of-type {
+				display: block; /* Shudhu first button visible korbe */
+			}
+		}
+	}
+}
+
+.fb-custom-color-item .actions {
+	cursor: pointer;
+
+	.dashicons-trash:before {
+		color: $error-color;
+	}
+}
+
+// Gradient color
+.fb-color-panel.fb-gradient-color-panel {
+	.components-panel__row.fb-gradient-color-label {
+		color: $neutral-color-950;
+		font-family: $heading-font-family;
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.00px;
+		line-height: 19.2px;
+		padding: 14px 12px;
+		border-bottom: 1px solid $neutral-color-100;
+	}
+
+	.fb-gradient-color-list {
+		.fb-custom-color-item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 44px;
+			padding: 0 12px;
+			border-bottom: 1px solid $neutral-color-100;
+
+			.item-content {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				color: $neutral-color-700;
+				font-family: $body-font-family;
+				font-weight: 500;
+				font-size: 14px;
+				line-height: 16px;
+			}
+
+			&:last-child {
+				//border-bottom: none;
+			}
+
+			.actions {
+				.fb-reset {
+					.dashicons-image-rotate {
+						cursor: pointer;
+
+						&:before {
+							color: $neutral-color-700;
+							font-size: 17px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+#tab-panel-1-gradient-view {
+	.fb-gradient-color-panel {
+		.fb-gradient-color-label {
+
+		}
+	}
+}

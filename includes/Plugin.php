@@ -4,145 +4,196 @@ namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Core\Blocks;
-use FrontisBlocks\Assets\Asset;
 use FrontisBlocks\Utils\Enqueue;
+use FrontisBlocks\Core\UsedBlocks;
 use FrontisBlocks\Config\BlockList;
+use FrontisBlocks\Admin\Ajax\Settings;
+use FrontisBlocks\Admin\Ajax\GlobalSettings;
+use FrontisBlocks\Assets\GenerateFrontendCss;
+use FrontisBlocks\Core\FontLoader;
+use FrontisBlocks\Core\InitialActivatedBlocks;
 
-final class Plugin {
-    /**
-     * Plugin version
-     *
-     * @var string
-     */
-    const VERSION = '1.0.0';
+final class Plugin
+{
+	/**
+	 * Plugin version
+	 *
+	 * @var string
+	 */
+	const VERSION = '1.0.0';
 
-    /**
-     * Plugin slug
-     *
-     * @var string
-     */
-    const SLUG = 'frontis-blocks';
+	/**
+	 * Plugin slug
+	 *
+	 * @var string
+	 */
+	const SLUG = 'frontis-blocks';
 
-    /**
-     * Plugin prefix
-     *
-     * @var string
-     */
-    const PREFIX = 'fb_';
+	/**
+	 * Plugin prefix
+	 *
+	 * @var string
+	 */
+	const PREFIX = 'fb_';
 
-    /**
-     * Plugin text domain
-     *
-     * @var string
-     */
-    const TEXT_DOMAIN = 'frontis-blocks';
+	/**
+	 * Plugin text domain
+	 *
+	 * @var string
+	 */
+	const TEXT_DOMAIN = 'frontis-blocks';
 
-    /**
-     * Admin instance
-     *
-     * @var Admin
-     */
-    public $admin;
+	/**
+	 * Admin instance
+	 *
+	 * @var Admin
+	 */
+	public $admin;
 
-    /**
-     * Asset instance
-     *
-     * @var Asset
-     */
-    public $asset;
+	/**
+	 * Asset instance
+	 *
+	 * @var Asset
+	 */
+	public $asset;
 
-    /**
-     * Plugin settings
-     *
-     * @var array|null
-     */
-    public static $settings = null;
+	/**
+	 * Plugin settings
+	 *
+	 * @var array|null
+	 */
+	public static $settings = null;
 
-    /**
-     * Loaded blocks
-     *
-     * @var array
-     */
-    public static $blocks = [];
+	/**
+	 * Loaded blocks
+	 *
+	 * @var array
+	 */
+	public static $blocks = [];
 
-    /**
-     * Plugin instance
-     *
-     * @var Plugin|null
-     */
-    private static $instance = null;
+	/**
+	 * Plugin instance
+	 *
+	 * @var Plugin|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Constructor
-     */
-    private function __construct() {
-        $this->define_constants();
-        $this->set_locale();
-        $this->init_classes();
-        $this->init_hooks();
-    }
+	/**
+	 * Constructor
+	 */
+	private function __construct()
+	{
+		$this->define_constants();
+		$this->set_locale();
+		$this->init_classes();
+		$this->init_hooks();
 
-    /**
-     * Get plugin instance
-     *
-     * @return Plugin
-     */
-    public static function get_instance() {
-        if (null === self::$instance) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+	}
 
-    /**
-     * Define constants
-     */
-    private function define_constants() {
-        define('FB_VERSION', self::VERSION);
-        define('FB_SLUG', self::SLUG);
-        define('FB_PREFIX', self::PREFIX);
-        define('FB_TEXT_DOMAIN', self::TEXT_DOMAIN);
-        define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
-        define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
-        define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
-    }
 
-    /**
-     * Set locale
-     */
-    private function set_locale() {
-        add_action('plugins_loaded', function() {
-            load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(plugin_basename(FB_PLUGIN_FILE)) . '/languages');
-        });
-    }
+	public function enqueue_scripts()
+	{
+		// Check if the current post has the 'countdown' block
+		if (has_block('frontis-blocks/countdown')) {
+			wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js', array('jquery'), '1.0.0', true);
+		}
 
-    /**
-     * Initialize classes
-     */
-    private function init_classes() {
-       $this->asset =Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
+		// Check if the current post has the 'counter' block
+		if (has_block('frontis-blocks/counter-number')) {
+			wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/public/counter.js', array('jquery'), '1.0.0', true);
+		}
 
-       //load blocks
-       self::$blocks = BlockList::get_instance()->get_blocks();
+		if (has_block('frontis-blocks/advanced-video')) {
+			wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+		}
+	}
 
-      
-    }
 
-    /**
-     * Initialize hooks
-     */
-    private function init_hooks() {
-        add_action('plugins_loaded', [$this, 'init_plugin']);
-    }
+	/**
+	 * Get plugin instance
+	 *
+	 * @return Plugin
+	 */
+	public static function get_instance()
+	{
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Initialize plugin
-     */
-    public function init_plugin() {
-        // Additional plugin initialization if needed
+	/**
+	 * Define constants
+	 */
+	private function define_constants()
+	{
+		define('FB_VERSION', self::VERSION);
+		define('FB_SLUG', self::SLUG);
+		define('FB_PREFIX', self::PREFIX);
+		define('FB_TEXT_DOMAIN', self::TEXT_DOMAIN);
+		define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
+		define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
+		define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
+		// define('SCRIPT_DEBUG', true);
+		define('FB_PLUGIN_BASENAME', plugin_basename(FB_PLUGIN_FILE));
+		define('FB_UPGRADE_PRO_URL', 'https://frontis.co/frontis-blocks-pro');
+		define('FB_IS_PRO_ACTIVE', class_exists('FrontisBlocks\Pro\Plugin') ? true : false);
+	}
 
-        Blocks::get_instance();
+	/**
+	 * Set locale
+	 */
+	private function set_locale()
+	{
+		add_action('plugins_loaded', function () {
+			load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(plugin_basename(FB_PLUGIN_FILE)) . '/languages');
+		});
+	}
 
-        Admin::get_instance();
-    }
+	/**
+	 * Initialize classes
+	 */
+	private function init_classes()
+	{
+		$this->asset = Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
+
+		//load blocks
+		self::$blocks = BlockList::get_instance()->get_blocks();
+
+		//load blocks
+		self::$blocks = BlockList::get_instance()->get_blocks();
+
+		// Load google font
+		FontLoader::get_instance();
+	}
+
+	/**
+	 * Initialize hooks
+	 */
+	private function init_hooks()
+	{
+		add_action('plugins_loaded', [$this, 'init_plugin']);
+	}
+
+	/**
+	 * Initialize plugin
+	 */
+	public function init_plugin()
+	{
+		// Additional plugin initialization if needed
+
+		Blocks::get_instance();
+
+		Admin::get_instance();
+
+		Settings::get_instance()->register_ajax_events();
+
+		InitialActivatedBlocks::blocks();
+
+		GlobalSettings::get_instance()->register_global_settings_events();
+
+		// UsedBlocks::get_instance()->get_used_frontis_blocks();
+
+	}
 }

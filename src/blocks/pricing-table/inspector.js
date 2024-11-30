@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, URLInput } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -41,14 +41,25 @@ import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
 import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
 		deviceType,
+		blockStyle,
 		/** Start Header */
+		pricingSectionTopSwitcher,
+		pricingSectionTopText,
+		pricingTitleTag,
 		pricingTitle,
+		pricingSubTitleTag,
 		pricingSubTitleSwitcher,
 		pricingSubTitle,
 		pricingIconAlign,
@@ -63,7 +74,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceCurrencyPosition,
 		pricePeriod,
 		pricePeriodSeparator,
-		/** End Pricing */
 
 		/** Start Feature */
 		priceHideFeaturesSwitcher,
@@ -216,10 +226,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricePeriodColorSwitcher,
 		pricePeriodColor,
 		pricePeriodHoverColor,
-
-		priceingPriceGap,
-		priceingPriceGapUnits,
 		/** End Pricing Style */
+
+
+		pricePaddingUnits, 
+		priceDesktopPadding,
+		priceTabletPadding,
+		priceMobilePadding,
+		pricePaddingLink,
 
 		/**Start Title and Subtitle Style */
 		pricingTitleAlignment,
@@ -279,6 +293,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingfeatureTitleLineHeight,
 		pricingfeatureTitleLineHeightUnits,
 		/** End Feature Title */
+
+		/** Start Feature Item Padding */
+		priceFeatureItemPaddingUnits,
+		priceFeatureItemDesktopPadding,
+		priceFeatureItemTabPadding,
+		priceFeatureItemMobilePadding,
+		priceFeatureItemPaddingLink,
+		/** End Feature Item Padding */
+
+		/** Start Feature Padding */
+		priceFeaturePaddingUnits,
+		priceFeatureDesktopPadding,
+		priceFeatureTabPadding,
+		priceFeatureMobilePadding,
+		priceFeaturePaddingLink,
+		/** End Feature Padding */
+
+
+
 
 
 		/** Start price Button */
@@ -397,6 +430,78 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceGlobalBoxShadowCssValue,
 		/** End Global Settings */
 
+
+		priceAfterTextSwitcher,
+		priceAfterText,
+		priceAfterTextFontFamily,
+		priceAfterTextFontSize,
+		priceAfterTextFontSizeUnits,
+		priceAfterTextFontWeight,
+		priceAfterTextFontStyle,
+		priceAfterTextTextTransform,
+		priceAfterTextTextDecoration,
+		priceAfterTextLetterSpacing,
+		priceAfterTextLetterSpacingUnits,
+		priceAfterTextLineHeight,
+		priceAfterTextLineHeightUnits,
+		priceAfterTextColorSwitcher,
+		priceAfterTextColor,
+		priceAfterTextHoverColor,
+		
+		priceAfterTextBgColorSwitcher,
+		priceAfterTextNormalBackgroundType,
+		priceAfterTextNormalClassicColor,
+		priceAfterTextNormalGradientColor,
+		priceAfterTextNormalCustomGradientSwitcher,
+		priceAfterTextNormalCustomGradientInputValue,
+		priceAfterTextHoverBackgroundType,
+		priceAfterTextHoverClassicColor,
+		priceAfterTextHoverGradientColor,
+		priceAfterTextHoverCustomGradientSwitcher,
+		priceAfterTextHoverCustomGradientInputValue,
+
+		priceAfterTextPaddingUnits,
+		priceAfterTextPaddingDesktop,
+		priceAfterTextPaddingTablet,
+		priceAfterTextPaddingMobile,
+		priceAfterTextPaddingLink,
+
+		priceAfterTextBorder,
+		priceAfterTextBorderColorSwitcher,
+		priceAfterTextBorderColor,
+		priceAfterTextBorderHoverColor,
+
+		priceAfterTextBorderUnits,
+		priceAfterTextBorderDesktop,
+		priceAfterTextBorderTablet,
+		priceAfterTextBorderMobile,
+		priceAfterTextBorderLink,
+
+		priceAfterTextBorderRadiusUnits,
+		priceAfterTextBorderRadiusDesktop,
+		priceAfterTextBorderRadiusTablet,
+		priceAfterTextBorderRadiusMobile,
+		priceAfterTextBorderRadiusLink,
+
+		priceFeatureAfterTextSwitcher,
+		priceFeatureAfterText,
+		priceFeatureAfterTextFontFamily,
+		priceFeatureAfterTextFontSize,
+		priceFeatureAfterTextFontSizeUnits,
+		priceFeatureAfterTextFontWeight,
+		priceFeatureAfterTextFontStyle,
+		priceFeatureAfterTextTextTransform,
+		priceFeatureAfterTextTextDecoration,
+		priceFeatureAfterTextLetterSpacing,
+		priceFeatureAfterTextLetterSpacingUnits,
+		priceFeatureAfterTextLineHeight,
+		priceFeatureAfterTextLineHeightUnits,
+		priceFeatureAfterTextColorSwitcher,
+		priceFeatureAfterTextColor,
+		priceFeatureAfterTextHoverColor,
+
+
+
     } = attributes;
 
 
@@ -419,6 +524,86 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             document.head.appendChild(linkElement);
         }
     }, [normalPricingFontFamily]);
+
+	useEffect(() => {
+        if (salePricingFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${salePricingFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [salePricingFontFamily]);
+
+	useEffect(() => {
+        if (priceCurrencyFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${priceCurrencyFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [priceCurrencyFontFamily]);
+
+	useEffect(() => {
+        if (pricePeriodFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricePeriodFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricePeriodFontFamily]);
+
+	useEffect(() => {
+        if (pricingTitleFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingTitleFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricingTitleFontFamily]);
+
+	useEffect(() => {
+        if (pricingSubtitleFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingSubtitleFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricingSubtitleFontFamily]);
+
+	useEffect(() => {
+        if (pricingfeatureTitleFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingfeatureTitleFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [pricingfeatureTitleFontFamily]);
+
+	useEffect(() => {
+        if (priceButtonFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${priceButtonFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [priceButtonFontFamily]);
+
+	useEffect(() => {
+        if (priceAfterTextFontFamily) {
+            const fontUrl = `https://fonts.googleapis.com/css?family=${priceAfterTextFontFamily.replace(' ', '+')}`;
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.href = fontUrl;
+            document.head.appendChild(linkElement);
+        }
+    }, [priceAfterTextFontFamily]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -453,6 +638,445 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const priceButtonIconHandler = (IconName) => {
 		setAttributes({priceButtonIcon: IconName})
 	}
+
+
+	/** Start After Text Padding */ 
+	const handleAfterTextPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceAfterTextPaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceAfterTextPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceAfterTextPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceAfterTextPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceAfterTextPaddingDesktop: {...priceAfterTextPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceAfterTextPaddingTablet: {...priceAfterTextPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceAfterTextPaddingMobile: {...priceAfterTextPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleAfterTextPaddingCombineBtn = () => {
+		setAttributes( {priceAfterTextPaddingLink: !priceAfterTextPaddingLink} );
+	}
+
+	const handleAfterTextPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			priceAfterTextPaddingUnits: {
+				...priceAfterTextPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceAfterTextDesktopPaddingWidth = `${priceAfterTextPaddingDesktop.top}${priceAfterTextPaddingUnits.Desktop} ${priceAfterTextPaddingDesktop.right}${priceAfterTextPaddingUnits.Desktop} ${priceAfterTextPaddingDesktop.bottom}${priceAfterTextPaddingUnits.Desktop} ${priceAfterTextPaddingDesktop.left}${priceAfterTextPaddingUnits.Desktop}`;
+	const priceAfterTextTabletPaddingWidth = `${priceAfterTextPaddingTablet.top}${priceAfterTextPaddingUnits.Tablet} ${priceAfterTextPaddingTablet.right}${priceAfterTextPaddingUnits.Tablet} ${priceAfterTextPaddingTablet.bottom}${priceAfterTextPaddingUnits.Tablet} ${priceAfterTextPaddingTablet.left}${priceAfterTextPaddingUnits.Tablet}`;
+	const priceAfterTextMobilePaddingWidth = `${priceAfterTextPaddingMobile.top}${priceAfterTextPaddingUnits.Mobile} ${priceAfterTextPaddingMobile.right}${priceAfterTextPaddingUnits.Mobile} ${priceAfterTextPaddingMobile.bottom}${priceAfterTextPaddingUnits.Mobile} ${priceAfterTextPaddingMobile.left}${priceAfterTextPaddingUnits.Mobile}`;
+	/** End After Text Padding */
+
+
+	/** Start Feature Item Padding */ 
+	const handleFeatureItemPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceFeatureItemPaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceFeatureItemDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceFeatureItemTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceFeatureItemMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceFeatureItemDesktopPadding: {...priceFeatureItemDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceFeatureItemTabPadding: {...priceFeatureItemTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceFeatureItemMobilePadding: {...priceFeatureItemMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeatureItemPaddingCombineBtn = () => {
+		setAttributes( {priceFeatureItemPaddingLink: !priceFeatureItemPaddingLink} );
+	}
+
+	const handleFeatureItemPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			priceFeatureItemPaddingUnits: {
+				...priceFeatureItemPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceFeatureItemDesktopPaddingWidth 	= `${priceFeatureItemDesktopPadding.top}${priceFeatureItemPaddingUnits.Desktop} ${priceFeatureItemDesktopPadding.right}${priceFeatureItemPaddingUnits.Desktop} ${priceFeatureItemDesktopPadding.bottom}${priceFeatureItemPaddingUnits.Desktop} ${priceFeatureItemDesktopPadding.left}${priceFeatureItemPaddingUnits.Desktop}`;
+	const priceFeatureItemTabPaddingWidth 		= `${priceFeatureItemTabPadding.top}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.right}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.bottom}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.left}${priceFeatureItemPaddingUnits.Tablet}`;
+	const priceFeatureItemMobilePaddingWidth 	= `${priceFeatureItemMobilePadding.top}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.right}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.bottom}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.left}${priceFeatureItemPaddingUnits.Mobile}`;
+	/** End Feature Item Padding */
+	
+	/** Start Feature Padding */ 
+	const handleFeaturePaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceFeaturePaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceFeatureDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceFeatureTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceFeatureMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceFeatureDesktopPadding: {...priceFeatureDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceFeatureTabPadding: {...priceFeatureTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceFeatureMobilePadding: {...priceFeatureMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeaturePaddingCombineBtn = () => {
+		setAttributes( {priceFeaturePaddingLink: !priceFeaturePaddingLink} );
+	}
+
+	const handleFeaturePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			priceFeaturePaddingUnits: {
+				...priceFeaturePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceFeatureDesktopPaddingWidth 	= `${priceFeatureDesktopPadding.top}${priceFeaturePaddingUnits.Desktop} ${priceFeatureDesktopPadding.right}${priceFeaturePaddingUnits.Desktop} ${priceFeatureDesktopPadding.bottom}${priceFeaturePaddingUnits.Desktop} ${priceFeatureDesktopPadding.left}${priceFeaturePaddingUnits.Desktop}`;
+	const priceFeatureTabPaddingWidth 		= `${priceFeatureTabPadding.top}${priceFeaturePaddingUnits.Tablet} ${priceFeatureTabPadding.right}${priceFeaturePaddingUnits.Tablet} ${priceFeatureTabPadding.bottom}${priceFeaturePaddingUnits.Tablet} ${priceFeatureTabPadding.left}${priceFeaturePaddingUnits.Tablet}`;
+	const priceFeatureMobilePaddingWidth 	= `${priceFeatureMobilePadding.top}${priceFeaturePaddingUnits.Mobile} ${priceFeatureMobilePadding.right}${priceFeaturePaddingUnits.Mobile} ${priceFeatureMobilePadding.bottom}${priceFeaturePaddingUnits.Mobile} ${priceFeatureMobilePadding.left}${priceFeaturePaddingUnits.Mobile}`;
+	/** End Feature Padding */
+
+
+	/** Start After Text Border */ 
+	const handleAfterTextBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceAfterTextBorderLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceAfterTextBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceAfterTextBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceAfterTextBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceAfterTextBorderDesktop: {...priceAfterTextBorderDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceAfterTextBorderTablet: {...priceAfterTextBorderTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceAfterTextBorderMobile: {...priceAfterTextBorderMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleAfterTextBorderCombineBtn = () => {
+		setAttributes( {priceAfterTextBorderLink: !priceAfterTextBorderLink} );
+	}
+
+	const handleAfterTextBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			priceAfterTextBorderUnits: {
+				...priceAfterTextBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceAfterTextBorderDesktopWidth = `${priceAfterTextBorderDesktop.top}${priceAfterTextBorderUnits.Desktop} ${priceAfterTextBorderDesktop.right}${priceAfterTextBorderUnits.Desktop} ${priceAfterTextBorderDesktop.bottom}${priceAfterTextBorderUnits.Desktop} ${priceAfterTextBorderDesktop.left}${priceAfterTextBorderUnits.Desktop}`;
+	const priceAfterTextBorderTabletWidth = `${priceAfterTextBorderTablet.top}${priceAfterTextBorderUnits.Tablet} ${priceAfterTextBorderTablet.right}${priceAfterTextBorderUnits.Tablet} ${priceAfterTextBorderTablet.bottom}${priceAfterTextBorderUnits.Tablet} ${priceAfterTextBorderTablet.left}${priceAfterTextBorderUnits.Tablet}`;
+	const priceAfterTextBorderMobileWidth = `${priceAfterTextBorderMobile.top}${priceAfterTextBorderUnits.Mobile} ${priceAfterTextBorderMobile.right}${priceAfterTextBorderUnits.Mobile} ${priceAfterTextBorderMobile.bottom}${priceAfterTextBorderUnits.Mobile} ${priceAfterTextBorderMobile.left}${priceAfterTextBorderUnits.Mobile}`;
+	/** End After Text Border */
+
+	/** Start After Text Border Radius */ 
+	const handleAfterTextBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceAfterTextBorderRadiusLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceAfterTextBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceAfterTextBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceAfterTextBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceAfterTextBorderRadiusDesktop: {...priceAfterTextBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceAfterTextBorderRadiusTablet: {...priceAfterTextBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceAfterTextBorderRadiusMobile: {...priceAfterTextBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleAfterTextBorderRadiusCombineBtn = () => {
+		setAttributes( {priceAfterTextBorderRadiusLink: !priceAfterTextBorderRadiusLink} );
+	}
+
+	const handleAfterTextBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			priceAfterTextBorderRadiusUnits: {
+				...priceAfterTextBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceAfterTextBorderRadiusDesktopWidth = `${priceAfterTextBorderRadiusDesktop.top}${priceAfterTextBorderRadiusUnits.Desktop} ${priceAfterTextBorderRadiusDesktop.right}${priceAfterTextBorderRadiusUnits.Desktop} ${priceAfterTextBorderRadiusDesktop.bottom}${priceAfterTextBorderRadiusUnits.Desktop} ${priceAfterTextBorderRadiusDesktop.left}${priceAfterTextBorderRadiusUnits.Desktop}`;
+	const priceAfterTextBorderRadiusTabletWidth = `${priceAfterTextBorderRadiusTablet.top}${priceAfterTextBorderRadiusUnits.Tablet} ${priceAfterTextBorderRadiusTablet.right}${priceAfterTextBorderRadiusUnits.Tablet} ${priceAfterTextBorderRadiusTablet.bottom}${priceAfterTextBorderRadiusUnits.Tablet} ${priceAfterTextBorderRadiusTablet.left}${priceAfterTextBorderRadiusUnits.Tablet}`;
+	const priceAfterTextBorderRadiusMobileWidth = `${priceAfterTextBorderRadiusMobile.top}${priceAfterTextBorderRadiusUnits.Mobile} ${priceAfterTextBorderRadiusMobile.right}${priceAfterTextBorderRadiusUnits.Mobile} ${priceAfterTextBorderRadiusMobile.bottom}${priceAfterTextBorderRadiusUnits.Mobile} ${priceAfterTextBorderRadiusMobile.left}${priceAfterTextBorderRadiusUnits.Mobile}`;
+	/** End After Text Border Radius */
+
+
+
+
+
+	/** Start Pricing Padding */
+	const handlePricePaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricePaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceDesktopPadding: {...priceDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceTabletPadding: {...priceTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceMobilePadding: {...priceMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handlePricePaddingCombineBtn = () => {
+		setAttributes( {pricePaddingLink: !pricePaddingLink} );
+	}
+
+	const handlePricePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			pricePaddingUnits: {
+				...pricePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceDesktopPaddingWidth = `${priceDesktopPadding.top}${pricePaddingUnits.Desktop} ${priceDesktopPadding.right}${pricePaddingUnits.Desktop} ${priceDesktopPadding.bottom}${pricePaddingUnits.Desktop} ${priceDesktopPadding.left}${pricePaddingUnits.Desktop}`;
+	const priceTabletPaddingWidth = `${priceTabletPadding.top}${pricePaddingUnits.Tablet} ${priceTabletPadding.right}${pricePaddingUnits.Tablet} ${priceTabletPadding.bottom}${pricePaddingUnits.Tablet} ${priceTabletPadding.left}${pricePaddingUnits.Tablet}`;
+	const priceMobilePaddingWidth = `${priceMobilePadding.top}${pricePaddingUnits.Mobile} ${priceMobilePadding.right}${pricePaddingUnits.Mobile} ${priceMobilePadding.bottom}${pricePaddingUnits.Mobile} ${priceMobilePadding.left}${pricePaddingUnits.Mobile}`;
+	/** End Pricing Padding */
 
 
 	/** Start Header padding */
@@ -1409,343 +2033,1028 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${priceGlobalBorderRadiusMobile.top}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.right}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.bottom}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.left}${priceGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
+
+
+	const allBlockStyle = useMemo(() => ` 
+		.${blockId} .fb-pricing-main-wrapper {
+			${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
+			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
+			${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
+			${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+			${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+			${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
+			${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-main-wrapper:hover {
+			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
+			${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
+			${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-header {
+			${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
+			${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
+			${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
+			${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
+			${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
+			${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-header:hover {
+			${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
+			${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-icon-wrapper {
+			justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+		.${blockId} .fb-pricing-icon {
+			width: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
+			height: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
+			${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
+			${priceIconBorder ? `border: ${priceIconBorder};` : ''}
+			${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
+			${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
+			${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-icon:hover {
+			background-color: ${priceIconBgHoverColor};
+			${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-icon svg {
+			width: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+			height: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
+			fill: ${priceIconColor};
+			transition: fill 0.3s ease;
+		}
+		.${blockId} .fb-pricing-icon:hover svg {
+			fill: ${priceIconHoverColor};
+		}
+
+		.${blockId}	.fb-pricing-price-wrapper {
+			${priceDesktopPaddingWidth ? `padding: ${priceDesktopPaddingWidth};` : ''}
+			text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
+		}
+
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price {
+			${normalPricingColor ? `color: ${normalPricingColor};` : ''}
+			${normalPricingFontFamily ? `font-family: ${normalPricingFontFamily};` : ""}
+			${normalPricingFontSize.Desktop ? `font-size: ${normalPricingFontSize.Desktop}${normalPricingFontSizeUnits.Desktop};` : ""}
+			${normalPricingFontWeight ? `font-weight: ${normalPricingFontWeight};` : ""}
+			${normalPricingFontStyle ? `font-style: ${normalPricingFontStyle};` : ""}
+			${normalPricingTextTransform ? `text-transform: ${normalPricingTextTransform};` : ""}
+			${normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
+			${normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
+			${normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
+			${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price {
+			${salePricingColor ? `color: ${salePricingColor};` : ''}
+			${salePricingFontFamily ? `font-family: ${salePricingFontFamily};` : ""}
+			${salePricingFontSize.Desktop ? `font-size: ${salePricingFontSize.Desktop}${salePricingFontSizeUnits.Desktop};` : ""}
+			${salePricingFontWeight ? `font-weight: ${salePricingFontWeight};` : ""}
+			${salePricingFontStyle ? `font-style: ${salePricingFontStyle};` : ""}
+			${salePricingTextTransform ? `text-transform: ${salePricingTextTransform};` : ""}
+			${salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
+			${salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
+			${salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
+			${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-price-wrapper .price-currency {
+			${priceCurrencyColor ? `color: ${priceCurrencyColor};` : ''}
+			${priceCurrencyFontFamily ? `font-family: ${priceCurrencyFontFamily};` : ""}
+			${priceCurrencyFontSize.Desktop ? `font-size: ${priceCurrencyFontSize.Desktop}${priceCurrencyFontSizeUnits.Desktop};` : ""}
+			${priceCurrencyFontWeight ? `font-weight: ${priceCurrencyFontWeight};` : ""}
+			${priceCurrencyFontStyle ? `font-style: ${priceCurrencyFontStyle};` : ""}
+			${priceCurrencyTextTransform ? `text-transform: ${priceCurrencyTextTransform};` : ""}
+			${priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
+			${priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
+			${priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
+			${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-price-wrapper .price-period {
+			${pricePeriodColor ? `color: ${pricePeriodColor};` : ''}
+			${pricePeriodFontFamily ? `font-family: ${pricePeriodFontFamily};` : ""}
+			${pricePeriodFontSize.Desktop ? `font-size: ${pricePeriodFontSize.Desktop}${pricePeriodFontSizeUnits.Desktop};` : ""}
+			${pricePeriodFontWeight ? `font-weight: ${pricePeriodFontWeight};` : ""}
+			${pricePeriodFontStyle ? `font-style: ${pricePeriodFontStyle};` : ""}
+			${pricePeriodTextTransform ? `text-transform: ${pricePeriodTextTransform};` : ""}
+			${pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
+			${pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
+			${pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
+		}
+		.${blockId} .fb-pricing-price-wrapper .price-period:hover {
+			${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-title {
+			${pricingTitleColor ? `color: ${pricingTitleColor};` : ''}
+			${pricingTitleFontFamily ? `font-family: ${pricingTitleFontFamily};` : ''}
+			${pricingTitleFontSize.Desktop ? `font-size: ${pricingTitleFontSize.Desktop}${pricingTitleFontSizeUnits.Desktop};` : ''}
+			${pricingTitleFontWeight ? `font-weight: ${pricingTitleFontWeight};` : ''}
+			${pricingTitleFontStyle ? `font-style: ${pricingTitleFontStyle};` : ''}
+			${pricingTitleTextTransform ? `text-transform: ${pricingTitleTextTransform};` : ''}
+			${pricingTitleTextDecoration ? `text-decoration: ${pricingTitleTextDecoration};` : ''}
+			${pricingTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingTitleLetterSpacing.Desktop}${pricingTitleLetterSpacingUnits.Desktop};` : ''}
+			${pricingTitleLineHeight.Desktop ? `line-height: ${pricingTitleLineHeight.Desktop}${pricingTitleLineHeightUnits.Desktop};` : ''}
+		}
+		.${blockId} .fb-pricing-title:hover {
+			${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-subtitle {
+			${pricingSubtitleColor ? `color: ${pricingSubtitleColor};` : ''}
+			${pricingSubtitleFontFamily ? `font-family: ${pricingSubtitleFontFamily};` : ''}
+			${pricingSubtitleFontSize.Desktop ? `font-size: ${pricingSubtitleFontSize.Desktop}${pricingSubtitleFontSizeUnits.Desktop};` : ''}
+			${pricingSubtitleFontWeight ? `font-weight: ${pricingSubtitleFontWeight};` : ''}
+			${pricingSubtitleFontStyle ? `font-style: ${pricingSubtitleFontStyle};` : ''}
+			${pricingSubtitleTextTransform ? `text-transform: ${pricingSubtitleTextTransform};` : ''}
+			${pricingSubtitleTextDecoration ? `text-decoration: ${pricingSubtitleTextDecoration};` : ''}
+			${pricingSubtitleLetterSpacing.Desktop ? `letter-spacing: ${pricingSubtitleLetterSpacing.Desktop}${pricingSubtitleLetterSpacingUnits.Desktop};` : ''}
+			${pricingSubtitleLineHeight.Desktop ? `line-height: ${pricingSubtitleLineHeight.Desktop}${pricingSubtitleLineHeightUnits.Desktop};` : ''}
+		}
+		.${blockId} .fb-pricing-subtitle:hover {
+			${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-after-text {
+
+			${priceAfterTextFontFamily ? `font-family: ${priceAfterTextFontFamily};` : ''}
+			${priceAfterTextFontSize.Desktop && priceAfterTextFontSizeUnits.Desktop ? `font-size: ${priceAfterTextFontSize.Desktop}${priceAfterTextFontSizeUnits.Desktop};` : ''}
+			${priceAfterTextFontWeight ? `font-weight: ${priceAfterTextFontWeight};` : ''}
+			${priceAfterTextFontStyle ? `font-style: ${priceAfterTextFontStyle};` : ''}
+			${priceAfterTextTextTransform ? `text-transform: ${priceAfterTextTextTransform};` : ''}
+			${priceAfterTextTextDecoration ? `text-decoration: ${priceAfterTextTextDecoration};` : ''}
+			${priceAfterTextLetterSpacing.Desktop && priceAfterTextLetterSpacingUnits.Desktop ? `letter-spacing: ${priceAfterTextLetterSpacing.Desktop}${priceAfterTextLetterSpacingUnits.Desktop};` : ''}
+			${priceAfterTextLineHeight.Desktop && priceAfterTextLineHeightUnits.Desktop ? `line-height: ${priceAfterTextLineHeight.Desktop}${priceAfterTextLineHeightUnits.Desktop};` : ''}
+
+			${priceAfterTextColor ? `color: ${priceAfterTextColor};` : ''} 
+
+			${priceAfterTextNormalBackgroundType === 'gradient' ? `  
+				background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
+			`: `
+				background: ${priceAfterTextNormalClassicColor};
+			`}
+
+			${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
+			${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
+			${priceAfterTextBorderDesktopWidth ? `border-width: ${priceAfterTextBorderDesktopWidth};` : ''}
+			${priceAfterTextBorderRadiusDesktopWidth ? `border-radius: ${priceAfterTextBorderRadiusDesktopWidth};` : ''}
+			${priceAfterTextDesktopPaddingWidth ? `padding: ${priceAfterTextDesktopPaddingWidth};` : ''}
+		}
+
+		.${blockId} .fb-pricing-after-text:hover {
+			${priceAfterTextHoverColor ? `color: ${priceAfterTextHoverColor};` : ''}
+
+			${priceAfterTextHoverBackgroundType === 'gradient' ? `  
+				background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
+			`: `
+				background: ${priceAfterTextHoverClassicColor};
+			`}
+
+			${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-features-wrapper {
+			${priceFeatureDesktopPaddingWidth ? `padding: ${priceFeatureDesktopPaddingWidth};` : ''}
+		}
+
+		.${blockId} .fb-pricing-feature-item {
+			${priceFeatureItemDesktopPaddingWidth ? `padding: ${priceFeatureItemDesktopPaddingWidth};` : ''}
+		}
+
+		.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
+			justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+
+		.${blockId} .fb-pricing-feature-after-text { 
+			${priceFeatureAfterTextColor ? `color: ${priceFeatureAfterTextColor};` : ''}
+			${priceFeatureAfterTextFontFamily ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
+			${priceFeatureAfterTextFontSize.Desktop ? `font-size: ${priceFeatureAfterTextFontSize.Desktop}${priceFeatureAfterTextFontSizeUnits.Desktop};` : ''}
+			${priceFeatureAfterTextFontWeight ? `font-weight: ${priceFeatureAfterTextFontWeight};` : ''}
+			${priceFeatureAfterTextFontStyle ? `font-style: ${priceFeatureAfterTextFontStyle};` : ''}
+			${priceFeatureAfterTextTextTransform ? `text-transform: ${priceFeatureAfterTextTextTransform};` : ''}
+			${priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
+			${priceFeatureAfterTextLetterSpacing.Desktop ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Desktop}${priceFeatureAfterTextLetterSpacingUnits.Desktop};` : ''}
+			${priceFeatureAfterTextLineHeight.Desktop ? `line-height: ${priceFeatureAfterTextLineHeight.Desktop}${priceFeatureAfterTextLineHeightUnits.Desktop};` : ''}	
+		}
+
+		.${blockId} .fb-pricing-feature-after-text:hover {
+			${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
+		}
+
+		.${blockId} .fb-pricing-feature-icon-inner svg {
+			width: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+			height: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
+			fill: ${priceFeatureIconColor};
+			transition: fill 0.3s ease;
+		}
+		.${blockId} .fb-pricing-feature-icon-inner:hover svg {
+			fill: ${priceFeatureIconHoverColor};
+		}
+
+		.${blockId} .fb-pricing-feature-text {
+			${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
+			${pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
+			${pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
+			${pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
+			${pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
+			${pricingfeatureTitleTextTransform ? `text-transform: ${pricingfeatureTitleTextTransform};` : ''}
+			${pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
+			${pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
+			${pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
+		}
+		.${blockId} .fb-pricing-feature-text:hover {
+			${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
+		}
+
+
+		.${blockId} .fb-pricing-button-wrapper {
+			justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
+		}
+
+		.${blockId} .fb-pricing-button {
+			width: ${priceButtonWidth.Desktop ? `${priceButtonWidth.Desktop}${priceButtonWidthUnits.Desktop}` : 'auto'};
+			${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
+			${priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
+			${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
+			${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
+			${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
+			${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
+			${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
+			${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
+			${priceButtonColor ? `color: ${priceButtonColor};` : ''}
+			${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
+			${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
+			${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
+			${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
+			${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
+			${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
+			${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
+			transition: color 0.3s ease, background-color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-button:hover {
+			${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
+			${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
+			${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-button-icon svg {
+			width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+			height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
+			fill: ${priceButtonIconColor};
+			transition: fill 0.3s ease;
+		}
+		.${blockId} .fb-pricing-button-icon:hover svg {
+			fill: ${priceButtonIconHoverColor};
+		}
+		.${blockId} .fb-pricing-ribbon {
+			${priceRibbonBgColor ? `background-color: ${priceRibbonBgColor};` : ''}
+			${priceRibbonColor ? `color: ${priceRibbonColor};` : ''}
+			font-size: ${priceRibbonFontSize.Desktop ? `${priceRibbonFontSize.Desktop}${priceRibbonFontSizeUnits.Desktop}` : ''};
+			top: ${priceRibbonTop.Desktop ? `${priceRibbonTop.Desktop}${priceRibbonTopUnits.Desktop}` : ''};
+			width: ${priceRibbonWidth.Desktop ? `${priceRibbonWidth.Desktop}${priceRibbonWidthUnits.Desktop}` : ''};
+			padding: ${priceRibbonpadding.Desktop ? `${priceRibbonpadding.Desktop}${priceRibbonpaddingUnits.Desktop}` : ''};
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+		.${blockId} .fb-pricing-ribbon:hover {
+			${priceRibbonBgHoverColor ? `background-color: ${priceRibbonBgHoverColor};` : ''}
+			${priceRibbonHoverColor ? `color: ${priceRibbonHoverColor};` : ''}
+		}
+		.${blockId} .fb-pricing-ribbon-left {
+			left: ${priceRibbonLeft.Desktop ? `${priceRibbonLeft.Desktop}${priceRibbonLeftUnits.Desktop}` : ''};
+		}
+		.${blockId} .fb-pricing-ribbon-right {
+			right: ${priceRibbonRight.Desktop ? `${priceRibbonRight.Desktop}${priceRibbonRightUnits.Desktop}` : ''};
+		}
+
+		@media only screen and (max-width: 1024px) {
+			.${blockId} .fb-pricing-main-wrapper {
+				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+				${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+			}
+
+			.${blockId}	.fb-pricing-price-wrapper {
+				${priceTabletPaddingWidth ? `padding: ${priceTabletPaddingWidth};` : ''}
+				text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
+			}
+
+			.${blockId} .fb-pricing-after-text {
+				${priceAfterTextFontFamily ? `font-family: ${priceAfterTextFontFamily};` : ''}
+				${priceAfterTextFontSize.Tablet && priceAfterTextFontSizeUnits.Tablet ? `font-size: ${priceAfterTextFontSize.Tablet}${priceAfterTextFontSizeUnits.Tablet};` : ''}
+				${priceAfterTextFontWeight ? `font-weight: ${priceAfterTextFontWeight};` : ''}
+				${priceAfterTextFontStyle ? `font-style: ${priceAfterTextFontStyle};` : ''}
+				${priceAfterTextTextTransform ? `text-transform: ${priceAfterTextTextTransform};` : ''}
+				${priceAfterTextTextDecoration ? `text-decoration: ${priceAfterTextTextDecoration};` : ''}
+				${priceAfterTextLetterSpacing.Tablet && priceAfterTextLetterSpacingUnits.Tablet ? `letter-spacing: ${priceAfterTextLetterSpacing.Tablet}${priceAfterTextLetterSpacingUnits.Tablet};` : ''}
+				${priceAfterTextLineHeight.Tablet && priceAfterTextLineHeightUnits.Tablet ? `line-height: ${priceAfterTextLineHeight.Tablet}${priceAfterTextLineHeightUnits.Tablet};` : ''}
+				${priceAfterTextColor ? `color: ${priceAfterTextColor};` : ''} 
+				${priceAfterTextNormalBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
+				`: `
+					background: ${priceAfterTextNormalClassicColor};
+				`}
+				${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
+				${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
+				${priceAfterTextBorderTabletWidth ? `border-width: ${priceAfterTextBorderTabletWidth};` : ''}
+				${priceAfterTextBorderRadiusTabletWidth ? `border-radius: ${priceAfterTextBorderRadiusTabletWidth};` : ''}
+				${priceAfterTextTabletPaddingWidth ? `padding: ${priceAfterTextTabletPaddingWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-after-text:hover {
+				${priceAfterTextHoverColor ? `color: ${priceAfterTextHoverColor};` : ''}
+				${priceAfterTextHoverBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
+				`: `
+					background: ${priceAfterTextHoverClassicColor};
+				`}
+
+				${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
+			}
+
+			.${blockId} .fb-pricing-features-wrapper {
+				${priceFeatureTabPaddingWidth ? `padding: ${priceFeatureTabPaddingWidth};` : ''} 
+			}
+
+			.${blockId} .fb-pricing-feature-item {
+				${priceFeatureItemTabPaddingWidth ? `padding: ${priceFeatureItemTabPaddingWidth};` : ''}
+			}
+
+			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
+				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+			}
+
+			.${blockId} .fb-pricing-feature-after-text { 
+				${priceFeatureAfterTextColor ? `color: ${priceFeatureAfterTextColor};` : ''}
+				${priceFeatureAfterTextFontFamily ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
+				${priceFeatureAfterTextFontSize.Tablet && priceFeatureAfterTextFontSizeUnits.Tablet ? `font-size: ${priceFeatureAfterTextFontSize.Tablet}${priceFeatureAfterTextFontSizeUnits.Tablet};` : ''}
+				${priceFeatureAfterTextFontWeight ? `font-weight: ${priceFeatureAfterTextFontWeight};` : ''}
+				${priceFeatureAfterTextFontStyle ? `font-style: ${priceFeatureAfterTextFontStyle};` : ''}
+				${priceFeatureAfterTextTextTransform ? `text-transform: ${priceFeatureAfterTextTextTransform};` : ''}
+				${priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
+				${priceFeatureAfterTextLetterSpacing.Tablet && priceFeatureAfterTextLetterSpacingUnits.Tablet ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Tablet}${priceFeatureAfterTextLetterSpacingUnits.Tablet};` : ''}
+				${priceFeatureAfterTextLineHeight.Tablet && priceFeatureAfterTextLineHeightUnits.Tablet ? `line-height: ${priceFeatureAfterTextLineHeight.Tablet}${priceFeatureAfterTextLineHeightUnits.Tablet};` : ''}	
+			}
+
+			.${blockId} .fb-pricing-feature-after-text:hover {
+				${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
+			}
+
+			.${blockId} .fb-pricing-header {
+				${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
+				${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
+				${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-icon {
+				width: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+				height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
+				${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
+				${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-icon svg {
+				width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+				height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+			}
+			.${blockId} .fb-pricing-button {
+				${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
+				${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
+				${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
+				${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-button-icon svg {
+				width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+				height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
+			}
+			.${blockId} .fb-pricing-ribbon {
+				font-size: ${priceRibbonFontSize.Tablet ? `${priceRibbonFontSize.Tablet}${priceRibbonFontSizeUnits.Tablet}` : ''};
+				top: ${priceRibbonTop.Tablet ? `${priceRibbonTop.Tablet}${priceRibbonTopUnits.Tablet}` : ''};
+				width: ${priceRibbonWidth.Tablet ? `${priceRibbonWidth.Tablet}${priceRibbonWidthUnits.Tablet}` : ''};
+				padding: ${priceRibbonpadding.Tablet ? `${priceRibbonpadding.Tablet}${priceRibbonpaddingUnits.Tablet}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-left {
+				left: ${priceRibbonLeft.Tablet ? `${priceRibbonLeft.Tablet}${priceRibbonLeftUnits.Tablet}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-right {
+				right: ${priceRibbonRight.Tablet ? `${priceRibbonRight.Tablet}${priceRibbonRightUnits.Tablet}` : ''};
+			}
+		}
+
+		@media only screen and (max-width: 767px) {
+			.${blockId} .fb-pricing-main-wrapper {
+				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+				${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-header {
+				${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
+				${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
+				${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
+			}
+			.${blockId}	.fb-pricing-price-wrapper {
+				${priceMobilePaddingWidth ? `padding: ${priceMobilePaddingWidth};` : ''}
+				text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
+			}
+
+			.${blockId} .fb-pricing-features-wrapper {
+				${priceFeatureMobilePaddingWidth ? `padding: ${priceFeatureMobilePaddingWidth};` : ''} 
+			}
+
+			.${blockId} .fb-pricing-feature-item {
+				${priceFeatureItemMobilePaddingWidth ? `padding: ${priceFeatureItemMobilePaddingWidth};` : ''}
+			}
+
+			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
+				justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
+			}
+
+			.${blockId} .fb-pricing-feature-after-text { 
+				${priceFeatureAfterTextColor ? `color: ${priceFeatureAfterTextColor};` : ''}
+				${priceFeatureAfterTextFontFamily ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
+				${priceFeatureAfterTextFontSize.Mobile && priceFeatureAfterTextFontSizeUnits.Mobile ? `font-size: ${priceFeatureAfterTextFontSize.Mobile}${priceFeatureAfterTextFontSizeUnits.Mobile};` : ''}
+				${priceFeatureAfterTextFontWeight ? `font-weight: ${priceFeatureAfterTextFontWeight};` : ''}
+				${priceFeatureAfterTextFontStyle ? `font-style: ${priceFeatureAfterTextFontStyle};` : ''}
+				${priceFeatureAfterTextTextTransform ? `text-transform: ${priceFeatureAfterTextTextTransform};` : ''}
+				${priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
+				${priceFeatureAfterTextLetterSpacing.Mobile && priceFeatureAfterTextLetterSpacingUnits.Mobile ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Mobile}${priceFeatureAfterTextLetterSpacingUnits.Mobile};` : ''}
+				${priceFeatureAfterTextLineHeight.Mobile && priceFeatureAfterTextLineHeightUnits.Mobile ? `line-height: ${priceFeatureAfterTextLineHeight.Mobile}${priceFeatureAfterTextLineHeightUnits.Mobile};` : ''}	
+			}
+
+			.${blockId} .fb-pricing-feature-after-text:hover {
+				${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
+			}
+
+			.${blockId} .fb-pricing-after-text {
+				${priceAfterTextFontFamily ? `font-family: ${priceAfterTextFontFamily};` : ''}
+				${priceAfterTextFontSize.Mobile && priceAfterTextFontSizeUnits.Mobile ? `font-size: ${priceAfterTextFontSize.Mobile}${priceAfterTextFontSizeUnits.Mobile};` : ''}
+				${priceAfterTextFontWeight ? `font-weight: ${priceAfterTextFontWeight};` : ''}
+				${priceAfterTextFontStyle ? `font-style: ${priceAfterTextFontStyle};` : ''}
+				${priceAfterTextTextTransform ? `text-transform: ${priceAfterTextTextTransform};` : ''}
+				${priceAfterTextTextDecoration ? `text-decoration: ${priceAfterTextTextDecoration};` : ''}
+				${priceAfterTextLetterSpacing.Mobile && priceAfterTextLetterSpacingUnits.Mobile ? `letter-spacing: ${priceAfterTextLetterSpacing.Mobile}${priceAfterTextLetterSpacingUnits.Mobile};` : ''}
+				${priceAfterTextLineHeight.Mobile && priceAfterTextLineHeightUnits.Mobile ? `line-height: ${priceAfterTextLineHeight.Mobile}${priceAfterTextLineHeightUnits.Mobile};` : ''}
+
+				${priceAfterTextColor ? `color: ${priceAfterTextColor};` : ''} 
+				${priceAfterTextNormalBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
+				`: `
+					background: ${priceAfterTextNormalClassicColor};
+				`}
+				${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
+				${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
+				${priceAfterTextBorderMobileWidth ? `border-width: ${priceAfterTextBorderMobileWidth};` : ''}
+				${priceAfterTextBorderRadiusMobileWidth ? `border-radius: ${priceAfterTextBorderRadiusMobileWidth};` : ''}
+				${priceAfterTextMobilePaddingWidth ? `padding: ${priceAfterTextMobilePaddingWidth};` : ''}
+			}
+			.${blockId} .fb-pricing-after-text:hover {
+				${priceAfterTextHoverColor ? `color: ${priceAfterTextHoverColor};` : ''}
+
+				${priceAfterTextHoverBackgroundType === 'gradient' ? `  
+					background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
+				`: `
+					background: ${priceAfterTextHoverClassicColor};
+				`}
+
+				${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
+			}
+			.${blockId} .fb-pricing-icon {
+				width: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+				height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
+				${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
+				${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-icon svg {
+				width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+				height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+			}
+			.${blockId} .fb-pricing-button {
+				${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
+				${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
+				${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
+				${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
+			}
+			.${blockId} .fb-pricing-button-icon svg {
+				width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+				height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
+			}
+			.${blockId} .fb-pricing-ribbon {
+				font-size: ${priceRibbonFontSize.Mobile ? `${priceRibbonFontSize.Mobile}${priceRibbonFontSizeUnits.Mobile}` : ''};
+				top: ${priceRibbonTop.Mobile ? `${priceRibbonTop.Mobile}${priceRibbonTopUnits.Mobile}` : ''};
+				width: ${priceRibbonWidth.Mobile ? `${priceRibbonWidth.Mobile}${priceRibbonWidthUnits.Mobile}` : ''};
+				padding: ${priceRibbonpadding.Mobile ? `${priceRibbonpadding.Mobile}${priceRibbonpaddingUnits.Mobile}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-left {
+				left: ${priceRibbonLeft.Mobile ? `${priceRibbonLeft.Mobile}${priceRibbonLeftUnits.Mobile}` : ''};
+			}
+			.${blockId} .fb-pricing-ribbon-right {
+				right: ${priceRibbonRight.Mobile ? `${priceRibbonRight.Mobile}${priceRibbonRightUnits.Mobile}` : ''};
+			}
+		}
+	`, [
+		blockId,
+		pricingSectionTopSwitcher,
+		pricingSectionTopText,
+		pricingTitle,
+		pricingSubTitleSwitcher,
+		pricingSubTitle,
+		pricingIconAlign,
+		pricingIcon,
+		
+		normalPrice,
+		salePriceSwitcher,
+		salePrice,
+		priceCurrency,
+		priceCurrencyPosition,
+		pricePeriod,
+		pricePeriodSeparator,
+		priceHideFeaturesSwitcher,
+		priceFeatureIconSwitcher,
+		priceFeatureItems,
+
+		priceButtonSwitcher,
+		priceButtonText,
+		priceButtonUrl,
+		priceButtonTargetUrl,
+		priceButtonIconAlign,
+		priceButtonIcon,
+		priceButtonIconPosition,
+		priceButtonIconSpacing,	
+
+		priceRibbonSwitcher,
+		priceRibbonText,
+		priceRibbonPosition,
+
+
+		pricingHeaderBgColorSwitcher,
+		pricingHeaderBgColor,
+		pricingHeaderBgHoverColor,
+
+		pricingHeaderPaddingUnits,
+		pricingHeaderDesktopPadding,
+		pricingHeaderTabletPadding,
+		pricingHeaderMobilePadding,
+		pricingHeaderPaddingLink,
+
+
+		pricingHeaderBorder,
+		pricingHeaderBorderColorSwitcher,
+		pricingHeaderBorderColor,
+		pricingHeaderBorderHoverColor,
+		pricingHeaderBorderUnits,
+		pricingHeaderBorderDesktop,
+		pricingHeaderBorderTablet,
+		pricingHeaderBorderMobile,
+		pricingHeaderBorderLink,
+
+		pricingHeaderBorderRadiusUnits,
+		pricingHeaderBorderRadiusDesktop,
+		pricingHeaderBorderRadiusTablet,
+		pricingHeaderBorderRadiusMobile,
+		pricingHeaderBorderRadiusLink,
+		/**End Header */
+
+		pricingIconAlignment,
+		priceIconColorSwitcher,
+		priceIconColor,
+		priceIconHoverColor,
+		priceIconBgColorSwitcher,
+		priceIconBgColor,
+		priceIconBgHoverColor,
+		priceIconSize,
+		priceIconSizeUnits,
+		priceIconBgSize,
+		priceIconBgSizeUnits,
+
+		priceIconBorder,
+		priceIconBorderColorSwitcher,
+		priceIconBorderColor,
+		priceIconBorderHoverColor,
+		priceIconBorderUnits,
+		priceIconBorderDesktop,
+		priceIconBorderTablet,
+		priceIconBorderMobile,
+		priceIconBorderLink,
+
+		priceIconBorderRadiusUnits,
+		priceIconBorderRadiusDesktop,
+		priceIconBorderRadiusTablet,
+		priceIconBorderRadiusMobile,
+		priceIconBorderRadiusLink,
+
+		pricingAlignment,
+		normalPricingFontFamily,
+		normalPricingFontSize,
+		normalPricingFontSizeUnits,
+		normalPricingFontWeight,
+		normalPricingFontStyle,
+		normalPricingTextTransform,
+		normalPricingTextDecoration,
+		normalPricingLetterSpacing,
+		normalPricingLetterSpacingUnits,
+		normalPricingLineHeight,
+		normalPricingLineHeightUnits,
+		normalPricingColorSwitcher,
+		normalPricingColor,
+		normalPricingHoverColor,
+
+		salePricingFontFamily,
+		salePricingFontSize,
+		salePricingFontSizeUnits,
+		salePricingFontWeight,
+		salePricingFontStyle,
+		salePricingTextTransform,
+		salePricingTextDecoration,
+		salePricingLetterSpacing,
+		salePricingLetterSpacingUnits,
+		salePricingLineHeight,
+		salePricingLineHeightUnits,
+		salePricingColorSwitcher,
+		salePricingColor,
+		salePricingHoverColor,
+
+		priceCurrencyFontFamily,
+		priceCurrencyFontSize,
+		priceCurrencyFontSizeUnits,
+		priceCurrencyFontWeight,
+		priceCurrencyFontStyle,
+		priceCurrencyTextTransform,
+		priceCurrencyTextDecoration,
+		priceCurrencyLetterSpacing,
+		priceCurrencyLetterSpacingUnits,
+		priceCurrencyLineHeight,
+		priceCurrencyLineHeightUnits,
+		priceCurrencyColorSwitcher,
+		priceCurrencyColor,
+		priceCurrencyHoverColor,
+
+		pricePeriodFontFamily,
+		pricePeriodFontSize,
+		pricePeriodFontSizeUnits,
+		pricePeriodFontWeight,
+		pricePeriodFontStyle,
+		pricePeriodTextTransform,
+		pricePeriodTextDecoration,
+		pricePeriodLetterSpacing,
+		pricePeriodLetterSpacingUnits,
+		pricePeriodLineHeight,
+		pricePeriodLineHeightUnits,
+		pricePeriodColorSwitcher,
+		pricePeriodColor,
+		pricePeriodHoverColor,
+
+		
+
+
+
+		pricingTitleAlignment,
+		pricingTitleColorSwitcher,
+		pricingTitleColor,
+		pricingTitleHoverColor,
+		pricingTitleFontFamily,
+		pricingTitleFontSize,
+		pricingTitleFontSizeUnits,
+		pricingTitleFontWeight,
+		pricingTitleFontStyle,
+		pricingTitleTextTransform,
+		pricingTitleTextDecoration,
+		pricingTitleLetterSpacing,
+		pricingTitleLetterSpacingUnits,
+		pricingTitleLineHeight,
+		pricingTitleLineHeightUnits,
+
+		pricingSubtitleColorSwitcher,
+		pricingSubtitleColor,
+		pricingSubtitleHoverColor,
+		pricingSubtitleFontFamily,
+		pricingSubtitleFontSize,
+		pricingSubtitleFontSizeUnits,
+		pricingSubtitleFontWeight,
+		pricingSubtitleFontStyle,
+		pricingSubtitleTextTransform,
+		pricingSubtitleTextDecoration,
+		pricingSubtitleLetterSpacing,
+		pricingSubtitleLetterSpacingUnits,
+		pricingSubtitleLineHeight,
+		pricingSubtitleLineHeightUnits,
+
+		priceFeatureAlignment,
+		priceFeatureIconColorSwitcher,
+		priceFeatureIconColor,
+		priceFeatureIconHoverColor,
+		priceFeatureIconSize,
+		priceFeatureIconSizeUnits,
+
+		pricingfeatureTitleColorSwitcher,
+		pricingfeatureTitleColor,
+		pricingfeatureTitleHoverColor,
+		pricingfeatureTitleFontFamily,
+		pricingfeatureTitleFontSize,
+		pricingfeatureTitleFontSizeUnits,
+		pricingfeatureTitleFontWeight,
+		pricingfeatureTitleFontStyle,
+		pricingfeatureTitleTextTransform,
+		pricingfeatureTitleTextDecoration,
+		pricingfeatureTitleLetterSpacing,
+		pricingfeatureTitleLetterSpacingUnits,
+		pricingfeatureTitleLineHeight,
+		pricingfeatureTitleLineHeightUnits,
+
+		priceFeatureItemPaddingUnits,
+		priceFeatureItemDesktopPadding,
+		priceFeatureItemTabPadding,
+		priceFeatureItemMobilePadding,
+		priceFeatureItemPaddingLink,
+		priceFeatureItemDesktopPaddingWidth,
+		priceFeatureItemTabPaddingWidth,
+		priceFeatureItemMobilePaddingWidth,
+
+		priceFeaturePaddingUnits, 
+		priceFeatureDesktopPadding,
+		priceFeatureTabPadding,
+		priceFeatureMobilePadding,
+		priceFeaturePaddingLink,
+		priceFeatureDesktopPaddingWidth,
+		priceFeatureTabPaddingWidth,
+		priceFeatureMobilePaddingWidth,
+
+		priceButtonAlignment,
+		priceButtonWidth,
+		priceButtonWidthUnits,
+
+		priceButtonFontFamily,
+		priceButtonFontSize,
+		priceButtonFontSizeUnits,
+		priceButtonFontWeight,
+		priceButtonFontStyle,
+		priceButtonTextTransform,
+		priceButtonTextDecoration,
+		priceButtonLetterSpacing,
+		priceButtonLetterSpacingUnits,
+		priceButtonLineHeight,
+		priceButtonLineHeightUnits,
+
+		priceButtonColorSwitcher,
+		priceButtonColor,
+		priceButtonHoverColor,
+		priceButtonBgColorSwitcher,
+		priceButtonBgColor,
+		priceButtonBgHoverColor,
+
+		priceButtonPaddingUnits,
+		priceButtonDesktopPadding,
+		priceButtonTabPadding,
+		priceButtonMobilePadding,
+		priceButtonPaddingLink,
+
+		priceButtonMarginUnits,
+		priceButtonDesktopMargin,
+		priceButtonTabMargin,
+		priceButtonMobileMargin,
+		priceButtonMarginLink,
+
+		priceButtonBorder,
+		priceButtonBorderColorSwitcher,
+		priceButtonBorderColor,
+		priceButtonBorderHoverColor,
+
+		priceButtonBorderUnits,
+		priceButtonDesktopBorderWidth,
+		priceButtonTabBorderWidth,
+		priceButtonMobileBorderWidth,
+		priceButtonBorderLink,
+
+		priceButtonBorderRadiusUnits,
+		priceButtonDesktopBorderRadiusWidth,
+		priceButtonTabBorderRadiusWidth,
+		priceButtonMobileBorderRadiusWidth,
+		priceButtonBorderRadiusLink,
+
+		priceButtonIconColorSwitcher,
+		priceButtonIconColor,
+		priceButtonIconHoverColor,
+		priceButtonIconSize,
+		priceButtonIconSizeUnits,
+
+		priceRibbonColorSwitcher,
+		priceRibbonColor,
+		priceRibbonHoverColor,
+		priceRibbonBgColorSwitcher,
+		priceRibbonBgColor,
+		priceRibbonBgHoverColor,
+
+		priceRibbonTop,
+		priceRibbonTopUnits,
+		priceRibbonLeft,
+		priceRibbonLeftUnits,
+		priceRibbonRight,
+		priceRibbonRightUnits,
+		priceRibbonWidth,
+		priceRibbonWidthUnits,
+		priceRibbonFontSize,
+		priceRibbonFontSizeUnits,
+		priceRibbonpadding,
+		priceRibbonpaddingUnits,
+
+		priceGlobalZIndex,
+		priceGlobalPaddingUnits,
+		priceGlobalPaddingDesktop,
+		priceGlobalPaddingTablet,
+		priceGlobalPaddingMobile,
+		priceGlobalPaddingLink,
+		priceGlobalMarginUnits,
+		priceGlobalMarginDesktop,
+		priceGlobalMarginTablet,
+		priceGlobalMarginMobile,
+		priceGlobalMarginLink,
+		priceGlobalBgColorSwitcher,
+		priceGlobalBgColor,
+		priceGlobalBgHoverColor,
+		priceGlobalBorder,
+		priceGlobalBorderColorSwitcher,
+		priceGlobalBorderColor,
+		priceGlobalBorderHoverColor,
+		priceGlobalBorderUnits,
+		priceGlobalBorderDesktop,
+		priceGlobalBorderTablet,
+		priceGlobalBorderMobile,
+		priceGlobalBorderLink,
+		priceGlobalBorderRadiusUnits,
+		priceGlobalBorderRadiusDesktop,
+		priceGlobalBorderRadiusTablet,
+		priceGlobalBorderRadiusMobile,
+		priceGlobalBorderRadiusLink,
+		priceGlobalBoxShadowValues,
+		priceGlobalBoxShadowCssValue,
+
+		headerDesktopPadding,
+		headerTabletPadding,
+		headerMobilePadding,
+
+		headerDesktopBorderWidth,
+		headerTabletBorderWidth,
+		headerMobileBorderWidth,
+
+		headerDesktopBorderRadiusWidth,
+		headerTabletBorderRadiusWidth,
+		headerMobileBorderRadiusWidth,
+
+		priceIconDesktopBorderWidthValue,
+		priceIconTabletBorderWidthValue,
+		priceIconMobileBorderWidthValue,
+
+		priceIconDesktopBorderRadiusWidthValue,
+		priceIconTabletBorderRadiusWidthValue,
+		priceIconMobileBorderRadiusWidthValue,
+
+		priceButtonDesktopPaddingValue,
+		priceButtonTabletPaddingValue,
+		priceButtonMobilePaddingValue,
+
+		priceButtonDesktopMarginValue,
+		priceButtonTabletMarginValue,
+		priceButtonMobileMarginValue,
+
+		priceButtonDesktopBorderWidthValue,
+		priceButtonTabletBorderWidthValue,
+		priceButtonMobileBorderWidthValue,
+
+		priceButtonDesktopBorderRadiusWidthValue,
+		priceButtonTabletBorderRadiusWidthValue,
+		priceButtonMobileBorderRadiusWidthValue,
+
+		globalDesktopPadding,
+		globalTabletPadding,
+		globalMobilePadding,
+
+		globalDesktopMargin,
+		globalTabletMargin,
+		globalMobileMargin,
+
+		globalDesktopBorderWidth,
+		globalTabletBorderWidth,
+		globalMobileBorderWidth,
+
+		globalDesktopBorderRadiusWidth,
+		globalTabletBorderRadiusWidth,
+		globalMobileBorderRadiusWidth,
+
+
+		pricePaddingUnits, 
+		priceDesktopPadding,
+		priceTabletPadding,
+		priceMobilePadding,
+		pricePaddingLink,
+		priceDesktopPaddingWidth,
+		priceTabletPaddingWidth,
+		priceMobilePaddingWidth,
+
+
+		priceAfterTextSwitcher,
+		priceAfterText,
+
+		priceAfterTextFontFamily,
+		priceAfterTextFontSize,
+		priceAfterTextFontSizeUnits,
+		priceAfterTextFontWeight,
+		priceAfterTextFontStyle,
+		priceAfterTextTextTransform,
+		priceAfterTextTextDecoration,
+		priceAfterTextLetterSpacing,
+		priceAfterTextLetterSpacingUnits,
+		priceAfterTextLineHeight,
+		priceAfterTextLineHeightUnits,
+
+		priceAfterTextColorSwitcher,
+		priceAfterTextColor,
+		priceAfterTextHoverColor,
+
+		priceAfterTextBgColorSwitcher,
+		priceAfterTextNormalBackgroundType,
+		priceAfterTextNormalClassicColor,
+		priceAfterTextNormalGradientColor,
+		priceAfterTextNormalCustomGradientSwitcher,
+		priceAfterTextNormalCustomGradientInputValue,
+		priceAfterTextHoverBackgroundType,
+		priceAfterTextHoverClassicColor,
+		priceAfterTextHoverGradientColor,
+		priceAfterTextHoverCustomGradientSwitcher,
+		priceAfterTextHoverCustomGradientInputValue,
+
+		priceAfterTextPaddingUnits,
+		priceAfterTextPaddingDesktop,
+		priceAfterTextPaddingTablet,
+		priceAfterTextPaddingMobile,
+		priceAfterTextPaddingLink,
+		priceAfterTextDesktopPaddingWidth,
+		priceAfterTextTabletPaddingWidth,
+		priceAfterTextMobilePaddingWidth,
+
+
+		priceAfterTextBorder,
+		priceAfterTextBorderColorSwitcher,
+		priceAfterTextBorderColor,
+		priceAfterTextBorderHoverColor,
+
+		priceAfterTextBorderUnits,
+		priceAfterTextBorderDesktop,
+		priceAfterTextBorderTablet,
+		priceAfterTextBorderMobile,
+		priceAfterTextBorderLink,
+		priceAfterTextBorderDesktopWidth,
+		priceAfterTextBorderTabletWidth,
+		priceAfterTextBorderMobileWidth,
+
+		priceAfterTextBorderRadiusUnits,
+		priceAfterTextBorderRadiusDesktop,
+		priceAfterTextBorderRadiusTablet,
+		priceAfterTextBorderRadiusMobile,
+		priceAfterTextBorderRadiusLink,
+		priceAfterTextBorderRadiusDesktopWidth,
+		priceAfterTextBorderRadiusTabletWidth,
+		priceAfterTextBorderRadiusMobileWidth,
+
+
+		priceFeatureAfterTextSwitcher,
+		priceFeatureAfterText,
+		priceFeatureAfterTextFontFamily,
+		priceFeatureAfterTextFontSize,
+		priceFeatureAfterTextFontSizeUnits,
+		priceFeatureAfterTextFontWeight,
+		priceFeatureAfterTextFontStyle,
+		priceFeatureAfterTextTextTransform,
+		priceFeatureAfterTextTextDecoration,
+		priceFeatureAfterTextLetterSpacing,
+		priceFeatureAfterTextLetterSpacingUnits,
+		priceFeatureAfterTextLineHeight,
+		priceFeatureAfterTextLineHeightUnits,
+		priceFeatureAfterTextColorSwitcher,
+		priceFeatureAfterTextColor,
+		priceFeatureAfterTextHoverColor,
+
+	]);
+
+	useEffect(() => {
+		setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle]);
+
+	const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+
+
+
     return (
         <>
 
 			<style>
-			{`
-				.fb-pricing-wrapper.${blockId} {
-					${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
-					${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-					${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
-					${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
-					${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-					${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-					${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-					${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
-					transition: background-color 0.3s ease, border-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId}:hover {
-					${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
-					${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
-					${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-					${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
-					${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
-					${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
-					${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
-					${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
-					${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
-					transition: background-color 0.3s ease, border-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-header:hover {
-					${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
-					${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon-wrapper {
-					justify-content: ${pricingIconAlignment === 'left' ? 'flex-start' : pricingIconAlignment === 'center' ? 'center' : pricingIconAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-					width: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
-					height: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};
-					${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
-					${priceIconBorder ? `border: ${priceIconBorder};` : ''}
-					${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
-					${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
-					${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
-					transition: background-color 0.3s ease, border-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover {
-					background-color: ${priceIconBgHoverColor};
-					${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-					width: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
-					height: ${priceIconSize.Desktop}${priceIconSizeUnits.Desktop};
-					fill: ${priceIconColor};
-					transition: fill 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-icon:hover svg {
-					fill: ${priceIconHoverColor};
-				}
-
-				.fb-pricing-wrapper.${blockId}	.fb-pricing-price-wrapper {
-					justify-content: ${pricingAlignment === 'left' ? 'flex-start' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper {
-					margin: ${priceingPriceGap.Desktop ? `${priceingPriceGap.Desktop}${priceingPriceGapUnits.Desktop}` : '0'} 0;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price {
-					${normalPricingColor ? `color: ${normalPricingColor};` : ''}
-					${normalPricingFontFamily ? `font-family: ${normalPricingFontFamily};` : ""}
-					${normalPricingFontSize.Desktop ? `font-size: ${normalPricingFontSize.Desktop}${normalPricingFontSizeUnits.Desktop};` : ""}
-					${normalPricingFontWeight ? `font-weight: ${normalPricingFontWeight};` : ""}
-					${normalPricingFontStyle ? `font-style: ${normalPricingFontStyle};` : ""}
-					${normalPricingTextTransform ? `text-transform: ${normalPricingTextTransform};` : ""}
-					${normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
-					${normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
-					${normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
-					${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price {
-					${salePricingColor ? `color: ${salePricingColor};` : ''}
-					${salePricingFontFamily ? `font-family: ${salePricingFontFamily};` : ""}
-					${salePricingFontSize.Desktop ? `font-size: ${salePricingFontSize.Desktop}${salePricingFontSizeUnits.Desktop};` : ""}
-					${salePricingFontWeight ? `font-weight: ${salePricingFontWeight};` : ""}
-					${salePricingFontStyle ? `font-style: ${salePricingFontStyle};` : ""}
-					${salePricingTextTransform ? `text-transform: ${salePricingTextTransform};` : ""}
-					${salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
-					${salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
-					${salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
-					${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency {
-					${priceCurrencyColor ? `color: ${priceCurrencyColor};` : ''}
-					${priceCurrencyFontFamily ? `font-family: ${priceCurrencyFontFamily};` : ""}
-					${priceCurrencyFontSize.Desktop ? `font-size: ${priceCurrencyFontSize.Desktop}${priceCurrencyFontSizeUnits.Desktop};` : ""}
-					${priceCurrencyFontWeight ? `font-weight: ${priceCurrencyFontWeight};` : ""}
-					${priceCurrencyFontStyle ? `font-style: ${priceCurrencyFontStyle};` : ""}
-					${priceCurrencyTextTransform ? `text-transform: ${priceCurrencyTextTransform};` : ""}
-					${priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
-					${priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
-					${priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
-					${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period {
-					${pricePeriodColor ? `color: ${pricePeriodColor};` : ''}
-					${pricePeriodFontFamily ? `font-family: ${pricePeriodFontFamily};` : ""}
-					${pricePeriodFontSize.Desktop ? `font-size: ${pricePeriodFontSize.Desktop}${pricePeriodFontSizeUnits.Desktop};` : ""}
-					${pricePeriodFontWeight ? `font-weight: ${pricePeriodFontWeight};` : ""}
-					${pricePeriodFontStyle ? `font-style: ${pricePeriodFontStyle};` : ""}
-					${pricePeriodTextTransform ? `text-transform: ${pricePeriodTextTransform};` : ""}
-					${pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
-					${pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
-					${pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-price-wrapper .price-period:hover {
-					${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-title {
-					${pricingTitleColor ? `color: ${pricingTitleColor};` : ''}
-					${pricingTitleFontFamily ? `font-family: ${pricingTitleFontFamily};` : ''}
-					${pricingTitleFontSize.Desktop ? `font-size: ${pricingTitleFontSize.Desktop}${pricingTitleFontSizeUnits.Desktop};` : ''}
-					${pricingTitleFontWeight ? `font-weight: ${pricingTitleFontWeight};` : ''}
-					${pricingTitleFontStyle ? `font-style: ${pricingTitleFontStyle};` : ''}
-					${pricingTitleTextTransform ? `text-transform: ${pricingTitleTextTransform};` : ''}
-					${pricingTitleTextDecoration ? `text-decoration: ${pricingTitleTextDecoration};` : ''}
-					${pricingTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingTitleLetterSpacing.Desktop}${pricingTitleLetterSpacingUnits.Desktop};` : ''}
-					${pricingTitleLineHeight.Desktop ? `line-height: ${pricingTitleLineHeight.Desktop}${pricingTitleLineHeightUnits.Desktop};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-title:hover {
-					${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle {
-					${pricingSubtitleColor ? `color: ${pricingSubtitleColor};` : ''}
-					${pricingSubtitleFontFamily ? `font-family: ${pricingSubtitleFontFamily};` : ''}
-					${pricingSubtitleFontSize.Desktop ? `font-size: ${pricingSubtitleFontSize.Desktop}${pricingSubtitleFontSizeUnits.Desktop};` : ''}
-					${pricingSubtitleFontWeight ? `font-weight: ${pricingSubtitleFontWeight};` : ''}
-					${pricingSubtitleFontStyle ? `font-style: ${pricingSubtitleFontStyle};` : ''}
-					${pricingSubtitleTextTransform ? `text-transform: ${pricingSubtitleTextTransform};` : ''}
-					${pricingSubtitleTextDecoration ? `text-decoration: ${pricingSubtitleTextDecoration};` : ''}
-					${pricingSubtitleLetterSpacing.Desktop ? `letter-spacing: ${pricingSubtitleLetterSpacing.Desktop}${pricingSubtitleLetterSpacingUnits.Desktop};` : ''}
-					${pricingSubtitleLineHeight.Desktop ? `line-height: ${pricingSubtitleLineHeight.Desktop}${pricingSubtitleLineHeightUnits.Desktop};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-subtitle:hover {
-					${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-item {
-					justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner svg {
-					width: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
-					height: ${priceFeatureIconSize.Desktop}${priceFeatureIconSizeUnits.Desktop};
-					fill: ${priceFeatureIconColor};
-					transition: fill 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-icon-inner:hover svg {
-					fill: ${priceFeatureIconHoverColor};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text {
-					${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
-					${pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
-					${pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
-					${pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
-					${pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
-					${pricingfeatureTitleTextTransform ? `text-transform: ${pricingfeatureTitleTextTransform};` : ''}
-					${pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
-					${pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
-					${pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-feature-text:hover {
-					${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
-				}
-
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-footer-wrapper {
-					justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
-				}
-
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-					width: ${priceButtonWidth.Desktop ? `${priceButtonWidth.Desktop}${priceButtonWidthUnits.Desktop}` : 'auto'};
-					${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
-					${priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
-					${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
-					${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
-					${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
-					${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
-					${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
-					${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
-					${priceButtonColor ? `color: ${priceButtonColor};` : ''}
-					${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
-					${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
-					${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
-					${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
-					${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
-					${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
-					${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
-					transition: color 0.3s ease, background-color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button:hover {
-					${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
-					${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
-					${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-					width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
-					height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
-					fill: ${priceButtonIconColor};
-					transition: fill 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon:hover svg {
-					fill: ${priceButtonIconHoverColor};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-					${priceRibbonBgColor ? `background-color: ${priceRibbonBgColor};` : ''}
-					${priceRibbonColor ? `color: ${priceRibbonColor};` : ''}
-					font-size: ${priceRibbonFontSize.Desktop ? `${priceRibbonFontSize.Desktop}${priceRibbonFontSizeUnits.Desktop}` : ''};
-					top: ${priceRibbonTop.Desktop ? `${priceRibbonTop.Desktop}${priceRibbonTopUnits.Desktop}` : ''};
-					width: ${priceRibbonWidth.Desktop ? `${priceRibbonWidth.Desktop}${priceRibbonWidthUnits.Desktop}` : ''};
-					padding: ${priceRibbonpadding.Desktop ? `${priceRibbonpadding.Desktop}${priceRibbonpaddingUnits.Desktop}` : ''};
-					transition: background-color 0.3s ease, color 0.3s ease;
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon:hover {
-					${priceRibbonBgHoverColor ? `background-color: ${priceRibbonBgHoverColor};` : ''}
-					${priceRibbonHoverColor ? `color: ${priceRibbonHoverColor};` : ''}
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-					left: ${priceRibbonLeft.Desktop ? `${priceRibbonLeft.Desktop}${priceRibbonLeftUnits.Desktop}` : ''};
-				}
-				.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-					right: ${priceRibbonRight.Desktop ? `${priceRibbonRight.Desktop}${priceRibbonRightUnits.Desktop}` : ''};
-				}
-
-				@media only screen and (max-width: 1024px) {
-					.fb-pricing-wrapper.${blockId} {
-						${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-						${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
-						${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-						${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-						${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
-						${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
-						${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-						width: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
-						height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};
-						${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
-						${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-						width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
-						height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-						${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
-						${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
-						${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
-						${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-						width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
-						height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-						font-size: ${priceRibbonFontSize.Tablet ? `${priceRibbonFontSize.Tablet}${priceRibbonFontSizeUnits.Tablet}` : ''};
-						top: ${priceRibbonTop.Tablet ? `${priceRibbonTop.Tablet}${priceRibbonTopUnits.Tablet}` : ''};
-						width: ${priceRibbonWidth.Tablet ? `${priceRibbonWidth.Tablet}${priceRibbonWidthUnits.Tablet}` : ''};
-						padding: ${priceRibbonpadding.Tablet ? `${priceRibbonpadding.Tablet}${priceRibbonpaddingUnits.Tablet}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-						left: ${priceRibbonLeft.Tablet ? `${priceRibbonLeft.Tablet}${priceRibbonLeftUnits.Tablet}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-						right: ${priceRibbonRight.Tablet ? `${priceRibbonRight.Tablet}${priceRibbonRightUnits.Tablet}` : ''};
-					}
-				}
-
-				@media only screen and (max-width: 767px) {
-					.fb-pricing-wrapper.${blockId} {
-						${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-						${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
-						${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-						${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-header {
-						${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
-						${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
-						${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon {
-						width: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
-						height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};
-						${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
-						${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-icon svg {
-						width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
-						height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button {
-						${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
-						${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
-						${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
-						${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-button-icon svg {
-						width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
-						height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon {
-						font-size: ${priceRibbonFontSize.Mobile ? `${priceRibbonFontSize.Mobile}${priceRibbonFontSizeUnits.Mobile}` : ''};
-						top: ${priceRibbonTop.Mobile ? `${priceRibbonTop.Mobile}${priceRibbonTopUnits.Mobile}` : ''};
-						width: ${priceRibbonWidth.Mobile ? `${priceRibbonWidth.Mobile}${priceRibbonWidthUnits.Mobile}` : ''};
-						padding: ${priceRibbonpadding.Mobile ? `${priceRibbonpadding.Mobile}${priceRibbonpaddingUnits.Mobile}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-left {
-						left: ${priceRibbonLeft.Mobile ? `${priceRibbonLeft.Mobile}${priceRibbonLeftUnits.Mobile}` : ''};
-					}
-					.fb-pricing-wrapper.${blockId} .fb-pricing-ribbon-right {
-						right: ${priceRibbonRight.Mobile ? `${priceRibbonRight.Mobile}${priceRibbonRightUnits.Mobile}` : ''};
-					}
-				}
-			`}
+				{editorStyle}
 			</style>
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
@@ -1777,6 +3086,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										{/** Start Header */}
 										<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+
+											<ToggleControl
+												label={__("Display Top Section", "frontis-blocks")}
+												checked={pricingSectionTopSwitcher}	
+												onChange={(value) => setAttributes({pricingSectionTopSwitcher: value})}
+											/>
+											{pricingSectionTopSwitcher && ( 
+												<TextControl
+													label={__("Top Text", "frontis-blocks")}
+													value={pricingSectionTopText}
+													onChange={(value) => setAttributes({ pricingSectionTopText: value })}
+													placeholder={__('Best Deal', 'frontis-block')}
+												/>
+											)}
+
 											<TextControl
 												label={__("Title", "frontis-blocks")}
 												value={pricingTitle}
@@ -1860,45 +3184,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												label={__("Period", "frontis-blocks")}
 												value={pricePeriod}
 												onChange={(value) => setAttributes({ pricePeriod: value })}
-											/>			
+											/>	
+
+											<ToggleControl
+												label={__("Text Switcher", "frontis-blocks")}
+												checked={priceAfterTextSwitcher}
+												onChange={(value) => setAttributes({priceAfterTextSwitcher: value})}
+											/>
+											{priceAfterTextSwitcher && (
+												<TextControl
+													value={priceAfterText}
+													onChange={(value) => setAttributes({ priceAfterText: value })}
+												/>
+											)}
 										</PanelBody>
 										{/** End Price */}
 
 										{/** Start Feature */}
 										<PanelBody title={__("Features", "frontis-blocks")} initialOpen={false}>
 											<ToggleControl
-												label={__("Hide Features", "frontis-blocks")}
+												label={__("Show Features", "frontis-blocks")}
 												checked={priceHideFeaturesSwitcher}
 												onChange={(value) => setAttributes({priceHideFeaturesSwitcher: value})}
 											/>
+
+											{priceHideFeaturesSwitcher && (
+												<>
+													<ToggleControl
+														label={__("Show Icon", "frontis-blocks")}
+														checked={priceFeatureIconSwitcher}
+														onChange={(value) => setAttributes({ priceFeatureIconSwitcher: value })}
+													/>
+													<div className="fb-feature-wrapper">
+														<DndContext
+															collisionDetection={closestCenter}
+															onDragEnd={handleDragEnd}
+														>
+															<SortableContext items={priceFeatureItems.map(item => item.id)}>
+																<ul className='dnd-items-wrapper'>
+																	{priceFeatureItems.map((item) => (
+																		<SortableItem
+																			key={item.id}
+																			id={item.id}
+																			item={item}
+																			handleChangeItem={handleChangeItem}
+																			handleDeleteItem={handleDeleteItem}
+																		/>
+																	))}
+																</ul>
+															</SortableContext>
+															<Button isPrimary onClick={handleAddItem}>
+																{__("Add Feature", "frontis-blocks")}
+															</Button>
+														</DndContext>
+													</div>
+												</>
+											)}
+
 											<ToggleControl
-												label={__("Show Icon", "frontis-blocks")}
-												checked={priceFeatureIconSwitcher}
-												onChange={(value) => setAttributes({priceFeatureIconSwitcher: value})}
+												label={__("Text Switcher", "frontis-blocks")}
+												checked={priceFeatureAfterTextSwitcher}
+												onChange={(value) => setAttributes({priceFeatureAfterTextSwitcher: value})}
 											/>
-											<div className="fb-feature-wrapper">
-                                                <DndContext
-                                                    collisionDetection={closestCenter}
-                                                    onDragEnd={handleDragEnd}
-                                                >
-													<SortableContext items={priceFeatureItems.map(item => item.id)}>
-                                                        <ul className='dnd-items-wrapper'>
-                                                            {priceFeatureItems.map((item) => (
-                                                                <SortableItem
-                                                                    key={item.id}
-                                                                    id={item.id}
-                                                                    item={item}
-                                                                    handleChangeItem={handleChangeItem}
-                                                                    handleDeleteItem={handleDeleteItem}
-                                                                />
-                                                            ))}
-                                                        </ul>
-                                                    </SortableContext>
-                                                    <Button isPrimary onClick={handleAddItem}>
-                                                        {__("Add Feature", "frontis-blocks")}
-                                                    </Button>
-                                                </DndContext>
-											</div>
+											{priceFeatureAfterTextSwitcher && (
+												<TextControl
+													value={priceFeatureAfterText}
+													onChange={(value) => setAttributes({ priceFeatureAfterText: value })}
+												/>
+											)}
 										</PanelBody>
 										{/** End Feature */}
 
@@ -2030,15 +3383,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({ pricingHeaderBorder: value })}
 											/>
 
-											<FB_Color
+											<FB_SwitcherControl
 												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={pricingHeaderBorderColorSwitcher}
-												globalColor={pricingHeaderBorderColor}
-												globalHoverColor={pricingHeaderBorderHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricingHeaderBorderColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricingHeaderBorderColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricingHeaderBorderHoverColor: value })}
+												globalSwitcher={pricingHeaderBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ pricingHeaderBorderColorSwitcher: value })}
 											/>
+
+											{pricingHeaderBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={pricingHeaderBorderColor}
+													setGlobalColor={(value) => setAttributes({ pricingHeaderBorderColor: value })}
+												/>
+											)}
+
+											{pricingHeaderBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={pricingHeaderBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ pricingHeaderBorderHoverColor: value })}
+												/>
+											)}
 
 											<FB_Spacing 
 												label={__("Border", "frontis-blocks")}
@@ -2068,357 +3433,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 										</PanelBody>
-
 										<PanelBody
-											title={__("Icon", "frontis-blocks")}
-											initialOpen={false}
-										>
-
-											<BaseControl
-												label={__("Alignment", "frontis-blocks")}
-												id="fb-setting-text-alignment"
-												className="fb-setting-text-alignment"
-											>
-													<ButtonGroup
-														className="fb-setting-text-alignment-group-btn"
-													>
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() => setAttributes({ pricingIconAlignment: item.value })}
-																className={`fb-setting-text-alignment-single-btn ${pricingIconAlignment === item.value ? 'active' : ''}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-											</BaseControl>
-
-											<FB_Range
-												min={1}
-                                                max={200}
-												label={__("Icon Size", "frontis-blocks")}
-                                                rangeValue={priceIconSize}
-                                                onChangeHandler={(value) => setAttributes({ priceIconSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ priceIconSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={priceIconSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={"100"}
-											/>
-
-											<FB_Range
-												min={0}
-												max={200}
-												label={__("Background Size", "frontis-blocks")}
-												rangeValue={priceIconBgSize}
-												onChangeHandler={(value) => setAttributes({ priceIconBgSize: value })}
-												rangeUnitHandler={(value) => setAttributes({ priceIconBgSizeUnits: value })}
-												deviceType={deviceType}
-												units={priceIconBgSizeUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											<FB_Color
-												label={__("Color", "frontis-blocks")}
-												globalColorSwitcher={priceIconColorSwitcher}
-												globalColor={priceIconColor}
-												globalHoverColor={priceIconHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceIconColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceIconColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconHoverColor: value })}
-											/>
-
-											<FB_Color
-												label={__("Background Color", "frontis-blocks")}
-												globalColorSwitcher={priceIconBgColorSwitcher}
-												globalColor={priceIconBgColor}
-												globalHoverColor={priceIconBgHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceIconBgColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceIconBgColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBgHoverColor: value })}
-											/>
-
-											<SelectControl
-													label={__("Border Style", "frontis-blocks")}
-													value={priceIconBorder}
-													options={BORDER_STYLES}
-													onChange={(value) => setAttributes({ priceIconBorder: value })}
-											/>
-
-											<FB_Color
-												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={priceIconBorderColorSwitcher}
-												globalColor={priceIconBorderColor}
-												globalHoverColor={priceIconBorderHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceIconBorderColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBorderHoverColor: value })}
-											/>
-
-											<FB_Spacing 
-												label={__("Border", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handlePriceIconBorderUnitsHandler}
-												spacingUnits={priceIconBorderUnits}
-												spacingDesktop={priceIconBorderDesktop}
-												spacingTablet={priceIconBorderTablet}
-												spacingMobile={priceIconBorderMobile}
-												handleSpacingUnitHandler={handlePriceIconBorderUnitChange}
-												spacingCombineBtn={priceIconBorderLink}
-												spacingCombineBtnHandler={handlePriceIconBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing 
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handlePriceIconBorderRadiusUnitsHandler}
-												spacingUnits={priceIconBorderRadiusUnits}
-												spacingDesktop={priceIconBorderRadiusDesktop}
-												spacingTablet={priceIconBorderRadiusTablet}
-												spacingMobile={priceIconBorderRadiusMobile}
-												handleSpacingUnitHandler={handlePriceIconBorderRadiusUnitChange}
-												spacingCombineBtn={priceIconBorderRadiusLink}
-												spacingCombineBtnHandler={handlePriceIconBorderRadiusCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-										</PanelBody>
-										<PanelBody
-											title={__("Price", "frontis-blocks")}
-											initialOpen={false}
-										>
-											<BaseControl
-												label={__("Alignment", "frontis-blocks")}
-												id="fb-setting-text-alignment"
-												className="fb-setting-text-alignment"
-											>
-													<ButtonGroup
-														className="fb-setting-text-alignment-group-btn"
-													>
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() => setAttributes({ pricingAlignment: item.value })}
-																className={`fb-setting-text-alignment-single-btn ${pricingAlignment === item.value ? 'active' : ''}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-											</BaseControl>
-
-											<FB_Color
-												label={__("Price Color", "frontis-blocks")}
-												globalColorSwitcher={normalPricingColorSwitcher}
-												globalColor={normalPricingColor}
-												globalHoverColor={normalPricingHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ normalPricingColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ normalPricingColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ normalPricingHoverColor: value })}
-											/>
-											<FB_TypographyControl
-												fontFamily={normalPricingFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ normalPricingFontFamily: value })}
-
-												fontSize={normalPricingFontSize}
-												onChangeFontSize={(value) => setAttributes({ normalPricingFontSize: value })}
-
-												fontSizeUnits={normalPricingFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ normalPricingFontSizeUnits: value })}
-
-												fontWeight={normalPricingFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ normalPricingFontWeight: value })}
-
-												fontStyle={normalPricingFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ normalPricingFontStyle: value })}
-
-												textTransform={normalPricingTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ normalPricingTextTransform: value })}
-
-												textDecoration={normalPricingTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ normalPricingTextDecoration: value })}
-
-												letterSpacing={normalPricingLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ normalPricingLetterSpacing: value })}
-
-												letterSpacingUnits={normalPricingLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ normalPricingLetterSpacingUnits: value })}
-
-												lineHeight={normalPricingLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ normalPricingLineHeight: value })}
-
-												lineHeightUnits={normalPricingLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ normalPricingLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Color
-												label={__("Sale Price Color", "frontis-blocks")}
-												globalColorSwitcher={salePricingColorSwitcher}
-												globalColor={salePricingColor}
-												globalHoverColor={salePricingHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ salePricingColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ salePricingColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ salePricingHoverColor: value })}
-											/>
-
-											<FB_TypographyControl
-												fontFamily={salePricingFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ salePricingFontFamily: value })}
-
-												fontSize={salePricingFontSize}
-												onChangeFontSize={(value) => setAttributes({ salePricingFontSize: value })}
-
-												fontSizeUnits={salePricingFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ salePricingFontSizeUnits: value })}
-
-												fontWeight={salePricingFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ salePricingFontWeight: value })}
-
-												fontStyle={salePricingFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ salePricingFontStyle: value })}
-
-												textTransform={salePricingTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ salePricingTextTransform: value })}
-
-												textDecoration={salePricingTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ salePricingTextDecoration: value })}
-
-												letterSpacing={salePricingLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ salePricingLetterSpacing: value })}
-
-												letterSpacingUnits={salePricingLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ salePricingLetterSpacingUnits: value })}
-
-												lineHeight={salePricingLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ salePricingLineHeight: value })}
-
-												lineHeightUnits={salePricingLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ salePricingLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Color
-												label={__("Currency Color", "frontis-blocks")}
-												globalColorSwitcher={priceCurrencyColorSwitcher}
-												globalColor={priceCurrencyColor}
-												globalHoverColor={priceCurrencyHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceCurrencyColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceCurrencyColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceCurrencyHoverColor: value })}
-											/>
-
-											<FB_TypographyControl
-												fontFamily={priceCurrencyFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ priceCurrencyFontFamily: value })}
-
-												fontSize={priceCurrencyFontSize}
-												onChangeFontSize={(value) => setAttributes({ priceCurrencyFontSize: value })}
-
-												fontSizeUnits={priceCurrencyFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ priceCurrencyFontSizeUnits: value })}
-
-												fontWeight={priceCurrencyFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ priceCurrencyFontWeight: value })}
-
-												fontStyle={priceCurrencyFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ priceCurrencyFontStyle: value })}
-
-												textTransform={priceCurrencyTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ priceCurrencyTextTransform: value })}
-
-												textDecoration={priceCurrencyTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ priceCurrencyTextDecoration: value })}
-
-												letterSpacing={priceCurrencyLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ priceCurrencyLetterSpacing: value })}
-
-												letterSpacingUnits={priceCurrencyLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ priceCurrencyLetterSpacingUnits: value })}
-
-												lineHeight={priceCurrencyLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ priceCurrencyLineHeight: value })}
-
-												lineHeightUnits={priceCurrencyLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ priceCurrencyLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Color
-												label={__("Period Color", "frontis-blocks")}
-												globalColorSwitcher={pricePeriodColorSwitcher}
-												globalColor={pricePeriodColor}
-												globalHoverColor={pricePeriodHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricePeriodColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricePeriodColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricePeriodHoverColor: value })}
-											/>
-
-											<FB_TypographyControl
-												fontFamily={pricePeriodFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ pricePeriodFontFamily: value })}
-
-												fontSize={pricePeriodFontSize}
-												onChangeFontSize={(value) => setAttributes({ pricePeriodFontSize: value })}
-
-												fontSizeUnits={pricePeriodFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ pricePeriodFontSizeUnits: value })}
-
-												fontWeight={pricePeriodFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ pricePeriodFontWeight: value })}
-
-												fontStyle={pricePeriodFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ pricePeriodFontStyle: value })}
-
-												textTransform={pricePeriodTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ pricePeriodTextTransform: value })}
-
-												textDecoration={pricePeriodTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ pricePeriodTextDecoration: value })}
-
-												letterSpacing={pricePeriodLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ pricePeriodLetterSpacing: value })}
-
-												letterSpacingUnits={pricePeriodLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ pricePeriodLetterSpacingUnits: value })}
-
-												lineHeight={pricePeriodLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ pricePeriodLineHeight: value })}
-
-												lineHeightUnits={pricePeriodLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ pricePeriodLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Range
-												min={0}
-												max={200}
-												label={__("Spacing", "frontis-blocks")}
-												rangeValue={priceingPriceGap}
-												onChangeHandler={(value) => setAttributes({ priceingPriceGap: value })}
-												rangeUnitHandler={(value) => setAttributes({ priceingPriceGapUnits: value })}
-												deviceType={deviceType}
-												units={priceingPriceGapUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={"20"}
-											/>
-										</PanelBody>
-										<PanelBody
-											title={__("Title and Subtitle", "frontis-blocks")}
+											title={__("Title", "frontis-blocks")}
 											initialOpen={false}
 										>
 											<BaseControl
@@ -2441,14 +3457,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													</ButtonGroup>
 											</BaseControl>
 
-											<FB_Color
-												label={__("Title Color", "frontis-blocks")}
-												globalColorSwitcher={pricingTitleColorSwitcher}
-												globalColor={pricingTitleColor}
-												globalHoverColor={pricingTitleHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricingTitleColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricingTitleColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricingTitleHoverColor: value })}
+											<FB_HtmlTagControl
+												label={__("HTML Tag", "frontis-blocks")}
+												globalHtmlTag={pricingTitleTag}
+												setGlobalHtmlTag={(value) => setAttributes({ pricingTitleTag: value })}
 											/>
 
 											<FB_TypographyControl
@@ -2489,16 +3501,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 
-											<FB_Color
-												label={__("Subtitle Color", "frontis-blocks")}
-												globalColorSwitcher={pricingSubtitleColorSwitcher}
-												globalColor={pricingSubtitleColor}
-												globalHoverColor={pricingSubtitleHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricingSubtitleColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricingSubtitleColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricingSubtitleHoverColor: value })}
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={pricingTitleColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ pricingTitleColorSwitcher: value })}
 											/>
 
+											{pricingTitleColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={pricingTitleColor}
+													setGlobalColor={(value) => setAttributes({ pricingTitleColor: value })}
+												/>
+											)}
+
+											{pricingTitleColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={pricingTitleHoverColor}
+													setGlobalColor={(value) => setAttributes({ pricingTitleHoverColor: value })}
+												/>
+											)}
+										</PanelBody>
+
+										<PanelBody
+											title={__("Subtitle", "frontis-blocks")}
+											initialOpen={false}
+										>
+
+											<FB_HtmlTagControl
+												label={__("HTML Tag", "frontis-blocks")}
+												globalHtmlTag={pricingSubTitleTag}
+												setGlobalHtmlTag={(value) => setAttributes({ pricingSubTitleTag: value })}
+											/>
 											<FB_TypographyControl
 												fontFamily={pricingSubtitleFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ pricingSubtitleFontFamily: value })}
@@ -2536,7 +3571,624 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												deviceType={deviceType}
 												setAttributes={setAttributes}
 											/>
+
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={pricingSubtitleColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ pricingSubtitleColorSwitcher: value })}
+											/>
+
+											{pricingSubtitleColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={pricingSubtitleColor}
+													setGlobalColor={(value) => setAttributes({ pricingSubtitleColor: value })}
+												/>
+											)}
+
+											{pricingSubtitleColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={pricingSubtitleHoverColor}
+													setGlobalColor={(value) => setAttributes({ pricingSubtitleHoverColor: value })}
+												/>
+											)}
 										</PanelBody>
+
+
+										{pricingIconAlign !== 'none' && (
+											<PanelBody
+												title={__("Icon", "frontis-blocks")}
+												initialOpen={false}
+											>
+
+												<BaseControl
+													label={__("Alignment", "frontis-blocks")}
+													id="fb-setting-text-alignment"
+													className="fb-setting-text-alignment"
+												>
+														<ButtonGroup
+															className="fb-setting-text-alignment-group-btn"
+														>
+															{TEXT_ALIGN.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() => setAttributes({ pricingIconAlignment: item.value })}
+																	className={`fb-setting-text-alignment-single-btn ${pricingIconAlignment === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+												</BaseControl>
+
+												<FB_Range
+													min={1}
+													max={200}
+													label={__("Icon Size", "frontis-blocks")}
+													rangeValue={priceIconSize}
+													onChangeHandler={(value) => setAttributes({ priceIconSize: value })}
+													rangeUnitHandler={(value) => setAttributes({ priceIconSizeUnits: value })}
+													deviceType={deviceType}
+													units={priceIconSizeUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={"100"}
+												/>
+
+												<FB_Range
+													min={0}
+													max={200}
+													label={__("Background Size", "frontis-blocks")}
+													rangeValue={priceIconBgSize}
+													onChangeHandler={(value) => setAttributes({ priceIconBgSize: value })}
+													rangeUnitHandler={(value) => setAttributes({ priceIconBgSizeUnits: value })}
+													deviceType={deviceType}
+													units={priceIconBgSizeUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={""}
+												/>
+
+												<FB_SwitcherControl
+													label={__("Color", "frontis-blocks")}
+													globalSwitcher={priceIconColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ priceIconColorSwitcher: value })}
+												/>
+
+												{priceIconColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Nomal Color", "frontis-blocks")}
+														globalColor={priceIconColor}
+														setGlobalColor={(value) => setAttributes({ priceIconColor: value })}
+													/>
+												)}
+
+												{priceIconColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={priceIconHoverColor}
+														setGlobalColor={(value) => setAttributes({ priceIconHoverColor: value })}
+													/>
+												)}
+
+												<FB_Color
+													label={__("Background Color", "frontis-blocks")}
+													globalColorSwitcher={priceIconBgColorSwitcher}
+													globalColor={priceIconBgColor}
+													globalHoverColor={priceIconBgHoverColor}
+													handleColorSwitcherChange={(value) => setAttributes({ priceIconBgColorSwitcher: value })}
+													handleGlobalColorChange={(value) => setAttributes({ priceIconBgColor: value })}
+													handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBgHoverColor: value })}
+												/>
+
+												<SelectControl
+														label={__("Border Style", "frontis-blocks")}
+														value={priceIconBorder}
+														options={BORDER_STYLES}
+														onChange={(value) => setAttributes({ priceIconBorder: value })}
+												/>
+
+												<FB_Color
+													label={__("Border Color", "frontis-blocks")}
+													globalColorSwitcher={priceIconBorderColorSwitcher}
+													globalColor={priceIconBorderColor}
+													globalHoverColor={priceIconBorderHoverColor}
+													handleColorSwitcherChange={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
+													handleGlobalColorChange={(value) => setAttributes({ priceIconBorderColor: value })}
+													handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+												/>
+
+
+												<FB_SwitcherControl
+													label={__("Border Color", "frontis-blocks")}
+													globalSwitcher={priceIconBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
+												/>
+
+												{priceIconBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Nomal Color", "frontis-blocks")}
+														globalColor={priceIconBorderColor}
+														setGlobalColor={(value) => setAttributes({ priceIconBorderColor: value })}
+													/>
+												)}
+
+												{priceIconBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={priceIconBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+													/>
+												)}
+
+												<FB_Spacing 
+													label={__("Border", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handlePriceIconBorderUnitsHandler}
+													spacingUnits={priceIconBorderUnits}
+													spacingDesktop={priceIconBorderDesktop}
+													spacingTablet={priceIconBorderTablet}
+													spacingMobile={priceIconBorderMobile}
+													handleSpacingUnitHandler={handlePriceIconBorderUnitChange}
+													spacingCombineBtn={priceIconBorderLink}
+													spacingCombineBtnHandler={handlePriceIconBorderCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+												<FB_Spacing 
+													label={__("Border Radius", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handlePriceIconBorderRadiusUnitsHandler}
+													spacingUnits={priceIconBorderRadiusUnits}
+													spacingDesktop={priceIconBorderRadiusDesktop}
+													spacingTablet={priceIconBorderRadiusTablet}
+													spacingMobile={priceIconBorderRadiusMobile}
+													handleSpacingUnitHandler={handlePriceIconBorderRadiusUnitChange}
+													spacingCombineBtn={priceIconBorderRadiusLink}
+													spacingCombineBtnHandler={handlePriceIconBorderRadiusCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+											</PanelBody>
+										)}
+
+										<PanelBody
+											title={__("Price", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<FB_AlignmentControl
+												label={__("Alignment", "frontis-blocks")}
+												globalAlignment={pricingAlignment}
+												setGlobalAlignment={(value) => setAttributes({ pricingAlignment: value })}
+											/>
+
+											<FB_TypographyControl
+												label={__("Normal Price Typography", "frontis-blocks")}
+												fontFamily={normalPricingFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ normalPricingFontFamily: value })}
+
+												fontSize={normalPricingFontSize}
+												onChangeFontSize={(value) => setAttributes({ normalPricingFontSize: value })}
+
+												fontSizeUnits={normalPricingFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ normalPricingFontSizeUnits: value })}
+
+												fontWeight={normalPricingFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ normalPricingFontWeight: value })}
+
+												fontStyle={normalPricingFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ normalPricingFontStyle: value })}
+
+												textTransform={normalPricingTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ normalPricingTextTransform: value })}
+
+												textDecoration={normalPricingTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ normalPricingTextDecoration: value })}
+
+												letterSpacing={normalPricingLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ normalPricingLetterSpacing: value })}
+
+												letterSpacingUnits={normalPricingLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ normalPricingLetterSpacingUnits: value })}
+
+												lineHeight={normalPricingLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ normalPricingLineHeight: value })}
+
+												lineHeightUnits={normalPricingLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ normalPricingLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Price Color", "frontis-blocks")}
+												globalSwitcher={normalPricingColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ normalPricingColorSwitcher: value })}
+											/>
+
+											{normalPricingColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={normalPricingColor}
+													setGlobalColor={(value) => setAttributes({ normalPricingColor: value })}
+												/>
+											)}
+
+											{normalPricingColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={normalPricingHoverColor}
+													setGlobalColor={(value) => setAttributes({ normalPricingHoverColor: value })}
+												/>
+											)}
+
+											<FB_TypographyControl
+												label={__("Sale Price Typography", "frontis-blocks")}
+												fontFamily={salePricingFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ salePricingFontFamily: value })}
+
+												fontSize={salePricingFontSize}
+												onChangeFontSize={(value) => setAttributes({ salePricingFontSize: value })}
+
+												fontSizeUnits={salePricingFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ salePricingFontSizeUnits: value })}
+
+												fontWeight={salePricingFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ salePricingFontWeight: value })}
+
+												fontStyle={salePricingFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ salePricingFontStyle: value })}
+
+												textTransform={salePricingTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ salePricingTextTransform: value })}
+
+												textDecoration={salePricingTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ salePricingTextDecoration: value })}
+
+												letterSpacing={salePricingLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ salePricingLetterSpacing: value })}
+
+												letterSpacingUnits={salePricingLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ salePricingLetterSpacingUnits: value })}
+
+												lineHeight={salePricingLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ salePricingLineHeight: value })}
+
+												lineHeightUnits={salePricingLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ salePricingLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Sale Price Color", "frontis-blocks")}
+												globalSwitcher={salePricingColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ salePricingColorSwitcher: value })}
+											/>
+
+											{salePricingColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={normalPricingColor}
+													setGlobalColor={(value) => setAttributes({ normalPricingColor: value })}
+												/>
+											)}
+
+											{salePricingColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={salePricingHoverColor}
+													setGlobalColor={(value) => setAttributes({ salePricingHoverColor: value })}
+												/>
+											)}
+
+											<FB_TypographyControl
+												label={__("Currency Typography", "frontis-blocks")}
+												fontFamily={priceCurrencyFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ priceCurrencyFontFamily: value })}
+
+												fontSize={priceCurrencyFontSize}
+												onChangeFontSize={(value) => setAttributes({ priceCurrencyFontSize: value })}
+
+												fontSizeUnits={priceCurrencyFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ priceCurrencyFontSizeUnits: value })}
+
+												fontWeight={priceCurrencyFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ priceCurrencyFontWeight: value })}
+
+												fontStyle={priceCurrencyFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ priceCurrencyFontStyle: value })}
+
+												textTransform={priceCurrencyTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ priceCurrencyTextTransform: value })}
+
+												textDecoration={priceCurrencyTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ priceCurrencyTextDecoration: value })}
+
+												letterSpacing={priceCurrencyLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ priceCurrencyLetterSpacing: value })}
+
+												letterSpacingUnits={priceCurrencyLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ priceCurrencyLetterSpacingUnits: value })}
+
+												lineHeight={priceCurrencyLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ priceCurrencyLineHeight: value })}
+
+												lineHeightUnits={priceCurrencyLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ priceCurrencyLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Currency Color", "frontis-blocks")}
+												globalSwitcher={priceCurrencyColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceCurrencyColorSwitcher: value })}
+											/>
+
+											{priceCurrencyColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceCurrencyColor}
+													setGlobalColor={(value) => setAttributes({ priceCurrencyColor: value })}
+												/>
+											)}
+
+											{priceCurrencyColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceCurrencyHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceCurrencyHoverColor: value })}
+												/>
+											)}
+
+											<FB_TypographyControl
+												label={__("Period Typography", "frontis-blocks")}
+												fontFamily={pricePeriodFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ pricePeriodFontFamily: value })}
+
+												fontSize={pricePeriodFontSize}
+												onChangeFontSize={(value) => setAttributes({ pricePeriodFontSize: value })}
+
+												fontSizeUnits={pricePeriodFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ pricePeriodFontSizeUnits: value })}
+
+												fontWeight={pricePeriodFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ pricePeriodFontWeight: value })}
+
+												fontStyle={pricePeriodFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ pricePeriodFontStyle: value })}
+
+												textTransform={pricePeriodTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ pricePeriodTextTransform: value })}
+
+												textDecoration={pricePeriodTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricePeriodTextDecoration: value })}
+
+												letterSpacing={pricePeriodLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ pricePeriodLetterSpacing: value })}
+
+												letterSpacingUnits={pricePeriodLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ pricePeriodLetterSpacingUnits: value })}
+
+												lineHeight={pricePeriodLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ pricePeriodLineHeight: value })}
+
+												lineHeightUnits={pricePeriodLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ pricePeriodLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Period Color", "frontis-blocks")}
+												globalSwitcher={pricePeriodColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ pricePeriodColorSwitcher: value })}
+											/>
+
+											{pricePeriodColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={pricePeriodColor}
+													setGlobalColor={(value) => setAttributes({ pricePeriodColor: value })}
+												/>
+											)}
+
+											{pricePeriodColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={pricePeriodHoverColor}
+													setGlobalColor={(value) => setAttributes({ pricePeriodHoverColor: value })}
+												/>
+											)}
+											<FB_Spacing 
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlePricePaddingUnitsHandler}
+												spacingUnits={pricePaddingUnits}
+												spacingDesktop={priceDesktopPadding}
+												spacingTablet={priceTabletPadding}
+												spacingMobile={priceMobilePadding}
+												handleSpacingUnitHandler={handlePricePaddingUnitChange}
+												spacingCombineBtn={pricePaddingLink}
+												spacingCombineBtnHandler={handlePricePaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+
+										<PanelBody
+											title={__("Price After Text", "frontis-blocks")}
+											initialOpen={false}
+										>
+
+											<FB_TypographyControl
+												fontFamily={priceAfterTextFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ priceAfterTextFontFamily: value })}
+
+												fontSize={priceAfterTextFontSize}
+												onChangeFontSize={(value) => setAttributes({ priceAfterTextFontSize: value })}
+
+												fontSizeUnits={priceAfterTextFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ priceAfterTextFontSizeUnits: value })}
+
+												fontWeight={priceAfterTextFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ priceAfterTextFontWeight: value })}
+
+												fontStyle={priceAfterTextFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ priceAfterTextFontStyle: value })}
+
+												textTransform={priceAfterTextTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ priceAfterTextTextTransform: value })}
+
+												textDecoration={priceAfterTextTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ pricingTitleTextDecoration: value })}
+
+												letterSpacing={priceAfterTextLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ priceAfterTextLetterSpacing: value })}
+
+												letterSpacingUnits={priceAfterTextLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ priceAfterTextLetterSpacingUnits: value })}
+
+												lineHeight={priceAfterTextLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ priceAfterTextLineHeight: value })}
+
+												lineHeightUnits={priceAfterTextLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ priceAfterTextLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Text Color", "frontis-blocks")}
+												globalSwitcher={priceAfterTextColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceAfterTextColorSwitcher: value })}
+											/>
+
+											{priceAfterTextColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceAfterTextColor}
+													setGlobalColor={(value) => setAttributes({ priceAfterTextColor: value })}
+												/>
+											)}
+
+											{priceAfterTextColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceAfterTextHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceAfterTextHoverColor: value })}
+												/>
+											)}
+
+
+											<FB_BackgroundColorControl
+                                                label={__("BackgroundColor", "frontis-blocks")}
+                                                bgColorSwitcher={priceAfterTextBgColorSwitcher}
+                                                setBgColorSwitcher={(value) => setAttributes({ priceAfterTextBgColorSwitcher: value })}
+                                                
+                                                normalBackgroundType={priceAfterTextNormalBackgroundType}
+                                                setNormalBackgroundType={(value) => setAttributes({ priceAfterTextNormalBackgroundType: value })}
+                                                normalClassicColor={priceAfterTextNormalClassicColor}
+                                                setNormalClassicColor={(value) => setAttributes({ priceAfterTextNormalClassicColor: value })}
+                                                normalGradientColor={priceAfterTextNormalGradientColor}
+                                                setNormalGradientColor={(value) => setAttributes({ priceAfterTextNormalGradientColor: value })}
+                                                normalCustomGradientSwitcher={priceAfterTextNormalCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ priceAfterTextNormalCustomGradientSwitcher: value })}
+                                                normalCustomGradientInputValue={priceAfterTextNormalCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => setAttributes({ priceAfterTextNormalCustomGradientInputValue: value })}
+                                                
+                                                hoverBackgroundType={priceAfterTextHoverBackgroundType}
+                                                setHoverBackgroundType={(value) => setAttributes({ priceAfterTextHoverBackgroundType: value })}
+                                                hoverClassicColor={priceAfterTextHoverClassicColor}
+                                                setHoverClassicColor={(value) => setAttributes({ priceAfterTextHoverClassicColor: value })}
+                                                hoverGradientColor={priceAfterTextHoverGradientColor} 
+                                                setHoverGradientColor={(value) => setAttributes({ priceAfterTextHoverGradientColor: value })}
+                                                hoverCustomGradientSwitcher={priceAfterTextHoverCustomGradientSwitcher}
+                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ priceAfterTextHoverCustomGradientSwitcher: value })}
+                                                hoverCustomGradientInputValue={priceAfterTextHoverCustomGradientInputValue}
+                                                setHoverCustomGradientInputValue={(value) => setAttributes({ priceAfterTextHoverCustomGradientInputValue: value })}
+                                                isBackgroundImage={false}
+
+                                            />
+
+											<FB_Spacing 
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleAfterTextPaddingUnitsHandler}
+												spacingUnits={priceAfterTextPaddingUnits}
+												spacingDesktop={priceAfterTextPaddingDesktop} 
+												spacingTablet={priceAfterTextPaddingTablet} 
+												spacingMobile={priceAfterTextPaddingMobile}
+												handleSpacingUnitHandler={handleAfterTextPaddingUnitChange}
+												spacingCombineBtn={priceAfterTextPaddingLink}
+												spacingCombineBtnHandler={handleAfterTextPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<SelectControl
+												label={__("Border", "frontis-blocks")}
+												value={priceAfterTextBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ priceAfterTextBorder: value })}
+											/>
+
+
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={priceAfterTextBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceAfterTextBorderColorSwitcher: value })}
+											/>
+
+											{priceAfterTextBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceAfterTextBorderColor}
+													setGlobalColor={(value) => setAttributes({ priceAfterTextBorderColor: value })}
+												/>
+											)}
+
+											{priceAfterTextBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceAfterTextBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceAfterTextBorderHoverColor: value })}
+												/>
+											)}
+											<FB_Spacing 
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleAfterTextBorderUnitsHandler}
+												spacingUnits={priceAfterTextBorderUnits}
+												spacingDesktop={priceAfterTextBorderDesktop}
+												spacingTablet={priceAfterTextBorderTablet}
+												spacingMobile={priceAfterTextBorderMobile}
+												handleSpacingUnitHandler={handleAfterTextBorderUnitChange}
+												spacingCombineBtn={priceAfterTextBorderLink}
+												spacingCombineBtnHandler={handleAfterTextBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<FB_Spacing 
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleAfterTextBorderRadiusUnitsHandler}
+												spacingUnits={priceAfterTextBorderRadiusUnits}
+												spacingDesktop={priceAfterTextBorderRadiusDesktop}
+												spacingTablet={priceAfterTextBorderRadiusTablet}
+												spacingMobile={priceAfterTextBorderRadiusMobile}
+												handleSpacingUnitHandler={handleAfterTextBorderRadiusUnitChange}
+												spacingCombineBtn={priceAfterTextBorderRadiusLink}
+												spacingCombineBtnHandler={handleAfterTextBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											
+										</PanelBody>	
+
 										<PanelBody
 											title={__("Feature", "frontis-blocks")}
 											initialOpen={false}
@@ -2561,15 +4213,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													</ButtonGroup>
 											</BaseControl>
 
-											<FB_Color
+											<FB_SwitcherControl
 												label={__("Feature Icon Color", "frontis-blocks")}
-												globalColorSwitcher={priceFeatureIconColorSwitcher}
-												globalColor={priceFeatureIconColor}
-												globalHoverColor={priceFeatureIconHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceFeatureIconColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceFeatureIconColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceFeatureIconHoverColor: value })}
+												globalSwitcher={priceFeatureIconColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceFeatureIconColorSwitcher: value })}
 											/>
+
+											{priceFeatureIconColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceFeatureIconColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureIconColor: value })}
+												/>
+											)}
+
+											{priceFeatureIconColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceFeatureIconHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureIconHoverColor: value })}
+												/>
+											)}
 
 											<FB_Range
 												min={0}
@@ -2583,16 +4247,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												rangeStep={1}
 												resetFallbackValue={""}
-											/>
-
-											<FB_Color
-												label={__("Feature Title Color", "frontis-blocks")}
-												globalColorSwitcher={pricingfeatureTitleColorSwitcher}
-												globalColor={pricingfeatureTitleColor}
-												globalHoverColor={pricingfeatureTitleHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricingfeatureTitleColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricingfeatureTitleColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricingfeatureTitleHoverColor: value })}
 											/>
 
 											<FB_TypographyControl
@@ -2632,6 +4286,123 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												deviceType={deviceType}
 												setAttributes={setAttributes}
 											/>
+
+											<FB_SwitcherControl
+												label={__("Feature Title Color", "frontis-blocks")}
+												globalSwitcher={pricingfeatureTitleColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ pricingfeatureTitleColorSwitcher: value })}
+											/>
+
+											{pricingfeatureTitleColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={pricingfeatureTitleColor}
+													setGlobalColor={(value) => setAttributes({ pricingfeatureTitleColor: value })}
+												/>
+											)}
+
+											{pricingfeatureTitleColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={pricingfeatureTitleHoverColor}
+													setGlobalColor={(value) => setAttributes({ pricingfeatureTitleHoverColor: value })}
+												/>
+											)}
+
+											<FB_Spacing 
+												label={__("Item Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleFeatureItemPaddingUnitsHandler}
+												spacingUnits={priceFeatureItemPaddingUnits}
+												spacingDesktop={priceFeatureItemDesktopPadding}
+												spacingTablet={priceFeatureItemTabPadding}
+												spacingMobile={priceFeatureItemMobilePadding}
+												handleSpacingUnitHandler={handleFeatureItemPaddingUnitChange}
+												spacingCombineBtn={priceFeatureItemPaddingLink}
+												spacingCombineBtnHandler={handleFeatureItemPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+
+											<FB_Spacing 
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleFeaturePaddingUnitsHandler}
+												spacingUnits={priceFeaturePaddingUnits}
+												spacingDesktop={priceFeatureDesktopPadding}
+												spacingTablet={priceFeatureTabPadding}
+												spacingMobile={priceFeatureMobilePadding}
+												handleSpacingUnitHandler={handleFeaturePaddingUnitChange}
+												spacingCombineBtn={priceFeaturePaddingLink}
+												spacingCombineBtnHandler={handleFeaturePaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+										</PanelBody>
+
+										<PanelBody
+											title={__("Feature After Text", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<FB_TypographyControl
+												fontFamily={priceFeatureAfterTextFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ priceFeatureAfterTextFontFamily: value })}
+
+												fontSize={priceFeatureAfterTextFontSize}
+												onChangeFontSize={(value) => setAttributes({ priceFeatureAfterTextFontSize: value })}
+
+												fontSizeUnits={priceFeatureAfterTextFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ priceFeatureAfterTextFontSizeUnits: value })}
+
+												fontWeight={priceFeatureAfterTextFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ priceFeatureAfterTextFontWeight: value })}
+
+												fontStyle={priceFeatureAfterTextFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ priceFeatureAfterTextFontStyle: value })}
+
+												textTransform={priceFeatureAfterTextTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ priceFeatureAfterTextTextTransform: value })}
+
+												textDecoration={priceFeatureAfterTextTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ priceFeatureAfterTextTextDecoration: value })}
+
+												letterSpacing={priceFeatureAfterTextLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ priceFeatureAfterTextLetterSpacing: value })}
+
+												letterSpacingUnits={priceFeatureAfterTextLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ priceFeatureAfterTextLetterSpacingUnits: value })}
+
+												lineHeight={priceFeatureAfterTextLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ priceFeatureAfterTextLineHeight: value })}
+
+												lineHeightUnits={priceFeatureAfterTextLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ priceFeatureAfterTextLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Text Color", "frontis-blocks")} 
+												globalSwitcher={priceFeatureAfterTextColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceFeatureAfterTextColorSwitcher: value })}
+											/>
+
+											{priceFeatureAfterTextColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceFeatureAfterTextColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextColor: value })}
+												/>
+											)}
+
+											{priceFeatureAfterTextColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceFeatureAfterTextHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextHoverColor: value })}
+												/>
+											)}
 
 										</PanelBody>
 
@@ -2711,121 +4482,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 
-											
-											<BaseControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                className="fb-setting-color-panel-wrapper"
-                                            >
-                                                <ButtonGroup className="fb-setting-color-panel-btn">
-                                                    {NORMAL_HOVER.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ priceButtonColorSwitcher: item.value })}
-                                                            className={`fb-setting-color-panel-btn-switchr ${priceButtonColorSwitcher === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
 
-                                            {priceButtonColorSwitcher === 'normal' && (
-                                                <BaseControl 
-                                                    label={__("Nomal Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-normal-color">
-                                                                        <ColorPicker
-                                                                            color={priceButtonColor}
-                                                                            onChange={(value) => setAttributes({ priceButtonColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={priceButtonColor}
-                                                                            onChange={(value) => setAttributes({ priceButtonColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-                                            )}
+											<FB_SwitcherControl
+												label={__("Text Color", "frontis-blocks")}
+												globalSwitcher={priceButtonColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceButtonColorSwitcher: value })}
+											/>
 
-                                            {priceButtonColorSwitcher === 'hover' && (
-                                                <BaseControl 
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    className="fb-setting-color-setting-wrapper"
-                                                >
-                                                    <Dropdown
-                                                        className="fb-setting-color-setting-icon-dropdown"
-                                                        contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                        popoverProps={{ placement: 'bottom-start' }}
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            <Button
-                                                                variant="primary"
-                                                                onClick={onToggle}
-                                                                aria-expanded={isOpen}
-                                                                className="fb-setting-color-setting-icon-btn"
-                                                            >
-                                                                <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                            </Button>
-                                                        )}
-                                                        renderContent={() => (
-                                                            <div className="fb-setting-color-setting-icon-popup">
-                                                                <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                    <div className="fb-setting-hover-color">
-                                                                        <ColorPicker
-                                                                            color={priceButtonHoverColor}
-                                                                            onChange={(value) => setAttributes({ priceButtonHoverColor: value })}
-                                                                            enableAlpha={true}
-                                                                        />
-                                                                        <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                        <ColorPalette
-                                                                            colors={[
-                                                                                { color: '#F72585' },
-                                                                                { color: '#7209B7' },
-                                                                                { color: '#3A0CA3' },
-                                                                                { color: '#4361EE' },
-                                                                                { color: '#4CC9F0' },
-                                                                            ]}
-                                                                            disableCustomColors={true}
-                                                                            value={priceButtonHoverColor}
-                                                                            onChange={(value) => setAttributes({ priceButtonHoverColor: value })}
-                                                                        />
-                                                                    </div>
-                                                                </BaseControl>
-                                                            </div>
-                                                        )}
-                                                    />
-                                                </BaseControl>
-												)}
+											{priceButtonColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceButtonColor}
+													setGlobalColor={(value) => setAttributes({ priceButtonColor: value })}
+												/>
+											)}
+
+											{priceButtonColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceButtonHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceButtonHoverColor: value })}
+												/>
+											)}
 											
 											<BaseControl
 												label={__("Background Color", "frontis-blocks")}
@@ -2975,119 +4653,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													options={BORDER_STYLES}
 													onChange={(value) => setAttributes({ priceButtonBorder: value })}
 											/>
-											<BaseControl
+
+
+											<FB_SwitcherControl
 												label={__("Border Color", "frontis-blocks")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ priceButtonBorderColorSwitcher: item.value })}
-															className={`fb-setting-color-panel-btn-switchr ${priceButtonBorderColorSwitcher === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
+												globalSwitcher={priceButtonBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceButtonBorderColorSwitcher: value })}
+											/>
 
 											{priceButtonBorderColorSwitcher === 'normal' && (
-												<BaseControl 
+												<FB_ColorControl
 													label={__("Nomal Color", "frontis-blocks")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={priceButtonBorderColor}
-																			onChange={(value) => setAttributes({ priceButtonBorderColor: value })}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: '#F72585' },
-																				{ color: '#7209B7' },
-																				{ color: '#3A0CA3' },
-																				{ color: '#4361EE' },
-																				{ color: '#4CC9F0' },
-																			]}
-																			disableCustomColors={true}
-																			value={priceButtonBorderColor}
-																			onChange={(value) => setAttributes({ priceButtonBorderColor: value })}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
+													globalColor={priceButtonBorderColor}
+													setGlobalColor={(value) => setAttributes({ priceButtonBorderColor: value })}
+												/>
 											)}
 
 											{priceButtonBorderColorSwitcher === 'hover' && (
-												<BaseControl 
+												<FB_ColorControl
 													label={__("Hover Color", "frontis-blocks")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={priceButtonBorderHoverColor}
-																			onChange={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: '#F72585' },
-																				{ color: '#7209B7' },
-																				{ color: '#3A0CA3' },
-																				{ color: '#4361EE' },
-																				{ color: '#4CC9F0' },
-																			]}
-																			disableCustomColors={true}
-																			value={priceButtonBorderHoverColor}
-																			onChange={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
+													globalColor={priceButtonBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
+												/>
 											)}
 
 											<FB_Spacing 
@@ -3117,119 +4704,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingCombineBtnHandler={handlePriceButtonBorderRadiusCombineBtn}
 												setAttributes={setAttributes}
 											/>
-											<BaseControl
+
+											<FB_SwitcherControl
 												label={__("Icon Color", "frontis-blocks")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ priceButtonIconColorSwitcher: item.value })}
-															className={`fb-setting-color-panel-btn-switchr ${priceButtonIconColorSwitcher === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
+												globalSwitcher={priceButtonIconColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceButtonIconColorSwitcher: value })}
+											/>
 
 											{priceButtonIconColorSwitcher === 'normal' && (
-												<BaseControl 
+												<FB_ColorControl
 													label={__("Nomal Color", "frontis-blocks")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={priceButtonIconColor}
-																			onChange={(value) => setAttributes({ priceButtonIconColor: value })}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: '#F72585' },
-																				{ color: '#7209B7' },
-																				{ color: '#3A0CA3' },
-																				{ color: '#4361EE' },
-																				{ color: '#4CC9F0' },
-																			]}
-																			disableCustomColors={true}
-																			value={priceButtonIconColor}
-																			onChange={(value) => setAttributes({ priceButtonIconColor: value })}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
+													globalColor={priceButtonIconColor}
+													setGlobalColor={(value) => setAttributes({ priceButtonIconColor: value })}
+												/>
 											)}
 
 											{priceButtonIconColorSwitcher === 'hover' && (
-												<BaseControl 
+												<FB_ColorControl
 													label={__("Hover Color", "frontis-blocks")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={priceButtonIconHoverColor}
-																			onChange={(value) => setAttributes({ priceButtonIconHoverColor: value })}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: '#F72585' },
-																				{ color: '#7209B7' },
-																				{ color: '#3A0CA3' },
-																				{ color: '#4361EE' },
-																				{ color: '#4CC9F0' },
-																			]}
-																			disableCustomColors={true}
-																			value={priceButtonIconHoverColor}
-																			onChange={(value) => setAttributes({ priceButtonIconHoverColor: value })}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
+													globalColor={priceButtonIconHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceButtonIconHoverColor: value })}
+												/>
 											)}
 
 											<FB_Range
@@ -3250,15 +4745,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Ribbon", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<FB_Color
+
+                                           <FB_SwitcherControl
 												label={__("Color", "frontis-blocks")}
-												globalColorSwitcher={priceRibbonColorSwitcher}
-												globalColor={priceRibbonColor}
-												globalHoverColor={priceRibbonHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceRibbonColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceRibbonColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceRibbonHoverColor: value })}
+												globalSwitcher={priceRibbonColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceRibbonColorSwitcher: value })}
 											/>
+
+											{priceButtonIconColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceRibbonColor}
+													setGlobalColor={(value) => setAttributes({ priceRibbonColor: value })}
+												/>
+											)}
+
+											{priceButtonIconColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceRibbonHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceRibbonHoverColor: value })}
+												/>
+											)}
+
 											<FB_Color
 												label={__("Background Color", "frontis-blocks")}
 												globalColorSwitcher={priceRibbonBgColorSwitcher}
@@ -3418,15 +4927,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															onChange={(value) => setAttributes({ priceGlobalBorder: value })}
 													/>
 
-													<FB_Color
+
+
+													<FB_SwitcherControl
 														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={priceGlobalBorderColorSwitcher}
-														globalColor={priceGlobalBorderColor}
-														globalHoverColor={priceGlobalBorderHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ priceGlobalBorderColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ priceGlobalBorderColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ priceGlobalBorderHoverColor: value })}
+														globalSwitcher={priceGlobalBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ priceGlobalBorderColorSwitcher: value })}
 													/>
+
+													{priceGlobalBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Nomal Color", "frontis-blocks")}
+															globalColor={priceGlobalBorderColor}
+															setGlobalColor={(value) => setAttributes({ priceGlobalBorderColor: value })}
+														/>
+													)}
+
+													{priceGlobalBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={priceGlobalBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ priceGlobalBorderHoverColor: value })}
+														/>
+													)}
 
 													<FB_Spacing 
 														label={__("Border", "frontis-blocks")}

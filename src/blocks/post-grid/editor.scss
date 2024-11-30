@@ -1,9 +1,10 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
 
-.wp-block-frontis-blocks-post-grid {
-	border: 1px dotted #f00;
+.fb-inspector-control {
+    .fb-select2-control {
+        input {
+            &:focus {
+               box-shadow: none;
+            }
+        }
+    }
 }

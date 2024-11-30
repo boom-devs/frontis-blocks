@@ -62,6 +62,140 @@ class Helper
         return in_array($pagenow, ['post.php', 'post-new.php', 'site-editor.php', 'widgets.php']);
     }
 
+	/**
+	 * Get size information for all currently-registered image sizes.
+	 *
+	 * @global $_wp_additional_image_sizes
+	 * @uses   get_intermediate_image_sizes()
+	 * @link   https://codex.wordpress.org/Function_Reference/get_intermediate_image_sizes
+	 * @since  1.9.0
+	 * @return array $sizes Data for all currently-registered image sizes.
+	 */
+	public static function get_image_sizes() {
+
+		global $_wp_additional_image_sizes;
+
+		$sizes       = get_intermediate_image_sizes();
+		$image_sizes = array();
+
+		$image_sizes[] = array(
+			'value' => 'full',
+			'label' => esc_html__( 'Full', 'frontis-blocks' ),
+		);
+
+		foreach ( $sizes as $size ) {
+			if ( in_array( $size, array( 'thumbnail', 'medium', 'medium_large', 'large' ), true ) ) {
+				$image_sizes[] = array(
+					'value' => $size,
+					'label' => ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
+				);
+			} else {
+				$image_sizes[] = array(
+					'value' => $size,
+					'label' => sprintf(
+						'%1$s (%2$sx%3$s)',
+						ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
+						$_wp_additional_image_sizes[ $size ]['width'],
+						$_wp_additional_image_sizes[ $size ]['height']
+					),
+				);
+			}
+		}
+
+		$image_sizes = apply_filters( 'fb_post_featured_image_sizes', $image_sizes );
+
+		return $image_sizes;
+	}
+
+	/**
+	 * Get all taxonomies.
+	 *
+	 * @since 1.11.0
+	 * @access public
+	 */
+	public static function get_related_taxonomy() {
+
+		$post_types = self::get_post_types();
+
+		$return_array = array();
+
+		foreach ( $post_types as $key => $value ) {
+			$post_type = $value['value'];
+
+			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
+			$data       = array();
+
+			foreach ( $taxonomies as $tax_slug => $tax ) {
+				if ( ! $tax->public || ! $tax->show_ui || ! $tax->show_in_rest ) {
+					continue;
+				}
+
+				$data[ $tax_slug ] = $tax;
+
+				$terms = get_terms( $tax_slug );
+
+				$related_tax = array();
+
+				if ( ! empty( $terms ) ) {
+					foreach ( $terms as $t_index => $t_obj ) {
+						$related_tax[] = array(
+							'id'    => $t_obj->term_id,
+							'name'  => $t_obj->name,
+							'child' => get_term_children( $t_obj->term_id, $tax_slug ),
+						);
+					}
+					$return_array[ $post_type ]['terms'][ $tax_slug ] = $related_tax;
+				}
+			}
+
+			$return_array[ $post_type ]['taxonomy'] = $data;
+
+		}
+
+		return apply_filters( 'fb_post_loop_taxonomies', $return_array );
+	}
+
+    public static function get_all_authors_with_posts() {
+        $args = array(
+            'has_published_posts' => true,
+            'fields' => 'all_with_meta',
+        );
+        return get_users($args);
+    }
+
+    public static function get_page_name() {
+        global $wp_query;
+        if($wp_query->queried_object) {
+        	return $wp_query->queried_object->post_name;
+        }
+    }
+
+    public static function get_post_types() {
+        $post_types = get_post_types(
+            array(
+                'public'       => true,
+                'show_in_rest' => true,
+            ),
+            'objects'
+        );
+
+        $options = array();
+
+        foreach ( $post_types as $post_type ) {
+
+            if ( 'attachment' === $post_type->name ) {
+                continue;
+            }
+
+            $options[] = array(
+                'value' => $post_type->name,
+                'label' => $post_type->label,
+            );
+        }
+
+        return apply_filters( 'fb_loop_post_types', $options );
+    }
+
     /**
      * Sanitize HTML classes
      *
@@ -166,4 +300,32 @@ class Helper
 
         return false;
     }
+
+	public static function load_google_font( $fonts )
+	{
+		if ( is_array( $fonts ) && ! empty( $fonts ) ) {
+			$gfonts      = '';
+			$gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
+			foreach ( $fonts as $font ) {
+				$gfonts .= str_replace( ' ', '+', trim( $font ) ) . $gfonts_attr . '|';
+			}
+
+			if ( ! empty( $gfonts ) ) {
+				$query_args = [
+					'family' => $gfonts
+				];
+				wp_register_style(
+					'frontis-blocks-fonts',
+					add_query_arg( $query_args, '//fonts.googleapis.com/css' ),
+					[  ],
+					FB_VERSION
+				);
+
+				wp_enqueue_style( 'frontis-blocks-fonts' );
+			}
+
+			// Reset.
+			$gfonts = '';
+		}
+	}
 }

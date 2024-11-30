@@ -1,4 +1,4 @@
-const defaultIcons = [
+const fb_icons_name = [
 	[
 		"0",
 		"1",
@@ -2309,5 +2309,4 @@ const defaultIcons = [
 		"zhihu"
 	]
 ];
-
-export default defaultIcons;
+export default fb_icons_name;

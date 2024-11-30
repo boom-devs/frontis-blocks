@@ -4,7 +4,9 @@ import {
     Dashboard,
     Blocks,
     Settings,
-    Integration
+    Integration,
+    Pricing,
+	CustomIcons
 } from "./components";
 
 import {
@@ -12,9 +14,10 @@ import {
     OptionsIcon,
     BlockIcon,
     IntegrationsIcon,
+    PricingIcon
 } from './icons'
 
-const TabMenus = applyFilters('frontis_blocks_settings_menu_list', [
+const TabMenus = applyFilters('frontisblocks/admin/tabs', [
     {
         id: 'general',
         icon: <HomeIcon />,
@@ -27,18 +30,32 @@ const TabMenus = applyFilters('frontis_blocks_settings_menu_list', [
         label: __("Blocks", "frontis-blocks"),
         comp: <Blocks />
     },
-    {
-        id: 'options',
-        icon: <OptionsIcon />,
-        label: __("Settings", "frontis-blocks"),
-        comp: <Settings />
-    },
-    {
-        id: 'integrations',
-        icon: <IntegrationsIcon />,
-        label: __("Integrations", "frontis-blocks"),
-        comp: <Integration />
-    },
+    // {
+    //     id: 'settings',
+    //     icon: <OptionsIcon />,
+    //     label: __("Settings", "frontis-blocks"),
+    //     comp: <Settings />
+    // },
+    // {
+    //     id: 'integrations',
+    //     icon: <IntegrationsIcon />,
+    //     label: __("Integrations", "frontis-blocks"),
+    //     comp: <Integration />
+    // },
+	// {
+	// 	id: 'custom_icons',
+	// 	icon: <IntegrationsIcon />,
+	// 	label: __("Custom icons", "frontis-blocks"),
+	// 	comp: <CustomIcons />
+	// }
 ]);
-
+// Add pricing tab if not pro
+// if (window.frontisBlocksAdmin.isProActive === 'false') {
+//     TabMenus.push({
+//       id: 'pricing',
+//       icon: <PricingIcon />,
+//       label: __("Pricing", "frontis-blocks"),
+//       comp: <Pricing />
+//     });
+// }
 export default TabMenus;

@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Advanced Button",
 	"category": "frontis-blocks",
-	"icon": "button",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
     "supports": {
@@ -15,6 +14,6 @@
     },
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css"
 }

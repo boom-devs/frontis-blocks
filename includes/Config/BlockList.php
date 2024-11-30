@@ -4,128 +4,183 @@ namespace FrontisBlocks\Config;
 
 use FrontisBlocks\Traits\Singleton;
 
-class BlockList {
-    use Singleton;
+class BlockList
+{
+	use Singleton;
 
-    private $blocks = [];
+	private $blocks = [];
 
-    public function __construct() {
-        $this->init_blocks();
-    }
+	public function __construct()
+	{
+		$this->init_blocks();
+	}
 
     private function init_blocks() {
         $this->blocks = [
+            'accordion' => [
+                'slug'      => 'accordion',
+                'title'     => 'Accordion',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'freemium',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/accordion',
+                'demo'      => 'https://wpmessiah.com/demo/accordion',
+            ],
+            'accordion-item' => [
+                'slug'      => 'accordion-item',
+                'title'     => 'Accordion Item',
+                'package'   => 'free',
+                'category'  => 'post',
+                'badge'     => 'freemium',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/accordion-item',
+                'demo'      => 'https://wpmessiah.com/demo/accordion-item',
+            ],
             'advanced-heading' => [
                 'slug'      => 'advanced-heading',
                 'title'     => 'Advanced Heading',
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'freemium',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-heading',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-heading',
             ],
-            // 'row' => [
-            //     'slug'      => 'row',
-            //     'title'     => 'Row',
-            //     'package'   => 'free',
-            //     'category'  => 'layout',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
-            // 'column' => [
-            //     'slug'      => 'column',
-            //     'title'     => 'Column',
-            //     'package'   => 'free',
-            //     'category'  => 'layout',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
-            // 'advanced-image' => [
-            //     'slug'      => 'advanced-image',
-            //     'title'     => 'Advanced Image',
-            //     'package'   => 'free',
-            //     'category'  => 'media',
-            //     'badge'     => 'freemium',
-            //     'status'    => 'active',
-            // ],
-            // 'image-gallery' => [
-            //     'slug'      => 'image-gallery',
-            //     'title'     => 'Image Gallery',
-            //     'package'   => 'free',
-            //     'category'  => 'media',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
-            // 'info-box' => [
-            //     'slug'      => 'info-box',
-            //     'title'     => 'Info Box',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
-            // 'icon-box' => [
-            //     'slug'      => 'icon-box',
-            //     'title'     => 'Icon Box',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'container' => [
+                'slug'      => 'container',
+                'title'     => 'Container',
+                'package'   => 'free',
+                'category'  => 'layout',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/container',
+                'demo'      => 'https://wpmessiah.com/demo/container',
+            ],
+            'advanced-image' => [
+                'slug'      => 'advanced-image',
+                'title'     => 'Advanced Image',
+                'package'   => 'free',
+                'category'  => 'media',
+                'badge'     => 'freemium',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-image',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-image',
+            ],
+            'image-gallery' => [
+                'slug'      => 'image-gallery',
+                'title'     => 'Image Gallery',
+                'package'   => 'free',
+                'category'  => 'media',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/image-gallery',
+                'demo'      => 'https://wpmessiah.com/demo/image-gallery',
+            ],
+            'info-box' => [
+                'slug'      => 'info-box',
+                'title'     => 'Info Box',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/info-box',
+                'demo'      => 'https://wpmessiah.com/demo/info-box',
+            ],
+            'icon-box' => [
+                'slug'      => 'icon-box',
+                'title'     => 'Icon Box',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/icon-box',
+                'demo'      => 'https://wpmessiah.com/demo/icon-box',
+            ],
             'advanced-button' => [
                 'slug'      => 'advanced-button',
                 'title'     => 'Advanced Button',
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-button',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-button',
             ],
-            // 'dual-button' => [
-            //     'slug'      => 'dual-button',
-            //     'title'     => 'Dual Button',
-            //     'package'   => 'free',
-            //     'category'  => 'general',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
-            // 'advanced-navigation' => [
-            //     'slug'      => 'advanced-navigation',
-            //     'title'     => 'Advanced Navigation',
-            //     'package'   => 'pro',
-            //     'category'  => 'navigation',
-            //     'badge'     => 'pro',
-            //     'status'    => 'active',
-            // ],
+            'dual-button' => [
+                'slug'      => 'dual-button',
+                'title'     => 'Dual Button',
+                'package'   => 'free',
+                'category'  => 'general',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/dual-button',
+                'demo'      => 'https://wpmessiah.com/demo/dual-button',
+            ],
+            'advanced-navigation' => [
+                'slug'      => 'advanced-navigation',
+                'title'     => 'Advanced Navigation',
+                'package'   => 'free',
+                'category'  => 'navigation',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-navigation',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-navigation',
+            ],
             'advanced-video' => [
                 'slug'      => 'advanced-video',
                 'title'     => 'Advanced Video',
                 'package'   => 'free',
-                'category'  => 'post',
-                'badge'     => 'free',
-                'status'    => 'active',
+                'category'  => 'media',
+                'badge'     => 'freemium',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/advanced-video',
+                'demo'      => 'https://wpmessiah.com/demo/advanced-video',
             ],
-            // 'countdown' => [
-            //     'slug'      => 'countdown',
-            //     'title'     => 'Countdown',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
-            // 'flip-box' => [
-            //     'slug'      => 'flip-box',
-            //     'title'     => 'Flip Box',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+             'countdown' => [
+                 'slug'      => 'countdown',
+                 'title'     => 'Countdown',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'true',
+                 'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                 'doc'       => 'https://wpmessiah.com/docs/countdown',
+                 'demo'      => 'https://wpmessiah.com/demo/countdown',
+             ],
+             'flip-box' => [
+                 'slug'      => 'flip-box',
+                 'title'     => 'Flip Box',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'true',
+                 'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                 'doc'       => 'https://wpmessiah.com/docs/flip-box',
+                 'demo'      => 'https://wpmessiah.com/demo/flip-box',
+             ],
             'features-list' => [
                 'slug'      => 'features-list',
                 'title'     => 'Features List',
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/features-list',
+                'demo'      => 'https://wpmessiah.com/demo/features-list',
             ],
             'testimonial' => [
                 'slug'      => 'testimonial',
@@ -133,55 +188,77 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'content',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/testimonial',
+                'demo'      => 'https://wpmessiah.com/demo/testimonial',
             ],
-            // 'counter-number' => [
-            //     'slug'      => 'counter-number',
-            //     'title'     => 'Counter Number',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'counter-number' => [
+                 'slug'      => 'counter-number',
+                 'title'     => 'Counter Number',
+                 'package'   => 'free',
+                 'category'  => 'content',
+                 'badge'     => 'free',
+                 'status'    => 'true',
+                 'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                 'doc'       => 'https://wpmessiah.com/docs/counter-number',
+                 'demo'      => 'https://wpmessiah.com/demo/counter-number',
+             ],
             'fluent-form' => [
                 'slug'      => 'fluent-form',
                 'title'     => 'Fluent Form',
                 'package'   => 'free',
                 'category'  => 'form',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/fluent-form',
+                'demo'      => 'https://wpmessiah.com/demo/fluent-form',
             ],
-            // 'contact-form-7' => [
-            //     'slug'      => 'contact-form-7',
-            //     'title'     => 'Contact Form 7',
-            //     'package'   => 'free',
-            //     'category'  => 'form',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
-            // 'call-to-action' => [
-            //     'slug'      => 'call-to-action',
-            //     'title'     => 'Call to Action',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'contact-form-7' => [
+                'slug'      => 'contact-form-7',
+                'title'     => 'Contact Form 7',
+                'package'   => 'free',
+                'category'  => 'form',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/contact-form-7',
+                'demo'      => 'https://wpmessiah.com/demo/contact-form-7',
+            ],
+            'call-to-action' => [
+                'slug'      => 'call-to-action',
+                'title'     => 'Call to Action',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/call-to-action',
+                'demo'      => 'https://wpmessiah.com/demo/call-to-action',
+            ],
             'pricing-table' => [
                 'slug'      => 'pricing-table',
                 'title'     => 'Pricing Table',
                 'package'   => 'free',
                 'category'  => 'content',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/pricing-table',
+                'demo'      => 'https://wpmessiah.com/demo/pricing-table',
             ],
+
             // 'woo-product-grid' => [
             //     'slug'      => 'woo-product-grid',
             //     'title'     => 'Woo Product Grid',
             //     'package'   => 'free',
             //     'category'  => 'woocommerce',
             //     'badge'     => 'free',
-            //     'status'    => 'active',
+            //     'status'    => 'true',
+            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+            //     'doc'       => 'https://wpmessiah.com/docs/woo-product-grid',
+            //     'demo'      => 'https://wpmessiah.com/demo/woo-product-grid',
             // ],
             'social-icons' => [
                 'slug'      => 'social-icons',
@@ -189,7 +266,10 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'social',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/social-icons',
+                'demo'      => 'https://wpmessiah.com/demo/social-icons',
             ],
             'post-grid' => [
                 'slug'      => 'post-grid',
@@ -197,34 +277,61 @@ class BlockList {
                 'package'   => 'free',
                 'category'  => 'post',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/post-grid',
+                'demo'      => 'https://wpmessiah.com/demo/post-grid',
             ],
-            // 'team-member' => [
-            //     'slug'      => 'team-member',
-            //     'title'     => 'Team Member',
-            //     'package'   => 'free',
-            //     'category'  => 'content',
-            //     'badge'     => 'free',
-            //     'status'    => 'active',
-            // ],
+            'team-member' => [
+                'slug'      => 'team-member',
+                'title'     => 'Team Member',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/team-member',
+                'demo'      => 'https://wpmessiah.com/demo/team-member',
+            ],
             'progressbar' => [
                 'slug'      => 'progressbar',
                 'title'     => 'Progressbar',
                 'package'   => 'free',
                 'category'  => 'content',
                 'badge'     => 'free',
-                'status'    => 'active',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/post-grid',
+                'demo'      => 'https://wpmessiah.com/demo/post-grid',
+            ],
+            // pro inactive block
+            'pro-test' => [
+                'slug'      => 'pro-test',
+                'title'     => 'Pro Test',
+                'package'   => 'pro',
+                'category'  => 'content',
+                'badge'     => 'pro',
+                'status'    => 'false',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
+                'doc'       => 'https://wpmessiah.com/docs/pro-test',
+                'demo'      => 'https://wpmessiah.com/demo/pro-test',
             ],
         ];
+		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
+	}
 
-        $this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
-    }
+	public function get_blocks()
+	{
+		return $this->blocks;
+	}
 
-    public function get_blocks() {
+	public function get_block($slug)
+	{
+		return isset($this->blocks[$slug]) ? $this->blocks[$slug] : null;
+	}
+
+    public function get_default_blocks() {
+        //now return init blocks
         return $this->blocks;
-    }
-
-    public function get_block($slug) {
-        return isset($this->blocks[$slug]) ? $this->blocks[$slug] : null;
     }
 }
