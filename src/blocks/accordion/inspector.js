@@ -15,8 +15,6 @@ import {
     RangeControl,
     SelectControl,
     Dashicon,
-    ColorPicker,
-    ColorPalette,
     TextControl,
     ToggleControl,
 } from '@wordpress/components';
