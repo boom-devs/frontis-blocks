@@ -13,6 +13,7 @@ export default function FB_RangeControl({
 	rangeTabletValue,
 	rangeMobileValue,
 	setAttributes,
+	isRangeUnit=true
 }) {
 	const UNIT_TYPES = [
 		{ label: 'px', value: 'px' },
@@ -55,21 +56,23 @@ export default function FB_RangeControl({
 					device={DeviceType}
 					deviceHandler={(newDevice) => setAttributes({ DeviceType: newDevice })}
 				/>
-				<div className="fb-setting-units-type">
-					<ButtonGroup className="fb-setting-units-type-wrap">
-						{UNIT_TYPES.map((item, key) => (
-							<Button
-								key={key}
-								onClick={() => setRangeUnit(item.value)}
-								className={`fb-setting-units-type-switcher ${
-									rangeUnit[DeviceType] === item.value ? 'active' : ''
-								}`}
-							>
-								{item.label}
-							</Button>
-						))}
-					</ButtonGroup>
-				</div>
+				{isRangeUnit && (
+					<div className="fb-setting-units-type">
+						<ButtonGroup className="fb-setting-units-type-wrap">
+							{UNIT_TYPES.map((item, key) => (
+								<Button
+									key={key}
+									onClick={() => setRangeUnit(item.value)}
+									className={`fb-setting-units-type-switcher ${
+										rangeUnit[DeviceType] === item.value ? 'active' : ''
+									}`}
+								>
+									{item.label}
+								</Button>
+							))}
+						</ButtonGroup>
+					</div>
+				)}
 			</div>
 			<div className="fb-setting-fontsize-rangecontrol">
 				<RangeControl
