@@ -92,6 +92,10 @@ const attributes = {
 	selectedImgIndex: {
 		type: "number",
 	},
+	showOverlay: {
+		type: "boolean",
+		default: false,
+	},
 	displayCaption: {
 		type: "boolean",
 		default: false,

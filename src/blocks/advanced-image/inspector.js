@@ -160,6 +160,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalBorderRadiusLink,
 		globalZIndex,
 		blockStyle,
+		showOverlay 
 	} = attributes;
 
 	useEffect(() => {
@@ -1293,17 +1294,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															label: __("Pattern", "frontis-blocks"),
 															value: "pattern",
 														},
-														{
-															label: __("Overlay", "frontis-blocks"),
-															value: "overlay-simple",
-														},
+														
 													]}
 													onChange={(newStyle) =>
 														setAttributes({ imageStyle: newStyle })
 													}
 													__nextHasNoMarginBottom
 												/>
-
+												<ToggleControl
+													__nextHasNoMarginBottom
+													label={__("Show Overlay", "frontis-block")}
+													checked={showOverlay}
+													onChange={(newValue) => {
+														setAttributes({ showOverlay: newValue });
+													}}
+												/>
 												{/* Display Caption */}
 												<ToggleControl
 													__nextHasNoMarginBottom
