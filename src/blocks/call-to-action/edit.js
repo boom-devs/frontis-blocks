@@ -44,11 +44,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnTwoIconPosition,
 		btnTwoIcon,
 		buttonTwoIconSwitcher,
-		btnTwoText
+		btnTwoText,
+		btnTwoLink,
+		btnOneTargetUrl,
+		btnTwoTargetUrl
 	} = attributes;
 
 	const blockProps = useBlockProps();
 
+	const handleBtnClick = (e) =>{
+		e.preventDefault();
+	}
+	const handleBtnTwoClick = (e) =>{
+		e.preventDefault();
+	}
 	return (
 		<>
 			<Inspector
@@ -104,20 +113,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													btnIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
+										<a 
+											className="fb-cta-button"
+											href={info_Button_Link}
+											onClick={handleBtnClick}
+											target={btnOneTargetUrl ? "_blank" : undefined}
+											rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+											>
 											<RichText
 												value={info_Button_Text}
-												tagName={"span"}
+												tagName="span"
 												onChange={(value) =>
 													setAttributes({info_Button_Text: value})
 												}
 												placeholder={__("CTA Button", "frontis-block")}
-												className="fb-cta-button"
+												
 											/>
+											</a>
 											{buttonIconSwitcher && (
 												<div className="fb-btn-icon-wrapper">
 													{renderSVG(btnIcon)}
 												</div>
 											)}
+										
 										</div>
 									</div>
 								)}
@@ -131,20 +149,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													btnTwoIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
+											<a 
+											className="fb-cta-button"
+											href={btnTwoLink}
+											onClick={handleBtnTwoClick}
+											target={btnTwoTargetUrl ? "_blank" : undefined}
+											rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+											>
 											<RichText
 												value={btnTwoText}
-												tagName={"span"}
+												tagName="span"
 												onChange={(value) =>
 													setAttributes({btnTwoText: value})
 												}
 												placeholder={__("CTA Button", "frontis-block")}
-												className="fb-cta-button"
+												
 											/>
+											</a>
 											{buttonTwoIconSwitcher && (
 												<div className="fb-btn-icon-wrapper">
 													{renderSVG(btnTwoIcon)}
 												</div>
 											)}
+											
 										</div>
 									</div>
 								)}
