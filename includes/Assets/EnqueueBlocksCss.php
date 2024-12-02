@@ -36,7 +36,7 @@ class EnqueueBlocksCss {
 		$upload_dir = wp_upload_dir();
 		$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
 		$css_new_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/' . $page_name . '/';
-		$combined_css_file_name = 'frontis-blocks.min.css';
+		$combined_css_file_name = 'frontis-blocks.css';
 		$combined_css_file_path = $css_new_dir . $combined_css_file_name;
 
 		// Use a cache identifier based on the modification times of all CSS files
@@ -68,8 +68,8 @@ class EnqueueBlocksCss {
 				$css_contents[] = $css_content;
 			}
 
-			$minified_css = self::minify_css(implode("\n", $css_contents));
-			file_put_contents($combined_css_file_path, $minified_css);
+			// $minified_css = self::minify_css(implode("\n", $css_contents));
+			file_put_contents($combined_css_file_path, $css_contents);
 
 			// Save the new cache key
 			file_put_contents($cache_key_file, $current_key);

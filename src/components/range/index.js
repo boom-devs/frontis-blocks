@@ -4,7 +4,21 @@ import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 
-const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandler, deviceType, units, setAttributes, rangeStep, resetFallbackValue, units_types_arr = null }) => {
+const FB_Range = ({ 
+	min,
+	max,
+	label,
+	rangeValue,
+	onChangeHandler,
+	rangeUnitHandler,
+	deviceType,
+	units,
+	setAttributes,
+	rangeStep,
+	resetFallbackValue,	
+	units_types_arr = null,
+	isRangeUnit=true,
+}) => {
 
 	let UNIT_TYPES = [
 		{ label: 'px', value: 'px' },
@@ -43,8 +57,9 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 						device={ deviceType }
 						deviceHandler={( newDevice ) => setAttributes({ deviceType: newDevice })}
 					/>
-					<div className="fb-setting-units-type">
-						<ButtonGroup className="fb-setting-units-type-wrap">
+					{isRangeUnit && (
+						<div className="fb-setting-units-type">
+							<ButtonGroup className="fb-setting-units-type-wrap">
 							{UNIT_TYPES.map((item, key) => (
 								<Button
 									key={key}
@@ -53,9 +68,10 @@ const FB_Range = ({ min, max, label, rangeValue, onChangeHandler, rangeUnitHandl
 								>
 									{item.label}
 								</Button>
-							))}
-						</ButtonGroup>
-					</div>
+								))}
+							</ButtonGroup>
+						</div>
+					)}
 				</div>
 				<RangeControl
 					__nextHasNoMarginBottom
