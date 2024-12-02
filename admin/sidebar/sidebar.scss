@@ -329,6 +329,13 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 .fb-global-typo-elements-wrap {
 	background: $neutral-color-50;
 
+	.components-navigator-back-button {
+		&:focus {
+			outline: none !important;
+			box-shadow: none !important;
+		}
+	}
+
 	.fb-custom-element {
 		border-bottom: 1px solid $neutral-color-100;
 		padding: 14px 12px;
@@ -340,6 +347,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			font-size: 14px;
 			font-weight: 400;
 			color: $neutral-color-700;
+
+			&:focus {
+				outline: none !important;
+			box-shadow: none !important;
+			}
 
 			.font_preview {
 				display: block;
