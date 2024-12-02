@@ -17,6 +17,11 @@ export const ICON_ALIGN = [
 	{ label: __("Icon"), value: "icon" },
 ];
 
+export const ICON_SWITCHER = [
+    { label: __('Icon', 'frontis-blocks'), value: 'icon' },
+    { label: __('Image', 'frontis-blocks'), value: 'image' },
+];
+
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
