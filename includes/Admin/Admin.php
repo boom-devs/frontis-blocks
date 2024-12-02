@@ -230,16 +230,38 @@ class Admin {
 				)
 			);
 
-// 			// Add author info.
-// 			register_rest_field(
-// 				$value['value'],
-// 				'fb_author_info',
-// 				array(
-// 					'get_callback'    => array( $this, 'get_post_author_info' ),
-// 					'update_callback' => null,
-// 					'schema'          => null,
-// 				)
-// 			);
+			// Add author info.
+			register_rest_field(
+				$value['value'],
+				'fb_author_info',
+				array(
+					'get_callback'    => array( $this, 'get_post_author_info' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
+
+			// Add category info.
+			register_rest_field(
+				$value['value'],
+				'fb_category_info',
+				array(
+					'get_callback'    => array( $this, 'get_post_category_info' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
+
+			// Add post_tag info.
+			register_rest_field(
+				$value['value'],
+				'fb_post_tag_info',
+				array(
+					'get_callback'    => array( $this, 'get_post_post_tag_info' ),
+					'update_callback' => null,
+					'schema'          => null,
+				)
+			);
 //
 // 			// Add comment info.
 // 			register_rest_field(
@@ -264,6 +286,97 @@ class Admin {
 			);
 		}
     }
+
+    public function get_post_author_info($object, $field_name, $request) {
+        $author_id = $object['author'];
+        
+        // Check if the author has published posts
+        $author_has_posts = count_user_posts($author_id, 'post', true) > 0;
+    
+        // If the author has no published posts, return null
+        if (!$author_has_posts) {
+            return null;
+        }
+        
+        // Get the latest published post of the author
+        $latest_post = get_posts(array(
+            'author' => $author_id,
+            'post_type' => 'post',
+            'posts_per_page' => 1,
+            'post_status' => 'publish',
+            'orderby' => 'date',
+            'order' => 'DESC'
+        ));
+    
+        // Get the publish date of the latest post
+        $latest_post_date = $latest_post ? get_the_date('j M Y', $latest_post[0]) : null;
+        
+        // Get author's display name
+        $author_name = get_the_author_meta('display_name', $author_id);
+        
+        // Get author's avatar URL
+        $author_avatar = get_avatar_url($author_id);
+        
+        // Get author's bio
+        $author_bio = get_the_author_meta('description', $author_id);
+        
+        // Get author's URL (if set)
+        $author_archive_url = get_author_posts_url($author_id);        
+        // Get author's email
+        $author_email = get_the_author_meta('email', $author_id);
+
+        // Return all information in an associative array
+        return array(
+            'name'        => $author_name,
+            'avatar'      => $author_avatar,
+            'bio'         => $author_bio,
+            'archive_url' => $author_archive_url,
+            'email'       => $author_email,
+            'latest_post_date' => $latest_post_date,
+        );
+    }
+
+    public function get_post_category_info($object, $field_name, $request) {
+        $categories = get_the_category($object['id']);
+    
+        if (empty($categories)) {
+            return [];
+        }
+    
+        // Map the categories to include detailed information
+        return array_map(function ($category) {
+            return array(
+                'id'   => $category->term_id,
+                'name' => $category->name,
+                'slug' => $category->slug,
+                'url' => get_category_link($category->term_id),
+            );
+        }, $categories);
+    }
+
+
+    public function get_post_post_tag_info($object, $field_name, $request) {
+        // Get the tags associated with the post
+        $tags = get_the_tags($object['id']);
+    
+        // Prepare a formatted array of tag information
+        if (!empty($tags) && is_array($tags)) {
+            $tag_info = array_map(function($tag) {
+                return array(
+                    'id'    => $tag->term_id,
+                    'name'  => $tag->name,
+                    'slug'  => $tag->slug,
+                    'url'   => get_tag_link($tag->term_id),
+                );
+            }, $tags);
+        } else {
+            $tag_info = array();
+        }
+    
+        return $tag_info;
+    }    
+    
+    
 
 	/**
 	 * Get excerpt for the rest field
@@ -311,6 +424,7 @@ class Admin {
 		return $featured_images;
 	}
 
+
 	public function get_posts() {
     	global $wpdb;
 
@@ -318,8 +432,28 @@ class Admin {
         $post_type = isset($_POST['post_type']) ? $_POST['post_type'] : 'post';
         $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
         $limit = isset($_POST['limit']) ? intval($_POST['limit']) : 12;
-        $category = isset($_POST['category']) ? intval($_POST['category']) : 0;
+        $category = isset($_POST['category']) ? $_POST['category'] : '';
+        $post_tag = isset($_POST['post_tag']) ? $_POST['post_tag'] : '';
+        $post_author = isset($_POST['post_author']) ? $_POST['post_author'] : '';
+        $deselected_post_author = isset($_POST['deauthor']) ? $_POST['deauthor'] : '';
+        $deselected_post_tag = isset($_POST['detag']) ? $_POST['detag'] : '';
+        $deselected_post_category = isset($_POST['decategory']) ? $_POST['decategory'] : '';
         $current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
+        $orderby = isset($_POST['orderby']) ? $_POST['orderby'] : 'date';
+        $sortorder = isset($_POST['sortorder']) ? $_POST['sortorder'] : 'desc';
+
+        $post_title_tag = isset($_POST['postTitleTag']) ? $_POST['postTitleTag'] : 'h3';
+        $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
+        $post_description_excerpt_length = isset($_POST['postDescriptionExcerptLength']) ? intval($_POST['postDescriptionExcerptLength']) : 10;
+
+        $show_author_switcher = isset($_POST['showAuthorSwitcher']) ? $_POST['showAuthorSwitcher'] : false;
+        $show_category_switcher = isset($_POST['showCategorySwitcher']) ? $_POST['showCategorySwitcher'] : false;
+        $show_tag_switcher = isset($_POST['showTagSwitcher']) ? $_POST['showTagSwitcher'] : false;
+
+        $post_author_prefix_switcher = isset($_POST['postAuthorPrefixSwitcher']) ? $_POST['postAuthorPrefixSwitcher'] : false;
+        $post_author_prefix = isset($_POST['postAuthorPrefix']) ? $_POST['postAuthorPrefix'] : 'Posted By';
+
+        $show_date_switcher = isset($_POST['showDateSwitcher']) ? $_POST['showDateSwitcher'] : true;
 
         ob_start();
 
@@ -331,60 +465,226 @@ class Admin {
             AND post_status = 'publish'
         ", $post_type);
 
-        if ($category !== 0) {
-            $query .= " AND ID IN (
+        /** Start Selected post category */
+        if (!empty($category)) {
+            $category_ids = explode(',', $category);
+            $placeholders = implode(',', array_fill(0, count($category_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID IN (
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'category' AND tt.term_id = $category
-            )";
+                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+            )", $category_ids);
+        }
+        /** End Selected post category */
+
+        /** Start Deselected post category */
+        if (!empty($deselected_post_category)) {
+            $deselected_post_category_ids = explode(',', $deselected_post_category);
+            $placeholders = implode(',', array_fill(0, count($deselected_post_category_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID NOT IN (
+                SELECT object_id
+                FROM {$wpdb->term_relationships} AS tr
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+            )", $deselected_post_category_ids);
+        }
+        /** End Deselected post category */
+
+        /** Start Selected post tag */
+        if (!empty($post_tag)) {
+            $post_tag_ids = explode(',', $post_tag);
+            $placeholders = implode(',', array_fill(0, count($post_tag_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID IN (
+                SELECT object_id
+                FROM {$wpdb->term_relationships} AS tr
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+            )", $post_tag_ids);
+        }
+        /** End Selected post tag */
+
+        /** Start Deselected post tag */
+        if (!empty($deselected_post_tag)) {
+            $deselected_post_tag_ids = explode(',', $deselected_post_tag);
+            $placeholders = implode(',', array_fill(0, count($deselected_post_tag_ids), '%d'));
+            $query .= $wpdb->prepare(" AND ID NOT IN (
+                SELECT object_id
+                FROM {$wpdb->term_relationships} AS tr
+                INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+            )", $deselected_post_tag_ids);
+        }
+        /** End Deselected post tag */
+
+        /** Start Selected post author */
+        if (!empty($post_author)) {
+            $post_author_ids = explode(',', $post_author);
+            $placeholders = implode(',', array_fill(0, count($post_author_ids), '%d'));
+            $query .= $wpdb->prepare(" AND post_author IN ($placeholders)", $post_author_ids);
+        }
+        /** End Selected post author */
+
+        /** Start Deselected post author */
+        if (!empty($deselected_post_author)) {
+            $deselected_post_author_ids = explode(',', $deselected_post_author);
+            $placeholders = implode(',', array_fill(0, count($deselected_post_author_ids), '%d'));
+            $query .= $wpdb->prepare(" AND post_author NOT IN ($placeholders)", $deselected_post_author_ids);
+        }
+        /** End Deselected post author */
+
+        /** Start Orderby and Sortorder */
+        $valid_orderby_values = ['date', 'author', 'title', 'modified'];
+        if (!in_array($orderby, $valid_orderby_values)) {
+            $orderby = 'date'; // Default to 'date' if invalid value provided
         }
 
-        // Count total number of records
+        $valid_sortorder_values = ['asc', 'desc'];
+        if (!in_array(strtolower($sortorder), $valid_sortorder_values)) {
+            $sortorder = 'desc'; // Default to 'desc' if invalid value provided
+        }
+
+        $sortorder = strtoupper($sortorder);
+        
+        $orderby = sanitize_key($orderby);
+
+        switch ($orderby) {
+            case 'author':
+                $query .= " ORDER BY post_author $sortorder";
+                break;
+            case 'title':
+                $query .= " ORDER BY post_title COLLATE utf8mb4_unicode_ci $sortorder";
+                break;
+            case 'modified':
+                $query .= " ORDER BY post_modified $sortorder";
+                break;
+            case 'date':
+            default:
+                $query .= " ORDER BY post_date $sortorder";
+                break;
+        }
+        /** End Orderby and Sortorder */
+
+        /** Start Count total number of records */
         $count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
         $total_records = $wpdb->get_var($count_query);
 
-        // Calculate total number of pages
+        /** Start Calculate total number of pages */
         $total_pages = ceil($total_records / $limit);
 
-        // Adjust offset if it exceeds total records to avoid empty results
-//         $offset = min($offset, max(0, $total_records - $limit));
+        $query_with_limit = $query . " LIMIT %d OFFSET %d";
 
-        // Adding limit and offset to the query
-        $temp_query = "
-            SELECT * FROM (
-                $query
-            ) AS SubQuery
-            LIMIT %d OFFSET %d
-        ";
+        /** Start Prepare the final query */
+        $final_query = $wpdb->prepare($query_with_limit, $limit, $offset);
 
-        // Prepare the final query
-        $final_query = $wpdb->prepare($temp_query, $limit, $offset);
-
-        // Execute the query to get results
+        /** Start Execute the query to get results */
         $results = $wpdb->get_results($final_query);
 
         if ($results) {
             foreach($results as $key => $single_post): ?>
                 <div class="fb_post_grid_wrapper">
-                    <a class="fb_post_grid" href="<?php echo get_permalink( $single_post->ID ); ?>">
+                    <div class="fb_post_grid">
                         <div class="fb_post_grid_image">
-                            <?php if (has_post_thumbnail( $single_post->ID )): ?>
-                                <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), 'medium'); ?>
-                                <img src="<?php echo $image[0]; ?>" alt=""/>
+                            <?php if (has_post_thumbnail($single_post->ID)): ?>
+                                <?php
+                                    $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), 'medium');
+                                    $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), 'medium');
+                                ?>
+                                <a href="<?php echo get_permalink($single_post->ID); ?>" aria-label="Read more about <?php echo esc_attr($single_post->post_title); ?>">
+                                    <img src="<?php echo esc_url($image[0]); ?>" 
+                                        srcset="<?php echo esc_attr($image_srcset); ?>" 
+                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
+                                </a>
                             <?php endif; ?>
                         </div>
+
+                        <?php if ($show_author_switcher == 'true'): ?>
+                            <div class="fb_post_grid_author">
+                                <div class="fb_post_grid_author_avatar">
+                                    <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>" 
+                                    aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                        <img src="<?php echo esc_url(get_avatar_url($single_post->post_author)); ?>" 
+                                            alt="<?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>" />
+                                    </a>
+                                </div>
+                                <div class="fb_post_grid_author_info">
+                                    <div class="fb_post_grid_author_info_name">
+                                        <?php if ($post_author_prefix_switcher == 'true'): ?>
+                                            <span class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
+                                        <?php endif; ?>
+                                        <div class="fb_post_grid_author_name">
+                                            <a class="fb_post_grid_author_name_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>" 
+                                            aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <?php if ($show_date_switcher == 'true'): ?>
+                                        <div class="fb_post_grid_date">
+                                            <?php echo esc_html(get_the_date('j M Y', $single_post->ID)); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($show_category_switcher == 'true'): ?>
+                            <div class="fb_post_grid_categories">
+                                <?php 
+                                    $categories = get_the_category($single_post->ID); 
+                                    if ($categories): 
+                                        foreach ($categories as $category): ?>
+                                            <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
+                                                <a class="fb_post_grid_category_url" 
+                                                href="<?php echo esc_url(get_category_link($category->term_id)); ?>"
+                                                aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
+                                                    <?php echo esc_html($category->name); ?>
+                                                </a>
+                                            </div>
+                                        <?php endforeach; 
+                                    endif;
+                                ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($show_tag_switcher == 'true'): ?>
+                            <div class="fb_post_grid_tags">
+                                <?php 
+                                    $tags = get_the_tags($single_post->ID);
+                                    if ($tags): 
+                                        foreach ($tags as $tag): ?>
+                                            <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
+                                                <a class="fb_post_grid_tag_url" 
+                                                href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
+                                                aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
+                                                    <?php echo esc_html($tag->name); ?>
+                                                </a>
+                                            </div>
+                                        <?php endforeach; 
+                                    endif;
+                                ?>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="fb_post_grid_content">
-                            <h3 class="fb_post_title"><?php echo $single_post->post_title; ?></h3>
-                            <?php if($single_post->post_excerpt !== ''): ?>
-                                <p class="fb_post_desc"><?php echo $single_post->post_excerpt; ?></p>
-                            <?php else: ?>
-                                <?php if(!empty($single_post->post_content)): ?>
-                                    <p class="fb_post_desc"><?php echo wp_trim_words($single_post->post_content, 20, '...'); ?></p>
-                                <?php endif; ?>
+
+                            <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>">
+                                <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
+                                    <?php echo esc_html($single_post->post_title); ?>
+                                </<?php echo esc_html($post_title_tag); ?>>
+                            </a>
+
+                            <?php if (!empty($single_post->post_excerpt)): ?>
+                                <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
+                                    <?php echo esc_html(wp_trim_words($single_post->post_excerpt, $post_description_excerpt_length, '...')); ?>
+                                </<?php echo esc_html($post_description_tag); ?>>
+                            <?php elseif (!empty($single_post->post_content)): ?>
+                                <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
+                                    <?php echo esc_html(wp_trim_words($single_post->post_content, $post_description_excerpt_length, '...')); ?>
+                                </<?php echo esc_html($post_description_tag); ?>>
                             <?php endif; ?>
                         </div>
-                    </a>
+                    </div>
                 </div>
             <?php endforeach;
 
@@ -393,11 +693,8 @@ class Admin {
                     <div class="fb_load_more" data-current_page="<?php echo $current_page; ?>">
                         Load more
                         <span class="load_more_button_icon_wrap">
-                            <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g opacity="0.5">
-                                    <path d="M8.25 4.5L15.75 12L8.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
-                                </g>
-                                <path d="M18.25 4.5L25.75 12L18.25 19.5" stroke="black" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round"/>
+                            <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M246.6 233.4l-160-160c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25L178.8 256l-137.4 137.4c-12.5 12.5-12.5 32.75 0 45.25C47.63 444.9 55.81 448 64 448s16.38-3.125 22.62-9.375l160-160C259.1 266.1 259.1 245.9 246.6 233.4zM438.6 233.4l-160-160c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25L370.8 256l-137.4 137.4c-12.5 12.5-12.5 32.75 0 45.25C239.6 444.9 247.8 448 256 448s16.38-3.125 22.62-9.375l160-160C451.1 266.1 451.1 245.9 438.6 233.4z"></path>
                             </svg>
                             <div class="fb_load_more_outter_wrap">
                                 <span class="fb_load_more_loader"></span>
@@ -413,12 +710,13 @@ class Admin {
         $content = ob_get_contents();
         ob_end_clean();
 
-        // Send response with content and total pages
+        /** Start Send response with content and total pages */
         wp_send_json_success(array(
             'content' => $content,
             'total_pages' => $total_pages,
             'current_page' => $current_page
         ));
+        /** End Send response with content and total pages */
     }
 
 

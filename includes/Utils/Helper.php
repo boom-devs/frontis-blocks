@@ -152,8 +152,16 @@ class Helper
 
 		}
 
-		return apply_filters( 'uagb_post_loop_taxonomies', $return_array );
+		return apply_filters( 'fb_post_loop_taxonomies', $return_array );
 	}
+
+    public static function get_all_authors_with_posts() {
+        $args = array(
+            'has_published_posts' => true,
+            'fields' => 'all_with_meta',
+        );
+        return get_users($args);
+    }
 
     public static function get_page_name() {
         global $wp_query;

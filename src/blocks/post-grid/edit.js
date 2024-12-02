@@ -10,140 +10,96 @@ import {
 } from '@wordpress/components';
 import LayoutGrid from './layoutGrid';
 import './editor.scss';
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
 		postType,
 		postPerPage,
-		selectedCat
+		selectedCatSwitcher,
+		selectedCat,
+		deSelectedCat,
+		selectedTagSwitcher,
+		selectedTag,
+		deSelectedTag,
+		selectedAuthorSwitcher,
+		selectedAuthor,
+		deSelectedAuthor,
+		orderBy,
+		sortOrder,
+		postTitleTag,
+		postDescriptionTag,
+        postDescriptionExcerptLength,
+        showAuthorSwitcher,
+        showCategorySwitcher,
+        showTagSwitcher,
+
+        postAuthorPrefixSwitcher,
+        postAuthorPrefix,
+        showDateSwitcher,
     } = attributes;
 
+    const blockProps = useBlockProps({
+        className: `${blockId}`,
+    });
+
     const { useSelect } = wp.data;
-    const blockProps = useBlockProps();
-
-    const postTypes = FrontisBlocksData.post_types;
-	const allTaxs = FrontisBlocksData.all_cats;
-	const allTaxonomies = allTaxs[postType];
-
-	let taxOptions = [];
-	if(allTaxonomies?.terms?.category){
-		taxOptions = allTaxonomies.terms.category.map(item => ({
-			value: item.id,
-			label: item.name
-		}));
-	}
 
     const postLists = useSelect( ( select ) => {
-        if(selectedCat !== "") {
-            return select('core').getEntityRecords('postType', postType, {
-                per_page: postPerPage,
-                categories: [selectedCat], // Replace `categoryID` with the actual ID of the category
-            });
-        } else {
-            return select('core').getEntityRecords('postType', postType, {
-                per_page: postPerPage,
-                // categories: [selectedCat], // Replace `categoryID` with the actual ID of the category
-            });
+        const query = {
+            orderby: orderBy,
+            order: sortOrder,
+            per_page: postPerPage,
+        };
+
+        if (selectedCatSwitcher === 'include' && Array.isArray(selectedCat) && selectedCat.length > 0) {
+            query.categories = selectedCat;
+        } else if (selectedCatSwitcher === 'exclude' && Array.isArray(deSelectedCat) && deSelectedCat.length > 0) {
+            query.categories_exclude = deSelectedCat;
         }
+
+        if (selectedTagSwitcher === 'include' && Array.isArray(selectedTag) && selectedTag.length > 0) {
+            query.tags = selectedTag;
+        } else if (selectedTagSwitcher === 'exclude' && Array.isArray(deSelectedTag) && deSelectedTag.length > 0) {
+            query.tags_exclude = deSelectedTag;
+        }
+
+        if (selectedAuthorSwitcher === 'include' && Array.isArray(selectedAuthor) && selectedAuthor.length > 0) {
+            query.author = selectedAuthor;
+        } else if (selectedAuthorSwitcher === 'exclude' && Array.isArray(deSelectedAuthor) && deSelectedAuthor.length > 0) {
+            query.author_exclude = deSelectedAuthor;
+        }
+
+        return select('core').getEntityRecords('postType', postType, query);
     } );
 
-    const selectPostType = (postType) => {
-		setAttributes({postType: postType});
-    }
-
-	useEffect(() => {
-		setAttributes({blockId: clientId})
-	}, [])
-
-    
     return (
         <>
-            <InspectorControls key="controls">
-                <div className="fb-inspector-control">
-                    <TabPanel
-                        className="fb-parent-tab-panel"
-                        activeClass="active-tab"
-                        tabs={[
-                            {
-                                name: "general",
-                                title: "General",
-                                className: "fb-tab general",
-                            },
-                            {
-                                name: "styles",
-                                title: "Style",
-                                className: "fb-tab styles",
-                            },
-                            {
-                                name: "advanced",
-                                title: "Advanced",
-                                className: "fb-tab advanced",
-                            },
-                        ]}
-                    >
-                        {(tab) => (
-                            <div className={"fb-tab-controls" + tab.name}>
-                                {tab.name === 'general' && (
-                                    <>
-                                        <div className="fb-advanced-wrapper">
-                                            <PanelBody
-                                                title={__("General", "frontis-blocks")}
-                                                initialOpen={true}
-                                            >
-                                                <SelectControl
-                                                    label={__("Post types", "frontis-blocks")}
-                                                    value={postType}
-                                                    options={postTypes}
-                                                    onChange={(selected) => selectPostType(selected)}
-                                                />
-
-												{postType &&
-													<SelectControl
-														label={__("Category", "frontis-blocks")}
-														value={selectedCat}
-														options={taxOptions}
-														onChange={(selected) => setAttributes({selectedCat: selected})}
-													/>
-												}
-
-												<NumberControl
-													label={__('Post per page', 'frontis-blocks')}
-													isShiftStepEnabled={ true }
-													onChange={ (newValue) => setAttributes({postPerPage: newValue}) }
-													shiftStep={ 1 }
-													value={ postPerPage }
-												/>
-                                            </PanelBody>
-                                        </div>
-                                    </>
-                                )}
-
-                                {tab.name === "styles" && (
-                                    <>
-										<div></div>
-                                    </>
-                                )}
-                            {tab.name === "advanced" && (
-                                    <>
-										<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-inner-wrapper">
-											</div>
-										</div>
-                                    </>
-                                )}
-                            </div>
-                        )}
-                    </TabPanel>
-                </div>
-            </InspectorControls>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             {postLists ? (
                 <div {...blockProps} id={blockId}>
                     {postLists.length > 0 ? (
-                        <div className='fb_post_grid_container'>
+                        <div className={`fb_post_grid_container ${blockId}`}> 
                             {postLists.map((item, index) => {
-                                return <LayoutGrid data={item} index={index} />
+                                return <LayoutGrid 
+                                    data={item}
+                                    index={index}
+                                    postTitleTag={postTitleTag}
+                                    postDescriptionTag={postDescriptionTag}
+                                    postDescriptionExcerptLength={postDescriptionExcerptLength}
+                                    showAuthorSwitcher={showAuthorSwitcher}
+                                    showCategorySwitcher={showCategorySwitcher}
+                                    showTagSwitcher={showTagSwitcher}
+                                    postAuthorPrefixSwitcher={postAuthorPrefixSwitcher}
+                                    postAuthorPrefix={postAuthorPrefix}
+                                    showDateSwitcher={showDateSwitcher}
+                                />
                             })}
                         </div>
                     ) : (

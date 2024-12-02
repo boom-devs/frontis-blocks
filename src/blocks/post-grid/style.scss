@@ -1,83 +1,91 @@
-.post-list{
-	display: flex;
-	gap: 30px;
-	flex-wrap: wrap;
-
-	.fb_post_grid_wrapper {
-		width: calc( 50% - 15px );
-
-		@media only screen and (max-width: 767px) {
+.fb_post_grid_container{ 
+	.fb_post_grid_wrapper{
+		width: 100%;
+		overflow: hidden;
+		box-sizing: border-box;
+		img{
 			width: 100%;
+			box-sizing: border-box;
+			display: block;
+			object-fit: cover;
+			height: 100%;
 		}
-
-		&:hover {
-			.fb_post_grid {
-				.fb_post_grid_image {
-					img {
-						transform: scale(1.05);
-						transition: all 0.3s ease-in-out;
-					}
-				}
-			}
-		}
-
-		.fb_post_grid {
-			border: 1px solid #998954;
-			padding: 24px;
-			background-color: transparent;
-			display: flex;
-			flex-direction: column;
-			gap: 16px;
-
-			.fb_post_grid_image {
-				position: relative;
-				width: 100%;
-				height: 280px;
-				overflow: hidden;
-
-				img {
-					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-					transform: scale(1.001);
-					transition: all 0.3s ease-in-out;
-				}
-			}
-			.fb_post_grid_content {
-				display: flex;
-				flex-direction: column;
-				gap: 16px;
-
-				.fb_post_title {
-					font-family: Playfair Display;
-					font-size: 24px;
-					font-weight: 600;
-					line-height: 31px;
-					color: #FFE58C;
-					margin: 0;
-				}
-				.fb_post_desc {
-					font-family: Montserrat;
-					font-size: 16px;
-					font-weight: 400;
-					line-height: 22px;
-					color: #FFFFFF;
-					margin: 0;
-				}
+	}
+	.fb_post_grid_categories {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		a {
+			&:focus {
+				outline: none;
+				box-shadow: none;
 			}
 		}
 	}
-
-	.fb_load_more_wrapper{
-		flex-basis: 100%;
+	.fb_post_grid_tags {
 		display: flex;
 		align-items: center;
-		gap: 30px;
-		margin-top: 32px;
-		
+		gap: 10px;
+		a {
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
+	.fb_post_grid_content {
+		.fb_post_title {
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+		a {
+			text-decoration: none;
+			&:focus {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
+}
+
+
+
+.fb_post_grid_author {
+	display: flex;
+    align-items: center;
+
+	a {
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+	}
+
+    .fb_post_grid_author_avatar {
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+
+    .fb_post_grid_author_info {
+		display: flex;
+		align-items: center;
+		.fb_post_grid_author_info_name {
+			display: flex;
+			align-items: center;
+		}
+    }
+}
+
+
+
+.fb_post_grid_container{
+	.fb_load_more_wrapper{
 		.fb_load_more{
 			cursor: pointer;
 			display: inline-flex;
@@ -85,21 +93,43 @@
 			gap: 5px;
 			padding: 16px 24px;
 			background-color: #FFE58C;
+			border: 1px solid #FFE58C;
 			color: #000000;
 			font-family: Josefin Sans;
 			font-size: 24px;
 			font-weight: 600;
 			font-style: normal;
 			line-height: 33px;
+			transition: all 0.3s ease-in-out;
+
+			&:hover .fb_load_more_loader {
+				border-top: 2px solid #ffffff;
+				border-right: 2px solid #cccccc;
+				border-bottom: 2px solid #999999;
+				border-left: 2px solid #666666;
+			}
+			&:hover {
+				background-color: #000000;
+				color: #FFFFFF;
+				transition: all 0.3s ease-in-out;
+
+				span {
+					fill: #FFFFFF;
+					transition: all 0.3s ease-in-out;
+				}
+			}
 
 			span {
 				width: 20px;
 				height: 20px;
 				position: relative;
+				fill: #000000;
+				transition: all 0.3s ease-in-out;
 
 				svg {
 					width: 100%;
 					height: 100%;
+
 				}
 			}
 		}
@@ -130,17 +160,10 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	height: auto;
-	width: calc(50% - 15px) !important;
-
-	@media only screen and (max-width: 767px) {
-		width: 100% !important;
-	}
 
 	.skeleton-item-title {
 		width: 100%;
-		height: 280px;
-		margin-bottom: 32px;
+		height: 260px;
 	}
 
 	.loading {
@@ -150,7 +173,7 @@
 	.skeleton-item-location {
 		width: 100%;
 		height: 43px;
-		margin-bottom: 16px;
+		margin: 32px 0 16px;
 	}
 	.skeleton-item-sport {
 		width: 80%;
@@ -158,15 +181,58 @@
 	}
 }
 
-.loading.post {
-	display: flex;
-	gap: 24px;
-	flex-wrap: wrap;
 
-	p {
-		flex-basis: 100%;
-	}
-}
+// .skeleton-item {
+// 	position: relative;
+// 	display: flex;
+// 	flex-direction: column;
+
+// 	@media only screen and (max-width: 767px) {
+// 		width: 100% !important;
+// 	}
+
+// 	.skeleton-item-title {
+// 		width: 100%;
+// 		height: 280px;
+// 		// margin-bottom: 32px;
+// 	}
+
+// 	.loading {
+// 		position: relative;
+// 	}
+
+// 	.skeleton-item-location {
+// 		width: 100%;
+// 		height: 280px;
+// 		// margin-bottom: 16px;
+// 	}
+// 	.skeleton-item-sport {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-date {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-readmore {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// 	.skeleton-item-author {
+// 		width: 100%;
+// 		height: 280px;
+// 	}
+// }
+
+// .loading.post {
+// 	display: flex;
+// 	gap: 24px;
+// 	flex-wrap: wrap;
+
+// 	p {
+// 		flex-basis: 100%;
+// 	}
+// }
 
 .post-card.skeleton .loading:before {
 	content: "";
