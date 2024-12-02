@@ -242,6 +242,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 .fb-global-typo-elements-wrap {
   background: #F7F7F7;
 }
+.fb-global-typo-elements-wrap .components-navigator-back-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 .fb-global-typo-elements-wrap .fb-custom-element {
   border-bottom: 1px solid #E1E3E8;
   padding: 14px 12px;
@@ -253,6 +257,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   font-size: 14px;
   font-weight: 400;
   color: #404655;
+}
+.fb-global-typo-elements-wrap .fb-custom-element button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 .fb-global-typo-elements-wrap .fb-custom-element button .font_preview {
   display: block;

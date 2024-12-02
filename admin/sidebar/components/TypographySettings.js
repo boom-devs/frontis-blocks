@@ -19,7 +19,7 @@ import {
 import {useEffect, useState} from "@wordpress/element";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_SidebarTypography from "./SidebarTypography";
-import {memo} from "react";
+import { loadGoogleFont } from "../helper";
 
 const TypographySettings = () => {
 	const [typography, setTypography] = useState({});
@@ -405,6 +405,7 @@ const TypographySettings = () => {
 	const generateFontObj = (font, size = false) => {
 		let result = {}
 		if (typeof font === 'object' && Object.keys(font).length > 0) {
+			console.log(font)
 			result = {
 				...(font.fontFamily && { fontFamily: font.fontFamily }),
 				...(font.fontWeight && { fontWeight: font.fontWeight }),
@@ -412,7 +413,8 @@ const TypographySettings = () => {
 				...(font.fontStyle && { fontStyle: font.fontStyle }),
 				...(font.textDecoration && { textDecoration: font.textDecoration }),
 				...(font.letterSpacing && { letterSpacing: `${font.letterSpacing[deviceType]}${font.letterSpacingUnit[deviceType] || 'px'}` }),
-				...((size && font.fontSize) && { fontSize: `${font.fontSize[deviceType]}${font.fontSizeUnit[deviceType] || 'px'}` })
+				...((size && font.fontSize) && { fontSize: `${font.fontSize[deviceType]}${font.fontSizeUnit[deviceType] || 'px'}` }),
+				...((font.lineHeight) && { lineHeight: `${font.lineHeight[deviceType]}${font.lineHeightUnits[deviceType] || 'px'}` })
 			}
 		}
 
@@ -442,13 +444,16 @@ const TypographySettings = () => {
 
 	useEffect(() => {
 		setTypography(defaultTypos);
-	});
+	}, []);
 
 	const setAttributes = (attr) => {
 		// Check if the input is an object
 		if (typeof attr === "object" && attr !== null) {
 			if (attr.typography) {
 				setTypography(attr.typography);
+
+
+				console.log(typography)
 			} else if (attr.deviceType) {
 				setDeviceType(attr.deviceType)
 			} else {
@@ -459,7 +464,172 @@ const TypographySettings = () => {
 		}
 	}
 
-	console.log(typography)
+	// Heading typography change
+	const onChangeHeadingFontFamily = (value, item) => {
+		// Assuming typography is an object that looks like { item1: { h1: { fontFamily: ... }, h2: ... }, item2: ... }
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				fontFamily: value,
+			  },
+			},
+		}));
+
+		loadGoogleFont(value)
+	}
+
+	const onChangeHeadingFontSize = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				fontSize: {
+					...typography[item][selectedHeading]?.fontSize,
+					[deviceType]: value[deviceType],
+				},
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingFontSizeUnit = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				fontSizeUnit: {
+					...typography[item][selectedHeading]?.fontSizeUnit,
+					[deviceType]: value[deviceType],
+				},
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingFontWeight = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				fontWeight: value,
+			  },
+			},
+		}));
+	}
+
+	const onChnageHeadingFontStyle = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				fontStyle: value,
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingTextDecoration = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				textDecoration: value,
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingTextTransform = (value,item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				textTransform: value,
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingLetterSpacing = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				letterSpacing: {
+					...typography[item][selectedHeading]?.letterSpacing,
+					[deviceType]: value[deviceType],
+				},
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingLetterSpacingUnit = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				letterSpacingUnit: {
+					...typography[item][selectedHeading]?.letterSpacingUnit,
+					[deviceType]: value[deviceType],
+				},
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingLineHeight = (value,item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				lineHeight: {
+					...typography[item][selectedHeading]?.lineHeight,
+					[deviceType]: value[deviceType],
+				},
+			  },
+			},
+		}));
+	}
+
+	const onChangeHeadingLineHeightUnit = (value, item) => {
+		setTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+			  ...prevTypography[item],
+			  [selectedHeading]: {
+				...prevTypography[item][selectedHeading],
+				lineHeightUnits: {
+					...typography[item][selectedHeading]?.lineHeightUnits,
+					[deviceType]: value[deviceType],
+				},
+			  },
+			},
+		}));
+	}
+	
+	// Not heading item store
 
 	return (
 		<TabPanel
@@ -543,184 +713,33 @@ const TypographySettings = () => {
 																			className="font_preview_box"
 																		>Aa
 																		</div>
-																		{/*<FB_SidebarTypography*/}
-																		{/*	fontFamily={typography?.[item]?.[selectedHeading]?.fontFamily}*/}
-																		{/*	onChangeFontFamily={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					fontFamily: value,*/}
-																		{/*				}*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
+																		<FB_SidebarTypography
+																			fontFamily={typography?.[item]?.[selectedHeading]?.fontFamily}
+																			onChangeFontFamily={(value) => onChangeHeadingFontFamily(value, item)}
+																			fontSize={typography?.[item]?.[selectedHeading]?.fontSize}
+																			onChangeFontSize={(value) => onChangeHeadingFontSize(value, item)}
+																			fontSizeUnits={typography?.[item]?.[selectedHeading]?.fontSizeUnit}
+																			onChangeFontSizeUnit={(value) => onChangeHeadingFontSizeUnit(value, item)}
+																			fontWeight={typography?.[item]?.[selectedHeading]?.fontWeight}
+																			onChangeFontWeight={(value) => onChangeHeadingFontWeight(value, item)}
+																			fontStyle={typography?.[item]?.[selectedHeading]?.fontStyle}
+																			onChangeFontStyle={(value) => onChnageHeadingFontStyle(value, item)}
+																			textTransform={typography?.[item]?.[selectedHeading]?.textTransform}
+																			onChangeTextTransform={(value) => onChangeHeadingTextTransform(value, item)}
+																			textDecoration={typography?.[item]?.[selectedHeading]?.textDecoration}
+																			onChangeTextDecoration={(value) => onChangeHeadingTextDecoration(value, item)}
+																			letterSpacing={typography?.[item]?.[selectedHeading]?.letterSpacing}
+																			onChangeLetterSpacing={(value) => onChangeHeadingLetterSpacing(value, item)}
+																			letterSpacingUnits={typography?.[item]?.[selectedHeading]?.letterSpacingUnit}
+																			onChangeLetterSpacingUnit={(value) => onChangeHeadingLetterSpacingUnit(value, item)}
+																			lineHeight={typography?.[item]?.[selectedHeading]?.lineHeight}
+																			onChangeLineHeight={(value) => onChangeHeadingLineHeight(value, item)}
+																			lineHeightUnits={typography?.[item]?.[selectedHeading]?.lineHeightUnits}
+																			onChangeLineHeightUnit={(value) => onChangeHeadingLineHeightUnit(value, item)}
+																			deviceType={deviceType}
+																			setAttributes={setAttributes}
+																		/>
 
-																		{/*	fontSize={typography?.[item]?.[selectedHeading]?.fontSize}*/}
-																		{/*	onChangeFontSize={(value) =>*/}
-																		{/*		setAttributes({*/}
-																		{/*			typography: {*/}
-																		{/*				...typography,*/}
-																		{/*				[item]: {*/}
-																		{/*					...typography[item],*/}
-																		{/*					[selectedHeading]: {*/}
-																		{/*						...typography[item][selectedHeading],*/}
-																		{/*						fontSize: {*/}
-																		{/*							...typography[item][selectedHeading]?.fontSize, // Retain existing sizes*/}
-																		{/*							[deviceType]: value[deviceType], // Update only the current device type*/}
-																		{/*						},*/}
-																		{/*					},*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		})*/}
-																		{/*	}*/}
-
-																		{/*	fontSizeUnits={typography?.[item]?.[selectedHeading]?.fontSizeUnit}*/}
-																		{/*	onChangeFontSizeUnit={(value) =>  setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					fontSizeUnit: {*/}
-																		{/*						...typography[item][selectedHeading]?.fontSizeUnit,*/}
-																		{/*						[deviceType]: value[deviceType],*/}
-																		{/*					},*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	fontWeight={typography?.[item]?.[selectedHeading]?.fontWeight}*/}
-																		{/*	onChangeFontWeight={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					fontWeight: value,*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	fontStyle={typography?.[item]?.[selectedHeading]?.fontStyle}*/}
-																		{/*	onChangeFontStyle={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					fontStyle: value,*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	textTransform={typography?.[item]?.[selectedHeading]?.textTransform}*/}
-																		{/*	onChangeTextTransform={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					textTransform: value,*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	textDecoration={typography?.[item]?.[selectedHeading]?.textDecoration}*/}
-																		{/*	onChangeTextDecoration={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					textDecoration: value,*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	letterSpacing={typography?.[item]?.[selectedHeading]?.letterSpacing}*/}
-																		{/*	onChangeLetterSpacing={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					letterSpacing: {*/}
-																		{/*						...typography[item][selectedHeading]?.letterSpacing,*/}
-																		{/*						[deviceType]: value[deviceType],*/}
-																		{/*					},*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	letterSpacingUnits={typography?.[item]?.[selectedHeading]?.letterSpacingUnit}*/}
-																		{/*	onChangeLetterSpacingUnit={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					letterSpacingUnit: {*/}
-																		{/*						...typography[item][selectedHeading]?.letterSpacingUnit,*/}
-																		{/*						[deviceType]: value[deviceType],*/}
-																		{/*					},*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	lineHeight={typography?.[item]?.[selectedHeading]?.lineHeight}*/}
-																		{/*	onChangeLineHeight={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					lineHeight: {*/}
-																		{/*						...typography[item][selectedHeading]?.lineHeight,*/}
-																		{/*						[deviceType]: value[deviceType],*/}
-																		{/*					},*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	lineHeightUnits={typography?.[item]?.[selectedHeading]?.lineHeightUnits}*/}
-																		{/*	onChangeLineHeightUnit={(value) => setAttributes({*/}
-																		{/*		typography: {*/}
-																		{/*			...typography,*/}
-																		{/*			[item]: {*/}
-																		{/*				...typography[item],*/}
-																		{/*				[selectedHeading]: {*/}
-																		{/*					...typography[item][selectedHeading],*/}
-																		{/*					lineHeightUnits: {*/}
-																		{/*						...typography[item][selectedHeading]?.lineHeightUnits,*/}
-																		{/*						[deviceType]: value[deviceType],*/}
-																		{/*					},*/}
-																		{/*				},*/}
-																		{/*			},*/}
-																		{/*		},*/}
-																		{/*	})}*/}
-
-																		{/*	deviceType={deviceType}*/}
-																		{/*	setAttributes={setAttributes}*/}
-																		{/*/>*/}
 																	</div>
 																</div>
 															))}
@@ -737,149 +756,33 @@ const TypographySettings = () => {
 																	className="font_preview_box"
 																>Aa
 																</div>
-																{/*<FB_SidebarTypography*/}
-																{/*	fontFamily={typography[item]?.fontFamily}*/}
-																{/*	onChangeFontFamily={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				fontFamily: value,*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
+																<FB_SidebarTypography
+																	fontFamily={typography?.[item]?.fontFamily}
+																	onChangeFontFamily={(value) => onChangeFontFamily(value, item)}
+																	fontSize={typography?.[item]?.fontSize}
+																	onChangeFontSize={(value) => onChangeFontSize(value, item)}
+																	fontSizeUnits={typography?.[item]?.fontSizeUnit}
+																	onChangeFontSizeUnit={(value) => onChangeFontSizeUnit(value, item)}
+																	fontWeight={typography?.[item]?.fontWeight}
+																	onChangeFontWeight={(value) => onChangeFontWeight(value, item)}
+																	fontStyle={typography?.[item]?.fontStyle}
+																	onChangeFontStyle={(value) => onChnageFontStyle(value, item)}
+																	textTransform={typography?.[item]?.textTransform}
+																	onChangeTextTransform={(value) => onChangeTextTransform(value, item)}
+																	textDecoration={typography?.[item]?.textDecoration}
+																	onChangeTextDecoration={(value) => onChangeTextDecoration(value, item)}
+																	letterSpacing={typography?.[item]?.letterSpacing}
+																	onChangeLetterSpacing={(value) => onChangeLetterSpacing(value, item)}
+																	letterSpacingUnits={typography?.[item]?.letterSpacingUnit}
+																	onChangeLetterSpacingUnit={(value) => onChangeLetterSpacingUnit(value, item)}
+																	lineHeight={typography?.[item]?.lineHeight}
+																	onChangeLineHeight={(value) => onChangeLineHeight(value, item)}
+																	lineHeightUnits={typography?.[item]?.lineHeightUnits}
+																	onChangeLineHeightUnit={(value) => onChangeLineHeightUnit(value, item)}
+																	deviceType={deviceType}
+																	setAttributes={setAttributes}
+																/>
 
-																{/*	fontSize={typography[item]?.fontSize[deviceType]}*/}
-																{/*	onChangeFontSize={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				fontSize: {*/}
-																{/*					...typography[item].fontSize,*/}
-																{/*					[deviceType]: value[deviceType],*/}
-																{/*				},*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	fontSizeUnits={typography[item]?.fontSizeUnit[deviceType]}*/}
-																{/*	onChangeFontSizeUnit={(value) =>  setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				fontSizeUnits: {*/}
-																{/*					...typography[item]?.fontSizeUnit,*/}
-																{/*					[deviceType]: value[deviceType],*/}
-																{/*				},*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	fontWeight={typography[item]?.fontWeight}*/}
-																{/*	onChangeFontWeight={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				fontWeight: value,*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	fontStyle={typography[item]?.fontStyle}*/}
-																{/*	onChangeFontStyle={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				fontStyle: value,*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	textTransform={typography[item]?.textTransform}*/}
-																{/*	onChangeTextTransform={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				textTransform: value,*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	textDecoration={typography[item]?.textDecoration}*/}
-																{/*	onChangeTextDecoration={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				textDecoration: value,*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	letterSpacing={typography[item]?.letterSpacing[deviceType]}*/}
-																{/*	onChangeLetterSpacing={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				letterSpacing: {*/}
-																{/*					...typography[item]?.letterSpacing,*/}
-																{/*					[deviceType]: value[deviceType],*/}
-																{/*				},*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	letterSpacingUnits={typography[item]?.letterSpacingUnit[deviceType]}*/}
-																{/*	onChangeLetterSpacingUnit={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				letterSpacingUnit: {*/}
-																{/*					...typography[item]?.letterSpacing,*/}
-																{/*					[deviceType]: value[deviceType],*/}
-																{/*				},*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	lineHeight={typography[item]?.lineHeight[deviceType]}*/}
-																{/*	onChangeLineHeight={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				lineHeight: {*/}
-																{/*					...typography[item]?.lineHeight,*/}
-																{/*					[deviceType]: value[deviceType],*/}
-																{/*				},*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	lineHeightUnits={typography[item]?.lineHeightUnits[deviceType]}*/}
-																{/*	onChangeLineHeightUnit={(value) => setAttributes({*/}
-																{/*		typography: {*/}
-																{/*			...typography,*/}
-																{/*			[item]: {*/}
-																{/*				...typography[item],*/}
-																{/*				lineHeightUnits: {*/}
-																{/*					...typography[item]?.lineHeightUnits,*/}
-																{/*					[deviceType]: value[deviceType],*/}
-																{/*				},*/}
-																{/*			},*/}
-																{/*		},*/}
-																{/*	})}*/}
-
-																{/*	deviceType={deviceType}*/}
-																{/*	setAttributes={setAttributes}*/}
-																{/*/>*/}
 															</div>
 														</>
 													)}
@@ -1108,4 +1011,4 @@ const TypographySettings = () => {
 	)
 }
 
-export default memo(TypographySettings);
+export default TypographySettings;

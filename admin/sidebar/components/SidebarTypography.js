@@ -1,5 +1,4 @@
 import { __ } from '@wordpress/i18n';
-import React, { memo } from 'react'
 import {
 	BaseControl,
 	Button,
@@ -170,4 +169,4 @@ const FB_SidebarTypography = ({
 	);
 };
 
-export default memo(FB_SidebarTypography);
+export default FB_SidebarTypography;
