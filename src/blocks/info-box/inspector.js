@@ -2593,7 +2593,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	return (
 		<>
 			<style>
-				{`
+			{`
 				${blockStyle}
             `}
 			</style>
@@ -3759,407 +3759,411 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 										</PanelBody>
 										{/*Description Style*/}
+										{Sub_Heading_Switcher && (
 										<PanelBody
-											title={__("Description", "frontis-block")}
-											initialOpen={false}
-											className="fb-info-box-desc-setting-wrapper"
+										title={__("Description", "frontis-block")}
+										initialOpen={false}
+										className="fb-info-box-desc-setting-wrapper"
 										>
-											{/*Typography*/}
-											<BaseControl
-												label={__("Typography", "frontis-block")}
-												className="fb-setting-typography"
-											>
-												<Dropdown
-													className="fb-setting-typography-icon-dropdown"
-													contentClassName="fb-setting-typography-dropdown-content"
-													popoverProps={{ placement: "bottom-start" }}
-													renderToggle={({ isOpen, onToggle }) => (
-														<Button
-															variant="primary"
-															onClick={onToggle}
-															aria-expanded={isOpen}
-															aria-label={__(
-																"Toggle Typography Settings",
-																"frontis-block",
-															)}
-															className="fb-setting-typography-icon-btn"
-														>
-															<Dashicon
-																icon="edit"
-																className="fb-setting-typography-icon"
-															/>
-														</Button>
-													)}
-													renderContent={() => (
-														<div className="fb-setting-typography-popup">
-															<BaseControl className="fb-setting-typography-popup-inner">
-																<div className="fb-setting-fontfamily-wrapper">
-																	<SelectControl
-																		label={__("Font Family", "frontis-block")}
-																		options={FONT_FAMILYS}
-																		value={SubHeadingFontFamily}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingFontFamily: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-fontsize-wrapper">
-																	<div className="fb-setting-fontsize-header">
-																		<div className="fb-setting-fontsize-label">
-																			<span>
-																				{__("Font Size", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-fontsize-units">
-																			<ButtonGroup className="fb-setting-fontsize-units-wrap">
-																				{UNIT_TYPES.map((item, key) => (
-																					<Button
-																						key={key}
-																						onClick={() =>
-																							setAttributes({
-																								SubHeadingFontSizeUnits:
-																									item.value,
-																							})
-																						}
-																						className={`fb-setting-fontsize-units-switcher ${
-																							SubHeadingFontSizeUnits ===
-																							item.value
-																								? "active"
-																								: ""
-																						}`}
-																					>
-																						{item.label}
-																					</Button>
-																				))}
-																			</ButtonGroup>
-																		</div>
+										{/*Typography*/}
+										<BaseControl
+											label={__("Typography", "frontis-block")}
+											className="fb-setting-typography"
+										>
+											<Dropdown
+												className="fb-setting-typography-icon-dropdown"
+												contentClassName="fb-setting-typography-dropdown-content"
+												popoverProps={{ placement: "bottom-start" }}
+												renderToggle={({ isOpen, onToggle }) => (
+													<Button
+														variant="primary"
+														onClick={onToggle}
+														aria-expanded={isOpen}
+														aria-label={__(
+															"Toggle Typography Settings",
+															"frontis-block",
+														)}
+														className="fb-setting-typography-icon-btn"
+													>
+														<Dashicon
+															icon="edit"
+															className="fb-setting-typography-icon"
+														/>
+													</Button>
+												)}
+												renderContent={() => (
+													<div className="fb-setting-typography-popup">
+														<BaseControl className="fb-setting-typography-popup-inner">
+															<div className="fb-setting-fontfamily-wrapper">
+																<SelectControl
+																	label={__("Font Family", "frontis-block")}
+																	options={FONT_FAMILYS}
+																	value={SubHeadingFontFamily}
+																	onChange={(value) =>
+																		setAttributes({
+																			SubHeadingFontFamily: value,
+																		})
+																	}
+																/>
+															</div>
+															<div className="fb-setting-fontsize-wrapper">
+																<div className="fb-setting-fontsize-header">
+																	<div className="fb-setting-fontsize-label">
+																		<span>
+																			{__("Font Size", "frontis-block")}
+																		</span>
 																	</div>
-																	<div className="fb-setting-fontsize-rangecontrol">
-																		<RangeControl
-																			value={SubHeadingFontSize}
-																			onChange={(value) =>
-																				setAttributes({
-																					SubHeadingFontSize: value,
-																				})
-																			}
-																			min={1}
-																			max={200}
-																			allowReset
-																			resetFallbackValue={undefined}
-																		/>
+																	<div className="fb-setting-fontsize-units">
+																		<ButtonGroup className="fb-setting-fontsize-units-wrap">
+																			{UNIT_TYPES.map((item, key) => (
+																				<Button
+																					key={key}
+																					onClick={() =>
+																						setAttributes({
+																							SubHeadingFontSizeUnits:
+																								item.value,
+																						})
+																					}
+																					className={`fb-setting-fontsize-units-switcher ${
+																						SubHeadingFontSizeUnits ===
+																						item.value
+																							? "active"
+																							: ""
+																					}`}
+																				>
+																					{item.label}
+																				</Button>
+																			))}
+																		</ButtonGroup>
 																	</div>
 																</div>
-																<div className="fb-setting-fontweight-wrapper">
-																	<SelectControl
-																		label={__("Font Weight", "frontis-block")}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "700",
-																			},
-																			{
-																				label: __("100", "frontis-block"),
-																				value: "100",
-																			},
-																			{
-																				label: __("200", "frontis-block"),
-																				value: "200",
-																			},
-																			{
-																				label: __("300", "frontis-block"),
-																				value: "300",
-																			},
-																			{
-																				label: __("400", "frontis-block"),
-																				value: "400",
-																			},
-																			{
-																				label: __("500", "frontis-block"),
-																				value: "500",
-																			},
-																			{
-																				label: __("600", "frontis-block"),
-																				value: "600",
-																			},
-																			{
-																				label: __("700", "frontis-block"),
-																				value: "700",
-																			},
-																			{
-																				label: __("800", "frontis-block"),
-																				value: "800",
-																			},
-																			{
-																				label: __("900", "frontis-block"),
-																				value: "900",
-																			},
-																		]}
-																		value={SubHeadingFontWeight}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingFontWeight: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-fontstyle-wrapper">
-																	<SelectControl
-																		label={__("Font Style", "frontis-block")}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "normal",
-																			},
-																			{
-																				label: __("Normal", "frontis-block"),
-																				value: "normal",
-																			},
-																			{
-																				label: __("Italic", "frontis-block"),
-																				value: "italic",
-																			},
-																			{
-																				label: __("Oblique", "frontis-block"),
-																				value: "oblique",
-																			},
-																		]}
-																		value={SubHeadingFontStyle}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingFontStyle: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-texttransform-wrapper">
-																	<SelectControl
-																		label={__(
-																			"Text Transform",
-																			"frontis-block",
-																		)}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("None", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __(
-																					"Capitalize",
-																					"frontis-block",
-																				),
-																				value: "capitalize",
-																			},
-																			{
-																				label: __("Uppercase", "frontis-block"),
-																				value: "uppercase",
-																			},
-																			{
-																				label: __("Lowercase", "frontis-block"),
-																				value: "lowercase",
-																			},
-																		]}
-																		value={SubHeadingTextTransform}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingTextTransform: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-textdecoration-wrapper">
-																	<SelectControl
-																		label={__(
-																			"Text Decoration",
-																			"frontis-block",
-																		)}
-																		options={[
-																			{
-																				label: __("Default", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("None", "frontis-block"),
-																				value: "none",
-																			},
-																			{
-																				label: __("Underline", "frontis-block"),
-																				value: "underline",
-																			},
-																			{
-																				label: __("Overline", "frontis-block"),
-																				value: "overline",
-																			},
-																			{
-																				label: __(
-																					"Line Through",
-																					"frontis-block",
-																				),
-																				value: "line-through",
-																			},
-																		]}
-																		value={SubHeadingTextDecoration}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingTextDecoration: value,
-																			})
-																		}
-																	/>
-																</div>
-																<div className="fb-setting-letterspacing-wrapper">
-																	<div className="fb-setting-letterspacing-header">
-																		<div className="fb-setting-letterspacing-label">
-																			<span>
-																				{__("Letter Spacing", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-letterspacing-units">
-																			<ButtonGroup className="fb-setting-letterspacing-units-wrap">
-																				{UNIT_TYPES.map((item, key) => (
-																					<Button
-																						key={key}
-																						onClick={() =>
-																							setAttributes({
-																								SubHeadingLetterSpacingUnits:
-																									item.value,
-																							})
-																						}
-																						className={`fb-setting-letterspacing-units-switcher ${
-																							SubHeadingLetterSpacingUnits ===
-																							item.value
-																								? "active"
-																								: ""
-																						}`}
-																					>
-																						{item.label}
-																					</Button>
-																				))}
-																			</ButtonGroup>
-																		</div>
-																	</div>
+																<div className="fb-setting-fontsize-rangecontrol">
 																	<RangeControl
-																		value={SubHeadingLetterSpacing}
+																		value={SubHeadingFontSize}
 																		onChange={(value) =>
 																			setAttributes({
-																				SubHeadingLetterSpacing:
-																					value === 0 ? undefined : value,
+																				SubHeadingFontSize: value,
 																			})
 																		}
 																		min={1}
-																		max={100}
-																		step={1}
+																		max={200}
 																		allowReset
 																		resetFallbackValue={undefined}
 																	/>
 																</div>
-																<div className="fb-setting-lineheight-wrapper">
-																	<div className="fb-setting-lineheight-header">
-																		<div className="fb-setting-lineheight-label">
-																			<span>
-																				{__("Line Height", "frontis-block")}
-																			</span>
-																		</div>
-																		<div className="fb-setting-lineheight-units">
-																			<ButtonGroup className="fb-setting-lineheight-units-wrap">
-																				{UNIT_TYPES.map((item, key) => (
-																					<Button
-																						key={key}
-																						onClick={() =>
-																							setAttributes({
-																								SubHeadingLineHeightUnits:
-																									item.value,
-																							})
-																						}
-																						className={`fb-setting-lineheight-units-switcher ${
-																							SubHeadingLineHeightUnits ===
-																							item.value
-																								? "active"
-																								: ""
-																						}`}
-																					>
-																						{item.label}
-																					</Button>
-																				))}
-																			</ButtonGroup>
-																		</div>
+															</div>
+															<div className="fb-setting-fontweight-wrapper">
+																<SelectControl
+																	label={__("Font Weight", "frontis-block")}
+																	options={[
+																		{
+																			label: __("Default", "frontis-block"),
+																			value: "700",
+																		},
+																		{
+																			label: __("100", "frontis-block"),
+																			value: "100",
+																		},
+																		{
+																			label: __("200", "frontis-block"),
+																			value: "200",
+																		},
+																		{
+																			label: __("300", "frontis-block"),
+																			value: "300",
+																		},
+																		{
+																			label: __("400", "frontis-block"),
+																			value: "400",
+																		},
+																		{
+																			label: __("500", "frontis-block"),
+																			value: "500",
+																		},
+																		{
+																			label: __("600", "frontis-block"),
+																			value: "600",
+																		},
+																		{
+																			label: __("700", "frontis-block"),
+																			value: "700",
+																		},
+																		{
+																			label: __("800", "frontis-block"),
+																			value: "800",
+																		},
+																		{
+																			label: __("900", "frontis-block"),
+																			value: "900",
+																		},
+																	]}
+																	value={SubHeadingFontWeight}
+																	onChange={(value) =>
+																		setAttributes({
+																			SubHeadingFontWeight: value,
+																		})
+																	}
+																/>
+															</div>
+															<div className="fb-setting-fontstyle-wrapper">
+																<SelectControl
+																	label={__("Font Style", "frontis-block")}
+																	options={[
+																		{
+																			label: __("Default", "frontis-block"),
+																			value: "normal",
+																		},
+																		{
+																			label: __("Normal", "frontis-block"),
+																			value: "normal",
+																		},
+																		{
+																			label: __("Italic", "frontis-block"),
+																			value: "italic",
+																		},
+																		{
+																			label: __("Oblique", "frontis-block"),
+																			value: "oblique",
+																		},
+																	]}
+																	value={SubHeadingFontStyle}
+																	onChange={(value) =>
+																		setAttributes({
+																			SubHeadingFontStyle: value,
+																		})
+																	}
+																/>
+															</div>
+															<div className="fb-setting-texttransform-wrapper">
+																<SelectControl
+																	label={__(
+																		"Text Transform",
+																		"frontis-block",
+																	)}
+																	options={[
+																		{
+																			label: __("Default", "frontis-block"),
+																			value: "none",
+																		},
+																		{
+																			label: __("None", "frontis-block"),
+																			value: "none",
+																		},
+																		{
+																			label: __(
+																				"Capitalize",
+																				"frontis-block",
+																			),
+																			value: "capitalize",
+																		},
+																		{
+																			label: __("Uppercase", "frontis-block"),
+																			value: "uppercase",
+																		},
+																		{
+																			label: __("Lowercase", "frontis-block"),
+																			value: "lowercase",
+																		},
+																	]}
+																	value={SubHeadingTextTransform}
+																	onChange={(value) =>
+																		setAttributes({
+																			SubHeadingTextTransform: value,
+																		})
+																	}
+																/>
+															</div>
+															<div className="fb-setting-textdecoration-wrapper">
+																<SelectControl
+																	label={__(
+																		"Text Decoration",
+																		"frontis-block",
+																	)}
+																	options={[
+																		{
+																			label: __("Default", "frontis-block"),
+																			value: "none",
+																		},
+																		{
+																			label: __("None", "frontis-block"),
+																			value: "none",
+																		},
+																		{
+																			label: __("Underline", "frontis-block"),
+																			value: "underline",
+																		},
+																		{
+																			label: __("Overline", "frontis-block"),
+																			value: "overline",
+																		},
+																		{
+																			label: __(
+																				"Line Through",
+																				"frontis-block",
+																			),
+																			value: "line-through",
+																		},
+																	]}
+																	value={SubHeadingTextDecoration}
+																	onChange={(value) =>
+																		setAttributes({
+																			SubHeadingTextDecoration: value,
+																		})
+																	}
+																/>
+															</div>
+															<div className="fb-setting-letterspacing-wrapper">
+																<div className="fb-setting-letterspacing-header">
+																	<div className="fb-setting-letterspacing-label">
+																		<span>
+																			{__("Letter Spacing", "frontis-block")}
+																		</span>
 																	</div>
-																	<RangeControl
-																		value={SubHeadingLineHeight}
-																		onChange={(value) =>
-																			setAttributes({
-																				SubHeadingLineHeight:
-																					value === 1 ? undefined : value,
-																			})
-																		}
-																		min={1}
-																		max={100}
-																		step={1}
-																		allowReset
-																		resetFallbackValue={undefined}
-																	/>
+																	<div className="fb-setting-letterspacing-units">
+																		<ButtonGroup className="fb-setting-letterspacing-units-wrap">
+																			{UNIT_TYPES.map((item, key) => (
+																				<Button
+																					key={key}
+																					onClick={() =>
+																						setAttributes({
+																							SubHeadingLetterSpacingUnits:
+																								item.value,
+																						})
+																					}
+																					className={`fb-setting-letterspacing-units-switcher ${
+																						SubHeadingLetterSpacingUnits ===
+																						item.value
+																							? "active"
+																							: ""
+																					}`}
+																				>
+																					{item.label}
+																				</Button>
+																			))}
+																		</ButtonGroup>
+																	</div>
 																</div>
-															</BaseControl>
-														</div>
-													)}
-												/>
-											</BaseControl>
-											{/*Color*/}
-											<FB_Color
-												label={__("Text Color", "frontis-blocks")}
-												globalColorSwitcher={SubHeadingColorSwitcher}
-												globalColor={SubHeadingColor}
-												globalHoverColor={SubHeadingHoverColor}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({
-														SubHeadingColorSwitcher: value,
-													})
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ SubHeadingColor: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ SubHeadingHoverColor: value })
-												}
+																<RangeControl
+																	value={SubHeadingLetterSpacing}
+																	onChange={(value) =>
+																		setAttributes({
+																			SubHeadingLetterSpacing:
+																				value === 0 ? undefined : value,
+																		})
+																	}
+																	min={1}
+																	max={100}
+																	step={1}
+																	allowReset
+																	resetFallbackValue={undefined}
+																/>
+															</div>
+															<div className="fb-setting-lineheight-wrapper">
+																<div className="fb-setting-lineheight-header">
+																	<div className="fb-setting-lineheight-label">
+																		<span>
+																			{__("Line Height", "frontis-block")}
+																		</span>
+																	</div>
+																	<div className="fb-setting-lineheight-units">
+																		<ButtonGroup className="fb-setting-lineheight-units-wrap">
+																			{UNIT_TYPES.map((item, key) => (
+																				<Button
+																					key={key}
+																					onClick={() =>
+																						setAttributes({
+																							SubHeadingLineHeightUnits:
+																								item.value,
+																						})
+																					}
+																					className={`fb-setting-lineheight-units-switcher ${
+																						SubHeadingLineHeightUnits ===
+																						item.value
+																							? "active"
+																							: ""
+																					}`}
+																				>
+																					{item.label}
+																				</Button>
+																			))}
+																		</ButtonGroup>
+																	</div>
+																</div>
+																<RangeControl
+																	value={SubHeadingLineHeight}
+																	onChange={(value) =>
+																		setAttributes({
+																			SubHeadingLineHeight:
+																				value === 1 ? undefined : value,
+																		})
+																	}
+																	min={1}
+																	max={100}
+																	step={1}
+																	allowReset
+																	resetFallbackValue={undefined}
+																/>
+															</div>
+														</BaseControl>
+													</div>
+												)}
 											/>
+										</BaseControl>
+										{/*Color*/}
+										<FB_Color
+											label={__("Text Color", "frontis-blocks")}
+											globalColorSwitcher={SubHeadingColorSwitcher}
+											globalColor={SubHeadingColor}
+											globalHoverColor={SubHeadingHoverColor}
+											handleColorSwitcherChange={(value) =>
+												setAttributes({
+													SubHeadingColorSwitcher: value,
+												})
+											}
+											handleGlobalColorChange={(value) =>
+												setAttributes({ SubHeadingColor: value })
+											}
+											handleGlobalHoverColorChange={(value) =>
+												setAttributes({ SubHeadingHoverColor: value })
+											}
+										/>
 
-											{/*Spacing*/}
-											<Heading>Spacing</Heading>
-											{/* Padding */}
-											<FB_Spacing
-												label={__("Padding", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleDescPaddingUnitsHandler}
-												spacingUnits={SubHeadingPaddingUnits}
-												spacingDesktop={SubHeadingDesktopPadding}
-												spacingTablet={SubHeadingTabPadding}
-												spacingMobile={SubHeadingMobilePadding}
-												handleSpacingUnitHandler={handleDescPaddingUnitChange}
-												spacingCombineBtn={descMarginLink}
-												spacingCombineBtnHandler={handleDescPaddingCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											{/* Margin */}
-											<FB_Spacing
-												label={__("Margin", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleDescMarginUnitsHandler}
-												spacingUnits={descMarginUnits}
-												spacingDesktop={descDesktopMargin}
-												spacingTablet={descTabMargin}
-												spacingMobile={descMobileMargin}
-												handleSpacingUnitHandler={handleDescMarginUnitChange}
-												spacingCombineBtn={descMarginLink}
-												spacingCombineBtnHandler={handleDescMarginCombineBtn}
-												setAttributes={setAttributes}
-											/>
+										{/*Spacing*/}
+										<Heading>Spacing</Heading>
+										{/* Padding */}
+										<FB_Spacing
+											label={__("Padding", "frontis-blocks")}
+											deviceType={deviceType}
+											spacingUnitsHandler={handleDescPaddingUnitsHandler}
+											spacingUnits={SubHeadingPaddingUnits}
+											spacingDesktop={SubHeadingDesktopPadding}
+											spacingTablet={SubHeadingTabPadding}
+											spacingMobile={SubHeadingMobilePadding}
+											handleSpacingUnitHandler={handleDescPaddingUnitChange}
+											spacingCombineBtn={descMarginLink}
+											spacingCombineBtnHandler={handleDescPaddingCombineBtn}
+											setAttributes={setAttributes}
+										/>
+										{/* Margin */}
+										<FB_Spacing
+											label={__("Margin", "frontis-blocks")}
+											deviceType={deviceType}
+											spacingUnitsHandler={handleDescMarginUnitsHandler}
+											spacingUnits={descMarginUnits}
+											spacingDesktop={descDesktopMargin}
+											spacingTablet={descTabMargin}
+											spacingMobile={descMobileMargin}
+											handleSpacingUnitHandler={handleDescMarginUnitChange}
+											spacingCombineBtn={descMarginLink}
+											spacingCombineBtnHandler={handleDescMarginCombineBtn}
+											setAttributes={setAttributes}
+										/>
 										</PanelBody>
+										)}
+										
 										{/*Button Style*/}
-										<PanelBody
+										{info_Button_Switcher && (
+											<PanelBody
 											title={__("Button", "frontis-block")}
 											className="fb-info-box-button-setting-wrapper"
 											initialOpen={false}
@@ -4769,6 +4773,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												</div>
 											</div>
 										</PanelBody>
+										)}
+										
 									</>
 								)}
 								{tab.name === "advance" && (

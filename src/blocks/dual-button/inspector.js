@@ -1805,6 +1805,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															)}
 														</BaseControl>
 													</div>
+													{buttonIconAlign === "icon-text"  && (
 													<SelectControl
 														label={__("Icon Position", "frontis-blocks")}
 														options={ICON_POSITION}
@@ -1813,6 +1814,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ btnIconPosition: value })
 														}
 													/>
+													)}
 												</PanelBody>
 											</div>
 											{/* Connector */}
@@ -1943,6 +1945,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															)}
 														</BaseControl>
 													</div>
+													{buttonTwoIconAlign === "icon-text" && (
 													<SelectControl
 														label={__("Icon Position", "frontis-blocks")}
 														options={ICON_POSITION}
@@ -1951,6 +1954,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ btnTwoIconPosition: value })
 														}
 													/>
+													)}
 												</PanelBody>
 											</div>
 										</div>
@@ -3515,7 +3519,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{/*Spacing*/}
 
 										{/*	Connector Style*/}
-										<PanelBody
+										{connectorSwitcher && (
+											<PanelBody
 											title={__("Connector", "frontis-blocks")}
 											initialOpen={false}
 										>
@@ -4238,8 +4243,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 										</PanelBody>
+										)}
+										
 										{/*	Icon */}
-										<PanelBody
+										{buttonIconAlign === 'icon-text' || 
+										buttonIconAlign === 'icon-only' && (
+											<PanelBody
 											title={__("Icon", "frontis-blocks")}
 											initialOpen={false}
 										>
@@ -4290,6 +4299,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												}
 											/>
 										</PanelBody>
+										)}
 									</>
 								)}
 								{tab.name === "advanced" && (
