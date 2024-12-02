@@ -2590,12 +2590,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [fbInfoBoxStyle]);
 
+
+	const editorStyle = fbInfoBoxStyle.replace(/\s+/g, ' ').trim();
+
 	return (
 		<>
 			<style>
-			{`
-				${blockStyle}
-            `}
+				{editorStyle}
 			</style>
 
 			<InspectorControls key="controls">
@@ -3662,8 +3663,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setAttributes({ Heading_Hover_Color: value })
 												}
 											/>
-											{/*Spacing*/}
-											<Heading>Spacing</Heading>
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
@@ -3672,13 +3671,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={Heading_Desktop_padding}
 												spacingTablet={Heading_Tab_padding}
 												spacingMobile={Heading_Mobile_padding}
-												handleSpacingUnitHandler={
-													handleHeadingPaddingUnitChange
-												}
+												handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
 												spacingCombineBtn={paddingLink}
-												spacingCombineBtnHandler={
-													handleHeadingPaddingCombineBtn
-												}
+												spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
 												setAttributes={setAttributes}
 											/>
 

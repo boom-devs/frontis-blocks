@@ -77,3 +77,9 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
+
+
+export const POST_SWITCHER = [
+	{ label: __('Grid', 'frontis-blocks'), value: 'grid' },
+	{ label: __('List', 'frontis-blocks'), value: 'list' },
+];
