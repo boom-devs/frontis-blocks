@@ -650,6 +650,9 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    btnOneTargetUrl: {
+        type: "boolean",
+    },
     buttonIconSwitcher: {
         type: "boolean",
         default: true,
@@ -914,6 +917,9 @@ const attributes = {
 	btnTwoLink: {
 		type: "string",
 		default: ""
+	},
+    btnTwoTargetUrl: {
+		type: "boolean",
 	},
 	btnTwoPaddingUnits: {
 		type: 'object',

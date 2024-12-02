@@ -3048,7 +3048,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
-														label={__("Icon Position", "frontis-block")}
+														label={__("Media Position", "frontis-block")}
 														value={infoIconPosition}
 														options={INFO_ICON_POSITION}
 														onChange={(value) =>
@@ -3771,7 +3771,8 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 											/>
 										</PanelBody>
 										{/*Description Style*/}
-										<PanelBody
+										{Sub_Heading_Switcher && (
+											<PanelBody
 											title={__("Description", "frontis-block")}
 											initialOpen={false}
 											className="fb-icon-box-desc-setting-wrapper"
@@ -3891,6 +3892,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 													/>
 											
 										</PanelBody>
+										)}
 									</>
 								)}
 								{tab.name === "advance" && (
@@ -4061,7 +4063,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
                                                         onChange={(value) => setAttributes({ wrapperUrlSwitcher: value })}
                                                 />
 												{wrapperUrlSwitcher && (
-													<FB_UrlControl
+												<FB_UrlControl
 																url={wrapperLink}
 																onChangeUrl={(value) =>
 																	setAttributes({ wrapperLink: value })
