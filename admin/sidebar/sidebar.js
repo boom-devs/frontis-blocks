@@ -21,6 +21,7 @@ import CustomGradientColorPallet from "./components/CustomGradientPallet";
 import {getFbLocalStorage, setFbLocalStorage, useAfterSave} from "./helper";
 import {updateSettings} from "./api";
 import {updateGlobalStyle} from "./fetch";
+import TypographySettings from "./components/TypographySettings";
 
 const defaultsColors = [
 	{
@@ -106,6 +107,7 @@ const gradientDefaults = [
 function FrontisBlocksSidebar(props) {
 	const [customColors, setCustomColors] = useState([]);
 	const [activeTab, setActiveTab] = useState("solid");
+	const [activeTabTypo, setActiveTabTypo] = useState("");
 	const [gradientColors, setGradientColors] = useState([]);
 	const [customGradientColors, setCustomGradientColors] = useState([]);
 	const [globalColors, setGlobalColors] = useState([]);
@@ -289,7 +291,7 @@ function FrontisBlocksSidebar(props) {
 	// Save colors after post save
 	const isAfterSave = useAfterSave();
 
-	useEffect( () => {
+	useEffect(() => {
 		const handleUpdateSettings = async () => {
 			if (isAfterSave) {
 				try {
@@ -325,7 +327,7 @@ function FrontisBlocksSidebar(props) {
 		};
 
 		handleUpdateSettings();
-	}, [ isAfterSave ] );
+	}, [isAfterSave]);
 
 	return (
 		<>
@@ -339,7 +341,7 @@ function FrontisBlocksSidebar(props) {
 					className="fb-global-controls"
 				>
 					<div className="fb-panel-control">
-						<PanelBody title={__("Global Color", "frontis-blocks")}>
+						<PanelBody title={__("Global Color", "frontis-blocks")} initialOpen={ false }>
 							<TabPanel
 								className="fb-blocks-color-tabs"
 								activeClass="active-tab"
@@ -373,15 +375,14 @@ function FrontisBlocksSidebar(props) {
 												<div className="add-custom-color">
 													<Button
 														className="add-custom-color-btn"
-														onClick={() =>setNewCustomColorFn()}
-													>Add Custom Color <span><svg width="15" height="14"
-																				 viewBox="0 0 15 14" fill="none"
-																				 xmlns="http://www.w3.org/2000/svg">
-<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round"
-	  stroke-linejoin="round"/>
-</svg></span></Button>
+														onClick={() => setNewCustomColorFn()}
+													>Add Custom Color <span>
+														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+													</Button>
 												</div>
-
 											</>
 										)}
 										{tab.name === "gradient" && (
@@ -422,13 +423,12 @@ function FrontisBlocksSidebar(props) {
 																var: `--fb-custom-gradient-color-${customGradientColors.length + 1}`
 															}
 														])}
-													>Add Gradient Color <span><svg width="15" height="14"
-																						  viewBox="0 0 15 14"
-																						  fill="none"
-																						  xmlns="http://www.w3.org/2000/svg">
-<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round"
-	  stroke-linejoin="round"/>
-</svg></span></Button>
+													>Add Custom Color <span>
+														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+													</Button>
 												</div>
 											</>
 										)}
@@ -436,16 +436,11 @@ function FrontisBlocksSidebar(props) {
 								)}
 							</TabPanel>
 						</PanelBody>
-						<PanelBody
-							title={__("Global Typography", "frontis-blocks")}
-						>
-							<>
-								<h3>{__("Heading Typography", "frontis-blocks")}</h3>
-								<h3>{__("Body Typography", "frontis-blocks")}</h3>
-							</>
-
+						<PanelBody title={__("Global Typography", "frontis-blocks")} initialOpen={ false }>
+							{/* Global Typography settings */}
+							<TypographySettings />
 						</PanelBody>
-						<PanelBody title={__("Custom CSS", "frontis-blocks")}>
+						<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={ false }>
 							<TextareaControl
 								value={customCSS}
 								onChange={(value) => setCustomCSS(value)}
@@ -459,16 +454,3 @@ function FrontisBlocksSidebar(props) {
 };
 
 export default FrontisBlocksSidebar;
-
-//
-// export default withSelect((select) => {
-// 	return {
-// 		globalColors: select("frontis-blocks").getGlobalColors(),
-// 		customColors: select("frontis-blocks").getCustomColors(),
-// 		gradientColors: select("frontis-blocks").getGradientColors(),
-// 		customGradientColors: select("frontis-blocks").getCustomGradientColors(),
-// 		typography: select("frontis-blocks").getTypography(),
-// 		isLoading: select("frontis-blocks").getIsLoading(),
-// 		error: select("frontis-blocks").getError()
-// 	};
-// })(FrontisBlocksSidebar);

@@ -11,6 +11,7 @@ module.exports = {
 			'@Utils': path.resolve(__dirname, 'src/utils/'),
 			'@Blocks': path.resolve(__dirname, 'src/blocks/'),
 			'@Store': path.resolve(__dirname, 'src/store/'),
+			'@Constants': path.resolve(__dirname, 'src/fbConstants/'),
 		},
 	},
 	output: {

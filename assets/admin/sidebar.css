@@ -142,6 +142,28 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   margin-top: 0;
   border: 1px solid #e1e3e8;
 }
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content {
+  padding-top: 10px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings {
+  padding: 0 12px;
+  margin-top: 10px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .font_preview_box {
+  padding: 20px;
+  text-align: center;
+  background: #E1E3E8;
+  margin-bottom: 30px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control {
+  width: auto;
+  margin-left: 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap {
+  max-width: 200px;
+  margin: 0 auto;
+  margin-top: 12px;
+}
 
 .block-editor-tools-panel-color-gradient-settings__dropdown > button.is-open {
   background: transparent;
@@ -208,6 +230,47 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .actions .fb-reset .dashicons-image-rotate:before {
   color: #404655;
   font-size: 17px;
+}
+
+.fb-gradient-color-popup .fb-gradient-color-popup-content {
+  padding: 10px;
+}
+.fb-gradient-color-popup .components-circular-option-picker .components-circular-option-picker__swatches {
+  display: none !important;
+}
+
+.fb-global-typo-elements-wrap {
+  background: #F7F7F7;
+}
+.fb-global-typo-elements-wrap .fb-custom-element {
+  border-bottom: 1px solid #E1E3E8;
+  padding: 14px 12px;
+}
+.fb-global-typo-elements-wrap .fb-custom-element button {
+  padding: 0;
+  width: 100%;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #404655;
+}
+.fb-global-typo-elements-wrap .fb-custom-element button .font_preview {
+  display: block;
+  background: #E1E3E8;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.fb-global-typo-elements-wrap .fb-custom-element:last-child {
+  border-bottom: none;
+}
+.fb-global-typo-elements-wrap .fb-typography-settings .components-base-control {
+  width: auto !important;
+  margin-left: 0 !important;
+}
+
+svg#fb-global-panel-icon {
+  height: 25px;
 }
 
 /*# sourceMappingURL=sidebar.css.map*/
