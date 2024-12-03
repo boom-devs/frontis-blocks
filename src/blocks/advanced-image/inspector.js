@@ -31,9 +31,7 @@ import {
 	BORDER_STYLES,
 	FONT_FAMILYS,
 	HEADING,
-	NORMAL_HOVER,
 	TEXT_ALIGN,
-	UNIT_TYPES,
 } from "../advanced-image/constants/constants";
 import "./editor.scss";
 
@@ -701,8 +699,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border: ${globalBorder};
 			border-width: ${globalDeskBorder};
 			border-radius: ${globalDeskBorderRadius} !important;
-			${globalBorderColor !== undefined ? `bordeimport FB_ColorControl from './../../components/color-control/index';
-r-color: ${globalBorderColor};` : ""}
+			${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : ""}
 			${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : "" }
 			${testBackgroundType === "gradient" ? ` background: ${ testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor };
 			`
@@ -727,16 +724,25 @@ r-color: ${globalBorderColor};` : ""}
 		}
 		@media all and (max-width: 1024px) {
 			.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
+				padding: ${globalTabPadding};
+				margin: ${globalTabMargin};
+				border-width: ${globalTabBorder};
+				border-radius: ${globalTabBorderRadius} !important;
 				width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 				${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}` };
 			}
 		}
 		@media all and (max-width: 767px) {
 			.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
+				padding: ${globalMobPadding};
+				margin: ${globalMobMargin};
+				border-width: ${globalMobBorder};
+				border-radius: ${globalMobBorderRadius} !important;
 				width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 				${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}` };
 			}
 		}
+		
 		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image-caption figcaption {
 			text-align: ${captionAlignment};
 		}
@@ -1333,7 +1339,7 @@ r-color: ${globalBorderColor};` : ""}
 											title={__("Title", "frontis-blocks")}
 											initialOpen={true}
 										>
-										<FB_TypographyControl
+											<FB_TypographyControl
                                                 fontFamily={headingFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value })}
 
@@ -1421,6 +1427,15 @@ r-color: ${globalBorderColor};` : ""}
 												setAttributes={setAttributes}
 											/>
 										</PanelBody>
+										{/*	Overlay */}
+										{showOverlay && (
+											<PanelBody
+											title={__("Overlay", "frontis-blocks")}
+											initialOpen={true}
+										>
+											
+										</PanelBody>
+										)}
 									</>
 								)}
 								{tab.name === "advanced" && (
