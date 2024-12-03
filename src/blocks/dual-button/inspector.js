@@ -4229,6 +4229,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												}
 											/>
 
+											
+
 											<FB_Spacing
 												label={__("Border", "frontis-blocks")}
 												deviceType={deviceType}
