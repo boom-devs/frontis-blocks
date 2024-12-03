@@ -41,7 +41,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnIconPosition,
         infoIconPosition,
 		infoButtonLink,
-		infobtnTargetUrl
+		infobtnTargetUrl,
+		infoIconVerticalPosition
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -70,22 +71,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<Card className={`fb-info-box-content-wrapper ${blockID}`}>
 					<div className={`fb-info-box-content-wrapper-inner ${blockID}`} style={{
                         display: "flex",
-                        flexDirection:
-                            infoIconPosition === "left"
-                                ? "row"
-                                : infoIconPosition === "right"
-                                ? "row-reverse"
-                                : infoIconPosition === "top"
-                                ? "column"
-                                : "column-reverse",
+                        flexDirection: infoIconPosition === "left" ? "row" : infoIconPosition === "right" ? "row-reverse" : infoIconPosition === "top" ? "column" : "column-reverse",
+						justifyContent: "space-between"
                         
                     }}>
 						<div className="fb-info-media-container" style={{
 								justifyContent: wrapperAlignment,
+								alignItems: infoIconVerticalPosition === "v-top" ? "flex-start" : infoIconVerticalPosition === "v-middle" ? "center" : infoIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start",
 							}}>
 						<div
 							className="fb-info-media-wrapper"
-							
 						>
 							{mediaSwitcher === "image" && (
 								<img src={attributes.infoMediaUrl} />
