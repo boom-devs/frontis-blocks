@@ -46,37 +46,12 @@ const save = ({ attributes }) => {
                                            renderSVG(titlePrefixIcon)
                                     )}
 
-                                    {titlePrefixType === "image" ? (
-                                        <MediaUpload
-                                            onSelect={(media) =>
-                                                setAttributes({
-                                                    titlePrefixImgUrl: media.url,
-                                                    titlePrefixImgId: media.id,
-                                                    titlePrefixImgAlt: media.alt,
-                                                })
-                                            }
-                                            type="image"
-                                            value={titlePrefixImgId}
-                                            render={({ open }) => {
-                                                if (!titlePrefixImgUrl) {
-                                                    return (
-                                                        <Button
-                                                            label={__(
-                                                                "Upload Image",
-                                                                "frontis-blocks"
-                                                            )}
-                                                            icon="format-image"
-                                                            onClick={open}
-                                                        />
-                                                    );
-                                                } else {
-                                                    return (
-                                                        <img src={titlePrefixImgUrl} />
-                                                    );
-                                                }
-                                            }}
+                                    {titlePrefixType === 'image' && titlePrefixImgUrl && (
+                                        <img
+                                            src={titlePrefixImgUrl}
+                                            alt=""
                                         />
-                                    ) : null}
+                                    )}
                                 </div>
                             )}
 
@@ -93,37 +68,12 @@ const save = ({ attributes }) => {
                                         renderSVG(titleSuffixIcon)
                                     )}
 
-                                    {titleSuffixType === "image" ? (
-                                        <MediaUpload
-                                            onSelect={(media) =>
-                                                setAttributes({
-                                                    titleSuffixImgUrl: media.url,
-                                                    titleSuffixImgId: media.id,
-                                                    titleSuffixImgAlt: media.alt,
-                                                })
-                                            }
-                                            type="image"
-                                            value={titleSuffixImgId}
-                                            render={({ open }) => {
-                                                if (!titleSuffixImgUrl) {
-                                                    return (
-                                                        <Button
-                                                            label={__(
-                                                                "Upload Image",
-                                                                "frontis-blocks"
-                                                            )}
-                                                            icon="format-image"
-                                                            onClick={open}
-                                                        />
-                                                    );
-                                                } else {
-                                                    return (
-                                                        <img src={titleSuffixImgUrl} />
-                                                    );
-                                                }
-                                            }}
+                                    {titleSuffixType === 'image' && titleSuffixImgUrl && (
+                                        <img
+                                            src={titleSuffixImgUrl}
+                                            alt=""
                                         />
-                                    ) : null}
+                                    )}
                                 </div>
                             )}
                         </div>
