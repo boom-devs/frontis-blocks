@@ -22,6 +22,8 @@ import FB_Color from "../../components/color";
 import FB_Spacing from "../../components/spacing";
 import { SelectControl } from "@wordpress/components";
 import { useEffect } from "@wordpress/element";
+import FB_BoxShadowControl from "../../components/box-shadow";
+import FB_BackgroundColorControl from "../../components/background-color-control";
 
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
@@ -83,9 +85,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemTabMargin,
         accordionItemMobileMargin,
         accordionItemMarginLink,
-        accordionItemBgColorSwitcher,
-        accordionItemBgColor,
-        accordionItemBgHoverColor,
         accordionItemBorder,
         accordionItemBorderColor,
         accordionItemBorderHoverColor,
@@ -102,7 +101,38 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemBorderRadiusLink,
         accordionItemDesktopSwitcher,
         accordionItemTabletSwitcher,
-        accordionItemMobileSwitcher,	
+        accordionItemMobileSwitcher,
+
+        // Item Box Shadow
+        accordionItemBoxShadowValues,
+        accordionItemBoxShadowCssValue,
+
+        // Item Backgorund
+        accordionItemBgColorSwitcher,
+        accordionItemBgType,
+        accordionItemClassicColor,
+        accordionItemGradientColor,
+        accordionItemCustomGradientSwitcher,
+        accordionItemCustomGradientInputValue,
+        accordionItemBgImageUrl,
+        accordionItemBgImageAlt,
+        accordionItemBgImageID,
+        accordionItemBgImagePosition,
+        accordionItemBgImageAttachment,
+        accordionItemBgImageRepeat,
+        accordionItemBgImageSize,
+        accordionItemBgHoverType,
+        accordionItemHoverClassicColor,
+        accordionItemHoverGradientColor,
+        accordionItemHoverCustomGradientSwitcher,
+        accordionItemHoverCustomGradientInputValue,
+        accordionItemBgHoverImageUrl,
+        accordionItemBgHoverImageAlt,
+        accordionItemBgHoverImageID,
+        accordionItemBgHoverImagePosition,
+        accordionItemBgHoverImageAttachment,
+        accordionItemBgHoverImageRepeat,
+        accordionItemBgHoverImageSize,
     } = attributes;
 
 
@@ -540,33 +570,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                             <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
                                 <PanelBody title={__("Title Prefix", "frontis-blocks")}>
-                                    <BaseControl id="fb-accordionItem-image-icon">
-                                        <ButtonGroup id="fb-accordionItem-image-icon">
-                                            {MEDIA_TYPES.map(
-                                                (
-                                                    { label, value },
-                                                    index
-                                                ) => (
+                                    <div className="fb-setting-switcher-container">
+                                        <BaseControl
+                                            className="fb-setting-switcher-panel-wrapper"
+                                        >
+                                            <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                {MEDIA_TYPES.map((item, key) => (
                                                     <Button
-                                                        key={index}
-                                                        isSecondary={
-                                                            titlePrefixType !== value
-                                                        }
-                                                        isPrimary={
-                                                            titlePrefixType === value
-                                                        }
-                                                        onClick={() =>
-                                                            setAttributes({
-                                                                titlePrefixType: value,
-                                                            })
-                                                        }
+                                                        key={key}
+                                                        onClick={() => setAttributes({ titlePrefixType: item.value })} 
+                                                        className={`fb-setting-switcher-panel-btn-switcher ${titlePrefixType === item.value ? 'active' : ''}`}
                                                     >
-                                                        {label}
+                                                        {item.label}
                                                     </Button>
-                                                )
-                                            )}
-                                        </ButtonGroup>
-                                    </BaseControl>
+                                                ))}
+                                            </ButtonGroup>
+                                        </BaseControl>
+                                    </div>
 
                                     {titlePrefixType !== "none" && (
                                         <>
@@ -668,33 +688,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                 </PanelBody>
 
                                 <PanelBody title={__("Title Suffix", "frontis-blocks")}>
-                                    <BaseControl id="fb-accordionItem-image-icon">
-                                        <ButtonGroup id="fb-accordionItem-image-icon">
-                                            {MEDIA_TYPES.map(
-                                                (
-                                                    { label, value },
-                                                    index
-                                                ) => (
+                                    <div className="fb-setting-switcher-container">
+                                        <BaseControl
+                                            className="fb-setting-switcher-panel-wrapper"
+                                        >
+                                            <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                {MEDIA_TYPES.map((item, key) => (
                                                     <Button
-                                                        key={index}
-                                                        isSecondary={
-                                                            titleSuffixType !== value
-                                                        }
-                                                        isPrimary={
-                                                            titleSuffixType === value
-                                                        }
-                                                        onClick={() =>
-                                                            setAttributes({
-                                                                titleSuffixType: value,
-                                                            })
-                                                        }
+                                                        key={key}
+                                                        onClick={() => setAttributes({ titleSuffixType: item.value })} 
+                                                        className={`fb-setting-switcher-panel-btn-switcher ${titleSuffixType === item.value ? 'active' : ''}`}
                                                     >
-                                                        {label}
+                                                        {item.label}
                                                     </Button>
-                                                )
-                                            )}
-                                        </ButtonGroup>
-                                    </BaseControl>
+                                                ))}
+                                            </ButtonGroup>
+                                        </BaseControl>
+                                    </div>
 
                                     {titleSuffixType !== "none" && (
                                         <>
@@ -856,14 +866,148 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                         </PanelBody>
 
                                         <PanelBody title="Background Color" initialOpen={false} >
-                                            <FB_Color
-                                                globalColorSwitcher={accordionItemBgColorSwitcher}
-                                                globalColor={accordionItemBgColor}
-                                                globalHoverColor={accordionItemBgHoverColor}
-                                                handleColorSwitcherChange={accordionItemBGColorSwitcherChange}
-                                                handleGlobalColorChange={accordionItemBGColorChange}
-                                                handleGlobalHoverColorChange={accordionItemBGHoverColorChange}
-                                            />
+                                            <FB_BackgroundColorControl
+														bgColorSwitcher={accordionItemBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ accordionItemBgColorSwitcher: value })
+														}
+														normalBackgroundType={accordionItemBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ accordionItemBgType: value })
+														}
+														normalClassicColor={accordionItemClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ accordionItemClassicColor: value })
+														}
+														normalGradientColor={accordionItemGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ accordionItemGradientColor: value })
+														}
+														normalCustomGradientSwitcher={
+															accordionItemCustomGradientSwitcher
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionItemCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={
+															accordionItemCustomGradientInputValue
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionItemCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={accordionItemBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ accordionItemBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={accordionItemBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ accordionItemBgImageAlt: value })
+														}
+														normalBackgroundImageID={accordionItemBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ accordionItemBgImageID: value })
+														}
+														normalBackgroundImagePosition={
+															accordionItemBgImagePosition
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																accordionItemBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={
+															accordionItemBgImageAttachment
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																accordionItemBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={
+															accordionItemBgImageRepeat
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																accordionItemBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={accordionItemBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ accordionItemBgImageSize: value })
+														}
+														hoverBackgroundType={accordionItemBgHoverType}
+														setBgHoverType={(value) =>
+															setAttributes({ accordionItemBgHoverType: value })
+														}
+														hoverClassicColor={accordionItemHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ accordionItemHoverClassicColor: value })
+														}
+														hoverGradientColor={accordionItemHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ accordionItemHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={
+															accordionItemHoverCustomGradientSwitcher
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionItemHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={
+															accordionItemHoverCustomGradientInputValue
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionItemHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={accordionItemBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ accordionItemBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={accordionItemBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ accordionItemBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={accordionItemBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ accordionItemBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={
+															accordionItemBgHoverImagePosition
+														}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																accordionItemBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={
+															accordionItemBgHoverImageAttachment
+														}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																accordionItemBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={
+															accordionItemBgHoverImageRepeat
+														}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																accordionItemBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={accordionItemBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ accordionItemBgHoverImageSize: value })
+														}
+											/>
                                         </PanelBody>
 
                                         <PanelBody
@@ -915,6 +1059,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 spacingCombineBtnHandler={handleAccordionItemBorderRadiusCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
+
+                                            <FB_BoxShadowControl
+												onBoxShadowChange={(value) =>
+													setAttributes({ accordionItemBoxShadowValues: value })
+												}
+												initialShadowValue={accordionItemBoxShadowValues}
+												onBoxShadowStyleChange={(value) =>
+													setAttributes({
+														accordionItemBoxShadowCssValue: value,
+													})
+												}
+											/>
                                         </PanelBody>
 
                                         <PanelBody

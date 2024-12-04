@@ -30,6 +30,7 @@ import {
     TITLE_ALIGNMENT,
     CONTENT_ALIGN,
     ICON_POSITIONS,
+    ICON_SWITCHER,
 } from "./constants/constants";
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
@@ -39,6 +40,9 @@ import FB_Color from '@Components/color';
 import './editor.scss';
 import FBIconPicker from '../../components/icon-picker';
 import FB_TypographyControl from '../../components/typography-control';
+import FB_BackgroundColorControl from '../../components/background-color-control';
+import FB_BoxShadowControl from '../../components/box-shadow';
+import FB_ImageControl from '../../components/image-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -96,8 +100,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionType,
         displayIcon,
         transitionDuration,
+        tabIconSwitcher,
         tabIcon,
+        tabImageUrl,
+        tabImageAlt,
+        tabImageID,
+        tabImagePosition,
+        tabImageAttachment,
+        tabImageRepeat,
+        tabImageSize,
+
+        expandedIconSwitcher,
         expandedIcon,
+        expandedImageUrl,
+        expandedImageAlt,
+        expandedImageID,
+        expandedImagePosition,
+        expandedImageAttachment,
+        expandedImageRepeat,
+        expandedImageSize,
         contentAlign,
         contentColor,
         iconColor,
@@ -169,9 +190,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionTabMargin,
         accordionMobileMargin,
         accordionMarginLink,
-        accordionBgColorSwitcher,
-        accordionBgColor,
-        accordionBgHoverColor,
         accordionBorder,
         accordionBorderColor,
         accordionBorderHoverColor,
@@ -189,6 +207,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionDesktopSwitcher,
         accordionTabletSwitcher,
         accordionMobileSwitcher,
+
+        // Boxshadow
+        accordionGlobalBoxShadowValues,
+        accordionGlobalBoxShadowCssValue,
+
+        // Backgorund
+        accordionBgColorSwitcher,
+        accordionBgType,
+        accordionClassicColor,
+        accordionGradientColor,
+        accordionCustomGradientSwitcher,
+        accordionCustomGradientInputValue,
+        accordionBgImageUrl,
+        accordionBgImageAlt,
+        accordionBgImageID,
+        accordionBgImagePosition,
+        accordionBgImageAttachment,
+        accordionBgImageRepeat,
+        accordionBgImageSize,
+        accordionBgHoverType,
+        accordionHoverClassicColor,
+        accordionHoverGradientColor,
+        accordionHoverCustomGradientSwitcher,
+        accordionHoverCustomGradientInputValue,
+        accordionBgHoverImageUrl,
+        accordionBgHoverImageAlt,
+        accordionBgHoverImageID,
+        accordionBgHoverImagePosition,
+        accordionBgHoverImageAttachment,
+        accordionBgHoverImageRepeat,
+        accordionBgHoverImageSize,
+
+        // Item Box Shadow
+        accordionItemBoxShadowValues,
+        accordionItemBoxShadowCssValue,
+
+        // Item Backgorund
+        accordionItemBgColorSwitcher,
+        accordionItemBgType,
+        accordionItemClassicColor,
+        accordionItemGradientColor,
+        accordionItemCustomGradientSwitcher,
+        accordionItemCustomGradientInputValue,
+        accordionItemBgImageUrl,
+        accordionItemBgImageAlt,
+        accordionItemBgImageID,
+        accordionItemBgImagePosition,
+        accordionItemBgImageAttachment,
+        accordionItemBgImageRepeat,
+        accordionItemBgImageSize,
+        accordionItemBgHoverType,
+        accordionItemHoverClassicColor,
+        accordionItemHoverGradientColor,
+        accordionItemHoverCustomGradientSwitcher,
+        accordionItemHoverCustomGradientInputValue,
+        accordionItemBgHoverImageUrl,
+        accordionItemBgHoverImageAlt,
+        accordionItemBgHoverImageID,
+        accordionItemBgHoverImagePosition,
+        accordionItemBgHoverImageAttachment,
+        accordionItemBgHoverImageRepeat,
+        accordionItemBgHoverImageSize,
     } = attributes;
 
 
@@ -853,8 +933,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-
-    
     
 
     return (
@@ -1046,19 +1124,93 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <BaseControl
                                                         label={__("Tab Icon", "frontis-blocks")}
                                                     >
-                                                        <FBIconPicker
-                                                            value={tabIcon} 
-                                                            setIconHandler={titleTabIconHandler} 
-                                                        />
+                                                        <div className="fb-setting-switcher-container">
+                                                            <BaseControl
+                                                                className="fb-setting-switcher-panel-wrapper"
+                                                            >
+                                                                <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                                    {ICON_SWITCHER.map((item, key) => (
+                                                                        <Button
+                                                                            key={key}
+                                                                            onClick={() => setAttributes({ tabIconSwitcher: item.value })} 
+                                                                            className={`fb-setting-switcher-panel-btn-switcher ${tabIconSwitcher === item.value ? 'active' : ''}`}
+                                                                        >
+                                                                            {item.label}
+                                                                        </Button>
+                                                                    ))}
+                                                                </ButtonGroup>
+                                                            </BaseControl>
+                                                        </div>
+                                                        { tabIconSwitcher === 'icon' &&
+                                                            <FBIconPicker
+                                                                value={tabIcon} 
+                                                                setIconHandler={titleTabIconHandler} 
+                                                            />
+                                                        }
+                                                        { tabIconSwitcher === 'image' &&
+                                                            <FB_ImageControl
+                                                                globalBackgroundImageUrl={tabImageUrl}
+                                                                setGlobalBackgroundImageUrl={(value) => setAttributes({ tabImageUrl: value })}
+                                                                globalBackgroundImageAlt={tabImageAlt}
+                                                                setGlobalBackgroundImageAlt={(value) => setAttributes({ tabImageAlt: value })}
+                                                                globalBackgroundImageID={tabImageID}
+                                                                setGlobalBackgroundImageID={(value) => setAttributes({ tabImageID: value })}
+                                                                globalBackgroundImagePosition={tabImagePosition}
+                                                                setGlobalBackgroundImagePosition={(value) => setAttributes({ tabImagePosition: value })}
+                                                                globalBackgroundImageAttachment={tabImageAttachment} 
+                                                                setGlobalBackgroundImageAttachment={(value) => setAttributes({ tabImageAttachment: value })}
+                                                                globalBackgroundImageRepeat={tabImageRepeat}
+                                                                setGlobalBackgroundImageRepeat={(value) => setAttributes({ tabImageRepeat: value })}
+                                                                globalBackgroundImageSize={tabImageSize}
+                                                                setGlobalBackgroundImageSize={(value) => setAttributes({ tabImageSize: value })}
+                                                            />
+                                                        }
                                                     </BaseControl>
 
                                                     <BaseControl
                                                         label={__("Expanded Icon", "frontis-blocks")}
                                                     >
-                                                        <FBIconPicker
-                                                            value={expandedIcon} 
-                                                            setIconHandler={titleExpandedIconHandler} 
-                                                        />
+                                                        <div className="fb-setting-switcher-container">
+                                                            <BaseControl
+                                                                className="fb-setting-switcher-panel-wrapper"
+                                                            >
+                                                                <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                                    {ICON_SWITCHER.map((item, key) => (
+                                                                        <Button
+                                                                            key={key}
+                                                                            onClick={() => setAttributes({ expandedIconSwitcher: item.value })} 
+                                                                            className={`fb-setting-switcher-panel-btn-switcher ${expandedIconSwitcher === item.value ? 'active' : ''}`}
+                                                                        >
+                                                                            {item.label}
+                                                                        </Button>
+                                                                    ))}
+                                                                </ButtonGroup>
+                                                            </BaseControl>
+                                                        </div>
+                                                        { expandedIconSwitcher === 'icon' &&
+                                                            <FBIconPicker
+                                                                value={expandedIcon} 
+                                                                setIconHandler={titleExpandedIconHandler} 
+                                                            />
+                                                        }
+                                                        { expandedIconSwitcher === 'image' &&
+                                                            <FB_ImageControl 
+                                                                globalBackgroundImageUrl={expandedImageUrl}
+                                                                setGlobalBackgroundImageUrl={(value) => setAttributes({ expandedImageUrl: value })}
+                                                                globalBackgroundImageAlt={expandedImageAlt}
+                                                                setGlobalBackgroundImageAlt={(value) => setAttributes({ expandedImageAlt: value })}
+                                                                globalBackgroundImageID={expandedImageID}
+                                                                setGlobalBackgroundImageID={(value) => setAttributes({ expandedImageID: value })}
+                                                                globalBackgroundImagePosition={expandedImagePosition}
+                                                                setGlobalBackgroundImagePosition={(value) => setAttributes({ expandedImagePosition: value })}
+                                                                globalBackgroundImageAttachment={expandedImageAttachment} 
+                                                                setGlobalBackgroundImageAttachment={(value) => setAttributes({ expandedImageAttachment: value })}
+                                                                globalBackgroundImageRepeat={expandedImageRepeat}
+                                                                setGlobalBackgroundImageRepeat={(value) => setAttributes({ expandedImageRepeat: value })}
+                                                                globalBackgroundImageSize={expandedImageSize}
+                                                                setGlobalBackgroundImageSize={(value) => setAttributes({ expandedImageSize: value })}
+                                                            />
+                                                        }
                                                     </BaseControl>
 
                                                     <FB_Range
@@ -1234,6 +1386,150 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 handleGlobalColorChange={handleTitleBGColorChange}
                                                 handleGlobalHoverColorChange={handleTitleBGHoverColorChange}
                                             />
+
+                                            <FB_BackgroundColorControl
+                                                label={__("Background Color", "frontis-blocks")}
+														bgColorSwitcher={accordionItemBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ accordionItemBgColorSwitcher: value })
+														}
+														normalBackgroundType={accordionItemBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ accordionItemBgType: value })
+														}
+														normalClassicColor={accordionItemClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ accordionItemClassicColor: value })
+														}
+														normalGradientColor={accordionItemGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ accordionItemGradientColor: value })
+														}
+														normalCustomGradientSwitcher={
+															accordionItemCustomGradientSwitcher
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionItemCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={
+															accordionItemCustomGradientInputValue
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionItemCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={accordionItemBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ accordionItemBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={accordionItemBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ accordionItemBgImageAlt: value })
+														}
+														normalBackgroundImageID={accordionItemBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ accordionItemBgImageID: value })
+														}
+														normalBackgroundImagePosition={
+															accordionItemBgImagePosition
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																accordionItemBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={
+															accordionItemBgImageAttachment
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																accordionItemBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={
+															accordionItemBgImageRepeat
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																accordionItemBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={accordionItemBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ accordionItemBgImageSize: value })
+														}
+														hoverBackgroundType={accordionItemBgHoverType}
+														setBgHoverType={(value) =>
+															setAttributes({ accordionItemBgHoverType: value })
+														}
+														hoverClassicColor={accordionItemHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ accordionItemHoverClassicColor: value })
+														}
+														hoverGradientColor={accordionItemHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ accordionItemHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={
+															accordionItemHoverCustomGradientSwitcher
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionItemHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={
+															accordionItemHoverCustomGradientInputValue
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionItemHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={accordionItemBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ accordionItemBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={accordionItemBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ accordionItemBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={accordionItemBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ accordionItemBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={
+															accordionItemBgHoverImagePosition
+														}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																accordionItemBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={
+															accordionItemBgHoverImageAttachment
+														}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																accordionItemBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={
+															accordionItemBgHoverImageRepeat
+														}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																accordionItemBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={accordionItemBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ accordionItemBgHoverImageSize: value })
+														}
+											/>
                                            
                                             <FB_Range
                                                 min={1}
@@ -1361,6 +1657,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleAccordionItemsBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
+
+                                                    <FB_BoxShadowControl
+														onBoxShadowChange={(value) =>
+															setAttributes({ accordionItemBoxShadowValues: value })
+														}
+														initialShadowValue={accordionItemBoxShadowValues}
+														onBoxShadowStyleChange={(value) =>
+															setAttributes({
+																accordionItemBoxShadowCssValue: value,
+															})
+														}
+													/>
                                         </PanelBody>
                                     </>
                                 )}
@@ -1419,14 +1727,128 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
         
                                                 <PanelBody title="Background Color" initialOpen={false} >
-                                                    <FB_Color
-                                                        globalColorSwitcher={accordionBgColorSwitcher}
-                                                        globalColor={accordionBgColor}
-                                                        globalHoverColor={accordionBgHoverColor}
-                                                        handleColorSwitcherChange={accordionBGColorSwitcherChange}
-                                                        handleGlobalColorChange={accordionBGColorChange}
-                                                        handleGlobalHoverColorChange={accordionBGHoverColorChange}
-                                                    />
+                                                    <FB_BackgroundColorControl
+														bgColorSwitcher={accordionBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ accordionBgColorSwitcher: value })
+														}
+														normalBackgroundType={accordionBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ accordionBgType: value })
+														}
+														normalClassicColor={accordionClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ accordionClassicColor: value })
+														}
+														normalGradientColor={accordionGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ accordionGradientColor: value })
+														}
+														normalCustomGradientSwitcher={accordionCustomGradientSwitcher}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={accordionCustomGradientInputValue}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={accordionBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ accordionBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={accordionBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ accordionBgImageAlt: value })
+														}
+														normalBackgroundImageID={accordionBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ accordionBgImageID: value })
+														}
+														normalBackgroundImagePosition={accordionBgImagePosition}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																accordionBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={accordionBgImageAttachment}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																accordionBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={accordionBgImageRepeat}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																accordionBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={accordionBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ accordionBgImageSize: value })
+														}
+														hoverBackgroundType={accordionBgHoverType}
+														setBgHoverType={(value) =>
+															setAttributes({ accordionBgHoverType: value })
+														}
+														hoverClassicColor={accordionHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ accordionHoverClassicColor: value })
+														}
+														hoverGradientColor={accordionHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ accordionHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={accordionHoverCustomGradientSwitcher}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={accordionHoverCustomGradientInputValue}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={accordionBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ accordionBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={accordionBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ accordionBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={accordionBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ accordionBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={accordionBgHoverImagePosition}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																accordionBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={accordionBgHoverImageAttachment}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																accordionBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={accordionBgHoverImageRepeat}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																accordionBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={accordionBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ accordionBgHoverImageSize: value })
+														}
+													/>
                                                 </PanelBody>
         
                                                 <PanelBody
@@ -1478,6 +1900,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleAccordionBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
+
+                                                    <FB_BoxShadowControl
+														onBoxShadowChange={(value) =>
+															setAttributes({ accordionGlobalBoxShadowValues: value })
+														}
+														initialShadowValue={accordionGlobalBoxShadowValues}
+														onBoxShadowStyleChange={(value) =>
+															setAttributes({
+																accordionGlobalBoxShadowCssValue: value,
+															})
+														}
+													/>
                                                 </PanelBody>
         
                                                 <PanelBody
