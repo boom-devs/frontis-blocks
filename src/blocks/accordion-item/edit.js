@@ -22,7 +22,11 @@ const Edit = (props) => {
 
         inheritedTagName,
         inheritedDisplayIcon,
+        inheritedTabIconSwitcher,
+        inheritedTabImageUrl,
         inheritedTabIcon,
+        inheritedExpandedIconSwitcher,
+        inheritedExpandedImageUrl,
         inheritedExpandedIcon,
 
         title,
@@ -76,8 +80,12 @@ const Edit = (props) => {
             parentBlockID:  context["fb/accordionparentBlockID"],
             inheritedAccordionType:  context["fb/accordionInheritedAccordionType"],
             inheritedDisplayIcon: context["fb/accordionInheritedDisplayIcon"],
+            inheritedTabIconSwitcher: context["fb/accordionInheritedTabIconSwitcher"],
             inheritedTabIcon: context["fb/accordionInheritedTabIcon"],
+            inheritedTabImageUrl: context["fb/accordionInheritedTabImageUrl"],
+            inheritedExpandedIconSwitcher: context["fb/accordionInheritedExpandedIconSwitcher"],
             inheritedExpandedIcon: context["fb/accordionInheritedExpandedIcon"],
+            inheritedExpandedImageUrl: context["fb/accordionInheritedExpandedImageUrl"],
             inheritedTagName: context["fb/accordionInheritedTagName"],
             faqSchema: context["fb/accordionFaqSchema"],
         })
@@ -85,8 +93,12 @@ const Edit = (props) => {
         context["fb/accordionparentBlockID"],
         context["fb/accordionInheritedAccordionType"],
         context["fb/accordionInheritedDisplayIcon"],
+        context["fb/accordionInheritedTabIconSwitcher"],
         context["fb/accordionInheritedTabIcon"],
+        context["fb/accordionInheritedTabImageUrl"],
+        context["fb/accordionInheritedExpandedIconSwitcher"],
         context["fb/accordionInheritedExpandedIcon"],
+        context["fb/accordionInheritedExpandedImageUrl"],
         context["fb/accordionInheritedTagName"],
         context["fb/accordionFaqSchema"]
     ])
@@ -131,7 +143,7 @@ const Edit = (props) => {
         <>
             {isSelected && <Inspector {...props} />}
 
-            <style>
+            {/* <style>
                 {`
                     .fb-accordion-item-main-wrapper.${blockID} {
                         position: relative;
@@ -140,6 +152,43 @@ const Edit = (props) => {
 
                     .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
                         ${accordionItemBgColor !== undefined ? `background-color: ${accordionItemBgColor};` : ''};
+                        ${
+                            accordionBgType === "gradient"
+                                ? `background: ${
+                                        testCustomGradientSwitcher && testCustomGradientInputValue
+                                            ? testCustomGradientInputValue
+                                            : testGradientColor
+                                  };`
+                                : accordionBgImageUrl && accordionBgImageUrl !== "null"
+                                ? `
+                              ${
+                                    accordionBgImageUrl
+                                        ? `background-image: url(${accordionBgImageUrl});`
+                                        : ""
+                                }
+                              ${
+                                    accordionBgImagePosition
+                                        ? `background-position: ${accordionBgImagePosition};`
+                                        : ""
+                                }
+                              ${
+                                    accordionBgImageAttachment
+                                        ? `background-attachment: ${accordionBgImageAttachment};`
+                                        : ""
+                                }
+                              ${
+                                    accordionBgImageRepeat
+                                        ? `background-repeat: ${accordionBgImageRepeat};`
+                                        : ""
+                                }
+                              ${
+                                    accordionBgImageSize
+                                        ? `background-size: ${accordionBgImageSize};`
+                                        : ""
+                                }
+                            `
+                                : `background: ${testClassicColor};`
+                        }
                         padding: ${accordionItemPaddingDesktopWidth};
                         margin: ${accordionItemMarginDesktopWidth};
                         border-style: ${accordionItemBorder};
@@ -188,7 +237,7 @@ const Edit = (props) => {
                         }
                     }
                 `}
-            </style>
+            </style> */}
 
             <div {...blockProps}>
                 <div className={`fb-accordion-item-wrapper for_edit_page`} ref={accordionTitle}>
@@ -283,8 +332,10 @@ const Edit = (props) => {
                             )}
                         </div>
                         <div className="fb-accordion-icon">
-                            {inheritedDisplayIcon && toggleClick === false && renderSVG(inheritedTabIcon)}
-                            {inheritedDisplayIcon && toggleClick === true && renderSVG(inheritedExpandedIcon)}
+                            {inheritedTabIconSwitcher === 'icon' && inheritedDisplayIcon && toggleClick === false && renderSVG(inheritedTabIcon)}
+                            {inheritedTabIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === false && <img src={inheritedTabImageUrl}/>}
+                            {inheritedExpandedIconSwitcher === 'icon' && inheritedDisplayIcon && toggleClick === true && renderSVG(inheritedExpandedIcon)}
+                            {inheritedExpandedIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === true && <img src={inheritedExpandedImageUrl}/>}
                         </div>
                     </div>
                     <div

@@ -21,7 +21,7 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_Color from "../../components/color";
 import FB_Spacing from "../../components/spacing";
 import { SelectControl } from "@wordpress/components";
-import { useEffect } from "@wordpress/element";
+import { useEffect, useMemo } from "@wordpress/element";
 import FB_BoxShadowControl from "../../components/box-shadow";
 import FB_BackgroundColorControl from "../../components/background-color-control";
 
@@ -29,6 +29,7 @@ import FB_BackgroundColorControl from "../../components/background-color-control
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
         blockID,
+		blockStyle,
         deviceType,
         clickable,
 
@@ -525,13 +526,131 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const accordionItemBorderRadiusMobileWidth = `${accordionItemMobileBorderRadiusWidth.top}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.right}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.bottom}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.left}${accordionItemBorderRadiusUnits[deviceType]}`;
 	
 
+	const fbAccordionItemStyle = useMemo(
+		() => `
+		  .fb-accordion-item-main-wrapper.${blockID} {
+			position: relative;
+			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			${
+			  accordionItemBgType === "gradient"
+				? `background: ${
+					accordionItemCustomGradientSwitcher && accordionItemCustomGradientInputValue
+					  ? accordionItemCustomGradientInputValue
+					  : accordionItemGradientColor
+				  };`
+				: accordionItemBgImageUrl !== undefined && accordionItemBgImageUrl !== "null"
+				? `
+				  ${accordionItemBgImageUrl !== undefined ? `background-image: url(${accordionItemBgImageUrl});` : ''}
+				  ${accordionItemBgImagePosition !== undefined ? `background-position: ${accordionItemBgImagePosition};` : ''}
+				  ${accordionItemBgImageAttachment !== undefined ? `background-attachment: ${accordionItemBgImageAttachment};` : ''}
+				  ${accordionItemBgImageRepeat !== undefined ? `background-repeat: ${accordionItemBgImageRepeat};` : ''}
+				  ${accordionItemBgImageSize !== undefined ? `background-size: ${accordionItemBgImageSize};` : ''}
+				`
+				: `background: ${accordionItemClassicColor};`
+			}
+			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+			${accordionItemBorder !== undefined ? `border-style: ${accordionItemBorder};` : ''}
+			${accordionItemBorderDesktopWidth !== undefined ? `border-width: ${accordionItemBorderDesktopWidth};` : ''}
+			${accordionItemBorderColor !== undefined ? `border-color: ${accordionItemBorderColor};` : ''}
+			${accordionItemBorderRadiusDesktopWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusDesktopWidth};` : ''}
+			transition: all 0.3s ease-in-out;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper:hover {
+			${accordionItemBorderHoverColor !== undefined ? `border-color: ${accordionItemBorderHoverColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .block-editor-block-list__layout {
+			display: block !important;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .block-editor-block-list__layout p {
+			margin: 0;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-prefix {
+			${titlePrefixColor !== undefined ? `fill: ${titlePrefixColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-suffix {
+			${titleSuffixColor !== undefined ? `fill: ${titleSuffixColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-prefix {
+			${titlePrefixHoverColor !== undefined ? `fill: ${titlePrefixHoverColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-suffix {
+			${titleSuffixHoverColor !== undefined ? `fill: ${titleSuffixHoverColor};` : ''}
+		  }
+	  
+		  @media only screen and (max-width: 1024px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			  ${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+			  ${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+			  ${accordionItemBorderRadiusTabletWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusTabletWidth};` : ''}
+			}
+		  }
+	  
+		  @media only screen and (max-width: 767px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			  ${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+			  ${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+			  ${accordionItemBorderRadiusMobileWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusMobileWidth};` : ''}
+			}
+		  }
+		`,
+		[
+		  blockID,
+		  accordionItemZIndex,
+		  accordionItemBgType,
+		  accordionItemCustomGradientSwitcher,
+		  accordionItemCustomGradientInputValue,
+		  accordionItemClassicColor,
+		  accordionItemGradientColor,
+		  accordionItemBgImageUrl,
+		  accordionItemBgImagePosition,
+		  accordionItemBgImageAttachment,
+		  accordionItemBgImageRepeat,
+		  accordionItemBgImageSize,
+		  accordionItemPaddingDesktopWidth,
+		  accordionItemMarginDesktopWidth,
+		  accordionItemBorder,
+		  accordionItemBorderDesktopWidth,
+		  accordionItemBorderColor,
+		  accordionItemBorderRadiusDesktopWidth,
+		  accordionItemBorderHoverColor,
+		  titlePrefixColor,
+		  titleSuffixColor,
+		  titlePrefixHoverColor,
+		  titleSuffixHoverColor,
+		  accordionItemPaddingTabletWidth,
+		  accordionItemMarginTabletWidth,
+		  accordionItemBorderRadiusTabletWidth,
+		  accordionItemPaddingMobileWidth,
+		  accordionItemMarginMobileWidth,
+		  accordionItemBorderRadiusMobileWidth,
+		]
+	  );
+	  
+	  useEffect(() => {
+		setAttributes({
+		  blockStyle: fbAccordionItemStyle.replace(/\s+/g, ' ').trim(),
+		});
+	  }, [fbAccordionItemStyle]);
+	  
+
 
     return (
         <>
         <style>
-            {`
-                
-            `}
+			{`
+            	${blockStyle}
+			`}
         </style>
         <InspectorControls key="controls">
         <div className="fb-inspector-control">
