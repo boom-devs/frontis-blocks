@@ -12,6 +12,310 @@ const attributes = {
 		default: ""
 	},
 	/** Start General Settings */
+
+	/** Start Top Section */
+
+	/** Start Background */
+	pricingTopSectionBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	pricingTopSectionNormalBackgroundType: { 
+		type: "string",
+		default: "classic",
+	},
+	pricingTopSectionNormalClassicColor: {
+		type: "string",
+		default: "#399CFF",
+	},
+	pricingTopSectionNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	pricingTopSectionNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	pricingTopSectionNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	pricingTopSectionHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	pricingTopSectionHoverClassicColor: {
+		type: "string",
+		default: "#399CFF",
+	},
+	pricingTopSectionHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	pricingTopSectionHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	pricingTopSectionHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
+	
+	pricingTopSectionPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingTopSectionDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '5',
+			right: '5',
+		},
+	},
+	pricingTopSectionTabletPadding: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '5',
+			right: '5',
+		},
+	},
+	pricingTopSectionMobilePadding: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '5',
+			right: '5',
+		},
+	},
+	pricingTopSectionPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	pricingTopSectionBorder: {
+		type: 'string',
+		default: "none",
+	},
+	pricingTopSectionBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	pricingTopSectionBorderColor: {
+		type: 'string',
+	},
+	pricingTopSectionBorderHoverColor: {
+		type: 'string',
+	},
+	pricingTopSectionBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingTopSectionBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTopSectionBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTopSectionBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTopSectionBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	pricingTopSectionBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingTopSectionBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
+		},
+	},
+	pricingTopSectionBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
+		},
+	},
+	pricingTopSectionBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '30',
+			right: '30',
+		},
+	},
+	pricingTopSectionBorderRadiusLink: {
+		type : "boolean",
+		default: true
+	},
+
+	/** Start Text */
+	pricingTopSectionTextColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	pricingTopSectionTextColor: {
+		type: 'string',
+		default: "#FFFFFF",
+	},
+	pricingTopSectionTextHoverColor: {
+		type: 'string',
+		default: "#FFFFFF",
+	},
+	pricingTopSectionTextFontFamily: {
+		type: 'string',
+	},
+	pricingTopSectionTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '24',
+			Mobile: '24',
+		},
+	},
+	pricingTopSectionTextFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	pricingTopSectionTextFontWeight: {
+		type: 'string',
+		default: '600',
+	},
+	pricingTopSectionTextFontStyle: {
+		type: 'string',
+		default: 'normal',
+	},
+	pricingTopSectionTextTextTransform: {
+		type: 'string',
+		default: 'normal',
+	},
+	pricingTopSectionTextTextDecoration: {
+		type: 'string',
+		default: 'none',
+	},
+	pricingTopSectionTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	pricingTopSectionTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	pricingTopSectionTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '30',
+		},
+	},
+	pricingTopSectionTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	pricingTopSectionTextPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	pricingTopSectionTextDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '20',
+			bottom: '20',
+			left: '0',
+			right: '0',
+		},
+	},
+	pricingTopSectionTextTabletPadding: {
+		type: "object", 
+		default: {
+			top: '20',
+			bottom: '20',
+			left: '0',
+			right: '0',
+		},
+	},
+	pricingTopSectionTextMobilePadding: {
+		type: "object", 
+		default: {
+			top: '20',
+			bottom: '20',
+			left: '0',
+			right: '0',
+		},
+	},
+	pricingTopSectionTextPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Top Section */
+
 	/** Start Header */
 	pricingSectionTopSwitcher: {
 		type: "boolean",
