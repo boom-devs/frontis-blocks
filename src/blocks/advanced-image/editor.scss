@@ -10,6 +10,7 @@ $radius-5: 60%;
 $radius-6: 40%;
 $radius-7: 60%;
 $radius-8: 40%;
+
 /** Start Admin Panel scss **/
 .fb-inspector-control {
 	.fb-tab {
@@ -523,6 +524,14 @@ $radius-8: 40%;
 			max-width: 100%;
 			max-height: 100%;
 		}
+	&:before{
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
 	}
 	.fb-advanced-image-title{
 		display: flex;
@@ -617,14 +626,8 @@ $radius-8: 40%;
 			text-align: right;
 		}
 	}
-	&.circle .fb-advanced-image-inner {
-		border-radius: 50%;
-	}
 	&.square .fb-advanced-image-inner {
-		border-radius: 0;
-	}
-	&.rounded .fb-advanced-image-inner {
-		border-radius: 15px;
+		border-radius: 0 ;
 	}
 	&.triangle .fb-advanced-image-inner {
 		clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
