@@ -82,6 +82,108 @@ const attributes = {
 	imageCaption: {
 		type: "string",
 	},
+	/** Image Border **/
+	imageBorder: {
+		type: 'string',
+		default: "none",
+	},
+	imageBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	imageBorderColor: {
+		type: 'string',
+	},
+	imageBorderHoverColor: {
+		type: 'string',
+	},
+	imageBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageBorderDesktop: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	imageBorderTablet: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	imageBorderMobile: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	imageBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	imageBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	imageBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	imageBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	imageBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	/** Image Box Shadow **/
+	imageBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    imageBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
 	captionPosition: {
 		type: "string",
 	},
@@ -493,6 +595,8 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
+	/** Global Background Control **/
 	testBgColorSwitcher: {
         type: "string",
         default: "normal"
@@ -598,6 +702,113 @@ const attributes = {
         default: ""
     },
 
+	/** Image Overlay **/
+	overlayBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	overlayBackgroundType: {
+		type: "string",
+		default: "classic"
+	},
+	overlayClassicColor: {
+		type: "string",
+	},
+	overlayGradientColor: {
+		type: "string",
+	},
+	overlayCustomGradientSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	overlayCustomGradientInputValue: {
+		type: "string",
+		default: ""
+	},
+	overlayBackgroundImageUrl: {
+		type: "string",
+		default: ""
+	},
+	overlayBackgroundImagePosition: {
+		type: "string",
+		default: ""
+	},
+	overlayBackgroundImageAttachment: {
+		type: "string",
+		default: ""
+	},
+	overlayBackgroundImageSize: {
+		type: "string",
+		default: ""
+	},
+	overlayBackgroundImageRepeat: {
+		type: "string",
+		default: ""
+	},
+	/** Hover **/
+	overlayHoverBackgroundType: {
+		type: "string",
+		default: "classic"
+	},
+	overlayHoverClassicColor: {
+		type: "string",
+	},
+	overlayHoverGradientColor: {
+		type: "string",
+	},
+	overlayHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	overlayHoverCustomGradientInputValue: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundColorStyle: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundImageUrl: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundImageAlt: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundImageID: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundImagePosition: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundImageAttachment: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundImageSize: {
+		type: "string",
+		default: ""
+	},
+	overlayHoverBackgroundImageRepeat: {
+		type: "string",
+		default: ""
+	},
+
+	/** Overlay opacity **/
+	overlayOpacity: {
+        type: 'number',
+    },
+    overlayOpacityUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
     globalBackgroundImageUrl: {
         type: "string",
         default: ""

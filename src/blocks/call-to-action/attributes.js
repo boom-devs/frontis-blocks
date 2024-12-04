@@ -1754,10 +1754,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-    hoverBackgroundColorStyle: {
-        type: "string",
-        default: ""
-    },
     hoverBackgroundImageUrl: {
         type: "string",
         default: ""

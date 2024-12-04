@@ -2239,7 +2239,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         Upload
                                                     </button>
                                                 )}
-                                                </BaseControl>
+                                            </BaseControl>
                                             )}
 
                                             <ToggleControl

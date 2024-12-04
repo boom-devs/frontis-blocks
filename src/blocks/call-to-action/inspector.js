@@ -2793,99 +2793,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
 			  ${globalBorder ? `border: ${globalBorder};` : ""}
 			  ${BorderDesktopWidth ? `border-width: ${BorderDesktopWidth};` : ""}
-			  ${
-					BorderRadiusDesktopWidth
-						? `border-radius: ${BorderRadiusDesktopWidth} !important;`
-						: ""
-				}
-			  ${
-					globalBorderColor !== undefined
-						? `border-color: ${globalBorderColor};`
-						: ""
-				}
-			  ${
-					boxGlobalBoxShadowCssValue
-						? `box-shadow: ${boxGlobalBoxShadowCssValue};`
-						: ""
-				}
-			  ${
-					testBackgroundType === "gradient"
-						? `background: ${
-								testCustomGradientSwitcher && testCustomGradientInputValue
-									? testCustomGradientInputValue
-									: testGradientColor
-						  };`
-						: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
-						? `
-					  ${
-							testBackgroundImageUrl
-								? `background-image: url(${testBackgroundImageUrl});`
-								: ""
-						}
-					  ${
-							testBackgroundImagePosition
-								? `background-position: ${testBackgroundImagePosition};`
-								: ""
-						}
-					  ${
-							testBackgroundImageAttachment
-								? `background-attachment: ${testBackgroundImageAttachment};`
-								: ""
-						}
-					  ${
-							testBackgroundImageRepeat
-								? `background-repeat: ${testBackgroundImageRepeat};`
-								: ""
-						}
-					  ${
-							testBackgroundImageSize
-								? `background-size: ${testBackgroundImageSize};`
-								: ""
-						}
-					`
-						: `background: ${testClassicColor};`
-				}
+			  ${BorderRadiusDesktopWidth ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : "" }
+			  ${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : "" }
+			  ${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : "" }
+			  ${testBackgroundType === "gradient" ? `background: ${ testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor };` : testBackgroundImageUrl && testBackgroundImageUrl !== "null" ? `
+			  ${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : "" }
+			  ${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : "" }
+			  ${ testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : "" }
+			  ${ testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : "" }
+			  ${ testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : "" } `
+			  : `background: ${testClassicColor};` }
 			  transition: all .3s ease-in-out;
 		  }
 		  .fb-cta-content-wrapper.${blockID}:hover {
-			  
-			  ${
-					testBackgroundType === "gradient"
-						? `background: ${
-								testCustomGradientSwitcher && testCustomGradientInputValue
-									? testCustomGradientInputValue
-									: testGradientColor
-						  };`
-						: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
-						? `
-					  ${
-							testBackgroundImageUrl
-								? `background-image: url(${testBackgroundImageUrl});`
-								: ""
-						}
-					  ${
-							testBackgroundImagePosition
-								? `background-position: ${testBackgroundImagePosition};`
-								: ""
-						}
-					  ${
-							testBackgroundImageAttachment
-								? `background-attachment: ${testBackgroundImageAttachment};`
-								: ""
-						}
-					  ${
-							testBackgroundImageRepeat
-								? `background-repeat: ${testBackgroundImageRepeat};`
-								: ""
-						}
-					  ${
-							testBackgroundImageSize
-								? `background-size: ${testBackgroundImageSize};`
-								: ""
-						}
-					`
-						: `background: ${testClassicColor};`
-				}
+			  ${hoverBackgroundType === "gradient" ? `background: ${ hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
+			  ${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
+			  ${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
+			  ${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
+			  ${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
+			  ${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${testClassicColor};` }
 		  }
 		  @media only screen and (max-width: 1024px) {
 			.fb-cta-content-wrapper-inner.${blockID} {
@@ -4301,9 +4227,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</BaseControl>
 											)}
-
-											{/*Spacing*/}
-											<Heading>Spacing</Heading>
 											<div className="fb-setting-spacing-container">
 												<div className="fb-setting-spacing-inner-container">
 													{/* Padding */}
@@ -4550,6 +4473,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													</div>
 												</div>
 											</div>
+											
 											{/*Border*/}
 											<Heading>Border</Heading>
 											<SelectControl
