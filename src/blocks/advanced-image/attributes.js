@@ -120,47 +120,74 @@ const attributes = {
 		type: "string",
 		default: "tilt"
 	},
-	HeadingFontFamily: {
-		type: "string",
-		default: "inherit",
+	/** Start Heading Style */
+    headingFontFamily: {
+        type: "string",
+        default: "inherit",
+    },
+    headingFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '18',
+			Mobile: '16'
+		}
 	},
-	HeadingFontSize: {
-		type: "number",
-		default: 35
+	headingFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
-	HeadingFontSizeUnits: {
-		type: "string",
-		default: "px"
+    headingFontWeight : {
+        type: "string",
+        default: "600"
+    },
+    headingFontStyle : {
+        type: "string",
+        default: ""
+    },
+    headingTextTransform : {
+        type: "string",
+        default: ""
+    },
+    headingTextDecoration : {
+        type: "string",
+        default: ""
+    },
+    headingLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	HeadingFontWeight : {
-		type: "string",
-		default: "700"
+	headingLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
-	HeadingFontStyle : {
-		type: "string",
-		default: "normal"
+    headingLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	HeadingTextTransform : {
-		type: "string",
-		default: "none"
-	},
-	HeadingTextDecoration : {
-		type: "string",
-		default: "none"
-	},
-	HeadingLetterSpacing : {
-		type: "number",
-	},
-	HeadingLetterSpacingUnits : {
-		type: "string",
-		default: "px"
-	},
-	HeadingLineHeight : {
-		type: "number",
-	},
-	HeadingLineHeightUnits : {
-		type: "string",
-		default: "px"
+	headingLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 
 	HeadingColorSwitcher : {
@@ -262,8 +289,12 @@ const attributes = {
 		default: true
 	},
 	HeadingPaddingUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
 	},
 	HeadingDesktopPadding: {
 		type: "object",
@@ -297,8 +328,12 @@ const attributes = {
 		default: true
 	},
 	HeadingMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
 	},
 	HeadingDesktopMargin: {
 		type: "object",
