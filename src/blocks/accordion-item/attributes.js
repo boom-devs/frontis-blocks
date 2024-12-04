@@ -9,6 +9,10 @@ const attributes = {
     blockID: {
         type: "string",
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
     blockRoot: {
         type: "string",
         default: "frontis_block",
@@ -72,10 +76,22 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    inheritedTabIconSwitcher: {
+        type: "string",
+    },
     inheritedTabIcon: {
         type: "string",
     },
+    inheritedTabImageUrl: {
+        type: "string",
+    },
+    inheritedExpandedIconSwitcher: {
+        type: "string",
+    },
     inheritedExpandedIcon: {
+        type: "string",
+    },
+    inheritedExpandedImageUrl: {
         type: "string",
     },
     faqSchema: {

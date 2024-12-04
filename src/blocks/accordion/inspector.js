@@ -1057,32 +1057,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                "frontis-blocks"
                                            )}
                                            className="fb-setting-text-alignment"
-                                       >
-                                           <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                                               {HEADING.map((item, key) => (
-                                                   <Button
-                                                        className="fb-setting-text-alignment-single-btn"
-                                                       key={key}
-                                                       // isLarge
-                                                       isPrimary={
-                                                           tagName ===
-                                                           item.value
-                                                       }
-                                                       isSecondary={
-                                                           tagName !==
-                                                           item.value
-                                                       }
-                                                       onClick={() =>
-                                                           setAttributes({
-                                                               tagName:
-                                                                   item.value,
-                                                           })
-                                                       }
-                                                   >
-                                                       {item.label}
-                                                   </Button>
-                                               ))}
-                                           </ButtonGroup>
+                                        >
+                                           <div className="fb-setting-switcher-container">
+                                                <BaseControl
+                                                    className="fb-setting-switcher-panel-wrapper"
+                                                >
+                                                    <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                        {HEADING.map((item, key) => (
+                                                            <Button
+                                                                key={key}
+                                                                onClick={() => setAttributes({ tagName: item.value })} 
+                                                                className={`fb-setting-switcher-panel-btn-switcher ${tagName === item.value ? 'active' : ''}`}
+                                                            >
+                                                                {item.label}
+                                                            </Button>
+                                                        ))}
+                                                    </ButtonGroup>
+                                                </BaseControl>
+                                            </div>
                                        </BaseControl>
                                        <FB_Range
                                             min={1}
