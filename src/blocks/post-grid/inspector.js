@@ -15,7 +15,7 @@ import {
     TextControl,
 } from '@wordpress/components';
 
-import { BORDER_STYLES } from './constants/constants';
+import { BORDER_STYLES, POST_SWITCHER } from './constants/constants';
 
 /**
  * External Dependencies
@@ -52,10 +52,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		deSelectedAuthor,
 		orderBy,
 		sortOrder,
-		columnsPerSection,
-		gapUnits,
-		rowGap,
-		columnGap,
+		gridColumnsPerSection,
+		gridGapUnits,
+		gridRowGap,
+		gridColumnGap,
+		listGapUnits,
+		listRowGap,
+		listImageSpacing,
+		postSwitcher,
 
         /** Start grid */
         postGridPaddingUnits,
@@ -103,6 +107,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End grid */ 
 
         /** Start Image */
+        postImageSize,
         postImageWidth,
         postImageWidthUnits,
         postImageHeight,
@@ -292,6 +297,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         showAuthorSwitcher,
         postAuthorGap,
         postAuthorGapUnits,
+        postAuthorAvatarSwitcher,
         postAuthorAvatarWidth,
         postAuthorAvatarWidthUnits,
 
@@ -432,6 +438,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ postType: option.value });
     };
     /** End post type */
+
+    /** Start image size */
+    const imageSizes = FrontisBlocksData.image_sizes;
+    const imageSizeOptions = imageSizes.map(item => ({
+        value: item.value,
+        label: item.label
+    }));
+    /** End image size */
 
     /** Start category */
 	const allTaxs = FrontisBlocksData.all_cats;
@@ -726,7 +740,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        postGridBorderTablet: {
+                        postGridBorderTablet: { 
                             top: value,
                             right: value,
                             bottom: value,
@@ -736,7 +750,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        postGridBorderMobile: {
+                        postGridBorderMobile: { 
                             top: value,
                             right: value,
                             bottom: value,
@@ -2353,21 +2367,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `}
             ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
         }
-        .${blockId}.fb_post_grid_container {
+        .${blockId}.fb_post_grid_container.grid-layout {
             display: grid; 
-            grid-template-columns: repeat(${columnsPerSection.Desktop}, 1fr) !important;
-            row-gap: ${rowGap.Desktop}${gapUnits.Desktop}; 
-            column-gap: ${columnGap.Desktop}${gapUnits.Desktop}; 
+            grid-template-columns: repeat(${gridColumnsPerSection.Desktop}, 1fr) !important;
+            row-gap: ${gridRowGap.Desktop}${gridGapUnits.Desktop};  
+            column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop}; 
         }
 
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper {
-            grid-column: span ${columnsPerSection.Desktop};
+        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper {
+            grid-column: span ${gridColumnsPerSection.Desktop};
+        }
+        .${blockId}.fb_post_grid_container.list-layout {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: ${listRowGap.Desktop}${listGapUnits.Desktop}; 
+        }
+        .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper {
+            display: flex;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden;
+        }
+        .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper {
+            margin-right: ${listImageSpacing.Desktop}${listGapUnits.Desktop};
+            max-width: 50%;
+            height: fit-content;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+        }
+
+        .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper img {
+            max-width: 100% ;
+            object-fit: cover;
+            border-radius: 0px;
+            display: block;
+        }
+        .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_content_wrapper {
+            flex: 1;
+            align-self: center;
+            display: block;
+            text-align: left;
         }
         .loading.post {
             display: grid;
-            grid-template-columns: repeat(${columnsPerSection.Desktop}, 1fr);
-            row-gap: ${rowGap.Desktop}${gapUnits.Desktop};
-            column-gap: ${columnGap.Desktop}${gapUnits.Desktop};
+            grid-template-columns: repeat(${gridColumnsPerSection.Desktop}, 1fr);
+            row-gap: ${gridRowGap.Desktop}${gridGapUnits.Desktop}; 
+            column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop};
             width: 100%;
             height: auto;
         }
@@ -2611,21 +2657,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `}
                 ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
             }
-            .${blockId}.fb_post_grid_container {
+            .${blockId}.fb_post_grid_container.grid-layout {
                 display: grid; 
-                grid-template-columns: repeat(${columnsPerSection.Tablet}, 1fr) !important;
-                row-gap: ${rowGap.Tablet}${gapUnits.Tablet}; 
-                column-gap: ${columnGap.Tablet}${gapUnits.Tablet}; 
+                grid-template-columns: repeat(${gridColumnsPerSection.Tablet}, 1fr) !important;
+                row-gap: ${gridRowGap.Tablet}${gridGapUnits.Tablet};  
+                column-gap: ${gridColumnGap.Tablet}${gridGapUnits.Tablet}; 
             }
 
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper {
-                grid-column: span ${columnsPerSection.Tablet};
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper {
+                grid-column: span ${gridColumnsPerSection.Tablet};
             }
+
+            .${blockId}.fb_post_grid_container.list-layout {
+                display: grid; 
+                row-gap: ${listRowGap.Tablet}${listGapUnits.Tablet};
+            }
+
+            .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper {
+                margin-right: ${listImageSpacing.Tablet}${listGapUnits.Tablet};  
+            }
+
             .loading.post {
                 display: grid;
-                grid-template-columns: repeat(${columnsPerSection.Tablet}, 1fr);
-                row-gap: ${rowGap.Tablet}${gapUnits.Tablet};
-                column-gap: ${columnGap.Tablet}${gapUnits.Tablet};
+                grid-template-columns: repeat(${gridColumnsPerSection.Tablet}, 1fr);
+                row-gap: ${gridRowGap.Tablet}${gridGapUnits.Tablet};
+                column-gap: ${gridColumnGap.Tablet}${gridGapUnits.Tablet};
                 width: 100%;
                 height: auto;
             }
@@ -2872,21 +2928,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `}
                 ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
             }
-            .${blockId}.fb_post_grid_container {
+            .${blockId}.fb_post_grid_container.grid-layout {
                 display: grid; 
-                grid-template-columns: repeat(${columnsPerSection.Mobile}, 1fr) !important;
-                row-gap: ${rowGap.Mobile}${gapUnits.Mobile}; 
-                column-gap: ${columnGap.Mobile}${gapUnits.Mobile}; 
+                grid-template-columns: repeat(${gridColumnsPerSection.Mobile}, 1fr) !important;
+                row-gap: ${gridRowGap.Mobile}${gridGapUnits.Mobile};  
+                column-gap: ${gridColumnGap.Mobile}${gridGapUnits.Mobile}; 
             }
 
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper {
-                grid-column: span ${columnsPerSection.Mobile};
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper {
+                grid-column: span ${gridColumnsPerSection.Mobile};
+            }
+
+            .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper {
+                display: block;
+            }
+            .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper {
+                max-width: 100%;
+                margin-right: 0px;
+            }
+
+            .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper {
+                margin-right: ${listImageSpacing.Mobile}${listGapUnits.Mobile};
+                max-width: 100%;
+                height: fit-content;
+                overflow: hidden;
+                display: inline-block;
+                position: relative;
+            }
+
+            .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper img {
+                max-width: 100% ;
+                object-fit: cover;
+                display: block;
+            }
+            .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_content_wrapper {
+                flex: 1;
+                align-self: center;
+                display: block;
+                text-align: left;
             }
             .loading.post {
                 display: grid;
-                grid-template-columns: repeat(${columnsPerSection.Mobile}, 1fr);
-                row-gap: ${rowGap.Mobile}${gapUnits.Mobile};
-                column-gap: ${columnGap.Mobile}${gapUnits.Mobile};
+                grid-template-columns: repeat(${gridColumnsPerSection.Mobile}, 1fr);
+                row-gap: ${gridRowGap.Mobile}${gridGapUnits.Mobile}; 
+                column-gap: ${gridColumnGap.Mobile}${gridGapUnits.Mobile};
                 width: 100%;
                 height: auto;
             }
@@ -3120,10 +3205,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         deSelectedAuthor,
         orderBy,
         sortOrder,
-        columnsPerSection,
-        gapUnits,
-        rowGap,
-        columnGap,
+        gridColumnsPerSection,
+        gridGapUnits,
+        listGapUnits,
+        gridRowGap,
+        listRowGap,
+        listImageSpacing,
+        gridColumnGap,
 
         postGridPaddingUnits,
         postGridPaddingDesktop,
@@ -3398,6 +3486,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         showAuthorSwitcher,
         postAuthorGap,
         postAuthorGapUnits,
+        postAuthorAvatarSwitcher,
         postAuthorAvatarWidth,
         postAuthorAvatarWidthUnits,
 
@@ -3782,51 +3871,102 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </PanelBody>
 
                                             <PanelBody
-                                                title={__("Grid", "frontis-blocks")}
+                                                title={__("Post Switcher", "frontis-blocks")}
                                                 initialOpen={false}
                                             >
+                                                <div className="fb-setting-switcher-container">
+                                                    <BaseControl
+                                                        className="fb-setting-switcher-panel-wrapper"
+                                                    >
+                                                        <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                            {POST_SWITCHER.map((item, key) => (
+                                                                <Button
+                                                            key={key}
+                                                                    onClick={() => setAttributes({postSwitcher: item.value})} 
+                                                                    className={`fb-setting-switcher-panel-btn-switcher ${postSwitcher === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                    </BaseControl>
+                                                </div>
+                                                {postSwitcher === 'grid' && (
+                                                    <>
+                                                        <FB_Range
+                                                            min={1}
+                                                            max={6}
+                                                            label={__("Columns", "frontis-blocks")}
+                                                            rangeValue={gridColumnsPerSection}
+                                                            onChangeHandler={(value) => setAttributes({ gridColumnsPerSection: value })}
+                                                            deviceType={deviceType}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={"3"}
+                                                            isRangeUnit={false}
+                                                        />
 
-                                                <FB_Range
-                                                    min={1}
-                                                    max={6}
-                                                    label={__("Columns", "frontis-blocks")}
-                                                    rangeValue={columnsPerSection}
-                                                    onChangeHandler={(value) => setAttributes({ columnsPerSection: value })}
-                                                    deviceType={deviceType}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={"3"}
-                                                    isRangeUnit={false}
-                                                />
+                                                        <FB_Range
+                                                            min={1}
+                                                            max={200}
+                                                            label={__("Row Gap", "frontis-blocks")}
+                                                            rangeValue={gridRowGap}
+                                                            onChangeHandler={(value) => setAttributes({ gridRowGap: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ gridGapUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={gridGapUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={"30"}
+                                                        />
 
-                                                <FB_Range
-                                                    min={1}
-                                                    max={200}
-                                                    label={__("Row Gap", "frontis-blocks")}
-                                                    rangeValue={rowGap}
-                                                    onChangeHandler={(value) => setAttributes({ rowGap: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ gapUnits: value })}
-                                                    deviceType={deviceType}
-                                                    units={gapUnits}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={"30"}
-                                                />
+                                                        <FB_Range
+                                                            min={1}
+                                                            max={200}
+                                                            label={__("Column Gap", "frontis-blocks")}
+                                                            rangeValue={gridColumnGap}
+                                                            onChangeHandler={(value) => setAttributes({ gridColumnGap: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ gridGapUnits: value })} 
+                                                            deviceType={deviceType}
+                                                            units={gridGapUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={"30"}
+                                                        />
+                                                    </>
+                                                )}
 
-                                                <FB_Range
-                                                    min={1}
-                                                    max={200}
-                                                    label={__("Column Gap", "frontis-blocks")}
-                                                    rangeValue={columnGap}
-                                                    onChangeHandler={(value) => setAttributes({ columnGap: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ gapUnits: value })}
-                                                    deviceType={deviceType}
-                                                    units={gapUnits}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={"30"}
-                                                />
+                                                {postSwitcher === 'list' && (
+                                                    <>
+                                                        <FB_Range
+                                                            min={1}
+                                                            max={200}
+                                                            label={__("Row Gap", "frontis-blocks")}
+                                                            rangeValue={listRowGap}
+                                                            onChangeHandler={(value) => setAttributes({ listRowGap: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ listGapUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={listGapUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={"30"}
+                                                        />
 
+                                                        <FB_Range
+                                                            min={1}
+                                                            max={100}
+                                                            label={__("Image Spacing", "frontis-blocks")}
+                                                            rangeValue={listImageSpacing}
+                                                            onChangeHandler={(value) => setAttributes({ listImageSpacing: value })}
+                                                            rangeUnitHandler={(value) => setAttributes({ listGapUnits: value })}
+                                                            deviceType={deviceType}
+                                                            units={listGapUnits}
+                                                            setAttributes={setAttributes}
+                                                            rangeStep={1}
+                                                            resetFallbackValue={"40"}
+                                                        />
+                                                    </>
+                                                )}
                                             </PanelBody>
                                         </div>
                                     </>
@@ -3957,6 +4097,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         </PanelBody>
 
                                         <PanelBody title={__("Thumbnail", "frontis-blocks")} initialOpen={false}>
+                                            <SelectControl
+                                                label={__("Image Size", "frontis-blocks")}
+                                                value={postImageSize}
+                                                options={imageSizeOptions}
+                                                onChange={(value) => setAttributes({ postImageSize: value })}
+                                            />
 
                                             <FB_Range
                                                 min={1}
@@ -4638,6 +4784,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtn={postAuthorMarginLink}
                                                 spacingCombineBtnHandler={handlePostAuthorMarginCombineBtn}
                                                 setAttributes={setAttributes}
+                                            />
+                                            <ToggleControl
+                                                label={__("Show Author Avatar", "frontis-blocks")}
+                                                checked={postAuthorAvatarSwitcher}
+                                                onChange={(value) => setAttributes({ postAuthorAvatarSwitcher: value })}
                                             />
                                             <FB_Range
                                                 min={1}
