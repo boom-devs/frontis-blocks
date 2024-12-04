@@ -64,26 +64,10 @@ const attributes = {
     mediaBgWidth: {
 		type: 'object',
 		default: {
-			Desktop: 76,
-			Tablet: 76,
-			Mobile: 76
+			Desktop: '76',
+			Tablet: '50',
+			Mobile: '40'
 		}
-	},
-	mediaBgWidthDesktop: {
-		type: "number",
-		default: 20
-	},
-	mediaBgWidthTablet: {
-		type: "number",
-		default: 20
-	},
-	mediaBgWidthMobile: {
-		type: "number",
-		default: 20
-	},
-	mediaBgWidthUnitsSave: {
-		type: "string",
-		default: "px"
 	},
 	mediaBgWidthUnits: {
 		type: 'object',
@@ -96,22 +80,10 @@ const attributes = {
     mediaBgHeight: {
 		type: 'object',
 		default: {
-			Desktop: 76,
-			Tablet: 76,
-			Mobile: 76
+			Desktop: '76',
+			Tablet: '50',
+			Mobile: '40'
 		}
-	},
-	mediaBgHeightDesktop: {
-		type: "number",
-		default: 20
-	},
-	mediaBgHeightTablet: {
-		type: "number",
-		default: 20
-	},
-	mediaBgHeightMobile: {
-		type: "number",
-		default: 20
 	},
 	mediaBgHeightUnits: {
 		type: 'object',
@@ -166,6 +138,10 @@ const attributes = {
         default: 'left'
 	},
     infoIconPosition: {
+		type: 'string',
+        default: 'top'
+	},
+    infoIconVerticalPosition: {
 		type: 'string',
         default: 'top'
 	},
@@ -236,48 +212,75 @@ const attributes = {
         type : "string",
         default: "h2"
     },
-    Heading_Font_Family: {
+    /** Start Heading Style */
+    headingFontFamily: {
         type: "string",
         default: "inherit",
     },
-    Heading_Font_Size: {
-        type: "number",
-        default: 24
-    },
-    Heading_Font_size_units: {
+    headingFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '18',
+			Mobile: '16'
+		}
+	},
+	headingFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    headingFontWeight : {
         type: "string",
-        default: "px"
+        default: "600"
     },
-    Heading_Font_Weight : {
+    headingFontStyle : {
         type: "string",
-        default: "700"
+        default: ""
     },
-    Heading_Font_Style : {
+    headingTextTransform : {
         type: "string",
-        default: "normal"
+        default: ""
     },
-    Heading_Text_Transform : {
+    headingTextDecoration : {
         type: "string",
-        default: "none"
+        default: ""
     },
-    Heading_Text_Decoration : {
-        type: "string",
-        default: "none"
-    },
-    Heading_Letter_Spacing : {
-        type: "number",
-    },
-    Heading_Letter_Spacing_units : {
-        type: "string",
-        default: "px"
-    },
-    Heading_Line_Height : {
-        type: "number",
-    },
-    Heading_Line_Height_units : {
-        type: "string",
-        default: "px"
-    },
+    headingLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    headingLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
     Heading_Color_Switcher : {
         type: "string",
         default: "normal"
@@ -464,48 +467,74 @@ const attributes = {
         type : "boolean",
         default: true
     },
-    //Sub Heading
-    SubHeadingFontFamily: {
+    /** Start Sub Heading Style */  
+    subHeadingFontFamily: {
         type: "string",
         default: "inherit",
     },
-    SubHeadingFontSize: {
-        type: "number",
-        default: 16
+    subHeadingFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    SubHeadingFontSizeUnits: {
+    subHeadingFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    subHeadingFontWeight: {
         type: "string",
-        default: "px"
+        default: ""
     },
-    SubHeadingFontWeight : {
+    subHeadingFontStyle: {
         type: "string",
-        default: "400"
+        default: ""
     },
-    SubHeadingFontStyle : {
+    subHeadingTextTransform: {
         type: "string",
-        default: "normal"
+        default: ""
     },
-    SubHeadingTextTransform : {
+    subHeadingTextDecoration: {
         type: "string",
-        default: "none"
+        default: ""
     },
-    SubHeadingTextDecoration : {
-        type: "string",
-        default: "none"
+    subHeadingLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    SubHeadingLetterSpacing : {
-        type: "number",
+    subHeadingLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
-    SubHeadingLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+    subHeadingLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    SubHeadingLineHeight : {
-        type: "number",
-    },
-    SubHeadingLineHeightUnits : {
-        type: "string",
-        default: "px"
+    subHeadingLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
     SubHeadingColorSwitcher : {
         type: "string",
@@ -766,8 +795,12 @@ const attributes = {
 	},
 	//Button Border Radius
 	infoBtnBorderradiusUnits : {
-		type: "string",
-		default: "px"
+		type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
 	infoBtnDesktopBorderradiusWidth: {
 		type: "object",
@@ -796,6 +829,10 @@ const attributes = {
 			right: 0,
 		},
 	},
+    btnBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
 	//Info box padding
 	infoBoxPaddingUnits : {
 		type: "string",
@@ -952,12 +989,20 @@ const attributes = {
 		default: "inherit",
 	},
 	buttonFontSize: {
-		type: "number",
-		default: 14
+		type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
 	},
 	buttonFontSizeUnits: {
-		type: "string",
-		default: "px"
+        type: 'object',
+		default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
 	},
 	buttonFontWeight : {
 		type: "string",
@@ -976,18 +1021,36 @@ const attributes = {
 		default: "none"
 	},
 	buttonLetterSpacing : {
-		type: "number",
+		type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
 	},
 	buttonLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
 	},
 	buttonLineHeight : {
-		type: "number",
+		type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
 	},
 	buttonLineHeightUnits : {
-		type: "string",
-		default: "px"
+		type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
 	},
 	// Button Color
 	buttonColorSwitcher : {
@@ -1209,10 +1272,10 @@ const attributes = {
     mediaPaddingDesktop: {
         type: "object",
         default: {
-            top: 25,
-            bottom: 25,
-            left: 25,
-            right: 25,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     mediaPaddingTablet: {

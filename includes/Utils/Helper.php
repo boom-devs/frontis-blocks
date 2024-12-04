@@ -71,41 +71,50 @@ class Helper
 	 * @since  1.9.0
 	 * @return array $sizes Data for all currently-registered image sizes.
 	 */
-	public static function get_image_sizes() {
+    public static function get_image_sizes() {
 
-		global $_wp_additional_image_sizes;
-
-		$sizes       = get_intermediate_image_sizes();
-		$image_sizes = array();
-
-		$image_sizes[] = array(
-			'value' => 'full',
-			'label' => esc_html__( 'Full', 'frontis-blocks' ),
-		);
-
-		foreach ( $sizes as $size ) {
-			if ( in_array( $size, array( 'thumbnail', 'medium', 'medium_large', 'large' ), true ) ) {
-				$image_sizes[] = array(
-					'value' => $size,
-					'label' => ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
-				);
-			} else {
-				$image_sizes[] = array(
-					'value' => $size,
-					'label' => sprintf(
-						'%1$s (%2$sx%3$s)',
-						ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
-						$_wp_additional_image_sizes[ $size ]['width'],
-						$_wp_additional_image_sizes[ $size ]['height']
-					),
-				);
-			}
-		}
-
-		$image_sizes = apply_filters( 'fb_post_featured_image_sizes', $image_sizes );
-
-		return $image_sizes;
-	}
+        global $_wp_additional_image_sizes;
+    
+        // Define essential sizes
+        $essential_sizes = array( 'full', 'thumbnail', 'medium', 'medium_large', 'large' );
+    
+        $sizes       = get_intermediate_image_sizes();
+        $image_sizes = array();
+    
+        // Add the 'Full' size option
+        $image_sizes[] = array(
+            'value' => 'full',
+            'label' => esc_html__( 'Full', 'frontis-blocks' ),
+        );
+    
+        foreach ( $sizes as $size ) {
+            // Include only essential sizes
+            if ( in_array( $size, $essential_sizes, true ) ) {
+                $image_sizes[] = array(
+                    'value' => $size,
+                    'label' => ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
+                );
+            } elseif ( isset( $_wp_additional_image_sizes[ $size ] ) ) {
+                // Include additional sizes if they are essential
+                if ( in_array( $size, $essential_sizes, true ) ) {
+                    $image_sizes[] = array(
+                        'value' => $size,
+                        'label' => sprintf(
+                            '%1$s (%2$sx%3$s)',
+                            ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
+                            $_wp_additional_image_sizes[ $size ]['width'],
+                            $_wp_additional_image_sizes[ $size ]['height']
+                        ),
+                    );
+                }
+            }
+        }
+    
+        // Apply the filter for additional customization
+        $image_sizes = apply_filters( 'fb_post_featured_image_sizes', $image_sizes );
+    
+        return $image_sizes;
+    }    
 
 	/**
 	 * Get all taxonomies.

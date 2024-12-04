@@ -70,7 +70,8 @@ class Blocks
 						'contact_form7_html' => ContactForms7::wf7_form_html(),
 						'post_types' => Helper::get_post_types(),
 						'all_cats' => Helper::get_related_taxonomy(),
-						'all_authors' => Helper::get_all_authors_with_posts()
+						'all_authors' => Helper::get_all_authors_with_posts(),
+						'image_sizes' => Helper::get_image_sizes(),
 					];
 
 					$localize_array = array_merge($localize_array, $admin_localize_array);

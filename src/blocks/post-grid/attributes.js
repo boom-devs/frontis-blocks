@@ -20,6 +20,11 @@ const attributes = {
 		type: "string",
 		default: 6
 	},
+
+	postSwitcher: {
+		type: "string",
+		default: "grid"
+	},
 	/** Start category */
 	selectedCatSwitcher: {
 		type: "string",
@@ -77,7 +82,7 @@ const attributes = {
 		type: "string",
 		default: "desc"
 	},
-	columnsPerSection: {
+	gridColumnsPerSection: {
 		type: "object",
 		default: {
 			Desktop: 3,
@@ -85,7 +90,7 @@ const attributes = {
 			Mobile: 1
 		}
 	},
-	gapUnits: {
+	gridGapUnits: {
 		type: "object",
 		default: {
 			Desktop: 'px',
@@ -93,7 +98,15 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-	rowGap: {
+	listGapUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	gridRowGap: {
 		type: "object",
 		default: {
 			Desktop: 30,
@@ -101,12 +114,29 @@ const attributes = {
 			Mobile: 30
 		}
 	},
-	columnGap: {
+	gridColumnGap: {
 		type: "object",
 		default: {
 			Desktop: 30,
 			Tablet: 30,
 			Mobile: 30
+		}
+	},
+
+	listRowGap: {
+		type: "object",
+		default: {
+			Desktop: 30,
+			Tablet: 30,
+			Mobile: 30
+		}
+	},
+	listImageSpacing: {
+		type: "object",
+		default: {
+			Desktop: 40,
+			Tablet: 30,
+			Mobile: 0
 		}
 	},
 
@@ -355,6 +385,10 @@ const attributes = {
 	/** End Post Grid */
 
 	/** Start Image */
+	postImageSize: {
+		type: "string",
+		default: "large",
+	},
 	postImageWidth: {
 		type: "object",
 		default: {
@@ -535,8 +569,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '24',
-			Tablet: '24',
-			Mobile: '24'
+			Tablet: '20',
+			Mobile: '16'
 		}
 	},
 	postTitleFontSizeUnits: { 
@@ -664,8 +698,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '18',
-			Tablet: '18',
-			Mobile: '18'
+			Tablet: '16',
+			Mobile: '14'
 		}
 	},
 	postDescriptionFontSizeUnits: { 
@@ -1389,6 +1423,11 @@ const attributes = {
 		}
 	},
 
+	postAuthorAvatarSwitcher: {
+		type: "boolean",
+		default: true
+	},
+
 	postAuthorAvatarWidth: {
 		type: "object",
 		default: {
@@ -1648,7 +1687,7 @@ const attributes = {
 	/** Start Date */
 	showDateSwitcher: {
 		type: "boolean",
-		default: true
+		default: false
 	},
 
 	postDateFontFamily: {

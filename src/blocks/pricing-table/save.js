@@ -67,7 +67,7 @@ export default function save({ attributes }) {
     return (
         <>
         <div {...blockProps} id={blockId}>
-            <div className={`fb-pricing-wrapper ${blockId}`}>
+            <div className={`fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`}>
                 {pricingSectionTopSwitcher && (
                     <div className="fb-pricing-inner-wrapper">
                         <div className="fb-pricing-top-wrapper">
@@ -152,12 +152,12 @@ export default function save({ attributes }) {
                                     ))}
                                 </ul>
                             )}
-                            {priceFeatureAfterTextSwitcher && (
-                                <div className="fb-pricing-after-text-wrapper">
-                                    <div className="fb-pricing-after-text">{priceFeatureAfterText}</div>
-                                </div>
-                            )}
                         </div>
+                        {priceFeatureAfterTextSwitcher && (
+                            <div className="fb-pricing-feature-after-text-wrapper">
+                                <span className="fb-pricing-feature-after-text">{priceFeatureAfterText}</span>
+                            </div>
+                        )}
                     </div>
                     <div className="fb-pricing-footer-wrapper">
                         <div className="fb-pricing-button-wrapper">
