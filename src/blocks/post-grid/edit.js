@@ -34,10 +34,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showAuthorSwitcher,
         showCategorySwitcher,
         showTagSwitcher,
+        postAuthorAvatarSwitcher,
 
         postAuthorPrefixSwitcher,
         postAuthorPrefix,
         showDateSwitcher,
+        postSwitcher,
+        postImageSize,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -85,7 +88,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             {postLists ? (
                 <div {...blockProps} id={blockId}>
                     {postLists.length > 0 ? (
-                        <div className={`fb_post_grid_container ${blockId}`}> 
+                        <div className={`fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} > 
                             {postLists.map((item, index) => {
                                 return <LayoutGrid 
                                     data={item}
@@ -99,6 +102,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     postAuthorPrefixSwitcher={postAuthorPrefixSwitcher}
                                     postAuthorPrefix={postAuthorPrefix}
                                     showDateSwitcher={showDateSwitcher}
+                                    postAuthorAvatarSwitcher={postAuthorAvatarSwitcher}
+                                    postImageSize={postImageSize}
                                 />
                             })}
                         </div>

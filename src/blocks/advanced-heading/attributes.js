@@ -77,9 +77,9 @@ const attributes = {
     headingLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '42',
+			Tablet: '42',
+			Mobile: '42'
 		}
 	},
 	headingLineHeightUnits: {

@@ -39,7 +39,6 @@ import FB_UrlControl from '@Components/url-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
@@ -54,6 +53,69 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
 		deviceType,
 		blockStyle,
+
+		/** Start Top Section */
+		pricingTopSectionBgColorSwitcher,
+		pricingTopSectionNormalBackgroundType,
+		pricingTopSectionNormalClassicColor,
+		pricingTopSectionNormalGradientColor,
+		pricingTopSectionNormalCustomGradientSwitcher,
+		pricingTopSectionNormalCustomGradientInputValue,
+
+		pricingTopSectionHoverBackgroundType,
+		pricingTopSectionHoverClassicColor,
+		pricingTopSectionHoverGradientColor,
+		pricingTopSectionHoverCustomGradientSwitcher,
+		pricingTopSectionHoverCustomGradientInputValue,
+
+		pricingTopSectionPaddingUnits,
+		pricingTopSectionDesktopPadding,
+		pricingTopSectionTabletPadding,
+		pricingTopSectionMobilePadding,
+		pricingTopSectionPaddingLink,
+
+		pricingTopSectionBorder,
+		pricingTopSectionBorderColorSwitcher,
+		pricingTopSectionBorderColor,
+		pricingTopSectionBorderHoverColor,
+
+		pricingTopSectionBorderUnits,
+		pricingTopSectionBorderDesktop,
+		pricingTopSectionBorderTablet,
+		pricingTopSectionBorderMobile,
+		pricingTopSectionBorderLink,
+
+		pricingTopSectionBorderRadiusUnits,
+		pricingTopSectionBorderRadiusDesktop,
+		pricingTopSectionBorderRadiusTablet,
+		pricingTopSectionBorderRadiusMobile,
+		pricingTopSectionBorderRadiusLink,
+
+		pricingTopSectionTextColorSwitcher,
+		pricingTopSectionTextColor,
+		pricingTopSectionTextHoverColor,
+
+		pricingTopSectionTextFontFamily,
+		pricingTopSectionTextFontSize,
+		pricingTopSectionTextFontSizeUnits,
+		pricingTopSectionTextFontWeight,
+		pricingTopSectionTextFontStyle,
+		pricingTopSectionTextTextTransform,
+		pricingTopSectionTextTextDecoration,
+		pricingTopSectionTextLetterSpacing,
+		pricingTopSectionTextLetterSpacingUnits,
+		pricingTopSectionTextLineHeight,
+		pricingTopSectionTextLineHeightUnits,
+
+		pricingTopSectionTextPaddingUnits,
+		pricingTopSectionTextDesktopPadding,
+		pricingTopSectionTextTabletPadding,
+		pricingTopSectionTextMobilePadding,
+		pricingTopSectionTextPaddingLink,
+
+
+		/** End Top Section */
+		
 		/** Start Header */
 		pricingSectionTopSwitcher,
 		pricingSectionTopText,
@@ -638,6 +700,294 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const priceButtonIconHandler = (IconName) => {
 		setAttributes({priceButtonIcon: IconName})
 	}
+
+	/** Start section Top Padding */ 
+	const handleTopSectionPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingTopSectionPaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingTopSectionDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingTopSectionTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingTopSectionMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingTopSectionDesktopPadding: {...pricingTopSectionDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingTopSectionTabletPadding: {...pricingTopSectionTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingTopSectionMobilePadding: {...pricingTopSectionMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleTopSectionPaddingCombineBtn = () => {   
+		setAttributes( {pricingTopSectionPaddingLink: !pricingTopSectionPaddingLink} );
+	}
+
+	const handleTopSectionPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingTopSectionPaddingUnits: {
+				...pricingTopSectionPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const pricingTopSectionDesktopPaddingWidth = `${pricingTopSectionDesktopPadding.top}${pricingTopSectionPaddingUnits.Desktop} ${pricingTopSectionDesktopPadding.right}${pricingTopSectionPaddingUnits.Desktop} ${pricingTopSectionDesktopPadding.bottom}${pricingTopSectionPaddingUnits.Desktop} ${pricingTopSectionDesktopPadding.left}${pricingTopSectionPaddingUnits.Desktop}`;
+	const pricingTopSectionTabletPaddingWidth = `${pricingTopSectionTabletPadding.top}${pricingTopSectionPaddingUnits.Tablet} ${pricingTopSectionTabletPadding.right}${pricingTopSectionPaddingUnits.Tablet} ${pricingTopSectionTabletPadding.bottom}${pricingTopSectionPaddingUnits.Tablet} ${pricingTopSectionTabletPadding.left}${pricingTopSectionPaddingUnits.Tablet}`;
+	const pricingTopSectionMobilePaddingWidth = `${pricingTopSectionMobilePadding.top}${pricingTopSectionPaddingUnits.Mobile} ${pricingTopSectionMobilePadding.right}${pricingTopSectionPaddingUnits.Mobile} ${pricingTopSectionMobilePadding.bottom}${pricingTopSectionPaddingUnits.Mobile} ${pricingTopSectionMobilePadding.left}${pricingTopSectionPaddingUnits.Mobile}`;
+	/** End Top Section Padding */
+
+	/** Start section Top Border */ 
+	const handleTopSectionBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingTopSectionBorderLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingTopSectionBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingTopSectionBorderTablet: { 
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingTopSectionBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingTopSectionBorderDesktop: {...pricingTopSectionBorderDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingTopSectionBorderTablet: {...pricingTopSectionBorderTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingTopSectionBorderMobile: {...pricingTopSectionBorderMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleTopSectionBorderCombineBtn = () => {   
+		setAttributes( {pricingTopSectionBorderLink: !pricingTopSectionBorderLink} );
+	}
+
+	const handleTopSectionBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingTopSectionBorderUnits: {
+				...pricingTopSectionBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const pricingTopSectionBorderDesktopWidth = `${pricingTopSectionBorderDesktop.top}${pricingTopSectionBorderUnits.Desktop} ${pricingTopSectionBorderDesktop.right}${pricingTopSectionBorderUnits.Desktop} ${pricingTopSectionBorderDesktop.bottom}${pricingTopSectionBorderUnits.Desktop} ${pricingTopSectionBorderDesktop.left}${pricingTopSectionBorderUnits.Desktop}`;
+	const pricingTopSectionBorderTabletWidth = `${pricingTopSectionBorderTablet.top}${pricingTopSectionBorderUnits.Tablet} ${pricingTopSectionBorderTablet.right}${pricingTopSectionBorderUnits.Tablet} ${pricingTopSectionBorderTablet.bottom}${pricingTopSectionBorderUnits.Tablet} ${pricingTopSectionBorderTablet.left}${pricingTopSectionBorderUnits.Tablet}`;
+	const pricingTopSectionBorderMobileWidth = `${pricingTopSectionBorderMobile.top}${pricingTopSectionBorderUnits.Mobile} ${pricingTopSectionBorderMobile.right}${pricingTopSectionBorderUnits.Mobile} ${pricingTopSectionBorderMobile.bottom}${pricingTopSectionBorderUnits.Mobile} ${pricingTopSectionBorderMobile.left}${pricingTopSectionBorderUnits.Mobile}`;
+	/** End Top Section Border */
+	
+	/** Start section Top Border Radius */ 
+	const handleTopSectionBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingTopSectionBorderRadiusLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingTopSectionBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingTopSectionBorderRadiusTablet: { 
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingTopSectionBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingTopSectionBorderRadiusDesktop: {...pricingTopSectionBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingTopSectionBorderRadiusTablet: {...pricingTopSectionBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingTopSectionBorderRadiusMobile: {...pricingTopSectionBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleTopSectionBorderRadiusCombineBtn = () => {   
+		setAttributes( {pricingTopSectionBorderRadiusLink: !pricingTopSectionBorderRadiusLink} );
+	}
+
+	const handleTopSectionBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingTopSectionBorderRadiusUnits: {
+				...pricingTopSectionBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const pricingTopSectionBorderRadiusDesktopWidth = `${pricingTopSectionBorderRadiusDesktop.top}${pricingTopSectionBorderRadiusUnits.Desktop} ${pricingTopSectionBorderRadiusDesktop.right}${pricingTopSectionBorderRadiusUnits.Desktop} ${pricingTopSectionBorderRadiusDesktop.bottom}${pricingTopSectionBorderRadiusUnits.Desktop} ${pricingTopSectionBorderRadiusDesktop.left}${pricingTopSectionBorderRadiusUnits.Desktop}`;
+	const pricingTopSectionBorderRadiusTabletWidth = `${pricingTopSectionBorderRadiusTablet.top}${pricingTopSectionBorderRadiusUnits.Tablet} ${pricingTopSectionBorderRadiusTablet.right}${pricingTopSectionBorderRadiusUnits.Tablet} ${pricingTopSectionBorderRadiusTablet.bottom}${pricingTopSectionBorderRadiusUnits.Tablet} ${pricingTopSectionBorderRadiusTablet.left}${pricingTopSectionBorderRadiusUnits.Tablet}`;
+	const pricingTopSectionBorderRadiusMobileWidth = `${pricingTopSectionBorderRadiusMobile.top}${pricingTopSectionBorderRadiusUnits.Mobile} ${pricingTopSectionBorderRadiusMobile.right}${pricingTopSectionBorderRadiusUnits.Mobile} ${pricingTopSectionBorderRadiusMobile.bottom}${pricingTopSectionBorderRadiusUnits.Mobile} ${pricingTopSectionBorderRadiusMobile.left}${pricingTopSectionBorderRadiusUnits.Mobile}`;
+	/** End Top Section Border Radius */
+
+	/** Start section Top Text Padding */ 
+	const handleTopSectionTextPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingTopSectionTextPaddingLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingTopSectionTextDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingTopSectionTextTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingTopSectionTextMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingTopSectionTextDesktopPadding: {...pricingTopSectionTextDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingTopSectionTextTabletPadding: {...pricingTopSectionTextTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingTopSectionTextMobilePadding: {...pricingTopSectionTextMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleTopSectionTextPaddingCombineBtn = () => { 
+		setAttributes( {pricingTopSectionTextPaddingLink: !pricingTopSectionTextPaddingLink} );
+	}
+
+	const handleTopSectionTextPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingTopSectionTextPaddingUnits: {
+				...pricingTopSectionTextPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const pricingTopSectionTextDesktopPaddingWidth = `${pricingTopSectionTextDesktopPadding.top}${pricingTopSectionTextPaddingUnits.Desktop} ${pricingTopSectionTextDesktopPadding.right}${pricingTopSectionTextPaddingUnits.Desktop} ${pricingTopSectionTextDesktopPadding.bottom}${pricingTopSectionTextPaddingUnits.Desktop} ${pricingTopSectionTextDesktopPadding.left}${pricingTopSectionTextPaddingUnits.Desktop}`;
+	const pricingTopSectionTextTabletPaddingWidth = `${pricingTopSectionTextTabletPadding.top}${pricingTopSectionTextPaddingUnits.Tablet} ${pricingTopSectionTextTabletPadding.right}${pricingTopSectionTextPaddingUnits.Tablet} ${pricingTopSectionTextTabletPadding.bottom}${pricingTopSectionTextPaddingUnits.Tablet} ${pricingTopSectionTextTabletPadding.left}${pricingTopSectionTextPaddingUnits.Tablet}`;
+	const pricingTopSectionTextMobilePaddingWidth = `${pricingTopSectionTextMobilePadding.top}${pricingTopSectionTextPaddingUnits.Mobile} ${pricingTopSectionTextMobilePadding.right}${pricingTopSectionTextPaddingUnits.Mobile} ${pricingTopSectionTextMobilePadding.bottom}${pricingTopSectionTextPaddingUnits.Mobile} ${pricingTopSectionTextMobilePadding.left}${pricingTopSectionTextPaddingUnits.Mobile}`;
+	/** End Top Section Text Padding */
 
 
 	/** Start After Text Padding */ 
@@ -2036,6 +2386,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 	const allBlockStyle = useMemo(() => ` 
+
+		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section {
+		    ${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
+                background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
+            `: `
+                    background: ${pricingTopSectionNormalClassicColor}; 
+            `}
+			${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
+			${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
+			${pricingTopSectionBorderDesktopWidth ? `border-width: ${pricingTopSectionBorderDesktopWidth};` : ''}
+			${pricingTopSectionBorderRadiusDesktopWidth ? `border-radius: ${pricingTopSectionBorderRadiusDesktopWidth};` : ''}
+			${pricingTopSectionDesktopPaddingWidth ? `padding: ${pricingTopSectionDesktopPaddingWidth};` : ''}
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section:hover {
+		    ${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
+                background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
+            `: `
+                    background: ${pricingTopSectionHoverClassicColor}; 
+            `}
+			${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
+		}
+
+		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper {
+			${pricingTopSectionTextColor ? `color: ${pricingTopSectionTextColor};` : ''}
+			${pricingTopSectionTextFontFamily ? `font-family: ${pricingTopSectionTextFontFamily};` : ""}
+			${pricingTopSectionTextFontSize.Desktop ? `font-size: ${pricingTopSectionTextFontSize.Desktop}${pricingTopSectionTextFontSizeUnits.Desktop};` : ""}
+			${pricingTopSectionTextFontWeight ? `font-weight: ${pricingTopSectionTextFontWeight};` : ""}
+			${pricingTopSectionTextFontStyle ? `font-style: ${pricingTopSectionTextFontStyle};` : ""}
+			${pricingTopSectionTextTextTransform ? `text-transform: ${pricingTopSectionTextTextTransform};` : ""} 
+			${pricingTopSectionTextTextDecoration ? `text-decoration: ${pricingTopSectionTextTextDecoration};` : ""}
+			${pricingTopSectionTextLetterSpacing.Desktop ? `letter-spacing: ${pricingTopSectionTextLetterSpacing.Desktop}${pricingTopSectionTextLetterSpacingUnits.Desktop};` : ""}
+			${pricingTopSectionTextLineHeight.Desktop ? `line-height: ${pricingTopSectionTextLineHeight.Desktop}${pricingTopSectionTextLineHeightUnits.Desktop};` : ""}
+			${pricingTopSectionTextDesktopPaddingWidth ? `padding: ${pricingTopSectionTextDesktopPaddingWidth};` : ''}
+			text-align: center;
+		}
+		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
+			${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
+		}
+
 		.${blockId} .fb-pricing-main-wrapper {
 			${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
 			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
@@ -2337,6 +2727,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 1024px) {
+
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section {
+				${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
+					background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
+				`: `
+						background: ${pricingTopSectionNormalClassicColor}; 
+				`}
+				${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
+				${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
+				${pricingTopSectionBorderTabletWidth ? `border-width: ${pricingTopSectionBorderTabletWidth};` : ''}
+				${pricingTopSectionBorderRadiusTabletWidth ? `border-radius: ${pricingTopSectionBorderRadiusTabletWidth};` : ''}
+				${pricingTopSectionTabletPaddingWidth ? `padding: ${pricingTopSectionTabletPaddingWidth};` : ''}
+				transition: background-color 0.3s ease, border-color 0.3s ease;
+			}
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section:hover {
+				${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
+					background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
+				`: `
+						background: ${pricingTopSectionHoverClassicColor}; 
+				`}
+				${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
+			}
+
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper {
+				${pricingTopSectionTextColor ? `color: ${pricingTopSectionTextColor};` : ''}
+				${pricingTopSectionTextFontFamily ? `font-family: ${pricingTopSectionTextFontFamily};` : ""}
+				${pricingTopSectionTextFontSize.Tablet ? `font-size: ${pricingTopSectionTextFontSize.Tablet}${pricingTopSectionTextFontSizeUnits.Tablet};` : ""}
+				${pricingTopSectionTextFontWeight ? `font-weight: ${pricingTopSectionTextFontWeight};` : ""}
+				${pricingTopSectionTextFontStyle ? `font-style: ${pricingTopSectionTextFontStyle};` : ""}
+				${pricingTopSectionTextTextTransform ? `text-transform: ${pricingTopSectionTextTextTransform};` : ""} 
+				${pricingTopSectionTextTextDecoration ? `text-decoration: ${pricingTopSectionTextTextDecoration};` : ""}
+				${pricingTopSectionTextLetterSpacing.Tablet ? `letter-spacing: ${pricingTopSectionTextLetterSpacing.Tablet}${pricingTopSectionTextLetterSpacingUnits.Tablet};` : ""}
+				${pricingTopSectionTextLineHeight.Tablet ? `line-height: ${pricingTopSectionTextLineHeight.Tablet}${pricingTopSectionTextLineHeightUnits.Tablet};` : ""}
+				${pricingTopSectionTextTabletPaddingWidth ? `padding: ${pricingTopSectionTextTabletPaddingWidth};` : ''}
+				text-align: center;
+			}
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
+				${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
+			}
 			.${blockId} .fb-pricing-main-wrapper {
 				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
@@ -2449,6 +2878,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 767px) {
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section {
+				${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
+					background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
+				`: `
+						background: ${pricingTopSectionNormalClassicColor}; 
+				`}
+				${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
+				${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
+				${pricingTopSectionBorderMobileWidth ? `border-width: ${pricingTopSectionBorderMobileWidth};` : ''}
+				${pricingTopSectionBorderRadiusMobileWidth ? `border-radius: ${pricingTopSectionBorderRadiusMobileWidth};` : ''}
+				${pricingTopSectionMobilePaddingWidth ? `padding: ${pricingTopSectionMobilePaddingWidth};` : ''}
+				transition: background-color 0.3s ease, border-color 0.3s ease;
+			}
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section:hover {
+				${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
+					background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
+				`: `
+						background: ${pricingTopSectionHoverClassicColor}; 
+				`}
+				${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
+			}
+
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper {
+				${pricingTopSectionTextColor ? `color: ${pricingTopSectionTextColor};` : ''}
+				${pricingTopSectionTextFontFamily ? `font-family: ${pricingTopSectionTextFontFamily};` : ""}
+				${pricingTopSectionTextFontSize.Mobile ? `font-size: ${pricingTopSectionTextFontSize.Mobile}${pricingTopSectionTextFontSizeUnits.Mobile};` : ""}
+				${pricingTopSectionTextFontWeight ? `font-weight: ${pricingTopSectionTextFontWeight};` : ""}
+				${pricingTopSectionTextFontStyle ? `font-style: ${pricingTopSectionTextFontStyle};` : ""}
+				${pricingTopSectionTextTextTransform ? `text-transform: ${pricingTopSectionTextTextTransform};` : ""} 
+				${pricingTopSectionTextTextDecoration ? `text-decoration: ${pricingTopSectionTextTextDecoration};` : ""}
+				${pricingTopSectionTextLetterSpacing.Mobile ? `letter-spacing: ${pricingTopSectionTextLetterSpacing.Mobile}${pricingTopSectionTextLetterSpacingUnits.Mobile};` : ""}
+				${pricingTopSectionTextLineHeight.Mobile ? `line-height: ${pricingTopSectionTextLineHeight.Mobile}${pricingTopSectionTextLineHeightUnits.Mobile};` : ""}
+				${pricingTopSectionTextMobilePaddingWidth ? `padding: ${pricingTopSectionTextMobilePaddingWidth};` : ''}
+				text-align: center;
+			}
+			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
+				${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
+			}
 			.${blockId} .fb-pricing-main-wrapper {
 				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
@@ -2593,7 +3060,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceRibbonText,
 		priceRibbonPosition,
 
-
 		pricingHeaderBgColorSwitcher,
 		pricingHeaderBgColor,
 		pricingHeaderBgHoverColor,
@@ -2710,10 +3176,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricePeriodColorSwitcher,
 		pricePeriodColor,
 		pricePeriodHoverColor,
-
-		
-
-
 
 		pricingTitleAlignment,
 		pricingTitleColorSwitcher,
@@ -2998,7 +3460,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceAfterTextTabletPaddingWidth,
 		priceAfterTextMobilePaddingWidth,
 
-
 		priceAfterTextBorder,
 		priceAfterTextBorderColorSwitcher,
 		priceAfterTextBorderColor,
@@ -3022,7 +3483,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceAfterTextBorderRadiusTabletWidth,
 		priceAfterTextBorderRadiusMobileWidth,
 
-
 		priceFeatureAfterTextSwitcher,
 		priceFeatureAfterText,
 		priceFeatureAfterTextFontFamily,
@@ -3039,6 +3499,77 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceFeatureAfterTextColorSwitcher,
 		priceFeatureAfterTextColor,
 		priceFeatureAfterTextHoverColor,
+
+
+		pricingTopSectionBgColorSwitcher,
+		pricingTopSectionNormalBackgroundType,
+		pricingTopSectionNormalClassicColor,
+		pricingTopSectionNormalGradientColor,
+		pricingTopSectionNormalCustomGradientSwitcher,
+		pricingTopSectionNormalCustomGradientInputValue,
+		
+		pricingTopSectionHoverBackgroundType,
+		pricingTopSectionHoverClassicColor,
+		pricingTopSectionHoverGradientColor,
+		pricingTopSectionHoverCustomGradientSwitcher,
+		pricingTopSectionHoverCustomGradientInputValue,
+
+		pricingTopSectionPaddingUnits,
+		pricingTopSectionDesktopPadding,
+		pricingTopSectionTabletPadding,
+		pricingTopSectionMobilePadding,
+		pricingTopSectionPaddingLink,
+		pricingTopSectionDesktopPaddingWidth,
+		pricingTopSectionTabletPaddingWidth,
+		pricingTopSectionMobilePaddingWidth,
+
+		pricingTopSectionBorder,
+		pricingTopSectionBorderColorSwitcher,
+		pricingTopSectionBorderColor,
+		pricingTopSectionBorderHoverColor,
+
+		pricingTopSectionBorderUnits,
+		pricingTopSectionBorderDesktop,
+		pricingTopSectionBorderTablet,
+		pricingTopSectionBorderMobile,
+		pricingTopSectionBorderLink,
+		pricingTopSectionBorderDesktopWidth,
+		pricingTopSectionBorderTabletWidth,
+		pricingTopSectionBorderMobileWidth,
+
+		pricingTopSectionBorderRadiusUnits,
+		pricingTopSectionBorderRadiusDesktop,
+		pricingTopSectionBorderRadiusTablet,
+		pricingTopSectionBorderRadiusMobile,
+		pricingTopSectionBorderRadiusLink,
+		pricingTopSectionBorderRadiusDesktopWidth,
+		pricingTopSectionBorderRadiusTabletWidth,
+		pricingTopSectionBorderRadiusMobileWidth,
+
+		pricingTopSectionTextColorSwitcher,
+		pricingTopSectionTextColor,
+		pricingTopSectionTextHoverColor,
+
+		pricingTopSectionTextFontFamily,
+		pricingTopSectionTextFontSize,
+		pricingTopSectionTextFontSizeUnits,
+		pricingTopSectionTextFontWeight,
+		pricingTopSectionTextFontStyle,
+		pricingTopSectionTextTextTransform,
+		pricingTopSectionTextTextDecoration,
+		pricingTopSectionTextLetterSpacing,
+		pricingTopSectionTextLetterSpacingUnits,
+		pricingTopSectionTextLineHeight,
+		pricingTopSectionTextLineHeightUnits,
+
+		pricingTopSectionTextPaddingUnits,
+		pricingTopSectionTextDesktopPadding,
+		pricingTopSectionTextTabletPadding,
+		pricingTopSectionTextMobilePadding,
+		pricingTopSectionTextPaddingLink,
+		pricingTopSectionTextDesktopPaddingWidth,
+		pricingTopSectionTextTabletPaddingWidth,
+		pricingTopSectionTextMobilePaddingWidth,
 
 	]);
 
@@ -3350,19 +3881,218 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 								{tab.name === "styles" && (
 									<>
+										{pricingSectionTopSwitcher && (
+											<PanelBody
+												title={__("Top Section", "frontis-blocks")}
+												initialOpen={false}
+											>
+
+												<FB_Spacing 
+													label={__("Padding", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handleTopSectionPaddingUnitsHandler}
+													spacingUnits={pricingTopSectionPaddingUnits}
+													spacingDesktop={pricingTopSectionDesktopPadding} 
+													spacingTablet={pricingTopSectionTabletPadding}
+													spacingMobile={pricingTopSectionMobilePadding}
+													handleSpacingUnitHandler={handleTopSectionPaddingUnitChange}
+													spacingCombineBtn={pricingTopSectionPaddingLink}
+													spacingCombineBtnHandler={handleTopSectionPaddingCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+												<SelectControl
+													label={__("Border Style", "frontis-blocks")}
+													value={pricingTopSectionBorder}
+													options={BORDER_STYLES}
+													onChange={(value) => setAttributes({ pricingTopSectionBorder: value })}
+												/>
+
+												<FB_SwitcherControl
+													label={__("Border Color", "frontis-blocks")}
+													globalSwitcher={pricingTopSectionBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ pricingTopSectionBorderColorSwitcher: value })}
+												/>
+
+												{pricingTopSectionBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Nomal Color", "frontis-blocks")}
+														globalColor={pricingTopSectionBorderColor}
+														setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderColor: value })}
+													/>
+												)}
+
+												{pricingTopSectionBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={pricingTopSectionBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderHoverColor: value })}
+													/>
+												)}
+
+												<FB_Spacing 
+													label={__("Border", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handleTopSectionBorderUnitsHandler}
+													spacingUnits={pricingTopSectionBorderUnits}
+													spacingDesktop={pricingTopSectionBorderDesktop} 
+													spacingTablet={pricingTopSectionBorderTablet}
+													spacingMobile={pricingTopSectionBorderMobile}
+													handleSpacingUnitHandler={handleTopSectionBorderUnitChange}
+													spacingCombineBtn={pricingTopSectionBorderLink}
+													spacingCombineBtnHandler={handleTopSectionBorderCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+												<FB_Spacing 
+													label={__("Border Radius", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handleTopSectionBorderRadiusUnitsHandler}
+													spacingUnits={pricingTopSectionBorderRadiusUnits}
+													spacingDesktop={pricingTopSectionBorderRadiusDesktop}
+													spacingTablet={pricingTopSectionBorderRadiusTablet}
+													spacingMobile={pricingTopSectionBorderRadiusMobile}
+													handleSpacingUnitHandler={handleTopSectionBorderRadiusUnitChange}
+													spacingCombineBtn={pricingTopSectionBorderRadiusLink}
+													spacingCombineBtnHandler={handleTopSectionBorderRadiusCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+												<FB_BackgroundColorControl
+													label={__("Background Color", "frontis-blocks")}
+													bgColorSwitcher={pricingTopSectionBgColorSwitcher}
+													setBgColorSwitcher={(value) => setAttributes({ pricingTopSectionBgColorSwitcher: value })}
+													
+													normalBackgroundType={pricingTopSectionNormalBackgroundType}
+													setNormalBackgroundType={(value) => setAttributes({ pricingTopSectionNormalBackgroundType: value })}
+													normalClassicColor={pricingTopSectionNormalClassicColor}
+													setNormalClassicColor={(value) => setAttributes({ pricingTopSectionNormalClassicColor: value })}
+													normalGradientColor={pricingTopSectionNormalGradientColor}
+													setNormalGradientColor={(value) => setAttributes({ pricingTopSectionNormalGradientColor: value })}
+													normalCustomGradientSwitcher={pricingTopSectionNormalCustomGradientSwitcher}
+													setNormalCustomGradientSwitcher={(value) => setAttributes({ pricingTopSectionNormalCustomGradientSwitcher: value })}
+													normalCustomGradientInputValue={pricingTopSectionNormalCustomGradientInputValue}
+													setNormalCustomGradientInputValue={(value) => setAttributes({ pricingTopSectionNormalCustomGradientInputValue: value })}
+													
+													hoverBackgroundType={pricingTopSectionHoverBackgroundType}
+													setHoverBackgroundType={(value) => setAttributes({ pricingTopSectionHoverBackgroundType: value })}
+													hoverClassicColor={pricingTopSectionHoverClassicColor}
+													setHoverClassicColor={(value) => setAttributes({ pricingTopSectionHoverClassicColor: value })}
+													hoverGradientColor={pricingTopSectionHoverGradientColor} 
+													setHoverGradientColor={(value) => setAttributes({ pricingTopSectionHoverGradientColor: value })}
+													hoverCustomGradientSwitcher={pricingTopSectionHoverCustomGradientSwitcher}
+													setHoverCustomGradientSwitcher={(value) => setAttributes({ pricingTopSectionHoverCustomGradientSwitcher: value })}
+													hoverCustomGradientInputValue={pricingTopSectionHoverCustomGradientInputValue}
+													setHoverCustomGradientInputValue={(value) => setAttributes({ pricingTopSectionHoverCustomGradientInputValue: value })}
+
+													isBackgroundImage={false}
+
+												/>
+
+												<FB_TypographyControl
+													fontFamily={pricingTopSectionTextFontFamily}
+													onChangeFontFamily={(value) => setAttributes({ pricingTopSectionTextFontFamily: value })}
+
+													fontSize={pricingTopSectionTextFontSize}
+													onChangeFontSize={(value) => setAttributes({ pricingTopSectionTextFontSize: value })}
+
+													fontSizeUnits={pricingTopSectionTextFontSizeUnits}
+													onChangeFontSizeUnit={(value) => setAttributes({ pricingTopSectionTextFontSizeUnits: value })}
+
+													fontWeight={pricingTopSectionTextFontWeight}
+													onChangeFontWeight={(value) => setAttributes({ pricingTopSectionTextFontWeight: value })}
+
+													fontStyle={pricingTopSectionTextFontStyle}
+													onChangeFontStyle={(value) => setAttributes({ pricingTopSectionTextFontStyle: value })}
+
+													textTransform={pricingTopSectionTextTextTransform}
+													onChangeTextTransform={(value) => setAttributes({ pricingTopSectionTextTextTransform: value })}
+
+													textDecoration={pricingTopSectionTextTextDecoration}
+													onChangeTextDecoration={(value) => setAttributes({ pricingTopSectionTextTextDecoration: value })}
+
+													letterSpacing={pricingTopSectionTextLetterSpacing}
+													onChangeLetterSpacing={(value) => setAttributes({ pricingTopSectionTextLetterSpacing: value })}
+
+													letterSpacingUnits={pricingTopSectionTextLetterSpacingUnits}
+													onChangeLetterSpacingUnit={(value) => setAttributes({ pricingTopSectionTextLetterSpacingUnits: value })}
+
+													lineHeight={pricingTopSectionTextLineHeight}
+													onChangeLineHeight={(value) => setAttributes({ pricingTopSectionTextLineHeight: value })}
+
+													lineHeightUnits={pricingTopSectionTextLineHeightUnits}
+													onChangeLineHeightUnit={(value) => setAttributes({ pricingTopSectionTextLineHeightUnits: value })}
+
+													deviceType={deviceType}
+													setAttributes={setAttributes}
+												/>
+
+												<FB_SwitcherControl
+													label={__("Color", "frontis-blocks")}
+													globalSwitcher={pricingTopSectionTextColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ pricingTopSectionTextColorSwitcher: value })}
+												/>
+
+												{pricingTopSectionTextColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Color", "frontis-blocks")}
+														globalColor={pricingTopSectionTextColor}
+														setGlobalColor={(value) => setAttributes({ pricingTopSectionTextColor: value })}
+													/>
+												)}
+
+												{pricingTopSectionTextColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={pricingTopSectionTextHoverColor}
+														setGlobalColor={(value) => setAttributes({ pricingTopSectionTextHoverColor: value })}
+													/>
+												)}
+
+												<FB_Spacing 
+													label={__("Padding", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handleTopSectionTextPaddingUnitsHandler}
+													spacingUnits={pricingTopSectionTextPaddingUnits}
+													spacingDesktop={pricingTopSectionTextDesktopPadding}
+													spacingTablet={pricingTopSectionTextTabletPadding}
+													spacingMobile={pricingTopSectionTextMobilePadding}
+													handleSpacingUnitHandler={handleTopSectionTextPaddingUnitChange}
+													spacingCombineBtn={pricingTopSectionTextPaddingLink}
+													spacingCombineBtnHandler={handleTopSectionTextPaddingCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+
+											</PanelBody>
+										)}
 										<PanelBody
 											title={__("Header", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
-											<FB_Color
+
+											<FB_SwitcherControl
 												label={__("Background Color", "frontis-blocks")}
-												globalColorSwitcher={pricingHeaderBgColorSwitcher}
-												globalColor={pricingHeaderBgColor}
-												globalHoverColor={pricingHeaderBgHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ pricingHeaderBgColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ pricingHeaderBgColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ pricingHeaderBgHoverColor: value })}
+												globalSwitcher={pricingHeaderBgColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ pricingHeaderBgColorSwitcher: value })}
 											/>
+
+											{pricingHeaderBgColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={pricingHeaderBgColor}
+													setGlobalColor={(value) => setAttributes({ pricingHeaderBgColor: value })}
+												/>
+											)}
+
+											{pricingHeaderBgColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={pricingHeaderBgHoverColor}
+													setGlobalColor={(value) => setAttributes({ pricingHeaderBgHoverColor: value })}
+												/>
+											)}
+
 											<FB_Spacing 
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
@@ -3672,15 +4402,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												)}
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Background Color", "frontis-blocks")}
-													globalColorSwitcher={priceIconBgColorSwitcher}
-													globalColor={priceIconBgColor}
-													globalHoverColor={priceIconBgHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ priceIconBgColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ priceIconBgColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBgHoverColor: value })}
+													globalSwitcher={priceIconBgColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ priceIconBgColorSwitcher: value })}
 												/>
+
+												{priceIconBgColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Nomal Color", "frontis-blocks")}
+														globalColor={priceIconBgColor}
+														setGlobalColor={(value) => setAttributes({ priceIconBgColor: value })}
+													/>
+												)}
+
+												{priceIconBgColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={priceIconBgHoverColor}
+														setGlobalColor={(value) => setAttributes({ priceIconBgHoverColor: value })}
+													/>
+												)}
 
 												<SelectControl
 														label={__("Border Style", "frontis-blocks")}
@@ -3689,16 +4431,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ priceIconBorder: value })}
 												/>
 
-												<FB_Color
-													label={__("Border Color", "frontis-blocks")}
-													globalColorSwitcher={priceIconBorderColorSwitcher}
-													globalColor={priceIconBorderColor}
-													globalHoverColor={priceIconBorderHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ priceIconBorderColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+
+												<FB_SwitcherControl
+													label={__("Border Color", "frontis-blocks")} 
+													globalSwitcher={priceIconBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ priceIconBorderColorSwitcher: value })}
 												/>
 
+												{priceIconBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Nomal Color", "frontis-blocks")}
+														globalColor={priceIconBorderColor}
+														setGlobalColor={(value) => setAttributes({ priceIconBorderColor: value })}
+													/>
+												)}
+
+												{priceIconBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={priceIconBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+													/>
+												)}
 
 												<FB_SwitcherControl
 													label={__("Border Color", "frontis-blocks")}
@@ -4768,15 +5522,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 											)}
 
-											<FB_Color
+											<FB_SwitcherControl
 												label={__("Background Color", "frontis-blocks")}
-												globalColorSwitcher={priceRibbonBgColorSwitcher}
-												globalColor={priceRibbonBgColor}
-												globalHoverColor={priceRibbonBgHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ priceRibbonBgColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ priceRibbonBgColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ priceRibbonBgHoverColor: value })}
+												globalSwitcher={priceRibbonBgColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceRibbonBgColorSwitcher: value })}
 											/>
+
+											{priceRibbonBgColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceRibbonBgColor}
+													setGlobalColor={(value) => setAttributes({ priceRibbonBgColor: value })}
+												/>
+											)}
+
+											{priceRibbonBgColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceRibbonBgHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceRibbonBgHoverColor: value })}
+												/>
+											)}
+
 											<FB_Range
 												min={1}
 												max={200}
@@ -4908,15 +5675,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												</PanelBody>
 
 												<PanelBody title="Background Color" initialOpen={false} >
-													<FB_Color
+													<FB_SwitcherControl
 														label={__("Background Color", "frontis-blocks")}
-														globalColorSwitcher={priceGlobalBgColorSwitcher}
-														globalColor={priceGlobalBgColor}
-														globalHoverColor={priceGlobalBgHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ priceGlobalBgColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ priceGlobalBgColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ priceGlobalBgHoverColor: value })}
+														globalSwitcher={priceGlobalBgColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ priceGlobalBgColorSwitcher: value })}
 													/>
+
+													{priceGlobalBgColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Nomal Color", "frontis-blocks")}
+															globalColor={priceGlobalBgColor}
+															setGlobalColor={(value) => setAttributes({ priceGlobalBgColor: value })}
+														/>
+													)}
+
+													{priceGlobalBgColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={priceGlobalBgHoverColor}
+															setGlobalColor={(value) => setAttributes({ priceGlobalBgHoverColor: value })}
+														/>
+													)}
+
 												</PanelBody>
 												<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
