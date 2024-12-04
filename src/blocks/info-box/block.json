@@ -10,6 +10,7 @@
 	"supports": {
 		"html": false,
 		"align": ["wide", "full"]
+		
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",

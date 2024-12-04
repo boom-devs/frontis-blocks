@@ -19,10 +19,10 @@ export default function save({ attributes }) {
 		selectedCatSwitcher,
 		selectedTagSwitcher,
 		selectedAuthorSwitcher,
-		columnsPerSection,
+		gridColumnsPerSection,
 		gapUnits,
-		rowGap,
-		columnGap,
+		gridRowGap,
+		gridColumnGap,
 		postTitleTag,
 		postDescriptionTag,
 		postDescriptionExcerptLength,
@@ -32,6 +32,9 @@ export default function save({ attributes }) {
 		postAuthorPrefixSwitcher,
 		postAuthorPrefix,
 		showDateSwitcher,
+		postAuthorAvatarSwitcher,
+		postSwitcher,
+		postImageSize,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -62,8 +65,9 @@ export default function save({ attributes }) {
 				data-post-author-prefix-switcher={postAuthorPrefixSwitcher}
 				data-post-author-prefix={postAuthorPrefix}
 				data-show-date-switcher={showDateSwitcher}
+				data-post-image-size={postImageSize}
 			>
-				<div className={`fb_post_grid_container ${blockId}`}></div>
+				<div className={`fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}></div>
 				<div className="loading post">
 					{placeholders.map((item) => (
 						<div key={item} className={`post-card skeleton skeleton-item ${blockId}`}>

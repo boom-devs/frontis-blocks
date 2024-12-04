@@ -3176,13 +3176,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingDesktop={Heading_Desktop_padding}
 												spacingTablet={Heading_Tab_padding}
 												spacingMobile={Heading_Mobile_padding}
-												handleSpacingUnitHandler={
-													handleHeadingPaddingUnitChange
-												}
+												handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
 												spacingCombineBtn={paddingLink}
-												spacingCombineBtnHandler={
-													handleHeadingPaddingCombineBtn
-												}
+												spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
 												setAttributes={setAttributes}
 											/>
 
