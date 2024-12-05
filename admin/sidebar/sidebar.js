@@ -2,25 +2,20 @@ import {__} from "@wordpress/i18n";
 import {PluginSidebar, PluginSidebarMoreMenuItem} from "@wordpress/editor";
 import {
 	PanelBody,
-	PanelRow,
 	Button,
 	TabPanel,
-	Dashicon,
 	TextareaControl
 } from "@wordpress/components";
 import {
 	PanelColorSettings,
 } from "@wordpress/block-editor";
-import FB_TypographyControl from '@Components/typography-control';
 import GradientColorPallet from './components/GradientColorPallet';
 import ColorPalletWrapper from './components/ColorPalletWrapper';
 import {useState, useEffect} from "@wordpress/element";
-// import {useSelect, useDispatch, withSelect, dispatch, select} from "@wordpress/data";
 import "./sidebar.scss";
 import CustomGradientColorPallet from "./components/CustomGradientPallet";
-import {getFbLocalStorage, setFbLocalStorage, useAfterSave} from "./helper";
-import {updateSettings} from "./api";
-import {updateGlobalStyle} from "./fetch";
+import {getFbLocalStorage, useAfterSave, loadGoogleFont} from "./helper";
+import {updateGlobalStyle, getGlobalStyle} from "./fetch";
 import TypographySettings from "./components/TypographySettings";
 
 const defaultsColors = [
@@ -76,7 +71,6 @@ const defaultsColors = [
 	}
 
 ];
-
 const gradientDefaults = [
 	{
 		"color": "linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%)",
@@ -107,91 +101,504 @@ const gradientDefaults = [
 function FrontisBlocksSidebar(props) {
 	const [customColors, setCustomColors] = useState([]);
 	const [activeTab, setActiveTab] = useState("solid");
-	const [activeTabTypo, setActiveTabTypo] = useState("");
 	const [gradientColors, setGradientColors] = useState([]);
 	const [customGradientColors, setCustomGradientColors] = useState([]);
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
-	const [currentState, setCurrentState] = useState('');
+	const [fbGlobalSettingsLoading, setFbGlobalSettingsLoading] = useState(false);
+	const [typography, setTypography] = useState({});
+	const [customTypography, setCustomTypography] = useState({});
+	const [fontfamilies, setFontfamilies] = useState({})
 
-	const [heading, setHeading] = useState({
-		fontFamily: '',
-		fontSize: '',
-		fontSizeUnits: 'px',
-		fontWeight: '',
-		fontStyle: '',
-		textTransform: '',
-		textDecoration: '',
-		letterSpacing: '',
-		letterSpacingUnits: 'px',
-		lineHeight: '',
-		lineHeightUnits: '',
-	});
+	const defaultTypos = {
+		body: {
+			fontFamily: 'default',
+			lineHeight: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			lineHeightUnits: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			},
+			fontSize: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			fontSizeUnit: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			},
+			fontWeight: 0,
+			fontStyle: 0,
+			textTransform: 0,
+			textDecoration: 0,
+			letterSpacing: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			letterSpacingUnit: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			}
+		},
+		link: {
+			fontFamily: 'default',
+			lineHeight: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			lineHeightUnits: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			},
+			fontSize: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			fontSizeUnit: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			},
+			fontWeight: 0,
+			fontStyle: 0,
+			textTransform: 0,
+			textDecoration: 0,
+			letterSpacing: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			letterSpacingUnit: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			}
+		},
+		button: {
+			fontFamily: 'default',
+			lineHeight: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			lineHeightUnits: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			},
+			fontSize: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			fontSizeUnit: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			},
+			fontWeight: 0,
+			fontStyle: 0,
+			textTransform: 0,
+			textDecoration: 0,
+			letterSpacing: {
+				Desktop: 0,
+				Tablet: 0,
+				Mobile: 0
+			},
+			letterSpacingUnit: {
+				Desktop: 'px',
+				Tablet: 'em',
+				Mobile: '%'
+			}
+		},
+		heading: {
+			h1: {
+				fontFamily: "default",
+				lineHeight: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				lineHeightUnits: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontSize: {
+					Desktop: 10,
+					Tablet: 0,
+					Mobile: 0
+				},
+				fontSizeUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontWeight: 0,
+				fontStyle: 0,
+				textTransform: 0,
+				textDecoration: 0,
+				letterSpacing: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				letterSpacingUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				}
+			},
+			h2: {
+				fontFamily: "default",
+				lineHeight: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				lineHeightUnits: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontSize: {
+					Desktop: 50,
+					Tablet: 0,
+					Mobile: 0
+				},
+				fontSizeUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontWeight: 0,
+				fontStyle: 0,
+				textTransform: 0,
+				textDecoration: 0,
+				letterSpacing: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				letterSpacingUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				}
+			},
+			h3: {
+				fontFamily: "default",
+				lineHeight: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				lineHeightUnits: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontSize: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				fontSizeUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontWeight: 0,
+				fontStyle: 0,
+				textTransform: 0,
+				textDecoration: 0,
+				letterSpacing: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				letterSpacingUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				}
+			},
+			h4: {
+				fontFamily: "default",
+				lineHeight: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				lineHeightUnits: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontSize: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				fontSizeUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontWeight: 0,
+				fontStyle: 0,
+				textTransform: 0,
+				textDecoration: 0,
+				letterSpacing: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				letterSpacingUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				}
+			},
+			h5: {
+				fontFamily: "default",
+				lineHeight: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				lineHeightUnits: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontSize: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				fontSizeUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontWeight: 0,
+				fontStyle: 0,
+				textTransform: 0,
+				textDecoration: 0,
+				letterSpacing: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				letterSpacingUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				}
+			},
+			h6: {
+				fontFamily: "default",
+				lineHeight: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				lineHeightUnits: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontSize: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				fontSizeUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				},
+				fontWeight: 0,
+				fontStyle: 0,
+				textTransform: 0,
+				textDecoration: 0,
+				letterSpacing: {
+					Desktop: 0,
+					Tablet: 0,
+					Mobile: 0
+				},
+				letterSpacingUnit: {
+					Desktop: 'px',
+					Tablet: 'em',
+					Mobile: '%'
+				}
+			}
+		}
+	};
 
-	const [body, setBody] = useState({
-		fontFamily: '',
-		fontSize: '',
-		fontSizeUnits: 'px',
-		fontWeight: '',
-		fontStyle: '',
-		textTransform: '',
-		textDecoration: '',
-		letterSpacing: '',
-		letterSpacingUnits: 'px',
-		lineHeight: '',
-		lineHeightUnits: '',
-	});
+	// Extract all font families into a single string
+	const getAllFontFamilies = (fontsObject) => {
+		const fontFamilies = [];
 
-	const [deviceType, setDeviceType] = useState('Desktop');
+		const extractFonts = (obj) => {
+			Object.values(obj).forEach((value) => {
+				if (typeof value === "string") {
+					fontFamilies.push(value);
+				} else if (typeof value === "object") {
+					extractFonts(value); // Recursively extract nested objects
+				}
+			});
+		};
+
+		extractFonts(fontsObject);
+		const regenerateFonts = fontFamilies.join(",");
+		loadGoogleFont(regenerateFonts);
+	};
+
 	useEffect(() => {
-
 		const localStorageKeys = [
-			'fb_update_global_colors',
-			'fb_update_custom_colors',
-			'fb_update_gradient_colors',
-			'fb_update_custom_gradient_colors'
+			'fb_global_colors',
+			'fb_custom_colors',
+			'fb_gradient_colors',
+			'fb_custom_gradient_colors',
+			'fb_typography',
+			'fb_custom_typography',
+			'fb_fontfamilies'
 		];
 
-		localStorageKeys.forEach((key) => {
-			const localStorageData = getFbLocalStorage(key);
+		const handleUpdateState = async () => {
+			try {
+				for (const key of localStorageKeys) {
+					const localStorageData = getFbLocalStorage(key);
 
-			switch (key) {
-				case 'fb_update_global_colors':
-					if (localStorageData.length > 0) {
-						setGlobalColors(localStorageData);
-					} else {
-						setGlobalColors(defaultsColors); // Assuming `defaultsColors` is defined elsewhere
+					if(key === 'fb_global_colors') {
+						if(localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_global_colors');
+							if(!res.success) {
+								setGlobalColors(defaultsColors);
+								localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
+							} else {
+								setGlobalColors(res.data);
+								localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
+							}
+						} else {
+							setGlobalColors(localStorageData);
+						}
 					}
-					break;
 
-				case 'fb_update_custom_colors':
-					if (localStorageData.length > 0) {
-						setCustomColors(localStorageData);
-					} else {
-						setCustomColors([]); // Default empty array
+					// Custom colors
+					if(key === 'fb_custom_colors') {
+						if(localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_custom_colors');
+							if(!res.success) {
+								setCustomColors([]);
+							} else {
+								setCustomColors(res.data);
+								localStorage.setItem('fb_custom_colors', JSON.stringify(res.data));
+							}
+						} else {
+							setCustomColors(localStorageData);
+						}
 					}
-					break;
 
-				case 'fb_update_gradient_colors':
-					if (localStorageData.length > 0) {
-						setGradientColors(localStorageData);
-					} else {
-						setGradientColors(gradientDefaults); // Assuming `gradientDefaults` is defined elsewhere
+					// Gradient colors
+					if(key === 'fb_gradient_colors') {
+						if(localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_gradient_colors');
+							if(!res.success) {
+								setGradientColors(gradientDefaults);
+								localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
+							} else {
+								setGradientColors(res.data);
+								localStorage.setItem('fb_gradient_colors', JSON.stringify(res.data));
+							}
+						} else {
+							setGradientColors(localStorageData);
+						}
 					}
-					break;
 
-				case 'fb_update_custom_gradient_colors':
-					if (localStorageData.length > 0) {
-						setCustomGradientColors(localStorageData);
-					} else {
-						setCustomGradientColors([]); // Default empty array
+					// Custom Gradient colors
+					if(key === 'fb_custom_gradient_colors') {
+						if(localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_custom_gradient_colors');
+							if(!res.success) {
+								setCustomGradientColors([]);
+							} else {
+								setCustomGradientColors(res.data);
+								localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(res.data));
+							}
+						} else {
+							setCustomGradientColors(localStorageData);
+						}
 					}
-					break;
 
-				default:
-					console.warn(`Unhandled key: ${key}`);
+					// Get global typography
+					if(key === 'fb_typography') {
+						if(localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_typography');
+							if(!res.success) {
+								setTypography(defaultTypos);
+								localStorage.setItem('fb_typography', JSON.stringify(defaultTypos));
+							} else {
+								setTypography(res.data);
+								localStorage.setItem('fb_typography', JSON.stringify(res.data));
+							}
+						} else {
+							setTypography(localStorageData);
+						}
+					}
+
+					// Custom typography
+					if(key === 'fb_custom_typography') {
+						if(localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_custom_typography');
+							if(!res.success) {
+								setCustomTypography([]);
+							} else {
+								setCustomTypography(res.data);
+								localStorage.setItem('fb_custom_typography', JSON.stringify(res.data));
+							}
+						} else {
+							setCustomTypography(localStorageData);
+						}
+					}
+
+					// Add fontfamilies
+					if(key === 'fb_fontfamilies') {
+						if(localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_fontfamilies');
+							if(!res.success) {
+								setFontfamilies([]);
+							} else {
+								setFontfamilies(res.data);
+								getAllFontFamilies(res.data)
+								localStorage.setItem('fb_fontFamilies', JSON.stringify(res.data));
+							}
+						} else {
+							getAllFontFamilies(localStorageData)
+							setFontfamilies(localStorageData);
+						}
+					}
+				}
+			} catch (error) {
+				console.error("Error fetching global colors:", error);
 			}
-		});
+		}
+
+		handleUpdateState();
+
 	}, []);
 
 	const colorPanelArray = (colors, setColor, defaults = []) => {
@@ -217,7 +624,7 @@ function FrontisBlocksSidebar(props) {
 		const colors = [...globalColors];
 		colors[index].color = color;
 		setGlobalColors([...colors]);
-		setCurrentState('fb_update_global_colors');
+		setFbGlobalSettingsLoading(true);
 	};
 
 	//Update Gradient Colors
@@ -225,7 +632,7 @@ function FrontisBlocksSidebar(props) {
 		const colors = [...gradientColors];
 		colors[index].color = color;
 		setGradientColors([...colors]);
-		setCurrentState('fb_update_gradient_colors');
+		setFbGlobalSettingsLoading(true);
 	};
 
 	//Update Gradient Colors
@@ -233,35 +640,25 @@ function FrontisBlocksSidebar(props) {
 		const colors = [...customGradientColors];
 		colors[index].color = color;
 		setCustomGradientColors([...colors]);
-		setCurrentState('fb_update_custom_gradient_colors');
+		setFbGlobalSettingsLoading(true);
 	};
 
 	const setCustomColor = (index, color) => {
 		const colors = [...customColors];
 		colors[index].color = color;
 		setCustomColors([...colors]);
-		setCurrentState('fb_update_custom_colors');
+		setFbGlobalSettingsLoading(true);
 	};
 
 	// New custom color function
 	const setNewCustomColorFn = () => {
-		setCustomColors((prevColors) => {
+		setCustomColors(() => {
 			// Determine a unique index
-			let index = prevColors.length + 1;
-			while (
-				prevColors.some(
-					(color) =>
-						color.name === `Custom Color ${index}` ||
-						color.slug === `custom-color-${index}` ||
-						color.var === `--fb-custom-color-${index}`
-				)
-				) {
-				index++;
-			}
+			let index = customColors.length + 1;
 
 			// Add the new color
 			return [
-				...prevColors,
+				...customColors,
 				{
 					color: '#000000',
 					name: `Custom Color ${index}`,
@@ -271,55 +668,64 @@ function FrontisBlocksSidebar(props) {
 			];
 		});
 
-		setCurrentState('fb_update_custom_colors');
+		setFbGlobalSettingsLoading(true);
 	}
 
 	// Delete custom gradient color
 	const deleteCustomGradientColor = (index, color) => {
 		const colors = [...customGradientColors];
-		console.log(colors)
-
 		colors.splice(index, 1);
 		setCustomGradientColors([...colors]);
-		setCurrentState('fb_update_custom_gradient_colors');
+		setFbGlobalSettingsLoading(true);
 	}
-
-	const updateGradientColors = (colors) => {
-		// console.log(colors)
-	};
 
 	// Save colors after post save
 	const isAfterSave = useAfterSave();
 
 	useEffect(() => {
 		const handleUpdateSettings = async () => {
-			if (isAfterSave) {
+			if (isAfterSave && fbGlobalSettingsLoading) {
 				try {
-					let updatedColors = [];
-					if (currentState === 'fb_update_global_colors') {
-						updatedColors = globalColors;
-					} else if (currentState === 'fb_update_custom_colors') {
-						updatedColors = customColors;
-					} else if (currentState === 'fb_update_gradient_colors') {
-						updatedColors = gradientColors;
-					} else if (currentState === 'fb_update_custom_gradient_colors') {
-						updatedColors = customGradientColors;
+					const settingsState = [
+						'fb_update_global_colors',
+						'fb_update_custom_colors',
+						'fb_update_gradient_colors',
+						'fb_update_custom_gradient_colors'
+					];
+
+					for (const key of settingsState) {
+						if(key === 'fb_update_global_colors') {
+							const response = await updateGlobalStyle(globalColors, key);
+							if(response.success) {
+								setGlobalColors(response.data.data);
+								localStorage.setItem('fb_global_colors', JSON.stringify(response.data.data));
+							}
+						}
+
+						if(key === 'fb_update_custom_colors') {
+							const response = await updateGlobalStyle(customColors, key);
+							if(response.success) {
+								setCustomColors(response.data.data);
+								localStorage.setItem('fb_custom_colors', JSON.stringify(response.data.data));
+							}
+						}
+
+						if(key === 'fb_update_gradient_colors') {
+							const response = await updateGlobalStyle(gradientColors, key);
+							if(response.success) {
+								setGradientColors(response.data.data);
+								localStorage.setItem('fb_gradient_colors', JSON.stringify(response.data.data));
+							}
+						}
+
+						if(key === 'fb_update_custom_gradient_colors') {
+							const response = await updateGlobalStyle(customGradientColors, key);
+							if(response.success) {
+								setCustomGradientColors(response.data.data);
+								localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(response.data.data));
+							}
+						}
 					}
-
-					// Update global styles
-					const response = await updateGlobalStyle(updatedColors, currentState);
-
-					if (currentState === 'fb_update_global_colors') {
-						setGlobalColors(response.data.data);
-					} else if (currentState === 'fb_update_custom_colors') {
-						setCustomColors(response.data.data);
-					} else if (currentState === 'fb_update_gradient_colors') {
-						setGradientColors(response.data.data);
-					} else if (currentState === 'fb_update_custom_gradient_colors') {
-						setCustomGradientColors(response.data.data);
-					}
-
-					localStorage.setItem(currentState, JSON.stringify(response.data.data));
 				} catch (error) {
 					console.error('Error updating settings:', error);
 				}
@@ -369,7 +775,6 @@ function FrontisBlocksSidebar(props) {
 														customColors={customColors}
 														setCustomColor={setCustomColor}
 														setCustomColors={setCustomColors}
-														setCurrentState={setCurrentState}
 													/>
 												)}
 												<div className="add-custom-color">
@@ -438,14 +843,14 @@ function FrontisBlocksSidebar(props) {
 						</PanelBody>
 						<PanelBody title={__("Global Typography", "frontis-blocks")} initialOpen={ false }>
 							{/* Global Typography settings */}
-							<TypographySettings />
+							<TypographySettings typography={typography} customTypography={customTypography}/>
 						</PanelBody>
-						<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={ false }>
-							<TextareaControl
-								value={customCSS}
-								onChange={(value) => setCustomCSS(value)}
-							/>
-						</PanelBody>
+						{/*<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={ false }>*/}
+						{/*	<TextareaControl*/}
+						{/*		value={customCSS}*/}
+						{/*		onChange={(value) => setCustomCSS(value)}*/}
+						{/*	/>*/}
+						{/*</PanelBody>*/}
 					</div>
 				</PluginSidebar>
 			</div>

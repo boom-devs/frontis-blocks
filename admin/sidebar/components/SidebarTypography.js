@@ -96,21 +96,19 @@ const FB_SidebarTypography = ({
 				value={fontFamily}
 				onChange={handleFontFamilyChange}
 			/>
-			{fontSizeUnits &&
-				<FB_Range
-					min={1}
-					max={200}
-					label={__("Font Size", "frontis-blocks")}
-					rangeValue={fontSize}
-					onChangeHandler={handleFontSizeChange}
-					rangeUnitHandler={handleFontSizeUnitChange}
-					deviceType={deviceType}
-					units={fontSizeUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={''}
-				/>
-			}
+			<FB_Range
+				min={1}
+				max={200}
+				label={__("Font Size", "frontis-blocks")}
+				rangeValue={fontSize}
+				onChangeHandler={handleFontSizeChange}
+				rangeUnitHandler={handleFontSizeUnitChange}
+				deviceType={deviceType}
+				units={fontSizeUnits}
+				setAttributes={setAttributes}
+				rangeStep={1}
+				resetFallbackValue={''}
+			/>
 			<SelectControl
 				label={__("Font Weight", "frontis-blocks")}
 				options={FONT_WEIGHT}
