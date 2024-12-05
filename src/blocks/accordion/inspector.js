@@ -215,10 +215,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         // Backgorund
         accordionBgColorSwitcher,
         accordionBgType,
-        accordionClassicColor,
-        accordionGradientColor,
-        accordionCustomGradientSwitcher,
-        accordionCustomGradientInputValue,
+        accordionBgClassicColor,
+        accordionBgGradientColor,
+        accordionBgCustomGradientSwitcher,
+        accordionBgCustomGradientInputValue,
         accordionBgImageUrl,
         accordionBgImageAlt,
         accordionBgImageID,
@@ -227,10 +227,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionBgImageRepeat,
         accordionBgImageSize,
         accordionBgHoverType,
-        accordionHoverClassicColor,
-        accordionHoverGradientColor,
-        accordionHoverCustomGradientSwitcher,
-        accordionHoverCustomGradientInputValue,
+        accordionBgHoverClassicColor,
+        accordionBgHoverGradientColor,
+        accordionBgHoverCustomGradientSwitcher,
+        accordionBgHoverCustomGradientInputValue,
         accordionBgHoverImageUrl,
         accordionBgHoverImageAlt,
         accordionBgHoverImageID,
@@ -244,31 +244,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionItemBoxShadowCssValue,
 
         // Item Backgorund
-        accordionItemBgColorSwitcher,
-        accordionItemBgType,
-        accordionItemClassicColor,
-        accordionItemGradientColor,
-        accordionItemCustomGradientSwitcher,
-        accordionItemCustomGradientInputValue,
-        accordionItemBgImageUrl,
-        accordionItemBgImageAlt,
-        accordionItemBgImageID,
-        accordionItemBgImagePosition,
-        accordionItemBgImageAttachment,
-        accordionItemBgImageRepeat,
-        accordionItemBgImageSize,
-        accordionItemBgHoverType,
-        accordionItemHoverClassicColor,
-        accordionItemHoverGradientColor,
-        accordionItemHoverCustomGradientSwitcher,
-        accordionItemHoverCustomGradientInputValue,
-        accordionItemBgHoverImageUrl,
-        accordionItemBgHoverImageAlt,
-        accordionItemBgHoverImageID,
-        accordionItemBgHoverImagePosition,
-        accordionItemBgHoverImageAttachment,
-        accordionItemBgHoverImageRepeat,
-        accordionItemBgHoverImageSize,
+        titleBgColorSwitcher,
+        titleBgType,
+        titleBgClassicColor,
+        titleBgGradientColor,
+        titleBgCustomGradientSwitcher,
+        titleBgCustomGradientInputValue,
+        titleBgImageUrl,
+        titleBgImageAlt,
+        titleBgImageID,
+        titleBgImagePosition,
+        titleBgImageAttachment,
+        titleBgImageRepeat,
+        titleBgImageSize,
+        titleBgHoverType,
+        titleBgHoverClassicColor,
+        titleBgHoverGradientColor,
+        titleBgHoverCustomGradientSwitcher,
+        titleBgHoverCustomGradientInputValue,
+        titleBgHoverImageUrl,
+        titleBgHoverImageAlt,
+        titleBgHoverImageID,
+        titleBgHoverImagePosition,
+        titleBgHoverImageAttachment,
+        titleBgHoverImageRepeat,
+        titleBgHoverImageSize,
     } = attributes;
 
 
@@ -1057,32 +1057,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                "frontis-blocks"
                                            )}
                                            className="fb-setting-text-alignment"
-                                       >
-                                           <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                                               {HEADING.map((item, key) => (
-                                                   <Button
-                                                        className="fb-setting-text-alignment-single-btn"
-                                                       key={key}
-                                                       // isLarge
-                                                       isPrimary={
-                                                           tagName ===
-                                                           item.value
-                                                       }
-                                                       isSecondary={
-                                                           tagName !==
-                                                           item.value
-                                                       }
-                                                       onClick={() =>
-                                                           setAttributes({
-                                                               tagName:
-                                                                   item.value,
-                                                           })
-                                                       }
-                                                   >
-                                                       {item.label}
-                                                   </Button>
-                                               ))}
-                                           </ButtonGroup>
+                                        >
+                                           <div className="fb-setting-switcher-container">
+                                                <BaseControl
+                                                    className="fb-setting-switcher-panel-wrapper"
+                                                >
+                                                    <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                        {HEADING.map((item, key) => (
+                                                            <Button
+                                                                key={key}
+                                                                onClick={() => setAttributes({ tagName: item.value })} 
+                                                                className={`fb-setting-switcher-panel-btn-switcher ${tagName === item.value ? 'active' : ''}`}
+                                                            >
+                                                                {item.label}
+                                                            </Button>
+                                                        ))}
+                                                    </ButtonGroup>
+                                                </BaseControl>
+                                            </div>
                                        </BaseControl>
                                        <FB_Range
                                             min={1}
@@ -1377,157 +1369,148 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 handleGlobalColorChange={handleTitleColorChange}
                                                 handleGlobalHoverColorChange={handleTitleHoverColorChange}
                                             />
-                                            <FB_Color
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={titleBGColorSwitcher}
-                                                globalColor={titleBGColor}
-                                                globalHoverColor={titleBGHoverColor}
-                                                handleColorSwitcherChange={handleTitleBGColorSwitcherChange}
-                                                handleGlobalColorChange={handleTitleBGColorChange}
-                                                handleGlobalHoverColorChange={handleTitleBGHoverColorChange}
-                                            />
 
                                             <FB_BackgroundColorControl
                                                 label={__("Background Color", "frontis-blocks")}
-														bgColorSwitcher={accordionItemBgColorSwitcher}
+														bgColorSwitcher={titleBgColorSwitcher}
 														setBgColorSwitcher={(value) =>
-															setAttributes({ accordionItemBgColorSwitcher: value })
+															setAttributes({ titleBgColorSwitcher: value })
 														}
-														normalBackgroundType={accordionItemBgType}
+														normalBackgroundType={titleBgType}
 														setNormalBackgroundType={(value) =>
-															setAttributes({ accordionItemBgType: value })
+															setAttributes({ titleBgType: value })
 														}
-														normalClassicColor={accordionItemClassicColor}
+														normalClassicColor={titleBgClassicColor}
 														setNormalClassicColor={(value) =>
-															setAttributes({ accordionItemClassicColor: value })
+															setAttributes({ titleBgClassicColor: value })
 														}
-														normalGradientColor={accordionItemGradientColor}
+														normalGradientColor={titleBgGradientColor}
 														setNormalGradientColor={(value) =>
-															setAttributes({ accordionItemGradientColor: value })
+															setAttributes({ titleBgGradientColor: value })
 														}
 														normalCustomGradientSwitcher={
-															accordionItemCustomGradientSwitcher
+															titleBgCustomGradientSwitcher
 														}
 														setNormalCustomGradientSwitcher={(value) =>
 															setAttributes({
-																accordionItemCustomGradientSwitcher: value,
+																titleBgCustomGradientSwitcher: value,
 															})
 														}
 														normalCustomGradientInputValue={
-															accordionItemCustomGradientInputValue
+															titleBgCustomGradientInputValue
 														}
 														setNormalCustomGradientInputValue={(value) =>
 															setAttributes({
-																accordionItemCustomGradientInputValue: value,
+																titleBgCustomGradientInputValue: value,
 															})
 														}
-														normalBackgroundImageUrl={accordionItemBgImageUrl}
+														normalBackgroundImageUrl={titleBgImageUrl}
 														setNormalBackgroundImageUrl={(value) =>
-															setAttributes({ accordionItemBgImageUrl: value })
+															setAttributes({ titleBgImageUrl: value })
 														}
-														normalBackgroundImageAlt={accordionItemBgImageAlt}
+														normalBackgroundImageAlt={titleBgImageAlt}
 														setNormalBackgroundImageAlt={(value) =>
-															setAttributes({ accordionItemBgImageAlt: value })
+															setAttributes({ titleBgImageAlt: value })
 														}
-														normalBackgroundImageID={accordionItemBgImageID}
+														normalBackgroundImageID={titleBgImageID}
 														setNormalBackgroundImageID={(value) =>
-															setAttributes({ accordionItemBgImageID: value })
+															setAttributes({ titleBgImageID: value })
 														}
 														normalBackgroundImagePosition={
-															accordionItemBgImagePosition
+															titleBgImagePosition
 														}
 														setNormalBackgroundImagePosition={(value) =>
 															setAttributes({
-																accordionItemBgImagePosition: value,
+																titleBgImagePosition: value,
 															})
 														}
 														normalBackgroundImageAttachment={
-															accordionItemBgImageAttachment
+															titleBgImageAttachment
 														}
 														setNormalBackgroundImageAttachment={(value) =>
 															setAttributes({
-																accordionItemBgImageAttachment: value,
+																titleBgImageAttachment: value,
 															})
 														}
 														normalBackgroundImageRepeat={
-															accordionItemBgImageRepeat
+															titleBgImageRepeat
 														}
 														setNormalBackgroundImageRepeat={(value) =>
 															setAttributes({
-																accordionItemBgImageRepeat: value,
+																titleBgImageRepeat: value,
 															})
 														}
-														normalBackgroundImageSize={accordionItemBgImageSize}
+														normalBackgroundImageSize={titleBgImageSize}
 														setNormalBackgroundImageSize={(value) =>
-															setAttributes({ accordionItemBgImageSize: value })
+															setAttributes({ titleBgImageSize: value })
 														}
-														hoverBackgroundType={accordionItemBgHoverType}
+														hoverBackgroundType={titleBgHoverType}
 														setBgHoverType={(value) =>
-															setAttributes({ accordionItemBgHoverType: value })
+															setAttributes({ titleBgHoverType: value })
 														}
-														hoverClassicColor={accordionItemHoverClassicColor}
+														hoverClassicColor={titleBgHoverClassicColor}
 														setHoverClassicColor={(value) =>
-															setAttributes({ accordionItemHoverClassicColor: value })
+															setAttributes({ titleBgHoverClassicColor: value })
 														}
-														hoverGradientColor={accordionItemHoverGradientColor}
+														hoverGradientColor={titleBgHoverGradientColor}
 														setHoverGradientColor={(value) =>
-															setAttributes({ accordionItemHoverGradientColor: value })
+															setAttributes({ titleBgHoverGradientColor: value })
 														}
 														hoverCustomGradientSwitcher={
-															accordionItemHoverCustomGradientSwitcher
+															titleBgHoverCustomGradientSwitcher
 														}
 														setHoverCustomGradientSwitcher={(value) =>
 															setAttributes({
-																accordionItemHoverCustomGradientSwitcher: value,
+																titleBgHoverCustomGradientSwitcher: value,
 															})
 														}
 														hoverCustomGradientInputValue={
-															accordionItemHoverCustomGradientInputValue
+															titleBgHoverCustomGradientInputValue
 														}
 														setHoverCustomGradientInputValue={(value) =>
 															setAttributes({
-																accordionItemHoverCustomGradientInputValue: value,
+																titleBgHoverCustomGradientInputValue: value,
 															})
 														}
-														hoverBackgroundImageUrl={accordionItemBgHoverImageUrl}
+														hoverBackgroundImageUrl={titleBgHoverImageUrl}
 														setBgHoverImageUrl={(value) =>
-															setAttributes({ accordionItemBgHoverImageUrl: value })
+															setAttributes({ titleBgHoverImageUrl: value })
 														}
-														hoverBackgroundImageAlt={accordionItemBgHoverImageAlt}
+														hoverBackgroundImageAlt={titleBgHoverImageAlt}
 														setBgHoverImageAlt={(value) =>
-															setAttributes({ accordionItemBgHoverImageAlt: value })
+															setAttributes({ titleBgHoverImageAlt: value })
 														}
-														hoverBackgroundImageID={accordionItemBgHoverImageID}
+														hoverBackgroundImageID={titleBgHoverImageID}
 														setBgHoverImageID={(value) =>
-															setAttributes({ accordionItemBgHoverImageID: value })
+															setAttributes({ titleBgHoverImageID: value })
 														}
 														hoverBackgroundImagePosition={
-															accordionItemBgHoverImagePosition
+															titleBgHoverImagePosition
 														}
 														setBgHoverImagePosition={(value) =>
 															setAttributes({
-																accordionItemBgHoverImagePosition: value,
+																titleBgHoverImagePosition: value,
 															})
 														}
 														hoverBackgroundImageAttachment={
-															accordionItemBgHoverImageAttachment
+															titleBgHoverImageAttachment
 														}
 														setBgHoverImageAttachment={(value) =>
 															setAttributes({
-																accordionItemBgHoverImageAttachment: value,
+																titleBgHoverImageAttachment: value,
 															})
 														}
 														hoverBackgroundImageRepeat={
-															accordionItemBgHoverImageRepeat
+															titleBgHoverImageRepeat
 														}
 														setBgHoverImageRepeat={(value) =>
 															setAttributes({
-																accordionItemBgHoverImageRepeat: value,
+																titleBgHoverImageRepeat: value,
 															})
 														}
-														hoverBackgroundImageSize={accordionItemBgHoverImageSize}
+														hoverBackgroundImageSize={titleBgHoverImageSize}
 														setBgHoverImageSize={(value) =>
-															setAttributes({ accordionItemBgHoverImageSize: value })
+															setAttributes({ titleBgHoverImageSize: value })
 														}
 											/>
                                            
@@ -1736,24 +1719,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setNormalBackgroundType={(value) =>
 															setAttributes({ accordionBgType: value })
 														}
-														normalClassicColor={accordionClassicColor}
+														normalClassicColor={accordionBgClassicColor}
 														setNormalClassicColor={(value) =>
-															setAttributes({ accordionClassicColor: value })
+															setAttributes({ accordionBgClassicColor: value })
 														}
-														normalGradientColor={accordionGradientColor}
+														normalGradientColor={accordionBgGradientColor}
 														setNormalGradientColor={(value) =>
-															setAttributes({ accordionGradientColor: value })
+															setAttributes({ accordionBgGradientColor: value })
 														}
-														normalCustomGradientSwitcher={accordionCustomGradientSwitcher}
+														normalCustomGradientSwitcher={accordionBgCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) =>
 															setAttributes({
-																accordionCustomGradientSwitcher: value,
+																accordionBgCustomGradientSwitcher: value,
 															})
 														}
-														normalCustomGradientInputValue={accordionCustomGradientInputValue}
+														normalCustomGradientInputValue={accordionBgCustomGradientInputValue}
 														setNormalCustomGradientInputValue={(value) =>
 															setAttributes({
-																accordionCustomGradientInputValue: value,
+																accordionBgCustomGradientInputValue: value,
 															})
 														}
 														normalBackgroundImageUrl={accordionBgImageUrl}
@@ -1794,24 +1777,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setBgHoverType={(value) =>
 															setAttributes({ accordionBgHoverType: value })
 														}
-														hoverClassicColor={accordionHoverClassicColor}
+														hoverClassicColor={accordionBgHoverClassicColor}
 														setHoverClassicColor={(value) =>
-															setAttributes({ accordionHoverClassicColor: value })
+															setAttributes({ accordionBgHoverClassicColor: value })
 														}
-														hoverGradientColor={accordionHoverGradientColor}
+														hoverGradientColor={accordionBgHoverGradientColor}
 														setHoverGradientColor={(value) =>
-															setAttributes({ accordionHoverGradientColor: value })
+															setAttributes({ accordionBgHoverGradientColor: value })
 														}
-														hoverCustomGradientSwitcher={accordionHoverCustomGradientSwitcher}
+														hoverCustomGradientSwitcher={accordionBgHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) =>
 															setAttributes({
-																accordionHoverCustomGradientSwitcher: value,
+																accordionBgHoverCustomGradientSwitcher: value,
 															})
 														}
-														hoverCustomGradientInputValue={accordionHoverCustomGradientInputValue}
+														hoverCustomGradientInputValue={accordionBgHoverCustomGradientInputValue}
 														setHoverCustomGradientInputValue={(value) =>
 															setAttributes({
-																accordionHoverCustomGradientInputValue: value,
+																accordionBgHoverCustomGradientInputValue: value,
 															})
 														}
 														hoverBackgroundImageUrl={accordionBgHoverImageUrl}
