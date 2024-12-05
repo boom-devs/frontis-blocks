@@ -168,18 +168,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoBoxDesktopPadding,
 		infoBoxTabPadding,
 		infoBoxMobilePadding,
-		infoBoxBorder,
-		infoBoxBorderColor,
-		infoBoxBorderHoverColor,
-		infoBoxBorderColorSwitcher,
-		infoBoxBorderUnits,
-		infoBoxDesktopBorderWidth,
-		infoBoxTabBorderWidth,
-		infoBoxMobileBorderWidth,
-
-		infoBoxBorderRadiusUnits,
-		infoBoxTabBorderRadiusWidth,
-		infoBoxMobileBorderRadiusWidth,
 
 		infoButtonPaddingUnits,
 		infoButtonDesktopPadding,
@@ -197,20 +185,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoBoxTabMargin,
 		infoBoxMobileMargin,
 		infoBoxMarginLink,
-		infoButtonBorderUnits,
-		infoButtonDesktopBorderWidth,
-		infoButtonTabBorderWidth,
-		infoButtonMobileBorderWidth,
-		infoBtnBorderradiusUnits,
-		infoBtnDesktopBorderradiusWidth,
-		infoBtnTabBorderradiusWidth,
-		infoBtnMobileBorderradiusWidth,
-		infoButtonBorderColorSwitcher,
-		infoButtonBorderColor,
-		infoButtonHoverBorderColor,
-		boxBgColor,
-		boxBgColorSwitcher,
-		boxBgHoverColor,
 		mediaSize,
 		mediaSizeUnits,
 		globalZIndex,
@@ -368,9 +342,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const iconHandler = (iconName) => {
 		setAttributes({ icon: iconName });
 	};
-	const buttonIconHandler = (iconName) => {
-		setAttributes({ btnIcon: iconName });
-	};
 
 	const mediaSizeHandler = (value) => {
 		setAttributes({ mediaSize: value });
@@ -379,903 +350,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const mediaSizeUnitsHandler = (value) => {
 		setAttributes({ mediaSizeUnits: value });
 	};
-	/** Media Bg Width */
-	const mediaBgWidthHandler = (value) => {
-		setAttributes({ mediaBgWidth: value });
-	};
-
-	const mediaBgWidthUnitsHandler = (value) => {
-		setAttributes({ mediaBgWidthUnits: value });
-	};
-	/** Media Bg Width */
-	const mediaBgHeightHandler = (value) => {
-		setAttributes({ mediaBgHeight: value });
-	};
-
-	const mediaBgHeightUnitsHandler = (value) => {
-		setAttributes({ mediaBgWidthUnits: value });
-	};
-	/** Start Padding */
-	const [previousPadding, setPreviousPadding] = useState(
-		Heading_Desktop_padding,
-	);
-	/** Function to update all padding values */
-	const updateAllPadding = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_padding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_padding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_padding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handlePaddingInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_padding: {
-						...Heading_Desktop_padding,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_padding: { ...Heading_Tab_padding, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_padding: {
-						...Heading_Mobile_padding,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if paddingLink is true */
-		if (paddingLink) {
-			updateAllPadding(value, deviceType);
-		}
-	};
-
-	/** Function to handle paddingLink toggle */
-	const handlePaddingLinkToggle = () => {
-		if (!paddingLink) {
-			setAttributes({ Heading_Desktop_padding: previousPadding });
-		}
-		/** setPaddingLink(!paddingLink) */
-		setAttributes({ paddingLink: !paddingLink });
-	};
-
-	/** Update previousPadding state when padding changes */
-	useEffect(() => {
-		setPreviousPadding(Heading_Desktop_padding);
-	}, [Heading_Desktop_padding]);
-
-	/** Function to handle device click for padding */
-	const handlePaddingDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default padding for desktop (using desktop_padding) */
-	const padding = `${Heading_Desktop_padding.top}${Heading_padding_units} ${Heading_Desktop_padding.right}${Heading_padding_units} ${Heading_Desktop_padding.bottom}${Heading_padding_units} ${Heading_Desktop_padding.left}${Heading_padding_units}`;
-	/** End Padding */
-
-	/** Start Padding */
-	const [buttonPreviousPadding, setButtonPreviousPadding] = useState(
-		infoButtonDesktopPadding,
-	);
-	/** Function to update all padding values */
-	const updateButtonPadding = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoButtonDesktopPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoButtonTabPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoButtonMobilePadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleButtonPaddingInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					infoButtonDesktopPadding: {
-						...infoButtonDesktopPadding,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoButtonTabPadding: { ...infoButtonTabPadding, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoButtonMobilePadding: {
-						...infoButtonMobilePadding,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if paddingLink is true */
-		if (paddingLink) {
-			updateButtonPadding(value, deviceType);
-		}
-	};
-
-	/** Function to handle paddingLink toggle */
-	const handleButtonPaddingLinkToggle = () => {
-		if (!paddingLink) {
-			setAttributes({ infoButtonDesktopPadding: buttonPreviousPadding });
-		}
-		/** setPaddingLink(!paddingLink) */
-		setAttributes({ paddingLink: !paddingLink });
-	};
-
-	/** Update previousPadding state when padding changes */
-	useEffect(() => {
-		setButtonPreviousPadding(infoButtonDesktopPadding);
-	}, [infoButtonDesktopPadding]);
-
-	/** Function to handle device click for padding */
-	const handleButtonPaddingDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default padding for desktop (using desktop_padding) */
-	const buttonPadding = `${infoButtonDesktopPadding.top}${infoButtonPaddingUnits} ${infoButtonDesktopPadding.right}${infoButtonPaddingUnits} ${infoButtonDesktopPadding.bottom}${infoButtonPaddingUnits} ${infoButtonDesktopPadding.left}${infoButtonPaddingUnits}`;
-	/** End Padding */
-
-	/*BOX SPACING*/
-	/** Start Padding */
-	const [boxPreviousPadding, setBoxPreviousPadding] = useState(
-		infoBoxDesktopPadding,
-	);
-	/** Function to update all padding values */
-	const updateAllBoxPadding = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobilePadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxPaddingInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopPadding: {
-						...infoBoxDesktopPadding,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabPadding: { ...infoBoxTabPadding, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobilePadding: { ...infoBoxMobilePadding, [direction]: value },
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if paddingLink is true */
-		if (paddingLink) {
-			updateAllBoxPadding(value, deviceType);
-		}
-	};
-
-	/** Function to handle paddingLink toggle */
-	const handleBoxPaddingLinkToggle = () => {
-		if (!paddingLink) {
-			setAttributes({ infoBoxDesktopPadding: boxPreviousPadding });
-		}
-		/** setPaddingLink(!paddingLink) */
-		setAttributes({ paddingLink: !paddingLink });
-	};
-
-	/** Update previousPadding state when padding changes */
-	useEffect(() => {
-		setBoxPreviousPadding(infoBoxDesktopPadding);
-	}, [infoBoxDesktopPadding]);
-
-	/** Function to handle device click for padding */
-	const handleBoxPaddingDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default padding for desktop (using desktop_padding) */
-	const boxPadding = `${infoBoxDesktopPadding.top}${infoBoxPaddingUnits} ${infoBoxDesktopPadding.right}${infoBoxPaddingUnits} ${infoBoxDesktopPadding.bottom}${infoBoxPaddingUnits} ${infoBoxDesktopPadding.left}${infoBoxPaddingUnits}`;
-	/** End Padding */
-
-	/** Start Margin */
-	const [boxPreviousMargin, setBoxPreviousMargin] =
-		useState(infoBoxDesktopMargin);
-	/** Function to update all margin values */
-	const updateBoxMargin = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBoxMarginInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					infoBoxDesktopMargin: { ...infoBoxDesktopMargin, [direction]: value },
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					infoBoxTabMargin: { ...infoBoxTabMargin, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					infoBoxMobileMargin: { ...infoBoxMobileMargin, [direction]: value },
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all margin values if marginLink is true */
-		if (infoBoxMarginLink) {
-			updateBoxMargin(value, deviceType);
-		}
-	};
-
-	/** Function to handle marginLink toggle */
-	const handleBoxMarginLinkToggle = () => {
-		if (!infoBoxMarginLink) {
-			setAttributes({ infoBoxDesktopMargin: boxPreviousMargin });
-		}
-		/** setmarginLink(!marginLink) */
-		setAttributes({ infoBoxMarginLink: !infoBoxMarginLink });
-	};
-
-	/** Update previousMargin state when margin changes */
-	useEffect(() => {
-		setBoxPreviousMargin(infoBoxDesktopMargin);
-	}, [infoBoxDesktopMargin]);
-
-	/** Function to handle device click for margin */
-	const handleBoxMarginDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default margin for desktop (using desktop_margin) */
-	const boxMargin = `${infoBoxDesktopMargin.top}${infoBoxMarginUnits} ${infoBoxDesktopMargin.right}${infoBoxMarginUnits} ${infoBoxDesktopMargin.bottom}${infoBoxMarginUnits} ${infoBoxDesktopMargin.left}${infoBoxMarginUnits}`;
-	/** End Margin */
-
-	/** Start Padding For Description*/
-	const [previousPaddingDescription, setPreviousPaddingDescription] = useState(
-		SubHeadingDesktopPadding,
-	);
-	/** Function to update all padding values */
-	const updateAllDescPadding = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					SubHeadingDesktopPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					SubHeadingTabPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					SubHeadingMobilePadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleDescPaddingInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					SubHeadingDesktopPadding: {
-						...SubHeadingDesktopPadding,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					SubHeadingTabPadding: { ...SubHeadingTabPadding, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					SubHeadingMobilePadding: {
-						...SubHeadingMobilePadding,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if paddingLink is true */
-		if (paddingLink) {
-			updateAllDescPadding(value, deviceType);
-		}
-	};
-
-	/** Function to handle paddingLink toggle */
-	const handleDescPaddingLinkToggle = () => {
-		if (!paddingLink) {
-			setAttributes({ SubHeadingDesktopPadding: previousPaddingDescription });
-		}
-		/** setPaddingLink(!paddingLink) */
-		setAttributes({ paddingLink: !paddingLink });
-	};
-
-	/** Update previousPadding state when padding changes */
-	useEffect(() => {
-		setPreviousPaddingDescription(SubHeadingDesktopPadding);
-	}, [SubHeadingDesktopPadding]);
-
-	/** Function to handle device click for padding */
-	const handleDescPaddingDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default padding for desktop (using desktop_padding) */
-	const descPadding = `${SubHeadingDesktopPadding.top}${SubHeadingPaddingUnits} ${SubHeadingDesktopPadding.right}${SubHeadingPaddingUnits} ${SubHeadingDesktopPadding.bottom}${SubHeadingPaddingUnits} ${SubHeadingDesktopPadding.left}${SubHeadingPaddingUnits}`;
-	/** End Padding */
-
-	/** Start Margin */
-	const [descPreviousMargin, setDescPreviousMargin] =
-		useState(descDesktopMargin);
-	/** Function to update all margin values */
-	const updateDescMargin = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					descDesktopMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					descTabMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					descMobileMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleDescMarginInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					descDesktopMargin: { ...descDesktopMargin, [direction]: value },
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					descTabMargin: { ...descTabMargin, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					descMobileMargin: { ...descMobileMargin, [direction]: value },
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all margin values if marginLink is true */
-		if (descMarginLink) {
-			updateDescMargin(value, deviceType);
-		}
-	};
-
-	/** Function to handle marginLink toggle */
-	const handleDescMarginLinkToggle = () => {
-		if (!descMarginLink) {
-			setAttributes({ descDesktopMargin: descPreviousMargin });
-		}
-		/** setmarginLink(!marginLink) */
-		setAttributes({ descMarginLink: !descMarginLink });
-	};
-
-	/** Update previousMargin state when margin changes */
-	useEffect(() => {
-		setDescPreviousMargin(descDesktopMargin);
-	}, [descDesktopMargin]);
-
-	/** Function to handle device click for margin */
-	const handleDescMarginDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default margin for desktop (using desktop_margin) */
-	const descMargin = `${descDesktopMargin.top}${descMarginUnits} ${descDesktopMargin.right}${descMarginUnits} ${descDesktopMargin.bottom}${descMarginUnits} ${descDesktopMargin.left}${descMarginUnits}`;
-	/** End Description Margin */
-
-	/** Start Margin */
-	const [previousMargin, setPreviousMargin] = useState(Heading_Desktop_Margin);
-	/** Function to update all margin values */
-	const updateAllMargin = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_Margin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_Margin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_Margin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleMarginInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_Margin: {
-						...Heading_Desktop_Margin,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_Margin: { ...Heading_Tab_Margin, [direction]: value },
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_Margin: {
-						...Heading_Mobile_Margin,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all margin values if marginLink is true */
-		if (Heading_Margin_Link) {
-			updateAllMargin(value, deviceType);
-		}
-	};
-
-	/** Function to handle marginLink toggle */
-	const handleMarginLinkToggle = () => {
-		if (!Heading_Margin_Link) {
-			setAttributes({ Heading_Desktop_Margin: previousMargin });
-		}
-		/** setmarginLink(!marginLink) */
-		setAttributes({ Heading_Margin_Link: !Heading_Margin_Link });
-	};
-
-	/** Update previousMargin state when margin changes */
-	useEffect(() => {
-		setPreviousMargin(Heading_Desktop_Margin);
-	}, [Heading_Desktop_Margin]);
-
-	/** Function to handle device click for margin */
-	const handleMarginDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-	/** Default margin for desktop (using desktop_margin) */
-	const margin = `${Heading_Desktop_Margin.top}${Heading_padding_units} ${Heading_Desktop_Margin.right}${Heading_padding_units} ${Heading_Desktop_Margin.bottom}${Heading_padding_units} ${Heading_Desktop_Margin.left}${Heading_padding_units}`;
-	/** End Margin */
-
-	/** Start Border Width */
-	const [previousBorderWidth, setPreviousBorderWidth] = useState(
-		Heading_Desktop_Border_Width,
-	);
-	/** Function to update all Border Width values */
-	const updateAllBorderWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_Border_Width: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_Border_Width: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_Border_Width: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBorderWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_Border_Width: {
-						...Heading_Desktop_Border_Width,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_Border_Width: {
-						...Heading_Tab_Border_Width,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_Border_Width: {
-						...Heading_Mobile_Border_Width,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderLink is true */
-		if (borderLink) {
-			updateAllBorderWidth(value, deviceType);
-		}
-	};
-
-	/** Function to handle borderLink toggle */
-	const handleBorderWidthLinkToggle = () => {
-		if (!borderLink) {
-			setAttributes({ Heading_Desktop_Border_Width: previousBorderWidth });
-		}
-		/** setborderLinkLink(!borderLink) */
-		setAttributes({ borderLink: !borderLink });
-	};
-
-	/** Update previousborderWidth state when Border Width changes */
-	useEffect(() => {
-		setPreviousBorderWidth(Heading_Desktop_Border_Width);
-	}, [Heading_Desktop_Border_Width]);
-
-	/** Function to handle device click for Border Width */
-	const handleBorderWidthDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const borderWidth = `${Heading_Desktop_Border_Width.top}${Heading_Border_units} ${Heading_Desktop_Border_Width.right}${Heading_Border_units} ${Heading_Desktop_Border_Width.bottom}${Heading_Border_units} ${Heading_Desktop_Border_Width.left}${Heading_Border_units}`;
-	/** End Border Width */
-
-	/** Start Border Radius Width */
-	const [previousBorderRadiusWidth, setPreviousBorderRadiusWidth] = useState(
-		Heading_Desktop_Border_radius_Width,
-	);
-	/** Function to update all Border Width values */
-	const updateAllBorderRadiusWidth = (value, device) => {
-		switch (device) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_Border_radius_Width: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_Border_radius_Width: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_Border_radius_Width: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	};
-
-	/** Function to handle input change */
-	const handleBorderRadiusWidthInputChange = (e, direction) => {
-		const value = e.target.value;
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					Heading_Desktop_Border_radius_Width: {
-						...Heading_Desktop_Border_radius_Width,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					Heading_Tab_Border_radius_Width: {
-						...Heading_Tab_Border_radius_Width,
-						[direction]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					Heading_Mobile_Border_radius_Width: {
-						...Heading_Mobile_Border_radius_Width,
-						[direction]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-		/** Update all padding values if borderRadiusLink is true */
-		if (borderRadiusLink) {
-			updateAllBorderRadiusWidth(value, deviceType);
-		}
-	};
-
-	/** Function to handle borderRadiusLink toggle */
-	const handleBorderRadiusWidthLinkToggle = () => {
-		if (!borderRadiusLink) {
-			setAttributes({
-				Heading_Desktop_Border_radius_Width: previousBorderRadiusWidth,
-			});
-		}
-		/** setborderRadiusLinkLink(!borderRadiusLink) */
-		setAttributes({ borderRadiusLink: !borderRadiusLink });
-	};
-
-	/** Update previousBorderRadiusWidth state when Border Width changes */
-	useEffect(() => {
-		setPreviousBorderRadiusWidth(Heading_Desktop_Border_radius_Width);
-	}, [Heading_Desktop_Border_radius_Width]);
-
-	/** Function to handle device click for Border Width */
-	const handleBorderRadiusWidthDeviceClick = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	/** Default Border Width for desktop (using Heading_Desktop_Border_Width) */
-	const borderRadiusWidth = `${Heading_Desktop_Border_radius_Width.top}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.right}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.bottom}${Heading_Border_radius_units} ${Heading_Desktop_Border_radius_Width.left}${Heading_Border_radius_units}`;
-	/** End Border Radius Width */
-
-	/** Global Typography */
+	
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -2379,93 +1454,93 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const SubHeadingMobilePaddingValue = `${SubHeadingMobilePadding.top}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.right}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.bottom}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.left}${SubHeadingPaddingUnits.Mobile}`;
 
 	/** Start Desc Margin */
-const handleDescMarginUnitChange = (event, position) => {
-	const value = event.target.value;
-	if (descMarginLink) {
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					descDesktopMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					descTabMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					descMobileMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
+	const handleDescMarginUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (descMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						descDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						descTabMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						descMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						descDesktopMargin: {
+							...descDesktopMargin,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						descTabMargin: {
+							...descTabMargin,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						descMobileMargin: {
+							...descMobileMargin,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
 		}
-	} else {
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					descDesktopMargin: {
-						...descDesktopMargin,
-						[position]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					descTabMargin: {
-						...descTabMargin,
-						[position]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					descMobileMargin: {
-						...descMobileMargin,
-						[position]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	}
-};
+	};
 
-const handleDescMarginCombineBtn = () => {
-	setAttributes({ descMarginLink: !descMarginLink });
-};
+	const handleDescMarginCombineBtn = () => {
+		setAttributes({ descMarginLink: !descMarginLink });
+	};
 
-const handleDescMarginUnitsHandler = (unit) => {
-	setAttributes({
-		descMarginUnits: {
-			...descMarginUnits,
-			[deviceType]: unit,
-		},
-	});
-};
-/** End Desc Margin */
+	const handleDescMarginUnitsHandler = (unit) => {
+		setAttributes({
+			descMarginUnits: {
+				...descMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End Desc Margin */
 
-/** End Global Desc Margin */
-const descDesktopMarginValue = `${descDesktopMargin.top}${descMarginUnits.Desktop} ${descDesktopMargin.right}${descMarginUnits.Desktop} ${descDesktopMargin.bottom}${descMarginUnits.Desktop} ${descDesktopMargin.left}${descMarginUnits.Desktop}`;
-const descTabMarginValue = `${descTabMargin.top}${descMarginUnits.Tablet} ${descTabMargin.right}${descMarginUnits.Tablet} ${descTabMargin.bottom}${descMarginUnits.Tablet} ${descTabMargin.left}${descMarginUnits.Tablet}`;
-const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} ${descMobileMargin.right}${descMarginUnits.Mobile} ${descMobileMargin.bottom}${descMarginUnits.Mobile} ${descMobileMargin.left}${descMarginUnits.Mobile}`;
+	/** End Global Desc Margin */
+	const descDesktopMarginValue = `${descDesktopMargin.top}${descMarginUnits.Desktop} ${descDesktopMargin.right}${descMarginUnits.Desktop} ${descDesktopMargin.bottom}${descMarginUnits.Desktop} ${descDesktopMargin.left}${descMarginUnits.Desktop}`;
+	const descTabMarginValue = `${descTabMargin.top}${descMarginUnits.Tablet} ${descTabMargin.right}${descMarginUnits.Tablet} ${descTabMargin.bottom}${descMarginUnits.Tablet} ${descTabMargin.left}${descMarginUnits.Tablet}`;
+	const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} ${descMobileMargin.right}${descMarginUnits.Mobile} ${descMobileMargin.bottom}${descMarginUnits.Mobile} ${descMobileMargin.left}${descMarginUnits.Mobile}`;
 
 	/** Start Global Bg Color */
 	const handleGlobalBgColorSwitcherChange = (value) => {
@@ -2516,44 +1591,20 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 	const iconBoxStyle = useMemo(
 		() => `
     .fb-icon-box-content-wrapper.${blockID} {
-        ${
-					globalBgColor !== undefined
-						? `background-color: ${globalBgColor};`
-						: ""
-				}
+        ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : "" }
         ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
         ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
         ${globalBorder ? `border: ${globalBorder};` : ""}
         ${BorderDesktopWidth ? `border-width: ${BorderDesktopWidth};` : ""}
-        ${
-					BorderRadiusDesktopWidth
-						? `border-radius: ${BorderRadiusDesktopWidth} !important;`
-						: ""
-				}
-        ${
-					globalBorderColor !== undefined
-						? `border-color: ${globalBorderColor};`
-						: ""
-				}
-        ${
-					boxGlobalBoxShadowCssValue
-						? `box-shadow: ${boxGlobalBoxShadowCssValue};`
-						: ""
-				}
+        ${BorderRadiusDesktopWidth ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : "" }
+        ${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : "" }
+        ${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : "" }
         transition: all .3s ease-in-out;
     }
     
     .fb-icon-box-content-wrapper.${blockID}:hover {
-        ${
-					globalBgHoverColor !== undefined
-						? `background-color: ${globalBgHoverColor};`
-						: ""
-				}
-        ${
-					globalBorderHoverColor !== undefined
-						? `border-color: ${globalBorderHoverColor};`
-						: ""
-				}
+        ${globalBgHoverColor !== undefined ? `background-color: ${globalBgHoverColor};` : "" }
+        ${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
     }
     
     @media only screen and (max-width: 1024px) {
@@ -2576,77 +1627,34 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 
     .fb-icon-box-content-wrapper.${blockID} .fb-heading {
         ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ""}
-        ${
-					Heading_Background_Color !== undefined
-						? `background-color: ${Heading_Background_Color};`
-						: ""
-				}
-        font-family: ${
-					Heading_Font_Family !== "default" ? Heading_Font_Family : "inherit"
-				};
-       
+        ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : "" }
+        font-family: ${ Heading_Font_Family !== "default" ? Heading_Font_Family : "inherit" };
         font-weight: ${Heading_Font_Weight};
         font-style: ${Heading_Font_Style};
         text-transform: ${Heading_Text_Transform};
         text-decoration: ${Heading_Text_Decoration};
-        ${
-			Heading_Font_Size.Desktop && Heading_Font_size_units.Desktop
-							? `font-size: ${Heading_Font_Size.Desktop}${Heading_Font_size_units.Desktop};`
-							: ""
-			}
-		${
-			Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop
-				? `letter-spacing: ${Heading_Letter_Spacing.Desktop}${Heading_Letter_Spacing_units.Desktop};`
-				: ""
-		}
-		${
-			Heading_Line_Height.Desktop && Heading_Line_Height_units.Desktop
-				? `line-height: ${Heading_Line_Height.Desktop}${Heading_Line_Height_units.Desktop};`
-				: ""
-		}
+        ${Heading_Font_Size.Desktop && Heading_Font_size_units.Desktop ? `font-size: ${Heading_Font_Size.Desktop}${Heading_Font_size_units.Desktop};` : "" }
+		${Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop ? `letter-spacing: ${Heading_Letter_Spacing.Desktop}${Heading_Letter_Spacing_units.Desktop};` : "" }
+		${Heading_Line_Height.Desktop && Heading_Line_Height_units.Desktop ? `line-height: ${Heading_Line_Height.Desktop}${Heading_Line_Height_units.Desktop};` : "" }
         transition: all .3s ease-in-out;
         padding: ${Heading_Desktop_paddingWidth};
         margin: ${HeadingDesktopMarginValue};
         border: ${Heading_Border};
         border-width: ${HeadingDesktopBorderWidthValue};
         border-radius: ${HeadingDesktopBorderradiusWidthValue};
-        ${
-					Heading_Border_Color !== undefined
-						? `border-color: ${Heading_Border_Color};`
-						: ""
-				}
+        ${Heading_Border_Color !== undefined ? `border-color: ${Heading_Border_Color};` : "" }
     }
 
     .fb-icon-box-content-wrapper.${blockID}:hover .fb-heading {
-        ${
-					Heading_Hover_Color !== undefined
-						? `color: ${Heading_Hover_Color};`
-						: ""
-				}
-        ${
-					Heading_Border_Hover_Color !== undefined
-						? `border-color: ${Heading_Border_Hover_Color};`
-						: ""
-				}
+        ${Heading_Hover_Color !== undefined ? `color: ${Heading_Hover_Color};` : "" }
+        ${Heading_Border_Hover_Color !== undefined ? `border-color: ${Heading_Border_Hover_Color};` : "" }
     }
 
     @media only screen and (max-width: 1024px) {
         .fb-icon-box-content-wrapper.${blockID} .fb-heading {
-			${
-				Heading_Font_Size.Tablet && Heading_Font_size_units.Tablet
-								? `font-size: ${Heading_Font_Size.Tablet}${Heading_Font_size_units.Tablet};`
-								: ""
-				}
-			${
-				Heading_Letter_Spacing.Tablet && Heading_Letter_Spacing_units.Desktop
-					? `letter-spacing: ${Heading_Letter_Spacing.Tablet}${Heading_Letter_Spacing_units.Tablet};`
-					: ""
-			}
-			${
-				Heading_Line_Height.Tablet && Heading_Line_Height_units.Tablet
-					? `line-height: ${Heading_Line_Height.Tablet}${Heading_Line_Height_units.Tablet};`
-					: ""
-			}
+			${Heading_Font_Size.Tablet && Heading_Font_size_units.Tablet ? `font-size: ${Heading_Font_Size.Tablet}${Heading_Font_size_units.Tablet};` : "" }
+			${Heading_Letter_Spacing.Tablet && Heading_Letter_Spacing_units.Desktop ? `letter-spacing: ${Heading_Letter_Spacing.Tablet}${Heading_Letter_Spacing_units.Tablet};` : "" }
+			${Heading_Line_Height.Tablet && Heading_Line_Height_units.Tablet ? `line-height: ${Heading_Line_Height.Tablet}${Heading_Line_Height_units.Tablet};` : "" }
             padding: ${Heading_Tab_paddingWidth} !important;
             margin: ${HeadingTabMarginValue} !important;
             border-width: ${HeadingTabBorderWidthValue} !important;
@@ -2656,21 +1664,9 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 
     @media only screen and (max-width: 767px) {
         .fb-icon-box-content-wrapper.${blockID} .fb-heading {
-			${
-				Heading_Font_Size.Mobile && Heading_Font_size_units.Mobile
-								? `font-size: ${Heading_Font_Size.Mobile}${Heading_Font_size_units.Mobile};`
-								: ""
-				}
-			${
-				Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop
-					? `letter-spacing: ${Heading_Letter_Spacing.Mobile}${Heading_Letter_Spacing_units.Mobile};`
-					: ""
-			}
-			${
-				Heading_Line_Height.Mobile && Heading_Line_Height_units.Mobile
-					? `line-height: ${Heading_Line_Height.Mobile}${Heading_Line_Height_units.Mobile};`
-					: ""
-			}
+			${Heading_Font_Size.Mobile && Heading_Font_size_units.Mobile ? `font-size: ${Heading_Font_Size.Mobile}${Heading_Font_size_units.Mobile};` : "" }
+			${Heading_Letter_Spacing.Desktop && Heading_Letter_Spacing_units.Desktop ? `letter-spacing: ${Heading_Letter_Spacing.Mobile}${Heading_Letter_Spacing_units.Mobile};`: "" }
+			${Heading_Line_Height.Mobile && Heading_Line_Height_units.Mobile ? `line-height: ${Heading_Line_Height.Mobile}${Heading_Line_Height_units.Mobile};` : "" }
             padding: ${Heading_Mobile_paddingWidth} !important;
             margin: ${HeadingMobileMarginValue} !important;
             border-width: ${HeadingMobileBorderWidthValue} !important;
@@ -2679,31 +1675,14 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
     }
 	.fb-icon-box-content-wrapper.${blockID} .fb-description {
         ${SubHeadingColor ? `color: ${SubHeadingColor} !important;` : ""}
-        font-family: ${
-					SubHeadingFontFamily !== "default"
-						? SubHeadingFontFamily
-						: SubHeadingFontFamily
-				};
-		
+        font-family: ${ SubHeadingFontFamily !== "default" ? SubHeadingFontFamily : SubHeadingFontFamily };
         font-weight: ${SubHeadingFontWeight};
         font-style: ${SubHeadingFontStyle};
         text-transform: ${SubHeadingTextTransform};
         text-decoration: ${SubHeadingTextDecoration};
-		${
-			SubHeadingFontSize.Desktop && SubHeadingFontSizeUnits.Desktop
-				? `font-size: ${SubHeadingFontSize.Desktop}${SubHeadingFontSizeUnits.Desktop};`
-				: ""
-		}
-		${
-			SubHeadingLetterSpacing.Desktop && SubHeadingLetterSpacingUnits.Desktop
-				? `letter-spacing: ${SubHeadingLetterSpacing.Desktop}${SubHeadingLetterSpacingUnits.Desktop};`
-				: ""
-		}
-		${
-			SubHeadingLineHeight.Desktop && SubHeadingLineHeightUnits.Desktop
-				? `line-height: ${SubHeadingLineHeight.Desktop}${SubHeadingLineHeightUnits.Desktop};`
-				: ""
-		}
+		${SubHeadingFontSize.Desktop && SubHeadingFontSizeUnits.Desktop ? `font-size: ${SubHeadingFontSize.Desktop}${SubHeadingFontSizeUnits.Desktop};` : "" }
+		${SubHeadingLetterSpacing.Desktop && SubHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${SubHeadingLetterSpacing.Desktop}${SubHeadingLetterSpacingUnits.Desktop};` : "" }
+		${ SubHeadingLineHeight.Desktop && SubHeadingLineHeightUnits.Desktop ? `line-height: ${SubHeadingLineHeight.Desktop}${SubHeadingLineHeightUnits.Desktop};` : "" }
         padding: ${SubHeadingDesktopPaddingValue};
         margin: ${descDesktopMarginValue};
     }
@@ -2712,42 +1691,18 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
     }
     @media only screen and (max-width: 1024px) {
       .fb-icon-box-content-wrapper.${blockID} .fb-description {
-		${
-			SubHeadingFontSize.Tablet && SubHeadingFontSizeUnits.Tablet
-				? `font-size: ${SubHeadingFontSize.Tablet}${SubHeadingFontSizeUnits.Tablet};`
-				: ""
-		}
-		${
-			SubHeadingLetterSpacing.Tablet && SubHeadingLetterSpacingUnits.Tablet
-				? `letter-spacing: ${SubHeadingLetterSpacing.Tablet}${SubHeadingLetterSpacingUnits.Tablet};`
-				: ""
-		}
-		${
-			SubHeadingLineHeight.Tablet && SubHeadingLineHeightUnits.Tablet
-				? `line-height: ${SubHeadingLineHeight.Tablet}${SubHeadingLineHeightUnits.Tablet};`
-				: ""
-		}
+		${SubHeadingFontSize.Tablet && SubHeadingFontSizeUnits.Tablet ? `font-size: ${SubHeadingFontSize.Tablet}${SubHeadingFontSizeUnits.Tablet};` : "" }
+		${SubHeadingLetterSpacing.Tablet && SubHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${SubHeadingLetterSpacing.Tablet}${SubHeadingLetterSpacingUnits.Tablet};`: "" }
+		${SubHeadingLineHeight.Tablet && SubHeadingLineHeightUnits.Tablet ? `line-height: ${SubHeadingLineHeight.Tablet}${SubHeadingLineHeightUnits.Tablet};` : "" }
         padding: ${SubHeadingTabPaddingValue} !important;
         margin: ${descTabMarginValue} !important;
       }
     }
     @media only screen and (max-width: 757px) {
       .fb-icon-box-content-wrapper.${blockID} .fb-description {
-		${
-			SubHeadingFontSize.Mobile && SubHeadingFontSizeUnits.Mobile
-				? `font-size: ${SubHeadingFontSize.Mobile}${SubHeadingFontSizeUnits.Mobile};`
-				: ""
-		}
-		${
-			SubHeadingLetterSpacing.Mobile && SubHeadingLetterSpacingUnits.Mobile
-				? `letter-spacing: ${SubHeadingLetterSpacing.Mobile}${SubHeadingLetterSpacingUnits.Mobile};`
-				: ""
-		}
-		${
-			SubHeadingLineHeight.Mobile && SubHeadingLineHeightUnits.Mobile
-				? `line-height: ${SubHeadingLineHeight.Mobile}${SubHeadingLineHeightUnits.Mobile};`
-				: ""
-		}
+		${SubHeadingFontSize.Mobile && SubHeadingFontSizeUnits.Mobile ? `font-size: ${SubHeadingFontSize.Mobile}${SubHeadingFontSizeUnits.Mobile};` : "" }
+		${SubHeadingLetterSpacing.Mobile && SubHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${SubHeadingLetterSpacing.Mobile}${SubHeadingLetterSpacingUnits.Mobile};` : "" }
+		${SubHeadingLineHeight.Mobile && SubHeadingLineHeightUnits.Mobile ? `line-height: ${SubHeadingLineHeight.Mobile}${SubHeadingLineHeightUnits.Mobile};` : "" }
         padding: ${SubHeadingMobilePaddingValue} !important;
         margin: ${descMobileMarginValue} !important;
       }
@@ -2755,22 +1710,14 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
     .fb-icon-box-content-wrapper.${blockID} .fb-icon-media-wrapper {
       width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};
       height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};
-      ${
-				mediaBackgroundType === "gradient"
-					? `background: ${
-							mediaCustomGradientSwitcher && mediaCustomGradientInputValue
-								? mediaCustomGradientInputValue
-								: mediaGradientColor
-					  };`
-					: mediaBackgroundImageUrl && mediaBackgroundImageUrl !== "null"
-					? `
+      ${mediaBackgroundType === "gradient" ? `background: ${ mediaCustomGradientSwitcher && mediaCustomGradientInputValue ? mediaCustomGradientInputValue : mediaGradientColor };` : mediaBackgroundImageUrl && mediaBackgroundImageUrl !== "null" ? `
         background-image: url(${mediaBackgroundImageUrl});
         background-position: ${mediaBackgroundImagePosition};
         background-attachment: ${mediaBackgroundImageAttachment};
         background-repeat: ${mediaBackgroundImageRepeat};
         background-size: ${mediaBackgroundImageSize};`
-					: `background: ${mediaClassicColor};`
-			}
+		: `background: ${mediaClassicColor};`
+	  }
       padding: ${mediaDesktopPadding};
       margin: ${mediaDesktopMargin};
       border: ${mediaBorder};
@@ -2780,24 +1727,15 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
       background-size: cover;
     }
     .fb-icon-box-content-wrapper.${blockID}:hover .fb-icon-media-wrapper {
-      ${
-				mediaHoverBackgroundType === "gradient"
-					? `background: ${
-							mediaHoverCustomGradientSwitcher &&
-							mediaHoverCustomGradientInputValue
-								? mediaHoverCustomGradientInputValue
-								: mediaHoverGradientColor
-					  };`
-					: mediaHoverBackgroundImageUrl &&
-					  mediaHoverBackgroundImageUrl !== "null"
-					? `
+      ${mediaHoverBackgroundType === "gradient" ? `background: ${ mediaHoverCustomGradientSwitcher && mediaHoverCustomGradientInputValue ? mediaHoverCustomGradientInputValue : mediaHoverGradientColor };`
+		: mediaHoverBackgroundImageUrl && mediaHoverBackgroundImageUrl !== "null" ? `
         background-image: url(${mediaHoverBackgroundImageUrl});
         background-position: ${mediaHoverBackgroundImagePosition};
         background-attachment: ${mediaHoverBackgroundImageAttachment};
         background-repeat: ${mediaHoverBackgroundImageRepeat};
         background-size: ${mediaHoverBackgroundImageSize};`
-					: `background: ${mediaHoverClassicColor};`
-			}
+		: `background: ${mediaHoverClassicColor};`
+	  }
     }
     @media only screen and (max-width: 1024px) {
       .fb-icon-box-content-wrapper.${blockID} .fb-icon-media-wrapper {
@@ -2877,11 +1815,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 			Heading_Font_size_units,
 			Heading_Letter_Spacing_units,
 			Heading_Line_Height_units,
-			padding,
-			margin,
 			Heading_Border,
-			borderWidth,
-			borderRadiusWidth,
 			Heading_Border_Color,
 			Heading_Hover_Color,
 			Heading_Border_Hover_Color,
@@ -2909,8 +1843,6 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 			SubHeadingLetterSpacingUnits,
 			SubHeadingLineHeight,
 			SubHeadingLineHeightUnits,
-			descPadding,
-			descMargin,
 			SubHeadingHoverColor,
 			SubHeadingTabPadding,
 			SubHeadingPaddingUnits,
@@ -2969,12 +1901,11 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 		});
 	}, [iconBoxStyle]);
 
+	const editorStyle = iconBoxStyle.replace(/\s+/g, ' ').trim();
 	return (
 		<>
 			<style>
-				{`
-				${blockStyle}
-            `}
+				{editorStyle}
 			</style>
 
 			<InspectorControls key="controls">
@@ -3674,8 +2605,6 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 												}
 											/>
 
-											{/*Spacing*/}
-											<Heading>Spacing</Heading>
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
@@ -3707,8 +2636,6 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 												setAttributes={setAttributes}
 											/>
 
-											{/*Border*/}
-											<Heading>Border</Heading>
 											<SelectControl
 												label={__("Border Style", "frontis-block")}
 												value={Heading_Border}
@@ -3849,9 +2776,7 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
 													})
 												}
 											/>
-											{/*Spacing*/}
-											<Heading>Spacing</Heading>
-											{/* Padding */}
+											
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
 												deviceType={deviceType}
@@ -4064,14 +2989,14 @@ const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} 
                                                 />
 												{wrapperUrlSwitcher && (
 												<FB_UrlControl
-																url={wrapperLink}
-																onChangeUrl={(value) =>
-																	setAttributes({ wrapperLink: value })
-																}
-																openInNewTab={wrapperTargetUrl}
-																onChangeOpenInNewTab={(value) =>
-																	setAttributes({ wrapperTargetUrl: value })
+													url={wrapperLink}
+													onChangeUrl={(value) =>
+														setAttributes({ wrapperLink: value })
 													}
+													openInNewTab={wrapperTargetUrl}
+													onChangeOpenInNewTab={(value) =>
+														setAttributes({ wrapperTargetUrl: value })
+												}
 												/>
 												)}
 												</PanelBody>

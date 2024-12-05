@@ -281,6 +281,7 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+    /** Heading Color **/
     Heading_Color_Switcher : {
         type: "string",
         default: "normal"

@@ -8,12 +8,7 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
-		"html": false,
-		"spacing": {
-			"margin": true,
-			"padding": true
-		}
-
+		"html": false
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",

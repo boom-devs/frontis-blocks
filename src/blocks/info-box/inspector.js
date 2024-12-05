@@ -1999,197 +1999,196 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 		
+		.fb-info-box-content-wrapper.${blockID} .fb-description {
+			${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ""}
+			${subHeadingFontFamily ? `font-family: ${subHeadingFontFamily};` : ''}
+			${subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
+			${subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
+			${subHeadingFontStyle ? `font-style: ${subHeadingFontStyle};` : ''}
+			${subHeadingTextTransform ? `text-transform: ${subHeadingTextTransform};` : ''}
+			${subHeadingTextDecoration ? `text-decoration: ${subHeadingTextDecoration};` : ''}
+			${subHeadingLetterSpacing.Desktop && subHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${subHeadingLetterSpacing.Desktop}${subHeadingLetterSpacingUnits.Desktop};` : ''}
+			${subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
+			${ subHeadingDesktopPaddingValue !== undefined ? `padding: ${subHeadingDesktopPaddingValue};` : "" }
+			${descDesktopMarginValue  !== undefined ? `margin: ${descDesktopMarginValue };` : ""}
+			transition: all .3s ease-in-out;
+		}
 
-    .fb-info-box-content-wrapper.${blockID} .fb-description {
-		${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ""}
-		${subHeadingFontFamily ? `font-family: ${subHeadingFontFamily};` : ''}
-		${subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
-		${subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
-		${subHeadingFontStyle ? `font-style: ${subHeadingFontStyle};` : ''}
-		${subHeadingTextTransform ? `text-transform: ${subHeadingTextTransform};` : ''}
-		${subHeadingTextDecoration ? `text-decoration: ${subHeadingTextDecoration};` : ''}
-		${subHeadingLetterSpacing.Desktop && subHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${subHeadingLetterSpacing.Desktop}${subHeadingLetterSpacingUnits.Desktop};` : ''}
-		${subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
-        ${ subHeadingDesktopPaddingValue !== undefined ? `padding: ${subHeadingDesktopPaddingValue};` : "" }
-        ${descDesktopMarginValue  !== undefined ? `margin: ${descDesktopMarginValue };` : ""}
-		transition: all .3s ease-in-out;
-    }
+		.fb-info-box-content-wrapper.${blockID}:hover .fb-description {
+			${ SubHeadingHoverColor !== undefined ? `color: ${SubHeadingHoverColor};` : "" }
+		}
 
-    .fb-info-box-content-wrapper.${blockID}:hover .fb-description {
-        ${ SubHeadingHoverColor !== undefined ? `color: ${SubHeadingHoverColor};` : "" }
-    }
+		@media only screen and (max-width: 1024px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-description {
+				${ subHeadingTabPaddingValue !== undefined ? `padding: ${subHeadingTabPaddingValue};` : "" }
+				${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
+				${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
+				${subHeadingLineHeight.Tablet && subHeadingLineHeightUnits.Tablet ? `line-height: ${subHeadingLineHeight.Tablet}${subHeadingLineHeightUnits.Tablet};` : ''}
+			}
+		}
 
-    @media only screen and (max-width: 1024px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-description {
-            ${ subHeadingTabPaddingValue !== undefined ? `padding: ${subHeadingTabPaddingValue};` : "" }
-			${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
-			${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
-			${subHeadingLineHeight.Tablet && subHeadingLineHeightUnits.Tablet ? `line-height: ${subHeadingLineHeight.Tablet}${subHeadingLineHeightUnits.Tablet};` : ''}
-        }
-    }
+		@media only screen and (max-width: 757px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-description {
+				${ subHeadingMobilePaddingValue !== undefined ? `padding: ${subHeadingMobilePaddingValue};` : "" }
+				${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
+				${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
+				${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
+			}
+		}
+		.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+			${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ""}
+			${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : "" }
+			font-family: ${ buttonFontFamily !== "default" ? buttonFontFamily : buttonFontFamily };
+			${buttonFontSize.Desktop && buttonFontSizeUnits.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
+			${buttonLetterSpacing.Desktop && buttonLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};` : ''}
+			${buttonLineHeight.Desktop && buttonLineHeightUnits.Desktop ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
+			font-weight: ${buttonFontWeight};
+			font-style: ${buttonFontStyle};
+			text-transform: ${buttonTextTransform};
+			text-decoration: ${buttonTextDecoration};
+			padding: ${buttonDesktopPaddingValue};
+			margin: ${buttonDesktopMarginValue};
+			border: ${infoButtonBorder};
+			border-width: ${buttonDesktopBorderValue};
+			border-radius: ${buttonBorderRadiusWidth};
+			${buttonDesktopBorderRadiusValue ? `border-radius: ${buttonDesktopBorderRadiusValue};` : ''}
+			transition: all .3s ease-in-out;
+		}
 
-    @media only screen and (max-width: 757px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-description {
-            ${ subHeadingMobilePaddingValue !== undefined ? `padding: ${subHeadingMobilePaddingValue};` : "" }
-			${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
-			${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
-			${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
-        }
-    }
-	.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
-        ${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ""}
-        ${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : "" }
-        font-family: ${ buttonFontFamily !== "default" ? buttonFontFamily : buttonFontFamily };
-		${buttonFontSize.Desktop && buttonFontSizeUnits.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
-		${buttonLetterSpacing.Desktop && buttonLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};` : ''}
-		${buttonLineHeight.Desktop && buttonLineHeightUnits.Desktop ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
-        font-weight: ${buttonFontWeight};
-        font-style: ${buttonFontStyle};
-        text-transform: ${buttonTextTransform};
-        text-decoration: ${buttonTextDecoration};
-        padding: ${buttonDesktopPaddingValue};
-        margin: ${buttonDesktopMarginValue};
-        border: ${infoButtonBorder};
-        border-width: ${buttonDesktopBorderValue};
-        border-radius: ${buttonBorderRadiusWidth};
-		${buttonDesktopBorderRadiusValue ? `border-radius: ${buttonDesktopBorderRadiusValue};` : ''}
-		transition: all .3s ease-in-out;
-    }
+		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-btn-wrapper {
+			${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : "" }
+			${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : "" }
+		}
 
-    .fb-info-box-content-wrapper.${blockID}:hover .fb-info-btn-wrapper {
-        ${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : "" }
-        ${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : "" }
-    }
+		@media only screen and (max-width: 1024px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+				${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
+				${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
+				${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
+				padding: ${buttonTabPaddingValue} !important;
+				margin: ${buttonDesktopMarginValue} !important;
+				border-width: ${buttonTabBorderValue} !important;
+				${buttonTabBorderRadiusValue ? `border-radius: ${buttonTabBorderRadiusValue};` : ''}
+			}
+		}
 
-    @media only screen and (max-width: 1024px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
-			${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
-			${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
-			${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
-            padding: ${buttonTabPaddingValue} !important;
-            margin: ${buttonDesktopMarginValue} !important;
-            border-width: ${buttonTabBorderValue} !important;
-            ${buttonTabBorderRadiusValue ? `border-radius: ${buttonTabBorderRadiusValue};` : ''}
-        }
-    }
+		@media only screen and (max-width: 767px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+				${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
+				${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
+				${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
+				padding: ${buttonTabPaddingValue} !important;
+				margin: ${buttonDesktopMarginValue} !important;
+				border-width: ${buttonMobileBorderValue} !important;
+				${buttonMobileBorderRadiusValue ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
+			}
+		}
+		.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+			${mediaBackgroundType === "gradient" ? `
+			background: ${mediaCustomGradientSwitcher && mediaCustomGradientInputValue ? mediaCustomGradientInputValue : mediaGradientColor };
+			`
+			: mediaBackgroundImageUrl && mediaBackgroundImageUrl !== "null" ? `
+			${mediaBackgroundImageUrl ? `background-image: url(${mediaBackgroundImageUrl});` : "" }
+			${mediaBackgroundImagePosition ? `background-position: ${mediaBackgroundImagePosition};` : "" }
+			${mediaBackgroundImageAttachment ? `background-attachment: ${mediaBackgroundImageAttachment};` : "" }
+			${mediaBackgroundImageRepeat ? `background-repeat: ${mediaBackgroundImageRepeat};` : "" }
+			${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : "" }` : `
+			background: ${mediaClassicColor}; `}
+			${mediaBgWidth.Desktop ? `width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};` : ''}
+			${mediaBgHeight.Desktop ? `height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};` : ''}
+			padding: ${mediaDesktopPadding};
+			margin: ${mediaDesktopMargin};
+			border: ${mediaBorder};
+			border-width: ${mediaBorderDesktopWidth};
+			border-radius: ${mediaBorderRadiusDesktopWidth};
+			background-repeat: none;
+			background-size: cover;
+			${mediaClassicColor ? `justify-content: center; ` : ''}
+			transition: all .3s ease-in-out;
+		}
 
-    @media only screen and (max-width: 767px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
-			${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
-			${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
-			${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
-            padding: ${buttonTabPaddingValue} !important;
-            margin: ${buttonDesktopMarginValue} !important;
-            border-width: ${buttonMobileBorderValue} !important;
-            ${buttonMobileBorderRadiusValue ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
-        }
-    }
-	.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
-        ${mediaBackgroundType === "gradient" ? `
-        background: ${mediaCustomGradientSwitcher && mediaCustomGradientInputValue ? mediaCustomGradientInputValue : mediaGradientColor };
-        `
-		: mediaBackgroundImageUrl && mediaBackgroundImageUrl !== "null" ? `
-        ${mediaBackgroundImageUrl ? `background-image: url(${mediaBackgroundImageUrl});` : "" }
-        ${mediaBackgroundImagePosition ? `background-position: ${mediaBackgroundImagePosition};` : "" }
-        ${mediaBackgroundImageAttachment ? `background-attachment: ${mediaBackgroundImageAttachment};` : "" }
-        ${mediaBackgroundImageRepeat ? `background-repeat: ${mediaBackgroundImageRepeat};` : "" }
-        ${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : "" }` : `
-        background: ${mediaClassicColor}; `}
-		${mediaBgWidth.Desktop ? `width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};` : ''}
-        ${mediaBgHeight.Desktop ? `height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};` : ''}
-        padding: ${mediaDesktopPadding};
-        margin: ${mediaDesktopMargin};
-        border: ${mediaBorder};
-        border-width: ${mediaBorderDesktopWidth};
-        border-radius: ${mediaBorderRadiusDesktopWidth};
-        background-repeat: none;
-        background-size: cover;
-		${mediaClassicColor ? `justify-content: center; ` : ''}
-		transition: all .3s ease-in-out;
-    }
+		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
+			${mediaHoverBackgroundType === "gradient" ? ` background: ${ mediaHoverCustomGradientSwitcher && mediaHoverCustomGradientInputValue ? mediaHoverCustomGradientInputValue : mediaHoverGradientColor
+			};
+			`: mediaHoverBackgroundImageUrl &&  mediaHoverBackgroundImageUrl !== "null" ? `
+			${mediaHoverBackgroundImageUrl ? `background-image: url(${mediaHoverBackgroundImageUrl});` : "" }
+			${mediaHoverBackgroundImagePosition ? `background-position: ${mediaHoverBackgroundImagePosition};` : "" }
+			${mediaHoverBackgroundImageAttachment ? `background-attachment: ${mediaHoverBackgroundImageAttachment};` : "" }
+			${ mediaHoverBackgroundImageRepeat ? `background-repeat: ${mediaHoverBackgroundImageRepeat};` : "" }
+			${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : "" } ` : `
+			background: ${mediaHoverClassicColor}; ` }
+		}
 
-    .fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
-        ${mediaHoverBackgroundType === "gradient" ? ` background: ${ mediaHoverCustomGradientSwitcher && mediaHoverCustomGradientInputValue ? mediaHoverCustomGradientInputValue : mediaHoverGradientColor
-		};
-        `: mediaHoverBackgroundImageUrl &&  mediaHoverBackgroundImageUrl !== "null" ? `
-        ${mediaHoverBackgroundImageUrl ? `background-image: url(${mediaHoverBackgroundImageUrl});` : "" }
-        ${mediaHoverBackgroundImagePosition ? `background-position: ${mediaHoverBackgroundImagePosition};` : "" }
-        ${mediaHoverBackgroundImageAttachment ? `background-attachment: ${mediaHoverBackgroundImageAttachment};` : "" }
-        ${ mediaHoverBackgroundImageRepeat ? `background-repeat: ${mediaHoverBackgroundImageRepeat};` : "" }
-        ${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : "" } ` : `
-        background: ${mediaHoverClassicColor}; ` }
-    }
+		@media only screen and (max-width: 1024px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+				padding: ${mediaTabletPadding};
+				margin: ${mediaTabletMargin};
+				border-width: ${mediaBorderTabletWidth};
+				border-radius: ${mediaBorderRadiusTabletWidth};
+				${mediaBgWidth.Tablet ? `width: ${mediaBgWidth.Tablet}${mediaBgWidthUnits.Tablet};` : ''}
+				${mediaBgHeight.Tablet ? `height: ${mediaBgHeight.Tablet}${mediaBgHeightUnits.Tablet};` : ''}
+			}
+		}
 
-    @media only screen and (max-width: 1024px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
-            padding: ${mediaTabletPadding};
-            margin: ${mediaTabletMargin};
-            border-width: ${mediaBorderTabletWidth};
-            border-radius: ${mediaBorderRadiusTabletWidth};
-			${mediaBgWidth.Tablet ? `width: ${mediaBgWidth.Tablet}${mediaBgWidthUnits.Tablet};` : ''}
-        	${mediaBgHeight.Tablet ? `height: ${mediaBgHeight.Tablet}${mediaBgHeightUnits.Tablet};` : ''}
-        }
-    }
+		@media only screen and (max-width: 767px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+				padding: ${mediaMobilePadding};
+				margin: ${mediaMobileMargin};
+				border-width: ${mediaBorderMobileWidth};
+				border-radius: ${mediaBorderRadiusMobileWidth};
+				${mediaBgWidth.Mobile ? `width: ${mediaBgWidth.Mobile}${mediaBgWidthUnits.Mobile};` : ''}
+				${mediaBgHeight.Mobile ? `height: ${mediaBgHeight.Mobile}${mediaBgHeightUnits.Mobile};` : ''}
+			}
+		}
 
-    @media only screen and (max-width: 767px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
-            padding: ${mediaMobilePadding};
-            margin: ${mediaMobileMargin};
-            border-width: ${mediaBorderMobileWidth};
-            border-radius: ${mediaBorderRadiusMobileWidth};
-			${mediaBgWidth.Mobile ? `width: ${mediaBgWidth.Mobile}${mediaBgWidthUnits.Mobile};` : ''}
-        	${mediaBgHeight.Mobile ? `height: ${mediaBgHeight.Mobile}${mediaBgHeightUnits.Mobile};` : ''}
-        }
-    }
+		.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
+		.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+			width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
+			${mediaIconColor !== undefined ? `fill: ${mediaIconColor};` : ""}
+		}
 
-    .fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-    .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
-        width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
-        ${mediaIconColor !== undefined ? `fill: ${mediaIconColor};` : ""}
-    }
+		.fb-info-box-content-wrapper.${blockID}:hover .fb-icon-wrapper svg {
+			${mediaIconHoverColor !== undefined ? `fill: ${mediaIconHoverColor};` : "#ffffff" }
+		}
 
-    .fb-info-box-content-wrapper.${blockID}:hover .fb-icon-wrapper svg {
-        ${mediaIconHoverColor !== undefined ? `fill: ${mediaIconHoverColor};` : "#ffffff" }
-    }
+		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
+			${mediaBgHoverColor !== undefined ? `fill: ${mediaBgHoverColor};` : "#ffffff" }
+		}
 
-    .fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
-        ${mediaBgHoverColor !== undefined ? `fill: ${mediaBgHoverColor};` : "#ffffff" }
-    }
+		@media only screen and (max-width: 1024px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+				width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
+			}
+		}
 
-    @media only screen and (max-width: 1024px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-        .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
-            width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
-        }
-    }
+		@media only screen and (max-width: 767px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+				width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
+			}
+		}
 
-    @media only screen and (max-width: 767px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-        .fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
-            width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
-        }
-    }
+		.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
+			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff"}
+		}
 
-    .fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
-        width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
-        ${btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff"}
-    }
+		.fb-info-box-content-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
+			${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : "#ffffff" }
+		}
 
-    .fb-info-box-content-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
-        ${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : "#ffffff" }
-    }
+		@media only screen and (max-width: 1024px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+				width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
+			}
+		}
 
-    @media only screen and (max-width: 1024px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
-            width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
-        }
-    }
-
-    @media only screen and (max-width: 767px) {
-        .fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
-            width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
-        }
-    }
+		@media only screen and (max-width: 767px) {
+			.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+				width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
+			}
+		}
 		`,
 		[
 			blockID,
@@ -2867,153 +2866,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													globalColorSwitcher={mediaIconColorSwitcher}
 													globalColor={mediaIconColor}
 													globalHoverColor={mediaIconHoverColor}
-													handleColorSwitcherChange={(value) =>
-														setAttributes({ mediaIconColorSwitcher: value })
-													}
-													handleGlobalColorChange={(value) =>
-														setAttributes({ mediaIconColor: value })
-													}
-													handleGlobalHoverColorChange={(value) =>
-														setAttributes({ mediaIconHoverColor: value })
-													}
+													handleColorSwitcherChange={(value) => setAttributes({ mediaIconColorSwitcher: value }) }
+													handleGlobalColorChange={(value) => setAttributes({ mediaIconColor: value }) }
+													handleGlobalHoverColorChange={(value) => setAttributes({ mediaIconHoverColor: value }) }
 												/>
 											)}
 											<FB_BackgroundColorControl
-												bgColorSwitcher={mediaBackColorSwitcher}
-												setBgColorSwitcher={(value) =>
-													setAttributes({ mediaBackColorSwitcher: value })
-												}
-												normalBackgroundType={mediaBackgroundType}
-												setNormalBackgroundType={(value) =>
-													setAttributes({ mediaBackgroundType: value })
-												}
-												normalClassicColor={mediaClassicColor}
-												setNormalClassicColor={(value) =>
-													setAttributes({ mediaClassicColor: value })
-												}
-												normalGradientColor={mediaGradientColor}
-												setNormalGradientColor={(value) =>
-													setAttributes({ mediaGradientColor: value })
-												}
-												normalCustomGradientSwitcher={
-													mediaCustomGradientSwitcher
-												}
-												setNormalCustomGradientSwitcher={(value) =>
-													setAttributes({ mediaCustomGradientSwitcher: value })
-												}
-												normalCustomGradientInputValue={
-													mediaCustomGradientInputValue
-												}
-												setNormalCustomGradientInputValue={(value) =>
-													setAttributes({
-														mediaCustomGradientInputValue: value,
-													})
-												}
-												normalBackgroundImageUrl={mediaBackgroundImageUrl}
-												setNormalBackgroundImageUrl={(value) =>
-													setAttributes({ mediaBackgroundImageUrl: value })
-												}
-												normalBackgroundImageAlt={mediaBackgroundImageAlt}
-												setNormalBackgroundImageAlt={(value) =>
-													setAttributes({ mediaBackgroundImageAlt: value })
-												}
-												normalBackgroundImageID={mediaBackgroundImageID}
-												setNormalBackgroundImageID={(value) =>
-													setAttributes({ mediaBackgroundImageID: value })
-												}
-												normalBackgroundImagePosition={
-													mediaBackgroundImagePosition
-												}
-												setNormalBackgroundImagePosition={(value) =>
-													setAttributes({ mediaBackgroundImagePosition: value })
-												}
-												normalBackgroundImageAttachment={
-													mediaBackgroundImageAttachment
-												}
-												setNormalBackgroundImageAttachment={(value) =>
-													setAttributes({
-														mediaBackgroundImageAttachment: value,
-													})
-												}
-												normalBackgroundImageRepeat={mediaBackgroundImageRepeat}
-												setNormalBackgroundImageRepeat={(value) =>
-													setAttributes({ mediaBackgroundImageRepeat: value })
-												}
-												normalBackgroundImageSize={mediaBackgroundImageSize}
-												setNormalBackgroundImageSize={(value) =>
-													setAttributes({ mediaBackgroundImageSize: value })
-												}
-												hoverBackgroundType={mediaHoverBackgroundType}
-												setHoverBackgroundType={(value) =>
-													setAttributes({ mediaHoverBackgroundType: value })
-												}
-												hoverClassicColor={mediaHoverClassicColor}
-												setHoverClassicColor={(value) =>
-													setAttributes({ mediaHoverClassicColor: value })
-												}
-												hoverGradientColor={mediaHoverGradientColor}
-												setHoverGradientColor={(value) =>
-													setAttributes({ mediaHoverGradientColor: value })
-												}
-												hoverCustomGradientSwitcher={
-													mediaHoverCustomGradientSwitcher
-												}
-												setHoverCustomGradientSwitcher={(value) =>
-													setAttributes({
-														mediaHoverCustomGradientSwitcher: value,
-													})
-												}
-												hoverCustomGradientInputValue={
-													mediaHoverCustomGradientInputValue
-												}
-												setHoverCustomGradientInputValue={(value) =>
-													setAttributes({
-														mediaHoverCustomGradientInputValue: value,
-													})
-												}
-												hoverBackgroundImageUrl={mediaHoverBackgroundImageUrl}
-												setHoverBackgroundImageUrl={(value) =>
-													setAttributes({ mediaHoverBackgroundImageUrl: value })
-												}
-												hoverBackgroundImageAlt={mediaHoverBackgroundImageAlt}
-												setHoverBackgroundImageAlt={(value) =>
-													setAttributes({ mediaHoverBackgroundImageAlt: value })
-												}
-												hoverBackgroundImageID={mediaHoverBackgroundImageID}
-												setHoverBackgroundImageID={(value) =>
-													setAttributes({ mediaHoverBackgroundImageID: value })
-												}
-												hoverBackgroundImagePosition={
-													mediaHoverBackgroundImagePosition
-												}
-												setHoverBackgroundImagePosition={(value) =>
-													setAttributes({
-														mediaHoverBackgroundImagePosition: value,
-													})
-												}
-												hoverBackgroundImageAttachment={
-													mediaHoverBackgroundImageAttachment
-												}
-												setHoverBackgroundImageAttachment={(value) =>
-													setAttributes({
-														mediaHoverBackgroundImageAttachment: value,
-													})
-												}
-												hoverBackgroundImageRepeat={
-													mediaHoverBackgroundImageRepeat
-												}
-												setHoverBackgroundImageRepeat={(value) =>
-													setAttributes({
-														mediaHoverBackgroundImageRepeat: value,
-													})
-												}
-												hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
-												setHoverBackgroundImageSize={(value) =>
-													setAttributes({
-														mediaHoverBackgroundImageSize: value,
-													})
-												}
+											bgColorSwitcher={mediaBackColorSwitcher}
+											setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
+											normalBackgroundType={mediaBackgroundType}
+											setNormalBackgroundType={(value) => setAttributes({ mediaBackgroundType: value })}
+											normalClassicColor={mediaClassicColor}
+											setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value })}
+											normalGradientColor={mediaGradientColor}
+											setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value })}
+											normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
+											setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
+											normalCustomGradientInputValue={mediaCustomGradientInputValue}
+											setNormalCustomGradientInputValue={(value) => setAttributes({ mediaCustomGradientInputValue: value }) }
+											normalBackgroundImageUrl={mediaBackgroundImageUrl}
+											setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackgroundImageUrl: value })}
+											normalBackgroundImageAlt={mediaBackgroundImageAlt}
+											setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackgroundImageAlt: value })}
+											normalBackgroundImageID={mediaBackgroundImageID}
+											setNormalBackgroundImageID={(value) => setAttributes({ mediaBackgroundImageID: value })}
+											normalBackgroundImagePosition={mediaBackgroundImagePosition}
+											setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackgroundImagePosition: value }) }
+											normalBackgroundImageAttachment={mediaBackgroundImageAttachment}
+											setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackgroundImageAttachment: value }) }
+											normalBackgroundImageRepeat={mediaBackgroundImageRepeat}
+											setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackgroundImageRepeat: value }) }
+											normalBackgroundImageSize={mediaBackgroundImageSize}
+											setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackgroundImageSize: value }) }
+											hoverBackgroundType={mediaHoverBackgroundType}
+											setHoverBackgroundType={(value) => setAttributes({ mediaHoverBackgroundType: value })}
+											hoverClassicColor={mediaHoverClassicColor}
+											setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value })}
+											hoverGradientColor={mediaHoverGradientColor}
+											setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value })}
+											hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
+											setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value }) }
+											hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
+											setHoverCustomGradientInputValue={(value) => setAttributes({ mediaHoverCustomGradientInputValue: value }) }
+											hoverBackgroundImageUrl={mediaHoverBackgroundImageUrl}
+											setHoverBackgroundImageUrl={(value) => setAttributes({ mediaHoverBackgroundImageUrl: value })}
+											hoverBackgroundImageAlt={mediaHoverBackgroundImageAlt}
+											setHoverBackgroundImageAlt={(value) => setAttributes({ mediaHoverBackgroundImageAlt: value })}
+											hoverBackgroundImageID={mediaHoverBackgroundImageID}
+											setHoverBackgroundImageID={(value) => setAttributes({ mediaHoverBackgroundImageID: value })}
+											hoverBackgroundImagePosition={mediaHoverBackgroundImagePosition}
+											setHoverBackgroundImagePosition={(value) => setAttributes({ mediaHoverBackgroundImagePosition: value }) }
+											hoverBackgroundImageAttachment={mediaHoverBackgroundImageAttachment}
+											setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaHoverBackgroundImageAttachment: value }) }
+											hoverBackgroundImageRepeat={mediaHoverBackgroundImageRepeat}
+											setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaHoverBackgroundImageRepeat: value }) }
+											hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
+											setHoverBackgroundImageSize={(value) => setAttributes({ mediaHoverBackgroundImageSize: value }) }
 											/>
+
 											<FB_Range
 												min={0}
 												max={500}
