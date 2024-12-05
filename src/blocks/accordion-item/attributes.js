@@ -9,6 +9,14 @@ const attributes = {
     blockID: {
         type: "string",
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
+    blockStyleTwo: {
+        type: "string",
+        default: "",
+    },
     blockRoot: {
         type: "string",
         default: "frontis_block",
@@ -72,10 +80,22 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    inheritedTabIconSwitcher: {
+        type: "string",
+    },
     inheritedTabIcon: {
         type: "string",
     },
+    inheritedTabImageUrl: {
+        type: "string",
+    },
+    inheritedExpandedIconSwitcher: {
+        type: "string",
+    },
     inheritedExpandedIcon: {
+        type: "string",
+    },
+    inheritedExpandedImageUrl: {
         type: "string",
     },
     faqSchema: {
@@ -377,17 +397,17 @@ const attributes = {
         type: "string",
         default: "classic"
     },
-    accordionItemClassicColor: {
+    accordionItemBgClassicColor: {
         type: "string",
     },
-    accordionItemGradientColor: {
+    accordionItemBgGradientColor: {
         type: "string",
     },
-    accordionItemCustomGradientSwitcher: {
+    accordionItemBgCustomGradientSwitcher: {
         type: "boolean",
         default: false
     },
-    accordionItemCustomGradientInputValue: {
+    accordionItemBgCustomGradientInputValue: {
         type: "string",
         default: ""
     },
@@ -427,17 +447,17 @@ const attributes = {
         type: "string",
         default: "classic"
     },
-    accordionItemHoverClassicColor: {
+    accordionItemBgHoverClassicColor: {
         type: "string",
     },
-    accordionItemHoverGradientColor: {
+    accordionItemBgHoverGradientColor: {
         type: "string",
     },
-    accordionItemHoverCustomGradientSwitcher: {
+    accordionItemBgHoverCustomGradientSwitcher: {
         type: "boolean",
         default: false
     },
-    accordionItemHoverCustomGradientInputValue: {
+    accordionItemBgHoverCustomGradientInputValue: {
         type: "string",
         default: ""
     },
