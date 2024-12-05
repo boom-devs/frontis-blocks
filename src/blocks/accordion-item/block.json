@@ -22,8 +22,12 @@
       "fb/accordionparentBlockID",
       "fb/accordionInheritedAccordionType",
       "fb/accordionInheritedDisplayIcon",
+      "fb/accordionInheritedTabIconSwitcher",
       "fb/accordionInheritedTabIcon",
+      "fb/accordionInheritedTabImageUrl",
+      "fb/accordionInheritedExpandedIconSwitcher",
       "fb/accordionInheritedExpandedIcon",
+      "fb/accordionInheritedExpandedImageUrl",
       "fb/accordionInheritedTagName",
       "fb/accordionFaqSchema"
     ]
