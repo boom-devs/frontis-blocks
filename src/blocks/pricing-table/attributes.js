@@ -449,15 +449,27 @@ const attributes = {
     },
     priceButtonIcon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'arrow-right',
 	},
 	priceButtonIconPosition :{
 		type: "string",
-		default: "left"
+		default: "right"
 	},
 	priceButtonIconSpacing: {
-		type: "number",
-		default: 10
+		type: "object",
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10',
+		}
+	},
+	priceButtonIconSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	/** End Button */
 	/** Start Ribbon */	
@@ -1855,7 +1867,7 @@ const attributes = {
 	},
 	priceButtonIconColor: {
 		type: "string",
-		default: ""
+		default: "#FFFFFF"
 	},
 	priceButtonIconHoverColor: {
 		type: 'string',
