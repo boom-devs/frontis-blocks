@@ -29,7 +29,9 @@ import FB_BackgroundColorControl from "../../components/background-color-control
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
         blockID,
+		parentBlockID,
 		blockStyle,
+		blockStyleTwo,
         deviceType,
         clickable,
 
@@ -697,6 +699,194 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		  blockStyle: fbAccordionItemStyle.replace(/\s+/g, ' ').trim(),
 		});
 	  }, [fbAccordionItemStyle]);
+
+	  const fbAccordionItemStyleTwo = useMemo(() => `
+		.fb-accordion-item-main-wrapper.${blockID} {
+			position: relative;
+			display: block;
+			overflow: hidden;
+			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+		}
+		
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			${accordionItemBgType === 'gradient' 
+			? (accordionItemBgCustomGradientSwitcher && accordionItemBgCustomGradientInputValue 
+				? `background: ${accordionItemBgCustomGradientInputValue};` 
+				: `background: ${accordionItemBgGradientColor};`)
+			: accordionItemBgImageUrl 
+			? `
+				background-image: url('${accordionItemBgImageUrl}');
+				${accordionItemBgImagePosition ? `background-position: ${accordionItemBgImagePosition};` : ''}
+				${accordionItemBgImageAttachment ? `background-attachment: ${accordionItemBgImageAttachment};` : ''}
+				${accordionItemBgImageRepeat ? `background-repeat: ${accordionItemBgImageRepeat};` : ''}
+				${accordionItemBgImageSize ? `background-size: ${accordionItemBgImageSize};` : ''}
+				` 
+			: `background: ${accordionItemBgClassicColor};`
+			}
+			${accordionItemBorder ? `border-style: ${accordionItemBorder};` : ''}
+			${accordionItemBorderDesktopWidth !== undefined ? `border-width: ${accordionItemBorderDesktopWidth};` : ''}
+			${accordionItemBorderColor ? `border-color: ${accordionItemBorderColor};` : ''}
+			${accordionItemBorderRadiusDesktopWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusDesktopWidth};` : ''}
+			${accordionItemBoxShadowCssValue ? `box-shadow: ${accordionItemBoxShadowCssValue};` : ''}
+			margin: 0;
+			padding: 0;
+			transform-origin: top;
+			transform: scaleY(0);
+			height: 0;
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+			height: unset;
+			visibility: visible;
+			transform: scaleY(1);
+			opacity: 1;
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper:hover {
+			${accordionItemBgHoverType === 'gradient' 
+			? (accordionItemBgHoverCustomGradientSwitcher && accordionItemBgHoverCustomGradientInputValue 
+				? `background: ${accordionItemBgHoverCustomGradientInputValue};` 
+				: `background: ${accordionItemBgHoverGradientColor};`)
+			: accordionItemBgHoverImageUrl 
+			? `
+				background-image: url('${accordionItemBgHoverImageUrl}');
+				${accordionItemBgHoverImagePosition ? `background-position: ${accordionItemBgHoverImagePosition};` : ''}
+				${accordionItemBgHoverImageAttachment ? `background-attachment: ${accordionItemBgHoverImageAttachment};` : ''}
+				${accordionItemBgHoverImageRepeat ? `background-repeat: ${accordionItemBgHoverImageRepeat};` : ''}
+				${accordionItemBgHoverImageSize ? `background-size: ${accordionItemBgHoverImageSize};` : ''}
+				` 
+			: `background: ${accordionItemBgHoverClassicColor};`
+			}
+			${accordionItemBorderHoverColor ? `border-color: ${accordionItemBorderHoverColor};` : ''}
+			transition: all 0.3s ease-in-out;
+		}
+
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
+			display: none;
+		}
+
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
+			display: block;
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
+			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
+			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
+			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
+			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
+		}
+
+		@media only screen and (max-width: 1024px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			${accordionItemBorderTabletWidth ? `border-width: ${accordionItemBorderTabletWidth};` : ''}
+			${accordionItemBorderRadiusTabletWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusTabletWidth};` : ''}
+			}
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+				${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+				${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+			}
+		}
+
+		@media only screen and (max-width: 767px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+				${accordionItemBorderMobileWidth ? `border-width: ${accordionItemBorderMobileWidth};` : ''}
+				${accordionItemBorderRadiusMobileWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusMobileWidth};` : ''}
+			}
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+				${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+				${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+			}
+		}
+		`, [
+			blockID,
+            deviceType,
+    
+            titlePrefixColorSwitcher,
+            titlePrefixColor,
+            titlePrefixHoverColor,
+    
+            titleSuffixColorSwitcher,
+            titleSuffixColor,
+            titleSuffixHoverColor,
+    
+            // Accordion Item Advance
+            accordionItemZIndex,
+            accordionItemPaddingUnits,
+            accordionItemDesktopPadding,
+            accordionItemTabPadding,
+            accordionItemMobilePadding,
+            accordionItemMarginUnits,
+            accordionItemDesktopMargin,
+            accordionItemTabMargin,
+            accordionItemMobileMargin,
+            accordionItemBorder,
+            accordionItemBorderColor,
+            accordionItemBorderHoverColor,
+            accordionItemBorderColorSwitcher,
+            accordionItemBorderUnits,
+            accordionItemDesktopBorderWidth,
+            accordionItemTabBorderWidth,
+            accordionItemMobileBorderWidth,
+            accordionItemBorderRadiusUnits,
+            accordionItemDesktopBorderRadiusWidth,
+            accordionItemTabBorderRadiusWidth,
+            accordionItemMobileBorderRadiusWidth,
+            accordionItemDesktopSwitcher,
+            accordionItemTabletSwitcher,
+            accordionItemMobileSwitcher,
+    
+            // Item Box Shadow
+            accordionItemBoxShadowValues,
+            accordionItemBoxShadowCssValue,
+    
+            // Item Backgorund
+            accordionItemBgColorSwitcher,
+            accordionItemBgType,
+            accordionItemBgClassicColor,
+            accordionItemBgGradientColor,
+            accordionItemBgCustomGradientSwitcher,
+            accordionItemBgCustomGradientInputValue,
+            accordionItemBgImageUrl,
+            accordionItemBgImagePosition,
+            accordionItemBgImageAttachment,
+            accordionItemBgImageRepeat,
+            accordionItemBgImageSize,
+            accordionItemBgHoverType,
+            accordionItemBgHoverClassicColor,
+            accordionItemBgHoverGradientColor,
+            accordionItemBgHoverCustomGradientSwitcher,
+            accordionItemBgHoverCustomGradientInputValue,
+            accordionItemBgHoverImageUrl,
+            accordionItemBgHoverImageAlt,
+            accordionItemBgHoverImageID,
+            accordionItemBgHoverImagePosition,
+            accordionItemBgHoverImageAttachment,
+            accordionItemBgHoverImageRepeat,
+            accordionItemBgHoverImageSize,
+		]);
+
+		useEffect(() => {
+		setAttributes({
+			blockStyleTwo: fbAccordionItemStyleTwo.replace(/\s+/g, ' ').trim(),
+		});
+		}, [fbAccordionItemStyleTwo]);
+
 
 
     return (
