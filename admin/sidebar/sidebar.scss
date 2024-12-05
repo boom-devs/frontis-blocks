@@ -216,6 +216,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						margin-top: 12px;
 					}
 				}
+
+				&:empty {
+					display: none;
+				}
 			}
 		}
 	}
@@ -248,6 +252,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 .fb-custom-color-item .actions {
 	cursor: pointer;
+	margin-right: 0;
+	margin-left: auto;
 
 	.dashicons-trash:before {
 		color: $error-color;
@@ -347,6 +353,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			font-size: 14px;
 			font-weight: 400;
 			color: $neutral-color-700;
+			height: auto;
 
 			&:focus {
 				outline: none !important;
@@ -354,16 +361,25 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			}
 
 			.font_preview {
-				display: block;
 				background: $neutral-color-100;
 				padding: 6px;
 				border-radius: 4px;
 				font-size: 12px;
+				min-height: 26px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 		}
 
 		&:last-child {
 			border-bottom: none;
+		}
+
+		&.fb-global-typography-element {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 		}
 	}
 
@@ -375,6 +391,18 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		.components-base-control {
 			width: auto !important;
 			margin-left: 0 !important;
+		}
+	}
+
+	.fb-delete-custom-typo {
+		margin-left: auto;
+		margin-right: 0;
+		width: 20px !important;
+
+		.dashicons-trash {
+			&:before {
+				color: $error-color;
+			}
 		}
 	}
 }
