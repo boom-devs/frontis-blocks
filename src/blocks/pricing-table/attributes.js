@@ -47,7 +47,7 @@ const attributes = {
 	},
 	pricingTopSectionHoverClassicColor: {
 		type: "string",
-		default: "#399CFF",
+		default: "",
 	},
 	pricingTopSectionHoverGradientColor: {
 		type: "string",
@@ -449,15 +449,27 @@ const attributes = {
     },
     priceButtonIcon: {
 		type: 'string',
-		default: 'circle-check',
+		default: 'arrow-right',
 	},
 	priceButtonIconPosition :{
 		type: "string",
-		default: "left"
+		default: "right"
 	},
 	priceButtonIconSpacing: {
-		type: "number",
-		default: 10
+		type: "object",
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10',
+		}
+	},
+	priceButtonIconSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	/** End Button */
 	/** Start Ribbon */	
@@ -1629,17 +1641,55 @@ const attributes = {
 	priceButtonHoverColor: {
 		type: 'string',
 	},
-	priceButtonBgColorSwitcher: {
+
+	priceButtonBackgroundColorSwitcher : {  
 		type: "string",
 		default: "normal"
 	},
-	priceButtonBgColor: {
+	priceButtonNormalBackgroundType: {   
+		type: "string",
+		default: "classic",
+	},
+	priceButtonNormalClassicColor: {
 		type: "string",
 		default: "#15171C",
 	},
-	priceButtonBgHoverColor: {
-		type: 'string',
+	priceButtonNormalGradientColor: {
+		type: "string",
+		default: null,
 	},
+	priceButtonNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	priceButtonNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	priceButtonHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	priceButtonHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	priceButtonHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	priceButtonHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	priceButtonHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+
+
 	priceButtonPaddingUnits: {
 		type: 'object',
 		default: {
@@ -1817,7 +1867,7 @@ const attributes = {
 	},
 	priceButtonIconColor: {
 		type: "string",
-		default: ""
+		default: "#FFFFFF"
 	},
 	priceButtonIconHoverColor: {
 		type: 'string',
@@ -2056,16 +2106,50 @@ const attributes = {
 	/** End Margin */
 
 	/** Start Background */
-	priceGlobalBgColorSwitcher : {
+	priceGlobalBackgroundColorSwitcher : { 
 		type: "string",
 		default: "normal"
 	},
-	priceGlobalBgColor : {
+	priceGlobalNormalBackgroundType: {  
 		type: "string",
-		default: "#EBF5FF"
+		default: "classic",
 	},
-	priceGlobalBgHoverColor: {
-		type: 'string',
+	priceGlobalNormalClassicColor: {
+		type: "string",
+		default: "#EBF5FF",
+	},
+	priceGlobalNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	priceGlobalNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	priceGlobalNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	priceGlobalHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	priceGlobalHoverClassicColor: {
+		type: "string",
+		default: "#EBF5FF",
+	},
+	priceGlobalHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	priceGlobalHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	priceGlobalHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
 	/** End Background */
 
@@ -2080,7 +2164,7 @@ const attributes = {
 	},
 	priceGlobalBorderColor: {
 		type: 'string',
-		default: "#ddd"
+		default: ""
 	},
 	priceGlobalBorderHoverColor: {
 		type: 'string',
@@ -2174,6 +2258,14 @@ const attributes = {
         default: [],
     },
     priceGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+	priceGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    priceGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

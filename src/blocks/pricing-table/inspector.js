@@ -153,6 +153,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonIcon,
 		priceButtonIconPosition,
 		priceButtonIconSpacing,
+		priceButtonIconSpacingUnits,
 		/** End Button */	
 
 		/** Start Ribbon */
@@ -396,9 +397,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonColorSwitcher,
 		priceButtonColor,
 		priceButtonHoverColor,
-		priceButtonBgColorSwitcher,
-		priceButtonBgColor,
 		priceButtonBgHoverColor,
+
+		priceButtonBackgroundColorSwitcher,
+		priceButtonNormalBackgroundType,
+		priceButtonNormalClassicColor,
+		priceButtonNormalGradientColor,
+		priceButtonNormalCustomGradientSwitcher,
+		priceButtonNormalCustomGradientInputValue,
+
+		priceButtonHoverBackgroundType,
+		priceButtonHoverClassicColor,
+		priceButtonHoverGradientColor,
+		priceButtonHoverCustomGradientSwitcher,
+		priceButtonHoverCustomGradientInputValue,
+
 
 		priceButtonPaddingUnits,
 		priceButtonDesktopPadding,
@@ -471,9 +484,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         priceGlobalMarginTablet,
         priceGlobalMarginMobile,
         priceGlobalMarginLink,
-        priceGlobalBgColorSwitcher,
-        priceGlobalBgColor,
-        priceGlobalBgHoverColor,
+
+		priceGlobalBackgroundColorSwitcher,
+		priceGlobalNormalBackgroundType,
+		priceGlobalNormalClassicColor,
+		priceGlobalNormalGradientColor,
+		priceGlobalNormalCustomGradientSwitcher,
+		priceGlobalNormalCustomGradientInputValue,
+		priceGlobalHoverBackgroundType,
+		priceGlobalHoverClassicColor,
+		priceGlobalHoverGradientColor,
+		priceGlobalHoverCustomGradientSwitcher,
+		priceGlobalHoverCustomGradientInputValue,
+
         priceGlobalBorder,
         priceGlobalBorderColorSwitcher,
         priceGlobalBorderColor,
@@ -490,6 +513,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         priceGlobalBorderRadiusLink,
 		priceGlobalBoxShadowValues,
 		priceGlobalBoxShadowCssValue,
+		priceGlobalBoxShadowHoverValues,
+		priceGlobalBoxShadowHoverCssValue,
 		/** End Global Settings */
 
 
@@ -2427,7 +2452,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		.${blockId} .fb-pricing-main-wrapper {
-			${priceGlobalBgColor ? `background-color: ${priceGlobalBgColor};` : ''}
+			${priceGlobalNormalBackgroundType === 'gradient' ? `  
+                background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
+            `: `
+                    background: ${priceGlobalNormalClassicColor}; 
+            `}
 			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
 			${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
@@ -2435,12 +2464,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 			${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 			${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
 			transition: background-color 0.3s ease, border-color 0.3s ease;
+			position: relative;
 		}
 		.${blockId} .fb-pricing-main-wrapper:hover {
-			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
+			${priceGlobalHoverBackgroundType === 'gradient' ? `  
+                background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
+            `: `
+                    background: ${priceGlobalHoverClassicColor}; 
+            `}
 			${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
-			${priceGlobalBgHoverColor ? `background-color: ${priceGlobalBgHoverColor};` : ''}
+			${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
 		}
 		.${blockId} .fb-pricing-header {
 			${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
@@ -2683,20 +2718,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceButtonLetterSpacing.Desktop ? `letter-spacing: ${priceButtonLetterSpacing.Desktop}${priceButtonLetterSpacingUnits.Desktop};` : ''}
 			${priceButtonLineHeight.Desktop ? `line-height: ${priceButtonLineHeight.Desktop}${priceButtonLineHeightUnits.Desktop};` : ''}
 			${priceButtonColor ? `color: ${priceButtonColor};` : ''}
-			${priceButtonBgColor ? `background-color: ${priceButtonBgColor};` : ''}
 			${priceButtonDesktopPaddingValue ? `padding: ${priceButtonDesktopPaddingValue};` : ''}
 			${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
 			${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
 			${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
 			${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
 			${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
+
+			${priceButtonNormalBackgroundType === 'gradient' ? `  
+				background: ${priceButtonNormalCustomGradientSwitcher && priceButtonNormalCustomGradientInputValue ? priceButtonNormalCustomGradientInputValue : priceButtonNormalGradientColor};
+			`: `
+				background: ${priceButtonNormalClassicColor}; 
+			`}
 			transition: color 0.3s ease, background-color 0.3s ease;
 		}
 		.${blockId} .fb-pricing-button:hover {
 			${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
-			${priceButtonBgHoverColor ? `background-color: ${priceButtonBgHoverColor};` : ''}
 			${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
+			${priceButtonHoverBackgroundType === 'gradient' ? `  
+				background: ${priceButtonHoverCustomGradientSwitcher && priceButtonHoverCustomGradientInputValue ? priceButtonHoverCustomGradientInputValue : priceButtonHoverGradientColor};
+			`: `
+				background: ${priceButtonHoverClassicColor}; 
+			`}
 		}
+		.${blockId} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+			margin-right: ${priceButtonIconSpacing.Desktop}${priceButtonIconSpacingUnits.Desktop};
+		}
+		.${blockId} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+			margin-left: ${priceButtonIconSpacing.Desktop}${priceButtonIconSpacingUnits.Desktop};
+		}
+
 		.${blockId} .fb-pricing-button-icon svg {
 			width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
 			height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
@@ -2766,11 +2817,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
 				${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
 			}
+
 			.${blockId} .fb-pricing-main-wrapper {
+				${priceGlobalNormalBackgroundType === 'gradient' ? `  
+					background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
+				`: `
+						background: ${priceGlobalNormalClassicColor}; 
+				`}
 				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+				${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
 				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
 				${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
+				${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
+				transition: background-color 0.3s ease, border-color 0.3s ease;
+				position: relative;
+			}
+			.${blockId} .fb-pricing-main-wrapper:hover {
+				${priceGlobalHoverBackgroundType === 'gradient' ? `  
+					background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
+				`: `
+						background: ${priceGlobalHoverClassicColor}; 
+				`}
+				${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
+				${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
 			}
 
 			.${blockId}	.fb-pricing-price-wrapper {
@@ -2853,12 +2925,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
 				height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
 			}
+
 			.${blockId} .fb-pricing-button {
+				width: ${priceButtonWidth.Tablet ? `${priceButtonWidth.Tablet}${priceButtonWidthUnits.Tablet}` : 'auto'}; 
+				${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
+				${priceButtonFontSize.Tablet ? `font-size: ${priceButtonFontSize.Tablet}${priceButtonFontSizeUnits.Tablet};` : ''}
+				${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
+				${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
+				${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
+				${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
+				${priceButtonLetterSpacing.Tablet ? `letter-spacing: ${priceButtonLetterSpacing.Tablet}${priceButtonLetterSpacingUnits.Tablet};` : ''}
+				${priceButtonLineHeight.Tablet ? `line-height: ${priceButtonLineHeight.Tablet}${priceButtonLineHeightUnits.Tablet};` : ''}
+				${priceButtonColor ? `color: ${priceButtonColor};` : ''}
 				${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
 				${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
+				${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
+				${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
 				${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
 				${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
+
+				${priceButtonNormalBackgroundType === 'gradient' ? `  
+					background: ${priceButtonNormalCustomGradientSwitcher && priceButtonNormalCustomGradientInputValue ? priceButtonNormalCustomGradientInputValue : priceButtonNormalGradientColor};
+				`: `
+					background: ${priceButtonNormalClassicColor}; 
+				`}
+				transition: color 0.3s ease, background-color 0.3s ease;
 			}
+			.${blockId} .fb-pricing-button:hover {
+				${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
+				${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
+				${priceButtonHoverBackgroundType === 'gradient' ? `  
+					background: ${priceButtonHoverCustomGradientSwitcher && priceButtonHoverCustomGradientInputValue ? priceButtonHoverCustomGradientInputValue : priceButtonHoverGradientColor};
+				`: `
+					background: ${priceButtonHoverClassicColor}; 
+				`}
+			}
+
+			.${blockId} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+				margin-right: ${priceButtonIconSpacing.Tablet}${priceButtonIconSpacingUnits.Tablet};
+			}
+			.${blockId} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+				margin-left: ${priceButtonIconSpacing.Tablet}${priceButtonIconSpacingUnits.Tablet};
+			}
+
 			.${blockId} .fb-pricing-button-icon svg {
 				width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
 				height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
@@ -2916,11 +3025,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
 				${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
 			}
+
 			.${blockId} .fb-pricing-main-wrapper {
+				${priceGlobalNormalBackgroundType === 'gradient' ? `  
+					background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
+				`: `
+						background: ${priceGlobalNormalClassicColor}; 
+				`}
 				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+				${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
 				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
 				${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
+				${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
+				transition: background-color 0.3s ease, border-color 0.3s ease;
+				position: relative;
+			}
+			.${blockId} .fb-pricing-main-wrapper:hover {
+				${priceGlobalHoverBackgroundType === 'gradient' ? `  
+					background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
+				`: `
+						background: ${priceGlobalHoverClassicColor}; 
+				`}
+				${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
+				${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
 			}
 			.${blockId} .fb-pricing-header {
 				${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
@@ -3003,12 +3133,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
 				height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
 			}
+
 			.${blockId} .fb-pricing-button {
+				width: ${priceButtonWidth.Mobile ? `${priceButtonWidth.Mobile}${priceButtonWidthUnits.Mobile}` : 'auto'}; 
+				${priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
+				${priceButtonFontSize.Mobile ? `font-size: ${priceButtonFontSize.Mobile}${priceButtonFontSizeUnits.Mobile};` : ''}
+				${priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
+				${priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
+				${priceButtonTextTransform ? `text-transform: ${priceButtonTextTransform};` : ''}
+				${priceButtonTextDecoration ? `text-decoration: ${priceButtonTextDecoration};` : ''}
+				${priceButtonLetterSpacing.Mobile ? `letter-spacing: ${priceButtonLetterSpacing.Mobile}${priceButtonLetterSpacingUnits.Mobile};` : ''}
+				${priceButtonLineHeight.Mobile ? `line-height: ${priceButtonLineHeight.Mobile}${priceButtonLineHeightUnits.Mobile};` : ''}
+				${priceButtonColor ? `color: ${priceButtonColor};` : ''}
 				${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
 				${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
+				${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
+				${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
 				${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
 				${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
+
+				${priceButtonNormalBackgroundType === 'gradient' ? `  
+					background: ${priceButtonNormalCustomGradientSwitcher && priceButtonNormalCustomGradientInputValue ? priceButtonNormalCustomGradientInputValue : priceButtonNormalGradientColor};
+				`: `
+					background: ${priceButtonNormalClassicColor}; 
+				`}
+				transition: color 0.3s ease, background-color 0.3s ease;
 			}
+			.${blockId} .fb-pricing-button:hover {
+				${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
+				${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
+				${priceButtonHoverBackgroundType === 'gradient' ? `  
+					background: ${priceButtonHoverCustomGradientSwitcher && priceButtonHoverCustomGradientInputValue ? priceButtonHoverCustomGradientInputValue : priceButtonHoverGradientColor};
+				`: `
+					background: ${priceButtonHoverClassicColor}; 
+				`}
+			}
+
+			.${blockId} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+				margin-right: ${priceButtonIconSpacing.Mobile}${priceButtonIconSpacingUnits.Mobile}; 
+			}
+			.${blockId} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+				margin-left: ${priceButtonIconSpacing.Mobile}${priceButtonIconSpacingUnits.Mobile};
+			}
+
 			.${blockId} .fb-pricing-button-icon svg {
 				width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
 				height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
@@ -3054,7 +3221,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonIconAlign,
 		priceButtonIcon,
 		priceButtonIconPosition,
-		priceButtonIconSpacing,	
+		priceButtonIconSpacing,
+		priceButtonIconSpacingUnits,
 
 		priceRibbonSwitcher,
 		priceRibbonText,
@@ -3267,9 +3435,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonColorSwitcher,
 		priceButtonColor,
 		priceButtonHoverColor,
-		priceButtonBgColorSwitcher,
-		priceButtonBgColor,
-		priceButtonBgHoverColor,
+
+		priceButtonBackgroundColorSwitcher,
+		priceButtonNormalBackgroundType,
+		priceButtonNormalClassicColor,
+		priceButtonNormalGradientColor,
+		priceButtonNormalCustomGradientSwitcher,
+		priceButtonNormalCustomGradientInputValue,
+		
+		priceButtonHoverBackgroundType,
+		priceButtonHoverClassicColor,
+		priceButtonHoverGradientColor,
+		priceButtonHoverCustomGradientSwitcher,
+		priceButtonHoverCustomGradientInputValue,
 
 		priceButtonPaddingUnits,
 		priceButtonDesktopPadding,
@@ -3337,9 +3515,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceGlobalMarginTablet,
 		priceGlobalMarginMobile,
 		priceGlobalMarginLink,
-		priceGlobalBgColorSwitcher,
-		priceGlobalBgColor,
-		priceGlobalBgHoverColor,
+
+		priceGlobalBackgroundColorSwitcher,
+		priceGlobalNormalBackgroundType,
+		priceGlobalNormalClassicColor,
+		priceGlobalNormalGradientColor,
+		priceGlobalNormalCustomGradientSwitcher,
+		priceGlobalNormalCustomGradientInputValue,
+		priceGlobalHoverBackgroundType,
+		priceGlobalHoverClassicColor,
+		priceGlobalHoverGradientColor,
+		priceGlobalHoverCustomGradientSwitcher,
+		priceGlobalHoverCustomGradientInputValue,
+
 		priceGlobalBorder,
 		priceGlobalBorderColorSwitcher,
 		priceGlobalBorderColor,
@@ -3356,6 +3544,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceGlobalBorderRadiusLink,
 		priceGlobalBoxShadowValues,
 		priceGlobalBoxShadowCssValue,
+		priceGlobalBoxShadowHoverValues,
+		priceGlobalBoxShadowHoverCssValue,
 
 		headerDesktopPadding,
 		headerTabletPadding,
@@ -3833,14 +4023,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		value={priceButtonIconPosition}
 																		options={ICON_POSITION}
 																		onChange={(value) => setAttributes({ priceButtonIconPosition: value })}
-																	/>
-																	<RangeControl
-																		label={__("Icon Spacing", "frontis-blocks")}
-																		value={priceButtonIconSpacing}
-																		onChange={(value) => setAttributes({ priceButtonIconSpacing: value })}
-																		min={0}
-																		max={50}
-																		step={1}
 																	/>
 																</>
 															)}
@@ -5258,121 +5440,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setGlobalColor={(value) => setAttributes({ priceButtonHoverColor: value })}
 												/>
 											)}
-											
-											<BaseControl
+
+											<FB_BackgroundColorControl
 												label={__("Background Color", "frontis-blocks")}
-												className="fb-setting-color-panel-wrapper"
-											>
-												<ButtonGroup className="fb-setting-color-panel-btn">
-													{NORMAL_HOVER.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ priceButtonBgColorSwitcher: item.value })}
-															className={`fb-setting-color-panel-btn-switchr ${priceButtonBgColorSwitcher === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
+												bgColorSwitcher={priceButtonBackgroundColorSwitcher}
+												setBgColorSwitcher={(value) => setAttributes({ priceButtonBackgroundColorSwitcher: value })}
+												
+												normalBackgroundType={priceButtonNormalBackgroundType}
+												setNormalBackgroundType={(value) => setAttributes({ priceButtonNormalBackgroundType: value })}
+												normalClassicColor={priceButtonNormalClassicColor}
+												setNormalClassicColor={(value) => setAttributes({ priceButtonNormalClassicColor: value })}
+												normalGradientColor={priceButtonNormalGradientColor}
+												setNormalGradientColor={(value) => setAttributes({ priceButtonNormalGradientColor: value })}
+												normalCustomGradientSwitcher={priceButtonNormalCustomGradientSwitcher}
+												setNormalCustomGradientSwitcher={(value) => setAttributes({ priceButtonNormalCustomGradientSwitcher: value })}
+												normalCustomGradientInputValue={priceButtonNormalCustomGradientInputValue}
+												setNormalCustomGradientInputValue={(value) => setAttributes({ priceButtonNormalCustomGradientInputValue: value })}
+												
+												hoverBackgroundType={priceButtonHoverBackgroundType}
+												setHoverBackgroundType={(value) => setAttributes({ priceButtonHoverBackgroundType: value })}
+												hoverClassicColor={priceButtonHoverClassicColor}
+												setHoverClassicColor={(value) => setAttributes({ priceButtonHoverClassicColor: value })}
+												hoverGradientColor={priceButtonHoverGradientColor} 
+												setHoverGradientColor={(value) => setAttributes({ priceButtonHoverGradientColor: value })}
+												hoverCustomGradientSwitcher={priceButtonHoverCustomGradientSwitcher}
+												setHoverCustomGradientSwitcher={(value) => setAttributes({ priceButtonHoverCustomGradientSwitcher: value })}
+												hoverCustomGradientInputValue={priceButtonHoverCustomGradientInputValue}
+												setHoverCustomGradientInputValue={(value) => setAttributes({ priceButtonHoverCustomGradientInputValue: value })}
 
-											{priceButtonBgColorSwitcher === 'normal' && (
-												<BaseControl 
-													label={__("Nomal Color", "frontis-blocks")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-normal-color">
-																		<ColorPicker
-																			color={priceButtonBgColor}
-																			onChange={(value) => setAttributes({ priceButtonBgColor: value })}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: '#F72585' },
-																				{ color: '#7209B7' },
-																				{ color: '#3A0CA3' },
-																				{ color: '#4361EE' },
-																				{ color: '#4CC9F0' },
-																			]}
-																			disableCustomColors={true}
-																			value={priceButtonBgColor}
-																			onChange={(value) => setAttributes({ priceButtonBgColor: value })}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
+												isBackgroundImage={false}
 
-											{priceButtonBgColorSwitcher === 'hover' && (
-												<BaseControl 
-													label={__("Hover Color", "frontis-blocks")}
-													className="fb-setting-color-setting-wrapper"
-												>
-													<Dropdown
-														className="fb-setting-color-setting-icon-dropdown"
-														contentClassName="fb-setting-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-color-setting-icon-btn"
-															>
-																<Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-color-setting-icon-popup">
-																<BaseControl className="fb-setting-color-setting-icon-popup-inner">
-																	<div className="fb-setting-hover-color">
-																		<ColorPicker
-																			color={priceButtonBgHoverColor}
-																			onChange={(value) => setAttributes({ priceButtonBgHoverColor: value })}
-																			enableAlpha={true}
-																		/>
-																		<div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-																		<ColorPalette
-																			colors={[
-																				{ color: '#F72585' },
-																				{ color: '#7209B7' },
-																				{ color: '#3A0CA3' },
-																				{ color: '#4361EE' },
-																				{ color: '#4CC9F0' },
-																			]}
-																			disableCustomColors={true}
-																			value={priceButtonBgHoverColor}
-																			onChange={(value) => setAttributes({ priceButtonBgHoverColor: value })}
-																		/>
-																	</div>
-																</BaseControl>
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
+											/>
 
 											<FB_Spacing 
 												label={__("Padding", "frontis-blocks")}
@@ -5493,6 +5591,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												rangeStep={1}
 												resetFallbackValue={""}
+											/>
+											<FB_Range
+												min={0}
+												max={100}
+												label={__("Icon Spacing", "frontis-blocks")}
+												rangeValue={priceButtonIconSpacing}
+												onChangeHandler={(value) => setAttributes({ priceButtonIconSpacing: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceButtonIconSpacingUnits: value })}
+												deviceType={deviceType}
+												units={priceButtonIconSpacingUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={"10"}
 											/>
 										</PanelBody>
 										<PanelBody
@@ -5675,27 +5786,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												</PanelBody>
 
 												<PanelBody title="Background Color" initialOpen={false} >
-													<FB_SwitcherControl
+
+													<FB_BackgroundColorControl
 														label={__("Background Color", "frontis-blocks")}
-														globalSwitcher={priceGlobalBgColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ priceGlobalBgColorSwitcher: value })}
+														bgColorSwitcher={priceGlobalBackgroundColorSwitcher}
+														setBgColorSwitcher={(value) => setAttributes({ priceGlobalBackgroundColorSwitcher: value })}
+														
+														normalBackgroundType={priceGlobalNormalBackgroundType}
+														setNormalBackgroundType={(value) => setAttributes({ priceGlobalNormalBackgroundType: value })}
+														normalClassicColor={priceGlobalNormalClassicColor}
+														setNormalClassicColor={(value) => setAttributes({ priceGlobalNormalClassicColor: value })}
+														normalGradientColor={priceGlobalNormalGradientColor}
+														setNormalGradientColor={(value) => setAttributes({ priceGlobalNormalGradientColor: value })}
+														normalCustomGradientSwitcher={priceGlobalNormalCustomGradientSwitcher}
+														setNormalCustomGradientSwitcher={(value) => setAttributes({ priceGlobalNormalCustomGradientSwitcher: value })}
+														normalCustomGradientInputValue={priceGlobalNormalCustomGradientInputValue}
+														setNormalCustomGradientInputValue={(value) => setAttributes({ priceGlobalNormalCustomGradientInputValue: value })}
+														
+														hoverBackgroundType={priceGlobalHoverBackgroundType}
+														setHoverBackgroundType={(value) => setAttributes({ priceGlobalHoverBackgroundType: value })}
+														hoverClassicColor={priceGlobalHoverClassicColor}
+														setHoverClassicColor={(value) => setAttributes({ priceGlobalHoverClassicColor: value })}
+														hoverGradientColor={priceGlobalHoverGradientColor} 
+														setHoverGradientColor={(value) => setAttributes({ priceGlobalHoverGradientColor: value })}
+														hoverCustomGradientSwitcher={priceGlobalHoverCustomGradientSwitcher}
+														setHoverCustomGradientSwitcher={(value) => setAttributes({ priceGlobalHoverCustomGradientSwitcher: value })}
+														hoverCustomGradientInputValue={priceGlobalHoverCustomGradientInputValue}
+														setHoverCustomGradientInputValue={(value) => setAttributes({ priceGlobalHoverCustomGradientInputValue: value })}
+
+														isBackgroundImage={false}
+
 													/>
-
-													{priceGlobalBgColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Nomal Color", "frontis-blocks")}
-															globalColor={priceGlobalBgColor}
-															setGlobalColor={(value) => setAttributes({ priceGlobalBgColor: value })}
-														/>
-													)}
-
-													{priceGlobalBgColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={priceGlobalBgHoverColor}
-															setGlobalColor={(value) => setAttributes({ priceGlobalBgHoverColor: value })}
-														/>
-													)}
 
 												</PanelBody>
 												<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
@@ -5759,9 +5880,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 													/>
 													<FB_BoxShadowControl
+														label={__("Normal Box Shadow", "frontis-blocks")}
 														onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowValues: value })}
 														initialShadowValue={priceGlobalBoxShadowValues}
 														onBoxShadowStyleChange={(value) => setAttributes({ priceGlobalBoxShadowCssValue: value })}
+													/>
+													<FB_BoxShadowControl
+														label={__("Hover Box Shadow", "frontis-blocks")}
+														onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowHoverValues: value })}
+														initialShadowValue={priceGlobalBoxShadowHoverValues}
+														onBoxShadowStyleChange={(value) => setAttributes({ priceGlobalBoxShadowHoverCssValue: value })}
 													/>
 												</PanelBody>
 											</div>
