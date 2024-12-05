@@ -13,6 +13,10 @@ const attributes = {
         type: "string",
         default: "",
     },
+    blockStyleTwo: {
+        type: "string",
+        default: "",
+    },
     blockRoot: {
         type: "string",
         default: "frontis_block",
