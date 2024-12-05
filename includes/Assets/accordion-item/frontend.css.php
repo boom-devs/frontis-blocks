@@ -20,8 +20,37 @@ $titleSuffixHoverColor = isset( $block_attributes['titleSuffixHoverColor'] ) ? $
 
 // AccordionItem Main Start
 $accordionItemZIndex      = isset( $block_attributes['accordionItemZIndex'] ) ? $block_attributes['accordionItemZIndex'] : 0;
-$accordionItemBgColor      = isset( $block_attributes['accordionItemBgColor'] ) ? $block_attributes['accordionItemBgColor'] : 'transparent';
-$accordionItemBgHoverColor = isset( $block_attributes['accordionItemBgHoverColor'] ) ? $block_attributes['accordionItemBgHoverColor'] : 'transparent';
+$accordionItemBoxShadowValues = isset( $block_attributes['accordionItemBoxShadowValues'] ) ? $block_attributes['accordionItemBoxShadowValues'] : [];
+$accordionItemBoxShadowCssValue = isset( $block_attributes['accordionItemBoxShadowCssValue'] ) ? $block_attributes['accordionItemBoxShadowCssValue'] : '';
+
+$accordionItemBgColorSwitcher = isset( $block_attributes['accordionItemBgColorSwitcher'] ) ? $block_attributes['accordionItemBgColorSwitcher'] : 'normal';
+$accordionItemBgType = isset( $block_attributes['accordionItemBgType'] ) ? $block_attributes['accordionItemBgType'] : 'classic';
+$accordionItemBgClassicColor = isset( $block_attributes['accordionItemBgClassicColor'] ) ? $block_attributes['accordionItemBgClassicColor'] : '';
+$accordionItemBgGradientColor = isset( $block_attributes['accordionItemBgGradientColor'] ) ? $block_attributes['accordionItemBgGradientColor'] : '';
+$accordionItemBgCustomGradientSwitcher = isset( $block_attributes['accordionItemBgCustomGradientSwitcher'] ) ? $block_attributes['accordionItemBgCustomGradientSwitcher'] : false;
+$accordionItemBgCustomGradientInputValue = isset( $block_attributes['accordionItemBgCustomGradientInputValue'] ) ? $block_attributes['accordionItemBgCustomGradientInputValue'] : '';
+$accordionItemBgColorStyle = isset( $block_attributes['accordionItemBgColorStyle'] ) ? $block_attributes['accordionItemBgColorStyle'] : '';
+$accordionItemBgImageUrl = isset( $block_attributes['accordionItemBgImageUrl'] ) ? $block_attributes['accordionItemBgImageUrl'] : '';
+$accordionItemBgImageAlt = isset( $block_attributes['accordionItemBgImageAlt'] ) ? $block_attributes['accordionItemBgImageAlt'] : '';
+$accordionItemBgImageID = isset( $block_attributes['accordionItemBgImageID'] ) ? $block_attributes['accordionItemBgImageID'] : '';
+$accordionItemBgImagePosition = isset( $block_attributes['accordionItemBgImagePosition'] ) ? $block_attributes['accordionItemBgImagePosition'] : '';
+$accordionItemBgImageAttachment = isset( $block_attributes['accordionItemBgImageAttachment'] ) ? $block_attributes['accordionItemBgImageAttachment'] : '';
+$accordionItemBgImageSize = isset( $block_attributes['accordionItemBgImageSize'] ) ? $block_attributes['accordionItemBgImageSize'] : '';
+$accordionItemBgImageRepeat = isset( $block_attributes['accordionItemBgImageRepeat'] ) ? $block_attributes['accordionItemBgImageRepeat'] : '';
+$accordionItemBgHoverType = isset( $block_attributes['accordionItemBgHoverType'] ) ? $block_attributes['accordionItemBgHoverType'] : 'classic';
+$accordionItemBgHoverClassicColor = isset( $block_attributes['accordionItemBgHoverClassicColor'] ) ? $block_attributes['accordionItemBgHoverClassicColor'] : '';
+$accordionItemBgHoverGradientColor = isset( $block_attributes['accordionItemBgHoverGradientColor'] ) ? $block_attributes['accordionItemBgHoverGradientColor'] : '';
+$accordionItemBgHoverCustomGradientSwitcher = isset( $block_attributes['accordionItemBgHoverCustomGradientSwitcher'] ) ? $block_attributes['accordionItemBgHoverCustomGradientSwitcher'] : false;
+$accordionItemBgHoverCustomGradientInputValue = isset( $block_attributes['accordionItemBgHoverCustomGradientInputValue'] ) ? $block_attributes['accordionItemBgHoverCustomGradientInputValue'] : '';
+$accordionItemBgHoverColorStyle = isset( $block_attributes['accordionItemBgHoverColorStyle'] ) ? $block_attributes['accordionItemBgHoverColorStyle'] : '';
+$accordionItemBgHoverImageUrl = isset( $block_attributes['accordionItemBgHoverImageUrl'] ) ? $block_attributes['accordionItemBgHoverImageUrl'] : '';
+$accordionItemBgHoverImageAlt = isset( $block_attributes['accordionItemBgHoverImageAlt'] ) ? $block_attributes['accordionItemBgHoverImageAlt'] : '';
+$accordionItemBgHoverImageID = isset( $block_attributes['accordionItemBgHoverImageID'] ) ? $block_attributes['accordionItemBgHoverImageID'] : '';
+$accordionItemBgHoverImagePosition = isset( $block_attributes['accordionItemBgHoverImagePosition'] ) ? $block_attributes['accordionItemBgHoverImagePosition'] : '';
+$accordionItemBgHoverImageAttachment = isset( $block_attributes['accordionItemBgHoverImageAttachment'] ) ? $block_attributes['accordionItemBgHoverImageAttachment'] : '';
+$accordionItemBgHoverImageSize = isset( $block_attributes['accordionItemBgHoverImageSize'] ) ? $block_attributes['accordionItemBgHoverImageSize'] : '';
+$accordionItemBgHoverImageRepeat = isset( $block_attributes['accordionItemBgHoverImageRepeat'] ) ? $block_attributes['accordionItemBgHoverImageRepeat'] : '';
+
 
 // Margin
 $accordionItemMarginUnits   = isset( $block_attributes['accordionItemMarginUnits'] ) ? $block_attributes['accordionItemMarginUnits'] : 'px';
@@ -81,11 +110,30 @@ $css_content = "
 		" . ( $accordionItemZIndex ? "z-index: $accordionItemZIndex;" : "" ) . "
 	}
 	.$blockID.fb-accordion-item-main-wrapper .fb-accordion-content-wrapper {
-		" . ( $accordionItemBgColor ? "background-color: $accordionItemBgColor;" : "" ) . "
+		" . (
+    	$accordionItemBgType === "gradient"
+			? (
+				!empty($accordionItemBgCustomGradientSwitcher) && !empty($accordionItemBgCustomGradientInputValue)
+				? "background: $accordionItemBgCustomGradientInputValue;"
+				: "background: $accordionItemBgGradientColor;"
+			)
+			: (
+				!empty($accordionItemBgImageUrl)
+				? "
+					background-image: url('$accordionItemBgImageUrl');
+					" . (!empty($accordionItemBgImagePosition) ? "background-position: $accordionItemBgImagePosition;" : "") . "
+					" . (!empty($accordionItemBgImageAttachment) ? "background-attachment: $accordionItemBgImageAttachment;" : "") . "
+					" . (!empty($accordionItemBgImageRepeat) ? "background-repeat: $accordionItemBgImageRepeat;" : "") . "
+					" . (!empty($accordionItemBgImageSize) ? "background-size: $accordionItemBgImageSize;" : "") . "
+				"
+				: "background: $accordionItemBgClassicColor;"
+			)
+		) . "
 		" . ( $accordionItemBorder ? "border-style: $accordionItemBorder;" : "" ) . "
 		" . ( $accordionItemDesktopBorder ? "border-width: $accordionItemDesktopBorder;" : "" ) . "
 		" . ( $accordionItemBorderColor ? "border-color: $accordionItemBorderColor;" : "" ) . "
 		" . ( $accordionItemDesktopBorderRadius ? "border-radius: $accordionItemDesktopBorderRadius;" : "" ) . "
+		" . ( !empty($accordionItemBoxShadowCssValue) ? "box-shadow: $accordionItemBoxShadowCssValue;" : "" ) . "
 		margin: 0;
 		padding: 0;
 		transform-origin: top;
@@ -104,7 +152,25 @@ $css_content = "
 		opacity: 1;
 	}
 	.$blockID.fb-accordion-item-main-wrapper .fb-accordion-content-wrapper:hover {
-		" . ( $accordionItemBgHoverColor ? "background-color: $accordionItemBgHoverColor;" : "" ) . "
+		" . (
+    	$accordionItemBgHoverType === "gradient"
+			? (
+				!empty($accordionItemBgHoverCustomGradientSwitcher) && !empty($accordionItemBgHoverCustomGradientInputValue)
+				? "background: $accordionItemBgHoverCustomGradientInputValue;"
+				: "background: $accordionItemBgHoverGradientColor;"
+			)
+			: (
+				!empty($accordionItemBgHoverImageUrl)
+				? "
+					background-image: url('$accordionItemBgHoverImageUrl');
+					" . (!empty($accordionItemBgHoverImagePosition) ? "background-position: $accordionItemBgHoverImagePosition;" : "") . "
+					" . (!empty($accordionItemBgHoverImageAttachment) ? "background-attachment: $accordionItemBgHoverImageAttachment;" : "") . "
+					" . (!empty($accordionItemBgHoverImageRepeat) ? "background-repeat: $accordionItemBgHoverImageRepeat;" : "") . "
+					" . (!empty($accordionItemBgHoverImageSize) ? "background-size: $accordionItemBgHoverImageSize;" : "") . "
+				"
+				: "background: $accordionItemBgHoverClassicColor;"
+			)
+		) . "
 		" . ( $accordionItemBorderHoverColor ? "border-color: $accordionItemBorderHoverColor;" : "" ) . "
 		transition: all .3s ease-in-out;
 	}
