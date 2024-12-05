@@ -153,6 +153,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonIcon,
 		priceButtonIconPosition,
 		priceButtonIconSpacing,
+		priceButtonIconSpacingUnits,
 		/** End Button */	
 
 		/** Start Ribbon */
@@ -2740,6 +2741,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				background: ${priceButtonHoverClassicColor}; 
 			`}
 		}
+		.${blockId} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+			margin-right: ${priceButtonIconSpacing.Desktop}${priceButtonIconSpacingUnits.Desktop};
+		}
+		.${blockId} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+			margin-left: ${priceButtonIconSpacing.Desktop}${priceButtonIconSpacingUnits.Desktop};
+		}
+
 		.${blockId} .fb-pricing-button-icon svg {
 			width: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
 			height: ${priceButtonIconSize.Desktop}${priceButtonIconSizeUnits.Desktop};
@@ -2953,6 +2961,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`}
 			}
 
+			.${blockId} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+				margin-right: ${priceButtonIconSpacing.Tablet}${priceButtonIconSpacingUnits.Tablet};
+			}
+			.${blockId} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+				margin-left: ${priceButtonIconSpacing.Tablet}${priceButtonIconSpacingUnits.Tablet};
+			}
+
 			.${blockId} .fb-pricing-button-icon svg {
 				width: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
 				height: ${priceButtonIconSize.Tablet}${priceButtonIconSizeUnits.Tablet};
@@ -3154,6 +3169,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`}
 			}
 
+			.${blockId} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+				margin-right: ${priceButtonIconSpacing.Mobile}${priceButtonIconSpacingUnits.Mobile}; 
+			}
+			.${blockId} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+				margin-left: ${priceButtonIconSpacing.Mobile}${priceButtonIconSpacingUnits.Mobile};
+			}
+
 			.${blockId} .fb-pricing-button-icon svg {
 				width: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
 				height: ${priceButtonIconSize.Mobile}${priceButtonIconSizeUnits.Mobile};
@@ -3199,7 +3221,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonIconAlign,
 		priceButtonIcon,
 		priceButtonIconPosition,
-		priceButtonIconSpacing,	
+		priceButtonIconSpacing,
+		priceButtonIconSpacingUnits,
 
 		priceRibbonSwitcher,
 		priceRibbonText,
@@ -4000,14 +4023,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		value={priceButtonIconPosition}
 																		options={ICON_POSITION}
 																		onChange={(value) => setAttributes({ priceButtonIconPosition: value })}
-																	/>
-																	<RangeControl
-																		label={__("Icon Spacing", "frontis-blocks")}
-																		value={priceButtonIconSpacing}
-																		onChange={(value) => setAttributes({ priceButtonIconSpacing: value })}
-																		min={0}
-																		max={50}
-																		step={1}
 																	/>
 																</>
 															)}
@@ -5576,6 +5591,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												rangeStep={1}
 												resetFallbackValue={""}
+											/>
+											<FB_Range
+												min={0}
+												max={100}
+												label={__("Icon Spacing", "frontis-blocks")}
+												rangeValue={priceButtonIconSpacing}
+												onChangeHandler={(value) => setAttributes({ priceButtonIconSpacing: value })}
+												rangeUnitHandler={(value) => setAttributes({ priceButtonIconSpacingUnits: value })}
+												deviceType={deviceType}
+												units={priceButtonIconSpacingUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={"10"}
 											/>
 										</PanelBody>
 										<PanelBody
