@@ -18,8 +18,12 @@
 	  "fb/accordionparentBlockID": "blockID",
 	  "fb/accordionInheritedAccordionType": "accordionType",
 	  "fb/accordionInheritedDisplayIcon": "displayIcon",
+	  "fb/accordionInheritedTabIconSwitcher": "tabIconSwitcher",
 	  "fb/accordionInheritedTabIcon": "tabIcon",
+	  "fb/accordionInheritedTabImageUrl": "tabImageUrl",
+	  "fb/accordionInheritedExpandedIconSwitcher": "expandedIconSwitcher",
 	  "fb/accordionInheritedExpandedIcon": "expandedIcon",
+	  "fb/accordionInheritedExpandedImageUrl": "expandedImageUrl",
 	  "fb/accordionInheritedTagName": "tagName",
 	  "fb/accordionFaqSchema": "faqSchema"
 	},

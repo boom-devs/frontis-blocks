@@ -21,7 +21,7 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_Color from "../../components/color";
 import FB_Spacing from "../../components/spacing";
 import { SelectControl } from "@wordpress/components";
-import { useEffect } from "@wordpress/element";
+import { useEffect, useMemo } from "@wordpress/element";
 import FB_BoxShadowControl from "../../components/box-shadow";
 import FB_BackgroundColorControl from "../../components/background-color-control";
 
@@ -29,6 +29,7 @@ import FB_BackgroundColorControl from "../../components/background-color-control
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
         blockID,
+		blockStyle,
         deviceType,
         clickable,
 
@@ -110,10 +111,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         // Item Backgorund
         accordionItemBgColorSwitcher,
         accordionItemBgType,
-        accordionItemClassicColor,
-        accordionItemGradientColor,
-        accordionItemCustomGradientSwitcher,
-        accordionItemCustomGradientInputValue,
+        accordionItemBgClassicColor,
+        accordionItemBgGradientColor,
+        accordionItemBgCustomGradientSwitcher,
+        accordionItemBgCustomGradientInputValue,
         accordionItemBgImageUrl,
         accordionItemBgImageAlt,
         accordionItemBgImageID,
@@ -122,10 +123,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemBgImageRepeat,
         accordionItemBgImageSize,
         accordionItemBgHoverType,
-        accordionItemHoverClassicColor,
-        accordionItemHoverGradientColor,
-        accordionItemHoverCustomGradientSwitcher,
-        accordionItemHoverCustomGradientInputValue,
+        accordionItemBgHoverClassicColor,
+        accordionItemBgHoverGradientColor,
+        accordionItemBgHoverCustomGradientSwitcher,
+        accordionItemBgHoverCustomGradientInputValue,
         accordionItemBgHoverImageUrl,
         accordionItemBgHoverImageAlt,
         accordionItemBgHoverImageID,
@@ -524,15 +525,188 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const accordionItemBorderRadiusTabletWidth = `${accordionItemTabBorderRadiusWidth.top}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemTabBorderRadiusWidth.right}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemTabBorderRadiusWidth.bottom}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemTabBorderRadiusWidth.left}${accordionItemBorderRadiusUnits[deviceType]}`;
 	const accordionItemBorderRadiusMobileWidth = `${accordionItemMobileBorderRadiusWidth.top}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.right}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.bottom}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.left}${accordionItemBorderRadiusUnits[deviceType]}`;
 	
+	
+	const fbAccordionItemStyle = useMemo(
+		() => `
+		  .fb-accordion-item-main-wrapper.${blockID} {
+			position: relative;
+			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			${
+			  accordionItemBgType === "gradient"
+				? `background: ${
+					accordionItemBgCustomGradientSwitcher && accordionItemBgCustomGradientInputValue
+					  ? accordionItemBgCustomGradientInputValue
+					  : accordionItemBgGradientColor
+				  };`
+				: accordionItemBgImageUrl !== undefined && accordionItemBgImageUrl !== null && accordionItemBgImageUrl !== ""
+				? `
+				  ${accordionItemBgImageUrl !== undefined ? `background-image: url(${accordionItemBgImageUrl});` : ''}
+				  ${accordionItemBgImagePosition !== undefined ? `background-position: ${accordionItemBgImagePosition};` : ''}
+				  ${accordionItemBgImageAttachment !== undefined ? `background-attachment: ${accordionItemBgImageAttachment};` : ''}
+				  ${accordionItemBgImageRepeat !== undefined ? `background-repeat: ${accordionItemBgImageRepeat};` : ''}
+				  ${accordionItemBgImageSize !== undefined ? `background-size: ${accordionItemBgImageSize};` : ''}
+				`
+				: `background: ${accordionItemBgClassicColor};`
+			}
+			${accordionItemBoxShadowCssValue ? `box-shadow: ${accordionItemBoxShadowCssValue};` : ''}
+			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+			${accordionItemBorder !== undefined ? `border-style: ${accordionItemBorder};` : ''}
+			${accordionItemBorderDesktopWidth !== undefined ? `border-width: ${accordionItemBorderDesktopWidth};` : ''}
+			${accordionItemBorderColor !== undefined ? `border-color: ${accordionItemBorderColor};` : ''}
+			${accordionItemBorderRadiusDesktopWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusDesktopWidth};` : ''}
+			transition: all 0.3s ease-in-out;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper:hover {
+			${
+				accordionItemBgHoverType === "gradient"
+				  ? `background: ${
+					  accordionItemBgHoverCustomGradientSwitcher && accordionItemBgHoverCustomGradientInputValue
+						? accordionItemBgHoverCustomGradientInputValue
+						: accordionItemBgHoverGradientColor
+					};`
+				  : accordionItemBgHoverImageUrl !== undefined && accordionItemBgHoverImageUrl !== null && accordionItemBgHoverImageUrl !== ""
+				  ? `
+					${accordionItemBgHoverImageUrl !== undefined ? `background-image: url(${accordionItemBgHoverImageUrl});` : ''}
+					${accordionItemBgHoverImagePosition !== undefined ? `background-position: ${accordionItemBgHoverImagePosition};` : ''}
+					${accordionItemBgHoverImageAttachment !== undefined ? `background-attachment: ${accordionItemBgHoverImageAttachment};` : ''}
+					${accordionItemBgHoverImageRepeat !== undefined ? `background-repeat: ${accordionItemBgHoverImageRepeat};` : ''}
+					${accordionItemBgHoverImageSize !== undefined ? `background-size: ${accordionItemBgHoverImageSize};` : ''}
+				  `
+				  : `background: ${accordionItemBgHoverClassicColor};`
+			}
+			${accordionItemBorderHoverColor !== undefined ? `border-color: ${accordionItemBorderHoverColor};` : ''}
+			transition: all 0.3s ease-in-out;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout {
+			display: block;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout p {
+			margin: 0;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-prefix {
+			${titlePrefixColor !== undefined ? `fill: ${titlePrefixColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-suffix {
+			${titleSuffixColor !== undefined ? `fill: ${titleSuffixColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-prefix {
+			${titlePrefixHoverColor !== undefined ? `fill: ${titlePrefixHoverColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-suffix {
+			${titleSuffixHoverColor !== undefined ? `fill: ${titleSuffixHoverColor};` : ''}
+		  }
+	  
+		  @media only screen and (max-width: 1024px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			  ${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+			  ${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+			  ${accordionItemBorderRadiusTabletWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusTabletWidth};` : ''}
+			}
+		  }
+	  
+		  @media only screen and (max-width: 767px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			  ${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+			  ${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+			  ${accordionItemBorderRadiusMobileWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusMobileWidth};` : ''}
+			}
+		  }
+		`,
+		[
+            blockID,
+            deviceType,
+    
+            titlePrefixColorSwitcher,
+            titlePrefixColor,
+            titlePrefixHoverColor,
+    
+            titleSuffixColorSwitcher,
+            titleSuffixColor,
+            titleSuffixHoverColor,
+    
+            // Accordion Item Advance
+            accordionItemZIndex,
+            accordionItemPaddingUnits,
+            accordionItemDesktopPadding,
+            accordionItemTabPadding,
+            accordionItemMobilePadding,
+            accordionItemMarginUnits,
+            accordionItemDesktopMargin,
+            accordionItemTabMargin,
+            accordionItemMobileMargin,
+            accordionItemBorder,
+            accordionItemBorderColor,
+            accordionItemBorderHoverColor,
+            accordionItemBorderColorSwitcher,
+            accordionItemBorderUnits,
+            accordionItemDesktopBorderWidth,
+            accordionItemTabBorderWidth,
+            accordionItemMobileBorderWidth,
+            accordionItemBorderRadiusUnits,
+            accordionItemDesktopBorderRadiusWidth,
+            accordionItemTabBorderRadiusWidth,
+            accordionItemMobileBorderRadiusWidth,
+            accordionItemDesktopSwitcher,
+            accordionItemTabletSwitcher,
+            accordionItemMobileSwitcher,
+    
+            // Item Box Shadow
+            accordionItemBoxShadowValues,
+            accordionItemBoxShadowCssValue,
+    
+            // Item Backgorund
+            accordionItemBgColorSwitcher,
+            accordionItemBgType,
+            accordionItemBgClassicColor,
+            accordionItemBgGradientColor,
+            accordionItemBgCustomGradientSwitcher,
+            accordionItemBgCustomGradientInputValue,
+            accordionItemBgImageUrl,
+            accordionItemBgImagePosition,
+            accordionItemBgImageAttachment,
+            accordionItemBgImageRepeat,
+            accordionItemBgImageSize,
+            accordionItemBgHoverType,
+            accordionItemBgHoverClassicColor,
+            accordionItemBgHoverGradientColor,
+            accordionItemBgHoverCustomGradientSwitcher,
+            accordionItemBgHoverCustomGradientInputValue,
+            accordionItemBgHoverImageUrl,
+            accordionItemBgHoverImageAlt,
+            accordionItemBgHoverImageID,
+            accordionItemBgHoverImagePosition,
+            accordionItemBgHoverImageAttachment,
+            accordionItemBgHoverImageRepeat,
+            accordionItemBgHoverImageSize,
+		]
+	  );
+	  
+	  useEffect(() => {
+		setAttributes({
+		  blockStyle: fbAccordionItemStyle.replace(/\s+/g, ' ').trim(),
+		});
+	  }, [fbAccordionItemStyle]);
 
 
     return (
         <>
         <style>
-            {`
-                
-            `}
+			{`
+            	${blockStyle}
+			`}
         </style>
+
         <InspectorControls key="controls">
         <div className="fb-inspector-control">
             <TabPanel
@@ -875,28 +1049,28 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 														setNormalBackgroundType={(value) =>
 															setAttributes({ accordionItemBgType: value })
 														}
-														normalClassicColor={accordionItemClassicColor}
+														normalClassicColor={accordionItemBgClassicColor}
 														setNormalClassicColor={(value) =>
-															setAttributes({ accordionItemClassicColor: value })
+															setAttributes({ accordionItemBgClassicColor: value })
 														}
-														normalGradientColor={accordionItemGradientColor}
+														normalGradientColor={accordionItemBgGradientColor}
 														setNormalGradientColor={(value) =>
-															setAttributes({ accordionItemGradientColor: value })
+															setAttributes({ accordionItemBgGradientColor: value })
 														}
 														normalCustomGradientSwitcher={
-															accordionItemCustomGradientSwitcher
+															accordionItemBgCustomGradientSwitcher
 														}
 														setNormalCustomGradientSwitcher={(value) =>
 															setAttributes({
-																accordionItemCustomGradientSwitcher: value,
+																accordionItemBgCustomGradientSwitcher: value,
 															})
 														}
 														normalCustomGradientInputValue={
-															accordionItemCustomGradientInputValue
+															accordionItemBgCustomGradientInputValue
 														}
 														setNormalCustomGradientInputValue={(value) =>
 															setAttributes({
-																accordionItemCustomGradientInputValue: value,
+																accordionItemBgCustomGradientInputValue: value,
 															})
 														}
 														normalBackgroundImageUrl={accordionItemBgImageUrl}
@@ -943,28 +1117,28 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 														setBgHoverType={(value) =>
 															setAttributes({ accordionItemBgHoverType: value })
 														}
-														hoverClassicColor={accordionItemHoverClassicColor}
+														hoverClassicColor={accordionItemBgHoverClassicColor}
 														setHoverClassicColor={(value) =>
-															setAttributes({ accordionItemHoverClassicColor: value })
+															setAttributes({ accordionItemBgHoverClassicColor: value })
 														}
-														hoverGradientColor={accordionItemHoverGradientColor}
+														hoverGradientColor={accordionItemBgHoverGradientColor}
 														setHoverGradientColor={(value) =>
-															setAttributes({ accordionItemHoverGradientColor: value })
+															setAttributes({ accordionItemBgHoverGradientColor: value })
 														}
 														hoverCustomGradientSwitcher={
-															accordionItemHoverCustomGradientSwitcher
+															accordionItemBgHoverCustomGradientSwitcher
 														}
 														setHoverCustomGradientSwitcher={(value) =>
 															setAttributes({
-																accordionItemHoverCustomGradientSwitcher: value,
+																accordionItemBgHoverCustomGradientSwitcher: value,
 															})
 														}
 														hoverCustomGradientInputValue={
-															accordionItemHoverCustomGradientInputValue
+															accordionItemBgHoverCustomGradientInputValue
 														}
 														setHoverCustomGradientInputValue={(value) =>
 															setAttributes({
-																accordionItemHoverCustomGradientInputValue: value,
+																accordionItemBgHoverCustomGradientInputValue: value,
 															})
 														}
 														hoverBackgroundImageUrl={accordionItemBgHoverImageUrl}
