@@ -78,13 +78,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		priceButtonIconSpacing,
 		/** End Button */	
 
-		/** Start Ribbon */
-		priceRibbonSwitcher,
-		priceRibbonText,
-		priceRibbonPosition,
-
-		/** End Ribbon */
-
 		pricingTitleAlignment,
 
 		priceAfterTextSwitcher,
@@ -115,14 +108,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							</div>
 						)}
 						<div className="fb-pricing-main-wrapper">
-							<div className="fb-pricing-ribbon-wrapper">
-								{priceRibbonSwitcher && (
-									<div className={`fb-pricing-ribbon fb-pricing-ribbon-${priceRibbonPosition}`}>
-										<span>{priceRibbonText}</span>
-									</div>
-								)}
-							</div>
 							<div className="fb-pricing-header">
+								<div className="fb-pricing-ribbon-icon-wrapper">
+									{pricingIconAlign === 'icon' && (
+										<span className="fb-pricing-ribbon-icon">{renderSVG(pricingIcon)}</span>
+									)}
+								</div>
 								<div className={`fb-pricing-title-wrapper fb-pricing-title-${pricingTitleAlignment}`}>
 									<RichText
 										tagName={pricingTitleTag}
@@ -139,11 +130,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											onChange={(value) => setAttributes({ pricingSubTitle: value })}
 											placeholder={__('Enter subtitle', 'frontis-blocks')}
 										/>
-									)}
-								</div>
-								<div className="fb-pricing-icon-wrapper">
-									{pricingIconAlign === 'icon' && (
-										<span className="fb-pricing-icon">{renderSVG(pricingIcon)}</span>
 									)}
 								</div>
 								<div className="fb-pricing-price-wrapper">
