@@ -1,6 +1,4 @@
 .fb-pricing-wrapper {
-	// text-align: center;
-	overflow: hidden;
 	transition: ease-in-out all 0.3s;
 
 }
@@ -135,20 +133,6 @@
 			outline: none;
 			box-shadow: none;
 		}
-	
-  
-		&.fb-button-icon-left {
-		  .fb-pricing-button-icon {
-			margin-right: 8px;
-		  }
-		}
-  
-		&.fb-button-icon-right {
-		  .fb-pricing-button-icon {
-			margin-left: 8px;
-		  }
-		}
-
   
 		.fb-pricing-button-icon {
 		  display: flex;
