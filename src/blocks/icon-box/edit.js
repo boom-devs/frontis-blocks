@@ -42,7 +42,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         infoIconPosition,
 		headingUrlSwitcher,
 		headingLink,
-		headingTargetUrl
+		headingTargetUrl,
+		infoIconVerticalPosition
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -82,6 +83,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     }}>
 						<div className="fb-icon-media-container" style={{
 								justifyContent: wrapperAlignment,
+								alignItems: infoIconVerticalPosition === "v-top" ? "flex-start" : infoIconVerticalPosition === "v-middle" ? "center" : infoIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start",
 							}}>
 						<div
 							className="fb-icon-media-wrapper"
