@@ -21,12 +21,17 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_Color from "../../components/color";
 import FB_Spacing from "../../components/spacing";
 import { SelectControl } from "@wordpress/components";
-import { useEffect } from "@wordpress/element";
+import { useEffect, useMemo } from "@wordpress/element";
+import FB_BoxShadowControl from "../../components/box-shadow";
+import FB_BackgroundColorControl from "../../components/background-color-control";
 
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
         blockID,
+		parentBlockID,
+		blockStyle,
+		blockStyleTwo,
         deviceType,
         clickable,
 
@@ -83,9 +88,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemTabMargin,
         accordionItemMobileMargin,
         accordionItemMarginLink,
-        accordionItemBgColorSwitcher,
-        accordionItemBgColor,
-        accordionItemBgHoverColor,
         accordionItemBorder,
         accordionItemBorderColor,
         accordionItemBorderHoverColor,
@@ -102,7 +104,38 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemBorderRadiusLink,
         accordionItemDesktopSwitcher,
         accordionItemTabletSwitcher,
-        accordionItemMobileSwitcher,	
+        accordionItemMobileSwitcher,
+
+        // Item Box Shadow
+        accordionItemBoxShadowValues,
+        accordionItemBoxShadowCssValue,
+
+        // Item Backgorund
+        accordionItemBgColorSwitcher,
+        accordionItemBgType,
+        accordionItemBgClassicColor,
+        accordionItemBgGradientColor,
+        accordionItemBgCustomGradientSwitcher,
+        accordionItemBgCustomGradientInputValue,
+        accordionItemBgImageUrl,
+        accordionItemBgImageAlt,
+        accordionItemBgImageID,
+        accordionItemBgImagePosition,
+        accordionItemBgImageAttachment,
+        accordionItemBgImageRepeat,
+        accordionItemBgImageSize,
+        accordionItemBgHoverType,
+        accordionItemBgHoverClassicColor,
+        accordionItemBgHoverGradientColor,
+        accordionItemBgHoverCustomGradientSwitcher,
+        accordionItemBgHoverCustomGradientInputValue,
+        accordionItemBgHoverImageUrl,
+        accordionItemBgHoverImageAlt,
+        accordionItemBgHoverImageID,
+        accordionItemBgHoverImagePosition,
+        accordionItemBgHoverImageAttachment,
+        accordionItemBgHoverImageRepeat,
+        accordionItemBgHoverImageSize,
     } = attributes;
 
 
@@ -494,15 +527,376 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const accordionItemBorderRadiusTabletWidth = `${accordionItemTabBorderRadiusWidth.top}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemTabBorderRadiusWidth.right}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemTabBorderRadiusWidth.bottom}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemTabBorderRadiusWidth.left}${accordionItemBorderRadiusUnits[deviceType]}`;
 	const accordionItemBorderRadiusMobileWidth = `${accordionItemMobileBorderRadiusWidth.top}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.right}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.bottom}${accordionItemBorderRadiusUnits[deviceType]} ${accordionItemMobileBorderRadiusWidth.left}${accordionItemBorderRadiusUnits[deviceType]}`;
 	
+	
+	const fbAccordionItemStyle = useMemo(
+		() => `
+		  .fb-accordion-item-main-wrapper.${blockID} {
+			position: relative;
+			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			${
+			  accordionItemBgType === "gradient"
+				? `background: ${
+					accordionItemBgCustomGradientSwitcher && accordionItemBgCustomGradientInputValue
+					  ? accordionItemBgCustomGradientInputValue
+					  : accordionItemBgGradientColor
+				  };`
+				: accordionItemBgImageUrl !== undefined && accordionItemBgImageUrl !== null && accordionItemBgImageUrl !== ""
+				? `
+				  ${accordionItemBgImageUrl !== undefined ? `background-image: url(${accordionItemBgImageUrl});` : ''}
+				  ${accordionItemBgImagePosition !== undefined ? `background-position: ${accordionItemBgImagePosition};` : ''}
+				  ${accordionItemBgImageAttachment !== undefined ? `background-attachment: ${accordionItemBgImageAttachment};` : ''}
+				  ${accordionItemBgImageRepeat !== undefined ? `background-repeat: ${accordionItemBgImageRepeat};` : ''}
+				  ${accordionItemBgImageSize !== undefined ? `background-size: ${accordionItemBgImageSize};` : ''}
+				`
+				: `background: ${accordionItemBgClassicColor};`
+			}
+			${accordionItemBoxShadowCssValue ? `box-shadow: ${accordionItemBoxShadowCssValue};` : ''}
+			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+			${accordionItemBorder !== undefined ? `border-style: ${accordionItemBorder};` : ''}
+			${accordionItemBorderDesktopWidth !== undefined ? `border-width: ${accordionItemBorderDesktopWidth};` : ''}
+			${accordionItemBorderColor !== undefined ? `border-color: ${accordionItemBorderColor};` : ''}
+			${accordionItemBorderRadiusDesktopWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusDesktopWidth};` : ''}
+			transition: all 0.3s ease-in-out;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper:hover {
+			${
+				accordionItemBgHoverType === "gradient"
+				  ? `background: ${
+					  accordionItemBgHoverCustomGradientSwitcher && accordionItemBgHoverCustomGradientInputValue
+						? accordionItemBgHoverCustomGradientInputValue
+						: accordionItemBgHoverGradientColor
+					};`
+				  : accordionItemBgHoverImageUrl !== undefined && accordionItemBgHoverImageUrl !== null && accordionItemBgHoverImageUrl !== ""
+				  ? `
+					${accordionItemBgHoverImageUrl !== undefined ? `background-image: url(${accordionItemBgHoverImageUrl});` : ''}
+					${accordionItemBgHoverImagePosition !== undefined ? `background-position: ${accordionItemBgHoverImagePosition};` : ''}
+					${accordionItemBgHoverImageAttachment !== undefined ? `background-attachment: ${accordionItemBgHoverImageAttachment};` : ''}
+					${accordionItemBgHoverImageRepeat !== undefined ? `background-repeat: ${accordionItemBgHoverImageRepeat};` : ''}
+					${accordionItemBgHoverImageSize !== undefined ? `background-size: ${accordionItemBgHoverImageSize};` : ''}
+				  `
+				  : `background: ${accordionItemBgHoverClassicColor};`
+			}
+			${accordionItemBorderHoverColor !== undefined ? `border-color: ${accordionItemBorderHoverColor};` : ''}
+			transition: all 0.3s ease-in-out;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout {
+			display: block;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout p {
+			margin: 0;
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-prefix {
+			${titlePrefixColor !== undefined ? `fill: ${titlePrefixColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-suffix {
+			${titleSuffixColor !== undefined ? `fill: ${titleSuffixColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-prefix {
+			${titlePrefixHoverColor !== undefined ? `fill: ${titlePrefixHoverColor};` : ''}
+		  }
+	  
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-suffix {
+			${titleSuffixHoverColor !== undefined ? `fill: ${titleSuffixHoverColor};` : ''}
+		  }
+	  
+		  @media only screen and (max-width: 1024px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			  ${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+			  ${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+			  ${accordionItemBorderRadiusTabletWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusTabletWidth};` : ''}
+			}
+		  }
+	  
+		  @media only screen and (max-width: 767px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			  ${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+			  ${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+			  ${accordionItemBorderRadiusMobileWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusMobileWidth};` : ''}
+			}
+		  }
+		`,
+		[
+            blockID,
+            deviceType,
+    
+            titlePrefixColorSwitcher,
+            titlePrefixColor,
+            titlePrefixHoverColor,
+    
+            titleSuffixColorSwitcher,
+            titleSuffixColor,
+            titleSuffixHoverColor,
+    
+            // Accordion Item Advance
+            accordionItemZIndex,
+            accordionItemPaddingUnits,
+            accordionItemDesktopPadding,
+            accordionItemTabPadding,
+            accordionItemMobilePadding,
+            accordionItemMarginUnits,
+            accordionItemDesktopMargin,
+            accordionItemTabMargin,
+            accordionItemMobileMargin,
+            accordionItemBorder,
+            accordionItemBorderColor,
+            accordionItemBorderHoverColor,
+            accordionItemBorderColorSwitcher,
+            accordionItemBorderUnits,
+            accordionItemDesktopBorderWidth,
+            accordionItemTabBorderWidth,
+            accordionItemMobileBorderWidth,
+            accordionItemBorderRadiusUnits,
+            accordionItemDesktopBorderRadiusWidth,
+            accordionItemTabBorderRadiusWidth,
+            accordionItemMobileBorderRadiusWidth,
+            accordionItemDesktopSwitcher,
+            accordionItemTabletSwitcher,
+            accordionItemMobileSwitcher,
+    
+            // Item Box Shadow
+            accordionItemBoxShadowValues,
+            accordionItemBoxShadowCssValue,
+    
+            // Item Backgorund
+            accordionItemBgColorSwitcher,
+            accordionItemBgType,
+            accordionItemBgClassicColor,
+            accordionItemBgGradientColor,
+            accordionItemBgCustomGradientSwitcher,
+            accordionItemBgCustomGradientInputValue,
+            accordionItemBgImageUrl,
+            accordionItemBgImagePosition,
+            accordionItemBgImageAttachment,
+            accordionItemBgImageRepeat,
+            accordionItemBgImageSize,
+            accordionItemBgHoverType,
+            accordionItemBgHoverClassicColor,
+            accordionItemBgHoverGradientColor,
+            accordionItemBgHoverCustomGradientSwitcher,
+            accordionItemBgHoverCustomGradientInputValue,
+            accordionItemBgHoverImageUrl,
+            accordionItemBgHoverImageAlt,
+            accordionItemBgHoverImageID,
+            accordionItemBgHoverImagePosition,
+            accordionItemBgHoverImageAttachment,
+            accordionItemBgHoverImageRepeat,
+            accordionItemBgHoverImageSize,
+		]
+	  );
+	  
+	  useEffect(() => {
+		setAttributes({
+		  blockStyle: fbAccordionItemStyle.replace(/\s+/g, ' ').trim(),
+		});
+	  }, [fbAccordionItemStyle]);
+
+	  const fbAccordionItemStyleTwo = useMemo(() => `
+		.fb-accordion-item-main-wrapper.${blockID} {
+			position: relative;
+			display: block;
+			overflow: hidden;
+			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+		}
+		
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			${accordionItemBgType === 'gradient' 
+			? (accordionItemBgCustomGradientSwitcher && accordionItemBgCustomGradientInputValue 
+				? `background: ${accordionItemBgCustomGradientInputValue};` 
+				: `background: ${accordionItemBgGradientColor};`)
+			: accordionItemBgImageUrl 
+			? `
+				background-image: url('${accordionItemBgImageUrl}');
+				${accordionItemBgImagePosition ? `background-position: ${accordionItemBgImagePosition};` : ''}
+				${accordionItemBgImageAttachment ? `background-attachment: ${accordionItemBgImageAttachment};` : ''}
+				${accordionItemBgImageRepeat ? `background-repeat: ${accordionItemBgImageRepeat};` : ''}
+				${accordionItemBgImageSize ? `background-size: ${accordionItemBgImageSize};` : ''}
+				` 
+			: `background: ${accordionItemBgClassicColor};`
+			}
+			${accordionItemBorder ? `border-style: ${accordionItemBorder};` : ''}
+			${accordionItemBorderDesktopWidth !== undefined ? `border-width: ${accordionItemBorderDesktopWidth};` : ''}
+			${accordionItemBorderColor ? `border-color: ${accordionItemBorderColor};` : ''}
+			${accordionItemBorderRadiusDesktopWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusDesktopWidth};` : ''}
+			${accordionItemBoxShadowCssValue ? `box-shadow: ${accordionItemBoxShadowCssValue};` : ''}
+			margin: 0;
+			padding: 0;
+			transform-origin: top;
+			transform: scaleY(0);
+			height: 0;
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+			height: unset;
+			visibility: visible;
+			transform: scaleY(1);
+			opacity: 1;
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper:hover {
+			${accordionItemBgHoverType === 'gradient' 
+			? (accordionItemBgHoverCustomGradientSwitcher && accordionItemBgHoverCustomGradientInputValue 
+				? `background: ${accordionItemBgHoverCustomGradientInputValue};` 
+				: `background: ${accordionItemBgHoverGradientColor};`)
+			: accordionItemBgHoverImageUrl 
+			? `
+				background-image: url('${accordionItemBgHoverImageUrl}');
+				${accordionItemBgHoverImagePosition ? `background-position: ${accordionItemBgHoverImagePosition};` : ''}
+				${accordionItemBgHoverImageAttachment ? `background-attachment: ${accordionItemBgHoverImageAttachment};` : ''}
+				${accordionItemBgHoverImageRepeat ? `background-repeat: ${accordionItemBgHoverImageRepeat};` : ''}
+				${accordionItemBgHoverImageSize ? `background-size: ${accordionItemBgHoverImageSize};` : ''}
+				` 
+			: `background: ${accordionItemBgHoverClassicColor};`
+			}
+			${accordionItemBorderHoverColor ? `border-color: ${accordionItemBorderHoverColor};` : ''}
+			transition: all 0.3s ease-in-out;
+		}
+
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
+			display: none;
+		}
+
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
+		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
+			display: block;
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
+			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
+			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
+			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
+		}
+
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
+			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
+		}
+
+		@media only screen and (max-width: 1024px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			${accordionItemBorderTabletWidth ? `border-width: ${accordionItemBorderTabletWidth};` : ''}
+			${accordionItemBorderRadiusTabletWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusTabletWidth};` : ''}
+			}
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+				${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+				${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+			}
+		}
+
+		@media only screen and (max-width: 767px) {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+				${accordionItemBorderMobileWidth ? `border-width: ${accordionItemBorderMobileWidth};` : ''}
+				${accordionItemBorderRadiusMobileWidth !== undefined ? `border-radius: ${accordionItemBorderRadiusMobileWidth};` : ''}
+			}
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+				${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+				${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+			}
+		}
+		`, [
+			blockID,
+            deviceType,
+    
+            titlePrefixColorSwitcher,
+            titlePrefixColor,
+            titlePrefixHoverColor,
+    
+            titleSuffixColorSwitcher,
+            titleSuffixColor,
+            titleSuffixHoverColor,
+    
+            // Accordion Item Advance
+            accordionItemZIndex,
+            accordionItemPaddingUnits,
+            accordionItemDesktopPadding,
+            accordionItemTabPadding,
+            accordionItemMobilePadding,
+            accordionItemMarginUnits,
+            accordionItemDesktopMargin,
+            accordionItemTabMargin,
+            accordionItemMobileMargin,
+            accordionItemBorder,
+            accordionItemBorderColor,
+            accordionItemBorderHoverColor,
+            accordionItemBorderColorSwitcher,
+            accordionItemBorderUnits,
+            accordionItemDesktopBorderWidth,
+            accordionItemTabBorderWidth,
+            accordionItemMobileBorderWidth,
+            accordionItemBorderRadiusUnits,
+            accordionItemDesktopBorderRadiusWidth,
+            accordionItemTabBorderRadiusWidth,
+            accordionItemMobileBorderRadiusWidth,
+            accordionItemDesktopSwitcher,
+            accordionItemTabletSwitcher,
+            accordionItemMobileSwitcher,
+    
+            // Item Box Shadow
+            accordionItemBoxShadowValues,
+            accordionItemBoxShadowCssValue,
+    
+            // Item Backgorund
+            accordionItemBgColorSwitcher,
+            accordionItemBgType,
+            accordionItemBgClassicColor,
+            accordionItemBgGradientColor,
+            accordionItemBgCustomGradientSwitcher,
+            accordionItemBgCustomGradientInputValue,
+            accordionItemBgImageUrl,
+            accordionItemBgImagePosition,
+            accordionItemBgImageAttachment,
+            accordionItemBgImageRepeat,
+            accordionItemBgImageSize,
+            accordionItemBgHoverType,
+            accordionItemBgHoverClassicColor,
+            accordionItemBgHoverGradientColor,
+            accordionItemBgHoverCustomGradientSwitcher,
+            accordionItemBgHoverCustomGradientInputValue,
+            accordionItemBgHoverImageUrl,
+            accordionItemBgHoverImageAlt,
+            accordionItemBgHoverImageID,
+            accordionItemBgHoverImagePosition,
+            accordionItemBgHoverImageAttachment,
+            accordionItemBgHoverImageRepeat,
+            accordionItemBgHoverImageSize,
+		]);
+
+		useEffect(() => {
+		setAttributes({
+			blockStyleTwo: fbAccordionItemStyleTwo.replace(/\s+/g, ' ').trim(),
+		});
+		}, [fbAccordionItemStyleTwo]);
+
 
 
     return (
         <>
         <style>
-            {`
-                
-            `}
+			{`
+            	${blockStyle}
+			`}
         </style>
+
         <InspectorControls key="controls">
         <div className="fb-inspector-control">
             <TabPanel
@@ -540,33 +934,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                             <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
                                 <PanelBody title={__("Title Prefix", "frontis-blocks")}>
-                                    <BaseControl id="fb-accordionItem-image-icon">
-                                        <ButtonGroup id="fb-accordionItem-image-icon">
-                                            {MEDIA_TYPES.map(
-                                                (
-                                                    { label, value },
-                                                    index
-                                                ) => (
+                                    <div className="fb-setting-switcher-container">
+                                        <BaseControl
+                                            className="fb-setting-switcher-panel-wrapper"
+                                        >
+                                            <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                {MEDIA_TYPES.map((item, key) => (
                                                     <Button
-                                                        key={index}
-                                                        isSecondary={
-                                                            titlePrefixType !== value
-                                                        }
-                                                        isPrimary={
-                                                            titlePrefixType === value
-                                                        }
-                                                        onClick={() =>
-                                                            setAttributes({
-                                                                titlePrefixType: value,
-                                                            })
-                                                        }
+                                                        key={key}
+                                                        onClick={() => setAttributes({ titlePrefixType: item.value })} 
+                                                        className={`fb-setting-switcher-panel-btn-switcher ${titlePrefixType === item.value ? 'active' : ''}`}
                                                     >
-                                                        {label}
+                                                        {item.label}
                                                     </Button>
-                                                )
-                                            )}
-                                        </ButtonGroup>
-                                    </BaseControl>
+                                                ))}
+                                            </ButtonGroup>
+                                        </BaseControl>
+                                    </div>
 
                                     {titlePrefixType !== "none" && (
                                         <>
@@ -668,33 +1052,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                 </PanelBody>
 
                                 <PanelBody title={__("Title Suffix", "frontis-blocks")}>
-                                    <BaseControl id="fb-accordionItem-image-icon">
-                                        <ButtonGroup id="fb-accordionItem-image-icon">
-                                            {MEDIA_TYPES.map(
-                                                (
-                                                    { label, value },
-                                                    index
-                                                ) => (
+                                    <div className="fb-setting-switcher-container">
+                                        <BaseControl
+                                            className="fb-setting-switcher-panel-wrapper"
+                                        >
+                                            <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                {MEDIA_TYPES.map((item, key) => (
                                                     <Button
-                                                        key={index}
-                                                        isSecondary={
-                                                            titleSuffixType !== value
-                                                        }
-                                                        isPrimary={
-                                                            titleSuffixType === value
-                                                        }
-                                                        onClick={() =>
-                                                            setAttributes({
-                                                                titleSuffixType: value,
-                                                            })
-                                                        }
+                                                        key={key}
+                                                        onClick={() => setAttributes({ titleSuffixType: item.value })} 
+                                                        className={`fb-setting-switcher-panel-btn-switcher ${titleSuffixType === item.value ? 'active' : ''}`}
                                                     >
-                                                        {label}
+                                                        {item.label}
                                                     </Button>
-                                                )
-                                            )}
-                                        </ButtonGroup>
-                                    </BaseControl>
+                                                ))}
+                                            </ButtonGroup>
+                                        </BaseControl>
+                                    </div>
 
                                     {titleSuffixType !== "none" && (
                                         <>
@@ -856,14 +1230,148 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                         </PanelBody>
 
                                         <PanelBody title="Background Color" initialOpen={false} >
-                                            <FB_Color
-                                                globalColorSwitcher={accordionItemBgColorSwitcher}
-                                                globalColor={accordionItemBgColor}
-                                                globalHoverColor={accordionItemBgHoverColor}
-                                                handleColorSwitcherChange={accordionItemBGColorSwitcherChange}
-                                                handleGlobalColorChange={accordionItemBGColorChange}
-                                                handleGlobalHoverColorChange={accordionItemBGHoverColorChange}
-                                            />
+                                            <FB_BackgroundColorControl
+														bgColorSwitcher={accordionItemBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ accordionItemBgColorSwitcher: value })
+														}
+														normalBackgroundType={accordionItemBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ accordionItemBgType: value })
+														}
+														normalClassicColor={accordionItemBgClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ accordionItemBgClassicColor: value })
+														}
+														normalGradientColor={accordionItemBgGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ accordionItemBgGradientColor: value })
+														}
+														normalCustomGradientSwitcher={
+															accordionItemBgCustomGradientSwitcher
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionItemBgCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={
+															accordionItemBgCustomGradientInputValue
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionItemBgCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={accordionItemBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ accordionItemBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={accordionItemBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ accordionItemBgImageAlt: value })
+														}
+														normalBackgroundImageID={accordionItemBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ accordionItemBgImageID: value })
+														}
+														normalBackgroundImagePosition={
+															accordionItemBgImagePosition
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																accordionItemBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={
+															accordionItemBgImageAttachment
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																accordionItemBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={
+															accordionItemBgImageRepeat
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																accordionItemBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={accordionItemBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ accordionItemBgImageSize: value })
+														}
+														hoverBackgroundType={accordionItemBgHoverType}
+														setBgHoverType={(value) =>
+															setAttributes({ accordionItemBgHoverType: value })
+														}
+														hoverClassicColor={accordionItemBgHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ accordionItemBgHoverClassicColor: value })
+														}
+														hoverGradientColor={accordionItemBgHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ accordionItemBgHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={
+															accordionItemBgHoverCustomGradientSwitcher
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																accordionItemBgHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={
+															accordionItemBgHoverCustomGradientInputValue
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																accordionItemBgHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={accordionItemBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ accordionItemBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={accordionItemBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ accordionItemBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={accordionItemBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ accordionItemBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={
+															accordionItemBgHoverImagePosition
+														}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																accordionItemBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={
+															accordionItemBgHoverImageAttachment
+														}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																accordionItemBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={
+															accordionItemBgHoverImageRepeat
+														}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																accordionItemBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={accordionItemBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ accordionItemBgHoverImageSize: value })
+														}
+											/>
                                         </PanelBody>
 
                                         <PanelBody
@@ -915,6 +1423,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 spacingCombineBtnHandler={handleAccordionItemBorderRadiusCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
+
+                                            <FB_BoxShadowControl
+												onBoxShadowChange={(value) =>
+													setAttributes({ accordionItemBoxShadowValues: value })
+												}
+												initialShadowValue={accordionItemBoxShadowValues}
+												onBoxShadowStyleChange={(value) =>
+													setAttributes({
+														accordionItemBoxShadowCssValue: value,
+													})
+												}
+											/>
                                         </PanelBody>
 
                                         <PanelBody

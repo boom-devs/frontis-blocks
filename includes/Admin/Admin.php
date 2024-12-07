@@ -450,10 +450,14 @@ class Admin {
         $show_category_switcher = isset($_POST['showCategorySwitcher']) ? $_POST['showCategorySwitcher'] : false;
         $show_tag_switcher = isset($_POST['showTagSwitcher']) ? $_POST['showTagSwitcher'] : false;
 
-        $post_author_prefix_switcher = isset($_POST['postAuthorPrefixSwitcher']) ? $_POST['postAuthorPrefixSwitcher'] : false;
+        $post_author_prefix_switcher = isset($_POST['postAuthorPrefixSwitcher']) ? $_POST['postAuthorPrefixSwitcher'] : true;
         $post_author_prefix = isset($_POST['postAuthorPrefix']) ? $_POST['postAuthorPrefix'] : 'Posted By';
 
         $show_date_switcher = isset($_POST['showDateSwitcher']) ? $_POST['showDateSwitcher'] : true;
+
+        $post_author_avatar_switcher = isset($_POST['postAuthorAvatarSwitcher']) ? $_POST['postAuthorAvatarSwitcher'] : true;
+
+        $post_image_size = isset($_POST['postImageSize']) ? $_POST['postImageSize'] : 'full';
 
         ob_start();
 
@@ -583,12 +587,12 @@ class Admin {
         if ($results) {
             foreach($results as $key => $single_post): ?>
                 <div class="fb_post_grid_wrapper">
-                    <div class="fb_post_grid">
+                    <div class="fb_post_grid_image_wrapper">
                         <div class="fb_post_grid_image">
                             <?php if (has_post_thumbnail($single_post->ID)): ?>
                                 <?php
-                                    $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), 'medium');
-                                    $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), 'medium');
+                                    $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
+                                    $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                 ?>
                                 <a href="<?php echo get_permalink($single_post->ID); ?>" aria-label="Read more about <?php echo esc_attr($single_post->post_title); ?>">
                                     <img src="<?php echo esc_url($image[0]); ?>" 
@@ -597,16 +601,20 @@ class Admin {
                                 </a>
                             <?php endif; ?>
                         </div>
+                    </div>
 
+                    <div class="fb_post_grid_content_wrapper">
                         <?php if ($show_author_switcher == 'true'): ?>
                             <div class="fb_post_grid_author">
-                                <div class="fb_post_grid_author_avatar">
-                                    <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>" 
-                                    aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                        <img src="<?php echo esc_url(get_avatar_url($single_post->post_author)); ?>" 
-                                            alt="<?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>" />
-                                    </a>
-                                </div>
+                                <?php if ($post_author_avatar_switcher == 'true'): ?>
+                                    <div class="fb_post_grid_author_avatar">
+                                        <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>" 
+                                        aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                            <img src="<?php echo esc_url(get_avatar_url($single_post->post_author)); ?>" 
+                                                alt="<?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>" />
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="fb_post_grid_author_info">
                                     <div class="fb_post_grid_author_info_name">
                                         <?php if ($post_author_prefix_switcher == 'true'): ?>

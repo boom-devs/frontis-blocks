@@ -14,16 +14,20 @@
       "align": ["wide", "full"],
           "customClassName": false
       },
-	  "editorScript": "fb_combined_index",
-	  "editorStyle": "fb_combined_index",
-	  "style": "fb_combined_style",
+	  "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
     "parent": ["frontis-blocks/accordion"],
     "usesContext": [
       "fb/accordionparentBlockID",
       "fb/accordionInheritedAccordionType",
       "fb/accordionInheritedDisplayIcon",
+      "fb/accordionInheritedTabIconSwitcher",
       "fb/accordionInheritedTabIcon",
+      "fb/accordionInheritedTabImageUrl",
+      "fb/accordionInheritedExpandedIconSwitcher",
       "fb/accordionInheritedExpandedIcon",
+      "fb/accordionInheritedExpandedImageUrl",
       "fb/accordionInheritedTagName",
       "fb/accordionFaqSchema"
     ]
