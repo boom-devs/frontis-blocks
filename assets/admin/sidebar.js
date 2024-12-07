@@ -2995,19 +2995,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/range/editor.lazy.scss");
+/* harmony import */ var _Components_unit_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/unit-control */ "./src/components/unit-control/index.js");
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/range/editor.lazy.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
 
 
 
@@ -3029,20 +3025,6 @@ var FB_Range = function FB_Range(_ref) {
     units_types_arr = _ref$units_types_arr === void 0 ? null : _ref$units_types_arr,
     _ref$isRangeUnit = _ref.isRangeUnit,
     isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit;
-  var UNIT_TYPES = [{
-    label: 'px',
-    value: 'px'
-  }, {
-    label: '%',
-    value: '%'
-  }, {
-    label: 'em',
-    value: 'em'
-  }];
-  if (units_types_arr) {
-    UNIT_TYPES = units_types_arr;
-  }
-
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3058,21 +3040,6 @@ var FB_Range = function FB_Range(_ref) {
     var newUnits = _objectSpread(_objectSpread({}, units), {}, _defineProperty({}, deviceType, unit));
     rangeUnitHandler(newUnits);
   };
-
-  // State to manage dropdown visibility
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    isDropdownOpen = _useState2[0],
-    setDropdownOpen = _useState2[1];
-  var toggleDropdown = function toggleDropdown() {
-    setDropdownOpen(function (prevState) {
-      return !prevState;
-    });
-  };
-  var selectUnit = function selectUnit(unit) {
-    setRangeUnit(unit); // Set the selected unit
-    setDropdownOpen(false); // Close the dropdown
-  };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3087,23 +3054,11 @@ var FB_Range = function FB_Range(_ref) {
         deviceType: newDevice
       });
     }
-  }), isRangeUnit && /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-range-units-type"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-range-units-current",
-    onClick: toggleDropdown
-  }, units[deviceType]), isDropdownOpen && /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-range-units-dropdown"
-  }, UNIT_TYPES.map(function (item, key) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: key,
-      className: "fb-setting-range-units-option ".concat(units[deviceType] === item.value ? 'active' : ''),
-      onClick: function onClick() {
-        return selectUnit(item.value);
-      }
-    }, item.label);
-  })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    __nextHasNoMarginBottom: true,
+  }), isRangeUnit && /*#__PURE__*/React.createElement(_Components_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    currentUnit: units[deviceType],
+    unitTypes: units_types_arr,
+    onUnitChange: setRangeUnit
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
     value: parseInt(rangeValue[deviceType]),
     onChange: setRangeValue,
     min: min,
@@ -6649,6 +6604,77 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_TypographyControl);
+
+/***/ }),
+
+/***/ "./src/components/unit-control/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/unit-control/index.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
+  var currentUnit = _ref.currentUnit,
+    _ref$unitTypes = _ref.unitTypes,
+    unitTypes = _ref$unitTypes === void 0 ? null : _ref$unitTypes,
+    onUnitChange = _ref.onUnitChange;
+  /** Default unit types */
+  var UNIT_TYPES = unitTypes || [{
+    label: 'px',
+    value: 'px'
+  }, {
+    label: '%',
+    value: '%'
+  }, {
+    label: 'em',
+    value: 'em'
+  }];
+
+  /** State to manage dropdown visibility */
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isDropdownOpen = _useState2[0],
+    setDropdownOpen = _useState2[1];
+  var toggleDropdown = function toggleDropdown() {
+    setDropdownOpen(function (prevState) {
+      return !prevState;
+    });
+  };
+  var selectUnit = function selectUnit(unit) {
+    onUnitChange(unit);
+    setDropdownOpen(false);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-units-type"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-units-current",
+    onClick: toggleDropdown
+  }, currentUnit), isDropdownOpen && /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-units-dropdown"
+  }, UNIT_TYPES.map(function (item, key) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: key,
+      className: "fb-setting-units-option ".concat(currentUnit === item.value ? 'active' : ''),
+      onClick: function onClick() {
+        return selectUnit(item.value);
+      }
+    }, item.label);
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_RangeUnitsType);
 
 /***/ }),
 
