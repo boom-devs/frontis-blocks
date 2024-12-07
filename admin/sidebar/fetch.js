@@ -32,29 +32,33 @@ export const updateGlobalStyle = async (value, key = 'fb_update_global_colors') 
 
 		return response;
 	} catch (error) {
-		console.error('Ajax error:', error);
-		throw error;
+		return {
+			"success": false,
+			"data": "Update failed."
+		};
 	}
 };
 
-export const getGlobalColors = () => {
-    let data = new FormData();
-    data.append("action", getGlobalStyleAction);
-    data.append("nonce", nonce);
+export const getGlobalStyle = async (key = getGlobalStyleAction) => {
+	try {
+		const response = await jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: key,
+				nonce: nonce,
+			}
+		});
 
-    return fetch(ajaxUrl, {
-        method: 'POST',
-        body: data,
-    }) // wrapped
-        .then(res => res.text())
-        .then(data => {
-            const response = JSON.parse(data);
-            if (response.success) {
-                return response.data
-            }
-            else {
-                return false;
-            }
-        })
-        .catch(err => console.log(err));
+		if (!response.success) {
+			throw new Error(response.data || 'Update failed');
+		}
+
+		return response;
+	} catch (error) {
+		return {
+			"success": false,
+			"data": "Colors not found."
+		};
+	}
 }

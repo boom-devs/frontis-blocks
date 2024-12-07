@@ -4,7 +4,7 @@ import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 
-const FB_Range = ({ 
+const FB_Range = ({
 	min,
 	max,
 	label,
@@ -15,7 +15,7 @@ const FB_Range = ({
 	units,
 	setAttributes,
 	rangeStep,
-	resetFallbackValue,	
+	resetFallbackValue,
 	units_types_arr = null,
 	isRangeUnit=true,
 }) => {
