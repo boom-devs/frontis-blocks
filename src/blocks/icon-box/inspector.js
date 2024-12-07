@@ -44,33 +44,15 @@ import FB_UrlControl from "@Components/url-control";
  * Internal depencencies
  */
 import {
-	WRAPPER_BG,
-	WRAPPER_MARGIN,
-	WRAPPER_PADDING,
-	WRAPPER_BORDER_SHADOW,
-	TITLE_MARGIN,
-	SUBTITLE_MARGIN,
-	separator_MARGIN,
-	separator_LINE_SIZE,
-	separator_ICON_SIZE,
-	separator_WIDTH,
-	separator_POSITION,
-	subheading_POSITION,
-	NORMAL_HOVER,
-	UNIT_TYPES,
-	separator_UNIT_TYPES,
-	PRESETS,
 	TEXT_ALIGN,
 	HEADING,
-	SEPERATOR_STYLES,
-	separator_TYPE,
-	FONT_FAMILYS,
 	CLASSIC_GRADIENT,
 	BORDER_STYLES,
 	mediaType,
 	ICON_POSITION,
 	INFO_ICON_POSITION,
 	BG_TYPE,
+	INFO_ICON_VERTICAL_POSITION
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -317,7 +299,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingUrlSwitcher,
 		wrapperLink,
 		wrapperTargetUrl,
-		wrapperUrlSwitcher
+		wrapperUrlSwitcher,
+		infoIconVerticalPosition
 	} = attributes;
 
 	useEffect(() => {
@@ -1987,6 +1970,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
 												</BaseControl>
+
+												{(infoIconPosition === 'left' || infoIconPosition === 'right') && (
+												<BaseControl className="fb-media-vertical-position">
+													<SelectControl
+														label={__("Vertical Position", "frontis-block")}
+														value={infoIconVerticalPosition}
+														options={INFO_ICON_VERTICAL_POSITION}
+														onChange={(value) =>
+															setAttributes({ infoIconVerticalPosition: value })
+														}
+													/>
+												</BaseControl>
+												)}
 
 												<div className="fb-image-upload-field-wrapper">
 													{mediaSwitcher === "image" && (
