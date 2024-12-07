@@ -3040,6 +3040,9 @@ var FB_Range = function FB_Range(_ref) {
     var newUnits = _objectSpread(_objectSpread({}, units), {}, _defineProperty({}, deviceType, unit));
     rangeUnitHandler(newUnits);
   };
+  var resetRangeValue = function resetRangeValue() {
+    setRangeValue(resetFallbackValue);
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3054,17 +3057,39 @@ var FB_Range = function FB_Range(_ref) {
         deviceType: newDevice
       });
     }
-  }), isRangeUnit && /*#__PURE__*/React.createElement(_Components_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-unit-wrapper"
+  }, rangeValue[deviceType] && /*#__PURE__*/React.createElement("div", {
+    className: "fb-reset-control-container",
+    onClick: resetRangeValue
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-reset-button fb-reset-has-value"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/React.createElement("path", {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M2.75 2C3.16421 2 3.5 2.33579 3.5 2.75V6.5H7.25C7.66421 6.5 8 6.83579 8 7.25C8 7.66421 7.66421 8 7.25 8H2.75C2.33579 8 2 7.66421 2 7.25V2.75C2 2.33579 2.33579 2 2.75 2Z",
+    fill: "#4d4d4d"
+  }), /*#__PURE__*/React.createElement("path", {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M8.29365 3.75C6.56527 3.75 5.07807 4.79769 4.42654 6.30028C4.26196 6.67984 3.82318 6.8531 3.4465 6.68726C3.06981 6.52143 2.89787 6.07929 3.06245 5.69972C3.94232 3.6705 5.95253 2.25 8.29365 2.25C11.4452 2.25 14 4.82436 14 8C14 11.1756 11.4452 13.75 8.29365 13.75C6.42651 13.75 4.76879 12.8456 3.72895 11.451C3.48203 11.1198 3.54828 10.6497 3.87693 10.4009C4.20558 10.1521 4.67217 10.2188 4.91909 10.55C5.68985 11.5837 6.91443 12.25 8.29365 12.25C10.623 12.25 12.5114 10.3472 12.5114 8C12.5114 5.65279 10.623 3.75 8.29365 3.75Z",
+    fill: "#4d4d4d"
+  })))), isRangeUnit && /*#__PURE__*/React.createElement(_Components_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    value: parseInt(rangeValue[deviceType]),
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    value: rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined,
     onChange: setRangeValue,
     min: min,
     max: max,
     step: rangeStep,
-    allowReset: true,
     resetFallbackValue: resetFallbackValue
   })));
 };
@@ -6544,7 +6569,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         value: fontFamily,
         onChange: handleFontFamilyChange
       }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        min: 1,
+        min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
         rangeValue: fontSize,
@@ -6576,7 +6601,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         value: textDecoration,
         onChange: handleTextDecorationChange
       }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        min: 1,
+        min: 0,
         max: 100,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
         rangeValue: letterSpacing,
@@ -6588,7 +6613,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         rangeStep: 1,
         resetFallbackValue: ''
       }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        min: 1,
+        min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
         rangeValue: lineHeight,
@@ -6619,12 +6644,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/unit-control/editor.lazy.scss");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
   var currentUnit = _ref.currentUnit,
@@ -6657,7 +6684,7 @@ var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
     onUnitChange(unit);
     setDropdownOpen(false);
   };
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-units-type"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-units-current",
@@ -6672,7 +6699,7 @@ var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
         return selectUnit(item.value);
       }
     }, item.label);
-  })));
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_RangeUnitsType);
 
@@ -9991,6 +10018,18 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************************!*\
   !*** ./src/components/typography-control/editor.lazy.scss ***!
   \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/unit-control/editor.lazy.scss":
+/*!******************************************************!*\
+  !*** ./src/components/unit-control/editor.lazy.scss ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

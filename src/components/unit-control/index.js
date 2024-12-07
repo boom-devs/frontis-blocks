@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './editor.lazy.scss';
 
 const FB_RangeUnitsType = ({
 	currentUnit,
@@ -25,29 +26,31 @@ const FB_RangeUnitsType = ({
 	};
 
 	return (
-		<div className="fb-setting-units-type">
-			<div
-				className="fb-setting-units-current"
-				onClick={toggleDropdown}
-			>
-				{currentUnit}
-			</div>
-			{isDropdownOpen && (
-				<div className="fb-setting-units-dropdown">
-					{UNIT_TYPES.map((item, key) => (
-						<div
-							key={key}
-							className={`fb-setting-units-option ${
-								currentUnit === item.value ? 'active' : ''
-							}`}
-							onClick={() => selectUnit(item.value)}
-						>
-							{item.label}
-						</div>
-					))}
+		<>
+			<div className="fb-setting-units-type">
+				<div
+					className="fb-setting-units-current"
+					onClick={toggleDropdown}
+				>
+					{currentUnit}
 				</div>
-			)}
-		</div>
+				{isDropdownOpen && (
+					<div className="fb-setting-units-dropdown">
+						{UNIT_TYPES.map((item, key) => (
+							<div
+								key={key}
+								className={`fb-setting-units-option ${
+									currentUnit === item.value ? 'active' : ''
+								}`}
+								onClick={() => selectUnit(item.value)}
+							>
+								{item.label}
+							</div>
+						))}
+					</div>
+				)}
+			</div>
+		</>
 	);
 };
 
