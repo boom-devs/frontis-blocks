@@ -2049,10 +2049,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			@media only screen and (max-width: 1024px) {
 				.fb-cta-content-wrapper.${blockID} {
-					${TabletPadding ? `padding: ${TabletPadding};` : ""}
-					${TabletMargin ? `margin: ${TabletMargin};` : ""}
-					${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
-					${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
+				${TabletPadding ? `padding: ${TabletPadding};` : ""}
+				${TabletMargin ? `margin: ${TabletMargin};` : ""}
+				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
+				${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading {
 					${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
