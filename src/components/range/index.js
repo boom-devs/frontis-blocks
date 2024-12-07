@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
-// eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_RangeUnitsType from '@Components/unit-control';
+import './editor.lazy.scss';
 
 const FB_Range = ({
 	min,
@@ -17,19 +18,8 @@ const FB_Range = ({
 	rangeStep,
 	resetFallbackValue,
 	units_types_arr = null,
-	isRangeUnit=true,
+	isRangeUnit = true,
 }) => {
-
-	let UNIT_TYPES = [
-		{ label: 'px', value: 'px' },
-		{ label: '%', value: '%' },
-		{ label: 'em', value: 'em' },
-	];
-
-	if(units_types_arr) {
-		UNIT_TYPES = units_types_arr;
-	}
-
 	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {
 		if (rangeValue[deviceType] === undefined) {
@@ -53,33 +43,24 @@ const FB_Range = ({
 			<div className="fb-setting-spacing-inner-container">
 				<div className="fb-setting-spacing-label-container">
 					<FB_ResponsiveControl
-						labelText={ __( label, 'frontis-blocks' )}
-						device={ deviceType }
-						deviceHandler={( newDevice ) => setAttributes({ deviceType: newDevice })}
+						labelText={__(label, 'frontis-blocks')}
+						device={deviceType}
+						deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
 					/>
 					{isRangeUnit && (
-						<div className="fb-setting-units-type">
-							<ButtonGroup className="fb-setting-units-type-wrap">
-							{UNIT_TYPES.map((item, key) => (
-								<Button
-									key={key}
-									onClick={() => setRangeUnit(item.value)}
-									className={`fb-setting-units-type-switcher ${units[deviceType] === item.value ? 'active' : ''}`}
-								>
-									{item.label}
-								</Button>
-								))}
-							</ButtonGroup>
-						</div>
+						<FB_RangeUnitsType
+							currentUnit={units[deviceType]}
+							unitTypes={units_types_arr}
+							onUnitChange={setRangeUnit}
+						/>
 					)}
 				</div>
 				<RangeControl
-					__nextHasNoMarginBottom
-					value={ parseInt(rangeValue[deviceType]) }
-					onChange={ setRangeValue }
-					min={ min }
-					max={ max }
-					step={ rangeStep }
+					value={parseInt(rangeValue[deviceType])}
+					onChange={setRangeValue}
+					min={min}
+					max={max}
+					step={rangeStep}
 					allowReset
 					resetFallbackValue={resetFallbackValue}
 				/>
