@@ -366,51 +366,6 @@ $white_color: #ffffff;
 	}
 }
 
-.fb-setting-label-wrapper {
-	display: flex;
-	align-items: center;
-	p {
-		margin-bottom: 0;
-		margin-right: 5px;
-
-		&.fb-setting-label-text {
-			flex: 1;
-		}
-	}
-	.fb-responsive-device-wrapper {
-		display: flex;
-		align-items: center;
-
-		button {
-			&.fb-responsive-desktop-device,
-			&.fb-responsive-tablet-device,
-			&.fb-responsive-mobile-device {
-				background: none;
-				border: none;
-				cursor: pointer;
-				margin: 0;
-				padding: 0;
-
-				svg {
-					fill: #cebeff;
-					height: 10px;
-					width: 15px;
-				}
-
-				&.active {
-					color: #551ef7;
-					font-weight: 600;
-
-					svg {
-						fill: #551ef7;
-						height: 12px;
-						width: 17px;
-					}
-				}
-			}
-		}
-	}
-}
 
 .fb-setting-units-type {
 	.fb-setting-units-type-wrap {

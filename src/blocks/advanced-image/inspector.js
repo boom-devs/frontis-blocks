@@ -970,7 +970,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
 			transition: all .3s ease-in-out;
 			${headingDesktopPadding ? `padding: ${headingDesktopPadding};` : ""}
-			${headingDesktopMargin ? `padding: ${headingDesktopMargin};` : ""}
+			${headingDesktopMargin ? `margin: ${headingDesktopMargin};` : ""}
 			border: ${HeadingBorder};
 			${HeadingBorderColor !== undefined ? `border-color: ${HeadingBorderColor};` : "" }
 		}
@@ -994,7 +994,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}` };
 			${headingTabletPadding ? `padding: ${headingTabletPadding};` : ""}
-			${headingTabletMargin ? `padding: ${headingTabletMargin};` : ""}
+			${headingTabletMargin ? `margin: ${headingTabletMargin};` : ""}
 		}
 		}
 		@media all and (max-width: 767px) {
@@ -1018,7 +1018,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}` };
 			${headingMobilePadding ? `padding: ${headingMobilePadding};` : ""}
-			${headingMobileMargin ? `padding: ${headingMobileMargin};` : ""}
+			${headingMobileMargin ? `margin: ${headingMobileMargin};` : ""}
 		}
 		}
 	`,
@@ -1099,6 +1099,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingLineHeight,
 			headingLineHeightUnits,
 			HeadingBorder,
+			headingDesktopPadding,
+			headingTabletPadding,
+			headingMobilePadding,
+			headingDesktopMargin,
+			headingTabletMargin,
+			headingMobileMargin,
 		],
 	);
 
