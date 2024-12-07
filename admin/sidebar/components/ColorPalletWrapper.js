@@ -13,9 +13,7 @@ const ColorPalletWrapper = (props) => {
         const colors = [...afterDeletedCustomColors]
 		afterDeletedCustomColors.splice(index, 1);
 		setAfterDeletedColors([...afterDeletedCustomColors]);
-		setCurrentState('fb_update_custom_colors');
 		setCustomColors(afterDeletedCustomColors);
-		console.log("testing")
     }
 
     useEffect(() => {
