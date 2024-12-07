@@ -19,7 +19,6 @@ import {
 	Dashicon,
 	SelectControl,
 	ButtonGroup,
-	ColorPalette,
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
 import {useEffect, useRef, useState} from '@wordpress/element';

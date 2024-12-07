@@ -1,21 +1,24 @@
-import {__} from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
 import {
 	useBlockProps,
 	RichText,
 	BlockControls,
-	AlignmentToolbar, MediaReplaceFlow, MediaPlaceholder,
-	MediaUpload, MediaUploadCheck
-} from '@wordpress/block-editor';
-import {upload} from '@wordpress/icons';
+	AlignmentToolbar,
+	MediaReplaceFlow,
+	MediaPlaceholder,
+	MediaUpload,
+	MediaUploadCheck,
+} from "@wordpress/block-editor";
+import { upload } from "@wordpress/icons";
 
 /**
  * Internal dependencies
  */
 import Inspector from "./inspector";
-import './editor.scss';
-import {Button, ToolbarButton, ToolbarGroup} from "@wordpress/components";
+import "./editor.scss";
+import { Button, ToolbarButton, ToolbarGroup } from "@wordpress/components";
 
-export default function Edit({attributes, setAttributes, clientId}) {
+export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		image,
@@ -40,13 +43,14 @@ export default function Edit({attributes, setAttributes, clientId}) {
 		displayTitle,
 		titleText,
 		titleTag,
-		titlePosition
+		titlePosition,
+		showOverlay
 	} = attributes;
 
 	const blockProps = useBlockProps();
 
-	const handleLinkClick = (event) => {
-		event.preventDefault();
+	const handleImageClick = (e) => {
+		e.preventDefault();
 	};
 
 	return (
@@ -60,27 +64,28 @@ export default function Edit({attributes, setAttributes, clientId}) {
 				{imageUrl && (
 					<ToolbarGroup>
 						<ToolbarButton
-							onClick={() => setAttributes({
-								imageId: '',
-								imageUrl: '',
-								imageAlt: '',
-							})}
+							onClick={() =>
+								setAttributes({
+									imageId: "",
+									imageUrl: "",
+									imageAlt: "",
+								})
+							}
 							icon="trash"
 						/>
 						<MediaUploadCheck>
 							<MediaUpload
-								onSelect={(media) => setAttributes({
-									imageId: media.id,
-									imageUrl: media.url,
-									imageAlt: media.alt,
-								})}
-								allowedTypes={['image']}
+								onSelect={(media) =>
+									setAttributes({
+										imageId: media.id,
+										imageUrl: media.url,
+										imageAlt: media.alt,
+									})
+								}
+								allowedTypes={["image"]}
 								value={imageId}
-								render={({open}) => (
-									<ToolbarButton
-										onClick={open}
-										icon="edit"
-									/>
+								render={({ open }) => (
+									<ToolbarButton onClick={open} icon="edit" />
 								)}
 							/>
 						</MediaUploadCheck>
@@ -90,23 +95,39 @@ export default function Edit({attributes, setAttributes, clientId}) {
 
 			<div {...blockProps} id={blockID}>
 				<div className={`fb-advanced-image-wrapper ${blockID}`}>
-					<div className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
+					<div
+						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition} ${
+							showOverlay ? "overlay-simple" : ""
+						}`}
+					>
 						<div className="fb-advanced-image-inner">
 							{imageUrl ? (
-									<img src={imageUrl} alt={imageAlt}/>
+								linkSwitch ? (
+									<a
+										href={linkUrl}
+										target={linkTargetUrl ? "_blank" : undefined}
+										rel={linkTargetUrl ? "noopener noreferrer" : undefined}
+										onClick={handleImageClick}
+									>
+										<img src={imageUrl} alt={imageAlt} />
+									</a>
 								) : (
-									<MediaPlaceholder
-										onSelect={(media) => setAttributes({
+									<img src={imageUrl} alt={imageAlt} />
+								)
+							) : (
+								<MediaPlaceholder
+									onSelect={(media) =>
+										setAttributes({
 											imageId: media.id,
 											imageUrl: media.url,
 											imageAlt: media.alt,
-										})}
-										allowedTypes={['image']}
-										multiple={false}
-										labels={{title: 'Add Author Image'}}
-									/>
-								)}
-
+										})
+									}
+									allowedTypes={["image"]}
+									multiple={false}
+									labels={{ title: "Add Image" }}
+								/>
+							)}
 						</div>
 						{displayTitle && (
 							<div className="fb-advanced-image-title">
@@ -114,25 +135,23 @@ export default function Edit({attributes, setAttributes, clientId}) {
 									<RichText
 										tagName={titleTag}
 										value={titleText}
-										onChange={(value) => setAttributes({titleText: value})}
+										onChange={(value) => setAttributes({ titleText: value })}
 										placeholder="Add your title here..."
 										className="fb-advanced-title"
 									/>
 								</div>
 							</div>
-						)
-						}
+						)}
 						{displayCaption && (
 							<div className="fb-advanced-image-caption">
 								<RichText
-									tagName='figcaption'
+									tagName="figcaption"
 									value={imageCaption}
-									onChange={(value) => setAttributes({imageCaption: value})}
+									onChange={(value) => setAttributes({ imageCaption: value })}
 									placeholder="Add your caption here..."
 								/>
 							</div>
-						)
-						}
+						)}
 					</div>
 				</div>
 			</div>

@@ -278,7 +278,7 @@ export default function FlipBoxItemFrontControl ({ attributes, setAttributes}) {
 
 	let defaultImageUrl = '';
 	if (typeof FrontisBlocksData !== 'undefined') {
-		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.svg';
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
 	}
 
 	// Set default value for flipBoxItemFrontBackgroundImageUrl
