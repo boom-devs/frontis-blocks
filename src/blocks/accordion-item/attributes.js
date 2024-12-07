@@ -9,6 +9,14 @@ const attributes = {
     blockID: {
         type: "string",
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
+    blockStyleTwo: {
+        type: "string",
+        default: "",
+    },
     blockRoot: {
         type: "string",
         default: "frontis_block",
@@ -72,10 +80,22 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    inheritedTabIconSwitcher: {
+        type: "string",
+    },
     inheritedTabIcon: {
         type: "string",
     },
+    inheritedTabImageUrl: {
+        type: "string",
+    },
+    inheritedExpandedIconSwitcher: {
+        type: "string",
+    },
     inheritedExpandedIcon: {
+        type: "string",
+    },
+    inheritedExpandedImageUrl: {
         type: "string",
     },
     faqSchema: {
@@ -253,18 +273,6 @@ const attributes = {
         default: true
     },
 
-    accordionItemBgColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    accordionItemBgColor : {
-        type: "string"
-    },
-    accordionItemBgHoverColor: {
-        type: 'string',
-    },
-
-
 
     accordionItemBorder: {
         type: 'string',
@@ -371,6 +379,119 @@ const attributes = {
     accordionItemMobileSwitcher: {
         type: "boolean",
         default: false,
+    },
+
+    accordionItemBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    accordionItemBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    accordionItemBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    accordionItemBgType: {
+        type: "string",
+        default: "classic"
+    },
+    accordionItemBgClassicColor: {
+        type: "string",
+    },
+    accordionItemBgGradientColor: {
+        type: "string",
+    },
+    accordionItemBgCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    accordionItemBgCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgColorStyle: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgImageUrl: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgImageAlt: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgImageID: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgImagePosition: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgImageSize: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverType: {
+        type: "string",
+        default: "classic"
+    },
+    accordionItemBgHoverClassicColor: {
+        type: "string",
+    },
+    accordionItemBgHoverGradientColor: {
+        type: "string",
+    },
+    accordionItemBgHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    accordionItemBgHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverColorStyle: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverImageUrl: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverImageAlt: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverImageID: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverImagePosition: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverImageSize: {
+        type: "string",
+        default: ""
+    },
+    accordionItemBgHoverImageRepeat: {
+        type: "string",
+        default: ""
     },
 };
 

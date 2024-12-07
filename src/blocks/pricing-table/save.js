@@ -43,13 +43,7 @@ export default function save({ attributes }) {
 		priceButtonIcon,
 		priceButtonIconPosition,
 		priceButtonIconSpacing,
-		/** End Button */	
-
-		/** Start Ribbon */
-		priceRibbonSwitcher,
-		priceRibbonText,
-		priceRibbonPosition,
-		/** End Ribbon */
+		/** End Button */
 
 
         priceAfterTextSwitcher,
@@ -67,7 +61,7 @@ export default function save({ attributes }) {
     return (
         <>
         <div {...blockProps} id={blockId}>
-            <div className={`fb-pricing-wrapper ${blockId}`}>
+            <div className={`fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`}>
                 {pricingSectionTopSwitcher && (
                     <div className="fb-pricing-inner-wrapper">
                         <div className="fb-pricing-top-wrapper">
@@ -76,14 +70,12 @@ export default function save({ attributes }) {
                     </div>
                 )}
                 <div className="fb-pricing-main-wrapper">
-                    <div className="fb-pricing-ribbon-wrapper">
-                        {priceRibbonSwitcher && (
-                            <div className={`fb-pricing-ribbon fb-pricing-ribbon-${priceRibbonPosition}`}>
-                                <span>{priceRibbonText}</span>
-                            </div>
-                        )}
-                    </div>
                     <div className="fb-pricing-header">
+                        <div className="fb-pricing-ribbon-icon-wrapper">
+                            {pricingIconAlign === 'icon' && (
+                                <div className="fb-pricing-ribbon-icon">{renderSVG(pricingIcon)}</div>
+                            )}
+                        </div>
                         <div className="fb-pricing-title-wrapper">
                             <RichText.Content
                                 tagName={pricingTitleTag}
@@ -96,11 +88,6 @@ export default function save({ attributes }) {
                                     className="fb-pricing-subtitle"
                                     value={pricingSubTitle}
                                 />
-                            )}
-                        </div>
-                        <div className="fb-pricing-icon-wrapper">
-                            {pricingIconAlign === 'icon' && (
-                                <div className="fb-pricing-icon">{renderSVG(pricingIcon)}</div>
                             )}
                         </div>
                         <div className="fb-pricing-price-wrapper">
@@ -152,12 +139,12 @@ export default function save({ attributes }) {
                                     ))}
                                 </ul>
                             )}
-                            {priceFeatureAfterTextSwitcher && (
-                                <div className="fb-pricing-after-text-wrapper">
-                                    <div className="fb-pricing-after-text">{priceFeatureAfterText}</div>
-                                </div>
-                            )}
                         </div>
+                        {priceFeatureAfterTextSwitcher && (
+                            <div className="fb-pricing-feature-after-text-wrapper">
+                                <span className="fb-pricing-feature-after-text">{priceFeatureAfterText}</span>
+                            </div>
+                        )}
                     </div>
                     <div className="fb-pricing-footer-wrapper">
                         <div className="fb-pricing-button-wrapper">

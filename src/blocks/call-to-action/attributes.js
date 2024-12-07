@@ -273,48 +273,75 @@ const attributes = {
         type : "string",
         default: "h2"
     },
-    Heading_Font_Family: {
+    /** Start Heading Style */
+    headingFontFamily: {
         type: "string",
         default: "inherit",
     },
-    Heading_Font_Size: {
-        type: "number",
-        default: 72
-    },
-    Heading_Font_size_units: {
+    headingFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '18',
+			Mobile: '16'
+		}
+	},
+	headingFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    headingFontWeight : {
         type: "string",
-        default: "px"
+        default: "600"
     },
-    Heading_Font_Weight : {
+    headingFontStyle : {
         type: "string",
-        default: "700"
+        default: ""
     },
-    Heading_Font_Style : {
+    headingTextTransform : {
         type: "string",
-        default: "normal"
+        default: ""
     },
-    Heading_Text_Transform : {
+    headingTextDecoration : {
         type: "string",
-        default: "none"
+        default: ""
     },
-    Heading_Text_Decoration : {
-        type: "string",
-        default: "none"
-    },
-    Heading_Letter_Spacing : {
-        type: "number",
-    },
-    Heading_Letter_Spacing_units : {
-        type: "string",
-        default: "px"
-    },
-    Heading_Line_Height : {
-        type: "number",
-    },
-    Heading_Line_Height_units : {
-        type: "string",
-        default: "px"
-    },
+    headingLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    headingLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	headingLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
     Heading_Color_Switcher : {
         type: "string",
         default: "normal"
@@ -343,11 +370,17 @@ const attributes = {
         type: "string",
         default: "normal"
     },
-    Heading_Border_units : {
-        type: "string",
-        default: "px"
+
+    /** Title Padding **/
+    headingPaddingUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
-    Heading_Desktop_Border_Width: {
+    headingDesktopPadding: {
         type: "object",
         default: {
             top: 0,
@@ -356,7 +389,7 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Tab_Border_Width: {
+    headingTabPadding: {
         type: "object",
         default: {
             top: 0,
@@ -365,7 +398,7 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Mobile_Border_Width: {
+    headingMobilePadding: {
         type: "object",
         default: {
             top: 0,
@@ -374,19 +407,21 @@ const attributes = {
             right: 0,
         },
     },
-    activeBorderDevice: {
-        type: "string",
-        default: "desktop"
-    },
-    borderLink : {
+    headingPaddingLink : {
         type : "boolean",
         default: true
     },
-    Heading_Border_radius_units : {
-        type: "string",
-        default: "px"
+
+	/** Title Margin **/
+    headingMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
     },
-    Heading_Desktop_Border_radius_Width: {
+    headingDesktopMargin: {
         type: "object",
         default: {
             top: 0,
@@ -395,7 +430,7 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Tab_Border_radius_Width: {
+    headingTabMargin: {
         type: "object",
         default: {
             top: 0,
@@ -404,7 +439,7 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Mobile_Border_radius_Width: {
+    headingMobileMargin: {
         type: "object",
         default: {
             top: 0,
@@ -413,19 +448,20 @@ const attributes = {
             right: 0,
         },
     },
-    activeBorderRadiusDevice: {
-        type: "string",
-        default: "desktop"
+    headingMarginLink: {
+        type: "boolean",
+        default: true,
     },
-    borderRadiusLink : {
-        type : "boolean",
-        default: true
+    /** Title Border **/
+    headingBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
     },
-    Heading_padding_units : {
-        type: "string",
-        default: "px"
-    },
-    Heading_Desktop_padding: {
+    headingDesktopBorder: {
         type: "object",
         default: {
             top: 0,
@@ -434,7 +470,7 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Tab_padding: {
+    headingTabBorder: {
         type: "object",
         default: {
             top: 0,
@@ -443,7 +479,7 @@ const attributes = {
             right: 0,
         },
     },
-    Heading_Mobile_padding: {
+    headingMobileBorder: {
         type: "object",
         default: {
             top: 0,
@@ -452,66 +488,71 @@ const attributes = {
             right: 0,
         },
     },
-    activePaddingDevice: {
-        type: "string",
-        default: "desktop"
+    headingBorderLink: {
+        type: "boolean",
+        default: true,
     },
-    paddingLink : {
-        type : "boolean",
-        default: true
-    },
-	//Margin
-    Heading_Margin_Units : {
-        type: "string",
-        default: "px"
-    },
-    Heading_Desktop_Margin: {
-        type: "object",
+    /** Title Border Radius **/    
+    headingBorderRadiusUnits: {
+        type: 'object',
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
         },
     },
-    Heading_Tab_Margin: {
+    headingDesktopBorderRadius: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            topLeft: 0,
+            topRight: 0,
+            bottomLeft: 0,
+            bottomRight: 0,
         },
     },
-    Heading_Mobile_Margin: {
+    headingTabBorderRadius: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            topLeft: 0,
+            topRight: 0,
+            bottomLeft: 0,
+            bottomRight: 0,
         },
     },
-    Heading_Active_Margin_Device: {
-        type: "string",
-        default: "desktop"
+    headingMobileBorderRadius: {
+        type: "object",
+        default: {
+            topLeft: 0,
+            topRight: 0,
+            bottomLeft: 0,
+            bottomRight: 0,
+        },
     },
-    Heading_Margin_Link : {
-        type : "boolean",
-        default: true
-    },
+    headingBorderRadiusLink: {
+        type: "boolean",
+        default: true,
+    },    
+
     //Sub Heading
     SubHeadingFontFamily: {
         type: "string",
         default: "inherit",
     },
     SubHeadingFontSize: {
-        type: "number",
-        default: 16
+        type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
     },
     SubHeadingFontSizeUnits: {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     SubHeadingFontWeight : {
         type: "string",
@@ -530,18 +571,36 @@ const attributes = {
         default: "none"
     },
     SubHeadingLetterSpacing : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingLetterSpacingUnits : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     SubHeadingLineHeight : {
-        type: "number",
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
     SubHeadingLineHeightUnits : {
-        type: "string",
-        default: "px"
+        type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     SubHeadingColorSwitcher : {
         type: "string",
@@ -570,20 +629,16 @@ const attributes = {
         type: "string",
         default: "bottom",
     },
-    SubHeadingPaddingUnits : {
-        type: "string",
-        default: "px"
-    },
-    SubHeadingDesktopPadding: {
-        type: "object",
+    /** Description Padding **/
+    descPaddingUnits: {
+        type: 'object',
         default: {
-            top: 15,
-            bottom: 15,
-            left: 0,
-            right: 0,
-        },
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
-    SubHeadingTabPadding: {
+    descDesktopPadding: {
         type: "object",
         default: {
             top: 0,
@@ -592,7 +647,7 @@ const attributes = {
             right: 0,
         },
     },
-    SubHeadingMobilePadding: {
+    descTabPadding: {
         type: "object",
         default: {
             top: 0,
@@ -601,46 +656,61 @@ const attributes = {
             right: 0,
         },
     },
-	//Margin
-	descMarginUnits : {
-		type: "string",
-		default: "px"
-	},
-	descDesktopMargin: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	descTabMargin: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	descMobileMargin: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	descActiveMarginDevice: {
-		type: "string",
-		default: "desktop"
-	},
-	descMarginLink : {
-		type : "boolean",
-		default: true
-	},
+    descMobilePadding: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    descPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+
+    /** Description Margin **/
+    descMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    descDesktopMargin: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    descTabMargin: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    descMobileMargin: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    descMarginLink: {
+        type: "boolean",
+        default: true,
+    },
+
     //Info Button
     info_Button_Text: {
         type: "string",
@@ -650,6 +720,9 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    btnOneTargetUrl: {
+        type: "boolean",
+    },
     buttonIconSwitcher: {
         type: "boolean",
         default: true,
@@ -658,155 +731,172 @@ const attributes = {
         type: "string",
         default: ""
     },
-	infoButtonPaddingUnits : {
-		type: "string",
-		default: "px"
-	},
-	infoButtonDesktopPadding: {
-		type: "object",
-		default: {
-			top: 15,
-			bottom: 15,
-			left: 20,
-			right: 20,
-		},
-	},
-	infoButtonTabPadding: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	infoButtonMobilePadding: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	//Button Margin
-	infoButtonMarginUnits : {
-		type: "string",
-		default: "px"
-	},
-	infoButtonDesktopMargin: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 20,
-		},
-	},
-	infoButtonTabMargin: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	infoButtonMobileMargin: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	infoButtonActiveMarginDevice: {
-		type: "string",
-		default: "desktop"
-	},
-	infoButtonMarginLink : {
-		type : "boolean",
-		default: true
-	},
-	//Info Button Border
-	infoButtonBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	infoButtonBorder: {
-		type: 'string',
-		default: "none",
-	},
-	infoButtonBorderColor: {
-		type: 'string',
-	},
-	infoButtonHoverBorderColor: {
-		type: 'string',
-	},
-	infoButtonBorderUnits : {
-		type: "string",
-		default: "px"
-	},
-	infoButtonDesktopBorderWidth: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	infoButtonTabBorderWidth: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	infoButtonMobileBorderWidth: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	//Button Border Radius
-	infoBtnBorderradiusUnits : {
-		type: "string",
-		default: "px"
-	},
-	infoBtnDesktopBorderradiusWidth: {
-		type: "object",
-		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
-		},
-	},
-	infoBtnTabBorderradiusWidth: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
-	infoBtnMobileBorderradiusWidth: {
-		type: "object",
-		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
-		},
-	},
+    /** Button One Padding **/
+	btnOnePaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    btnOneDesktopPadding: {
+        type: "object",
+        default: {
+            top: 12,
+            bottom: 12,
+            left: 20,
+            right: 20,
+        },
+    },
+    btnOneTabPadding: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    btnOneMobilePadding: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    btnOnePaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    // Button Margin
+    btnOneMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    btnOneDesktopMargin: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    btnOneTabMargin: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    btnOneMobileMargin: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    btnOneActiveMarginDevice: {
+        type: "string",
+        default: "desktop"
+    },
+    btnOneMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    
+	/** Button One Border **/
+    btnOneBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    btnOneDesktopBorder: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    btnOneTabBorder: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    btnOneMobileBorder: {
+        type: "object",
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    btnOneBorderLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** Button One Border Radius **/
+    btnOneBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    btnOneDesktopBorderRadius: {
+        type: "object",
+        default: {
+            topLeft: 0,
+            topRight: 0,
+            bottomLeft: 0,
+            bottomRight: 0,
+        },
+    },
+    btnOneTabBorderRadius: {
+        type: "object",
+        default: {
+            topLeft: 0,
+            topRight: 0,
+            bottomLeft: 0,
+            bottomRight: 0,
+        },
+    },
+    btnOneMobileBorderRadius: {
+        type: "object",
+        default: {
+            topLeft: 0,
+            topRight: 0,
+            bottomLeft: 0,
+            bottomRight: 0,
+        },
+    },
+    btnOneBorderRadiusLink: {
+        type: "boolean",
+        default: true,
+    },
+
 	//Button Two
 	buttonTwoFontFamily: {
 		type: "string",
@@ -915,6 +1005,10 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+    btnTwoTargetUrl: {
+		type: "boolean",
+	},
+    /** Button Two Padding **/
 	btnTwoPaddingUnits: {
 		type: 'object',
 		default: {
@@ -1249,12 +1343,19 @@ const attributes = {
 		default: "inherit",
 	},
 	buttonFontSize: {
-		type: "number",
-		default: 14
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
 	},
 	buttonFontSizeUnits: {
-		type: "string",
-		default: "px"
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	buttonFontWeight : {
 		type: "string",
@@ -1273,18 +1374,34 @@ const attributes = {
 		default: "none"
 	},
 	buttonLetterSpacing : {
-		type: "number",
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	buttonLetterSpacingUnits : {
-		type: "string",
-		default: "px"
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	buttonLineHeight : {
-		type: "number",
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	buttonLineHeightUnits : {
-		type: "string",
-		default: "px"
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	// Button Color
 	buttonColorSwitcher : {
@@ -1748,10 +1865,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-    hoverBackgroundColorStyle: {
-        type: "string",
-        default: ""
-    },
     hoverBackgroundImageUrl: {
         type: "string",
         default: ""
@@ -1817,9 +1930,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-
-
-
     // Attributes added as per file context
     globalCustomGradientSwitcher: {
         type: "boolean",

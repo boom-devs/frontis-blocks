@@ -28,6 +28,10 @@ export default function save({ attributes }) {
 		btnTwoIcon,
 		buttonTwoIconSwitcher,
 		btnTwoText,
+		btnOneTargetUrl,
+		btnTwoTargetUrl,
+		info_Button_Link,
+		btnTwoLink
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -69,11 +73,14 @@ export default function save({ attributes }) {
 													btnIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a className="fb-info-button">
+											<a className="fb-cta-button"
+											href={info_Button_Link}
+											target={btnOneTargetUrl ? "_blank" : undefined}
+											rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+											>
 												<RichText.Content
 													value={info_Button_Text}
 													placeholder={__("Info Button", "frontis-block")}
-													className="fb-cta-button"
 													style={{ textAlign: buttonAlignment }}
 												/>
 											</a>
@@ -94,7 +101,11 @@ export default function save({ attributes }) {
 													btnTwoIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a className="fb-info-button">
+											<a className="fb-cta-button"
+											href={btnTwoLink}
+											target={btnTwoTargetUrl ? "_blank" : undefined}
+											rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+											>
 												<RichText.Content
 													value={btnTwoText}
 													placeholder={__("Info Button", "frontis-block")}

@@ -14,7 +14,7 @@ import {
 	RangeControl,
 	ToggleControl,
 	TabPanel,
-	ColorPalette, Dropdown, Button, Dashicon, SelectControl, ButtonGroup
+	Dropdown, Button, Dashicon, SelectControl, ButtonGroup
 } from '@wordpress/components';
 
 import { useEffect, useState } from '@wordpress/element';
