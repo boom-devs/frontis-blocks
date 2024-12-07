@@ -89,7 +89,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingBorderColor,
         headingBorderHoverColor,
         headingBorderColorSwitcher,
-        
+
         headingBorderUnits,
         headingDesktopBorder,
         headingTabletBorder,
@@ -359,11 +359,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     };
     /** End Preset Style */
 
-
-
-
-
-
     /** Start Heading Padding */
     const headingPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -592,7 +587,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingMobileBorderWidth = `${headingMobileBorder.top}${headingBorderUnits.Mobile} ${headingMobileBorder.right}${headingBorderUnits.Mobile} ${headingMobileBorder.bottom}${headingBorderUnits.Mobile} ${headingMobileBorder.left}${headingBorderUnits.Mobile}`;
     /** End Heading Border */
 
-    
+
 
 
     /** Start Heading Border Radius */
