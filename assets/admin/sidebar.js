@@ -3100,7 +3100,7 @@ var FB_Range = function FB_Range(_ref) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ FB_ResponsiveControl)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
@@ -3108,10 +3108,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
 
 
 
-function FB_ResponsiveControl(_ref) {
+
+var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
     device = _ref.device,
     deviceHandler = _ref.deviceHandler;
@@ -3121,14 +3123,21 @@ function FB_ResponsiveControl(_ref) {
     deviceHandler(deviceName);
     setDeviceType(deviceName);
   };
+  var toggleDeviceVisibility = function toggleDeviceVisibility(e) {
+    var wrapper = e.currentTarget;
+    wrapper.classList.toggle('fb-device-switchers-open');
+  };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-label-wrapper"
+    className: "fb-setting-device-label-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
     className: "fb-setting-label-text"
-  }, labelText), /*#__PURE__*/React.createElement("div", {
-    className: "fb-responsive-device-wrapper"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(labelText, 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
+    className: "fb-responsive-device-wrapper",
+    onClick: toggleDeviceVisibility
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-responsive-device-inner-wrapper"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
+    className: "fb-device-switcher fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
     onClick: function onClick() {
       return handleDevice('Desktop');
     }
@@ -3139,7 +3148,7 @@ function FB_ResponsiveControl(_ref) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
   }))), /*#__PURE__*/React.createElement("button", {
-    className: "fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
+    className: "fb-device-switcher fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
     onClick: function onClick() {
       return handleDevice('Tablet');
     }
@@ -3150,7 +3159,7 @@ function FB_ResponsiveControl(_ref) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
   }))), /*#__PURE__*/React.createElement("button", {
-    className: "fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
+    className: "fb-device-switcher fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
     onClick: function onClick() {
       return handleDevice('Mobile');
     }
@@ -3160,8 +3169,9 @@ function FB_ResponsiveControl(_ref) {
     viewBox: "0 0 4 7"
   }, /*#__PURE__*/React.createElement("path", {
     d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-  }))))));
-}
+  })))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_ResponsiveControl);
 
 /***/ }),
 
@@ -9894,6 +9904,18 @@ var FONT_FAMILYS = [{
 /*!************************************!*\
   !*** ./admin/sidebar/sidebar.scss ***!
   \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/responsive-control/editor.lazy.scss":
+/*!************************************************************!*\
+  !*** ./src/components/responsive-control/editor.lazy.scss ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
