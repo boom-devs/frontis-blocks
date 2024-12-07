@@ -2048,6 +2048,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff" };
 			}
 			@media only screen and (max-width: 1024px) {
+				.fb-cta-content-wrapper.${blockID} {
+					${TabletPadding ? `padding: ${TabletPadding};` : ""}
+					${TabletMargin ? `margin: ${TabletMargin};` : ""}
+					${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
+					${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
+				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading {
 					${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
 					${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
@@ -2086,6 +2092,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 			}
 			@media only screen and (max-width: 767px) {
+				.fb-cta-content-wrapper.${blockID} {
+					${MobilePadding ? `padding: ${MobilePadding};` : ""}
+					${MobileMargin ? `margin: ${MobileMargin};` : ""}
+					${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
+					${BorderRadiusMobileWidth ? `border-radius: ${BorderRadiusMobileWidth} !important;` : "" }
+				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading {
 					${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
 					${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}

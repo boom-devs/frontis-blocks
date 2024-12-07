@@ -29,8 +29,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Tablet: 20,
+			Mobile: 15
 		}
 	},
 	mediaSizeDesktop: {
@@ -586,8 +586,8 @@ const attributes = {
     SubHeadingTabPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
+            top: 15,
+            bottom: 15,
             left: 0,
             right: 0,
         },
@@ -595,12 +595,13 @@ const attributes = {
     SubHeadingMobilePadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
+            top: 10,
+            bottom: 10,
             left: 0,
             right: 0,
         },
     },
+
 	//Margin
 	descMarginUnits : {
 		type: "object",
@@ -1322,7 +1323,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 15,
             left: 0,
             right: 0,
         },
@@ -1331,7 +1332,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 10,
             left: 0,
             right: 0,
         },
