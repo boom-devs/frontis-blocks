@@ -1,14 +1,18 @@
 import { useState } from 'react';
 
-const FBRangeUnitsType = ({ currentUnit, unitTypes, onUnitChange }) => {
-	// Default unit types
+const FB_RangeUnitsType = ({
+	currentUnit,
+	unitTypes = null,
+	onUnitChange
+}) => {
+	/** Default unit types */
 	const UNIT_TYPES = unitTypes || [
 		{ label: 'px', value: 'px' },
 		{ label: '%', value: '%' },
 		{ label: 'em', value: 'em' },
 	];
 
-	// State to manage dropdown visibility
+	/** State to manage dropdown visibility */
 	const [isDropdownOpen, setDropdownOpen] = useState(false);
 
 	const toggleDropdown = () => {
@@ -16,24 +20,24 @@ const FBRangeUnitsType = ({ currentUnit, unitTypes, onUnitChange }) => {
 	};
 
 	const selectUnit = (unit) => {
-		onUnitChange(unit); // Notify parent of selected unit
-		setDropdownOpen(false); // Close the dropdown
+		onUnitChange(unit);
+		setDropdownOpen(false);
 	};
 
 	return (
-		<div className="fb-setting-range-units-type">
+		<div className="fb-setting-units-type">
 			<div
-				className="fb-setting-range-units-current"
+				className="fb-setting-units-current"
 				onClick={toggleDropdown}
 			>
 				{currentUnit}
 			</div>
 			{isDropdownOpen && (
-				<div className="fb-setting-range-units-dropdown">
+				<div className="fb-setting-units-dropdown">
 					{UNIT_TYPES.map((item, key) => (
 						<div
 							key={key}
-							className={`fb-setting-range-units-option ${
+							className={`fb-setting-units-option ${
 								currentUnit === item.value ? 'active' : ''
 							}`}
 							onClick={() => selectUnit(item.value)}
@@ -47,4 +51,4 @@ const FBRangeUnitsType = ({ currentUnit, unitTypes, onUnitChange }) => {
 	);
 };
 
-export default FBRangeUnitsType;
+export default FB_RangeUnitsType;

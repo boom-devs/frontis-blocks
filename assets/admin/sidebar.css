@@ -392,11 +392,11 @@ svg#fb-global-panel-icon {
   top: 13px;
 }
 
-.fb-setting-range-units-type {
+.fb-setting-units-type {
   position: relative;
   display: inline-block;
 }
-.fb-setting-range-units-type .fb-setting-range-units-current {
+.fb-setting-units-type .fb-setting-units-current {
   width: 26px;
   height: 26px;
   border: none;
@@ -409,7 +409,7 @@ svg#fb-global-panel-icon {
   align-items: center;
   justify-content: center;
 }
-.fb-setting-range-units-type .fb-setting-range-units-dropdown {
+.fb-setting-units-type .fb-setting-units-dropdown {
   position: absolute;
   top: 0;
   left: 0;
@@ -420,7 +420,7 @@ svg#fb-global-panel-icon {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
-.fb-setting-range-units-type .fb-setting-range-units-dropdown .fb-setting-range-units-option {
+.fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option {
   cursor: pointer;
   transition: background 0.2s;
   width: 26px;
@@ -429,11 +429,11 @@ svg#fb-global-panel-icon {
   align-items: center;
   justify-content: center;
 }
-.fb-setting-range-units-type .fb-setting-range-units-dropdown .fb-setting-range-units-option.active {
+.fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option.active {
   font-weight: bold;
   color: #007cba;
 }
-.fb-setting-range-units-type .fb-setting-range-units-dropdown .fb-setting-range-units-option:hover {
+.fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option:hover {
   background: #dcdcde;
 }
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\

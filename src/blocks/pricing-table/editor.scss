@@ -366,23 +366,6 @@ $white_color: #ffffff;
 	}
 }
 
-.fb-setting-units-type {
-	.fb-setting-units-type-wrap {
-		direction: initial;
-		display: flex;
-		align-items: center;
-		.fb-setting-units-type-switcher {
-			box-shadow: unset;
-			font-size: 10px;
-			padding: 0;
-			text-transform: uppercase;
-			padding-right: 5px;
-			&.active {
-				color: $primary_color;
-			}
-		}
-	}
-}
 /** End Admin Panel scss **/
 
 
