@@ -1,6 +1,7 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import {__} from "@wordpress/i18n";
 import { useRef, useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
+import { toast } from 'react-toastify';
 
 export const getGlobalSettings = (select) => {
 	return {
@@ -57,3 +58,36 @@ export const useAfterSave = () => {
 
 	return isPostSaved;
 };
+
+
+// Load google font
+export const loadGoogleFont = (font) => {
+	const fontUrl = `https://fonts.googleapis.com/css?family=${font.replace(' ', '+')}:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic`;
+	const linkElement = document.createElement('link');
+	linkElement.rel = 'stylesheet';
+	linkElement.href = fontUrl;
+	document.head.appendChild(linkElement);
+}
+
+// Toast message
+export const toastError = (msg) => {
+	toast.error(__(msg, 'frontis-blocks'), {
+		position: "top-right",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+	});
+}
+
+export const toastSuccess = (msg) => {
+	toast.success(__(msg, 'frontis-blocks'), {
+		position: "top-right",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+	});
+}
