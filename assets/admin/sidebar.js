@@ -3122,7 +3122,7 @@ function FB_ResponsiveControl(_ref) {
     setDeviceType(deviceName);
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-label-wrapper"
+    className: "fb-setting-device-label-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
     className: "fb-setting-label-text"
   }, labelText), /*#__PURE__*/React.createElement("div", {
