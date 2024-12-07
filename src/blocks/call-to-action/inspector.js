@@ -1938,7 +1938,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
 				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
 				${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
-				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${testClassicColor};` }
+				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-heading {
 				${Heading_Color ? `color: ${Heading_Color};` : ""}
@@ -2141,6 +2141,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			testBackgroundImageRepeat,
 			testBackgroundImageSize,
 			testClassicColor,
+			hoverBackgroundType,
+			hoverCustomGradientSwitcher,
+			hoverCustomGradientInputValue,
+			hoverGradientColor,
+			hoverBackgroundImageUrl,
+			hoverBackgroundImagePosition,
+			hoverBackgroundImageAttachment,
+			hoverBackgroundImageRepeat,
+			hoverBackgroundImageSize,
+			hoverClassicColor,
 			globalBgHoverColor,
 			globalBorderHoverColor,
 			infoBoxTabPadding,
