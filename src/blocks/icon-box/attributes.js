@@ -162,6 +162,10 @@ const attributes = {
 		type: 'string',
         default: 'top'
 	},
+    infoIconVerticalPosition: {
+		type: 'string',
+        default: 'top'
+	},
     height: {
         type: 'number',
         default: 50
