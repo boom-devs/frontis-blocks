@@ -2009,7 +2009,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${subHeadingTextDecoration ? `text-decoration: ${subHeadingTextDecoration};` : ''}
 			${subHeadingLetterSpacing.Desktop && subHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${subHeadingLetterSpacing.Desktop}${subHeadingLetterSpacingUnits.Desktop};` : ''}
 			${subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
-			${ subHeadingDesktopPaddingValue !== undefined ? `padding: ${subHeadingDesktopPaddingValue};` : "" }
+			${subHeadingDesktopPaddingValue !== undefined ? `padding: ${subHeadingDesktopPaddingValue};` : "" }
 			${descDesktopMarginValue  !== undefined ? `margin: ${descDesktopMarginValue };` : ""}
 			transition: all .3s ease-in-out;
 		}

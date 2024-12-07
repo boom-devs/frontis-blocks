@@ -230,9 +230,9 @@ const attributes = {
     headingFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
-			Tablet: '18',
-			Mobile: '16'
+			Desktop: '48',
+			Tablet: '36',
+			Mobile: '24'
 		}
 	},
 	headingFontSizeUnits: {

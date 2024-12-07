@@ -1037,6 +1037,307 @@ const attributes = {
         type: "string",
         default: ""
     },
+
+    contentPaddingUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    contentDesktopPadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    contentTabPadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    contentMobilePadding: {
+        type: "object", 
+        default: {
+            top: 20,
+            bottom: 20,
+            left: 20,
+            right: 20,
+        },
+    },
+    contentPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    contentMarginUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    contentDesktopMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentTabMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentMobileMargin: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    
+    contentBorder: {
+        type: 'string',
+        default: "none",
+    },
+    contentBorderColor: {
+        type: 'string',
+    },
+    contentBorderHoverColor: {
+        type: 'string',
+    },
+    contentBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    
+    contentBorderUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    contentDesktopBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentTabBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentMobileBorderWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    contentBorderRadiusUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    contentDesktopBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentTabBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentMobileBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+    },
+    contentBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    contentDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    contentTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    contentMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    
+    contentBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    contentBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    contentBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    contentBgType: {
+        type: "string",
+        default: "classic"
+    },
+    contentBgClassicColor: {
+        type: "string",
+    },
+    contentBgGradientColor: {
+        type: "string",
+    },
+    contentBgCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    contentBgCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    contentBgColorStyle: {
+        type: "string",
+        default: ""
+    },
+    contentBgImageUrl: {
+        type: "string",
+        default: ""
+    },
+    contentBgImageAlt: {
+        type: "string",
+        default: ""
+    },
+    contentBgImageID: {
+        type: "string",
+        default: ""
+    },
+    contentBgImagePosition: {
+        type: "string",
+        default: ""
+    },
+    contentBgImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    contentBgImageSize: {
+        type: "string",
+        default: ""
+    },
+    contentBgImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverType: {
+        type: "string",
+        default: "classic"
+    },
+    contentBgHoverClassicColor: {
+        type: "string",
+    },
+    contentBgHoverGradientColor: {
+        type: "string",
+    },
+    contentBgHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    contentBgHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverColorStyle: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverImageUrl: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverImageAlt: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverImageID: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverImagePosition: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverImageSize: {
+        type: "string",
+        default: ""
+    },
+    contentBgHoverImageRepeat: {
+        type: "string",
+        default: ""
+    },
 };
 
 export default attributes;
