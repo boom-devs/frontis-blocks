@@ -26,7 +26,6 @@ import {
     Dashicon,
     RangeControl,
     ColorPicker,
-    ColorPalette,
 } from '@wordpress/components';
 
 import {

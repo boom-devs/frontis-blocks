@@ -75,7 +75,7 @@ const FB_Range = ({
 				</div>
 				<RangeControl
 					__nextHasNoMarginBottom
-					value={ rangeValue[deviceType] }
+					value={ parseInt(rangeValue[deviceType]) }
 					onChange={ setRangeValue }
 					min={ min }
 					max={ max }

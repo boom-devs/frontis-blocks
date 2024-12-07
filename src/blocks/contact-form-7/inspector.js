@@ -12,7 +12,6 @@ import {
 	SelectControl,
 	Dashicon,
 	ColorPicker,
-	ColorPalette,
 	TextControl,
 	TextareaControl,
 	ToggleControl,

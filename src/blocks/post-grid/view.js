@@ -50,6 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				const showDateSwitcher = parentElement.getAttribute("data-show-date-switcher");
 
+				const postAuthorAvatarSwitcher = parentElement.getAttribute("data-post-author-avatar-switcher");
+				const postImageSize = parentElement.getAttribute("data-post-image-size");
+
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
 
@@ -78,9 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				filterPost.showDateSwitcher = showDateSwitcher ? showDateSwitcher : true;
 
+				filterPost.postAuthorAvatarSwitcher = postAuthorAvatarSwitcher ? postAuthorAvatarSwitcher : false;
+
+				filterPost.postImageSize = postImageSize ? postImageSize : 'full';
+
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize);
 			}
 		}
 	});
@@ -97,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
@@ -122,6 +129,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.postAuthorPrefix = postAuthorPrefix ? postAuthorPrefix : 'Posted By';
 
 		filterPost.showDateSwitcher = showDateSwitcher ? showDateSwitcher : true;
+
+		filterPost.postAuthorAvatarSwitcher = postAuthorAvatarSwitcher ? postAuthorAvatarSwitcher : false;
+		filterPost.postImageSize = postImageSize ? postImageSize : 'full';
 
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
@@ -189,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher')); 
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher'), block.getAttribute('data-post-author-avatar-switcher'), block.getAttribute('data-post-image-size')); 
 	});
 
 

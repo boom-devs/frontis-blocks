@@ -27,19 +27,40 @@ const attributes = {
 		type: "boolean",
 	},
 	ButtonWidth: {
-		type: "number",
+        type: 'object',
+        default: {
+            Desktop: '100',
+            Tablet: '100',
+            Mobile: '100'
+        }
+    },
+    ButtonWidthWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
 	},
 	ButtonFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
 	ButtonFontSize: {
-		type: "number",
-		default: 16,
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
 	},
 	ButtonFontSizeUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	ButtonFontWeight: {
 		type: "string",
@@ -58,18 +79,36 @@ const attributes = {
 		default: "none",
 	},
 	ButtonLetterSpacing: {
-		type: "number",
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	ButtonLetterSpacingUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	ButtonLineHeight: {
-		type: "number",
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	ButtonLineHeightUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	ButtonColorSwitcher: {
 		type: "string",
@@ -106,8 +145,12 @@ const attributes = {
 		default: "normal",
 	},
 	ButtonBorderUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	ButtonDesktopBorderWidth: {
 		type: "object",
@@ -136,17 +179,17 @@ const attributes = {
 			right: 0,
 		},
 	},
-	ButtonActiveBorderDevice: {
-		type: "string",
-		default: "Desktop",
-	},
 	ButtonBorderLink: {
 		type: "boolean",
 		default: true,
 	},
 	ButtonBorderRadiusUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	ButtonDesktopBorderRadiusWidth: {
 		type: "object",
@@ -174,10 +217,6 @@ const attributes = {
 			left: 0,
 			right: 0,
 		},
-	},
-	ButtonActiveBorderRadiusDevice: {
-		type: "string",
-		default: "Desktop",
 	},
 	ButtonBorderRadiusLink: {
 		type: "boolean",
@@ -286,12 +325,20 @@ const attributes = {
 		default: "inherit",
 	},
 	connectorFontSize: {
-		type: "number",
-		default: 16,
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
 	},
 	connectorFontSizeUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	connectorFontWeight: {
 		type: "string",
@@ -310,19 +357,36 @@ const attributes = {
 		default: "none",
 	},
 	connectorLetterSpacing: {
-		type: "number",
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	connectorLetterSpacingUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	connectorLineHeight: {
-		type: "number",
-		default: 35,
+		type: 'object',
+		default: {
+			Desktop: '35',
+			Tablet: '35',
+			Mobile: '35'
+		}
 	},
 	connectorLineHeightUnits: {
-		type: "string",
-		default: "px",
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 	connectorColorSwitcher: {
 		type: "string",
@@ -413,6 +477,46 @@ const attributes = {
 		},
 	},
 	connectorBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** Border Radius **/
+	connectorBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	connectorBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	connectorBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	connectorBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	connectorBorderRadiusLink: {
 		type: "boolean",
 		default: true,
 	},
