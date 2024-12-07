@@ -27,8 +27,8 @@ const FB_ColorControl = ({
 
     useEffect(() => {
         // Retrieve colors from local storage
-        const storedColors = localStorage.getItem('fb_update_global_colors');
-        const storedCustomColors = localStorage.getItem('fb_update_custom_colors');
+        const storedColors = localStorage.getItem('fb_global_colors');
+        const storedCustomColors = localStorage.getItem('fb_custom_colors');
         let combinedColors = [];
         if (storedColors) {
             try {

@@ -17,8 +17,8 @@ const FB_GradientColorControl = ({
 
     useEffect(() => {
         // Retrieve colors from local storage
-        const storedGradientColors = localStorage.getItem('fb_update_gradient_colors');
-        const storedCustomGradientColors = localStorage.getItem('fb_update_custom_gradient_colors');
+        const storedGradientColors = localStorage.getItem('fb_gradient_colors');
+        const storedCustomGradientColors = localStorage.getItem('fb_custom_gradient_colors');
         let combinedColors = [];
         
         if (storedGradientColors) {
