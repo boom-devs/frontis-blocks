@@ -23,7 +23,7 @@ $border_color: #dddddd;
     width: 26px;
     &.fb-device-switchers-open {
         .fb-responsive-device-inner-wrapper {
-            background: #f2f2f2;
+            background: #dcdcde;
             border-radius: 2px;
             position: relative;
             z-index: 11;
@@ -49,12 +49,15 @@ $border_color: #dddddd;
         width: 100% !important;
         z-index: 2;
         &.active {
-            background: #f2f2f2;
+            background: #dcdcde;
             border-radius: 50%;
             height: 26px;
             opacity: 1;
             transform: scale(1);
             width: 26px;
+        }
+        &:hover {
+            background: #dcdcde;
         }
     }
 }
